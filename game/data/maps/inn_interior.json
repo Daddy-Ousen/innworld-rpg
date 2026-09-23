@@ -1,0 +1,39 @@
+{
+	"schema_version": 1,
+	"id": "inn_interior",
+	"name": "Inside the inn",
+	"location": "wandering_inn",
+	"confidence": "guess",
+	"note": "Design map. The inn has a common room, a kitchen and rooms (1.00-1.01); the layout is a guess.",
+	"zones": {},
+	"exits": [
+		{"at": [12, 15, 1, 1], "to": "inn_hill", "arrive": [16, 12], "minutes": 0}
+	],
+	"objects": [
+		{"id": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true},
+		{"id": "wash_basin", "at": [22, 3], "name": "Wash basin", "actions": ["wash_dishes"], "solid": true},
+		{"id": "broom", "at": [2, 1], "name": "Broom", "actions": ["sweep_floor"]},
+		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true},
+		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true},
+		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHHHHHHHHHHHH",
+		"H===============H======H",
+		"H===============H======H",
+		"H===============H======H",
+		"H======================H",
+		"H===============H======H",
+		"H===============H======H",
+		"H===============H======H",
+		"H===============H======H",
+		"H===============HHH=HHHH",
+		"H===============H======H",
+		"H===============H======H",
+		"H======================H",
+		"H===============H======H",
+		"H===============H======H",
+		"HHHHHHHHHHHH+HHHHHHHHHHH"
+	]
+}

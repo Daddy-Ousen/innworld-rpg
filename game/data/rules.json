@@ -1,7 +1,7 @@
 {
 	"schema_version": 1,
 	"clock": {
-		"start_minute": 360,
+		"start_minute": 10440,
 		"wake_minute": 360,
 		"min_sleep_minutes": 240,
 		"collapse_after_awake": 2160,
@@ -23,5 +23,9 @@
 		"drift": {"substituted": 0.25, "mutated": 0.5, "cancelled": 1.0},
 		"tier_weight": {"1": 0.5, "2": 1.0},
 		"unreliable_at": 5.0
+	},
+	"world": {
+		"start": {"area": "liscor_gate", "pos": [3, 12]},
+		"step_seconds": 6
 	}
 }

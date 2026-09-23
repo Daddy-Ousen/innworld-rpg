@@ -1,0 +1,47 @@
+{
+	"schema_version": 1,
+	"id": "floodplains_south",
+	"name": "Floodplains near the inn",
+	"location": "floodplains_of_liscor",
+	"confidence": "guess",
+	"note": "Design map. The stream and the blue fruit valley are canon (1.00-1.02); distances are guesses.",
+	"zones": {"inn_stream": [[22, 0, 6, 24]], "amentus_orchard": [[2, 16, 10, 7]]},
+	"exits": [
+		{"at": [0, 11, 1, 2], "to": "liscor_gate", "arrive": [30, 11], "minutes": 20},
+		{"at": [16, 0, 2, 1], "to": "inn_hill", "arrive": [15, 22], "minutes": 20}
+	],
+	"objects": [
+		{"id": "stream_bank", "at": [23, 8], "name": "Stream bank", "actions": ["carry_water"]},
+		{"id": "blue_fruit_tree_1", "at": [4, 18], "name": "Blue fruit tree", "actions": ["forage_fruit"], "solid": true},
+		{"id": "blue_fruit_tree_2", "at": [8, 20], "name": "Blue fruit tree", "actions": ["forage_fruit"], "solid": true},
+		{"id": "herb_patch", "at": [20, 4], "name": "Herb patch", "actions": ["gather_herbs"]},
+		{"id": "dead_tree", "at": [6, 8], "name": "Dead tree", "actions": ["chop_wood"], "solid": true}
+	],
+	"legend": {",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "s": "shallows", "~": "water"},
+	"rows": [
+		"................::......~~......",
+		"................::......~~......",
+		"................::...^..~~......",
+		"...,,,,,........::......~~...T..",
+		"...,,,,,........::......~~......",
+		"...,,,,,.....T..::......~~......",
+		"................::......~~.,,,..",
+		".^..............::......~~.,,,..",
+		"................::......~~.,,,..",
+		"................::......~~.,,,..",
+		"................::......~~.,,,..",
+		"::::::::::::::::::......~~.,,,..",
+		"::::::::::::::::::......~~......",
+		"........................~~......",
+		"...................,,,,.~~......",
+		"...................,,,,.~~......",
+		"..,,,,,,,,,,.......,,,,.~~......",
+		"..,T,,,,,,T,.......,,,,.ss......",
+		"..,,,,,,,,,,.......,,,,.~~......",
+		"..,,,,,,,,,,............~~......",
+		"..,,,,,,,,,,..^.........~~..T...",
+		"..,,,,,,,,,T............~~......",
+		"..,,,,T,,,,,............~~......",
+		"........................~~......"
+	]
+}
