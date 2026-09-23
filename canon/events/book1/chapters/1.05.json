@@ -1,0 +1,70 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.05",
+	"events": {
+		"b1.erin_lights_kitchen_fire": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {"firestarter": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.claimed"], "not_flags": []},
+			"depends_on": ["b1.erin_claims_inn"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["wandering_inn.chimney_smoke"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed"},
+			"summary": "After dumping the rotten fish (it bursts into acid-spitting flies), Erin finds flint and steel in the kitchen and gets a fire going in the stone hearth with dry grass and a broken chair."
+		},
+		"b1.watch_spots_smoke": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "liscor_walls",
+			"roles": {
+				"spotter": {"prefer": ["beilmark"], "fallback_tags": ["guard"]},
+				"captain": {"prefer": ["zevara"], "fallback_tags": ["captain", "guard"], "optional": true}
+			},
+			"requires": {"alive": [], "flags": ["wandering_inn.chimney_smoke"], "not_flags": []},
+			"depends_on": ["b1.erin_lights_kitchen_fire"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["liscor.watch_knows_inn_occupied"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed"},
+			"summary": "Wall guards see a thin line of smoke out on the Floodplains. Beilmark smells it too and sends word to the Captain, who assigns Relc and Klbkch to check it as a punishment detail."
+		},
+		"b1.erin_takes_razorbeak_eggs": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "razorbeak_nests",
+			"roles": {
+				"forager": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"bird": {"prefer": [], "fallback_tags": ["razorbeak"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["erin.has_eggs"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed"},
+			"summary": "Fetching water, Erin startles a grass-green flying reptile with a long toothed beak. Next to its grisly nest she trips over a smaller nest of big pale eggs and carries them home in her bucket."
+		},
+		"b1.erin_opens_inn": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.claimed"], "not_flags": []},
+			"depends_on": ["b1.erin_lights_kitchen_fire", "b1.erin_takes_razorbeak_eggs", "b1.erin_breaks_preservation_cupboard"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["wandering_inn.open", "wandering_inn.serves_pasta"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "The sign has English plus a second, unknown script."},
+			"summary": "Erin flips the old door sign from Closed to Open, fills a big pot with stream water, and cooks her first real meal: egg pasta with butter and the preserved sausage, plus mashed blue-fruit juice."
+		}
+	},
+	"system": []
+}

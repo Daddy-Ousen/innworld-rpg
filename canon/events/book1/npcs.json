@@ -1,0 +1,125 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"erin_solstice": {
+			"name": "Erin Solstice",
+			"race": "Human",
+			"tags": ["human", "earther", "innkeeper", "chess"],
+			"faction": null,
+			"home": "wandering_inn",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed"},
+			"summary": "20-year-old from Grand Rapids, Michigan. Loves chess, shogi and go; wants to be a board game commentator. Arrives on day 1 with no class and no gear; talks to herself; stubborn and kind."
+		},
+		"cave_dragon": {
+			"name": "The Dragon",
+			"race": "Dragon",
+			"tags": ["dragon", "ancient", "mage", "recluse"],
+			"faction": null,
+			"home": "dragon_cave_lair",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Unnamed in 1.00-1.09. Dragons cannot level (1.06)."},
+			"summary": "Old, tired Dragon who sleeps for years behind hundreds of wards. Fears assassins. Breathes violet fire, uses [Message] and teleport magic. Keeps old social duties, one every 200 years."
+		},
+		"rags": {
+			"name": "Littlest Goblin",
+			"race": "Goblin",
+			"tags": ["goblin", "child", "clever", "forager"],
+			"faction": "floodplains_goblin_tribe",
+			"home": "goblin_cave",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Exists: confirmed. Id 'rags' is a guess from an art credit in 1.13; confirm when the text names her."},
+			"summary": "Smallest, youngest Goblin of the tribe (about two years old by her own count). Carries baskets, gets hit a lot. Very curious: invents her own counting system, works out how to spot poisoned blue fruit."
+		},
+		"goblin_chieftain": {
+			"name": "Goblin Chieftain",
+			"race": "Goblin",
+			"tags": ["goblin", "chieftain", "leader", "warrior"],
+			"faction": "floodplains_goblin_tribe",
+			"home": "goblin_cave",
+			"classes": [{"name": "[Chieftain]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed"},
+			"summary": "Twice the size of other Goblins, fights with a bone axe. Only one in the tribe who speaks and reads. Taught them to count. Always angry; wants a bigger tribe and says the tribe needs a [Shaman]."
+		},
+		"goblin_gatherer": {
+			"name": "Goblin gatherer",
+			"race": "Goblin",
+			"tags": ["goblin", "gatherer", "forager", "elder"],
+			"faction": "floodplains_goblin_tribe",
+			"home": "goblin_cave",
+			"classes": [{"name": "[Gatherer]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed"},
+			"summary": "Older female Goblin who wears a spider claw as a hairpin. Sorts food for the tribe and uses a Skill to find poisoned blue fruit."
+		},
+		"relc": {
+			"name": "Relc",
+			"race": "Drake",
+			"tags": ["drake", "guard", "senior_guard", "spear", "veteran", "loud"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [{"name": "[Spearmaster]", "level": null}, {"name": "[Guardsman]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06."},
+			"summary": "Huge light-green Drake, Senior Guardsman of Liscor and former soldier. Loud, friendly, big eater, proud of being a Drake; hates being called a lizard. Cannot breathe fire. Never misses a spear throw."
+		},
+		"klbkch": {
+			"name": "Klbkch",
+			"race": "Antinium",
+			"tags": ["antinium", "guard", "senior_guard", "swords", "precise"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [{"name": "[Swordslayer]", "level": null}, {"name": "[Guardsman]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09."},
+			"summary": "Four-armed Antinium, Senior Guardsman and Relc's partner. Polite, exact, takes notes with a quill. Most guards avoid him. Quietly kind: spends a rare potion on Erin. Pisces fears his title."
+		},
+		"zevara": {
+			"name": "Zevara",
+			"race": "Drake",
+			"tags": ["drake", "guard", "captain", "leader"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed", "note": "'The Captain' in 1.05; named Watch Captain Zevara in 1.06; seen in 1.07."},
+			"summary": "Watch Captain of Liscor. Smaller female Drake with cobalt-blue scales and yellow eyes, chainmail and a sword. Strict and often annoyed with Relc."
+		},
+		"beilmark": {
+			"name": "Beilmark",
+			"race": "Unknown",
+			"tags": ["guard", "senior_guard", "keen_nose"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [{"name": "[Guardswoman]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Race not stated; she smells the smoke, so maybe a Gnoll (guess)."},
+			"summary": "Senior Guardswoman on Liscor's wall. Has a keen nose; spots and smells the inn's smoke and reports it to the Captain."
+		},
+		"pisces": {
+			"name": "Pisces",
+			"race": "Human",
+			"tags": ["human", "mage", "illusionist", "necromancer", "criminal", "wistram"],
+			"faction": null,
+			"home": null,
+			"classes": [{"name": "[Mage]", "level": null}, {"name": "[Necromancer]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.08", "confidence": "confirmed", "note": "Very likely the unnamed bone thief who watches the inn in 1.04 (he does not deny it in 1.09)."},
+			"summary": "Thin, filthy young Human mage from Wistram Academy with a sneering, wordy manner. Illusions, elemental magic, and secret necromancy. Has robbed people near Liscor with fake monsters for about a month; bounty on him."
+		}
+	}
+}

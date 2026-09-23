@@ -1,0 +1,37 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.03",
+	"events": {
+		"b1.stream_fish_attack": {
+			"tier": 2,
+			"window": {"earliest": 3, "latest": 3, "confidence": "confirmed"},
+			"location": "inn_stream",
+			"roles": {
+				"bather": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"predator": {"prefer": [], "fallback_tags": ["river_fish"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["erin.has_fish", "erin.found_stream"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.03", "confidence": "confirmed"},
+			"summary": "Dehydrated and dizzy, Erin finds the stream, drinks too fast, then bathes. A flat four-eyed fish with a huge toothy mouth lunges at her; she leaps out, it lands on the bank and dies."
+		},
+		"b1.erin_poisoned_hand": {
+			"tier": 2,
+			"window": {"earliest": 3, "latest": 3, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {"cook": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.has_fish"], "not_flags": []},
+			"depends_on": ["b1.stream_fish_attack"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.hand_poisoned"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.03", "confidence": "confirmed", "note": "The cut is poisoned by fish mucus (explained in 1.06)."},
+			"summary": "Trying to fillet the rock-hard fish with a kitchen knife, Erin slips and slices her left palm. She binds it with a curtain strip and spends a sleepless night in pain, reciting chess games."
+		}
+	},
+	"system": []
+}

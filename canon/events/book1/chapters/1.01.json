@@ -1,0 +1,65 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.01",
+	"events": {
+		"b1.dragon_abandons_lair": {
+			"tier": 1,
+			"window": {"earliest": 1, "latest": 1, "confidence": "confirmed"},
+			"location": "dragon_backup_lair",
+			"roles": {"dragon": {"prefer": ["cave_dragon"], "fallback_tags": []}},
+			"requires": {"alive": ["cave_dragon"], "flags": ["erin.arrived"], "not_flags": []},
+			"depends_on": ["b1.erin_arrives"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["dragon.lair_moved"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Dragon POV. He then spends two days re-warding the new lair."},
+			"summary": "Sure that a stranger in his lair means assassins, the Dragon teleports away with his hoard to a backup lair he dislikes. He finds no pursuit and starts to think it was an accident."
+		},
+		"b1.dragon_old_obligation": {
+			"tier": 1,
+			"window": {"earliest": 3, "latest": 14, "confidence": "guess"},
+			"location": "dragon_backup_lair",
+			"roles": {"dragon": {"prefer": ["cave_dragon"], "fallback_tags": []}},
+			"requires": {"alive": ["cave_dragon"], "flags": ["dragon.lair_moved"], "not_flags": []},
+			"depends_on": ["b1.dragon_abandons_lair"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 14,
+			"effects": {"set_flags": ["dragon.courtesy_arranged"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "likely", "note": "What the arrangement is, and with which city, is not said. Timing is vague (day 3 to 'two weeks later')."},
+			"summary": "Awake anyway, the Dragon checks his notes, sees a duty that falls every two hundred years, and contacts the nearest city to make arrangements. Then he goes back to sleep."
+		},
+		"b1.erin_finds_amentus_orchard": {
+			"tier": 2,
+			"window": {"earliest": 2, "latest": 2, "confidence": "confirmed"},
+			"location": "amentus_orchard",
+			"roles": {"forager": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.claimed"], "not_flags": []},
+			"depends_on": ["b1.erin_claims_inn"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 2,
+			"effects": {"set_flags": ["erin.knows_orchard", "erin.knows_liscor_direction"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed"},
+			"summary": "In daylight Erin sees two moons' sky, giant clouds and a far stone wall. She uses a band of coloured grass as a trail, finds a valley of blue-fruit trees to the east, and kicks a tree until fruit drops."
+		},
+		"b1.rock_crab_ambush": {
+			"tier": 2,
+			"window": {"earliest": 2, "latest": 2, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"prey": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"ambusher": {"prefer": [], "fallback_tags": ["rock_crab"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["erin.knows_rock_crabs"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed"},
+			"summary": "On the way to the trees, a boulder turns out to be the shell of a bus-sized crab. It snaps at Erin with two huge pincers and chases her downhill, then gives up and goes back."
+		}
+	},
+	"system": []
+}

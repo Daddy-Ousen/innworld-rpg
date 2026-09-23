@@ -1,0 +1,30 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.08",
+	"events": {
+		"b1.pisces_illusion_at_inn": {
+			"tier": 2,
+			"window": {"earliest": 6, "latest": 6, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {"prefer": ["pisces"], "fallback_tags": ["mage", "illusionist"]},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["wandering_inn.open"], "not_flags": ["pisces.arrested"]},
+			"depends_on": ["b1.erin_opens_inn"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {
+				"set_flags": ["erin.met_pisces", "erin.knows_pisces_necromancer"],
+				"relationship": [{"from": "pisces", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.08", "confidence": "confirmed", "note": "Starts at the end of 1.07 (night 6). Delta is a design value."},
+			"summary": "A frost-and-bone monster forcing the door is an illusion: Erin's thrown pot knocks out Pisces. Under threat of the pot he pays in silver. She feeds him anyway; he names the Floodplains and admits a hobby of necromancy."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "other", "name": "Wistram Academy student", "level": null, "confidence": "confirmed", "note": "Self-described: Elementalist and Illusion schools, plus other competencies."}
+	]
+}

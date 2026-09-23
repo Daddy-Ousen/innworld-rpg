@@ -1,0 +1,53 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.04",
+	"events": {
+		"b1.erin_breaks_preservation_cupboard": {
+			"tier": 2,
+			"window": {"earliest": 4, "latest": 4, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {"searcher": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.claimed"], "not_flags": ["wandering_inn.preservation_rune_broken"]},
+			"depends_on": ["b1.erin_claims_inn"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["erin.has_preserved_food", "wandering_inn.preservation_rune_broken"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.04", "confidence": "confirmed"},
+			"summary": "Searching the kitchen, Erin finds one cupboard ringed with glowing silver runes that keeps a sausage, flour and butter fresh. Poking at the old wood, she breaks the rune line and the spell dies."
+		},
+		"b1.skeleton_stolen": {
+			"tier": 2,
+			"window": {"earliest": 4, "latest": 4, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {"thief": {"prefer": ["pisces"], "fallback_tags": ["necromancer"]}},
+			"requires": {"alive": [], "flags": [], "not_flags": ["wandering_inn.skeleton_gone"]},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["wandering_inn.skeleton_gone"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.04", "confidence": "likely", "note": "Theft confirmed; thief unnamed. Pisces is implied (necromancer, 'bones for his project'; he does not deny it in 1.09)."},
+			"summary": "While Erin is out, someone walks into the inn and takes the old skeleton from the last upstairs bed. She finds it gone and remembers the door was open when she came back."
+		},
+		"b1.goblin_night_ambush": {
+			"tier": 2,
+			"window": {"earliest": 4, "latest": 4, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"defender": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"infiltrator": {"prefer": [], "fallback_tags": ["goblin", "warrior"]},
+				"watcher": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["goblin_tribe.lost_to_erin"], "not_flags": []},
+			"depends_on": ["b1.goblin_raid_on_inn"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"relationship": [{"from": "rags", "to": "erin_solstice", "delta": 1}]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.04", "confidence": "confirmed", "note": "Relationship delta is a design value."},
+			"summary": "At night one Goblin sneaks in upstairs while six wait outside. Erin catches him, beats him senseless and throws him out the door. The group carries him off; the littlest Goblin, watching, half likes the Human."
+		}
+	},
+	"system": []
+}
