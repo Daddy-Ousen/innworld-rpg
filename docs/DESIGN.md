@@ -119,7 +119,7 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
 ## 6. Content pipeline (canon → data)
 1. `tools/extract_epub.py` splits the Book 1 ebook into chapter text in `canon/raw/book1/`.
 2. An agent reads one chapter at a time and proposes events, NPCs, locations and classes seen, as JSON with `canon_ref` and `confidence`.
-3. A human reviews and commits to `canon/events/book1/`.
+3. A human reviews and commits to `game/data/canon/book1/` (moved from `canon/events/` in M3, ADR 0005).
 4. Days: the book gives few exact dates. We set **windows**, not fixed days. Mark guesses.
 
 ## 7. Known risks
