@@ -1,7 +1,7 @@
 # Handoff
 
 ## Just done (2026-09-23, branch `feat/m2-canon-pipeline`)
-M2 is done and committed locally (not pushed):
+M2 is done, pushed, PR #3 open:
 - `tools/extract_epub.py` + tests → `canon/raw/book1/` (66 chapters + `index.json`, gitignored).
 - `tools/validate_data.py` + tests (ADR 0004 accepted).
 - `canon/events/book1/`: `npcs.json` (10), `locations.json` (15), `chapters/1.00.json` … `1.09.json` (26 events, `system` logs). All records `status: "reviewed"`. Validator: 0 errors.
@@ -9,7 +9,7 @@ M2 is done and committed locally (not pushed):
 - ROADMAP M2 ticked. GUT 115/115, Python 26/26.
 
 ## Waiting on the user
-- Push branch + open PR? After merge: `git tag m2-done`.
+- PR https://github.com/Daddy-Ousen/innworld-rpg/pull/3 open. After merge: `git tag m2-done`.
 - Game-data suggestions (not applied): `[Guardsman]` canon_ref → 1.06 confirmed. Missing from data: skill `[Basic Crafting]` (Innkeeper Lv5), class `[Gatherer]` + skill `[Detect Poison]`, skill `[Detect Guilt]`, skill `[Dangersense]`, classes `[Spearmaster]`, `[Swordslayer]`.
 
 ## Next (M3, world director)

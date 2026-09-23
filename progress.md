@@ -6,7 +6,7 @@
   - [x] Schemas: ADR 0002 accepted (outcome_mult yes, tags.json registry yes)
   - [x] Clock, tags, data loader, action log, XP, `Actions.perform` (part 1, PR #1 merged)
   - [x] Part 2: classes (17), skills (47), pools, offers, decline blacklist, levels, dilution, capstones, class loss, consolidation, night pipeline 1–4 + 8, `Commands` facade, debug console, `sim_30_days`, `sim_decline`
-- [x] M2 — Canon pipeline (done 2026-09-23 on branch `feat/m2-canon-pipeline`; not pushed yet; tag `m2-done` after merge)
+- [x] M2 — Canon pipeline (done 2026-09-23 on branch `feat/m2-canon-pipeline`; PR #3 open; tag `m2-done` after merge)
   - [x] `tools/extract_epub.py` + tests. Book 1: 66 chapters, ~448k words, 6 images skipped.
   - [x] Schemas (ADR 0004 accepted) + `tools/validate_data.py` + tests (26 Python tests pass).
   - [x] Events 1.00–1.09 in `canon/events/book1/`: 26 events, 10 NPCs, 15 locations, all `reviewed`; validator 0 errors.
