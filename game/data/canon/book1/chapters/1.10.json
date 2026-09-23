@@ -1,0 +1,36 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.10",
+	"events": {
+		"b1.erin_saves_pisces": {
+			"tier": 2,
+			"window": {"earliest": 7, "latest": 7, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"suspect": {"prefer": ["pisces"], "fallback_tags": ["mage", "criminal"]},
+				"guard_a": {"prefer": ["relc"], "fallback_tags": ["drake", "guard"]},
+				"guard_b": {"prefer": ["klbkch"], "fallback_tags": ["guard"]},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["pisces.exposed_necromancer"], "not_flags": ["pisces.arrested"]},
+			"depends_on": ["b1.pisces_arrest_and_escape"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["pisces.spared_by_erin", "wandering_inn.outside_watch_jurisdiction", "wandering_inn.furniture_broken"],
+				"relationship": [
+					{"from": "pisces", "to": "erin_solstice", "delta": 2},
+					{"from": "relc", "to": "erin_solstice", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.10", "confidence": "confirmed", "note": "Same day as 1.09. Deltas are design values."},
+			"summary": "Pisces hid under a bed and begs Erin for shelter; she refuses at knifepoint. Relc and Klbkch come back, and the fight wrecks the common room. Relc means to kill him. Erin drops her testimony and claims the inn is outside the Watch's authority; Klbkch agrees."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "level", "name": "[Mage]", "level": null, "confidence": "confirmed", "note": "Pisces says he is over level 20 as a [Mage]; also studied elementalist, illusion and enchanting schools."},
+		{"who": "pisces", "kind": "other", "name": "Spell [Barrier of Air]", "level": null, "confidence": "confirmed", "note": "A spell, not a Skill. Relc breaks it by charging."},
+		{"who": "relc", "kind": "other", "name": "Former soldier, 4th Wing of the Liscorian Army", "level": null, "confidence": "confirmed", "note": "Says he has killed many [Mages]."}
+	]
+}

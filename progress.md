@@ -10,12 +10,18 @@
   - [x] `tools/extract_epub.py` + tests. Book 1: 66 chapters, ~448k words, 6 images skipped.
   - [x] Schemas (ADR 0004 accepted) + `tools/validate_data.py` + tests (26 Python tests pass).
   - [x] Events 1.00–1.09 (now in `game/data/canon/book1/`): 26 events, 10 NPCs, 15 locations, all `reviewed`; validator 0 errors.
-- [x] M3 — World director (done 2026-09-23 on branch `feat/m3-world-director`; PR to open; tag `m3-done` after merge)
+- [x] M3 — World director (done 2026-09-23, PR #4 merged, tag `m3-done` on merge commit 47412d1)
   - [x] Canon data moved to `game/data/canon/` (user choice).
   - [x] `CanonDb` loader, `WorldState` (save v3), `Director` (night step 5), rules `director` section.
   - [x] `Commands.kill_npc` / `set_flag`; console `kill`, `flag`, `history`, `drift`.
   - [x] Tests: `unit_canon_db`, `unit_director`, `sim_divergence` (3 scenarios), `sim_canon_book1` (real week 1, drift 0).
-- [ ] M4 … M6 — see `docs/ROADMAP.md`
+- [ ] M4 — 2D world (plan approved 2026-09-23; 5 sub-modules, see ROADMAP)
+  - [x] M4.1 Canon 1.10–1.14 (branch `data/book1-1.10-1.14`, PR #5): 12 events, 5 NPCs, 8 locations, reviewed by user; validator 0 errors, GUT 156/156 (canon runs days 1–9, drift 0). Tag `m4.1-done` after merge.
+  - [ ] M4.2 World grid core (save v4)
+  - [ ] M4.3 2D view
+  - [ ] M4.4 NPC schedules + utility AI (save v5)
+  - [ ] M4.5 System message UI
+- [ ] M5, M6 — see `docs/ROADMAP.md`
 
 ## Completed
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
@@ -29,6 +35,13 @@
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
+
+## M4 decisions (user, 2026-09-23)
+- Start: the player arrives with the Great Ritual (night 7) and starts outside the Liscor east gate on day 8 (user choice). New game must run the director for days 1–7 first. Celum start deferred to M7+ (no Celum canon yet; first seen 1.19R).
+- Art: placeholder colored tiles made in code; Kenney CC0 later (ask then).
+- NPCs: extract 1.10–1.14 first (adds Selys, Krshia, Lism, Belsc, Drassi).
+- Map: small linked areas (Liscor gate, market, Floodplains patch, inn hill, inn inside).
+- Approved: new schemas `tiles.json`, `maps/<area>.json`, `npc_behaviour.json`; rules `world` + `npc`; `Actions.perform` `minutes` opt; `Session` autoload; save v4 and v5.
 
 ## Architectural decisions
 - ADR 0001: GUT version, RNG state as strings in JSON, `.import` files committed, save load path.

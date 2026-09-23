@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.11",
+	"events": {
+		"b1.erin_walks_to_liscor": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "liscor_east_gate",
+			"roles": {
+				"traveller": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"gate_guard": {"prefer": ["belsc"], "fallback_tags": ["drake", "guard"], "optional": true},
+				"trackers": {"prefer": [], "fallback_tags": ["goblin"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.knows_liscor"], "not_flags": []},
+			"depends_on": ["b1.watch_first_visit"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["erin.visited_liscor"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "The walk takes Erin about an hour, not the twenty minutes Relc claimed. Gate guard named Belsc in 1.12."},
+			"summary": "Out of food and clean clothes, Erin walks to Liscor with her coins, throwing stones at Goblins who trail her. A bored yellow-scaled Drake at the east gate waves her in: anyone may enter, and the gates shut at sundown. She is the only Human in a crowded Drake and Gnoll city."
+		},
+		"b1.erin_meets_selys": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"visitor": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"receptionist": {"prefer": ["selys"], "fallback_tags": ["receptionist"]},
+				"bully": {"prefer": [], "fallback_tags": ["gnoll", "adventurer"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.visited_liscor"], "not_flags": []},
+			"depends_on": ["b1.erin_walks_to_liscor"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.met_selys", "erin.knows_market_way"],
+				"relationship": [{"from": "selys", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "Delta is a design value."},
+			"summary": "Lost and unable to read Drake script, Erin wanders into the Adventurer's Guild. Selys, the Drake receptionist, is friendly and points her to the market. A tired Gnoll adventurer, back from a Shield Spider bounty, says she stinks and pushes her out."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "other", "name": "Cannot read Drake script", "level": null, "confidence": "confirmed", "note": "Everyone speaks a language she understands, but she cannot read signs."}
+	]
+}

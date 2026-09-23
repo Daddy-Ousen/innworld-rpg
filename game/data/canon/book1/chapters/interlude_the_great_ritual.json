@@ -1,0 +1,21 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "interlude_the_great_ritual",
+	"events": {
+		"b1.great_ritual_summoning": {
+			"tier": 1,
+			"window": {"earliest": 7, "latest": 7, "confidence": "confirmed"},
+			"location": "blighted_kingdom",
+			"roles": {},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["world.earthers_summoned"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "interlude_the_great_ritual", "confidence": "confirmed", "note": "Night 7, the night after 1.10. No rumor: news of it does not reach Liscor in these chapters."},
+			"summary": "Deep under the Blighted Kingdom, a [High Mage] ends a decades-long ritual before the Blighted King and Queen. Young Humans from Earth appear, hailed as heroes of prophecy. Many more land alone all over the world: a farm, a Runner's Guild, a throne room, a tomb, a forest."
+		}
+	},
+	"system": []
+}
