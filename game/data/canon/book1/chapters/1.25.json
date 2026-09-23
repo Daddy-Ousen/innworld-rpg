@@ -37,6 +37,16 @@
 					{"from": "rags", "to": "erin_solstice", "delta": 1}
 				]
 			},
+			"news": "Goblins paid coin to eat at the Wandering Inn tonight, and the innkeeper served them.",
+			"hooks": [
+				{
+					"id": "player_fought_goblins",
+					"did": [{"action": ["attack_melee", "throw_object"], "outcome": ["success"], "context": {"enemy": "goblin_grunt"}}],
+					"days": [14, 19],
+					"then": "cancel",
+					"news": "No Goblins came to the Wandering Inn tonight. The tribe keeps away from the Human who beats their kin."
+				}
+			],
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.25", "confidence": "confirmed", "note": "Same evening as the Workers' visit. Erin calls her 'Rags' here for the first time. Delta is a design value."},
 			"summary": "The littlest Goblin leads eight others to the inn and holds out a fistful of coins. Erin calls her Rags, takes the money, makes them wash their hands, and feeds them bread, sausage and pasta until they are full."
@@ -64,6 +74,7 @@
 					{"from": "klbkch", "to": "olesm", "delta": 1}
 				]
 			},
+			"news": "Antinium Workers now visit the Wandering Inn. People say they play chess there, even with Goblins.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.25", "confidence": "confirmed", "note": "Evening of day 19. The Workers are the ones who dug out the door. Deltas are design values."},
 			"summary": "Klbkch brings twelve silent Workers to eat Acid Flies; Olesm drops by with a board. Erin plays him without looking, then plays him against Klbkch. A Worker asks to watch; soon Workers and Goblins play on paper boards, and Rags beats two Workers. Erin slips the Workers the paper sets."

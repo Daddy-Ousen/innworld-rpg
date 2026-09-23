@@ -31,6 +31,7 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["goblin_tribe.hunts_without_chieftain", "rags.tribe_listens"]},
+			"news": "About forty Goblins brought down a huge Rock Crab on the Floodplains and ate it where it fell.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "likely", "note": "The day after Erin's level 10 (she is 'celebrating not dying'). The hunt was the littlest Goblin's idea (confirmed)."},
 			"summary": "About forty Goblins run down a huge Rock Crab, lose hands to its claws, swarm under its shell and eat it raw. The hunt was the littlest Goblin's idea, so the warriors now listen to her. She hides a pouch of coins. Erin watches in terror and runs home."

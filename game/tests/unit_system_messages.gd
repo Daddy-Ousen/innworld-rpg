@@ -241,6 +241,8 @@ func test_main_scene_sleep_opens_the_dialog() -> void:
 	var dialog: SystemDialog = main.dialog
 	assert_true(dialog.visible)
 	assert_true(main.is_busy())
+	assert_eq(dialog.current["kind"], SystemMessages.NEWS, "day 8 has local news (M6.4)")
+	dialog.choose(SystemMessages.NEXT)
 	assert_eq(dialog.current["kind"], SystemMessages.OFFER)
 	dialog.choose(SystemMessages.ACCEPT)
 	dialog.choose(SystemMessages.NEXT)

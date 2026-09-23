@@ -79,6 +79,7 @@
 					{"from": "goblin_chieftain", "to": "relc", "delta": -3}
 				]
 			},
+			"news": "Guards at the east gate joke that Relc went out alone last night and came back with two Goblin heads.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "The two dead Goblins made the littlest Goblin (her parents, in Goblin terms). Deltas are design values."},
 			"summary": "That night Relc hunts down the two older Goblin throwers, kills them, and takes their heads as a gift for Erin. The littlest Goblin, sent to find them, sees it. The Chieftain hears the news, takes up his axes and goes looking for the Human."
