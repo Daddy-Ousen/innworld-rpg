@@ -15,7 +15,7 @@ M5.2 Monsters on the map is done and tested (GUT 348/348, Python 26/26, validato
 - ADR 0010 has the M5.2 section. ROADMAP M5.2 ticked.
 
 ## Waiting on the user
-- Review the M5.2 PR, merge, then tag `m5.2-done`.
+- Review PR #11 (https://github.com/Daddy-Ousen/innworld-rpg/pull/11), merge, then tag `m5.2-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next: M5.3 Combat UI (branch `feat/m5.3-combat-ui`, from `main` after the merge)
