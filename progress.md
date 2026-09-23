@@ -24,25 +24,34 @@
 - [ ] M5 — Combat (plan approved 2026-09-23; 3 sub-modules, see ROADMAP and ADR 0010)
   - [x] M5.1 Combat core (branch `feat/m5.1-combat-core`): `enemies.json` (goblin_grunt, rock_crab, razorbeak; spawns empty), `items.json` (chair, rolling_pin, stone, seed_core), rules `combat`, `CombatDb`, `Stats` (stat_mod live), `CombatState`, `Combat` (attack, block, throw, drop, bump attack, fight records at fight end, danger refusals, knock-out with safe wake spot, night heal, bandage heal), `Night.run(..., knocked_out)`, save v6. ADR 0010. GUT 302/302.
   - [x] M5.2 Monsters on the map (branch `feat/m5.2-monsters`): `MonsterSim` (turns by `act_seconds`, spawns, spot/ambush, pack aggro + morale, give up (crab hides, others go home), territorial leash from home, flee to the edge), 4 real spawns, map items (seed cores, stones, rolling pin, chairs) + `Commands.take`, Razorbeak nest zone/object, monster `pack` field. ADR 0010 M5.2 section. GUT 348/348. PR #11 merged, tag `m5.2-done`.
-  - [x] M5.3 Combat UI (branch `feat/m5.3-combat-ui`): monster markers (state edge, dark ring, "Goblin 5/8"; hidden crab = rock tile), HUD `HP 14/20 · Held: Chair` (warning colour ≤ 25%), combat text in the log, bump attack once per key press, B/T/X, Take in the E menu, knock-out page (`SystemMessages.KNOCKOUT`), sheet HP + stats, console combat + debug commands, `Combat.nearest_foe`. `sim_m5_done` (seed 2) checks the M5 "Done when". ADR 0010 M5.3 section. GUT 358/358. PR #12 open (waiting on the user).
-- [ ] M6 — see `docs/ROADMAP.md`
+  - [x] M5.3 Combat UI (branch `feat/m5.3-combat-ui`): monster markers (state edge, dark ring, "Goblin 5/8"; hidden crab = rock tile), HUD `HP 14/20 · Held: Chair` (warning colour ≤ 25%), combat text in the log, bump attack once per key press, B/T/X, Take in the E menu, knock-out page (`SystemMessages.KNOCKOUT`), sheet HP + stats, console combat + debug commands, `Combat.nearest_foe`. `sim_m5_done` (seed 2) checks the M5 "Done when". ADR 0010 M5.3 section. GUT 358/358. PR #12 merged, tags `m5.3-done` and `m5-done`.
+- [ ] M6 — Vertical slice (plan approved 2026-09-23; 5 sub-modules, see ROADMAP and ADR 0011)
+  - [x] M6.1 Play loop (branch `feat/m6.1-play-loop`): `SaveSlots` (3 slots + autosave in `user://saves`), `Session` save/load/new game, title menu (main scene), pause menu (Esc: save, load, quit to title), shared slot list, journal (J: focus from class main tags), welcome page with hints, autosave when the System dialog closes / on quit, offer thresholds ÷ 3 (first offer night 3, day 11), GUT pre-run hook (test saves in `user://test_saves`). ADR 0011. GUT 382/382.
+  - [ ] M6.2 Canon 1.15–1.20R
+  - [ ] M6.3 Canon 1.21–1.25
+  - [ ] M6.4 Player hooks + news (save v7)
+  - [ ] M6.5 Canon fights + `sim_m6_done`
 
 ## Completed
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `rng`, `game_state` (SAVE_VERSION=6), `save_migrations` (1→…→6), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
-- UI: `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
+- Core: `save_slots`, `rng`, `game_state` (SAVE_VERSION=6), `save_migrations` (1→…→6), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior), `npc_behaviour.json`, `enemies.json`, `items.json`; rules `npc`, `combat`.
-- Tests: 37 GUT scripts, 358 tests, all pass, headless exit 0. Python tool tests: 26 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 40 GUT scripts, 382 tests, all pass, headless exit 0. Python tool tests: 26 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers
 - None.
 
 ## Open balance note
-- First class offer comes on day 22 with a plain inn workday (ADR 0009). Canon Erin gets [Innkeeper] on night 1. Tune XP / thresholds in a later pass (M6).
+- M6.1: first offer now on night 3 (day 11) with a plain inn workday (thresholds ÷ 3). Levels after the first class are still slow (canon Erin is level 9 by day 9). Check in M6.5.
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
+
+## M6 decisions (user, 2026-09-23)
+- Canon: all chapters 1.15–1.25 (incl. R, A and Interlude – King Edition). Hooks on each canon event (schema change in M6.4, ask for details first). First offer night 2–3. Title menu + 3 slots + autosave.
+- Save in a fight is allowed (ROADMAP: "save/load at any point").
 
 ## M5 decisions (user, 2026-09-23)
 - HP 0 = knocked out (no death). One held improvised item (no inventory). Enemies: Goblin grunt, Rock Crab, Razorbeak. A monster at 0 HP dies. Knock-out wake: nearest safe place (Floodplains / inn hill → inside the inn; Liscor gate / market → the gate; else where you fell). 3 sub-modules.
@@ -58,6 +67,7 @@
 - Approved: new schemas `tiles.json`, `maps/<area>.json`, `npc_behaviour.json`; rules `world` + `npc`; `Actions.perform` `minutes` opt; `Session` autoload; save v4 and v5.
 
 ## Architectural decisions
+- ADR 0011 (accepted, M6.1): `SaveSlots` (headless, folder as a parameter); Continue = newest readable save; autosave when the System dialog closes, on quit to title and on window close; welcome page only for a new game from the title; hints are UI text (not data); journal focus = class main tags (weight ≥ 0.5); thresholds ÷ 3; GUT pre-run hook sets `Session.save_dir`.
 - ADR 0010 (accepted, M5.1–M5.3): M5.3: presentation only, no schema/save change; bump attack once per key press (lock per direction); T throws at `Combat.nearest_foe` (seen monsters, hostile first, then distance, then id); a knock-out runs `Commands.knock_out` at once after any command and opens the knock-out page; `sim_m5_done` uses a fixed seed (2). M5.2: `MonsterSim.run` from `Combat.sync`; long gaps give no turns unless a monster is hostile (then capped); territorial give-up measured from home; goblins that give up go home (not routed); routed counts when a monster starts to flee; objects may have no actions; `DataDb` loads combat before it validates maps. M5.1: no combat mode (each command is a 6 s turn); `Commands._after` = `Combat.sync` + `NpcSim.sync`; monsters only in the player's area (`gs.combat`, save v6); fight counts → one record per action kind at fight end (minutes 0, risk = foe danger, won/fled/KO → success/partial/fail); improvise = context `weapon: improvised`; danger refuses actions/uses/sleep; knock-out wakes at the normal time at a safe place with 25% HP; `Stats` from base stats + stat_mod.
 - ADR 0009 (accepted): night result sections (`collapsed`, `progress`, `world`); `SystemMessages` page order and page shape; offers from `gs.progression.offers`; decline asks once more; no skip; console blocked while the dialog waits; map object `sleep` flag (`Interact.SLEEP` is not an action); character sheet (C).
 - ADR 0001: GUT version, RNG state as strings in JSON, `.import` files committed, save load path.
