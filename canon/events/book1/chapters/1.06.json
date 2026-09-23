@@ -1,0 +1,62 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.06",
+	"events": {
+		"b1.watch_first_visit": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"guard_a": {"prefer": ["relc"], "fallback_tags": ["drake", "guard"]},
+				"guard_b": {"prefer": ["klbkch"], "fallback_tags": ["guard"]},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["liscor.watch_knows_inn_occupied"], "not_flags": []},
+			"depends_on": ["b1.watch_spots_smoke"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 2,
+			"effects": {
+				"set_flags": ["erin.met_liscor_watch", "erin.knows_liscor"],
+				"relationship": [
+					{"from": "relc", "to": "erin_solstice", "delta": 2},
+					{"from": "klbkch", "to": "erin_solstice", "delta": 2},
+					{"from": "erin_solstice", "to": "relc", "delta": 1},
+					{"from": "erin_solstice", "to": "klbkch", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed", "note": "Starts with the knock at the end of 1.05. Deltas are design values."},
+			"summary": "Relc and Klbkch knock. Erin slams the door twice, then feeds them pasta. They explain Liscor, Drakes, Antinium, levels and the plague that emptied the site, find her harmless, pay in coins, and plan to come back."
+		},
+		"b1.klbkch_heals_erin": {
+			"tier": 2,
+			"window": {"earliest": 5, "latest": 5, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"healer": {"prefer": ["klbkch"], "fallback_tags": ["guard", "healer"]},
+				"patient": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.hand_poisoned", "erin.met_liscor_watch"], "not_flags": []},
+			"depends_on": ["b1.watch_first_visit", "b1.erin_poisoned_hand"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["klbkch.special_potion_used"],
+				"clear_flags": ["erin.hand_poisoned"],
+				"relationship": [{"from": "erin_solstice", "to": "klbkch", "delta": 2}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed"},
+			"summary": "Klbkch sees the oozing wound is fish poison, not infection, and gives Erin a healing potion he calls cheap. It closes the cut at once. Later he admits to Relc it was rare special issue and he will pay for it."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 5, "confidence": "confirmed", "note": "Night 5."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Basic Crafting]", "level": 5, "confidence": "confirmed"},
+		{"who": "relc", "kind": "class", "name": "[Spearmaster]", "level": null, "confidence": "confirmed", "note": "Primary class."},
+		{"who": "relc", "kind": "class", "name": "[Guardsman]", "level": null, "confidence": "confirmed", "note": "Fewer levels than his primary class."},
+		{"who": "klbkch", "kind": "class", "name": "[Swordslayer]", "level": null, "confidence": "confirmed", "note": "Primary class."},
+		{"who": "klbkch", "kind": "class", "name": "[Guardsman]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "other", "name": "Level-up message on falling asleep", "level": null, "confidence": "confirmed", "note": "Relc: common and annoying. New classes can come without training if you meet the requirements."}
+	]
+}

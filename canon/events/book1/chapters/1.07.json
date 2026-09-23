@@ -1,0 +1,59 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.07",
+	"events": {
+		"b1.erin_blue_fruit_sickness": {
+			"tier": 2,
+			"window": {"earliest": 6, "latest": 6, "confidence": "confirmed"},
+			"location": "inn_stream",
+			"roles": {"victim": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.knows_orchard"], "not_flags": ["erin.knows_amentus_poison"]},
+			"depends_on": ["b1.erin_finds_amentus_orchard"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_amentus_poison"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed"},
+			"summary": "Back from a painful egg raid and a basket-weaving success, Erin vomits for an hour. At the stream a fish that eats a seed core dies in minutes, and she realises some blue fruit carry deadly poison."
+		},
+		"b1.goblins_take_erins_basket": {
+			"tier": 2,
+			"window": {"earliest": 6, "latest": 6, "confidence": "confirmed"},
+			"location": "inn_stream",
+			"roles": {
+				"gatherer": {"prefer": ["goblin_gatherer"], "fallback_tags": ["goblin", "gatherer"]},
+				"curious_child": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"]},
+				"hidden_watcher": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["goblin_tribe.has_erins_basket", "erin.knows_bad_fruit_tell", "rags.knows_bad_fruit_tell"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed", "note": "erin.knows_bad_fruit_tell needs the hidden_watcher role filled."},
+			"summary": "Six Goblins fetching water take Erin's grass basket. Their gatherer sorts out poisoned fruit by Skill; the littlest Goblin cuts some open and sees the tell. Erin, hidden nearby, copies her: bad fruit is watery."
+		},
+		"b1.market_brawl_delays_watch": {
+			"tier": 2,
+			"window": {"earliest": 6, "latest": 6, "confidence": "confirmed"},
+			"location": "liscor_market",
+			"roles": {
+				"captain": {"prefer": ["zevara"], "fallback_tags": ["captain", "guard"]},
+				"guard_a": {"prefer": ["relc"], "fallback_tags": ["guard"]},
+				"guard_b": {"prefer": ["klbkch"], "fallback_tags": ["guard"]}
+			},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": ["b1.watch_first_visit"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["liscor.watch_busy_night"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed", "note": "This is why the guards miss their promised visit and Erin is alone when Pisces comes."},
+			"summary": "Just as Relc and Klbkch sign out to visit the inn, Watch Captain Zevara orders every guard to a brawl in the market. Overtime and follow-up work keep them in the city all night."
+		}
+	},
+	"system": [
+		{"who": "goblin_gatherer", "kind": "class", "name": "[Gatherer]", "level": null, "confidence": "confirmed"},
+		{"who": "goblin_gatherer", "kind": "skill", "name": "[Detect Poison]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "other", "name": "[Basic Crafting] used", "level": null, "confidence": "confirmed", "note": "Weaves a sturdy grass basket in about 20 minutes with no prior knowledge."}
+	]
+}

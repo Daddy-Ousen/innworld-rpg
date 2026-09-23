@@ -1,0 +1,53 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.09",
+	"events": {
+		"b1.storm_from_the_south": {
+			"tier": 1,
+			"window": {"earliest": 7, "latest": 7, "confidence": "confirmed"},
+			"location": "pallass",
+			"roles": {"caster": {"prefer": [], "fallback_tags": ["mage"], "optional": true}},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["floodplains.storm_day7"]},
+			"rumor": "A mage claims the sudden autumn downpour was cast on purpose, somewhere to the south, maybe Pallass.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.09", "confidence": "likely", "note": "Rain is confirmed. The cause and Pallass are only Pisces' claim; location is a guess."},
+			"summary": "A short, violent storm hits the Floodplains out of season. Pisces senses a local weather-control spell cast from the south, possibly Pallass; any level 30 [Mage] could do it."
+		},
+		"b1.pisces_arrest_and_escape": {
+			"tier": 2,
+			"window": {"earliest": 7, "latest": 7, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"suspect": {"prefer": ["pisces"], "fallback_tags": ["mage", "criminal"]},
+				"guard_a": {"prefer": ["relc"], "fallback_tags": ["drake", "guard"]},
+				"guard_b": {"prefer": ["klbkch"], "fallback_tags": ["guard"]},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["pisces"], "flags": ["erin.met_pisces", "erin.met_liscor_watch"], "not_flags": ["pisces.arrested"]},
+			"depends_on": ["b1.pisces_illusion_at_inn", "b1.watch_first_visit"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {
+				"set_flags": ["liscor.hunting_pisces", "pisces.exposed_necromancer", "erin.watch_tab_open"],
+				"relationship": [
+					{"from": "relc", "to": "pisces", "delta": -2},
+					{"from": "klbkch", "to": "pisces", "delta": -2},
+					{"from": "pisces", "to": "erin_solstice", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.09", "confidence": "confirmed", "note": "Deltas are design values."},
+			"summary": "Pisces comes back for breakfast just before Relc and Klbkch arrive. Erin's story shows he is the illusion robber; they pin him. When she mentions necromancy and the skeleton, he escapes behind an illusion of himself."
+		}
+	},
+	"system": [
+		{"who": "klbkch", "kind": "skill", "name": "[Detect Guilt]", "level": null, "confidence": "confirmed", "note": "Klbkch calls it a basic Skill most [Guardsmen] get."},
+		{"who": "relc", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed"},
+		{"who": "pisces", "kind": "skill", "name": "[Flash Step]", "level": null, "confidence": "likely", "note": "Named by Relc as the move Pisces fumbled."},
+		{"who": "pisces", "kind": "class", "name": "[Necromancer]", "level": null, "confidence": "confirmed", "note": "Narration uses the class title."}
+	]
+}

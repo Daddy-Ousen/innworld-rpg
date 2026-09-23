@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.02",
+	"events": {
+		"b1.seed_core_scares_rock_crab": {
+			"tier": 2,
+			"window": {"earliest": 2, "latest": 2, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"thrower": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"crab": {"prefer": [], "fallback_tags": ["rock_crab"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.knows_orchard"], "not_flags": []},
+			"depends_on": ["b1.erin_finds_amentus_orchard", "b1.rock_crab_ambush"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["erin.knows_seed_repels_crabs"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed"},
+			"summary": "Erin eats the sweet blue rinds but finds the big seed core stinks like cleaning fluid. When the rock crab creeps up again, she hits it with a core; it panics and claws at itself."
+		},
+		"b1.goblin_raid_on_inn": {
+			"tier": 2,
+			"window": {"earliest": 2, "latest": 2, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"defender": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"raiders": {"prefer": [], "fallback_tags": ["goblin", "warrior"]},
+				"young_carrier": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.claimed"], "not_flags": []},
+			"depends_on": ["b1.erin_claims_inn", "b1.erin_finds_amentus_orchard"],
+			"on_fail": ["substitute", "delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {
+				"set_flags": ["wandering_inn.shutters_broken", "goblin_tribe.lost_to_erin"],
+				"relationship": [{"from": "rags", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "Relationship delta is a design value (Rags is curious), not canon."},
+			"summary": "Ten Goblins picking blue fruit spot Erin and chase her home. Seven break in through the shutters. She fights back with chairs, a kick, fists and a slap, takes a knife, and shouts them out of the inn."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 4, "confidence": "confirmed", "note": "Levels 2 and 3 skipped; night 2."},
+		{"who": "goblin_chieftain", "kind": "class", "name": "[Chieftain]", "level": null, "confidence": "confirmed"}
+	]
+}

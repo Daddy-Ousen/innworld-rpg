@@ -1,0 +1,55 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.00",
+	"events": {
+		"b1.erin_arrives": {
+			"tier": 2,
+			"window": {"earliest": 1, "latest": 1, "confidence": "confirmed"},
+			"location": "dragon_cave_lair",
+			"roles": {"earther": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.arrived", "erin.burned_arm"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Day 1 is defined as this day."},
+			"summary": "Erin walks to her bathroom on Earth and steps into a cave beside a sleeping Dragon. It wakes, a jet of violet flame burns her right arm, and she flees out into the plains."
+		},
+		"b1.goblins_chase_erin": {
+			"tier": 2,
+			"window": {"earliest": 1, "latest": 1, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"prey": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"hunters": {"prefer": [], "fallback_tags": ["goblin"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.arrived"], "not_flags": []},
+			"depends_on": ["b1.erin_arrives"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {"set_flags": ["erin.cut_legs"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Told in flashback."},
+			"summary": "Lost and shouting for help, Erin draws a pack of small red-eyed Goblins. Their knives cut her legs before she finally outruns them."
+		},
+		"b1.erin_claims_inn": {
+			"tier": 2,
+			"window": {"earliest": 1, "latest": 1, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {"claimant": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.arrived"], "not_flags": ["wandering_inn.claimed"]},
+			"depends_on": ["b1.erin_arrives"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 2,
+			"effects": {"set_flags": ["wandering_inn.claimed", "wandering_inn.common_room_clean"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "The not_flags check is a design hook (player takes the inn first), not canon."},
+			"summary": "At dusk Erin finds the empty inn on a hill and shelters from heavy rain. With a bucket of rainwater and an old curtain she cleans every table, chair and the bar, then falls asleep in a chair."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "class", "name": "[Innkeeper]", "level": 1, "confidence": "confirmed", "note": "On falling asleep, night 1."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Basic Cleaning]", "level": 1, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Basic Cooking]", "level": 1, "confidence": "confirmed"}
+	]
+}

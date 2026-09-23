@@ -1,0 +1,140 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"floodplains_of_liscor": {
+			"name": "Floodplains of Liscor",
+			"kind": "region",
+			"parent": null,
+			"tags": ["grassland", "wild", "monsters"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Seen from 1.00; named by Pisces in 1.08."},
+			"summary": "Rolling hills and hidden valleys of autumn grass in bands of green, orange and purple, walled by huge mountains. Easy to get lost in. Border of the Drake lands to the south."
+		},
+		"wandering_inn": {
+			"name": "The abandoned inn on the hill",
+			"kind": "building",
+			"parent": "floodplains_of_liscor",
+			"tags": ["inn", "shelter", "abandoned", "plague_site"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Not called 'The Wandering Inn' in 1.00-1.09. Id uses the book title."},
+			"summary": "Large old wooden inn on a high hill: common room, long bar, kitchen with stone oven, upstairs rooms. Last of a small settlement that died of plague about ten years ago. No law stops anyone living there."
+		},
+		"inn_stream": {
+			"name": "Stream near the inn",
+			"kind": "landmark",
+			"parent": "floodplains_of_liscor",
+			"tags": ["water", "fish", "danger"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed"},
+			"summary": "Cold, fast, shoulder-deep stream of mountain water a few hundred feet from the inn. Drinking and washing spot for Erin and the Goblins. Flat, toothy, four-eyed fish hunt in it."
+		},
+		"amentus_orchard": {
+			"name": "Blue fruit valley",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["food", "amentus", "forage"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Fruit named Amentus by Pisces in 1.08."},
+			"summary": "Small valley east of the inn full of thin, very tough grey trees with blue fruit. Kick a tree and ripe fruit drops. Goblins forage here too."
+		},
+		"razorbeak_nests": {
+			"name": "Razorbeak nesting ground",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["nest", "eggs", "danger"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "likely", "note": "Nests found in open grass on the way to the stream; exact spot is not fixed."},
+			"summary": "Ground nests of Razorbeaks in the long grass. A big messy nest holds prey remains; smaller nests hold large pale eggs. Adults dive and peck at thieves."
+		},
+		"goblin_cave": {
+			"name": "Goblin tribe cave",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["goblin", "cave", "lair"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "Distance and direction from the inn not given."},
+			"summary": "Small, wet, dark cave home of a small Goblin tribe. The way in is a narrow gap you roll under and crawl through; the Chieftain sometimes gets stuck."
+		},
+		"liscor": {
+			"name": "Liscor",
+			"kind": "settlement",
+			"parent": "floodplains_of_liscor",
+			"tags": ["city", "drake", "walled"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Seen as a far stone wall in 1.01; named in 1.06."},
+			"summary": "Walled Drake city about twenty minutes' walk from the inn. Watch is mostly Drakes, a few tall furry guards, and one Antinium. People with a criminal record are not welcome."
+		},
+		"liscor_walls": {
+			"name": "Liscor city walls",
+			"kind": "landmark",
+			"parent": "liscor",
+			"tags": ["wall", "watch_post"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed"},
+			"summary": "Watch posts on Liscor's wall. Guards there look out over the Floodplains for monsters, Goblins and smoke."
+		},
+		"liscor_watch_barracks": {
+			"name": "Liscor Watch barracks",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": ["watch", "guard"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed"},
+			"summary": "Barracks of the City Watch. Guards sign in and out in a ledger here. The Watch Captain's office is upstairs."
+		},
+		"liscor_market": {
+			"name": "Liscor marketplace",
+			"kind": "district",
+			"parent": "liscor",
+			"tags": ["market", "commerce"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.07", "confidence": "confirmed"},
+			"summary": "Liscor's market square. Scene of an evening brawl that pulled in the whole Watch on day 6."
+		},
+		"high_passes": {
+			"name": "The mountains around the pass",
+			"kind": "region",
+			"parent": null,
+			"tags": ["mountains", "dangerous"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "guess", "note": "Unnamed in 1.00-1.09. Id guesses the name High Passes; confirm or rename when the book names them."},
+			"summary": "Vast cloud-topped mountains that wall the Floodplains and part to form one pass between north and south."
+		},
+		"dragon_cave_lair": {
+			"name": "The Dragon's first cave",
+			"kind": "wild",
+			"parent": "high_passes",
+			"tags": ["cave", "lair", "dragon"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "likely", "note": "In or near the mountains: Erin ran from it into the plains. Exact place unknown."},
+			"summary": "Cave where Erin appears. A Dragon sleeps there behind hundreds of warding spells. He abandons it after she wakes him."
+		},
+		"dragon_backup_lair": {
+			"name": "The Dragon's backup lair",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["cave", "lair", "dragon", "hoard"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Location unknown. He dislikes its neighbours."},
+			"summary": "Emergency lair the Dragon teleports to with his hoard. Harder to reach and more dangerous for visitors."
+		},
+		"pallass": {
+			"name": "Pallass",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "drake", "mentioned"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed"},
+			"summary": "Drake city to the south. Sends high-grade healing potions to Liscor once the Blood Fields freeze. Pisces thinks a storm spell may have come from there."
+		},
+		"blood_fields": {
+			"name": "The Blood Fields",
+			"kind": "region",
+			"parent": null,
+			"tags": ["mentioned", "dangerous"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed"},
+			"summary": "Area between Liscor and Pallass. Supply shipments only cross it once it is frozen in winter."
+		}
+	}
+}

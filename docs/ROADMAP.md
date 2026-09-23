@@ -23,10 +23,11 @@ Rule: finish a milestone's acceptance tests before starting the next. Tick boxes
   Done: `tests/sim_30_days.gd`, `tests/sim_decline.gd` (ADR 0003).
 
 ## M2 — Canon pipeline
-- [ ] `tools/extract_epub.py` → chapter text files + `index.json` (chapter id, title, word count)
-- [ ] Event/NPC/location JSON schemas + a validator (`tools/validate_data.py`)
-- [ ] Extract the first ~10 chapters of Book 1 into event candidates; human review
+- [x] `tools/extract_epub.py` → chapter text files + `index.json` (chapter id, title, word count)
+- [x] Event/NPC/location JSON schemas + a validator (`tools/validate_data.py`) — ADR 0004
+- [x] Extract the first ~10 chapters of Book 1 into event candidates; human review — 1.00–1.09, 26 events, reviewed
 **Done when:** validator passes on `canon/events/book1/`.
+  Done: `python tools/validate_data.py canon/events/book1` → 0 errors (ADR 0004).
 
 ## M3 — World director
 - [ ] Event nodes, windows, roles, requires, `on_fail`, effects
