@@ -19,6 +19,10 @@ const HELP := [
 	"  focus <tag ...> / focus clear      journal focus (conviction bonus)",
 	"  pools                              hidden class pools (debug)",
 	"  breakthrough <class>               allow the next capstone level (debug)",
+	"  kill <npc>                         kill a canon NPC (debug)",
+	"  flag <key> [value] / flag <key> off   set or clear a world flag (debug)",
+	"  history                            what happened to canon events (debug)",
+	"  drift                              how far the world left canon",
 	"  save / load                        " + SAVE_PATH,
 	"  new [seed]                         start a new game",
 ]
@@ -67,6 +71,17 @@ func execute(line: String) -> Array[String]:
 			if out.is_empty():
 				var ok := Commands.grant_breakthrough(gs, args[0])
 				out.append("Breakthrough granted." if ok else "You do not have the class '%s'." % args[0])
+		"kill":
+			out = _need_arg(args, "kill <npc>")
+			if out.is_empty():
+				var err := Commands.kill_npc(gs, db, args[0])
+				out.append(err if err != "" else "%s is dead." % db.canon.npcs[args[0]]["name"])
+		"flag":
+			out = _flag(args)
+		"history":
+			out = _history()
+		"drift":
+			out.append("Drift %.2f." % gs.world.drift)
 		"save":
 			var err := gs.save_to_file(SAVE_PATH)
 			out.append("Saved." if err == OK else "Save failed (error %d)." % err)
@@ -187,6 +202,37 @@ func _pools() -> Array[String]:
 				"declined" if gs.progression.declined.has(id) else ""])
 	if out.is_empty():
 		out.append("All pools are empty. Pools fill at night.")
+	return out
+
+
+func _flag(args: Array) -> Array[String]:
+	var out := _need_arg(args, "flag <key> [value] / flag <key> off")
+	if not out.is_empty():
+		return out
+	var value: Variant = true
+	if args.size() > 1:
+		value = false if args[1] == "off" else _value(args[1])
+	Commands.set_flag(gs, args[0], value)
+	out.append("%s = %s" % [args[0], gs.flags[args[0]]] if gs.flags.has(args[0]) else "%s cleared." % args[0])
+	return out
+
+
+func _history() -> Array[String]:
+	var out: Array[String] = []
+	for h: Dictionary in gs.world.history:
+		var roles: Dictionary = h["roles"]
+		var who := ", ".join(roles.keys().map(func(r: String) -> String: return "%s=%s" % [r, roles[r]]))
+		var line := "D%d  %-11s %s" % [int(h["day"]), h["outcome"], h["event"]]
+		if h.has("via"):
+			line += " → " + h["via"]
+		if who != "":
+			line += "  (%s)" % who
+		if h.has("reason"):
+			line += "  [%s]" % h["reason"]
+		out.append(line)
+	if out.is_empty():
+		out.append("Nothing has happened yet.")
+	out.append("Drift %.2f." % gs.world.drift)
 	return out
 
 

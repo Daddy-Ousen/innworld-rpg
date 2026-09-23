@@ -92,3 +92,18 @@ func test_console_scene_runs_a_command() -> void:
 	input.text_submitted.emit("do sweep_floor")
 	assert_string_contains(output.get_parsed_text(), "> do sweep_floor")
 	assert_string_contains(output.get_parsed_text(), "Sweep the floor")
+
+
+func test_kill_flag_history_and_drift() -> void:
+	var c := ConsoleCommands.new(_db)
+	assert_string_contains(_text(c.execute("kill relc")), "is dead")
+	assert_string_contains(_text(c.execute("kill relc")), "already dead")
+	assert_string_contains(_text(c.execute("kill")), "Usage")
+	assert_string_contains(_text(c.execute("flag village.walls")), "village.walls = true")
+	assert_eq(c.gs.flags["village.walls"], true)
+	assert_string_contains(_text(c.execute("flag village.walls off")), "cleared")
+	assert_false(c.gs.flags.has("village.walls"))
+	c.execute("flag gold 5")
+	assert_eq(c.gs.flags["gold"], 5)
+	assert_string_contains(_text(c.execute("history")), "killed")
+	assert_string_contains(_text(c.execute("drift")), "Drift 0.00")
