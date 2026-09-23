@@ -1,0 +1,20 @@
+{
+	"schema_version": 1,
+	"clock": {
+		"start_minute": 360,
+		"wake_minute": 360,
+		"min_sleep_minutes": 240,
+		"collapse_after_awake": 2160,
+		"collapse_sleep_minutes": 720
+	},
+	"xp": {
+		"intensity_min": 0.25,
+		"intensity_max": 3.0,
+		"risk_scale": 3.0,
+		"outcome_mult": {"success": 1.0, "partial": 0.75, "fail": 0.5},
+		"novelty": {"window_days": 7, "half_life_days": 2.0, "k": 0.35, "floor": 0.1, "first_time_bonus": 1.5},
+		"conviction": {"match_mult": 1.25}
+	},
+	"levels": {"base_xp": 100, "growth": 1.35, "capstones": [10, 20, 30]},
+	"offers": {"max_per_night": 2}
+}
