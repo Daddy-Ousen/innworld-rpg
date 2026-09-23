@@ -22,7 +22,7 @@ M5.1 Combat core is done and tested:
 - **Tests:** GUT 302/302 (new: `unit_combat`, `unit_combat_db`, `unit_stats`, plus additions to `unit_night`, `unit_game_state`, `unit_data_db`). Python 26/26. Validator 0 errors.
 
 ## Waiting on the user
-- Review the M5.1 PR, merge, then tag `m5.1-done`.
+- Review PR #10 (https://github.com/Daddy-Ousen/innworld-rpg/pull/10), merge, then tag `m5.1-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next: M5.2 Monsters on the map (branch `feat/m5.2-monsters`, from `main` after the merge)
