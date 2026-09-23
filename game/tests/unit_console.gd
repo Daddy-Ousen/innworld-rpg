@@ -153,3 +153,33 @@ func test_wait_npcs_and_talk() -> void:
 	assert_string_contains(_text(c.execute("wait 30")), "You wait.")
 	assert_eq(c.gs.clock.total_minutes, t + 30)
 	assert_string_contains(_text(c.execute("wait soon")), "whole number")
+
+
+func test_combat_commands() -> void:
+	var c := ConsoleCommands.new(_db)
+	c.gs.player.place("floodplains_south", Vector2i(14, 9))
+	Commands.settle(c.gs, _db)
+	c.gs.combat.monsters.clear()
+	c.gs.combat.fight = {}
+	for s: Dictionary in _db.combat.spawns:
+		c.gs.combat.spawn_last[s["id"]] = c.gs.clock.total_minutes
+	assert_string_contains(_text(c.execute("look")), "Loose stones (loose_stones_1): take")
+	assert_string_contains(_text(c.execute("use loose_stones_1 take")), "You take the stone.")
+	assert_string_contains(_text(c.execute("status")), "HP 20/20 · Held: Stone")
+	assert_string_contains(_text(c.execute("monsters")), "There are no monsters here.")
+	assert_string_contains(_text(c.execute("throw")), "There is nothing to throw at.")
+	assert_string_contains(_text(c.execute("spawn dragon")), "Unknown enemy")
+	assert_string_contains(_text(c.execute("spawn goblin_grunt 1 0")), "Goblin (m")
+	assert_string_contains(_text(c.execute("look")), "@M")
+	var list := _text(c.execute("monsters"))
+	assert_string_contains(list, "hostile")
+	assert_string_contains(list, "In a fight (in danger).")
+	assert_string_contains(_text(c.execute("do sweep_floor")), Combat.REFUSED_DANGER)
+	assert_string_contains(_text(c.execute("attack e")), "Goblin")
+	assert_string_contains(_text(c.execute("block")), "You raise your guard.")
+	assert_string_contains(_text(c.execute("drop")), "You put the stone down.")
+	assert_string_contains(_text(c.execute("drop")), "You hold nothing.")
+	assert_string_contains(_text(c.execute("attack")), "Usage")
+	assert_string_contains(_text(c.execute("knockout")), "--- You are knocked out. ---")
+	assert_eq(c.gs.player.area, "inn_interior")
+	assert_string_contains(_text(c.execute("monsters")), "There are no monsters here.")

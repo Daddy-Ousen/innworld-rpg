@@ -1,15 +1,19 @@
-## Heads-up display: day, time, place, a tiredness warning, and a short
-## log of what just happened. Presentation only.
+## Heads-up display: day, time, place, HP and the held item, a tiredness
+## warning, and a short log of what just happened. Presentation only.
 class_name Hud
 extends Control
 
-const LOG_LINES := 4
+const LOG_LINES := 6
 ## Warn when this many awake minutes are left before a collapse.
 const WARN_BEFORE := 360
+## HP at or below this share of max HP is shown in the warning colour.
+const LOW_HP := 0.25
+const WARN_COLOR := Color(1, 0.55, 0.4, 1)
 
 var _log: Array[String] = []
 
 @onready var _status: Label = %Status
+@onready var _health: Label = %Health
 @onready var _warning: Label = %Warning
 @onready var _log_label: Label = %Log
 
@@ -21,8 +25,26 @@ func refresh(gs: GameState, db: DataDb) -> void:
 		place = "%s · %s" % [db.maps.areas[gs.player.area]["name"],
 				db.canon.locations.get(loc, {}).get("name", loc)]
 	_status.text = "Day %d  %s    %s" % [gs.clock.day(), gs.clock.time_string(), place]
+	_health.text = health(gs, db)
+	if is_low(gs, db):
+		_health.add_theme_color_override("font_color", WARN_COLOR)
+	else:
+		_health.remove_theme_color_override("font_color")
 	_warning.text = warning(gs, db)
 	_warning.visible = _warning.text != ""
+
+
+## "HP 14/20 · Held: Chair" (or "Held: nothing").
+static func health(gs: GameState, db: DataDb) -> String:
+	var held := "nothing"
+	if gs.player.held != "":
+		held = String(db.combat.items.get(gs.player.held, {}).get("name", gs.player.held))
+	return "HP %d/%d · Held: %s" % [Combat.hp(gs, db), Stats.max_hp(gs, db), held]
+
+
+## True at or below LOW_HP of max HP.
+static func is_low(gs: GameState, db: DataDb) -> bool:
+	return Combat.hp(gs, db) <= Stats.max_hp(gs, db) * LOW_HP
 
 
 ## "" or a line about how close a collapse is.

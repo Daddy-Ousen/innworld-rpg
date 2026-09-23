@@ -1,5 +1,5 @@
-## Read-only character sheet (C key): classes, levels, skills, focus,
-## open offers. `lines` is static and headless, so tests can check it.
+## Read-only character sheet (C key): HP, held item, stats, classes,
+## levels, skills, focus, open offers. `lines` is static and headless, so tests can check it.
 ## Presentation only.
 class_name CharacterSheet
 extends PanelContainer
@@ -34,9 +34,13 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = [
 		"Day %d, %s. Awake %dh %02dm." % [gs.clock.day(), gs.clock.time_string(), awake / 60, awake % 60],
 		"Race: %s. Total level: %d." % [gs.race.capitalize(), p.total_level()],
-		"",
-		"Classes:",
+		Hud.health(gs, db),
 	]
+	var stats := Stats.of(gs, db)
+	out.append("Stats: %s" % ", ".join(stats.keys().map(func(s: String) -> String:
+		return "%s %d" % [s.capitalize(), int(stats[s])])))
+	out.append("")
+	out.append("Classes:")
 	if p.classes.is_empty():
 		out.append("  None yet.")
 	for id: String in p.classes:

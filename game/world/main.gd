@@ -1,7 +1,11 @@
 ## The game screen: world map, HUD, "use" menu, character sheet, System
 ## dialog and the debug console overlay. Turns keys into Commands on
 ## Session.gs, then redraws. Held keys: WASD/arrows walk, Space waits
-## (one step of time).
+## (one step of time). Walking into a monster attacks it, once per key
+## press (holding the key does not attack again). B blocks, T throws the
+## held item at the nearest monster, X drops it. After every command the
+## combat text goes to the log; a knocked-out player gets the night at once
+## (Commands.knock_out) and the System dialog.
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
@@ -16,6 +20,9 @@ const MOVE_KEYS := {
 var _cooldown := 0.0
 ## The NPC the player last bumped into (say it once, not every repeat).
 var _bumped := ""
+## The direction of the last bump attack. That key must be let go before it
+## moves or attacks again.
+var _attack_dir := ""
 
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
@@ -30,7 +37,7 @@ func _ready() -> void:
 	var names := {}
 	for id: String in Session.db.canon.npcs:
 		names[id] = Session.db.canon.npcs[id]["name"]
-	view.setup(Session.db.maps, names)
+	view.setup(Session.db.maps, names, Session.db.combat.enemies)
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)
@@ -70,6 +77,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			sleep()
 		KEY_C:
 			sheet.open(Session.gs, Session.db)
+		KEY_B:
+			block()
+		KEY_T:
+			throw()
+		KEY_X:
+			drop()
 		_:
 			return
 	get_viewport().set_input_as_handled()
@@ -80,9 +93,11 @@ func _process(delta: float) -> void:
 	if is_busy():
 		return
 	var dir := _held_direction()
+	if dir != _attack_dir:
+		_attack_dir = ""
 	if dir == "":
 		_cooldown = 0.0
-	elif _cooldown == 0.0:
+	elif _cooldown == 0.0 and _attack_dir == "":
 		step(dir)
 		_cooldown = STEP_REPEAT
 
@@ -95,7 +110,8 @@ func _held_direction() -> String:
 	return ""
 
 
-## One step in `dir` (n, s, e, w), or WAIT for one step of time.
+## One step in `dir` (n, s, e, w), or WAIT for one step of time. A step
+## into a monster attacks it (or springs a hidden one).
 func step(dir: String) -> void:
 	var gs := Session.gs
 	var db := Session.db
@@ -111,6 +127,54 @@ func step(dir: String) -> void:
 	if r["exit_to"] != "":
 		hud.add_lines(["You travel to %s (%d min)." % [
 			Session.db.maps.areas[r["exit_to"]]["name"], int(r["minutes"])]])
+	if r.has("attack") or r.has("ambush"):
+		_attack_dir = dir
+		if r.has("attack") and r["attack"]["error"] != "":
+			hud.add_lines([r["attack"]["error"]])
+	_finish()
+
+
+## Raises the guard for one turn (B).
+func block() -> void:
+	_command_error(Commands.block(Session.gs, Session.db))
+
+
+## Throws the held item at the nearest monster you can see (T).
+func throw() -> void:
+	if Session.gs.player.held == "":
+		hud.add_lines(["You hold nothing to throw."])
+		return
+	var target := Combat.nearest_foe(Session.gs)
+	if target == "":
+		hud.add_lines(["There is nothing to throw at."])
+		return
+	_command_error(Commands.throw(Session.gs, Session.db, target)["error"])
+
+
+## Puts the held item down (X).
+func drop() -> void:
+	_command_error(Commands.drop(Session.gs, Session.db))
+
+
+## After a combat command: its error (too tired: the day ends), else the
+## combat text.
+func _command_error(err: String) -> void:
+	if err != "":
+		hud.add_lines([err])
+		if Session.gs.clock.is_collapse_due(Session.db.rules["clock"]):
+			sleep()
+			return
+	_finish()
+
+
+## After every command: the combat text goes to the log; a knocked-out
+## player loses the day at once (Commands.knock_out); then redraw.
+func _finish() -> void:
+	var gs := Session.gs
+	hud.add_lines(gs.combat.lines)
+	if Combat.is_down(gs):
+		_show_night(Commands.knock_out(gs, Session.db))
+		return
 	Session.changed()
 
 
@@ -123,6 +187,9 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id == Interact.SLEEP:
 		sleep()
 		return
+	if action_id == Interact.TAKE:
+		_command_error(Commands.take(Session.gs, Session.db, object_id))
+		return
 	var r := Commands.interact(Session.gs, Session.db, object_id, action_id)
 	if r["error"] != "":
 		hud.add_lines([r["error"]])
@@ -131,18 +198,27 @@ func use(object_id: String, action_id: String) -> void:
 			return
 	else:
 		hud.add_lines(["%s: %.1f XP." % [Session.db.actions[action_id]["name"], float(r["record"]["xp"])]])
-	Session.changed()
+	_finish()
 
 
-## Ends the day (a collapse if the player is past the awake limit) and
-## shows the night in the System dialog.
+## Ends the day (a collapse if the player is past the awake limit, a
+## knock-out if they are down) and shows the night in the System dialog.
 func sleep() -> void:
 	var night := Commands.sleep(Session.gs, Session.db)
 	if night.is_empty():  # refused: enemies near
 		hud.add_lines(Session.gs.combat.lines)
 		Session.changed()
 		return
-	hud.add_lines(["You collapse." if night["collapsed"] else "You sleep."])
+	_show_night(night)
+
+
+func _show_night(night: Dictionary) -> void:
+	var what := "You sleep."
+	if night["knocked_out"]:
+		what = "Everything goes dark."
+	elif night["collapsed"]:
+		what = "You collapse."
+	hud.add_lines([what])
 	Session.changed()
 	dialog.open(SystemMessages.pages(night, Session.gs, Session.db), Session.gs, Session.db)
 

@@ -17,7 +17,15 @@ const HELP := [
 	"  look                               map around you and objects you can use",
 	"  go <n|s|e|w> [xN]                  walk N steps",
 	"  use <object|npc> <action>          do an action with a nearby object or person",
-	"                                     (use bed sleep: sleep in a bed)",
+	"                                     (use bed sleep: sleep in a bed;",
+	"                                     use <object> take: hold its item)",
+	"  attack <n|s|e|w>                   attack the monster next to you (go does too)",
+	"  block                              raise your guard for one turn",
+	"  throw [monster]                    throw the held item (default: the nearest monster)",
+	"  drop                               put the held item down",
+	"  monsters                           the monsters here (debug)",
+	"  spawn <enemy> [dx dy]              put a hostile monster near you (debug; default 2 0)",
+	"  knockout                           be knocked out now: the night, then the safe place (debug)",
 	"  wait <minutes>                     stand still while the world goes on",
 	"  npcs                               where every NPC is and what they do (debug)",
 	"  sleep                              end the day (night pipeline)",
@@ -71,6 +79,22 @@ func execute(line: String) -> Array[String]:
 			out = _wait(args)
 		"npcs":
 			out = _npcs()
+		"attack":
+			out = _need_arg(args, "attack <n|s|e|w>")
+			if out.is_empty():
+				out = _combat(Commands.attack(gs, db, (args[0] as String).to_lower().left(1))["error"])
+		"block":
+			out = _combat(Commands.block(gs, db))
+		"throw":
+			out = _throw(args)
+		"drop":
+			out = _combat(Commands.drop(gs, db))
+		"monsters":
+			out = _monsters()
+		"spawn":
+			out = _spawn(args)
+		"knockout":
+			out = _night(Commands.knock_out(gs, db))
 		"status":
 			out = _status()
 		"accept":
@@ -154,6 +178,8 @@ func _do(args: Array) -> Array[String]:
 			if gs.clock.is_collapse_due(db.rules["clock"]):
 				out.append("You are too tired. You collapse.")
 				out.append_array(_night(Commands.sleep(gs, db)))
+			elif not gs.combat.lines.is_empty():
+				out.append_array(gs.combat.lines)
 			else:
 				out.append("You cannot do that.")
 			break
@@ -176,7 +202,8 @@ func _where() -> Array[String]:
 	return out
 
 
-## A small window of the map: @ is you, & a person, o an object, > an exit.
+## A small window of the map: @ is you, & a person, M a monster you can
+## see, o an object, > an exit.
 func _look() -> Array[String]:
 	var out := _where()
 	if not gs.player.is_placed():
@@ -187,6 +214,10 @@ func _look() -> Array[String]:
 		marks[Vector2i(int(o["at"][0]), int(o["at"][1]))] = "o"
 	for id in gs.npcs.in_area(p.area):
 		marks[NpcRoster.pos_of(gs.npcs.npcs[id])] = "&"
+	for id in gs.combat.ids():
+		var m: Dictionary = gs.combat.monsters[id]
+		if m["area"] == p.area and m["state"] != CombatState.HIDDEN:
+			marks[CombatState.pos_of(m)] = "M"
 	var legend: Dictionary = db.maps.areas[p.area]["legend"]
 	var char_of := {}
 	for ch: String in legend:
@@ -207,7 +238,8 @@ func _look() -> Array[String]:
 		out.append(line)
 	var options := Interact.options(gs, db)
 	for o: Dictionary in options:
-		var actions: Array = (o["actions"] as Array) + ([Interact.SLEEP] if o["sleep"] else [])
+		var actions: Array = (o["actions"] as Array) + ([Interact.SLEEP] if o["sleep"] else []) \
+				+ ([Interact.TAKE] if o["item"] != "" else [])
 		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(actions)])
 	if options.is_empty():
 		out.append("  Nothing to use here.")
@@ -228,6 +260,12 @@ func _go(args: Array) -> Array[String]:
 	var steps := 0
 	for i in times:
 		var r := Commands.move(gs, db, dir)
+		if r.has("attack") and r["attack"]["error"] != "":
+			out.append(r["attack"]["error"])
+		var down := Combat.is_down(gs)
+		out.append_array(_after_lines())
+		if down or r.has("attack") or r.has("ambush"):
+			break
 		if r["refused"]:
 			if gs.clock.is_collapse_due(db.rules["clock"]):
 				out.append("You are too tired. You collapse.")
@@ -255,6 +293,8 @@ func _use(args: Array) -> Array[String]:
 		return out
 	if args[1] == Interact.SLEEP and Interact.can_sleep(gs, db, args[0]):
 		return _night(Commands.sleep(gs, db))
+	if args[1] == Interact.TAKE:
+		return _combat(Commands.take(gs, db, args[0]))
 	var r := Commands.interact(gs, db, args[0], args[1])
 	if r["error"] != "":
 		out.append(r["error"])
@@ -274,11 +314,12 @@ func _wait(args: Array) -> Array[String]:
 	if not (args[0] as String).is_valid_int() or int(args[0]) < 1:
 		out.append("Minutes must be a whole number above 0.")
 		return out
-	if Commands.wait(gs, db, int(args[0]) * 60) < 0:
+	if Commands.wait(gs, db, int(args[0]) * 60) < 0 and not Combat.is_down(gs):
 		out.append("You are too tired. You collapse.")
 		out.append_array(_night(Commands.sleep(gs, db)))
 		return out
 	out.append("You wait.")
+	out.append_array(_after_lines())
 	out.append_array(_where())
 	return out
 
@@ -297,10 +338,63 @@ func _npcs() -> Array[String]:
 	return out
 
 
+## Combat text of the last command, then the night if it knocked the
+## player out.
+func _after_lines() -> Array[String]:
+	var out: Array[String] = gs.combat.lines.duplicate()
+	if Combat.is_down(gs):
+		out.append_array(_night(Commands.knock_out(gs, db)))
+	return out
+
+
+## After a combat command: its error, or its combat text (and a knock-out).
+func _combat(err: String) -> Array[String]:
+	if err != "":
+		var out: Array[String] = [err]
+		return out
+	return _after_lines()
+
+
+func _throw(args: Array) -> Array[String]:
+	var target: String = args[0] if not args.is_empty() else Combat.nearest_foe(gs)
+	if target == "":
+		var out: Array[String] = ["There is nothing to throw at."]
+		return out
+	return _combat(Commands.throw(gs, db, target)["error"])
+
+
+func _monsters() -> Array[String]:
+	var out: Array[String] = []
+	for id in gs.combat.ids():
+		var m: Dictionary = gs.combat.monsters[id]
+		var e: Dictionary = db.combat.enemies[m["type"]]
+		out.append("  %-4s %-10s %2d/%-2d %-8s %s %d,%d  %s" % [id, e["name"], int(m["hp"]), int(e["hp"]),
+				m["state"], m["area"], int(m["x"]), int(m["y"]), m["spawn"] if m["spawn"] != "" else "debug"])
+	if out.is_empty():
+		out.append("There are no monsters here.")
+	if gs.combat.has_fight():
+		out.append("In a fight%s." % (" (in danger)" if Combat.in_danger(gs) else ""))
+	return out
+
+
+func _spawn(args: Array) -> Array[String]:
+	var out := _need_arg(args, "spawn <enemy> [dx dy]")
+	if not out.is_empty():
+		return out
+	var offset := Vector2i(2, 0)
+	if args.size() >= 3 and (args[1] as String).is_valid_int() and (args[2] as String).is_valid_int():
+		offset = Vector2i(int(args[1]), int(args[2]))
+	var r := Commands.spawn_monster(gs, db, args[0], gs.player.pos() + offset)
+	out.append(r["error"] if r["error"] != "" else "%s (%s) appears." % [
+		db.combat.enemies[args[0]]["name"], r["id"]])
+	return out
+
+
 func _night(night: Dictionary) -> Array[String]:
 	if night.is_empty():  # refused: enemies near
 		return gs.combat.lines.duplicate()
-	var out: Array[String] = ["--- You sleep. ---"]
+	var out: Array[String] = ["--- You are knocked out. ---" if night.get("knocked_out", false)
+			else "--- You sleep. ---"]
 	out.append_array(night["lines"])
 	if (night["lines"] as Array).is_empty():
 		out.append("The System is silent.")
@@ -313,7 +407,7 @@ func _status() -> Array[String]:
 	var p := gs.progression
 	var awake := gs.clock.awake_minutes
 	var out: Array[String] = ["Day %d, %s. Awake %dh %02dm." % [
-		gs.clock.day(), gs.clock.time_string(), awake / 60, awake % 60]]
+		gs.clock.day(), gs.clock.time_string(), awake / 60, awake % 60], Hud.health(gs, db)]
 	if p.classes.is_empty():
 		out.append("No class. Level 0.")
 	for id: String in p.classes:

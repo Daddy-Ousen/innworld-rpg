@@ -1,6 +1,7 @@
-## Draws the player's map from MapDb, the NPCs in it (with names) and
-## the player. Placeholder art: one coloured 16×16 tile per tiles.json
-## entry, made in code.
+## Draws the player's map from MapDb, the NPCs in it (with names), the
+## monsters (with name and HP) and the player. Placeholder art: one
+## coloured 16×16 tile per tiles.json entry, made in code. A hidden monster
+## (a Rock Crab) looks like a rock tile and has no label.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -14,6 +15,14 @@ const NPC_NAME_SIZE := 7
 ## Names are drawn this many times larger, then scaled down, so they stay
 ## sharp under the camera zoom.
 const TEXT_SCALE := 3
+## A hidden monster is drawn as this tile.
+const HIDDEN_TILE := "rock"
+## Monster marker edge by state: hostile, fleeing, else calm.
+const HOSTILE_EDGE := Color("#e03a3a")
+const FLEE_EDGE := Color("#f0d040")
+const CALM_EDGE := Color(0, 0, 0, 0.6)
+## A dark ring between the edge and the body, so a green Goblin stands out on grass.
+const RING := Color(0.08, 0.08, 0.08, 1)
 
 ## Map id on screen now ("" = none).
 var area := ""
@@ -21,19 +30,23 @@ var area := ""
 var atlas: Dictionary = {}
 ## NPC id → name shown over its marker.
 var npc_names: Dictionary = {}
+## Enemy type → enemies.json entry (name, color, hp).
+var enemies: Dictionary = {}
 var _maps: MapDb
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var marks: Node2D = $Marks
 @onready var npcs: Node2D = $Npcs
+@onready var monsters: Node2D = $Monsters
 @onready var player: Node2D = $Player
 @onready var nose: ColorRect = $Player/Nose
 @onready var camera: Camera2D = $Player/Camera
 
 
-func setup(maps: MapDb, names: Dictionary = {}) -> void:
+func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {}) -> void:
 	_maps = maps
 	npc_names = names
+	enemies = enemy_defs
 	atlas.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas)
 	area = ""
@@ -47,6 +60,7 @@ func refresh(gs: GameState) -> void:
 	if new_area:
 		_show_area(gs.player.area)
 	_show_npcs(gs)
+	_show_monsters(gs)
 	player.position = cell_center(gs.player.pos())
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
 	if new_area:  # jump, do not glide across the new map
@@ -130,18 +144,70 @@ func _show_npcs(gs: GameState) -> void:
 		body.color = NPC_COLOR
 		body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marker.add_child(body)
-		var label := Label.new()
-		label.text = npc_names.get(id, id)
-		label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
-		label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
-		label.add_theme_constant_override("outline_size", 6)
-		label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		label.scale = Vector2.ONE / TEXT_SCALE
-		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		marker.add_child(label)
-		var size := label.get_minimum_size() / TEXT_SCALE
-		label.position = Vector2(-size.x / 2.0, -5 - size.y)
+		_add_label(marker, npc_names.get(id, id))
 		npcs.add_child(marker)
+
+
+## One marker per monster in the area (named after the monster id): an
+## edge by state, a dark ring, a body in the enemy colour, and "Goblin 5/8"
+## above it. A hidden monster is a rock tile with no label.
+func _show_monsters(gs: GameState) -> void:
+	for child in monsters.get_children():
+		monsters.remove_child(child)
+		child.queue_free()
+	for id in gs.combat.ids():
+		var m: Dictionary = gs.combat.monsters[id]
+		if m["area"] != area:
+			continue
+		var e: Dictionary = enemies.get(m["type"], {})
+		var marker := Node2D.new()
+		marker.name = id
+		marker.position = cell_center(CombatState.pos_of(m))
+		if m["state"] == CombatState.HIDDEN:
+			var rock := Color.html(_maps.tiles.get(HIDDEN_TILE, e).get("color", "#7a7468"))
+			_square(marker, TILE / 2.0, rock.darkened(0.35))
+			_square(marker, TILE / 2.0 - 2, rock)
+		else:
+			var edge := CALM_EDGE
+			if m["state"] == CombatState.HOSTILE:
+				edge = HOSTILE_EDGE
+			elif m["state"] == CombatState.FLEE:
+				edge = FLEE_EDGE
+			_square(marker, 6, edge)
+			_square(marker, 5, RING)
+			_square(marker, 4, Color.html(e.get("color", "#ff00ff")))
+			_add_label(marker, monster_label(m, e))
+		monsters.add_child(marker)
+
+
+## "Goblin 5/8": name, HP now / max HP.
+static func monster_label(m: Dictionary, e: Dictionary) -> String:
+	return "%s %d/%d" % [e.get("name", m["type"]), int(m["hp"]), int(e.get("hp", m["hp"]))]
+
+
+## A square of half-width `half` centred on the marker.
+func _square(marker: Node2D, half: float, color: Color) -> void:
+	var r := ColorRect.new()
+	r.position = Vector2(-half, -half)
+	r.size = Vector2(half, half) * 2.0
+	r.color = color
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	marker.add_child(r)
+
+
+## A small sharp name label centred above a marker.
+func _add_label(marker: Node2D, text: String) -> void:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
+	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
+	label.add_theme_constant_override("outline_size", 6)
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	label.scale = Vector2.ONE / TEXT_SCALE
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	marker.add_child(label)
+	var size := label.get_minimum_size() / TEXT_SCALE
+	label.position = Vector2(-size.x / 2.0, -5 - size.y)
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:

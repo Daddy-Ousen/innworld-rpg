@@ -14,6 +14,9 @@ z_index = 1
 [node name="Npcs" type="Node2D" parent="."]
 z_index = 2
 
+[node name="Monsters" type="Node2D" parent="."]
+z_index = 2
+
 [node name="Player" type="Node2D" parent="."]
 z_index = 2
 
