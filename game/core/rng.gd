@@ -37,6 +37,27 @@ func pick(items: Array) -> Variant:
 	return items[_rng.randi_range(0, items.size() - 1)]
 
 
+## Picks an index with chance proportional to its weight. Weights <= 0 are
+## never picked. Returns -1 if no weight is > 0. Uses one randf() call.
+func weighted_index(weights: Array) -> int:
+	var total := 0.0
+	for w: Variant in weights:
+		total += maxf(float(w), 0.0)
+	if total <= 0.0:
+		return -1
+	var roll := _rng.randf() * total
+	var last := -1
+	for i in weights.size():
+		var w := maxf(float(weights[i]), 0.0)
+		if w <= 0.0:
+			continue
+		last = i
+		if roll < w:
+			return i
+		roll -= w
+	return last
+
+
 ## Seed and state are 64-bit ints. JSON parses numbers as floats and would lose
 ## precision, so we store them as strings.
 func to_dict() -> Dictionary:

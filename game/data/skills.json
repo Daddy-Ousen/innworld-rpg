@@ -1,0 +1,449 @@
+{
+	"schema_version": 1,
+	"skills": {
+		"basic_cleaning": {
+			"name": "[Basic Cleaning]",
+			"rarity": "common",
+			"pools": [
+				{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "maid", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"cleaning": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cleaning"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "likely"}
+		},
+		"basic_cooking": {
+			"name": "[Basic Cooking]",
+			"rarity": "common",
+			"pools": [
+				{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "cook", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"cooking": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cooking"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "likely"}
+		},
+		"tavern_brawling": {
+			"name": "[Tavern Brawling]",
+			"rarity": "uncommon",
+			"pools": [{"class": "innkeeper", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"combat.improvise": 1.0, "combat": 0.5, "hospitality": 0.3},
+			"effects": [{"type": "stat_mod", "stat": "strength", "value": 1}, {"type": "xp_mult", "tags": ["combat.improvise"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"advanced_cooking": {
+			"name": "[Advanced Cooking]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "innkeeper", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "cook", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"cooking": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cooking"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"warm_welcome": {
+			"name": "[Warm Welcome]",
+			"rarity": "common",
+			"pools": [{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"hospitality": 1.0, "social": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["hospitality"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"inns_aura": {
+			"name": "[Inn's Aura]",
+			"rarity": "rare",
+			"pools": [{"class": "innkeeper", "min_level": 10, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"hospitality": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "presence", "value": 2}, {"type": "xp_mult", "tags": ["hospitality"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"hearty_stew": {
+			"name": "[Hearty Stew]",
+			"rarity": "common",
+			"pools": [{"class": "cook", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"cooking.stew": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cooking.stew"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"quick_prep": {
+			"name": "[Quick Prep]",
+			"rarity": "common",
+			"pools": [
+				{"class": "cook", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "server", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"cooking": 0.6, "hospitality.service": 0.4},
+			"effects": [{"type": "stat_mod", "stat": "speed", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"fine_baking": {
+			"name": "[Fine Baking]",
+			"rarity": "uncommon",
+			"pools": [{"class": "cook", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"cooking.baking": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cooking.baking"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"flawless_meal": {
+			"name": "[Flawless Meal]",
+			"rarity": "rare",
+			"pools": [{"class": "cook", "min_level": 10, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"cooking": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cooking"], "value": 1.3}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"quick_service": {
+			"name": "[Quick Service]",
+			"rarity": "common",
+			"pools": [
+				{"class": "server", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"hospitality.service": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["hospitality.service"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"balanced_tray": {
+			"name": "[Balanced Tray]",
+			"rarity": "uncommon",
+			"pools": [{"class": "server", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"hospitality.service": 1.0, "labor.hauling": 0.3},
+			"effects": [{"type": "stat_mod", "stat": "dexterity", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"spotless_room": {
+			"name": "[Spotless Room]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "maid", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"cleaning": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["cleaning"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"tidy_habit": {
+			"name": "[Tidy Habit]",
+			"rarity": "common",
+			"pools": [{"class": "maid", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"cleaning.sweep": 1.0, "cleaning.dishes": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["cleaning.sweep", "cleaning.dishes"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"lesser_strength": {
+			"name": "[Lesser Strength]",
+			"rarity": "common",
+			"pools": [
+				{"class": "laborer", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"labor": 1.0, "combat.melee": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "strength", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"lesser_endurance": {
+			"name": "[Lesser Endurance]",
+			"rarity": "common",
+			"pools": [
+				{"class": "laborer", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "runner", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"labor": 0.6, "running": 0.6},
+			"effects": [{"type": "stat_mod", "stat": "endurance", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"tireless_hauling": {
+			"name": "[Tireless Hauling]",
+			"rarity": "uncommon",
+			"pools": [{"class": "laborer", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"labor.hauling": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["labor.hauling"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"steady_hands": {
+			"name": "[Steady Hands]",
+			"rarity": "common",
+			"pools": [
+				{"class": "carpenter", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "healer", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"crafting": 1.0, "medicine": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "dexterity", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"sturdy_joinery": {
+			"name": "[Sturdy Joinery]",
+			"rarity": "uncommon",
+			"pools": [{"class": "carpenter", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"crafting.carpentry": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["crafting.carpentry"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"keen_eye": {
+			"name": "[Keen Eye]",
+			"rarity": "common",
+			"pools": [
+				{"class": "forager", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "guardsman", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"foraging": 0.6, "vigilance": 0.6},
+			"effects": [{"type": "stat_mod", "stat": "perception", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"find_food": {
+			"name": "[Find Food]",
+			"rarity": "common",
+			"pools": [{"class": "forager", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"foraging": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["foraging"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"safe_path": {
+			"name": "[Safe Path]",
+			"rarity": "rare",
+			"pools": [
+				{"class": "forager", "min_level": 10, "max_level": 30, "weight": 1.0},
+				{"class": "runner", "min_level": 10, "max_level": 30, "weight": 1.0}
+			],
+			"tag_affinity": {"travel": 1.0, "foraging": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "perception", "value": 2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"herb_lore": {
+			"name": "[Herb Lore]",
+			"rarity": "common",
+			"pools": [{"class": "herbalist", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"foraging.herbs": 1.0, "study": 0.3},
+			"effects": [{"type": "xp_mult", "tags": ["foraging.herbs"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"bitter_brew": {
+			"name": "[Bitter Brew]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "herbalist", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "healer", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"medicine": 1.0, "foraging.herbs": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["medicine"], "value": 1.1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"steady_bandage": {
+			"name": "[Steady Bandage]",
+			"rarity": "common",
+			"pools": [{"class": "healer", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"medicine.first_aid": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["medicine.first_aid"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"calm_presence": {
+			"name": "[Calm Presence]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "healer", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"social.empathy": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "presence", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"quick_movement": {
+			"name": "[Quick Movement]",
+			"rarity": "common",
+			"pools": [
+				{"class": "runner", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "rogue", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"running": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "speed", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"long_stride": {
+			"name": "[Long Stride]",
+			"rarity": "uncommon",
+			"pools": [{"class": "runner", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"travel": 1.0, "running": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["travel", "running"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"second_wind": {
+			"name": "[Second Wind]",
+			"rarity": "rare",
+			"pools": [
+				{"class": "runner", "min_level": 10, "max_level": 30, "weight": 1.0},
+				{"class": "warrior", "min_level": 10, "max_level": 30, "weight": 1.0}
+			],
+			"tag_affinity": {"running.escape": 1.0, "combat": 0.3},
+			"effects": [{"type": "stat_mod", "stat": "endurance", "value": 2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"basic_swordplay": {
+			"name": "[Basic Swordplay]",
+			"rarity": "common",
+			"pools": [{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["combat.melee"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"power_strike": {
+			"name": "[Power Strike]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "warrior", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "guardsman", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "strength", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"iron_guard": {
+			"name": "[Iron Guard]",
+			"rarity": "common",
+			"pools": [
+				{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "guardsman", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"combat.block": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["combat.block"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"battle_focus": {
+			"name": "[Battle Focus]",
+			"rarity": "rare",
+			"pools": [
+				{"class": "warrior", "min_level": 10, "max_level": 30, "weight": 1.0},
+				{"class": "commander", "min_level": 10, "max_level": 30, "weight": 1.0}
+			],
+			"tag_affinity": {"combat": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["combat"], "value": 1.25}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"watchful_eye": {
+			"name": "[Watchful Eye]",
+			"rarity": "common",
+			"pools": [{"class": "guardsman", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"vigilance": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["vigilance"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"hold_the_line": {
+			"name": "[Hold the Line]",
+			"rarity": "rare",
+			"pools": [
+				{"class": "guardsman", "min_level": 10, "max_level": 30, "weight": 1.0},
+				{"class": "commander", "min_level": 10, "max_level": 30, "weight": 1.0}
+			],
+			"tag_affinity": {"combat.block": 1.0, "vigilance": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "endurance", "value": 2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"light_step": {
+			"name": "[Light Step]",
+			"rarity": "common",
+			"pools": [{"class": "rogue", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"stealth": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["stealth"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"quick_fingers": {
+			"name": "[Quick Fingers]",
+			"rarity": "uncommon",
+			"pools": [{"class": "rogue", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"stealth": 0.6, "commerce": 0.4},
+			"effects": [{"type": "stat_mod", "stat": "dexterity", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"haggling": {
+			"name": "[Haggling]",
+			"rarity": "common",
+			"pools": [
+				{"class": "merchant", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"commerce.haggle": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["commerce.haggle"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"appraisal": {
+			"name": "[Appraisal]",
+			"rarity": "uncommon",
+			"pools": [{"class": "merchant", "min_level": 4, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"commerce.trade": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "perception", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+		},
+		"silver_tongue": {
+			"name": "[Silver Tongue]",
+			"rarity": "rare",
+			"pools": [{"class": "merchant", "min_level": 10, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"social.persuasion": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["social.persuasion", "commerce"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"read_the_board": {
+			"name": "[Read the Board]",
+			"rarity": "common",
+			"pools": [{"class": "strategist", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"games.chess": 1.0, "strategy": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["games.chess"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"plan_ahead": {
+			"name": "[Plan Ahead]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "strategist", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "commander", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"strategy": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["strategy"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"tactical_mind": {
+			"name": "[Tactical Mind]",
+			"rarity": "rare",
+			"pools": [{"class": "strategist", "min_level": 10, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"strategy": 1.0, "games": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "intellect", "value": 2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"speed_reading": {
+			"name": "[Speed Reading]",
+			"rarity": "common",
+			"pools": [{"class": "scholar", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"study.reading": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["study.reading"], "value": 1.2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"clear_explanation": {
+			"name": "[Clear Explanation]",
+			"rarity": "uncommon",
+			"pools": [
+				{"class": "scholar", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "strategist", "min_level": 4, "max_level": 15, "weight": 1.0}
+			],
+			"tag_affinity": {"teaching": 1.0},
+			"effects": [{"type": "xp_mult", "tags": ["teaching"], "value": 1.15}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"rally": {
+			"name": "[Rally]",
+			"rarity": "common",
+			"pools": [{"class": "commander", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"strategy": 0.5, "social.persuasion": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "presence", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"battlefield_command": {
+			"name": "[Battlefield Command]",
+			"rarity": "rare",
+			"pools": [{"class": "commander", "min_level": 10, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"strategy": 1.0, "combat": 0.5},
+			"effects": [{"type": "xp_mult", "tags": ["strategy", "combat"], "value": 1.25}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		}
+	}
+}

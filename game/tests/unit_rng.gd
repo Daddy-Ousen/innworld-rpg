@@ -27,3 +27,14 @@ func test_state_survives_json_round_trip() -> void:
 
 func test_pick_empty_returns_null() -> void:
 	assert_null(Rng.new(1).pick([]))
+
+
+func test_weighted_index_follows_weights() -> void:
+	var rng := Rng.new(1)
+	assert_eq(rng.weighted_index([]), -1)
+	assert_eq(rng.weighted_index([0.0, -1.0]), -1)
+	assert_eq(rng.weighted_index([0.0, 2.0, 0.0]), 1)
+	var hits := [0, 0]
+	for i in 1000:
+		hits[rng.weighted_index([1.0, 3.0])] += 1
+	assert_between(hits[1], 700, 800)

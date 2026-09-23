@@ -42,3 +42,9 @@ func test_validate_registry_finds_missing_parent_and_bad_names() -> void:
 	var errors := Tags.validate_registry({"x.y": "", "Bad Tag": ""})
 	assert_eq(errors.size(), 2)
 	assert_string_contains(errors[0], "parent")
+
+
+func test_match_score() -> void:
+	var tags := {"cooking.stew": 0.5, "hospitality": 0.5}
+	assert_almost_eq(Tags.match_score(tags, {"cooking": 1.0, "hospitality": 0.4}), 0.7, 0.000001)
+	assert_almost_eq(Tags.match_score(tags, {"combat": 1.0}), 0.0, 0.000001)
