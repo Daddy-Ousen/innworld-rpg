@@ -1,6 +1,6 @@
 # ADR 0003 — M1 class system, levels, skills, night pipeline
 
-Date: 2026-09-23 · Status: **proposed** — the data/schema items marked (ASK) need the user's OK (CLAUDE.md rule 11).
+Date: 2026-09-23 · Status: accepted (user approved 2026-09-23: rules.skills section, save v2, base_xp 60 — the items marked (ASK))
 
 ## State (`GameState`, save version 2)
 - New fields: `race` ("human" for Earthers), `flags` (world flags; class prereqs now, canon events in M3), `progression`, `morning` (last night's System messages).

@@ -2,7 +2,7 @@
 
 ## Roadmap status
 - [x] M0 — Setup (done 2026-09-23, tag `m0-done`)
-- [x] M1 — Sim core (code done 2026-09-23; PR open; tag `m1-done` after merge + user OK on ADR 0003)
+- [x] M1 — Sim core (code done 2026-09-23; PR open; tag `m1-done` after merge)
   - [x] Schemas: ADR 0002 accepted (outcome_mult yes, tags.json registry yes)
   - [x] Clock, tags, data loader, action log, XP, `Actions.perform` (part 1, PR #1 merged)
   - [x] Part 2: classes (17), skills (47), pools, offers, decline blacklist, levels, dilution, capstones, class loss, consolidation, night pipeline 1–4 + 8, `Commands` facade, debug console, `sim_30_days`, `sim_decline`
@@ -16,7 +16,7 @@
 - Tests: 15 scripts, 115 tests, all pass, headless exit 0.
 
 ## Blockers
-- ADR 0003 has 3 items that need the user's OK (CLAUDE.md rule 11): new `rules.skills` section, save v2 fields, `levels.base_xp` 100 → 60.
+- None. ADR 0003 accepted 2026-09-23.
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.

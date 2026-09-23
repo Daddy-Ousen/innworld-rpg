@@ -5,8 +5,8 @@ M1 part 2 is done on branch `feat/m1-sim-core-part2` (4 commits on top of `main`
 Built: `core/progression.gd`, `levels.gd`, `skill_system.gd`, `class_system.gd`, `night.gd`, `commands.gd`; `data/classes.json` (17), `data/skills.json` (47), `rules.skills`; save version 2 + migration; `ui/console_commands.gd` + `ui/debug_console.tscn` (main scene); tests `sim_30_days`, `sim_decline` and unit tests. 115/115 tests pass, headless exit 0. All design choices are in `docs/adr/0003-m1-class-system.md`.
 
 ## Waiting on the user
-- ADR 0003 is "proposed". 3 items need an OK (CLAUDE.md rule 11): new `rules.skills` section, save v2 fields, `levels.base_xp` 100 → 60.
-- Push the branch and open the PR (not done yet). After merge: `git tag m1-done`.
+- ADR 0003 accepted (all 3 items approved 2026-09-23).
+- Branch pushed, PR open (see progress.md). After merge: `git tag m1-done`.
 
 ## Next (M2, see docs/KICKOFF.md Session 4)
 1. `tools/extract_epub.py` → `canon/raw/book1/` + `index.json`.
