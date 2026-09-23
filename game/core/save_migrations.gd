@@ -21,6 +21,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			2: out = _migrate_2_to_3(out)
 			3: out = _migrate_3_to_4(out)
 			4: out = _migrate_4_to_5(out)
+			5: out = _migrate_5_to_6(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -55,4 +56,14 @@ static func _migrate_3_to_4(d: Dictionary) -> Dictionary:
 ## as exact f64 text (SaveCodec); plain numbers in old saves still load.
 static func _migrate_4_to_5(d: Dictionary) -> Dictionary:
 	d["npcs"] = {}
+	return d
+
+
+## v6 (M5.1): hit points, the held item and combat (monsters, the fight).
+## A v5 save has a player at full HP holding nothing, and no monsters.
+static func _migrate_5_to_6(d: Dictionary) -> Dictionary:
+	var player: Dictionary = d["player"]
+	player["hp"] = -1
+	player["held"] = ""
+	d["combat"] = {}
 	return d

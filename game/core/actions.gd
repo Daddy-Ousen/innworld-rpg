@@ -36,13 +36,15 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 ## Does `action_id` now. Options (all optional):
 ##   intensity: float, risk: float (overrides the action's base risk),
 ##   outcome: "success" | "partial" | "fail", context: Dictionary, witnesses: Array,
-##   minutes: int (overrides the action's minutes, e.g. travel between maps).
+##   minutes: int (overrides the action's minutes, e.g. travel between maps),
+##   allow_collapsed: bool (log it even when a collapse is due: the records
+##   of a fight that ends the day, Combat.end_fight).
 ## Returns the record, or {} if the action is refused (unknown, or collapse due).
 static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictionary = {}) -> Dictionary:
 	if not db.actions.has(action_id):
 		push_error("Unknown action '%s'." % action_id)
 		return {}
-	if gs.clock.is_collapse_due(db.rules["clock"]):
+	if gs.clock.is_collapse_due(db.rules["clock"]) and not opts.get("allow_collapsed", false):
 		return {}
 	var xp_rules: Dictionary = db.rules["xp"]
 	var outcome: String = opts.get("outcome", "success")

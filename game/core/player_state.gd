@@ -13,6 +13,11 @@ var y: int = 0
 var facing: String = "s"
 ## Step time not yet spent on the clock (the clock counts whole minutes).
 var sub_seconds: int = 0
+## Hit points (M5). -1 = full (the max comes from Stats, so it is not
+## stored); 0 = knocked out. Combat.set_hp keeps this rule.
+var hp: int = -1
+## The improvised item the player holds (data/items.json id), or "".
+var held: String = ""
 
 
 func is_placed() -> bool:
@@ -30,7 +35,8 @@ func place(to_area: String, at: Vector2i) -> void:
 
 
 func to_dict() -> Dictionary:
-	return {"area": area, "x": x, "y": y, "facing": facing, "sub_seconds": sub_seconds}
+	return {"area": area, "x": x, "y": y, "facing": facing, "sub_seconds": sub_seconds,
+		"hp": hp, "held": held}
 
 
 ## Accepts {} (a migrated v3 save): a player who is not placed yet.
@@ -41,4 +47,6 @@ static func from_dict(d: Dictionary) -> PlayerState:
 	p.y = int(d.get("y", 0))
 	p.facing = d.get("facing", "s")
 	p.sub_seconds = int(d.get("sub_seconds", 0))
+	p.hp = int(d.get("hp", -1))
+	p.held = d.get("held", "")
 	return p

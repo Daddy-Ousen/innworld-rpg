@@ -86,3 +86,25 @@ func test_commands_set_focus_checks_tags() -> void:
 	assert_eq(gs.focus_tags, ["cooking"] as Array[String], "unchanged after an error")
 	Commands.set_focus(gs, _db, [])
 	assert_true(gs.focus_tags.is_empty())
+
+
+func test_knock_out_night_wakes_at_the_normal_time() -> void:
+	var gs := _new_game()
+	gs.clock.advance(14 * 60)  # 20:00
+	var night := Night.run(gs, _db, true, true)
+	assert_eq(night["lines"][0], Night.KNOCKOUT_LINE)
+	assert_true(night["knocked_out"])
+	assert_true(night["collapsed"], "a knock-out counts as a collapse")
+	assert_eq(gs.clock.day(), 2)
+	assert_eq(gs.clock.time_string(), "06:00", "not the 12 h collapse sleep")
+	assert_true(gs.clock.last_sleep_collapsed)
+
+
+func test_a_collapse_still_sleeps_long() -> void:
+	var gs := _new_game()
+	gs.clock.advance(14 * 60)
+	var start := gs.clock.total_minutes
+	var night := Night.run(gs, _db, true)
+	assert_false(night["knocked_out"])
+	assert_eq(night["lines"][0], Night.COLLAPSE_LINE)
+	assert_eq(gs.clock.total_minutes - start, int(_db.rules["clock"]["collapse_sleep_minutes"]))

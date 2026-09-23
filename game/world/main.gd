@@ -138,6 +138,10 @@ func use(object_id: String, action_id: String) -> void:
 ## shows the night in the System dialog.
 func sleep() -> void:
 	var night := Commands.sleep(Session.gs, Session.db)
+	if night.is_empty():  # refused: enemies near
+		hud.add_lines(Session.gs.combat.lines)
+		Session.changed()
+		return
 	hud.add_lines(["You collapse." if night["collapsed"] else "You sleep."])
 	Session.changed()
 	dialog.open(SystemMessages.pages(night, Session.gs, Session.db), Session.gs, Session.db)

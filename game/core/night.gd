@@ -5,20 +5,29 @@ extends RefCounted
 
 
 const COLLAPSE_LINE := "You collapsed. The System still works while you sleep."
+const KNOCKOUT_LINE := "You were knocked out. The System still works while you sleep."
 
 
-## Runs one night: the player sleeps, or collapses (`collapsed` = true,
-## also for being knocked out). Returns
+## Runs one night: the player sleeps, or collapses (`collapsed` = true).
+## Being knocked out (`knocked_out` = true, with `collapsed`) counts as a
+## collapse for the System, but the player wakes at the normal wake time
+## (ADR 0010). Returns
 ## {"days_passed": int, "records": int, "offers": Array[String], "lines": Array[String],
-##  "events": Array[Dictionary], "collapsed": bool, "progress": Array[String],
-##  "world": Array[String]}. `events` are the history entries the director
-## added tonight. `lines` is everything in order: the collapse line, then
+##  "events": Array[Dictionary], "collapsed": bool, "knocked_out": bool,
+##  "progress": Array[String], "world": Array[String]}. `events` are the history
+## entries the director added tonight. `lines` is everything in order: the
+## collapse (or knock-out) line, then
 ## `progress` (levels, skills, class loss), one line per offer, then
 ## `world` (the director's rumors and drift warning). The lines are also
 ## stored in gs.morning for the morning summary.
-static func run(gs: GameState, db: DataDb, collapsed: bool = false) -> Dictionary:
+static func run(gs: GameState, db: DataDb, collapsed: bool = false,
+		knocked_out: bool = false) -> Dictionary:
+	collapsed = collapsed or knocked_out
+	var long_sleep := collapsed and not knocked_out
 	var lines: Array[String] = []
-	if collapsed:
+	if knocked_out:
+		lines.append(KNOCKOUT_LINE)
+	elif collapsed:
 		lines.append(COLLAPSE_LINE)
 	# 1. Close the day's action log.
 	var records := close_day(gs)
@@ -36,18 +45,22 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false) -> Dictionar
 		lines.append("Class offered: %s. Accept or decline." % db.classes[id]["name"])
 	# 5. World director: canon events up to the day before the wake day.
 	var history_before := gs.world.history.size()
-	var world := Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], collapsed) - 1)
+	var world := Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], long_sleep) - 1)
 	lines.append_array(world)
 	var events := gs.world.history.slice(history_before)
-	# 6. Off-screen sim: NPCs go where their goals put them at wake time
-	#    (the dead are gone).
-	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], collapsed)
+	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
+	#    player wakes at a safe place); NPCs go where their goals put them
+	#    at wake time (the dead are gone).
+	Combat.night(gs, db, collapsed, knocked_out)
+	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], long_sleep)
 	NpcSim.advance_to(gs, db, wake * 60 + gs.player.sub_seconds)
 	# 8. Advance to the next day and keep the morning summary.
-	var days := gs.clock.sleep(db.rules["clock"], collapsed)
+	var days := gs.clock.sleep(db.rules["clock"], long_sleep)
+	gs.clock.last_sleep_collapsed = collapsed
 	gs.morning = lines.duplicate()
 	return {"days_passed": days, "records": records.size(), "offers": offered, "lines": lines,
-			"events": events, "collapsed": collapsed, "progress": progress, "world": world}
+			"events": events, "collapsed": collapsed, "knocked_out": knocked_out,
+			"progress": progress, "world": world}
 
 
 ## Step 1: returns the records made since the last night, and starts a new day.

@@ -14,6 +14,9 @@ const RULE_FIELDS := {
 	"director": ["default_delay_limit", "drift", "tier_weight", "unreliable_at"],
 	"world": ["start", "step_seconds"],
 	"npc": ["step_seconds", "jump_seconds", "talk_actions", "talk_relationship"],
+	"combat": ["base_stats", "hp_base", "hp_per_endurance", "unarmed", "hit", "strength_div",
+		"min_damage", "block", "spot", "spawn", "jump_seconds", "max_turns_per_sync",
+		"heal_actions", "night_heal", "knockout", "xp"],
 }
 const CONTEXT_TESTS := ["min", "max", "equals"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
@@ -40,11 +43,13 @@ var canon: CanonDb = CanonDb.new()
 var maps: MapDb = MapDb.new()
 ## NPC goals and schedules (data/npc_behaviour.json). Empty in toy dbs.
 var behaviour: BehaviourDb = BehaviourDb.new()
+## Enemies, improvised items and spawns (data/enemies.json, data/items.json). Empty in toy dbs.
+var combat: CombatDb = CombatDb.new()
 var errors: Array[String] = []
 
 
 ## Loads tags, actions, rules, classes and skills JSON from `dir`, the
-## canon from `dir`/canon, the maps and the NPC behaviour. Errors are
+## canon from `dir`/canon, the maps, the NPC behaviour and the combat data. Errors are
 ## pushed and kept in `errors`.
 static func load_dir(dir: String = "res://data") -> DataDb:
 	var load_errors: Array[String] = []
@@ -60,7 +65,10 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.maps.validate(db)
 	db.behaviour = BehaviourDb.load_dir(dir)
 	db.behaviour.validate(db)
-	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors
+	db.combat = CombatDb.load_dir(dir)
+	db.combat.validate(db)
+	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
+			+ db.combat.errors
 	for e in db.errors:
 		push_error(e)
 	return db

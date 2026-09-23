@@ -72,3 +72,13 @@ static func xp_effects(p: Progression, db: DataDb) -> Array:
 			if e["type"] == "xp_mult":
 				out.append(e)
 	return out
+
+
+## All stat_mod effects of the skills the player holds (Stats reads them).
+static func stat_effects(p: Progression, db: DataDb) -> Array:
+	var out := []
+	for held: Dictionary in p.skills:
+		for e: Dictionary in db.skills[held["id"]]["effects"]:
+			if e["type"] == "stat_mod":
+				out.append(e)
+	return out
