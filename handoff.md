@@ -11,7 +11,7 @@ PR #8 merged; tag `m4.4-done` pushed (annotated, on merge commit 760d4d5). M4.5 
 - Frames checked: offer dialog in the inn, character sheet after accept.
 
 ## Waiting on the user
-- Review the M4.5 PR, merge, then tag `m4.5-done` and `m4-done` (M4 is complete after this merge).
+- Review PR #9 (https://github.com/Daddy-Ousen/innworld-rpg/pull/9), merge, then tag `m4.5-done` and `m4-done` (M4 is complete after this merge).
 - Play it: `godot --path game` (WASD, Space wait, E use/talk/sleep in bed, Z sleep, C character, backtick console).
 - Balance note: first offer on day 22 with a plain inn workday (canon: Erin's first night). Tune later (M6).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
