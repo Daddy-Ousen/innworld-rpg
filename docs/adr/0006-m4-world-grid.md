@@ -13,7 +13,7 @@ Date: 2026-09-23 · Status: accepted (M4 plan approved by the user 2026-09-23)
 - `data/tiles.json`: `{"tiles": {id: {"name", "walk": bool, "color": "#rrggbb"}}}`. `color` is for placeholder tiles (M4.3).
 - `data/maps/<area>.json`: `id` (= file name), `name`, `location` (canon location id), `confidence`, `note`, `legend` (one char → tile id), `rows` (ASCII grid, equal widths), `zones` (canon location id → `[[x, y, w, h], ...]`), `exits`, `objects`.
   - exit: `{"at": [x, y] | [x, y, w, h], "to": area, "arrive": [x, y], "minutes": int}`. A wide exit keeps the offset: arrive + (tile − rect origin).
-  - object: `{"id", "at": [x, y], "name", "actions": [action ids], "solid"?: bool, "context"?: {}}`.
+  - object: `{"id", "at": [x, y], "name", "actions": [action ids], "solid"?: bool, "sleep"?: bool, "context"?: {}}`. (`sleep` added in ADR 0009.)
 - 5 maps, all `confidence: "guess"` (layout is design, the places are canon): `liscor_gate` (start 3,12), `liscor_market` (Krshia's and Lism's stalls as zones), `floodplains_south` (stream, blue fruit trees), `inn_hill`, `inn_interior` (stove, basin, broom, tables, bed).
 - Route: market ⇄ gate 10 min, gate ⇄ floodplains 20 min, floodplains ⇄ inn hill 20 min, inn hill ⇄ inside 0 min (a door).
 - `rules.json` `world`: `{"start": {"area", "pos"}, "step_seconds": 6}`.

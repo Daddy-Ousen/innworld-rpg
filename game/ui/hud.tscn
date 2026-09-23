@@ -61,4 +61,4 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 12
-text = "WASD / arrows: walk    Space: wait    E: use    Z: sleep    `: debug console"
+text = "WASD / arrows: walk    Space: wait    E: use    Z: sleep    C: character    `: debug console"

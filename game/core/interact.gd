@@ -3,23 +3,34 @@
 ## context gets the map's canon location, the zone (if any) and the
 ## object's own context. Talking to an NPC adds {"npc": id}, makes them a
 ## witness and raises their relationship with the player once a day.
+##
+## Objects with "sleep": true (a bed) also offer SLEEP. It is not an
+## action: the presentation ends the day with Commands.sleep.
 class_name Interact
 extends RefCounted
 
+const SLEEP := "sleep"
+
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
-## player: [{"id", "name", "actions": [action ids], "npc": bool}].
+## player: [{"id", "name", "actions": [action ids], "npc": bool, "sleep": bool}].
 static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	if not Movement.ensure_placed(gs, db):
 		return out
 	for o: Dictionary in db.maps.objects_near(gs.player.area, gs.player.pos()):
 		out.append({"id": o["id"], "name": o["name"], "actions": (o["actions"] as Array).duplicate(),
-			"npc": false})
+			"npc": false, "sleep": o.get("sleep", false)})
 	for id in NpcSim.near_player(gs):
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
-			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate()})
+			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false})
 	return out
+
+
+## True if the player stands on or next to `object_id` and can sleep there.
+static func can_sleep(gs: GameState, db: DataDb, object_id: String) -> bool:
+	return options(gs, db).any(func(o: Dictionary) -> bool:
+		return o["id"] == object_id and o["sleep"])
 
 
 ## Does `action_id` on the nearby object `object_id`. `opts` go to

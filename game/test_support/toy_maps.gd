@@ -3,7 +3,7 @@
 ##       a training dummy at 4,1 (zone toy_corner), an exit east to the
 ##       field (30 min) and a door at 6,3 into the shop (0 min).
 ##   field (4×3): exit west back to town (30 min).
-##   shop (3×3): door at 1,2 back to town.
+##   shop (3×3): door at 1,2 back to town, a cot (sleep, no actions) in the west wall.
 class_name ToyMaps
 extends RefCounted
 
@@ -65,7 +65,9 @@ static func areas() -> Dictionary:
 		], []),
 		"shop": area("shop", "toy_shop", ["www", "wgw", "wgw"], {}, [
 			{"at": [1, 2], "to": "town", "arrive": [5, 2], "minutes": 0},
-		], []),
+		], [
+			{"id": "cot", "at": [0, 1], "name": "Cot", "actions": [], "sleep": true},
+		]),
 	}
 
 

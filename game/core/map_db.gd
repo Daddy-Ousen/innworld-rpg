@@ -274,8 +274,10 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 	seen[o["id"]] = true
 	if not _pos_ok(o["at"]) or not bounds.has_point(_vec(o["at"])):
 		errors.append("%s: 'at' must be [x, y] inside the map." % where)
-	if (o["actions"] as Array).is_empty():
-		errors.append("%s: needs at least one action." % where)
+	if o.has("sleep") and not o["sleep"] is bool:
+		errors.append("%s: sleep must be true or false." % where)
+	elif (o["actions"] as Array).is_empty() and not o.get("sleep", false):
+		errors.append("%s: needs at least one action (or sleep: true)." % where)
 	for a: Variant in o["actions"]:
 		if not db.actions.has(a):
 			errors.append("%s: unknown action '%s'." % [where, a])

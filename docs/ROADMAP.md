@@ -45,10 +45,11 @@ days 1–7 run as canon history at new game (Celum start: later, see ADR 0006).
 - [x] M4.2 World grid core (headless): maps as JSON, player position, grid movement, interact, time cost per step — save v4 (ADR 0006)
 - [x] M4.3 2D view: tilemap (placeholder tiles) for Liscor gate + market, a Floodplains patch, the inn on the hill; camera, input, HUD (ADR 0007)
 - [x] M4.4 NPC schedules + utility AI for 14 NPCs — save v5, exact float saves (ADR 0008)
-- [ ] M4.5 System message UI (level-up / offer dialog, morning summary, character sheet)
+- [x] M4.5 System message UI: System dialog (night pages, offers with Accept / Decline + confirm), sleep in the inn bed, character sheet (ADR 0009)
 **Done when:** from a new game the player walks from the Liscor gate to the market and the inn,
 does 3 actions through map objects, meets NPCs who follow their schedules, sleeps, and answers
 a class offer in the System dialog. `sim_walk_day` and `sim_npc_day` are deterministic.
+Checked by `sim_m4_done` (the first offer comes on day 22 with a plain inn workday; see ADR 0009).
 
 ## M5 — Combat
 - [ ] Turn-based grid combat on the world map

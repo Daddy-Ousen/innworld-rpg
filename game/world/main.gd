@@ -1,6 +1,7 @@
-## The game screen: world map, HUD, "use" menu and the debug console
-## overlay. Turns keys into Commands on Session.gs, then redraws. Held
-## keys: WASD/arrows walk, Space waits (one step of time).
+## The game screen: world map, HUD, "use" menu, character sheet, System
+## dialog and the debug console overlay. Turns keys into Commands on
+## Session.gs, then redraws. Held keys: WASD/arrows walk, Space waits
+## (one step of time).
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
@@ -19,6 +20,8 @@ var _bumped := ""
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
 @onready var menu: InteractMenu = $MenuLayer/InteractMenu
+@onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
+@onready var dialog: SystemDialog = $SystemLayer/SystemDialog
 @onready var console_layer: CanvasLayer = $ConsoleLayer
 @onready var console_input: LineEdit = $ConsoleLayer/DebugConsole.get_node("%Input")
 
@@ -30,6 +33,7 @@ func _ready() -> void:
 	view.setup(Session.db.maps, names)
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
+	dialog.closed.connect(_on_dialog_closed)
 	console_layer.visible = false
 	hud.add_lines(["You stand outside the east gate of Liscor, a walled city."])
 	if not Session.db.is_valid():
@@ -42,15 +46,16 @@ func _redraw() -> void:
 	hud.refresh(Session.gs, Session.db)
 
 
-## True while a menu or the console has the keyboard.
+## True while a menu, the sheet, the System dialog or the console has the keyboard.
 func is_busy() -> bool:
-	return console_layer.visible or menu.visible
+	return console_layer.visible or menu.visible or sheet.visible or dialog.visible
 
 
 func _input(event: InputEvent) -> void:
-	# Backtick before the console's LineEdit sees it.
+	# Backtick before the console's LineEdit sees it. Not while the System
+	# dialog waits for an answer.
 	if event is InputEventKey and event.pressed and not event.echo \
-			and event.physical_keycode == KEY_QUOTELEFT:
+			and event.physical_keycode == KEY_QUOTELEFT and not dialog.visible:
 		toggle_console()
 		get_viewport().set_input_as_handled()
 
@@ -63,6 +68,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			open_use_menu()
 		KEY_Z:
 			sleep()
+		KEY_C:
+			sheet.open(Session.gs, Session.db)
 		_:
 			return
 	get_viewport().set_input_as_handled()
@@ -113,24 +120,31 @@ func open_use_menu() -> void:
 
 
 func use(object_id: String, action_id: String) -> void:
+	if action_id == Interact.SLEEP:
+		sleep()
+		return
 	var r := Commands.interact(Session.gs, Session.db, object_id, action_id)
 	if r["error"] != "":
 		hud.add_lines([r["error"]])
+		if Session.gs.clock.is_collapse_due(Session.db.rules["clock"]):
+			sleep()
+			return
 	else:
 		hud.add_lines(["%s: %.1f XP." % [Session.db.actions[action_id]["name"], float(r["record"]["xp"])]])
 	Session.changed()
 
 
-## Ends the day (a collapse if the player is past the awake limit). The
-## System dialog comes in M4.5; for now the night lines go to the log.
+## Ends the day (a collapse if the player is past the awake limit) and
+## shows the night in the System dialog.
 func sleep() -> void:
 	var night := Commands.sleep(Session.gs, Session.db)
-	var lines: Array = ["--- You sleep. ---"]
-	lines.append_array(night["lines"])
-	if (night["lines"] as Array).is_empty():
-		lines.append("The System is silent.")
-	lines.append("--- Day %d, %s. ---" % [Session.gs.clock.day(), Session.gs.clock.time_string()])
-	hud.add_lines(lines)
+	hud.add_lines(["You collapse." if night["collapsed"] else "You sleep."])
+	Session.changed()
+	dialog.open(SystemMessages.pages(night, Session.gs, Session.db), Session.gs, Session.db)
+
+
+func _on_dialog_closed() -> void:
+	hud.add_lines(["Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]])
 	Session.changed()
 
 
@@ -138,6 +152,7 @@ func toggle_console() -> void:
 	console_layer.visible = not console_layer.visible
 	if console_layer.visible:
 		menu.close()
+		sheet.close()
 		console_input.grab_focus()
 	else:
 		console_input.release_focus()
