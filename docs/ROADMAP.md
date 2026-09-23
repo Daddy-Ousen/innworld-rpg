@@ -43,7 +43,7 @@ The player is one of the Earthers of the Great Ritual (night 7). They start outs
 days 1–7 run as canon history at new game (Celum start: later, see ADR 0006).
 - [x] M4.1 Canon data 1.10–1.14 (NPCs for the market and gate; `sim_canon_book1` to day 9)
 - [x] M4.2 World grid core (headless): maps as JSON, player position, grid movement, interact, time cost per step — save v4 (ADR 0006)
-- [ ] M4.3 2D view: tilemap (placeholder tiles) for Liscor gate + market, a Floodplains patch, the inn on the hill; camera, input, HUD
+- [x] M4.3 2D view: tilemap (placeholder tiles) for Liscor gate + market, a Floodplains patch, the inn on the hill; camera, input, HUD (ADR 0007)
 - [ ] M4.4 NPC schedules + utility AI for ~13 NPCs — save v5
 - [ ] M4.5 System message UI (level-up / offer dialog, morning summary, character sheet)
 **Done when:** from a new game the player walks from the Liscor gate to the market and the inn,
