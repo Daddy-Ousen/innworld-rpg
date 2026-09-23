@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://world/world_view.tscn" id="2_view"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://ui/debug_console.tscn" id="5_console"]
 [ext_resource type="PackedScene" path="res://ui/system_dialog.tscn" id="6_dialog"]
 [ext_resource type="PackedScene" path="res://ui/character_sheet.tscn" id="7_sheet"]
+[ext_resource type="PackedScene" path="res://ui/journal.tscn" id="8_journal"]
+[ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="9_pause"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -23,6 +25,10 @@ layer = 2
 [node name="InteractMenu" parent="MenuLayer" instance=ExtResource("4_menu")]
 
 [node name="CharacterSheet" parent="MenuLayer" instance=ExtResource("7_sheet")]
+
+[node name="Journal" parent="MenuLayer" instance=ExtResource("8_journal")]
+
+[node name="PauseMenu" parent="MenuLayer" instance=ExtResource("9_pause")]
 
 [node name="SystemLayer" type="CanvasLayer" parent="."]
 layer = 4

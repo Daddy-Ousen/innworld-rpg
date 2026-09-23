@@ -4,5 +4,6 @@
   "prefix": "",
   "suffix": ".gd",
   "log_level": 1,
-  "should_exit": true
+  "should_exit": true,
+  "pre_run_script": "res://test_support/gut_pre_run.gd"
 }

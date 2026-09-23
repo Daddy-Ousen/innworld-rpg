@@ -4,7 +4,7 @@
 		"innkeeper": {
 			"name": "[Innkeeper]",
 			"tag_weights": {"hospitality": 1.0, "cooking": 0.6, "cleaning": 0.5, "commerce": 0.3, "social.conversation": 0.3},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -15,7 +15,7 @@
 		"cook": {
 			"name": "[Cook]",
 			"tag_weights": {"cooking": 1.0},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -26,7 +26,7 @@
 		"server": {
 			"name": "[Server]",
 			"tag_weights": {"hospitality.service": 1.0, "hospitality": 0.6, "social.conversation": 0.3},
-			"offer_threshold": 180,
+			"offer_threshold": 60,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -37,7 +37,7 @@
 		"maid": {
 			"name": "[Maid]",
 			"tag_weights": {"cleaning": 1.0, "hospitality": 0.3},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -48,7 +48,7 @@
 		"laborer": {
 			"name": "[Laborer]",
 			"tag_weights": {"labor": 1.0, "crafting": 0.2},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -59,7 +59,7 @@
 		"carpenter": {
 			"name": "[Carpenter]",
 			"tag_weights": {"crafting.carpentry": 1.0, "crafting": 0.6, "labor.woodcutting": 0.3},
-			"offer_threshold": 180,
+			"offer_threshold": 60,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -70,7 +70,7 @@
 		"forager": {
 			"name": "[Forager]",
 			"tag_weights": {"foraging": 1.0, "travel": 0.2, "vigilance": 0.2},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -81,7 +81,7 @@
 		"herbalist": {
 			"name": "[Herbalist]",
 			"tag_weights": {"foraging.herbs": 1.0, "medicine": 0.5, "study": 0.2},
-			"offer_threshold": 200,
+			"offer_threshold": 65,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -92,7 +92,7 @@
 		"healer": {
 			"name": "[Healer]",
 			"tag_weights": {"medicine": 1.0, "social.empathy": 0.4},
-			"offer_threshold": 200,
+			"offer_threshold": 65,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -103,7 +103,7 @@
 		"runner": {
 			"name": "[Runner]",
 			"tag_weights": {"running": 1.0, "travel": 0.5},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -114,7 +114,7 @@
 		"warrior": {
 			"name": "[Warrior]",
 			"tag_weights": {"combat": 1.0, "vigilance": 0.2, "running.escape": 0.1},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -125,7 +125,7 @@
 		"guardsman": {
 			"name": "[Guardsman]",
 			"tag_weights": {"vigilance": 1.0, "combat": 0.5, "combat.block": 0.7},
-			"offer_threshold": 200,
+			"offer_threshold": 65,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": ["rogue"],
 			"race_limits": null,
@@ -136,7 +136,7 @@
 		"rogue": {
 			"name": "[Rogue]",
 			"tag_weights": {"stealth": 1.0, "running.escape": 0.3, "commerce.haggle": 0.2},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": ["guardsman"],
 			"race_limits": null,
@@ -147,7 +147,7 @@
 		"merchant": {
 			"name": "[Merchant]",
 			"tag_weights": {"commerce": 1.0, "social.persuasion": 0.4},
-			"offer_threshold": 150,
+			"offer_threshold": 50,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -158,7 +158,7 @@
 		"strategist": {
 			"name": "[Strategist]",
 			"tag_weights": {"strategy": 1.0, "games.chess": 0.7, "teaching": 0.2},
-			"offer_threshold": 200,
+			"offer_threshold": 65,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -169,7 +169,7 @@
 		"scholar": {
 			"name": "[Scholar]",
 			"tag_weights": {"study": 1.0, "teaching": 0.5},
-			"offer_threshold": 200,
+			"offer_threshold": 65,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,
@@ -180,7 +180,7 @@
 		"commander": {
 			"name": "[Commander]",
 			"tag_weights": {"strategy": 1.0, "combat": 0.6, "teaching": 0.3},
-			"offer_threshold": 400,
+			"offer_threshold": 135,
 			"prereqs": {"classes": [], "flags": []},
 			"excludes": [],
 			"race_limits": null,

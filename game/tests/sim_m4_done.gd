@@ -2,10 +2,11 @@ extends GutTest
 ## M4 "Done when" (ROADMAP): from a new game the player walks from the Liscor
 ## gate to the market and the inn, does actions through map objects, meets
 ## NPCs on their schedules, sleeps in the inn bed through the main scene and
-## answers a class offer in the System dialog.
+## answers a class offer in the System dialog. M6.1 pacing (ADR 0011): a plain
+## inn workday gets the first offer by the third night.
 
 const SEED := 20260923
-const MAX_DAYS := 21
+const MAX_DAYS := 3
 
 var _session: Node
 
