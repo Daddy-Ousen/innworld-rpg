@@ -100,3 +100,76 @@ func test_a_missing_file_gives_empty_data() -> void:
 	var c := CombatDb.load_dir("res://no_such_dir")
 	assert_true(c.is_empty())
 	assert_eq(c.errors, [] as Array[String])
+
+
+func _spawn_errors(spawn: Dictionary) -> Array[String]:
+	var d := ToyCombat.db()
+	var c := CombatDb.from_dicts(ToyCombat.enemies(), ToyCombat.items(), [spawn])
+	return c.validate(d)
+
+
+func _good_spawn() -> Dictionary:
+	return {"id": "s", "area": "arena", "enemy": "goblin", "confidence": "guess", "count": [2, 3],
+		"chance": 0.5, "cooldown_minutes": 60, "rects": [[10, 0, 4, 9]], "hours": [22, 6],
+		"days": [1, 3], "when_flags": ["a"], "unless_flags": ["b"]}
+
+
+func test_shipped_spawns() -> void:
+	var db := DataDb.load_dir()
+	var ids := db.combat.spawns.map(func(s: Dictionary) -> String: return s["id"])
+	assert_eq(ids, ["crab_valley", "goblins_orchard", "goblins_hill", "razorbeak_nest"])
+	var types := {}
+	for s: Dictionary in db.combat.spawns:
+		types[s["enemy"]] = true
+		assert_eq(s["confidence"], "guess", s["id"])
+	assert_eq(types.size(), 3, "all 3 enemy types spawn")
+
+
+func test_good_toy_spawns_are_valid() -> void:
+	assert_eq(_spawn_errors(_good_spawn()), [] as Array[String])
+	var zone := _good_spawn()
+	zone.erase("rects")
+	zone["zone"] = "toy_corner"
+	assert_eq(_spawn_errors(zone), [] as Array[String])
+	var home := _good_spawn()
+	home.erase("rects")
+	home["home"] = [11, 4]
+	home["count"] = [1, 1]
+	assert_eq(_spawn_errors(home), [] as Array[String])
+
+
+func test_bad_spawns() -> void:
+	var cases := [
+		[{"enemy": "dragon"}, "unknown enemy 'dragon'"],
+		[{"count": [0, 2]}, "count must be at least 1"],
+		[{"count": [3, 2]}, "count: must be [min, max]"],
+		[{"chance": 2.0}, "chance: must be 0.0"],
+		[{"cooldown_minutes": -1}, "cooldown_minutes"],
+		[{"hours": [5, 5]}, "hours must be"],
+		[{"days": [0, 2]}, "days must be"],
+		[{"when_flags": "a"}, "when_flags must be a list"],
+		[{"area": "moon"}, "unknown map 'moon'"],
+		[{"rects": [[10, 0, 9, 9]]}, "rects must be"],
+		[{"zone": "toy_corner"}, "exactly one of zone, rects or home"],
+		[{"confidence": "sure"}, "confidence"],
+	]
+	for case: Array in cases:
+		var bad := _good_spawn()
+		bad.merge(case[0], true)
+		assert_true(_has_error(_spawn_errors(bad), case[1]), case[1])
+	var s := _good_spawn()
+	s.erase("chance")
+	assert_true(_has_error(_spawn_errors(s), "missing 'chance'"))
+	s = _good_spawn()
+	s.erase("rects")
+	s["zone"] = "nest"
+	assert_true(_has_error(_spawn_errors(s), "has no zone 'nest'"))
+	s = _good_spawn()
+	s.erase("rects")
+	s["home"] = [6, 4]
+	assert_true(_has_error(_spawn_errors(s), "home must be a walkable tile"))
+	s["home"] = [11, 4]
+	assert_true(_has_error(_spawn_errors(s), "exactly 1 monster"))
+	var d := ToyCombat.db()
+	var twice := CombatDb.from_dicts(ToyCombat.enemies(), ToyCombat.items(), [_good_spawn(), _good_spawn()])
+	assert_true(_has_error(twice.validate(d), "duplicate id"))

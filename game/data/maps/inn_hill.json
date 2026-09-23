@@ -11,7 +11,8 @@
 		{"at": [15, 23, 2, 1], "to": "floodplains_south", "arrive": [16, 1], "minutes": 20}
 	],
 	"objects": [
-		{"id": "woodpile", "at": [23, 9], "name": "Woodpile", "actions": ["chop_wood"], "solid": true}
+		{"id": "woodpile", "at": [23, 9], "name": "Woodpile", "actions": ["chop_wood"], "solid": true},
+		{"id": "loose_stones", "at": [20, 20], "name": "Loose stones", "actions": [], "item": "stone"}
 	],
 	"legend": {"+": "door", ",": "tall_grass", ".": "grass", ":": "dirt_road", "H": "wood_wall", "T": "tree", "^": "rock"},
 	"rows": [

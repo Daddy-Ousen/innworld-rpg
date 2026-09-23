@@ -1,6 +1,6 @@
 {
 	"schema_version": 1,
-	"note": "Monster types (M5, ADR 0010). Stats are design guesses; the behaviour follows Book 1. Spawn tables come in M5.2.",
+	"note": "Monster types (M5, ADR 0010). Stats are design guesses; the behaviour follows Book 1. Spawns (M5.2) are design guesses: where Erin meets them in Book 1, placed on our small maps.",
 	"enemies": {
 		"goblin_grunt": {"name": "Goblin", "confidence": "guess",
 			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "Goblins hunt in small groups with knives and stones, and run when they lose."},
@@ -19,7 +19,21 @@
 			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "A dino-bird that nests in the long grass and pecks hard to guard its eggs."},
 			"tags": ["razorbeak"], "color": "#4fa84a", "danger": 0.4, "behaviour": "territorial",
 			"hp": 6, "armor": 0, "accuracy": 4, "evasion": 5, "damage": [1, 2], "act_seconds": 4,
-			"aggro_radius": 4, "lose_radius": 5, "chase_turns": 99, "flee_below": 0.34, "scared_by": []}
+			"aggro_radius": 3, "lose_radius": 5, "chase_turns": 99, "flee_below": 0.34, "scared_by": []}
 	},
-	"spawns": []
+	"spawns": [
+		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",
+			"note": "A Rock Crab lies among the rocks by the blue fruit valley (1.01).",
+			"rects": [[10, 15, 8, 9]], "hours": [6, 20], "count": [1, 1], "chance": 0.6, "cooldown_minutes": 240},
+		{"id": "goblins_orchard", "area": "floodplains_south", "enemy": "goblin_grunt", "confidence": "guess",
+			"note": "Goblins come for the blue fruit in the morning (1.02).",
+			"zone": "amentus_orchard", "hours": [7, 11], "count": [2, 3], "chance": 0.5, "cooldown_minutes": 480},
+		{"id": "goblins_hill", "area": "inn_hill", "enemy": "goblin_grunt", "confidence": "guess",
+			"note": "Goblins raid the inn after dark while their Chieftain lives (1.02-1.14).",
+			"rects": [[0, 13, 12, 11]], "hours": [19, 23], "count": [2, 3], "chance": 0.4, "cooldown_minutes": 1440,
+			"unless_flags": ["goblin_tribe.leaderless"]},
+		{"id": "razorbeak_nest", "area": "floodplains_south", "enemy": "razorbeak", "confidence": "guess",
+			"note": "A Razorbeak guards its nest in the long grass (1.05).",
+			"home": [21, 16], "count": [1, 1], "chance": 1.0, "cooldown_minutes": 1440}
+	]
 }

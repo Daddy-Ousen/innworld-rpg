@@ -9,12 +9,19 @@
 ##            "ranged"?: {"range", "damage", "chance"}, "ambush"?: {"spot_radius", "hit_bonus"}}.
 ##   items: item id → {"name", "confidence", "canon_ref"?, "melee": [min, max],
 ##          "throw": [min, max], "throw_range", "break_chance" 0–1, "tags": [...]}.
-##   spawns: where monsters appear (M5.2).
+##   spawns: [{"id", "area": map id, "enemy": enemy id, "confidence",
+##            "count": [min, max], "chance" 0–1, "cooldown_minutes",
+##            one of "zone" (a zone of the map) | "rects": [[x, y, w, h], ...]
+##            | "home": [x, y] (one monster that lives there),
+##            "hours"?: [from, to] (whole hours 0–24; from > to wraps),
+##            "days"?: [first, last], "when_flags"?, "unless_flags"?, "note"?}]
+##            (MonsterSim.spawn_check).
 class_name CombatDb
 extends RefCounted
 
 const SCHEMA_VERSION := 1
 const BEHAVIOURS := ["pack", "ambush", "territorial"]
+const SPAWN_FIELDS := ["id", "area", "enemy", "confidence", "count", "chance", "cooldown_minutes"]
 const ENEMY_FIELDS := ["name", "confidence", "tags", "color", "danger", "behaviour", "hp", "armor",
 	"accuracy", "evasion", "damage", "act_seconds", "aggro_radius", "lose_radius", "chase_turns",
 	"flee_below", "scared_by"]
@@ -63,8 +70,8 @@ static func _read_json(path: String, errs: Array[String]) -> Dictionary:
 	return d
 
 
-## Checks items, enemies and the rules' knock-out wake spots (against the
-## maps). Adds to and returns `errors`.
+## Checks items, enemies, spawns and the rules' knock-out wake spots
+## (against the maps). Adds to and returns `errors`.
 func validate(db: DataDb) -> Array[String]:
 	var item_tags := {}
 	for id: String in items:
@@ -73,8 +80,71 @@ func validate(db: DataDb) -> Array[String]:
 			item_tags[tag] = true
 	for id: String in enemies:
 		_validate_enemy(id, enemies[id], item_tags)
+	var seen := {}
+	for i in spawns.size():
+		if not spawns[i] is Dictionary:
+			errors.append("spawn %d: must be an object." % i)
+			continue
+		_validate_spawn(spawns[i], seen, db)
 	_validate_rules(db)
 	return errors
+
+
+func _validate_spawn(s: Dictionary, seen: Dictionary, db: DataDb) -> void:
+	var where := "spawn '%s'" % s.get("id", "?")
+	if not _has_fields(where, s, SPAWN_FIELDS):
+		return
+	if seen.has(s["id"]):
+		errors.append("%s: duplicate id." % where)
+	seen[s["id"]] = true
+	_check_confidence(where, s)
+	if not enemies.has(s["enemy"]):
+		errors.append("%s: unknown enemy '%s'." % [where, s["enemy"]])
+	_check_range(where + " count", s["count"])
+	if s["count"] is Array and (s["count"] as Array).size() == 2 and int(s["count"][0]) < 1:
+		errors.append("%s: count must be at least 1." % where)
+	_check_share(where + " chance", s["chance"])
+	if int(s["cooldown_minutes"]) < 0:
+		errors.append("%s: cooldown_minutes must be >= 0." % where)
+	var h: Variant = s.get("hours", [0, 1])
+	if not h is Array or (h as Array).size() != 2 or int(h[0]) < 0 or int(h[1]) > 24 \
+			or int(h[0]) == int(h[1]):
+		errors.append("%s: hours must be [from, to] with 0 <= from != to <= 24." % where)
+	var days: Variant = s.get("days", [1, 1])
+	if not days is Array or (days as Array).size() != 2 or int(days[0]) < 1 or int(days[0]) > int(days[1]):
+		errors.append("%s: days must be [first, last] with 1 <= first <= last." % where)
+	for key: String in ["when_flags", "unless_flags"]:
+		var flags: Variant = s.get(key, [])
+		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+			errors.append("%s: %s must be a list of strings." % [where, key])
+	var places := ["zone", "rects", "home"].filter(func(k: String) -> bool: return s.has(k))
+	if places.size() != 1:
+		errors.append("%s: needs exactly one of zone, rects or home." % where)
+		return
+	if db.maps.is_empty():
+		return
+	if not db.maps.areas.has(s["area"]):
+		errors.append("%s: unknown map '%s'." % [where, s["area"]])
+		return
+	var area: String = s["area"]
+	var bounds := Rect2i(Vector2i.ZERO, db.maps.size(area))
+	match places[0]:
+		"zone":
+			if not (db.maps.areas[area]["zones"] as Dictionary).has(s["zone"]):
+				errors.append("%s: map '%s' has no zone '%s'." % [where, area, s["zone"]])
+		"rects":
+			var rects: Variant = s["rects"]
+			if not rects is Array or (rects as Array).is_empty() or not (rects as Array).all(
+					func(r: Variant) -> bool: return r is Array and (r as Array).size() == 4 \
+							and bounds.encloses(MapDb.rect_of(r))):
+				errors.append("%s: rects must be [[x, y, w, h], ...] inside the map." % where)
+		"home":
+			var p: Variant = s["home"]
+			if not p is Array or (p as Array).size() != 2 \
+					or not db.maps.is_walkable(area, Vector2i(int(p[0]), int(p[1]))):
+				errors.append("%s: home must be a walkable tile in '%s'." % [where, area])
+			elif s["count"] is Array and int(s["count"][1]) != 1:
+				errors.append("%s: a home spawn places exactly 1 monster." % where)
 
 
 func _validate_item(id: String, it: Dictionary) -> void:
