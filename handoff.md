@@ -1,31 +1,37 @@
 # Handoff
 
-## Just done (2026-09-23, branch `feat/m2-canon-pipeline`)
-M2 is done, pushed, PR #3 open:
-- `tools/extract_epub.py` + tests → `canon/raw/book1/` (66 chapters + `index.json`, gitignored).
-- `tools/validate_data.py` + tests (ADR 0004 accepted).
-- `canon/events/book1/`: `npcs.json` (10), `locations.json` (15), `chapters/1.00.json` … `1.09.json` (26 events, `system` logs). All records `status: "reviewed"`. Validator: 0 errors.
-- User chose to keep relationship deltas (design values, marked in `canon_ref.note`).
-- ROADMAP M2 ticked. GUT 115/115, Python 26/26.
+## Just done (2026-09-23, branch `feat/m3-world-director`)
+M3 world director is done and tested (not pushed yet):
+- Canon data moved: `canon/events/` → `game/data/canon/` (user choice). CLAUDE.md, validator help, DESIGN §6, ADR 0004 note updated.
+- `game/core/canon_db.gd` — loads every `data/canon/book*`, run order, dependents, alt-only events. `DataDb.load_dir()` sets `db.canon`.
+- `game/core/world_state.gd` — `gs.world`: NPC fates, relationships, event status, history, drift, `last_day`. Save v3 + migration.
+- `game/core/director.gd` — night step 5. Rules in ADR 0005.
+- `Clock.sleep_length` / `wake_day` (director runs up to the day before the wake day).
+- `Commands.kill_npc`, `Commands.set_flag`; console `kill`, `flag`, `history`, `drift`.
+- `rules.json` new `director` section.
+- Tests: GUT 156/156 (19 scripts), exit 0. Python 26/26. Validator 0 errors on `game/data/canon/book1`.
+- ADR 0005 written; ROADMAP M3 ticked.
 
 ## Waiting on the user
-- PR https://github.com/Daddy-Ousen/innworld-rpg/pull/3 open. After merge: `git tag m2-done`.
-- Game-data suggestions (not applied): `[Guardsman]` canon_ref → 1.06 confirmed. Missing from data: skill `[Basic Crafting]` (Innkeeper Lv5), class `[Gatherer]` + skill `[Detect Poison]`, skill `[Detect Guilt]`, skill `[Dangersense]`, classes `[Spearmaster]`, `[Swordslayer]`.
+- Push branch and open PR. After merge: `git tag m3-done`.
+- Game-data suggestions from M2 still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`.
 
-## Next (M3, world director)
-- Needs a loader for `canon/events/` (outside `game/`). Decide: copy/export step, or move canon data into `game/data/canon/`. Ask the user (rule 11 if it changes layout).
-- Open canon questions to confirm while reading on: id `rags` (guess), id `high_passes` (guess), Pisces = 1.04 bone thief (`likely`).
-- Continue event extraction from 1.10 / interlude onward, one chapter per file.
+## Next (M4, 2D world)
+- Tilemap (inn, Floodplains part, Liscor gate + market), grid movement, NPC schedules + utility AI, System message UI.
+- Player interactions should call `Commands.set_flag` / `Commands.kill_npc` to bend canon.
+- Open canon questions: id `rags` (guess), id `high_passes` (guess), Pisces = 1.04 bone thief (`likely`).
+- Continue event extraction from 1.10 onward into `game/data/canon/book1/chapters/`.
 
 ## Gotchas
 - Commits: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer.
-- Godot class cache goes stale after checkout/merge: `unit_console.gd` fails to parse and GUT shows 107/14 instead of 115/15. Fix: `godot --headless --path game --import`, then re-run.
+- A sleep at 06:00 is a 4 h nap (same day). Loop on `gs.world.last_day`, not on sleep count (`ToyCanon.sleep_through`).
+- `const X := SomeClassName` does not parse in Godot 4.7 test scripts. Use the class name directly.
+- New `.gd` files get `.gd.uid` files. Commit them.
+- Godot class cache goes stale after checkout/merge: run `godot --headless --path game --import`, then the tests.
 - Python 3.14; use `python -X utf8` in Git Bash when printing book text.
 - Python tests: `python -m unittest discover -s tools/tests` (no `-t .`).
-- Validator auto-finds `canon/raw/book<N>`; `--no-raw` skips chapter-id + copy checks (CI has no raw text).
 - Day 1 = Erin's arrival. 1.00–1.09 = days 1–7.
-- In Git Bash, never run `cat > file` without a heredoc.
 - GUT `.import` files show as modified: line endings only. Do not commit them.
 
 ## Active files
-`tools/*.py`, `tools/tests/*`, `canon/events/book1/**`, `docs/adr/0004-m2-canon-schemas.md`.
+`game/core/{canon_db,world_state,director}.gd`, `game/test_support/toy_canon.gd`, `game/tests/{unit_director,sim_divergence,sim_canon_book1}.gd`, `docs/adr/0005-m3-world-director.md`.
