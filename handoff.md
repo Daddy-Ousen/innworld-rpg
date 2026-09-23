@@ -1,7 +1,7 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.21-1.25`, not pushed)
-M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data drafted, one chapter at a time. New entries are `status: "candidate"`.
+## Just done (2026-09-24, branch `data/book1-1.21-1.25`)
+M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data done and reviewed; all entries `reviewed`.
 - `1.21.json`: inn_first_regulars d15, selys_sews_pads d16.
 - `1.22.json`: erin_traps_acid_flies d16, erin_beats_pisces_at_chess d16, pisces_saves_erin_from_flies d17; system: Erin [Innkeeper] 10, [Alcohol Brewing], [Dangersense].
 - `1.23A.json`: antinium_uncover_ruin_door d14 (secret dig by Klbkch).
@@ -12,12 +12,8 @@ M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data drafted, one chapter at a time.
 - Updated (were `reviewed`): rags name "Littlest Goblin" → "Rags"; olesm name → "Olesm Swifttail"; klbkch note (Klbkchhezeim, Prognugator); selys note ([Fast Stitching]); 1.11 `bully` role now prefers `terbore`.
 - `sim_canon_book1`: LAST_DAY 19, counts 62 / 27 / 30, new test `test_killing_the_free_queen_keeps_workers_home`. GUT 384/384 (40 scripts), validator 0 errors, Python 26 OK.
 
-## Waiting on the user (M6.3 review)
-1. Dungeon discovery as tier 1 + rumor (so the player hears it now) or tier 2 with no rumor until M6.4 news. My pick: tier 1 + rumor.
-2. King of Destruction rumor reaches Liscor on day 18. My pick: keep.
-3. Worker id `pawn` (a guess, like `rags` was). My pick: keep.
-4. Canon ends on day 19, not "about day 22" as the roadmap says. 1.26R and later are next (M7). My pick: accept day 19.
-After OK: `candidate` → `reviewed`, tick M6.3 in `docs/ROADMAP.md` and `progress.md`, push, PR, then tag `m6.3-done` on the merge commit.
+## Waiting on the user
+- M6.3 reviewed 2026-09-24 (my picks: ruins + King news as tier 1 rumors, Worker id `pawn`, canon ends day 19). Review the M6.3 PR, merge, then tag `m6.3-done` on the merge commit.
 Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, and now `[Alcohol Brewing]`.
 
 ## Next after M6.3

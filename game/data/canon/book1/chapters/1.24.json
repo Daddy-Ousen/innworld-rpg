@@ -13,7 +13,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["liscor.dungeon_found", "liscor.adventurer_influx"]},
 			"rumor": "Someone found an ancient ruin in the hills northeast of Liscor. Adventurers from all over are said to be on their way to explore it.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "confirmed", "note": "Relc brings it as fresh news on day 18; the finder and the day are not given. Tier 1 so the player hears it as a rumor until M6.4 adds news."},
 			"summary": "Someone finds ruins northeast of Liscor that look like a large, unexplored dungeon. Adventurers start to pour into the city. The Watch dreads the extra work; the city expects trade."
 		},
@@ -31,7 +31,7 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["goblin_tribe.hunts_without_chieftain", "rags.tribe_listens"]},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "likely", "note": "The day after Erin's level 10 (she is 'celebrating not dying'). The hunt was the littlest Goblin's idea (confirmed)."},
 			"summary": "About forty Goblins run down a huge Rock Crab, lose hands to its claws, swarm under its shell and eat it raw. The hunt was the littlest Goblin's idea, so the warriors now listen to her. She hides a pouch of coins. Erin watches in terror and runs home."
 		},
@@ -53,7 +53,7 @@
 					{"from": "klbkch", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "likely", "note": "Evening of day 18. Delta is a design value."},
 			"summary": "Relc laughs off Erin's fear: forty Goblins is just the local tribe; a raid is hundreds. The two tell her of the Goblin King, the Bloodfields, the old Necromancer and Liscor's Hive. Klbkch devours bowls of Acid Flies, and Erin asks him to bring his friends."
 		}

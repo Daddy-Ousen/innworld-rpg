@@ -249,7 +249,7 @@
 			"kind": "wild",
 			"parent": "floodplains_of_liscor",
 			"tags": ["ruins", "dungeon", "ancient", "danger"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Door dug out in 1.23A; 'ruins to the northeast' found in 1.24. That they are the same place is likely, not stated."},
 			"summary": "A tall hillside outside Liscor hides a huge weathered stone door into an ancient complex; something moves in the dark within. Liscor talks of it as a large, unexplored dungeon."
 		},
@@ -258,7 +258,7 @@
 			"kind": "region",
 			"parent": null,
 			"tags": ["continent", "desert", "mentioned"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "confirmed"},
 			"summary": "Dry continent of deserts far to the south and west of Izril. Home of Reim, Nerrhavia, Medain, Germina and the rising Emperor of the Sands."
 		},
@@ -267,7 +267,7 @@
 			"kind": "settlement",
 			"parent": "chandrar",
 			"tags": ["city", "capital", "kingdom", "ruined"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "confirmed"},
 			"summary": "Capital of Flos Reimarch's kingdom: a crown-shaped city with two fallen towers, a faded palace on a hill and hungry people after twenty-two years of decline."
 		}

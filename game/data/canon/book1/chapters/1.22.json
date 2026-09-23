@@ -15,7 +15,7 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.traps_acid_flies", "erin.has_fly_acid"]},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "Same day as the pads (end of 1.21). The flies are drawn to blood."},
 			"summary": "Back home, Erin finds Acid Flies eating her bloodied clothes and the floor. She drowns them with a bucket, jars them, shakes them until they burst, and patches the floor with [Basic Crafting]. Then she baits jars with a dead stream fish and catches swarms."
 		},
@@ -36,7 +36,7 @@
 					{"from": "pisces", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "Evening of day 16. Delta is a design value."},
 			"summary": "Pisces, sure he is one of the best players in the north, bets on chess and is beaten flat; Erin adds the bets to his tab. Over eggs he explains magic tiers and admits he robbed graves. When she says he is better than the people who scorn him, he is stunned."
 		},
@@ -59,7 +59,7 @@
 					{"from": "pisces", "to": "erin_solstice", "delta": 2}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "The next morning. Erin levels that night. Deltas are design values."},
 			"summary": "Erin trips and a full fly jar bursts; the swarm engulfs her. Pisces blasts it aside with [Gust] and kills it with [Frozen Wind], then throws up. He suggests floating the jars in the stream. She feeds him until he is ill and adds Acid Flies to her chalk menu."
 		}

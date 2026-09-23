@@ -273,7 +273,7 @@
 			"home": "liscor",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "confirmed", "note": "Named in 1.21. He says he warned her 'last time', so he is likely the Gnoll who bullied her out in 1.11."},
 			"summary": "Big male Gnoll adventurer at Liscor's Adventurer's Guild. Growls that Erin stinks and tries to drive her out; backs off with flattened ears when she stares him down."
 		},
@@ -285,7 +285,7 @@
 			"home": "liscor_hive",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "confirmed", "note": "Called 'the Free Queen' in 1.23A; seen in 1.25."},
 			"summary": "Queen of the Free Antinium Hive under Liscor. Huge and worn out, she barely rests while she holds back monster breaches, and speaks to Klbkch in thought. Other Queens doubt her ten-year venture; she needs a real success soon."
 		},
@@ -297,7 +297,7 @@
 			"home": "liscor_hive",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Id 'pawn' is a guess; still unnamed. He swept during the 1.17 game (confirmed); that he is the Worker who asks to watch in 1.25 is likely."},
 			"summary": "Worker Antinium who once swept Market Street and saw Erin play chess, the first thing with rules he understood. Survives a monster breach, dreams of the board, and at the inn dares to ask to watch."
 		},
@@ -309,7 +309,7 @@
 			"home": "reim",
 			"classes": [{"name": "[King]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "confirmed"},
 			"summary": "The King of Destruction: red-gold hair, green eyes, old scars, armour under his robes. Once swept across Chandrar, then sat idle for twenty-two years after a grief while Reim decayed. Two Earth twins wake him on day 18."
 		},
@@ -321,7 +321,7 @@
 			"home": "reim",
 			"classes": [{"name": "[Steward]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "likely", "note": "Race not stated; Human is likely."},
 			"summary": "Flos Reimarch's gaunt [Steward] in black, with a curved sword and armour under his clothes. Kept the failing kingdom going for two decades and weeps when his king returns."
 		}

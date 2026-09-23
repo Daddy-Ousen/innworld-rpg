@@ -20,7 +20,7 @@
 				"set_flags": ["wandering_inn.new_door", "erin.knows_antinium_diet", "pisces.runs_a_tab"],
 				"clear_flags": ["wandering_inn.door_boarded"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "likely", "note": "'Two days' after the sign (day 13), so day 15. Klbkch helped fit the new door some time before."},
 			"summary": "Two days after naming the inn, Erin's only customers are Relc, Klbkch and Pisces. She learns Antinium cannot digest pasta well; Klbkch had eaten it only to support her, and they quarrel. Pisces eats on credit and complains the soup is bland. Food is spoiling."
 		},
@@ -45,7 +45,7 @@
 					{"from": "terbore", "to": "erin_solstice", "delta": -1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "likely", "note": "The day after 1.21's opening scene. Deltas are design values."},
 			"summary": "Erin's period arrives without warning, and Liscor sells nothing for it: Gnolls and Drakes do not bleed monthly. At the Guild, Selys uses [Fast Stitching] to make her washable pads, explains Goblin raids, and says a pasta-only inn far from town will fail. Erin stares down Terbore."
 		}
