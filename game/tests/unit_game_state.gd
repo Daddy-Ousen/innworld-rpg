@@ -77,10 +77,33 @@ func test_v2_save_migrates_to_v3_with_an_untouched_world() -> void:
 	d.erase("world")
 	var gs := GameState.from_json(JSON.stringify(d))
 	assert_not_null(gs)
-	assert_eq(gs.save_version, 3)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
 	assert_true(gs.world.history.is_empty())
 	assert_eq(gs.world.last_day, 0)
 	assert_eq(gs.world.status("b1.erin_arrives"), WorldState.PENDING)
+
+
+func test_v3_save_migrates_to_v4_with_an_unplaced_player() -> void:
+	var db := DataDb.load_dir()
+	var d := GameState.new_game(2, db).to_dict()
+	d["save_version"] = 3
+	d.erase("player")
+	var gs := GameState.from_json(JSON.stringify(d))
+	assert_not_null(gs)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
+	assert_false(gs.player.is_placed())
+	assert_true(Movement.ensure_placed(gs, db), "placed at the start on first use")
+	assert_eq(gs.player.area, db.rules["world"]["start"]["area"])
+
+
+func test_player_survives_save_and_load() -> void:
+	var gs := GameState.new(4)
+	gs.player.place("inn_hill", Vector2i(15, 20))
+	gs.player.facing = "n"
+	gs.player.sub_seconds = 42
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(loaded.player.to_dict(), gs.player.to_dict())
+	assert_eq(typeof(loaded.player.x), TYPE_INT)
 
 
 func test_world_survives_save_and_load() -> void:

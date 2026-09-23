@@ -12,6 +12,7 @@ const RULE_FIELDS := {
 	"offers": ["max_per_night"],
 	"skills": ["on_accept", "chance_per_level", "base_weight"],
 	"director": ["default_delay_limit", "drift", "tier_weight", "unreliable_at"],
+	"world": ["start", "step_seconds"],
 }
 const CONTEXT_TESTS := ["min", "max", "equals"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
@@ -34,11 +35,13 @@ var classes: Dictionary = {}
 var skills: Dictionary = {}
 ## Canon NPCs, locations and events (data/canon/book<N>/). Empty in toy dbs.
 var canon: CanonDb = CanonDb.new()
+## Tiles and world maps (data/tiles.json, data/maps/). Empty in toy dbs.
+var maps: MapDb = MapDb.new()
 var errors: Array[String] = []
 
 
-## Loads tags, actions, rules, classes and skills JSON from `dir`, and the
-## canon from `dir`/canon. Errors are pushed and kept in `errors`.
+## Loads tags, actions, rules, classes and skills JSON from `dir`, the
+## canon from `dir`/canon and the maps. Errors are pushed and kept in `errors`.
 static func load_dir(dir: String = "res://data") -> DataDb:
 	var load_errors: Array[String] = []
 	var t := _read_json(dir.path_join("tags.json"), load_errors)
@@ -49,7 +52,9 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	var db := from_dicts(t.get("tags", {}), a.get("actions", {}), r,
 			c.get("classes", {}), s.get("skills", {}))
 	db.canon = CanonDb.load_root(dir.path_join("canon"))
-	db.errors = load_errors + db.errors + db.canon.errors
+	db.maps = MapDb.load_dir(dir)
+	db.maps.validate(db)
+	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors
 	for e in db.errors:
 		push_error(e)
 	return db

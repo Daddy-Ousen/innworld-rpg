@@ -19,6 +19,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 		match version:
 			1: out = _migrate_1_to_2(out)
 			2: out = _migrate_2_to_3(out)
+			3: out = _migrate_3_to_4(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -38,4 +39,11 @@ static func _migrate_1_to_2(d: Dictionary) -> Dictionary:
 ## canon event has run yet; the director catches up on the next night.
 static func _migrate_2_to_3(d: Dictionary) -> Dictionary:
 	d["world"] = {}
+	return d
+
+
+## v4 (M4.2): the player's place on the world grid. A v3 save has a player
+## who is not placed yet; Movement puts them at rules.world.start.
+static func _migrate_3_to_4(d: Dictionary) -> Dictionary:
+	d["player"] = {}
 	return d

@@ -11,8 +11,12 @@ const HELP := [
 	"Commands:",
 	"  do <action> [xN] [key=value ...]   do an action (N times). Keys: intensity, risk,",
 	"                                     outcome, with=a,b (witnesses); others are context,",
-	"                                     e.g. do cook_stew guests=12 location=inn",
+	"                                     e.g. do cook_stew guests=12 location=wandering_inn",
 	"  actions                            list actions",
+	"  where                              area, tile, place, day and time",
+	"  look                               map around you and objects you can use",
+	"  go <n|s|e|w> [xN]                  walk N steps",
+	"  use <object> <action>              do an action with a nearby object",
 	"  sleep                              end the day (night pipeline)",
 	"  status                             day, time, classes, skills, offers",
 	"  accept <class> / decline <class>   answer a class offer",
@@ -52,6 +56,14 @@ func execute(line: String) -> Array[String]:
 			out = _do(args)
 		"sleep":
 			out = _night(Commands.sleep(gs, db))
+		"where":
+			out = _where()
+		"look":
+			out = _look()
+		"go":
+			out = _go(args)
+		"use":
+			out = _use(args)
 		"status":
 			out = _status()
 		"accept":
@@ -95,7 +107,7 @@ func execute(line: String) -> Array[String]:
 		"new":
 			var seed_value := int(args[0]) if not args.is_empty() and (args[0] as String).is_valid_int() else 1
 			gs = GameState.new_game(seed_value, db)
-			out.append("New game, seed %d. Day 1, %s." % [seed_value, gs.clock.time_string()])
+			out.append("New game, seed %d. Day %d, %s." % [seed_value, gs.clock.day(), gs.clock.time_string()])
 		_:
 			out.append("Unknown command '%s'. Type help." % parts[0])
 	return out
@@ -139,6 +151,105 @@ func _do(args: Array) -> Array[String]:
 			break
 		out.append("%s  %s: %.1f XP  (novelty %.2f)" % [
 			_time_of(rec), db.actions[action_id]["name"], float(rec["xp"]), float(rec["novelty"])])
+	return out
+
+
+func _where() -> Array[String]:
+	var out: Array[String] = []
+	if not Movement.ensure_placed(gs, db):
+		out.append("There is no world map.")
+		return out
+	var p := gs.player
+	var place := Movement.location_at(gs, db)
+	var place_name: String = db.canon.locations.get(place, {}).get("name", place)
+	out.append("%s (%s) at %d,%d, facing %s. %s." % [db.maps.areas[p.area]["name"], p.area,
+			p.x, p.y, p.facing, place_name])
+	out.append("Day %d, %s." % [gs.clock.day(), gs.clock.time_string()])
+	return out
+
+
+## A small window of the map: @ is you, o an object, > an exit.
+func _look() -> Array[String]:
+	var out := _where()
+	if not gs.player.is_placed():
+		return out
+	var p := gs.player
+	var marks := {}
+	for o: Dictionary in db.maps.areas[p.area]["objects"]:
+		marks[Vector2i(int(o["at"][0]), int(o["at"][1]))] = "o"
+	var legend: Dictionary = db.maps.areas[p.area]["legend"]
+	var char_of := {}
+	for ch: String in legend:
+		char_of[legend[ch]] = ch
+	for y in range(p.y - 4, p.y + 5):
+		var line := "  "
+		for x in range(p.x - 8, p.x + 9):
+			var at := Vector2i(x, y)
+			var tile := db.maps.tile_at(p.area, at)
+			if at == p.pos():
+				line += "@"
+			elif marks.has(at):
+				line += marks[at]
+			elif tile != "" and not db.maps.exit_at(p.area, at).is_empty():
+				line += ">"
+			else:
+				line += char_of.get(tile, " ")
+		out.append(line)
+	var options := Interact.options(gs, db)
+	for o: Dictionary in options:
+		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(o["actions"])])
+	if options.is_empty():
+		out.append("  Nothing to use here.")
+	return out
+
+
+func _go(args: Array) -> Array[String]:
+	var out := _need_arg(args, "go <n|s|e|w> [xN]")
+	if not out.is_empty():
+		return out
+	var dir: String = (args[0] as String).to_lower().left(1)
+	if not PlayerState.DIRS.has(dir):
+		out.append("Direction must be n, s, e or w.")
+		return out
+	var times := 1
+	if args.size() > 1 and (args[1] as String).begins_with("x") and (args[1] as String).substr(1).is_valid_int():
+		times = clampi(int((args[1] as String).substr(1)), 1, 100)
+	var steps := 0
+	for i in times:
+		var r := Commands.move(gs, db, dir)
+		if r["refused"]:
+			if gs.clock.is_collapse_due(db.rules["clock"]):
+				out.append("You are too tired. You collapse.")
+				out.append_array(_night(Commands.sleep(gs, db)))
+			else:
+				out.append("You cannot move.")
+			break
+		if r["blocked"]:
+			out.append("Something blocks the way.")
+			break
+		steps += 1
+		if r["exit_to"] != "":
+			out.append("You travel to %s (%d min)." % [db.maps.areas[r["exit_to"]]["name"], int(r["minutes"])])
+			break
+	out.push_front("You walk %d step%s." % [steps, "" if steps == 1 else "s"])
+	out.append_array(_where())
+	return out
+
+
+func _use(args: Array) -> Array[String]:
+	var out: Array[String] = []
+	if args.size() < 2:
+		out.append("Usage: use <object> <action>. Type look.")
+		return out
+	var r := Commands.interact(gs, db, args[0], args[1])
+	if r["error"] != "":
+		out.append(r["error"])
+		if gs.clock.is_collapse_due(db.rules["clock"]):
+			out.append_array(_night(Commands.sleep(gs, db)))
+		return out
+	var rec: Dictionary = r["record"]
+	out.append("%s  %s: %.1f XP  (novelty %.2f)" % [
+		_time_of(rec), db.actions[args[1]]["name"], float(rec["xp"]), float(rec["novelty"])])
 	return out
 
 

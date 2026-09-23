@@ -8,7 +8,7 @@
 			"tags": {"cooking.stew": 1.0},
 			"context": [
 				{"key": "guests", "min": 10, "add_tags": {"hospitality": 0.5}},
-				{"key": "location", "equals": "inn", "add_tags": {"hospitality": 0.2}}
+				{"key": "location", "equals": "wandering_inn", "add_tags": {"hospitality": 0.2}}
 			]},
 		"cook_pasta": {"name": "Cook pasta", "minutes": 60, "base_xp": 9, "risk": 0.0,
 			"tags": {"cooking.pasta": 1.0},
@@ -20,7 +20,7 @@
 			"context": [{"key": "guests", "min": 10, "add_tags": {"hospitality": 0.5}}]},
 		"clean_room": {"name": "Clean a room", "minutes": 60, "base_xp": 6, "risk": 0.0,
 			"tags": {"cleaning": 1.0},
-			"context": [{"key": "location", "equals": "inn", "add_tags": {"hospitality": 0.3}}]},
+			"context": [{"key": "location", "equals": "wandering_inn", "add_tags": {"hospitality": 0.3}}]},
 		"sweep_floor": {"name": "Sweep the floor", "minutes": 30, "base_xp": 4, "risk": 0.0,
 			"tags": {"cleaning.sweep": 1.0}},
 		"wash_dishes": {"name": "Wash the dishes", "minutes": 30, "base_xp": 4, "risk": 0.0,
@@ -65,7 +65,7 @@
 			"tags": {"games.chess": 0.6, "teaching": 1.0}},
 		"talk_with_guest": {"name": "Talk with a guest", "minutes": 20, "base_xp": 4, "risk": 0.0,
 			"tags": {"social.conversation": 1.0},
-			"context": [{"key": "location", "equals": "inn", "add_tags": {"hospitality": 0.3}}]},
+			"context": [{"key": "location", "equals": "wandering_inn", "add_tags": {"hospitality": 0.3}}]},
 		"comfort_someone": {"name": "Comfort someone", "minutes": 20, "base_xp": 6, "risk": 0.0,
 			"tags": {"social.empathy": 1.0}},
 		"persuade": {"name": "Persuade someone", "minutes": 15, "base_xp": 6, "risk": 0.0,

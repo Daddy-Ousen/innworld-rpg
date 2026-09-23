@@ -35,7 +35,8 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 
 ## Does `action_id` now. Options (all optional):
 ##   intensity: float, risk: float (overrides the action's base risk),
-##   outcome: "success" | "partial" | "fail", context: Dictionary, witnesses: Array.
+##   outcome: "success" | "partial" | "fail", context: Dictionary, witnesses: Array,
+##   minutes: int (overrides the action's minutes, e.g. travel between maps).
 ## Returns the record, or {} if the action is refused (unknown, or collapse due).
 static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictionary = {}) -> Dictionary:
 	if not db.actions.has(action_id):
@@ -77,6 +78,6 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		"xp": xp,
 	}
 	gs.action_log.add(record)
-	gs.clock.advance(int(def["minutes"]))
+	gs.clock.advance(maxi(int(opts.get("minutes", def["minutes"])), 0))
 	gs.action_log.prune(gs.clock.total_minutes, int(xp_rules["novelty"]["window_days"]))
 	return record

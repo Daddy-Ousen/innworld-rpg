@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"id": "liscor_market",
+	"name": "Liscor market",
+	"location": "liscor_market",
+	"confidence": "guess",
+	"note": "Design map. Krshia's and Lism's stalls are canon (1.12-1.13); places and sizes are guesses.",
+	"zones": {"krshia_stall": [[8, 5, 5, 4]], "lism_stall": [[18, 5, 5, 4]]},
+	"exits": [
+		{"at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10}
+	],
+	"objects": [
+		{"id": "krshia_counter", "at": [10, 6], "name": "Krshia's stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true},
+		{"id": "lism_counter", "at": [20, 6], "name": "Lism's stall", "actions": ["buy_supplies", "haggle"], "solid": true},
+		{"id": "market_well", "at": [15, 15], "name": "Well", "actions": ["carry_water"], "solid": true}
+	],
+	"legend": {"#": "city_wall", "B": "building", "_": "cobble"},
+	"rows": [
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB______________________________",
+		"BB______________________________",
+		"BB_____________________________#",
+		"BB___BBBB______________________#",
+		"BB___BBBB______________BBBB____#",
+		"BB___BBBB______________BBBB____#",
+		"BB_____________________BBBB____#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BB_____________________________#",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#"
+	]
+}

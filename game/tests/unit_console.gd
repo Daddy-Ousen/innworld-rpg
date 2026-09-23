@@ -13,6 +13,10 @@ func after_each() -> void:
 		DirAccess.remove_absolute(path)
 
 
+func _start() -> int:
+	return int(_db.rules["clock"]["start_minute"])
+
+
 func _text(lines: Array[String]) -> String:
 	return "\n".join(lines)
 
@@ -26,13 +30,13 @@ func test_help_and_unknown_command() -> void:
 
 func test_do_parses_repeat_options_and_context() -> void:
 	var c := ConsoleCommands.new(_db)
-	var out := c.execute("do cook_stew x2 guests=12 location=inn intensity=1.5 with=relc,klbkch")
+	var out := c.execute("do cook_stew x2 guests=12 location=wandering_inn intensity=1.5 with=relc,klbkch")
 	assert_eq(out.size(), 2)
 	var rec: Dictionary = c.gs.action_log.records[0]
 	assert_true((rec["tags"] as Dictionary).has("hospitality"), "context went to the action")
 	assert_almost_eq(float(rec["intensity"]), 1.5, 0.000001)
 	assert_eq(rec["witnesses"], ["relc", "klbkch"])
-	assert_eq(c.gs.clock.total_minutes, 360 + 2 * 90)
+	assert_eq(c.gs.clock.total_minutes, _start() + 2 * 90)
 
 
 func test_do_unknown_action() -> void:
@@ -44,12 +48,13 @@ func test_do_unknown_action() -> void:
 func test_sleep_status_and_offers() -> void:
 	var c := ConsoleCommands.new(_db, 20260923)
 	var status := ""
-	for day in range(1, 16):
-		c.execute("do cook_stew x2 guests=12 location=inn")
+	for i in 15:
+		var next := c.gs.clock.day() + 1
+		c.execute("do cook_stew x2 guests=12 location=wandering_inn")
 		c.execute("do serve_guests x2 guests=12")
-		c.execute("do clean_room location=inn")
-		c.execute("do talk_with_guest location=inn")
-		assert_string_contains(_text(c.execute("sleep")), "Day %d" % (day + 1))
+		c.execute("do clean_room location=wandering_inn")
+		c.execute("do talk_with_guest location=wandering_inn")
+		assert_string_contains(_text(c.execute("sleep")), "Day %d" % next)
 		status = _text(c.execute("status"))
 		if status.contains("Offer: [Innkeeper]"):
 			break
@@ -79,9 +84,37 @@ func test_save_load_and_new() -> void:
 	var saved := c.gs.to_json()
 	assert_eq(_text(c.execute("save")), "Saved.")
 	c.execute("new 5")
-	assert_eq(c.gs.clock.total_minutes, 360)
+	assert_eq(c.gs.clock.total_minutes, _start())
 	assert_string_contains(_text(c.execute("load")), "Loaded")
 	assert_eq(c.gs.to_json(), saved)
+
+
+func test_where_look_go_and_use() -> void:
+	var c := ConsoleCommands.new(_db)
+	assert_string_contains(_text(c.execute("where")), "Liscor east gate")
+	assert_string_contains(_text(c.execute("look")), "@")
+	var out := _text(c.execute("go w x3"))
+	assert_string_contains(out, "You travel to Liscor market")
+	assert_eq(c.gs.player.area, "liscor_market")
+	assert_string_contains(_text(c.execute("go up")), "n, s, e or w")
+	assert_string_contains(_text(c.execute("use stove cook_stew")), "no 'stove' here")
+	assert_string_contains(_text(c.execute("use stove")), "Usage")
+
+
+func test_go_into_a_wall_stops() -> void:
+	var c := ConsoleCommands.new(_db)
+	c.gs.player.place("inn_interior", Vector2i(1, 1))
+	var out := _text(c.execute("go n x5"))
+	assert_string_contains(out, "You walk 0 steps.")
+	assert_string_contains(out, "blocks the way")
+
+
+func test_use_an_object() -> void:
+	var c := ConsoleCommands.new(_db)
+	c.gs.player.place("inn_interior", Vector2i(20, 2))
+	assert_string_contains(_text(c.execute("look")), "Stove (stove)")
+	assert_string_contains(_text(c.execute("use stove cook_stew")), "Cook a stew")
+	assert_eq(c.gs.action_log.records[-1]["action_id"], "cook_stew")
 
 
 func test_console_scene_runs_a_command() -> void:
