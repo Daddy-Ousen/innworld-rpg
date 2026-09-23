@@ -14,12 +14,13 @@ Rule: finish a milestone's acceptance tests before starting the next. Tick boxes
 - [x] Clock: minutes, day counter, forced collapse
 - [x] Action log + tag system (`data/actions.json`, 32 actions, `data/tags.json`)
 - [x] XP formula with novelty/risk/conviction multipliers (+ outcome, ADR 0002)
-- [ ] Class candidates, offers, accept/decline, permanent blacklist (`data/classes.json`, ~15 classes)
-- [ ] Levels, exponential curve, multi-class dilution
-- [ ] Skills from weighted pools (`data/skills.json`, ~40 skills)
-- [ ] Night resolution pipeline (DESIGN §2), steps 1–4 and 8
-- [ ] Debug text console scene: type actions, sleep, see System messages
+- [x] Class candidates, offers, accept/decline, permanent blacklist (`data/classes.json`, ~15 classes)
+- [x] Levels, exponential curve, multi-class dilution
+- [x] Skills from weighted pools (`data/skills.json`, ~40 skills)
+- [x] Night resolution pipeline (DESIGN §2), steps 1–4 and 8
+- [x] Debug text console scene: type actions, sleep, see System messages
 **Done when:** `sim_30_days` test drives 30 days of scripted actions with a fixed seed, and gets the same offers/levels every run; a decline test shows the class never returns.
+  Done: `tests/sim_30_days.gd`, `tests/sim_decline.gd` (ADR 0003).
 
 ## M2 — Canon pipeline
 - [ ] `tools/extract_epub.py` → chapter text files + `index.json` (chapter id, title, word count)

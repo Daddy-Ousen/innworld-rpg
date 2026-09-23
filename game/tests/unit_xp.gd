@@ -72,3 +72,10 @@ func test_novelty_has_a_floor() -> void:
 
 func test_compute_multiplies_everything() -> void:
 	assert_almost_eq(Xp.compute(10.0, 2.0, 1.5, 0.5, 1.25, 0.75), 14.0625, EPS)
+
+
+func test_skill_mult_counts_by_tag_overlap() -> void:
+	var effects := [{"tags": ["cooking"], "value": 1.2}, {"tags": ["hospitality"], "value": 2.0}]
+	var tags := {"cooking.stew": 0.5, "combat": 0.5}
+	assert_almost_eq(Xp.skill_mult(tags, effects), 1.1, 0.000001)
+	assert_almost_eq(Xp.skill_mult(tags, []), 1.0, 0.000001)

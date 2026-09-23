@@ -15,9 +15,19 @@ static func migrate(data: Dictionary) -> Dictionary:
 		push_error("Save version %d is newer than supported %d." % [version, GameState.SAVE_VERSION])
 		return {}
 	var out := data.duplicate(true)
-	# while version < GameState.SAVE_VERSION:
-	# 	match version:
-	# 		1: out = _migrate_1_to_2(out)
-	# 	version += 1
+	while version < GameState.SAVE_VERSION:
+		match version:
+			1: out = _migrate_1_to_2(out)
+		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
+
+
+## v2 (M1 part 2): race, flags, progression (classes, skills, offers) and
+## the morning summary. A v1 save is an Earther with no class yet.
+static func _migrate_1_to_2(d: Dictionary) -> Dictionary:
+	d["race"] = "human"
+	d["flags"] = {}
+	d["progression"] = {"day_start": int(d["clock"]["total_minutes"])}
+	d["morning"] = []
+	return d

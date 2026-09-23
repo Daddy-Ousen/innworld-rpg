@@ -63,3 +63,11 @@ static func validate_registry(registry: Dictionary) -> Array[String]:
 		if parent != "" and not registry.has(parent):
 			errors.append("Tag '%s' has no parent '%s' in the registry." % [tag, parent])
 	return errors
+
+
+## How well a record's tags fit a {tag: weight} map: Σ share × match_weight.
+static func match_score(tags: Dictionary, weights: Dictionary) -> float:
+	var sum := 0.0
+	for tag: String in tags:
+		sum += float(tags[tag]) * match_weight(weights, tag)
+	return sum

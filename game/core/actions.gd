@@ -57,8 +57,9 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 	var now := gs.clock.total_minutes
 	var novelty := Xp.novelty_mult(gs.action_log, action_id, now, xp_rules)
 	var conviction := Xp.conviction_mult(tags, gs.focus_tags, xp_rules)
+	var skill_m := Xp.skill_mult(tags, SkillSystem.xp_effects(gs.progression, db))
 	var xp := Xp.compute(float(def["base_xp"]), intensity, Xp.risk_mult(risk, xp_rules),
-			novelty, conviction, Xp.outcome_mult(outcome, xp_rules))
+			novelty, conviction, Xp.outcome_mult(outcome, xp_rules), skill_m)
 
 	var record := {
 		"time": now,
@@ -70,6 +71,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		"risk": risk,
 		"novelty": novelty,
 		"conviction": conviction,
+		"skill_mult": skill_m,
 		"outcome": outcome,
 		"witnesses": (opts.get("witnesses", []) as Array).duplicate(),
 		"xp": xp,

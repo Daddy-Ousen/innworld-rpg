@@ -37,3 +37,35 @@ func test_newer_save_version_is_rejected() -> void:
 func test_invalid_json_is_rejected() -> void:
 	assert_null(GameState.from_json("not json"))
 	assert_push_error("not a JSON object")
+
+
+func test_progression_survives_save_and_load() -> void:
+	var db := DataDb.load_dir()
+	var gs := GameState.new_game(5, db)
+	gs.flags["met_relc"] = true
+	gs.progression.pools["cook"] = 12.5
+	gs.progression.classes["innkeeper"] = {"level": 3, "xp": 41.25, "last_active_day": 2}
+	gs.progression.skills.append({"id": "basic_cooking", "class": "innkeeper", "level": 1, "day": 1})
+	gs.progression.offers.append({"class": "cook", "kind": "new", "day": 2})
+	gs.progression.declined.append("warrior")
+	gs.morning.append("Hello.")
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(loaded.to_json(), gs.to_json())
+	assert_eq(loaded.progression.level_of("innkeeper"), 3)
+	assert_eq(typeof(loaded.progression.classes["innkeeper"]["level"]), TYPE_INT)
+
+
+func test_v1_save_migrates_to_v2() -> void:
+	var v1 := {
+		"save_version": 1,
+		"rng": Rng.new(3).to_dict(),
+		"clock": {"total_minutes": 2000, "awake_minutes": 100, "last_sleep_collapsed": false},
+		"action_log": {"records": [], "action_counts": {}, "tag_totals": {}},
+		"focus_tags": [],
+	}
+	var gs := GameState.from_json(JSON.stringify(v1))
+	assert_not_null(gs)
+	assert_eq(gs.save_version, 2)
+	assert_eq(gs.race, "human")
+	assert_true(gs.progression.classes.is_empty())
+	assert_eq(gs.progression.day_start, 2000)

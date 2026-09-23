@@ -65,3 +65,40 @@ func test_missing_rule_is_an_error() -> void:
 	var db := DataDb.from_dicts({}, {}, rules)
 	assert_false(db.is_valid())
 	assert_string_contains(db.errors[0], "wake_minute")
+
+
+func test_shipped_classes_and_skills() -> void:
+	var db := DataDb.load_dir()
+	assert_gte(db.classes.size(), 15)
+	assert_gte(db.skills.size(), 40)
+	for id: String in db.classes:
+		var has_pool := false
+		for s: Dictionary in db.skills.values():
+			for p: Dictionary in s["pools"]:
+				has_pool = has_pool or p["class"] == id
+		assert_true(has_pool, "class '%s' has skills" % id)
+
+
+func test_bad_class_and_skill_refs_are_errors() -> void:
+	var toy := ToyData.db()
+	var classes := toy.classes.duplicate(true)
+	classes["cook"]["excludes"] = ["ghost"]
+	classes["warrior"]["canon_ref"] = {"book": 1, "confidence": "sure"}
+	classes["innkeeper"]["tag_weights"] = {"cookin": 1.0}
+	var skills := toy.skills.duplicate(true)
+	skills["swing"]["pools"][0]["class"] = "nobody"
+	skills["swing"]["effects"] = [{"type": "teleport"}]
+	skills["knife_work"]["effects"] = [{"type": "action_unlock", "action": "fly"}]
+	skills["stew_sense"]["rarity"] = "epic"
+	var db := DataDb.from_dicts(toy.tags, toy.actions, toy.rules, classes, skills)
+	var all := "\n".join(db.errors)
+	for needle: String in ["ghost", "confidence", "cookin", "nobody", "teleport", "fly", "rarity"]:
+		assert_string_contains(all, needle)
+
+
+func test_consolidation_needs_two_classes() -> void:
+	var toy := ToyData.db()
+	var classes := toy.classes.duplicate(true)
+	classes["battle_chef"]["consolidation"]["from"] = ["cook"]
+	var db := DataDb.from_dicts(toy.tags, toy.actions, toy.rules, classes, toy.skills)
+	assert_string_contains("\n".join(db.errors), "at least 2")

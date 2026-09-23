@@ -1,5 +1,6 @@
 ## XP formula (DESIGN §3.2, ADR 0002):
 ## xp = base × intensity × risk_mult × novelty_mult × conviction_mult × outcome_mult
+##      × skill_mult (ADR 0003)
 ## All functions take the "xp" section of data/rules.json.
 class_name Xp
 extends RefCounted
@@ -45,6 +46,15 @@ static func novelty_mult(log: ActionLog, action_id: String, now: int, rules: Dic
 	return maxf(float(n["floor"]), 1.0 / (1.0 + float(n["k"]) * w))
 
 
+## Bonus from held skills' xp_mult effects. Each effect counts by the share
+## of the record's tags it matches: 1 + (value − 1) × overlap.
+static func skill_mult(tags: Dictionary, effects: Array) -> float:
+	var m := 1.0
+	for e: Dictionary in effects:
+		m *= 1.0 + (float(e["value"]) - 1.0) * Tags.overlap(tags, e["tags"])
+	return m
+
+
 static func compute(base: float, intensity: float, risk_m: float, novelty_m: float,
-		conviction_m: float, outcome_m: float) -> float:
-	return base * intensity * risk_m * novelty_m * conviction_m * outcome_m
+		conviction_m: float, outcome_m: float, skill_m: float = 1.0) -> float:
+	return base * intensity * risk_m * novelty_m * conviction_m * outcome_m * skill_m
