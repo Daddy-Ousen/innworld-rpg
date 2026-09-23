@@ -56,12 +56,13 @@ Split into 3 sub-modules, one branch + PR each (plan approved 2026-09-23, ADR 00
 Enemies: Goblin grunt, Rock Crab, Razorbeak. HP 0 = knocked out (no death). One held improvised item.
 - [x] M5.1 Combat core (headless): stats, HP, enemy + item data, attack / block / throw / drop, bump attack, knock-out + safe wake spot, one action record per action kind at fight end — save v6
 - [x] M5.2 Monsters on the map: spawn tables, monster turns and AI (pack, ambush, territorial), aggro, flee, take items from map objects, seed cores scare crabs
-- [ ] M5.3 Combat UI: monster markers, HP in the HUD, combat keys, knock-out System page, console commands
+- [x] M5.3 Combat UI: monster markers, HP in the HUD, combat keys, knock-out System page, console commands
 **Done when:** from a new game the player walks to the Floodplains, takes a seed core, meets all 3 enemy
 types from the spawn tables, attacks with fists and an item, blocks, throws, scares a Rock Crab, flees a
 Razorbeak, is knocked out once and wakes at 06:00 in the inn with low HP; that night's records carry
 `combat.melee`, `combat.block`, `combat.thrown`, `combat.improvise` and `running.escape`. `sim_m5_done`
 is deterministic, and save/load mid-fight plays on the same.
+Checked by `sim_m5_done` through the main scene (seed 2; see ADR 0010 M5.3).
 
 ## M6 — Vertical slice
 - [ ] The first ~14 in-game days of Book 1 playable end to end

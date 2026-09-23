@@ -1,6 +1,6 @@
 # ADR 0010 — M5 Combat
 
-Date: 2026-09-23 · Status: accepted (M5 plan approved by the user 2026-09-23). This ADR grows with each part: M5.1 and M5.2 now, M5.3 later.
+Date: 2026-09-23 · Status: accepted (M5 plan approved by the user 2026-09-23). It covers all three parts: M5.1, M5.2 and M5.3.
 
 ## User choices (plan)
 - HP 0 = knocked out. There is no player death in M5.
@@ -138,6 +138,47 @@ The world is already turn-based: time moves only on commands. Each combat comman
 
 **Known limits:** NPCs ignore monsters and walk through them (M6). Monsters do not use exits. Fleeing is greedy and can be stuck in a corner.
 
+## M5.3 Combat UI
+Presentation only. It reads `GameState` and sends `Commands`. No schema or save change.
+
+**Map (`WorldView`)**
+- One marker per monster in the player's area, named after the monster id.
+- A marker is an edge by state (red: hostile, yellow: fleeing, dark: calm), a dark ring, and a body in the enemy `color`. The ring keeps a green Goblin visible on grass.
+- The label is "Goblin 5/8" (name, HP now / max HP).
+- A hidden monster (a Rock Crab) is drawn as the `rock` tile, with no label.
+- `WorldView.setup` gets the enemy data as a third argument.
+
+**HUD**
+- A new line: `HP 14/20 · Held: Chair` (`Hud.health`). At 25% of max HP or less it has the warning colour (`Hud.is_low`).
+- The log keeps 6 lines (was 4). After every command the combat text (`gs.combat.lines`) goes to the log.
+- The key hint lists the new keys.
+
+**Keys (`world/main.gd`)**
+- Walking into a monster attacks it (bump attack). One attack per key press: holding the key does not attack again. The lock is per direction, so another direction key works at once.
+- `B` block, `T` throw the held item at `Combat.nearest_foe`, `X` drop.
+- The `E` menu has "Take <item>" entries for objects with an `item` (`Commands.take`).
+- After every command: if the player is down, `Commands.knock_out` runs at once and the System dialog opens. The log says "Everything goes dark."
+- A combat command refused because the player is too tired ends the day, like the other commands.
+
+**Throw target — `Combat.nearest_foe(gs)` (core, headless)**
+- The nearest seen (not hidden) monster in the player's area, hostile ones first. Ties go to the lower id. The console `throw` without an id uses it too.
+
+**System page**
+- `SystemMessages.KNOCKOUT` ("Knocked Out") takes the place of the collapse page when the night has `knocked_out`. Lines: `Night.KNOCKOUT_LINE`, then "You wake at <place> with N HP." The place is the canon location name at the wake spot (on day 8 the inn is still "The abandoned inn on the hill").
+
+**Character sheet:** the HP line and the stats (`Stats.of`).
+
+**Debug console**
+- `attack <dir>`, `block`, `throw [id]`, `drop`, `use <object> take`.
+- Debug: `monsters` (id, name, HP, state, place, spawn), `spawn <enemy> [dx dy]` (default 2 0), `knockout`.
+- `status` shows HP and the held item. `look` shows seen monsters as `M` and lists `take`.
+- `go`, `wait` and the combat commands print the combat text. A knock-out prints the night at once.
+- `do` prints the refusal reason ("Not with enemies near.").
+
+**Tests**
+- `sim_m5_done` (the M5 "Done when"), through the main scene: new game (seed 2); walk to the Floodplains; take a seed core; find the valley's hidden Rock Crab and scare it off with a throw (`T`); take a stone, hit the Razorbeak once with it, run until it gives up (`flee_danger`); bandage to full HP; drop the stone (`X`); wait for the Goblins' morning raid and fight with fists and blocks. A knock-out by the Goblins, or else by the Razorbeak, opens the knock-out page. The player wakes on day 9 at 06:00 in the inn with 5 HP. The day's records carry the 5 tags. Seed 2 twice gives the same game. A game saved 3 turns into the Goblin fight plays on to the same end.
+- The sim's player reads the game state to find the hidden crab (a real player would have to spot it). Seeds where Goblins come before the crab is scared, or where no raid comes, fail the script, so the sim uses a fixed seed.
+- `unit_world_view`: monster markers, HUD HP, bump attack once per key press, take / block / throw / drop keys, the knock-out opens its page. `unit_system_messages`: knock-out page, sheet stats. `unit_console`: the combat commands. `unit_combat`: `nearest_foe`.
+
 ## Later
-- M5.3: combat UI and the M5 "Done when".
 - M6: NPCs react to monsters, guards fight, the Chieftain fight, sparing Goblins, XP tuning.
