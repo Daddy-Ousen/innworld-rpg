@@ -70,7 +70,7 @@ Canon: all chapters 1.15–1.25. The player changes canon through `hooks` on can
 - [x] M6.1 Play loop: title menu, 3 save slots + autosave, pause menu (Esc), journal with focus (J), welcome page, XP pacing (ADR 0011)
 - [x] M6.2 Canon data 1.15–1.20R (`sim_canon_book1` to the new last day)
 - [x] M6.3 Canon data 1.21–1.25 (`sim_canon_book1` to day 19)
-- [ ] M6.4 Player hooks on canon events, local news page, journal history + drift, 3 divergence cases in data — save v7
+- [x] M6.4 Player hooks on canon events, local news page, journal history + drift, 3 divergence cases in data — save v7
 - [ ] M6.5 Canon fights (the Chieftain at the inn), sparing Goblins, NPCs flee monsters, guards fight; `sim_m6_done`
 - [ ] The first ~14 in-game days of Book 1 playable end to end
 - [ ] Save/load at any point; 3 divergence cases work in play

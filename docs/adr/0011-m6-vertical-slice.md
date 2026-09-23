@@ -1,6 +1,6 @@
 # ADR 0011 — M6 Vertical slice
 
-Date: 2026-09-23 · Status: accepted for M6.1 (M6 plan approved by the user 2026-09-23). Later parts add their sections here.
+Date: 2026-09-23 · Status: accepted for M6.1 and M6.4 (M6 plan approved by the user 2026-09-23; M6.4 schema approved 2026-09-24). Later parts add their sections here.
 
 ## User choices (plan)
 - Canon: all chapters 1.15–1.25 as event data (Ryoka, Antinium and King chapters too). Two data parts: M6.2 (1.15–1.20R), M6.3 (1.21–1.25).
@@ -31,3 +31,49 @@ Presentation and data numbers only. No schema change, no save version change.
 **Console.** `save` / `load` still use `user://debug_save.json` (debug only).
 
 **Known limits.** Levels after the first class are still slow (canon Erin is [Innkeeper] level 9 by day 9); tune in M6.5 if the slice feels slow. The focus list shows every class, which a new Earther would not know.
+
+## M6.4 Player hooks and news
+User choices (2026-09-24): the schema below as planned, with the outcome `changed`; the three cases below; the player hears all local news (Liscor is small).
+
+**Canon event schema (rule 11, approved).** Two new optional event fields:
+- `news`: one short line (max 200 chars, own words) that people in Liscor say when the event happens. It is design text about a canon event, not a new canon fact.
+- `hooks`: a list of ways the player can change the event.
+```json
+"hooks": [{
+  "id": "player_beat_rock_crab",
+  "did": [{"action": ["attack_melee", "throw_object"], "outcome": ["success"], "context": {"enemy": "rock_crab"}}],
+  "days": [10, 11],
+  "then": "mutate:b1.player_beat_rock_crab_first",
+  "effects": {},
+  "news": "Word on the road: ..."
+}]
+```
+- `did`: the hook matches if one action record matches one entry: the action id is in `action`; the outcome is in `outcome` (if given); each `context` key has that value (or one of a list).
+- `days`: `[from, to]`, absolute days. Records from these days count, but never after the day the director is running. The action log keeps 7 days (`xp.novelty.window_days`), so the span is at most 7 days (validator error).
+- `then`: `cancel` (the event does not happen), `mutate:<id>` (the alt event runs in its place; the alt is alt-only, like an `on_fail` mutate target), or `change` (the event runs with the hook's `effects` added; `effects` only here).
+- `news`: the hook's news line. On `change` it replaces the event's news.
+
+**Action records keep their `context`** (the enemy of a fight, the location, the NPC). Hooks match on it. On load, whole numbers in a context become ints again (JSON reads them as floats; real floats are f64 text).
+
+**Director.** Before an event that is due is checked, its `cancel` / `mutate` hooks are tried in order; the first that matches wins. A mutate hook whose alt is not pending or cannot run now is skipped. A `change` hook is tried when the event fires. History entries of a hook result get `"by": "player"` and `"hook": <id>`; the reason is `the player: <id>`. The new outcome/status `changed` counts as happened for `depends_on` (like `done` and `substituted`). Drift weights: `changed` 0.25 (like `substituted`), `mutated` 0.5, `cancelled` 1.0; dependents that cancel add their own drift.
+
+**News.** `gs.world.news`: `{"day", "event", "kind", "text"}` in order; kind `news` (event or hook `news`) or `rumor` (T1 `rumor`). A new game clears the news of days 1–7 (the player was not there). The night result gets `news` (texts of kind `news`); `lines` gets `News: <text>` after the offers and before the world lines. `SystemMessages` shows a "Local News" page after levels and skills, before rumors. Console: `news`.
+
+**Journal (J).** Day, focus, "Your mark on the story" (each hook result as its news line, each player kill as "You killed <name>."), a drift line (0 = "The story runs as you know it."; at `unreliable_at` or more, the unreliable line), the news of the last 7 days (newest first), then the hints. The text scrolls (PgUp / PgDn, mouse wheel).
+
+**Save v7.** Migration 6 → 7: every old record gets `"context": {}`; `world.news` starts empty.
+
+**Validator.** Checks `news` and `hooks` (shape, `days` span, `then`, effects only with `change`, mutate targets, NPCs in hook effects), warns when hook days start after the window, checks hook action ids against `game/data/actions.json` (auto-detected, or `--actions`), and runs the copy check on news and hook news. 32 Python tests.
+
+**The three divergence cases (data).**
+| Event | Hook | The player… | Result |
+|---|---|---|---|
+| `b1.erin_screams_off_rock_crab` (day 11) | `player_beat_rock_crab` | wins a fight against a Rock Crab on day 10–11 | mutate → `b1.player_beat_rock_crab_first` (new, `candidate`, `guess`, not canon): no crab at Erin's door |
+| `b1.inn_first_regulars` (day 15) | `player_cooked_for_regulars` | cooks or serves at the Wandering Inn on day 15 | change: flag `wandering_inn.earther_cooks`, Klbkch and Pisces → Erin +1 (design values) |
+| `b1.rags_brings_goblins_to_eat` (day 19) | `player_fought_goblins` | wins a fight against Goblins on days 14–19 | cancel: the tribe does not come to eat |
+
+News lines on 13 T2 events of days 8–19. They are new text on reviewed events: the user reviews them in the PR.
+
+**Tests.** `unit_player_hooks` (toy canon: cancel, mutate, change, no match, days, first hook wins, news, night result, `CanonDb` checks, save round trip, v6 → v7), `sim_player_hooks` (real Book 1: a real bump-attack fight and real cooking at the inn stove for each case, a save/load between deed and night, the journal). `sim_canon_book1` also checks one news line per event with news and no news before day 8.
+
+**Known limits.** A hook sees only the last 7 days of actions. Hooks cannot see where the player stood or who watched; only the action records. A fight counts as won when any foe died or ran off.
