@@ -11,9 +11,9 @@ Rule: finish a milestone's acceptance tests before starting the next. Tick boxes
 **Done when:** the headless test command exits 0.
 
 ## M1 — Sim core (text only)
-- [ ] Clock: minutes, day counter, forced collapse
-- [ ] Action log + tag system (`data/actions.json`, ~30 actions)
-- [ ] XP formula with novelty/risk/conviction multipliers
+- [x] Clock: minutes, day counter, forced collapse
+- [x] Action log + tag system (`data/actions.json`, 32 actions, `data/tags.json`)
+- [x] XP formula with novelty/risk/conviction multipliers (+ outcome, ADR 0002)
 - [ ] Class candidates, offers, accept/decline, permanent blacklist (`data/classes.json`, ~15 classes)
 - [ ] Levels, exponential curve, multi-class dilution
 - [ ] Skills from weighted pools (`data/skills.json`, ~40 skills)
