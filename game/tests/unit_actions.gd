@@ -12,24 +12,28 @@ func _new_game() -> GameState:
 	return GameState.new_game(7, _db)
 
 
+func _start() -> int:
+	return int(_db.rules["clock"]["start_minute"])
+
+
 func test_perform_logs_record_and_spends_time() -> void:
 	var gs := _new_game()
 	var rec := Actions.perform(gs, _db, "cook_stew", {"witnesses": ["relc"]})
 	assert_eq(rec["action_id"], "cook_stew")
-	assert_eq(rec["time"], 360)
-	assert_eq(rec["day"], 1)
-	assert_eq(rec["minute"], 360)
+	assert_eq(rec["time"], _start())
+	assert_eq(rec["day"], gs.clock.day())
+	assert_eq(rec["minute"], _start() % Clock.MINUTES_PER_DAY)
 	assert_eq(rec["outcome"], "success")
 	assert_eq(rec["witnesses"], ["relc"])
 	# First time: 10 base × 1.5 novelty bonus.
 	assert_almost_eq(float(rec["xp"]), 15.0, EPS)
-	assert_eq(gs.clock.total_minutes, 360 + 90)
+	assert_eq(gs.clock.total_minutes, _start() + 90)
 	assert_eq(gs.action_log.records.size(), 1)
 
 
 func test_context_adds_tags() -> void:
 	var gs := _new_game()
-	var rec := Actions.perform(gs, _db, "cook_stew", {"context": {"guests": 12, "location": "inn"}})
+	var rec := Actions.perform(gs, _db, "cook_stew", {"context": {"guests": 12, "location": "wandering_inn"}})
 	var tags: Dictionary = rec["tags"]
 	assert_almost_eq(float(tags["cooking.stew"]), 1.0 / 1.7, EPS)
 	assert_almost_eq(float(tags["hospitality"]), 0.7 / 1.7, EPS)
@@ -77,7 +81,7 @@ func test_unknown_action_is_refused() -> void:
 	var gs := _new_game()
 	assert_eq(Actions.perform(gs, _db, "fly_to_moon"), {})
 	assert_push_error("Unknown action")
-	assert_eq(gs.clock.total_minutes, 360)
+	assert_eq(gs.clock.total_minutes, _start())
 
 
 func test_unknown_outcome_is_refused() -> void:

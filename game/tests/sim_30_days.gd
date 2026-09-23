@@ -18,7 +18,7 @@ func before_all() -> void:
 ## fights on some days. Context and risk vary with the day.
 func _play_day(gs: GameState, day: int) -> void:
 	var guests := mini(2 + day, 20)
-	var inn := {"guests": guests, "location": "inn"}
+	var inn := {"guests": guests, "location": "wandering_inn"}
 	var plan: Array = [
 		["cook_stew", {"context": inn}],
 		["serve_guests", {"context": inn}],
@@ -83,7 +83,7 @@ func test_30_days_are_deterministic() -> void:
 	gut.p("levels: %s  skills: %d  declined: %s" % [_levels(a), a.progression.skills.size(), a.progression.declined])
 	assert_eq(trace_a, trace_b)
 	assert_eq(a.to_json(), b.to_json())
-	assert_eq(a.clock.day(), DAYS + 1)
+	assert_eq(a.clock.day(), GameState.new_game(SEED, _db).clock.day() + DAYS)
 
 
 func test_30_days_reach_a_class_levels_and_skills() -> void:

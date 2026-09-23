@@ -6,6 +6,7 @@ extends RefCounted
 
 static func db() -> DataDb:
 	var rules: Dictionary = DataDb.load_dir().rules.duplicate(true)
+	rules["clock"]["start_minute"] = 360  # toy games start on day 1
 	rules["levels"] = {"base_xp": 100, "growth": 2.0, "capstones": [3]}
 	rules["offers"] = {"max_per_night": 2}
 	rules["skills"] = {"on_accept": 1, "chance_per_level": 1.0, "base_weight": 0.1}

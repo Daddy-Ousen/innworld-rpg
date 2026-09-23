@@ -54,3 +54,14 @@ static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:
 		gs.flags.erase(key)
 	else:
 		gs.flags[key] = value
+
+
+## One step on the world grid (n, s, e, w). See Movement.step.
+static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
+	return Movement.step(gs, db, dir)
+
+
+## Uses a nearby map object. Returns {"record", "error"} (see Interact.perform).
+static func interact(gs: GameState, db: DataDb, object_id: String, action_id: String,
+		opts: Dictionary = {}) -> Dictionary:
+	return Interact.perform(gs, db, object_id, action_id, opts)

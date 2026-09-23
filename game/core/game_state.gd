@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 3
+const SAVE_VERSION := 4
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -21,6 +21,8 @@ var progression: Progression
 var morning: Array[String] = []
 ## Canon events, NPC fates, history and drift (world director).
 var world: WorldState
+## Where the player is on the world grid.
+var player: PlayerState
 
 
 func _init(seed_value: int = 0) -> void:
@@ -29,13 +31,18 @@ func _init(seed_value: int = 0) -> void:
 	action_log = ActionLog.new()
 	progression = Progression.new()
 	world = WorldState.new()
+	player = PlayerState.new()
 
 
-## A fresh game at the start time from data/rules.json.
+## A fresh game at the start time and place from data/rules.json. The
+## director first runs the canon days before the player arrives (ADR 0006),
+## so that history exists; its rumor lines are not shown.
 static func new_game(seed_value: int, db: DataDb) -> GameState:
 	var gs := GameState.new(seed_value)
 	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
 	gs.progression.day_start = gs.clock.total_minutes
+	Director.run(gs, db, gs.clock.day() - 1)
+	Movement.ensure_placed(gs, db)
 	return gs
 
 
@@ -51,6 +58,7 @@ func to_dict() -> Dictionary:
 		"progression": progression.to_dict(),
 		"morning": morning.duplicate(),
 		"world": world.to_dict(),
+		"player": player.to_dict(),
 	}
 
 
@@ -66,6 +74,7 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.progression = Progression.from_dict(d["progression"])
 	gs.morning.assign(d["morning"])
 	gs.world = WorldState.from_dict(d["world"])
+	gs.player = PlayerState.from_dict(d["player"])
 	return gs
 
 

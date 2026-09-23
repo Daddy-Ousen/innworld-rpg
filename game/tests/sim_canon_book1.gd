@@ -4,6 +4,8 @@ extends GutTest
 
 ## Last day with extracted canon (chapter 1.14).
 const LAST_DAY := 9
+## The player arrives with the Great Ritual (night 7) and starts on day 8.
+const ARRIVAL_DAY := 8
 
 var _db: DataDb
 
@@ -17,6 +19,17 @@ func test_canon_loads_without_errors() -> void:
 	assert_gte(_db.canon.events.size(), 38)
 	assert_gte(_db.canon.npcs.size(), 15)
 	assert_gte(_db.canon.locations.size(), 23)
+
+
+func test_new_game_starts_after_the_great_ritual() -> void:
+	var gs := GameState.new_game(1, _db)
+	assert_eq(gs.clock.day(), ARRIVAL_DAY)
+	assert_eq(gs.clock.time_string(), "06:00")
+	assert_eq(gs.world.last_day, ARRIVAL_DAY - 1, "canon days 1-7 are history")
+	assert_eq(gs.world.status("b1.erin_arrives"), Director.DONE)
+	assert_eq(gs.world.status("b1.erin_walks_to_liscor"), WorldState.PENDING, "day 8: still ahead")
+	assert_true(gs.morning.is_empty(), "the player did not hear the old rumors")
+	assert_eq(gs.player.area, "liscor_gate")
 
 
 func test_book1_runs_as_canon() -> void:
@@ -34,12 +47,12 @@ func test_book1_runs_as_canon() -> void:
 		if int(ev["window"]["earliest"]) <= LAST_DAY and not _db.canon.alt_only.has(id):
 			expected += 1
 			assert_eq(gs.world.status(id), Director.DONE, id)
-			if int(ev["tier"]) == 1 and ev.has("rumor"):
+			var seen := int(gs.world.events[id]["day"]) >= ARRIVAL_DAY
+			if int(ev["tier"]) == 1 and ev.has("rumor") and seen:
 				rumor_events += 1
 	assert_eq(gs.world.history.size(), expected, "one history entry per event")
 	assert_eq(gs.world.drift, 0.0)
-	assert_eq(rumors, rumor_events)
-	assert_gt(rumors, 0)
+	assert_eq(rumors, rumor_events, "rumors only from the day the player arrives")
 
 
 func test_killing_relc_bends_book1() -> void:
