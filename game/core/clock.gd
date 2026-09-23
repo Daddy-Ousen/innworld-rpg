@@ -47,16 +47,24 @@ func is_collapse_due(rules: Dictionary) -> bool:
 ## collapse_sleep_minutes after a collapse. Returns calendar days passed.
 func sleep(rules: Dictionary, collapsed: bool = false) -> int:
 	var before := day()
-	var length: int
-	if collapsed:
-		length = int(rules["collapse_sleep_minutes"])
-	else:
-		length = posmod(int(rules["wake_minute"]) - minute(), MINUTES_PER_DAY)
-		length = maxi(length, int(rules["min_sleep_minutes"]))
-	total_minutes += length
+	total_minutes += sleep_length(rules, collapsed)
 	awake_minutes = 0
 	last_sleep_collapsed = collapsed
 	return day() - before
+
+
+## Minutes a sleep (or collapse) starting now would last.
+func sleep_length(rules: Dictionary, collapsed: bool = false) -> int:
+	if collapsed:
+		return int(rules["collapse_sleep_minutes"])
+	var length := posmod(int(rules["wake_minute"]) - minute(), MINUTES_PER_DAY)
+	return maxi(length, int(rules["min_sleep_minutes"]))
+
+
+## Calendar day the player wakes on after a sleep starting now.
+@warning_ignore("integer_division")
+func wake_day(rules: Dictionary, collapsed: bool = false) -> int:
+	return (total_minutes + sleep_length(rules, collapsed)) / MINUTES_PER_DAY + 1
 
 
 func to_dict() -> Dictionary:

@@ -17,5 +17,11 @@
 	},
 	"levels": {"base_xp": 60, "growth": 1.35, "capstones": [10, 20, 30]},
 	"offers": {"max_per_night": 2},
-	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1}
+	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
+	"director": {
+		"default_delay_limit": 3,
+		"drift": {"substituted": 0.25, "mutated": 0.5, "cancelled": 1.0},
+		"tier_weight": {"1": 0.5, "2": 1.0},
+		"unreliable_at": 5.0
+	}
 }

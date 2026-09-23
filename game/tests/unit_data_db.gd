@@ -102,3 +102,16 @@ func test_consolidation_needs_two_classes() -> void:
 	classes["battle_chef"]["consolidation"]["from"] = ["cook"]
 	var db := DataDb.from_dicts(toy.tags, toy.actions, toy.rules, classes, toy.skills)
 	assert_string_contains("\n".join(db.errors), "at least 2")
+
+
+func test_missing_director_rules_are_an_error() -> void:
+	var rules := _rules.duplicate(true)
+	rules.erase("director")
+	var db := DataDb.from_dicts({}, {}, rules)
+	assert_string_contains("
+".join(db.errors), "director")
+
+
+func test_shipped_canon_is_loaded() -> void:
+	var db := DataDb.load_dir()
+	assert_true(db.canon.events.has("b1.erin_arrives"))

@@ -1,8 +1,8 @@
 """Validate canon data (events, NPCs, locations) for one book.
 
 Usage (PowerShell, from repo root):
-    python tools/validate_data.py canon/events/book1
-    python tools/validate_data.py canon/events/book1 --raw canon/raw/book1
+    python tools/validate_data.py game/data/canon/book1
+    python tools/validate_data.py game/data/canon/book1 --raw canon/raw/book1
 
 Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
     <dir>/npcs.json                {"schema_version": 1, "npcs": {id: npc}}
@@ -513,7 +513,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("data_dir", help="e.g. canon/events/book1")
+    ap.add_argument("data_dir", help="e.g. game/data/canon/book1")
     ap.add_argument("--raw", help="extractor output, e.g. canon/raw/book1 (default: auto)")
     ap.add_argument("--no-raw", action="store_true", help="skip chapter-id and copy checks")
     args = ap.parse_args(argv)

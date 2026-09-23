@@ -26,15 +26,16 @@ Rule: finish a milestone's acceptance tests before starting the next. Tick boxes
 - [x] `tools/extract_epub.py` → chapter text files + `index.json` (chapter id, title, word count)
 - [x] Event/NPC/location JSON schemas + a validator (`tools/validate_data.py`) — ADR 0004
 - [x] Extract the first ~10 chapters of Book 1 into event candidates; human review — 1.00–1.09, 26 events, reviewed
-**Done when:** validator passes on `canon/events/book1/`.
+**Done when:** validator passes on `canon/events/book1/` (now `game/data/canon/book1/`).
   Done: `python tools/validate_data.py canon/events/book1` → 0 errors (ADR 0004).
 
 ## M3 — World director
-- [ ] Event nodes, windows, roles, requires, `on_fail`, effects
-- [ ] Substitute / delay / mutate / cancel + dependency propagation
-- [ ] Drift value; T1 rumors in the morning summary
-- [ ] Tests with toy data: "save a doomed NPC", "kill a future-important NPC", "prevent an event"
+- [x] Event nodes, windows, roles, requires, `on_fail`, effects
+- [x] Substitute / delay / mutate / cancel + dependency propagation
+- [x] Drift value; T1 rumors in the morning summary
+- [x] Tests with toy data: "save a doomed NPC", "kill a future-important NPC", "prevent an event"
 **Done when:** the three toy scenarios give the expected history and drift.
+  Done: `tests/sim_divergence.gd`; real Book 1 week in `tests/sim_canon_book1.gd` (ADR 0005).
 
 ## M4 — 2D world
 - [ ] Tilemap: the inn on the hill, a part of the Floodplains, Liscor gate + market

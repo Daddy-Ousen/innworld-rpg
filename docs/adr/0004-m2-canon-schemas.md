@@ -11,7 +11,7 @@ Date: 2026-09-23 · Status: accepted (user approved 2026-09-23; relationship del
 - Book 1 result: 66 chapters, ~448k words, 6 images skipped.
 - `canon/raw/` stays gitignored (copyrighted text).
 
-## Canon data layout — `canon/events/book<N>/`
+## Canon data layout — `game/data/canon/book<N>/` (was `canon/events/book<N>/`; moved in M3, ADR 0005)
 ```
 npcs.json                {"schema_version": 1, "npcs": {id: npc}}
 locations.json           {"schema_version": 1, "locations": {id: location}}

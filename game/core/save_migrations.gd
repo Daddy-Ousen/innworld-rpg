@@ -18,6 +18,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 	while version < GameState.SAVE_VERSION:
 		match version:
 			1: out = _migrate_1_to_2(out)
+			2: out = _migrate_2_to_3(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -30,4 +31,11 @@ static func _migrate_1_to_2(d: Dictionary) -> Dictionary:
 	d["flags"] = {}
 	d["progression"] = {"day_start": int(d["clock"]["total_minutes"])}
 	d["morning"] = []
+	return d
+
+
+## v3 (M3): the world director's state. A v2 save has a world where no
+## canon event has run yet; the director catches up on the next night.
+static func _migrate_2_to_3(d: Dictionary) -> Dictionary:
+	d["world"] = {}
 	return d

@@ -17,14 +17,14 @@ CLAUDE.md
 docs/                 design, roadmap, decisions (ADRs)
 game/                 Godot project root (project.godot lives here)
   core/               pure simulation logic — NO Node, NO scene, NO rendering
-  data/               classes, skills, actions, npcs, events (JSON)
+  data/               classes, skills, actions, rules (JSON)
+    canon/book<N>/    reviewed canon: npcs.json, locations.json, chapters/<ch>.json
   world/              scenes, maps, tilesets (presentation)
   ui/                 UI scenes and scripts (presentation)
   tests/              GUT tests (unit_*.gd, sim_*.gd)
 tools/                python: epub → chapters, event extraction helpers
 canon/
   raw/                extracted chapter text  (gitignored — copyrighted)
-  events/             reviewed event JSON per chapter (committed)
 The Wandering Inn Books 1-17 Pirateaba/   source epubs (read-only, gitignored)
 ```
 
@@ -52,6 +52,9 @@ godot --path game
 
 # extract epub chapters (M2)
 python tools/extract_epub.py "The Wandering Inn Books 1-17 Pirateaba/Book 1 - The Wandering Inn.epub" canon/raw/book1
+
+# validate canon data
+python tools/validate_data.py game/data/canon/book1
 ```
 If `godot` is not on PATH, use the full path to the Godot exe or set `$env:GODOT`.
 

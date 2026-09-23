@@ -40,3 +40,17 @@ static func set_focus(gs: GameState, db: DataDb, tags: Array) -> String:
 ## Debug / canon-event hook: lets a class pass its next capstone level.
 static func grant_breakthrough(gs: GameState, class_id: String) -> bool:
 	return ClassSystem.grant_breakthrough(gs, class_id)
+
+
+## The player kills a canon NPC. Returns "" or an error text.
+static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
+	return Director.player_kill(gs, db, npc)
+
+
+## Sets a world flag (debug now; M4 interactions will call it). A false,
+## 0 or null value clears the flag.
+static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:
+	if not value:
+		gs.flags.erase(key)
+	else:
+		gs.flags[key] = value

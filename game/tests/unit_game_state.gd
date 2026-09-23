@@ -55,7 +55,7 @@ func test_progression_survives_save_and_load() -> void:
 	assert_eq(typeof(loaded.progression.classes["innkeeper"]["level"]), TYPE_INT)
 
 
-func test_v1_save_migrates_to_v2() -> void:
+func test_v1_save_migrates_to_current() -> void:
 	var v1 := {
 		"save_version": 1,
 		"rng": Rng.new(3).to_dict(),
@@ -65,7 +65,36 @@ func test_v1_save_migrates_to_v2() -> void:
 	}
 	var gs := GameState.from_json(JSON.stringify(v1))
 	assert_not_null(gs)
-	assert_eq(gs.save_version, 2)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
 	assert_eq(gs.race, "human")
 	assert_true(gs.progression.classes.is_empty())
 	assert_eq(gs.progression.day_start, 2000)
+
+
+func test_v2_save_migrates_to_v3_with_an_untouched_world() -> void:
+	var d := GameState.new().to_dict()
+	d["save_version"] = 2
+	d.erase("world")
+	var gs := GameState.from_json(JSON.stringify(d))
+	assert_not_null(gs)
+	assert_eq(gs.save_version, 3)
+	assert_true(gs.world.history.is_empty())
+	assert_eq(gs.world.last_day, 0)
+	assert_eq(gs.world.status("b1.erin_arrives"), WorldState.PENDING)
+
+
+func test_world_survives_save_and_load() -> void:
+	var gs := GameState.new(4)
+	gs.world.set_alive("relc", false)
+	gs.world.add_relationship("relc", "pisces", -2)
+	gs.world.events["b1.x"] = {"status": "pending", "latest": 6}
+	gs.world.events["b1.y"] = {"status": "substituted", "day": 5, "roles": {"guard": "klbkch"}}
+	gs.world.history.append({"day": 5, "event": "b1.y", "outcome": "substituted",
+			"roles": {"guard": "klbkch"}})
+	gs.world.drift = 1.25
+	gs.world.last_day = 5
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(loaded.to_json(), gs.to_json())
+	assert_eq(loaded.world.relationship("relc", "pisces"), -2)
+	assert_eq(typeof(loaded.world.events["b1.x"]["latest"]), TYPE_INT)
+	assert_eq(typeof(loaded.world.history[0]["day"]), TYPE_INT)
