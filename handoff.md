@@ -12,7 +12,7 @@ M4.3 2D view is done and tested:
 - Manual frames checked for gate, market, floodplains, inn hill, inn inside.
 
 ## Waiting on the user
-- Review the M4.3 PR, merge, then tag `m4.3-done`.
+- Review PR #7 (https://github.com/Daddy-Ousen/innworld-rpg/pull/7), merge, then tag `m4.3-done`.
 - Play it: `godot --path game` (WASD, E, Z, backtick).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
