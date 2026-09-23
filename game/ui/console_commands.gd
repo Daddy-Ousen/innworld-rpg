@@ -16,7 +16,9 @@ const HELP := [
 	"  where                              area, tile, place, day and time",
 	"  look                               map around you and objects you can use",
 	"  go <n|s|e|w> [xN]                  walk N steps",
-	"  use <object> <action>              do an action with a nearby object",
+	"  use <object|npc> <action>          do an action with a nearby object or person",
+	"  wait <minutes>                     stand still while the world goes on",
+	"  npcs                               where every NPC is and what they do (debug)",
 	"  sleep                              end the day (night pipeline)",
 	"  status                             day, time, classes, skills, offers",
 	"  accept <class> / decline <class>   answer a class offer",
@@ -64,6 +66,10 @@ func execute(line: String) -> Array[String]:
 			out = _go(args)
 		"use":
 			out = _use(args)
+		"wait":
+			out = _wait(args)
+		"npcs":
+			out = _npcs()
 		"status":
 			out = _status()
 		"accept":
@@ -103,6 +109,7 @@ func execute(line: String) -> Array[String]:
 				out.append("Load failed.")
 			else:
 				gs = loaded
+				Commands.settle(gs, db)
 				out.append("Loaded. Day %d, %s." % [gs.clock.day(), gs.clock.time_string()])
 		"new":
 			var seed_value := int(args[0]) if not args.is_empty() and (args[0] as String).is_valid_int() else 1
@@ -168,7 +175,7 @@ func _where() -> Array[String]:
 	return out
 
 
-## A small window of the map: @ is you, o an object, > an exit.
+## A small window of the map: @ is you, & a person, o an object, > an exit.
 func _look() -> Array[String]:
 	var out := _where()
 	if not gs.player.is_placed():
@@ -177,6 +184,8 @@ func _look() -> Array[String]:
 	var marks := {}
 	for o: Dictionary in db.maps.areas[p.area]["objects"]:
 		marks[Vector2i(int(o["at"][0]), int(o["at"][1]))] = "o"
+	for id in gs.npcs.in_area(p.area):
+		marks[NpcRoster.pos_of(gs.npcs.npcs[id])] = "&"
 	var legend: Dictionary = db.maps.areas[p.area]["legend"]
 	var char_of := {}
 	for ch: String in legend:
@@ -225,7 +234,8 @@ func _go(args: Array) -> Array[String]:
 				out.append("You cannot move.")
 			break
 		if r["blocked"]:
-			out.append("Something blocks the way.")
+			out.append("%s is in the way." % db.canon.npcs[r["npc"]]["name"] if r["npc"] != ""
+					else "Something blocks the way.")
 			break
 		steps += 1
 		if r["exit_to"] != "":
@@ -250,6 +260,36 @@ func _use(args: Array) -> Array[String]:
 	var rec: Dictionary = r["record"]
 	out.append("%s  %s: %.1f XP  (novelty %.2f)" % [
 		_time_of(rec), db.actions[args[1]]["name"], float(rec["xp"]), float(rec["novelty"])])
+	return out
+
+
+func _wait(args: Array) -> Array[String]:
+	var out := _need_arg(args, "wait <minutes>")
+	if not out.is_empty():
+		return out
+	if not (args[0] as String).is_valid_int() or int(args[0]) < 1:
+		out.append("Minutes must be a whole number above 0.")
+		return out
+	if Commands.wait(gs, db, int(args[0]) * 60) < 0:
+		out.append("You are too tired. You collapse.")
+		out.append_array(_night(Commands.sleep(gs, db)))
+		return out
+	out.append("You wait.")
+	out.append_array(_where())
+	return out
+
+
+func _npcs() -> Array[String]:
+	var out: Array[String] = []
+	for id: String in gs.npcs.npcs:
+		var n: Dictionary = gs.npcs.npcs[id]
+		var place: String = n["area"]
+		if not BehaviourDb.is_off_map(place):
+			place += " %d,%d" % [int(n["x"]), int(n["y"])]
+		out.append("  %-16s %-22s %-10s rel %d" % [id, place, n["goal"],
+				gs.world.relationship(id, NpcSim.PLAYER)])
+	if out.is_empty():
+		out.append("There are no NPCs.")
 	return out
 
 

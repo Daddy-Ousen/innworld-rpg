@@ -27,5 +27,11 @@
 	"world": {
 		"start": {"area": "liscor_gate", "pos": [3, 12]},
 		"step_seconds": 6
+	},
+	"npc": {
+		"step_seconds": 8,
+		"jump_seconds": 300,
+		"talk_actions": ["talk_with_guest", "persuade", "comfort_someone"],
+		"talk_relationship": 1
 	}
 }

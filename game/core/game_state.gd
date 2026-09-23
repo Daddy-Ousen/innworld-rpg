@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 4
+const SAVE_VERSION := 5
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -23,6 +23,8 @@ var morning: Array[String] = []
 var world: WorldState
 ## Where the player is on the world grid.
 var player: PlayerState
+## Where the NPCs are and what they are doing (M4.4).
+var npcs: NpcRoster
 
 
 func _init(seed_value: int = 0) -> void:
@@ -32,6 +34,7 @@ func _init(seed_value: int = 0) -> void:
 	progression = Progression.new()
 	world = WorldState.new()
 	player = PlayerState.new()
+	npcs = NpcRoster.new()
 
 
 ## A fresh game at the start time and place from data/rules.json. The
@@ -43,6 +46,7 @@ static func new_game(seed_value: int, db: DataDb) -> GameState:
 	gs.progression.day_start = gs.clock.total_minutes
 	Director.run(gs, db, gs.clock.day() - 1)
 	Movement.ensure_placed(gs, db)
+	NpcSim.sync(gs, db)
 	return gs
 
 
@@ -59,6 +63,7 @@ func to_dict() -> Dictionary:
 		"morning": morning.duplicate(),
 		"world": world.to_dict(),
 		"player": player.to_dict(),
+		"npcs": npcs.to_dict(),
 	}
 
 
@@ -75,13 +80,14 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.morning.assign(d["morning"])
 	gs.world = WorldState.from_dict(d["world"])
 	gs.player = PlayerState.from_dict(d["player"])
+	gs.npcs = NpcRoster.from_dict(d["npcs"])
 	return gs
 
 
-## Keeps key order and full float precision, so a loaded game plays on
-## exactly like the one that was saved.
+## Keeps key order, and floats as exact f64 text (SaveCodec), so a loaded
+## game plays on exactly like the one that was saved.
 func to_json() -> String:
-	return JSON.stringify(to_dict(), "\t", false, true)
+	return JSON.stringify(SaveCodec.encode(to_dict()), "\t", false)
 
 
 ## Returns null if the text is not valid JSON or the save cannot be migrated.
@@ -91,7 +97,7 @@ static func from_json(text: String) -> GameState:
 	if not parsed is Dictionary:
 		push_error("Save is not a JSON object.")
 		return null
-	var migrated := SaveMigrations.migrate(parsed)
+	var migrated := SaveMigrations.migrate(SaveCodec.decode(parsed))
 	if migrated.is_empty():
 		return null
 	return GameState.from_dict(migrated)

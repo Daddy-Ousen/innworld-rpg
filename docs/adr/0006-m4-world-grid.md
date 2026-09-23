@@ -45,4 +45,4 @@ Date: 2026-09-23 · Status: accepted (M4 plan approved by the user 2026-09-23)
 - A `sleep` action on the bed waits for M4.5 (the bed has `clean_room` for now).
 
 ## Known issue: float save round trip is not exact
-Godot 4.7's JSON parser reads back about 1 in 3 floats written at 17 digits with a 1-bit error (ADR 0002 assumed exact). `sim_walk_day` compares save/load with a 1e-9 relative tolerance on floats. Everything else is exact. A real fix needs a save format change (user decision, see handoff).
+Godot 4.7's JSON parser reads back about 1 in 3 floats written at 17 digits with a 1-bit error (ADR 0002 assumed exact). `sim_walk_day` compares save/load with a 1e-9 relative tolerance on floats. Everything else is exact. A real fix needs a save format change (user decision, see handoff). Fixed in save v5 (ADR 0008): floats are saved as exact f64 text.

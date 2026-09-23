@@ -121,3 +121,58 @@ func test_world_survives_save_and_load() -> void:
 	assert_eq(loaded.world.relationship("relc", "pisces"), -2)
 	assert_eq(typeof(loaded.world.events["b1.x"]["latest"]), TYPE_INT)
 	assert_eq(typeof(loaded.world.history[0]["day"]), TYPE_INT)
+
+
+func test_floats_survive_save_and_load_exactly() -> void:
+	var gs := GameState.new(4)
+	var rng := Rng.new(11)
+	var values: Array[float] = []
+	for i in 300:
+		values.append(rng.randf() * pow(10.0, rng.randi_range(-4, 5)))
+	for i in values.size():
+		gs.progression.pools["c%d" % i] = values[i]
+	gs.world.drift = 0.1 + 0.2
+	var text := gs.to_json()
+	assert_string_contains(text, SaveCodec.float_to_text(0.1 + 0.2))
+	var loaded := GameState.from_json(text)
+	for i in values.size():
+		assert_eq(loaded.progression.pools["c%d" % i], values[i])
+	assert_eq(loaded.world.drift, 0.1 + 0.2)
+	assert_eq(loaded.to_json(), text)
+
+
+func test_save_codec_keeps_ints_and_strings() -> void:
+	var d := {"i": 3, "s": "12.5", "f": -0.0, "a": [1.5, "x", {"n": 2.25}]}
+	var enc: Dictionary = SaveCodec.encode(d)
+	assert_eq(enc["i"], 3)
+	assert_eq(enc["s"], "12.5")
+	assert_eq(enc["f"], "f64:8000000000000000")
+	assert_eq(SaveCodec.decode(enc), d)
+	assert_eq(SaveCodec.float_to_text(0.5), "f64:3fe0000000000000")
+
+
+func test_v4_save_migrates_to_v5_with_npcs_not_placed_yet() -> void:
+	var db := DataDb.load_dir()
+	var d := GameState.new_game(2, db).to_dict()
+	d["save_version"] = 4
+	d.erase("npcs")
+	var gs := GameState.from_json(JSON.stringify(d, "", false, true))  # v4: plain float numbers
+	assert_not_null(gs)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
+	assert_false(gs.npcs.is_placed())
+	Commands.settle(gs, db)
+	assert_true(gs.npcs.is_placed(), "placed on the first command")
+	assert_eq(gs.npcs.to_dict(), GameState.new_game(2, db).npcs.to_dict())
+
+
+func test_npcs_survive_save_and_load() -> void:
+	var gs := GameState.new(4)
+	gs.npcs.sec = 12345
+	gs.npcs.npcs["relc"] = {"area": "liscor_gate", "x": 3, "y": 10, "facing": "e", "goal": "patrol",
+		"route_i": 2, "carry": 5, "talked_day": 8}
+	gs.npcs.npcs["rags"] = {"area": "@wilds", "x": 0, "y": 0, "facing": "s", "goal": "off_map",
+		"route_i": 0, "carry": 0, "talked_day": 0}
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(loaded.to_json(), gs.to_json())
+	assert_eq(loaded.npcs.at("liscor_gate", Vector2i(3, 10)), "relc")
+	assert_eq(typeof(loaded.npcs.npcs["relc"]["route_i"]), TYPE_INT)

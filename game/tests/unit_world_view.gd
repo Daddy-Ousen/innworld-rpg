@@ -153,6 +153,7 @@ func test_use_menu_lists_and_uses() -> void:
 		fail_test("no Session autoload")
 		return
 	session.set_state(GameState.new_game(1, session.db))
+	session.gs.npcs.npcs.clear()  # objects only here; NPC talk is in unit_npc_sim
 	var main: Node = add_child_autofree(load("res://world/main.tscn").instantiate())
 	main.open_use_menu()
 	assert_false(main.menu.visible, "nothing to use at the start")
@@ -166,3 +167,39 @@ func test_use_menu_lists_and_uses() -> void:
 	items.item_activated.emit(0)
 	assert_false(main.menu.visible)
 	assert_eq(session.gs.action_log.records[-1]["action_id"], "cook_simple_meal")
+
+
+func test_npc_markers_with_names() -> void:
+	var d := ToyNpcs.db()
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(d.maps, {"guard": "Guard"})
+	var gs := ToyNpcs.new_game(d)
+	v.refresh(gs)
+	assert_eq(v.npcs.get_child_count(), 1, "only the guard is in town")
+	var marker: Node2D = v.npcs.get_child(0)
+	assert_eq(String(marker.name), "guard")
+	assert_eq(marker.position, WorldView.cell_center(Vector2i(1, 1)))
+	assert_eq((marker.get_child(1) as Label).text, "Guard")
+	gs.player.place("field", Vector2i(3, 2))
+	v.refresh(gs)
+	assert_eq(v.npcs.get_child_count(), 1)
+	assert_eq(String(v.npcs.get_child(0).name), "farmer")
+	assert_eq((v.npcs.get_child(0).get_child(1) as Label).text, "farmer", "no name given: the id")
+
+
+func test_space_waits_and_bumping_an_npc_says_who() -> void:
+	var session := get_node_or_null("/root/Session")
+	if session == null:
+		fail_test("no Session autoload")
+		return
+	session.set_state(GameState.new_game(1, session.db))
+	var main: Node = add_child_autofree(load("res://world/main.tscn").instantiate())
+	var before: int = NpcSim.world_sec(session.gs)
+	main.step(main.WAIT)
+	assert_eq(NpcSim.world_sec(session.gs), before + 6, "one step of time")
+	session.gs.player.place("liscor_gate", Vector2i(3, 13))  # Beilmark stands at 2,13
+	main.step("w")
+	main.step("w")
+	var log_text: String = main.hud.get_node("%Log").text
+	assert_string_contains(log_text, "Beilmark is in the way.")
+	assert_eq(log_text.count("in the way"), 1, "said once")
