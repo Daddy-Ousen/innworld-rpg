@@ -1,7 +1,7 @@
 # Handoff
 
 ## Just done
-M0 finished and committed on branch `master`, tagged `m0-done`.
+M0 finished, tagged `m0-done`. Branch `main` is pushed to https://github.com/Daddy-Ousen/innworld-rpg (public). Git author for this repo (local config): Daddy-Ousen, GitHub noreply email.
 
 ## Next
 Start M1 (see `docs/KICKOFF.md` Session 2 prompt): plan data schemas for actions, classes, skills; show them to the user before code.

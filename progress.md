@@ -13,5 +13,8 @@
 ## Blockers
 - None.
 
+## Repo
+- Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
+
 ## Architectural decisions
 - ADR 0001 (`docs/adr/0001-m0-setup.md`): GUT version, RNG state as strings in JSON, `.import` files committed, save load path.
