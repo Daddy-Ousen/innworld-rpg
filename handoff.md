@@ -8,7 +8,7 @@ M6.1 merged (PR #13), tag `m6.1-done`. M6.2 Canon 1.15–1.20R is done and revie
 - `sim_canon_book1`: LAST_DAY 13, drift 0. GUT 383/383 (40 scripts), validator 0 errors, Python 26 OK.
 
 ## Waiting on the user
-- Review the M6.2 PR, merge, then tag `m6.2-done` on the merge commit.
+- Review PR #14 (https://github.com/Daddy-Ousen/innworld-rpg/pull/14), merge, then tag `m6.2-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next after M6.2: M6.3 Canon 1.21–1.25 (branch `data/book1-1.21-1.25`)
