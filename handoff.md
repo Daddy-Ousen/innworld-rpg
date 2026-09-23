@@ -13,7 +13,7 @@ M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data done and reviewed; all entries 
 - `sim_canon_book1`: LAST_DAY 19, counts 62 / 27 / 30, new test `test_killing_the_free_queen_keeps_workers_home`. GUT 384/384 (40 scripts), validator 0 errors, Python 26 OK.
 
 ## Waiting on the user
-- M6.3 reviewed 2026-09-24 (my picks: ruins + King news as tier 1 rumors, Worker id `pawn`, canon ends day 19). Review the M6.3 PR, merge, then tag `m6.3-done` on the merge commit.
+- M6.3 reviewed 2026-09-24 (my picks: ruins + King news as tier 1 rumors, Worker id `pawn`, canon ends day 19). Review PR #15 (https://github.com/Daddy-Ousen/innworld-rpg/pull/15), merge, then tag `m6.3-done` on the merge commit.
 Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, and now `[Alcohol Brewing]`.
 
 ## Next after M6.3
