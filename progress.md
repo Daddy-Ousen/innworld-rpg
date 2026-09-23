@@ -2,7 +2,7 @@
 
 ## Roadmap status
 - [x] M0 — Setup (done 2026-09-23, tag `m0-done`)
-- [x] M1 — Sim core (code done 2026-09-23; PR open; tag `m1-done` after merge)
+- [x] M1 — Sim core (code done 2026-09-23; PR #2 open; tag `m1-done` after merge)
   - [x] Schemas: ADR 0002 accepted (outcome_mult yes, tags.json registry yes)
   - [x] Clock, tags, data loader, action log, XP, `Actions.perform` (part 1, PR #1 merged)
   - [x] Part 2: classes (17), skills (47), pools, offers, decline blacklist, levels, dilution, capstones, class loss, consolidation, night pipeline 1–4 + 8, `Commands` facade, debug console, `sim_30_days`, `sim_decline`
