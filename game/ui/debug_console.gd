@@ -1,8 +1,10 @@
 ## Debug text console: type actions, sleep, see System messages.
-## Main scene until the 2D world exists (M4).
+## Runs on its own, or as the overlay in world/main.tscn (backtick key).
+## With the Session autoload it works on Session.gs, so the map follows.
 extends Control
 
 var _console: ConsoleCommands
+var _session: Node
 var _history: Array[String] = []
 var _history_pos := 0
 
@@ -11,15 +13,18 @@ var _history_pos := 0
 
 
 func _ready() -> void:
-	var db := DataDb.load_dir()
+	_session = get_node_or_null("/root/Session")
+	var db: DataDb = _session.db if _session != null else DataDb.load_dir()
 	if not db.is_valid():
 		_print(["Data errors:"] as Array[String])
 		_print(db.errors)
 	_console = ConsoleCommands.new(db)
+	if _session != null:
+		_console.gs = _session.gs
 	_input.text_submitted.connect(_on_submitted)
 	_input.gui_input.connect(_on_input_key)
 	_input.grab_focus()
-	_print(["Innworld RPG — debug console. You wake in an empty inn on a hill."] as Array[String])
+	_print(["Innworld RPG — debug console."] as Array[String])
 	_print(_console.execute("help"))
 	_print(_console.execute("status"))
 
@@ -33,7 +38,11 @@ func _on_submitted(text: String) -> void:
 	_output.push_color(Color(0.6, 0.6, 0.6))
 	_output.add_text("> " + text + "\n")
 	_output.pop()
+	if _session != null:
+		_console.gs = _session.gs
 	_print(_console.execute(text))
+	if _session != null:
+		_session.set_state(_console.gs)
 
 
 ## Up/down arrows walk the command history.

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://world/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://world/world_view.tscn" id="2_view"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://ui/interact_menu.tscn" id="4_menu"]
+[ext_resource type="PackedScene" path="res://ui/debug_console.tscn" id="5_console"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_main")
+
+[node name="WorldView" parent="." instance=ExtResource("2_view")]
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HudLayer" instance=ExtResource("3_hud")]
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="InteractMenu" parent="MenuLayer" instance=ExtResource("4_menu")]
+
+[node name="ConsoleLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Backdrop" type="ColorRect" parent="ConsoleLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06, 0.06, 0.08, 0.92)
+
+[node name="DebugConsole" parent="ConsoleLayer" instance=ExtResource("5_console")]
