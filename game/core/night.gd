@@ -1,13 +1,13 @@
 ## Night resolution pipeline (DESIGN §2). Fixed order; each step works on
-## GameState only. Steps 5–7 (world director, off-screen sim, relations)
-## come in M3 and later.
+## GameState only. Steps 6–7 (off-screen sim, relation decay) come in M4+.
 class_name Night
 extends RefCounted
 
 
 ## Runs one night: the player sleeps, or collapses (`collapsed` = true,
 ## also for being knocked out). Returns
-## {"days_passed": int, "records": int, "offers": Array[String], "lines": Array[String]}.
+## {"days_passed": int, "records": int, "offers": Array[String], "lines": Array[String],
+##  "events": Array[Dictionary]} (history entries the director added tonight).
 ## The lines are also stored in gs.morning for the morning summary.
 static func run(gs: GameState, db: DataDb, collapsed: bool = false) -> Dictionary:
 	var lines: Array[String] = []
@@ -26,10 +26,15 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false) -> Dictionar
 			budget - offered.size()))
 	for id in offered:
 		lines.append("Class offered: %s. Accept or decline." % db.classes[id]["name"])
+	# 5. World director: canon events up to the day before the wake day.
+	var history_before := gs.world.history.size()
+	lines.append_array(Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], collapsed) - 1))
+	var events := gs.world.history.slice(history_before)
 	# 8. Advance to the next day and keep the morning summary.
 	var days := gs.clock.sleep(db.rules["clock"], collapsed)
 	gs.morning = lines.duplicate()
-	return {"days_passed": days, "records": records.size(), "offers": offered, "lines": lines}
+	return {"days_passed": days, "records": records.size(), "offers": offered, "lines": lines,
+			"events": events}
 
 
 ## Step 1: returns the records made since the last night, and starts a new day.
