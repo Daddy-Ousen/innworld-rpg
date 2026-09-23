@@ -1,19 +1,28 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.15-1.20`)
-M6.1 merged (PR #13), tag `m6.1-done`. M6.2 Canon 1.15–1.20R is done and reviewed by the user (took my picks: Goblin meal day 12, Ryoka window 13–16 guess, Ryoka rumor kept, Persua / Antinium Queen / `izril` left for later).
-- Chapters: `1.15.json` (klbkch_saves_erin d9, klbkch_punches_relc d9, klbkch_files_bounty d9), `1.16.json` (erin_defends_goblins d10, erin_screams_off_rock_crab d11, erin_feeds_goblins d12), `1.17.json` (erin_beats_olesm_at_chess d13), `1.18.json` (erin_befriends_krshia d13, erin_names_the_inn d13), `1.19R.json` (ryoka_delivers_to_magnolia, tier 1 + rumor), `1.20R.json` (ryoka_warned_by_fals, tier 1, system log `[Barefoot Runner]`).
-- New NPCs: olesm ([Tactician] 22), ryoka_griffin, magnolia_reinhart, ressa, wesle, garia_strongheart, fals. New locations: celum, remendia, remendia_runners_guild, liscor_hive. Updated: klbkch, beilmark, krshia, lism, high_passes ("The High Passes"), wandering_inn note.
-- `klbkch_saves_erin`: rescuer falls back to any `guard` (test `test_killing_klbkch_sends_another_guard`).
-- `sim_canon_book1`: LAST_DAY 13, drift 0. GUT 383/383 (40 scripts), validator 0 errors, Python 26 OK.
+## Just done (2026-09-24, branch `data/book1-1.21-1.25`, not pushed)
+M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data drafted, one chapter at a time. New entries are `status: "candidate"`.
+- `1.21.json`: inn_first_regulars d15, selys_sews_pads d16.
+- `1.22.json`: erin_traps_acid_flies d16, erin_beats_pisces_at_chess d16, pisces_saves_erin_from_flies d17; system: Erin [Innkeeper] 10, [Alcohol Brewing], [Dangersense].
+- `1.23A.json`: antinium_uncover_ruin_door d14 (secret dig by Klbkch).
+- `1.24.json`: liscor_ruins_discovered (tier 1 + rumor, window 17–18 guess), goblins_hunt_rock_crab d18, erin_serves_acid_flies d18.
+- `interlude_king_edition.json`: king_of_destruction_wakes d18 (tier 1 + rumor).
+- `1.25.json`: queen_allows_workers_visit d19, rags_brings_goblins_to_eat d19, workers_learn_chess d19; system: Olesm level (number unknown), Rags and pawn [Tactician].
+- New NPCs: terbore, free_queen, pawn (id is a guess), flos_reimarch, orthenon. New locations: liscor_dungeon, chandrar, reim.
+- Updated (were `reviewed`): rags name "Littlest Goblin" → "Rags"; olesm name → "Olesm Swifttail"; klbkch note (Klbkchhezeim, Prognugator); selys note ([Fast Stitching]); 1.11 `bully` role now prefers `terbore`.
+- `sim_canon_book1`: LAST_DAY 19, counts 62 / 27 / 30, new test `test_killing_the_free_queen_keeps_workers_home`. GUT 384/384 (40 scripts), validator 0 errors, Python 26 OK.
 
-## Waiting on the user
-- Review PR #14 (https://github.com/Daddy-Ousen/innworld-rpg/pull/14), merge, then tag `m6.2-done` on the merge commit.
-- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
+## Waiting on the user (M6.3 review)
+1. Dungeon discovery as tier 1 + rumor (so the player hears it now) or tier 2 with no rumor until M6.4 news. My pick: tier 1 + rumor.
+2. King of Destruction rumor reaches Liscor on day 18. My pick: keep.
+3. Worker id `pawn` (a guess, like `rags` was). My pick: keep.
+4. Canon ends on day 19, not "about day 22" as the roadmap says. 1.26R and later are next (M7). My pick: accept day 19.
+After OK: `candidate` → `reviewed`, tick M6.3 in `docs/ROADMAP.md` and `progress.md`, push, PR, then tag `m6.3-done` on the merge commit.
+Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, and now `[Alcohol Brewing]`.
 
-## Next after M6.2: M6.3 Canon 1.21–1.25 (branch `data/book1-1.21-1.25`)
-- 1.21, 1.22, 1.23A, 1.24, Interlude – King Edition, 1.25. 1.22 has Erin's [Innkeeper Level 10] (chapter `system` log). Krshia's Runner delivery is due day 14.
-- M6.4 needs a schema OK first: `hooks` and `news` on canon events (ADR 0011 plan). M6.5 needs a schema OK for `stage`.
+## Next after M6.3
+- M6.4 Player hooks + news (save v7). Ask for a schema OK first: `hooks` and `news` on canon events (ADR 0011 plan).
+- M6.5 Canon fights + `sim_m6_done`. Needs a schema OK for `stage`.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.

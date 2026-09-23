@@ -1,0 +1,77 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.25",
+	"events": {
+		"b1.queen_allows_workers_visit": {
+			"tier": 2,
+			"window": {"earliest": 19, "latest": 19, "confidence": "likely"},
+			"location": "liscor_hive",
+			"roles": {
+				"prognugator": {"prefer": ["klbkch"], "fallback_tags": []},
+				"queen": {"prefer": ["free_queen"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["klbkch", "free_queen"], "flags": ["erin.invited_workers"], "not_flags": []},
+			"depends_on": ["b1.erin_serves_acid_flies"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium_hive.workers_may_visit_inn"]},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.25", "confidence": "likely", "note": "The day after Erin's request (day 18), so day 19."},
+			"summary": "Deep in the Hive, the weary Free Queen hears Klbkch out. Other Queens question ten years of failure, so she allows the risk: twelve Workers may visit the Human's inn under his watch. She wants real success within a few years, and a taste of the flies."
+		},
+		"b1.rags_brings_goblins_to_eat": {
+			"tier": 2,
+			"window": {"earliest": 19, "latest": 19, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"leader": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"]},
+				"goblins": {"prefer": [], "fallback_tags": ["goblin"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.fed_goblins"], "not_flags": []},
+			"depends_on": ["b1.erin_feeds_goblins"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["goblin_tribe.paying_guests", "erin.named_rags"],
+				"relationship": [
+					{"from": "rags", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.25", "confidence": "confirmed", "note": "Same evening as the Workers' visit. Erin calls her 'Rags' here for the first time. Delta is a design value."},
+			"summary": "The littlest Goblin leads eight others to the inn and holds out a fistful of coins. Erin calls her Rags, takes the money, makes them wash their hands, and feeds them bread, sausage and pasta until they are full."
+		},
+		"b1.workers_learn_chess": {
+			"tier": 2,
+			"window": {"earliest": 19, "latest": 19, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"prognugator": {"prefer": ["klbkch"], "fallback_tags": []},
+				"workers": {"prefer": [], "fallback_tags": ["antinium"]},
+				"watcher": {"prefer": ["pawn"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true},
+				"goblin_player": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": ["antinium_hive.workers_may_visit_inn"], "not_flags": []},
+			"depends_on": ["b1.queen_allows_workers_visit"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_hive.workers_play_chess", "goblin_tribe.plays_chess", "erin.antinium_customers"],
+				"relationship": [
+					{"from": "olesm", "to": "erin_solstice", "delta": 1},
+					{"from": "klbkch", "to": "erin_solstice", "delta": 1},
+					{"from": "klbkch", "to": "olesm", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.25", "confidence": "confirmed", "note": "Evening of day 19. The Workers are the ones who dug out the door. Deltas are design values."},
+			"summary": "Klbkch brings twelve silent Workers to eat Acid Flies; Olesm drops by with a board. Erin plays him without looking, then plays him against Klbkch. A Worker asks to watch; soon Workers and Goblins play on paper boards, and Rags beats two Workers. Erin slips the Workers the paper sets."
+		}
+	},
+	"system": [
+		{"who": "olesm", "kind": "level", "name": "[Tactician]", "level": null, "confidence": "confirmed", "note": "He levels that night; the new level is not given (he was 22)."},
+		{"who": "rags", "kind": "class", "name": "[Tactician]", "level": null, "confidence": "confirmed", "note": "Same night. The shown message is Level 2 with [Risk Calculation] and [Group: Erratic Maneuvering], but the text says each hearer got some variation."},
+		{"who": "pawn", "kind": "class", "name": "[Tactician]", "level": null, "confidence": "likely", "note": "Many Workers gain the class that night; that the chess-watching Worker is one of them is likely."}
+	]
+}

@@ -28,7 +28,7 @@
 			"roles": {
 				"visitor": {"prefer": ["erin_solstice"], "fallback_tags": []},
 				"receptionist": {"prefer": ["selys"], "fallback_tags": ["receptionist"]},
-				"bully": {"prefer": [], "fallback_tags": ["gnoll", "adventurer"], "optional": true}
+				"bully": {"prefer": ["terbore"], "fallback_tags": ["gnoll", "adventurer"], "optional": true}
 			},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.visited_liscor"], "not_flags": []},
 			"depends_on": ["b1.erin_walks_to_liscor"],
