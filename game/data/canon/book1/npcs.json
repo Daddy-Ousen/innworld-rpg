@@ -76,14 +76,14 @@
 		"klbkch": {
 			"name": "Klbkch",
 			"race": "Antinium",
-			"tags": ["antinium", "guard", "senior_guard", "swords", "precise"],
+			"tags": ["antinium", "free_antinium", "hive", "guard", "senior_guard", "swords", "precise"],
 			"faction": "liscor_watch",
 			"home": "liscor",
 			"classes": [{"name": "[Swordslayer]", "level": null}, {"name": "[Guardsman]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09."},
-			"summary": "Four-armed Antinium, Senior Guardsman and Relc's partner. Polite, exact, takes notes with a quill. Most guards avoid him. Quietly kind: spends a rare potion on Erin. Pisces fears his title."
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels."},
+			"summary": "Four-armed Free Antinium, Relc's partner and a guard for ten years; fourth-highest [Guardsman] in Liscor, with [Enhanced Movement] and [Detect Guilt]. Polite, exact, rule-bound. Serves his Queen in the Hive. Quietly kind: twice spends potions on Erin."
 		},
 		"zevara": {
 			"name": "Zevara",
@@ -106,8 +106,8 @@
 			"classes": [{"name": "[Guardswoman]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Race not stated; she smells the smoke, so maybe a Gnoll (guess)."},
-			"summary": "Senior Guardswoman on Liscor's wall. Has a keen nose; spots and smells the inn's smoke and reports it to the Captain."
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Race not stated; she smells the smoke, so maybe a Gnoll (guess). Desk sergeant and family from 1.15."},
+			"summary": "Senior Guardswoman of Liscor with a keen nose; spots and smells the inn's smoke from the wall. Also works the barracks desk, and has a family waiting at home."
 		},
 		"pisces": {
 			"name": "Pisces",
@@ -136,13 +136,13 @@
 		"krshia": {
 			"name": "Krshia",
 			"race": "Gnoll",
-			"tags": ["gnoll", "merchant", "shopkeeper", "market", "loud"],
+			"tags": ["gnoll", "merchant", "shopkeeper", "market", "loud", "silverfang"],
 			"faction": null,
 			"home": "liscor_market",
-			"classes": [],
+			"classes": [{"name": "[Shopkeeper]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "Her stall is called Krshia's Silverfang Goods; Silverfang may be her tribe (guess)."},
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "1.18: of the Silverfang tribe from the Great Plains of Izril, away from home nearly ten years. 1.18 calls her fur light brown; 1.12 said russet spotted black."},
 			"summary": "Tall female Gnoll with russet fur spotted black, owner of a large general-goods stall in Liscor's market. Loud and brisk, calls Erin over for bargains. Hisses at Lism when he overcharges Erin."
 		},
 		"lism": {
@@ -151,11 +151,11 @@
 			"tags": ["drake", "merchant", "shopkeeper", "market", "grocer", "prejudiced"],
 			"faction": null,
 			"home": "liscor_market",
-			"classes": [],
+			"classes": [{"name": "[Shopkeeper]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed"},
-			"summary": "Drake who sells flour, salt, sugar, oil and dried sausages at a market stall next to Krshia's. Openly hates Humans, will not let Erin touch the goods, and charges her far too much."
+			"summary": "Purple-scaled Drake who sells flour, salt, sugar, oil, sausages and chess sets at a stall near Krshia's. Olesm's uncle. Openly hates Humans and cheats them; loses a chess bet to Erin on day 13."
 		},
 		"belsc": {
 			"name": "Belsc",
@@ -180,6 +180,90 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
 			"summary": "Bright yellow-scaled Drake who serves at an outdoor café in Liscor until her boss fires her for gossiping. Delighted to see a Human and eager to help Erin find her way."
+		},
+		"olesm": {
+			"name": "Olesm",
+			"race": "Drake",
+			"tags": ["drake", "tactician", "chess", "scholar"],
+			"faction": null,
+			"home": "liscor",
+			"classes": [{"name": "[Tactician]", "level": 22}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "Works for the city Council and wears the same insignia as Relc's badge. Level from Klbkch in 1.18."},
+			"summary": "Young sky-blue Drake, Lism's nephew and Liscor's best chess player. Level 22 [Tactician] with ink-stained claws; neat, polite and eager. Crushed by Erin in a street game, he admires her and dreams of a [Grandmaster] class."
+		},
+		"ryoka_griffin": {
+			"name": "Ryoka Griffin",
+			"race": "Human",
+			"tags": ["human", "earther", "runner", "city_runner", "barefoot", "loner"],
+			"faction": "runners_guild",
+			"home": "remendia",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed", "note": "Arrived 'two weeks and a bit' before 1.20R; the exact day is unknown. Not shown as part of the Great Ritual."},
+			"summary": "Tall barefoot City Runner from California on a track scholarship, pulled into this world mid-lap. Hates small talk and hides her name. Made City Runner in two weeks; faster than any Runner she has met. Blocks her level messages every night."
+		},
+		"magnolia_reinhart": {
+			"name": "Magnolia Reinhart",
+			"race": "Human",
+			"tags": ["human", "noble", "lady", "reinhart", "wealthy"],
+			"faction": "house_reinhart",
+			"home": "celum",
+			"classes": [{"name": "[Lady]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed", "note": "Home is one of several houses; Celum is where she is seen."},
+			"summary": "Human noble of northern Izril dressed in loud pink, with a pink carriage. Warm and chatty; makes a point of knowing the best City Runners and tips well. Loves Amentus wine. Keeps one of her houses in Celum."
+		},
+		"ressa": {
+			"name": "Ressa",
+			"race": "Human",
+			"tags": ["human", "maid", "head_maid", "servant"],
+			"faction": "house_reinhart",
+			"home": "celum",
+			"classes": [{"name": "[Head Maid]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed"},
+			"summary": "Magnolia Reinhart's [Head Maid]. Wears severe spectacles, minds manners strictly, and teases her mistress dryly when a shy Runner flees."
+		},
+		"wesle": {
+			"name": "Wesle",
+			"race": "Human",
+			"tags": ["human", "guard", "gate_guard"],
+			"faction": "celum_watch",
+			"home": "celum",
+			"classes": [{"name": "[Guardsman]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed"},
+			"summary": "Young, sleepy gate guard of Celum with a thin try at a mustache, cheap leather armour and a sword. Takes Ryoka's Goblin warning seriously and asks her to guide the Watch."
+		},
+		"garia_strongheart": {
+			"name": "Garia Strongheart",
+			"race": "Human",
+			"tags": ["human", "runner", "city_runner", "strong", "friendly"],
+			"faction": "runners_guild",
+			"home": "remendia",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed", "note": "Race not stated; all Runners in that guild are Human-looking."},
+			"summary": "Short, sturdy City Runner who hauls ore for the Merchant's Guild. Daughter of a [Farmer]. Cheerful and curious about Ryoka; talks her into a joint spice run on the Tern Road."
+		},
+		"fals": {
+			"name": "Fals",
+			"race": "Human",
+			"tags": ["human", "runner", "city_runner", "senior", "popular"],
+			"faction": "runners_guild",
+			"home": "remendia",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "likely", "note": "Race not stated; Human is likely."},
+			"summary": "Tall, blond, popular senior City Runner with two daggers; said to have killed a Creler. Friendly on the surface. Speaks for the other Runners when he tells Ryoka to share Magnolia's jobs."
 		}
 	}
 }

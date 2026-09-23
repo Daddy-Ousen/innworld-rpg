@@ -1,26 +1,24 @@
 # Handoff
 
-## Just done (2026-09-23, branch `feat/m6.1-play-loop`)
-M6 plan approved (5 sub-modules, see `docs/ROADMAP.md` M6 and ADR 0011). M6.1 Play loop is done and tested (GUT 382/382, 40 scripts). No schema or save change.
-- `core/save_slots.gd`: 3 manual slots + autosave, `info`, `label`, `latest`, `load_game` (runs `Commands.settle`).
-- `ui/session.gd`: `save_dir`, `fresh`, `start_new_game`, `save_slot`, `load_slot`, `autosave`.
-- `ui/title_menu.tscn` is the main scene (`project.godot`). `ui/pause_menu.tscn` (Esc), `ui/slot_list.tscn` (shared), `ui/journal.tscn` (J).
-- `world/main.gd`: Esc / J keys, welcome page for a fresh game, autosave when the System dialog closes, `quit_to_title`, autosave on window close. `switch_scene = false` in tests.
-- `ui/system_messages.gd`: `WELCOME`, `HINTS`, `welcome_page()`. Character sheet shows the focus name (`Journal.focus_name`).
-- `data/classes.json`: all `offer_threshold` ÷ 3 (rounded to 5). First offer on night 3 (day 11). `sim_m4_done` MAX_DAYS 3.
-- `test_support/gut_pre_run.gd` + `.gutconfig.json` `pre_run_script`: tests save to `user://test_saves`.
-- Tests: `unit_save_slots`, `unit_journal`, `unit_play_loop`.
+## Just done (2026-09-24, branch `data/book1-1.15-1.20`, not pushed)
+M6.1 is merged (PR #13) and tagged `m6.1-done`. M6.2 data drafted from the book text, one chapter at a time. All new entries are `status: "candidate"`.
+- Chapters: `1.15.json` (klbkch_saves_erin d9, klbkch_punches_relc d9, klbkch_files_bounty d9), `1.16.json` (erin_defends_goblins d10, erin_screams_off_rock_crab d11, erin_feeds_goblins d12), `1.17.json` (erin_beats_olesm_at_chess d13), `1.18.json` (erin_befriends_krshia d13, erin_names_the_inn d13), `1.19R.json` (ryoka_delivers_to_magnolia, tier 1 + rumor, window 13–16 guess), `1.20R.json` (ryoka_warned_by_fals, tier 1, system log `[Barefoot Runner]`).
+- New NPCs: olesm ([Tactician] 22), ryoka_griffin, magnolia_reinhart, ressa, wesle, garia_strongheart, fals. New locations: celum, remendia, remendia_runners_guild, liscor_hive.
+- Updated (were `reviewed`): klbkch (Free Antinium, [Enhanced Movement], [Detect Guilt]), beilmark (desk, family), krshia (Silverfang confirmed, [Shopkeeper]), lism (purple, Olesm's uncle, [Shopkeeper]), high_passes (renamed "The High Passes", confirmed in 1.19R), wandering_inn note (named on day 13; name field unchanged).
+- `klbkch_saves_erin`: rescuer falls back to any `guard` (substitute). Test `test_killing_klbkch_sends_another_guard`.
+- `sim_canon_book1`: LAST_DAY 13, counts 49 events / 22 NPCs / 27 locations. GUT 383/383, validator 0 errors, Python 26 OK.
 
-## Waiting on the user
-- Review PR #13 (https://github.com/Daddy-Ousen/innworld-rpg/pull/13), merge, then tag `m6.1-done` on the merge commit.
-- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
+## Waiting on the user (M6.2 review)
+1. Day of the Goblin meal: day 12 (my pick) or day 11. Text says she wakes at noon "of tomorrow".
+2. Ryoka chapters: window 13–16 (guess), so they fire on day 13. Nothing ties them to Erin's days.
+3. Rumor for Ryoka's Goblin ambush reaches Liscor: yes (my pick) or no.
+4. Left out: Persua (only named), the Antinium Queen (only in thoughts), a continent `izril` location.
+After OK: set all `candidate` → `reviewed`, tick M6.2 in `docs/ROADMAP.md` and `progress.md`, push, PR, then tag `m6.2-done` on the merge commit.
+Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
-## Next: M6.2 Canon 1.15–1.20R (branch `data/book1-1.15-1.20`)
-- Same flow as M4.1: read one chapter at a time from `canon/raw/book1/` (017_1-15.txt … 022_1-20R.txt), propose events / NPCs / locations in own words, the user reviews.
-- Rough day cues found in planning: 1.15 ≈ day 9–10, 1.16 next day, 1.17 wakes (≈ day 12), 1.18, 1.19R / 1.20R are Ryoka in Celum (tier 1 + rumor). Confirm while reading.
-- Extend `sim_canon_book1` to the new last day, drift 0. Validator 0 errors.
-- Then M6.3 (1.21, 1.22, 1.23A, 1.24, Interlude – King Edition, 1.25). 1.22 has Erin's [Innkeeper Level 10] (chapter `system` log).
-- M6.4 needs a schema OK first: `hooks` and `news` on canon events (ADR 0011 plan). M6.5 needs a schema OK for `stage` (monster on a map in an event window).
+## Next after M6.2: M6.3 Canon 1.21–1.25 (branch `data/book1-1.21-1.25`)
+- 1.21, 1.22, 1.23A, 1.24, Interlude – King Edition, 1.25. 1.22 has Erin's [Innkeeper Level 10] (chapter `system` log). Krshia's Runner delivery is due day 14.
+- M6.4 needs a schema OK first: `hooks` and `news` on canon events (ADR 0011 plan). M6.5 needs a schema OK for `stage`.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -49,8 +47,10 @@ M6 plan approved (5 sub-modules, see `docs/ROADMAP.md` M6 and ADR 0011). M6.1 Pl
 - Screenshots: a scratch scene in `game/` (script picks a mode from an env var, adds `world/main.tscn` or the title), then `godot --path game --write-movie <scratchpad>/x.png --fixed-fps 5 --quit-after 3 res://<scene>.tscn`. Delete scratch files (and their `.uid`) before committing.
 - **Python file writes:** always pass `encoding='utf-8'` to `open()`.
 - `sim_m5_done` depends on the seed (2). If spawn data or monster AI change, it may need a new seed.
-- On day 8 the inn's canon location name is "The abandoned inn on the hill".
+- On day 8 the inn's canon location name is "The abandoned inn on the hill". From day 13 the flag `wandering_inn.named` is set; the name field does not change.
+- Canon JSON files are LF. Director: an anonymous role (`prefer: []`) always fills; a dead NPC in `requires.alive` is a hard fail (no substitute), so leave an NPC out of `alive` if a stand-in may take the role.
+- Canon review flow: write events as `candidate`, run the validator (it also checks 7-word copies against `canon/raw`), user reviews, then flip to `reviewed`.
 - `SystemDialog` buttons connect deferred; tests call `dialog.choose(...)` directly.
 
 ## Active files
-`game/core/save_slots.gd`, `game/ui/{session,title_menu,pause_menu,slot_list,journal,system_messages,character_sheet}.gd`, `game/world/main.gd`, `game/world/main.tscn`, `game/data/classes.json`, `game/tests/{unit_save_slots,unit_journal,unit_play_loop,sim_m4_done}.gd`, `docs/adr/0011-m6-vertical-slice.md`.
+`game/data/canon/book1/{npcs,locations}.json`, `game/data/canon/book1/chapters/1.15–1.20R.json`, `game/tests/sim_canon_book1.gd`. Older: `game/core/save_slots.gd`, `game/ui/{session,title_menu,pause_menu,slot_list,journal,system_messages,character_sheet}.gd`, `game/world/main.gd`, `game/world/main.tscn`, `game/data/classes.json`, `game/tests/{unit_save_slots,unit_journal,unit_play_loop,sim_m4_done}.gd`, `docs/adr/0011-m6-vertical-slice.md`.

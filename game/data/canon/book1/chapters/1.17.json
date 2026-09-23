@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.17",
+	"events": {
+		"b1.erin_beats_olesm_at_chess": {
+			"tier": 2,
+			"window": {"earliest": 13, "latest": 13, "confidence": "likely"},
+			"location": "liscor_market",
+			"roles": {
+				"challenger": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"shopkeeper": {"prefer": ["lism"], "fallback_tags": []},
+				"player": {"prefer": ["olesm"], "fallback_tags": ["tactician"]},
+				"guard_a": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"guard_b": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"onlooker": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "lism"], "flags": ["erin.cheated_in_market"], "not_flags": []},
+			"depends_on": ["b1.klbkch_saves_erin"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.won_money_back", "erin.owns_chess_set", "liscor.knows_erin_chess", "lism.stall_searched"],
+				"relationship": [
+					{"from": "olesm", "to": "erin_solstice", "delta": 2},
+					{"from": "lism", "to": "erin_solstice", "delta": -2},
+					{"from": "klbkch", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "The day after the Goblin meal (day 13 if 1.16 is dated right). The game ends at the start of 1.18. Olesm is a Level 22 [Tactician]. Deltas are design values."},
+			"summary": "With a bounty purse from Klbkch in hand, Erin demands a refund from Lism. He bets it on chess against his nephew Olesm, Liscor's best player. Relc and Klbkch warn her. She wins crushingly, then beats Olesm and Klbkch again; the guards search Lism's stall until he pays."
+		}
+	},
+	"system": []
+}

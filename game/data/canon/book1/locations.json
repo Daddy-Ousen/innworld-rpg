@@ -16,7 +16,7 @@
 			"parent": "floodplains_of_liscor",
 			"tags": ["inn", "shelter", "abandoned", "plague_site"],
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Not called 'The Wandering Inn' in 1.00-1.09. Id uses the book title."},
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Erin paints the name 'The Wandering Inn' on the sign on day 13 (1.18); flag wandering_inn.named. The name field keeps the day-8 name."},
 			"summary": "Large old wooden inn on a high hill: common room, long bar, kitchen with stone oven, upstairs rooms. Last of a small settlement that died of plague about ten years ago. No law stops anyone living there."
 		},
 		"inn_stream": {
@@ -92,13 +92,13 @@
 			"summary": "Liscor's market square. Scene of an evening brawl that pulled in the whole Watch on day 6."
 		},
 		"high_passes": {
-			"name": "The mountains around the pass",
+			"name": "The High Passes",
 			"kind": "region",
 			"parent": null,
 			"tags": ["mountains", "dangerous"],
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "guess", "note": "Unnamed in 1.00-1.09. Id guesses the name High Passes; confirm or rename when the book names them."},
-			"summary": "Vast cloud-topped mountains that wall the Floodplains and part to form one pass between north and south."
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Seen from 1.00; named in 1.19R. 1.20R: Runners call it a Gold- or Named-rank danger."},
+			"summary": "Vast cloud-topped range that splits the continent of Izril into north and south and walls the Floodplains. Many monsters; more Runners die there than anywhere near."
 		},
 		"dragon_cave_lair": {
 			"name": "The Dragon's first cave",
@@ -207,6 +207,42 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "interlude_the_great_ritual", "confidence": "likely", "note": "Text says 'kingdom of blight' and 'the Blighted King'; the continent is not named."},
 			"summary": "Distant Human kingdom ruled by the Blighted King and Queen, continents away from Liscor. Its mages hold a vast ritual underground to summon heroes."
+		},
+		"celum": {
+			"name": "Celum",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "human", "walled"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed"},
+			"summary": "Walled Human city-state north of the High Passes, one of the southernmost before them. Has a [Mayor] and owes no noble house. Magnolia Reinhart keeps a mansion there."
+		},
+		"remendia": {
+			"name": "Remendia",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "human"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed", "note": "Distance and direction from Celum not given."},
+			"summary": "Human city north of the High Passes. Its Runner's Guild is Ryoka's base and is better known than the city. Wales lies about thirty miles away."
+		},
+		"remendia_runners_guild": {
+			"name": "Remendia Runner's Guild",
+			"kind": "building",
+			"parent": "remendia",
+			"tags": ["guild", "runners", "request_board"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed"},
+			"summary": "Old tavern turned Runner's Guild: counters with uniformed [Receptionists], wall maps pinned with local dangers, a cork board of requests, and tables where Runners gossip between jobs."
+		},
+		"liscor_hive": {
+			"name": "The Hive under Liscor",
+			"kind": "district",
+			"parent": "liscor",
+			"tags": ["antinium", "hive", "underground", "restricted"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.15", "confidence": "confirmed", "note": "Seen only in Klbkch's thoughts."},
+			"summary": "Antinium home below Liscor. The ground opens on one street of the city and only Antinium go down. Klbkch's Queen is there."
 		}
 	}
 }

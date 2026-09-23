@@ -1,0 +1,27 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.19R",
+	"events": {
+		"b1.ryoka_delivers_to_magnolia": {
+			"tier": 1,
+			"window": {"earliest": 13, "latest": 16, "confidence": "guess"},
+			"location": "celum",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []},
+				"maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true},
+				"gate_guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "magnolia_reinhart"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.met_magnolia", "celum.goblin_band_reported"]},
+			"rumor": "Runners say a barefoot City Runner outran a Goblin band led by a Hob near Celum, far to the north, and still made her delivery.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed", "note": "Day is a guess: Ryoka has been in this world 'two weeks and a bit' (1.20R); nothing ties it to Erin's days. The rumor is a design choice."},
+			"summary": "At dawn a Goblin band with a Hob ambushes Ryoka, a barefoot City Runner, in tall grass near Celum. She outruns them, warns gate guard Wesle, and brings Lady Magnolia Reinhart a bottle of Amentus wine. Too shy to stay, she takes a gold tip and flees."
+		}
+	},
+	"system": []
+}
