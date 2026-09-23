@@ -1,0 +1,65 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.13",
+	"events": {
+		"b1.relc_brings_goblin_heads": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"guard": {"prefer": ["relc"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "relc"], "flags": ["goblin_tribe.lost_two_to_relc"], "not_flags": []},
+			"depends_on": ["b1.relc_kills_goblin_pair"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.threw_out_relc"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "relc", "delta": -3},
+					{"from": "relc", "to": "erin_solstice", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.13", "confidence": "confirmed", "note": "Deltas are design values."},
+			"summary": "At dawn Relc proudly brings Erin two Goblin heads as his apology and asks for sticks to mount them around the inn. Erin is sick, screams, and drives him out. He leaves angry and confused."
+		},
+		"b1.erin_buries_goblin_pair": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "goblin_grave",
+			"roles": {
+				"mourner": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"attacker": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.threw_out_relc"], "not_flags": []},
+			"depends_on": ["b1.relc_brings_goblin_heads"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.buried_goblins", "erin.spared_rags"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.13", "confidence": "likely", "note": "Burial confirmed. That the ragged attacker is the littlest Goblin is likely, not stated."},
+			"summary": "Erin carries the heads to the bodies and digs a grave with a spoon, then her bare hands. A small ragged Goblin rushes her with a knife; she slaps and kicks it down but will not kill it, and it runs off."
+		},
+		"b1.chieftain_hunts_erin": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"hunter": {"prefer": ["goblin_chieftain"], "fallback_tags": []},
+				"prey": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"watcher": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true},
+				"tribe": {"prefer": [], "fallback_tags": ["goblin"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "goblin_chieftain"], "flags": ["goblin_tribe.lost_two_to_relc"], "not_flags": []},
+			"depends_on": ["b1.erin_buries_goblin_pair"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 2,
+			"effects": {"set_flags": ["erin.hunted_by_chieftain"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.13", "confidence": "confirmed"},
+			"summary": "A horn sounds. The armoured Chieftain shoots arrows at Erin while his small tribe watches in silence and lets her flee home. It is a revenge hunt. She barricades the door, puts a pot of her market oil on the fire, and waits."
+		}
+	},
+	"system": []
+}

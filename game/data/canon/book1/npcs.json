@@ -34,7 +34,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Exists: confirmed. Id 'rags' is a guess from an art credit in 1.13; confirm when the text names her."},
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Exists: confirmed. Id 'rags' is a guess; still unnamed in 1.10-1.14. The small Goblin in rags who attacks Erin in 1.13 is likely her."},
 			"summary": "Smallest, youngest Goblin of the tribe (about two years old by her own count). Carries baskets, gets hit a lot. Very curious: invents her own counting system, works out how to spot poisoned blue fruit."
 		},
 		"goblin_chieftain": {
@@ -67,10 +67,10 @@
 			"tags": ["drake", "guard", "senior_guard", "spear", "veteran", "loud"],
 			"faction": "liscor_watch",
 			"home": "liscor",
-			"classes": [{"name": "[Spearmaster]", "level": null}, {"name": "[Guardsman]", "level": null}],
+			"classes": [{"name": "[Spearmaster]", "level": null}, {"name": "[Guardsman]", "level": null}, {"name": "[Sergeant]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06."},
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. [Sergeant] and [Iron Scales] from 1.12; served in the 4th Wing of the Liscorian Army (1.10)."},
 			"summary": "Huge light-green Drake, Senior Guardsman of Liscor and former soldier. Loud, friendly, big eater, proud of being a Drake; hates being called a lizard. Cannot breathe fire. Never misses a spear throw."
 		},
 		"klbkch": {
@@ -118,8 +118,68 @@
 			"classes": [{"name": "[Mage]", "level": null}, {"name": "[Necromancer]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.08", "confidence": "confirmed", "note": "Very likely the unnamed bone thief who watches the inn in 1.04 (he does not deny it in 1.09)."},
+			"canon_ref": {"book": 1, "chapter": "1.08", "confidence": "confirmed", "note": "Very likely the unnamed bone thief of 1.04 (does not deny it in 1.09). Sleeps in a cave (interlude after 1.10); place not given."},
 			"summary": "Thin, filthy young Human mage from Wistram Academy with a sneering, wordy manner. Illusions, elemental magic, and secret necromancy. Has robbed people near Liscor with fake monsters for about a month; bounty on him."
+		},
+		"selys": {
+			"name": "Selys",
+			"race": "Drake",
+			"tags": ["drake", "receptionist", "guild_staff", "friendly", "gossip"],
+			"faction": "liscor_adventurers_guild",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
+			"summary": "Young female Drake with pale green scales, receptionist at Liscor's Adventurer's Guild. Chatty and kind to Erin, shakes her hand Human-style and gives directions, but backs down when a Gnoll adventurer bullies her out."
+		},
+		"krshia": {
+			"name": "Krshia",
+			"race": "Gnoll",
+			"tags": ["gnoll", "merchant", "shopkeeper", "market", "loud"],
+			"faction": null,
+			"home": "liscor_market",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "Her stall is called Krshia's Silverfang Goods; Silverfang may be her tribe (guess)."},
+			"summary": "Tall female Gnoll with russet fur spotted black, owner of a large general-goods stall in Liscor's market. Loud and brisk, calls Erin over for bargains. Hisses at Lism when he overcharges Erin."
+		},
+		"lism": {
+			"name": "Lism",
+			"race": "Drake",
+			"tags": ["drake", "merchant", "shopkeeper", "market", "grocer", "prejudiced"],
+			"faction": null,
+			"home": "liscor_market",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed"},
+			"summary": "Drake who sells flour, salt, sugar, oil and dried sausages at a market stall next to Krshia's. Openly hates Humans, will not let Erin touch the goods, and charges her far too much."
+		},
+		"belsc": {
+			"name": "Belsc",
+			"race": "Drake",
+			"tags": ["drake", "guard", "gate_guard"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "likely", "note": "Named in 1.12 as the eastern gate guard. That he is the yellow-scaled guard Erin meets in 1.11 is likely, not stated."},
+			"summary": "Watch guard on duty at Liscor's quiet eastern gate. Pale yellow scales, spear, buckler and curved sword. Bored and curt with Humans; lets Erin in and complains in the barracks that she talks too much."
+		},
+		"drassi": {
+			"name": "Drassi",
+			"race": "Drake",
+			"tags": ["drake", "barmaid", "gossip", "friendly", "townsfolk"],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
+			"summary": "Bright yellow-scaled Drake who serves at an outdoor café in Liscor until her boss fires her for gossiping. Delighted to see a Human and eager to help Erin find her way."
 		}
 	}
 }

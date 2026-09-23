@@ -135,6 +135,78 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.06", "confidence": "confirmed"},
 			"summary": "Area between Liscor and Pallass. Supply shipments only cross it once it is frozen in winter."
+		},
+		"liscor_east_gate": {
+			"name": "Liscor east gate",
+			"kind": "landmark",
+			"parent": "liscor",
+			"tags": ["gate", "wall", "watch_post"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "Erin comes from the inn to the eastern gate. That the inn lies east of Liscor is a guess from this."},
+			"summary": "Two solid metal doors in a wall about forty feet high. Quiet: most visitors come from the north, or from the south in winter. Anyone may enter; the gates close at sundown. One guard on duty."
+		},
+		"liscor_adventurers_guild": {
+			"name": "Liscor Adventurer's Guild",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": ["guild", "adventurers", "bounty_board"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
+			"summary": "Big hall like a tavern, full of armed Drake and Gnoll adventurers and a few mages. A receptionist's counter takes bounties and quests; a wooden board holds job notices."
+		},
+		"liscor_mages_guild": {
+			"name": "Liscor Mage's Guild",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": ["guild", "magic", "mentioned"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
+			"summary": "Large, busy building marked with a crystal ball and a wand. Named by Drassi; Erin only sees it from outside."
+		},
+		"liscor_plaza": {
+			"name": "Liscor central plaza",
+			"kind": "district",
+			"parent": "liscor",
+			"tags": ["plaza", "park", "government"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "likely", "note": "Erin guesses the pillared building is a city hall; it bears the city sigil."},
+			"summary": "Open square with benches, trees and a children's play area. At one end stands a pillared public building with the Liscor sigil."
+		},
+		"krshia_stall": {
+			"name": "Krshia's Silverfang Goods",
+			"kind": "building",
+			"parent": "liscor_market",
+			"tags": ["shop", "general_goods", "market_stall"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed"},
+			"summary": "One of the larger stalls in the food section of the market, under a thin canopy. Sells food and many other goods. Run by the Gnoll Krshia."
+		},
+		"lism_stall": {
+			"name": "Lism's dry goods stall",
+			"kind": "building",
+			"parent": "liscor_market",
+			"tags": ["shop", "food", "dry_goods", "market_stall"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "Stall name not given; id uses the owner's name."},
+			"summary": "Stall next to Krshia's with sacks and sample bins of flour, salt and sugar, dried onions, garlic, roots, spices, and sausages on hooks. Prices on paper signs in Drake script."
+		},
+		"goblin_grave": {
+			"name": "Goblin grave",
+			"kind": "landmark",
+			"parent": "floodplains_of_liscor",
+			"tags": ["grave", "goblin"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.13", "confidence": "confirmed", "note": "At the foot of a hill, walking distance from the inn; exact spot not given."},
+			"summary": "Low mound of packed earth where Erin buried the two Goblins Relc killed, with their heads."
+		},
+		"blighted_kingdom": {
+			"name": "The Blighted Kingdom",
+			"kind": "region",
+			"parent": null,
+			"tags": ["kingdom", "far", "mentioned"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "interlude_the_great_ritual", "confidence": "likely", "note": "Text says 'kingdom of blight' and 'the Blighted King'; the continent is not named."},
+			"summary": "Distant Human kingdom ruled by the Blighted King and Queen, continents away from Liscor. Its mages hold a vast ritual underground to summon heroes."
 		}
 	}
 }

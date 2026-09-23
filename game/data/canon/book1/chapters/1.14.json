@@ -1,0 +1,31 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.14",
+	"events": {
+		"b1.erin_kills_chieftain": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"hunter": {"prefer": ["goblin_chieftain"], "fallback_tags": []},
+				"defender": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "goblin_chieftain"], "flags": ["erin.hunted_by_chieftain"], "not_flags": []},
+			"depends_on": ["b1.chieftain_hunts_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.killed_chieftain", "erin.stab_wound", "erin.hands_burned", "wandering_inn.door_broken", "goblin_tribe.leaderless"],
+				"kill": ["goblin_chieftain"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.14", "confidence": "confirmed", "note": "Before noon on day 9."},
+			"summary": "The Chieftain smashes in the door, beats Erin through tables and tries to assault her. She fights back with chairs and a rolling pin, is stabbed with her own knife, then throws the boiling oil in his face. She stays with him until he dies."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 9, "confidence": "confirmed", "note": "Right after the fight, not at night."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Bar Fighting]", "level": 9, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Unerring Throw]", "level": 9, "confidence": "confirmed"}
+	]
+}

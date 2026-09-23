@@ -1,0 +1,93 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.12",
+	"events": {
+		"b1.lism_overcharges_erin": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "liscor_market",
+			"roles": {
+				"buyer": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"seller": {"prefer": ["lism"], "fallback_tags": ["merchant", "drake"]},
+				"witness": {"prefer": ["krshia"], "fallback_tags": ["merchant", "gnoll"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.visited_liscor"], "not_flags": []},
+			"depends_on": ["b1.erin_walks_to_liscor"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.has_city_supplies", "erin.cheated_in_market", "erin.met_krshia"],
+				"relationship": [{"from": "lism", "to": "erin_solstice", "delta": -1}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "Delta is a design value."},
+			"summary": "At the market Erin shies away from Krshia, a loud Gnoll with a big goods stall. Lism, a Drake grocer, sneers at Humans and charges her two gold and eight silver for flour, oil, butter, sausages and spices. Krshia chokes at the price. Erin pays and is left with four silver."
+		},
+		"b1.erin_overhears_relc": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "liscor_watch_barracks",
+			"roles": {
+				"speaker": {"prefer": ["relc"], "fallback_tags": []},
+				"listener": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "relc"], "flags": ["erin.cheated_in_market"], "not_flags": []},
+			"depends_on": ["b1.lism_overcharges_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.overheard_relc"],
+				"relationship": [{"from": "erin_solstice", "to": "relc", "delta": -2}]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "Delta is a design value."},
+			"summary": "Erin looks for Relc at the barracks to ask about prices. In the mess hall he is joking to other guards that Humans are empty-headed and should keep to the north. She hears it and walks out without a word."
+		},
+		"b1.relc_drives_off_goblin_throwers": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"rescuer": {"prefer": ["relc"], "fallback_tags": []},
+				"target": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"throwers": {"prefer": [], "fallback_tags": ["goblin"]},
+				"young_thrower": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.overheard_relc"], "not_flags": []},
+			"depends_on": ["b1.erin_overhears_relc"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["goblin_tribe.stoned_erin"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed"},
+			"summary": "Relc chases Erin to apologise; she ignores him. Halfway home three Goblins pelt her with stones to make her drop the food. Relc scatters them, carries her bag to the inn, and promises to deal with the Goblins."
+		},
+		"b1.relc_kills_goblin_pair": {
+			"tier": 2,
+			"window": {"earliest": 8, "latest": 8, "confidence": "confirmed"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"killer": {"prefer": ["relc"], "fallback_tags": []},
+				"victims": {"prefer": [], "fallback_tags": ["goblin"]},
+				"witness": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["relc"], "flags": ["goblin_tribe.stoned_erin"], "not_flags": []},
+			"depends_on": ["b1.relc_drives_off_goblin_throwers"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["goblin_tribe.lost_two_to_relc"],
+				"relationship": [
+					{"from": "rags", "to": "relc", "delta": -3},
+					{"from": "goblin_chieftain", "to": "relc", "delta": -3}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.12", "confidence": "confirmed", "note": "The two dead Goblins made the littlest Goblin (her parents, in Goblin terms). Deltas are design values."},
+			"summary": "That night Relc hunts down the two older Goblin throwers, kills them, and takes their heads as a gift for Erin. The littlest Goblin, sent to find them, sees it. The Chieftain hears the news, takes up his axes and goes looking for the Human."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 6, "confidence": "confirmed", "note": "Night 8."},
+		{"who": "relc", "kind": "skill", "name": "[Iron Scales]", "level": null, "confidence": "confirmed", "note": "Relc: the last Skill from his [Sergeant] class."},
+		{"who": "relc", "kind": "class", "name": "[Sergeant]", "level": null, "confidence": "confirmed"},
+		{"who": "krshia", "kind": "other", "name": "Krshia's Silverfang Goods", "level": null, "confidence": "confirmed", "note": "Name of her stall."}
+	]
+}
