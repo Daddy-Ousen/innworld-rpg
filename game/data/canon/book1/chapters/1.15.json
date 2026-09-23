@@ -1,0 +1,68 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.15",
+	"events": {
+		"b1.klbkch_saves_erin": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"rescuer": {"prefer": ["klbkch"], "fallback_tags": ["guard"]},
+				"patient": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"onlookers": {"prefer": [], "fallback_tags": ["goblin"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.killed_chieftain"], "not_flags": []},
+			"depends_on": ["b1.erin_kills_chieftain"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.healed_by_klbkch", "klbkch.knows_erin_otherworld", "erin.forbids_goblin_killing", "klbkch.spares_goblins", "goblin_chieftain.body_buried"],
+				"clear_flags": ["erin.stab_wound", "erin.hands_burned"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "klbkch", "delta": 3},
+					{"from": "klbkch", "to": "erin_solstice", "delta": 2}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.15", "confidence": "confirmed", "note": "Evening of day 9; Klbkch is off duty. Another guard as a stand-in is a design choice. Deltas are design values."},
+			"summary": "Off duty, Klbkch walks out to visit Erin, sees smoke and Goblins at the windows, and finds her dying beside the dead Chieftain. His potion heals her. He guesses she is from another world. She makes him promise not to hunt the Goblins. He buries the body in pieces."
+		},
+		"b1.klbkch_punches_relc": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "confirmed"},
+			"location": "liscor",
+			"roles": {
+				"avenger": {"prefer": ["klbkch"], "fallback_tags": []},
+				"target": {"prefer": ["relc"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["klbkch", "relc"], "flags": ["erin.healed_by_klbkch"], "not_flags": []},
+			"depends_on": ["b1.klbkch_saves_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["relc.punched_by_klbkch", "liscor.antinium_standing_down"],
+				"relationship": [
+					{"from": "relc", "to": "klbkch", "delta": -2}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.15", "confidence": "confirmed", "note": "Erin tells Klbkch that Relc's killings caused the attack. The bar is not named. Delta is a design value."},
+			"summary": "That night Klbkch finds a drunk Relc in a Drake bar, bragging about the foolish Human. Without a word Klbkch holds him and punches him to the floor again and again, apologises to the room, and leaves, knowing the city will think a little worse of Antinium."
+		},
+		"b1.klbkch_files_bounty": {
+			"tier": 2,
+			"window": {"earliest": 9, "latest": 9, "confidence": "likely"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"witness": {"prefer": ["klbkch"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["klbkch"], "flags": ["goblin_chieftain.body_buried"], "not_flags": []},
+			"depends_on": ["b1.klbkch_saves_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.chieftain_bounty_filed", "antinium_hive.knows_erin"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.15", "confidence": "likely", "note": "Filing that night is his stated plan, not shown. The reward (12 gold, 14 silver) is on Erin's table by 1.17. Telling his Queen is also his stated aim."},
+			"summary": "Klbkch carries the Chieftain's head to Liscor in a sack made from Erin's shopping bag. He files the bounty and his witness report in her name, and resolves that his Queen must hear of this unusual Human."
+		}
+	},
+	"system": []
+}

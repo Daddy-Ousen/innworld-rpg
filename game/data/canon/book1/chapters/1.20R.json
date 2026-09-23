@@ -1,0 +1,34 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.20R",
+	"events": {
+		"b1.ryoka_warned_by_fals": {
+			"tier": 1,
+			"window": {"earliest": 13, "latest": 16, "confidence": "guess"},
+			"location": "remendia_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"senior": {"prefer": ["fals"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.met_magnolia"], "not_flags": []},
+			"depends_on": ["b1.ryoka_delivers_to_magnolia"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.warned_off_good_requests", "ryoka.saw_high_passes_request", "ryoka.agreed_run_with_garia"],
+				"relationship": [
+					{"from": "ryoka_griffin", "to": "fals", "delta": -2},
+					{"from": "fals", "to": "ryoka_griffin", "delta": -1},
+					{"from": "garia_strongheart", "to": "ryoka_griffin", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed", "note": "Same day as 1.19R. Day is a guess, as in 1.19R. Deltas are design values."},
+			"summary": "At the Runner's Guild in Remendia, Ryoka reports the Goblins and eyes an odd request: twenty gold just to visit the High Passes. Garia talks her into a joint run. Fals, speaking for the other Runners, tells her to leave Magnolia's jobs to others. She runs to Wales for the night."
+		}
+	},
+	"system": [
+		{"who": "ryoka_griffin", "kind": "class", "name": "[Barefoot Runner]", "level": null, "confidence": "likely", "note": "She blocks the level messages each night; the text cuts off mid-word, so whether she ever takes the class is not shown."}
+	]
+}

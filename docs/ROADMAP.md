@@ -68,7 +68,7 @@ Checked by `sim_m5_done` through the main scene (seed 2; see ADR 0010 M5.3).
 Split into 5 sub-modules, one branch + PR each (plan approved 2026-09-23, ADR 0011).
 Canon: all chapters 1.15–1.25. The player changes canon through `hooks` on canon events. First offer on night 2–3.
 - [x] M6.1 Play loop: title menu, 3 save slots + autosave, pause menu (Esc), journal with focus (J), welcome page, XP pacing (ADR 0011)
-- [ ] M6.2 Canon data 1.15–1.20R (`sim_canon_book1` to the new last day)
+- [x] M6.2 Canon data 1.15–1.20R (`sim_canon_book1` to the new last day)
 - [ ] M6.3 Canon data 1.21–1.25 (`sim_canon_book1` to about day 22)
 - [ ] M6.4 Player hooks on canon events, local news page, journal history + drift, 3 divergence cases in data — save v7
 - [ ] M6.5 Canon fights (the Chieftain at the inn), sparing Goblins, NPCs flee monsters, guards fight; `sim_m6_done`

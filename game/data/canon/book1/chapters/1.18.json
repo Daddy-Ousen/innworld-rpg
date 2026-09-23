@@ -1,0 +1,47 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.18",
+	"events": {
+		"b1.erin_befriends_krshia": {
+			"tier": 2,
+			"window": {"earliest": 13, "latest": 13, "confidence": "likely"},
+			"location": "krshia_stall",
+			"roles": {
+				"shopper": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "krshia"], "flags": ["erin.won_money_back"], "not_flags": []},
+			"depends_on": ["b1.erin_beats_olesm_at_chess"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.friend_of_krshia", "erin.supplies_ordered"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "krshia", "delta": 3},
+					{"from": "krshia", "to": "erin_solstice", "delta": 3}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.18", "confidence": "confirmed", "note": "Same day as the chess game. The Runner delivery is due the next day. Deltas are design values."},
+			"summary": "Erin apologises to Krshia for snubbing her. The Gnoll laughs, hugs her and names herself a Silverfang. A truth stone backs Erin's claim about her chess skill. Krshia sells her soap, toothpaste and food at a discount, books a Runner delivery for tomorrow and shows her the bath house."
+		},
+		"b1.erin_names_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 13, "latest": 13, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"reader_mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"reader_goblin": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.fed_goblins"], "not_flags": []},
+			"depends_on": ["b1.erin_feeds_goblins"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.named", "wandering_inn.no_killing_goblins_sign"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.18", "confidence": "confirmed", "note": "Evening of the chess day. The location name in data stays 'The abandoned inn on the hill'; the flag marks the new name."},
+			"summary": "At home, Erin decides she will not play life as a game with one winner. She runs back for tools and powdered paint, paints over the old sign and writes 'The Wandering Inn', and plants a second sign by the door: 'No Killing Goblins'. Pisces and the littlest Goblin read them."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,71 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.16",
+	"events": {
+		"b1.erin_defends_goblins": {
+			"tier": 2,
+			"window": {"earliest": 10, "latest": 10, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"hothead": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"carer": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.forbids_goblin_killing"], "not_flags": []},
+			"depends_on": ["b1.klbkch_saves_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.in_shock", "relc.told_spare_goblins", "pisces.told_spare_goblins", "wandering_inn.door_boarded"],
+				"clear_flags": ["wandering_inn.door_broken"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "relc", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "Day 10 is likely: the day after the fight. Erin has lost track of time. Klbkch boards up the door on day 10 or 11. Delta is a design value."},
+			"summary": "Numb in a chair, Erin barely notices her visitors. When Relc shouts about wiping out the Goblins, her [Unerring Throw] sends a kitchen knife past his face. Pisces offers to curse them; she hands him a sausage and swears to kill him if he kills a Goblin."
+		},
+		"b1.erin_screams_off_rock_crab": {
+			"tier": 2,
+			"window": {"earliest": 11, "latest": 11, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"crab": {"prefer": [], "fallback_tags": ["rock_crab"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.scared_off_rock_crab"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "The day Klbkch visits again, so day 11 is likely."},
+			"summary": "A Rock Crab knocks at the boarded door and snaps at Erin. She hits a claw with a chair and screams at it without stopping until it flees in pain, covering its ear holes. Far off, the Razorbeaks take to the air. Then she sleeps in her chair."
+		},
+		"b1.erin_feeds_goblins": {
+			"tier": 2,
+			"window": {"earliest": 12, "latest": 12, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"first_guest": {"prefer": ["rags"], "fallback_tags": ["goblin", "child"], "optional": true},
+				"guests": {"prefer": [], "fallback_tags": ["goblin"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.forbids_goblin_killing"], "not_flags": []},
+			"depends_on": ["b1.klbkch_saves_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.fed_goblins", "goblin_tribe.fed_by_erin"],
+				"relationship": [
+					{"from": "rags", "to": "erin_solstice", "delta": 2},
+					{"from": "erin_solstice", "to": "rags", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "Day 12 is likely: after the crab she sleeps and wakes at noon 'of tomorrow'. Day 11 is possible. The littlest Goblin is one of the four (confirmed). Deltas are design values."},
+			"summary": "Starved and sick, Erin walks to the blue fruit valley and sees four hungry Goblins flee from her. At dusk she cooks buttered pasta with sausage, opens the door and invites them in. They eat six plates. They offer three silver coins; she refuses: the first meal is free."
+		}
+	},
+	"system": []
+}
