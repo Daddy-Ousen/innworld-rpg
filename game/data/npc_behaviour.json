@@ -1,0 +1,145 @@
+{
+	"schema_version": 1,
+	"note": "NPC goals and schedules (M4.4, ADR 0008). Design data: where NPCs go and when. Hours are whole hours 0-24 (from > to wraps past midnight). Book 1 shows little of daily routines, so most of this is a guess; goals tied to a canon event say so in 'notes'. The Dragon never leaves its lair and is not here.",
+	"entries": {
+		"liscor": {"liscor_gate": [1, 11], "liscor_market": [2, 4]},
+		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]}
+	},
+	"npcs": {
+		"erin_solstice": {
+			"confidence": "guess",
+			"notes": "Day 8: Erin walks to Liscor for supplies (b1.erin_walks_to_liscor, b1.lism_overcharges_erin). Otherwise she runs the inn and forages blue fruit.",
+			"goals": [
+				{"goal": "trade", "base": 5, "days": [8, 8], "hours": [[11, 13, 1]],
+					"target": {"area": "liscor_market", "pos": [20, 8]}},
+				{"goal": "travel", "base": 4, "days": [8, 8], "hours": [[8, 16, 1]],
+					"target": {"off_map": "liscor"}},
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]],
+					"target": {"area": "inn_interior", "pos": [18, 13]}},
+				{"goal": "work", "base": 2, "hours": [[6, 9, 1], [17, 20, 1]],
+					"target": {"area": "inn_interior", "pos": [20, 2]}},
+				{"goal": "forage", "base": 2, "hours": [[13, 15, 1]], "when_flags": ["erin.knows_orchard"],
+					"target": {"area": "floodplains_south", "pos": [7, 17]}},
+				{"goal": "work", "base": 1,
+					"target": {"area": "inn_interior", "pos": [12, 6]}}
+			]
+		},
+		"relc": {
+			"confidence": "guess",
+			"notes": "Day 9 dawn: Relc brings Goblin heads to the inn (b1.relc_brings_goblin_heads). Stays away from the inn after Erin throws him out.",
+			"goals": [
+				{"goal": "visit_inn", "base": 5, "days": [9, 9], "hours": [[6, 7, 1]],
+					"target": {"area": "inn_hill", "pos": [16, 13]}},
+				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
+					"target": {"area": "liscor_gate", "route": [[3, 10], [28, 10], [28, 13], [3, 13]]}},
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]],
+					"when_flags": ["erin.met_liscor_watch"], "unless_flags": ["erin.threw_out_relc"],
+					"target": {"area": "inn_interior", "pos": [8, 8]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"klbkch": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
+					"target": {"area": "liscor_gate", "route": [[6, 14], [20, 14], [20, 9], [6, 9]]}},
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
+					"target": {"area": "inn_interior", "pos": [10, 8]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"zevara": {
+			"confidence": "guess",
+			"notes": "A short morning check at the east gate; otherwise in the Watch barracks.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[7, 8, 1]],
+					"target": {"area": "liscor_gate", "pos": [5, 9]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"beilmark": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[6, 14, 1]],
+					"target": {"area": "liscor_gate", "pos": [2, 13]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"belsc": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[14, 22, 1]],
+					"target": {"area": "liscor_gate", "pos": [2, 10]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"krshia": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "trade", "base": 2, "hours": [[7, 19, 1]],
+					"target": {"area": "liscor_market", "pos": [10, 5]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"lism": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "trade", "base": 2, "hours": [[8, 18, 1]],
+					"target": {"area": "liscor_market", "pos": [20, 5]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"selys": {
+			"confidence": "guess",
+			"notes": "Works at the Adventurer's Guild (off-map); lunch in the market.",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[12, 13, 1]],
+					"target": {"area": "liscor_market", "pos": [14, 14]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"drassi": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "trade", "base": 2, "hours": [[15, 17, 1]],
+					"target": {"area": "liscor_market", "pos": [17, 18]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"pisces": {
+			"confidence": "guess",
+			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night.",
+			"goals": [
+				{"goal": "forage", "base": 2, "hours": [[20, 5, 1]], "when_flags": ["liscor.hunting_pisces"],
+					"target": {"area": "floodplains_south", "pos": [27, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"rags": {
+			"confidence": "guess",
+			"notes": "Forages the fruit trees with the gatherer. Watches the inn after Erin spares her (b1.erin_buries_goblin_pair).",
+			"goals": [
+				{"goal": "forage", "base": 2, "hours": [[7, 11, 1]],
+					"target": {"area": "floodplains_south", "pos": [5, 19]}},
+				{"goal": "visit_inn", "base": 2, "hours": [[15, 18, 1]], "when_flags": ["erin.spared_rags"],
+					"target": {"area": "inn_hill", "pos": [6, 18]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"goblin_gatherer": {
+			"confidence": "guess",
+			"goals": [
+				{"goal": "forage", "base": 2, "hours": [[7, 11, 1]],
+					"target": {"area": "floodplains_south", "pos": [9, 19]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"goblin_chieftain": {
+			"confidence": "guess",
+			"notes": "Stays with the tribe in the wilds.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		}
+	}
+}
