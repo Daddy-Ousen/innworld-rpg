@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 6
+const SAVE_VERSION := 7
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -42,12 +42,13 @@ func _init(seed_value: int = 0) -> void:
 
 ## A fresh game at the start time and place from data/rules.json. The
 ## director first runs the canon days before the player arrives (ADR 0006),
-## so that history exists; its rumor lines are not shown.
+## so that history exists; its rumors and news are not heard.
 static func new_game(seed_value: int, db: DataDb) -> GameState:
 	var gs := GameState.new(seed_value)
 	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
 	gs.progression.day_start = gs.clock.total_minutes
 	Director.run(gs, db, gs.clock.day() - 1)
+	gs.world.news.clear()
 	Movement.ensure_placed(gs, db)
 	Combat.sync(gs, db)
 	NpcSim.sync(gs, db)

@@ -212,6 +212,78 @@ class ValidateTest(unittest.TestCase):
         self.ev()["window"] = {"earliest": 1.0, "latest": 2.0, "confidence": "guess"}
         self.assertEqual(self.fx.run().errors, [])
 
+    # --- M6.4 news and player hooks
+
+    def hook(self, **over):
+        h = {"id": "player_cooked", "did": [{"action": ["cook_stew"], "context": {"location": "hut"}}],
+             "days": [1, 2], "then": "change", "effects": {"set_flags": ["hut.player_cooked"]},
+             "news": "The soup was better today."}
+        h.update(over)
+        return h
+
+    def test_news_and_hooks_pass(self):
+        ev = self.ev()
+        ev["news"] = "People say Alice made soup."
+        ev["hooks"] = [self.hook(), self.hook(id="player_left", then="cancel", effects=None),
+                       self.hook(id="player_swapped", then="mutate:b9.guard_visit", effects=None)]
+        for h in ev["hooks"]:
+            if h["effects"] is None:
+                del h["effects"]
+        ev["hooks"][2]["did"] = [{"action": ["attack_melee"], "outcome": ["success"],
+                                  "context": {"enemy": ["rat", "crab"]}}]
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_hook_shape_errors(self):
+        self.ev()["hooks"] = [
+            self.hook(days=[3, 1]),
+            self.hook(id="player_cooked", then="explode"),
+            self.hook(id="no_fx", effects=None),
+            self.hook(id="cancel_fx", then="cancel"),
+            self.hook(id="empty_did", did=[]),
+            self.hook(id="bad_outcome", did=[{"action": ["cook_stew"], "outcome": ["great"]}]),
+            self.hook(id="long_span", days=[1, 9]),
+        ]
+        del self.ev()["hooks"][2]["effects"]
+        rep = self.fx.run()
+        self.assertError(rep, "hooks[0].days")
+        self.assertError(rep, "duplicate hook id")
+        self.assertError(rep, "hooks[1].then")
+        self.assertError(rep, "hooks[2]: 'change' needs effects")
+        self.assertError(rep, "hooks[3]: effects only with 'change'")
+        self.assertError(rep, "hooks[4].did")
+        self.assertError(rep, "hooks[5].did[0].outcome")
+        self.assertError(rep, "hooks[6].days: the action log keeps 7 days")
+
+    def test_hook_references(self):
+        self.ev()["hooks"] = [
+            self.hook(effects={"kill": ["zed"]}),
+            self.hook(id="ghost", then="mutate:b9.ghost", effects=None),
+        ]
+        del self.ev()["hooks"][1]["effects"]
+        rep = self.fx.run()
+        self.assertError(rep, "unknown npc 'zed'")
+        self.assertError(rep, "unknown mutate target 'b9.ghost'")
+
+    def test_hook_actions_checked_when_known(self):
+        self.ev()["hooks"] = [self.hook(did=[{"action": ["juggle"]}])]
+        self.fx.write()
+        rep = vd.validate_dir(self.fx.root, None, actions={"cook_stew"})
+        self.assertError(rep, "unknown action 'juggle'")
+        self.assertEqual(self.fx.run().errors, [], "no action list: not checked")
+
+    def test_hook_days_after_the_window_warn(self):
+        self.ev()["hooks"] = [self.hook(days=[5, 6])]
+        rep = self.fx.run()
+        self.assertEqual(rep.errors, [])
+        self.assertTrue(any("after the event's window" in w for w in rep.warnings), rep.warnings)
+
+    def test_news_copy_check(self):
+        self.ev()["news"] = "Here the quick brown fox jumps over the lazy dog again."
+        self.ev()["hooks"] = [self.hook(news="Here the quick brown fox jumps over the lazy dog again.")]
+        rep = self.fx.run(with_raw=True)
+        self.assertError(rep, ".news: copies book text")
+        self.assertError(rep, "hooks[0].news: copies book text")
+
     def test_cli_exit_codes(self):
         self.fx.write()
         self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 0)

@@ -6,6 +6,9 @@ class_name CanonDb
 extends RefCounted
 
 const SCHEMA_VERSION := 1
+## Hook results (besides "mutate:<id>").
+const HOOK_CANCEL := "cancel"
+const HOOK_CHANGE := "change"
 
 var npcs: Dictionary = {}
 var locations: Dictionary = {}
@@ -14,7 +17,8 @@ var events: Dictionary = {}
 var order: Array[String] = []
 ## Event id → ids of the events that list it in depends_on (in run order).
 var dependents: Dictionary = {}
-## Events that are a mutate target. They only run in place of another event.
+## Events that are a mutate target (of on_fail or a hook). They only run in
+## place of another event.
 var alt_only: Dictionary = {}
 var errors: Array[String] = []
 
@@ -115,6 +119,44 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 		_check_npcs("%s role '%s'" % [where, role], ev["roles"][role].get("prefer", []))
 	_check_npcs(where + " requires.alive", ev["requires"].get("alive", []))
 	_check_npcs(where + " effects.kill", ev["effects"].get("kill", []))
+	var hook_ids := {}
+	for hook: Dictionary in ev.get("hooks", []):
+		_validate_hook(where, hook, hook_ids)
+
+
+## A player hook (M6.4, ADR 0011): {"id", "did": [{"action": [ids],
+## "outcome"?: [..], "context"?: {key: value or [values]}}], "days": [from, to],
+## "then": "cancel" | "change" | "mutate:<id>", "effects"? (change only), "news"?}.
+func _validate_hook(where: String, hook: Dictionary, seen: Dictionary) -> void:
+	for field: String in ["id", "did", "days", "then"]:
+		if not hook.has(field):
+			errors.append("%s hook: missing '%s'." % [where, field])
+			return
+	var hw := "%s hook '%s'" % [where, hook["id"]]
+	if seen.has(hook["id"]):
+		errors.append("%s: duplicate hook id." % hw)
+	seen[hook["id"]] = true
+	if (hook["did"] as Array).is_empty():
+		errors.append("%s: 'did' is empty." % hw)
+	for m: Dictionary in hook["did"]:
+		if (m.get("action", []) as Array).is_empty():
+			errors.append("%s: a 'did' entry has no action." % hw)
+	var days: Array = hook["days"]
+	if days.size() != 2 or int(days[0]) < 1 or int(days[1]) < int(days[0]):
+		errors.append("%s: 'days' must be [from, to] with 1 <= from <= to." % hw)
+	var then: String = hook["then"]
+	var target := mutate_target(then)
+	if target != "":
+		if not events.has(target):
+			errors.append("%s: mutate target '%s' is unknown." % [hw, target])
+		else:
+			alt_only[target] = true
+	elif then == HOOK_CHANGE:
+		if not hook.has("effects"):
+			errors.append("%s: 'change' needs effects." % hw)
+		_check_npcs(hw + " effects.kill", hook.get("effects", {}).get("kill", []))
+	elif then != HOOK_CANCEL:
+		errors.append("%s: 'then' must be cancel, change or mutate:<id>." % hw)
 
 
 func _check_npcs(where: String, ids: Array) -> void:

@@ -29,15 +29,21 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Margin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.55, 0.8, 1, 1)
-text = "[Journal]   (J or Esc to close)"
+text = "[Journal]   (J or Esc to close, PgUp / PgDn to scroll)"
 
-[node name="Text" type="Label" parent="Margin/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Text" type="Label" parent="Margin/VBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 autowrap_mode = 3
 
 [node name="Focus" type="ItemList" parent="Margin/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
-size_flags_vertical = 3

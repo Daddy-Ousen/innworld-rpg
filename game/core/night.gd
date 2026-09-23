@@ -14,10 +14,12 @@ const KNOCKOUT_LINE := "You were knocked out. The System still works while you s
 ## (ADR 0010). Returns
 ## {"days_passed": int, "records": int, "offers": Array[String], "lines": Array[String],
 ##  "events": Array[Dictionary], "collapsed": bool, "knocked_out": bool,
-##  "progress": Array[String], "world": Array[String]}. `events` are the history
-## entries the director added tonight. `lines` is everything in order: the
+##  "progress": Array[String], "news": Array[String], "world": Array[String]}.
+## `events` are the history entries the director added tonight; `news` the
+## local news texts it added (M6.4). `lines` is everything in order: the
 ## collapse (or knock-out) line, then
-## `progress` (levels, skills, class loss), one line per offer, then
+## `progress` (levels, skills, class loss), one line per offer, one
+## "News: ..." line per news, then
 ## `world` (the director's rumors and drift warning). The lines are also
 ## stored in gs.morning for the morning summary.
 static func run(gs: GameState, db: DataDb, collapsed: bool = false,
@@ -45,7 +47,13 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 		lines.append("Class offered: %s. Accept or decline." % db.classes[id]["name"])
 	# 5. World director: canon events up to the day before the wake day.
 	var history_before := gs.world.history.size()
+	var news_before := gs.world.news.size()
 	var world := Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], long_sleep) - 1)
+	var news: Array[String] = []
+	for n: Dictionary in gs.world.news.slice(news_before):
+		if n["kind"] == Director.NEWS:
+			news.append(n["text"])
+			lines.append("News: %s" % n["text"])
 	lines.append_array(world)
 	var events := gs.world.history.slice(history_before)
 	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
@@ -60,7 +68,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	gs.morning = lines.duplicate()
 	return {"days_passed": days, "records": records.size(), "offers": offered, "lines": lines,
 			"events": events, "collapsed": collapsed, "knocked_out": knocked_out,
-			"progress": progress, "world": world}
+			"progress": progress, "news": news, "world": world}
 
 
 ## Step 1: returns the records made since the last night, and starts a new day.

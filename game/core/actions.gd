@@ -33,7 +33,8 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 	return float(v) <= float(rule["max"])
 
 
-## Does `action_id` now. Options (all optional):
+## Does `action_id` now. The record keeps the context (M6.4: canon event
+## hooks match on it, e.g. the enemy of a fight). Options (all optional):
 ##   intensity: float, risk: float (overrides the action's base risk),
 ##   outcome: "success" | "partial" | "fail", context: Dictionary, witnesses: Array,
 ##   minutes: int (overrides the action's minutes, e.g. travel between maps),
@@ -76,6 +77,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		"conviction": conviction,
 		"skill_mult": skill_m,
 		"outcome": outcome,
+		"context": (opts.get("context", {}) as Dictionary).duplicate(true),
 		"witnesses": (opts.get("witnesses", []) as Array).duplicate(),
 		"xp": xp,
 	}

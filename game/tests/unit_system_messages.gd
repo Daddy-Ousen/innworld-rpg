@@ -54,6 +54,17 @@ func test_pages_come_in_a_fixed_order() -> void:
 	assert_eq(pages[-1]["lines"].size(), 1, "not silent")
 
 
+func test_local_news_page_comes_before_the_rumors() -> void:
+	var gs := _new_game()
+	var night := {"progress": ["Cook reached level 2."], "news": ["Relc is angry.", "The inn has a name."],
+		"world": ["Rumor: a thing happened."]}
+	var pages := SystemMessages.pages(night, gs, _db)
+	assert_eq(_kinds(pages), [SystemMessages.PROGRESS, SystemMessages.NEWS, SystemMessages.RUMORS,
+		SystemMessages.MORNING])
+	assert_eq(pages[1]["title"], "Local News")
+	assert_eq(pages[1]["lines"], ["Relc is angry.", "The inn has a name."])
+
+
 func test_a_real_night_offer_has_accept_and_decline() -> void:
 	var gs := _new_game()
 	for i in 3:

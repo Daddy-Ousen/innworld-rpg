@@ -22,6 +22,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			3: out = _migrate_3_to_4(out)
 			4: out = _migrate_4_to_5(out)
 			5: out = _migrate_5_to_6(out)
+			6: out = _migrate_6_to_7(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -66,4 +67,15 @@ static func _migrate_5_to_6(d: Dictionary) -> Dictionary:
 	player["hp"] = -1
 	player["held"] = ""
 	d["combat"] = {}
+	return d
+
+
+## v7 (M6.4): action records keep their context (canon event hooks match
+## on it), and the world keeps the news the player heard. Old records get
+## an empty context; a v6 save has heard no news.
+static func _migrate_6_to_7(d: Dictionary) -> Dictionary:
+	for r: Dictionary in d["action_log"].get("records", []):
+		if not r.has("context"):
+			r["context"] = {}
+	(d["world"] as Dictionary)["news"] = []
 	return d

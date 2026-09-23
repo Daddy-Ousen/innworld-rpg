@@ -1,14 +1,19 @@
 ## World director (DESIGN §4.4, night step 5; ADR 0005). Runs the canon
 ## events that are due, and patches the story when their conditions fail:
 ## substitute, delay, mutate, cancel, then propagation to dependent events.
+## Player hooks (M6.4, ADR 0011): what the player did (the action log) can
+## cancel, mutate or change a due event. Events and hooks with `news` add
+## local news; T1 rumors are news too (gs.world.news).
 ## Pure functions over GameState + DataDb. No randomness: every choice is
 ## ordered by data and id.
 class_name Director
 extends RefCounted
 
-## Event outcomes (history "outcome"; the last four are also event statuses).
+## Event outcomes (history "outcome"; all but delayed and killed are also
+## event statuses). changed = done, with a player hook's extra effects.
 const DONE := "done"
 const SUBSTITUTED := "substituted"
+const CHANGED := "changed"
 const MUTATED := "mutated"
 const CANCELLED := "cancelled"
 const DELAYED := "delayed"
@@ -25,6 +30,11 @@ const FAIL_HARD := "hard"
 ## Anonymous role fillers are "*" + the first fallback tag, e.g. "*rock_crab".
 const ANONYMOUS := "*"
 const UNRELIABLE_LINE := "The future you remember no longer feels certain."
+## History "by" of a change the player made.
+const BY_PLAYER := "player"
+## gs.world.news kinds.
+const NEWS := "news"
+const RUMOR := "rumor"
 
 
 ## Runs every day from world.last_day + 1 up to `through_day`.
@@ -63,7 +73,7 @@ static func evaluate(gs: GameState, db: DataDb, id: String) -> Dictionary:
 		var s := w.status(dep)
 		if s == WorldState.PENDING:
 			fails.append(_fail(FAIL_WAIT, "waits for %s" % dep))
-		elif s != DONE and s != SUBSTITUTED:
+		elif not happened(s):
 			fails.append(_fail(FAIL_HARD, "%s was %s" % [dep, s]))
 	var roles := {}
 	var open: Array[String] = []
@@ -122,6 +132,56 @@ static func resolve(gs: GameState, db: DataDb, id: String, day: int, check: Dict
 	_propagate(gs, db, id, day, lines)
 
 
+## True for a status where the event took place (done, substituted, changed).
+static func happened(status: String) -> bool:
+	return status == DONE or status == SUBSTITUTED or status == CHANGED
+
+
+## The first hook of the event whose deeds the player did by `day`, among the
+## hooks with a result in `thens` ("cancel", "change", "mutate"); {} if none.
+static func matching_hook(gs: GameState, ev: Dictionary, day: int, thens: Array) -> Dictionary:
+	for hook: Dictionary in ev.get("hooks", []):
+		var then: String = hook["then"]
+		var kind := "mutate" if CanonDb.mutate_target(then) != "" else then
+		if thens.has(kind) and did(gs, hook, day):
+			return hook
+	return {}
+
+
+## True if an action record in the log matches one of the hook's "did"
+## entries, on a day in hook.days (and not after `day`).
+static func did(gs: GameState, hook: Dictionary, day: int) -> bool:
+	var from := int(hook["days"][0])
+	var to := mini(int(hook["days"][1]), day)
+	for r: Dictionary in gs.action_log.records:
+		var rday := int(r["day"])
+		if rday < from or rday > to:
+			continue
+		for m: Dictionary in hook["did"]:
+			if _record_matches(r, m):
+				return true
+	return false
+
+
+static func _record_matches(r: Dictionary, m: Dictionary) -> bool:
+	if not (m["action"] as Array).has(r["action_id"]):
+		return false
+	if m.has("outcome") and not (m["outcome"] as Array).has(r["outcome"]):
+		return false
+	var ctx: Dictionary = r.get("context", {})
+	var want: Dictionary = m.get("context", {})
+	for key: String in want:
+		if not ctx.has(key):
+			return false
+		var ok: Variant = want[key]
+		if ok is Array:
+			if not (ok as Array).has(ctx[key]):
+				return false
+		elif ctx[key] != ok:
+			return false
+	return true
+
+
 ## The player kills an NPC (M5 combat will call this). Returns "" or an error.
 static func player_kill(gs: GameState, db: DataDb, npc: String) -> String:
 	if not db.canon.npcs.has(npc):
@@ -142,6 +202,9 @@ static func _run_day(gs: GameState, db: DataDb, day: int, lines: Array[String]) 
 		var changed := false
 		for id in order:
 			if _is_due(gs, db, id, day):
+				if _player_hook(gs, db, id, day, lines):
+					changed = true
+					continue
 				var check := evaluate(gs, db, id)
 				if (check["fails"] as Array).is_empty():
 					_fire(gs, db, id, day, DONE, check["roles"], lines)
@@ -150,6 +213,9 @@ static func _run_day(gs: GameState, db: DataDb, day: int, lines: Array[String]) 
 			continue
 		for id in order:
 			if not _is_due(gs, db, id, day):
+				continue
+			if _player_hook(gs, db, id, day, lines):
+				changed = true
 				continue
 			var check := evaluate(gs, db, id)
 			if (check["fails"] as Array).is_empty():
@@ -160,6 +226,34 @@ static func _run_day(gs: GameState, db: DataDb, day: int, lines: Array[String]) 
 				changed = true
 		if not changed:
 			return
+
+
+## A due event whose cancel or mutate hook matches: the player changed it.
+## A mutate hook whose target cannot run now is skipped. Returns true if a
+## hook was applied.
+static func _player_hook(gs: GameState, db: DataDb, id: String, day: int,
+		lines: Array[String]) -> bool:
+	var ev: Dictionary = db.canon.events[id]
+	for hook: Dictionary in ev.get("hooks", []):
+		if hook["then"] == CanonDb.HOOK_CHANGE or not did(gs, hook, day):
+			continue
+		var by := {"by": BY_PLAYER, "hook": hook["id"]}
+		var reason := "the player: %s" % hook["id"]
+		var alt := CanonDb.mutate_target(hook["then"])
+		var alt_check := {}
+		if alt != "":
+			if gs.world.status(alt) != WorldState.PENDING:
+				continue
+			alt_check = evaluate(gs, db, alt)
+			if not (alt_check["fails"] as Array).is_empty():
+				continue
+		_close(gs, db, id, day, CANCELLED if alt == "" else MUTATED, {}, alt, reason, by)
+		_add_news(gs, day, id, NEWS, hook.get("news", ""))
+		if alt != "":
+			_fire(gs, db, alt, day, DONE, alt_check["roles"], lines)
+		_propagate(gs, db, id, day, lines)
+		return true
+	return false
 
 
 static func _is_due(gs: GameState, db: DataDb, id: String, day: int) -> bool:
@@ -207,19 +301,34 @@ static func _substitute(gs: GameState, db: DataDb, ev: Dictionary, check: Dictio
 	return true
 
 
+## Runs the event. A matching "change" hook adds its effects (outcome
+## changed), and its news replaces the event's news.
 static func _fire(gs: GameState, db: DataDb, id: String, day: int, outcome: String,
 		roles: Dictionary, lines: Array[String]) -> void:
 	var ev: Dictionary = db.canon.events[id]
-	_close(gs, db, id, day, outcome, roles, "", "")
-	_apply_effects(gs, ev, roles)
+	var hook := matching_hook(gs, ev, day, [CanonDb.HOOK_CHANGE])
+	if hook.is_empty():
+		_close(gs, db, id, day, outcome, roles, "", "")
+	else:
+		_close(gs, db, id, day, CHANGED, roles, "", "", {"by": BY_PLAYER, "hook": hook["id"]})
+	_apply_effects(gs, ev["effects"], ev, roles)
+	if not hook.is_empty():
+		_apply_effects(gs, hook["effects"], ev, roles)
+	_add_news(gs, day, id, NEWS, hook.get("news", ev.get("news", "")))
 	if int(ev["tier"]) == 1 and ev.has("rumor"):
 		lines.append("Rumor: %s" % ev["rumor"])
+		_add_news(gs, day, id, RUMOR, ev["rumor"])
+
+
+static func _add_news(gs: GameState, day: int, id: String, kind: String, text: String) -> void:
+	if text != "":
+		gs.world.add_news(day, id, kind, text)
 
 
 ## Effects on flags, NPCs and relationships. An NPC id in kill/relationship
 ## that a role replaced (substitute, or a later prefer) means the replacement.
-static func _apply_effects(gs: GameState, ev: Dictionary, roles: Dictionary) -> void:
-	var fx: Dictionary = ev["effects"]
+static func _apply_effects(gs: GameState, fx: Dictionary, ev: Dictionary,
+		roles: Dictionary) -> void:
 	for f: String in fx.get("set_flags", []):
 		gs.flags[f] = true
 	for f: String in fx.get("clear_flags", []):
@@ -238,18 +347,20 @@ static func _apply_effects(gs: GameState, ev: Dictionary, roles: Dictionary) -> 
 
 ## Sets the final status, logs history and adds drift.
 static func _close(gs: GameState, db: DataDb, id: String, day: int, outcome: String,
-		roles: Dictionary, via: String, reason: String) -> void:
+		roles: Dictionary, via: String, reason: String, extra: Dictionary = {}) -> void:
 	gs.world.events[id] = {"status": outcome, "day": day, "roles": roles.duplicate()}
-	_log(gs, db, id, day, outcome, roles, via, reason)
+	_log(gs, db, id, day, outcome, roles, via, reason, extra)
 
 
+## `extra` goes into the history entry ("by", "hook").
 static func _log(gs: GameState, db: DataDb, id: String, day: int, outcome: String,
-		roles: Dictionary, via: String, reason: String) -> void:
+		roles: Dictionary, via: String, reason: String, extra: Dictionary = {}) -> void:
 	var entry := {"day": day, "event": id, "outcome": outcome, "roles": roles.duplicate()}
 	if via != "":
 		entry["via"] = via
 	if reason != "":
 		entry["reason"] = reason
+	entry.merge(extra)
 	gs.world.history.append(entry)
 	var rules: Dictionary = db.rules["director"]
 	var tier := str(int(db.canon.events[id]["tier"]))
