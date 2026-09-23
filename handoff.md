@@ -1,29 +1,27 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.21-1.25`)
-M6.2 merged (PR #14), tag `m6.2-done`. M6.3 data done and reviewed; all entries `reviewed`.
-- `1.21.json`: inn_first_regulars d15, selys_sews_pads d16.
-- `1.22.json`: erin_traps_acid_flies d16, erin_beats_pisces_at_chess d16, pisces_saves_erin_from_flies d17; system: Erin [Innkeeper] 10, [Alcohol Brewing], [Dangersense].
-- `1.23A.json`: antinium_uncover_ruin_door d14 (secret dig by Klbkch).
-- `1.24.json`: liscor_ruins_discovered (tier 1 + rumor, window 17–18 guess), goblins_hunt_rock_crab d18, erin_serves_acid_flies d18.
-- `interlude_king_edition.json`: king_of_destruction_wakes d18 (tier 1 + rumor).
-- `1.25.json`: queen_allows_workers_visit d19, rags_brings_goblins_to_eat d19, workers_learn_chess d19; system: Olesm level (number unknown), Rags and pawn [Tactician].
-- New NPCs: terbore, free_queen, pawn (id is a guess), flos_reimarch, orthenon. New locations: liscor_dungeon, chandrar, reim.
-- Updated (were `reviewed`): rags name "Littlest Goblin" → "Rags"; olesm name → "Olesm Swifttail"; klbkch note (Klbkchhezeim, Prognugator); selys note ([Fast Stitching]); 1.11 `bully` role now prefers `terbore`.
-- `sim_canon_book1`: LAST_DAY 19, counts 62 / 27 / 30, new test `test_killing_the_free_queen_keeps_workers_home`. GUT 384/384 (40 scripts), validator 0 errors, Python 26 OK.
+## Just done (2026-09-24, branch `feat/m6.4-hooks-news`, PR #16)
+M6.4 Player hooks + news. Schema approved by the user 2026-09-24 (my picks: `changed` outcome, 3 cases below, all local news heard).
+- Commits: `22858d6` feat(director) core + UI + validator, `368cc80` data(book1), `a665603` docs.
+- Core: `Director` hooks (`_player_hook` for cancel/mutate before `requires`; `change` in `_fire`), `happened()`, outcome `changed`; `WorldState.news` + `add_news` / `news_since`; `Night` result `news`; records keep `context`; save v7 (`_migrate_6_to_7`); `ActionLog.from_dict` turns whole-number context floats back to ints; `GameState.new_game` clears news of days 1–7.
+- UI: `SystemMessages.NEWS` page "Local News"; journal: your mark on the story, drift line, 7 days of news, scroll (PgUp/PgDn); console `news`.
+- Data: 13 `news` lines (days 8–19); hooks on `b1.erin_screams_off_rock_crab` (mutate → new `b1.player_beat_rock_crab_first`, candidate), `b1.inn_first_regulars` (change), `b1.rags_brings_goblins_to_eat` (cancel).
+- Validator: news/hooks checks, `--actions` (auto: `game/data/actions.json`), copy check on news. Python 32 OK.
+- Tests: `unit_player_hooks`, `sim_player_hooks` (real fights by bump attack with frozen monsters + always hit; real cooking at the stove at inn_interior 20,2). GUT 408/408 (42 scripts). Validator 0 errors.
+- Journal and News page checked on screen (screenshots).
 
 ## Waiting on the user
-- M6.3 reviewed 2026-09-24 (my picks: ruins + King news as tier 1 rumors, Worker id `pawn`, canon ends day 19). Review PR #15 (https://github.com/Daddy-Ousen/innworld-rpg/pull/15), merge, then tag `m6.3-done` on the merge commit.
-Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, and now `[Alcohol Brewing]`.
+- Review PR #16 (https://github.com/Daddy-Ousen/innworld-rpg/pull/16): the 13 news lines, the 3 hook news lines, the new node `b1.player_beat_rock_crab_first` (candidate). Then merge and tag `m6.4-done` on the merge commit.
+- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
-## Next after M6.3
-- M6.4 Player hooks + news (save v7). Ask for a schema OK first: `hooks` and `news` on canon events (ADR 0011 plan).
-- M6.5 Canon fights + `sim_m6_done`. Needs a schema OK for `stage`.
+## Next
+- M6.5 Canon fights (the Chieftain at the inn), sparing Goblins, NPCs flee monsters, guards fight; `sim_m6_done`. Needs a schema OK for `stage` (ask first). A canon fight can end in a hook result (the player's fight record).
+- Open balance note: levels after the first class are slow (check in M6.5).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Line endings:** most `.gd`, `.json` and `.md` files are CRLF in the working copy (`core.autocrlf=true`). New files written by the Write tool are LF: fine, but never mix endings in one file. Patch CRLF files with a Python script that converts to LF, edits, and converts back.
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 40 / 382).
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 42 / 408).
 - Write GUT output to `$TMP` or the scratchpad, not next to the repo.
 - A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
 - Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir` (= `user://test_saves` via the pre-run hook); clear slots in `before_each`.
@@ -52,5 +50,11 @@ Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detec
 - Canon review flow: write events as `candidate`, run the validator (it also checks 7-word copies against `canon/raw`), user reviews, then flip to `reviewed`.
 - `SystemDialog` buttons connect deferred; tests call `dialog.choose(...)` directly.
 
+- **M6.4 hooks:** action records keep `context`; hooks match on it (`Director.did`). The log keeps 7 days only, so hook `days` span ≤ 7 (validator error).
+- A new game clears `world.news` after the day 1–7 director run (the player was not there).
+- Day 8 now has local news, so the first night's System dialog starts with a Local News page.
+- `sed -i` in Git Bash turns a CRLF file into LF. Fine (git stores LF), but do not mix endings in one file.
+- `git status` may list LF-converted files with no real diff; `git add` clears them.
+
 ## Active files
-`game/data/canon/book1/{npcs,locations}.json`, `game/data/canon/book1/chapters/1.15–1.20R.json`, `game/tests/sim_canon_book1.gd`. Older: `game/core/save_slots.gd`, `game/ui/{session,title_menu,pause_menu,slot_list,journal,system_messages,character_sheet}.gd`, `game/world/main.gd`, `game/world/main.tscn`, `game/data/classes.json`, `game/tests/{unit_save_slots,unit_journal,unit_play_loop,sim_m4_done}.gd`, `docs/adr/0011-m6-vertical-slice.md`.
+`game/core/{director,world_state,canon_db,night,actions,action_log,game_state,save_migrations}.gd`, `game/ui/{journal.gd,journal.tscn,system_messages.gd,console_commands.gd}`, `game/data/canon/book1/chapters/{1.12,1.14–1.18,1.21,1.24,1.25}.json`, `game/tests/{unit_player_hooks,sim_player_hooks,sim_canon_book1,unit_system_messages,unit_journal}.gd`, `tools/validate_data.py`, `docs/adr/0011-m6-vertical-slice.md`.
