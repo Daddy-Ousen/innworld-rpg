@@ -66,4 +66,4 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 12
-text = "WASD / arrows: walk (into a monster: attack)    Space: wait    B: block    T: throw    X: drop    E: use / take    Z: sleep    C: character    `: console"
+text = "WASD / arrows: walk (into a monster: attack)    Space: wait    B: block    T: throw    X: drop    E: use / take    Z: sleep    C: character    J: journal    Esc: menu    `: console"

@@ -5,12 +5,16 @@
 ## press (holding the key does not attack again). B blocks, T throws the
 ## held item at the nearest monster, X drops it. After every command the
 ## combat text goes to the log; a knocked-out player gets the night at once
-## (Commands.knock_out) and the System dialog.
+## (Commands.knock_out) and the System dialog. Esc opens the pause menu
+## (save, load, quit to title), J the journal. A new game opens with the
+## welcome page; the game autosaves each time the System dialog closes
+## (each morning) and on quit.
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
 ## Seconds between steps while a direction key is held.
 const STEP_REPEAT := 0.14
+const TITLE_SCENE := "res://ui/title_menu.tscn"
 const WAIT := "wait"
 const MOVE_KEYS := {
 	"n": [KEY_W, KEY_UP], "s": [KEY_S, KEY_DOWN], "e": [KEY_D, KEY_RIGHT], "w": [KEY_A, KEY_LEFT],
@@ -23,11 +27,15 @@ var _bumped := ""
 ## The direction of the last bump attack. That key must be let go before it
 ## moves or attacks again.
 var _attack_dir := ""
+## Tests set this false: quit to title then only autosaves.
+var switch_scene := true
 
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
 @onready var menu: InteractMenu = $MenuLayer/InteractMenu
 @onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
+@onready var journal: Journal = $MenuLayer/Journal
+@onready var pause: PauseMenu = $MenuLayer/PauseMenu
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
 @onready var console_layer: CanvasLayer = $ConsoleLayer
 @onready var console_input: LineEdit = $ConsoleLayer/DebugConsole.get_node("%Input")
@@ -41,11 +49,17 @@ func _ready() -> void:
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)
+	journal.focus_changed.connect(Session.changed)
+	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
+	pause.quit_requested.connect(quit_to_title)
 	console_layer.visible = false
-	hud.add_lines(["You stand outside the east gate of Liscor, a walled city."])
+	hud.add_lines(["Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]])
 	if not Session.db.is_valid():
 		hud.add_lines(["Data errors: see the debug console (`)."])
 	_redraw()
+	if Session.fresh:
+		Session.fresh = false
+		dialog.open([SystemMessages.welcome_page()] as Array[Dictionary], Session.gs, Session.db)
 
 
 func _redraw() -> void:
@@ -53,9 +67,10 @@ func _redraw() -> void:
 	hud.refresh(Session.gs, Session.db)
 
 
-## True while a menu, the sheet, the System dialog or the console has the keyboard.
+## True while a menu, the sheet, the journal, the System dialog or the
+## console has the keyboard.
 func is_busy() -> bool:
-	return console_layer.visible or menu.visible or sheet.visible or dialog.visible
+	return console_layer.visible or menu.visible or sheet.visible or journal.visible 			or pause.visible or dialog.visible
 
 
 func _input(event: InputEvent) -> void:
@@ -77,6 +92,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			sleep()
 		KEY_C:
 			sheet.open(Session.gs, Session.db)
+		KEY_J:
+			journal.open(Session.gs, Session.db)
+		KEY_ESCAPE:
+			pause.open()
 		KEY_B:
 			block()
 		KEY_T:
@@ -225,7 +244,21 @@ func _show_night(night: Dictionary) -> void:
 
 func _on_dialog_closed() -> void:
 	hud.add_lines(["Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]])
+	if Session.autosave() != OK:
+		hud.add_lines(["Autosave failed."])
 	Session.changed()
+
+
+## Autosaves, then goes back to the title screen.
+func quit_to_title() -> void:
+	Session.autosave()
+	if switch_scene:
+		get_tree().change_scene_to_file.call_deferred(TITLE_SCENE)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		Session.autosave()
 
 
 func toggle_console() -> void:
@@ -233,6 +266,8 @@ func toggle_console() -> void:
 	if console_layer.visible:
 		menu.close()
 		sheet.close()
+		journal.close()
+		pause.close()
 		console_input.grab_focus()
 	else:
 		console_input.release_focus()

@@ -57,7 +57,7 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 		out.append("  %s   from %s level %d" % [db.skills[s["id"]]["name"],
 				db.classes[s["class"]]["name"], int(s["level"])])
 	out.append("")
-	out.append("Focus: %s" % (", ".join(gs.focus_tags) if not gs.focus_tags.is_empty() else "none"))
+	out.append("Focus: %s" % Journal.focus_name(gs, db))
 	if not p.offers.is_empty():
 		out.append("Open offers: %s (answer them after you sleep)" % ", ".join(p.offers.map(
 				func(o: Dictionary) -> String: return db.classes[o["class"]]["name"])))

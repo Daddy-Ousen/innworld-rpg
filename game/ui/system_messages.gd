@@ -19,6 +19,7 @@ const OFFER := "offer"
 const CONFIRM := "confirm"
 const RESULT := "result"
 const MORNING := "morning"
+const WELCOME := "welcome"
 
 const NEXT := "next"
 const ACCEPT := "accept"
@@ -27,6 +28,15 @@ const YES := "yes"
 const BACK := "back"
 
 const SILENT_LINE := "The System is silent."
+
+## How to play: on the welcome page and in the journal (M6.1).
+const HINTS: Array[String] = [
+	"Walk with WASD or the arrow keys. E uses what is next to you.",
+	"Every action gives XP. At night the System can offer you a class.",
+	"J opens the journal. Choose a focus there: matching actions give more XP.",
+	"Sleep in a bed (Z). C shows your character. Esc opens the menu (save, load).",
+	"The game saves itself each morning.",
+]
 
 
 ## All pages for one night, in order. Offers come from the open offers in
@@ -53,6 +63,18 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	morning.append("You wake on day %d at %s." % [gs.clock.day(), gs.clock.time_string()])
 	out.append(page(MORNING, "Morning", morning))
 	return out
+
+
+## The first page of a new game (M6.1): who the player is, then HINTS.
+static func welcome_page() -> Dictionary:
+	var lines: Array[String] = [
+		"You are an Earther. The Great Ritual pulled you into this world last night.",
+		"You stand outside the east gate of Liscor, a walled city of Drakes and Gnolls.",
+		"You have no class and no level.",
+		"",
+	]
+	lines.append_array(HINTS)
+	return page(WELCOME, "Welcome", lines)
 
 
 ## The knock-out page (M5.3): where the player woke and with how much HP.
