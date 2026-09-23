@@ -1,6 +1,7 @@
 ## The Voice of the World as pages (ADR 0009). Turns a night result
 ## (Night.run) and GameState into the pages the System dialog shows, in
-## this order: collapse, levels and skills, rumors, drift warning, one page
+## this order: collapse (or knock-out), levels and skills, rumors, drift
+## warning, one page
 ## per open class offer, then the morning. Headless, so tests can check
 ## it. Reads state only; the dialog sends the answers as Commands.
 ##
@@ -10,6 +11,7 @@ class_name SystemMessages
 extends RefCounted
 
 const COLLAPSE := "collapse"
+const KNOCKOUT := "knockout"
 const PROGRESS := "progress"
 const RUMORS := "rumors"
 const DRIFT := "drift"
@@ -31,7 +33,9 @@ const SILENT_LINE := "The System is silent."
 ## gs (tonight's and any older unanswered ones), not from the night result.
 static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
-	if night.get("collapsed", false):
+	if night.get("knocked_out", false):
+		out.append(knockout_page(gs, db))
+	elif night.get("collapsed", false):
 		out.append(page(COLLAPSE, "Collapse", [Night.COLLAPSE_LINE]))
 	var progress: Array = night.get("progress", [])
 	if not progress.is_empty():
@@ -49,6 +53,16 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	morning.append("You wake on day %d at %s." % [gs.clock.day(), gs.clock.time_string()])
 	out.append(page(MORNING, "Morning", morning))
 	return out
+
+
+## The knock-out page (M5.3): where the player woke and with how much HP.
+static func knockout_page(gs: GameState, db: DataDb) -> Dictionary:
+	var place := gs.player.area
+	if db.maps.areas.has(place):
+		var loc := Movement.location_at(gs, db)
+		place = db.canon.locations.get(loc, {}).get("name", db.maps.areas[place]["name"])
+	return page(KNOCKOUT, "Knocked Out", [Night.KNOCKOUT_LINE,
+		"You wake at %s with %d HP." % [place, Combat.hp(gs, db)]])
 
 
 ## One page per open offer, in offer order.

@@ -1,33 +1,26 @@
 # Handoff
 
-## Just done (2026-09-23, branch `feat/m5.2-monsters`)
-M5.1 was merged (PR #10) and tagged `m5.1-done`.
-M5.2 Monsters on the map is done and tested (GUT 348/348, Python 26/26, validator 0 errors):
-- **`core/monster_sim.gd`** (`MonsterSim`), called by `Combat.sync` after the area check:
-  - turns per `act_seconds` (`carry`), round by round in id order; none on entering; none over `jump_seconds` unless a monster is hostile (then capped by `max_turns_per_sync`); stop when the player is down;
-  - spawns on entering and every `spawn.check_minutes` (`spawn_open`, `spawn_tiles`, `spawn_check`);
-  - spot roll once within `spot_radius`; ambush when next to the player or bumped (`MonsterSim.ambush`, used by `Commands.move`);
-  - pack aggro together; pack morale (half gone → flee); hurt → flee; give up (crab hides, others go home); territorial leash measured from home; flee to the edge / an exit and vanish;
-  - `fight.routed` counts when a monster starts to flee (also a scare in `Combat._strike`).
-- **Data:** 4 spawns in `enemies.json`; Razorbeak `aggro_radius` 3; map `item` fields (seed cores, stones, rolling pin, chairs); zone `razorbeak_nests` and object `razorbeak_nest`; 3 `loose_stones` objects.
-- **Core:** `Combat.take` / `Commands.take`; `Interact.TAKE` and `item` in options; `MapDb` checks `item` and allows objects with no actions; `DataDb` loads combat before it validates maps; `CombatDb` validates spawns; monsters have `pack` (defaults to 1 on load).
-- **Tests:** new `unit_monster_sim` (31), `sim_combat` (6); additions in `unit_combat_db`, `unit_interact`, `unit_map_db`. `unit_combat` now calls `ToyCombat.freeze` (monsters never act). `ToyCombat` has an `arena` map (`to_arena`) and a `bird`.
-- ADR 0010 has the M5.2 section. ROADMAP M5.2 ticked.
+## Just done (2026-09-23, branch `feat/m5.3-combat-ui`)
+M5.2 was merged (PR #11) and tagged `m5.2-done`.
+M5.3 Combat UI is done and tested (GUT 358/358, Python 26/26, validator 0 errors). Presentation only; no schema or save change.
+- `world/world_view.gd`: monster markers (edge by state: red hostile, yellow flee, dark calm; a dark ring; body in the enemy colour; label "Goblin 5/8"). A hidden crab is drawn as the `rock` tile, no label. `setup(maps, names, enemies)`.
+- `ui/hud.gd` + `hud.tscn`: `%Health` line `HP 14/20 · Held: Chair` (`Hud.health`, `Hud.is_low` at ≤ 25%). Log keeps 6 lines. New key hint.
+- `world/main.gd`: bump attack once per key press (`_attack_dir` lock per direction); `B` block, `T` throw at `Combat.nearest_foe`, `X` drop; `use(obj, Interact.TAKE)`; `_finish()` after every command (combat text to the log; if down: `Commands.knock_out` + dialog, log "Everything goes dark.").
+- `ui/interact_menu.gd`: "Take <item>" entries. `ui/system_messages.gd`: `KNOCKOUT` page. `ui/character_sheet.gd`: HP + stats.
+- `ui/console_commands.gd`: `attack`, `block`, `throw [id]`, `drop`, `use <obj> take`, debug `monsters`, `spawn <enemy> [dx dy]`, `knockout`; HP in `status`; `M` in `look`.
+- Core: `Combat.nearest_foe(gs)` only.
+- Tests: new `sim_m5_done` (seed 2; plays the M5 "Done when" through the main scene); additions in `unit_world_view`, `unit_system_messages`, `unit_console`, `unit_combat`.
+- ADR 0010 M5.3 section. ROADMAP M5.3 ticked.
 
 ## Waiting on the user
-- Review PR #11 (https://github.com/Daddy-Ousen/innworld-rpg/pull/11), merge, then tag `m5.2-done`.
+- Review PR #12 (https://github.com/Daddy-Ousen/innworld-rpg/pull/12), merge, then tag `m5.3-done` and `m5-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
-## Next: M5.3 Combat UI (branch `feat/m5.3-combat-ui`, from `main` after the merge)
-- Until M5.3, monsters are invisible in the running game (no markers, no HP in the HUD).
-- `world/world_view.gd`: monster markers in the enemy colour, label "Goblin 5/8"; a hidden crab looks like a rock tile, no label.
-- `ui/hud.gd`: `HP 14/20 · Held: Chair` (warning colour at ≤25%); combat lines (`gs.combat.lines`) into the log.
-- `world/main.gd`: bump to attack, one attack per key press (no auto-repeat attacks); `B` block, `T` throw at the nearest hostile, `X` drop; `E` menu gets "Take <item>" entries (options with `item` != ""; `Commands.take`); after any command, if `Combat.is_down`, call `Commands.knock_out` and open the dialog.
-- `ui/interact_menu.gd`: take entries (metadata `[id, Interact.TAKE]`).
-- `ui/system_messages.gd`: `KNOCKOUT` page ("Knocked Out … You wake at <place> with N HP.") replaces the collapse page (night result key `knocked_out`).
-- `ui/character_sheet.gd`: HP and stats (`Stats.of`).
-- `ui/console_commands.gd`: `attack <dir>`, `block`, `throw [id]`, `drop`, `use <obj> take`; debug `monsters`, `spawn <enemy> [dx dy]`, `knockout`; HP in `status`.
-- `sim_m5_done` (ROADMAP "Done when"); ADR 0010 M5.3 section; tag `m5.3-done` and `m5-done` after merge.
+## Next: M6 Vertical slice (read `docs/ROADMAP.md` M6 first; plan mode; ask the user)
+- The first ~14 in-game days of Book 1 playable end to end; save/load at any point; 3 divergence cases in play.
+- Open M6 items from ADR 0010: NPCs react to monsters, guards fight, the Chieftain fight, sparing Goblins, XP tuning (first class offer on day 22 is late; canon Erin gets [Innkeeper] on night 1).
+- Known M5 limits: NPCs walk through monsters; monsters do not use exits; fleeing is greedy; throw has no line of sight.
+- Save/load from the game screen is only in the debug console (`save` / `load`). M6 needs a real save/load UI.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -50,7 +43,11 @@ M5.2 Monsters on the map is done and tested (GUT 348/348, Python 26/26, validato
 - NPCs stand next to the start and in the inn. Tests that need an empty spot clear `gs.npcs.npcs` or place the player elsewhere. Test walks use `ToyMaps.walk_to` (goes around NPCs, not monsters: a bump attacks).
 - Godot text → float is never exact. Keep all save floats going through `SaveCodec`.
 - Screenshots: a scratch scene in `game/` (set `Session` state, add `world/main.tscn`), then `godot --path game --write-movie <scratch>/x.png --fixed-fps 5 --quit-after 3 res://<scene>.tscn`. Delete scratch files before committing.
+- **Python file writes:** always pass `encoding='utf-8'` to `open()`. The Windows default (cp1252) writes `·` and `—` as bad bytes; Godot then skips the whole script ("invalid unicode") and GUT still exits 0. Check the test count after each run.
+- A knock-out at 06:00 on day 8 is a nap: the player wakes the same day. Tests that want day 9 advance the clock first.
+- `sim_m5_done` depends on the seed (2). If spawn data or monster AI change, it may need a new seed: loop seeds with `_play(s)` and pick one that returns "".
+- On day 8 the inn's canon location name is "The abandoned inn on the hill".
 - `SystemDialog` buttons connect deferred; tests call `dialog.choose(...)` directly.
 
 ## Active files
-`game/core/{monster_sim,combat,combat_state,combat_db,commands,interact,map_db,data_db}.gd`, `game/data/{enemies.json,maps/floodplains_south.json,maps/inn_hill.json,maps/inn_interior.json}`, `game/test_support/toy_combat.gd`, `game/tests/{unit_monster_sim,sim_combat,unit_combat_db,unit_interact}.gd`, `docs/adr/0010-m5-combat.md`.
+`game/world/{main,world_view}.gd`, `game/world/world_view.tscn`, `game/ui/{hud,interact_menu,system_messages,character_sheet,console_commands}.gd`, `game/ui/hud.tscn`, `game/core/combat.gd`, `game/tests/{sim_m5_done,unit_world_view,unit_system_messages,unit_console,unit_combat}.gd`, `docs/adr/0010-m5-combat.md`.

@@ -1,5 +1,6 @@
 ## The "use" menu: one entry per nearby object action, plus "Sleep" for a
-## bed (Interact.SLEEP). Enter or a double click picks one; Escape closes.
+## bed (Interact.SLEEP) and "Take <item>" for an object with an item
+## (Interact.TAKE). Enter or a double click picks one; Escape closes.
 ## Presentation only.
 class_name InteractMenu
 extends PanelContainer
@@ -25,6 +26,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 		if o["sleep"]:
 			var i := _items.add_item("%s — Sleep (end the day)" % o["name"])
 			_items.set_item_metadata(i, [o["id"], Interact.SLEEP])
+		if o["item"] != "":
+			var i := _items.add_item("%s — Take %s" % [o["name"],
+					db.combat.items.get(o["item"], {}).get("name", o["item"])])
+			_items.set_item_metadata(i, [o["id"], Interact.TAKE])
 	if _items.item_count == 0:
 		return false
 	show()

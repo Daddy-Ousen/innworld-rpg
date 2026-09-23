@@ -84,6 +84,23 @@ static func name_of(db: DataDb, m: Dictionary) -> String:
 	return String(db.combat.enemies[m["type"]]["name"])
 
 
+## The monster to throw at (M5.3): the nearest seen (not hidden) monster in
+## the player's area, hostile ones first. Ties go to the lower id. "" if none.
+static func nearest_foe(gs: GameState) -> String:
+	var best := ""
+	var best_rank := 0
+	for id in gs.combat.ids():
+		var m: Dictionary = gs.combat.monsters[id]
+		if m["area"] != gs.player.area or m["state"] == CombatState.HIDDEN:
+			continue
+		var rank := _dist(gs.player.pos(), CombatState.pos_of(m)) \
+				+ (0 if m["state"] == CombatState.HOSTILE else 100000)
+		if best == "" or rank < best_rank:
+			best = id
+			best_rank = rank
+	return best
+
+
 static func hit_chance(db: DataDb, accuracy: int, evasion: int, bonus: float = 0.0) -> float:
 	var h: Dictionary = db.rules["combat"]["hit"]
 	return clampf(float(h["base"]) + float(h["per_point"]) * (accuracy - evasion) + bonus,

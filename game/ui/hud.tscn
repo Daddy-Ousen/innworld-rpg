@@ -28,6 +28,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Day 1  06:00"
 
+[node name="Health" type="Label" parent="Top/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "HP 20/20"
+
 [node name="Warning" type="Label" parent="Top/VBox"]
 unique_name_in_owner = true
 visible = false
@@ -61,4 +66,4 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 12
-text = "WASD / arrows: walk    Space: wait    E: use    Z: sleep    C: character    `: debug console"
+text = "WASD / arrows: walk (into a monster: attack)    Space: wait    B: block    T: throw    X: drop    E: use / take    Z: sleep    C: character    `: console"

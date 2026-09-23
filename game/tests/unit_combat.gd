@@ -402,3 +402,19 @@ func test_combat_state_survives_save_and_load() -> void:
 	assert_eq(loaded.player.held, "stick")
 	assert_eq(loaded.player.hp, gs.player.hp)
 	assert_true(loaded.combat.blocking)
+
+
+func test_nearest_foe_prefers_hostile_and_skips_hidden() -> void:
+	var gs := _game()
+	ToyCombat.to_arena(gs, _db, Vector2i(3, 7))
+	assert_eq(Combat.nearest_foe(gs), "")
+	ToyCombat.spawn(gs, _db, "crab", Vector2i(4, 7), CombatState.HIDDEN)
+	assert_eq(Combat.nearest_foe(gs), "", "a hidden crab is a rock")
+	var calm := ToyCombat.spawn(gs, _db, "goblin", Vector2i(3, 6), CombatState.IDLE)
+	assert_eq(Combat.nearest_foe(gs), calm)
+	var far := ToyCombat.spawn(gs, _db, "goblin", Vector2i(8, 7))
+	assert_eq(Combat.nearest_foe(gs), far, "hostile first")
+	var near := ToyCombat.spawn(gs, _db, "goblin", Vector2i(5, 7))
+	assert_eq(Combat.nearest_foe(gs), near)
+	ToyCombat.spawn(gs, _db, "goblin", Vector2i(1, 7))
+	assert_eq(Combat.nearest_foe(gs), near, "a tie goes to the lower id")

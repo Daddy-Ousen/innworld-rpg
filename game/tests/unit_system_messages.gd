@@ -237,3 +237,23 @@ func test_main_scene_sleep_opens_the_dialog() -> void:
 	assert_false(main.is_busy())
 	assert_true(session.gs.progression.has_class("innkeeper"))
 	assert_string_contains(main.hud.get_node("%Log").text, "Day 9, 06:00.")
+
+
+func test_a_knock_out_page_replaces_the_collapse_page() -> void:
+	var gs := _new_game()
+	gs.clock.advance(14 * 60)
+	var night := Night.run(gs, _db, true, true)
+	var pages := SystemMessages.pages(night, gs, _db)
+	assert_eq(_kinds(pages), [SystemMessages.KNOCKOUT, SystemMessages.MORNING])
+	assert_eq(pages[0]["title"], "Knocked Out")
+	assert_eq(pages[0]["lines"][0], Night.KNOCKOUT_LINE)
+	var place: String = _db.canon.locations[Movement.location_at(gs, _db)]["name"]
+	assert_eq(pages[0]["lines"][1], "You wake at %s with %d HP." % [place, Combat.hp(gs, _db)])
+
+
+func test_sheet_shows_hp_held_item_and_stats() -> void:
+	var gs := _new_game()
+	var text := "\n".join(CharacterSheet.lines(gs, _db))
+	assert_string_contains(text, Hud.health(gs, _db))
+	assert_string_contains(text, "Stats: Strength ")
+	assert_string_contains(text, "Endurance ")
