@@ -1,26 +1,31 @@
 # Handoff
 
 ## Just done
-M1 part 1 is done. It is on branch `feat/m1-sim-core-part1`, PR https://github.com/Daddy-Ousen/innworld-rpg/pull/1 (not merged yet). Local `main` = `origin/main`. ADR 0002 accepted. Built: `core/clock.gd`, `core/tags.gd`, `core/data_db.gd`, `core/action_log.gd`, `core/xp.gd`, `core/actions.gd`; data `tags.json`, `actions.json` (32), `rules.json`. GameState has typed fields. 55/55 tests pass.
+M1 part 2 is done on branch `feat/m1-sim-core-part2` (4 commits on top of `main`). PR #1 (part 1) was merged before this work.
+Built: `core/progression.gd`, `levels.gd`, `skill_system.gd`, `class_system.gd`, `night.gd`, `commands.gd`; `data/classes.json` (17), `data/skills.json` (47), `rules.skills`; save version 2 + migration; `ui/console_commands.gd` + `ui/debug_console.tscn` (main scene); tests `sim_30_days`, `sim_decline` and unit tests. 115/115 tests pass, headless exit 0. All design choices are in `docs/adr/0003-m1-class-system.md`.
 
-## Next (M1 part 2, see docs/KICKOFF.md Session 3)
-1. `data/classes.json` (~15) and `data/skills.json` (~40) per ADR 0002. Extend `DataDb` to load + validate them (tags must exist in `tags.json`).
-2. Class candidate pools fed from action records (xp × `Tags.match_weight(class.tag_weights, tag)`), offers (max 2/night), accept/decline, permanent blacklist.
-3. Levels: `rules.levels` (base_xp 100, growth 1.35, capstones 10/20/30), multi-class dilution.
-4. Skills from weighted pools (`tag_affinity` × `action_log.tag_totals`), picked with `gs.rng`.
-5. Night pipeline steps 1–4 and 8. Use `Clock.sleep(rules, collapsed)`; it returns calendar days passed.
-6. Debug text console scene. Then `sim_30_days` test + decline test.
+## Waiting on the user
+- ADR 0003 is "proposed". 3 items need an OK (CLAUDE.md rule 11): new `rules.skills` section, save v2 fields, `levels.base_xp` 100 → 60.
+- Push the branch and open the PR (not done yet). After merge: `git tag m1-done`.
+
+## Next (M2, see docs/KICKOFF.md Session 4)
+1. `tools/extract_epub.py` → `canon/raw/book1/` + `index.json`.
+2. Event/NPC/location schemas + `tools/validate_data.py`.
+3. Event candidates from the first ~10 chapters; stop for human review.
+4. While reading chapters: check class/skill `canon_ref` in `classes.json` / `skills.json` (most are `likely`/`guess`, chapter `null`).
 
 ## Gotchas
 - Commits: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer (user request).
 - After adding a new `class_name` script, run `godot --headless --path game --import` once, or tests cannot find the class.
-- GUT file prefix is empty in `game/.gutconfig.json`; test files are named `unit_*.gd` / `sim_*.gd`.
-- Use `JSON.new().parse()` for untrusted text (the static `parse_string` logs engine errors on bad input).
-- JSON numbers load as floats. `from_dict` must cast int fields (see `ActionLog.from_dict`, `Clock.from_dict`). Dictionary `==` treats 1 and 1.0 as different.
-- `GameState.to_json` uses `sort_keys=false, full_precision=true`. Keep it: it makes a loaded game continue exactly the same (tested in `unit_actions.gd`).
-- Day = calendar day from `clock.total_minutes`. It is NOT "number of sleeps".
-- `Actions.perform` returns `{}` while a collapse is due. The night pipeline must then call `clock.sleep(rules, true)`.
+- Test helper `ToyData` lives in `game/test_support/` (not `tests/`: GUT warns on non-test scripts there).
+- GUT file prefix is empty in `game/.gutconfig.json`; test files are `unit_*.gd` / `sim_*.gd`.
+- Pools and class XP change only at night (`Night.run`), not during the day.
+- `sim_30_days` trace is printed with `gut.p`. If you change tuning numbers, the trace changes; the tests check determinism and minimums, not exact values.
+- Console text uses `RichTextLabel` with BBCode off: class names contain `[` `]`.
+- Presentation must call `Commands.*` only (rule 1). `ConsoleCommands` follows this.
+- JSON numbers load as floats. `from_dict` casts int fields (`Progression.from_dict` too).
+- In Git Bash, never run `cat > file` without a heredoc: it waits on stdin and hangs.
 - GUT `.import` files show as modified in git: line endings only (CRLF). Do not commit them.
 
 ## Active files
-`game/core/*.gd`, `game/data/*.json`, `game/tests/unit_*.gd`, `docs/adr/0002-m1-data-schemas.md`, `docs/ROADMAP.md`.
+`game/core/{progression,levels,skill_system,class_system,night,commands}.gd`, `game/data/{classes,skills,rules}.json`, `game/ui/*`, `game/tests/{sim_*,unit_*}.gd`, `docs/adr/0003-m1-class-system.md`.
