@@ -26,7 +26,7 @@
 			"summary": "Old, tired Dragon who sleeps for years behind hundreds of wards. Fears assassins. Breathes violet fire, uses [Message] and teleport magic. Keeps old social duties, one every 200 years."
 		},
 		"rags": {
-			"name": "Littlest Goblin",
+			"name": "Rags",
 			"race": "Goblin",
 			"tags": ["goblin", "child", "clever", "forager"],
 			"faction": "floodplains_goblin_tribe",
@@ -34,7 +34,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Exists: confirmed. Id 'rags' is a guess; still unnamed in 1.10-1.14. The small Goblin in rags who attacks Erin in 1.13 is likely her."},
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Exists: confirmed. Erin names her Rags in 1.25 (a nickname; the Goblins use none). The small Goblin in rags who attacks Erin in 1.13 is likely her."},
 			"summary": "Smallest, youngest Goblin of the tribe (about two years old by her own count). Carries baskets, gets hit a lot. Very curious: invents her own counting system, works out how to spot poisoned blue fruit."
 		},
 		"goblin_chieftain": {
@@ -82,7 +82,7 @@
 			"classes": [{"name": "[Swordslayer]", "level": null}, {"name": "[Guardsman]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels."},
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels. 1.25: full name Klbkchhezeim of the Centenium, the Hive's Prognugator."},
 			"summary": "Four-armed Free Antinium, Relc's partner and a guard for ten years; fourth-highest [Guardsman] in Liscor, with [Enhanced Movement] and [Detect Guilt]. Polite, exact, rule-bound. Serves his Queen in the Hive. Quietly kind: twice spends potions on Erin."
 		},
 		"zevara": {
@@ -130,7 +130,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed"},
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "1.21: has [Fast Stitching] and sews Erin washable pads."},
 			"summary": "Young female Drake with pale green scales, receptionist at Liscor's Adventurer's Guild. Chatty and kind to Erin, shakes her hand Human-style and gives directions, but backs down when a Gnoll adventurer bullies her out."
 		},
 		"krshia": {
@@ -182,7 +182,7 @@
 			"summary": "Bright yellow-scaled Drake who serves at an outdoor café in Liscor until her boss fires her for gossiping. Delighted to see a Human and eager to help Erin find her way."
 		},
 		"olesm": {
-			"name": "Olesm",
+			"name": "Olesm Swifttail",
 			"race": "Drake",
 			"tags": ["drake", "tactician", "chess", "scholar"],
 			"faction": null,
@@ -190,7 +190,7 @@
 			"classes": [{"name": "[Tactician]", "level": 22}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "Works for the city Council and wears the same insignia as Relc's badge. Level from Klbkch in 1.18."},
+			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "Works for the city Council and wears the same insignia as Relc's badge. Level from Klbkch in 1.18. Family name Swifttail and his liaison role from 1.25."},
 			"summary": "Young sky-blue Drake, Lism's nephew and Liscor's best chess player. Level 22 [Tactician] with ink-stained claws; neat, polite and eager. Crushed by Erin in a street game, he admires her and dreams of a [Grandmaster] class."
 		},
 		"ryoka_griffin": {
@@ -264,6 +264,66 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "likely", "note": "Race not stated; Human is likely."},
 			"summary": "Tall, blond, popular senior City Runner with two daggers; said to have killed a Creler. Friendly on the surface. Speaks for the other Runners when he tells Ryoka to share Magnolia's jobs."
+		},
+		"terbore": {
+			"name": "Terbore",
+			"race": "Gnoll",
+			"tags": ["gnoll", "adventurer", "bully"],
+			"faction": "liscor_adventurers_guild",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "confirmed", "note": "Named in 1.21. He says he warned her 'last time', so he is likely the Gnoll who bullied her out in 1.11."},
+			"summary": "Big male Gnoll adventurer at Liscor's Adventurer's Guild. Growls that Erin stinks and tries to drive her out; backs off with flattened ears when she stares him down."
+		},
+		"free_queen": {
+			"name": "The Free Queen",
+			"race": "Antinium",
+			"tags": ["antinium", "queen", "free_antinium", "hive_leader"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "confirmed", "note": "Called 'the Free Queen' in 1.23A; seen in 1.25."},
+			"summary": "Queen of the Free Antinium Hive under Liscor. Huge and worn out, she barely rests while she holds back monster breaches, and speaks to Klbkch in thought. Other Queens doubt her ten-year venture; she needs a real success soon."
+		},
+		"pawn": {
+			"name": "Chess-watching Worker",
+			"race": "Antinium",
+			"tags": ["antinium", "worker", "chess"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Id 'pawn' is a guess; still unnamed. He swept during the 1.17 game (confirmed); that he is the Worker who asks to watch in 1.25 is likely."},
+			"summary": "Worker Antinium who once swept Market Street and saw Erin play chess, the first thing with rules he understood. Survives a monster breach, dreams of the board, and at the inn dares to ask to watch."
+		},
+		"flos_reimarch": {
+			"name": "Flos Reimarch",
+			"race": "Human",
+			"tags": ["human", "king", "warrior", "conqueror"],
+			"faction": "kingdom_of_reim",
+			"home": "reim",
+			"classes": [{"name": "[King]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "confirmed"},
+			"summary": "The King of Destruction: red-gold hair, green eyes, old scars, armour under his robes. Once swept across Chandrar, then sat idle for twenty-two years after a grief while Reim decayed. Two Earth twins wake him on day 18."
+		},
+		"orthenon": {
+			"name": "Orthenon",
+			"race": "Human",
+			"tags": ["human", "steward", "swordsman", "loyal"],
+			"faction": "kingdom_of_reim",
+			"home": "reim",
+			"classes": [{"name": "[Steward]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "likely", "note": "Race not stated; Human is likely."},
+			"summary": "Flos Reimarch's gaunt [Steward] in black, with a curved sword and armour under his clothes. Kept the failing kingdom going for two decades and weeps when his king returns."
 		}
 	}
 }

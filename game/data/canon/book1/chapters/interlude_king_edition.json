@@ -1,0 +1,25 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "interlude_king_edition",
+	"events": {
+		"b1.king_of_destruction_wakes": {
+			"tier": 1,
+			"window": {"earliest": 18, "latest": 18, "confidence": "likely"},
+			"location": "reim",
+			"roles": {
+				"king": {"prefer": ["flos_reimarch"], "fallback_tags": []},
+				"steward": {"prefer": ["orthenon"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["flos_reimarch"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["world.king_of_destruction_awake", "reim.earther_twins_found"]},
+			"rumor": "Word spreads that the King of Destruction has woken in Reim, far across the sea on Chandrar, after twenty years of slumber.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "interlude_king_edition", "confidence": "likely", "note": "Same evening as the end of 1.24 (Erin knocking on the table), so day 18. The twins appeared the day before. The rumor is a design choice: the text says the news rings across the world."},
+			"summary": "In ruined Reim, a king who has sat idle for twenty-two years questions two sixteen-year-old twins from Earth. Their tales of a greater world set him on fire. He takes his throne at last, and Flos Reimarch, the King of Destruction, wakes his starving nation to war."
+		}
+	},
+	"system": []
+}

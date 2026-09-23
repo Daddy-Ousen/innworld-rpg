@@ -1,0 +1,54 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.21",
+	"events": {
+		"b1.inn_first_regulars": {
+			"tier": 2,
+			"window": {"earliest": 15, "latest": 15, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"regular_guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"regular_ant": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"regular_mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.named"], "not_flags": []},
+			"depends_on": ["b1.erin_names_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.new_door", "erin.knows_antinium_diet", "pisces.runs_a_tab"],
+				"clear_flags": ["wandering_inn.door_boarded"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "likely", "note": "'Two days' after the sign (day 13), so day 15. Klbkch helped fit the new door some time before."},
+			"summary": "Two days after naming the inn, Erin's only customers are Relc, Klbkch and Pisces. She learns Antinium cannot digest pasta well; Klbkch had eaten it only to support her, and they quarrel. Pisces eats on credit and complains the soup is bland. Food is spoiling."
+		},
+		"b1.selys_sews_pads": {
+			"tier": 2,
+			"window": {"earliest": 16, "latest": 16, "confidence": "likely"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"visitor": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"helper": {"prefer": ["selys"], "fallback_tags": ["receptionist"]},
+				"shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"bully": {"prefer": ["terbore"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.knows_why_inn_is_empty", "erin.knows_goblin_raids", "erin.stared_down_terbore"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "selys", "delta": 2},
+					{"from": "selys", "to": "erin_solstice", "delta": 1},
+					{"from": "terbore", "to": "erin_solstice", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "likely", "note": "The day after 1.21's opening scene. Deltas are design values."},
+			"summary": "Erin's period arrives without warning, and Liscor sells nothing for it: Gnolls and Drakes do not bleed monthly. At the Guild, Selys uses [Fast Stitching] to make her washable pads, explains Goblin raids, and says a pasta-only inn far from town will fail. Erin stares down Terbore."
+		}
+	},
+	"system": []
+}

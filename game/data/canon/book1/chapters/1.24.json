@@ -1,0 +1,62 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.24",
+	"events": {
+		"b1.liscor_ruins_discovered": {
+			"tier": 1,
+			"window": {"earliest": 17, "latest": 18, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {},
+			"requires": {"alive": [], "flags": ["liscor_dungeon.door_exposed"], "not_flags": []},
+			"depends_on": ["b1.antinium_uncover_ruin_door"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.dungeon_found", "liscor.adventurer_influx"]},
+			"rumor": "Someone found an ancient ruin in the hills northeast of Liscor. Adventurers from all over are said to be on their way to explore it.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "confirmed", "note": "Relc brings it as fresh news on day 18; the finder and the day are not given. Tier 1 so the player hears it as a rumor until M6.4 adds news."},
+			"summary": "Someone finds ruins northeast of Liscor that look like a large, unexplored dungeon. Adventurers start to pour into the city. The Watch dreads the extra work; the city expects trade."
+		},
+		"b1.goblins_hunt_rock_crab": {
+			"tier": 2,
+			"window": {"earliest": 18, "latest": 18, "confidence": "likely"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"planner": {"prefer": ["rags"], "fallback_tags": [], "optional": true},
+				"tribe": {"prefer": [], "fallback_tags": ["goblin"]},
+				"prey": {"prefer": [], "fallback_tags": ["rock_crab"]},
+				"witness": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": ["goblin_tribe.leaderless"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["goblin_tribe.hunts_without_chieftain", "rags.tribe_listens"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "likely", "note": "The day after Erin's level 10 (she is 'celebrating not dying'). The hunt was the littlest Goblin's idea (confirmed)."},
+			"summary": "About forty Goblins run down a huge Rock Crab, lose hands to its claws, swarm under its shell and eat it raw. The hunt was the littlest Goblin's idea, so the warriors now listen to her. She hides a pouch of coins. Erin watches in terror and runs home."
+		},
+		"b1.erin_serves_acid_flies": {
+			"tier": 2,
+			"window": {"earliest": 18, "latest": 18, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"ant": {"prefer": ["klbkch"], "fallback_tags": []},
+				"guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": ["erin.traps_acid_flies"], "not_flags": []},
+			"depends_on": ["b1.erin_traps_acid_flies"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["klbkch.loves_acid_flies", "erin.invited_workers", "erin.knows_liscor_history"],
+				"relationship": [
+					{"from": "klbkch", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.24", "confidence": "likely", "note": "Evening of day 18. Delta is a design value."},
+			"summary": "Relc laughs off Erin's fear: forty Goblins is just the local tribe; a raid is hundreds. The two tell her of the Goblin King, the Bloodfields, the old Necromancer and Liscor's Hive. Klbkch devours bowls of Acid Flies, and Erin asks him to bring his friends."
+		}
+	},
+	"system": []
+}

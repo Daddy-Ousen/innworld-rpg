@@ -1,0 +1,26 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.23A",
+	"events": {
+		"b1.antinium_uncover_ruin_door": {
+			"tier": 2,
+			"window": {"earliest": 14, "latest": 14, "confidence": "likely"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"prognugator": {"prefer": ["klbkch"], "fallback_tags": []},
+				"queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true},
+				"workers": {"prefer": [], "fallback_tags": ["antinium"]},
+				"sweeper": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["klbkch"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor_dungeon.door_exposed", "antinium_hive.dungeon_plan_done"]},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "The sweeping Worker saw Erin's chess 'yesterday' (day 13), so the dig is the night of day 14. The Hive's reason is not given."},
+			"summary": "Monsters break into a Hive tunnel for the fifth time this week and kill most of a Worker crew. That night Klbkch secretly leads twenty Workers out of Liscor to a hillside, where they dig out a huge ancient door, then collapse the tunnel so the door looks exposed by chance."
+		}
+	},
+	"system": []
+}
