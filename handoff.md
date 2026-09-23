@@ -12,7 +12,7 @@ PR #7 merged; tag `m4.3-done` pushed. M4.4 NPC schedules + utility AI is done an
 - Manual frames checked: gate 08:03 (Erin walks to Liscor, guards), market 12:06 (Krshia, Lism, Erin, Selys), inn 18:10 (Relc, Klbkch at the table).
 
 ## Waiting on the user
-- Review the M4.4 PR, merge, then tag `m4.4-done`.
+- Review PR #8 (https://github.com/Daddy-Ousen/innworld-rpg/pull/8), merge, then tag `m4.4-done`.
 - Play it: `godot --path game` (WASD, Space wait, E use/talk, Z sleep, backtick console).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
