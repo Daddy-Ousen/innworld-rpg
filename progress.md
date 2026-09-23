@@ -27,7 +27,7 @@
   - [x] M5.3 Combat UI (branch `feat/m5.3-combat-ui`): monster markers (state edge, dark ring, "Goblin 5/8"; hidden crab = rock tile), HUD `HP 14/20 · Held: Chair` (warning colour ≤ 25%), combat text in the log, bump attack once per key press, B/T/X, Take in the E menu, knock-out page (`SystemMessages.KNOCKOUT`), sheet HP + stats, console combat + debug commands, `Combat.nearest_foe`. `sim_m5_done` (seed 2) checks the M5 "Done when". ADR 0010 M5.3 section. GUT 358/358. PR #12 merged, tags `m5.3-done` and `m5-done`.
 - [ ] M6 — Vertical slice (plan approved 2026-09-23; 5 sub-modules, see ROADMAP and ADR 0011)
   - [x] M6.1 Play loop (branch `feat/m6.1-play-loop`): `SaveSlots` (3 slots + autosave in `user://saves`), `Session` save/load/new game, title menu (main scene), pause menu (Esc: save, load, quit to title), shared slot list, journal (J: focus from class main tags), welcome page with hints, autosave when the System dialog closes / on quit, offer thresholds ÷ 3 (first offer night 3, day 11), GUT pre-run hook (test saves in `user://test_saves`). ADR 0011. GUT 382/382. PR #13 open (waiting on the user).
-  - [ ] M6.2 Canon 1.15–1.20R (branch `data/book1-1.15-1.20`): 11 events, 7 new NPCs, 4 new locations, all `candidate`; waiting on user review. Validator 0 errors. `sim_canon_book1` LAST_DAY 13, drift 0; new test: kill Klbkch → another guard saves Erin. GUT 383/383.
+  - [x] M6.2 Canon 1.15–1.20R (branch `data/book1-1.15-1.20`): 11 events, 7 new NPCs, 4 new locations, reviewed by user 2026-09-24 (my picks: Goblin meal day 12, Ryoka window 13–16, Ryoka rumor kept, Persua/Queen/Izril later). Validator 0 errors. `sim_canon_book1` LAST_DAY 13, drift 0; new test: kill Klbkch → another guard saves Erin. GUT 383/383. PR open (waiting on the user).
   - [ ] M6.3 Canon 1.21–1.25
   - [ ] M6.4 Player hooks + news (save v7)
   - [ ] M6.5 Canon fights + `sim_m6_done`
@@ -41,7 +41,7 @@
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers
-- M6.2 review by the user (event list and 4 questions in handoff).
+- None.
 
 ## Open balance note
 - M6.1: first offer now on night 3 (day 11) with a plain inn workday (thresholds ÷ 3). Levels after the first class are still slow (canon Erin is level 9 by day 9). Check in M6.5.

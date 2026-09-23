@@ -213,7 +213,7 @@
 			"kind": "settlement",
 			"parent": null,
 			"tags": ["city", "human", "walled"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed"},
 			"summary": "Walled Human city-state north of the High Passes, one of the southernmost before them. Has a [Mayor] and owes no noble house. Magnolia Reinhart keeps a mansion there."
 		},
@@ -222,7 +222,7 @@
 			"kind": "settlement",
 			"parent": null,
 			"tags": ["city", "human"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed", "note": "Distance and direction from Celum not given."},
 			"summary": "Human city north of the High Passes. Its Runner's Guild is Ryoka's base and is better known than the city. Wales lies about thirty miles away."
 		},
@@ -231,7 +231,7 @@
 			"kind": "building",
 			"parent": "remendia",
 			"tags": ["guild", "runners", "request_board"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed"},
 			"summary": "Old tavern turned Runner's Guild: counters with uniformed [Receptionists], wall maps pinned with local dangers, a cork board of requests, and tables where Runners gossip between jobs."
 		},
@@ -240,7 +240,7 @@
 			"kind": "district",
 			"parent": "liscor",
 			"tags": ["antinium", "hive", "underground", "restricted"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.15", "confidence": "confirmed", "note": "Seen only in Klbkch's thoughts."},
 			"summary": "Antinium home below Liscor. The ground opens on one street of the city and only Antinium go down. Klbkch's Queen is there."
 		}

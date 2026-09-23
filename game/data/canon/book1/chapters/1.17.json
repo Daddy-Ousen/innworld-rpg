@@ -26,7 +26,7 @@
 					{"from": "klbkch", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "The day after the Goblin meal (day 13 if 1.16 is dated right). The game ends at the start of 1.18. Olesm is a Level 22 [Tactician]. Deltas are design values."},
 			"summary": "With a bounty purse from Klbkch in hand, Erin demands a refund from Lism. He bets it on chess against his nephew Olesm, Liscor's best player. Relc and Klbkch warn her. She wins crushingly, then beats Olesm and Klbkch again; the guards search Lism's stall until he pays."
 		}

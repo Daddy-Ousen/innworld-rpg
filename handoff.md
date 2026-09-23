@@ -1,20 +1,15 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.15-1.20`, not pushed)
-M6.1 is merged (PR #13) and tagged `m6.1-done`. M6.2 data drafted from the book text, one chapter at a time. All new entries are `status: "candidate"`.
-- Chapters: `1.15.json` (klbkch_saves_erin d9, klbkch_punches_relc d9, klbkch_files_bounty d9), `1.16.json` (erin_defends_goblins d10, erin_screams_off_rock_crab d11, erin_feeds_goblins d12), `1.17.json` (erin_beats_olesm_at_chess d13), `1.18.json` (erin_befriends_krshia d13, erin_names_the_inn d13), `1.19R.json` (ryoka_delivers_to_magnolia, tier 1 + rumor, window 13–16 guess), `1.20R.json` (ryoka_warned_by_fals, tier 1, system log `[Barefoot Runner]`).
-- New NPCs: olesm ([Tactician] 22), ryoka_griffin, magnolia_reinhart, ressa, wesle, garia_strongheart, fals. New locations: celum, remendia, remendia_runners_guild, liscor_hive.
-- Updated (were `reviewed`): klbkch (Free Antinium, [Enhanced Movement], [Detect Guilt]), beilmark (desk, family), krshia (Silverfang confirmed, [Shopkeeper]), lism (purple, Olesm's uncle, [Shopkeeper]), high_passes (renamed "The High Passes", confirmed in 1.19R), wandering_inn note (named on day 13; name field unchanged).
-- `klbkch_saves_erin`: rescuer falls back to any `guard` (substitute). Test `test_killing_klbkch_sends_another_guard`.
-- `sim_canon_book1`: LAST_DAY 13, counts 49 events / 22 NPCs / 27 locations. GUT 383/383, validator 0 errors, Python 26 OK.
+## Just done (2026-09-24, branch `data/book1-1.15-1.20`)
+M6.1 merged (PR #13), tag `m6.1-done`. M6.2 Canon 1.15–1.20R is done and reviewed by the user (took my picks: Goblin meal day 12, Ryoka window 13–16 guess, Ryoka rumor kept, Persua / Antinium Queen / `izril` left for later).
+- Chapters: `1.15.json` (klbkch_saves_erin d9, klbkch_punches_relc d9, klbkch_files_bounty d9), `1.16.json` (erin_defends_goblins d10, erin_screams_off_rock_crab d11, erin_feeds_goblins d12), `1.17.json` (erin_beats_olesm_at_chess d13), `1.18.json` (erin_befriends_krshia d13, erin_names_the_inn d13), `1.19R.json` (ryoka_delivers_to_magnolia, tier 1 + rumor), `1.20R.json` (ryoka_warned_by_fals, tier 1, system log `[Barefoot Runner]`).
+- New NPCs: olesm ([Tactician] 22), ryoka_griffin, magnolia_reinhart, ressa, wesle, garia_strongheart, fals. New locations: celum, remendia, remendia_runners_guild, liscor_hive. Updated: klbkch, beilmark, krshia, lism, high_passes ("The High Passes"), wandering_inn note.
+- `klbkch_saves_erin`: rescuer falls back to any `guard` (test `test_killing_klbkch_sends_another_guard`).
+- `sim_canon_book1`: LAST_DAY 13, drift 0. GUT 383/383 (40 scripts), validator 0 errors, Python 26 OK.
 
-## Waiting on the user (M6.2 review)
-1. Day of the Goblin meal: day 12 (my pick) or day 11. Text says she wakes at noon "of tomorrow".
-2. Ryoka chapters: window 13–16 (guess), so they fire on day 13. Nothing ties them to Erin's days.
-3. Rumor for Ryoka's Goblin ambush reaches Liscor: yes (my pick) or no.
-4. Left out: Persua (only named), the Antinium Queen (only in thoughts), a continent `izril` location.
-After OK: set all `candidate` → `reviewed`, tick M6.2 in `docs/ROADMAP.md` and `progress.md`, push, PR, then tag `m6.2-done` on the merge commit.
-Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
+## Waiting on the user
+- Review the M6.2 PR, merge, then tag `m6.2-done` on the merge commit.
+- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next after M6.2: M6.3 Canon 1.21–1.25 (branch `data/book1-1.21-1.25`)
 - 1.21, 1.22, 1.23A, 1.24, Interlude – King Edition, 1.25. 1.22 has Erin's [Innkeeper Level 10] (chapter `system` log). Krshia's Runner delivery is due day 14.

@@ -21,7 +21,7 @@
 					{"from": "krshia", "to": "erin_solstice", "delta": 3}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.18", "confidence": "confirmed", "note": "Same day as the chess game. The Runner delivery is due the next day. Deltas are design values."},
 			"summary": "Erin apologises to Krshia for snubbing her. The Gnoll laughs, hugs her and names herself a Silverfang. A truth stone backs Erin's claim about her chess skill. Krshia sells her soap, toothpaste and food at a discount, books a Runner delivery for tomorrow and shows her the bath house."
 		},
@@ -38,7 +38,7 @@
 			"depends_on": ["b1.erin_feeds_goblins"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["wandering_inn.named", "wandering_inn.no_killing_goblins_sign"]},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.18", "confidence": "confirmed", "note": "Evening of the chess day. The location name in data stays 'The abandoned inn on the hill'; the flag marks the new name."},
 			"summary": "At home, Erin decides she will not play life as a game with one winner. She runs back for tools and powdered paint, paints over the old sign and writes 'The Wandering Inn', and plants a second sign by the door: 'No Killing Goblins'. Pisces and the littlest Goblin read them."
 		}

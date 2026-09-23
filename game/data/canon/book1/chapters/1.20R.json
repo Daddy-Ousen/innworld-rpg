@@ -23,7 +23,7 @@
 					{"from": "garia_strongheart", "to": "ryoka_griffin", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.20R", "confidence": "confirmed", "note": "Same day as 1.19R. Day is a guess, as in 1.19R. Deltas are design values."},
 			"summary": "At the Runner's Guild in Remendia, Ryoka reports the Goblins and eyes an odd request: twenty gold just to visit the High Passes. Garia talks her into a joint run. Fals, speaking for the other Runners, tells her to leave Magnolia's jobs to others. She runs to Wales for the night."
 		}
