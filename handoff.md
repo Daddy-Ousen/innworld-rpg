@@ -1,7 +1,7 @@
 # Handoff
 
 ## Just done
-M1 part 1 is done and committed. ADR 0002 accepted. Built: `core/clock.gd`, `core/tags.gd`, `core/data_db.gd`, `core/action_log.gd`, `core/xp.gd`, `core/actions.gd`; data `tags.json`, `actions.json` (32), `rules.json`. GameState has typed fields. 55/55 tests pass.
+M1 part 1 is done. It is on branch `feat/m1-sim-core-part1`, PR https://github.com/Daddy-Ousen/innworld-rpg/pull/1 (not merged yet). Local `main` = `origin/main`. ADR 0002 accepted. Built: `core/clock.gd`, `core/tags.gd`, `core/data_db.gd`, `core/action_log.gd`, `core/xp.gd`, `core/actions.gd`; data `tags.json`, `actions.json` (32), `rules.json`. GameState has typed fields. 55/55 tests pass.
 
 ## Next (M1 part 2, see docs/KICKOFF.md Session 3)
 1. `data/classes.json` (~15) and `data/skills.json` (~40) per ADR 0002. Extend `DataDb` to load + validate them (tags must exist in `tags.json`).
