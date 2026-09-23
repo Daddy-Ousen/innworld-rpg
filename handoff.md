@@ -12,7 +12,7 @@ M4.2 world grid core is done and tested:
 - ADR 0006.
 
 ## Waiting on the user
-- Review PR for M4.2, merge, then tag `m4.2-done`.
+- Review PR #6 (https://github.com/Daddy-Ousen/innworld-rpg/pull/6), merge, then tag `m4.2-done`.
 - Float save round trip (ADR 0006 "Known issue"). Options: (1) keep the test tolerance (now), (2) save floats as exact strings (save format change), (3) round XP values so they survive JSON.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
