@@ -38,6 +38,7 @@ const HELP := [
 	"  flag <key> [value] / flag <key> off   set or clear a world flag (debug)",
 	"  history                            what happened to canon events (debug)",
 	"  drift                              how far the world left canon",
+	"  news                               all news and rumors the player heard",
 	"  save / load                        " + SAVE_PATH,
 	"  new [seed]                         start a new game",
 ]
@@ -125,6 +126,11 @@ func execute(line: String) -> Array[String]:
 			out = _history()
 		"drift":
 			out.append("Drift %.2f." % gs.world.drift)
+		"news":
+			for n: Dictionary in gs.world.news:
+				out.append("D%d  %-6s %s" % [int(n["day"]), n["kind"], n["text"]])
+			if out.is_empty():
+				out.append("No news yet.")
 		"save":
 			var err := gs.save_to_file(SAVE_PATH)
 			out.append("Saved." if err == OK else "Save failed (error %d)." % err)

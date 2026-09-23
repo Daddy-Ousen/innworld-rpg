@@ -3,6 +3,7 @@
 Usage (PowerShell, from repo root):
     python tools/validate_data.py game/data/canon/book1
     python tools/validate_data.py game/data/canon/book1 --raw canon/raw/book1
+    python tools/validate_data.py game/data/canon/book1 --actions game/data/actions.json
 
 Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
     <dir>/npcs.json                {"schema_version": 1, "npcs": {id: npc}}
@@ -13,6 +14,8 @@ Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
 When present, chapter ids must exist in index.json, and summaries must not copy
 book text (no run of COPY_RUN words in common with the chapter).
 Default for --raw: canon/raw/book<N> next to the repo root, if it exists.
+--actions is the game's actions.json; hook "did" action ids must exist in it.
+Default: <dir>/../../actions.json, if it exists.
 
 Exit code 0 = valid, 1 = errors. Stdlib only.
 """
@@ -33,6 +36,10 @@ LOCATION_KINDS = {"region", "settlement", "district", "building", "landmark", "w
 SYSTEM_KINDS = {"class", "level", "skill", "other"}
 ON_FAIL_SIMPLE = {"substitute", "delay", "cancel"}
 SUMMARY_MAX = 300
+NEWS_MAX = 200
+OUTCOMES = {"success", "partial", "fail"}
+HOOK_THEN = {"cancel", "change"}
+LOG_DAYS = 7  # the action log keeps this many days (rules xp.novelty.window_days)
 COPY_RUN = 7  # words; a shared run this long counts as copied text
 
 RE_ID = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -165,7 +172,7 @@ def check_location(r: Report, where: str, loc, book: int, chapters) -> None:
 def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     req = {"tier", "window", "location", "roles", "requires", "depends_on", "on_fail", "effects",
            "status", "canon_ref", "summary"}
-    opt = {"delay_limit", "rumor"}
+    opt = {"delay_limit", "rumor", "news", "hooks"}
     if not _keys(r, where, ev, req, opt):
         return
     if ev["tier"] not in TIERS:
@@ -220,21 +227,7 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     if "delay_limit" in ev and not (_int(ev["delay_limit"]) and ev["delay_limit"] >= 1):
         r.err(f"{where}.delay_limit", "must be an int >= 1 (days)")
 
-    fx = ev["effects"]
-    if _keys(r, f"{where}.effects", fx, set(), {"set_flags", "clear_flags", "kill", "relationship"}):
-        for k in ("set_flags", "clear_flags"):
-            if k in fx:
-                _str_list(r, f"{where}.effects.{k}", fx[k], RE_FLAG)
-        if "kill" in fx:
-            _str_list(r, f"{where}.effects.kill", fx["kill"], RE_ID)
-        for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship", []), list) else []):
-            rw = f"{where}.effects.relationship[{i}]"
-            if _keys(r, rw, rel, {"from", "to", "delta"}):
-                for k in ("from", "to"):
-                    if not (isinstance(rel[k], str) and RE_ID.match(rel[k])):
-                        r.err(f"{rw}.{k}", "must be an npc id")
-                if not (_int(rel["delta"]) and rel["delta"] != 0):
-                    r.err(f"{rw}.delta", "must be a non-zero int")
+    check_effects(r, f"{where}.effects", ev["effects"])
 
     if ev["status"] not in STATUS:
         r.err(f"{where}.status", f"must be one of {sorted(STATUS)}")
@@ -242,6 +235,93 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     _str(r, f"{where}.summary", ev["summary"], SUMMARY_MAX)
     if "rumor" in ev:
         _str(r, f"{where}.rumor", ev["rumor"], 200)
+    if "news" in ev:
+        _str(r, f"{where}.news", ev["news"], NEWS_MAX)
+    if "hooks" in ev:
+        check_hooks(r, where, ev["hooks"], ev.get("window"))
+
+
+def check_effects(r: Report, where: str, fx) -> None:
+    if not _keys(r, where, fx, set(), {"set_flags", "clear_flags", "kill", "relationship"}):
+        return
+    for k in ("set_flags", "clear_flags"):
+        if k in fx:
+            _str_list(r, f"{where}.{k}", fx[k], RE_FLAG)
+    if "kill" in fx:
+        _str_list(r, f"{where}.kill", fx["kill"], RE_ID)
+    for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship", []), list) else []):
+        rw = f"{where}.relationship[{i}]"
+        if _keys(r, rw, rel, {"from", "to", "delta"}):
+            for k in ("from", "to"):
+                if not (isinstance(rel[k], str) and RE_ID.match(rel[k])):
+                    r.err(f"{rw}.{k}", "must be an npc id")
+            if not (_int(rel["delta"]) and rel["delta"] != 0):
+                r.err(f"{rw}.delta", "must be a non-zero int")
+
+
+def _scalar(v) -> bool:
+    return isinstance(v, (str, int, float, bool))
+
+
+def check_hooks(r: Report, where: str, hooks, window) -> None:
+    """Player hooks (M6.4, ADR 0011): what the player did can cancel, change or mutate the event."""
+    if not isinstance(hooks, list) or not hooks:
+        r.err(f"{where}.hooks", "must be a non-empty list")
+        return
+    seen: set[str] = set()
+    for i, h in enumerate(hooks):
+        hw = f"{where}.hooks[{i}]"
+        if not _keys(r, hw, h, {"id", "did", "days", "then"}, {"effects", "news"}):
+            continue
+        if not (isinstance(h["id"], str) and RE_ID.match(h["id"])):
+            r.err(f"{hw}.id", "must be snake_case")
+        elif h["id"] in seen:
+            r.err(f"{hw}.id", f"duplicate hook id '{h['id']}'")
+        else:
+            seen.add(h["id"])
+        did = h["did"]
+        if not isinstance(did, list) or not did:
+            r.err(f"{hw}.did", "must be a non-empty list")
+        else:
+            for j, m in enumerate(did):
+                mw = f"{hw}.did[{j}]"
+                if not _keys(r, mw, m, {"action"}, {"outcome", "context"}):
+                    continue
+                if not _str_list(r, f"{mw}.action", m["action"], RE_ID):
+                    r.err(f"{mw}.action", "must name at least one action")
+                if "outcome" in m:
+                    for o in _str_list(r, f"{mw}.outcome", m["outcome"]):
+                        if o not in OUTCOMES:
+                            r.err(f"{mw}.outcome", f"must be in {sorted(OUTCOMES)}")
+                if "context" in m:
+                    ctx = m["context"]
+                    if not isinstance(ctx, dict) or not ctx:
+                        r.err(f"{mw}.context", "must be a non-empty object")
+                    else:
+                        for k, v in ctx.items():
+                            ok = _scalar(v) or (isinstance(v, list) and v and all(_scalar(x) for x in v))
+                            if not RE_ID.match(k) or not ok:
+                                r.err(f"{mw}.context.{k}", "must be key: value or key: [values]")
+        days = h["days"]
+        if not (isinstance(days, list) and len(days) == 2 and all(_int(x) for x in days)
+                and 1 <= days[0] <= days[1]):
+            r.err(f"{hw}.days", "must be [from, to] days with 1 <= from <= to")
+        elif days[1] - days[0] >= LOG_DAYS:
+            r.err(f"{hw}.days", f"the action log keeps {LOG_DAYS} days; span at most {LOG_DAYS} days")
+        elif isinstance(window, dict) and _int(window.get("latest")) and days[0] > window["latest"]:
+            r.warn(hw, "days start after the event's window; the hook only matches if the event is delayed")
+        then = h["then"]
+        if not (isinstance(then, str) and (then in HOOK_THEN or then.startswith("mutate:"))):
+            r.err(f"{hw}.then", "must be cancel | change | mutate:<event id>")
+        elif then == "change":
+            if "effects" in h:
+                check_effects(r, f"{hw}.effects", h["effects"])
+            else:
+                r.err(hw, "'change' needs effects")
+        elif "effects" in h:
+            r.err(hw, "effects only with 'change'")
+        if "news" in h:
+            _str(r, f"{hw}.news", h["news"], NEWS_MAX)
 
 
 def check_system_entry(r: Report, where: str, s) -> None:
@@ -324,7 +404,8 @@ def _has_cycle(graph: dict[str, list[str]]) -> list[str] | None:
     return None
 
 
-def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Report:
+def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
+                 actions: set[str] | None = None) -> Report:
     r = Report()
     d = Path(data_dir)
     book = _book_from_dir(d)
@@ -425,6 +506,17 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
         if nid not in npcs:
             r.err(where, f"unknown npc '{nid}'")
 
+    def effect_npcs(where: str, fx) -> None:
+        if not isinstance(fx, dict):
+            return
+        for nid in fx.get("kill", []) if isinstance(fx.get("kill"), list) else []:
+            need_npc(f"{where}.kill", nid)
+        for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship"), list) else []):
+            if isinstance(rel, dict):
+                for k in ("from", "to"):
+                    if isinstance(rel.get(k), str):
+                        need_npc(f"{where}.relationship[{i}].{k}", rel[k])
+
     for where, nid in system_refs:
         need_npc(where, nid)
 
@@ -442,14 +534,19 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
         rq = ev.get("requires") if isinstance(ev.get("requires"), dict) else {}
         for nid in rq.get("alive", []) if isinstance(rq.get("alive"), list) else []:
             need_npc(f"{w}.requires.alive", nid)
-        fx = ev.get("effects") if isinstance(ev.get("effects"), dict) else {}
-        for nid in fx.get("kill", []) if isinstance(fx.get("kill"), list) else []:
-            need_npc(f"{w}.effects.kill", nid)
-        for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship"), list) else []):
-            if isinstance(rel, dict):
-                for k in ("from", "to"):
-                    if isinstance(rel.get(k), str):
-                        need_npc(f"{w}.effects.relationship[{i}].{k}", rel[k])
+        effect_npcs(f"{w}.effects", ev.get("effects"))
+        hooks = ev.get("hooks") if isinstance(ev.get("hooks"), list) else []
+        mutates = [(f"{w}.on_fail", s) for s in (ev.get("on_fail") if isinstance(ev.get("on_fail"), list) else [])]
+        for i, h in enumerate(hooks):
+            if not isinstance(h, dict):
+                continue
+            effect_npcs(f"{w}.hooks[{i}].effects", h.get("effects"))
+            mutates.append((f"{w}.hooks[{i}].then", h.get("then")))
+            for j, m in enumerate(h.get("did") if isinstance(h.get("did"), list) else []):
+                acts = m.get("action") if isinstance(m, dict) and isinstance(m.get("action"), list) else []
+                for a in acts:
+                    if actions is not None and isinstance(a, str) and a not in actions:
+                        r.err(f"{w}.hooks[{i}].did[{j}].action", f"unknown action '{a}'")
         deps = [x for x in ev.get("depends_on", []) if isinstance(x, str)] if isinstance(ev.get("depends_on"), list) else []
         graph[eid] = deps
         for dep in deps:
@@ -463,13 +560,13 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
                         and _int(dw.get("earliest")) and _int(ew.get("latest"))
                         and dw["earliest"] > ew["latest"]):
                     r.err(f"{w}.depends_on", f"'{dep}' can only start after this event's window ends")
-        for step in ev.get("on_fail", []) if isinstance(ev.get("on_fail"), list) else []:
+        for mw, step in mutates:
             if isinstance(step, str) and step.startswith("mutate:"):
                 target = step[len("mutate:"):]
                 if target == eid:
-                    r.err(f"{w}.on_fail", "event mutates into itself")
+                    r.err(mw, "event mutates into itself")
                 elif target not in events:
-                    r.err(f"{w}.on_fail", f"unknown mutate target '{target}'")
+                    r.err(mw, f"unknown mutate target '{target}'")
         if "delay" in (ev.get("on_fail") or []) and "delay_limit" not in ev:
             r.warn(w, "uses 'delay' without delay_limit; the director default applies")
 
@@ -486,8 +583,9 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
                 book_shingles[ch] = _shingles(_words(raw_text.get(ch, "")), COPY_RUN)
             return book_shingles[ch]
 
-        def copy_check(where: str, rec: dict, fields: tuple[str, ...]) -> None:
-            ref = rec.get("canon_ref") if isinstance(rec.get("canon_ref"), dict) else {}
+        def copy_check(where: str, rec: dict, fields: tuple[str, ...], ref: dict | None = None) -> None:
+            if ref is None:
+                ref = rec.get("canon_ref") if isinstance(rec.get("canon_ref"), dict) else {}
             ch = ref.get("chapter")
             if ch not in raw_text:
                 return
@@ -500,7 +598,11 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None) -> Rep
 
         for eid, (fn, ev) in events.items():
             if isinstance(ev, dict):
-                copy_check(f"{fn}:events.{eid}", ev, ("summary", "rumor", "canon_ref.note"))
+                copy_check(f"{fn}:events.{eid}", ev, ("summary", "rumor", "news", "canon_ref.note"))
+                ref = ev.get("canon_ref") if isinstance(ev.get("canon_ref"), dict) else {}
+                for i, h in enumerate(ev.get("hooks") if isinstance(ev.get("hooks"), list) else []):
+                    if isinstance(h, dict):
+                        copy_check(f"{fn}:events.{eid}.hooks[{i}]", h, ("news",), ref)
         for nid, npc in npcs.items():
             if isinstance(npc, dict):
                 copy_check(f"npcs.json:npcs.{nid}", npc, ("summary", "canon_ref.note"))
@@ -516,7 +618,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("data_dir", help="e.g. game/data/canon/book1")
     ap.add_argument("--raw", help="extractor output, e.g. canon/raw/book1 (default: auto)")
     ap.add_argument("--no-raw", action="store_true", help="skip chapter-id and copy checks")
+    ap.add_argument("--actions", help="the game's actions.json (default: <dir>/../../actions.json)")
     args = ap.parse_args(argv)
+
+    actions = None
+    act_path = Path(args.actions) if args.actions else Path(args.data_dir).parent.parent / "actions.json"
+    if act_path.exists():
+        doc = json.loads(act_path.read_text(encoding="utf-8"))
+        actions = set(doc.get("actions", doc))
 
     raw = None
     if not args.no_raw:
@@ -528,12 +637,13 @@ def main(argv: list[str] | None = None) -> int:
             if book is not None and (guess / "index.json").exists():
                 raw = guess
 
-    rep = validate_dir(args.data_dir, raw)
+    rep = validate_dir(args.data_dir, raw, actions)
     for w in rep.warnings:
         print(f"WARN  {w}")
     for e in rep.errors:
         print(f"ERROR {e}")
     mode = f"raw={raw}" if raw else "no raw text (chapter-id and copy checks skipped)"
+    mode += f", actions={act_path}" if actions is not None else ", no actions.json (hook actions not checked)"
     print(f"{len(rep.errors)} errors, {len(rep.warnings)} warnings ({mode})")
     return 1 if rep.errors else 0
 

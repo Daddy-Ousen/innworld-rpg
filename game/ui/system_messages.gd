@@ -1,8 +1,7 @@
 ## The Voice of the World as pages (ADR 0009). Turns a night result
 ## (Night.run) and GameState into the pages the System dialog shows, in
-## this order: collapse (or knock-out), levels and skills, rumors, drift
-## warning, one page
-## per open class offer, then the morning. Headless, so tests can check
+## this order: collapse (or knock-out), levels and skills, local news (M6.4),
+## rumors, drift warning, one page per open class offer, then the morning. Headless, so tests can check
 ## it. Reads state only; the dialog sends the answers as Commands.
 ##
 ## A page: {"kind", "title", "lines": Array[String], "choices": Array[String],
@@ -13,6 +12,7 @@ extends RefCounted
 const COLLAPSE := "collapse"
 const KNOCKOUT := "knockout"
 const PROGRESS := "progress"
+const NEWS := "news"
 const RUMORS := "rumors"
 const DRIFT := "drift"
 const OFFER := "offer"
@@ -50,6 +50,9 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	var progress: Array = night.get("progress", [])
 	if not progress.is_empty():
 		out.append(page(PROGRESS, "Levels and Skills", progress))
+	var news: Array = night.get("news", [])
+	if not news.is_empty():
+		out.append(page(NEWS, "Local News", news))
 	var rumors: Array = (night.get("world", []) as Array).filter(func(l: String) -> bool:
 		return l != Director.UNRELIABLE_LINE)
 	if not rumors.is_empty():

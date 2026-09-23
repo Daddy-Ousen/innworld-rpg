@@ -46,6 +46,13 @@ static func from_dict(d: Dictionary) -> ActionLog:
 		for key: String in ["time", "day", "minute"]:
 			if rec.has(key):
 				rec[key] = int(rec[key])
+		# Save JSON writes floats as f64 text (SaveCodec), so a plain whole
+		# number in a context was an int (JSON reads it back as a float).
+		var ctx: Dictionary = rec.get("context", {})
+		for key: Variant in ctx:
+			var v: Variant = ctx[key]
+			if typeof(v) == TYPE_FLOAT and v == floorf(v) and absf(v) < 1e15:
+				ctx[key] = int(v)
 		log.records.append(rec)
 	var counts: Dictionary = d.get("action_counts", {})
 	for id: String in counts:

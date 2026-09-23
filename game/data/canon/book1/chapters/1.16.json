@@ -23,6 +23,7 @@
 					{"from": "erin_solstice", "to": "relc", "delta": -1}
 				]
 			},
+			"news": "At the inn on the hill, the Human threw a knife past Relc's face when he spoke of wiping out the Goblins.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "Day 10 is likely: the day after the fight. Erin has lost track of time. Klbkch boards up the door on day 10 or 11. Delta is a design value."},
 			"summary": "Numb in a chair, Erin barely notices her visitors. When Relc shouts about wiping out the Goblins, her [Unerring Throw] sends a kitchen knife past his face. Pisces offers to curse them; she hands him a sausage and swears to kill him if he kills a Goblin."
@@ -39,6 +40,16 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.scared_off_rock_crab"]},
+			"news": "They say the Human at the inn on the hill drove off a Rock Crab by screaming at it until it ran.",
+			"hooks": [
+				{
+					"id": "player_beat_rock_crab",
+					"did": [{"action": ["attack_melee", "throw_object"], "outcome": ["success"], "context": {"enemy": "rock_crab"}}],
+					"days": [10, 11],
+					"then": "mutate:b1.player_beat_rock_crab_first",
+					"news": "Word on the road: someone beat a Rock Crab near the inn on the hill. The innkeeper had a quiet day."
+				}
+			],
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "The day Klbkch visits again, so day 11 is likely."},
 			"summary": "A Rock Crab knocks at the boarded door and snaps at Erin. She hits a claw with a chair and screams at it without stopping until it flees in pain, covering its ear holes. Far off, the Razorbeaks take to the air. Then she sleeps in her chair."
@@ -62,9 +73,23 @@
 					{"from": "erin_solstice", "to": "rags", "delta": 1}
 				]
 			},
+			"news": "Goblins left the inn on the hill at dusk with full bellies. The Human there fed them.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "likely", "note": "Day 12 is likely: after the crab she sleeps and wakes at noon 'of tomorrow'. Day 11 is possible. The littlest Goblin is one of the four (confirmed). Deltas are design values."},
 			"summary": "Starved and sick, Erin walks to the blue fruit valley and sees four hungry Goblins flee from her. At dusk she cooks buttered pasta with sausage, opens the door and invites them in. They eat six plates. They offer three silver coins; she refuses: the first meal is free."
+		},
+		"b1.player_beat_rock_crab_first": {
+			"tier": 2,
+			"window": {"earliest": 11, "latest": 11, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["floodplains.rock_crab_beaten_by_earther"]},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.16", "confidence": "guess", "note": "Not canon: a divergence node. It runs only in place of b1.erin_screams_off_rock_crab, when the player beat a Rock Crab on day 10 or 11 (hook player_beat_rock_crab)."},
+			"summary": "The Earther beat a Rock Crab on the Floodplains, so no crab comes to knock at Erin's boarded door. She spends a quiet, hungry day inside and sleeps in her chair."
 		}
 	},
 	"system": []

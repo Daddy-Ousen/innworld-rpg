@@ -20,7 +20,7 @@
 	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
 	"director": {
 		"default_delay_limit": 3,
-		"drift": {"substituted": 0.25, "mutated": 0.5, "cancelled": 1.0},
+		"drift": {"substituted": 0.25, "changed": 0.25, "mutated": 0.5, "cancelled": 1.0},
 		"tier_weight": {"1": 0.5, "2": 1.0},
 		"unreliable_at": 5.0
 	},

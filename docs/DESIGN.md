@@ -89,7 +89,10 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
 }
 ```
 
+Events may also have `news` (what locals say when it happens) and `hooks` (what the player can do to cancel, change or mutate it: matched against the action log). See ADR 0011, M6.4.
+
 ### 4.4 Director algorithm (per night)
+0. For each due event: if a player hook matches, apply it (cancel or mutate) and skip the rest. A `change` hook adds its effects when the event runs.
 1. For each due event: check `requires`.
 2. Pass → run it, apply effects, log to history.
 3. Fail → try `on_fail` in order:

@@ -13,8 +13,12 @@ var relationships: Dictionary = {}
 ## Event runtime state: id → {"status", "day", "roles", "latest"}. Missing = pending.
 ## status: pending | done | substituted | mutated | cancelled.
 var events: Dictionary = {}
-## The emergent timeline, in order: {"day", "event", "outcome", "roles", "via"?, "reason"?}.
+## The emergent timeline, in order: {"day", "event", "outcome", "roles", "via"?, "reason"?,
+## "by"?, "hook"?}. "by": "player" and "hook" mark a change the player made (M6.4).
 var history: Array[Dictionary] = []
+## What the player heard, in order (M6.4): {"day", "event", "kind", "text"}.
+## kind: "news" (local, from event or hook `news`) or "rumor" (T1 `rumor`).
+var news: Array[Dictionary] = []
 ## Weighted count of changed canon events (rules "director.drift").
 var drift: float = 0.0
 ## Last day the director has run for (0 = never).
@@ -40,6 +44,19 @@ func latest(event_id: String, ev: Dictionary) -> int:
 	return int(events.get(event_id, {}).get("latest", ev["window"]["latest"]))
 
 
+func add_news(day: int, event_id: String, kind: String, text: String) -> void:
+	news.append({"day": day, "event": event_id, "kind": kind, "text": text})
+
+
+## News and rumors from day `from_day` on, newest first.
+func news_since(from_day: int) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for i in range(news.size() - 1, -1, -1):
+		if int(news[i]["day"]) >= from_day:
+			out.append(news[i])
+	return out
+
+
 func relationship(from: String, to: String) -> int:
 	return int(relationships.get(from, {}).get(to, 0))
 
@@ -56,6 +73,7 @@ func to_dict() -> Dictionary:
 		"relationships": relationships.duplicate(true),
 		"events": events.duplicate(true),
 		"history": history.duplicate(true),
+		"news": news.duplicate(true),
 		"drift": drift,
 		"last_day": last_day,
 	}
@@ -79,6 +97,10 @@ static func from_dict(d: Dictionary) -> WorldState:
 		var entry := h.duplicate(true)
 		entry["day"] = int(entry["day"])
 		w.history.append(entry)
+	for n: Dictionary in d.get("news", []):
+		var item := n.duplicate(true)
+		item["day"] = int(item["day"])
+		w.news.append(item)
 	w.drift = float(d.get("drift", 0.0))
 	w.last_day = int(d.get("last_day", 0))
 	return w

@@ -38,6 +38,7 @@
 			"depends_on": ["b1.erin_feeds_goblins"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["wandering_inn.named", "wandering_inn.no_killing_goblins_sign"]},
+			"news": "The old inn on the hill has a name now: The Wandering Inn. A second sign asks people not to kill Goblins.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.18", "confidence": "confirmed", "note": "Evening of the chess day. The location name in data stays 'The abandoned inn on the hill'; the flag marks the new name."},
 			"summary": "At home, Erin decides she will not play life as a game with one winner. She runs back for tools and powdered paint, paints over the old sign and writes 'The Wandering Inn', and plants a second sign by the door: 'No Killing Goblins'. Pisces and the littlest Goblin read them."

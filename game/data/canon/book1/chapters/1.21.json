@@ -20,6 +20,17 @@
 				"set_flags": ["wandering_inn.new_door", "erin.knows_antinium_diet", "pisces.runs_a_tab"],
 				"clear_flags": ["wandering_inn.door_boarded"]
 			},
+			"news": "The Wandering Inn has regulars now: Relc, Klbkch, and a thin Human mage who eats on credit.",
+			"hooks": [
+				{
+					"id": "player_cooked_for_regulars",
+					"did": [{"action": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "serve_guests"], "context": {"location": "wandering_inn"}}],
+					"days": [15, 15],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_cooks"], "relationship": [{"from": "klbkch", "to": "erin_solstice", "delta": 1}, {"from": "pisces", "to": "erin_solstice", "delta": 1}]},
+					"news": "The Wandering Inn's first regulars ate well today: the Earther cooked. Even the Human mage found nothing to complain about."
+				}
+			],
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.21", "confidence": "likely", "note": "'Two days' after the sign (day 13), so day 15. Klbkch helped fit the new door some time before."},
 			"summary": "Two days after naming the inn, Erin's only customers are Relc, Klbkch and Pisces. She learns Antinium cannot digest pasta well; Klbkch had eaten it only to support her, and they quarrel. Pisces eats on credit and complains the soup is bland. Food is spoiling."

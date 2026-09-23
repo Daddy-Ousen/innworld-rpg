@@ -18,6 +18,7 @@
 				"set_flags": ["erin.killed_chieftain", "erin.stab_wound", "erin.hands_burned", "wandering_inn.door_broken", "goblin_tribe.leaderless"],
 				"kill": ["goblin_chieftain"]
 			},
+			"news": "The local Goblin Chieftain is dead. The Human at the old inn on the hill killed him in her own common room, and nearly died of it.",
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.14", "confidence": "confirmed", "note": "Before noon on day 9."},
 			"summary": "The Chieftain smashes in the door, beats Erin through tables and tries to assault her. She fights back with chairs and a rolling pin, is stabbed with her own knife, then throws the boiling oil in his face. She stays with him until he dies."

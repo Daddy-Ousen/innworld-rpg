@@ -29,6 +29,7 @@ func test_new_game_starts_after_the_great_ritual() -> void:
 	assert_eq(gs.world.status("b1.erin_arrives"), Director.DONE)
 	assert_eq(gs.world.status("b1.erin_walks_to_liscor"), WorldState.PENDING, "day 8: still ahead")
 	assert_true(gs.morning.is_empty(), "the player did not hear the old rumors")
+	assert_true(gs.world.news.is_empty(), "nor the old news")
 	assert_eq(gs.player.area, "liscor_gate")
 
 
@@ -53,6 +54,15 @@ func test_book1_runs_as_canon() -> void:
 	assert_eq(gs.world.history.size(), expected, "one history entry per event")
 	assert_eq(gs.world.drift, 0.0)
 	assert_eq(rumors, rumor_events, "rumors only from the day the player arrives")
+	var news_events := []
+	for id: String in _db.canon.events:
+		if _db.canon.events[id].has("news") and int(gs.world.events.get(id, {}).get("day", 0)) >= ARRIVAL_DAY:
+			news_events.append(id)
+	news_events.sort()
+	var heard := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.NEWS) 			.map(func(n: Dictionary) -> String: return n["event"])
+	heard.sort()
+	assert_eq(heard, news_events, "one news line per event with news")
+	assert_gte(news_events.size(), 13)
 
 
 func test_killing_relc_bends_book1() -> void:
