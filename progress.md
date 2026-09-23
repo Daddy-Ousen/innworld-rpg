@@ -15,21 +15,24 @@
   - [x] `CanonDb` loader, `WorldState` (save v3), `Director` (night step 5), rules `director` section.
   - [x] `Commands.kill_npc` / `set_flag`; console `kill`, `flag`, `history`, `drift`.
   - [x] Tests: `unit_canon_db`, `unit_director`, `sim_divergence` (3 scenarios), `sim_canon_book1` (real week 1, drift 0).
-- [ ] M4 — 2D world (plan approved 2026-09-23; 5 sub-modules, see ROADMAP)
+- [x] M4 — 2D world (done 2026-09-23, PR #9 merged, tags `m4.5-done` and `m4-done` on merge commit 0e2f19a)
   - [x] M4.1 Canon 1.10–1.14 (branch `data/book1-1.10-1.14`, PR #5): 12 events, 5 NPCs, 8 locations, reviewed by user; validator 0 errors, GUT 156/156 (canon runs days 1–9, drift 0). Merged, tag `m4.1-done` pushed.
   - [x] M4.2 World grid core (branch `feat/m4.2-world-grid`): `tiles.json`, 5 maps, `MapDb`, `PlayerState`, `Movement`, `Interact`, `Pathfind`, save v4, console `where/look/go/use`, day-8 start, ADR 0006. GUT 193/193. PR #6 merged, tag `m4.2-done`.
   - [x] M4.3 2D view (branch `feat/m4.3-world-view`): `Session` autoload, `WorldView` (tiles made in code), main scene with WASD/E/Z, use menu, HUD, console overlay (backtick). ADR 0007. GUT 203/203. PR #7 merged, tag `m4.3-done`.
   - [x] M4.4 NPC schedules + utility AI (branch `feat/m4.4-npc-ai`): `npc_behaviour.json` (14 NPCs, off-map places `liscor`/`wilds`), `BehaviourDb`, `UtilityAi`, `NpcRoster`, `NpcSim` (walk in the player's area, jump elsewhere), `Pathfind` avoid + area routes, night step 6, talk to NPCs (+1 relationship a day), `Commands.wait` (Space), save v5 with exact f64 floats (`SaveCodec`). ADR 0008. GUT 243/243. PR #8 merged, tag `m4.4-done`.
-  - [x] M4.5 System message UI (branch `feat/m4.5-system-ui`): `SystemMessages` pages (collapse, levels/skills, rumors, drift, offers, morning), `SystemDialog` (Accept / Decline + confirm), sleep in the inn bed (map object `sleep: true`, user choice), character sheet (C), night result sections. ADR 0009. `sim_m4_done` checks the M4 "Done when". GUT 258/258. PR #9 open (https://github.com/Daddy-Ousen/innworld-rpg/pull/9).
-  - M4 "Done when" met in `sim_m4_done`. Tag `m4-done` after the M4.5 merge.
-- [ ] M5, M6 — see `docs/ROADMAP.md`
+  - [x] M4.5 System message UI (branch `feat/m4.5-system-ui`): `SystemMessages` pages (collapse, levels/skills, rumors, drift, offers, morning), `SystemDialog` (Accept / Decline + confirm), sleep in the inn bed (map object `sleep: true`, user choice), character sheet (C), night result sections. ADR 0009. `sim_m4_done` checks the M4 "Done when". GUT 258/258. PR #9 merged.
+- [ ] M5 — Combat (plan approved 2026-09-23; 3 sub-modules, see ROADMAP and ADR 0010)
+  - [x] M5.1 Combat core (branch `feat/m5.1-combat-core`): `enemies.json` (goblin_grunt, rock_crab, razorbeak; spawns empty), `items.json` (chair, rolling_pin, stone, seed_core), rules `combat`, `CombatDb`, `Stats` (stat_mod live), `CombatState`, `Combat` (attack, block, throw, drop, bump attack, fight records at fight end, danger refusals, knock-out with safe wake spot, night heal, bandage heal), `Night.run(..., knocked_out)`, save v6. ADR 0010. GUT 302/302.
+  - [ ] M5.2 Monsters on the map (spawns, `MonsterSim`, AI, take items from map objects)
+  - [ ] M5.3 Combat UI + `sim_m5_done`
+- [ ] M6 — see `docs/ROADMAP.md`
 
 ## Completed
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `rng`, `game_state` (SAVE_VERSION=5), `save_migrations` (1→…→5), `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `rng`, `game_state` (SAVE_VERSION=6), `save_migrations` (1→…→6), `combat_db`, `stats`, `combat_state`, `combat`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/session.gd` (autoload), `ui/hud.tscn`, `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
-- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior), `npc_behaviour.json`; rules `npc`.
-- Tests: 31 GUT scripts, 258 tests, all pass, headless exit 0. Python tool tests: 26 pass (`python -m unittest discover -s tools/tests`).
+- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior), `npc_behaviour.json`, `enemies.json`, `items.json`; rules `npc`, `combat`.
+- Tests: 34 GUT scripts, 302 tests, all pass, headless exit 0. Python tool tests: 26 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers
@@ -41,6 +44,11 @@
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
 
+## M5 decisions (user, 2026-09-23)
+- HP 0 = knocked out (no death). One held improvised item (no inventory). Enemies: Goblin grunt, Rock Crab, Razorbeak. A monster at 0 HP dies. Knock-out wake: nearest safe place (Floodplains / inn hill → inside the inn; Liscor gate / market → the gate; else where you fell). 3 sub-modules.
+- Approved schemas: `enemies.json` (+ spawns), `items.json`, rules `combat`, map object `item` field + razorbeak zone/objects (M5.2), save v6.
+- Canon goblin NPCs stay non-hostile; canon-event fights and guards who fight are M6. `[Bar Fighting]` / `[Unerring Throw]` need a separate OK.
+
 ## M4 decisions (user, 2026-09-23)
 - Float saves (2026-09-23, user chose option 2): save floats as exact text. Done in M4.4 (ADR 0008).
 - Start: the player arrives with the Great Ritual (night 7) and starts outside the Liscor east gate on day 8 (user choice). New game must run the director for days 1–7 first. Celum start deferred to M7+ (no Celum canon yet; first seen 1.19R).
@@ -50,6 +58,7 @@
 - Approved: new schemas `tiles.json`, `maps/<area>.json`, `npc_behaviour.json`; rules `world` + `npc`; `Actions.perform` `minutes` opt; `Session` autoload; save v4 and v5.
 
 ## Architectural decisions
+- ADR 0010 (accepted, M5.1 part): no combat mode (each command is a 6 s turn); `Commands._after` = `Combat.sync` + `NpcSim.sync`; monsters only in the player's area (`gs.combat`, save v6); fight counts → one record per action kind at fight end (minutes 0, risk = foe danger, won/fled/KO → success/partial/fail); improvise = context `weapon: improvised`; danger refuses actions/uses/sleep; knock-out wakes at the normal time at a safe place with 25% HP; `Stats` from base stats + stat_mod.
 - ADR 0009 (accepted): night result sections (`collapsed`, `progress`, `world`); `SystemMessages` page order and page shape; offers from `gs.progression.offers`; decline asks once more; no skip; console blocked while the dialog waits; map object `sleep` flag (`Interact.SLEEP` is not an action); character sheet (C).
 - ADR 0001: GUT version, RNG state as strings in JSON, `.import` files committed, save load path.
 - ADR 0002: data schemas (tags, actions, rules, classes, skills), XP formula, clock as one absolute minute counter, saves use full float precision and keep key order.

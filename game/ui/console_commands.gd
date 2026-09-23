@@ -298,6 +298,8 @@ func _npcs() -> Array[String]:
 
 
 func _night(night: Dictionary) -> Array[String]:
+	if night.is_empty():  # refused: enemies near
+		return gs.combat.lines.duplicate()
 	var out: Array[String] = ["--- You sleep. ---"]
 	out.append_array(night["lines"])
 	if (night["lines"] as Array).is_empty():

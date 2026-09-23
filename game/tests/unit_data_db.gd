@@ -115,3 +115,10 @@ func test_missing_director_rules_are_an_error() -> void:
 func test_shipped_canon_is_loaded() -> void:
 	var db := DataDb.load_dir()
 	assert_true(db.canon.events.has("b1.erin_arrives"))
+
+
+func test_rules_need_a_combat_section() -> void:
+	var rules := _rules.duplicate(true)
+	rules.erase("combat")
+	var db := DataDb.from_dicts({}, {}, rules)
+	assert_has(db.errors, "rules: missing section 'combat'.")

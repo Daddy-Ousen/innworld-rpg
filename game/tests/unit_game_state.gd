@@ -176,3 +176,21 @@ func test_npcs_survive_save_and_load() -> void:
 	assert_eq(loaded.to_json(), gs.to_json())
 	assert_eq(loaded.npcs.at("liscor_gate", Vector2i(3, 10)), "relc")
 	assert_eq(typeof(loaded.npcs.npcs["relc"]["route_i"]), TYPE_INT)
+
+
+func test_v5_save_migrates_to_v6_with_full_hp_and_no_monsters() -> void:
+	var db := DataDb.load_dir()
+	var d := GameState.new_game(2, db).to_dict()
+	d["save_version"] = 5
+	d.erase("combat")
+	(d["player"] as Dictionary).erase("hp")
+	(d["player"] as Dictionary).erase("held")
+	var gs := GameState.from_json(JSON.stringify(SaveCodec.encode(d)))
+	assert_not_null(gs)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
+	assert_eq(gs.player.hp, -1)
+	assert_eq(gs.player.held, "")
+	assert_true(gs.combat.monsters.is_empty())
+	assert_false(gs.combat.has_fight())
+	Commands.settle(gs, db)
+	assert_eq(gs.combat.area, gs.player.area)

@@ -33,5 +33,28 @@
 		"jump_seconds": 300,
 		"talk_actions": ["talk_with_guest", "persuade", "comfort_someone"],
 		"talk_relationship": 1
+	},
+	"combat": {
+		"base_stats": {"default": {"strength": 3, "dexterity": 3, "endurance": 3, "perception": 3, "speed": 3}},
+		"hp_base": 11,
+		"hp_per_endurance": 3,
+		"unarmed": {"name": "Fists", "damage": [1, 2]},
+		"hit": {"base": 0.7, "per_point": 0.05, "min": 0.1, "max": 0.95, "throw_per_tile": 0.05},
+		"strength_div": 3,
+		"min_damage": 1,
+		"block": {"damage_mult": 0.5, "hit_malus": 0.15},
+		"spot": {"base": 0.2, "per_point": 0.1},
+		"spawn": {"check_minutes": 60, "min_distance": 6, "max_monsters": 6},
+		"jump_seconds": 300,
+		"max_turns_per_sync": 600,
+		"heal_actions": {"bandage_wound": 6},
+		"night_heal": {"sleep": 1.0, "collapse": 0.5},
+		"knockout": {"wake_hp_frac": 0.25, "wake": {
+			"floodplains_south": {"area": "inn_interior", "pos": [20, 13]},
+			"inn_hill": {"area": "inn_interior", "pos": [20, 13]},
+			"liscor_gate": {"area": "liscor_gate", "pos": [3, 12]},
+			"liscor_market": {"area": "liscor_gate", "pos": [3, 12]}
+		}},
+		"xp": {"count_per_intensity": 4, "max_intensity": 2.0}
 	}
 }

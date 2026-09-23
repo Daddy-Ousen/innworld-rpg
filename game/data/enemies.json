@@ -1,0 +1,25 @@
+{
+	"schema_version": 1,
+	"note": "Monster types (M5, ADR 0010). Stats are design guesses; the behaviour follows Book 1. Spawn tables come in M5.2.",
+	"enemies": {
+		"goblin_grunt": {"name": "Goblin", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "Goblins hunt in small groups with knives and stones, and run when they lose."},
+			"tags": ["goblin"], "color": "#6f9a3a", "danger": 0.5, "behaviour": "pack",
+			"hp": 8, "armor": 0, "accuracy": 3, "evasion": 3, "damage": [1, 3], "act_seconds": 6,
+			"aggro_radius": 6, "lose_radius": 10, "chase_turns": 15, "flee_below": 0.5, "scared_by": [],
+			"ranged": {"range": 4, "damage": [1, 2], "chance": 0.25}},
+		"rock_crab": {"name": "Rock Crab", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "It looks like a boulder, rushes out with big claws, and gives up the chase quickly."},
+			"tags": ["rock_crab"], "color": "#7a7468", "danger": 0.8, "behaviour": "ambush",
+			"hp": 30, "armor": 4, "accuracy": 2, "evasion": 1, "damage": [4, 7], "act_seconds": 8,
+			"aggro_radius": 1, "lose_radius": 4, "chase_turns": 6, "flee_below": 0.2,
+			"scared_by": ["repels_crab"], "scare_turns": 12,
+			"ambush": {"spot_radius": 2, "hit_bonus": 0.2}},
+		"razorbeak": {"name": "Razorbeak", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "A dino-bird that nests in the long grass and pecks hard to guard its eggs."},
+			"tags": ["razorbeak"], "color": "#4fa84a", "danger": 0.4, "behaviour": "territorial",
+			"hp": 6, "armor": 0, "accuracy": 4, "evasion": 5, "damage": [1, 2], "act_seconds": 4,
+			"aggro_radius": 4, "lose_radius": 5, "chase_turns": 99, "flee_below": 0.34, "scared_by": []}
+	},
+	"spawns": []
+}

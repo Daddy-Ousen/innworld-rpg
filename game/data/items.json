@@ -1,0 +1,17 @@
+{
+	"schema_version": 1,
+	"note": "Improvised items the player can hold (one at a time, M5 ADR 0010). melee/throw are damage ranges [min, max]. Tags are matched by enemies' scared_by. Numbers are design guesses.",
+	"items": {
+		"chair": {"name": "Chair", "confidence": "guess", "melee": [2, 4], "throw": [1, 3], "throw_range": 2,
+			"break_chance": 0.25, "tags": [],
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "Erin fights Goblins in the inn with chairs."}},
+		"rolling_pin": {"name": "Rolling pin", "confidence": "guess", "melee": [1, 3], "throw": [1, 2], "throw_range": 4,
+			"break_chance": 0.0, "tags": [],
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "likely", "note": "Kitchen tools as weapons."}},
+		"stone": {"name": "Stone", "confidence": "guess", "melee": [1, 2], "throw": [1, 3], "throw_range": 5,
+			"break_chance": 0.0, "tags": []},
+		"seed_core": {"name": "Blue fruit seed core", "confidence": "likely", "melee": [0, 1], "throw": [0, 1], "throw_range": 5,
+			"break_chance": 1.0, "tags": ["repels_crab"],
+			"canon_ref": {"book": 1, "chapter": "1.02", "confidence": "confirmed", "note": "The seed core stinks; a Rock Crab panics and backs off."}}
+	}
+}

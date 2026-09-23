@@ -20,21 +20,23 @@ static func ensure_placed(gs: GameState, db: DataDb) -> bool:
 
 ## Tries one step in `dir` (n, s, e, w). Returns
 ## {"moved": bool, "blocked": bool, "refused": bool, "exit_to": area or "", "minutes": int,
-##  "npc": id of the NPC in the way or ""}.
-## refused: collapse is due, or there is no world. blocked: a wall, water,
-## a solid object, an NPC or the map edge. The player still turns to face `dir`.
+##  "npc": id of the NPC in the way or "", "monster": id of the monster in the way or ""}.
+## refused: collapse is due, the player is knocked out, or there is no world.
+## blocked: a wall, water, a solid object, an NPC, a monster or the map edge.
+## The player still turns to face `dir`.
 static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var out := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
-		"npc": ""}
+		"npc": "", "monster": ""}
 	if not PlayerState.DIRS.has(dir) or not ensure_placed(gs, db) \
-			or gs.clock.is_collapse_due(db.rules["clock"]):
+			or gs.clock.is_collapse_due(db.rules["clock"]) or gs.player.hp == 0:
 		out["refused"] = true
 		return out
 	var p := gs.player
 	p.facing = dir
 	var to := p.pos() + (PlayerState.DIRS[dir] as Vector2i)
 	out["npc"] = gs.npcs.at(p.area, to)
-	if not db.maps.is_walkable(p.area, to) or out["npc"] != "":
+	out["monster"] = gs.combat.at(p.area, to)
+	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "":
 		out["blocked"] = true
 		return out
 	var e := db.maps.exit_at(p.area, to)
@@ -64,11 +66,18 @@ static func location_at(gs: GameState, db: DataDb) -> String:
 
 
 ## Stands still for `seconds` (the world goes on). Returns the whole
-## minutes the clock moved, or -1 if refused (collapse is due, or seconds < 0).
+## minutes the clock moved, or -1 if refused (collapse is due, knocked out,
+## or seconds < 0).
 static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
-	if seconds < 0 or gs.clock.is_collapse_due(db.rules["clock"]):
+	if seconds < 0 or gs.clock.is_collapse_due(db.rules["clock"]) or gs.player.hp == 0:
 		return -1
 	return _spend_seconds(gs, seconds)
+
+
+## Spends one turn (a step's time) standing where you are: combat
+## commands. Returns the whole minutes the clock moved.
+static func spend_turn(gs: GameState, db: DataDb) -> int:
+	return _spend_step(gs, db)
 
 
 static func _spend_step(gs: GameState, db: DataDb) -> int:
