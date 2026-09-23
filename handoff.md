@@ -13,7 +13,7 @@ M5.3 Combat UI is done and tested (GUT 358/358, Python 26/26, validator 0 errors
 - ADR 0010 M5.3 section. ROADMAP M5.3 ticked.
 
 ## Waiting on the user
-- Review the M5.3 PR, merge, then tag `m5.3-done` and `m5-done` on the merge commit.
+- Review PR #12 (https://github.com/Daddy-Ousen/innworld-rpg/pull/12), merge, then tag `m5.3-done` and `m5-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next: M6 Vertical slice (read `docs/ROADMAP.md` M6 first; plan mode; ask the user)
