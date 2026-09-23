@@ -12,7 +12,7 @@ M6 plan approved (5 sub-modules, see `docs/ROADMAP.md` M6 and ADR 0011). M6.1 Pl
 - Tests: `unit_save_slots`, `unit_journal`, `unit_play_loop`.
 
 ## Waiting on the user
-- Review the M6.1 PR, merge, then tag `m6.1-done` on the merge commit.
+- Review PR #13 (https://github.com/Daddy-Ousen/innworld-rpg/pull/13), merge, then tag `m6.1-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Next: M6.2 Canon 1.15–1.20R (branch `data/book1-1.15-1.20`)
