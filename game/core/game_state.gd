@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 1
+const SAVE_VERSION := 2
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -11,18 +11,28 @@ var clock: Clock
 var action_log: ActionLog
 ## Tags of the focus the player declared in the journal (conviction bonus).
 var focus_tags: Array[String] = []
+## The player's race (class race_limits). Earthers are human.
+var race: String = "human"
+## World flags (class prereqs now; canon events in M3). flag → value.
+var flags: Dictionary = {}
+## Classes, levels, skills, offers, blacklist.
+var progression: Progression
+## System messages from the last night, shown in the morning.
+var morning: Array[String] = []
 
 
 func _init(seed_value: int = 0) -> void:
 	rng = Rng.new(seed_value)
 	clock = Clock.new()
 	action_log = ActionLog.new()
+	progression = Progression.new()
 
 
 ## A fresh game at the start time from data/rules.json.
 static func new_game(seed_value: int, db: DataDb) -> GameState:
 	var gs := GameState.new(seed_value)
 	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
+	gs.progression.day_start = gs.clock.total_minutes
 	return gs
 
 
@@ -33,6 +43,10 @@ func to_dict() -> Dictionary:
 		"clock": clock.to_dict(),
 		"action_log": action_log.to_dict(),
 		"focus_tags": focus_tags.duplicate(),
+		"race": race,
+		"flags": flags.duplicate(true),
+		"progression": progression.to_dict(),
+		"morning": morning.duplicate(),
 	}
 
 
@@ -43,6 +57,10 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.clock = Clock.from_dict(d["clock"])
 	gs.action_log = ActionLog.from_dict(d["action_log"])
 	gs.focus_tags.assign(d.get("focus_tags", []))
+	gs.race = d["race"]
+	gs.flags = (d["flags"] as Dictionary).duplicate(true)
+	gs.progression = Progression.from_dict(d["progression"])
+	gs.morning.assign(d["morning"])
 	return gs
 
 
