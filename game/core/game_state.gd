@@ -7,19 +7,32 @@ const SAVE_VERSION := 1
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
-## Placeholder bag for M0. Real typed fields arrive in M1.
-var data: Dictionary = {}
+var clock: Clock
+var action_log: ActionLog
+## Tags of the focus the player declared in the journal (conviction bonus).
+var focus_tags: Array[String] = []
 
 
 func _init(seed_value: int = 0) -> void:
 	rng = Rng.new(seed_value)
+	clock = Clock.new()
+	action_log = ActionLog.new()
+
+
+## A fresh game at the start time from data/rules.json.
+static func new_game(seed_value: int, db: DataDb) -> GameState:
+	var gs := GameState.new(seed_value)
+	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
+	return gs
 
 
 func to_dict() -> Dictionary:
 	return {
 		"save_version": save_version,
 		"rng": rng.to_dict(),
-		"data": data.duplicate(true),
+		"clock": clock.to_dict(),
+		"action_log": action_log.to_dict(),
+		"focus_tags": focus_tags.duplicate(),
 	}
 
 
@@ -27,12 +40,16 @@ static func from_dict(d: Dictionary) -> GameState:
 	var gs := GameState.new()
 	gs.save_version = int(d["save_version"])
 	gs.rng = Rng.from_dict(d["rng"])
-	gs.data = (d.get("data", {}) as Dictionary).duplicate(true)
+	gs.clock = Clock.from_dict(d["clock"])
+	gs.action_log = ActionLog.from_dict(d["action_log"])
+	gs.focus_tags.assign(d.get("focus_tags", []))
 	return gs
 
 
+## Keeps key order and full float precision, so a loaded game plays on
+## exactly like the one that was saved.
 func to_json() -> String:
-	return JSON.stringify(to_dict(), "\t")
+	return JSON.stringify(to_dict(), "\t", false, true)
 
 
 ## Returns null if the text is not valid JSON or the save cannot be migrated.

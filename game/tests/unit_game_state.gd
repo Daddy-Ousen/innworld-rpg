@@ -13,8 +13,11 @@ func test_new_state_has_current_save_version() -> void:
 
 
 func test_save_and_load_round_trip() -> void:
-	var gs := GameState.new(99)
-	gs.data["note"] = "hello"
+	var db := DataDb.load_dir()
+	var gs := GameState.new_game(99, db)
+	gs.focus_tags = ["cooking"]
+	Actions.perform(gs, db, "cook_stew", {"context": {"guests": 12}, "witnesses": ["relc"]})
+	gs.clock.sleep(db.rules["clock"])
 	gs.rng.randi()
 	assert_eq(gs.save_to_file(SAVE_PATH), OK)
 
