@@ -10,6 +10,7 @@ var _db: DataDb
 
 func before_each() -> void:
 	_db = ToyCombat.db()
+	ToyCombat.freeze(_db)  # monster turns are tested in unit_monster_sim
 
 
 func _game(seed_value: int = 1) -> GameState:

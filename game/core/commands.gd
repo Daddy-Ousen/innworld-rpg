@@ -89,12 +89,16 @@ static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:
 
 ## One step on the world grid (n, s, e, w). See Movement.step. Stepping
 ## into a monster attacks it instead: the result then has "attack" (see
-## Combat.player_attack).
+## Combat.player_attack). Stepping into a hidden monster (it looks like a
+## rock) springs its ambush: the result has "ambush" (see MonsterSim.ambush).
 static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
 	var r := Movement.step(gs, db, dir)
 	if r["monster"] != "":
-		r["attack"] = Combat.player_attack(gs, db, dir)
+		if gs.combat.monsters[r["monster"]]["state"] == CombatState.HIDDEN:
+			r["ambush"] = MonsterSim.ambush(gs, db, r["monster"])
+		else:
+			r["attack"] = Combat.player_attack(gs, db, dir)
 	_after(gs, db)
 	return r
 
@@ -147,6 +151,15 @@ static func throw(gs: GameState, db: DataDb, target_id: String) -> Dictionary:
 	var r := Combat.throw_at(gs, db, target_id)
 	_after(gs, db)
 	return r
+
+
+## Takes the item of a nearby map object (Interact.TAKE). A held item is
+## put down first. Works with enemies near. Returns "" or an error text.
+static func take(gs: GameState, db: DataDb, object_id: String) -> String:
+	Combat.begin_command(gs)
+	var err := Combat.take(gs, db, object_id)
+	_after(gs, db)
+	return err
 
 
 ## Puts the held item down. Returns "" or an error text.

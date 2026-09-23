@@ -5,7 +5,8 @@
 ##             "group": pack id, "area", "x", "y", "hp", "state" (STATES),
 ##             "home_x", "home_y", "carry": world seconds not yet acted,
 ##             "chase": turns spent chasing, "scared": turns left scared,
-##             "rolled_spot": the player already tried to spot it}.
+##             "rolled_spot": the player already tried to spot it,
+##             "pack": how many monsters its spawn placed together (1 if alone)}.
 ##   fight: {} when there is none, else {"start": clock minute,
 ##          "foes": {monster id: type} (everyone who took part), "attacks",
 ##          "improvised" (attacks with a held item), "blocks", "throws",
@@ -21,7 +22,7 @@ const HOSTILE := "hostile"
 const FLEE := "flee"
 const HOME := "home"
 const STATES := [HIDDEN, IDLE, HOSTILE, FLEE, HOME]
-const MONSTER_INTS := ["x", "y", "hp", "home_x", "home_y", "carry", "chase", "scared"]
+const MONSTER_INTS := ["x", "y", "hp", "home_x", "home_y", "carry", "chase", "scared", "pack"]
 const FIGHT_INTS := ["start", "attacks", "improvised", "blocks", "throws", "kills", "routed"]
 
 var next_id: int = 1
@@ -29,9 +30,9 @@ var next_id: int = 1
 var sec: int = -1
 ## The area the monsters belong to (the player's area at the last sync).
 var area: String = ""
-## Clock minute of the last spawn check (-1 = never; M5.2).
+## Clock minute of the last spawn check (-1 = never).
 var checked: int = -1
-## spawn id → clock minute it last placed monsters (M5.2).
+## spawn id → clock minute it last placed monsters.
 var spawn_last: Dictionary = {}
 ## The player raised their guard this turn (halves the next hits).
 var blocking: bool = false
@@ -99,6 +100,7 @@ static func from_dict(d: Dictionary) -> CombatState:
 		for k: String in MONSTER_INTS:
 			m[k] = int(m.get(k, 0))
 		m["rolled_spot"] = bool(m.get("rolled_spot", false))
+		m["pack"] = maxi(int(m["pack"]), 1)
 		c.monsters[id] = m
 	var f: Dictionary = (d.get("fight", {}) as Dictionary).duplicate(true)
 	if not f.is_empty():

@@ -1,6 +1,6 @@
 ## Turn-based combat on the world grid (M5, ADR 0010). There is no combat
 ## mode: every player command is one turn of world.step_seconds, and the
-## monsters act after it (MonsterSim, M5.2). The fight keeps counts; when it
+## monsters act after it (MonsterSim). The fight keeps counts; when it
 ## ends, end_fight writes one action record per kind of action used, so the
 ## System sees attack / block / throw / improvise / flee without a record
 ## per turn. All rolls go through gs.rng.
@@ -65,7 +65,7 @@ static func add_monster(gs: GameState, db: DataDb, type: String, pos: Vector2i,
 	c.monsters[id] = {"type": type, "spawn": spawn, "group": group if group != "" else id,
 		"area": gs.player.area, "x": pos.x, "y": pos.y, "hp": int(db.combat.enemies[type]["hp"]),
 		"state": state, "home_x": pos.x, "home_y": pos.y, "carry": 0, "chase": 0, "scared": 0,
-		"rolled_spot": false}
+		"rolled_spot": false, "pack": 1}
 	if state == CombatState.HOSTILE:
 		join(gs, id)
 	return id
@@ -181,6 +181,7 @@ static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: i
 	if not item.is_empty() and not out["killed"] and (thrown or out["hit"]) and _scares(item, e):
 		m["state"] = CombatState.FLEE
 		m["scared"] = int(e["scare_turns"])
+		c.fight["routed"] += 1
 		c.lines.append("The %s panics and backs away." % who)
 	if thrown:
 		gs.player.held = ""
@@ -332,17 +333,22 @@ static func _record(gs: GameState, db: DataDb, action_id: String, intensity: flo
 
 ## Bookkeeping after every command (Commands._after): leaving the area
 ## ends the fight as fled and the monsters stay behind (they are gone);
-## a fight with no hostile or fleeing monster left ends (see settle_fight).
+## then the monsters act and spawn (MonsterSim.run); a fight with no
+## hostile or fleeing monster left ends (see settle_fight).
 static func sync(gs: GameState, db: DataDb) -> void:
 	var c := gs.combat
-	if c.area != gs.player.area:
+	var now := NpcSim.world_sec(gs)
+	var entered := c.area != gs.player.area
+	if entered:
 		if c.has_fight():
 			end_fight(gs, db, FLED)
 		c.monsters.clear()
 		c.area = gs.player.area
-	if c.has_fight() and not is_down(gs) and c.in_state(CombatState.HOSTILE).is_empty() 			and c.in_state(CombatState.FLEE).is_empty():
+	MonsterSim.run(gs, db, now, entered)
+	if c.has_fight() and not is_down(gs) and c.in_state(CombatState.HOSTILE).is_empty() \
+			and c.in_state(CombatState.FLEE).is_empty():
 		settle_fight(gs, db)
-	c.sec = NpcSim.world_sec(gs)
+	c.sec = now
 
 
 ## Ends a fight that is not lost: won if any foe died or ran off, else fled
@@ -376,6 +382,31 @@ static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool)
 		if not w.is_empty() and db.maps.areas.has(w["area"]):
 			gs.player.place(w["area"], Vector2i(int(w["pos"][0]), int(w["pos"][1])))
 	c.area = gs.player.area
+
+
+## The player takes the item of the nearby map object `object_id` (see
+## Interact.options). A held item is put down first (it is gone). One turn.
+## Returns "" or an error.
+static func take(gs: GameState, db: DataDb, object_id: String) -> String:
+	var err := _cannot_act(gs, db)
+	if err != "":
+		return err
+	var found := {}
+	for o: Dictionary in Interact.options(gs, db):
+		if o["id"] == object_id and not o["npc"]:
+			found = o
+			break
+	if found.is_empty():
+		return "There is no '%s' here." % object_id
+	if found["item"] == "":
+		return "There is nothing to take at the %s." % String(found["name"]).to_lower()
+	var c := gs.combat
+	if gs.player.held != "":
+		c.lines.append("You put the %s down." % String(db.combat.items[gs.player.held]["name"]).to_lower())
+	gs.player.held = found["item"]
+	c.lines.append("You take the %s." % String(db.combat.items[gs.player.held]["name"]).to_lower())
+	Movement.spend_turn(gs, db)
+	return ""
 
 
 ## Heals after an action in rules.combat.heal_actions (bandage_wound).

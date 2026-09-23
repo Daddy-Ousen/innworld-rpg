@@ -62,10 +62,10 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 			c.get("classes", {}), s.get("skills", {}))
 	db.canon = CanonDb.load_root(dir.path_join("canon"))
 	db.maps = MapDb.load_dir(dir)
-	db.maps.validate(db)
+	db.combat = CombatDb.load_dir(dir)
+	db.maps.validate(db)  # map objects name combat items
 	db.behaviour = BehaviourDb.load_dir(dir)
 	db.behaviour.validate(db)
-	db.combat = CombatDb.load_dir(dir)
 	db.combat.validate(db)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
 			+ db.combat.errors

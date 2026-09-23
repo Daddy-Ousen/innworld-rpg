@@ -6,24 +6,29 @@
 ##
 ## Objects with "sleep": true (a bed) also offer SLEEP. It is not an
 ## action: the presentation ends the day with Commands.sleep.
+## Objects with an "item" (M5.2) also offer TAKE: the presentation calls
+## Commands.take, and the player holds that item.
 class_name Interact
 extends RefCounted
 
 const SLEEP := "sleep"
+const TAKE := "take"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
-## player: [{"id", "name", "actions": [action ids], "npc": bool, "sleep": bool}].
+## player: [{"id", "name", "actions": [action ids], "npc": bool, "sleep": bool,
+## "item": item id to take or ""}].
 static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	if not Movement.ensure_placed(gs, db):
 		return out
 	for o: Dictionary in db.maps.objects_near(gs.player.area, gs.player.pos()):
 		out.append({"id": o["id"], "name": o["name"], "actions": (o["actions"] as Array).duplicate(),
-			"npc": false, "sleep": o.get("sleep", false)})
+			"npc": false, "sleep": o.get("sleep", false), "item": o.get("item", "")})
 	for id in NpcSim.near_player(gs):
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
-			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false})
+			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
+			"item": ""})
 	return out
 
 

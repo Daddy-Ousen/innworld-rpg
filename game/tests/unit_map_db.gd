@@ -17,6 +17,21 @@ func test_real_maps_load_without_errors() -> void:
 		assert_true(_real.maps.areas.has(id), id)
 
 
+func test_real_map_items_and_the_razorbeak_nest() -> void:
+	var items := {}
+	for area: String in _real.maps.areas:
+		for o: Dictionary in _real.maps.areas[area]["objects"]:
+			if o.has("item"):
+				items["%s/%s" % [area, o["id"]]] = o["item"]
+	assert_eq(items["floodplains_south/blue_fruit_tree_1"], "seed_core")
+	assert_eq(items["floodplains_south/blue_fruit_tree_2"], "seed_core")
+	assert_eq(items["floodplains_south/loose_stones_1"], "stone")
+	assert_eq(items["inn_interior/stove"], "rolling_pin")
+	assert_eq(items["inn_interior/table"], "chair")
+	assert_eq(items["inn_hill/loose_stones"], "stone")
+	assert_eq(_real.maps.zone_at("floodplains_south", Vector2i(21, 16)), "razorbeak_nests")
+
+
 func test_real_exits_lead_back() -> void:
 	for id: String in _real.maps.areas:
 		for e: Dictionary in _real.maps.areas[id]["exits"]:
@@ -120,7 +135,7 @@ func test_validation_errors() -> void:
 	assert_string_contains(_errors_with(func(a: Dictionary, _t: Dictionary) -> void:
 		a["town"]["objects"][0]["sleep"] = "yes"), "sleep must be true or false")
 	assert_string_contains(_errors_with(func(a: Dictionary, _t: Dictionary) -> void:
-		a["town"]["objects"][0]["actions"] = []), "needs at least one action")
+		a["town"]["objects"][0]["item"] = "sword"), "unknown item 'sword'")
 
 
 func test_start_must_be_walkable() -> void:

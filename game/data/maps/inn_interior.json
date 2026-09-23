@@ -10,11 +10,11 @@
 		{"at": [12, 15, 1, 1], "to": "inn_hill", "arrive": [16, 12], "minutes": 0}
 	],
 	"objects": [
-		{"id": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true},
+		{"id": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true, "item": "rolling_pin"},
 		{"id": "wash_basin", "at": [22, 3], "name": "Wash basin", "actions": ["wash_dishes"], "solid": true},
 		{"id": "broom", "at": [2, 1], "name": "Broom", "actions": ["sweep_floor"]},
-		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true},
-		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true},
+		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true, "item": "chair"},
+		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true, "item": "chair"},
 		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true}
 	],
 	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
