@@ -17,6 +17,7 @@ const HELP := [
 	"  look                               map around you and objects you can use",
 	"  go <n|s|e|w> [xN]                  walk N steps",
 	"  use <object|npc> <action>          do an action with a nearby object or person",
+	"                                     (use bed sleep: sleep in a bed)",
 	"  wait <minutes>                     stand still while the world goes on",
 	"  npcs                               where every NPC is and what they do (debug)",
 	"  sleep                              end the day (night pipeline)",
@@ -206,7 +207,8 @@ func _look() -> Array[String]:
 		out.append(line)
 	var options := Interact.options(gs, db)
 	for o: Dictionary in options:
-		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(o["actions"])])
+		var actions: Array = (o["actions"] as Array) + ([Interact.SLEEP] if o["sleep"] else [])
+		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(actions)])
 	if options.is_empty():
 		out.append("  Nothing to use here.")
 	return out
@@ -251,6 +253,8 @@ func _use(args: Array) -> Array[String]:
 	if args.size() < 2:
 		out.append("Usage: use <object> <action>. Type look.")
 		return out
+	if args[1] == Interact.SLEEP and Interact.can_sleep(gs, db, args[0]):
+		return _night(Commands.sleep(gs, db))
 	var r := Commands.interact(gs, db, args[0], args[1])
 	if r["error"] != "":
 		out.append(r["error"])

@@ -130,7 +130,8 @@ func test_talk_to_an_npc() -> void:
 	var opts := Interact.options(gs, _db)
 	assert_eq(opts.map(func(o: Dictionary) -> String: return o["id"]), ["stove", "guard"],
 			"objects first, then NPCs")
-	assert_eq(opts[1], {"id": "guard", "name": "Guard", "actions": ["chat"], "npc": true})
+	assert_eq(opts[1], {"id": "guard", "name": "Guard", "actions": ["chat"], "npc": true,
+		"sleep": false})
 	var r := Commands.interact(gs, _db, "guard", "chat")
 	assert_eq(r["error"], "")
 	assert_eq(r["record"]["witnesses"], ["guard"])

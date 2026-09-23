@@ -117,6 +117,10 @@ func test_validation_errors() -> void:
 		t["grass"]["walk"] = "yes"), "walk must be true or false")
 	assert_string_contains(_errors_with(func(a: Dictionary, _t: Dictionary) -> void:
 		a["town"].erase("objects")), "missing 'objects'")
+	assert_string_contains(_errors_with(func(a: Dictionary, _t: Dictionary) -> void:
+		a["town"]["objects"][0]["sleep"] = "yes"), "sleep must be true or false")
+	assert_string_contains(_errors_with(func(a: Dictionary, _t: Dictionary) -> void:
+		a["town"]["objects"][0]["actions"] = []), "needs at least one action")
 
 
 func test_start_must_be_walkable() -> void:
