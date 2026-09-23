@@ -55,7 +55,7 @@ Checked by `sim_m4_done` (the first offer comes on day 22 with a plain inn workd
 Split into 3 sub-modules, one branch + PR each (plan approved 2026-09-23, ADR 0010).
 Enemies: Goblin grunt, Rock Crab, Razorbeak. HP 0 = knocked out (no death). One held improvised item.
 - [x] M5.1 Combat core (headless): stats, HP, enemy + item data, attack / block / throw / drop, bump attack, knock-out + safe wake spot, one action record per action kind at fight end — save v6
-- [ ] M5.2 Monsters on the map: spawn tables, monster turns and AI (pack, ambush, territorial), aggro, flee, take items from map objects, seed cores scare crabs
+- [x] M5.2 Monsters on the map: spawn tables, monster turns and AI (pack, ambush, territorial), aggro, flee, take items from map objects, seed cores scare crabs
 - [ ] M5.3 Combat UI: monster markers, HP in the HUD, combat keys, knock-out System page, console commands
 **Done when:** from a new game the player walks to the Floodplains, takes a seed core, meets all 3 enemy
 types from the spawn tables, attacks with fists and an item, blocks, throws, scares a Rock Crab, flees a

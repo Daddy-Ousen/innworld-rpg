@@ -1,6 +1,6 @@
 # ADR 0010 — M5 Combat
 
-Date: 2026-09-23 · Status: accepted (M5 plan approved by the user 2026-09-23). This ADR grows with each part: M5.1 now, M5.2 and M5.3 later.
+Date: 2026-09-23 · Status: accepted (M5 plan approved by the user 2026-09-23). This ADR grows with each part: M5.1 and M5.2 now, M5.3 later.
 
 ## User choices (plan)
 - HP 0 = knocked out. There is no player death in M5.
@@ -22,7 +22,7 @@ The world is already turn-based: time moves only on commands. Each combat comman
   - Rock Crab: looks like a boulder, gives up fast (1.01); a seed core makes it panic (1.02).
   - Razorbeak: nests in the long grass (1.05).
 - `CombatDb` loads and validates both files. Its errors join `DataDb.errors`. A missing file gives empty data (toy dbs).
-- `enemies.json` `spawns` is `[]` until M5.2.
+- `enemies.json` `spawns`: see M5.2 below.
 
 ## Rules — `rules.json` `combat` (new required section, approved in the plan)
 `base_stats` (per race, or `default`), `hp_base`, `hp_per_endurance`, `unarmed`, `hit`, `strength_div`, `min_damage`, `block`, `spot`, `spawn`, `jump_seconds`, `max_turns_per_sync`, `heal_actions`, `night_heal`, `knockout` {`wake_hp_frac`, `wake`: area → {area, pos}}, `xp`. `CombatDb.validate` checks that every wake tile is walkable.
@@ -45,7 +45,7 @@ The world is already turn-based: time moves only on commands. Each combat comman
 
 ## Runtime state — `core/combat_state.gd` (`GameState.combat`, save v6)
 - Top-level fields: `next_id`, `sec`, `area`, `checked` and `spawn_last` (M5.2), `blocking`, `lines`, `monsters`, `fight`.
-- **Monster:** `type`, `spawn`, `group`, `area`, `x`, `y`, `hp`, `state` (`hidden` | `idle` | `hostile` | `flee` | `home`), `home_x`, `home_y`, `carry`, `chase`, `scared`, `rolled_spot`.
+- **Monster:** `type`, `spawn`, `group`, `area`, `x`, `y`, `hp`, `state` (`hidden` | `idle` | `hostile` | `flee` | `home`), `home_x`, `home_y`, `carry`, `chase`, `scared`, `rolled_spot`, `pack` (M5.2).
   - Ids are `"m" + number`, always sorted by number.
 - **Fight:** `{}`, or `start`, `foes` {id: type}, `attacks`, `improvised`, `blocks`, `throws`, `kills`, `routed`.
 - **`lines`:** the combat text of the last command. `Combat.begin_command` clears it and drops the guard at the start of every command, so command return shapes do not change.
@@ -97,7 +97,47 @@ The world is already turn-based: time moves only on commands. Each combat comman
 ## Tests (M5.1)
 `unit_combat` (27), `unit_combat_db`, `unit_stats`, `unit_night` (knock-out wake time, collapse unchanged), `unit_game_state` (v5 → v6), `unit_data_db` (`rules.combat` is required). The toy content is `ToyCombat` (goblin, crab, stick, vase, stink).
 
+## M5.2 Monsters on the map — `core/monster_sim.gd`
+`Combat.sync` runs `MonsterSim.run(gs, db, now, entered)` after the area check and before the fight check.
+
+**Time**
+- A monster acts once per its `act_seconds` of world time (`carry` budget). Turns go round by round, in id order, until no one has a full turn left.
+- Entering an area gives no turns (only a spawn check).
+- A gap over `combat.jump_seconds` with no hostile monster gives no turns (carry is dropped).
+- **Change from the plan:** with a hostile monster near, a long gap still gives turns, up to `max_turns_per_sync`. Else a long `wait` would skip a fight.
+- Turns stop when the player is down.
+
+**Spawns** (`enemies.json` `spawns`, validated by `CombatDb`)
+- Entry: `id`, `area`, `enemy`, `confidence`, `count` [min, max], `chance`, `cooldown_minutes`, exactly one of `zone` | `rects` | `home` (one monster), optional `hours` [from, to] (wraps), `days`, `when_flags`, `unless_flags`, `note`.
+- Checked on entering the area and every `spawn.check_minutes`. A spawn rolls when its hours, days and flags fit, its cooldown has passed, and none of its monsters is still here.
+- Tiles: walkable, not an exit, not taken, at least `spawn.min_distance` (king moves) from the player, in row order; picked by `gs.rng`. `max_monsters` caps the total.
+- An ambusher spawns `hidden`, others `idle`. One spawn = one pack (`group` = the first id). Home = the spawn tile.
+- Real spawns (all `guess`): `crab_valley` (06–20 h, 0.6), `goblins_orchard` (orchard zone, 07–11 h, 2–3, 0.5), `goblins_hill` (19–23 h, 2–3, 0.4, `unless_flags: goblin_tribe.leaderless`), `razorbeak_nest` (home 21,16, always, 1-day cooldown).
+
+**AI by state**
+- `hidden`: one spot roll when the player comes within `ambush.spot_radius` (`spot.base + spot.per_point × perception`); seen, it is `idle`. Next to the player (not diagonal), or bumped by a step, it springs out with `ambush.hit_bonus`. A bump costs no time and gives the player no swing.
+- `idle` / `home`: hostile when the player is within `aggro_radius` (a territorial monster: of its home). A pack turns hostile together. A `home` monster walks back, then is `idle`.
+- `hostile`:
+  - flees when `hp < flee_below × max hp`, or (a pack of 2 or more) when half its pack is dead or running;
+  - gives up when the player is past `lose_radius` or after `chase_turns − max(0, speed − default speed)` turns not next to the player. For a territorial monster the distance is from its **home** (a leash): the Razorbeak is faster than the player, so this is how you flee it;
+  - an ambusher gives up by hiding again (a new spot roll); **change from the plan:** a Goblin goes home instead of fleeing, so a Goblin that loses you is not counted as routed;
+  - else it attacks when next to the player (not diagonal), may throw from `ranged.range` (`ranged.chance`), or steps along `Pathfind.path` to a free tile next to the player, around the player, NPCs and other monsters.
+- `flee`: a scared monster counts `scared` down each turn, then gives up (a crab hides). Else it steps to the side tile farthest from the player (Manhattan), and is gone at the map edge or on an exit.
+- **Routed:** `fight.routed` counts when a monster starts to flee (hurt, pack morale, or scared by an item). A fight with a routed or killed foe is won.
+
+**Save:** monsters get `pack` (how many its spawn placed; 1 if alone). `CombatState.from_dict` defaults it to 1, so older v6 saves load; no migration.
+
+**Items on the map**
+- Map objects may have `"item"` (an `items.json` id; `MapDb` checks it, so `DataDb` now loads the combat data before it validates the maps).
+- Objects with no actions are allowed (scenery, like the Razorbeak nest; eggs are M6).
+- `Interact.options` entries get `item`. `Interact.TAKE` is not an action: `Commands.take(object_id)` holds the item (a held item is put down and gone), costs one turn, and works with enemies near.
+- Items: seed cores on the blue fruit trees, stones (2 on the Floodplains, 1 on the hill), the rolling pin on the stove, chairs at the tables.
+- Map changes: zone `razorbeak_nests` [19, 14, 4, 5] and object `razorbeak_nest` on the Floodplains. The Razorbeak's `aggro_radius` is 3 (not 4), so it does not attack travellers on the road.
+
+**Tests:** `unit_monster_sim` (31), `sim_combat` (real data: spawns make all 3 types, hill raids stop when the tribe is leaderless, the Razorbeak is at its nest, a seed core sends a crab running, a Goblin pack fight; same seed = same game; save/load mid-fight = same game), `unit_combat_db` (spawn checks), `unit_interact` (take), `unit_map_db` (items). `unit_combat` freezes the monsters (`ToyCombat.freeze`), as its tests drive them by hand. `ToyCombat` adds an open 14×9 `arena` and a territorial `bird`.
+
+**Known limits:** NPCs ignore monsters and walk through them (M6). Monsters do not use exits. Fleeing is greedy and can be stuck in a corner.
+
 ## Later
-- M5.2: spawn tables, `MonsterSim` (turns, AI per behaviour, aggro, ambush, flee), take items from map objects.
 - M5.3: combat UI and the M5 "Done when".
 - M6: NPCs react to monsters, guards fight, the Chieftain fight, sparing Goblins, XP tuning.
