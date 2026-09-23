@@ -87,10 +87,11 @@ func test_save_and_load_mid_walk_changes_nothing() -> void:
 	_play(loaded, 5)
 	Commands.sleep(loaded, _db)
 	assert_eq(_diff(loaded.to_dict(), straight.to_dict(), "gs"), [] as Array[String])
+	assert_eq(loaded.to_json(), straight.to_json())
 
 
-## Differences between two states. Floats may differ in the last bit:
-## Godot's JSON parser does not always read back a 17-digit float exactly.
+## Differences between two states. Exact, floats too (save v5 writes
+## floats as f64 text, ADR 0008).
 func _diff(a: Variant, b: Variant, path: String) -> Array[String]:
 	var out: Array[String] = []
 	if a is Dictionary and b is Dictionary:
@@ -105,9 +106,6 @@ func _diff(a: Variant, b: Variant, path: String) -> Array[String]:
 			return out
 		for i in a.size():
 			out.append_array(_diff(a[i], b[i], "%s[%d]" % [path, i]))
-	elif typeof(a) == TYPE_FLOAT and typeof(b) == TYPE_FLOAT:
-		if absf(a - b) > 1e-9 * maxf(1.0, absf(b)):
-			out.append("%s: %s vs %s" % [path, a, b])
 	elif typeof(a) != typeof(b) or a != b:
 		out.append("%s: %s vs %s" % [path, a, b])
 	return out

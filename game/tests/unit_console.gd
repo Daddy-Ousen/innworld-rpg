@@ -140,3 +140,16 @@ func test_kill_flag_history_and_drift() -> void:
 	assert_eq(c.gs.flags["gold"], 5)
 	assert_string_contains(_text(c.execute("history")), "killed")
 	assert_string_contains(_text(c.execute("drift")), "Drift 0.00")
+
+
+func test_wait_npcs_and_talk() -> void:
+	var c := ConsoleCommands.new(_db)
+	assert_string_contains(_text(c.execute("npcs")), "beilmark         liscor_gate 2,13")
+	assert_string_contains(_text(c.execute("look")), "Beilmark (beilmark): talk_with_guest")
+	var out := _text(c.execute("use beilmark talk_with_guest"))
+	assert_string_contains(out, "Talk with a guest")
+	assert_eq(c.gs.world.relationship("beilmark", NpcSim.PLAYER), 1)
+	var t := c.gs.clock.total_minutes
+	assert_string_contains(_text(c.execute("wait 30")), "You wait.")
+	assert_eq(c.gs.clock.total_minutes, t + 30)
+	assert_string_contains(_text(c.execute("wait soon")), "whole number")

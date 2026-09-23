@@ -1,15 +1,20 @@
 ## The game screen: world map, HUD, "use" menu and the debug console
-## overlay. Turns keys into Commands on Session.gs, then redraws.
+## overlay. Turns keys into Commands on Session.gs, then redraws. Held
+## keys: WASD/arrows walk, Space waits (one step of time).
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
 ## Seconds between steps while a direction key is held.
 const STEP_REPEAT := 0.14
+const WAIT := "wait"
 const MOVE_KEYS := {
 	"n": [KEY_W, KEY_UP], "s": [KEY_S, KEY_DOWN], "e": [KEY_D, KEY_RIGHT], "w": [KEY_A, KEY_LEFT],
+	WAIT: [KEY_SPACE],
 }
 
 var _cooldown := 0.0
+## The NPC the player last bumped into (say it once, not every repeat).
+var _bumped := ""
 
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
@@ -19,7 +24,10 @@ var _cooldown := 0.0
 
 
 func _ready() -> void:
-	view.setup(Session.db.maps)
+	var names := {}
+	for id: String in Session.db.canon.npcs:
+		names[id] = Session.db.canon.npcs[id]["name"]
+	view.setup(Session.db.maps, names)
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	console_layer.visible = false
@@ -80,13 +88,19 @@ func _held_direction() -> String:
 	return ""
 
 
+## One step in `dir` (n, s, e, w), or WAIT for one step of time.
 func step(dir: String) -> void:
 	var gs := Session.gs
-	var r := Commands.move(gs, Session.db, dir)
-	if r["refused"] and gs.clock.is_collapse_due(Session.db.rules["clock"]):
+	var db := Session.db
+	var r := {"refused": Commands.wait(gs, db, int(db.rules["world"]["step_seconds"])) < 0,
+			"exit_to": "", "npc": ""} if dir == WAIT else Commands.move(gs, db, dir)
+	if r["refused"] and gs.clock.is_collapse_due(db.rules["clock"]):
 		hud.add_lines(["You are too tired to take another step."])
 		sleep()
 		return
+	if r["npc"] != "" and r["npc"] != _bumped:
+		hud.add_lines(["%s is in the way." % db.canon.npcs[r["npc"]]["name"]])
+	_bumped = r["npc"]
 	if r["exit_to"] != "":
 		hud.add_lines(["You travel to %s (%d min)." % [
 			Session.db.maps.areas[r["exit_to"]]["name"], int(r["minutes"])]])

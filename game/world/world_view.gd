@@ -1,5 +1,6 @@
-## Draws the player's map from MapDb and the player on it. Placeholder
-## art: one coloured 16×16 tile per tiles.json entry, made in code.
+## Draws the player's map from MapDb, the NPCs in it (with names) and
+## the player. Placeholder art: one coloured 16×16 tile per tiles.json
+## entry, made in code.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -8,22 +9,31 @@ const TILE := 16
 const OBJECT_COLOR := Color("#e8c547")
 const EXIT_COLOR := Color(1.0, 1.0, 0.7, 0.3)
 const NOSE := 4
+const NPC_COLOR := Color("#3b6fd1")
+const NPC_NAME_SIZE := 7
+## Names are drawn this many times larger, then scaled down, so they stay
+## sharp under the camera zoom.
+const TEXT_SCALE := 3
 
 ## Map id on screen now ("" = none).
 var area := ""
 ## tile id → atlas coords.
 var atlas: Dictionary = {}
+## NPC id → name shown over its marker.
+var npc_names: Dictionary = {}
 var _maps: MapDb
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var marks: Node2D = $Marks
+@onready var npcs: Node2D = $Npcs
 @onready var player: Node2D = $Player
 @onready var nose: ColorRect = $Player/Nose
 @onready var camera: Camera2D = $Player/Camera
 
 
-func setup(maps: MapDb) -> void:
+func setup(maps: MapDb, names: Dictionary = {}) -> void:
 	_maps = maps
+	npc_names = names
 	atlas.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas)
 	area = ""
@@ -36,6 +46,7 @@ func refresh(gs: GameState) -> void:
 	var new_area := gs.player.area != area
 	if new_area:
 		_show_area(gs.player.area)
+	_show_npcs(gs)
 	player.position = cell_center(gs.player.pos())
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
 	if new_area:  # jump, do not glide across the new map
@@ -101,6 +112,36 @@ func _show_area(id: String) -> void:
 	camera.limit_top = 0
 	camera.limit_right = size.x * TILE
 	camera.limit_bottom = size.y * TILE
+
+
+## One marker per NPC in the area (named after the NPC id), with its
+## name above it.
+func _show_npcs(gs: GameState) -> void:
+	for child in npcs.get_children():
+		npcs.remove_child(child)
+		child.queue_free()
+	for id in gs.npcs.in_area(area):
+		var marker := Node2D.new()
+		marker.name = id
+		marker.position = cell_center(NpcRoster.pos_of(gs.npcs.npcs[id]))
+		var body := ColorRect.new()
+		body.position = Vector2(-5, -5)
+		body.size = Vector2(10, 10)
+		body.color = NPC_COLOR
+		body.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		marker.add_child(body)
+		var label := Label.new()
+		label.text = npc_names.get(id, id)
+		label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
+		label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
+		label.add_theme_constant_override("outline_size", 6)
+		label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		label.scale = Vector2.ONE / TEXT_SCALE
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		marker.add_child(label)
+		var size := label.get_minimum_size() / TEXT_SCALE
+		label.position = Vector2(-size.x / 2.0, -5 - size.y)
+		npcs.add_child(marker)
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:

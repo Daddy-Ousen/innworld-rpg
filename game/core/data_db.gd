@@ -13,6 +13,7 @@ const RULE_FIELDS := {
 	"skills": ["on_accept", "chance_per_level", "base_weight"],
 	"director": ["default_delay_limit", "drift", "tier_weight", "unreliable_at"],
 	"world": ["start", "step_seconds"],
+	"npc": ["step_seconds", "jump_seconds", "talk_actions", "talk_relationship"],
 }
 const CONTEXT_TESTS := ["min", "max", "equals"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
@@ -37,11 +38,14 @@ var skills: Dictionary = {}
 var canon: CanonDb = CanonDb.new()
 ## Tiles and world maps (data/tiles.json, data/maps/). Empty in toy dbs.
 var maps: MapDb = MapDb.new()
+## NPC goals and schedules (data/npc_behaviour.json). Empty in toy dbs.
+var behaviour: BehaviourDb = BehaviourDb.new()
 var errors: Array[String] = []
 
 
 ## Loads tags, actions, rules, classes and skills JSON from `dir`, the
-## canon from `dir`/canon and the maps. Errors are pushed and kept in `errors`.
+## canon from `dir`/canon, the maps and the NPC behaviour. Errors are
+## pushed and kept in `errors`.
 static func load_dir(dir: String = "res://data") -> DataDb:
 	var load_errors: Array[String] = []
 	var t := _read_json(dir.path_join("tags.json"), load_errors)
@@ -54,7 +58,9 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.canon = CanonDb.load_root(dir.path_join("canon"))
 	db.maps = MapDb.load_dir(dir)
 	db.maps.validate(db)
-	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors
+	db.behaviour = BehaviourDb.load_dir(dir)
+	db.behaviour.validate(db)
+	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors
 	for e in db.errors:
 		push_error(e)
 	return db

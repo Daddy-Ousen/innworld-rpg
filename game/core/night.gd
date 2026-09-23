@@ -1,5 +1,5 @@
 ## Night resolution pipeline (DESIGN §2). Fixed order; each step works on
-## GameState only. Steps 6–7 (off-screen sim, relation decay) come in M4+.
+## GameState only. Step 7 (relationship decay) comes later.
 class_name Night
 extends RefCounted
 
@@ -30,6 +30,10 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false) -> Dictionar
 	var history_before := gs.world.history.size()
 	lines.append_array(Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], collapsed) - 1))
 	var events := gs.world.history.slice(history_before)
+	# 6. Off-screen sim: NPCs go where their goals put them at wake time
+	#    (the dead are gone).
+	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], collapsed)
+	NpcSim.advance_to(gs, db, wake * 60 + gs.player.sub_seconds)
 	# 8. Advance to the next day and keep the morning summary.
 	var days := gs.clock.sleep(db.rules["clock"], collapsed)
 	gs.morning = lines.duplicate()

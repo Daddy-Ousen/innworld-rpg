@@ -20,6 +20,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			1: out = _migrate_1_to_2(out)
 			2: out = _migrate_2_to_3(out)
 			3: out = _migrate_3_to_4(out)
+			4: out = _migrate_4_to_5(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -46,4 +47,12 @@ static func _migrate_2_to_3(d: Dictionary) -> Dictionary:
 ## who is not placed yet; Movement puts them at rules.world.start.
 static func _migrate_3_to_4(d: Dictionary) -> Dictionary:
 	d["player"] = {}
+	return d
+
+
+## v5 (M4.4): NPCs on the world grid. A v4 save has no NPCs yet; NpcSim
+## puts them at their goal spots on the next command. v5 also writes floats
+## as exact f64 text (SaveCodec); plain numbers in old saves still load.
+static func _migrate_4_to_5(d: Dictionary) -> Dictionary:
+	d["npcs"] = {}
 	return d

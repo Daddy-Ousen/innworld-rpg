@@ -19,7 +19,7 @@ func test_options_list_nearby_objects() -> void:
 	gs.player.place("town", Vector2i(3, 2))
 	var opts := Interact.options(gs, _db)
 	assert_eq(opts.size(), 2)
-	assert_eq(opts[0], {"id": "dummy", "name": "Dummy", "actions": ["fight", "spar"]})
+	assert_eq(opts[0], {"id": "dummy", "name": "Dummy", "actions": ["fight", "spar"], "npc": false})
 	assert_eq(opts[1]["id"], "stove")
 
 

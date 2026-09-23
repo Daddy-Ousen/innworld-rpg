@@ -100,15 +100,36 @@ static func walk_to_area(gs: GameState, d: DataDb, to_area: String) -> bool:
 			for y in range(r.position.y, r.end.y):
 				for x in range(r.position.x, r.end.x):
 					goals[Vector2i(x, y)] = true
-	var found := Pathfind.path(d.maps, gs.player.area, gs.player.pos(), goals)
-	return found["found"] and walk(gs, d, found["steps"]) and gs.player.area == to_area
+	return walk_to(gs, d, goals) and gs.player.area == to_area
 
 
 ## Walks until `object_id` (in the current map) is next to the player.
 static func walk_next_to(gs: GameState, d: DataDb, object_id: String) -> bool:
 	for o: Dictionary in d.maps.areas[gs.player.area]["objects"]:
 		if o["id"] == object_id:
-			var goals := Pathfind.around(Vector2i(int(o["at"][0]), int(o["at"][1])))
-			var found := Pathfind.path(d.maps, gs.player.area, gs.player.pos(), goals)
-			return found["found"] and walk(gs, d, found["steps"])
+			return walk_to(gs, d, Pathfind.around(Vector2i(int(o["at"][0]), int(o["at"][1]))))
+	return false
+
+
+## Walks to any tile in `goals` (or through an exit in it), one step at a
+## time around the NPCs, waiting a step when they block every way.
+## False if refused or not there after `max_steps`.
+static func walk_to(gs: GameState, d: DataDb, goals: Dictionary, max_steps: int = 400) -> bool:
+	var area := gs.player.area
+	for i in max_steps:
+		if goals.has(gs.player.pos()):
+			return true
+		var avoid := {}
+		for id in gs.npcs.in_area(area):
+			avoid[NpcRoster.pos_of(gs.npcs.npcs[id])] = true
+		var found := Pathfind.path(d.maps, area, gs.player.pos(), goals, avoid)
+		if not found["found"]:
+			if Commands.wait(gs, d, int(d.rules["world"]["step_seconds"])) < 0:
+				return false
+			continue
+		var r := Commands.move(gs, d, found["steps"][0])
+		if r["refused"]:
+			return false
+		if r["exit_to"] != "":
+			return true
 	return false
