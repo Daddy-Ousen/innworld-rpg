@@ -1,0 +1,17 @@
+# source books and extracted text (copyrighted — never commit)
+The Wandering Inn Books 1-17 Pirateaba/
+canon/raw/
+
+# Godot
+game/.godot/
+export/
+*.tmp
+
+# Python
+__pycache__/
+.venv/
+
+# OS / editors
+Thumbs.db
+.DS_Store
+.vscode/
