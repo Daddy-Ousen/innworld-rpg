@@ -1,19 +1,17 @@
 # Handoff
 
-## Just done (2026-09-23, branch `data/book1-1.10-1.14`, not committed)
+## Just done (2026-09-23, branch `data/book1-1.10-1.14`)
 M4 plan approved (5 sub-modules). Plan file: `C:\Users\rhasa\.claude\plans\lets-start-m4-plan-lucky-treehouse.md`.
-M4.1 canon extraction for 1.10, Interlude – The Great Ritual, 1.11–1.14:
-- New chapter files: `game/data/canon/book1/chapters/{1.10,interlude_the_great_ritual,1.11,1.12,1.13,1.14}.json` — 12 events, all `status: "candidate"`.
-- `npcs.json`: new `selys`, `krshia`, `lism`, `belsc`, `drassi` (candidate). Updated notes on `relc` (+[Sergeant]), `rags`, `pisces`.
-- `locations.json`: new `liscor_east_gate`, `liscor_adventurers_guild`, `liscor_mages_guild`, `liscor_plaza`, `krshia_stall`, `lism_stall`, `goblin_grave`, `blighted_kingdom` (candidate).
-- `game/tests/sim_canon_book1.gd`: `LAST_DAY := 9`; counts raised.
-- ROADMAP M4 split into M4.1–M4.5 + "Done when". progress.md updated.
-- Checks: validator 0 errors, GUT 156/156, Python 26/26.
+M4.1 done: canon 1.10, Great Ritual interlude, 1.11–1.14 — 12 events, NPCs `selys krshia lism belsc drassi`, 8 locations, all reviewed by the user. `sim_canon_book1` runs to day 9 (`LAST_DAY`), drift 0. PR #5 open: https://github.com/Daddy-Ousen/innworld-rpg/pull/5
+Checks: validator 0 errors, GUT 156/156, Python 26/26.
+
+## Decision (user, 2026-09-23): player arrives on day 8
+The player is one of the Earthers of the Great Ritual (night 7). New game starts on day 8 outside the Liscor east gate.
+M4.2 must: set the start in `rules.json` (`world.start` area/pos + a day-8 start minute), and run the director for days 1–7 at new game so canon history exists. Erin walks through the same gate on day 8 (`b1.erin_walks_to_liscor`). Check tests that assume a day-1 start (`sim_30_days`, `sim_canon_book1`, `unit_night`); toy dbs keep their own rules.
 
 ## Waiting on the user
-- Review the M4.1 candidate data. After OK: set `status` → `reviewed` in the new records, run validator + tests, commit `data(book1): events, NPCs and locations for 1.10-1.14` and `docs: split M4 into sub-modules`, push, open PR.
-- Design question raised: the Great Ritual (night 7) brings many Earthers to the world. Should the player arrive then (day 8) instead of day 1?
-- Old M2 game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`. New: `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
+- Merge PR #5. Then tag `m4.1-done`.
+- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`.
 
 ## Timeline (days)
 Day 1 = Erin's arrival. 1.00–1.09 = days 1–7. 1.10 + interlude = day 7 / night 7. 1.11–1.12 = day 8. 1.13–1.14 = day 9.

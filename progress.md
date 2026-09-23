@@ -16,7 +16,7 @@
   - [x] `Commands.kill_npc` / `set_flag`; console `kill`, `flag`, `history`, `drift`.
   - [x] Tests: `unit_canon_db`, `unit_director`, `sim_divergence` (3 scenarios), `sim_canon_book1` (real week 1, drift 0).
 - [ ] M4 — 2D world (plan approved 2026-09-23; 5 sub-modules, see ROADMAP)
-  - [ ] M4.1 Canon 1.10–1.14 (branch `data/book1-1.10-1.14`): reviewed by user, validator 0 errors, GUT 156/156 (canon runs days 1–9, drift 0). PR open.
+  - [x] M4.1 Canon 1.10–1.14 (branch `data/book1-1.10-1.14`, PR #5): 12 events, 5 NPCs, 8 locations, reviewed by user; validator 0 errors, GUT 156/156 (canon runs days 1–9, drift 0). Tag `m4.1-done` after merge.
   - [ ] M4.2 World grid core (save v4)
   - [ ] M4.3 2D view
   - [ ] M4.4 NPC schedules + utility AI (save v5)
