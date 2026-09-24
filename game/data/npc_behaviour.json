@@ -26,14 +26,14 @@
 		},
 		"relc": {
 			"confidence": "guess",
-			"notes": "Day 9 dawn: Relc brings Goblin heads to the inn (b1.relc_brings_goblin_heads). Stays away from the inn after Erin throws him out.",
+			"notes": "Day 9 dawn: Relc brings Goblin heads to the inn (b1.relc_brings_goblin_heads). Stays away from the inn after Erin throws him out, and again after he blames her for Klbkch (1.30).",
 			"goals": [
 				{"goal": "visit_inn", "base": 5, "days": [9, 9], "hours": [[6, 7, 1]],
 					"target": {"area": "inn_hill", "pos": [16, 13]}},
 				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
 					"target": {"area": "liscor_gate", "route": [[3, 10], [28, 10], [28, 13], [3, 13]]}},
 				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]],
-					"when_flags": ["erin.met_liscor_watch"], "unless_flags": ["erin.threw_out_relc"],
+					"when_flags": ["erin.met_liscor_watch"], "unless_flags": ["erin.threw_out_relc", "relc.blames_erin"],
 					"target": {"area": "inn_interior", "pos": [8, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
@@ -139,6 +139,15 @@
 			"notes": "Stays with the tribe in the wilds.",
 			"goals": [
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"pawn": {
+			"confidence": "guess",
+			"notes": "After he names himself (1.30), Pawn brings Workers to the inn each evening or every other evening, when the sun meets the mountains (1.34). Before that he works in the Hive.",
+			"goals": [
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["pawn.named"],
+					"target": {"area": "inn_interior", "pos": [6, 6]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		}
 	}

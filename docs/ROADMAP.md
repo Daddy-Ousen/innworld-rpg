@@ -77,5 +77,15 @@ Canon: all chapters 1.15–1.25. The player changes canon through `hooks` on can
 **Done when:** a new player can play two weeks, get a class, and change one canon event.
 Checked by `sim_m6_done` through the main scene (seed 1; see ADR 0011 M6.5).
 
+## M7 — Rest of Book 1
+Split into 4 canon batches of about 10 chapters, one branch + PR each (plan approved 2026-09-24, ADR 0012).
+New engine systems only when a batch needs them; a new schema or system is asked for first (rule 11).
+- [ ] M7.1 Canon 1.26R–1.34 (days 19–23): the Goblin raid on the inn on day 21 as a canon stage (Klbkch still dies; `change` hook), Pawn, the Watch leaves the inn, Ryoka's crushed leg
+- [ ] M7.2 Canon 1.35R–1.44R
+- [ ] M7.3 Canon 1.45–1.54
+- [ ] M7.4 Canon 1.55R–1.63
+**Done when:** all Book 1 canon is event data; `sim_canon_book1` runs to the last canon day with drift 0;
+each batch has at least one hook or stage the player can use to change canon; the validator reports 0 errors.
+
 ## Later
-- M7: rest of Book 1 · M8: Book 2 data · optional LLM flavour layer · audio · polish
+- M8: Book 2 data · optional LLM flavour layer · audio · polish

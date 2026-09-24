@@ -20,8 +20,8 @@ func _has_error(errors: Array[String], part: String) -> bool:
 func test_shipped_combat_data_is_valid() -> void:
 	var db := DataDb.load_dir()
 	assert_eq(db.combat.errors, [] as Array[String])
-	assert_eq(db.combat.enemies.keys().size(), 4)
-	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain"]:
+	assert_eq(db.combat.enemies.keys().size(), 5)
+	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain", "goblin_raid_leader"]:
 		assert_true(db.combat.enemies.has(id), id)
 	for id: String in ["chair", "rolling_pin", "stone", "seed_core"]:
 		assert_true(db.combat.items.has(id), id)
@@ -117,7 +117,7 @@ func _good_spawn() -> Dictionary:
 func test_shipped_spawns() -> void:
 	var db := DataDb.load_dir()
 	var ids := db.combat.spawns.map(func(s: Dictionary) -> String: return s["id"])
-	assert_eq(ids, ["crab_valley", "goblins_orchard", "goblins_hill", "razorbeak_nest"])
+	assert_eq(ids, ["crab_valley", "goblins_orchard", "goblins_hill", "razorbeak_nest", "crab_hill_unpatrolled"])
 	var types := {}
 	for s: Dictionary in db.combat.spawns:
 		types[s["enemy"]] = true

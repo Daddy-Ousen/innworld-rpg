@@ -1,0 +1,58 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.26R",
+	"events": {
+		"b1.ryoka_runs_potions_through_lich": {
+			"tier": 1,
+			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": []},
+				"vice_captain": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "calruz"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.saved_horns", "horns_of_hammerad.owe_ryoka", "horns_of_hammerad.killed_albez_lich"],
+				"relationship": [
+					{"from": "calruz", "to": "ryoka_griffin", "delta": 2},
+					{"from": "gerial", "to": "ryoka_griffin", "delta": 1},
+					{"from": "ceria_springwalker", "to": "ryoka_griffin", "delta": 1}
+				]
+			},
+			"rumor": "Adventurers say the Horns of Hammerad killed a Lich at the Ruins of Albez, far to the north, after a barefoot Runner brought them potions under fire.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Day is a guess: three days before 1.32R, which is about day 22. The Horns later say 'a week ago'; the text disagrees with itself. Deltas are design values."},
+			"summary": "A Lich pins down the Horns of Hammerad in the Ruins of Albez. Ryoka sprints at it, dodges its fire and bone wall, and hands the Horns fifteen healing and five mana potions. She runs out under fire to draw it off. Healed, the Horns kill the Lich, but no one got her name."
+		},
+		"b1.ryoka_takes_persuas_job": {
+			"tier": 1,
+			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"location": "wales_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"rival": {"prefer": ["persua"], "fallback_tags": []},
+				"crony_a": {"prefer": ["claudeil"], "fallback_tags": [], "optional": true},
+				"crony_b": {"prefer": ["toriska"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "persua"], "flags": ["ryoka.warned_off_good_requests"], "not_flags": []},
+			"depends_on": ["b1.ryoka_warned_by_fals"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.broke_runner_rule", "persua.feuds_with_ryoka"],
+				"relationship": [
+					{"from": "persua", "to": "ryoka_griffin", "delta": -3},
+					{"from": "ryoka_griffin", "to": "persua", "delta": -2}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Same day as the Lich run. Here the Guild is in Wales (1.20R had it in Remendia); flagged for review. Deltas are design values."},
+			"summary": "Back at the Guild, Ryoka is offered a rush Magnolia delivery that must reach Celum within the hour. Persua rushes in to claim it, since Ryoka already had a Magnolia job this week. Ryoka takes it anyway because she is faster. Persua swears she will regret it."
+		}
+	},
+	"system": []
+}

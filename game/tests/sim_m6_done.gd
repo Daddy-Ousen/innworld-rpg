@@ -13,6 +13,8 @@ const SEED := 1
 const FIRST_DAY := 8
 const LAST_DAY := 21
 const CHIEFTAIN_EVENT := "b1.erin_kills_chieftain"
+## M7.1: the Goblin raid on day 21 (a canon stage) is tested in sim_goblin_raid.
+const RAID_EVENT := "b1.klbkch_dies_defending_erin"
 const WORK := [["stove", "cook_stew"], ["wash_basin", "wash_dishes"], ["stove", "cook_pasta"],
 	["broom", "sweep_floor"], ["stove", "bake_bread"], ["bed", "clean_room"]]
 const END_HOUR := 20
@@ -168,6 +170,7 @@ func test_m6_done() -> void:
 		fail_test("no Session autoload")
 		return
 	_session.set_state(GameState.new_game(SEED, _db))
+	_gs().world.staged[RAID_EVENT] = LAST_DAY
 	_main = add_child_autofree(load("res://world/main.tscn").instantiate())
 	var gs := _gs()
 	assert_eq(gs.clock.day(), FIRST_DAY)
@@ -191,7 +194,7 @@ func test_m6_done() -> void:
 	assert_eq(gs.clock.day(), LAST_DAY + 1, "two weeks played")
 
 	# The Chieftain came on day 9 and the player won next to Erin.
-	assert_eq(gs.world.staged, {CHIEFTAIN_EVENT: FIRST_DAY + 1})
+	assert_eq(gs.world.staged, {RAID_EVENT: LAST_DAY, CHIEFTAIN_EVENT: FIRST_DAY + 1})
 	assert_true(_lines.any(func(l: String) -> bool: return l.begins_with("Erin Solstice hits the Goblin Chieftain")))
 	assert_has(_lines, "The Goblin Chieftain dies.")
 	assert_eq(gs.world.status(CHIEFTAIN_EVENT), Director.CHANGED, "one canon event changed")

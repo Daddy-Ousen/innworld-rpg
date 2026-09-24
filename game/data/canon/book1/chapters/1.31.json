@@ -1,0 +1,38 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.31",
+	"events": {
+		"b1.erin_beats_the_hive_mind": {
+			"tier": 2,
+			"window": {"earliest": 21, "latest": 21, "confidence": "confirmed"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"opponent": {"prefer": ["pawn"], "fallback_tags": ["antinium", "worker"]},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"goblin_watcher": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["pawn.named"], "not_flags": []},
+			"depends_on": ["b1.pawn_becomes_himself"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.beat_hive_mind", "erin.showed_immortal_game", "antinium_hive.plays_as_one", "liscor.knows_erin_levels_fast"],
+				"relationship": [
+					{"from": "olesm", "to": "erin_solstice", "delta": 1},
+					{"from": "pawn", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "People say the Human innkeeper beat a hundred Antinium at chess on her hill, and that the Drake tactician watching wept.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.31", "confidence": "confirmed", "note": "Evening of day 21, straight after 1.30. Selys says she saw a Soldier 'this morning', which fits loosely. Deltas are design values."},
+			"summary": "On the bloody hill, Pawn and a hundred Workers think as one and beat Erin again and again. Krshia and Selys explain levels; Pisces says she gets no [Tactician] levels because chess is only a game to her. She shows them the Immortal Game, then wins one last game in tears."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 11, "confidence": "confirmed", "note": "In her sleep that night. She says she was level 10 before."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Lesser Strength]", "level": 11, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Immortal Moment]", "level": 11, "confidence": "confirmed", "note": "What it does is not shown; Pisces has never heard of it (1.34)."}
+	]
+}

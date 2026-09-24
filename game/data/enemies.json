@@ -25,7 +25,12 @@
 			"tags": ["goblin", "chieftain"], "color": "#3f5a22", "danger": 1.0, "behaviour": "pack",
 			"hp": 20, "armor": 1, "accuracy": 4, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
 			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": [],
-			"ranged": {"range": 5, "damage": [2, 3], "chance": 0.3}}
+			"ranged": {"range": 5, "damage": [2, 3], "chance": 0.3}},
+		"goblin_raid_leader": {"name": "Goblin Raid Leader", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.29", "confidence": "confirmed", "note": "A Goblin a head taller than the rest, not yet a Hob, with a short sword. Leads the raid on the inn on day 21. Only in a canon stage, never in a spawn."},
+			"tags": ["goblin", "raid_leader"], "color": "#56782e", "danger": 0.8, "behaviour": "pack",
+			"hp": 14, "armor": 0, "accuracy": 4, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.2, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",
@@ -40,6 +45,10 @@
 			"unless_flags": ["goblin_tribe.leaderless"]},
 		{"id": "razorbeak_nest", "area": "floodplains_south", "enemy": "razorbeak", "confidence": "guess",
 			"note": "A Razorbeak guards its nest in the long grass (1.05).",
-			"home": [21, 16], "count": [1, 1], "chance": 1.0, "cooldown_minutes": 1440}
+			"home": [21, 16], "count": [1, 1], "chance": 1.0, "cooldown_minutes": 1440},
+		{"id": "crab_hill_unpatrolled", "area": "inn_hill", "enemy": "rock_crab", "confidence": "guess",
+			"note": "Design: once the Watch stops patrolling near the inn (1.30), monsters creep closer, as Pisces and Selys warn (1.34). Which ones is not shown yet; a Rock Crab by the hill's rocks stands in.",
+			"rects": [[0, 12, 12, 12]], "hours": [6, 20], "count": [1, 1], "chance": 0.3, "cooldown_minutes": 720,
+			"when_flags": ["liscor_watch.no_inn_patrols"]}
 	]
 }
