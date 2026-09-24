@@ -100,6 +100,37 @@ func test_later_prefer_npc_fills_the_role_without_drift() -> void:
 	assert_almost_eq(gs.world.drift, 0.0, EPS)
 
 
+func test_revive_brings_a_dead_npc_back() -> void:
+	var d := _db({
+		"e.kill": ToyCanon.event(1, 1, {"effects": {"kill": ["mentor"]}}),
+		"e.back": ToyCanon.event(2, 2, {"effects": {"revive": ["mentor"], "set_flags": ["mentor.back"]}}),
+		"e.needs": ToyCanon.event(3, 3, {"requires": ToyCanon.req(["mentor"])}),
+	})
+	var gs := _gs(d)
+	Director.run(gs, d, 1)
+	assert_false(gs.world.is_alive(d.canon, "mentor"))
+	Director.run(gs, d, 3)
+	assert_true(gs.world.is_alive(d.canon, "mentor"), "revive")
+	assert_eq(gs.world.status("e.needs"), Director.DONE, "alive again for later events")
+	var back := GameState.from_dict(gs.to_dict())
+	assert_true(back.world.is_alive(d.canon, "mentor"), "survives a save")
+
+
+func test_revive_runs_after_kill_in_one_event() -> void:
+	var d := _db({"e.x": ToyCanon.event(1, 1, {"effects": {"kill": ["guard_a"], "revive": ["mentor"]}})})
+	var gs := _gs(d)
+	Commands.kill_npc(gs, d, "mentor")
+	Director.run(gs, d, 1)
+	assert_false(gs.world.is_alive(d.canon, "guard_a"))
+	assert_true(gs.world.is_alive(d.canon, "mentor"))
+
+
+func test_revive_unknown_npc_is_a_data_error() -> void:
+	var c := CanonDb.from_dicts(ToyCanon.npcs(), {}, {"e.x": ToyCanon.event(1, 1, {"effects": {"revive": ["zed"]}})})
+	assert_eq(c.errors.size(), 1)
+	assert_string_contains(c.errors[0], "effects.revive")
+
+
 func test_substitute_then_delay_for_a_missing_flag() -> void:
 	var d := _db({"e.x": ToyCanon.event(1, 1, {"roles": {"r": ToyCanon.role(["guard_a"], ["guard"])},
 			"requires": ToyCanon.req([], ["late"]), "on_fail": ["substitute", "delay", "cancel"]})})

@@ -312,13 +312,17 @@ def check_wave(r: Report, where: str, w) -> None:
 
 
 def check_effects(r: Report, where: str, fx) -> None:
-    if not _keys(r, where, fx, set(), {"set_flags", "clear_flags", "kill", "relationship"}):
+    if not _keys(r, where, fx, set(), {"set_flags", "clear_flags", "kill", "revive", "relationship"}):
         return
     for k in ("set_flags", "clear_flags"):
         if k in fx:
             _str_list(r, f"{where}.{k}", fx[k], RE_FLAG)
-    if "kill" in fx:
-        _str_list(r, f"{where}.kill", fx["kill"], RE_ID)
+    for k in ("kill", "revive"):
+        if k in fx:
+            _str_list(r, f"{where}.{k}", fx[k], RE_ID)
+    if isinstance(fx.get("kill"), list) and isinstance(fx.get("revive"), list):
+        for nid in sorted(set(fx["kill"]) & set(fx["revive"]), key=str):
+            r.err(f"{where}.revive", f"'{nid}' is also in kill")
     for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship", []), list) else []):
         rw = f"{where}.relationship[{i}]"
         if _keys(r, rw, rel, {"from", "to", "delta"}):
@@ -579,8 +583,9 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     def effect_npcs(where: str, fx, player_ok: bool = False) -> None:
         if not isinstance(fx, dict):
             return
-        for nid in fx.get("kill", []) if isinstance(fx.get("kill"), list) else []:
-            need_npc(f"{where}.kill", nid)
+        for k in ("kill", "revive"):
+            for nid in fx.get(k, []) if isinstance(fx.get(k), list) else []:
+                need_npc(f"{where}.{k}", nid)
         for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship"), list) else []):
             if isinstance(rel, dict):
                 for k in ("from", "to"):

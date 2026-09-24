@@ -121,6 +121,7 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 		_check_npcs("%s role '%s'" % [where, role], ev["roles"][role].get("prefer", []))
 	_check_npcs(where + " requires.alive", ev["requires"].get("alive", []))
 	_check_npcs(where + " effects.kill", ev["effects"].get("kill", []))
+	_check_npcs(where + " effects.revive", ev["effects"].get("revive", []))
 	var hook_ids := {}
 	for hook: Dictionary in ev.get("hooks", []):
 		_validate_hook(where, hook, hook_ids)
@@ -220,6 +221,7 @@ func _validate_hook(where: String, hook: Dictionary, seen: Dictionary) -> void:
 		if not hook.has("effects"):
 			errors.append("%s: 'change' needs effects." % hw)
 		_check_npcs(hw + " effects.kill", hook.get("effects", {}).get("kill", []))
+		_check_npcs(hw + " effects.revive", hook.get("effects", {}).get("revive", []))
 	elif then != HOOK_CANCEL:
 		errors.append("%s: 'then' must be cancel, change or mutate:<id>." % hw)
 
