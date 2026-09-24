@@ -5,7 +5,7 @@
 	"events": {
 		"b1.ryoka_teaches_magnolia_ice_cream": {
 			"tier": 1,
-			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"window": {"earliest": 15, "latest": 15, "confidence": "guess"},
 			"location": "magnolia_celum_mansion",
 			"roles": {
 				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
@@ -28,7 +28,7 @@
 		},
 		"b1.persua_crushes_ryokas_leg": {
 			"tier": 1,
-			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"window": {"earliest": 15, "latest": 15, "confidence": "guess"},
 			"location": "celum",
 			"roles": {
 				"victim": {"prefer": ["ryoka_griffin"], "fallback_tags": []},

@@ -72,7 +72,7 @@
 			},
 			"news": "A Worker Antinium spoke as 'I' in the market today and followed the Human innkeeper out of the city. He calls himself Pawn.",
 			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Same afternoon. The Worker is one of the twelve from 1.25, so the id 'pawn' fits here for sure. Deltas are design values."},
+			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Same afternoon. The Worker is one of the twelve from 1.25, so the id 'pawn' fits here for sure. The Workers bury the raiders several hundred feet from the inn (raiders_grave). Deltas are design values."},
 			"summary": "Krshia and Selys comfort Erin at the stall. A hundred Workers bring stiff condolences; Erin asks their leader his name. He nearly turns Aberration and grips her throat, then becomes an individual who feels grief. On the walk he names himself Pawn. The Workers clean the inn."
 		}
 	},

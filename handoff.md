@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-24, branch `data/book1-1.26-1.34`, M7.1)
 M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 plan: 4 canon batches (ADR 0012). For the day-21 raid the user chose a `change` hook (Klbkch still dies).
-- Canon 1.26R–1.34: 9 new chapter files (19 events, days 19–23, all `candidate`), 11 new NPCs, 7 new locations. `pawn` is named, `beilmark` is a Gnoll, `klbkch` has the tag `prognugator` (these 3 are back to `candidate`).
+- Canon 1.26R–1.34: 9 new chapter files (19 events, days 15–23, all `candidate`), 11 new NPCs, 8 new locations. `pawn` is named, `beilmark` is a Gnoll, `klbkch` has the tag `prognugator` (these 3 are back to `candidate`).
 - The raid is `b1.klbkch_dies_defending_erin` (1.29). `b1.goblin_raid_on_inn` already exists in 1.02. Its stage is in `inn_interior` 12–14, with the raid leader + 5 Goblins at the door and Erin as ally. Hook `player_fought_raid` → change.
 - `enemies.json`: `goblin_raid_leader` (stage only) and spawn `crab_hill_unpatrolled` (when `liscor_watch.no_inn_patrols`).
 - `npc_behaviour.json`: `pawn` visits the inn 18–22 after `pawn.named`; `relc` has `unless_flags` `relc.blames_erin`.
@@ -11,12 +11,12 @@ M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 pla
 - Docs: ROADMAP M7 section, ADR 0012, progress.
 
 ## Waiting on the user
-- Review the M7.1 events in PR #18 (https://github.com/Daddy-Ousen/innworld-rpg/pull/18). Flagged conflicts:
-  - Ryoka's Guild is in Remendia (1.20R), Wales (1.26R) and Celum (1.33R).
-  - 1.32R says "a week ago" but also "three days".
-  - The Goblin grave is "several hundred feet" away (1.30) or "a mile" (1.31).
-  - The new spawn is a Rock Crab stand-in.
-- After review: flip the events to `reviewed`, merge, and tag `m7.1-done`.
+- PR #18 (https://github.com/Daddy-Ousen/innworld-rpg/pull/18). Review answers applied (2026-09-24):
+  - Guilds in Remendia, Wales and Celum are all correct (each city has one; memory `lore-city-guilds`).
+  - 1.32R: "a week ago" wins, so the Lich run and the crushed leg are now day 15.
+  - Raiders' grave is several hundred feet away (new location `raiders_grave`).
+- Open question: big fights. The user wants far more than 6 fighters (40 Goblins, and later big battles with many characters). I asked which battle upgrade to build. Measured: 80 Goblins cost about 2 ms per monster turn, so speed is not the limit. The limits are: NPCs have no HP; monsters attack only the player; stage allies must already be in the stage's area; one player against 40 is a sure knock-out; the labels overlap.
+- After that: flip the events to `reviewed`, merge, and tag `m7.1-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
 ## Next

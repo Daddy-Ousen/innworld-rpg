@@ -23,7 +23,7 @@
 				]
 			},
 			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Evening of the same day as 1.32R. The Guild here is Celum's (1.20R: Remendia; 1.26R: Wales); flagged for review. Delta is a design value."},
+			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Evening of the same day as 1.32R. Celum has its own Runners' Guild, as most cities do. Delta is a design value."},
 			"summary": "At the Guild that evening, Fals tells Persua in public to leave Ryoka alone. Garia sees he fears her. He admits he knew of the plan and only asked them not to go too far. Hearing how bad the leg is, he promises favors. Then Stenei says Magnolia came asking where Ryoka lives."
 		},
 		"b1.magnolia_offers_ryoka_healing": {
