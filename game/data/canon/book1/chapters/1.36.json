@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.36",
+	"events": {
+		"b1.ryoka_outruns_relc": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"guard": {"prefer": ["relc"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["ryoka_griffin", "relc"], "flags": ["ryoka.leg_healed"], "not_flags": []},
+			"depends_on": ["b1.pisces_mends_ryokas_leg"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["relc.outrun_by_human", "ryoka.ran_back_north"],
+				"relationship": [
+					{"from": "relc", "to": "ryoka_griffin", "delta": 1}
+				]
+			},
+			"news": "A barefoot Human Runner raced Senior Guardsman Relc on the north road and left him far behind. The Watch will not let him forget it.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "Same day as the healing. She then runs about thirty miles before the Horns pick her up (1.39R). Delta is a design value."},
+			"summary": "Leg healed, Ryoka cartwheels in joy and sets off north on foot, the Horns' wagon following. On the road a big Drake guard with a spear races her for show. He nearly keeps up in armour, then she speeds away. Relc gives up, stunned, and wonders if Erin knows her."
+		},
+		"b1.erin_burns_shield_spider_nest": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "shield_spider_nest",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"nest": {"prefer": [], "fallback_tags": ["shield_spider"]}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.plans_to_explore"], "not_flags": []},
+			"depends_on": ["b1.selys_maps_izril_for_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.burned_shield_spider_nest", "erin.knows_krakk_trees", "erin.killed_to_prove_herself", "floodplains.spider_nest_gone"]
+			},
+			"news": "Black smoke rose over the Floodplains all afternoon. Someone set a Shield Spider nest on fire.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "Same day as 1.35R: the Horns smell the smoke an hour after they leave. Gazi reads Erin as a Level 11 [Innkeeper] with [Lesser Strength]."},
+			"summary": "Erin goes exploring alone with a rock, a knife, a potion and a jar of acid. A Krakk tree bursts and cuts her cheek. A Shield Spider hunts her to a hidden nest pit. She beats it with bare hands, then burns the whole nest with the burst wood. She weeps for the young and calls herself a killer."
+		}
+	},
+	"system": []
+}

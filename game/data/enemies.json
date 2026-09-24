@@ -30,7 +30,17 @@
 			"canon_ref": {"book": 1, "chapter": "1.29", "confidence": "confirmed", "note": "A Goblin a head taller than the rest, not yet a Hob, with a short sword. Leads the raid on the inn on day 21. Only in a canon stage, never in a spawn."},
 			"tags": ["goblin", "raid_leader"], "color": "#56782e", "danger": 0.8, "behaviour": "pack",
 			"hp": 14, "armor": 0, "accuracy": 4, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
-			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.2, "scared_by": []}
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.2, "scared_by": []},
+		"adventurer_brawler": {"name": "Adventurer", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "One of three Human adventurers with swords and armour who try to kill the Goblins in the inn on day 28, then run from Gazi. Only in a canon stage, never in a spawn. Design: they run early (flee_below) because canon has them run, not die."},
+			"tags": ["human", "adventurer"], "color": "#8a6f55", "danger": 0.7, "behaviour": "pack",
+			"hp": 16, "armor": 1, "accuracy": 4, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.5, "scared_by": []},
+		"adventurer_axeman": {"name": "Big adventurer", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "The biggest of the three, with an axe; he holds off three Antinium at once. Only in a canon stage, never in a spawn. His danger is above the others, so the fight's records name him."},
+			"tags": ["human", "adventurer"], "color": "#6e5540", "danger": 0.9, "behaviour": "pack",
+			"hp": 24, "armor": 2, "accuracy": 4, "evasion": 2, "damage": [3, 5], "act_seconds": 6,
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.4, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

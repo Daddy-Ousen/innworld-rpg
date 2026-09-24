@@ -161,6 +161,15 @@
 			"goals": [
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
+		},
+		"toren": {
+			"confidence": "guess",
+			"notes": "Pisces's skeleton (1.41). Once it exists it never leaves the inn: it cleans, carries water and fruit, and guards Erin. Before day 27 it is not made yet (off the map).",
+			"combat": {"hp": 8, "accuracy": 3, "evasion": 2, "armor": 0, "damage": [1, 2]},
+			"goals": [
+				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "target": {"area": "inn_interior", "pos": [14, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
 		}
 	}
 }

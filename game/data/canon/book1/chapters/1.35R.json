@@ -1,0 +1,39 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.35R",
+	"events": {
+		"b1.pisces_mends_ryokas_leg": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"healer": {"prefer": ["pisces"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"vice_captain": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"fire_mage": {"prefer": ["sostrom"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "pisces", "ceria_springwalker"], "flags": ["ryoka.leg_crushed", "ceria.will_contact_old_classmate", "pisces.got_strange_message"], "not_flags": []},
+			"depends_on": ["b1.ceria_suggests_necromancy", "b1.pisces_trades_lessons_for_tab"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.leg_healed", "pisces.paid_forty_gold", "ceria.met_pisces_again", "ryoka.thanked_horns"],
+				"clear_flags": ["ryoka.leg_crushed", "ryoka.cannot_run"],
+				"relationship": [
+					{"from": "ryoka_griffin", "to": "ceria_springwalker", "delta": 2},
+					{"from": "ryoka_griffin", "to": "calruz", "delta": 1},
+					{"from": "ryoka_griffin", "to": "pisces", "delta": 1}
+				]
+			},
+			"news": "A wagon of Human adventurers stopped on the inn's hill. A mage there set a Runner's shattered leg in moments, and she ran off north.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.35R", "confidence": "confirmed", "note": "Day is a guess: they leave Celum the night Pisces answers Ceria (1.34, day 23 or 24), Ryoka has a fever for two days, and they reach the inn on the third day. Erin is out exploring (1.36). The wound is cleaned and healed in 1.36. Deltas are design values."},
+			"summary": "The Horns of Hammerad drive the feverish Ryoka south in a fast wagon, numbed by a spell. Pisces meets them outside the empty inn. Ceria haggles him to forty gold. He knits every splinter of bone in seconds with necromancy. Ryoka, whole again, thanks them all and means it."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "other", "name": "About Level 22 at Wistram", "level": 22, "confidence": "likely", "note": "Ceria's memory from their student days; he has levels in several magic classes."}
+	]
+}

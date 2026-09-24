@@ -1,0 +1,60 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.39R",
+	"events": {
+		"b1.magnolia_shuts_ryoka_out": {
+			"tier": 1,
+			"window": {"earliest": 27, "latest": 28, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []},
+				"senior": {"prefer": ["fals"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true},
+				"receptionist": {"prefer": ["stenei"], "fallback_tags": [], "optional": true},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "magnolia_reinhart"], "flags": ["ryoka.leg_healed", "ryoka.refused_magnolia_deal"], "not_flags": []},
+			"depends_on": ["b1.ryoka_outruns_relc", "b1.eterell_steps_down"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.blocked_by_guilds", "runners.overworked_for_magnolia", "persua.demoted_to_street_runner", "runners.high_passes_request_open"]
+			},
+			"rumor": "Runners from Celum to Wales say Lady Reinhart takes no deliveries until one barefoot Runner brings her one herself, and they all work double till then.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.39R", "confidence": "likely", "note": "Ryoka is back in Celum after the thirty-mile run and a wagon ride, then rests two days. Persua is already a Street Runner. Days are guesses."},
+			"summary": "Back in Celum, Ryoka enjoys Persua's fall to Street Runner. But every Guild she tries, in three cities, offers her only deliveries to Magnolia, and the other Runners take every other request, working to exhaustion. Fals says a third Runner died on an open High Passes request."
+		},
+		"b1.ryoka_takes_the_high_passes_request": {
+			"tier": 1,
+			"window": {"earliest": 30, "latest": 31, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"senior": {"prefer": ["fals"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true},
+				"repairer": {"prefer": ["sostrom"], "fallback_tags": ["mage"], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.blocked_by_guilds", "runners.high_passes_request_open"], "not_flags": []},
+			"depends_on": ["b1.magnolia_shuts_ryoka_out"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.took_high_passes_request", "ryoka.phone_repaired", "ryoka.called_runners_cowards", "ryoka.carries_mana_potions"],
+				"relationship": [
+					{"from": "ryoka_griffin", "to": "sostrom", "delta": 2},
+					{"from": "garia_strongheart", "to": "ryoka_griffin", "delta": 1},
+					{"from": "fals", "to": "ryoka_griffin", "delta": -1},
+					{"from": "persua", "to": "ryoka_griffin", "delta": -1}
+				]
+			},
+			"rumor": "A barefoot Runner took the High Passes request that has killed three Runners, and called the whole Celum Guild cowards on her way out.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.39R", "confidence": "confirmed", "note": "'It's been four days', at midday. Who swapped the potions is not said. The day is a guess. Deltas are design values."},
+			"summary": "After four days shut out, Ryoka tells Fals his team talk is a lie and takes the eighty-gold High Passes request. Ceria lends her potions, but half turn out to be mana potions. Sostrom's [Repair] brings her phone back to life, and she runs out of Celum to her music, leaving the Runners behind."
+		}
+	},
+	"system": []
+}

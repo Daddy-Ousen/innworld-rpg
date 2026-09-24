@@ -1,0 +1,107 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.41",
+	"events": {
+		"b1.rags_leads_a_splinter_band": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 27, "confidence": "guess"},
+			"location": "goblin_cave",
+			"roles": {
+				"leader": {"prefer": ["rags"], "fallback_tags": []},
+				"rivals": {"prefer": [], "fallback_tags": ["goblin"]}
+			},
+			"requires": {"alive": ["rags"], "flags": ["goblin_tribe.leaderless", "rags.fought_own_tribe"], "not_flags": []},
+			"depends_on": ["b1.klbkch_dies_defending_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.chieftain", "goblin_tribe.civil_war"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "The Horns see two Goblin bands fighting on the Floodplains on the day they reach the inn (1.35R): a small one in formation under a small leader, a bigger one without. That this is Rags is likely."},
+			"summary": "With the Chieftain dead the tribe splits. Rags, now a [Chieftain], leads the smaller band that will not eat every Human on sight, fighting the larger one while she feeds her Goblins on blue fruit, eggs, fish and Erin's meals. Winter is near and food is short."
+		},
+		"b1.erin_and_selys_visit_the_ruins": {
+			"tier": 2,
+			"window": {"earliest": 26, "latest": 27, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "selys"], "flags": [], "not_flags": []},
+			"depends_on": ["b1.gazi_comes_to_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.saw_the_ruins", "liscor_dungeon.tent_city"]
+			},
+			"news": "About a hundred adventurers camp by the new ruins ten miles out. The teams that went deepest came back as walking dead, or not at all.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "The first of Erin's two days out after 1.38. The ruins are those of 1.23A-1.24, ten miles from Liscor."},
+			"summary": "Selys lectures Erin about fighting monsters alone, takes her to a bathhouse and for clothes, then to the ruins. A tent city of mostly Human Silver- and Bronze-ranks rings a vast dug-out pit and a black stone door. Few dare dig far: rats, spiders and the undead wait inside."
+		},
+		"b1.thief_ransacks_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 27, "latest": 28, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"thief": {"prefer": ["princess_thief"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["princess_thief", "erin_solstice"], "flags": ["liscor.human_thief_at_large"], "not_flags": []},
+			"depends_on": ["b1.princess_steals_in_liscor", "b1.erin_and_selys_visit_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.ransacked", "erin.wants_protection", "erin.spider_bounty_paid"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "likely", "note": "The second day. Erin collects just over eleven gold for the spiders, then finds the inn trashed at lunch. The text does not name the thief; the stranded [Princess] is likely."},
+			"summary": "Erin collects just over eleven gold for the spiders and comes home to a trashed kitchen. Someone took food, her hidden gold and silver, even her toothbrush. Furious, she wants protection, but Liscor's adventurers ask eight silver a day each."
+		},
+		"b1.erin_sells_acid_to_rags": {
+			"tier": 2,
+			"window": {"earliest": 27, "latest": 28, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "rags"], "flags": ["rags.chieftain", "wandering_inn.ransacked"], "not_flags": []},
+			"depends_on": ["b1.thief_ransacks_the_inn", "b1.rags_leads_a_splinter_band"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.has_short_sword", "rags.buys_acid_jars", "rags.refused_to_guard_inn", "erin.beat_selys_sparring"],
+				"relationship": [
+					{"from": "rags", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Same afternoon. Selys spars with Erin on the Watch training ground on the way; she wears steel claws. Delta is a design value."},
+			"summary": "Erin buys a shortsword and a buckler to hire Rags's Goblins as guards, after a spar where she kicks Selys flat. Rags signs that her band is too small to hold the inn. She takes the gear on her tab and buys all of Erin's Acid Fly acid in jars instead."
+		},
+		"b1.pisces_pays_with_a_skeleton": {
+			"tier": 2,
+			"window": {"earliest": 27, "latest": 28, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {"prefer": ["pisces"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["pisces", "erin_solstice", "toren"], "flags": ["pisces.owes_erin_payment", "wandering_inn.ransacked"], "not_flags": []},
+			"depends_on": ["b1.relc_makes_up_with_erin", "b1.thief_ransacks_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.has_skeleton", "pisces.tab_paid", "wandering_inn.upstairs_clean", "pisces.made_leveling_undead"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "That evening. The skeleton's bones are not quite Human. Erin names it Toren in 1.46."},
+			"summary": "A skeleton knocks until Erin opens the door. Pisces drops his invisibility: it is his payment for the tab, a guard that obeys only her. Erin punches him, finds it cannot hold a sword it does not have, and sets it to scrub the filthy upper floor. It becomes a Level 1 [Skeleton Warrior]."
+		}
+	},
+	"system": [
+		{"who": "rags", "kind": "class", "name": "[Chieftain]", "level": null, "confidence": "confirmed", "note": "While she is Chieftain, her band will not attack the inn."},
+		{"who": "toren", "kind": "class", "name": "[Skeleton Warrior]", "level": 1, "confidence": "confirmed", "note": "Unnamed at first. Undead are not supposed to level."}
+	]
+}

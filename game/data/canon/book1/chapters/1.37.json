@@ -1,0 +1,71 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.37",
+	"events": {
+		"b1.gazi_comes_to_liscor": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["gazi_pathseeker", "erin_solstice"], "flags": ["erin.burned_shield_spider_nest"], "not_flags": []},
+			"depends_on": ["b1.erin_burns_shield_spider_nest"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.met_gazi", "liscor.gazi_in_city", "erin.spider_bounty_claimed", "erin.owes_gazi_wagon_money"],
+				"relationship": [
+					{"from": "gazi_pathseeker", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "Gazi of Reim, the King of Destruction's vassal, walked into Liscor beside the Human innkeeper and a cart of burned Shield Spiders.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.37", "confidence": "confirmed", "note": "Late the same day as the nest (Erin says Gazi helped her 'earlier today' in 1.38). The meeting at the pit is 1.36. Delta is a design value."},
+			"summary": "At the burning pit, a half-Gazer adventurer finds Erin, talks with her about killing, and lends her coin for a wagon. In Liscor's Adventurers' Guild Erin signs for over sixteen Shield Spiders. Then her companion gives her name, Gazi of Reim, and the whole hall freezes in fear."
+		},
+		"b1.relc_thrashes_adventurers": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"guard": {"prefer": ["relc"], "fallback_tags": ["senior_guard"]},
+				"brawlers": {"prefer": [], "fallback_tags": ["adventurer"]}
+			},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": ["b1.gazi_comes_to_liscor"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["liscor.watch_brawls_adventurers", "erin.knows_relc_is_strongest"]
+			},
+			"news": "Senior Guardsman Relc beat six Human adventurers in the street outside the Adventurers' Guild with his bare hands.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.37", "confidence": "confirmed", "note": "Gazi reads him as over Level 30 in [Spearmaster]; Selys says Klbkch was ten levels lower."},
+			"summary": "The crowd around Gazi spills into the street. Adventurers shove a guardsman, and Relc takes on six at once without his spear, tossing a man in plate into a wall. Selys tells Erin he may be the strongest city guard in the world. Gazi says she is done with war."
+		},
+		"b1.free_queen_sends_ksmvr": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {"prefer": ["free_queen"], "fallback_tags": []},
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["free_queen", "ksmvr"], "flags": ["klbkch.died_saving_erin"], "not_flags": []},
+			"depends_on": ["b1.free_queen_blames_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_hive.new_prognugator", "antinium_hive.queen_on_secret_project", "ksmvr.judges_pawn", "ksmvr.watches_gazi"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.37", "confidence": "confirmed", "note": "Same day as Gazi's arrival: the Queen hears of her. What the Queen is making is not said."},
+			"summary": "Deep in the Hive, the Queen hears of Humans and Gazi in Liscor. She is absorbed in a secret, hurried work and must not be disturbed. She names Ksmvr her Prognugator, tells him to handle the Council, watch Gazi and judge the Aberration who calls himself an individual."
+		}
+	},
+	"system": [
+		{"who": "relc", "kind": "class", "name": "[Spearmaster]", "level": null, "confidence": "confirmed", "note": "Over Level 30, as Gazi sees it."},
+		{"who": "gazi_pathseeker", "kind": "other", "name": "Rumored over Level 40", "level": null, "confidence": "likely", "note": "Selys's word; Named-rank, among the world's top hundred adventurers."}
+	]
+}

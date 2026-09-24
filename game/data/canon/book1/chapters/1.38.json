@@ -1,0 +1,99 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.38",
+	"events": {
+		"b1.princess_steals_in_liscor": {
+			"tier": 2,
+			"window": {"earliest": 24, "latest": 25, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"thief": {"prefer": ["princess_thief"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["princess_thief"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["liscor.human_thief_at_large", "princess_thief.stranded_in_liscor"]
+			},
+			"news": "Someone keeps stealing from the stalls on Market Street. With so many Humans in town, the Watch looks at them first.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.38", "confidence": "likely", "note": "Humans already talk of a Human [Thief] from a caravan in 1.37; she has stolen for 'a few days' by 1.38. The first day is a guess."},
+			"summary": "A proud Human girl who took the wrong caravan south is stranded in Liscor with no coin. Sure that what is theirs is hers, she lifts fruit and coin from Market Street stalls, sleeps in alleys, and plans to reach Celum and Lady Magnolia Reinhart."
+		},
+		"b1.lism_accuses_erin_of_theft": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"accuser": {"prefer": ["lism"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"defender": {"prefer": ["krshia"], "fallback_tags": ["gnoll"]},
+				"guard": {"prefer": [], "fallback_tags": ["guard"]}
+			},
+			"requires": {"alive": ["lism", "erin_solstice"], "flags": ["liscor.human_thief_at_large"], "not_flags": []},
+			"depends_on": ["b1.gazi_comes_to_liscor", "b1.princess_steals_in_liscor"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["erin.accused_of_theft", "krshia.wants_private_talk"],
+				"relationship": [
+					{"from": "krshia", "to": "erin_solstice", "delta": 1},
+					{"from": "erin_solstice", "to": "lism", "delta": -1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.38", "confidence": "confirmed", "note": "Straight after the Guild. Deltas are design values."},
+			"summary": "Lism, robbed in the night, shouts that Erin is the thief and a chess cheat. A tired guard wants her statement under a truth spell. Krshia arrives with other Gnolls and shames him off. She wants to speak with Erin alone, but Erin keeps being pulled away."
+		},
+		"b1.erin_answers_the_titans_puzzle": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "olesm"], "flags": [], "not_flags": []},
+			"depends_on": ["b1.lism_accuses_erin_of_theft"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.sent_puzzle_to_titan", "olesm.copies_erins_puzzle"],
+				"relationship": [
+					{"from": "olesm", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "The Titan of Baleros sent a chess problem to every tactician on the continent. Olesm says the Human innkeeper solved it at a glance.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.38", "confidence": "confirmed", "note": "The Titan's Great Company is the Forgotten Wing. Delta is a design value."},
+			"summary": "Olesm runs up with a drawn board: a mate-in-five problem the Titan of Baleros sent to every chess player he could reach. Erin solves it at once, then draws a far harder mate-in-four and pays two silver to have it sent back to the Titan and to Pallass."
+		},
+		"b1.relc_makes_up_with_erin": {
+			"tier": 2,
+			"window": {"earliest": 25, "latest": 26, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"guard": {"prefer": ["relc"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"mage": {"prefer": ["pisces"], "fallback_tags": []},
+				"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["relc", "erin_solstice", "pisces"], "flags": ["relc.ignores_erin"], "not_flags": []},
+			"depends_on": ["b1.relc_turns_away_from_erin", "b1.gazi_comes_to_liscor", "b1.pisces_mends_ryokas_leg"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["relc.made_peace_with_erin", "pisces.fines_paid", "pisces.welcome_in_liscor", "pisces.owes_erin_payment", "gazi.visited_inn"],
+				"clear_flags": ["relc.ignores_erin"],
+				"relationship": [
+					{"from": "relc", "to": "erin_solstice", "delta": 2},
+					{"from": "erin_solstice", "to": "relc", "delta": 1},
+					{"from": "pisces", "to": "relc", "delta": -1}
+				]
+			},
+			"news": "Senior Guardsman Relc took a bag of gold off the Necromancer at the inn on the hill to pay his old fines. The mage may walk in Liscor again.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.38", "confidence": "confirmed", "note": "That evening. Relc comes with four guards and says he wanted to see Erin 'after so long'. Design: relc.blames_erin stays set, so he does not visit every evening again until canon shows it. Deltas are design values."},
+			"summary": "Erin brings Gazi to the inn, where Pisces is eating her pastries. Relc comes in with four guards to size up Gazi, and Erin smacks him with a plate. He takes Pisces's forty gold as fines, then asks after a fast Human Runner. Pisces offers to pay his tab another way."
+		}
+	},
+	"system": []
+}
