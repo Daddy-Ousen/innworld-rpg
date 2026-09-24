@@ -1,20 +1,14 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.45-1.54`, M7.3 canon 1.45–1.54)
-PR #21 (M7.2) was merged by the user; tag `m7.2-done` is on 941261b and pushed.
-M7.3 is done and reviewed by the user (2026-09-24, all as proposed). The PR is open (see `gh pr list`).
-
-Commits on the branch:
-- `99bb878` data(book1): 24 events in 10 chapter files (days 34–37), 3 NPCs, 2 locations, NPC fact updates, enemy `goblin_feathered_chieftain`, the Goblin battle stage + hook, Horns lodger schedules, Pawn away while judged, tests.
-- `1434ea0` docs: ADR 0012 M7.3 section, ROADMAP, progress, handoff.
-- The review commit: all M7.3 entries `reviewed`, ADR accepted, docs.
-
-Tests: GUT 486/486 (51 scripts), Python 39, validator 0 errors. `sim_canon_book1` LAST_DAY 37, drift 0. Checked on screen (battle on day 35; Horns in the inn at 07:00 on day 36).
+## Just done (2026-09-24, branch `docs/readme`)
+PR #22 (M7.3) was merged by the user. Tag `m7.3-done` is on the merge commit 7534893 and pushed.
+README.md rewritten for GitHub: pillars, status table (M0–M8), Book 1 counts (1.00–1.54, days 1–37, 130 events, 47 NPCs, 44 locations), play command and keys, test commands, layout, canon/copyright rules. Docs only; no code change. A PR is open for it.
 
 ## Waiting on the user
-- Review and merge the M7.3 PR, then tag `m7.3-done`.
+- Merge the README PR.
 - Note: 1.16.json still has one old `candidate` event from M6.4 (not part of M7.x; left as is).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
+- After M7.4: update the README status table and canon counts.
 
 ## Next
 - M7.4: canon 1.55R–1.63 (last Book 1 batch). Read every chapter first. Calruz trains Erin for two days; the Horns and other teams enter the ruins (about day 39–40); Ryoka reaches the end of her Blood Fields run (the geas's errand); Gnoll warriors arrive "within the week"; Pawn's Queen ends the Rite of Anastases.
@@ -67,4 +61,6 @@ Tests: GUT 486/486 (51 scripts), Python 39, validator 0 errors. `sim_canon_book1
 - Screenshot trick still works (scratch `game/shot_*.gd/.tscn`, `main.switch_scene = false`); delete the files after.
 
 ## Active files
+`README.md` (status table and counts change with each milestone).
+
 `game/data/canon/book1/chapters/1.45.json` … `1.54.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/tests/{sim_goblin_battle,sim_canon_book1,unit_combat_db,sim_player_hooks}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.
