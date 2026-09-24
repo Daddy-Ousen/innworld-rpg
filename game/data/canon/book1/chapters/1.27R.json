@@ -5,7 +5,7 @@
 	"events": {
 		"b1.ryoka_teaches_magnolia_ice_cream": {
 			"tier": 1,
-			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"window": {"earliest": 15, "latest": 15, "confidence": "guess"},
 			"location": "magnolia_celum_mansion",
 			"roles": {
 				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
@@ -22,13 +22,13 @@
 				]
 			},
 			"rumor": "Northern gossip says Lady Magnolia Reinhart has a new frozen sweet, a cold cream no one else can make yet.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.27R", "confidence": "confirmed", "note": "Starts at the end of 1.26R: Ryoka reaches Celum in forty minutes and the package is ice cream. Same day as the Lich run. Delta is a design value."},
 			"summary": "The rush package is ice cream, and Ryoka lets slip that she knows it. She makes a custard in Magnolia's kitchen while a mage churns it frozen. Over tea, Magnolia and Ressa test her with Skills and a truth spell. Ryoka refuses all payment; Magnolia has someone look into her past."
 		},
 		"b1.persua_crushes_ryokas_leg": {
 			"tier": 1,
-			"window": {"earliest": 19, "latest": 19, "confidence": "guess"},
+			"window": {"earliest": 15, "latest": 15, "confidence": "guess"},
 			"location": "celum",
 			"roles": {
 				"victim": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
@@ -48,7 +48,7 @@
 				]
 			},
 			"rumor": "Word from Celum: a City Runner was crushed under a wagon in a side street. Some Runners whisper it was no accident.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.27R", "confidence": "confirmed", "note": "Late the same day, in Celum's streets. What glued her feet and knocked her down is not named (a spell or item). Deltas are design values."},
 			"summary": "Leaving the mansion, Ryoka is boxed in by Claudeil, Toriska and about twenty Street Runners and herded into a side street. Persua trips her. Something sticky glues her feet, an unseen force knocks her flat, and a heavy mule wagon rolls over her leg."
 		}

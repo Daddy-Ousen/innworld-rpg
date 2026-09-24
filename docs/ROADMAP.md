@@ -80,7 +80,8 @@ Checked by `sim_m6_done` through the main scene (seed 1; see ADR 0011 M6.5).
 ## M7 — Rest of Book 1
 Split into 4 canon batches of about 10 chapters, one branch + PR each (plan approved 2026-09-24, ADR 0012).
 New engine systems only when a batch needs them; a new schema or system is asked for first (rule 11).
-- [ ] M7.1 Canon 1.26R–1.34 (days 19–23): the Goblin raid on the inn on day 21 as a canon stage (Klbkch still dies; `change` hook), Pawn, the Watch leaves the inn, Ryoka's crushed leg
+- [x] M7.1 Canon 1.26R–1.34 (days 19–23): the Goblin raid on the inn on day 21 as a canon stage (Klbkch still dies; `change` hook), Pawn, the Watch leaves the inn, Ryoka's crushed leg
+- [ ] M7.B Big battles: NPC HP (down, not dead), monsters fight allies, stage waves, allies and helpers join, HP bars and fewer labels; the raid remade with 40 Goblins — save v9 (ADR 0013)
 - [ ] M7.2 Canon 1.35R–1.44R
 - [ ] M7.3 Canon 1.45–1.54
 - [ ] M7.4 Canon 1.55R–1.63

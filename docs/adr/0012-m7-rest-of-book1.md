@@ -10,9 +10,9 @@ Date: 2026-09-24 · Status: accepted for the split and the M7.1 raid (user, 2026
 ## M7.1 Canon 1.26R–1.34 (days 19–23)
 Data only. No schema change, no save version change.
 
-**Timeline.** 1.26R–1.27R and 1.28A are day 19. Ryoka's Lich run and the crushed leg are the same day, three days before 1.32R. 1.29 is day 20 (Hive) and day 21 (the raid). 1.30–1.31 are day 21. 1.32R–1.33R are day 22 (guess). Eterell steps down on day 23 (Magnolia says 'tomorrow'). 1.34 is day 23–24 (guess; the red-gold message to Pisces is likely Ceria's from 1.33R).
+**Timeline.** 1.26R–1.27R are day 15: Ryoka's Lich run and the crushed leg are the same day, a week before 1.32R (the Horns' words; user choice over Ryoka's 'three days'). 1.28A is day 19. 1.29 is day 20 (Hive) and day 21 (the raid). 1.30–1.31 are day 21. 1.32R–1.33R are day 22 (guess). Eterell steps down on day 23 (Magnolia says 'tomorrow'). 1.34 is day 23–24 (guess; the red-gold message to Pisces is likely Ceria's from 1.33R).
 
-**19 events**, all `candidate`. There are 11 new NPCs: the Horns (`calruz`, `ceria_springwalker`, `gerial`, `sostrom`), Persua's group (`persua`, `claudeil`, `toriska`), `jeiss`, `stenei`, `eterell` and `designated_worker`. There are 7 new locations: `ruins_of_albez`, `wales`, `wales_runners_guild`, `celum_runners_guild`, `magnolia_celum_mansion`, `celum_rats_tail_inn` and `selys_home`. `pawn` is now named. `beilmark` is a Gnoll: 1.28A calls her Jeiss's Gnoll partner. `klbkch` gets the tag `prognugator`. Changed entries go back to `candidate`.
+**19 events**, all `candidate`. There are 11 new NPCs: the Horns (`calruz`, `ceria_springwalker`, `gerial`, `sostrom`), Persua's group (`persua`, `claudeil`, `toriska`), `jeiss`, `stenei`, `eterell` and `designated_worker`. There are 8 new locations: `ruins_of_albez`, `wales`, `wales_runners_guild`, `celum_runners_guild`, `magnolia_celum_mansion`, `celum_rats_tail_inn`, `selys_home` and `raiders_grave`. `pawn` is now named. `beilmark` is a Gnoll: 1.28A calls her Jeiss's Gnoll partner. `klbkch` gets the tag `prognugator`. Changed entries go back to `candidate`.
 
 **The raid — `b1.klbkch_dies_defending_erin` (1.29).** The id `b1.goblin_raid_on_inn` was already taken (1.02).
 - **Roles.** `rescuer` prefers Klbkch, with the fallback tag `senior_guard`. If Klbkch is already dead, another senior guard comes and dies in his place (the effect is remapped). `worker` prefers `designated_worker`.
@@ -28,10 +28,10 @@ Data only. No schema change, no save version change.
 
 **Behaviour.** `pawn` visits the inn from 18–22 once `pawn.named` is set. `relc` stops visiting the inn once `relc.blames_erin` is set.
 
-**Conflicts flagged for review.**
-- Ryoka's Runners' Guild is in Remendia in 1.20R, in Wales in 1.26R, and in Celum in 1.33R. Each event uses the guild its own chapter names; 1.20R is not changed.
-- In 1.32R the Horns say Ryoka's delivery was a week ago, but Ryoka says her 'accident' was three days ago, and both happened on the same day.
-- The Goblin grave is 'several hundred feet' from the inn in 1.30 and 'a mile' in 1.31. No event needs the location.
+**Review answers (user, 2026-09-24).**
+- Runners' Guilds: most cities and towns have their own Runners', Mages', Merchants' and Adventurers' Guilds. Remendia (1.20R), Wales (1.26R) and Celum (1.33R) are three guilds, not a conflict.
+- 1.32R: use the Horns' 'a week ago'. The Lich run and the crushed leg move to day 15; 1.32R stays on day 22.
+- The raiders' grave is several hundred feet from the inn (1.30), not a mile (1.31): location `raiders_grave`.
 
 **Tests.**
 - `sim_canon_book1`: `LAST_DAY` is 23. A new test checks that on day 21 Klbkch dies, the Watch leaves the inn and Pawn is named. Another test kills Klbkch early; then a senior guard dies in the raid, and the Hive's chess day is cancelled.

@@ -27,8 +27,8 @@
 				]
 			},
 			"rumor": "They say a Minotaur adventurer fell down the stairs of a Celum inn after a crippled Runner punched him, and paid for the damage laughing.",
-			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.32R", "confidence": "confirmed", "note": "Day is a guess: Ryoka says three days since the 'accident'. Garia later says the punch was 'this morning'. Deltas are design values."},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.32R", "confidence": "confirmed", "note": "Day is a guess: a week after the Lich run (the Horns' words; Ryoka's 'three days' is not used, user choice). Garia later says the punch was 'this morning'. Deltas are design values."},
 			"summary": "Ryoka reads Antinium War history in a Celum inn, her crushed leg in magic bandages. Persua comes to gloat; Garia holds Ryoka back and cracks a table. The Horns of Hammerad arrive to repay their debt, but cannot heal splintered bone. Calruz flirts, and Ryoka punches him down the stairs."
 		}
 	},

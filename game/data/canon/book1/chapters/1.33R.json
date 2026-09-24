@@ -22,8 +22,8 @@
 					{"from": "garia_strongheart", "to": "fals", "delta": -2}
 				]
 			},
-			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Evening of the same day as 1.32R. The Guild here is Celum's (1.20R: Remendia; 1.26R: Wales); flagged for review. Delta is a design value."},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Evening of the same day as 1.32R. Celum has its own Runners' Guild, as most cities do. Delta is a design value."},
 			"summary": "At the Guild that evening, Fals tells Persua in public to leave Ryoka alone. Garia sees he fears her. He admits he knew of the plan and only asked them not to go too far. Hearing how bad the leg is, he promises favors. Then Stenei says Magnolia came asking where Ryoka lives."
 		},
 		"b1.magnolia_offers_ryoka_healing": {
@@ -46,7 +46,7 @@
 				]
 			},
 			"rumor": "Runners say Lady Magnolia Reinhart came to Celum's Runners' Guild herself, angry, and that its Guildmaster is finished.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Same evening. Magnolia sees Ryoka's phone and guesses she is not from this world. Deltas are design values."},
 			"summary": "Magnolia visits with Ressa; a truth stone backs Ryoka's story. Magnolia names Persua and says the Guildmaster steps down tomorrow. She offers the Healer of Tenbault's [Restoration] if Ryoka tells everything about where she is from. Fearing to spread guns, Ryoka refuses; Magnolia leaves."
 		},
@@ -67,7 +67,7 @@
 					{"from": "ryoka_griffin", "to": "ceria_springwalker", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "confirmed", "note": "Right after Magnolia leaves. Ceria does not name the man; the message Pisces gets in 1.34 makes Pisces likely. Delta is a design value."},
 			"summary": "Ceria comes up after Magnolia leaves. She warns Ryoka not to trust nobles and says the Healer of Tenbault is almost out of reach. There may be another way, she says, through a man from Wistram she swore never to speak to again. She asks how Ryoka feels about necromancy."
 		},
@@ -85,7 +85,7 @@
 			"effects": {
 				"set_flags": ["celum_runners_guild.new_guildmaster", "persua.second_investigation"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "likely", "note": "Magnolia says it will happen 'tomorrow'; the text does not show it."},
 			"summary": "As Magnolia promised, Guildmaster Eterell of Celum's Runners' Guild steps down. His successor must look into the Guild, and Persua and her friends face a second inquiry that may cost them their City Runner rank."
 		}

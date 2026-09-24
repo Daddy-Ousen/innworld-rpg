@@ -21,7 +21,7 @@
 					{"from": "pisces", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.34", "confidence": "likely", "note": "'After a few days' of Workers visiting. If the red-gold message is Ceria's from 1.33R (likely), this is day 23 or a little later. Delta is a design value."},
 			"summary": "Workers come each dusk, Rags's washed band pays, and Pisces never does. He warns that without patrols worse monsters will return. Erin offers to wipe his tab and buy alcohol if he teaches her magic. His Mage's Test is cut short by a red-gold message spell, and he hurries off to read it."
 		},
@@ -42,7 +42,7 @@
 				"set_flags": ["liscor.southern_adventurers_fight_watch", "relc.ignores_erin"]
 			},
 			"news": "Four Drake adventurers from past the Blood Fields fought the Watch in the market and walked away. More adventurers are coming for the ruins.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.34", "confidence": "confirmed", "note": "'When she saw Selys next' after Pisces's lesson: the same day or the next."},
 			"summary": "Shopping with Selys, Erin sees four Drake adventurers from the south shove out of a crowd after a scuffle with the Watch. Relc drags out a dazed guardsman and wants to chase them, then sees Erin, turns, and walks the other way without a word. Erin cries."
 		},
@@ -63,7 +63,7 @@
 					{"from": "selys", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.34", "confidence": "confirmed", "note": "Straight after the market. Delta is a design value."},
 			"summary": "Over root tea at her home, Selys draws Izril: Humans north, Drakes and Gnolls south, the Antinium Hivelands, and Liscor holding the only real pass. She tells of the Necromancer Az'kerash, who died at Liscor, and the empty villages around it. Erin decides to explore. Selys objects."
 		}
