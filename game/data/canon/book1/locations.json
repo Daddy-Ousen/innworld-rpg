@@ -342,6 +342,42 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "1.31 says 'a mile away'; the user chose 1.30's several hundred feet."},
 			"summary": "Unmarked pit the Workers dug several hundred feet from the inn to bury the Goblins who raided it on day 21. Not the small grave of 1.13."
+		},
+		"shield_spider_nest": {
+			"name": "Shield Spider nest",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["nest", "spiders", "pit", "danger"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "About a mile from the Krakk trees; direction from the inn not given. Burned out on day 25 (guess)."},
+			"summary": "Huge pit under a false cover of dead grass, full of armoured Shield Spiders and egg sacs, with side tunnels. Steel cannot crack the adults; a nest is a Gold-rank job."
+		},
+		"krakk_forest": {
+			"name": "Krakk tree wood",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["trees", "firewood", "danger"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "About forty minutes' walk from the inn."},
+			"summary": "Rare stand of bare, pale-barked trees on the Floodplains. A hard knock makes a Krakk tree burst and spray its branches like shrapnel. Once burst, the wood is safe and burns well."
+		},
+		"esthelm": {
+			"name": "Esthelm",
+			"kind": "settlement",
+			"parent": "high_passes",
+			"tags": ["city", "human", "mentioned"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Also named in 1.37 (ore from Esthelm) and 1.44R (about sixty miles south of Celum, near the road to Liscor)."},
+			"summary": "One of the two cities on the safe road through the High Passes, with Liscor. Ships ore south. The Horns of Hammerad gather there before they try the ruins near Liscor."
+		},
+		"teriarch_cave": {
+			"name": "Teriarch's cave",
+			"kind": "wild",
+			"parent": "high_passes",
+			"tags": ["cave", "lair", "dragon", "hoard"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Off the rough road through the High Passes; a yellow banner marks it for the Runner request. Whether it is the Dragon's backup lair of 1.01 is not confirmed."},
+			"summary": "Cave mouth big enough for a ship, opening into a hollowed mountain full of books, arms, tapestries, magic items and an alchemy lab. Gargoyles, Carn Wolves and killer goats live nearby, but none follow a visitor inside."
 		}
 	}
 }

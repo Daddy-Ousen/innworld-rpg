@@ -1,0 +1,66 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.44R",
+	"events": {
+		"b1.ryoka_and_garia_beat_arnel": {
+			"tier": 1,
+			"window": {"earliest": 33, "latest": 34, "confidence": "guess"},
+			"location": "celum",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": []},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true},
+				"senior": {"prefer": ["fals"], "fallback_tags": [], "optional": true},
+				"bully": {"prefer": [], "fallback_tags": ["adventurer"]},
+				"crossbow": {"prefer": ["claudeil"], "fallback_tags": [], "optional": true},
+				"knife": {"prefer": ["toriska"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "garia_strongheart"], "flags": ["ryoka.back_in_celum"], "not_flags": []},
+			"depends_on": ["b1.teriarch_lays_a_geas_on_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.guild_block_lifted", "persua.left_the_guild", "persua.hired_adventurer", "garia.may_learn_martial_arts", "horns_of_hammerad.at_esthelm"],
+				"clear_flags": ["ryoka.blocked_by_guilds"],
+				"relationship": [
+					{"from": "garia_strongheart", "to": "ryoka_griffin", "delta": 2},
+					{"from": "ryoka_griffin", "to": "garia_strongheart", "delta": 2},
+					{"from": "persua", "to": "ryoka_griffin", "delta": -2}
+				]
+			},
+			"rumor": "In a Celum inn, a big girl Runner knocked a Bronze-rank adventurer senseless through his chainmail with one punch.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.44R", "confidence": "confirmed", "note": "Some days after 1.43R: Ryoka is still resting from the healing. The Horns have left for Esthelm. The adventurer's name is Arnel; he is not an NPC. Deltas are design values."},
+			"summary": "Over dinner Fals apologises and says the Guild will give her work again; Ryoka sends him off. Persua brings Arnel, a Bronze-rank adventurer, to scare her. Ryoka soaks and outfights him, but he is tough; Garia ends it with one punch through his mail. She admits she was a Level 14 [Farm Worker]."
+		},
+		"b1.ryoka_slips_away_from_magnolia": {
+			"tier": 1,
+			"window": {"earliest": 33, "latest": 34, "confidence": "guess"},
+			"location": "celum",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []},
+				"assassin": {"prefer": ["theofore"], "fallback_tags": ["assassin"], "optional": true},
+				"maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "magnolia_reinhart"], "flags": [], "not_flags": []},
+			"depends_on": ["b1.ryoka_and_garia_beat_arnel"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.left_celum", "ryoka.bound_for_esthelm", "magnolia.missed_ryoka"],
+				"relationship": [
+					{"from": "magnolia_reinhart", "to": "ryoka_griffin", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.44R", "confidence": "confirmed", "note": "That night. Ryoka tells Garia to come to Esthelm to learn to fight. Delta is a design value."},
+			"summary": "At night Ryoka climbs out her window. An [Assassin] waits on the roof; she kicks his leg numb and flees across the rooftops, then drops to the street and is gone. Magnolia clears the whole inn to meet her at last, and knocks on an empty room."
+		}
+	},
+	"system": [
+		{"who": "garia_strongheart", "kind": "class", "name": "[Farm Worker]", "level": 14, "confidence": "confirmed", "note": "Her class before [Runner]."},
+		{"who": "garia_strongheart", "kind": "skill", "name": "[Lesser Strength]", "level": 2, "confidence": "confirmed", "note": "From [Farm Worker], at her second level."},
+		{"who": "garia_strongheart", "kind": "skill", "name": "[Enhanced Strength]", "level": null, "confidence": "confirmed", "note": "Warriors usually get it near Level 30."},
+		{"who": "theofore", "kind": "skill", "name": "[Nerve Strike: Paralysis]", "level": null, "confidence": "confirmed"}
+	]
+}

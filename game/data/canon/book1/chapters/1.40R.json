@@ -1,0 +1,31 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.40R",
+	"events": {
+		"b1.ryoka_runs_the_high_passes": {
+			"tier": 1,
+			"window": {"earliest": 30, "latest": 31, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"dragon": {"prefer": ["teriarch"], "fallback_tags": []},
+				"raiders": {"prefer": [], "fallback_tags": ["goblin"]},
+				"pack": {"prefer": [], "fallback_tags": ["carn_wolf"]},
+				"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": [], "optional": true},
+				"assassin": {"prefer": ["theofore"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.took_high_passes_request"], "not_flags": []},
+			"depends_on": ["b1.ryoka_takes_the_high_passes_request"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.survived_high_passes", "ryoka.killed_a_goblin", "ryoka.found_dragon_lair", "teriarch.woken_by_ryoka", "magnolia.guards_ryoka_with_assassins"]
+			},
+			"rumor": "They say a Runner came out of the High Passes alive this week, the first in years, after Carn Wolves, Gargoyles and worse.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Same day as 1.39R; a few hours' run. Theofore's team of [Assassins] was hired by Magnolia to guard her and lost her."},
+			"summary": "Near the passes Ryoka fights off a Goblin band and kills one with a kick by mistake. A Carn Wolf savages her arm, and her 'healing' potions are mana. Killer goats, Gargoyles and Razorbeaks chase her bleeding into a vast cave hoard, where an old mage wakes. She hands him the request and faints."
+		}
+	},
+	"system": []
+}

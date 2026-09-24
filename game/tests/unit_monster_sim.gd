@@ -246,6 +246,23 @@ func test_a_hurt_monster_flees_and_is_gone_at_the_edge() -> void:
 	assert_false(gs.combat.has_fight(), "the fight is won")
 
 
+func test_indoors_a_fleeing_monster_makes_for_the_door() -> void:
+	var db := DataDb.load_dir()
+	var gs := GameState.new_game(1, db)
+	gs.npcs.npcs.clear()
+	gs.player.place("inn_interior", Vector2i(6, 8))
+	Commands.settle(gs, db)
+	var gob := ToyCombat.spawn(gs, db, "goblin_grunt", Vector2i(22, 13), CombatState.FLEE)
+	var seen: Array[Vector2i] = []
+	for i in 80:
+		Commands.wait(gs, db, 6)
+		if not gs.combat.monsters.has(gob):
+			break
+		seen.append(CombatState.pos_of(gs.combat.monsters[gob]))
+	assert_false(gs.combat.monsters.has(gob), "it walked out of the door, not into a corner")
+	assert_has(seen, Vector2i(12, 15), "it left by the door")
+
+
 func test_half_a_pack_gone_breaks_its_morale() -> void:
 	var gs := _arena(Vector2i(1, 4))
 	var a := _add(gs, "goblin", Vector2i(2, 4), CombatState.HOSTILE, "pack")

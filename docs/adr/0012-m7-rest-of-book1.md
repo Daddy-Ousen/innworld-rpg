@@ -42,3 +42,36 @@ Data only. No schema change, no save version change.
 - The stage is only inside the inn, so a player out on the hill at noon misses it.
 - Rags's band does not join the fight on the map.
 - The raiders' name labels overlap at the door.
+
+## M7.2 Canon 1.35R–1.44R (days 24–33)
+Status: accepted; events reviewed by the user 2026-09-24 (timeline, Relc and the brawl hook as proposed). No schema change, no save version change.
+
+**Timeline (all guesses).** Pisces answers Ceria on day 23 or 24 (1.34); the Horns leave Celum that night, Ryoka has a fever for two days, and they reach the inn on day 25. Day 25 also holds 1.36–1.38 on Erin's side: the Shield Spider nest, Gazi, the Guild, Lism, the Titan's puzzle and Relc at the inn. 1.41 is days 26 (ruins) and 27 (bounty paid, inn ransacked, acid for Rags, the skeleton). 1.42 is day 28. Ryoka is back in Celum on day 27, is shut out for four days, and runs the High Passes on day 30 (1.39R, 1.40R, 1.43R). 1.44R is day 33, some days after the geas.
+
+**24 events**, all `candidate`, in 10 new chapter files.
+- New NPCs: `gazi_pathseeker`, `teriarch`, `ksmvr`, `toren` (the skeleton; named Toren in 1.46, so the id already uses it), `princess_thief` (never named in Book 1) and `theofore`.
+- New locations: `shield_spider_nest`, `krakk_forest`, `esthelm` and `teriarch_cave`.
+- The 1.44R Celum bully (Arnel), the traders Goeln and Cervial, Pestrom and Ylss are not NPCs: they appear once. Arnel is an anonymous `adventurer` role.
+- **Teriarch (user, 2026-09-24).** It is not confirmed that Teriarch is the Dragon of 1.00. So `teriarch` is his own NPC with his own cave `teriarch_cave`; `cave_dragon` and `dragon_backup_lair` are unchanged. Link them only when the text says so.
+- The new ruins near Liscor in 1.41 are the existing `liscor_dungeon` (ten miles out), not `ruins_of_albez` (1.26R, far north).
+- `relc.ignores_erin` is cleared on day 25, but `relc.blames_erin` stays set. So Relc does not visit the inn every evening yet: canon does not show it, and he would win the day-28 brawl alone.
+
+**Stage and hook — `b1.adventurers_attack_goblins_at_inn` (1.42).**
+- **Stage.** Area `inn_interior`, 19–21, day 28. Three foes at the door: one `adventurer_axeman` and two `adventurer_brawler`. Allies: Erin, Pawn and the skeleton. A wave at 0 seconds brings Rags and two Goblin helpers (they were eating inside). Gazi is not on the map: in canon she comes back after the fight.
+- **Enemies** (guess, stage only). Human adventurers with `flee_below` 0.5 / 0.4, because in canon they run and do not die. The axeman's danger (0.9) is above the brawler's (0.7), so the fight's records name him.
+- **Hook** `player_fought_adventurers`: a won fight against either type on day 28–29 is a `change`. It sets `wandering_inn.earther_defended_goblins`, Rags → player +2, Erin → player +1, Pawn → player +1, and has its own news line.
+- **Behaviour.** `toren` works in the inn once `wandering_inn.has_skeleton` is set (night 27), with a small `combat` block. Before that it is off the map.
+
+**Engine fix: fleeing indoors.** A fleeing monster stepped away from the player and left only at the map edge. The inn's edge is all wall, so fleeing foes got stuck in a corner and the fight never ended (this also hit the day-21 raid). Now, in an area whose walkable edge tiles are all exits, a fleeing monster walks to the nearest exit and is gone there. Outdoor maps keep the old behaviour, so the seeded sims do not change.
+
+**Tests.**
+- `sim_canon_book1`: `LAST_DAY` is 33, drift 0. New tests: days 25–28 (the leg is mended, Gazi, Relc, the skeleton, the brawl), Ryoka's geas and escape, and 'kill Pisces early' (Ryoka's whole chain and the skeleton are cancelled; Erin's days go on).
+- `sim_inn_brawl` (new): stage data, the skeleton's schedule, a win changes the event, a knock-out keeps the canon, no brawl on day 27, and the adventurers leave by the door.
+- `unit_monster_sim`: a fleeing Goblin in the inn walks out of the door.
+- Counts updated in `unit_combat_db` (7 enemies) and `sim_player_hooks` (6 hooks).
+
+**Known limits.**
+- A player can still chase and kill a fleeing adventurer. The hook does not check `killed`.
+- NPC name labels still overlap when NPCs stand close (only monster labels are de-overlapped, M7.B).
+- The market thief and Ksmvr have no map schedule yet.
+- The High Passes run, the spider nest and the Celum brawl are not playable: they are off the player's map.

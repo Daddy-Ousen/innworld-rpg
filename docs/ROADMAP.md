@@ -82,7 +82,7 @@ Split into 4 canon batches of about 10 chapters, one branch + PR each (plan appr
 New engine systems only when a batch needs them; a new schema or system is asked for first (rule 11).
 - [x] M7.1 Canon 1.26R–1.34 (days 19–23): the Goblin raid on the inn on day 21 as a canon stage (Klbkch still dies; `change` hook), Pawn, the Watch leaves the inn, Ryoka's crushed leg
 - [x] M7.B Big battles: NPC HP (down, not dead), monsters fight allies, stage waves, allies and helpers join, HP bars and fewer labels; the raid remade with 40 Goblins — save v9 (ADR 0013)
-- [ ] M7.2 Canon 1.35R–1.44R
+- [x] M7.2 Canon 1.35R–1.44R (days 24–33): Pisces mends Ryoka's leg, Gazi of Reim, Relc makes peace, the skeleton, Ryoka's High Passes run and Teriarch's geas; the adventurers' brawl in the inn on day 28 as a canon stage (`change` hook); fleeing monsters leave indoor maps by the door
 - [ ] M7.3 Canon 1.45–1.54
 - [ ] M7.4 Canon 1.55R–1.63
 **Done when:** all Book 1 canon is event data; `sim_canon_book1` runs to the last canon day with drift 0;

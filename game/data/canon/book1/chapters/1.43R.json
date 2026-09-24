@@ -1,0 +1,29 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.43R",
+	"events": {
+		"b1.teriarch_lays_a_geas_on_ryoka": {
+			"tier": 1,
+			"window": {"earliest": 30, "latest": 31, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"dragon": {"prefer": ["teriarch"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.found_dragon_lair"], "not_flags": []},
+			"depends_on": ["b1.ryoka_runs_the_high_passes"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.geas_to_find_azkerash", "ryoka.knows_azkerash_lives", "ryoka.has_speed_potion", "ryoka.has_flame_wand", "ryoka.paid_high_passes_reward", "ryoka.back_in_celum", "teriarch.knows_ryoka_face"],
+				"relationship": [
+					{"from": "ryoka_griffin", "to": "teriarch", "delta": -1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.43R", "confidence": "confirmed", "note": "When she wakes, healed; the same day or the next. He says she needs several days to recover before she goes."},
+			"summary": "A spell makes Ryoka obey and tell only truth. Teriarch learns she refuses to level, not that she is the Ryoka Magnolia named. He binds her by geas to carry a letter and ring to Az'kerash, alive in the Blood Fields, pays in gold, a speed potion and a fire wand, and teleports her to Celum."
+		}
+	},
+	"system": []
+}
