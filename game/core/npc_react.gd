@@ -86,21 +86,35 @@ static func is_ally(gs: GameState, db: DataDb, id: String) -> bool:
 
 ## The hostile monster the fighter `id` (its roster entry `n`) goes for:
 ## the nearest within help_radius (king moves), or of a stage it is an ally
-## of; ties to the lower id. "" if none.
+## of, that it can reach (side by side already, or with a free side tile;
+## M7.B: in a crowd it picks another); ties to the lower id. "" if none.
 static func target(gs: GameState, db: DataDb, id: String, n: Dictionary) -> String:
 	var radius := int(db.rules["npc"]["react"]["help_radius"])
 	var pos := NpcRoster.pos_of(n)
+	var avoid := _blocked(gs)
 	var best := ""
 	var best_d := 0
 	for mid in gs.combat.in_state(CombatState.HOSTILE):
 		var m: Dictionary = gs.combat.monsters[mid]
 		if m["area"] != n["area"]:
 			continue
-		var d := _dist(pos, CombatState.pos_of(m))
-		if (d <= radius or Stage.allies_of(db, m).has(id)) and (best == "" or d < best_d):
+		var at := CombatState.pos_of(m)
+		var d := _dist(pos, at)
+		if (d <= radius or Stage.allies_of(db, m).has(id)) and (best == "" or d < best_d) 				and _reachable(db, n["area"], pos, at, avoid):
 			best = mid
 			best_d = d
 	return best
+
+
+## Side by side with `at` already, or `at` has a free side tile.
+static func _reachable(db: DataDb, area: String, pos: Vector2i, at: Vector2i, avoid: Dictionary) -> bool:
+	if _manhattan(pos, at) == 1:
+		return true
+	for off: Vector2i in MonsterSim.ORTHO:
+		var g: Vector2i = at + off
+		if db.maps.is_walkable(area, g) and not avoid.has(g):
+			return true
+	return false
 
 
 ## Side by side: hit the monster. Else one step towards a tile next to it.
