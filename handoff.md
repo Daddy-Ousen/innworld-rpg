@@ -1,18 +1,22 @@
 # Handoff
 
-## Just done (2026-09-24, branch `docs/readme`)
-PR #22 (M7.3) was merged by the user. Tag `m7.3-done` is on the merge commit 7534893 and pushed.
-README.md rewritten for GitHub: pillars, status table (M0–M8), Book 1 counts (1.00–1.54, days 1–37, 130 events, 47 NPCs, 44 locations), play command and keys, test commands, layout, canon/copyright rules. Docs only; no code change. A PR is open for it.
+## Just done (2026-09-24, branch `data/book1-1.55-1.63`)
+M7.4, the last Book 1 batch, is written and waiting for the user's review (PR open).
+- `feat(director)`: new `effects.revive` (user choice). Director, CanonDb, validator + tests.
+- `fix(npc)`: a stage ally brought in during a long step (jump) stays in the fight if its goal is in another area.
+- `data(book1)`: 21 `candidate` events in `1.55R.json` … `1.63.json` (days 38–41). New NPCs `bird`, `tekshia`, `hawk`; updated `klbkch`, `toren`, `olesm`, `sostrom`, `selys` and location `liscor_dungeon` (all `candidate`). 7 new enemy types. Two stages with `change` hooks on day 39: east gate (`player_held_the_gate`) and inn hill (`player_fought_skinner`).
+- Docs: ADR 0012 M7.4 section, ROADMAP, progress.
+- GUT 499/499 (52 scripts), Python 40, validator 0 errors, `sim_canon_book1` to day 41 with drift 0. Checked on screen (inn hill fight).
 
 ## Waiting on the user
-- Merge the README PR.
-- Note: 1.16.json still has one old `candidate` event from M6.4 (not part of M7.x; left as is).
+- Review the M7.4 events (timeline guesses, likely links, the Tekshia name conflict, balance). Then flip every `candidate` in M7.4 files and changed NPC/location entries to `reviewed`, accept ADR 0012 M7.4, tick ROADMAP M7.4 and M7, merge, tag `m7.4-done` and `m7-done`.
+- After the merge: update the README status table and counts (Book 1 done: 1.00–1.63, days 1–41, 151 events, 50 NPCs, 44 locations).
+- 1.16.json still has one old `candidate` event from M6.4 (left as is).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
-- After M7.4: update the README status table and canon counts.
 
 ## Next
-- M7.4: canon 1.55R–1.63 (last Book 1 batch). Read every chapter first. Calruz trains Erin for two days; the Horns and other teams enter the ruins (about day 39–40); Ryoka reaches the end of her Blood Fields run (the geas's errand); Gnoll warriors arrive "within the week"; Pawn's Queen ends the Rite of Anastases.
-- Known limits: the Goblin battle is only in the Floodplains map in the morning; the Horns have no combat blocks; Gazi, Tkrn, Ksmvr and the thief have no map schedule; labels overlap in crowds.
+- After review: M8 (see `docs/ROADMAP.md`).
+- Known limits: no fear aura or poison; fights only on the hill and at the east gate; allies rush in and go down fast (balance); Gazi, Tkrn, Ksmvr, the thief, Tekshia and Hawk have no map schedule.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -59,8 +63,10 @@ README.md rewritten for GitHub: pillars, status table (M0–M8), Book 1 counts (
 - To test one commit alone: stage its files, `git stash push --keep-index --include-untracked`, run the suite, commit, `git stash pop`.
 - **M7.3:** the Goblin battle stage is on `floodplains_south`, day 35, 08–11 (`b1.rags_kills_the_feathered_chieftain`). Tests that play the Floodplains that morning meet it; mark it staged if a test is about something else. The Horns (`calruz`, `ceria_springwalker`, `gerial`, `sostrom`) stand in the inn 06–09 and 18–23 from day 36.
 - Screenshot trick still works (scratch `game/shot_*.gd/.tscn`, `main.switch_scene = false`); delete the files after.
+- **M7.4:** on day 39 two stages open: `liscor_gate` 18–23 and `inn_hill` 20–24. A test that stands at the east gate (the new-game start) on the evening of day 39 starts a fight, and then `ToyCanon.sleep_through` loops forever (sleep is refused in danger). Put the player in the inn first, or mark the events staged (`b1.skinner_leads_the_dead_into_liscor`, `b1.rags_kills_skinner`).
+- **Revive:** `effects.revive` sets an NPC alive again (after `kill`). Klbkch is dead on days 21–39 and alive from night 39. Calruz, Ceria and Olesm are alive in the data but off the map (`*.missing` flags).
+- GUT `-gtest=` does not limit the run here; use `-gdir=res://tests -gselect=<script name>` to run one script.
+- Scratch screenshot scene for M7.4 was `game/shot_skinner.gd/.tscn` (deleted): sleep to day 38, advance 14 h, place on `inn_hill`, wait.
 
 ## Active files
-`README.md` (status table and counts change with each milestone).
-
-`game/data/canon/book1/chapters/1.45.json` … `1.54.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/tests/{sim_goblin_battle,sim_canon_book1,unit_combat_db,sim_player_hooks}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.
+`game/data/canon/book1/chapters/1.55R.json` … `1.63.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/core/{director,canon_db,npc_sim}.gd`, `tools/validate_data.py`, `game/tests/{sim_skinner_night,sim_canon_book1,unit_director,unit_battle,unit_combat_db,sim_player_hooks}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`, `README.md` (after the merge).
