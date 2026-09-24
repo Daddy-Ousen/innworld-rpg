@@ -21,7 +21,7 @@
 					{"from": "ryoka_griffin", "to": "ceria_springwalker", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Dawn of the day after her escape from Celum; she ran about sixty miles through the night. Ceria has been at the guild two days. Delta is a design value."},
 			"summary": "Ryoka reaches Esthelm at dawn and asks Ceria to teach her magic. Ceria draws a glowing rune in the air as a test. Grasping it burns through Ryoka's mind like a brutal maths problem; then she casts [Light] and shifts its colours at will, until her mana runs dry and she is starving."
 		},
@@ -43,7 +43,7 @@
 					{"from": "rags", "to": "pisces", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Same day as Ryoka's lesson, in parallel (guess). The test lasts until the sun sets. Pisces will teach Rags every other day for free meals. Delta is a design value."},
 			"summary": "Pisces tests Erin and Rags by filling the air around them with his own mana. Rags already knows a spark of Goblin tribal magic, then casts the start of a true [Firefly] spell. Erin strains until his mana is spent and casts nothing. Pisces agrees to teach Rags for free food."
 		},
@@ -65,7 +65,7 @@
 					{"from": "erin_solstice", "to": "krshia", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "After the magic test. Gnolls had watched the gate for her. Krshia's [Spot Deception] tells her Erin speaks the truth. Erin is from Michigan and was a chess tutor saving for college. Deltas are design values."},
 			"summary": "Krshia pulls Erin home for tea and cubes of raw meat. At the chess game she heard Erin say she comes from another world, and she swears by her tribe that only Gnolls will ever share the secret. Erin says yes, it is true: a world of only Humans, eight billion of them. Krshia faints."
 		}

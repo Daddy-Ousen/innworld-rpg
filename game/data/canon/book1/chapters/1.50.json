@@ -22,7 +22,7 @@
 				"set_flags": ["wandering_inn.adventurers_meet_here", "erin.feeds_adventurers", "wandering_inn.full_house"]
 			},
 			"news": "The Silver-rank teams that mean to raid the ruins now eat and plan at the inn on the hill, where a skeleton waits the tables.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Ceria needs about two days to learn [Illumination]; the raid is at least four days off. The nights are colder and it rains. Erin runs out of ale."},
 			"summary": "Erin cooks breakfast for her lodgers, dismayed that Ceria is no Elf. Out of food, she hails the captains in the market, who haul her supplies up the hill and argue over the raid at her tables all day. Toren waits on them. Pisces and Ceria trade a single cold word each."
 		},
@@ -43,7 +43,7 @@
 					{"from": "olesm", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Evening. As a child Erin needed about a week for the same puzzle. Delta is a design value."},
 			"summary": "Olesm bursts into the inn, gaunt, unwashed and shedding scales, waving four chess moves: he shut himself away for most of a week and solved the puzzle Erin sent the Titan, and levelled twice. He is horrified to be served by a skeleton; most, he says, fall apart within a day or two."
 		},
@@ -63,7 +63,7 @@
 				"set_flags": ["pawn.maimed", "pawn.judged_individual"],
 				"clear_flags": ["pawn.taken_for_judgment"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Late that night; it goes on in 1.51. The Workers say he is no longer a Worker: an individual, not an Aberration."},
 			"summary": "In the cold rain, Workers help Pawn into the crowded inn. He passed Ksmvr's questioning and was judged an individual, not an Aberration, but he has lost three arms, part of a leg and an antenna. The adventurers' potions stop the bleeding; nothing can give back the limbs."
 		}

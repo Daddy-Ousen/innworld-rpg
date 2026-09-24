@@ -19,7 +19,7 @@
 			"effects": {
 				"set_flags": ["adventurers.ruins_raid_planned", "liscor_dungeon.gold_team_coming", "horns_of_hammerad.bound_for_liscor"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.47R", "confidence": "confirmed", "note": "The same morning Ryoka arrives. The three captains who walk out (Gregor, Menes, Rois) are not NPCs. Cervial rode a day from Liscor. Ceria later wins him over (1.48R)."},
 			"summary": "Six Silver-rank captains meet in Esthelm. Calruz and Yvlon Byres want a joint raid on the ruins near Liscor before a Gold-rank team arrives within the week. Charlez's team came back as zombies, and Gazi of Reim waits in Liscor, so three captains walk out. Cervial will join if Ceria agrees."
 		}

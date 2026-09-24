@@ -53,7 +53,7 @@
 					"news": "Two Goblin bands fought on the Floodplains. A Human fought beside the small band, whose tiny leader burned the rival chieftain with a spell."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "likely", "note": "Ryoka's first day out of Esthelm. The winners hold a line, flank with their biggest, and post sentries. The rival chieftain is not an NPC. The text never names the tiny leader; that she is Rags (gleaming sword and shield, a fire spell) is likely."},
 			"summary": "In a Floodplains valley, a feathered Goblin tribe under a huge chieftain attacks a smaller band that fights in formation. Its tiny leader, with a gleaming sword and shield, leads a flank attack, then sets the chieftain alight with a spell like a burning bird. His Goblins flee or grovel."
 		},
@@ -72,7 +72,7 @@
 				"set_flags": ["ryoka.lost_speed_potion", "rags.kicked_by_ryoka", "rags.has_looted_potion"],
 				"clear_flags": ["ryoka.has_speed_potion"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "likely", "note": "Which potion she loses is not said; her pack list later has no speed potion, so Teriarch's is likely. On day 37 Rags carries an orange-pink potion and a big bruise (1.53); that it is this one is likely."},
 			"summary": "A sentry spots Ryoka watching. The band herds her with ambushes and sling stones; she knocks Goblins flat without killing and kicks their tiny leader across the ground, shield and all. She dodges a fire spell and gets away, but the Goblins cut a potion from her side in the scramble."
 		},
@@ -92,7 +92,7 @@
 			"effects": {
 				"set_flags": ["ryoka.in_blood_fields"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "confirmed", "note": "Days 1-3 of the run (guess 35-37) and after. No bandits: only armed caravans use the south road. She runs to the place she promised to go (the geas's errand)."},
 			"summary": "Ryoka runs past Liscor down the empty south road. Spiders lunge from pits in the grass, nettles swell her feet, and the land turns to gravel she must walk on, bleeding. She barely sleeps and keeps going, day after day. Persua's three follow and cannot catch her."
 		}

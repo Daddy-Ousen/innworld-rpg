@@ -83,7 +83,7 @@ New engine systems only when a batch needs them; a new schema or system is asked
 - [x] M7.1 Canon 1.26R–1.34 (days 19–23): the Goblin raid on the inn on day 21 as a canon stage (Klbkch still dies; `change` hook), Pawn, the Watch leaves the inn, Ryoka's crushed leg
 - [x] M7.B Big battles: NPC HP (down, not dead), monsters fight allies, stage waves, allies and helpers join, HP bars and fewer labels; the raid remade with 40 Goblins — save v9 (ADR 0013)
 - [x] M7.2 Canon 1.35R–1.44R (days 24–33): Pisces mends Ryoka's leg, Gazi of Reim, Relc makes peace, the skeleton, Ryoka's High Passes run and Teriarch's geas; the adventurers' brawl in the inn on day 28 as a canon stage (`change` hook); fleeing monsters leave indoor maps by the door
-- [ ] M7.3 Canon 1.45–1.54 (days 34–37): Ryoka learns magic, fights Yvlon and Calruz and runs for the Blood Fields; Krshia learns Erin's secret; Ksmvr maims Pawn; the Horns lodge at the inn; Gazi leaves to hunt Ryoka; the Goblin battle on the Floodplains on day 35 as a canon stage (`change` hook) — in review
+- [x] M7.3 Canon 1.45–1.54 (days 34–37): Ryoka learns magic, fights Yvlon and Calruz and runs for the Blood Fields; Krshia learns Erin's secret; Ksmvr maims Pawn; the Horns lodge at the inn; Gazi leaves to hunt Ryoka; the Goblin battle on the Floodplains on day 35 as a canon stage (`change` hook)
 - [ ] M7.4 Canon 1.55R–1.63
 **Done when:** all Book 1 canon is event data; `sim_canon_book1` runs to the last canon day with drift 0;
 each batch has at least one hook or stage the player can use to change canon; the validator reports 0 errors.

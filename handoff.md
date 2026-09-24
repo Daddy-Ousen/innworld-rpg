@@ -2,17 +2,18 @@
 
 ## Just done (2026-09-24, branch `data/book1-1.45-1.54`, M7.3 canon 1.45–1.54)
 PR #21 (M7.2) was merged by the user; tag `m7.2-done` is on 941261b and pushed.
-M7.3 is built and waits for the user's review. All 24 events are `candidate`.
+M7.3 is done and reviewed by the user (2026-09-24, all as proposed). The PR is open (see `gh pr list`).
 
 Commits on the branch:
 - `99bb878` data(book1): 24 events in 10 chapter files (days 34–37), 3 NPCs, 2 locations, NPC fact updates, enemy `goblin_feathered_chieftain`, the Goblin battle stage + hook, Horns lodger schedules, Pawn away while judged, tests.
-- A docs commit: ADR 0012 M7.3 section (proposed), ROADMAP, progress, this handoff.
+- `1434ea0` docs: ADR 0012 M7.3 section, ROADMAP, progress, handoff.
+- The review commit: all M7.3 entries `reviewed`, ADR accepted, docs.
 
 Tests: GUT 486/486 (51 scripts), Python 39, validator 0 errors. `sim_canon_book1` LAST_DAY 37, drift 0. Checked on screen (battle on day 35; Horns in the inn at 07:00 on day 36).
 
 ## Waiting on the user
-- Review M7.3 (questions in the chat): timeline, the Goblin battle as the playable stage, the Horns lodger schedules, the `likely` links, the two Book conflicts.
-- After the review: flip M7.3 entries to `reviewed` (events, new NPCs/locations, and the changed `toren`, `relc`, `sostrom`, `gerial`, `ceria_springwalker`), mark ADR section accepted, push, open the PR.
+- Review and merge the M7.3 PR, then tag `m7.3-done`.
+- Note: 1.16.json still has one old `candidate` event from M6.4 (not part of M7.x; left as is).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
 
 ## Next

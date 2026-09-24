@@ -24,7 +24,7 @@
 				]
 			},
 			"news": "The adventurers at the inn on the hill say its Human innkeeper sang all night: songs nobody had heard, with music from nowhere.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.51", "confidence": "confirmed", "note": "Night 36 into day 37. Her [Immortal Moment] shows in both the chess and the songs; she teaches them a church hymn. Deltas are design values."},
 			"summary": "Erin plays chess against the trembling Pawn until he is calm. Then she goes out into the rain; the adventurers fear she hunts Ksmvr, but she only cries on the roof: she will not murder. Back inside she sings songs of her world, and the room hears music that is not there."
 		},
@@ -48,7 +48,7 @@
 					{"from": "relc", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.51", "confidence": "confirmed", "note": "The same night. No pact bars Soldiers beyond the walls; sixteen more were coming. Krshia says more Gnoll warriors arrive within the week. Erin never came. Delta is a design value."},
 			"summary": "On a hill outside the city, Ksmvr waits with four Soldiers for Erin to come for revenge, so he can take her: she is valuable to the Hive. Relc rises from the grass to stop him, Gazi watches from another hill, and Krshia's Gnolls lie hidden with bows. Ksmvr cannot choose, and withdraws."
 		}

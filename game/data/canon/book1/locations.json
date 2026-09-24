@@ -384,7 +384,7 @@
 			"kind": "building",
 			"parent": "esthelm",
 			"tags": ["guild", "adventurers", "lodging", "mess_hall"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Mess hall and courtyard from 1.47R-1.48R."},
 			"summary": "Big guild hall in Esthelm with rooms to rent upstairs, a guild shop, a loud mess hall like a school canteen and an open yard for sparring. The Horns of Hammerad stay here before the ruins."
 		},
@@ -393,7 +393,7 @@
 			"kind": "building",
 			"parent": "liscor",
 			"tags": ["home", "gnoll"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed"},
 			"summary": "Krshia's rooms in Liscor: rugs, pillows and big padded chairs, less tidy than her stall. She hosts Erin there with tea and cubes of raw meat."
 		}

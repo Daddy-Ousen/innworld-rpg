@@ -26,7 +26,7 @@
 				]
 			},
 			"rumor": "In Esthelm a barefoot Runner with no levels threw a Silver-rank captain in full plate twice, then called every adventurer there a coward.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.48R", "confidence": "confirmed", "note": "Midday to dusk. Garia arrives with a sugar delivery and watches. Yvlon's aunt told her Ryoka has no levels. Gregor and Menes rejoin the raid after Ryoka's taunts. Deltas are design values."},
 			"summary": "Yvlon challenges Ryoka to a spar. Ryoka fights her in full plate, throws her twice and lands punches, then kicks Calruz until one blow floors her. Cervial's [Appraisal] shows she has no levels. Ryoka calls them all cowards and strikes Ceria, and Yvlon knocks her out. Ceria leaves her, coldly angry."
 		},
@@ -47,7 +47,7 @@
 				"set_flags": ["ryoka.bound_for_blood_fields", "persua.trails_ryoka"],
 				"clear_flags": ["ryoka.at_esthelm"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.48R", "confidence": "confirmed", "note": "Ceria says the Horns and the other teams leave for the ruins, and Ryoka can find them in Liscor if she wants to talk. Persua lets her get far ahead before following."},
 			"summary": "At dusk Ryoka wakes alone in the empty yard, sick with guilt, and cannot bring herself to call out an apology. She takes her pack and runs, past Magnolia's pink carriage, maids and [Assassins], toward Liscor and the Blood Fields beyond. Persua, Toriska and Claudeil slip out of Esthelm after her."
 		}

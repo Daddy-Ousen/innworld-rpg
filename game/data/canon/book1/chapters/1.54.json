@@ -25,7 +25,7 @@
 				]
 			},
 			"news": "Gazi of Reim put a sword to a half-Elf adventurer's throat in the street. A fleeing girl snared the adventurers in magic webs, and Gazi left the city.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "confirmed", "note": "Afternoon. Gerial lets slip Celum, Ryoka's inn and Esthelm. That evening Gazi tells Erin she will be away a while and asks her not to leave. Ceria burns the webs away with [Flashfire]. Delta is a design value."},
 			"summary": "Gazi charms Gerial and Sostrom with her eye to learn where Ryoka is; Ceria shields her mind and refuses. When Ceria insults the King of Destruction, Gazi's sword is at her throat. A Watch whistle panics the invisible [Princess], whose ring snares the Horns in webs. Gazi leaves Liscor to hunt Ryoka."
 		},
@@ -48,7 +48,7 @@
 					{"from": "calruz", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "confirmed", "note": "Evening. [Hammer Blow] is Calruz's only Skill. He seems to know Gazi by sight. He wants to learn how to deal with Human women, thinking of Ryoka. Delta is a design value."},
 			"summary": "Erin teaches Toren chess, and recalls a rhyme from her childhood: a king that moves soon dies. Calruz says she should have fought for Pawn. She has never heard of combat Skills, so he smashes a boulder with [Hammer Blow] and says he will train her for the two days before the ruins."
 		}

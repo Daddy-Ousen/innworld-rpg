@@ -18,7 +18,7 @@
 			"effects": {
 				"set_flags": ["erin.wants_to_go_home", "erin.knows_wistram", "gnolls.search_for_earthers", "gnolls.watch_erin"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "The Gnolls shun Wistram: some forty years ago it turned away the young [Shaman] the tribes sent. Some of Krshia's Gnolls had wondered if Erin was a spy. She sends Tkrn to the Gnoll Runners that night."},
 			"summary": "Erin admits she wants to go home. Krshia thinks only an archmage could send her, and the best place to find one is Wistram, far over winter seas; the journey, lodging and a mage's help will cost much. The Gnolls will help, for a price. That night she sends word to the tribes: find others like Erin."
 		},
@@ -36,7 +36,7 @@
 			"effects": {
 				"set_flags": ["toren.named", "toren.hunts_flat_fish", "erin.can_cook_flat_fish"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "That night. Toren is the word for the chess rook in another language. The skeleton is Level 2 from the day-28 fight and hopes killing fish will level it."},
 			"summary": "The skeleton, which Erin names Toren, meets her near Liscor's gate hugging a dead flat fish. It caught several at the stream and hacked them apart in her kitchen. Scaled, they are good to cook. Alone in the kitchen, Erin pounds the fish guts and cries for home and for the magic she lacks."
 		}

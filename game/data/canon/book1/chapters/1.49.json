@@ -18,7 +18,7 @@
 				"set_flags": ["liscor_market.half_burned", "liscor.blames_humans_for_fire"]
 			},
 			"news": "Half of Market Street burned in the night. The Watch says someone caught the Human thief, who set the fire with a spell to get away.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "likely", "note": "'Last night' in 1.49: the night of day 34 (guess). Relc blames the mystery thief; that it is the [Princess] is likely, not stated. Workers have rebuilt much of it by the next day (1.50)."},
 			"summary": "Late at night someone catches the market thief, who escapes with a fire spell. Flames race through the wooden stalls of half of Market Street, hot enough to crack the paving. The Watch's mages come too late, and the rest is smashed to starve the fire. Drakes and Gnolls blame Humans."
 		},
@@ -36,7 +36,7 @@
 			"effects": {
 				"set_flags": ["erin.warned_by_watch", "liscor_dungeon.monsters_crawl_out", "liscor_watch.guards_the_ruins"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "Morning. He still blames Erin and avoids the inn: too many Goblins. The Watch will leave the Goblins be while they keep clear of the city. Krshia and Selys are too busy for Erin that day."},
 			"summary": "Relc shows Erin the burnt street, grieving that the Hive never mourned Klbkch. He warns her the new Prognugator looks familiar, the Watch just laughed at the adventurers she beat, and her skeleton must stay out of the city. The Watch is stretched at the ruins, where pale tentacled things come out."
 		},
@@ -60,7 +60,7 @@
 					{"from": "erin_solstice", "to": "ksmvr", "delta": -3}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "Evening chess. Ksmvr says complaints may go to the Queen, who is busy. The Workers say no Worker who became individual has ever not been an Aberration. Delta is a design value."},
 			"summary": "At chess night Ksmvr walks in, the image of Klbkch, and takes Pawn at sword point to judge whether he is an Aberration. He cuts off Pawn's antenna for speaking, strikes Erin and beheads the skeleton. Workers hold Erin back on the plain: the Hive is sealed, and its Soldiers would kill her."
 		},
@@ -84,7 +84,7 @@
 					{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "That night, after Ksmvr. Nobody had seen the sign. They met Pisces here before (1.34). Calruz swears on his honour to spare her guests unless provoked. Delta is a design value."},
 			"summary": "Back at the inn, Erin finds adventurers swinging at Rags's Goblins by the door. A Minotaur catches her thrown frying pan, but the Goblins escape. They are the Horns of Hammerad, and Liscor has no beds left. Once they promise to keep her rules and spare her guests, she lets them the rooms upstairs."
 		}

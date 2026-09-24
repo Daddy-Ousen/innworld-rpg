@@ -19,7 +19,7 @@
 			"effects": {
 				"set_flags": ["pawn.back_in_hive", "antinium_hive.rite_of_anastases", "erin.has_a_cold", "ceria.knows_hive_makes_new_antinium"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.53", "confidence": "confirmed", "note": "Morning. Pawn tells Ceria the Hive came ten years ago to make a new kind of Antinium. Ceria can numb Erin's sore throat but cannot cure a cold."},
 			"summary": "Erin wakes with a cold. Calruz asks Pawn why he never fought back; Pawn says a Worker's life belongs to the Hive. Erin begs him to stay, but Pawn says he is important now: the Queen will call him once her Rite of Anastases ends. He half lies that staying would bring Soldiers, and goes home."
 		},
@@ -40,7 +40,7 @@
 			"effects": {
 				"set_flags": ["toren.guards_erin", "toren.plays_chess", "selys.knows_pisces_necromancer", "selys.threatens_pisces_bounty"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.53", "confidence": "confirmed", "note": "The rest of the day. Toren understands Goblin speech: the dead share one language. Rags comes with about thirty Goblins; five wait outside. Toren is a Level 3 [Skeleton Warrior]."},
 			"summary": "Erin sleeps off her cold while Toren blocks the kitchen door, even to Pisces, who made it. Selys screams at it, then pummels Pisces and threatens a twenty-gold bounty if he raises undead near Liscor. Bruised, Rags plays chess against herself until Toren sits down and loses to her game after game."
 		}

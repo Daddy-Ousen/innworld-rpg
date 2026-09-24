@@ -77,7 +77,7 @@ Status: accepted; events reviewed by the user 2026-09-24 (timeline, Relc and the
 - The High Passes run, the spider nest and the Celum brawl are not playable: they are off the player's map.
 
 ## M7.3 Canon 1.45–1.54 (days 34–37)
-Status: proposed; events are `candidate` until the user reviews them. No schema change, no save version change.
+Status: accepted; events reviewed by the user 2026-09-24 (timeline, the Goblin battle stage, the Horns schedules and the `likely` links as proposed). No schema change, no save version change.
 
 **Timeline (all guesses).** Ryoka escapes Celum on night 33 and reaches Esthelm at dawn on day 34 (1.45, 1.47R, 1.48R). Erin's side of 1.45–1.46 is the same day. The Horns leave Esthelm at dusk on day 34 and reach the inn on night 35 (a day's travel), so 1.49 is day 35. The Market Street fire is 'last night' in 1.49: night 34. 1.50–1.51 are day 36 and that night; 1.53–1.54 are day 37. Ryoka's first day out (1.52R) is day 35. Conflict: on day 37 Gerial says Ryoka was in Esthelm 'two days ago'; by this timeline it was three.
 
