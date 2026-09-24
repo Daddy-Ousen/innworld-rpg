@@ -1,30 +1,28 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.35-1.44`, M7.2 canon 1.35R–1.44R)
-PR #20 (M7.B) was merged by the user; tag `m7b-done` is on 1376815 and pushed.
-M7.2 is done and reviewed by the user (2026-09-24). The PR is open (see progress.md / `gh pr list`).
-Review answers: timeline, Relc (no evening visits yet) and the brawl hook as proposed. Teriarch is NOT confirmed to be the 1.00 Dragon, so `teriarch` and `teriarch_cave` are separate entries; `cave_dragon` and `dragon_backup_lair` are unchanged.
+## Just done (2026-09-24, branch `data/book1-1.45-1.54`, M7.3 canon 1.45–1.54)
+PR #21 (M7.2) was merged by the user; tag `m7.2-done` is on 941261b and pushed.
+M7.3 is built and waits for the user's review. All 24 events are `candidate`.
 
 Commits on the branch:
-- `ea32938` fix(core): indoors, a fleeing monster walks to the nearest exit (the inn corners trapped them; the day-21 raid too).
-- `3cc1f83` data(book1): 24 events in 10 chapter files (days 24–33), NPCs, locations, 2 stage-only enemies, `toren` behaviour, the inn brawl stage + hook, tests.
-- Docs commit, then the review commit (Teriarch split, all M7.2 entries `reviewed`, docs).
+- `99bb878` data(book1): 24 events in 10 chapter files (days 34–37), 3 NPCs, 2 locations, NPC fact updates, enemy `goblin_feathered_chieftain`, the Goblin battle stage + hook, Horns lodger schedules, Pawn away while judged, tests.
+- A docs commit: ADR 0012 M7.3 section (proposed), ROADMAP, progress, this handoff.
 
-Tests: GUT 478/478 (50 scripts), Python 39, validator 0 errors. `sim_canon_book1` LAST_DAY 33, drift 0.
+Tests: GUT 486/486 (51 scripts), Python 39, validator 0 errors. `sim_canon_book1` LAST_DAY 37, drift 0. Checked on screen (battle on day 35; Horns in the inn at 07:00 on day 36).
 
 ## Waiting on the user
-- Review and merge the M7.2 PR, then tag `m7.2-done`.
+- Review M7.3 (questions in the chat): timeline, the Goblin battle as the playable stage, the Horns lodger schedules, the `likely` links, the two Book conflicts.
+- After the review: flip M7.3 entries to `reviewed` (events, new NPCs/locations, and the changed `toren`, `relc`, `sostrom`, `gerial`, `ceria_springwalker`), mark ADR section accepted, push, open the PR.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
-- Note: 1.16.json still has one old `candidate` event from M6.4 (not part of M7.2; left as is).
 
 ## Next
-- M7.3: canon 1.45–1.54. Read every chapter first. Toren is named in 1.46. Winter comes (`liscor.winter_coming`). Ryoka heads to Esthelm; the Horns go for the Liscor ruins (`liscor_dungeon`).
-- Known limits: a player can still kill a fleeing adventurer; NPC name labels overlap when NPCs stand close; the thief and Ksmvr have no map schedule; the raid balance (M7.B).
+- M7.4: canon 1.55R–1.63 (last Book 1 batch). Read every chapter first. Calruz trains Erin for two days; the Horns and other teams enter the ruins (about day 39–40); Ryoka reaches the end of her Blood Fields run (the geas's errand); Gnoll warriors arrive "within the week"; Pawn's Queen ends the Rite of Anastases.
+- Known limits: the Goblin battle is only in the Floodplains map in the morning; the Horns have no combat blocks; Gazi, Tkrn, Ksmvr and the thief have no map schedule; labels overlap in crowds.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Line endings:** most `.gd`, `.json` and `.md` files are CRLF in the working copy (`core.autocrlf=true`). New files written by the Write tool are LF: fine, but never mix endings in one file. Patch CRLF files with a Python script that converts to LF, edits, and converts back (see the scratch `patch_*.py` pattern).
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 50 / 478).
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 51 / 486).
 - Write GUT output to `$TMP` or the scratchpad, not next to the repo.
 - A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
 - Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir` (= `user://test_saves` via the pre-run hook); clear slots in `before_each`.
@@ -64,6 +62,8 @@ Tests: GUT 478/478 (50 scripts), Python 39, validator 0 errors. `sim_canon_book1
 - Check that an event id is free before you use it (the validator flags duplicates across files). `Commands.wait(gs, db, s)` takes seconds.
 - `npcs.json`, `locations.json`, `enemies.json` and `npc_behaviour.json` are CRLF in the working copy. Patch them with a Python script that keeps CRLF.
 - To test one commit alone: stage its files, `git stash push --keep-index --include-untracked`, run the suite, commit, `git stash pop`.
+- **M7.3:** the Goblin battle stage is on `floodplains_south`, day 35, 08–11 (`b1.rags_kills_the_feathered_chieftain`). Tests that play the Floodplains that morning meet it; mark it staged if a test is about something else. The Horns (`calruz`, `ceria_springwalker`, `gerial`, `sostrom`) stand in the inn 06–09 and 18–23 from day 36.
+- Screenshot trick still works (scratch `game/shot_*.gd/.tscn`, `main.switch_scene = false`); delete the files after.
 
 ## Active files
-`game/data/canon/book1/chapters/1.35R.json` … `1.44R.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/core/monster_sim.gd`, `game/tests/{sim_inn_brawl,sim_canon_book1,unit_monster_sim,unit_combat_db,sim_player_hooks}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.
+`game/data/canon/book1/chapters/1.45.json` … `1.54.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/tests/{sim_goblin_battle,sim_canon_book1,unit_combat_db,sim_player_hooks}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.

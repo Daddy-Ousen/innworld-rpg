@@ -75,3 +75,35 @@ Status: accepted; events reviewed by the user 2026-09-24 (timeline, Relc and the
 - NPC name labels still overlap when NPCs stand close (only monster labels are de-overlapped, M7.B).
 - The market thief and Ksmvr have no map schedule yet.
 - The High Passes run, the spider nest and the Celum brawl are not playable: they are off the player's map.
+
+## M7.3 Canon 1.45–1.54 (days 34–37)
+Status: proposed; events are `candidate` until the user reviews them. No schema change, no save version change.
+
+**Timeline (all guesses).** Ryoka escapes Celum on night 33 and reaches Esthelm at dawn on day 34 (1.45, 1.47R, 1.48R). Erin's side of 1.45–1.46 is the same day. The Horns leave Esthelm at dusk on day 34 and reach the inn on night 35 (a day's travel), so 1.49 is day 35. The Market Street fire is 'last night' in 1.49: night 34. 1.50–1.51 are day 36 and that night; 1.53–1.54 are day 37. Ryoka's first day out (1.52R) is day 35. Conflict: on day 37 Gerial says Ryoka was in Esthelm 'two days ago'; by this timeline it was three.
+
+**24 events**, all `candidate`, in 10 new chapter files.
+- New NPCs: `yvlon_byres`, `cervial_dermondy` (the 1.37 [Ranger], now back as a raid captain) and `tkrn` (Krshia's nephew in the Watch).
+- New locations: `esthelm_adventurers_guild` and `krshia_home`.
+- Updated NPCs (back to `candidate`): `toren` is named Toren (Level 3); `relc` is Relc Grasstongue, [Spearmaster] 33 and [Guardsman] 12 (Ksmvr's figures); `sostrom` is Human; `gerial` is a Level 17 [Warrior]; `ceria_springwalker` is also a [Cryomancer].
+- Not NPCs: Gregor, Menes, Rois (captains), Marian and Hunt (Horns), Charlez, the Gnoll Runners Lv and Tshana, the feathered chieftain.
+- **Conflicts in the Book (flagged in data):** Relc was a sergeant of the 1st Wing (1.51) or the 4th Wing (1.10). Sostrom is bald (1.54) or has a wisp of black hair (1.32R).
+- **Likely links (not confirmed, per the 'confirmed links only' rule):** the market thief who burns Market Street is the [Princess]; the tiny Goblin leader in 1.52R is Rags; the potion Ryoka loses is Teriarch's speed potion, and it is the orange-pink potion Rags carries on day 37. Each is marked `likely` in its canon_ref.
+
+**Stage and hook — `b1.rags_kills_the_feathered_chieftain` (1.52R).**
+- **Stage.** Area `floodplains_south`, 08–11, day 35. Five foes in the valley: one `goblin_feathered_chieftain` and four `goblin_grunt`. Wave at 0 s: Rags and three Goblin helpers (her line). Wave at 60 s: three more helpers (her flank attack).
+- **Enemy `goblin_feathered_chieftain`** (guess, stage only): hp 18, armor 1, accuracy 4, evasion 2, damage 2–5, danger 0.95, `flee_below` 0 (he dies in canon). His danger is above a grunt's and a Rock Crab's, so the fight's records name him.
+- **Hook** `player_fought_beside_rags`: a won fight against him on day 35–36 is a `change`. It sets `rags.earther_fought_beside_her`, Rags → player +2, and has its own news line. Rags still kills him, and her band still chases Ryoka.
+- Why this fight: it is the one fight in 1.45–1.54 the player can join on the map without breaking canon. The Horns attacking Rags's Goblins (1.49) and Ksmvr's visit (1.49, 1.51) end with no one hurt or with named NPCs only.
+
+**Behaviour.** The Horns (`calruz`, `ceria_springwalker`, `gerial`, `sostrom`) eat in the inn 06–09 and 18–23 once `horns_of_hammerad.stay_at_inn` is set (night 35); otherwise they are off the map in Liscor. They sleep upstairs, which is not on the map. `pawn` does not visit while `pawn.taken_for_judgment` is set (night 35 to night 36).
+
+**Tests.**
+- `sim_canon_book1`: `LAST_DAY` is 37, drift 0. New tests: days 34–37 (days of 16 events, flags), and 'kill Ksmvr early' (Pawn is never taken or maimed; the Horns, Olesm, Toren and the Goblin battle go on). The Teriarch test now stops at day 33 (1.45 clears `ryoka.bound_for_esthelm`).
+- `sim_goblin_battle` (new): stage data, a win beside Rags changes the event, a knock-out keeps the canon, no battle on day 34, the Horns lodge from night 35, Pawn stays away while judged.
+- Counts updated in `unit_combat_db` (8 enemies) and `sim_player_hooks` (7 hooks).
+
+**Known limits.**
+- The Goblin battle is only in the `floodplains_south` map, in the morning. A player elsewhere misses it.
+- The Horns have no combat blocks: if a monster gets into the inn, they step away.
+- Gazi, Tkrn, Ksmvr and the market thief still have no map schedule.
+- Monster and NPC name labels still overlap in a crowd.
