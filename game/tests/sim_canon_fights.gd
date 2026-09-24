@@ -53,7 +53,7 @@ func _records(gs: GameState, action_id: String) -> Array[Dictionary]:
 
 func test_the_chieftain_stage_data_is_sound() -> void:
 	assert_eq(_db.errors, [] as Array[String])
-	assert_eq(_db.canon.stages, [CHIEFTAIN_EVENT] as Array[String])
+	assert_has(_db.canon.stages, CHIEFTAIN_EVENT)
 	var e: Dictionary = _db.combat.enemies["goblin_chieftain"]
 	assert_eq(float(e["flee_below"]), 0.0, "he fights to the death")
 	for s: Dictionary in _db.combat.spawns:

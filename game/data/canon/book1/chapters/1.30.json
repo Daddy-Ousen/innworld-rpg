@@ -1,0 +1,80 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.30",
+	"events": {
+		"b1.free_queen_blames_erin": {
+			"tier": 2,
+			"window": {"earliest": 21, "latest": 21, "confidence": "confirmed"},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {"prefer": ["free_queen"], "fallback_tags": []},
+				"guest": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["free_queen", "erin_solstice"], "flags": ["klbkch.died_saving_erin"], "not_flags": []},
+			"depends_on": ["b1.klbkch_dies_defending_erin"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_hive.queen_met_erin", "antinium_hive.queen_blames_erin"],
+				"relationship": [
+					{"from": "free_queen", "to": "erin_solstice", "delta": -3}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Afternoon, straight after Erin carries Klbkch to the gate. Delta is a design value."},
+			"summary": "Soldiers carry Erin down to the Free Queen, who blames her: Klbkch could only fall to forty Goblins by putting her life first. She calls him a failure and the chess a waste that made three Aberrations. Erin says he was tired and sorry; shaken, the Queen sends her away."
+		},
+		"b1.watch_abandons_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 21, "latest": 21, "confidence": "confirmed"},
+			"location": "liscor_watch_barracks",
+			"roles": {
+				"captain": {"prefer": ["zevara"], "fallback_tags": ["captain"]},
+				"guest": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"partner": {"prefer": ["relc"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["klbkch.died_saving_erin"], "not_flags": []},
+			"depends_on": ["b1.klbkch_dies_defending_erin"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["liscor_watch.no_inn_patrols", "relc.blames_erin", "zevara.blames_erin"],
+				"relationship": [
+					{"from": "relc", "to": "erin_solstice", "delta": -5},
+					{"from": "zevara", "to": "erin_solstice", "delta": -4}
+				]
+			},
+			"news": "The Watch Captain has stopped all patrols near the inn on the hill. Relc blames the Human there for his partner's death.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "The Captain is not named here, but her scales, scar and smoke match Zevara. Deltas are design values."},
+			"summary": "At the Watch House, Relc spits at Erin and swears to stab her if she asks for help again. The Captain names all Klbkch was to Liscor, fears a new Antinium War, stops patrols near the inn and orders Erin out of her city. Erin tells the guards he was a hero."
+		},
+		"b1.pawn_becomes_himself": {
+			"tier": 2,
+			"window": {"earliest": 21, "latest": 21, "confidence": "confirmed"},
+			"location": "liscor_market",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"worker": {"prefer": ["pawn"], "fallback_tags": ["antinium", "worker"]},
+				"shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["selys"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["klbkch.died_saving_erin", "antinium_hive.workers_play_chess"], "not_flags": []},
+			"depends_on": ["b1.klbkch_dies_defending_erin"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["pawn.named", "pawn.individual", "antinium_hive.workers_visit_inn_daily", "wandering_inn.cleaned_by_workers", "erin.keeps_broken_knight", "krshia.visited_inn"],
+				"relationship": [
+					{"from": "pawn", "to": "erin_solstice", "delta": 3},
+					{"from": "erin_solstice", "to": "pawn", "delta": 2},
+					{"from": "krshia", "to": "erin_solstice", "delta": 1},
+					{"from": "selys", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "A Worker Antinium spoke as 'I' in the market today and followed the Human innkeeper out of the city. He calls himself Pawn.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Same afternoon. The Worker is one of the twelve from 1.25, so the id 'pawn' fits here for sure. Deltas are design values."},
+			"summary": "Krshia and Selys comfort Erin at the stall. A hundred Workers bring stiff condolences; Erin asks their leader his name. He nearly turns Aberration and grips her throat, then becomes an individual who feels grief. On the walk he names himself Pawn. The Workers clean the inn."
+		}
+	},
+	"system": []
+}

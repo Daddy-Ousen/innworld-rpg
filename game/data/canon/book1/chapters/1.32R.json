@@ -1,0 +1,36 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.32R",
+	"events": {
+		"b1.horns_find_ryoka": {
+			"tier": 1,
+			"window": {"earliest": 22, "latest": 22, "confidence": "guess"},
+			"location": "celum_rats_tail_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"vice_captain": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "calruz"], "flags": ["horns_of_hammerad.owe_ryoka", "ryoka.leg_crushed"], "not_flags": []},
+			"depends_on": ["b1.ryoka_runs_potions_through_lich", "b1.persua_crushes_ryokas_leg"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.know_leg_was_no_accident", "ryoka.punched_calruz", "calruz.courts_ryoka"],
+				"relationship": [
+					{"from": "calruz", "to": "ryoka_griffin", "delta": 2},
+					{"from": "ryoka_griffin", "to": "calruz", "delta": -1},
+					{"from": "garia_strongheart", "to": "persua", "delta": -2}
+				]
+			},
+			"rumor": "They say a Minotaur adventurer fell down the stairs of a Celum inn after a crippled Runner punched him, and paid for the damage laughing.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.32R", "confidence": "confirmed", "note": "Day is a guess: Ryoka says three days since the 'accident'. Garia later says the punch was 'this morning'. Deltas are design values."},
+			"summary": "Ryoka reads Antinium War history in a Celum inn, her crushed leg in magic bandages. Persua comes to gloat; Garia holds Ryoka back and cracks a table. The Horns of Hammerad arrive to repay their debt, but cannot heal splintered bone. Calruz flirts, and Ryoka punches him down the stairs."
+		}
+	},
+	"system": []
+}
