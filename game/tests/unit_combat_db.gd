@@ -20,8 +20,8 @@ func _has_error(errors: Array[String], part: String) -> bool:
 func test_shipped_combat_data_is_valid() -> void:
 	var db := DataDb.load_dir()
 	assert_eq(db.combat.errors, [] as Array[String])
-	assert_eq(db.combat.enemies.keys().size(), 3)
-	for id: String in ["goblin_grunt", "rock_crab", "razorbeak"]:
+	assert_eq(db.combat.enemies.keys().size(), 4)
+	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain"]:
 		assert_true(db.combat.enemies.has(id), id)
 	for id: String in ["chair", "rolling_pin", "stone", "seed_core"]:
 		assert_true(db.combat.items.has(id), id)

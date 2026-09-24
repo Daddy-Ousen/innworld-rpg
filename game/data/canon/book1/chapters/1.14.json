@@ -19,6 +19,29 @@
 				"kill": ["goblin_chieftain"]
 			},
 			"news": "The local Goblin Chieftain is dead. The Human at the old inn on the hill killed him in her own common room, and nearly died of it.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [9, 12],
+				"when_flags": ["goblin_tribe.lost_two_to_relc"],
+				"foes": [{"enemy": "goblin_chieftain", "pos": [12, 14]}],
+				"allies": ["erin_solstice"],
+				"line": "The door bursts inward. An armoured Goblin with blades in his hands walks into the inn.",
+				"note": "Design: the player meets the fight if they are in the inn that morning. Hours are a guess (before noon)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_chieftain",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": "goblin_chieftain"}}],
+					"days": [9, 11],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_fought_chieftain"],
+						"clear_flags": ["erin.stab_wound", "erin.hands_burned"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 3}]
+					},
+					"news": "The Goblin Chieftain is dead. He broke into the inn on the hill, but the Human there did not fight him alone, and she came out of it on her feet."
+				}
+			],
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.14", "confidence": "confirmed", "note": "Before noon on day 9."},
 			"summary": "The Chieftain smashes in the door, beats Erin through tables and tries to assault her. She fights back with chairs and a rolling pin, is stabbed with her own knife, then throws the boiling oil in his face. She stays with him until he dies."

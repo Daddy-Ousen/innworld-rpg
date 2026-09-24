@@ -41,10 +41,10 @@
 			"hooks": [
 				{
 					"id": "player_fought_goblins",
-					"did": [{"action": ["attack_melee", "throw_object"], "outcome": ["success"], "context": {"enemy": "goblin_grunt"}}],
+					"did": [{"action": ["attack_melee", "throw_object"], "outcome": ["success"], "context": {"enemy": "goblin_grunt", "killed": true}}],
 					"days": [14, 19],
 					"then": "cancel",
-					"news": "No Goblins came to the Wandering Inn tonight. The tribe keeps away from the Human who beats their kin."
+					"news": "No Goblins came to the Wandering Inn tonight. The tribe keeps away from the Human who kills their kin."
 				}
 			],
 			"status": "reviewed",

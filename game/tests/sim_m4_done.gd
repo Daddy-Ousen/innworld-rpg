@@ -28,6 +28,9 @@ func test_first_days_end_with_an_answered_offer() -> void:
 	var db: DataDb = _session.db
 	_session.set_state(GameState.new_game(SEED, db))
 	var gs: GameState = _session.gs
+	# M6.5: this test is about the M4 play loop. The Chieftain's fight in the
+	# inn on day 9 (a canon stage) is tested in sim_m6_done.
+	gs.world.staged["b1.erin_kills_chieftain"] = 9
 	var main: Node = add_child_autofree(load("res://world/main.tscn").instantiate())
 	var dialog: SystemDialog = main.dialog
 
