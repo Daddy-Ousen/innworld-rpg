@@ -1,27 +1,24 @@
 # Handoff
 
-## Just done (2026-09-24, branch `feat/m6.4-hooks-news`, PR #16)
-M6.4 Player hooks + news. Schema approved by the user 2026-09-24 (my picks: `changed` outcome, 3 cases below, all local news heard).
-- Commits: `22858d6` feat(director) core + UI + validator, `368cc80` data(book1), `a665603` docs.
-- Core: `Director` hooks (`_player_hook` for cancel/mutate before `requires`; `change` in `_fire`), `happened()`, outcome `changed`; `WorldState.news` + `add_news` / `news_since`; `Night` result `news`; records keep `context`; save v7 (`_migrate_6_to_7`); `ActionLog.from_dict` turns whole-number context floats back to ints; `GameState.new_game` clears news of days 1–7.
-- UI: `SystemMessages.NEWS` page "Local News"; journal: your mark on the story, drift line, 7 days of news, scroll (PgUp/PgDn); console `news`.
-- Data: 13 `news` lines (days 8–19); hooks on `b1.erin_screams_off_rock_crab` (mutate → new `b1.player_beat_rock_crab_first`, candidate), `b1.inn_first_regulars` (change), `b1.rags_brings_goblins_to_eat` (cancel).
-- Validator: news/hooks checks, `--actions` (auto: `game/data/actions.json`), copy check on news. Python 32 OK.
-- Tests: `unit_player_hooks`, `sim_player_hooks` (real fights by bump attack with frozen monsters + always hit; real cooking at the stove at inn_interior 20,2). GUT 408/408 (42 scripts). Validator 0 errors.
-- Journal and News page checked on screen (screenshots).
+## Just done (2026-09-24, branch `feat/m6.5-canon-fights`)
+M6.5 canon fights + the M6 slice check. User picks (2026-09-24, all my recommendations): Chieftain fight = `change`; sparing record + Rags hook needs a kill; NPCs have no HP; tune levels. `stage` schema and save v8 approved.
+- Commits: `cdc54fa` feat(core) stages, NpcReact, sparing, save v8; `c5c9c0e` feat(tools) validator stage checks; `a9fd5b4` data(book1) Chieftain stage + hook, `goblin_chieftain`, Rags hook `killed: true`, `sim_canon_fights`; `acef921` data(rules) levels 40 / 1.25; `8fba05e` test(sim) `sim_m6_done`; `db22be9` fix(core) stage allies join from anywhere in the area; then docs.
+- New core: `game/core/stage.gd`, `game/core/npc_react.gd`. Changed: `canon_db`, `combat_db`, `combat` (`settle_if_over`, `killed`, `spare_foe`), `combat_state` (monster `stage`), `monster_sim` (`in_hours`, `taken`), `npc_sim`, `commands`, `world_state` (`staged`), `save_migrations` (7 → 8), `data_db` (rules keys `npc.react`, `combat.spare_tags`).
+- Tests: GUT 440/440 (46 scripts), Python 36, validator 0 errors. `sim_m6_done` (seed 1): [Cook] level 6 by day 22, Chieftain won on day 9, event changed.
+- Checked on screen (screenshots): the Chieftain marker "Goblin Chieftain 20/20" at the inn door at 09:00; Erin walks over and fights next to the player.
 
 ## Waiting on the user
-- Review PR #16 (https://github.com/Daddy-Ousen/innworld-rpg/pull/16): the 13 news lines, the 3 hook news lines, the new node `b1.player_beat_rock_crab_first` (candidate). Then merge and tag `m6.4-done` on the merge commit.
+- Review the M6.5 PR: the stage line, the hook news line, the Chieftain stats (guesses), the new level curve. Then merge and tag `m6.5-done` and `m6-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
 ## Next
-- M6.5 Canon fights (the Chieftain at the inn), sparing Goblins, NPCs flee monsters, guards fight; `sim_m6_done`. Needs a schema OK for `stage` (ask first). A canon fight can end in a hook result (the player's fight record).
-- Open balance note: levels after the first class are slow (check in M6.5).
+- M7: rest of Book 1 (ROADMAP "Later"). Plan it first; ask about chapter split and schema needs.
+- Known limits to consider (ADR 0011 M6.5): name labels overlap when markers stand side by side; Klbkch ignores `klbkch.spares_goblins`; NPCs never leave the area when they flee; monsters attack only the player.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Line endings:** most `.gd`, `.json` and `.md` files are CRLF in the working copy (`core.autocrlf=true`). New files written by the Write tool are LF: fine, but never mix endings in one file. Patch CRLF files with a Python script that converts to LF, edits, and converts back.
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 42 / 408).
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 46 / 440).
 - Write GUT output to `$TMP` or the scratchpad, not next to the repo.
 - A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
 - Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir` (= `user://test_saves` via the pre-run hook); clear slots in `before_each`.
@@ -56,5 +53,11 @@ M6.4 Player hooks + news. Schema approved by the user 2026-09-24 (my picks: `cha
 - `sed -i` in Git Bash turns a CRLF file into LF. Fine (git stores LF), but do not mix endings in one file.
 - `git status` may list LF-converted files with no real diff; `git add` clears them.
 
+- **M6.5 stages:** a canon event `stage` puts its foes on the map (Stage.check after every command). Tests that play the inn on day 9 from 09:00 meet the Chieftain; tests about something else set `gs.world.staged["b1.erin_kills_chieftain"] = 9` first (see `sim_m4_done`).
+- NPCs near a hostile monster react (NpcReact) instead of walking their goals. Toy NPC + monster tests: `ToyNpcs.combat_db(events)`.
+- Fight record context now has `killed` (bool). Hooks can match it.
+- The Python heredoc trick breaks on `\` line continuations (they get joined). For GDScript edits with `\`, use the Edit tool or a scratch `.py` file.
+- One GUT script only: `-gdir=res://tests -gselect=<script name>` (plain `-gtest` still ran everything here).
+
 ## Active files
-`game/core/{director,world_state,canon_db,night,actions,action_log,game_state,save_migrations}.gd`, `game/ui/{journal.gd,journal.tscn,system_messages.gd,console_commands.gd}`, `game/data/canon/book1/chapters/{1.12,1.14–1.18,1.21,1.24,1.25}.json`, `game/tests/{unit_player_hooks,sim_player_hooks,sim_canon_book1,unit_system_messages,unit_journal}.gd`, `tools/validate_data.py`, `docs/adr/0011-m6-vertical-slice.md`.
+`game/core/{stage,npc_react,combat,combat_db,combat_state,monster_sim,npc_sim,commands,canon_db,world_state,save_migrations,data_db}.gd`, `game/data/{enemies,actions,rules}.json`, `game/data/canon/book1/chapters/{1.14,1.25}.json`, `game/tests/{unit_stage,unit_npc_react,unit_combat,sim_canon_fights,sim_m6_done,sim_m4_done}.gd`, `game/test_support/{toy_npcs,toy_combat}.gd`, `tools/validate_data.py`, `docs/adr/0011-m6-vertical-slice.md`.

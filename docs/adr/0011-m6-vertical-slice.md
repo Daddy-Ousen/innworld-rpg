@@ -1,6 +1,6 @@
 # ADR 0011 — M6 Vertical slice
 
-Date: 2026-09-23 · Status: accepted for M6.1 and M6.4 (M6 plan approved by the user 2026-09-23; M6.4 schema approved 2026-09-24). Later parts add their sections here.
+Date: 2026-09-23 · Status: accepted for M6.1, M6.4 and M6.5 (M6 plan approved by the user 2026-09-23; M6.4 and M6.5 schemas approved 2026-09-24).
 
 ## User choices (plan)
 - Canon: all chapters 1.15–1.25 as event data (Ryoka, Antinium and King chapters too). Two data parts: M6.2 (1.15–1.20R), M6.3 (1.21–1.25).
@@ -77,3 +77,49 @@ News lines on 13 T2 events of days 8–19. They are new text on reviewed events:
 **Tests.** `unit_player_hooks` (toy canon: cancel, mutate, change, no match, days, first hook wins, news, night result, `CanonDb` checks, save round trip, v6 → v7), `sim_player_hooks` (real Book 1: a real bump-attack fight and real cooking at the inn stove for each case, a save/load between deed and night, the journal). `sim_canon_book1` also checks one news line per event with news and no news before day 8.
 
 **Known limits.** A hook sees only the last 7 days of actions. Hooks cannot see where the player stood or who watched; only the action records. A fight counts as won when any foe died or ran off.
+
+## M6.5 Canon fights and the slice check
+User choices (2026-09-24, all as proposed): the Chieftain fight ends in a `change` (not a mutate); sparing gives a record and the Rags hook needs a kill; NPCs have no hit points; levels after the first class cost less.
+
+**Canon event schema (rule 11, approved).** One new optional event field:
+```json
+"stage": {
+  "area": "inn_interior", "hours": [9, 12],
+  "when_flags": ["goblin_tribe.lost_two_to_relc"], "unless_flags": [],
+  "foes": [{"enemy": "goblin_chieftain", "pos": [12, 14]}],
+  "allies": ["erin_solstice"],
+  "line": "...", "note": "..."
+}
+```
+A stage puts the event's fight on the map. It runs when the player is in `area` at `hours` (whole hours, `[from, to)`, may wrap), on a day in the event's window (with delays), while the event is pending, every NPC in its `requires.alive` lives, and the flags fit. Its `requires.flags` are **not** checked: the director sets them at night, after the day of the fight. Each event stages once (`world.staged`: event id → day). The foes come in hostile as one pack (spawn `""`, `stage` = event id) on their tile, or the nearest free one. `line` (own words) goes to the combat text. A stage never changes canon by itself: the fight writes normal records, and the event's hooks (M6.4) read them.
+
+**`core/stage.gd`**: `Stage.check` runs from `MonsterSim.run` after every command (`is_open`, `run`, `allies_of`, `free_near`). `CanonDb` checks the stage shape and lists `stages`. `CombatDb.validate` checks the enemies, the map and the foe tiles (walkable, not an exit). `MonsterSim.in_hours` is shared with spawns.
+
+**NPCs near a fight — `core/npc_react.gd`.** While a hostile monster is in the player's area (`Combat.in_danger`), NPCs there do not follow their goals:
+- A fighter walks to the nearest hostile monster and hits it when side by side. Fighters are NPCs with a tag in `rules.npc.react.fight_tags` (`guard`: Relc, Klbkch, Zevara, Beilmark, Belsc…) within `help_radius` (8, king moves), and the allies of a monster's stage at any distance. Hits use `react.fighter` (tagged) or `react.ally` accuracy and damage against the monster's evasion and armor, and count as fight kills. A fighter with no monster in reach follows its goal.
+- Any other NPC within `flee_radius` (4) of a hostile monster steps to the side tile farthest from it (not onto the player, a monster or an exit). The rest stand still until the danger is over.
+
+NPCs act once per `react.act_seconds` (6), after the monsters. Rolls use `gs.rng`. NPCs have no hit points: monsters attack only the player. `Commands._after` also ends the fight after the NPCs act (`Combat.settle_if_over`), because an NPC can kill the last foe.
+
+**Sparing.** Every fight record's context now has `killed` (a foe died, by anyone's hand). A won fight where foes ran and none died, against an enemy with a tag in `rules.combat.spare_tags` (`goblin`), adds a `spare_foe` record ("Let a beaten foe go", `social.empathy`) and the line "You let them go."
+
+**Data.**
+- `enemies.json`: `goblin_chieftain`. Guess stats: hp 20, armor 1, accuracy 4, damage 2–4, a bow (2–3 at range 5), `flee_below` 0. Tags `goblin`, `chieftain`. No spawn uses it.
+- `b1.erin_kills_chieftain`: the stage above (day 9, 09–12, he comes in by the door, and Erin fights with the player). Hook `player_fought_chieftain` (`attack_melee` / `throw_object` / `block_attack`, success, enemy `goblin_chieftain`, days 9–11) → `change`: flag `wandering_inn.earther_fought_chieftain`, clears `erin.stab_wound` and `erin.hands_burned`, Erin → player +3, and its own news line. Erin still kills him in the story, so every later event runs (drift 0.25).
+- `b1.rags_brings_goblins_to_eat`: the hook now needs `killed: true`. Goblins that ran away unkilled still come to eat.
+- A hook's relationship effect may use `"player"` as `to` (the player's relationship id). The validator allows it only in hooks.
+- `rules.levels`: `base_xp` 60 → 40, `growth` 1.35 → 1.25. A player who works hard at the inn now reaches level 5 by about day 18–21 (was level 4). `sim_m6_done` reaches level 6 by day 22.
+
+**Save v8.** Migration 7 → 8: `world.staged` starts empty, and old monsters get `"stage": ""`.
+
+**Validator.** `check_stage` checks the shape and the flags, checks that allies are known NPCs, limits `line` to 200 characters, and runs the copy check on `line`. 36 Python tests.
+
+**Tests.**
+- `unit_stage` (toy stage): hours, window, pending event, flags, NPCs alive, runs once, free tile, won → changed, fled → canon, save round trip, v7 → v8, shape and tile checks.
+- `unit_npc_react`: a guard kills a Goblin, same seed same fight, a bystander steps away and goes back to work, a far bystander stands still, stage allies (also from far away), a fighter out of reach keeps its goal.
+- `unit_combat`: spare and no spare.
+- `sim_canon_fights` (real data): a win next to Erin → changed, and the rest of the canon runs (drift 0.25 only); a knock-out → canon; no stage after the hours; a Liscor guard kills a Goblin at the gate; Goblins let go still come on day 19.
+- `sim_m6_done`: the M6 "Done when" through the main scene (seed 1). From the gate to the inn; work and sleep on days 8–21; the first offer accepted; the Chieftain fight won on day 9; the journal shows the change; a save in the middle of the fight plays on the same; a slot saved on day 15 loads back the same game.
+- `sim_m4_done` marks the stage as done (it tests the M4 loop).
+
+**Known limits.** A stage has its own `when_flags`, because the director sets the event's flags only at night. Monsters attack only the player. The Chieftain comes in by the only door, so a player in the inn at 09:00 must fight him or be knocked out. NPCs flee inside the area only (they never leave by an exit). The name labels of markers side by side overlap. Klbkch still fights Goblins as a guard after he promises Erin not to hunt them (`klbkch.spares_goblins` is not read yet).

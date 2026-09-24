@@ -90,6 +90,7 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
 ```
 
 Events may also have `news` (what locals say when it happens) and `hooks` (what the player can do to cancel, change or mutate it: matched against the action log). See ADR 0011, M6.4.
+An event may also have a `stage`: its fight appears on the map when the player is at the right place and time; the fight's records reach the event through its hooks. See ADR 0011, M6.5.
 
 ### 4.4 Director algorithm (per night)
 0. For each due event: if a player hook matches, apply it (cancel or mutate) and skip the rest. A `change` hook adds its effects when the event runs.
