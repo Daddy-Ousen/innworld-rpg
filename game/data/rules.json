@@ -15,7 +15,7 @@
 		"novelty": {"window_days": 7, "half_life_days": 2.0, "k": 0.35, "floor": 0.1, "first_time_bonus": 1.5},
 		"conviction": {"match_mult": 1.25}
 	},
-	"levels": {"base_xp": 60, "growth": 1.35, "capstones": [10, 20, 30]},
+	"levels": {"base_xp": 40, "growth": 1.25, "capstones": [10, 20, 30]},
 	"offers": {"max_per_night": 2},
 	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
 	"director": {
