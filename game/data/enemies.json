@@ -19,7 +19,13 @@
 			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "A dino-bird that nests in the long grass and pecks hard to guard its eggs."},
 			"tags": ["razorbeak"], "color": "#4fa84a", "danger": 0.4, "behaviour": "territorial",
 			"hp": 6, "armor": 0, "accuracy": 4, "evasion": 5, "damage": [1, 2], "act_seconds": 4,
-			"aggro_radius": 3, "lose_radius": 5, "chase_turns": 99, "flee_below": 0.34, "scared_by": []}
+			"aggro_radius": 3, "lose_radius": 5, "chase_turns": 99, "flee_below": 0.34, "scared_by": []},
+		"goblin_chieftain": {"name": "Goblin Chieftain", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.14", "confidence": "confirmed", "note": "An armoured Goblin leader with a bow and blades. He hunts Erin for revenge and fights to the death. Only in a canon stage (M6.5), never in a spawn."},
+			"tags": ["goblin", "chieftain"], "color": "#3f5a22", "danger": 1.0, "behaviour": "pack",
+			"hp": 20, "armor": 1, "accuracy": 4, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": [],
+			"ranged": {"range": 5, "damage": [2, 3], "chance": 0.3}}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

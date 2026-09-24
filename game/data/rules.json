@@ -15,7 +15,7 @@
 		"novelty": {"window_days": 7, "half_life_days": 2.0, "k": 0.35, "floor": 0.1, "first_time_bonus": 1.5},
 		"conviction": {"match_mult": 1.25}
 	},
-	"levels": {"base_xp": 60, "growth": 1.35, "capstones": [10, 20, 30]},
+	"levels": {"base_xp": 40, "growth": 1.25, "capstones": [10, 20, 30]},
 	"offers": {"max_per_night": 2},
 	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
 	"director": {
@@ -32,7 +32,15 @@
 		"step_seconds": 8,
 		"jump_seconds": 300,
 		"talk_actions": ["talk_with_guest", "persuade", "comfort_someone"],
-		"talk_relationship": 1
+		"talk_relationship": 1,
+		"react": {
+			"act_seconds": 6,
+			"fight_tags": ["guard"],
+			"help_radius": 8,
+			"flee_radius": 4,
+			"fighter": {"accuracy": 5, "damage": [2, 5]},
+			"ally": {"accuracy": 3, "damage": [1, 3]}
+		}
 	},
 	"combat": {
 		"base_stats": {"default": {"strength": 3, "dexterity": 3, "endurance": 3, "perception": 3, "speed": 3}},
@@ -55,6 +63,7 @@
 			"liscor_gate": {"area": "liscor_gate", "pos": [3, 12]},
 			"liscor_market": {"area": "liscor_gate", "pos": [3, 12]}
 		}},
-		"xp": {"count_per_intensity": 4, "max_intensity": 2.0}
+		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
+		"spare_tags": ["goblin"]
 	}
 }

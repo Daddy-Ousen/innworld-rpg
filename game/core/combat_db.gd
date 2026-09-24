@@ -70,8 +70,8 @@ static func _read_json(path: String, errs: Array[String]) -> Dictionary:
 	return d
 
 
-## Checks items, enemies, spawns and the rules' knock-out wake spots
-## (against the maps). Adds to and returns `errors`.
+## Checks items, enemies, spawns, canon event stages (M6.5) and the rules'
+## knock-out wake spots (against the maps). Adds to and returns `errors`.
 func validate(db: DataDb) -> Array[String]:
 	var item_tags := {}
 	for id: String in items:
@@ -86,8 +86,34 @@ func validate(db: DataDb) -> Array[String]:
 			errors.append("spawn %d: must be an object." % i)
 			continue
 		_validate_spawn(spawns[i], seen, db)
+	for id: String in db.canon.stages:
+		_validate_stage(id, db.canon.events[id]["stage"], db)
 	_validate_rules(db)
 	return errors
+
+
+## A canon event stage (CanonDb checks its shape): known enemies, a known
+## map, and foes on walkable tiles that are not exits.
+func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
+	var where := "event '%s' stage" % event_id
+	var foes: Variant = st.get("foes", [])
+	if not foes is Array:
+		return
+	for f: Variant in foes:
+		if f is Dictionary and not enemies.has(f.get("enemy", "")):
+			errors.append("%s: unknown enemy '%s'." % [where, f.get("enemy", "")])
+	if db.maps.is_empty():
+		return
+	var area: String = st.get("area", "")
+	if not db.maps.areas.has(area):
+		errors.append("%s: unknown map '%s'." % [where, area])
+		return
+	for f: Variant in foes:
+		if not f is Dictionary or not f.get("pos", null) is Array or (f["pos"] as Array).size() != 2:
+			continue
+		var at := Vector2i(int(f["pos"][0]), int(f["pos"][1]))
+		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+			errors.append("%s: foe pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
 
 
 func _validate_spawn(s: Dictionary, seen: Dictionary, db: DataDb) -> void:

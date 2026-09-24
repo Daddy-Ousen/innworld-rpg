@@ -7,7 +7,9 @@
 ##   - A gap longer than rules.npc.jump_seconds (a long action, a night):
 ##     everyone jumps to their goal's spot.
 ## Dead NPCs are removed. Time is in world seconds (clock minutes × 60 +
-## the player's step seconds). No randomness.
+## the player's step seconds). While a hostile monster is in the player's
+## area, the NPCs there react to it instead (NpcReact, M6.5); only their
+## hits roll dice (gs.rng).
 class_name NpcSim
 extends RefCounted
 
@@ -56,7 +58,8 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 		elif here != "" and n["area"] == here:
 			if NpcRoster.pos_of(n) == gs.player.pos():
 				_put(gs, db, n, here, gs.player.pos())
-			_walk(gs, db, n, t, maxi(dt, 0))
+			if not (NpcReact.active(gs) and NpcReact.act(gs, db, id, n, maxi(dt, 0))):
+				_walk(gs, db, n, t, maxi(dt, 0))
 		else:
 			_move_offscreen(gs, db, n, t)
 	r.sec = maxi(to_sec, r.sec)

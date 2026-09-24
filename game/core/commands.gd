@@ -1,8 +1,9 @@
 ## The commands presentation may send. UI and console call only these;
 ## they never change GameState directly (CLAUDE.md rule 1). Every command
 ## that moves the clock then runs _after: the monsters' turn and fight
-## bookkeeping (Combat.sync), then the NPCs (NpcSim.sync). Combat text of
-## the last command is in gs.combat.lines.
+## bookkeeping (Combat.sync), then the NPCs (NpcSim.sync; near a fight they
+## react, M6.5), then the fight ends if no foe is left. Combat text of the
+## last command is in gs.combat.lines.
 class_name Commands
 extends RefCounted
 
@@ -192,3 +193,4 @@ static func settle(gs: GameState, db: DataDb) -> void:
 static func _after(gs: GameState, db: DataDb) -> void:
 	Combat.sync(gs, db)
 	NpcSim.sync(gs, db)
+	Combat.settle_if_over(gs, db)

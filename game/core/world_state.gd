@@ -19,6 +19,9 @@ var history: Array[Dictionary] = []
 ## What the player heard, in order (M6.4): {"day", "event", "kind", "text"}.
 ## kind: "news" (local, from event or hook `news`) or "rumor" (T1 `rumor`).
 var news: Array[Dictionary] = []
+## Canon fights the player met on the map (M6.5): event id → day it was staged.
+## An event stages once.
+var staged: Dictionary = {}
 ## Weighted count of changed canon events (rules "director.drift").
 var drift: float = 0.0
 ## Last day the director has run for (0 = never).
@@ -74,6 +77,7 @@ func to_dict() -> Dictionary:
 		"events": events.duplicate(true),
 		"history": history.duplicate(true),
 		"news": news.duplicate(true),
+		"staged": staged.duplicate(),
 		"drift": drift,
 		"last_day": last_day,
 	}
@@ -101,6 +105,8 @@ static func from_dict(d: Dictionary) -> WorldState:
 		var item := n.duplicate(true)
 		item["day"] = int(item["day"])
 		w.news.append(item)
+	for id: String in d.get("staged", {}):
+		w.staged[id] = int(d["staged"][id])
 	w.drift = float(d.get("drift", 0.0))
 	w.last_day = int(d.get("last_day", 0))
 	return w

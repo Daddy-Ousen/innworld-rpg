@@ -418,3 +418,48 @@ func test_nearest_foe_prefers_hostile_and_skips_hidden() -> void:
 	assert_eq(Combat.nearest_foe(gs), near)
 	ToyCombat.spawn(gs, _db, "goblin", Vector2i(1, 7))
 	assert_eq(Combat.nearest_foe(gs), near, "a tie goes to the lower id")
+
+
+func test_goblins_that_ran_off_unkilled_are_spared() -> void:
+	ToyCombat.always_hit(_db)
+	var gs := _game()
+	var gob := ToyCombat.spawn(gs, _db, "goblin", EAST)
+	Commands.attack(gs, _db, "e")
+	# It ran off the map (MonsterSim: routed, then gone at the edge).
+	gs.combat.monsters[gob]["state"] = CombatState.FLEE
+	gs.combat.fight["routed"] += 1
+	gs.combat.monsters.erase(gob)
+	Commands.wait(gs, _db, 6)
+	assert_false(gs.combat.has_fight())
+	assert_has(gs.combat.lines, "You let them go.")
+	var spare := _records(gs, "spare_foe")
+	assert_eq(spare.size(), 1)
+	assert_eq(spare[0]["outcome"], "success")
+	assert_true((spare[0]["tags"] as Dictionary).has("social.empathy"))
+	assert_eq(spare[0]["context"]["killed"], false)
+	assert_eq(_records(gs, "attack_melee")[0]["context"]["killed"], false)
+
+
+func test_a_killed_goblin_is_not_spared() -> void:
+	ToyCombat.always_hit(_db)
+	var gs := _game()
+	var gob := ToyCombat.spawn(gs, _db, "goblin", EAST)
+	for i in 10:
+		if not gs.combat.monsters.has(gob):
+			break
+		Commands.attack(gs, _db, "e")
+	assert_false(gs.combat.has_fight())
+	assert_eq(_records(gs, "spare_foe").size(), 0)
+	assert_eq(_records(gs, "attack_melee")[0]["context"]["killed"], true)
+
+
+func test_only_spare_tag_foes_are_spared() -> void:
+	var gs := _game()
+	var crab := ToyCombat.spawn(gs, _db, "crab", EAST)
+	gs.player.held = "stink"
+	Commands.throw(gs, _db, crab)
+	assert_eq(gs.combat.fight["routed"], 1, "the crab panics")
+	gs.combat.monsters.erase(crab)
+	Commands.wait(gs, _db, 6)
+	assert_false(gs.combat.has_fight())
+	assert_eq(_records(gs, "spare_foe").size(), 0, "a crab has no goblin tag")

@@ -29,6 +29,7 @@ const ORTHO := [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)
 ## `entered`: the player just came into the area (no turns, a spawn check).
 ## A gap longer than combat.jump_seconds with no hostile monster gives no
 ## turns. Spawns are checked on entering and every spawn.check_minutes.
+## Canon stages (M6.5) are checked after every command.
 static func run(gs: GameState, db: DataDb, now: int, entered: bool) -> void:
 	var c := gs.combat
 	if db.combat.is_empty() or db.maps.is_empty() or not gs.player.is_placed():
@@ -45,6 +46,7 @@ static func run(gs: GameState, db: DataDb, now: int, entered: bool) -> void:
 			or gs.clock.total_minutes - c.checked >= int(rules["spawn"]["check_minutes"]):
 		c.checked = gs.clock.total_minutes
 		spawn_check(gs, db)
+	Stage.check(gs, db)
 
 
 ## Rolls every spawn of the player's area that is open now (see
@@ -87,13 +89,8 @@ static func spawn_open(gs: GameState, s: Dictionary) -> bool:
 	for m: Dictionary in gs.combat.monsters.values():
 		if m["spawn"] == s["id"]:
 			return false
-	if s.has("hours"):
-		@warning_ignore("integer_division")
-		var hour := gs.clock.minute() / 60
-		var from := int(s["hours"][0])
-		var to := int(s["hours"][1])
-		if not ((hour >= from and hour < to) if from < to else (hour >= from or hour < to)):
-			return false
+	if s.has("hours") and not in_hours(gs, s["hours"]):
+		return false
 	if s.has("days") and (gs.clock.day() < int(s["days"][0]) or gs.clock.day() > int(s["days"][1])):
 		return false
 	for f: String in s.get("when_flags", []):
@@ -103,6 +100,16 @@ static func spawn_open(gs: GameState, s: Dictionary) -> bool:
 		if gs.flags.get(f, false):
 			return false
 	return true
+
+
+## True if the clock's hour is in [from, to) (whole hours 0–24; from > to
+## wraps past midnight).
+static func in_hours(gs: GameState, hours: Array) -> bool:
+	@warning_ignore("integer_division")
+	var hour := gs.clock.minute() / 60
+	var from := int(hours[0])
+	var to := int(hours[1])
+	return (hour >= from and hour < to) if from < to else (hour >= from or hour < to)
 
 
 ## Free tiles spawn `s` may use, in row order: its home, or the tiles of
@@ -373,6 +380,10 @@ static func _step_to(gs: GameState, db: DataDb, id: String, goals: Dictionary) -
 
 ## Tiles in the player's area held by the player, an NPC or a monster
 ## other than `except_id`: {Vector2i: true}.
+static func taken(gs: GameState, except_id: String) -> Dictionary:
+	return _taken(gs, except_id)
+
+
 static func _taken(gs: GameState, except_id: String) -> Dictionary:
 	var area := gs.player.area
 	var out := {gs.player.pos(): true}

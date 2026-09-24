@@ -41,6 +41,7 @@ OUTCOMES = {"success", "partial", "fail"}
 HOOK_THEN = {"cancel", "change"}
 LOG_DAYS = 7  # the action log keeps this many days (rules xp.novelty.window_days)
 COPY_RUN = 7  # words; a shared run this long counts as copied text
+PLAYER = "player"  # relationship id of the player (a hook's effects may name it as "to")
 
 RE_ID = re.compile(r"^[a-z][a-z0-9_]*$")
 RE_FLAG = re.compile(r"^[a-z][a-z0-9_]*(\.[a-z0-9_]+)*$")
@@ -172,7 +173,7 @@ def check_location(r: Report, where: str, loc, book: int, chapters) -> None:
 def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     req = {"tier", "window", "location", "roles", "requires", "depends_on", "on_fail", "effects",
            "status", "canon_ref", "summary"}
-    opt = {"delay_limit", "rumor", "news", "hooks"}
+    opt = {"delay_limit", "rumor", "news", "hooks", "stage"}
     if not _keys(r, where, ev, req, opt):
         return
     if ev["tier"] not in TIERS:
@@ -239,6 +240,43 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
         _str(r, f"{where}.news", ev["news"], NEWS_MAX)
     if "hooks" in ev:
         check_hooks(r, where, ev["hooks"], ev.get("window"))
+    if "stage" in ev:
+        check_stage(r, f"{where}.stage", ev["stage"])
+
+
+def check_stage(r: Report, where: str, st) -> None:
+    """A canon fight on the map (M6.5, ADR 0011). The game checks enemies and map tiles."""
+    if not _keys(r, where, st, {"area", "hours", "foes"},
+                 {"when_flags", "unless_flags", "allies", "line", "note"}):
+        return
+    if not (isinstance(st["area"], str) and RE_ID.match(st["area"])):
+        r.err(f"{where}.area", "must be a map id")
+    h = st["hours"]
+    if not (isinstance(h, list) and len(h) == 2 and all(_int(x) for x in h)
+            and 0 <= h[0] <= 24 and 0 <= h[1] <= 24 and h[0] != h[1]):
+        r.err(f"{where}.hours", "must be [from, to] whole hours with 0 <= from != to <= 24")
+    foes = st["foes"]
+    if not isinstance(foes, list) or not foes:
+        r.err(f"{where}.foes", "must be a non-empty list")
+    else:
+        for i, f in enumerate(foes):
+            fw = f"{where}.foes[{i}]"
+            if not _keys(r, fw, f, {"enemy", "pos"}):
+                continue
+            if not (isinstance(f["enemy"], str) and RE_ID.match(f["enemy"])):
+                r.err(f"{fw}.enemy", "must be an enemy id")
+            p = f["pos"]
+            if not (isinstance(p, list) and len(p) == 2 and all(_int(x) and x >= 0 for x in p)):
+                r.err(f"{fw}.pos", "must be [x, y] with x, y >= 0")
+    for k in ("when_flags", "unless_flags"):
+        if k in st:
+            _str_list(r, f"{where}.{k}", st[k], RE_FLAG)
+    if "allies" in st:
+        _str_list(r, f"{where}.allies", st["allies"], RE_ID)
+    if "line" in st:
+        _str(r, f"{where}.line", st["line"], NEWS_MAX)
+    if "note" in st:
+        _str(r, f"{where}.note", st["note"], SUMMARY_MAX)
 
 
 def check_effects(r: Report, where: str, fx) -> None:
@@ -506,7 +544,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         if nid not in npcs:
             r.err(where, f"unknown npc '{nid}'")
 
-    def effect_npcs(where: str, fx) -> None:
+    def effect_npcs(where: str, fx, player_ok: bool = False) -> None:
         if not isinstance(fx, dict):
             return
         for nid in fx.get("kill", []) if isinstance(fx.get("kill"), list) else []:
@@ -514,7 +552,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         for i, rel in enumerate(fx.get("relationship", []) if isinstance(fx.get("relationship"), list) else []):
             if isinstance(rel, dict):
                 for k in ("from", "to"):
-                    if isinstance(rel.get(k), str):
+                    if isinstance(rel.get(k), str) and not (player_ok and k == "to" and rel[k] == PLAYER):
                         need_npc(f"{where}.relationship[{i}].{k}", rel[k])
 
     for where, nid in system_refs:
@@ -535,12 +573,16 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         for nid in rq.get("alive", []) if isinstance(rq.get("alive"), list) else []:
             need_npc(f"{w}.requires.alive", nid)
         effect_npcs(f"{w}.effects", ev.get("effects"))
+        st = ev.get("stage") if isinstance(ev.get("stage"), dict) else {}
+        for nid in st.get("allies", []) if isinstance(st.get("allies"), list) else []:
+            if isinstance(nid, str):
+                need_npc(f"{w}.stage.allies", nid)
         hooks = ev.get("hooks") if isinstance(ev.get("hooks"), list) else []
         mutates = [(f"{w}.on_fail", s) for s in (ev.get("on_fail") if isinstance(ev.get("on_fail"), list) else [])]
         for i, h in enumerate(hooks):
             if not isinstance(h, dict):
                 continue
-            effect_npcs(f"{w}.hooks[{i}].effects", h.get("effects"))
+            effect_npcs(f"{w}.hooks[{i}].effects", h.get("effects"), player_ok=True)
             mutates.append((f"{w}.hooks[{i}].then", h.get("then")))
             for j, m in enumerate(h.get("did") if isinstance(h.get("did"), list) else []):
                 acts = m.get("action") if isinstance(m, dict) and isinstance(m.get("action"), list) else []
@@ -603,6 +645,8 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                 for i, h in enumerate(ev.get("hooks") if isinstance(ev.get("hooks"), list) else []):
                     if isinstance(h, dict):
                         copy_check(f"{fn}:events.{eid}.hooks[{i}]", h, ("news",), ref)
+                if isinstance(ev.get("stage"), dict):
+                    copy_check(f"{fn}:events.{eid}.stage", ev["stage"], ("line",), ref)
         for nid, npc in npcs.items():
             if isinstance(npc, dict):
                 copy_check(f"npcs.json:npcs.{nid}", npc, ("summary", "canon_ref.note"))
