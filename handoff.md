@@ -1,32 +1,33 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.26-1.34`, M7.1)
-M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 plan: 4 canon batches (ADR 0012). For the day-21 raid the user chose a `change` hook (Klbkch still dies).
-- Canon 1.26R–1.34: 9 new chapter files (19 events, days 15–23, all `candidate`), 11 new NPCs, 8 new locations. `pawn` is named, `beilmark` is a Gnoll, `klbkch` has the tag `prognugator` (these 3 are back to `candidate`).
-- The raid is `b1.klbkch_dies_defending_erin` (1.29). `b1.goblin_raid_on_inn` already exists in 1.02. Its stage is in `inn_interior` 12–14, with the raid leader + 5 Goblins at the door and Erin as ally. Hook `player_fought_raid` → change.
-- `enemies.json`: `goblin_raid_leader` (stage only) and spawn `crab_hill_unpatrolled` (when `liscor_watch.no_inn_patrols`).
-- `npc_behaviour.json`: `pawn` visits the inn 18–22 after `pawn.named`; `relc` has `unless_flags` `relc.blames_erin`.
-- Tests: `sim_canon_book1` LAST_DAY 23 + 2 tests; new `sim_goblin_raid` (5 tests); `sim_m6_done` pre-stages the raid; counts updated in `sim_player_hooks`, `unit_combat_db`, `sim_canon_fights`. GUT 447/447 (47 scripts), Python 36, validator 0 errors.
-- Checked on screen: at 12:00 on day 21, 6 Goblins at the inn door, with Erin next to them.
-- Docs: ROADMAP M7 section, ADR 0012, progress.
+## Just done (2026-09-24, branch `feat/m7b-battles`, M7.B big battles)
+M7.1 is closed. The user approved it. PR #18 was merged early, so the review fixes and the "reviewed" marks came in a follow-up, PR #19. Tag `m7.1-done` is on fa01971.
+The user picked the full battle upgrade (option 1) and decided that an NPC at 0 HP is down, not dead.
+Commits on the branch:
+- `17672ac` feat(core): NPC HP, monster targets, helpers, stage waves, save v9.
+- `5e572e1` feat(tools): the validator checks waves.
+- `e14466f` feat(ui): HP bars, fewer labels, the helper edge, fallen NPCs, "Foes left".
+- `5c74748` fix(core): fighters pick a foe they can reach; new `sim_big_battle`.
+- `2bc271f` data(book1): the raid as 40 Goblins in 4 waves.
+- `b163c5f` feat(ui): label de-overlap.
+- Docs: ADR 0013, ROADMAP, progress.
+
+Tests: GUT 468/468 (49 scripts), Python 39, validator 0 errors. `sim_big_battle`: about 5 ms per command.
+Screenshots (scratch scene, deleted): at 12:00 on day 21, wave 0 of 8 Goblins at the door with Erin; "Foes left: 40"; the labels no longer overlap.
 
 ## Waiting on the user
-- PR #18 (https://github.com/Daddy-Ousen/innworld-rpg/pull/18). Review answers applied (2026-09-24):
-  - Guilds in Remendia, Wales and Celum are all correct (each city has one; memory `lore-city-guilds`).
-  - 1.32R: "a week ago" wins, so the Lich run and the crushed leg are now day 15.
-  - Raiders' grave is several hundred feet away (new location `raiders_grave`).
-- Open question: big fights. The user wants far more than 6 fighters (40 Goblins, and later big battles with many characters). I asked which battle upgrade to build. Measured: 80 Goblins cost about 2 ms per monster turn, so speed is not the limit. The limits are: NPCs have no HP; monsters attack only the player; stage allies must already be in the stage's area; one player against 40 is a sure knock-out; the labels overlap.
-- After that: flip the events to `reviewed`, merge, and tag `m7.1-done`.
+- Review PR #20 (https://github.com/Daddy-Ousen/innworld-rpg/pull/20). Balance point: a player who only waits is knocked out about a minute into the raid, so the raid is hard to win at 20 HP. Options: Klbkch comes earlier, fewer foes per wave, or leave it to play-testing.
+- After review: merge, and tag `m7b-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
 ## Next
-- M7.2: canon 1.35R–1.44R. Read the batch first (3 Explore readers worked well for the first pass; then read every chapter yourself). 1.34 ends with Erin about to go exploring, so expect a fight away from the inn. Ask before any schema change.
-- Known limits: name labels overlap; Klbkch ignores `klbkch.spares_goblins`; NPCs never leave the area when they flee; monsters attack only the player; the raid stage is inside the inn only; Rags's band is not on the map.
+- M7.2: canon 1.35R–1.44R. Read the batch first (3 Explore readers for a first pass, then read every chapter yourself). 1.34 ends with Erin about to go exploring. Big fights can now use `stage.waves`, `helpers` and `allies` (allies need an `npc_behaviour` entry). Ask before any schema change.
+- Known limits: NPCs never leave the area when they flee; Klbkch ignores `klbkch.spares_goblins`; a stage is tied to one map area; the raid balance.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Line endings:** most `.gd`, `.json` and `.md` files are CRLF in the working copy (`core.autocrlf=true`). New files written by the Write tool are LF: fine, but never mix endings in one file. Patch CRLF files with a Python script that converts to LF, edits, and converts back.
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 47 / 447).
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 49 / 468).
 - Write GUT output to `$TMP` or the scratchpad, not next to the repo.
 - A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
 - Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir` (= `user://test_saves` via the pre-run hook); clear slots in `before_each`.
@@ -70,5 +71,12 @@ M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 pla
 - **M7.1:** check that an event id is free before you use it (the validator flags duplicates across files). `Commands.wait(gs, db, s)` takes seconds. A day-21 test at the inn at noon meets the raid; tests about something else set `gs.world.staged["b1.klbkch_dies_defending_erin"] = 21`. The fight record's `enemy` is the most dangerous foe type in the fight.
 - New chapter JSON files written by the Write tool are LF; `npcs.json`, `locations.json`, `enemies.json` and `npc_behaviour.json` are CRLF in the working copy. Patch those with a Python script that keeps CRLF.
 
+- **M7.B:**
+  - Roster NPC entries have `hp` (-1 = full) and `down`. Read `down` with `n.get("down", false)`, because tests build NPC dicts by hand.
+  - Monsters now attack fighting NPCs and helpers (`Combat.monster_target`), so seeded fight sims can change when NPC fight stats change. Erin's damage is kept low so the player still takes part in the Chieftain fight (`sim_m6_done`).
+  - A stage with `waves` keeps the fight going until all waves came (`Stage.waves_left`).
+  - Wave allies must have an `npc_behaviour` entry.
+  - The bash heredoc broke on a long Python script with `\` line continuations: write the script with the Write tool into the scratchpad, then run it.
+
 ## Active files
-`game/data/canon/book1/chapters/{1.26R,1.27R,1.28A,1.29,1.30,1.31,1.32R,1.33R,1.34}.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/tests/{sim_goblin_raid,sim_canon_book1,sim_m6_done,sim_canon_fights,sim_player_hooks,unit_combat_db}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.
+`game/core/{combat,combat_state,monster_sim,npc_react,npc_sim,npc_roster,stage,canon_db,combat_db,behaviour_db,save_migrations,game_state,data_db}.gd`, `game/world/{world_view,main}.gd`, `game/ui/hud.gd`, `game/data/{rules,npc_behaviour}.json`, `game/data/canon/book1/chapters/1.29.json`, `game/tests/{unit_battle,sim_big_battle,sim_goblin_raid,unit_world_view,unit_game_state}.gd`, `tools/validate_data.py`, `docs/adr/0013-m7b-big-battles.md`.

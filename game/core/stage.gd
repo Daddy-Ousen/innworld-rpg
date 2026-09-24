@@ -6,6 +6,16 @@
 ## monsters with "stage" = the event id; stage allies fight next to the
 ## player (NpcReact). The fight's action records reach the event through its
 ## hooks (Director), so a stage never changes canon by itself.
+##
+## Waves (M7.B, ADR 0013): a stage's `waves` come after its first foes, in
+## order, while the player stays in the stage area (combat.stage_run). The
+## next wave comes when its after_seconds have passed since the stage began,
+## or when at most left_at_most of the stage's foes are still on the map, or
+## when none are; but it waits while rules.combat.stage.max_on_map of them
+## are on the map. A wave brings foes (hostile), helpers (monsters in state
+## ally) and allies (canon NPCs; one in another area is moved in) at its
+## `from` tile or the nearest free one. The fight does not end while waves
+## are left (Combat.settle_if_over).
 class_name Stage
 extends RefCounted
 
@@ -17,6 +27,7 @@ static func check(gs: GameState, db: DataDb) -> Array[String]:
 		if is_open(gs, db, id):
 			run(gs, db, id)
 			out.append(id)
+	tick(gs, db)
 	return out
 
 
@@ -62,15 +73,116 @@ static func run(gs: GameState, db: DataDb, id: String) -> Array[String]:
 			placed.append(mid)
 	for mid in placed:
 		c.monsters[mid]["pack"] = placed.size()
+	if not (st.get("waves", []) as Array).is_empty():
+		c.stage_run = {"event": id, "start": NpcSim.world_sec(gs), "next": 0}
 	return placed
 
 
-## Allies of the stage of monster `m` (NPC ids), or [].
+## Sends in the next wave of the staged fight in progress, if it is due
+## (see the class comment). Leaving the stage area drops the rest.
+## Returns the new monster ids.
+static func tick(gs: GameState, db: DataDb) -> Array[String]:
+	var out: Array[String] = []
+	var c := gs.combat
+	if c.stage_run.is_empty():
+		return out
+	var id: String = c.stage_run["event"]
+	var st: Dictionary = db.canon.events.get(id, {}).get("stage", {})
+	if st.is_empty() or gs.player.area != st["area"]:
+		c.stage_run = {}
+		return out
+	var waves: Array = st.get("waves", [])
+	var next := int(c.stage_run["next"])
+	if next >= waves.size():
+		return out
+	var w: Dictionary = waves[next]
+	var here := foes_here(gs, id)
+	if here >= int(db.rules["combat"]["stage"]["max_on_map"]):
+		return out
+	var elapsed := NpcSim.world_sec(gs) - int(c.stage_run["start"])
+	if here > 0 and elapsed < int(w["after_seconds"]) and here > int(w.get("left_at_most", -1)):
+		return out
+	c.stage_run["next"] = next + 1
+	return send_wave(gs, db, id, w)
+
+
+## Puts wave `w` of event `id`'s stage on the map. Returns the new monster ids.
+static func send_wave(gs: GameState, db: DataDb, id: String, w: Dictionary) -> Array[String]:
+	var c := gs.combat
+	var from := Vector2i(int(w["from"][0]), int(w["from"][1]))
+	if w.get("line", "") != "":
+		c.lines.append(w["line"])
+	var placed: Array[String] = []
+	var group := "m%d" % c.next_id
+	for type: String in w.get("foes", []):
+		var mid := Combat.add_monster(gs, db, type, free_near(gs, db, from), CombatState.HOSTILE, "", group)
+		if mid != "":
+			c.monsters[mid]["stage"] = id
+			placed.append(mid)
+	for mid in placed:
+		c.monsters[mid]["pack"] = placed.size()
+	for type: String in w.get("helpers", []):
+		var hid := Combat.add_monster(gs, db, type, free_near(gs, db, from), CombatState.ALLY)
+		if hid != "":
+			c.monsters[hid]["stage"] = id
+			placed.append(hid)
+	for npc: String in w.get("allies", []):
+		var n: Dictionary = gs.npcs.npcs.get(npc, {})
+		if n.is_empty() or n["area"] == gs.player.area or not gs.world.is_alive(db.canon, npc):
+			continue
+		var at := free_near(gs, db, from)
+		n["area"] = gs.player.area
+		n["x"] = at.x
+		n["y"] = at.y
+		n["carry"] = 0
+	return placed
+
+
+## Stage foes of event `id` still on the map (not helpers).
+static func foes_here(gs: GameState, id: String) -> int:
+	var count := 0
+	for m: Dictionary in gs.combat.monsters.values():
+		if m["stage"] == id and m["state"] != CombatState.ALLY:
+			count += 1
+	return count
+
+
+## True while the staged fight in progress has waves still to come.
+static func waves_left(gs: GameState, db: DataDb) -> bool:
+	var run := gs.combat.stage_run
+	if run.is_empty():
+		return false
+	var waves: Array = db.canon.events.get(run["event"], {}).get("stage", {}).get("waves", [])
+	return int(run["next"]) < waves.size()
+
+
+## Foes of the staged fight in progress still to beat: those on the map
+## plus those in the waves to come. -1 if no staged fight is on.
+static func foes_left(gs: GameState, db: DataDb) -> int:
+	var run := gs.combat.stage_run
+	if run.is_empty():
+		return -1
+	var id: String = run["event"]
+	var left := foes_here(gs, id)
+	var waves: Array = db.canon.events.get(id, {}).get("stage", {}).get("waves", [])
+	for i in range(int(run["next"]), waves.size()):
+		left += (waves[i].get("foes", []) as Array).size()
+	return left
+
+
+## Allies of the stage of monster `m` (NPC ids): the stage's and every
+## wave's. [] if it has no stage.
 static func allies_of(db: DataDb, m: Dictionary) -> Array:
 	var id: String = m.get("stage", "")
 	if id == "" or not db.canon.events.has(id):
 		return []
-	return db.canon.events[id].get("stage", {}).get("allies", [])
+	var st: Dictionary = db.canon.events[id].get("stage", {})
+	var out: Array = (st.get("allies", []) as Array).duplicate()
+	for w: Dictionary in st.get("waves", []):
+		for a: String in w.get("allies", []):
+			if not out.has(a):
+				out.append(a)
+	return out
 
 
 ## `at` if it is free (walkable, not an exit, no player, NPC or monster),

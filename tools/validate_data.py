@@ -247,7 +247,7 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
 def check_stage(r: Report, where: str, st) -> None:
     """A canon fight on the map (M6.5, ADR 0011). The game checks enemies and map tiles."""
     if not _keys(r, where, st, {"area", "hours", "foes"},
-                 {"when_flags", "unless_flags", "allies", "line", "note"}):
+                 {"when_flags", "unless_flags", "allies", "line", "note", "waves"}):
         return
     if not (isinstance(st["area"], str) and RE_ID.match(st["area"])):
         r.err(f"{where}.area", "must be a map id")
@@ -277,6 +277,38 @@ def check_stage(r: Report, where: str, st) -> None:
         _str(r, f"{where}.line", st["line"], NEWS_MAX)
     if "note" in st:
         _str(r, f"{where}.note", st["note"], SUMMARY_MAX)
+    if "waves" in st:
+        if not isinstance(st["waves"], list):
+            r.err(f"{where}.waves", "must be a list")
+        else:
+            for i, w in enumerate(st["waves"]):
+                check_wave(r, f"{where}.waves[{i}]", w)
+
+
+def check_wave(r: Report, where: str, w) -> None:
+    """A stage wave (M7.B, ADR 0013). The game checks enemies, tiles and behaviour entries."""
+    if not _keys(r, where, w, {"after_seconds", "from"}, {"left_at_most", "foes", "helpers", "allies", "line"}):
+        return
+    if not (_int(w["after_seconds"]) and w["after_seconds"] >= 0):
+        r.err(f"{where}.after_seconds", "must be an int >= 0 (seconds after the stage began)")
+    if "left_at_most" in w and not (_int(w["left_at_most"]) and w["left_at_most"] >= 0):
+        r.err(f"{where}.left_at_most", "must be an int >= 0")
+    p = w["from"]
+    if not (isinstance(p, list) and len(p) == 2 and all(_int(x) and x >= 0 for x in p)):
+        r.err(f"{where}.from", "must be [x, y] with x, y >= 0")
+    total = 0
+    for k in ("foes", "helpers"):  # enemy ids; the same one may come many times
+        if k in w:
+            if isinstance(w[k], list) and all(isinstance(x, str) and RE_ID.match(x) for x in w[k]):
+                total += len(w[k])
+            else:
+                r.err(f"{where}.{k}", "must be a list of enemy ids")
+    if "allies" in w:
+        total += len(_str_list(r, f"{where}.allies", w["allies"], RE_ID))
+    if total == 0:
+        r.err(where, "needs at least one foe, helper or ally")
+    if "line" in w:
+        _str(r, f"{where}.line", w["line"], NEWS_MAX)
 
 
 def check_effects(r: Report, where: str, fx) -> None:
@@ -577,6 +609,10 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         for nid in st.get("allies", []) if isinstance(st.get("allies"), list) else []:
             if isinstance(nid, str):
                 need_npc(f"{w}.stage.allies", nid)
+        for i, wave in enumerate(st.get("waves", []) if isinstance(st.get("waves"), list) else []):
+            for nid in wave.get("allies", []) if isinstance(wave, dict) and isinstance(wave.get("allies"), list) else []:
+                if isinstance(nid, str):
+                    need_npc(f"{w}.stage.waves[{i}].allies", nid)
         hooks = ev.get("hooks") if isinstance(ev.get("hooks"), list) else []
         mutates = [(f"{w}.on_fail", s) for s in (ev.get("on_fail") if isinstance(ev.get("on_fail"), list) else [])]
         for i, h in enumerate(hooks):
@@ -647,6 +683,9 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                         copy_check(f"{fn}:events.{eid}.hooks[{i}]", h, ("news",), ref)
                 if isinstance(ev.get("stage"), dict):
                     copy_check(f"{fn}:events.{eid}.stage", ev["stage"], ("line",), ref)
+                    for i, wave in enumerate(ev["stage"].get("waves") if isinstance(ev["stage"].get("waves"), list) else []):
+                        if isinstance(wave, dict):
+                            copy_check(f"{fn}:events.{eid}.stage.waves[{i}]", wave, ("line",), ref)
         for nid, npc in npcs.items():
             if isinstance(npc, dict):
                 copy_check(f"npcs.json:npcs.{nid}", npc, ("summary", "canon_ref.note"))

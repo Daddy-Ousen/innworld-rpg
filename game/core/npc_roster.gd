@@ -2,13 +2,14 @@
 ## One entry per living NPC with behaviour data:
 ##   {"area": map id, "@" + off-map place, or "" (nowhere yet), "x", "y", "facing": n/e/s/w,
 ##    "goal": goal name, "route_i": next patrol point, "carry": step seconds
-##    not yet spent, "talked_day": last day the player talked with them (0 = never)}.
+##    not yet spent, "talked_day": last day the player talked with them (0 = never),
+##    "hp": hit points (-1 = full; M7.B), "down": knocked out in a fight}.
 ## `sec` is the world second the NPCs were last moved to (-1 = not placed
 ## yet: a new or migrated game). NpcSim changes this; nothing else does.
 class_name NpcRoster
 extends RefCounted
 
-const INT_FIELDS := ["x", "y", "route_i", "carry", "talked_day"]
+const INT_FIELDS := ["x", "y", "route_i", "carry", "talked_day", "hp"]
 
 var sec: int = -1
 var npcs: Dictionary = {}
@@ -57,6 +58,7 @@ static func from_dict(d: Dictionary) -> NpcRoster:
 	for id: String in d.get("npcs", {}):
 		var n: Dictionary = (d["npcs"][id] as Dictionary).duplicate()
 		for k: String in INT_FIELDS:
-			n[k] = int(n.get(k, 0))
+			n[k] = int(n.get(k, -1 if k == "hp" else 0))
+		n["down"] = bool(n.get("down", false))
 		r.npcs[id] = n
 	return r

@@ -24,6 +24,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			5: out = _migrate_5_to_6(out)
 			6: out = _migrate_6_to_7(out)
 			7: out = _migrate_7_to_8(out)
+			8: out = _migrate_8_to_9(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -88,4 +89,14 @@ static func _migrate_7_to_8(d: Dictionary) -> Dictionary:
 	(d["world"] as Dictionary)["staged"] = {}
 	for m: Dictionary in (d["combat"] as Dictionary).get("monsters", {}).values():
 		m["stage"] = ""
+	return d
+
+
+## v9 (M7.B): big battles. NPCs have hit points (full) and are not down;
+## the fight has no staged waves in progress.
+static func _migrate_8_to_9(d: Dictionary) -> Dictionary:
+	for n: Dictionary in (d["npcs"] as Dictionary).get("npcs", {}).values():
+		n["hp"] = -1
+		n["down"] = false
+	(d["combat"] as Dictionary)["stage_run"] = {}
 	return d

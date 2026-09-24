@@ -8,11 +8,14 @@
 ##             "rolled_spot": the player already tried to spot it,
 ##             "pack": how many monsters its spawn placed together (1 if alone),
 ##             "stage": the canon event that staged it, or "" (M6.5)}.
+##             State "ally" (M7.B): a helper that fights for the player.
 ##   fight: {} when there is none, else {"start": clock minute,
 ##          "foes": {monster id: type} (everyone who took part), "attacks",
 ##          "improvised" (attacks with a held item), "blocks", "throws",
 ##          "kills", "routed"}. Combat.end_fight turns it into action records.
 ##   lines: combat text from the last command (the UI shows it).
+##   stage_run: {} or the staged fight in progress (M7.B): {"event": event id,
+##              "start": world second it began, "next": index of its next wave}.
 ## Combat and MonsterSim change this; nothing else does.
 class_name CombatState
 extends RefCounted
@@ -22,7 +25,8 @@ const IDLE := "idle"
 const HOSTILE := "hostile"
 const FLEE := "flee"
 const HOME := "home"
-const STATES := [HIDDEN, IDLE, HOSTILE, FLEE, HOME]
+const ALLY := "ally"
+const STATES := [HIDDEN, IDLE, HOSTILE, FLEE, HOME, ALLY]
 const MONSTER_INTS := ["x", "y", "hp", "home_x", "home_y", "carry", "chase", "scared", "pack"]
 const FIGHT_INTS := ["start", "attacks", "improvised", "blocks", "throws", "kills", "routed"]
 
@@ -40,6 +44,7 @@ var blocking: bool = false
 var lines: Array[String] = []
 var monsters: Dictionary = {}
 var fight: Dictionary = {}
+var stage_run: Dictionary = {}
 
 
 func has_fight() -> bool:
@@ -82,7 +87,7 @@ func to_dict() -> Dictionary:
 		list[id] = (monsters[id] as Dictionary).duplicate()
 	return {"next_id": next_id, "sec": sec, "area": area, "checked": checked,
 		"spawn_last": spawn_last.duplicate(), "blocking": blocking, "lines": lines.duplicate(),
-		"monsters": list, "fight": fight.duplicate(true)}
+		"monsters": list, "fight": fight.duplicate(true), "stage_run": stage_run.duplicate()}
 
 
 ## Accepts {} (a migrated v5 save): no monsters, no fight.
@@ -109,4 +114,9 @@ static func from_dict(d: Dictionary) -> CombatState:
 		for k: String in FIGHT_INTS:
 			f[k] = int(f.get(k, 0))
 	c.fight = f
+	var run: Dictionary = (d.get("stage_run", {}) as Dictionary).duplicate()
+	if not run.is_empty():
+		run["start"] = int(run["start"])
+		run["next"] = int(run["next"])
+	c.stage_run = run
 	return c

@@ -2,6 +2,8 @@ extends GutTest
 ## M7.1 canon fight on the real Book 1 data: the Goblin raid on the inn at
 ## midday on day 21 (1.29). A win next to Erin changes the event (Klbkch
 ## still dies, user choice 2026-09-24); a knock-out leaves the canon.
+## M7.B: 40 Goblins in 4 waves; Klbkch and the Designated Worker come with
+## wave 2, Rags and three helpers with wave 3.
 
 const RAID_EVENT := "b1.klbkch_dies_defending_erin"
 const INN_SPOT := Vector2i(6, 8)
@@ -76,9 +78,18 @@ func _records(gs: GameState, action_id: String) -> Array[Dictionary]:
 func test_the_raid_stage_data_is_sound() -> void:
 	assert_eq(_db.errors, [] as Array[String])
 	assert_has(_db.canon.stages, RAID_EVENT)
-	var foes: Array = _db.canon.events[RAID_EVENT]["stage"]["foes"]
-	assert_eq(foes.size(), 6)
+	var st: Dictionary = _db.canon.events[RAID_EVENT]["stage"]
+	var foes: Array = st["foes"]
+	assert_eq(foes.size(), 8)
 	assert_eq(foes.filter(func(f: Dictionary) -> bool: return f["enemy"] == "goblin_raid_leader").size(), 1)
+	var total := foes.size()
+	for w: Dictionary in st["waves"]:
+		total += (w["foes"] as Array).size()
+	assert_eq(st["waves"].size(), 3)
+	assert_eq(total, 40, "canon: about forty Goblins")
+	assert_eq(st["waves"][1]["allies"], ["klbkch", "designated_worker"])
+	assert_has(st["waves"][2]["allies"], "rags")
+	assert_eq((st["waves"][2]["helpers"] as Array).size(), 3, "Rags's band")
 	var e: Dictionary = _db.combat.enemies["goblin_raid_leader"]
 	assert_has(e["tags"], "goblin")
 	assert_gt(float(e["danger"]), float(_db.combat.enemies["goblin_grunt"]["danger"]),
@@ -92,19 +103,29 @@ func test_winning_the_raid_with_erin_changes_it_but_klbkch_still_dies() -> void:
 	ToyCombat.always_hit(_db)
 	var gs := _game_on_day(21)
 	var raiders := _raid_arrives(gs)
-	assert_eq(raiders.size(), 6)
+	assert_eq(raiders.size(), 8)
+	assert_eq(Stage.foes_left(gs, _db), 40)
 	assert_eq(gs.npcs.npcs["erin_solstice"]["area"], "inn_interior", "Erin is home")
 	var lines: Array[String] = []
-	for i in 400:
+	var klbkch_came := false
+	var most_foes := 0
+	for i in 3000:
 		if not gs.combat.has_fight():
 			break
 		_step_toward_a_raider(gs)
 		lines.append_array(gs.combat.lines)
-	for id in raiders:
-		assert_false(gs.combat.monsters.has(id), "%s is gone" % id)
-	assert_false(gs.combat.has_fight())
+		most_foes = maxi(most_foes, gs.combat.in_state(CombatState.HOSTILE).size())
+		if gs.npcs.npcs.has("klbkch") and gs.npcs.npcs["klbkch"]["area"] == "inn_interior":
+			klbkch_came = true
+	assert_false(gs.combat.has_fight(), "all 40 beaten")
+	assert_true(gs.combat.stage_run.is_empty())
+	assert_true(klbkch_came, "Klbkch came with wave 2")
+	assert_has(lines, _db.canon.events[RAID_EVENT]["stage"]["waves"][2]["line"])
+	assert_lte(most_foes, 23, "never all forty at once: a wave waits while 12 are on the map")
 	assert_true(lines.any(func(l: String) -> bool: return l.begins_with("Erin Solstice hits")),
 			"Erin fights next to the player")
+	assert_true(lines.any(func(l: String) -> bool: return l.begins_with("Klbkch hits")), "Klbkch fights")
+	assert_true(gs.combat.in_state(CombatState.ALLY).is_empty(), "the helpers left")
 	var melee := _records(gs, "attack_melee")
 	assert_eq(melee.size(), 1)
 	assert_eq(melee[0]["outcome"], "success")

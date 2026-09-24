@@ -16,7 +16,7 @@ const RULE_FIELDS := {
 	"npc": ["step_seconds", "jump_seconds", "talk_actions", "talk_relationship", "react"],
 	"combat": ["base_stats", "hp_base", "hp_per_endurance", "unarmed", "hit", "strength_div",
 		"min_damage", "block", "spot", "spawn", "jump_seconds", "max_turns_per_sync",
-		"heal_actions", "night_heal", "knockout", "xp", "spare_tags"],
+		"heal_actions", "night_heal", "knockout", "xp", "spare_tags", "stage"],
 }
 const CONTEXT_TESTS := ["min", "max", "equals"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",

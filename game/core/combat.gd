@@ -4,6 +4,11 @@
 ## ends, end_fight writes one action record per kind of action used, so the
 ## System sees attack / block / throw / improvise / flee without a record
 ## per turn. All rolls go through gs.rng.
+## M7.B (ADR 0013): NPCs who fight have hit points and fall at 0 (down, not
+## dead: only the director kills); hostile monsters go for the nearest of
+## the player, a fighting NPC and a helper (a monster in state "ally" that
+## fights for the player). A fight's end stands the fallen up and sends the
+## helpers away.
 class_name Combat
 extends RefCounted
 
@@ -15,6 +20,11 @@ const REFUSED_DANGER := "Not with enemies near."
 const REFUSED_DOWN := "You are knocked out."
 const REFUSED_TIRED := "You are too tired."
 const KNOCKED_OUT_LINE := "You are knocked out."
+const REFUSED_HELPER := "The %s fights on your side."
+## monster_target kinds.
+const PLAYER := "player"
+const NPC := "npc"
+const HELPER := "helper"
 
 
 ## Every command starts here: last command's combat text goes, and a
@@ -80,8 +90,66 @@ static func join(gs: GameState, id: String) -> void:
 	c.fight["foes"][id] = c.monsters[id]["type"]
 
 
+## A monster's name for the combat text ("allied Goblin" for a helper).
 static func name_of(db: DataDb, m: Dictionary) -> String:
-	return String(db.combat.enemies[m["type"]]["name"])
+	var kind := String(db.combat.enemies[m["type"]]["name"])
+	return "allied " + kind if m["state"] == CombatState.ALLY else kind
+
+
+static func npc_name(db: DataDb, id: String) -> String:
+	return String(db.canon.npcs.get(id, {}).get("name", id))
+
+
+## Current hit points of NPC `id` (in the roster); max from NpcReact.stats.
+static func npc_hp(gs: GameState, db: DataDb, id: String) -> int:
+	var n: Dictionary = gs.npcs.npcs[id]
+	var most := int(NpcReact.stats(db, id)["hp"])
+	return most if int(n["hp"]) < 0 else mini(int(n["hp"]), most)
+
+
+## NPC `id` takes `amount` damage. At 0 HP it is down ("X falls."): it lies
+## still until the fight ends. Returns true if it fell.
+static func damage_npc(gs: GameState, db: DataDb, id: String, amount: int) -> bool:
+	var n: Dictionary = gs.npcs.npcs[id]
+	if bool(n.get("down", false)) or amount <= 0:
+		return false
+	var left := npc_hp(gs, db, id) - amount
+	if left > 0:
+		n["hp"] = left
+		return false
+	n["hp"] = 0
+	n["down"] = true
+	gs.combat.lines.append("%s falls." % npc_name(db, id))
+	return true
+
+
+## Who hostile monster `id` goes for: the nearest (king moves) of the
+## player (not down), a standing NPC in the area who fights
+## (NpcReact.is_fighter) and a helper. Ties: the player, then NPCs by id,
+## then helpers by id. Returns {"kind": PLAYER | NPC | HELPER, "id", "pos"},
+## or {} if there is no one.
+static func monster_target(gs: GameState, db: DataDb, id: String) -> Dictionary:
+	var from := CombatState.pos_of(gs.combat.monsters[id])
+	var area := gs.player.area
+	var cands: Array[Dictionary] = []
+	if not is_down(gs):
+		cands.append({"kind": PLAYER, "id": "", "pos": gs.player.pos()})
+	for nid in gs.npcs.in_area(area):
+		var n: Dictionary = gs.npcs.npcs[nid]
+		if not bool(n.get("down", false)) and NpcReact.is_fighter(gs, db, nid):
+			cands.append({"kind": NPC, "id": nid, "pos": NpcRoster.pos_of(n)})
+	for hid in gs.combat.in_state(CombatState.ALLY):
+		var h: Dictionary = gs.combat.monsters[hid]
+		if h["area"] == area:
+			cands.append({"kind": HELPER, "id": hid, "pos": CombatState.pos_of(h)})
+	var best := {}
+	var best_d := 0
+	for c: Dictionary in cands:
+		var d := _dist(from, c["pos"])
+		if best.is_empty() or d < best_d:
+			best = c
+			best_d = d
+	return best
 
 
 ## The monster to throw at (M5.3): the nearest seen (not hidden) monster in
@@ -91,7 +159,8 @@ static func nearest_foe(gs: GameState) -> String:
 	var best_rank := 0
 	for id in gs.combat.ids():
 		var m: Dictionary = gs.combat.monsters[id]
-		if m["area"] != gs.player.area or m["state"] == CombatState.HIDDEN:
+		if m["area"] != gs.player.area or m["state"] == CombatState.HIDDEN \
+				or m["state"] == CombatState.ALLY:
 			continue
 		var rank := _dist(gs.player.pos(), CombatState.pos_of(m)) \
 				+ (0 if m["state"] == CombatState.HOSTILE else 100000)
@@ -134,6 +203,9 @@ static func player_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	if target == "":
 		out["error"] = "There is nothing to attack there."
 		return out
+	if gs.combat.monsters[target]["state"] == CombatState.ALLY:
+		out["error"] = REFUSED_HELPER % String(db.combat.enemies[gs.combat.monsters[target]["type"]]["name"])
+		return out
 	Movement.spend_turn(gs, db)
 	return _strike(gs, db, target, false, 1)
 
@@ -150,6 +222,9 @@ static func throw_at(gs: GameState, db: DataDb, id: String) -> Dictionary:
 		return out
 	if not c.monsters.has(id) or c.monsters[id]["area"] != gs.player.area:
 		out["error"] = "There is no '%s' here." % id
+		return out
+	if c.monsters[id]["state"] == CombatState.ALLY:
+		out["error"] = REFUSED_HELPER % String(db.combat.enemies[c.monsters[id]["type"]]["name"])
 		return out
 	var dist := _dist(gs.player.pos(), CombatState.pos_of(c.monsters[id]))
 	if dist > int(db.combat.items[gs.player.held]["throw_range"]):
@@ -240,10 +315,13 @@ static func drop(gs: GameState, db: DataDb) -> String:
 	return ""
 
 
-## Monster `id` attacks the player (`ranged`: its ranged attack). A raised
-## guard lowers the hit chance and halves the damage. Returns {"hit", "damage"}.
+## Monster `id` attacks the player (`ranged`: its ranged attack), or the
+## `target` from monster_target (M7.B). The player's raised guard lowers the
+## hit chance and halves the damage. Returns {"hit", "damage"}.
 static func monster_attack(gs: GameState, db: DataDb, id: String, ranged: bool = false,
-		bonus: float = 0.0) -> Dictionary:
+		bonus: float = 0.0, target: Dictionary = {}) -> Dictionary:
+	if target.get("kind", PLAYER) != PLAYER:
+		return _attack_other(gs, db, id, ranged, target)
 	var c := gs.combat
 	var rules: Dictionary = db.rules["combat"]
 	var m: Dictionary = c.monsters[id]
@@ -269,6 +347,59 @@ static func monster_attack(gs: GameState, db: DataDb, id: String, ranged: bool =
 	return out
 
 
+## Monster `id` attacks a fighting NPC or a helper (see monster_target):
+## its accuracy against their evasion, its damage minus their armor.
+static func _attack_other(gs: GameState, db: DataDb, id: String, ranged: bool,
+		target: Dictionary) -> Dictionary:
+	var c := gs.combat
+	var rules: Dictionary = db.rules["combat"]
+	var e: Dictionary = db.combat.enemies[c.monsters[id]["type"]]
+	var who := name_of(db, c.monsters[id])
+	join(gs, id)
+	var tid: String = target["id"]
+	var stats: Dictionary
+	var victim: String
+	if target["kind"] == NPC:
+		stats = NpcReact.stats(db, tid)
+		victim = npc_name(db, tid)
+	else:
+		stats = db.combat.enemies[c.monsters[tid]["type"]]
+		victim = "the " + name_of(db, c.monsters[tid])
+	var out := {"hit": false, "damage": 0}
+	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]), int(stats["evasion"]))
+	var how := "throws a stone at" if ranged else "attacks"
+	if not out["hit"]:
+		c.lines.append("The %s %s %s and misses." % [who, how, victim])
+		return out
+	var dmg := maxi(_roll(gs, e["ranged"]["damage"] if ranged else e["damage"]) - int(stats["armor"]),
+			int(rules["min_damage"]))
+	out["damage"] = dmg
+	c.lines.append("The %s %s %s: %d damage." % [who, how, victim, dmg])
+	if target["kind"] == NPC:
+		damage_npc(gs, db, tid, dmg)
+	else:
+		damage_monster(gs, db, tid, dmg)
+	return out
+
+
+## Helper `id` (state ally) hits the hostile monster `foe` next to it: its
+## accuracy against the foe's evasion, its damage minus the foe's armor.
+## A kill counts for the fight. Returns true if the foe died.
+static func helper_attack(gs: GameState, db: DataDb, id: String, foe: String) -> bool:
+	var c := gs.combat
+	var e: Dictionary = db.combat.enemies[c.monsters[id]["type"]]
+	var f: Dictionary = db.combat.enemies[c.monsters[foe]["type"]]
+	var who := name_of(db, c.monsters[id])
+	var what := name_of(db, c.monsters[foe])
+	join(gs, foe)
+	if gs.rng.randf() >= hit_chance(db, int(e["accuracy"]), int(f["evasion"])):
+		c.lines.append("The %s misses the %s." % [who, what])
+		return false
+	var dmg := maxi(_roll(gs, e["damage"]) - int(f["armor"]), int(db.rules["combat"]["min_damage"]))
+	c.lines.append("The %s hits the %s for %d." % [who, what, dmg])
+	return damage_monster(gs, db, foe, dmg)
+
+
 static func damage_player(gs: GameState, db: DataDb, amount: int) -> void:
 	if amount <= 0 or is_down(gs):
 		return
@@ -277,7 +408,8 @@ static func damage_player(gs: GameState, db: DataDb, amount: int) -> void:
 		gs.combat.lines.append(KNOCKED_OUT_LINE)
 
 
-## Returns true if the monster died (it is removed and counted as a kill).
+## Returns true if the monster died (it is removed; a foe counts as a kill,
+## a helper does not).
 static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -> bool:
 	var c := gs.combat
 	var m: Dictionary = c.monsters[id]
@@ -285,8 +417,9 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 	if int(m["hp"]) > 0:
 		return false
 	c.lines.append("The %s dies." % name_of(db, m))
+	var foe: bool = m["state"] != CombatState.ALLY
 	c.monsters.erase(id)
-	if c.has_fight():
+	if c.has_fight() and foe:
 		c.fight["kills"] += 1
 	return true
 
@@ -341,7 +474,22 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 			out.append_array(_record(gs, db, "spare_foe", 1.0, danger, "success", base))
 			c.lines.append("You let them go.")
 		c.lines.append("The fight is over.")
+	after_fight(gs)
 	return out
+
+
+## The fight is over (any end): fallen NPCs get up with 1 HP, helpers
+## leave, and the staged fight (its waves) is done.
+static func after_fight(gs: GameState) -> void:
+	var c := gs.combat
+	for id: String in gs.npcs.npcs:
+		var n: Dictionary = gs.npcs.npcs[id]
+		if bool(n.get("down", false)):
+			n["down"] = false
+			n["hp"] = 1
+	for id in c.in_state(CombatState.ALLY):
+		c.monsters.erase(id)
+	c.stage_run = {}
 
 
 ## True if an enemy type in `types` has a tag in rules.combat.spare_tags.
@@ -386,10 +534,11 @@ static func sync(gs: GameState, db: DataDb) -> void:
 
 ## Ends a fight with no hostile or fleeing monster left (see settle_fight).
 ## Commands._after calls it again after the NPCs, who may kill the last foe.
+## A staged fight with waves still to come (M7.B) is not over.
 static func settle_if_over(gs: GameState, db: DataDb) -> void:
 	var c := gs.combat
 	if c.has_fight() and not is_down(gs) and c.in_state(CombatState.HOSTILE).is_empty() \
-			and c.in_state(CombatState.FLEE).is_empty():
+			and c.in_state(CombatState.FLEE).is_empty() and not Stage.waves_left(gs, db):
 		settle_fight(gs, db)
 
 
@@ -411,6 +560,7 @@ static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool)
 	var rules: Dictionary = db.rules["combat"]
 	c.monsters.clear()
 	c.fight = {}
+	c.stage_run = {}
 	c.blocking = false
 	var share := float(rules["night_heal"]["sleep"])
 	if knocked_out:

@@ -34,12 +34,17 @@ func refresh(gs: GameState, db: DataDb) -> void:
 	_warning.visible = _warning.text != ""
 
 
-## "HP 14/20 · Held: Chair" (or "Held: nothing").
+## "HP 14/20 · Held: Chair" (or "Held: nothing"); in a staged fight
+## (M7.B) also " · Foes left: 23" (on the map and in the waves to come).
 static func health(gs: GameState, db: DataDb) -> String:
 	var held := "nothing"
 	if gs.player.held != "":
 		held = String(db.combat.items.get(gs.player.held, {}).get("name", gs.player.held))
-	return "HP %d/%d · Held: %s" % [Combat.hp(gs, db), Stats.max_hp(gs, db), held]
+	var out := "HP %d/%d · Held: %s" % [Combat.hp(gs, db), Stats.max_hp(gs, db), held]
+	var left := Stage.foes_left(gs, db)
+	if left >= 0:
+		out += " · Foes left: %d" % left
+	return out
 
 
 ## True at or below LOW_HP of max HP.

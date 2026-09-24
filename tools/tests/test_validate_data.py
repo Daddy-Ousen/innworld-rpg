@@ -316,6 +316,32 @@ class ValidateTest(unittest.TestCase):
         self.assertError(rep, "stage.foes")
         self.assertError(rep, "boss")
 
+    # --- M7.B waves
+
+    def test_stage_waves_pass(self):
+        self.ev()["stage"] = self.stage(waves=[
+            {"after_seconds": 60, "left_at_most": 2, "from": [2, 3], "foes": ["rat", "rat"],
+             "helpers": ["dog"], "allies": ["bob"], "line": "More rats pour in."}])
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_stage_wave_errors(self):
+        self.ev()["stage"] = self.stage(waves=[
+            {"after_seconds": -5, "from": [2], "foes": ["rat"], "left_at_most": "x"},
+            {"after_seconds": 5, "from": [2, 3]},
+            {"after_seconds": 5, "from": [2, 3], "allies": ["zed"], "boss": True}])
+        rep = self.fx.run()
+        self.assertError(rep, "waves[0].after_seconds")
+        self.assertError(rep, "waves[0].from")
+        self.assertError(rep, "waves[0].left_at_most")
+        self.assertError(rep, "waves[1]: needs at least one foe, helper or ally")
+        self.assertError(rep, "waves[2].allies: unknown npc 'zed'")
+        self.assertError(rep, "boss")
+
+    def test_stage_wave_line_copy_check(self):
+        self.ev()["stage"] = self.stage(waves=[{"after_seconds": 5, "from": [2, 3], "foes": ["rat"],
+                                               "line": "Here the quick brown fox jumps over the lazy dog again."}])
+        self.assertError(self.fx.run(with_raw=True), "waves[0].line: copies book text")
+
     def test_stage_line_copy_check(self):
         self.ev()["stage"] = self.stage(line="Here the quick brown fox jumps over the lazy dog again.")
         self.assertError(self.fx.run(with_raw=True), "stage.line: copies book text")

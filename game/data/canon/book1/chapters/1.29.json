@@ -53,11 +53,23 @@
 					{"enemy": "goblin_grunt", "pos": [13, 14]},
 					{"enemy": "goblin_grunt", "pos": [10, 14]},
 					{"enemy": "goblin_grunt", "pos": [14, 14]},
-					{"enemy": "goblin_grunt", "pos": [12, 14]}
+					{"enemy": "goblin_grunt", "pos": [12, 14]},
+					{"enemy": "goblin_grunt", "pos": [11, 13]},
+					{"enemy": "goblin_grunt", "pos": [13, 13]}
 				],
 				"allies": ["erin_solstice"],
 				"line": "A big Goblin with a short sword swaggers into the inn and spits on a table. More Goblins with knives crowd in behind him.",
-				"note": "Design: six of the forty come in; the rest wait outside. Canon: the leader comes in at lunchtime (1.29); the hours are a guess."
+				"waves": [
+					{"after_seconds": 60, "left_at_most": 3, "from": [12, 14], "foes": ["goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"line": "More Goblins push in through the door. There are dozens of them outside."},
+					{"after_seconds": 150, "from": [12, 14], "foes": ["goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"allies": ["klbkch", "designated_worker"],
+						"line": "Klbkch runs in, swords drawn, with an unarmed Worker at his side."},
+					{"after_seconds": 240, "from": [12, 14], "foes": ["goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"allies": ["rags"], "helpers": ["goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"line": "The last Goblins rush in, and Rags and three of her band strike them from behind."}
+				],
+				"note": "Design: 40 foes in 4 waves through the door (8, then 10, 10 and 12); max 12 on the map at once before a wave may come. Canon: the leader comes in at lunchtime (1.29); the hours and the wave timing are guesses."
 			},
 			"hooks": [
 				{

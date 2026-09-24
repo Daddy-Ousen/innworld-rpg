@@ -356,3 +356,64 @@ func test_a_knock_out_ends_the_day_and_opens_its_page() -> void:
 	assert_eq(session.gs.player.area, "inn_interior")
 	assert_string_contains(_log(main), "Everything goes dark.")
 	assert_true(main.is_busy())
+
+
+func test_big_fights_label_few_monsters_and_show_bars() -> void:
+	var d := ToyCombat.db()
+	ToyCombat.freeze(d)
+	d.combat.enemies["goblin"]["danger"] = 0.5
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(d.maps, {}, d.combat.enemies)
+	var gs := ToyCombat.new_game(d)
+	ToyCombat.to_arena(gs, d, Vector2i(0, 4))
+	var gobs: Array[String] = []
+	for x in range(3, 11):
+		gobs.append(ToyCombat.spawn(gs, d, "goblin", Vector2i(x, 1)))
+	var boss := ToyCombat.spawn(gs, d, "crab", Vector2i(12, 7), CombatState.IDLE)
+	var helper := ToyCombat.spawn(gs, d, "goblin", Vector2i(1, 4), CombatState.ALLY)
+	var named := WorldView.labelled(gs, d.combat.enemies)
+	assert_eq(named.size(), 4, "the crab (most dangerous), the helper and 2 goblins whose labels fit")
+	assert_true(named.has(boss))
+	assert_true(named.has(helper))
+	assert_true(named.has(gobs[0]), "the nearest goblin, at 3,1")
+	assert_false(named.has(gobs[1]), "4,1: too close to the label at 3,1")
+	assert_true(named.has(gobs[4]), "7,1: far enough from 3,1")
+	v.refresh(gs)
+	var far: Node2D = v.monsters.get_node(gobs[7])
+	for child in far.get_children():
+		assert_false(child is Label, "a far goblin has no label")
+	assert_eq(far.get_child_count(), 5, "edge, ring, body and the HP bar (back, fill)")
+	var h: Node2D = v.monsters.get_node(helper)
+	assert_eq((h.get_child(0) as ColorRect).color, WorldView.ALLY_EDGE)
+
+
+func test_a_fallen_npc_is_faded_and_a_hurt_one_has_a_bar() -> void:
+	var d := ToyNpcs.db()
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(d.maps, {"guard": "Guard"}, {}, {"guard": 20})
+	var gs := ToyNpcs.new_game(d)
+	v.refresh(gs)
+	var g: Node2D = v.npcs.get_node("guard")
+	assert_eq(g.get_child_count(), 2, "full HP: no bar")
+	gs.npcs.npcs["guard"]["hp"] = 5
+	v.refresh(gs)
+	g = v.npcs.get_node("guard")
+	assert_eq(g.get_child_count(), 4, "hurt: body, label and the bar")
+	assert_eq((g.get_child(3) as ColorRect).color, WorldView.BAR_LOW_FILL)
+	gs.npcs.npcs["guard"]["hp"] = 0
+	gs.npcs.npcs["guard"]["down"] = true
+	v.refresh(gs)
+	g = v.npcs.get_node("guard")
+	assert_eq((g.get_child(1) as Label).text, "Guard (down)")
+	assert_almost_eq((g.get_child(0) as ColorRect).color.a, WorldView.DOWN_ALPHA, 0.001)
+
+
+func test_hud_counts_the_foes_left_in_a_staged_fight() -> void:
+	var real := DataDb.load_dir()
+	var gs := GameState.new_game(1, real)
+	gs.combat.stage_run = {"event": "b1.klbkch_dies_defending_erin", "start": 0, "next": 0}
+	var waves: Array = real.canon.events["b1.klbkch_dies_defending_erin"]["stage"].get("waves", [])
+	var total := 0
+	for w: Dictionary in waves:
+		total += (w.get("foes", []) as Array).size()
+	assert_eq(Hud.health(gs, real), "HP 20/20 · Held: nothing · Foes left: %d" % total)
