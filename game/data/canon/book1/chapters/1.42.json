@@ -22,7 +22,7 @@
 					{"from": "pawn", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "The day after the skeleton. Erin wakes at [Innkeeper] Level 12. She pays with meals for the four days left in the week. Delta is a design value."},
 			"summary": "The skeleton fetches water and fruit and startles Erin all morning. Pawn and two Workers come to play chess; he says the Queen is busy with something below and a new Prognugator walks above. For a week of meals they spend the day building Erin a sturdy outhouse."
 		},
@@ -83,7 +83,7 @@
 					"news": "Three Human adventurers attacked the Goblins at the inn on the hill. A Human guest there fought on the Goblins' side, and Gazi of Reim sent the three running."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "That evening, as the sun meets the mountains; Gazi leaves ten minutes before. The Goblins cut the men's potion bags while they are down. Deltas are design values."},
 			"summary": "Three Human adventurers see Rags's Goblins and go for them. The skeleton, the Goblins, Pawn's Workers and Erin fight back; Erin fells the last with a thrown frying pan. They threaten to bring a mob, until Gazi returns and scares them off in the name of Reim. Half the furniture is kindling."
 		},
@@ -103,7 +103,7 @@
 			"effects": {
 				"set_flags": ["gazi.chose_erin", "gazi.chose_pisces", "gazi.knows_thief_is_princess", "gazi.protects_the_inn", "liscor.winter_coming"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "Walking back to Liscor that night. She sees Erin's [Immortal Moment] and that the market thief is a [Princess]. A cold front will freeze the land for at least a week."},
 			"summary": "Gazi judges both worthy of waking her sleeping King: Erin, who defends Goblins against her own kind and has a Skill Gazi has never seen, and Pisces, who made an undead that levels. She will wait and watch. Krshia's Gnolls tail her. She sees the market thief is a mere [Princess]."
 		}

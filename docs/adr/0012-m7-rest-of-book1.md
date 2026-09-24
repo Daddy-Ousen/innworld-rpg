@@ -44,15 +44,15 @@ Data only. No schema change, no save version change.
 - The raiders' name labels overlap at the door.
 
 ## M7.2 Canon 1.35R–1.44R (days 24–33)
-Status: events are `candidate` until the user reviews them. No schema change, no save version change.
+Status: accepted; events reviewed by the user 2026-09-24 (timeline, Relc and the brawl hook as proposed). No schema change, no save version change.
 
 **Timeline (all guesses).** Pisces answers Ceria on day 23 or 24 (1.34); the Horns leave Celum that night, Ryoka has a fever for two days, and they reach the inn on day 25. Day 25 also holds 1.36–1.38 on Erin's side: the Shield Spider nest, Gazi, the Guild, Lism, the Titan's puzzle and Relc at the inn. 1.41 is days 26 (ruins) and 27 (bounty paid, inn ransacked, acid for Rags, the skeleton). 1.42 is day 28. Ryoka is back in Celum on day 27, is shut out for four days, and runs the High Passes on day 30 (1.39R, 1.40R, 1.43R). 1.44R is day 33, some days after the geas.
 
 **24 events**, all `candidate`, in 10 new chapter files.
-- New NPCs: `gazi_pathseeker`, `ksmvr`, `toren` (the skeleton; named Toren in 1.46, so the id already uses it), `princess_thief` (never named in Book 1) and `theofore`.
-- New locations: `shield_spider_nest`, `krakk_forest` and `esthelm`.
+- New NPCs: `gazi_pathseeker`, `teriarch`, `ksmvr`, `toren` (the skeleton; named Toren in 1.46, so the id already uses it), `princess_thief` (never named in Book 1) and `theofore`.
+- New locations: `shield_spider_nest`, `krakk_forest`, `esthelm` and `teriarch_cave`.
 - The 1.44R Celum bully (Arnel), the traders Goeln and Cervial, Pestrom and Ylss are not NPCs: they appear once. Arnel is an anonymous `adventurer` role.
-- **Teriarch (to review).** `cave_dragon` is renamed Teriarch, and `dragon_backup_lair` is his 1.40R cave. The text never says the 1.00 Dragon and Teriarch are the same Dragon (confidence `likely`). Both entries go back to `candidate`.
+- **Teriarch (user, 2026-09-24).** It is not confirmed that Teriarch is the Dragon of 1.00. So `teriarch` is his own NPC with his own cave `teriarch_cave`; `cave_dragon` and `dragon_backup_lair` are unchanged. Link them only when the text says so.
 - The new ruins near Liscor in 1.41 are the existing `liscor_dungeon` (ten miles out), not `ruins_of_albez` (1.26R, far north).
 - `relc.ignores_erin` is cleared on day 25, but `relc.blames_erin` stays set. So Relc does not visit the inn every evening yet: canon does not show it, and he would win the day-28 brawl alone.
 

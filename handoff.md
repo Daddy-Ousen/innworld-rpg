@@ -1,24 +1,21 @@
 # Handoff
 
 ## Just done (2026-09-24, branch `data/book1-1.35-1.44`, M7.2 canon 1.35R–1.44R)
-PR #20 (M7.B) was already merged by the user. Tag `m7b-done` is on 1376815 and pushed.
-M7.2 is built and tested. The events are `candidate`, waiting for the user's review. The branch is not pushed yet, and there is no PR yet.
+PR #20 (M7.B) was merged by the user; tag `m7b-done` is on 1376815 and pushed.
+M7.2 is done and reviewed by the user (2026-09-24). The PR is open (see progress.md / `gh pr list`).
+Review answers: timeline, Relc (no evening visits yet) and the brawl hook as proposed. Teriarch is NOT confirmed to be the 1.00 Dragon, so `teriarch` and `teriarch_cave` are separate entries; `cave_dragon` and `dragon_backup_lair` are unchanged.
 
 Commits on the branch:
-- `ea32938` fix(core): indoors, a fleeing monster walks to the nearest exit. Before, fleeing foes got stuck in the inn's corners and the fight never ended (the day-21 raid had this too).
-- `3cc1f83` data(book1): 24 events in 10 chapter files (days 24–33), 5 NPCs, 3 locations, 2 stage-only enemies, the `toren` behaviour, the inn brawl stage + hook, and tests.
-- A docs commit: ADR 0012 M7.2 section, ROADMAP, progress, handoff.
+- `ea32938` fix(core): indoors, a fleeing monster walks to the nearest exit (the inn corners trapped them; the day-21 raid too).
+- `3cc1f83` data(book1): 24 events in 10 chapter files (days 24–33), NPCs, locations, 2 stage-only enemies, `toren` behaviour, the inn brawl stage + hook, tests.
+- Docs commit, then the review commit (Teriarch split, all M7.2 entries `reviewed`, docs).
 
 Tests: GUT 478/478 (50 scripts), Python 39, validator 0 errors. `sim_canon_book1` LAST_DAY 33, drift 0.
-Screenshot (scratch scene, deleted): day 28 at 19:00, three adventurers at the door, Rags, two Goblins, Pawn, the skeleton and Erin fight; "Foes left: 3".
 
-## Waiting on the user (review questions)
-1. Teriarch: `cave_dragon` is renamed Teriarch and `dragon_backup_lair` is his 1.40R cave. The book never says outright that he is the 1.00 Dragon (my pick: yes, confidence `likely`).
-2. Timeline guesses: Ryoka's leg mended and Erin's spider nest on day 25; the skeleton on day 27; the brawl on day 28; the High Passes on day 30; the Celum brawl on day 33.
-3. Relc: he makes peace on day 25 (`relc.ignores_erin` cleared), but `relc.blames_erin` stays, so he does not visit every evening yet (else he would win the day-28 brawl alone).
-4. The brawl hook: a won fight gives Rags → player +2, Erin +1, Pawn +1 and the flag `wandering_inn.earther_defended_goblins`. The canon event still runs (a `change`).
-After review: flip the 24 events and the changed entries (NPCs, locations, `cave_dragon`, `dragon_backup_lair`) to `reviewed`, rerun the validator and tests, push, open the PR, then tag `m7.2-done` after the merge.
-Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, and now `[Loud Voice]`.
+## Waiting on the user
+- Review and merge the M7.2 PR, then tag `m7.2-done`.
+- Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
+- Note: 1.16.json still has one old `candidate` event from M6.4 (not part of M7.2; left as is).
 
 ## Next
 - M7.3: canon 1.45–1.54. Read every chapter first. Toren is named in 1.46. Winter comes (`liscor.winter_coming`). Ryoka heads to Esthelm; the Horns go for the Liscor ruins (`liscor_dungeon`).
@@ -54,6 +51,7 @@ Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detec
 - `sim_m5_done` depends on the seed (2). If spawn data or monster AI change, it may need a new seed.
 - On day 8 the inn's canon location name is "The abandoned inn on the hill". From day 13 the flag `wandering_inn.named` is set; the name field does not change.
 - Canon JSON files are LF. Director: an event fires on the first day of its window when its conditions hold; an anonymous role (`prefer: []`) always fills; a dead NPC in `requires.alive` is a hard fail (no substitute), so leave an NPC out of `alive` if a stand-in may take the role.
+- Never link two canon entities (e.g. the 1.00 Dragon and Teriarch) unless the text says so (user rule).
 - Canon review flow: write events as `candidate`, run the validator (it also checks 7-word copies against `canon/raw`), user reviews, then flip to `reviewed`. Summaries and stage notes are at most 300 characters.
 - `SystemDialog` buttons connect deferred; tests call `dialog.choose(...)` directly.
 - **M6.4 hooks:** action records keep `context`; hooks match on it (`Director.did`). The log keeps 7 days only, so hook `days` span ≤ 7 (validator error).

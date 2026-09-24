@@ -17,7 +17,7 @@
 			"effects": {
 				"set_flags": ["rags.chieftain", "goblin_tribe.civil_war"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "The Horns see two Goblin bands fighting on the Floodplains on the day they reach the inn (1.35R): a small one in formation under a small leader, a bigger one without. That this is Rags is likely."},
 			"summary": "With the Chieftain dead the tribe splits. Rags, now a [Chieftain], leads the smaller band that will not eat every Human on sight, fighting the larger one while she feeds her Goblins on blue fruit, eggs, fish and Erin's meals. Winter is near and food is short."
 		},
@@ -36,7 +36,7 @@
 				"set_flags": ["erin.saw_the_ruins", "liscor_dungeon.tent_city"]
 			},
 			"news": "About a hundred adventurers camp by the new ruins ten miles out. The teams that went deepest came back as walking dead, or not at all.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "The first of Erin's two days out after 1.38. The ruins are those of 1.23A-1.24, ten miles from Liscor."},
 			"summary": "Selys lectures Erin about fighting monsters alone, takes her to a bathhouse and for clothes, then to the ruins. A tent city of mostly Human Silver- and Bronze-ranks rings a vast dug-out pit and a black stone door. Few dare dig far: rats, spiders and the undead wait inside."
 		},
@@ -54,7 +54,7 @@
 			"effects": {
 				"set_flags": ["wandering_inn.ransacked", "erin.wants_protection", "erin.spider_bounty_paid"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "likely", "note": "The second day. Erin collects just over eleven gold for the spiders, then finds the inn trashed at lunch. The text does not name the thief; the stranded [Princess] is likely."},
 			"summary": "Erin collects just over eleven gold for the spiders and comes home to a trashed kitchen. Someone took food, her hidden gold and silver, even her toothbrush. Furious, she wants protection, but Liscor's adventurers ask eight silver a day each."
 		},
@@ -76,7 +76,7 @@
 					{"from": "rags", "to": "erin_solstice", "delta": 1}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Same afternoon. Selys spars with Erin on the Watch training ground on the way; she wears steel claws. Delta is a design value."},
 			"summary": "Erin buys a shortsword and a buckler to hire Rags's Goblins as guards, after a spar where she kicks Selys flat. Rags signs that her band is too small to hold the inn. She takes the gear on her tab and buys all of Erin's Acid Fly acid in jars instead."
 		},
@@ -95,7 +95,7 @@
 			"effects": {
 				"set_flags": ["wandering_inn.has_skeleton", "pisces.tab_paid", "wandering_inn.upstairs_clean", "pisces.made_leveling_undead"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "That evening. The skeleton's bones are not quite Human. Erin names it Toren in 1.46."},
 			"summary": "A skeleton knocks until Erin opens the door. Pisces drops his invisibility: it is his payment for the tab, a guard that obeys only her. Erin punches him, finds it cannot hold a sword it does not have, and sets it to scrub the filthy upper floor. It becomes a Level 1 [Skeleton Warrior]."
 		}

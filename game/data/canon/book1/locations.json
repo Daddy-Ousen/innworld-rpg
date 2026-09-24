@@ -112,11 +112,11 @@
 		"dragon_backup_lair": {
 			"name": "The Dragon's backup lair",
 			"kind": "wild",
-			"parent": "high_passes",
+			"parent": null,
 			"tags": ["cave", "lair", "dragon", "hoard"],
-			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "likely", "note": "He dislikes its neighbours. That it is Teriarch's cave of 1.40R (a Runner request marks it with a yellow banner) is likely, not stated."},
-			"summary": "Emergency lair the Dragon teleports to with his hoard. Harder to reach and more dangerous for visitors. Likely the huge hall behind a yellow banner off the High Passes road, full of books, arms and magic, with Gargoyles nearby (1.40R)."
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Location unknown. He dislikes its neighbours."},
+			"summary": "Emergency lair the Dragon teleports to with his hoard. Harder to reach and more dangerous for visitors."
 		},
 		"pallass": {
 			"name": "Pallass",
@@ -348,7 +348,7 @@
 			"kind": "wild",
 			"parent": "floodplains_of_liscor",
 			"tags": ["nest", "spiders", "pit", "danger"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "About a mile from the Krakk trees; direction from the inn not given. Burned out on day 25 (guess)."},
 			"summary": "Huge pit under a false cover of dead grass, full of armoured Shield Spiders and egg sacs, with side tunnels. Steel cannot crack the adults; a nest is a Gold-rank job."
 		},
@@ -357,7 +357,7 @@
 			"kind": "wild",
 			"parent": "floodplains_of_liscor",
 			"tags": ["trees", "firewood", "danger"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "About forty minutes' walk from the inn."},
 			"summary": "Rare stand of bare, pale-barked trees on the Floodplains. A hard knock makes a Krakk tree burst and spray its branches like shrapnel. Once burst, the wood is safe and burns well."
 		},
@@ -366,9 +366,18 @@
 			"kind": "settlement",
 			"parent": "high_passes",
 			"tags": ["city", "human", "mentioned"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Also named in 1.37 (ore from Esthelm) and 1.44R (about sixty miles south of Celum, near the road to Liscor)."},
 			"summary": "One of the two cities on the safe road through the High Passes, with Liscor. Ships ore south. The Horns of Hammerad gather there before they try the ruins near Liscor."
+		},
+		"teriarch_cave": {
+			"name": "Teriarch's cave",
+			"kind": "wild",
+			"parent": "high_passes",
+			"tags": ["cave", "lair", "dragon", "hoard"],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Off the rough road through the High Passes; a yellow banner marks it for the Runner request. Whether it is the Dragon's backup lair of 1.01 is not confirmed."},
+			"summary": "Cave mouth big enough for a ship, opening into a hollowed mountain full of books, arms, tapestries, magic items and an alchemy lab. Gargoyles, Carn Wolves and killer goats live nearby, but none follow a visitor inside."
 		}
 	}
 }

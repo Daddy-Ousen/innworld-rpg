@@ -17,8 +17,8 @@ func before_all() -> void:
 func test_canon_loads_without_errors() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_gte(_db.canon.events.size(), 106)
-	assert_gte(_db.canon.npcs.size(), 43)
-	assert_gte(_db.canon.locations.size(), 41)
+	assert_gte(_db.canon.npcs.size(), 44)
+	assert_gte(_db.canon.locations.size(), 42)
 
 
 func test_new_game_starts_after_the_great_ritual() -> void:
@@ -149,7 +149,8 @@ func test_ryoka_meets_the_dragon_and_slips_away_from_magnolia() -> void:
 	assert_eq(int(gs.world.events["b1.ryoka_takes_the_high_passes_request"]["day"]), 30)
 	assert_eq(gs.world.status("b1.teriarch_lays_a_geas_on_ryoka"), Director.DONE)
 	assert_eq(gs.world.status("b1.ryoka_slips_away_from_magnolia"), Director.DONE)
-	assert_eq(_db.canon.npcs["cave_dragon"]["name"], "Teriarch")
+	assert_eq(gs.world.events["b1.teriarch_lays_a_geas_on_ryoka"]["roles"]["dragon"], "teriarch")
+	assert_eq(_db.canon.npcs["cave_dragon"]["name"], "The Dragon", "not confirmed to be Teriarch")
 	assert_true(gs.flags.has("ryoka.geas_to_find_azkerash"))
 	assert_true(gs.flags.has("ryoka.bound_for_esthelm"))
 	assert_false(gs.flags.has("ryoka.blocked_by_guilds"), "the Guilds let her work again")

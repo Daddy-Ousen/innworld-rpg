@@ -14,16 +14,16 @@
 			"summary": "20-year-old from Grand Rapids, Michigan. Loves chess, shogi and go; wants to be a board game commentator. Arrives on day 1 with no class and no gear; talks to herself; stubborn and kind."
 		},
 		"cave_dragon": {
-			"name": "Teriarch",
+			"name": "The Dragon",
 			"race": "Dragon",
 			"tags": ["dragon", "ancient", "mage", "recluse"],
 			"faction": null,
 			"home": "dragon_cave_lair",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
-			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "likely", "note": "Unnamed in 1.00-1.09. Dragons cannot level (1.06). Named Teriarch in 1.43R. That the 1.40R Dragon is the 1.00 Dragon is likely, not stated: both sleep in a High Passes lair and use teleport magic."},
-			"summary": "Old, tired Dragon who sleeps for years behind hundreds of wards. Fears assassins. Breathes violet fire, uses [Message] and teleport magic. Keeps old social duties, one every 200 years. Shows himself as a tall old half-Elf mage; knows Magnolia Reinhart."
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Unnamed in 1.00-1.09. Dragons cannot level (1.06)."},
+			"summary": "Old, tired Dragon who sleeps for years behind hundreds of wards. Fears assassins. Breathes violet fire, uses [Message] and teleport magic. Keeps old social duties, one every 200 years."
 		},
 		"rags": {
 			"name": "Rags",
@@ -465,7 +465,7 @@
 			"home": "liscor",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "Also called Gazi of Reim and Gazi the Omniscient (1.37). Rumored above Level 40. Takes lodgings in Liscor."},
 			"summary": "Half-Gazer from Chandrar with one great eye and four small ones that see levels, names and through walls. Named-rank adventurer in rust-coloured armour with a huge sword; one of the King of Destruction's Seven. Wanders Izril looking for people worthy to wake her King."
 		},
@@ -477,7 +477,7 @@
 			"home": "liscor_hive",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.37", "confidence": "confirmed", "note": "Named by the Queen at the end of 1.37. Workers have not seen him yet (1.42)."},
 			"summary": "The Free Queen's new Prognugator after Klbkch. Carries twin swords. Deals with the Liscor Council for her and hunts Aberrations; she tells him to judge whether the Worker who calls himself an individual should live."
 		},
@@ -489,7 +489,7 @@
 			"home": "wandering_inn",
 			"classes": [{"name": "[Skeleton Warrior]", "level": 2}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46 (next batch); the id already uses that name."},
 			"summary": "Undead skeleton Pisces makes to guard Erin and pay his tab. It obeys only her, is weaker than she is, and cleans the whole upper floor in one night. No skeleton should level, but it is a Level 1, then Level 2, [Skeleton Warrior]."
 		},
@@ -501,7 +501,7 @@
 			"home": "liscor",
 			"classes": [{"name": "[Princess]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.38", "confidence": "confirmed", "note": "Not named in 1.38-1.44R. Gazi sees her class in 1.42. That she ransacked the inn (1.41) is likely, not stated."},
 			"summary": "Proud Human girl who took the wrong caravan south and is stranded in Liscor. She steals food and coin from Market Street stalls, sure it is her due, and means to reach Celum and Lady Magnolia Reinhart."
 		},
@@ -513,9 +513,21 @@
 			"home": "celum",
 			"classes": [{"name": "[Assassin]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Race not stated; he looks like a plain man."},
 			"summary": "Forgettable-looking [Assassin] Magnolia hires to guard Ryoka from other people. His team loses her to the High Passes and to Carn Wolves; later she kicks his leg on a Celum roof and escapes him across the rooftops."
+		},
+		"teriarch": {
+			"name": "Teriarch",
+			"race": "Dragon",
+			"tags": ["dragon", "ancient", "mage", "recluse", "illusion"],
+			"faction": null,
+			"home": "teriarch_cave",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Named in 1.43R. Whether he is the Dragon of 1.00 (cave_dragon) is not confirmed (user, 2026-09-24); keep them apart until the text says so."},
+			"summary": "Golden Dragon who sleeps in a vast hoard-cave in the High Passes and shows himself as a tall old half-Elf mage. Clumsy, proud and out of touch with the world. Knows Magnolia Reinhart and owes a duty to the Necromancer Perril Chandler."
 		}
 	}
 }

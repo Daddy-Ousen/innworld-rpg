@@ -22,7 +22,7 @@
 				"set_flags": ["ryoka.blocked_by_guilds", "runners.overworked_for_magnolia", "persua.demoted_to_street_runner", "runners.high_passes_request_open"]
 			},
 			"rumor": "Runners from Celum to Wales say Lady Reinhart takes no deliveries until one barefoot Runner brings her one herself, and they all work double till then.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.39R", "confidence": "likely", "note": "Ryoka is back in Celum after the thirty-mile run and a wagon ride, then rests two days. Persua is already a Street Runner. Days are guesses."},
 			"summary": "Back in Celum, Ryoka enjoys Persua's fall to Street Runner. But every Guild she tries, in three cities, offers her only deliveries to Magnolia, and the other Runners take every other request, working to exhaustion. Fals says a third Runner died on an open High Passes request."
 		},
@@ -51,7 +51,7 @@
 				]
 			},
 			"rumor": "A barefoot Runner took the High Passes request that has killed three Runners, and called the whole Celum Guild cowards on her way out.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.39R", "confidence": "confirmed", "note": "'It's been four days', at midday. Who swapped the potions is not said. The day is a guess. Deltas are design values."},
 			"summary": "After four days shut out, Ryoka tells Fals his team talk is a lie and takes the eighty-gold High Passes request. Ceria lends her potions, but half turn out to be mana potions. Sostrom's [Repair] brings her phone back to life, and she runs out of Celum to her music, leaving the Runners behind."
 		}

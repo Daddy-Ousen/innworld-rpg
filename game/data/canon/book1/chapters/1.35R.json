@@ -28,7 +28,7 @@
 				]
 			},
 			"news": "A wagon of Human adventurers stopped on the inn's hill. A mage there set a Runner's shattered leg in moments, and she ran off north.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.35R", "confidence": "confirmed", "note": "Day is a guess: they leave Celum the night Pisces answers Ceria (1.34, day 23 or 24), Ryoka has a fever for two days, and they reach the inn on the third day. Erin is out exploring (1.36). The wound is cleaned and healed in 1.36. Deltas are design values."},
 			"summary": "The Horns of Hammerad drive the feverish Ryoka south in a fast wagon, numbed by a spell. Pisces meets them outside the empty inn. Ceria haggles him to forty gold. He knits every splinter of bone in seconds with necromancy. Ryoka, whole again, thanks them all and means it."
 		}

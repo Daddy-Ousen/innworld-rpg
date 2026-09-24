@@ -21,7 +21,7 @@
 				]
 			},
 			"news": "A barefoot Human Runner raced Senior Guardsman Relc on the north road and left him far behind. The Watch will not let him forget it.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "Same day as the healing. She then runs about thirty miles before the Horns pick her up (1.39R). Delta is a design value."},
 			"summary": "Leg healed, Ryoka cartwheels in joy and sets off north on foot, the Horns' wagon following. On the road a big Drake guard with a spear races her for show. He nearly keeps up in armour, then she speeds away. Relc gives up, stunned, and wonders if Erin knows her."
 		},
@@ -40,7 +40,7 @@
 				"set_flags": ["erin.burned_shield_spider_nest", "erin.knows_krakk_trees", "erin.killed_to_prove_herself", "floodplains.spider_nest_gone"]
 			},
 			"news": "Black smoke rose over the Floodplains all afternoon. Someone set a Shield Spider nest on fire.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.36", "confidence": "confirmed", "note": "Same day as 1.35R: the Horns smell the smoke an hour after they leave. Gazi reads Erin as a Level 11 [Innkeeper] with [Lesser Strength]."},
 			"summary": "Erin goes exploring alone with a rock, a knife, a potion and a jar of acid. A Krakk tree bursts and cuts her cheek. A Shield Spider hunts her to a hidden nest pit. She beats it with bare hands, then burns the whole nest with the burst wood. She weeps for the young and calls herself a killer."
 		}
