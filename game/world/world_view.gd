@@ -5,7 +5,8 @@
 ## Big battles (M7.B, ADR 0013): every monster and every hurt NPC has a small
 ## HP bar; with more than LABEL_ALL_UP_TO monsters, only the most dangerous
 ## foe, the helpers and the LABEL_NEAREST foes nearest the player keep their
-## label. A helper has a blue edge; a fallen NPC is faded, "(down)".
+## label, and a label that would overlap another is left out (see
+## labelled). A helper has a blue edge; a fallen NPC is faded, "(down)".
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -33,6 +34,8 @@ const BAR_LOW := 0.34
 ## Up to this many monsters on screen: all keep their labels.
 const LABEL_ALL_UP_TO := 4
 const LABEL_NEAREST := 3
+## Two labels on the same row closer than this many tiles would overlap.
+const LABEL_GAP := 3
 const DOWN_ALPHA := 0.35
 const CALM_EDGE := Color(0, 0, 0, 0.6)
 ## A dark ring between the edge and the body, so a green Goblin stands out on grass.
@@ -213,43 +216,59 @@ func _show_monsters(gs: GameState) -> void:
 		monsters.add_child(marker)
 
 
-## Ids of the monsters in the player's area that keep their label: all of
-## them up to LABEL_ALL_UP_TO seen monsters; else the helpers, the most
-## dangerous foe (lowest id on a tie) and the LABEL_NEAREST foes nearest
-## the player (king moves, then id).
+## Ids of the monsters in the player's area that keep their label. In
+## order: the most dangerous foe (lowest id on a tie), the helpers, then the
+## foes nearest the player (king moves, then id; with more than
+## LABEL_ALL_UP_TO seen monsters, at most LABEL_NEAREST of them). A label is
+## left out if it would overlap one already shown: an NPC's name or an
+## earlier monster label on the same row within LABEL_GAP tiles.
 static func labelled(gs: GameState, enemy_defs: Dictionary) -> Dictionary:
-	var out := {}
 	var seen: Array[String] = []
 	for id in gs.combat.ids():
 		var m: Dictionary = gs.combat.monsters[id]
 		if m["area"] == gs.player.area and m["state"] != CombatState.HIDDEN:
 			seen.append(id)
-	if seen.size() <= LABEL_ALL_UP_TO:
-		for id in seen:
-			out[id] = true
-		return out
 	var foes: Array[String] = []
+	var helpers: Array[String] = []
 	var top := ""
 	var top_danger := 0.0
 	for id in seen:
 		var m: Dictionary = gs.combat.monsters[id]
 		if m["state"] == CombatState.ALLY:
-			out[id] = true
+			helpers.append(id)
 			continue
-		foes.append(id)
 		var d := float(enemy_defs.get(m["type"], {}).get("danger", 0.0))
 		if top == "" or d > top_danger:
 			top = id
 			top_danger = d
-	if top != "":
-		out[top] = true
+		foes.append(id)
 	var you := gs.player.pos()
+	foes.erase(top)
 	foes.sort_custom(func(a: String, b: String) -> bool:
 		var da := _king(you, CombatState.pos_of(gs.combat.monsters[a]))
-		var db := _king(you, CombatState.pos_of(gs.combat.monsters[b]))
-		return da < db or (da == db and a.substr(1).to_int() < b.substr(1).to_int()))
-	for i in mini(LABEL_NEAREST, foes.size()):
-		out[foes[i]] = true
+		var dbb := _king(you, CombatState.pos_of(gs.combat.monsters[b]))
+		return da < dbb or (da == dbb and a.substr(1).to_int() < b.substr(1).to_int()))
+	var shown: Array[Vector2i] = []
+	for nid in gs.npcs.in_area(gs.player.area):
+		shown.append(NpcRoster.pos_of(gs.npcs.npcs[nid]))
+	var out := {}
+	var order: Array[String] = []
+	if top != "":
+		order.append(top)
+	order.append_array(helpers)
+	var cap := foes.size() if seen.size() <= LABEL_ALL_UP_TO else LABEL_NEAREST
+	var plain := 0
+	for id in order + foes:
+		var is_plain := id != top and not helpers.has(id)
+		if is_plain and plain >= cap:
+			break
+		var at := CombatState.pos_of(gs.combat.monsters[id])
+		if shown.any(func(p: Vector2i) -> bool: return p.y == at.y and absi(p.x - at.x) <= LABEL_GAP):
+			continue
+		shown.append(at)
+		out[id] = true
+		if is_plain:
+			plain += 1
 	return out
 
 

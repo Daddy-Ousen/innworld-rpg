@@ -372,11 +372,12 @@ func test_big_fights_label_few_monsters_and_show_bars() -> void:
 	var boss := ToyCombat.spawn(gs, d, "crab", Vector2i(12, 7), CombatState.IDLE)
 	var helper := ToyCombat.spawn(gs, d, "goblin", Vector2i(1, 4), CombatState.ALLY)
 	var named := WorldView.labelled(gs, d.combat.enemies)
-	assert_eq(named.size(), 5, "the crab (most dangerous), the helper and the 3 nearest goblins")
+	assert_eq(named.size(), 4, "the crab (most dangerous), the helper and 2 goblins whose labels fit")
 	assert_true(named.has(boss))
 	assert_true(named.has(helper))
-	for id in gobs.slice(0, 3):
-		assert_true(named.has(id), id)
+	assert_true(named.has(gobs[0]), "the nearest goblin, at 3,1")
+	assert_false(named.has(gobs[1]), "4,1: too close to the label at 3,1")
+	assert_true(named.has(gobs[4]), "7,1: far enough from 3,1")
 	v.refresh(gs)
 	var far: Node2D = v.monsters.get_node(gobs[7])
 	for child in far.get_children():
