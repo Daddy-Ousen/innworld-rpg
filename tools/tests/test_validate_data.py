@@ -284,6 +284,42 @@ class ValidateTest(unittest.TestCase):
         self.assertError(rep, ".news: copies book text")
         self.assertError(rep, "hooks[0].news: copies book text")
 
+    def test_a_hook_may_change_how_an_npc_sees_the_player(self):
+        self.ev()["hooks"] = [self.hook(effects={"relationship": [{"from": "alice", "to": "player", "delta": 2}]})]
+        self.assertEqual(self.fx.run().errors, [])
+        self.ev()["effects"]["relationship"] = [{"from": "alice", "to": "player", "delta": 2}]
+        self.assertError(self.fx.run(), "unknown npc 'player'")
+
+    # --- M6.5 stages
+
+    def stage(self, **over):
+        st = {"area": "hut_inside", "hours": [9, 12], "foes": [{"enemy": "rat", "pos": [2, 3]}],
+              "when_flags": ["hut.rats_near"], "allies": ["bob"], "line": "A rat runs in.",
+              "note": "Design guess."}
+        st.update(over)
+        return st
+
+    def test_a_stage_passes(self):
+        self.ev()["stage"] = self.stage()
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_stage_shape_errors(self):
+        self.ev()["stage"] = self.stage(hours=[12, 12], foes=[{"enemy": "rat"}], allies=["zed"],
+                                        unless_flags="nope")
+        rep = self.fx.run()
+        self.assertError(rep, "stage.hours")
+        self.assertError(rep, "stage.foes[0]")
+        self.assertError(rep, "stage.allies: unknown npc 'zed'")
+        self.assertError(rep, "stage.unless_flags")
+        self.ev()["stage"] = {"area": "hut_inside", "hours": [9, 12], "foes": [], "boss": True}
+        rep = self.fx.run()
+        self.assertError(rep, "stage.foes")
+        self.assertError(rep, "boss")
+
+    def test_stage_line_copy_check(self):
+        self.ev()["stage"] = self.stage(line="Here the quick brown fox jumps over the lazy dog again.")
+        self.assertError(self.fx.run(with_raw=True), "stage.line: copies book text")
+
     def test_cli_exit_codes(self):
         self.fx.write()
         self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 0)
