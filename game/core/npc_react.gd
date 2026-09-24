@@ -3,7 +3,8 @@
 ## following their goals:
 ##   - a fighter (an NPC with a rules.npc.react.fight_tags tag, or an ally
 ##     of the stage of a monster in the area) walks to the nearest hostile
-##     monster within help_radius and hits it when side by side;
+##     monster within help_radius (a stage ally: its stage's monsters at
+##     any distance) and hits it when side by side;
 ##   - any other NPC within flee_radius of a hostile monster steps away from
 ##     it; the rest stand still until the danger is over.
 ## A fighter with no monster in reach follows its goal. NPCs have no hit
@@ -25,7 +26,7 @@ static func active(gs: GameState) -> bool:
 static func act(gs: GameState, db: DataDb, id: String, n: Dictionary, dt: int) -> bool:
 	var rules: Dictionary = db.rules["npc"]["react"]
 	var fighter := is_fighter(gs, db, id)
-	if fighter and target(gs, db, n).is_empty():
+	if fighter and target(gs, db, id, n).is_empty():
 		return false
 	var step := int(rules["act_seconds"])
 	n["carry"] = int(n["carry"]) + dt
@@ -35,7 +36,7 @@ static func act(gs: GameState, db: DataDb, id: String, n: Dictionary, dt: int) -
 			break
 		n["carry"] = int(n["carry"]) - step
 		if fighter:
-			var foe := target(gs, db, n)
+			var foe := target(gs, db, id, n)
 			if foe.is_empty():
 				n["carry"] = 0
 				return false
@@ -62,9 +63,10 @@ static func is_ally(gs: GameState, db: DataDb, id: String) -> bool:
 	return false
 
 
-## The hostile monster the fighter `n` goes for: the nearest within
-## help_radius (king moves), ties to the lower id. "" if none.
-static func target(gs: GameState, db: DataDb, n: Dictionary) -> String:
+## The hostile monster the fighter `id` (its roster entry `n`) goes for:
+## the nearest within help_radius (king moves), or of a stage it is an ally
+## of; ties to the lower id. "" if none.
+static func target(gs: GameState, db: DataDb, id: String, n: Dictionary) -> String:
 	var radius := int(db.rules["npc"]["react"]["help_radius"])
 	var pos := NpcRoster.pos_of(n)
 	var best := ""
@@ -74,7 +76,7 @@ static func target(gs: GameState, db: DataDb, n: Dictionary) -> String:
 		if m["area"] != n["area"]:
 			continue
 		var d := _dist(pos, CombatState.pos_of(m))
-		if d <= radius and (best == "" or d < best_d):
+		if (d <= radius or Stage.allies_of(db, m).has(id)) and (best == "" or d < best_d):
 			best = mid
 			best_d = d
 	return best

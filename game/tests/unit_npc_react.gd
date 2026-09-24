@@ -127,3 +127,20 @@ func test_a_fighter_with_no_monster_in_reach_keeps_its_goal() -> void:
 	_wait(gs, 3)
 	assert_ne(ToyNpcs.pos(gs, "guard"), Vector2i(1, 1), "the guard walks its patrol")
 	_db.rules["npc"]["react"]["help_radius"] = 8
+
+
+func test_a_stage_ally_comes_from_across_the_area() -> void:
+	_db.rules["npc"]["react"]["help_radius"] = 1
+	var gs := ToyNpcs.new_game(_db)
+	gs.player.place("field", Vector2i(0, 2))
+	Commands.settle(gs, _db)
+	var gob := ToyCombat.spawn(gs, _db, "goblin", Vector2i(3, 2))
+	var n: Dictionary = gs.npcs.npcs["farmer"]
+	n["x"] = 0
+	n["y"] = 0
+	assert_eq(NpcReact.target(gs, _db, "farmer", n), "", "a plain Goblin: out of reach")
+	gs.combat.monsters[gob]["stage"] = "e.ambush"
+	_db.canon = CanonDb.from_dicts(ToyNpcs.npcs(), ToyMaps.locations(), {"e.ambush": ToyCanon.event(1, 1,
+			{"stage": {"area": "field", "hours": [6, 12], "foes": [{"enemy": "goblin", "pos": [3, 2]}],
+				"allies": ["farmer"]}})})
+	assert_eq(NpcReact.target(gs, _db, "farmer", n), gob, "its stage's foe: at any distance")
