@@ -28,7 +28,7 @@
 - [x] M6 — Vertical slice (done 2026-09-24, PR #17 merged, tags `m6.5-done` and `m6-done` on merge commit 666dd90; 5 sub-modules, see ROADMAP and ADR 0011)
 - [ ] M7 — Rest of Book 1 (plan approved 2026-09-24; 4 canon batches, see ROADMAP and ADR 0012)
   - [x] M7.1 Canon 1.26R–1.34 (branch `data/book1-1.26-1.34`): 19 events (days 15–23), 11 new NPCs, 8 new locations, reviewed by user 2026-09-24. PR #18 merged, tag `m7.1-done`. Review answers applied: guilds in Remendia/Wales/Celum are all correct; Lich run + crushed leg on day 15 ("a week ago"); raiders' grave several hundred feet away. The Goblin raid on day 21 (`b1.klbkch_dies_defending_erin`) is a canon stage in the inn (12–14, raid leader + 5 Goblins, Erin fights) with a `change` hook; Klbkch still dies (user choice). New enemy `goblin_raid_leader`, spawn `crab_hill_unpatrolled` (after the Watch leaves), Pawn visits the inn, Relc stays away. Validator 0 errors. `sim_canon_book1` LAST_DAY 23, drift 0; new `sim_goblin_raid`. GUT 447/447 (47 scripts), Python 36. Checked on screen.
-  - [ ] M7.B Big battles (plan approved 2026-09-24, branch `feat/m7b-battles`): NPC HP (down, not dead; only the director kills), monsters fight allies, stage waves, allies pulled in, helpers, HP bars; raid remade with 40 Goblins; save v9.
+  - [x] M7.B Big battles (plan approved 2026-09-24, branch `feat/m7b-battles`): NPC HP (down, not dead; only the director kills), monsters go for the nearest of player / fighting NPC / helper, helpers (state `ally`), stage waves (`stage.waves`, `max_on_map` 12), allies pulled in from other areas, HP bars, labels without overlap, "Foes left"; raid remade as 40 Goblins in 4 waves (Klbkch wave 2, Rags + 3 helpers wave 3); save v9. ADR 0013. GUT 468/468 (49 scripts), Python 39, validator 0 errors. Checked on screen. PR open.
   - [ ] M7.2 Canon 1.35R–1.44R
   - [ ] M7.3 Canon 1.45–1.54
   - [ ] M7.4 Canon 1.55R–1.63
@@ -40,10 +40,10 @@
 
 ## Completed
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `stage`, `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=8), `save_migrations` (1→…→8), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=9), `save_migrations` (1→…→9), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior), `npc_behaviour.json`, `enemies.json`, `items.json`; rules `npc`, `combat`.
-- Tests: 47 GUT scripts, 447 tests, all pass, headless exit 0. Python tool tests: 36 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 49 GUT scripts, 468 tests, all pass, headless exit 0. Python tool tests: 39 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers
@@ -81,6 +81,7 @@
 - Approved: new schemas `tiles.json`, `maps/<area>.json`, `npc_behaviour.json`; rules `world` + `npc`; `Actions.perform` `minutes` opt; `Session` autoload; save v4 and v5.
 
 ## Architectural decisions
+- ADR 0013 (accepted, M7.B big battles): NPC HP (down, not dead; heal at night), `Combat.monster_target`, helpers (state `ally`), fighters pick reachable foes, `stage.waves` + `combat.stage_run`, `npc_behaviour` `combat` blocks, save v9, HP bars and label de-overlap, HUD foes left. Known limit: the raid is hard to win at 20 HP (balance for play-testing).
 - ADR 0012 (accepted, M7 plan + M7.1 raid): 4 canon batches; the raid as a stage in `inn_interior` with a `change` hook; `goblin_raid_leader` only from the stage; the unpatrolled spawn is a Rock Crab stand-in (1.34: no more Goblins came); each event uses the Runners' Guild its chapter names (Remendia / Wales / Celum conflict flagged).
 - ADR 0011 M6.5 (accepted 2026-09-24): canon event `stage` (area, hours, when/unless flags, foes, allies, line; runs once per event while pending, in its window; requires.flags not checked); fights reach events only through hooks; `NpcReact` (fight tags + stage allies fight, others flee within 4 tiles or stand still; after the monsters; no NPC HP); `Combat.settle_if_over` after NPCs; fight context `killed`; `spare_foe` for spare_tags foes; hook relationship `to: "player"`; save v8.
 - ADR 0011 M6.4 (accepted 2026-09-24): hooks on canon events (`did` / `days` ≤ 7 days / `then` / `effects` for change / `news`); cancel+mutate hooks before `requires`, change hooks when the event fires; history `by: player` + `hook`; `changed` counts as happened; news kept in `world.news` (new game clears days 1–7); save v7.
