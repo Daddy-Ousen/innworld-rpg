@@ -1,0 +1,103 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.52R",
+	"events": {
+		"b1.rags_kills_the_feathered_chieftain": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []},
+				"rivals": {"prefer": [], "fallback_tags": ["goblin"]},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["rags"], "flags": ["rags.chieftain", "goblin_tribe.civil_war"], "not_flags": []},
+			"depends_on": ["b1.rags_leads_a_splinter_band", "b1.erin_sells_acid_to_rags"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.killed_rival_chieftain", "goblin_tribe.feathered_chieftain_dead", "rags.casts_firefly"]
+			},
+			"news": "Two Goblin bands fought in a valley on the Floodplains. The small band won: its tiny leader set the big rival chieftain on fire with a spell.",
+			"stage": {
+				"area": "floodplains_south",
+				"hours": [8, 11],
+				"foes": [
+					{"enemy": "goblin_feathered_chieftain", "pos": [13, 15]},
+					{"enemy": "goblin_grunt", "pos": [12, 14]},
+					{"enemy": "goblin_grunt", "pos": [14, 14]},
+					{"enemy": "goblin_grunt", "pos": [12, 16]},
+					{"enemy": "goblin_grunt", "pos": [14, 16]}
+				],
+				"line": "Goblins in feathers charge down the valley behind a chieftain twice their size, swinging an axe.",
+				"waves": [
+					{"after_seconds": 0, "from": [9, 13], "allies": ["rags"], "helpers": ["goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"line": "A smaller band meets them in a tight line, clubs in front and slings behind. Its tiny leader is Rags."},
+					{"after_seconds": 60, "from": [18, 19], "helpers": ["goblin_grunt", "goblin_grunt", "goblin_grunt"],
+						"line": "Rags's biggest Goblins burst from the long grass into the rivals' flank."}
+				],
+				"note": "Design: 5 foes and 6 helpers; canon has two whole bands. Rags's line comes at once and her flank attack a minute later. Hours are a guess: Ryoka sees the fight on her first morning out of Esthelm. The grunts flee when hurt (canon: they flee or grovel)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_beside_rags",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["goblin_feathered_chieftain"]}}],
+					"days": [35, 36],
+					"then": "change",
+					"effects": {
+						"set_flags": ["rags.earther_fought_beside_her"],
+						"relationship": [
+							{"from": "rags", "to": "player", "delta": 2}
+						]
+					},
+					"news": "Two Goblin bands fought on the Floodplains. A Human fought beside the small band, whose tiny leader burned the rival chieftain with a spell."
+				}
+			],
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "likely", "note": "Ryoka's first day out of Esthelm. The winners hold a line, flank with their biggest, and post sentries. The rival chieftain is not an NPC. The text never names the tiny leader; that she is Rags (gleaming sword and shield, a fire spell) is likely."},
+			"summary": "In a Floodplains valley, a feathered Goblin tribe under a huge chieftain attacks a smaller band that fights in formation. Its tiny leader, with a gleaming sword and shield, leads a flank attack, then sets the chieftain alight with a spell like a burning bird. His Goblins flee or grovel."
+		},
+		"b1.rags_band_chases_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["ryoka_griffin", "rags"], "flags": ["ryoka.bound_for_blood_fields"], "not_flags": []},
+			"depends_on": ["b1.rags_kills_the_feathered_chieftain", "b1.ryoka_runs_from_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.lost_speed_potion", "rags.kicked_by_ryoka", "rags.has_looted_potion"],
+				"clear_flags": ["ryoka.has_speed_potion"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "likely", "note": "Which potion she loses is not said; her pack list later has no speed potion, so Teriarch's is likely. On day 37 Rags carries an orange-pink potion and a big bruise (1.53); that it is this one is likely."},
+			"summary": "A sentry spots Ryoka watching. The band herds her with ambushes and sling stones; she knocks Goblins flat without killing and kicks their tiny leader across the ground, shield and all. She dodges a fire spell and gets away, but the Goblins cut a potion from her side in the scramble."
+		},
+		"b1.ryoka_runs_into_the_blood_fields": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "blood_fields",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true},
+				"crossbow": {"prefer": ["claudeil"], "fallback_tags": [], "optional": true},
+				"knife": {"prefer": ["toriska"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.bound_for_blood_fields"], "not_flags": []},
+			"depends_on": ["b1.ryoka_runs_from_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.in_blood_fields"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "confirmed", "note": "Days 1-3 of the run (guess 35-37) and after. No bandits: only armed caravans use the south road. She runs to the place she promised to go (the geas's errand)."},
+			"summary": "Ryoka runs past Liscor down the empty south road. Spiders lunge from pits in the grass, nettles swell her feet, and the land turns to gravel she must walk on, bleeding. She barely sleeps and keeps going, day after day. Persua's three follow and cannot catch her."
+		}
+	},
+	"system": [
+		{"who": "rags", "kind": "other", "name": "Fire spell like a burning bird", "level": null, "confidence": "likely", "note": "It chases foes and sets them alight. Likely the [Firefly] spell she began in 1.45."}
+	]
+}

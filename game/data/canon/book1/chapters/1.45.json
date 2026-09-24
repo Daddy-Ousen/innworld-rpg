@@ -1,0 +1,79 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.45",
+	"events": {
+		"b1.ceria_teaches_ryoka_light": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "esthelm_adventurers_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": ["ryoka.left_celum"], "not_flags": []},
+			"depends_on": ["b1.ryoka_slips_away_from_magnolia"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.can_cast_magic", "ryoka.knows_light_spell", "ryoka.at_esthelm"],
+				"clear_flags": ["ryoka.bound_for_esthelm"],
+				"relationship": [
+					{"from": "ryoka_griffin", "to": "ceria_springwalker", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Dawn of the day after her escape from Celum; she ran about sixty miles through the night. Ceria has been at the guild two days. Delta is a design value."},
+			"summary": "Ryoka reaches Esthelm at dawn and asks Ceria to teach her magic. Ceria draws a glowing rune in the air as a test. Grasping it burns through Ryoka's mind like a brutal maths problem; then she casts [Light] and shifts its colours at will, until her mana runs dry and she is starving."
+		},
+		"b1.pisces_tests_erin_and_rags": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {"prefer": ["pisces"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["pisces", "erin_solstice", "rags"], "flags": ["erin.magic_lessons_deal", "rags.chieftain"], "not_flags": []},
+			"depends_on": ["b1.pisces_pays_with_a_skeleton", "b1.erin_sells_acid_to_rags"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.cannot_cast_magic", "rags.can_cast_magic", "pisces.teaches_rags"],
+				"relationship": [
+					{"from": "rags", "to": "pisces", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Same day as Ryoka's lesson, in parallel (guess). The test lasts until the sun sets. Pisces will teach Rags every other day for free meals. Delta is a design value."},
+			"summary": "Pisces tests Erin and Rags by filling the air around them with his own mana. Rags already knows a spark of Goblin tribal magic, then casts the start of a true [Firefly] spell. Erin strains until his mana is spent and casts nothing. Pisces agrees to teach Rags for free food."
+		},
+		"b1.erin_tells_krshia_of_her_world": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["krshia", "erin_solstice"], "flags": ["krshia.wants_private_talk"], "not_flags": []},
+			"depends_on": ["b1.lism_accuses_erin_of_theft"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["krshia.knows_erin_otherworld", "gnolls.keep_erins_secret"],
+				"relationship": [
+					{"from": "krshia", "to": "erin_solstice", "delta": 1},
+					{"from": "erin_solstice", "to": "krshia", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "After the magic test. Gnolls had watched the gate for her. Krshia's [Spot Deception] tells her Erin speaks the truth. Erin is from Michigan and was a chess tutor saving for college. Deltas are design values."},
+			"summary": "Krshia pulls Erin home for tea and cubes of raw meat. At the chess game she heard Erin say she comes from another world, and she swears by her tribe that only Gnolls will ever share the secret. Erin says yes, it is true: a world of only Humans, eight billion of them. Krshia faints."
+		}
+	},
+	"system": [
+		{"who": "ryoka_griffin", "kind": "other", "name": "Spell [Light]", "level": null, "confidence": "confirmed", "note": "Her first spell, cast on the first try; she changes its colours. Ceria says she should get her first [Mage] level after she sleeps."},
+		{"who": "rags", "kind": "other", "name": "Spell [Firefly] (the start)", "level": null, "confidence": "confirmed", "note": "Pisces: not tribal magic but a true spell. He has never heard of a Goblin able to learn it."},
+		{"who": "erin_solstice", "kind": "other", "name": "No magic", "level": null, "confidence": "confirmed", "note": "Pisces's test finds she cannot cast spells."},
+		{"who": "krshia", "kind": "skill", "name": "[Spot Deception]", "level": null, "confidence": "confirmed", "note": "A [Merchant] and [Shopkeeper] Skill, weaker than [Detect Guilt]."}
+	]
+}

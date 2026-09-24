@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.46",
+	"events": {
+		"b1.krshia_offers_to_help_erin_home": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"nephew": {"prefer": ["tkrn"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["krshia", "erin_solstice"], "flags": ["krshia.knows_erin_otherworld"], "not_flags": []},
+			"depends_on": ["b1.erin_tells_krshia_of_her_world"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.wants_to_go_home", "erin.knows_wistram", "gnolls.search_for_earthers", "gnolls.watch_erin"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "The Gnolls shun Wistram: some forty years ago it turned away the young [Shaman] the tribes sent. Some of Krshia's Gnolls had wondered if Erin was a spy. She sends Tkrn to the Gnoll Runners that night."},
+			"summary": "Erin admits she wants to go home. Krshia thinks only an archmage could send her, and the best place to find one is Wistram, far over winter seas; the journey, lodging and a mage's help will cost much. The Gnolls will help, for a price. That night she sends word to the tribes: find others like Erin."
+		},
+		"b1.erin_names_the_skeleton_toren": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "toren"], "flags": ["wandering_inn.has_skeleton"], "not_flags": []},
+			"depends_on": ["b1.pisces_pays_with_a_skeleton"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["toren.named", "toren.hunts_flat_fish", "erin.can_cook_flat_fish"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "That night. Toren is the word for the chess rook in another language. The skeleton is Level 2 from the day-28 fight and hopes killing fish will level it."},
+			"summary": "The skeleton, which Erin names Toren, meets her near Liscor's gate hugging a dead flat fish. It caught several at the stream and hacked them apart in her kitchen. Scaled, they are good to cook. Alone in the kitchen, Erin pounds the fish guts and cries for home and for the magic she lacks."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "skill", "name": "[Basic Weapon Proficiency: Swords]", "level": null, "confidence": "confirmed"},
+		{"who": "tkrn", "kind": "other", "name": "Gnoll Runners Lv and Tshana", "level": null, "confidence": "confirmed", "note": "Krshia has Tkrn ask one of them to carry her message to the tribes."}
+	]
+}

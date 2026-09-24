@@ -62,15 +62,15 @@
 			"summary": "Older female Goblin who wears a spider claw as a hairpin. Sorts food for the tribe and uses a Skill to find poisoned blue fruit."
 		},
 		"relc": {
-			"name": "Relc",
+			"name": "Relc Grasstongue",
 			"race": "Drake",
 			"tags": ["drake", "guard", "senior_guard", "spear", "veteran", "loud"],
 			"faction": "liscor_watch",
 			"home": "liscor",
-			"classes": [{"name": "[Spearmaster]", "level": null}, {"name": "[Guardsman]", "level": null}, {"name": "[Sergeant]", "level": null}],
+			"classes": [{"name": "[Spearmaster]", "level": 33}, {"name": "[Guardsman]", "level": 12}, {"name": "[Sergeant]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. [Sergeant] and [Iron Scales] from 1.12; served in the 4th Wing of the Liscorian Army (1.10)."},
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. [Sergeant] and [Iron Scales] from 1.12; served in the 4th Wing of the Liscorian Army (1.10). Family name and levels from Ksmvr in 1.51 (Klbkch's figures). 1.51 says he was a sergeant of the 1st Wing; 1.10 said the 4th Wing (conflict in the Book)."},
 			"summary": "Huge light-green Drake, Senior Guardsman of Liscor and former soldier. Loud, friendly, big eater, proud of being a Drake; hates being called a lizard. Cannot breathe fire. Never misses a spear throw."
 		},
 		"klbkch": {
@@ -343,10 +343,10 @@
 			"tags": ["half_elf", "adventurer", "mage", "ice", "wistram"],
 			"faction": "horns_of_hammerad",
 			"home": null,
-			"classes": [{"name": "[Elementalist]", "level": null}],
+			"classes": [{"name": "[Elementalist]", "level": null}, {"name": "[Cryomancer]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Named in 1.26R; full name, age and home in 1.32R."},
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Named in 1.26R; full name, age and home in 1.32R. 1.47R: she learned [Fireball] at Level 18 as an [Elementalist]; 1.48R calls her a [Cryomancer]. Fourteen years an adventurer (1.54)."},
 			"summary": "Half-Elf ice mage of the Horns of Hammerad, over sixty, from the Village of the Spring in Terandria and 'technically' a Wistram student. Sharp and wry. Knows a man she swore never to speak to again."
 		},
 		"gerial": {
@@ -355,23 +355,23 @@
 			"tags": ["human", "adventurer", "vice_captain", "sword", "shield"],
 			"faction": "horns_of_hammerad",
 			"home": null,
-			"classes": [],
+			"classes": [{"name": "[Warrior]", "level": 17}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed"},
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Level 17 [Warrior] as Gazi sees him (1.53). Eight years an adventurer (1.54)."},
 			"summary": "Mustached Human with sword and shield, second-in-command to Calruz. Steady and earnest; talks Calruz out of reckless charges and stands up to his glare."
 		},
 		"sostrom": {
 			"name": "Sostrom",
 			"race": "Human",
-			"tags": ["adventurer", "mage", "self_taught"],
+			"tags": ["human", "adventurer", "mage", "self_taught"],
 			"faction": "horns_of_hammerad",
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "likely", "note": "Race not stated; Human is likely. Long wisp of black hair (1.32R)."},
-			"summary": "The Horns of Hammerad's second mage, self-taught, with a long wisp of black hair. Defers to Ceria because she trained at Wistram."
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Human confirmed in 1.54. 1.54 says he is completely bald under his mage's hat; 1.32R gave him a long wisp of black hair (conflict in the Book)."},
+			"summary": "The Horns of Hammerad's second mage, a self-taught Human in a pointed mage's hat. Defers to Ceria because she trained at Wistram; mended Ryoka's phone."
 		},
 		"persua": {
 			"name": "Persua Mavva",
@@ -482,15 +482,15 @@
 			"summary": "The Free Queen's new Prognugator after Klbkch. Carries twin swords. Deals with the Liscor Council for her and hunts Aberrations; she tells him to judge whether the Worker who calls himself an individual should live."
 		},
 		"toren": {
-			"name": "Skeleton",
+			"name": "Toren",
 			"race": "Undead",
 			"tags": ["undead", "skeleton", "warrior", "servant", "levels"],
 			"faction": null,
 			"home": "wandering_inn",
-			"classes": [{"name": "[Skeleton Warrior]", "level": 2}],
+			"classes": [{"name": "[Skeleton Warrior]", "level": 3}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46 (next batch); the id already uses that name."},
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46: the word for the chess rook in another language. Level 3 by 1.53."},
 			"summary": "Undead skeleton Pisces makes to guard Erin and pay his tab. It obeys only her, is weaker than she is, and cleans the whole upper floor in one night. No skeleton should level, but it is a Level 1, then Level 2, [Skeleton Warrior]."
 		},
 		"princess_thief": {
@@ -528,6 +528,42 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Named in 1.43R. Whether he is the Dragon of 1.00 (cave_dragon) is not confirmed (user, 2026-09-24); keep them apart until the text says so."},
 			"summary": "Golden Dragon who sleeps in a vast hoard-cave in the High Passes and shows himself as a tall old half-Elf mage. Clumsy, proud and out of touch with the world. Knows Magnolia Reinhart and owes a duty to the Necromancer Perril Chandler."
+		},
+		"yvlon_byres": {
+			"name": "Yvlon Byres",
+			"race": "Human",
+			"tags": ["human", "adventurer", "captain", "noble", "armor", "unarmed"],
+			"faction": "silver_spears",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.47R", "confidence": "confirmed", "note": "She calls Lady Magnolia her aunt twice-removed. Her brother is a [Knight] on the Gold-rank Silver Swords; her sister is a [Merchant]."},
+			"summary": "Blonde Human captain of the Silver-rank Silver Spears, in polished silver plate with her house crest. From minor noble House Byres, which mines silver and is distantly related to the Reinharts. Polite and well liked; once beat five bandits after losing her sword."
+		},
+		"cervial_dermondy": {
+			"name": "Cervial Dermondy",
+			"race": "Human",
+			"tags": ["human", "adventurer", "captain", "ranger", "archer"],
+			"faction": "flawless_flights",
+			"home": null,
+			"classes": [{"name": "[Ranger]", "level": null}],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.37", "confidence": "confirmed", "note": "Meets Erin in 1.37 while scouting the new ruins. 1.47R calls him an [Archer Captain]; he has [Appraisal] (1.48R)."},
+			"summary": "Human [Ranger] and captain of the Silver-rank Flawless Flights, with a longbow as tall as he is. Scouted the new ruins near Liscor, then rode to Esthelm to gather captains for a joint raid. Careful, but tempted by the treasure."
+		},
+		"tkrn": {
+			"name": "Tkrn",
+			"race": "Gnoll",
+			"tags": ["gnoll", "guard", "watch", "young"],
+			"faction": "liscor_watch",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "Calls Krshia 'Aunt'. Posted at the east gate for some days before 1.46; that he is the friendly Gnoll gate guard of 1.49 is likely."},
+			"summary": "Young Gnoll guardsman of Liscor's Watch with chainmail, sword and shield; Krshia's nephew. She has him watch the east gate for Erin and carry word to the Gnoll Runners. Eager, talks too much and gets cuffed for it."
 		}
 	}
 }

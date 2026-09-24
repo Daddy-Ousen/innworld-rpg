@@ -1,0 +1,62 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.48R",
+	"events": {
+		"b1.ryoka_fights_yvlon_and_calruz": {
+			"tier": 1,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "esthelm_adventurers_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"noble": {"prefer": ["yvlon_byres"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["cervial_dermondy"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "yvlon_byres"], "flags": ["ryoka.left_celum"], "not_flags": []},
+			"depends_on": ["b1.ryoka_slips_away_from_magnolia", "b1.captains_plan_the_ruins_raid"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["adventurers.know_ryoka_levelless", "ryoka.lost_to_yvlon", "ryoka.hit_ceria", "adventurers.ruins_raid_grows"],
+				"relationship": [
+					{"from": "ceria_springwalker", "to": "ryoka_griffin", "delta": -2},
+					{"from": "calruz", "to": "ryoka_griffin", "delta": -1}
+				]
+			},
+			"rumor": "In Esthelm a barefoot Runner with no levels threw a Silver-rank captain in full plate twice, then called every adventurer there a coward.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.48R", "confidence": "confirmed", "note": "Midday to dusk. Garia arrives with a sugar delivery and watches. Yvlon's aunt told her Ryoka has no levels. Gregor and Menes rejoin the raid after Ryoka's taunts. Deltas are design values."},
+			"summary": "Yvlon challenges Ryoka to a spar. Ryoka fights her in full plate, throws her twice and lands punches, then kicks Calruz until one blow floors her. Cervial's [Appraisal] shows she has no levels. Ryoka calls them all cowards and strikes Ceria, and Yvlon knocks her out. Ceria leaves her, coldly angry."
+		},
+		"b1.ryoka_runs_from_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true},
+				"crossbow": {"prefer": ["claudeil"], "fallback_tags": [], "optional": true},
+				"knife": {"prefer": ["toriska"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b1.ryoka_fights_yvlon_and_calruz"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.bound_for_blood_fields", "persua.trails_ryoka"],
+				"clear_flags": ["ryoka.at_esthelm"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.48R", "confidence": "confirmed", "note": "Ceria says the Horns and the other teams leave for the ruins, and Ryoka can find them in Liscor if she wants to talk. Persua lets her get far ahead before following."},
+			"summary": "At dusk Ryoka wakes alone in the empty yard, sick with guilt, and cannot bring herself to call out an apology. She takes her pack and runs, past Magnolia's pink carriage, maids and [Assassins], toward Liscor and the Blood Fields beyond. Persua, Toriska and Claudeil slip out of Esthelm after her."
+		}
+	},
+	"system": [
+		{"who": "cervial_dermondy", "kind": "skill", "name": "[Appraisal]", "level": null, "confidence": "confirmed", "note": "A Skill [Marksmen] sometimes get. He cannot see any level or class on Ryoka."},
+		{"who": "ryoka_griffin", "kind": "other", "name": "No levels, no classes", "level": null, "confidence": "confirmed", "note": "Known to the Esthelm adventurers from 1.48R."},
+		{"who": "calruz", "kind": "other", "name": "Close to Level 30", "level": null, "confidence": "likely", "note": "Yvlon's word. Silver-rank is mostly low twenties; Gold-rank from about Level 24."},
+		{"who": "ceria_springwalker", "kind": "class", "name": "[Cryomancer]", "level": null, "confidence": "confirmed"},
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Silence]", "level": null, "confidence": "confirmed"}
+	]
+}

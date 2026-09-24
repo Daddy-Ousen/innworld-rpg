@@ -1,0 +1,32 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.47R",
+	"events": {
+		"b1.captains_plan_the_ruins_raid": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "esthelm_adventurers_guild",
+			"roles": {
+				"noble": {"prefer": ["yvlon_byres"], "fallback_tags": []},
+				"archer": {"prefer": ["cervial_dermondy"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["yvlon_byres", "cervial_dermondy"], "flags": [], "not_flags": []},
+			"depends_on": ["b1.gazi_comes_to_liscor", "b1.erin_and_selys_visit_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["adventurers.ruins_raid_planned", "liscor_dungeon.gold_team_coming", "horns_of_hammerad.bound_for_liscor"]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.47R", "confidence": "confirmed", "note": "The same morning Ryoka arrives. The three captains who walk out (Gregor, Menes, Rois) are not NPCs. Cervial rode a day from Liscor. Ceria later wins him over (1.48R)."},
+			"summary": "Six Silver-rank captains meet in Esthelm. Calruz and Yvlon Byres want a joint raid on the ruins near Liscor before a Gold-rank team arrives within the week. Charlez's team came back as zombies, and Gazi of Reim waits in Liscor, so three captains walk out. Cervial will join if Ceria agrees."
+		}
+	},
+	"system": [
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Fireball]", "level": 18, "confidence": "confirmed", "note": "Learned at Level 18 in her [Elementalist] class."},
+		{"who": "cervial_dermondy", "kind": "other", "name": "[Archer Captain]", "level": null, "confidence": "confirmed", "note": "How the chapter titles him; his class in 1.37 is [Ranger]."},
+		{"who": "gazi_pathseeker", "kind": "other", "name": "Named-rank", "level": null, "confidence": "confirmed", "note": "Above Gold-rank; one Named adventurer can do what Gold-rank teams cannot. Known as Gazi the Omniscient continents away."}
+	]
+}

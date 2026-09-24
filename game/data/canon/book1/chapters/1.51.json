@@ -1,0 +1,65 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.51",
+	"events": {
+		"b1.erin_sings_through_the_night": {
+			"tier": 2,
+			"window": {"earliest": 36, "latest": 37, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"guest": {"prefer": ["pawn"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "pawn"], "flags": ["pawn.maimed"], "not_flags": []},
+			"depends_on": ["b1.pawn_returns_maimed"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.sang_at_the_inn", "erin.refuses_to_murder"],
+				"relationship": [
+					{"from": "pawn", "to": "erin_solstice", "delta": 2},
+					{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "The adventurers at the inn on the hill say its Human innkeeper sang all night: songs nobody had heard, with music from nowhere.",
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.51", "confidence": "confirmed", "note": "Night 36 into day 37. Her [Immortal Moment] shows in both the chess and the songs; she teaches them a church hymn. Deltas are design values."},
+			"summary": "Erin plays chess against the trembling Pawn until he is calm. Then she goes out into the rain; the adventurers fear she hunts Ksmvr, but she only cries on the roof: she will not murder. Back inside she sings songs of her world, and the room hears music that is not there."
+		},
+		"b1.ksmvr_backs_down_outside_liscor": {
+			"tier": 2,
+			"window": {"earliest": 36, "latest": 37, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []},
+				"guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": [], "optional": true},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"nephew": {"prefer": ["tkrn"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ksmvr"], "flags": ["pawn.judged_individual"], "not_flags": []},
+			"depends_on": ["b1.pawn_returns_maimed"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ksmvr.wants_erin", "ksmvr.backed_down", "relc.guards_erin_in_secret", "gnolls.warriors_coming"],
+				"relationship": [
+					{"from": "relc", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "reviewed",
+			"canon_ref": {"book": 1, "chapter": "1.51", "confidence": "confirmed", "note": "The same night. No pact bars Soldiers beyond the walls; sixteen more were coming. Krshia says more Gnoll warriors arrive within the week. Erin never came. Delta is a design value."},
+			"summary": "On a hill outside the city, Ksmvr waits with four Soldiers for Erin to come for revenge, so he can take her: she is valuable to the Hive. Relc rises from the grass to stop him, Gazi watches from another hill, and Krshia's Gnolls lie hidden with bows. Ksmvr cannot choose, and withdraws."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 15, "confidence": "confirmed", "note": "In her sleep after the songs."},
+		{"who": "erin_solstice", "kind": "other", "name": "[Immortal Moment] seen by others", "level": null, "confidence": "confirmed", "note": "Listeners hear instruments and voices that are not there. Gerial thinks it a rare Skill (1.53)."},
+		{"who": "relc", "kind": "level", "name": "[Spearmaster]", "level": 33, "confidence": "likely", "note": "Ksmvr's figures, from Klbkch."},
+		{"who": "relc", "kind": "level", "name": "[Guardsman]", "level": 12, "confidence": "likely", "note": "Ksmvr's figures. Also small levels in [Archer] and [Carpenter]."},
+		{"who": "relc", "kind": "skill", "name": "[Triple Thrust]", "level": null, "confidence": "confirmed", "note": "A rare Skill."},
+		{"who": "relc", "kind": "other", "name": "Former sergeant of the 1st Wing", "level": null, "confidence": "confirmed", "note": "Conflict: 1.10 says he served in the 4th Wing."},
+		{"who": "ksmvr", "kind": "other", "name": "No [Dangersense]", "level": null, "confidence": "confirmed", "note": "Made Prognugator before his training ended."}
+	]
+}
