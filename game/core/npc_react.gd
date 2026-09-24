@@ -7,8 +7,10 @@
 ##     any distance) and hits it when side by side;
 ##   - any other NPC within flee_radius of a hostile monster steps away from
 ##     it; the rest stand still until the danger is over.
-## A fighter with no monster in reach follows its goal. NPCs have no hit
-## points: monsters attack only the player. Each NPC acts once per
+## A fighter with no monster in reach follows its goal. Fighters have hit
+## points (M7.B, ADR 0013): monsters attack them too (Combat.monster_target),
+## and at 0 HP they are down until the fight ends (never dead: only the
+## director kills). Bystanders are never attacked. Each NPC acts once per
 ## react.act_seconds (its carry). Rolls go through gs.rng; NPCs act in id
 ## order (NpcSim), after the monsters.
 class_name NpcReact
@@ -24,6 +26,9 @@ static func active(gs: GameState) -> bool:
 ## Returns false if the NPC should follow its goal instead (a fighter with
 ## no monster in reach).
 static func act(gs: GameState, db: DataDb, id: String, n: Dictionary, dt: int) -> bool:
+	if bool(n.get("down", false)):
+		n["carry"] = 0
+		return true
 	var rules: Dictionary = db.rules["npc"]["react"]
 	var fighter := is_fighter(gs, db, id)
 	if fighter and target(gs, db, id, n).is_empty():
@@ -48,11 +53,27 @@ static func act(gs: GameState, db: DataDb, id: String, n: Dictionary, dt: int) -
 
 ## True if NPC `id` fights: a fight tag, or an ally of a staged monster here.
 static func is_fighter(gs: GameState, db: DataDb, id: String) -> bool:
+	return has_fight_tag(db, id) or is_ally(gs, db, id)
+
+
+## True if NPC `id` has a tag in rules.npc.react.fight_tags (a guard).
+static func has_fight_tag(db: DataDb, id: String) -> bool:
 	var tags: Array = db.canon.npcs.get(id, {}).get("tags", [])
 	for t: Variant in db.rules["npc"]["react"]["fight_tags"]:
 		if tags.has(t):
 			return true
-	return is_ally(gs, db, id)
+	return false
+
+
+## NPC `id`'s fight stats {"hp", "accuracy", "evasion", "armor", "damage"}:
+## its own npc_behaviour "combat" block (M7.B), else rules.npc.react.fighter
+## (a fight tag) or .ally.
+static func stats(db: DataDb, id: String) -> Dictionary:
+	var own := db.behaviour.combat_of(id)
+	if not own.is_empty():
+		return own
+	var react: Dictionary = db.rules["npc"]["react"]
+	return react["fighter"] if has_fight_tag(db, id) else react["ally"]
 
 
 ## True if NPC `id` is an ally of the stage of a monster in the player's area.
@@ -109,22 +130,19 @@ static func _fight_turn(gs: GameState, db: DataDb, id: String, n: Dictionary, mi
 	n["y"] = next.y
 
 
-## One hit roll with the NPC's react stats (fighter if it has a fight tag,
-## else ally) against the monster's evasion and armor.
+## One hit roll with the NPC's fight stats (see stats) against the
+## monster's evasion and armor.
 static func _hit(gs: GameState, db: DataDb, id: String, mid: String) -> void:
-	var rules: Dictionary = db.rules["npc"]["react"]
-	var tags: Array = db.canon.npcs.get(id, {}).get("tags", [])
-	var tagged := (rules["fight_tags"] as Array).any(func(t: Variant) -> bool: return tags.has(t))
-	var stats: Dictionary = rules["fighter"] if tagged else rules["ally"]
+	var s := stats(db, id)
 	var m: Dictionary = gs.combat.monsters[mid]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var who := String(db.canon.npcs.get(id, {}).get("name", id))
 	var foe := Combat.name_of(db, m)
 	Combat.join(gs, mid)
-	if gs.rng.randf() >= Combat.hit_chance(db, int(stats["accuracy"]), int(e["evasion"])):
+	if gs.rng.randf() >= Combat.hit_chance(db, int(s["accuracy"]), int(e["evasion"])):
 		gs.combat.lines.append("%s misses the %s." % [who, foe])
 		return
-	var dmg := maxi(gs.rng.randi_range(int(stats["damage"][0]), int(stats["damage"][1])) - int(e["armor"]),
+	var dmg := maxi(gs.rng.randi_range(int(s["damage"][0]), int(s["damage"][1])) - int(e["armor"]),
 			int(db.rules["combat"]["min_damage"]))
 	gs.combat.lines.append("%s hits the %s for %d." % [who, foe, dmg])
 	Combat.damage_monster(gs, db, mid, dmg)

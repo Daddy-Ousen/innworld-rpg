@@ -9,7 +9,8 @@
 ## Dead NPCs are removed. Time is in world seconds (clock minutes × 60 +
 ## the player's step seconds). While a hostile monster is in the player's
 ## area, the NPCs there react to it instead (NpcReact, M6.5); only their
-## hits roll dice (gs.rng).
+## hits roll dice (gs.rng). An NPC knocked out in a fight (M7.B) lies still
+## until the fight ends; a long gap (a night) heals every NPC.
 class_name NpcSim
 extends RefCounted
 
@@ -44,8 +45,14 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 			continue
 		if not r.npcs.has(id):
 			r.npcs[id] = {"area": "", "x": 0, "y": 0, "facing": "s", "goal": "",
-				"route_i": 0, "carry": 0, "talked_day": 0}
+				"route_i": 0, "carry": 0, "talked_day": 0, "hp": -1, "down": false}
 		var n: Dictionary = r.npcs[id]
+		if jump:
+			n["hp"] = -1  # a long gap (a night): healed and up again
+			n["down"] = false
+		elif n.get("down", false):
+			n["carry"] = 0  # knocked out in a fight: lies still until it ends
+			continue
 		var g := UtilityAi.pick(gs, db, id, to_sec)
 		if g["goal"] != n["goal"]:
 			n["goal"] = g["goal"]

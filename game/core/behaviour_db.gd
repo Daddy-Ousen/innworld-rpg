@@ -3,7 +3,9 @@
 ## after load.
 ##   entries: off-map place → {map id → [x, y]}: where NPCs from that place
 ##            (e.g. "liscor", the city beyond the maps) come in and go out.
-##   npcs: canon NPC id → {"confidence", "notes"?, "goals": [goal, ...]}.
+##   npcs: canon NPC id → {"confidence", "notes"?, "goals": [goal, ...],
+##         "combat"?: {"hp", "accuracy", "evasion", "armor", "damage": [a, b]}
+##         (M7.B: the NPC's own fight stats; else rules.npc.react defaults)}.
 ##   goal: {"goal": name from GOALS, "base": score > 0,
 ##          "hours"?: [[from, to, mult], ...]  (whole hours 0–24; from > to wraps
 ##                    past midnight; no matching range = score 0),
@@ -75,6 +77,29 @@ func goals_of(npc: String) -> Array:
 	return npcs[npc]["goals"]
 
 
+## The NPC's own fight stats (M7.B, ADR 0013), or {} (the react defaults apply).
+func combat_of(npc: String) -> Dictionary:
+	return npcs.get(npc, {}).get("combat", {})
+
+
+## Checks fight stats {"hp" > 0, "accuracy", "evasion", "armor" >= 0,
+## "damage": [a, b] with 0 <= a <= b}. Returns the problems.
+static func check_fight_stats(where: String, s: Variant) -> Array[String]:
+	var out: Array[String] = []
+	if not s is Dictionary:
+		out.append("%s: must be an object." % where)
+		return out
+	for k: String in ["hp", "accuracy", "evasion", "armor"]:
+		if not (s as Dictionary).has(k) or not (s[k] is int or s[k] is float):
+			out.append("%s: needs a number '%s'." % [where, k])
+	if out.is_empty() and (int(s["hp"]) <= 0 or int(s["armor"]) < 0):
+		out.append("%s: hp must be > 0 and armor >= 0." % where)
+	var d: Variant = s.get("damage", null)
+	if not d is Array or (d as Array).size() != 2 or int(d[0]) < 0 or int(d[0]) > int(d[1]):
+		out.append("%s: damage must be [a, b] with 0 <= a <= b." % where)
+	return out
+
+
 ## The tile a target sends an NPC to (a route: point `route_i`), or (-1, -1) off-map.
 static func target_pos(target: Dictionary, route_i: int = 0) -> Vector2i:
 	if target.has("pos"):
@@ -114,6 +139,9 @@ func validate(db: DataDb) -> Array[String]:
 	for a: Variant in db.rules.get("npc", {}).get("talk_actions", []):
 		if not db.actions.has(a):
 			errors.append("rules.npc.talk_actions: unknown action '%s'." % a)
+	var react: Dictionary = db.rules.get("npc", {}).get("react", {})
+	for kind: String in ["fighter", "ally"]:
+		errors.append_array(check_fight_stats("rules.npc.react.%s" % kind, react.get(kind, null)))
 	return errors
 
 
@@ -126,6 +154,8 @@ func _validate_npc(id: String, n: Variant, db: DataDb) -> void:
 		return
 	if not DataDb.CONFIDENCE.has(n.get("confidence", "")):
 		errors.append("%s: confidence must be one of %s." % [where, DataDb.CONFIDENCE])
+	if (n as Dictionary).has("combat"):
+		errors.append_array(check_fight_stats(where + " combat", n["combat"]))
 	var goals: Variant = n.get("goals", [])
 	if not goals is Array or (goals as Array).is_empty():
 		errors.append("%s: needs at least one goal." % where)

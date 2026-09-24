@@ -130,8 +130,11 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 
 ## A canon fight on the map (M6.5, ADR 0011): {"area", "hours": [from, to],
 ## "foes": [{"enemy", "pos": [x, y]}], "allies"?: [npc ids],
-## "when_flags"?, "unless_flags"?, "line"?, "note"?}. CombatDb.validate checks
-## the enemies and the map.
+## "when_flags"?, "unless_flags"?, "line"?, "note"?, "waves"?: [wave]}.
+## A wave (M7.B, ADR 0013): {"after_seconds" >= 0, "left_at_most"? >= 0,
+## "from": [x, y], "foes"?: [enemy ids], "helpers"?: [enemy ids],
+## "allies"?: [npc ids], "line"?}, with at least one foe, helper or ally.
+## CombatDb.validate checks the enemies, the map and the tiles.
 func _validate_stage(where: String, st: Variant) -> void:
 	var sw := where + " stage"
 	if not st is Dictionary:
@@ -154,6 +157,36 @@ func _validate_stage(where: String, st: Variant) -> void:
 					or not f.get("pos", null) is Array or (f["pos"] as Array).size() != 2:
 				errors.append("%s: each foe needs 'enemy' and 'pos': [x, y]." % sw)
 	_check_npcs(sw + " allies", st.get("allies", []))
+	var waves: Variant = st.get("waves", [])
+	if not waves is Array:
+		errors.append("%s: waves must be a list." % sw)
+		return
+	for i in (waves as Array).size():
+		_validate_wave("%s wave %d" % [sw, i + 1], waves[i])
+
+
+func _validate_wave(ww: String, w: Variant) -> void:
+	if not w is Dictionary:
+		errors.append("%s: must be an object." % ww)
+		return
+	if not (w.get("after_seconds", null) is int or w.get("after_seconds", null) is float) \
+			or int(w["after_seconds"]) < 0:
+		errors.append("%s: after_seconds must be a number >= 0." % ww)
+	if w.has("left_at_most") and not ((w["left_at_most"] is int or w["left_at_most"] is float)
+			and int(w["left_at_most"]) >= 0):
+		errors.append("%s: left_at_most must be a number >= 0." % ww)
+	if not w.get("from", null) is Array or (w["from"] as Array).size() != 2:
+		errors.append("%s: from must be [x, y]." % ww)
+	var total := 0
+	for key: String in ["foes", "helpers", "allies"]:
+		var list: Variant = w.get(key, [])
+		if not list is Array or not (list as Array).all(func(x: Variant) -> bool: return x is String):
+			errors.append("%s: %s must be a list of ids." % [ww, key])
+			return
+		total += (list as Array).size()
+	if total == 0:
+		errors.append("%s: needs at least one foe, helper or ally." % ww)
+	_check_npcs(ww + " allies", w.get("allies", []))
 
 
 ## A player hook (M6.4, ADR 0011): {"id", "did": [{"action": [ids],

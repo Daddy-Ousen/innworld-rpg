@@ -169,9 +169,9 @@ func test_npcs_survive_save_and_load() -> void:
 	var gs := GameState.new(4)
 	gs.npcs.sec = 12345
 	gs.npcs.npcs["relc"] = {"area": "liscor_gate", "x": 3, "y": 10, "facing": "e", "goal": "patrol",
-		"route_i": 2, "carry": 5, "talked_day": 8}
+		"route_i": 2, "carry": 5, "talked_day": 8, "hp": 7, "down": false}
 	gs.npcs.npcs["rags"] = {"area": "@wilds", "x": 0, "y": 0, "facing": "s", "goal": "off_map",
-		"route_i": 0, "carry": 0, "talked_day": 0}
+		"route_i": 0, "carry": 0, "talked_day": 0, "hp": -1, "down": false}
 	var loaded := GameState.from_json(gs.to_json())
 	assert_eq(loaded.to_json(), gs.to_json())
 	assert_eq(loaded.npcs.at("liscor_gate", Vector2i(3, 10)), "relc")

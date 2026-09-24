@@ -93,7 +93,9 @@ func validate(db: DataDb) -> Array[String]:
 
 
 ## A canon event stage (CanonDb checks its shape): known enemies, a known
-## map, and foes on walkable tiles that are not exits.
+## map, and foes on walkable tiles that are not exits. Waves (M7.B): known
+## foe and helper enemies, a `from` tile like a foe's, and allies with
+## npc_behaviour (only NPCs in the roster can be moved into the fight).
 func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 	var where := "event '%s' stage" % event_id
 	var foes: Variant = st.get("foes", [])
@@ -102,6 +104,19 @@ func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 	for f: Variant in foes:
 		if f is Dictionary and not enemies.has(f.get("enemy", "")):
 			errors.append("%s: unknown enemy '%s'." % [where, f.get("enemy", "")])
+	var waves: Array = st.get("waves", []) if st.get("waves", []) is Array else []
+	for i in waves.size():
+		var w: Variant = waves[i]
+		if not w is Dictionary:
+			continue
+		var ww := "%s wave %d" % [where, i + 1]
+		for key: String in ["foes", "helpers"]:
+			for type: Variant in w.get(key, []):
+				if not enemies.has(type):
+					errors.append("%s: unknown enemy '%s'." % [ww, type])
+		for npc: Variant in w.get("allies", []):
+			if not db.behaviour.is_empty() and not db.behaviour.npcs.has(npc):
+				errors.append("%s: ally '%s' has no npc_behaviour entry." % [ww, npc])
 	if db.maps.is_empty():
 		return
 	var area: String = st.get("area", "")
@@ -114,6 +129,14 @@ func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 		var at := Vector2i(int(f["pos"][0]), int(f["pos"][1]))
 		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
 			errors.append("%s: foe pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
+	for i in waves.size():
+		var w: Variant = waves[i]
+		if not w is Dictionary or not w.get("from", null) is Array or (w["from"] as Array).size() != 2:
+			continue
+		var at := Vector2i(int(w["from"][0]), int(w["from"][1]))
+		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+			errors.append("%s wave %d: from %s must be a walkable tile in '%s', not an exit."
+					% [where, i + 1, at, area])
 
 
 func _validate_spawn(s: Dictionary, seen: Dictionary, db: DataDb) -> void:
@@ -231,6 +254,8 @@ func _validate_rules(db: DataDb) -> void:
 	if c.is_empty():
 		return  # DataDb reports the missing section
 	_check_range("rules.combat.unarmed damage", c["unarmed"].get("damage", null))
+	if int(c["stage"].get("max_on_map", 0)) < 1:
+		errors.append("rules.combat.stage.max_on_map must be >= 1.")
 	if db.maps.is_empty():
 		return
 	var wake: Dictionary = c["knockout"].get("wake", {})
