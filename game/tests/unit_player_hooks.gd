@@ -239,7 +239,7 @@ func test_v6_save_migrates_to_v7() -> void:
 		r.erase("context")
 	var loaded := GameState.from_json(JSON.stringify(SaveCodec.encode(old)))
 	assert_not_null(loaded)
-	assert_eq(loaded.save_version, 7)
+	assert_eq(loaded.save_version, GameState.SAVE_VERSION)
 	assert_eq(loaded.world.news, [] as Array[Dictionary])
 	assert_eq(loaded.action_log.records[-1]["context"], {})
 	Director.run(loaded, d, 1)

@@ -65,7 +65,7 @@ static func add_monster(gs: GameState, db: DataDb, type: String, pos: Vector2i,
 	c.monsters[id] = {"type": type, "spawn": spawn, "group": group if group != "" else id,
 		"area": gs.player.area, "x": pos.x, "y": pos.y, "hp": int(db.combat.enemies[type]["hp"]),
 		"state": state, "home_x": pos.x, "home_y": pos.y, "carry": 0, "chase": 0, "scared": 0,
-		"rolled_spot": false, "pack": 1}
+		"rolled_spot": false, "pack": 1, "stage": ""}
 	if state == CombatState.HOSTILE:
 		join(gs, id)
 	return id
@@ -295,7 +295,11 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 ## melee with fists, melee with a held item (context weapon "improvised"),
 ## blocks and throws, each once with intensity = count / count_per_intensity;
 ## plus flee_danger when the player got away. Risk = the most dangerous
-## foe's danger. Records take no time (the turns already did). Returns them.
+## foe's danger. Every record's context has "enemy" (that foe's type),
+## "location" and "killed" (a foe died, by anyone's hand; M6.5). A won fight
+## where foes ran and none died, against a foe with a combat.spare_tags tag,
+## adds spare_foe (the player let them go). Records take no time (the turns
+## already did). Returns them.
 static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var c := gs.combat
@@ -314,7 +318,8 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 			danger = d
 			enemy = type
 	var xp_rules: Dictionary = db.rules["combat"]["xp"]
-	var base := {"enemy": enemy, "location": Movement.location_at(gs, db)}
+	var killed := int(f["kills"]) > 0
+	var base := {"enemy": enemy, "location": Movement.location_at(gs, db), "killed": killed}
 	var improvised := base.merged({"weapon": "improvised"})
 	var parts := [
 		["attack_melee", int(f["attacks"]) - int(f["improvised"]), base],
@@ -332,8 +337,21 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 		out.append_array(_record(gs, db, "flee_danger", 1.0, danger, "success", base))
 		c.lines.append("You got away.")
 	elif cause == WON:
+		if not killed and int(f["routed"]) > 0 and _spares(db, (f["foes"] as Dictionary).values()):
+			out.append_array(_record(gs, db, "spare_foe", 1.0, danger, "success", base))
+			c.lines.append("You let them go.")
 		c.lines.append("The fight is over.")
 	return out
+
+
+## True if an enemy type in `types` has a tag in rules.combat.spare_tags.
+static func _spares(db: DataDb, types: Array) -> bool:
+	var tags: Array = db.rules["combat"]["spare_tags"]
+	for type: Variant in types:
+		for t: Variant in db.combat.enemies.get(type, {}).get("tags", []):
+			if tags.has(t):
+				return true
+	return false
 
 
 static func _record(gs: GameState, db: DataDb, action_id: String, intensity: float, risk: float,
@@ -362,10 +380,17 @@ static func sync(gs: GameState, db: DataDb) -> void:
 		c.monsters.clear()
 		c.area = gs.player.area
 	MonsterSim.run(gs, db, now, entered)
+	settle_if_over(gs, db)
+	c.sec = now
+
+
+## Ends a fight with no hostile or fleeing monster left (see settle_fight).
+## Commands._after calls it again after the NPCs, who may kill the last foe.
+static func settle_if_over(gs: GameState, db: DataDb) -> void:
+	var c := gs.combat
 	if c.has_fight() and not is_down(gs) and c.in_state(CombatState.HOSTILE).is_empty() \
 			and c.in_state(CombatState.FLEE).is_empty():
 		settle_fight(gs, db)
-	c.sec = now
 
 
 ## Ends a fight that is not lost: won if any foe died or ran off, else fled

@@ -23,6 +23,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			4: out = _migrate_4_to_5(out)
 			5: out = _migrate_5_to_6(out)
 			6: out = _migrate_6_to_7(out)
+			7: out = _migrate_7_to_8(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -78,4 +79,13 @@ static func _migrate_6_to_7(d: Dictionary) -> Dictionary:
 		if not r.has("context"):
 			r["context"] = {}
 	(d["world"] as Dictionary)["news"] = []
+	return d
+
+
+## v8 (M6.5): canon fights on the map. The world notes the events it
+## staged (none in a v7 save); a monster notes its stage event ("" = none).
+static func _migrate_7_to_8(d: Dictionary) -> Dictionary:
+	(d["world"] as Dictionary)["staged"] = {}
+	for m: Dictionary in (d["combat"] as Dictionary).get("monsters", {}).values():
+		m["stage"] = ""
 	return d

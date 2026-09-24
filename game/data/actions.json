@@ -46,6 +46,8 @@
 			"context": [{"key": "weapon", "equals": "improvised", "add_tags": {"combat.improvise": 1.0}}]},
 		"block_attack": {"name": "Block an attack", "minutes": 5, "base_xp": 7, "risk": 0.5,
 			"tags": {"combat.block": 1.0}},
+		"spare_foe": {"name": "Let a beaten foe go", "minutes": 5, "base_xp": 6, "risk": 0.0,
+			"tags": {"social.empathy": 1.0}},
 		"throw_object": {"name": "Throw something at an enemy", "minutes": 5, "base_xp": 7, "risk": 0.4,
 			"tags": {"combat.thrown": 1.0},
 			"context": [{"key": "weapon", "equals": "improvised", "add_tags": {"combat.improvise": 1.0}}]},

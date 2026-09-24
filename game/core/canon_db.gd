@@ -20,6 +20,8 @@ var dependents: Dictionary = {}
 ## Events that are a mutate target (of on_fail or a hook). They only run in
 ## place of another event.
 var alt_only: Dictionary = {}
+## Events with a `stage` (a canon fight on the map, M6.5), in run order.
+var stages: Array[String] = []
 var errors: Array[String] = []
 
 
@@ -122,6 +124,36 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 	var hook_ids := {}
 	for hook: Dictionary in ev.get("hooks", []):
 		_validate_hook(where, hook, hook_ids)
+	if ev.has("stage"):
+		_validate_stage(where, ev["stage"])
+
+
+## A canon fight on the map (M6.5, ADR 0011): {"area", "hours": [from, to],
+## "foes": [{"enemy", "pos": [x, y]}], "allies"?: [npc ids],
+## "when_flags"?, "unless_flags"?, "line"?, "note"?}. CombatDb.validate checks
+## the enemies and the map.
+func _validate_stage(where: String, st: Variant) -> void:
+	var sw := where + " stage"
+	if not st is Dictionary:
+		errors.append("%s: must be an object." % sw)
+		return
+	for field: String in ["area", "hours", "foes"]:
+		if not (st as Dictionary).has(field):
+			errors.append("%s: missing '%s'." % [sw, field])
+			return
+	var h: Variant = st["hours"]
+	if not h is Array or (h as Array).size() != 2 or int(h[0]) < 0 or int(h[1]) > 24 \
+			or int(h[0]) == int(h[1]):
+		errors.append("%s: hours must be [from, to] with 0 <= from != to <= 24." % sw)
+	var foes: Variant = st["foes"]
+	if not foes is Array or (foes as Array).is_empty():
+		errors.append("%s: foes must be a non-empty list." % sw)
+	else:
+		for f: Variant in foes:
+			if not f is Dictionary or not (f as Dictionary).has("enemy") \
+					or not f.get("pos", null) is Array or (f["pos"] as Array).size() != 2:
+				errors.append("%s: each foe needs 'enemy' and 'pos': [x, y]." % sw)
+	_check_npcs(sw + " allies", st.get("allies", []))
 
 
 ## A player hook (M6.4, ADR 0011): {"id", "did": [{"action": [ids],
@@ -195,6 +227,9 @@ func _build_order() -> void:
 	for id: String in dependents:
 		(dependents[id] as Array).sort_custom(func(a: String, b: String) -> bool:
 			return order.find(a) < order.find(b))
+	for id in order:
+		if events[id].has("stage"):
+			stages.append(id)
 
 
 func _before(a: String, b: String) -> bool:

@@ -30,7 +30,7 @@ const ARENA := [
 static func db() -> DataDb:
 	var d := ToyMaps.db()
 	for tag: String in ["combat.melee", "combat.block", "combat.thrown", "combat.improvise",
-			"running", "running.escape", "medicine", "medicine.first_aid"]:
+			"running", "running.escape", "medicine", "medicine.first_aid", "social", "social.empathy"]:
 		d.tags[tag] = ""
 	d.actions["attack_melee"] = {"name": "Attack", "minutes": 5, "base_xp": 8, "risk": 0.5,
 		"tags": {"combat.melee": 1.0},
@@ -42,6 +42,8 @@ static func db() -> DataDb:
 		"context": [{"key": "weapon", "equals": "improvised", "add_tags": {"combat.improvise": 1.0}}]}
 	d.actions["flee_danger"] = {"name": "Flee", "minutes": 10, "base_xp": 8, "risk": 0.6,
 		"tags": {"running.escape": 1.0}}
+	d.actions["spare_foe"] = {"name": "Spare", "minutes": 5, "base_xp": 6, "risk": 0.0,
+		"tags": {"social.empathy": 1.0}}
 	d.actions["bandage_wound"] = {"name": "Bandage", "minutes": 20, "base_xp": 6, "risk": 0.0,
 		"tags": {"medicine.first_aid": 1.0}}
 	d.rules["combat"]["knockout"]["wake"] = {"field": {"area": "shop", "pos": [1, 1]}}

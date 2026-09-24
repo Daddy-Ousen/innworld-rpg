@@ -6,7 +6,8 @@
 ##             "home_x", "home_y", "carry": world seconds not yet acted,
 ##             "chase": turns spent chasing, "scared": turns left scared,
 ##             "rolled_spot": the player already tried to spot it,
-##             "pack": how many monsters its spawn placed together (1 if alone)}.
+##             "pack": how many monsters its spawn placed together (1 if alone),
+##             "stage": the canon event that staged it, or "" (M6.5)}.
 ##   fight: {} when there is none, else {"start": clock minute,
 ##          "foes": {monster id: type} (everyone who took part), "attacks",
 ##          "improvised" (attacks with a held item), "blocks", "throws",
@@ -101,6 +102,7 @@ static func from_dict(d: Dictionary) -> CombatState:
 			m[k] = int(m.get(k, 0))
 		m["rolled_spot"] = bool(m.get("rolled_spot", false))
 		m["pack"] = maxi(int(m["pack"]), 1)
+		m["stage"] = String(m.get("stage", ""))
 		c.monsters[id] = m
 	var f: Dictionary = (d.get("fight", {}) as Dictionary).duplicate(true)
 	if not f.is_empty():
