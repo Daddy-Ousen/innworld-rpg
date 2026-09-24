@@ -1,0 +1,52 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.57H",
+	"events": {
+		"b1.pawn_waits_for_the_queen": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"worker": {"prefer": ["pawn"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"workers": {"prefer": [], "fallback_tags": ["worker"]}
+			},
+			"requires": {"alive": ["pawn", "erin_solstice"], "flags": ["pawn.back_in_hive"], "not_flags": []},
+			"depends_on": ["b1.pawn_goes_home_to_the_hive"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.plays_boldly", "antinium_hive.workers_idle"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.57H", "confidence": "confirmed", "note": "Morning of the expedition. Pawn says the Workers have no tasks because they wait for the Queen, and 'it will be tomorrow'. In 1.60 Erin notes he plays with new confidence."},
+			"summary": "Four Workers carry the maimed Pawn to the inn to play chess. On the way they pass the Horns: the Workers have no tasks, Pawn says, because they wait for their Queen to finish her work. He plays boldly, taking chances, and leaves for the city promising to come back tomorrow."
+		},
+		"b1.expedition_enters_the_ruins": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"leader": {"prefer": ["yvlon_byres"], "fallback_tags": ["captain"]},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"ranger": {"prefer": ["cervial_dermondy"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": ["adventurers.ruins_raid_planned", "horns_of_hammerad.enter_ruins_soon"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["ruins_expedition.entered", "ruins_expedition.found_crypt"],
+				"clear_flags": ["horns_of_hammerad.enter_ruins_soon"]
+			},
+			"news": "Five Silver-rank adventuring teams, over forty strong, went down into the ruins outside Liscor this morning while a crowd cheered.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.57H", "confidence": "confirmed", "note": "Day 39. Teams: Horns of Hammerad, Silver Spears, Kyrial's Vanguard (Gregor), Flawless Flights (Cervial), Circle of Reneë (Menes); a sixth captain pulled out. The Watch and Bronze-rank teams guard the door. Gregor and Menes are not NPCs."},
+			"summary": "Five Silver-rank teams enter the Ruins of Liscor with Olesm along. Arrows and shields cut down a charge of freshly dead zombies. Deeper lies a crypt: stone slabs for the dead, a broken statue, then sacks of looted gold left on the floor. The scouts never came back. Then the walls open."
+		}
+	},
+	"system": [
+		{"who": "sostrom", "kind": "class", "name": "[Elementalist]", "level": 16, "confidence": "confirmed"}
+	]
+}

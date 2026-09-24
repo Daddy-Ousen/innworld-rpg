@@ -63,7 +63,7 @@ func test_hook_data_is_sound() -> void:
 			for m: Dictionary in hook["did"]:
 				for a: String in m["action"]:
 					assert_true(_db.actions.has(a), "%s: action %s" % [id, a])
-	assert_eq(hooks, 7)
+	assert_eq(hooks, 9)
 	assert_true(_db.canon.alt_only.has("b1.player_beat_rock_crab_first"))
 
 

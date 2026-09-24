@@ -2,8 +2,8 @@ extends GutTest
 ## Real Book 1 canon (game/data/canon/book1). With no player input, every
 ## canon event in days 1–LAST_DAY happens as written: no drift.
 
-## Last day with extracted canon (chapter 1.54).
-const LAST_DAY := 37
+## Last day with extracted canon (chapter 1.63, the end of Book 1).
+const LAST_DAY := 41
 ## The player arrives with the Great Ritual (night 7) and starts on day 8.
 const ARRIVAL_DAY := 8
 
@@ -16,8 +16,8 @@ func before_all() -> void:
 
 func test_canon_loads_without_errors() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
-	assert_gte(_db.canon.events.size(), 130)
-	assert_gte(_db.canon.npcs.size(), 47)
+	assert_gte(_db.canon.events.size(), 151)
+	assert_gte(_db.canon.npcs.size(), 50)
 	assert_gte(_db.canon.locations.size(), 44)
 
 
@@ -92,6 +92,10 @@ func test_killing_the_free_queen_keeps_workers_home() -> void:
 	assert_eq(gs.world.status("b1.queen_allows_workers_visit"), Director.CANCELLED)
 	assert_eq(gs.world.status("b1.workers_learn_chess"), Director.CANCELLED, "no Workers without her leave")
 	assert_eq(gs.world.status("b1.rags_brings_goblins_to_eat"), Director.DONE, "the Goblins still come")
+	assert_eq(gs.world.status("b1.klbkch_is_reborn"), Director.CANCELLED, "no Queen, no Rite")
+	assert_false(gs.world.is_alive(_db.canon, "klbkch"))
+	assert_eq(gs.world.status("b1.workers_name_themselves"), Director.CANCELLED, "no chess club to guard the inn")
+	assert_eq(gs.world.status("b1.rags_kills_skinner"), Director.DONE, "the Goblins still kill Skinner")
 	assert_gt(gs.world.drift, 0.0)
 
 
@@ -207,5 +211,49 @@ func test_without_ksmvr_pawn_keeps_his_arms_and_the_inn_goes_on() -> void:
 	assert_false(gs.flags.has("pawn.maimed"))
 	for id: String in ["b1.horns_lodge_at_the_inn", "b1.captains_plan_at_the_inn", "b1.olesm_solves_erins_puzzle",
 			"b1.toren_guards_sleeping_erin", "b1.calruz_shows_erin_hammer_blow", "b1.rags_kills_the_feathered_chieftain"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+	assert_gt(gs.world.drift, 0.0)
+
+func test_days_38_to_41_end_book1() -> void:
+	var gs := GameState.new_game(1, _db)
+	ToyCanon.sleep_through(gs, _db, 38)
+	assert_false(gs.world.is_alive(_db.canon, "klbkch"), "still dead on day 38")
+	assert_false(gs.world.is_alive(_db.canon, "toriska"), "Persua pushed her onto a root")
+	ToyCanon.sleep_through(gs, _db, LAST_DAY)
+	var days := {
+		"b1.silver_merchant_stops_ryoka": 38, "b1.gazi_fights_silverfang_warriors": 38, "b1.persua_ambushes_ryoka": 38,
+		"b1.ryoka_breaks_the_geas": 38, "b1.calruz_trains_erin": 38, "b1.olesm_joins_the_expedition": 38,
+		"b1.pawn_waits_for_the_queen": 39, "b1.expedition_enters_the_ruins": 39,
+		"b1.expedition_breaks_the_crypt_ambush": 39, "b1.skinner_wakes_in_the_ruins": 39,
+		"b1.skinner_leads_the_dead_into_liscor": 39, "b1.workers_name_themselves": 39,
+		"b1.knight_dies_holding_the_door": 39, "b1.watch_holds_market_street": 39, "b1.klbkch_is_reborn": 39,
+		"b1.rags_kills_skinner": 39, "b1.erin_mourns_the_workers": 40, "b1.toren_hides_skinners_eye": 40,
+		"b1.pisces_studies_the_crypt_lord": 40, "b1.magnolia_visits_yvlon": 41, "b1.ryoka_returns_to_liscor": 41}
+	for id: String in days:
+		assert_eq(gs.world.status(id), Director.DONE, id)
+		assert_eq(int(gs.world.events[id]["day"]), days[id], id)
+	assert_true(gs.world.is_alive(_db.canon, "klbkch"), "the Rite brings him back")
+	for npc: String in ["gerial", "sostrom", "cervial_dermondy", "toriska"]:
+		assert_false(gs.world.is_alive(_db.canon, npc), npc)
+	for npc: String in ["calruz", "ceria_springwalker", "olesm", "yvlon_byres", "persua", "claudeil"]:
+		assert_true(gs.world.is_alive(_db.canon, npc), npc + " is alive in the data")
+	for f: String in ["calruz.missing", "ceria.missing", "olesm.missing", "skinner.dead", "klbkch.reborn",
+			"ryoka.geas_broken", "ryoka.back_in_liscor", "antinium_hive.workers_named", "magnolia.gone_north"]:
+		assert_true(gs.flags.has(f), f)
+	for f: String in ["horns_of_hammerad.stay_at_inn", "ryoka.geas_to_find_azkerash", "ryoka.bound_for_liscor",
+			"gnolls.warriors_coming", "persua.trails_ryoka"]:
+		assert_false(gs.flags.has(f), f)
+	assert_eq(gs.world.drift, 0.0)
+
+
+func test_without_rags_the_worm_still_falls_out_of_the_canon() -> void:
+	var gs := GameState.new_game(1, _db)
+	assert_eq(Commands.kill_npc(gs, _db, "rags"), "")
+	ToyCanon.sleep_through(gs, _db, LAST_DAY)
+	assert_eq(gs.world.status("b1.rags_kills_skinner"), Director.CANCELLED)
+	assert_eq(gs.world.status("b1.toren_hides_skinners_eye"), Director.CANCELLED, "no worm, no eye")
+	assert_false(gs.flags.has("skinner.dead"))
+	for id: String in ["b1.skinner_leads_the_dead_into_liscor", "b1.klbkch_is_reborn", "b1.erin_mourns_the_workers",
+			"b1.ryoka_returns_to_liscor"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_gt(gs.world.drift, 0.0)
