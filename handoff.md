@@ -8,7 +8,7 @@ M6.5 canon fights + the M6 slice check. User picks (2026-09-24, all my recommend
 - Checked on screen (screenshots): the Chieftain marker "Goblin Chieftain 20/20" at the inn door at 09:00; Erin walks over and fights next to the player.
 
 ## Waiting on the user
-- Review the M6.5 PR: the stage line, the hook news line, the Chieftain stats (guesses), the new level curve. Then merge and tag `m6.5-done` and `m6-done` on the merge commit.
+- Review PR #17 (https://github.com/Daddy-Ousen/innworld-rpg/pull/17): the stage line, the hook news line, the Chieftain stats (guesses), the new level curve. Then merge and tag `m6.5-done` and `m6-done` on the merge commit.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
 ## Next
