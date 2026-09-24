@@ -1,0 +1,95 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.49",
+	"events": {
+		"b1.thief_burns_market_street": {
+			"tier": 2,
+			"window": {"earliest": 34, "latest": 35, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"thief": {"prefer": ["princess_thief"], "fallback_tags": []},
+				"workers": {"prefer": [], "fallback_tags": ["worker"], "optional": true}
+			},
+			"requires": {"alive": ["princess_thief"], "flags": ["liscor.human_thief_at_large"], "not_flags": []},
+			"depends_on": ["b1.princess_steals_in_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["liscor_market.half_burned", "liscor.blames_humans_for_fire"]
+			},
+			"news": "Half of Market Street burned in the night. The Watch says someone caught the Human thief, who set the fire with a spell to get away.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "likely", "note": "'Last night' in 1.49: the night of day 34 (guess). Relc blames the mystery thief; that it is the [Princess] is likely, not stated. Workers have rebuilt much of it by the next day (1.50)."},
+			"summary": "Late at night someone catches the market thief, who escapes with a fire spell. Flames race through the wooden stalls of half of Market Street, hot enough to crack the paving. The Watch's mages come too late, and the rest is smashed to starve the fire. Drakes and Gnolls blame Humans."
+		},
+		"b1.relc_warns_erin": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"guard": {"prefer": ["relc"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["relc", "erin_solstice"], "flags": ["relc.made_peace_with_erin"], "not_flags": []},
+			"depends_on": ["b1.relc_makes_up_with_erin", "b1.adventurers_attack_goblins_at_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.warned_by_watch", "liscor_dungeon.monsters_crawl_out", "liscor_watch.guards_the_ruins"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "Morning. He still blames Erin and avoids the inn: too many Goblins. The Watch will leave the Goblins be while they keep clear of the city. Krshia and Selys are too busy for Erin that day."},
+			"summary": "Relc shows Erin the burnt street, grieving that the Hive never mourned Klbkch. He warns her the new Prognugator looks familiar, the Watch just laughed at the adventurers she beat, and her skeleton must stay out of the city. The Watch is stretched at the ruins, where pale tentacled things come out."
+		},
+		"b1.ksmvr_takes_pawn": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []},
+				"worker": {"prefer": ["pawn"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ksmvr", "pawn"], "flags": ["pawn.named"], "not_flags": []},
+			"depends_on": ["b1.free_queen_sends_ksmvr", "b1.pawn_builds_an_outhouse"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.taken_for_judgment", "pawn.lost_an_antenna", "erin.struck_by_ksmvr", "erin.knows_aberration"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "ksmvr", "delta": -3}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "Evening chess. Ksmvr says complaints may go to the Queen, who is busy. The Workers say no Worker who became individual has ever not been an Aberration. Delta is a design value."},
+			"summary": "At chess night Ksmvr walks in, the image of Klbkch, and takes Pawn at sword point to judge whether he is an Aberration. He cuts off Pawn's antenna for speaking, strikes Erin and beheads the skeleton. Workers hold Erin back on the plain: the Hive is sealed, and its Soldiers would kill her."
+		},
+		"b1.horns_lodge_at_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 35, "latest": 36, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"vice": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["horns_of_hammerad.bound_for_liscor"], "not_flags": []},
+			"depends_on": ["b1.captains_plan_the_ruins_raid"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.stay_at_inn", "wandering_inn.first_lodgers"],
+				"relationship": [
+					{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.49", "confidence": "confirmed", "note": "That night, after Ksmvr. Nobody had seen the sign. They met Pisces here before (1.34). Calruz swears on his honour to spare her guests unless provoked. Delta is a design value."},
+			"summary": "Back at the inn, Erin finds adventurers swinging at Rags's Goblins by the door. A Minotaur catches her thrown frying pan, but the Goblins escape. They are the Horns of Hammerad, and Liscor has no beds left. Once they promise to keep her rules and spare her guests, she lets them the rooms upstairs."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "other", "name": "Pulls itself back together", "level": null, "confidence": "confirmed", "note": "Beheaded and scattered by Ksmvr, it reassembles; Olesm says most skeletons fall apart for good (1.50)."}
+	]
+}

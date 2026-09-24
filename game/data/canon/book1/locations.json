@@ -378,6 +378,24 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.40R", "confidence": "confirmed", "note": "Off the rough road through the High Passes; a yellow banner marks it for the Runner request. Whether it is the Dragon's backup lair of 1.01 is not confirmed."},
 			"summary": "Cave mouth big enough for a ship, opening into a hollowed mountain full of books, arms, tapestries, magic items and an alchemy lab. Gargoyles, Carn Wolves and killer goats live nearby, but none follow a visitor inside."
+		},
+		"esthelm_adventurers_guild": {
+			"name": "Esthelm Adventurers' Guild",
+			"kind": "building",
+			"parent": "esthelm",
+			"tags": ["guild", "adventurers", "lodging", "mess_hall"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed", "note": "Mess hall and courtyard from 1.47R-1.48R."},
+			"summary": "Big guild hall in Esthelm with rooms to rent upstairs, a guild shop, a loud mess hall like a school canteen and an open yard for sparring. The Horns of Hammerad stay here before the ruins."
+		},
+		"krshia_home": {
+			"name": "Krshia's home",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": ["home", "gnoll"],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.45", "confidence": "confirmed"},
+			"summary": "Krshia's rooms in Liscor: rugs, pillows and big padded chairs, less tidy than her stall. She hosts Erin there with tea and cubes of raw meat."
 		}
 	}
 }

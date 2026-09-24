@@ -1,0 +1,53 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.53",
+	"events": {
+		"b1.pawn_goes_home_to_the_hive": {
+			"tier": 2,
+			"window": {"earliest": 37, "latest": 38, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"worker": {"prefer": ["pawn"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.judged_individual"], "not_flags": []},
+			"depends_on": ["b1.erin_sings_through_the_night"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.back_in_hive", "antinium_hive.rite_of_anastases", "erin.has_a_cold", "ceria.knows_hive_makes_new_antinium"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.53", "confidence": "confirmed", "note": "Morning. Pawn tells Ceria the Hive came ten years ago to make a new kind of Antinium. Ceria can numb Erin's sore throat but cannot cure a cold."},
+			"summary": "Erin wakes with a cold. Calruz asks Pawn why he never fought back; Pawn says a Worker's life belongs to the Hive. Erin begs him to stay, but Pawn says he is important now: the Queen will call him once her Rite of Anastases ends. He half lies that staying would bring Soldiers, and goes home."
+		},
+		"b1.toren_guards_sleeping_erin": {
+			"tier": 2,
+			"window": {"earliest": 37, "latest": 38, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"skeleton": {"prefer": ["toren"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["toren", "erin_solstice"], "flags": ["toren.named"], "not_flags": []},
+			"depends_on": ["b1.erin_names_the_skeleton_toren", "b1.horns_lodge_at_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["toren.guards_erin", "toren.plays_chess", "selys.knows_pisces_necromancer", "selys.threatens_pisces_bounty"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.53", "confidence": "confirmed", "note": "The rest of the day. Toren understands Goblin speech: the dead share one language. Rags comes with about thirty Goblins; five wait outside. Toren is a Level 3 [Skeleton Warrior]."},
+			"summary": "Erin sleeps off her cold while Toren blocks the kitchen door, even to Pisces, who made it. Selys screams at it, then pummels Pisces and threatens a twenty-gold bounty if he raises undead near Liscor. Bruised, Rags plays chess against herself until Toren sits down and loses to her game after game."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "level", "name": "[Skeleton Warrior]", "level": 3, "confidence": "confirmed"},
+		{"who": "pisces", "kind": "other", "name": "Spell [Invisibility]", "level": null, "confidence": "confirmed", "note": "Tier 4; a month of study to master."},
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Numb]", "level": null, "confidence": "confirmed"}
+	]
+}

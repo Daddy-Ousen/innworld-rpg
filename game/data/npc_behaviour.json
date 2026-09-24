@@ -147,9 +147,9 @@
 		},
 		"pawn": {
 			"confidence": "guess",
-			"notes": "After he names himself (1.30), Pawn brings Workers to the inn each evening or every other evening, when the sun meets the mountains (1.34). Before that he works in the Hive.",
+			"notes": "After he names himself (1.30), Pawn brings Workers to the inn each evening or every other evening, when the sun meets the mountains (1.34). Before that he works in the Hive. He stays away while Ksmvr holds him for judgment (1.49-1.50).",
 			"goals": [
-				{"goal": "visit_inn", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["pawn.named"],
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["pawn.named"], "unless_flags": ["pawn.taken_for_judgment"],
 					"target": {"area": "inn_interior", "pos": [6, 6]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
@@ -169,6 +169,42 @@
 			"goals": [
 				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "target": {"area": "inn_interior", "pos": [14, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"calruz": {
+			"confidence": "guess",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map).",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
+					"target": {"area": "inn_interior", "pos": [10, 11]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"ceria_springwalker": {
+			"confidence": "guess",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map).",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
+					"target": {"area": "inn_interior", "pos": [3, 8]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"gerial": {
+			"confidence": "guess",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map).",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
+					"target": {"area": "inn_interior", "pos": [4, 10]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"sostrom": {
+			"confidence": "guess",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map).",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
+					"target": {"area": "inn_interior", "pos": [6, 11]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		}
 	}

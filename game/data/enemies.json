@@ -40,7 +40,12 @@
 			"canon_ref": {"book": 1, "chapter": "1.42", "confidence": "confirmed", "note": "The biggest of the three, with an axe; he holds off three Antinium at once. Only in a canon stage, never in a spawn. His danger is above the others, so the fight's records name him."},
 			"tags": ["human", "adventurer"], "color": "#6e5540", "danger": 0.9, "behaviour": "pack",
 			"hp": 24, "armor": 2, "accuracy": 4, "evasion": 2, "damage": [3, 5], "act_seconds": 6,
-			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.4, "scared_by": []}
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.4, "scared_by": []},
+		"goblin_feathered_chieftain": {"name": "Feathered Goblin Chieftain", "confidence": "guess",
+			"canon_ref": {"book": 1, "chapter": "1.52R", "confidence": "confirmed", "note": "Leads a feathered Goblin tribe on the Floodplains: nearly twice a Goblin's size, heavyset, in patched rusty armour, with an axe. The small band's leader burns him with a spell. Only in a canon stage, never in a spawn."},
+			"tags": ["goblin", "chieftain"], "color": "#4d6a2a", "danger": 0.95, "behaviour": "pack",
+			"hp": 18, "armor": 1, "accuracy": 4, "evasion": 2, "damage": [2, 5], "act_seconds": 6,
+			"aggro_radius": 8, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

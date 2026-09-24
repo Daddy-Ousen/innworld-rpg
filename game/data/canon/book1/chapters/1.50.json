@@ -1,0 +1,76 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.50",
+	"events": {
+		"b1.captains_plan_at_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 36, "latest": 37, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"noble": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["cervial_dermondy"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["horns_of_hammerad.stay_at_inn"], "not_flags": []},
+			"depends_on": ["b1.horns_lodge_at_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.adventurers_meet_here", "erin.feeds_adventurers", "wandering_inn.full_house"]
+			},
+			"news": "The Silver-rank teams that mean to raid the ruins now eat and plan at the inn on the hill, where a skeleton waits the tables.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Ceria needs about two days to learn [Illumination]; the raid is at least four days off. The nights are colder and it rains. Erin runs out of ale."},
+			"summary": "Erin cooks breakfast for her lodgers, dismayed that Ceria is no Elf. Out of food, she hails the captains in the market, who haul her supplies up the hill and argue over the raid at her tables all day. Toren waits on them. Pisces and Ceria trade a single cold word each."
+		},
+		"b1.olesm_solves_erins_puzzle": {
+			"tier": 2,
+			"window": {"earliest": 36, "latest": 37, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"tactician": {"prefer": ["olesm"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["olesm"], "flags": ["olesm.copies_erins_puzzle"], "not_flags": []},
+			"depends_on": ["b1.erin_answers_the_titans_puzzle"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["olesm.solved_erins_puzzle"],
+				"relationship": [
+					{"from": "olesm", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Evening. As a child Erin needed about a week for the same puzzle. Delta is a design value."},
+			"summary": "Olesm bursts into the inn, gaunt, unwashed and shedding scales, waving four chess moves: he shut himself away for most of a week and solved the puzzle Erin sent the Titan, and levelled twice. He is horrified to be served by a skeleton; most, he says, fall apart within a day or two."
+		},
+		"b1.pawn_returns_maimed": {
+			"tier": 2,
+			"window": {"earliest": 36, "latest": 37, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"worker": {"prefer": ["pawn"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true},
+				"workers": {"prefer": [], "fallback_tags": ["worker"], "optional": true}
+			},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.taken_for_judgment"], "not_flags": []},
+			"depends_on": ["b1.ksmvr_takes_pawn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.maimed", "pawn.judged_individual"],
+				"clear_flags": ["pawn.taken_for_judgment"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.50", "confidence": "confirmed", "note": "Late that night; it goes on in 1.51. The Workers say he is no longer a Worker: an individual, not an Aberration."},
+			"summary": "In the cold rain, Workers help Pawn into the crowded inn. He passed Ksmvr's questioning and was judged an individual, not an Aberration, but he has lost three arms, part of a leg and an antenna. The adventurers' potions stop the bleeding; nothing can give back the limbs."
+		}
+	},
+	"system": [
+		{"who": "olesm", "kind": "level", "name": "[Tactician]", "level": 24, "confidence": "likely", "note": "He levels twice from Level 22 (1.18), if he gained none in between."},
+		{"who": "ceria_springwalker", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed"},
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Illumination]", "level": null, "confidence": "confirmed", "note": "Tier 2 on paper, near Tier 3-4 in difficulty; lights about a hundred metres. She is still learning it."}
+	]
+}

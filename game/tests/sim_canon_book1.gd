@@ -2,8 +2,8 @@ extends GutTest
 ## Real Book 1 canon (game/data/canon/book1). With no player input, every
 ## canon event in days 1–LAST_DAY happens as written: no drift.
 
-## Last day with extracted canon (chapter 1.44R).
-const LAST_DAY := 33
+## Last day with extracted canon (chapter 1.54).
+const LAST_DAY := 37
 ## The player arrives with the Great Ritual (night 7) and starts on day 8.
 const ARRIVAL_DAY := 8
 
@@ -16,9 +16,9 @@ func before_all() -> void:
 
 func test_canon_loads_without_errors() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
-	assert_gte(_db.canon.events.size(), 106)
-	assert_gte(_db.canon.npcs.size(), 44)
-	assert_gte(_db.canon.locations.size(), 42)
+	assert_gte(_db.canon.events.size(), 130)
+	assert_gte(_db.canon.npcs.size(), 47)
+	assert_gte(_db.canon.locations.size(), 44)
 
 
 func test_new_game_starts_after_the_great_ritual() -> void:
@@ -62,7 +62,7 @@ func test_book1_runs_as_canon() -> void:
 	var heard := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.NEWS) 			.map(func(n: Dictionary) -> String: return n["event"])
 	heard.sort()
 	assert_eq(heard, news_events, "one news line per event with news")
-	assert_gte(news_events.size(), 29)
+	assert_gte(news_events.size(), 34)
 
 
 func test_killing_relc_bends_book1() -> void:
@@ -145,7 +145,7 @@ func test_days_25_to_28_heal_ryoka_and_bring_gazi_and_the_skeleton() -> void:
 
 func test_ryoka_meets_the_dragon_and_slips_away_from_magnolia() -> void:
 	var gs := GameState.new_game(1, _db)
-	ToyCanon.sleep_through(gs, _db, LAST_DAY)
+	ToyCanon.sleep_through(gs, _db, 33)
 	assert_eq(int(gs.world.events["b1.ryoka_takes_the_high_passes_request"]["day"]), 30)
 	assert_eq(gs.world.status("b1.teriarch_lays_a_geas_on_ryoka"), Director.DONE)
 	assert_eq(gs.world.status("b1.ryoka_slips_away_from_magnolia"), Director.DONE)
@@ -169,5 +169,43 @@ func test_without_pisces_ryokas_leg_stays_broken_but_erins_week_goes_on() -> voi
 	assert_false(gs.flags.has("wandering_inn.has_skeleton"))
 	for id: String in ["b1.erin_burns_shield_spider_nest", "b1.gazi_comes_to_liscor", "b1.pawn_builds_an_outhouse",
 			"b1.adventurers_attack_goblins_at_inn"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+	assert_gt(gs.world.drift, 0.0)
+
+
+func test_days_34_to_37_bring_the_horns_and_take_pawn() -> void:
+	var gs := GameState.new_game(1, _db)
+	ToyCanon.sleep_through(gs, _db, 37)
+	var days := {
+		"b1.ceria_teaches_ryoka_light": 34, "b1.pisces_tests_erin_and_rags": 34, "b1.erin_tells_krshia_of_her_world": 34,
+		"b1.erin_names_the_skeleton_toren": 34, "b1.ryoka_runs_from_esthelm": 34, "b1.thief_burns_market_street": 34,
+		"b1.ksmvr_takes_pawn": 35, "b1.horns_lodge_at_the_inn": 35, "b1.rags_kills_the_feathered_chieftain": 35,
+		"b1.rags_band_chases_ryoka": 35, "b1.pawn_returns_maimed": 36, "b1.erin_sings_through_the_night": 36,
+		"b1.ksmvr_backs_down_outside_liscor": 36, "b1.pawn_goes_home_to_the_hive": 37, "b1.gazi_hunts_for_ryoka": 37,
+		"b1.calruz_shows_erin_hammer_blow": 37}
+	for id: String in days:
+		assert_eq(gs.world.status(id), Director.DONE, id)
+		assert_eq(int(gs.world.events[id]["day"]), days[id], id)
+	for f: String in ["horns_of_hammerad.stay_at_inn", "pawn.judged_individual", "pawn.maimed", "toren.named",
+			"krshia.knows_erin_otherworld", "ryoka.in_blood_fields", "gazi.hunts_ryoka", "calruz.will_train_erin"]:
+		assert_true(gs.flags.has(f), f)
+	for f: String in ["pawn.taken_for_judgment", "liscor.gazi_in_city", "ryoka.has_speed_potion", "ryoka.bound_for_esthelm"]:
+		assert_false(gs.flags.has(f), f)
+	assert_eq(gs.world.events["b1.rags_kills_the_feathered_chieftain"]["roles"]["chieftain"], "rags")
+	assert_eq(_db.canon.npcs["relc"]["name"], "Relc Grasstongue")
+	assert_eq(_db.canon.npcs["toren"]["name"], "Toren")
+	assert_eq(gs.world.drift, 0.0)
+
+
+func test_without_ksmvr_pawn_keeps_his_arms_and_the_inn_goes_on() -> void:
+	var gs := GameState.new_game(1, _db)
+	assert_eq(Commands.kill_npc(gs, _db, "ksmvr"), "")
+	ToyCanon.sleep_through(gs, _db, LAST_DAY)
+	for id: String in ["b1.ksmvr_takes_pawn", "b1.pawn_returns_maimed", "b1.erin_sings_through_the_night",
+			"b1.ksmvr_backs_down_outside_liscor"]:
+		assert_eq(gs.world.status(id), Director.CANCELLED, id)
+	assert_false(gs.flags.has("pawn.maimed"))
+	for id: String in ["b1.horns_lodge_at_the_inn", "b1.captains_plan_at_the_inn", "b1.olesm_solves_erins_puzzle",
+			"b1.toren_guards_sleeping_erin", "b1.calruz_shows_erin_hammer_blow", "b1.rags_kills_the_feathered_chieftain"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_gt(gs.world.drift, 0.0)

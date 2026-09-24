@@ -1,0 +1,64 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.54",
+	"events": {
+		"b1.gazi_hunts_for_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 37, "latest": 38, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {
+				"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"vice": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"second_mage": {"prefer": ["sostrom"], "fallback_tags": [], "optional": true},
+				"thief": {"prefer": ["princess_thief"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["gazi_pathseeker", "ceria_springwalker", "ryoka_griffin"], "flags": ["liscor.gazi_in_city"], "not_flags": []},
+			"depends_on": ["b1.horns_lodge_at_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["gazi.hunts_ryoka", "gazi.left_liscor", "ceria.defied_gazi", "princess_thief.has_web_ring"],
+				"clear_flags": ["liscor.gazi_in_city", "gazi.protects_the_inn"],
+				"relationship": [
+					{"from": "ceria_springwalker", "to": "gazi_pathseeker", "delta": -2}
+				]
+			},
+			"news": "Gazi of Reim put a sword to a half-Elf adventurer's throat in the street. A fleeing girl snared the adventurers in magic webs, and Gazi left the city.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "confirmed", "note": "Afternoon. Gerial lets slip Celum, Ryoka's inn and Esthelm. That evening Gazi tells Erin she will be away a while and asks her not to leave. Ceria burns the webs away with [Flashfire]. Delta is a design value."},
+			"summary": "Gazi charms Gerial and Sostrom with her eye to learn where Ryoka is; Ceria shields her mind and refuses. When Ceria insults the King of Destruction, Gazi's sword is at her throat. A Watch whistle panics the invisible [Princess], whose ring snares the Horns in webs. Gazi leaves Liscor to hunt Ryoka."
+		},
+		"b1.calruz_shows_erin_hammer_blow": {
+			"tier": 2,
+			"window": {"earliest": 37, "latest": 38, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {"prefer": ["calruz"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["calruz", "erin_solstice"], "flags": ["horns_of_hammerad.stay_at_inn"], "not_flags": []},
+			"depends_on": ["b1.horns_lodge_at_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["calruz.will_train_erin", "erin.knows_combat_skills", "horns_of_hammerad.enter_ruins_soon", "erin.remembers_king_rhyme"],
+				"relationship": [
+					{"from": "calruz", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "confirmed", "note": "Evening. [Hammer Blow] is Calruz's only Skill. He seems to know Gazi by sight. He wants to learn how to deal with Human women, thinking of Ryoka. Delta is a design value."},
+			"summary": "Erin teaches Toren chess, and recalls a rhyme from her childhood: a king that moves soon dies. Calruz says she should have fought for Pawn. She has never heard of combat Skills, so he smashes a boulder with [Hammer Blow] and says he will train her for the two days before the ruins."
+		}
+	},
+	"system": [
+		{"who": "calruz", "kind": "skill", "name": "[Hammer Blow]", "level": null, "confidence": "confirmed", "note": "His only Skill, by his own word. It shatters a waist-high boulder."},
+		{"who": "gerial", "kind": "class", "name": "[Warrior]", "level": 17, "confidence": "confirmed", "note": "As Gazi sees him."},
+		{"who": "pisces", "kind": "other", "name": "Mostly a [Necromancer]", "level": null, "confidence": "likely", "note": "Ceria: perhaps Level 20+ as a pure [Mage], and he knows at least one Tier 4 spell. Expelled from Wistram for his experiments."},
+		{"who": "gazi_pathseeker", "kind": "other", "name": "[Charm] with her eye", "level": null, "confidence": "confirmed", "note": "Gazers cast spells by looking. She is one of the King of Destruction's Seven."},
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Flashfire]", "level": null, "confidence": "confirmed"},
+		{"who": "princess_thief", "kind": "other", "name": "Emerald ring of webs", "level": null, "confidence": "confirmed", "note": "Shoots sticky webbing as strong as stone. She also casts [Invisibility]."}
+	]
+}
