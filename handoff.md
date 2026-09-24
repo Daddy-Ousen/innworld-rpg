@@ -11,7 +11,7 @@ M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 pla
 - Docs: ROADMAP M7 section, ADR 0012, progress.
 
 ## Waiting on the user
-- Review the M7.1 events (PR). Flagged conflicts:
+- Review the M7.1 events in PR #18 (https://github.com/Daddy-Ousen/innworld-rpg/pull/18). Flagged conflicts:
   - Ryoka's Guild is in Remendia (1.20R), Wales (1.26R) and Celum (1.33R).
   - 1.32R says "a week ago" but also "three days".
   - The Goblin grave is "several hundred feet" away (1.30) or "a mile" (1.31).
