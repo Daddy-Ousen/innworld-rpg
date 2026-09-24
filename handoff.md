@@ -1,24 +1,32 @@
 # Handoff
 
-## Just done (2026-09-24, branch `feat/m6.5-canon-fights`)
-M6.5 canon fights + the M6 slice check. User picks (2026-09-24, all my recommendations): Chieftain fight = `change`; sparing record + Rags hook needs a kill; NPCs have no HP; tune levels. `stage` schema and save v8 approved.
-- Commits: `cdc54fa` feat(core) stages, NpcReact, sparing, save v8; `c5c9c0e` feat(tools) validator stage checks; `a9fd5b4` data(book1) Chieftain stage + hook, `goblin_chieftain`, Rags hook `killed: true`, `sim_canon_fights`; `acef921` data(rules) levels 40 / 1.25; `8fba05e` test(sim) `sim_m6_done`; `db22be9` fix(core) stage allies join from anywhere in the area; then docs.
-- New core: `game/core/stage.gd`, `game/core/npc_react.gd`. Changed: `canon_db`, `combat_db`, `combat` (`settle_if_over`, `killed`, `spare_foe`), `combat_state` (monster `stage`), `monster_sim` (`in_hours`, `taken`), `npc_sim`, `commands`, `world_state` (`staged`), `save_migrations` (7 → 8), `data_db` (rules keys `npc.react`, `combat.spare_tags`).
-- Tests: GUT 440/440 (46 scripts), Python 36, validator 0 errors. `sim_m6_done` (seed 1): [Cook] level 6 by day 22, Chieftain won on day 9, event changed.
-- Checked on screen (screenshots): the Chieftain marker "Goblin Chieftain 20/20" at the inn door at 09:00; Erin walks over and fights next to the player.
+## Just done (2026-09-24, branch `data/book1-1.26-1.34`, M7.1)
+M6 is merged (PR #17; tags `m6.5-done`, `m6-done`). The user approved the M7 plan: 4 canon batches (ADR 0012). For the day-21 raid the user chose a `change` hook (Klbkch still dies).
+- Canon 1.26R–1.34: 9 new chapter files (19 events, days 19–23, all `candidate`), 11 new NPCs, 7 new locations. `pawn` is named, `beilmark` is a Gnoll, `klbkch` has the tag `prognugator` (these 3 are back to `candidate`).
+- The raid is `b1.klbkch_dies_defending_erin` (1.29). `b1.goblin_raid_on_inn` already exists in 1.02. Its stage is in `inn_interior` 12–14, with the raid leader + 5 Goblins at the door and Erin as ally. Hook `player_fought_raid` → change.
+- `enemies.json`: `goblin_raid_leader` (stage only) and spawn `crab_hill_unpatrolled` (when `liscor_watch.no_inn_patrols`).
+- `npc_behaviour.json`: `pawn` visits the inn 18–22 after `pawn.named`; `relc` has `unless_flags` `relc.blames_erin`.
+- Tests: `sim_canon_book1` LAST_DAY 23 + 2 tests; new `sim_goblin_raid` (5 tests); `sim_m6_done` pre-stages the raid; counts updated in `sim_player_hooks`, `unit_combat_db`, `sim_canon_fights`. GUT 447/447 (47 scripts), Python 36, validator 0 errors.
+- Checked on screen: at 12:00 on day 21, 6 Goblins at the inn door, with Erin next to them.
+- Docs: ROADMAP M7 section, ADR 0012, progress.
 
 ## Waiting on the user
-- Review PR #17 (https://github.com/Daddy-Ousen/innworld-rpg/pull/17): the stage line, the hook news line, the Chieftain stats (guesses), the new level curve. Then merge and tag `m6.5-done` and `m6-done` on the merge commit.
+- Review the M7.1 events (PR). Flagged conflicts:
+  - Ryoka's Guild is in Remendia (1.20R), Wales (1.26R) and Celum (1.33R).
+  - 1.32R says "a week ago" but also "three days".
+  - The Goblin grave is "several hundred feet" away (1.30) or "a mile" (1.31).
+  - The new spawn is a Rock Crab stand-in.
+- After review: flip the events to `reviewed`, merge, and tag `m7.1-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
 ## Next
-- M7: rest of Book 1 (ROADMAP "Later"). Plan it first; ask about chapter split and schema needs.
-- Known limits to consider (ADR 0011 M6.5): name labels overlap when markers stand side by side; Klbkch ignores `klbkch.spares_goblins`; NPCs never leave the area when they flee; monsters attack only the player.
+- M7.2: canon 1.35R–1.44R. Read the batch first (3 Explore readers worked well for the first pass; then read every chapter yourself). 1.34 ends with Erin about to go exploring, so expect a fight away from the inn. Ask before any schema change.
+- Known limits: name labels overlap; Klbkch ignores `klbkch.spares_goblins`; NPCs never leave the area when they flee; monsters attack only the player; the raid stage is inside the inn only; Rags's band is not on the map.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Line endings:** most `.gd`, `.json` and `.md` files are CRLF in the working copy (`core.autocrlf=true`). New files written by the Write tool are LF: fine, but never mix endings in one file. Patch CRLF files with a Python script that converts to LF, edits, and converts back.
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 46 / 440).
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Always grep the output for `Parse Error` and check the script/test count (now 47 / 447).
 - Write GUT output to `$TMP` or the scratchpad, not next to the repo.
 - A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
 - Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir` (= `user://test_saves` via the pre-run hook); clear slots in `before_each`.
@@ -59,5 +67,8 @@ M6.5 canon fights + the M6 slice check. User picks (2026-09-24, all my recommend
 - The Python heredoc trick breaks on `\` line continuations (they get joined). For GDScript edits with `\`, use the Edit tool or a scratch `.py` file.
 - One GUT script only: `-gdir=res://tests -gselect=<script name>` (plain `-gtest` still ran everything here).
 
+- **M7.1:** check that an event id is free before you use it (the validator flags duplicates across files). `Commands.wait(gs, db, s)` takes seconds. A day-21 test at the inn at noon meets the raid; tests about something else set `gs.world.staged["b1.klbkch_dies_defending_erin"] = 21`. The fight record's `enemy` is the most dangerous foe type in the fight.
+- New chapter JSON files written by the Write tool are LF; `npcs.json`, `locations.json`, `enemies.json` and `npc_behaviour.json` are CRLF in the working copy. Patch those with a Python script that keeps CRLF.
+
 ## Active files
-`game/core/{stage,npc_react,combat,combat_db,combat_state,monster_sim,npc_sim,commands,canon_db,world_state,save_migrations,data_db}.gd`, `game/data/{enemies,actions,rules}.json`, `game/data/canon/book1/chapters/{1.14,1.25}.json`, `game/tests/{unit_stage,unit_npc_react,unit_combat,sim_canon_fights,sim_m6_done,sim_m4_done}.gd`, `game/test_support/{toy_npcs,toy_combat}.gd`, `tools/validate_data.py`, `docs/adr/0011-m6-vertical-slice.md`.
+`game/data/canon/book1/chapters/{1.26R,1.27R,1.28A,1.29,1.30,1.31,1.32R,1.33R,1.34}.json`, `game/data/canon/book1/{npcs,locations}.json`, `game/data/{enemies,npc_behaviour}.json`, `game/tests/{sim_goblin_raid,sim_canon_book1,sim_m6_done,sim_canon_fights,sim_player_hooks,unit_combat_db}.gd`, `docs/adr/0012-m7-rest-of-book1.md`, `docs/ROADMAP.md`.
