@@ -17,7 +17,7 @@
 			"effects": {
 				"set_flags": ["antinium_hive.chess_spreads", "antinium_hive.aberration_at_chess", "antinium_hive.worker_asks_for_erin"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.29", "confidence": "confirmed", "note": "The day after the twelve Workers came back (day 19). The Designated Worker asks for leave the next morning (day 21); that is folded into the raid."},
 			"summary": "The twelve Workers play chess in the Hive all night. At breakfast others join; one watcher turns Aberration, stabs itself and kills six Workers before Klbkch cuts it down. The boards stay. By dinner 192 play, and the Workers decide only a quarter may play at once."
 		},
@@ -73,7 +73,7 @@
 					"news": "Goblins raided the inn on the hill. The Human there did not stand alone, but Senior Guardsman Klbkch still died holding off the rest."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.29", "confidence": "confirmed", "note": "Lunchtime, day 21. The leader is bigger than a Goblin, smaller than a Hob. The Worker who dies is the Designated Worker, not one of the twelve. Deltas are design values."},
 			"summary": "A big Goblin leads forty raiders into the inn and smashes a chess piece. Erin beats him with a chair, then is stabbed many times. Klbkch arrives with the Designated Worker, heals her with his last potion and kills most of them, shielding her. Rags's band helps. The Worker and Klbkch die."
 		}

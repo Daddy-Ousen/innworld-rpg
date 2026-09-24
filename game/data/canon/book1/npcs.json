@@ -81,7 +81,7 @@
 			"home": "liscor",
 			"classes": [{"name": "[Swordslayer]", "level": null}, {"name": "[Guardsman]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels. 1.25: full name Klbkchhezeim of the Centenium, the Hive's Prognugator."},
 			"summary": "Four-armed Free Antinium, Relc's partner and a guard for ten years; fourth-highest [Guardsman] in Liscor, with [Enhanced Movement] and [Detect Guilt]. Polite, exact, rule-bound. Serves his Queen in the Hive. Quietly kind: twice spends potions on Erin."
 		},
@@ -105,7 +105,7 @@
 			"home": "liscor",
 			"classes": [{"name": "[Guardswoman]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05. Desk sergeant and family from 1.15. 1.28A: Jeiss's Gnoll partner, with a birthday the next week, so a Gnoll (confirmed)."},
 			"summary": "Senior Guardswoman of Liscor with a keen nose; spots and smells the inn's smoke from the wall. Also works the barracks desk, and has a family waiting at home."
 		},
@@ -297,7 +297,7 @@
 			"home": "liscor_hive",
 			"classes": [{"name": "[Butcher]", "level": 2}, {"name": "[Carpenter]", "level": 1}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Named himself 'Pawn' in 1.30, where he is one of the twelve from 1.25 (confirmed). That he is also the 1.17 sweeper of 1.23A is likely. Classes from 1.31."},
 			"summary": "Worker Antinium who swept Market Street, saw Erin play chess and asked to watch at the inn. After Klbkch dies, he nearly turns Aberration, then becomes an individual who feels grief and names himself Pawn. Plays chess as one mind with a hundred Workers."
 		},
@@ -333,7 +333,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Others call him a [Fighter] or [Warrior]; his real class is private. 'Of the Beriad, House of Minos' is on his horn caps (1.32R)."},
 			"summary": "Seven-foot Minotaur who leads a Silver-rank adventuring team, the Horns of Hammerad. Fights with a huge battleaxe in plate armour. Proud and honour-bound; he likes Ryoka for her spirit, even after she punches him down a flight of stairs."
 		},
@@ -345,7 +345,7 @@
 			"home": null,
 			"classes": [{"name": "[Elementalist]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Named in 1.26R; full name, age and home in 1.32R."},
 			"summary": "Half-Elf ice mage of the Horns of Hammerad, over sixty, from the Village of the Spring in Terandria and 'technically' a Wistram student. Sharp and wry. Knows a man she swore never to speak to again."
 		},
@@ -357,7 +357,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed"},
 			"summary": "Mustached Human with sword and shield, second-in-command to Calruz. Steady and earnest; talks Calruz out of reckless charges and stands up to his glare."
 		},
@@ -369,7 +369,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "likely", "note": "Race not stated; Human is likely. Long wisp of black hair (1.32R)."},
 			"summary": "The Horns of Hammerad's second mage, self-taught, with a long wisp of black hair. Defers to Ceria because she trained at Wistram."
 		},
@@ -381,7 +381,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Surname from 1.33R."},
 			"summary": "Thin, pigtailed City Runner, slow and lazy, with heavy perfume and a following of Street Runners. Feels owed Magnolia's jobs. Arranges the 'accident' that crushes Ryoka's leg, and gloats about it."
 		},
@@ -393,7 +393,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "likely", "note": "Race not stated; Human is likely."},
 			"summary": "Persua's tall friend, a City Runner who carries a crossbow and later a club. Follows her lead and helps herd Ryoka into the side street."
 		},
@@ -405,7 +405,7 @@
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "likely", "note": "Race not stated; Human is likely. Not yet a City Runner (1.26R)."},
 			"summary": "Persua's friend, a Street Runner with a wand and a knife. A Skill gives her a burst of speed every eight steps. Quick to draw her blade."
 		},
@@ -417,7 +417,7 @@
 			"home": "liscor",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.28A", "confidence": "likely", "note": "Race not stated; he has claws, so Drake is likely."},
 			"summary": "Senior Guardsman of Liscor, the best swordsman in the Watch, and Beilmark's partner. Notices Klbkch's hand go to his sword at the party, then laughs it off."
 		},
@@ -429,7 +429,7 @@
 			"home": "celum",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "likely", "note": "Race not stated; Human is likely."},
 			"summary": "[Receptionist] at Celum's Runners' Guild who often dealt with Ryoka. Called in to face Lady Magnolia, and tells her where Ryoka lives."
 		},
@@ -441,7 +441,7 @@
 			"home": "celum",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.33R", "confidence": "likely", "note": "Race not stated; Human is likely. Only named by Magnolia."},
 			"summary": "Guildmaster of Celum's Runners' Guild, once a good City Runner, now rich and comfortable. Calls Ryoka's crushed leg an accident; Magnolia forces him to step down."
 		},
@@ -453,7 +453,7 @@
 			"home": "liscor_hive",
 			"classes": [],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.29", "confidence": "confirmed", "note": "Never named. Not one of the twelve."},
 			"summary": "Worker Antinium with the Hive's best chess record, 54.6% wins, chosen to ask leave to learn from Erin. Dies unarmed at the inn, fighting the Goblin raiders so Klbkch can save her."
 		}

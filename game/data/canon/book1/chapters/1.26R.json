@@ -25,7 +25,7 @@
 				]
 			},
 			"rumor": "Adventurers say the Horns of Hammerad killed a Lich at the Ruins of Albez, far to the north, after a barefoot Runner brought them potions under fire.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Day is a guess: the Horns say it was a week before 1.32R (day 22), so day 15. Ryoka's 'three days' in 1.32R is not used (user choice). Deltas are design values."},
 			"summary": "A Lich pins down the Horns of Hammerad in the Ruins of Albez. Ryoka sprints at it, dodges its fire and bone wall, and hands the Horns fifteen healing and five mana potions. She runs out under fire to draw it off. Healed, the Horns kill the Lich, but no one got her name."
 		},
@@ -49,7 +49,7 @@
 					{"from": "ryoka_griffin", "to": "persua", "delta": -2}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Same day as the Lich run. Each city has its own Runners' Guild; this one is in Wales. Deltas are design values."},
 			"summary": "Back at the Guild, Ryoka is offered a rush Magnolia delivery that must reach Celum within the hour. Persua rushes in to claim it, since Ryoka already had a Magnolia job this week. Ryoka takes it anyway because she is faster. Persua swears she will regret it."
 		}

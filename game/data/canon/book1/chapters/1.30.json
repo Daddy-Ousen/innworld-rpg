@@ -20,7 +20,7 @@
 					{"from": "free_queen", "to": "erin_solstice", "delta": -3}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Afternoon, straight after Erin carries Klbkch to the gate. Delta is a design value."},
 			"summary": "Soldiers carry Erin down to the Free Queen, who blames her: Klbkch could only fall to forty Goblins by putting her life first. She calls him a failure and the chess a waste that made three Aberrations. Erin says he was tired and sorry; shaken, the Queen sends her away."
 		},
@@ -44,7 +44,7 @@
 				]
 			},
 			"news": "The Watch Captain has stopped all patrols near the inn on the hill. Relc blames the Human there for his partner's death.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "The Captain is not named here, but her scales, scar and smoke match Zevara. Deltas are design values."},
 			"summary": "At the Watch House, Relc spits at Erin and swears to stab her if she asks for help again. The Captain names all Klbkch was to Liscor, fears a new Antinium War, stops patrols near the inn and orders Erin out of her city. Erin tells the guards he was a hero."
 		},
@@ -71,7 +71,7 @@
 				]
 			},
 			"news": "A Worker Antinium spoke as 'I' in the market today and followed the Human innkeeper out of the city. He calls himself Pawn.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.30", "confidence": "confirmed", "note": "Same afternoon. The Worker is one of the twelve from 1.25, so the id 'pawn' fits here for sure. The Workers bury the raiders several hundred feet from the inn (raiders_grave). Deltas are design values."},
 			"summary": "Krshia and Selys comfort Erin at the stall. A hundred Workers bring stiff condolences; Erin asks their leader his name. He nearly turns Aberration and grips her throat, then becomes an individual who feels grief. On the walk he names himself Pawn. The Workers clean the inn."
 		}
