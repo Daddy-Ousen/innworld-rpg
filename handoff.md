@@ -16,7 +16,7 @@ Tests: GUT 468/468 (49 scripts), Python 39, validator 0 errors. `sim_big_battle`
 Screenshots (scratch scene, deleted): at 12:00 on day 21, wave 0 of 8 Goblins at the door with Erin; "Foes left: 40"; the labels no longer overlap.
 
 ## Waiting on the user
-- Review the M7.B PR. Balance point: a player who only waits is knocked out about a minute into the raid, so the raid is hard to win at 20 HP. Options: Klbkch comes earlier, fewer foes per wave, or leave it to play-testing.
+- Review PR #20 (https://github.com/Daddy-Ousen/innworld-rpg/pull/20). Balance point: a player who only waits is knocked out about a minute into the raid, so the raid is hard to win at 20 HP. Options: Klbkch comes earlier, fewer foes per wave, or leave it to play-testing.
 - After review: merge, and tag `m7b-done`.
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`.
 
