@@ -19,7 +19,9 @@
 ##             when next to it, may throw from range, or steps closer (around
 ##             monsters, NPCs and the player).
 ##   flee    — steps away from the player and is gone at the map edge or an
-##             exit. A scared monster calms down after scare_turns.
+##             exit. Indoors (no open map edge; M7.2) it walks to the nearest
+##             exit instead, so it cannot get stuck in a corner. A scared
+##             monster calms down after scare_turns.
 ##   home    — walks back to its home tile, then idle.
 ##   ally    — a helper (M7.B): walks to the nearest hostile monster and
 ##             hits it; it never flees and leaves when the fight ends.
@@ -380,6 +382,9 @@ static func _flee_turn(gs: GameState, db: DataDb, id: String) -> void:
 		c.lines.append("The %s is gone." % Combat.name_of(db, m))
 		c.monsters.erase(id)
 		return
+	var exits := _indoor_exits(db, area)
+	if not exits.is_empty() and _step_to(gs, db, id, exits):
+		return
 	var you := gs.player.pos()
 	var taken := _taken(gs, id)
 	var best := pos
@@ -391,6 +396,24 @@ static func _flee_turn(gs: GameState, db: DataDb, id: String) -> void:
 			best_d = _manhattan(at, you)
 	m["x"] = best.x
 	m["y"] = best.y
+
+
+## The exit tiles of an indoor area ({Vector2i: true}): one whose walkable
+## edge tiles are all exits. {} for an area with an open edge.
+static func _indoor_exits(db: DataDb, area: String) -> Dictionary:
+	var size := db.maps.size(area)
+	var exits := {}
+	for y in size.y:
+		for x in size.x:
+			var at := Vector2i(x, y)
+			if not db.maps.is_walkable(area, at):
+				continue
+			var edge := x == 0 or y == 0 or x == size.x - 1 or y == size.y - 1
+			if not db.maps.exit_at(area, at).is_empty():
+				exits[at] = true
+			elif edge:
+				return {}
+	return exits
 
 
 ## Walks one step towards home; idle when there (or when the way is shut).
