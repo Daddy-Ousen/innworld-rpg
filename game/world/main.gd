@@ -45,7 +45,10 @@ func _ready() -> void:
 	var names := {}
 	for id: String in Session.db.canon.npcs:
 		names[id] = Session.db.canon.npcs[id]["name"]
-	view.setup(Session.db.maps, names, Session.db.combat.enemies)
+	var max_hp := {}
+	for id in Session.db.behaviour.ids():
+		max_hp[id] = int(NpcReact.stats(Session.db, id)["hp"])
+	view.setup(Session.db.maps, names, Session.db.combat.enemies, max_hp)
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)

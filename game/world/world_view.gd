@@ -2,6 +2,10 @@
 ## monsters (with name and HP) and the player. Placeholder art: one
 ## coloured 16×16 tile per tiles.json entry, made in code. A hidden monster
 ## (a Rock Crab) looks like a rock tile and has no label.
+## Big battles (M7.B, ADR 0013): every monster and every hurt NPC has a small
+## HP bar; with more than LABEL_ALL_UP_TO monsters, only the most dangerous
+## foe, the helpers and the LABEL_NEAREST foes nearest the player keep their
+## label. A helper has a blue edge; a fallen NPC is faded, "(down)".
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -20,6 +24,16 @@ const HIDDEN_TILE := "rock"
 ## Monster marker edge by state: hostile, fleeing, else calm.
 const HOSTILE_EDGE := Color("#e03a3a")
 const FLEE_EDGE := Color("#f0d040")
+const ALLY_EDGE := Color("#4a90e2")
+## HP bar under a marker: back, fill, and fill at or below BAR_LOW of max.
+const BAR_BACK := Color(0.1, 0.1, 0.1, 0.85)
+const BAR_FILL := Color("#5cc85c")
+const BAR_LOW_FILL := Color("#e05050")
+const BAR_LOW := 0.34
+## Up to this many monsters on screen: all keep their labels.
+const LABEL_ALL_UP_TO := 4
+const LABEL_NEAREST := 3
+const DOWN_ALPHA := 0.35
 const CALM_EDGE := Color(0, 0, 0, 0.6)
 ## A dark ring between the edge and the body, so a green Goblin stands out on grass.
 const RING := Color(0.08, 0.08, 0.08, 1)
@@ -32,6 +46,8 @@ var atlas: Dictionary = {}
 var npc_names: Dictionary = {}
 ## Enemy type → enemies.json entry (name, color, hp).
 var enemies: Dictionary = {}
+## NPC id → max HP (NpcReact.stats), for the HP bars of hurt NPCs.
+var npc_max_hp: Dictionary = {}
 var _maps: MapDb
 
 @onready var tiles: TileMapLayer = $Tiles
@@ -43,10 +59,12 @@ var _maps: MapDb
 @onready var camera: Camera2D = $Player/Camera
 
 
-func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {}) -> void:
+func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
+		max_hp: Dictionary = {}) -> void:
 	_maps = maps
 	npc_names = names
 	enemies = enemy_defs
+	npc_max_hp = max_hp
 	atlas.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas)
 	area = ""
@@ -129,32 +147,43 @@ func _show_area(id: String) -> void:
 
 
 ## One marker per NPC in the area (named after the NPC id), with its
-## name above it.
+## name above it; a hurt NPC has an HP bar, a fallen one is faded.
 func _show_npcs(gs: GameState) -> void:
 	for child in npcs.get_children():
 		npcs.remove_child(child)
 		child.queue_free()
 	for id in gs.npcs.in_area(area):
+		var n: Dictionary = gs.npcs.npcs[id]
+		var down := bool(n.get("down", false))
 		var marker := Node2D.new()
 		marker.name = id
-		marker.position = cell_center(NpcRoster.pos_of(gs.npcs.npcs[id]))
+		marker.position = cell_center(NpcRoster.pos_of(n))
 		var body := ColorRect.new()
 		body.position = Vector2(-5, -5)
 		body.size = Vector2(10, 10)
 		body.color = NPC_COLOR
+		if down:
+			body.color.a = DOWN_ALPHA
 		body.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marker.add_child(body)
-		_add_label(marker, npc_names.get(id, id))
+		var name_text := String(npc_names.get(id, id))
+		_add_label(marker, name_text + " (down)" if down else name_text)
+		var most := int(npc_max_hp.get(id, 0))
+		var now := int(n.get("hp", -1))
+		if most > 0 and now >= 0:
+			_bar(marker, float(now) / most)
 		npcs.add_child(marker)
 
 
 ## One marker per monster in the area (named after the monster id): an
-## edge by state, a dark ring, a body in the enemy colour, and "Goblin 5/8"
-## above it. A hidden monster is a rock tile with no label.
+## edge by state, a dark ring, a body in the enemy colour, "Goblin 5/8"
+## above it (see labelled) and an HP bar below. A hidden monster is a rock
+## tile with no label.
 func _show_monsters(gs: GameState) -> void:
 	for child in monsters.get_children():
 		monsters.remove_child(child)
 		child.queue_free()
+	var named := labelled(gs, enemies)
 	for id in gs.combat.ids():
 		var m: Dictionary = gs.combat.monsters[id]
 		if m["area"] != area:
@@ -173,11 +202,76 @@ func _show_monsters(gs: GameState) -> void:
 				edge = HOSTILE_EDGE
 			elif m["state"] == CombatState.FLEE:
 				edge = FLEE_EDGE
+			elif m["state"] == CombatState.ALLY:
+				edge = ALLY_EDGE
 			_square(marker, 6, edge)
 			_square(marker, 5, RING)
 			_square(marker, 4, Color.html(e.get("color", "#ff00ff")))
-			_add_label(marker, monster_label(m, e))
+			if named.has(id):
+				_add_label(marker, monster_label(m, e))
+			_bar(marker, float(m["hp"]) / maxi(int(e.get("hp", m["hp"])), 1))
 		monsters.add_child(marker)
+
+
+## Ids of the monsters in the player's area that keep their label: all of
+## them up to LABEL_ALL_UP_TO seen monsters; else the helpers, the most
+## dangerous foe (lowest id on a tie) and the LABEL_NEAREST foes nearest
+## the player (king moves, then id).
+static func labelled(gs: GameState, enemy_defs: Dictionary) -> Dictionary:
+	var out := {}
+	var seen: Array[String] = []
+	for id in gs.combat.ids():
+		var m: Dictionary = gs.combat.monsters[id]
+		if m["area"] == gs.player.area and m["state"] != CombatState.HIDDEN:
+			seen.append(id)
+	if seen.size() <= LABEL_ALL_UP_TO:
+		for id in seen:
+			out[id] = true
+		return out
+	var foes: Array[String] = []
+	var top := ""
+	var top_danger := 0.0
+	for id in seen:
+		var m: Dictionary = gs.combat.monsters[id]
+		if m["state"] == CombatState.ALLY:
+			out[id] = true
+			continue
+		foes.append(id)
+		var d := float(enemy_defs.get(m["type"], {}).get("danger", 0.0))
+		if top == "" or d > top_danger:
+			top = id
+			top_danger = d
+	if top != "":
+		out[top] = true
+	var you := gs.player.pos()
+	foes.sort_custom(func(a: String, b: String) -> bool:
+		var da := _king(you, CombatState.pos_of(gs.combat.monsters[a]))
+		var db := _king(you, CombatState.pos_of(gs.combat.monsters[b]))
+		return da < db or (da == db and a.substr(1).to_int() < b.substr(1).to_int()))
+	for i in mini(LABEL_NEAREST, foes.size()):
+		out[foes[i]] = true
+	return out
+
+
+static func _king(a: Vector2i, b: Vector2i) -> int:
+	return maxi(absi(a.x - b.x), absi(a.y - b.y))
+
+
+## A small HP bar (share 0..1) under a marker.
+func _bar(marker: Node2D, share: float) -> void:
+	share = clampf(share, 0.0, 1.0)
+	var back := ColorRect.new()
+	back.position = Vector2(-6, 6)
+	back.size = Vector2(12, 2)
+	back.color = BAR_BACK
+	back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	marker.add_child(back)
+	var fill := ColorRect.new()
+	fill.position = Vector2(-6, 6)
+	fill.size = Vector2(12 * share, 2)
+	fill.color = BAR_LOW_FILL if share <= BAR_LOW else BAR_FILL
+	fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	marker.add_child(fill)
 
 
 ## "Goblin 5/8": name, HP now / max HP.
