@@ -11,7 +11,7 @@ M0–M8 detail (roadmap bullets, decisions, ADR 0001–0015) lives in
 
 ## Roadmap status
 - [x] M0–M7 — Book 1 and the engine. Tags `m0-done` … `m7-done`, `m7.4-done`, `m7b-done`.
-- [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 done on branch `data/book2-2.39-2.48` (PR pending, then tags `m8.7-done` and `m8-done`). Detail in the archive and ADR 0014 / 0015.
+- [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 done on branch `data/book2-2.39-2.48` ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34) open; after merge, tags `m8.7-done` and `m8-done`). Detail in the archive and ADR 0014 / 0015.
 - [ ] Next milestone: not planned yet. ROADMAP has only "Later" (audio, polish, LLM flavour layer). Book 3 would be a new M9 — ask the user.
 
 ## Open questions for the user

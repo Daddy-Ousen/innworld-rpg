@@ -1,13 +1,13 @@
 # Handoff
 
 ## Just done (2026-09-26)
-- M8.7 is built on branch `data/book2-2.39-2.48` (4 commits: world data, canon data, stage test, docs). A PR is open for the user to review and merge.
+- M8.7 is built on branch `data/book2-2.39-2.48` (4 commits: world data, canon data, stage test, docs). [PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34) is open for the user to review and merge.
 - Detail: `docs/adr/0014-m8-book2-and-celum.md`, section "M8.7".
 - GUT 591/591 (63 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen: the bar fight in the Frenzied Hare on day 71.
 - With M8.7, all of M8 is done. The M8 detail moved to `docs/PROGRESS_ARCHIVE.md`.
 
 ## Waiting on the user
-- Review and merge the M8.7 PR. After the merge: sync `main`, tag `m8.7-done` and `m8-done` on the merge commit, push the tags, and add a `docs: M8.7 done` commit.
+- Review and merge PR #34. After the merge: sync `main`, tag `m8.7-done` and `m8-done` on the merge commit, push the tags, and add a `docs: M8.7 done` commit.
 - 2.35 (M8.4) says Ryoka gained her first class; the text has a faerie cancel it. Fix it or keep it?
 - What the next milestone is. ROADMAP has no M9; "Later" = audio, polish, LLM flavour layer. Book 3 would be a new M9.
 
