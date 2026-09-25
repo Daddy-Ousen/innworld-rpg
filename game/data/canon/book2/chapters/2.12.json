@@ -1,0 +1,86 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.12",
+	"events": {
+		"b2.garia_learns_horns_died": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "friend": {"prefer": ["garia_strongheart"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "garia_strongheart"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["garia.knows_horns_dead"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "confirmed"},
+			"summary": "Back in Celum, Ryoka tells Garia that the Horns of Hammerad died in the ruins near Liscor. Garia breaks down crying in the street."
+		},
+		"b2.ryoka_bargains_with_octavia": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "octavia"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.garia_learns_horns_died"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.traded_potion_sample"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "confirmed"},
+			"summary": "Ryoka trades Octavia a sample of her Potion of Haste for alchemy lore and advice on surviving the High Passes again."
+		},
+		"b2.octavia_brews_stench_potion": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "octavia"], "flags": ["ryoka.traded_potion_sample"], "not_flags": []},
+			"depends_on": ["b2.ryoka_bargains_with_octavia"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.has_stench_potion"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "confirmed"},
+			"summary": "Rather than an invisibility potion, Octavia brews Ryoka a powerful monster-repelling stench potion for the High Passes crossing."
+		},
+		"b2.teriarch_magnolia_discuss_ryoka": {
+			"tier": 1,
+			"window": {"earliest": 44, "latest": 45, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"dragon": {"prefer": ["teriarch"], "fallback_tags": []}, "noble": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}},
+			"requires": {"alive": ["teriarch", "magnolia_reinhart"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["teriarch.senses_ryoka_approaching"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "likely", "note": "Distant, magical conversation; exact timing approximate."},
+			"summary": "Teriarch and Magnolia speak long-distance about Ryoka's strange resistance to scrying, just as he senses her nearing his lair again."
+		},
+		"b2.ryoka_runs_high_passes_with_stench_potion": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 45, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.has_stench_potion"], "not_flags": []},
+			"depends_on": ["b2.octavia_brews_stench_potion"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.crossed_high_passes_again"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "confirmed"},
+			"summary": "Ryoka crosses the High Passes a second time, using the stench potion to repel Goblins, Carn Wolves, gargoyles and mocking Frost Faeries alike."
+		},
+		"b2.ryoka_confronts_teriarch": {
+			"tier": 2,
+			"window": {"earliest": 45, "latest": 45, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "dragon": {"prefer": ["teriarch"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.crossed_high_passes_again"], "not_flags": []},
+			"depends_on": ["b2.ryoka_runs_high_passes_with_stench_potion", "b2.teriarch_magnolia_discuss_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.az_kerash_delivery_renegotiated", "ryoka.has_azkerash_homing_stone", "teriarch.blacklist_threatened"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.12", "confidence": "confirmed"},
+			"summary": "Ryoka refuses to be coerced into delivering Teriarch's package to Az'kerash, threatens a Runners' Guild blacklist, renegotiates payment up to 800 gold, and leaves with a homing stone pointing toward him."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,82 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.18",
+	"events": {
+		"b2.olesm_loses_chess_badly": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"scholar": {"prefer": ["olesm"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["olesm", "erin_solstice"], "flags": ["chess.mystery_game_active"], "not_flags": []},
+			"depends_on": ["b2.mystery_chess_opponent_first_move"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.18", "confidence": "likely"},
+			"summary": "Olesm plays the mystery opponent for Erin and loses three games straight."
+		},
+		"b2.erin_reveals_chess_mastery": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "scholar": {"prefer": ["olesm"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "olesm"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.olesm_loses_chess_badly"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.found_chess_rival"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.18", "confidence": "confirmed"},
+			"summary": "Erin takes over the board herself and plays a genuinely close game, showing Olesm just how good she really is and how much she wants a worthy rival."
+		},
+		"b2.niers_astoragon_revealed_as_opponent": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "strategist": {"prefer": ["niers_astoragon"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "niers_astoragon"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.erin_reveals_chess_mastery"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["baleros.niers_astoragon_chess_rival_of_erin"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.18",
+				"confidence": "likely",
+				"note": "Location placeholder: he plays from distant Baleros, which has no location entry yet."
+			},
+			"summary": "The mystery opponent turns out to be Niers Astoragon, a Level 63 Baleros [Strategist], intrigued enough to want to learn who he is playing."
+		},
+		"b2.ryoka_val_morning_run_courier_advice": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "valceif_godfrey"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_detects_curse_dreamcatcher"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.18", "confidence": "likely"},
+			"summary": "On a morning run, Val tells Ryoka that chasing levels this late is probably pointless, and explains Courier culture as mutual aid rather than guild rules."
+		},
+		"b2.hawk_gives_blood_fields_briefing": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"courier": {"prefer": ["hawk"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"courier2": {"prefer": ["valceif_godfrey"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["hawk", "ryoka_griffin"], "flags": ["ryoka.has_azkerash_homing_stone"], "not_flags": []},
+			"depends_on": ["b2.ryoka_val_morning_run_courier_advice", "b2.ryoka_confronts_teriarch"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.warned_about_azkerash_undead"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.18", "confidence": "likely"},
+			"summary": "Val calls in Hawk by communication stone; Hawk warns Ryoka about the Blood Fields' dangers, especially the powerful undead remnants of the Necromancer, Az'kerash."
+		}
+	},
+	"system": []
+}

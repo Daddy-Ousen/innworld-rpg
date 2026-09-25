@@ -95,8 +95,8 @@ Liscor and Celum: a paid ride and a road with one roadside camp map. Full econom
 simple hunger (one meal a day), a paid room in Celum. Winter systems added in M8.1 (user choice, 2026-09-25):
 snow look, cold rules and Frost Fairies on the map, as their own engine step (M8.W, like M7.B).
 - [x] M8.1 Canon Interlude – The Call + 2.00–2.09 (days 41–44): the magic call, Ryoka meets Erin, the rescue of Ceria and Olesm from the Ruins, Gazi's attack outside the Ruins as a canon stage on a new `ruins_entrance` map (`change` hook; Gazi cannot die: enemy `escape`), winter arrives, Ryoka back in Celum, Octavia
-- [ ] M8.W Winter: snow look + Toren's snow wall (map overlays), mild cold (indoors, fires and winter clothes keep you warm), Frost Fairies on the map (talk for `fae` XP, snow when annoyed, iron keeps them away) — save v10 (in review)
-- [ ] M8.2 Canon 2.10T–2.18 (incl. Interlude – Mating Rituals Pt. 1)
+- [x] M8.W Winter: snow look + Toren's snow wall (map overlays), mild cold (indoors, fires and winter clothes keep you warm), Frost Fairies on the map (talk for `fae` XP, snow when annoyed, iron keeps them away) — save v10
+- [x] M8.2 Canon 2.10T–2.18 (incl. Interlude – Mating Rituals Pt. 1, days 43–47): the inn destroyed by Toren's boom-bark firewood and rebuilt in a day near Liscor by the Antinium, hamburgers, Toren falls into the Skinner ruins and flees an armored guardian at the distant "death beyond death" rift (Rags sees him there), Ryoka gets a homing stone from Teriarch, meets Courier Valceif, recovers her memory of Teriarch's dragon form, and Erin's iPhone concert as a new non-combat "scene" stage (`kind: "scene"`, M8.2)
 - [ ] M8.3 Canon 2.19G–2.26 + 1.00C / 1.01C
 - [ ] M8.4 Canon 2.27G–2.38
 - [ ] M8.5 Celum map + Celum start (title start chooser, `rules.world.starts`)

@@ -10,7 +10,12 @@
 			"classes": [{"name": "[Alchemist]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "Garia's friend. Her body is cloth; a loose stitch lets her arm fall off and she sews it back on."},
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.08",
+				"confidence": "confirmed",
+				"note": "Garia's friend. Her body is cloth; a loose stitch lets her arm fall off and she sews it back on."
+			},
 			"summary": "Young dark-skinned [Alchemist] who runs Stitchworks in Celum and calls herself the best in the city. One of the String People, with a body of sewn cloth she has bulked up for lifting. A pushy seller who wants every new recipe she sees."
 		},
 		"peslas": {
@@ -22,8 +27,49 @@
 			"classes": [{"name": "[Innkeeper]", "level": 30}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "Knows Selys's grandmother Isshia. Selys says he has hardly levelled since his inn grew to be Liscor's largest."},
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.09",
+				"confidence": "confirmed",
+				"note": "Knows Selys's grandmother Isshia. Selys says he has hardly levelled since his inn grew to be Liscor's largest."
+			},
 			"summary": "Huge, loud, rich Drake who owns the Tailless Thief. Buys rounds for sad regulars and has an [Intuition] Skill he trusts. Looks down on Humans and on Erin's out-of-the-way inn."
+		},
+		"valceif_godfrey": {
+			"name": "Valceif Godfrey",
+			"race": "Human",
+			"tags": ["human", "runner", "courier", "first_landing"],
+			"faction": "runners_guild",
+			"home": null,
+			"classes": [{"name": "[Courier]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "confirmed", "note": "First Landing is his home city, not modelled as a location yet."},
+			"summary": "Confident, very fast Courier from First Landing, far to the north. Chases down a bandit band that hurt Garia, then races Ryoka on the road and wins easily with [Double Step]. Becomes a friendly rival and ally."
+		},
+		"niers_astoragon": {
+			"name": "Niers Astoragon",
+			"race": "Human",
+			"tags": ["human", "strategist", "baleros", "distant"],
+			"faction": null,
+			"home": null,
+			"classes": [{"name": "[Strategist]", "level": 63}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.18", "confidence": "guess", "note": "Distant Baleros figure; only known through the anonymous chess game so far."},
+			"summary": "Second-in-command of a Great Company in distant Baleros. Plays chess with Erin through Val's enchanted board without giving his name at first, intrigued by how good she is."
+		},
+		"culyss": {
+			"name": "Culyss",
+			"race": "Drake",
+			"tags": ["drake", "liscor", "suitor"],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "interlude_mating_rituals_pt_1", "confidence": "guess", "note": "Non-chronological Interlude; a minor one-off suitor."},
+			"summary": "Smooth-talking Drake known around Liscor as a lady's man; dated Selys briefly. Tries to court Erin and is driven off for good after the tribe's female Goblins ambush him."
 		}
 	}
 }

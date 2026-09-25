@@ -1,0 +1,77 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.15",
+	"events": {
+		"b2.ryoka_faerie_hint_dragon": {
+			"tier": 2,
+			"window": {"earliest": 45, "latest": 46, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_confronts_teriarch"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.suspects_teriarch_dragon"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "likely"},
+			"summary": "Frost Faeries taunt Ryoka on the road, mockingly calling Teriarch 'the old smoker' and hinting he is not what he seems."
+		},
+		"b2.garia_ambushed_by_bandits": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {"friend": {"prefer": ["garia_strongheart"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["garia_strongheart", "ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_faerie_hint_dragon"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["celum.bandit_activity", "garia.attacked_by_bandits"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "confirmed"},
+			"summary": "Garia stumbles into the Runners' Guild bleeding after a bandit ambush on the road; a stranger saved her. Ryoka gives first aid."
+		},
+		"b2.ryoka_meets_valceif": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "valceif_godfrey"], "flags": ["garia.attacked_by_bandits"], "not_flags": []},
+			"depends_on": ["b2.garia_ambushed_by_bandits"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_valceif"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "confirmed"},
+			"summary": "Valceif Godfrey, a Courier from First Landing, arrives at the Guild having personally routed the bandits who hurt Garia. He needs a fast escort south toward Liscor."
+		},
+		"b2.octavia_potions_for_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "octavia"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.has_pepper_potions", "octavia.goodwill_with_runners"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "likely"},
+			"summary": "Octavia hands Ryoka prototype pepper potions for the road ahead, testing one on her own eyes, and gives a free healing potion for Garia."
+		},
+		"b2.ryoka_races_valceif": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "valceif_godfrey"], "flags": ["ryoka.knows_valceif"], "not_flags": []},
+			"depends_on": ["b2.ryoka_meets_valceif"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.courier_ambition_challenged"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "confirmed"},
+			"summary": "Ryoka races Val on the road south; he casually outpaces her with [Double Step], humbling her hope of becoming a Courier through raw skill alone."
+		}
+	},
+	"system": []
+}

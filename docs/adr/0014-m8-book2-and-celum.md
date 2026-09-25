@@ -1,6 +1,6 @@
 # ADR 0014 — M8 Book 2 and Celum
 
-Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 accepted, events reviewed by the user 2026-09-25 (timeline, Invrisil, Gazi balance as proposed).
+Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 accepted, events reviewed by the user 2026-09-25 (timeline, Invrisil, Gazi balance as proposed); M8.W done; M8.2 built, batch decisions accepted by the user 2026-09-25, events not yet reviewed.
 
 ## User choices (plan)
 - M8 = Book 2 canon + Celum. Audio, polish and the LLM layer move to "Later".
@@ -63,4 +63,20 @@ Status: in review. User choices (2026-09-25): mild cold; warm = indoors, near a 
 **Tests.** `unit_winter` (toy maps: cold, floor, fire, indoor, chill reset, clothes, night and warning, fairies outdoors only, talk XP, snow, swat and slow, iron, overlays on and off, bad overlays and winter rules, save round trip, v9 save). `sim_winter` (real data: no cold before winter, the warning and two bites in an hour at the gate, warm by a Market brazier, the snow wall from day 44 with the road gap to the door, the wall covers no NPC goal or stage tile). `unit_data_db` and `ToyData` drop `rules.winter`.
 
 **Known limits.** Fairies do not follow Ryoka or Erin, and NPCs do not feel the cold. Travel through an exit counts its minutes as cold. Winter never ends yet (Book 2 has no spring).
+
+## M8.2 Canon 2.10T–2.18 + Interlude – Mating Rituals Pt. 1 (days 43–47)
+
+**58 events**, 10 chapter files under `game/data/canon/book2/chapters/`. User choices asked per batch, 2026-09-25:
+- The ruin Toren falls into is part of `liscor_dungeon` (he recognises the corridors from the book1 Skinner dungeon), but the far end he later bursts out of (`death_beyond_death`, a distant mountain rift in Red Fang territory) is **not walkable from that end yet** — a later book may open the path. The connection is recorded in both locations' `canon_ref.note` only.
+- Erin's iPhone concert (2.17) is a stage, but it has no fight, so a new **stage `kind: "scene"`** was built (below) rather than faked with harmless "monsters".
+- Interlude – Mating Rituals Pt. 1 is **floating flavor canon**: its 6 events are not `depends_on` anything and nothing depends on them; the Toren seen there does not clear the main-timeline `toren.missing` flag (`b2.toren_flees_armor_guardian_meets_rags` does that instead).
+- New NPCs `valceif_godfrey` and `niers_astoragon` (tier 1, Erin's anonymous chess rival, only known through the enchanted board) added now since both recur; `culyss` (Interlude, one-off) added too since he already has a name and two scenes. `hawk`, `persua` and `fals` are reused from book1.
+
+**Stage `kind: "scene"` (M8.2).** Extends the M6.5 stage (ADR 0011): `{"area", "hours", "kind": "scene", "npcs": [{"npc", "pos"}], "line"?, "when_flags"?, "unless_flags"?, "note"?}` — no `foes`, no `waves`. `Stage.run` moves each npc onto the map (`Stage.place_npc`, factored out of the wave-ally code) instead of spawning a hostile pack. New `Stage.is_scene_live` / `Stage.scene_npcs_here`: while a scene is live (staged today, player still in its area and hours), `NpcSim.advance_to` holds those NPCs in place instead of following their normal schedule goal — without this an NPC placed by the scene would walk off again on the very next tick. `CanonDb`/`CombatDb`/`tools/validate_data.py` all check the new shape (a scene npc still needs an `npc_behaviour` entry to be moved, same as a fight's allies). Used once so far: `b2.erin_iphone_concert_night` on `inn_hill`, with Ceria, Pisces, Selys, Relc and Krshia (Erin is already home on her schedule; Ryoka has no `npc_behaviour` entry yet, so she keeps the `runner` role but is not placed).
+
+**Timeline (guesses, anchored on two stated gaps: "a day since I pissed off Teriarch" opens 2.15, and 2.09 ends morning day 43).** Day 43: Toren's firewood errand blows up the inn; the Antinium rebuild it in a day near Liscor; Toren wanders, resists the necromancer's call, falls into the ruins that night. Rags' tribe hunts a Rock Crab, is found and spared by Relc, warned by Ceria, and builds crossbows. Day 44: Erin's hamburger stand, Hawk, an unidentified hungry girl; Ceria's nightmare and Olesm's crypt-guardian lore reveal that night; Rags leads her tribe toward death beyond death; Ryoka tells Garia the Horns died and gets a stench potion from Octavia. Day 45: Ryoka crosses the High Passes and confronts Teriarch for a homing stone; Toren bursts out at death beyond death, seen by Rags. Day 46: Ryoka's second arc (Celum) — a bandit ambush on Garia, meeting Valceif, losing a race to him, finding the wrecked guardian's armor, arriving at the inn, a cursed dreamcatcher restoring her memory that Teriarch is a dragon; the iPhone concert that night. Day 47: the mystery chess opponent is revealed as Niers Astoragon; Hawk briefs Ryoka on the Blood Fields and Az'kerash.
+
+**Tests.** `sim_canon_book2`: `LAST_DAY` 44 → 47; still drift 0 through the whole batch. `unit_stage` (+4): a scene stage moves its npcs with no fight and runs once; `CanonDb`/`CombatDb` scene-shape errors. `sim_winter`'s stage/wall-overlap check now covers scene npcs too, not just fight foes. `tools/tests/test_validate_data.py` (+4) for the Python-side scene schema.
+
+**Known limits.** Exact days are guesses except the two anchors above. The hungry girl in 2.13 gets no name or hook yet (identity unconfirmed in the text). Niers Astoragon's location is a placeholder (distant Baleros has no location entry). The concert's npc positions on `inn_hill` are a temporary guess at a "yard" spot, clear of Toren's snow wall overlay.
 
