@@ -1,16 +1,15 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.6 (economy + travel) is built on branch `feat/m8.6-economy-travel`. Full detail: `docs/adr/0015-m8.6-economy-travel.md`.
-- User choices this session: no sleep outdoors except at a camp; indoors/camp floor = half heal, a bed = full heal; hunger lowers max HP (-10% per hungry night, floor 50%); road 2 x 10 h through `road_camp`.
-- GUT 580/580 (61 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen (shop menu, coins on HUD, Hungry, bag menu, sleep refused outdoors).
+- M8.6 (economy + travel) is merged. [PR #33](https://github.com/Daddy-Ousen/innworld-rpg/pull/33), merge commit `1858f9d`, tagged `m8.6-done`. Local `main` synced.
+- Full detail: `docs/adr/0015-m8.6-economy-travel.md`.
+- GUT 580/580 (61 scripts), validator 0 errors (`--all`), Python 51/51.
 
 ## Waiting on the user
-- Review and merge [PR #33](https://github.com/Daddy-Ousen/innworld-rpg/pull/33). Then tag `m8.6-done` on the merge commit.
+- Whether to start M8.7 now.
 
 ## Next
-1. After merge: update `progress.md` (PR number, merge commit, tag).
-2. M8.7: final canon batches (3 interludes + 2.39-2.48, Erin in Celum, Octavia). `sim_canon_book2` `LAST_DAY` bumps then.
+1. M8.7: final canon batches (3 interludes + 2.39-2.48, Erin in Celum, Octavia). Plan first. `sim_canon_book2` `LAST_DAY` bumps then. Canon events can now use the road, the camp, the Rat's Tail and Stitchworks.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
