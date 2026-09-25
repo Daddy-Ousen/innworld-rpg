@@ -17,7 +17,7 @@
 			"effects": {
 				"set_flags": ["wandering_inn.snow_wall", "wandering_inn.short_of_firewood", "toren.gathers_firewood"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "The morning after Ryoka left. Five blankets from Krshia kept Erin alive through the night."},
 			"summary": "Erin wakes nearly frozen: wind howls through the holes in her walls and the firewood is almost gone. Outside, Toren, told to clear the snow, has shoveled all night and built a ten-foot ring of packed snow that breaks the wind. Erin sends him off to find firewood."
 		},
@@ -36,7 +36,7 @@
 			"effects": {
 				"set_flags": ["erin.met_peslas", "erin.wants_a_barmaid", "erin.knows_the_old_innkeeper", "selys.knows_erin_levels"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "Erin tells Selys she is Level 18 and a new [Warrior]. Peslas has heard of a Level 50 innkeeper in First Landing. The old Human innkeeper's village was lost to the undead before the Necromancer's time."},
 			"summary": "Selys takes Erin to the Tailless Thief, Liscor's richest inn. Its Level 30 [Innkeeper] Peslas mocks her chess but says her inn's last Human owner lost his village to the undead and gave up; she needs a hook. His [Intuition] says her trade will come soon. Erin decides to hire a barmaid."
 		},
@@ -59,7 +59,7 @@
 					{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 2}
 				]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "Liscor has no hospital; the Watch has beds. Olesm spoke up for the adventurers. Ceria will not serve drinks: she does not do well with males."},
 			"summary": "Erin visits Ceria and Olesm mending in the Watch barracks. The adventurers will likely not be charged, but the city keeps what it took from the Ruins; Ceria has no wand, books or coin, and Yvlon barely answers. Erin insists Ceria stay at her inn for free."
 		},
@@ -80,7 +80,7 @@
 				"set_flags": ["liscor.winter_prices", "krshia.no_deliveries", "erin.bought_winter_clothes", "erin.plans_burgers"]
 			},
 			"news": "Food costs half again what it did in Liscor's markets, and Street Runners are too busy to carry goods out through the snow.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "Braziers line Market Street. Krshia's Street Runner is busy with the city's wounded. Relc says Erin's inn 'exploded' (told in 2.10T)."},
 			"summary": "Braziers warm Market Street. Krshia dresses the freezing Erin in winter clothes, but food now costs half again as much and her Street Runner can no longer deliver. Erin buys beef, cheese, buns and mustard anyway; Relc and Klbkch carry it and invite themselves to dinner."
 		}

@@ -19,7 +19,7 @@
 				"set_flags": ["erin.knows_the_five_continents", "erin.knows_of_flos", "ryoka.lost_to_erin_at_chess", "ryoka.has_speed_potion", "adventurers.gear_confiscated"],
 				"clear_flags": ["ryoka.lost_speed_potion", "rags.has_looted_potion"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.06", "confidence": "confirmed", "note": "Evening of day 42. Ryoka is from Ohio, half-Japanese; Erin from Michigan and once played chess tournaments as a child. The dead adventurers' gear was worth one or two thousand gold."},
 			"summary": "Ryoka breaks chairs over Zevara seizing the fallen adventurers' gear, then she and Erin talk over pasta and chess. Erin wins eight games straight. Ryoka lays out the five continents and the King of Destruction with salt and chess pieces, and takes her haste potion back from Rags."
 		},
@@ -38,7 +38,7 @@
 			"effects": {
 				"set_flags": ["magnolia.knows_erin_wounded_gazi", "magnolia.watches_the_inn", "theofore.chased_off_by_sprites"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.06", "confidence": "likely", "note": "Late at night in her winter home, which is likely in Invrisil (2.08). Theofore came 'nearly a day' after her maids saw Ryoka running north."},
 			"summary": "In her winter home Magnolia hears Theofore's report: Gazi fled after an innkeeper put out her eye, the surviving adventurers are blamed and fined, and the named Workers are shut in the Hive. Winter Sprites chased him ten miles off before he could overhear Ryoka and Erin."
 		}

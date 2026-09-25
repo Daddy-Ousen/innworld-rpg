@@ -20,7 +20,7 @@
 			"effects": {
 				"set_flags": ["zevara.forbade_the_rescue", "ksmvr.guards_erin", "ryoka.called_adventurers_cowards"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Morning of day 42. By treaty, Soldiers may leave the Hive only when a city authority asks, in war, or to defend Liscor."},
 			"summary": "Zevara will not risk Relc or Klbkch for adventurers she blames for the siege, and forbids them to help. Klbkch may not bring Soldiers above ground, but orders Ksmvr to guard Erin with his life. The Adventurers' Guild refuses too, and Ryoka calls its warriors cowards."
 		},
@@ -39,7 +39,7 @@
 				"set_flags": ["krshia.hunts_gazi", "gnolls.howl_for_the_dead"]
 			},
 			"news": "Gnolls howled in every street of Liscor at midday. Word is that warriors of the Silverfang tribe were cut down on the south road.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Ryoka saw the bodies about forty miles out, each beheaded with one cut, and met Gazi near them (1.63)."},
 			"summary": "Krshia gives Erin healing potions and frying pans on credit and says warriors of her tribe will soon come up the south road. Ryoka tells her they are dead, beheaded, with Gazi close by. Krshia strings her great bow and howls, and Gnolls across the city take up the howl."
 		},
@@ -61,7 +61,7 @@
 			"effects": {
 				"set_flags": ["erin.fought_in_the_ruins", "ryoka.froze_before_the_dead", "rags.took_the_black_crossbow", "ruins.vault_found_looted", "ruins.guarded_by_palisade"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Goes on in 2.03. A palisade, a ditch and twenty guards now hold the entrance. Pisces thinks someone looted the vault and called the dead away (Az'kerash and others named as guesses)."},
 			"summary": "Erin shakes Rags upside down until she agrees to come, then pushes past the guards at the Ruins with Ryoka, Pisces, Toren and Ksmvr. Pisces snaps Ghouls' spines, Erin smashes zombies with a frying pan and thrown rocks, and Ryoka freezes. Skinner's vault is found stripped of magic."
 		}

@@ -18,7 +18,7 @@
 				"set_flags": ["ryoka.saving_for_ceria_hand", "ryoka.bound_for_celum", "erin.plans_a_well", "erin.keeps_earth_secrets"],
 				"clear_flags": ["ryoka.back_in_liscor"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.07", "confidence": "confirmed", "note": "Sunset of day 42. A healer who can regrow the hand may cost a few hundred to a thousand gold; Ryoka knows two ways to earn it. About ten Frost Fairies follow her north."},
 			"summary": "Ryoka sets a goal: gold for a healer who can mend Ceria's hand. She tells Erin how to grow the inn (fix the walls, enchant the kitchen, dig a well, be known for new dishes), asks her to keep Earth's secrets, and runs north at sunset in borrowed Gnoll boots."
 		},
@@ -37,7 +37,7 @@
 			"effects": {
 				"set_flags": ["erin.became_a_warrior", "erin.sees_frost_fairies", "pisces.frostbitten_by_fairies", "frost_fairies.angry_at_the_inn", "wandering_inn.buried_in_snow"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.07", "confidence": "confirmed", "note": "Night of day 42. The fairies ask how she can see them, and scorn her for mixing up Excalibur with the sword pulled from a stone. Pisces drives them off with a rusted iron horseshoe."},
 			"summary": "Erin gains the [Warrior] class in her sleep. When Pisces walks in she runs out to the Frost Fairies: she sees and hears them, he sees only blurs. They talk of blinding her. Pisces's fire spell gets him frozen, and an avalanche of snow fills the inn until Toren digs them out."
 		}
