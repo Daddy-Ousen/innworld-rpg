@@ -5,7 +5,7 @@
 - M8.W Winter built on branch `feat/m8w-winter` (main merged in): see ADR 0014 "M8.W Winter". Core: `core/winter.gd`, `core/winter_state.gd` (save v10), MapDb overlays + `indoor` + `warm` objects + tile `winter_color`, Movement (fairy blocks, slowed steps), Interact (fairy talk), Night (no chill at night, first-winter warning). Data: `rules.winter`, tiles (winter colours, `snow_wall`), inn hill overlay + horseshoe, Market braziers, action `talk_to_fairy`, tag `fae`, item `horseshoe`. View: snow look, overlay redraw, fairy diamonds, HUD Cold/Slowed. Tests `unit_winter` (17), `sim_winter` (4). GUT 529/529, checked on screen.
 
 ## Waiting on the user
-- Push `feat/m8w-winter` and open its PR (ask first), then review / merge.
+- Review / merge PR #28 (M8.W): https://github.com/Daddy-Ousen/innworld-rpg/pull/28
 
 ## Next
 1. After merges: tag `m8w-done`.
