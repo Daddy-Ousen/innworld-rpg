@@ -6,7 +6,9 @@
 ##            "act_seconds" (one turn per this many world seconds),
 ##            "aggro_radius", "lose_radius", "chase_turns", "flee_below" 0–1,
 ##            "scared_by": [item tag, ...], "scare_turns" (needed if scared_by),
-##            "ranged"?: {"range", "damage", "chance"}, "ambush"?: {"spot_radius", "hit_bonus"}}.
+##            "ranged"?: {"range", "damage", "chance"}, "ambush"?: {"spot_radius", "hit_bonus"},
+##            "escape"?: {"below" 0–1, "line"} (M8.1: it cannot die; a hit that takes
+##            it below this share of its hp makes it vanish with the line, like Gazi's portal)}.
 ##   items: item id → {"name", "confidence", "canon_ref"?, "melee": [min, max],
 ##          "throw": [min, max], "throw_range", "break_chance" 0–1, "tags": [...]}.
 ##   spawns: [{"id", "area": map id, "enemy": enemy id, "confidence",
@@ -247,6 +249,17 @@ func _validate_enemy(id: String, e: Dictionary, item_tags: Dictionary) -> void:
 			if int(a["spot_radius"]) < 1:
 				errors.append("%s ambush: spot_radius must be >= 1." % where)
 			_check_share(where + " ambush hit_bonus", a["hit_bonus"])
+	if e.has("escape"):
+		var x: Variant = e["escape"]
+		if not x is Dictionary or not _has_fields(where + " escape", x, ["below", "line"]):
+			if not x is Dictionary:
+				errors.append("%s escape: must be an object." % where)
+			return
+		_check_share(where + " escape below", x["below"])
+		if float(x["below"]) <= 0.0:
+			errors.append("%s escape: below must be > 0." % where)
+		if not x["line"] is String or (x["line"] as String).is_empty():
+			errors.append("%s escape: line must be a non-empty string." % where)
 
 
 func _validate_rules(db: DataDb) -> void:
