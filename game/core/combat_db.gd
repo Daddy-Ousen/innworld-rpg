@@ -97,15 +97,22 @@ func validate(db: DataDb) -> Array[String]:
 ## A canon event stage (CanonDb checks its shape): known enemies, a known
 ## map, and foes on walkable tiles that are not exits. Waves (M7.B): known
 ## foe and helper enemies, a `from` tile like a foe's, and allies with
-## npc_behaviour (only NPCs in the roster can be moved into the fight).
+## npc_behaviour (only NPCs in the roster can be moved into the fight). A
+## scene stage (M8.2) needs its npcs to have npc_behaviour the same way.
 func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 	var where := "event '%s' stage" % event_id
 	var foes: Variant = st.get("foes", [])
 	if not foes is Array:
-		return
+		foes = []
 	for f: Variant in foes:
 		if f is Dictionary and not enemies.has(f.get("enemy", "")):
 			errors.append("%s: unknown enemy '%s'." % [where, f.get("enemy", "")])
+	var npcs: Variant = st.get("npcs", [])
+	if not npcs is Array:
+		npcs = []
+	for n: Variant in npcs:
+		if n is Dictionary and not db.behaviour.is_empty() and not db.behaviour.npcs.has(n.get("npc", "")):
+			errors.append("%s: npc '%s' has no npc_behaviour entry." % [where, n.get("npc", "")])
 	var waves: Array = st.get("waves", []) if st.get("waves", []) is Array else []
 	for i in waves.size():
 		var w: Variant = waves[i]
@@ -131,6 +138,12 @@ func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 		var at := Vector2i(int(f["pos"][0]), int(f["pos"][1]))
 		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
 			errors.append("%s: foe pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
+	for n: Variant in npcs:
+		if not n is Dictionary or not n.get("pos", null) is Array or (n["pos"] as Array).size() != 2:
+			continue
+		var at := Vector2i(int(n["pos"][0]), int(n["pos"][1]))
+		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+			errors.append("%s: npc pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
 	for i in waves.size():
 		var w: Variant = waves[i]
 		if not w is Dictionary or not w.get("from", null) is Array or (w["from"] as Array).size() != 2:

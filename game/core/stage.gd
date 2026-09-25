@@ -1,14 +1,19 @@
-## Canon fights on the map (M6.5, ADR 0011). A canon event with a `stage`
-## puts its foes on the map when the player is in the stage area at the
-## stage hours, on a day of the event's window (with delays), while the
-## event is pending, every NPC in its requires.alive lives, and the stage
-## flags fit. Each event stages once (world.staged). The foes are hostile
-## monsters with "stage" = the event id; stage allies fight next to the
-## player (NpcReact). The fight's action records reach the event through its
-## hooks (Director), so a stage never changes canon by itself.
+## Canon fights and scenes on the map (M6.5, ADR 0011; scenes M8.2). A canon
+## event with a `stage` puts its foes (or, for a "scene" stage, its NPCs) on
+## the map when the player is in the stage area at the stage hours, on a day
+## of the event's window (with delays), while the event is pending, every
+## NPC in its requires.alive lives, and the stage flags fit. Each event
+## stages once (world.staged). The foes are hostile monsters with "stage" =
+## the event id; stage allies fight next to the player (NpcReact). The
+## fight's action records reach the event through its hooks (Director), so a
+## stage never changes canon by itself.
 ##
-## Waves (M7.B, ADR 0013): a stage's `waves` come after its first foes, in
-## order, while the player stays in the stage area (combat.stage_run). The
+## A "scene" stage (M8.2) has no fight: it moves its `npcs` (canon NPCs) into
+## the stage area with no monster involved, for a crowd or gathering the
+## player can walk into. It has no waves and never affects Combat.
+##
+## Waves (M7.B, ADR 0013): a fight stage's `waves` come after its first foes,
+## in order, while the player stays in the stage area (combat.stage_run). The
 ## next wave comes when its after_seconds have passed since the stage began,
 ## or when at most left_at_most of the stage's foes are still on the map, or
 ## when none are; but it waits while rules.combat.stage.max_on_map of them
@@ -56,13 +61,22 @@ static func is_open(gs: GameState, db: DataDb, id: String) -> bool:
 
 
 ## Stages event `id`: notes it, shows its line and puts each foe on its tile
-## (or the nearest free one) as one hostile pack. Returns the monster ids.
+## (or the nearest free one) as one hostile pack, or — for a "scene" stage —
+## moves in its npcs with no fight. Returns the monster ids (fight) or the
+## npc ids moved (scene).
 static func run(gs: GameState, db: DataDb, id: String) -> Array[String]:
 	var st: Dictionary = db.canon.events[id]["stage"]
 	var c := gs.combat
 	gs.world.staged[id] = gs.clock.day()
 	if st.get("line", "") != "":
 		c.lines.append(st["line"])
+	if st.get("kind", "fight") == "scene":
+		var moved: Array[String] = []
+		for n: Dictionary in st["npcs"]:
+			var at := Vector2i(int(n["pos"][0]), int(n["pos"][1]))
+			if place_npc(gs, db, n["npc"], at):
+				moved.append(n["npc"])
+		return moved
 	var group := "m%d" % c.next_id
 	var placed: Array[String] = []
 	for foe: Dictionary in st["foes"]:
@@ -127,15 +141,45 @@ static func send_wave(gs: GameState, db: DataDb, id: String, w: Dictionary) -> A
 			c.monsters[hid]["stage"] = id
 			placed.append(hid)
 	for npc: String in w.get("allies", []):
-		var n: Dictionary = gs.npcs.npcs.get(npc, {})
-		if n.is_empty() or n["area"] == gs.player.area or not gs.world.is_alive(db.canon, npc):
-			continue
-		var at := free_near(gs, db, from)
-		n["area"] = gs.player.area
-		n["x"] = at.x
-		n["y"] = at.y
-		n["carry"] = 0
+		place_npc(gs, db, npc, from)
 	return placed
+
+
+## Moves canon npc `npc` to `at` (or the nearest free tile) in the player's
+## area, if it is alive and not already there. True if moved.
+static func place_npc(gs: GameState, db: DataDb, npc: String, at: Vector2i) -> bool:
+	var n: Dictionary = gs.npcs.npcs.get(npc, {})
+	if n.is_empty() or n["area"] == gs.player.area or not gs.world.is_alive(db.canon, npc):
+		return false
+	var pos := free_near(gs, db, at)
+	n["area"] = gs.player.area
+	n["x"] = pos.x
+	n["y"] = pos.y
+	n["carry"] = 0
+	return true
+
+
+## True while `id` is a live scene stage (M8.2): staged today, the player
+## in its area, and still within its hours. Its npcs hold their ground
+## instead of following their normal schedule (NpcSim.advance_to).
+static func is_scene_live(gs: GameState, db: DataDb, id: String) -> bool:
+	var ev: Dictionary = db.canon.events.get(id, {})
+	var st: Dictionary = ev.get("stage", {})
+	if st.get("kind", "fight") != "scene":
+		return false
+	if int(gs.world.staged.get(id, -1)) != gs.clock.day() or gs.player.area != st["area"]:
+		return false
+	return MonsterSim.in_hours(gs, st["hours"])
+
+
+## NPC ids held in place by a live scene stage right now (M8.2).
+static func scene_npcs_here(gs: GameState, db: DataDb) -> Dictionary:
+	var out := {}
+	for id in db.canon.stages:
+		if is_scene_live(gs, db, id):
+			for n: Dictionary in db.canon.events[id]["stage"]["npcs"]:
+				out[n["npc"]] = true
+	return out
 
 
 ## Stage foes of event `id` still on the map (not helpers).

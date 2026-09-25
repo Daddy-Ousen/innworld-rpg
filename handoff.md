@@ -1,15 +1,16 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.1 done: PR #26 and review flip PR #27 merged; tag `m8.1-done` on bfb71a5 (pushed).
-- M8.W Winter built on branch `feat/m8w-winter` (main merged in): see ADR 0014 "M8.W Winter". Core: `core/winter.gd`, `core/winter_state.gd` (save v10), MapDb overlays + `indoor` + `warm` objects + tile `winter_color`, Movement (fairy blocks, slowed steps), Interact (fairy talk), Night (no chill at night, first-winter warning). Data: `rules.winter`, tiles (winter colours, `snow_wall`), inn hill overlay + horseshoe, Market braziers, action `talk_to_fairy`, tag `fae`, item `horseshoe`. View: snow look, overlay redraw, fairy diamonds, HUD Cold/Slowed. Tests `unit_winter` (17), `sim_winter` (4). GUT 529/529, checked on screen.
+- PR #28 (M8.W Winter) merged. Tag `m8w-done` on merge commit `78de12f`, pushed.
+- Local `main` synced to `78de12f`.
 
 ## Waiting on the user
-- Review / merge PR #28 (M8.W): https://github.com/Daddy-Ousen/innworld-rpg/pull/28
+- Nothing right now.
 
 ## Next
-1. After merges: tag `m8w-done`.
-2. M8.2 canon 2.10T-2.18 (starts with Toren's POV; Relc said the inn "exploded" at the end of 2.09). Ask per batch: timeline, stage/hook.
+1. Start M8.2: canon 2.10T–2.18 (incl. Interlude – Mating Rituals Pt. 1). Starts with Toren's POV; Relc said the inn "exploded" at the end of 2.09.
+2. Ask per batch: timeline, stage/hook.
+3. New branch off `main`: `data/book2-2.10T-2.18` (or similar).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
