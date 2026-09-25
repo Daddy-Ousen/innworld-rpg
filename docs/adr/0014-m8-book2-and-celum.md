@@ -98,3 +98,24 @@ Built by a delegated agent (chapters read and drafted outside the main session, 
 
 **Tests.** `sim_canon_book2`: `LAST_DAY` 55 → 67, drift 0 through the whole batch. `sim_player_hooks` hook count 11 → 12. Validator 0 errors (`--all`); GUT 533/533; Python 51/51.
 
+## M8.5 Celum map + Celum start
+
+User choices (2026-09-25): starts become a list; Celum gets three maps (gate, square, Runners' Guild inside).
+
+**Schema change (approved, rule 11).** `rules.world.start` (one object) is replaced by `rules.world.starts`: a non-empty list of `{"id", "name", "area", "pos", "intro"}`. The first start is the default. `MapDb.validate` checks it (unique ids, all fields, pos a walkable tile of a known map). `Movement.start_of(db, id)` returns a start (`""` = the first; unknown = `{}`); `GameState.new_game(seed, db, start_id)` places the player there (unknown id falls back to the first). No save change: the save already keeps where the player is, so the chosen start is not stored.
+
+**Starts.** `liscor` (Arrive at Liscor, `liscor_gate` 3,12) and `celum` (Arrive at Celum, `celum_gate` 16,4). Both are day 8, 06:00 and run the same director history, so the world is the same; only the player's place differs. The welcome page shows the start's `intro` line.
+
+**Title screen.** New game opens a chooser with one button per start plus Back (straight in if there is only one start). Debug console: `new [seed] [start]`.
+
+**Maps (design maps, `confidence: guess`).**
+- `celum_gate` (outdoor, location `celum`): Celum's wall and gate on the north, the road south, a guard's brazier (warm), a road stone (`sprint_training`), a fallen branch. The road south becomes the exit to Liscor in M8.6.
+- `celum_square` (outdoor, location `celum`): zones for `celum_runners_guild`, `celum_rats_tail_inn` and `stitchworks`; the guild door is an exit; the Rat's Tail and Stitchworks are signs with no actions yet (room rent and shop come in M8.6); a well, a market stall (buy, sell, haggle), two braziers, four trees. Streets open east and west (NPC entry at 31,9).
+- `celum_runners_guild` (indoor, location `celum_runners_guild`): a reception counter, a request board (jobs in M8.6), a hearth, a bench, a stretching mat (`sprint_training`).
+- Knock-out on `celum_gate` or `celum_square` wakes the player at the Celum start.
+
+**NPCs.** New `npc_behaviour` entry place `celum` (`celum_square` 31,9). `wesle` (Celum gate guard, 1.19R) guards `celum_gate` 15,2 from 06 to 18; `stenei` ([Receptionist], 1.33R) works the guild counter (10,2) from 08 to 18. Both hours are guesses.
+
+**Not in M8.5.** No road or ride between Celum and Liscor yet: a Celum player stays in Celum until M8.6. No Celum canon event moved onto these maps.
+
+**Tests.** New `sim_celum_start` (start lookup, Celum new game on day 8 at 06:00, unknown start falls back, same world for both starts, a morning with Wesle and Stenei, save/load, knock-out wake). `unit_map_db`: starts validation, real Celum start. `unit_play_loop`: the chooser, Back, the welcome intro. GUT 544/544 (57 scripts); validator 0 errors (`--all`); Python 51/51. Checked on screen.

@@ -63,7 +63,8 @@ func _ready() -> void:
 	_redraw()
 	if Session.fresh:
 		Session.fresh = false
-		dialog.open([SystemMessages.welcome_page()] as Array[Dictionary], Session.gs, Session.db)
+		var start := Movement.start_of(Session.db, Session.start_id)
+		dialog.open([SystemMessages.welcome_page(start)] as Array[Dictionary], Session.gs, Session.db)
 
 
 func _redraw() -> void:

@@ -25,7 +25,12 @@
 		"unreliable_at": 5.0
 	},
 	"world": {
-		"start": {"area": "liscor_gate", "pos": [3, 12]},
+		"starts": [
+			{"id": "liscor", "name": "Arrive at Liscor", "area": "liscor_gate", "pos": [3, 12],
+				"intro": "You stand outside the east gate of Liscor, a walled city of Drakes and Gnolls."},
+			{"id": "celum", "name": "Arrive at Celum", "area": "celum_gate", "pos": [16, 4],
+				"intro": "You stand outside the gate of Celum, a walled Human city north of the High Passes."}
+		],
 		"step_seconds": 6
 	},
 	"npc": {
@@ -63,7 +68,9 @@
 			"inn_hill": {"area": "inn_interior", "pos": [20, 13]},
 			"liscor_gate": {"area": "liscor_gate", "pos": [3, 12]},
 			"liscor_market": {"area": "liscor_gate", "pos": [3, 12]},
-			"ruins_entrance": {"area": "liscor_gate", "pos": [3, 12]}
+			"ruins_entrance": {"area": "liscor_gate", "pos": [3, 12]},
+			"celum_gate": {"area": "celum_gate", "pos": [16, 4]},
+			"celum_square": {"area": "celum_gate", "pos": [16, 4]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]

@@ -12,7 +12,7 @@ const RULE_FIELDS := {
 	"offers": ["max_per_night"],
 	"skills": ["on_accept", "chance_per_level", "base_weight"],
 	"director": ["default_delay_limit", "drift", "tier_weight", "unreliable_at"],
-	"world": ["start", "step_seconds"],
+	"world": ["starts", "step_seconds"],
 	"npc": ["step_seconds", "jump_seconds", "talk_actions", "talk_relationship", "react"],
 	"combat": ["base_stats", "hp_base", "hp_per_endurance", "unarmed", "hit", "strength_div",
 		"min_damage", "block", "spot", "spawn", "jump_seconds", "max_turns_per_sync",

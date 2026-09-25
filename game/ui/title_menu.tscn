@@ -71,6 +71,18 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
 
+[node name="Starts" type="VBoxContainer" parent="Center/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StartsTitle" type="Label" parent="Center/VBox/Starts"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+horizontal_alignment = 1
+text = "Where do you arrive?"
+
 [node name="Note" type="Label" parent="Center/VBox"]
 unique_name_in_owner = true
 layout_mode = 2

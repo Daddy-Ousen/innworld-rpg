@@ -13,7 +13,8 @@ func before_all() -> void:
 func test_real_maps_load_without_errors() -> void:
 	assert_eq(_real.maps.errors, [] as Array[String])
 	assert_eq(_real.errors, [] as Array[String])
-	for id: String in ["liscor_gate", "liscor_market", "floodplains_south", "inn_hill", "inn_interior"]:
+	for id: String in ["liscor_gate", "liscor_market", "floodplains_south", "inn_hill", "inn_interior",
+			"celum_gate", "celum_square", "celum_runners_guild"]:
 		assert_true(_real.maps.areas.has(id), id)
 
 
@@ -63,9 +64,18 @@ func test_real_maps_are_connected() -> void:
 
 
 func test_real_start_is_outside_the_east_gate() -> void:
-	var start: Dictionary = _real.rules["world"]["start"]
+	var start := Movement.start_of(_real)
+	assert_eq(start["id"], "liscor", "Liscor is the first (default) start")
 	assert_eq(start["area"], "liscor_gate")
 	assert_eq(_real.maps.areas["liscor_gate"]["location"], "liscor_east_gate")
+
+
+func test_real_celum_start_is_outside_celums_gate() -> void:
+	var start := Movement.start_of(_real, "celum")
+	assert_eq(start["area"], "celum_gate")
+	assert_eq(_real.maps.areas["celum_gate"]["location"], "celum")
+	assert_eq(_real.maps.areas["celum_runners_guild"]["location"], "celum_runners_guild")
+	assert_true(_real.maps.is_indoor("celum_runners_guild"))
 
 
 func test_lookups() -> void:
@@ -138,14 +148,32 @@ func test_validation_errors() -> void:
 		a["town"]["objects"][0]["item"] = "sword"), "unknown item 'sword'")
 
 
-func test_start_must_be_walkable() -> void:
+func _start_errors(starts: Variant) -> String:
 	var d := ToyMaps.db()
-	d.rules["world"]["start"] = {"area": "town", "pos": [0, 0]}
+	d.rules["world"]["starts"] = starts
 	d.maps = MapDb.from_dicts(ToyMaps.tiles(), ToyMaps.areas())
-	assert_string_contains("\n".join(d.maps.validate(d)), "walkable tile of 'town'")
-	d.rules["world"]["start"] = {"area": "moon", "pos": [0, 0]}
-	d.maps = MapDb.from_dicts(ToyMaps.tiles(), ToyMaps.areas())
-	assert_string_contains("\n".join(d.maps.validate(d)), "unknown area 'moon'")
+	return "\n".join(d.maps.validate(d))
+
+
+func _start(id: String, area: String, pos: Array) -> Dictionary:
+	return {"id": id, "name": id, "area": area, "pos": pos, "intro": "You stand here."}
+
+
+func test_start_must_be_walkable() -> void:
+	assert_string_contains(_start_errors([_start("a", "town", [0, 0])]), "walkable tile of 'town'")
+	assert_string_contains(_start_errors([_start("a", "town", [99, 99])]), "walkable tile of 'town'")
+	assert_string_contains(_start_errors([_start("a", "moon", [0, 0])]), "unknown area 'moon'")
+
+
+func test_starts_must_be_a_list_with_unique_ids_and_all_fields() -> void:
+	assert_string_contains(_start_errors([]), "must be a non-empty list")
+	assert_string_contains(_start_errors({"area": "town", "pos": [1, 2]}), "must be a non-empty list")
+	assert_string_contains(_start_errors([_start("a", "town", [1, 2]), _start("a", "town", [1, 2])]),
+			"'a': duplicate id")
+	var no_intro := _start("a", "town", [1, 2])
+	no_intro.erase("intro")
+	assert_string_contains(_start_errors([no_intro]), "missing 'intro'")
+	assert_eq(_start_errors([_start("a", "town", [1, 2]), _start("b", "town", [2, 2])]), "")
 
 
 func test_travel_exits_need_the_travel_action() -> void:

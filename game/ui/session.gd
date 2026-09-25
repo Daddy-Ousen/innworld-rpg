@@ -15,6 +15,8 @@ var save_dir := SaveSlots.DEFAULT_DIR
 ## True for a game started with start_new_game() until the game screen has
 ## shown the welcome page.
 var fresh := false
+## The start (rules.world.starts id) of the last new game; "" = the first.
+var start_id := ""
 
 
 func _ready() -> void:
@@ -33,9 +35,10 @@ func changed() -> void:
 	state_changed.emit()
 
 
-## A new game from the title menu.
-func start_new_game(seed_value: int) -> void:
-	set_state(GameState.new_game(seed_value, db))
+## A new game from the title menu, at the start `start` ("" = the first).
+func start_new_game(seed_value: int, start: String = "") -> void:
+	set_state(GameState.new_game(seed_value, db, start))
+	start_id = start
 	fresh = true
 
 

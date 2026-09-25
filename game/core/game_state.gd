@@ -43,16 +43,20 @@ func _init(seed_value: int = 0) -> void:
 	winter = WinterState.new()
 
 
-## A fresh game at the start time and place from data/rules.json. The
-## director first runs the canon days before the player arrives (ADR 0006),
-## so that history exists; its rumors and news are not heard.
-static func new_game(seed_value: int, db: DataDb) -> GameState:
+## A fresh game at the start time from data/rules.json, at the start place
+## `start_id` of rules.world.starts (M8.5; "" or an unknown id = the first).
+## The director first runs the canon days before the player arrives (ADR
+## 0006), so that history exists; its rumors and news are not heard.
+static func new_game(seed_value: int, db: DataDb, start_id: String = "") -> GameState:
 	var gs := GameState.new(seed_value)
 	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
 	gs.progression.day_start = gs.clock.total_minutes
 	Director.run(gs, db, gs.clock.day() - 1)
 	gs.world.news.clear()
 	db.maps.sync_flags(gs.flags)
+	var start := Movement.start_of(db, start_id)
+	if not start.is_empty() and not db.maps.is_empty():
+		Movement.place_at_start(gs, start)
 	Movement.ensure_placed(gs, db)
 	Combat.sync(gs, db)
 	NpcSim.sync(gs, db)

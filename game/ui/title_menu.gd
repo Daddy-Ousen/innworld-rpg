@@ -1,6 +1,7 @@
 ## The title screen (M6.1, the main scene): New game, Continue (the newest
-## save), Load, Quit. Sets Session's game, then opens the game screen.
-## Presentation only.
+## save), Load, Quit. With more than one start in rules.world.starts, New
+## game first asks where the player arrives (M8.5). Sets Session's game,
+## then opens the game screen. Presentation only.
 class_name TitleMenu
 extends Control
 
@@ -18,10 +19,13 @@ var new_game_seed := -1
 @onready var _continue: Button = %Continue
 @onready var _load: Button = %Load
 @onready var _note: Label = %Note
+@onready var _starts: VBoxContainer = %Starts
+## The New game, Continue, Load and Quit buttons (hidden while choosing a start).
+@onready var _menu: Array[Control] = [%NewGame, %Continue, %Load, %Quit]
 
 
 func _ready() -> void:
-	_new_game.pressed.connect(new_game)
+	_new_game.pressed.connect(open_starts)
 	_continue.pressed.connect(continue_game)
 	_load.pressed.connect(open_load)
 	%Quit.pressed.connect(func() -> void: get_tree().quit())
@@ -38,9 +42,47 @@ func refresh() -> void:
 	_focus_first()
 
 
-func new_game() -> void:
-	Session.start_new_game(new_game_seed if new_game_seed >= 0 else int(Time.get_unix_time_from_system()))
+## New game: the start chooser, or straight in when there is only one start.
+func open_starts() -> void:
+	var starts: Array = Session.db.rules.get("world", {}).get("starts", [])
+	if starts.size() <= 1:
+		new_game()
+		return
+	for child: Node in _starts.get_children():
+		if child is Button:
+			_starts.remove_child(child)
+			child.queue_free()
+	for s: Dictionary in starts:
+		var b := Button.new()
+		b.name = "Start_" + String(s["id"])
+		b.text = s["name"]
+		b.pressed.connect(new_game.bind(String(s["id"])))
+		_starts.add_child(b)
+	var back := Button.new()
+	back.name = "Back"
+	back.text = "Back"
+	back.pressed.connect(close_starts)
+	_starts.add_child(back)
+	_show_starts(true)
+	(_starts.get_child(1) as Button).grab_focus()
+
+
+func close_starts() -> void:
+	_show_starts(false)
+	_focus_first()
+
+
+## Starts a new game at the start `start_id` ("" = the first).
+func new_game(start_id: String = "") -> void:
+	Session.start_new_game(new_game_seed if new_game_seed >= 0 else int(Time.get_unix_time_from_system()),
+			start_id)
 	_enter()
+
+
+func _show_starts(on: bool) -> void:
+	_starts.visible = on
+	for c: Control in _menu:
+		c.visible = not on
 
 
 func continue_game() -> void:

@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"id": "celum_runners_guild",
+	"name": "Inside the Runners' Guild",
+	"location": "celum_runners_guild",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. The guild has a receptionist (Stenei) and a request board (1.33R); the layout is a guess. Jobs come in M8.6.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "celum_square", "arrive": [6, 4], "minutes": 0}
+	],
+	"objects": [
+		{"id": "guild_counter", "at": [10, 3], "name": "Reception counter", "actions": [], "solid": true},
+		{"id": "request_board", "at": [3, 1], "name": "Request board", "actions": [], "solid": true},
+		{"id": "guild_hearth", "at": [17, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "guild_bench", "at": [15, 7], "name": "Bench", "actions": [], "solid": true},
+		{"id": "stretching_mat", "at": [4, 8], "name": "Stretching mat", "actions": ["sprint_training"]}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHHHHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}

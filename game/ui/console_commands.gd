@@ -40,7 +40,7 @@ const HELP := [
 	"  drift                              how far the world left canon",
 	"  news                               all news and rumors the player heard",
 	"  save / load                        " + SAVE_PATH,
-	"  new [seed]                         start a new game",
+	"  new [seed] [start]                 start a new game (start: a rules.world.starts id)",
 ]
 
 var db: DataDb
@@ -144,8 +144,13 @@ func execute(line: String) -> Array[String]:
 				out.append("Loaded. Day %d, %s." % [gs.clock.day(), gs.clock.time_string()])
 		"new":
 			var seed_value := int(args[0]) if not args.is_empty() and (args[0] as String).is_valid_int() else 1
-			gs = GameState.new_game(seed_value, db)
-			out.append("New game, seed %d. Day %d, %s." % [seed_value, gs.clock.day(), gs.clock.time_string()])
+			var start: String = args[1] if args.size() > 1 else ""
+			if Movement.start_of(db, start).is_empty():
+				out.append("Unknown start '%s'." % start)
+			else:
+				gs = GameState.new_game(seed_value, db, start)
+				out.append("New game, seed %d. Day %d, %s, %s." % [seed_value, gs.clock.day(),
+						gs.clock.time_string(), gs.player.area])
 		_:
 			out.append("Unknown command '%s'. Type help." % parts[0])
 	return out
