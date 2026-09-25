@@ -65,3 +65,10 @@ If `godot` is not on PATH, use the full path to the Godot exe or set `$env:GODOT
 4. Run tests. Fix until green.
 5. Update `docs/ROADMAP.md` checkboxes and add an ADR in `docs/adr/` for any design decision.
 6. Commit.
+
+## Context discipline (agreed 2026-09-25, see `progress.md`)
+Canon batches and full test runs blow up context fast. To keep quality without the bloat:
+- Redirect GUT / validator runs to a scratchpad file. Read back only the summary line and any FAIL/Error/Parse Error lines, never the full run.
+- Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent (Agent tool). Only its short summary should return to the main session — not raw book text or raw test logs.
+- Don't re-read a file right after Edit/Write.
+- Keep `progress.md` to current-milestone status only; finished milestones live in `docs/PROGRESS_ARCHIVE.md`.
