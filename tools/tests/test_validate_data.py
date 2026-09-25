@@ -365,5 +365,98 @@ class ValidateTest(unittest.TestCase):
         self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 1)
 
 
+
+def earlier_book():
+    """A valid book8 folder: book9 data may use its ids (M8.0)."""
+    r8 = {"book": 8, "chapter": "8.00", "confidence": "confirmed"}
+    ev = event(location="field", roles={"farmer": {"prefer": ["carl"], "fallback_tags": []}},
+               requires={"alive": ["carl"], "flags": [], "not_flags": []},
+               effects={"set_flags": ["field.harvested"]}, canon_ref=r8, summary="Carl brings in the harvest.")
+    return {
+        "npcs.json": {"schema_version": 1, "npcs": {
+            "carl": {"name": "Carl", "race": "Human", "tags": ["human"], "faction": None, "home": "field",
+                     "classes": [], "alive_at_start": True, "status": "reviewed", "canon_ref": r8,
+                     "summary": "A farmer."}}},
+        "locations.json": {"schema_version": 1, "locations": {
+            "field": {"name": "Field", "kind": "region", "parent": None, "tags": [], "status": "reviewed",
+                      "canon_ref": r8, "summary": "A wheat field."}}},
+        "chapters/8.00.json": {"schema_version": 1, "book": 8, "chapter": "8.00",
+                               "events": {"b8.harvest": ev}, "system": []},
+    }
+
+
+class CrossBookTest(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+        self.fx = Fixture(self.tmp)
+        for rel, doc in earlier_book().items():
+            p = self.tmp / "book8" / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps(doc), encoding="utf-8")
+        ev = self.fx.data["chapters/9.01.json"]["events"]["b9.guard_visit"]
+        ev["location"] = "field"
+        ev["roles"]["farmer"] = {"prefer": ["carl"], "fallback_tags": []}
+        ev["depends_on"] = ["b9.soup", "b8.harvest"]
+        ev["on_fail"] = ["substitute", "mutate:b8.harvest", "cancel"]
+        self.fx.data["npcs.json"]["npcs"]["alice"]["home"] = "field"
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def run_known(self):
+        self.fx.write()
+        return vd.validate_dir(self.fx.root, None, None, vd.load_known(self.tmp, 9))
+
+    def assertError(self, rep, fragment):
+        self.assertTrue(any(fragment in e for e in rep.errors), f"no error containing {fragment!r} in {rep.errors}")
+
+    def test_load_known_reads_earlier_books_only(self):
+        k = vd.load_known(self.tmp, 9)
+        self.assertEqual(set(k.npcs), {"carl"})
+        self.assertEqual(set(k.locations), {"field"})
+        self.assertEqual(set(k.events), {"b8.harvest"})
+        self.assertEqual(vd.load_known(self.tmp, 8).npcs, {})
+
+    def test_earlier_ids_are_known(self):
+        self.assertEqual(self.run_known().errors, [])
+
+    def test_alone_the_earlier_ids_are_unknown(self):
+        self.fx.write()
+        rep = vd.validate_dir(self.fx.root)
+        self.assertError(rep, "unknown npc 'carl'")
+        self.assertError(rep, "unknown location 'field'")
+        self.assertError(rep, "unknown event 'b8.harvest'")
+        self.assertError(rep, "unknown mutate target 'b8.harvest'")
+
+    def test_still_unknown_ids_fail(self):
+        self.fx.data["chapters/9.01.json"]["events"]["b9.guard_visit"]["depends_on"] = ["b8.nothing"]
+        self.assertError(self.run_known(), "unknown event 'b8.nothing'")
+
+    def test_earlier_window_is_checked(self):
+        ev = self.fx.data["chapters/9.01.json"]["events"]["b9.guard_visit"]
+        ev["window"] = {"earliest": 0, "latest": 0, "confidence": "guess"}
+        self.assertError(self.run_known(), "'b8.harvest' can only start after this event's window ends")
+
+    def test_redefining_an_earlier_id_fails(self):
+        self.fx.data["npcs.json"]["npcs"]["carl"] = copy.deepcopy(NPCS["npcs"]["bob"])
+        self.fx.data["locations.json"]["locations"]["field"] = copy.deepcopy(LOCATIONS["locations"]["plains"])
+        rep = self.run_known()
+        self.assertError(rep, "npcs.carl: duplicate id (also in book8)")
+        self.assertError(rep, "locations.field: duplicate id (also in book8)")
+
+    def test_cli_loads_earlier_books_and_all(self):
+        self.fx.write()
+        self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 0)
+        self.assertEqual(vd.main([str(self.fx.root), "--no-raw", "--no-earlier"]), 1)
+        self.assertEqual(vd.main([str(self.tmp), "--all", "--no-raw"]), 0)
+        self.ev_bad()
+        self.assertEqual(vd.main([str(self.tmp), "--all", "--no-raw"]), 1)
+
+    def ev_bad(self):
+        self.fx.data["chapters/9.00.json"]["events"]["b9.soup"]["tier"] = 7
+        self.fx.write()
+
+
 if __name__ == "__main__":
     unittest.main()
