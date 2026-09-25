@@ -21,7 +21,8 @@ static func db() -> DataDb:
 			{"key": "zone", "equals": "toy_corner", "add_tags": {"cooking": 1.0}},
 		]}
 	d.canon = CanonDb.from_dicts({}, locations(), {})
-	d.rules["world"] = {"start": {"area": "town", "pos": [1, 2]}, "step_seconds": 6}
+	d.rules["world"] = {"starts": [{"id": "town", "name": "Arrive in town", "area": "town", "pos": [1, 2],
+		"intro": "You stand in a toy town."}], "step_seconds": 6}
 	d.maps = MapDb.from_dicts(tiles(), areas())
 	d.maps.validate(d)
 	return d

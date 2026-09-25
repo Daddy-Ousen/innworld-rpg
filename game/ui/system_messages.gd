@@ -68,11 +68,12 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	return out
 
 
-## The first page of a new game (M6.1): who the player is, then HINTS.
-static func welcome_page() -> Dictionary:
+## The first page of a new game (M6.1): who the player is, where they
+## stand (the start's intro, M8.5), then HINTS.
+static func welcome_page(start: Dictionary = {}) -> Dictionary:
 	var lines: Array[String] = [
 		"You are an Earther. The Great Ritual pulled you into this world last night.",
-		"You stand outside the east gate of Liscor, a walled city of Drakes and Gnolls.",
+		start.get("intro", "You stand outside the east gate of Liscor, a walled city of Drakes and Gnolls."),
 		"You have no class and no level.",
 		"",
 	]

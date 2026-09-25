@@ -218,19 +218,44 @@ static func _dist(a: Vector2i, b: Vector2i) -> int:
 
 
 ## Checks tiles and maps against each other, the actions, the canon
-## locations and rules.world.start. Appends to `errors` and returns them.
+## locations and rules.world.starts. Appends to `errors` and returns them.
 func validate(db: DataDb) -> Array[String]:
 	for id: String in tiles:
 		_validate_tile(id, tiles[id])
 	for id: String in areas:
 		_validate_map(id, areas[id], db)
-	var start: Dictionary = db.rules.get("world", {}).get("start", {})
-	var area: String = start.get("area", "")
-	if not areas.has(area):
-		errors.append("rules.world.start: unknown area '%s'." % area)
-	elif not _pos_ok(start.get("pos", [])) or not is_walkable(area, _vec(start["pos"])):
-		errors.append("rules.world.start: pos must be a walkable tile of '%s'." % area)
+	_validate_starts(db.rules.get("world", {}).get("starts", null))
 	return errors
+
+
+## rules.world.starts (M8.5): a non-empty list of {"id", "name", "area",
+## "pos", "intro"}; ids unique, pos a walkable tile of a known map.
+func _validate_starts(starts: Variant) -> void:
+	if not starts is Array or (starts as Array).is_empty():
+		errors.append("rules.world.starts: must be a non-empty list.")
+		return
+	var seen := {}
+	for s: Variant in starts:
+		if not s is Dictionary:
+			errors.append("rules.world.starts: each start must be an object.")
+			continue
+		var missing := false
+		for f: String in ["id", "name", "area", "pos", "intro"]:
+			if not (s as Dictionary).has(f):
+				errors.append("rules.world.starts: a start is missing '%s'." % f)
+				missing = true
+		if missing:
+			continue
+		var where := "rules.world.starts '%s'" % s["id"]
+		if seen.has(s["id"]):
+			errors.append("%s: duplicate id." % where)
+		seen[s["id"]] = true
+		var area: String = s["area"]
+		if not areas.has(area):
+			errors.append("%s: unknown area '%s'." % [where, area])
+		elif not _pos_ok(s["pos"]) or not in_bounds(area, _vec(s["pos"])) \
+				or not is_walkable(area, _vec(s["pos"])):
+			errors.append("%s: pos must be a walkable tile of '%s'." % [where, area])
 
 
 func _validate_tile(id: String, t: Dictionary) -> void:

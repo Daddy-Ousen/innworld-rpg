@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"id": "celum_square",
+	"name": "Celum town square",
+	"location": "celum",
+	"confidence": "guess",
+	"note": "Design map. The Runners' Guild (1.33R), the Rat's Tail (1.33R) and Stitchworks (2.08) are canon Celum places; where they stand is a guess.",
+	"zones": {"celum_runners_guild": [[4, 4, 5, 2]], "celum_rats_tail_inn": [[22, 4, 5, 2]], "stitchworks": [[2, 13, 3, 3]]},
+	"exits": [
+		{"at": [15, 19, 2, 1], "to": "celum_gate", "arrive": [16, 2], "minutes": 0},
+		{"at": [6, 3], "to": "celum_runners_guild", "arrive": [10, 10], "minutes": 0}
+	],
+	"objects": [
+		{"id": "rats_tail_door", "at": [24, 3], "name": "The Rat's Tail", "actions": []},
+		{"id": "stitchworks_door", "at": [1, 14], "name": "Stitchworks", "actions": []},
+		{"id": "celum_well", "at": [16, 12], "name": "Well", "actions": ["carry_water"], "solid": true},
+		{"id": "celum_stall", "at": [26, 14], "name": "Market stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true},
+		{"id": "celum_brazier_west", "at": [10, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "celum_brazier_east", "at": [22, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {"#": "city_wall", "B": "building", "D": "door", "T": "tree", "_": "cobble"},
+	"rows": [
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+		"BBBBBBDBBBBBBBBBBBBBBBBBBBBBBBBB",
+		"BB____________________________BB",
+		"BB__T______________________T__BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"________________________________",
+		"________________________________",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"BB__T______________________T__BB",
+		"BB____________________________BB",
+		"BB____________________________BB",
+		"###############__###############"
+	]
+}

@@ -55,6 +55,44 @@ func test_title_new_game_starts_fresh_with_the_seed() -> void:
 	assert_true(_session.fresh)
 
 
+func test_title_new_game_asks_where_you_arrive() -> void:
+	var t := _title()
+	t.new_game_seed = 7
+	watch_signals(t)
+	t.get_node("%NewGame").pressed.emit()
+	var starts: VBoxContainer = t.get_node("%Starts")
+	assert_true(starts.visible, "the start chooser opens")
+	assert_false(t.get_node("%NewGame").visible, "the main buttons hide")
+	assert_signal_not_emitted(t, "entered_game")
+	assert_not_null(starts.get_node_or_null("Start_liscor"))
+	var celum: Button = starts.get_node("Start_celum")
+	assert_eq(celum.text, "Arrive at Celum")
+	celum.pressed.emit()
+	assert_signal_emitted(t, "entered_game")
+	assert_eq(_session.gs.player.area, "celum_gate")
+	assert_eq(_session.start_id, "celum")
+	assert_true(_session.fresh)
+
+
+func test_title_start_chooser_back_returns_to_the_menu() -> void:
+	var t := _title()
+	t.open_starts()
+	t.open_starts()
+	var starts: VBoxContainer = t.get_node("%Starts")
+	assert_eq(starts.get_children().filter(func(c: Node) -> bool:
+		return c is Button and not c.is_queued_for_deletion()).size(), 3, "two starts and Back, not doubled")
+	(starts.get_node("Back") as Button).pressed.emit()
+	assert_false(starts.visible)
+	assert_true(t.get_node("%NewGame").visible)
+
+
+func test_welcome_page_says_where_you_start() -> void:
+	var celum := Movement.start_of(_session.db, "celum")
+	assert_has(SystemMessages.welcome_page(celum)["lines"], celum["intro"])
+	assert_has(SystemMessages.welcome_page(Movement.start_of(_session.db))["lines"],
+			"You stand outside the east gate of Liscor, a walled city of Drakes and Gnolls.")
+
+
 func test_title_continue_loads_the_newest_save() -> void:
 	var gs := GameState.new_game(9, _session.db)
 	gs.clock.advance(90)

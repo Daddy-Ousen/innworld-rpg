@@ -6,16 +6,30 @@ class_name Movement
 extends RefCounted
 
 
-## Puts an unplaced player (a migrated v3 save) at rules.world.start.
+## Puts an unplaced player (a migrated v3 save) at the first start.
 ## Returns false if the db has no maps.
 static func ensure_placed(gs: GameState, db: DataDb) -> bool:
 	if gs.player.is_placed():
 		return true
 	if db.maps.is_empty():
 		return false
-	var start: Dictionary = db.rules["world"]["start"]
-	gs.player.place(start["area"], Vector2i(int(start["pos"][0]), int(start["pos"][1])))
+	place_at_start(gs, start_of(db))
 	return true
+
+
+## The start in rules.world.starts with this id (M8.5): {"id", "name",
+## "area", "pos", "intro"}. "" gives the first start (the default); an
+## unknown id gives {}.
+static func start_of(db: DataDb, id: String = "") -> Dictionary:
+	var starts: Array = db.rules.get("world", {}).get("starts", [])
+	for s: Dictionary in starts:
+		if id == "" or s["id"] == id:
+			return s
+	return {}
+
+
+static func place_at_start(gs: GameState, start: Dictionary) -> void:
+	gs.player.place(start["area"], Vector2i(int(start["pos"][0]), int(start["pos"][1])))
 
 
 ## Tries one step in `dir` (n, s, e, w). Returns

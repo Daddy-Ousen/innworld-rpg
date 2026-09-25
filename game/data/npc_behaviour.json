@@ -3,7 +3,8 @@
 	"note": "NPC goals and schedules (M4.4, ADR 0008). Design data: where NPCs go and when. Hours are whole hours 0-24 (from > to wraps past midnight). Book 1 shows little of daily routines, so most of this is a guess; goals tied to a canon event say so in 'notes'. The Dragon never leaves its lair and is not here.",
 	"entries": {
 		"liscor": {"liscor_gate": [1, 11], "liscor_market": [2, 4]},
-		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]}
+		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]},
+		"celum": {"celum_square": [31, 9]}
 	},
 	"npcs": {
 		"erin_solstice": {
@@ -232,6 +233,22 @@
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"unless_flags": ["ruins_expedition.leave_at_dawn"], "target": {"area": "inn_interior", "pos": [6, 11]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"wesle": {
+			"confidence": "guess",
+			"notes": "Celum's gate guard (1.19R). Hours are a guess (M8.5).",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[6, 18, 1]], "target": {"area": "celum_gate", "pos": [15, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"stenei": {
+			"confidence": "guess",
+			"notes": "[Receptionist] at Celum's Runners' Guild (1.33R). Hours are a guess (M8.5).",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 18, 1]], "target": {"area": "celum_runners_guild", "pos": [10, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
 			]
 		}
 	}

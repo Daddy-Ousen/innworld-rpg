@@ -93,7 +93,7 @@ func test_v3_save_migrates_to_v4_with_an_unplaced_player() -> void:
 	assert_eq(gs.save_version, GameState.SAVE_VERSION)
 	assert_false(gs.player.is_placed())
 	assert_true(Movement.ensure_placed(gs, db), "placed at the start on first use")
-	assert_eq(gs.player.area, db.rules["world"]["start"]["area"])
+	assert_eq(gs.player.area, Movement.start_of(db)["area"])
 
 
 func test_player_survives_save_and_load() -> void:
