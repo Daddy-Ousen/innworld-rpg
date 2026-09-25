@@ -1,0 +1,87 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.20",
+	"events": {
+		"b2.ryoka_finds_tactician_loophole": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_class_leveling_loophole"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "likely"},
+			"summary": "Ryoka works out that [Tacticians] can only level off chess because no dedicated 'Gamer' class exists yet - a gap in the leveling system itself."
+		},
+		"b2.yvlon_wakes_blames_herself": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "victim": {"prefer": ["yvlon_byres"], "fallback_tags": []}},
+			"requires": {"alive": ["yvlon_byres", "ceria_springwalker"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["yvlon.awake", "yvlon.blames_self_for_squad_death"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed"},
+			"summary": "Yvlon wakes from her coma and blames herself for her squad's death to Skinner. Ceria visits her at the Guild and comes back to the inn shaken."
+		},
+		"b2.ryoka_starts_learning_magic_from_ceria": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.learning_magic_from_ceria"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed", "note": "Ceria's severed hand moves and casts on its own, kept alive by magic-conductive half-Elf bone."},
+			"summary": "Ryoka starts taking magic lessons from Ceria, who shows off her severed hand - still alive and spell-casting through magic-conductive half-Elf bone."
+		},
+		"b2.frost_fairy_swarm_torments_ceria": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ceria_springwalker", "ryoka_griffin"], "flags": ["izril.winter"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["frost_fairies.swarmed_the_inn", "ryoka.punched_a_frost_fairy"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed"},
+			"summary": "Dozens of Frost Faeries invade the inn uninvited and torment Ceria with slurs about her missing hand; Ryoka punches one out of the air and gets chased outside by the swarm."
+		},
+		"b2.klbkch_tries_forcing_chess_on_workers": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"guard": {"prefer": ["klbkch"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["klbkch", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["klbkch.tried_forcing_chess_on_workers", "klbkch.reconsiders_coercion"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed"},
+			"summary": "Klbkch brings Antinium Workers to force-learn chess, hoping to copy Pawn's spark of individuality. Erin tells him coercion won't work that way, and he seems to genuinely take it in."
+		},
+		"b2.thief_caught_stealing_in_liscor": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "krshia_stall",
+			"roles": {"thief": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.noble_thief_captured", "krshia.stall_destroyed"]},
+			"news": "A young Human woman was caught stealing from a Gnoll stall in Liscor at night and burned it to the ground with a desperate ring-cast fireball before the Watch took her.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed", "note": "Unnamed here; identified as Lyonette once Erin takes her in (2.25). Her low-magic desperation and noble bearing are both on the page."},
+			"summary": "A magic-starved noblewoman, later known as Lyonette, is caught stealing food and gear from Krshia's market stall late at night; cornered, she burns the stall down with a ring-cast fireball before the Watch takes her."
+		}
+	},
+	"system": []
+}

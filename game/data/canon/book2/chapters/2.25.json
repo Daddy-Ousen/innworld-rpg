@@ -1,0 +1,100 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.25",
+	"events": {
+		"b2.erin_takes_in_lyonette": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "thief": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "lyonette"], "flags": ["erin.rescuing_lyonette"], "not_flags": []},
+			"depends_on": ["b2.erin_rushes_to_rescue_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.taken_in_by_erin", "lyonette.works_at_inn"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "Erin finds Lyonette collapsing in the snow and refuses to just let her go. When Lyonette can't repay her, Erin offers a job instead of travel help; Lyonette reluctantly, resentfully accepts."
+		},
+		"b2.lyonette_hostile_and_disruptive": {
+			"tier": 2,
+			"window": {"earliest": 51, "latest": 51, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"thief": {"prefer": ["lyonette"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn"], "not_flags": []},
+			"depends_on": ["b2.erin_takes_in_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.hostile_to_ceria_and_toren"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "Lyonette is hostile to Ceria for being a half-Elf, refuses chores, and manipulates the inn's guests. Erin assigns Toren to 'teach' her, limiting him to no hitting once she catches him poking her."
+		},
+		"b2.krshia_confronts_erin_over_lyonette": {
+			"tier": 1,
+			"window": {"earliest": 52, "latest": 52, "confidence": "guess"},
+			"location": "liscor_plaza",
+			"roles": {"merchant": {"prefer": ["krshia"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "warrior": {"prefer": ["brunkr"], "fallback_tags": []}},
+			"requires": {"alive": ["krshia", "erin_solstice", "brunkr"], "flags": ["lyonette.hostile_to_ceria_and_toren"], "not_flags": []},
+			"depends_on": ["b2.lyonette_hostile_and_disruptive"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["krshia.confronts_erin_publicly", "brunkr.threatens_erin"], "relationship": [{"from": "krshia", "to": "erin_solstice", "delta": -1}]},
+			"news": "Krshia the Gnoll merchant publicly confronted innkeeper Erin Solstice in Liscor's plaza today over her sheltering the thief who burned Krshia's stall, calling it a betrayal of Gnoll trust.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "Krshia publicly confronts Erin in the city for harboring the thief who wronged her tribe, calling it a betrayal of Gnoll trust. Her kinsman Brunkr, calling her 'aunt' by tribal custom, threatens Erin outright."
+		},
+		"b2.lyonette_steals_gold_and_flees": {
+			"tier": 2,
+			"window": {"earliest": 53, "latest": 53, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"thief": {"prefer": ["lyonette"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette", "ceria_springwalker"], "flags": ["lyonette.hostile_to_ceria_and_toren"], "not_flags": []},
+			"depends_on": ["b2.lyonette_hostile_and_disruptive"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.tried_to_flee_with_gold"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "Lyonette steals gold and tries to flee the inn; Ceria tracks her down with a pre-planted tracking spell, and Toren brings her back."
+		},
+		"b2.lyonette_shield_spider_incident": {
+			"tier": 2,
+			"window": {"earliest": 54, "latest": 54, "confidence": "guess"},
+			"location": "shield_spider_nest",
+			"roles": {"thief": {"prefer": ["lyonette"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette", "toren"], "flags": ["lyonette.tried_to_flee_with_gold"], "not_flags": []},
+			"depends_on": ["b2.lyonette_steals_gold_and_flees"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.shield_spider_scare"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "While mushroom-gathering, Toren shoves Lyonette toward a Shield Spider nest for spite, then scares the spiders off with [Terror] to keep within Erin's no-harm order."
+		},
+		"b2.erin_declares_protection_of_lyonette": {
+			"tier": 1,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["krshia.confronts_erin_publicly", "lyonette.shield_spider_scare"], "not_flags": []},
+			"depends_on": ["b2.krshia_confronts_erin_over_lyonette", "b2.lyonette_shield_spider_incident"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.declared_protection_of_lyonette"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed"},
+			"summary": "Worn down but resolute, Erin has a private moment affirming to herself that she will protect Lyonette no matter what it costs her."
+		},
+		"b2.brunkr_leads_gnoll_warband_to_inn": {
+			"tier": 1,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"warrior": {"prefer": ["brunkr"], "fallback_tags": []}},
+			"requires": {"alive": ["brunkr"], "flags": ["brunkr.threatens_erin", "erin.declared_protection_of_lyonette"], "not_flags": []},
+			"depends_on": ["b2.erin_declares_protection_of_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["gnoll.silverfang_warband_attacks_inn"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.25", "confidence": "confirmed", "note": "About twenty Silverfang Gnolls; the fight and its resolution continue in 2.26."},
+			"summary": "Brunkr and roughly twenty Silverfang Gnolls, who had been hiding nearby, storm the inn to punish Erin for sheltering Lyonette - the opening of the siege."
+		}
+	},
+	"system": []
+}

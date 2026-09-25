@@ -1,0 +1,60 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "1.00C",
+	"events": {
+		"b2.tom_group_garrisons_blighted_village": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}, "leader": {"prefer": ["richard"], "fallback_tags": [], "optional": true}, "strategist": {"prefer": ["emily"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["tom"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rhir.hero_group_garrisons_village"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed", "note": "Rhir/Blighted Lands, a real continent unconnected to Liscor's story so far (see locations.json note on 'rhir'); day number is a placeholder, not synced to the Liscor calendar."},
+			"summary": "Tom, one of about twenty Earther 'Heroes' left from a group of fifty, garrisons a frontier village in the Blighted Lands under King Othius the Fourth, meant to hold the border against Demons."
+		},
+		"b2.tom_performs_for_village_children": {
+			"tier": 2,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}, "child": {"prefer": ["wilen"], "fallback_tags": []}},
+			"requires": {"alive": ["tom", "wilen"], "flags": ["rhir.hero_group_garrisons_village"], "not_flags": []},
+			"depends_on": ["b2.tom_group_garrisons_blighted_village"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["tom.performs_for_village_kids"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed"},
+			"summary": "Tom, with his [Clown] class, performs small conjuring and comedy skills for the village's children, including a regular in the audience, a boy named Wilen."
+		},
+		"b2.heroes_morale_collapses": {
+			"tier": 2,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"leader": {"prefer": ["richard"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": ["rhir.hero_group_garrisons_village"], "not_flags": []},
+			"depends_on": ["b2.tom_group_garrisons_blighted_village"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rhir.hero_group_morale_collapse"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed"},
+			"summary": "Tension boils over among the summoned Heroes - a dead cell phone, a failed spell to contact other Earthers, one member's breakdown - as the group's morale collapses."
+		},
+		"b2.demons_raid_village_wilen_hurt": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}, "child": {"prefer": ["wilen"], "fallback_tags": []}},
+			"requires": {"alive": ["tom", "wilen"], "flags": ["tom.performs_for_village_kids"], "not_flags": []},
+			"depends_on": ["b2.tom_performs_for_village_children"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rhir.demon_raid_on_village", "wilen.fatally_wounded"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed", "note": "Ends on a cliffhanger, continued in 1.01C."},
+			"summary": "A Demon raiding party attacks the village at night. Unlike the other Heroes, who flee, Tom stays behind to save children - but fails to save Wilen from a Troll."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,50 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "1.01C",
+	"events": {
+		"b2.wilen_dies_tom_breaks": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}, "child": {"prefer": ["wilen"], "fallback_tags": []}},
+			"requires": {"alive": ["tom", "wilen"], "flags": ["wilen.fatally_wounded"], "not_flags": []},
+			"depends_on": ["b2.demons_raid_village_wilen_hurt"],
+			"on_fail": ["cancel"],
+			"effects": {"kill": ["wilen"], "set_flags": ["tom.broke_after_wilens_death", "tom.class_change_clown_24"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.01C", "confidence": "confirmed"},
+			"summary": "Wilen dies in Tom's arms. Tom has a psychotic break, jumping to Clown Level 24 with grim new skills, and becomes gleefully, horrifically violent."
+		},
+		"b2.tom_slaughters_demon_raiders": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}},
+			"requires": {"alive": ["tom"], "flags": ["tom.broke_after_wilens_death"], "not_flags": []},
+			"depends_on": ["b2.wilen_dies_tom_breaks"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["tom.slaughtered_demon_raiders"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.01C", "confidence": "confirmed"},
+			"summary": "Tom single-handedly kills the Demon raiders with improvised, comedic violence, shrugging off severe wounds on overused healing potions and freeing the stable horses to trample the fleeing lieutenant."
+		},
+		"b2.tom_found_covered_in_blood": {
+			"tier": 1,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blighted_lands",
+			"roles": {"clown": {"prefer": ["tom"], "fallback_tags": []}, "leader": {"prefer": ["richard"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["tom"], "flags": ["tom.slaughtered_demon_raiders"], "not_flags": []},
+			"depends_on": ["b2.tom_slaughters_demon_raiders"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["tom.found_by_richard_covered_in_blood", "tom.level_2_hero", "tom.feared_and_awed_by_village"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.01C", "confidence": "confirmed"},
+			"summary": "At dawn, Richard's rescue party finds Tom alone among the corpses, covered in blood. His fellow Heroes can't look at him, but the soldiers and villagers regard him with awed fear as the man who saved them."
+		}
+	},
+	"system": [
+		{"who": "tom", "kind": "class", "name": "[Clown]", "level": 24, "confidence": "confirmed"},
+		{"who": "tom", "kind": "class", "name": "[Hero]", "level": 2, "confidence": "confirmed"}
+	]
+}

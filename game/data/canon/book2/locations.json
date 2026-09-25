@@ -83,6 +83,51 @@
 				"note": "Non-chronological Interlude; exact name and street not given."
 			},
 			"summary": "A Gnoll-run tavern in Liscor known for good food, where Krshia and Selys corner Erin about her love life."
+		},
+		"goblin_mountain_lair": {
+			"name": "The mountain dungeon",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["cave", "dungeon", "goblin", "golem"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "guess", "note": "No proper name given in the text; a golem-guarded ruin/dungeon in the mountains where Rags' tribe settles."},
+			"summary": "A golem-guarded ruin in the mountains where Rags' tribe kills an animated suit of armor, loses six goblins to a trap, and seals off a dangerous corridor to make the entrance their new lair."
+		},
+		"jawbreaker_camp": {
+			"name": "Jawbreaker camp",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["goblin", "camp", "tributary"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "guess"},
+			"summary": "Camp of the small Jawbreaker Tribe, a tributary of the Red Fang. Rags ambushes and kills its Hob chief, Rockgaw, to fold the tribe into her own."
+		},
+		"empire_of_sands": {
+			"name": "Empire of Sands",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": ["nation", "chandrar", "rival", "unseen"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "confirmed", "note": "Never shown on-page; known only through its Emperor's declaration of war on Reim."},
+			"summary": "A rising power of Chandrar, ruled by an unseen Emperor. Kills Flos Reimarch's ally Drevish and sends his head to Reim, starting a war."
+		},
+		"rhir": {
+			"name": "Rhir",
+			"kind": "region",
+			"parent": null,
+			"tags": ["continent", "war", "demons"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "guess", "note": "Named per the wider story's later canon, not stated in this chapter's text itself; flagged low-confidence until a later book confirms it on-page. A distant continent gripped by a war against Demons, expected to matter in later books."},
+			"summary": "A war-torn continent far from Izril, where Demons press against a kingdom of the Blighted Lands. Unconnected to Liscor's story so far."
+		},
+		"blighted_lands": {
+			"name": "The Blighted Lands",
+			"kind": "region",
+			"parent": "rhir",
+			"tags": ["border", "war", "demons"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed"},
+			"summary": "The border region of a small kingdom ruled by the Blighted King, Othius the Fourth, holding a wall against Demons beyond. Home to about twenty summoned Earther Heroes, including Tom."
 		}
 	}
 }
