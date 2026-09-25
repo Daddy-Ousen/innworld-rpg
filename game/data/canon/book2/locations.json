@@ -7,7 +7,12 @@
 			"parent": null,
 			"tags": ["academy", "mages", "island"],
 			"status": "reviewed",
-			"canon_ref": {"book": 2, "chapter": "interlude_the_call", "confidence": "confirmed", "note": "Kent Scott says only Wistram could cast a spell that reaches across the world. Pisces and Ceria studied there (2.04)."},
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_the_call",
+				"confidence": "confirmed",
+				"note": "Kent Scott says only Wistram could cast a spell that reaches across the world. Pisces and Ceria studied there (2.04)."
+			},
 			"summary": "The isle of mages. Its mages link stranded Earthers through their phones in a costly spell, and a gathering of great mages there ranks the world's likeliest disasters."
 		},
 		"invrisil": {
@@ -16,7 +21,12 @@
 			"parent": null,
 			"tags": ["city", "human", "adventurers"],
 			"status": "reviewed",
-			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "Fals: three hundred miles north of Celum. That Magnolia's winter home (2.06) is in Invrisil is likely, not stated."},
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.08",
+				"confidence": "confirmed",
+				"note": "Fals: three hundred miles north of Celum. That Magnolia's winter home (2.06) is in Invrisil is likely, not stated."
+			},
 			"summary": "The city of adventurers, far north of Celum. Magnolia Reinhart winters there and travels to it in a horseless magic carriage."
 		},
 		"tailless_thief": {
@@ -36,6 +46,43 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed"},
 			"summary": "Octavia's potion shop on a side street of Celum: herbs on the beams, potions on the walls, a safety lamp, and boards where the display glass should be."
+		},
+		"boom_tree_forest": {
+			"name": "Boom-bark forest",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["forest", "danger"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed", "note": "A scouting party is said to have vanished here; patrols avoid it."},
+			"summary": "A stand of odd, bark-stripped trees south-east of Liscor. The bark explodes when heated, so it is avoided—until Erin has it harvested as tough, free timber for the new inn."
+		},
+		"death_beyond_death": {
+			"name": "Death beyond death",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["cave", "danger", "goblin", "red_fang"],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.14G",
+				"confidence": "confirmed",
+				"note": "Toren fell into liscor_dungeon near Liscor and emerged here days later: the same dungeon reaches this far. Not walkable from this end yet; a later book may open the path."
+			},
+			"summary": "A narrow, feared opening in a mountainside far north of Liscor, in Red Fang territory. Three Goblin tribes have died trying to clear whatever lives inside. Deep tunnels are thought to reach all the way to the ruins near Liscor."
+		},
+		"gnoll_tavern": {
+			"name": "The Gnoll tavern",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": ["tavern", "gnoll", "food"],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Non-chronological Interlude; exact name and street not given."
+			},
+			"summary": "A Gnoll-run tavern in Liscor known for good food, where Krshia and Selys corner Erin about her love life."
 		}
 	}
 }

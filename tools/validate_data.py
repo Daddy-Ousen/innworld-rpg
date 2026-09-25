@@ -251,9 +251,17 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
 
 
 def check_stage(r: Report, where: str, st) -> None:
-    """A canon fight on the map (M6.5, ADR 0011). The game checks enemies and map tiles."""
-    if not _keys(r, where, st, {"area", "hours", "foes"},
-                 {"when_flags", "unless_flags", "allies", "line", "note", "waves"}):
+    """A canon fight or scene on the map (M6.5, ADR 0011; scenes M8.2). The
+    game checks enemies/npcs and map tiles."""
+    kind = st.get("kind", "fight") if isinstance(st, dict) else "fight"
+    if kind not in ("fight", "scene"):
+        r.err(f"{where}.kind", "must be 'fight' or 'scene'")
+        return
+    if kind == "fight":
+        req, opt = {"area", "hours", "foes"}, {"when_flags", "unless_flags", "allies", "line", "note", "waves", "kind"}
+    else:
+        req, opt = {"area", "hours", "npcs"}, {"when_flags", "unless_flags", "line", "note", "kind"}
+    if not _keys(r, where, st, req, opt):
         return
     if not (isinstance(st["area"], str) and RE_ID.match(st["area"])):
         r.err(f"{where}.area", "must be a map id")
@@ -261,6 +269,28 @@ def check_stage(r: Report, where: str, st) -> None:
     if not (isinstance(h, list) and len(h) == 2 and all(_int(x) for x in h)
             and 0 <= h[0] <= 24 and 0 <= h[1] <= 24 and h[0] != h[1]):
         r.err(f"{where}.hours", "must be [from, to] whole hours with 0 <= from != to <= 24")
+    for k in ("when_flags", "unless_flags"):
+        if k in st:
+            _str_list(r, f"{where}.{k}", st[k], RE_FLAG)
+    if "line" in st:
+        _str(r, f"{where}.line", st["line"], NEWS_MAX)
+    if "note" in st:
+        _str(r, f"{where}.note", st["note"], SUMMARY_MAX)
+    if kind == "scene":
+        npcs = st["npcs"]
+        if not isinstance(npcs, list) or not npcs:
+            r.err(f"{where}.npcs", "must be a non-empty list")
+        else:
+            for i, n in enumerate(npcs):
+                nw = f"{where}.npcs[{i}]"
+                if not _keys(r, nw, n, {"npc", "pos"}):
+                    continue
+                if not (isinstance(n["npc"], str) and RE_ID.match(n["npc"])):
+                    r.err(f"{nw}.npc", "must be an npc id")
+                p = n["pos"]
+                if not (isinstance(p, list) and len(p) == 2 and all(_int(x) and x >= 0 for x in p)):
+                    r.err(f"{nw}.pos", "must be [x, y] with x, y >= 0")
+        return
     foes = st["foes"]
     if not isinstance(foes, list) or not foes:
         r.err(f"{where}.foes", "must be a non-empty list")
@@ -274,15 +304,8 @@ def check_stage(r: Report, where: str, st) -> None:
             p = f["pos"]
             if not (isinstance(p, list) and len(p) == 2 and all(_int(x) and x >= 0 for x in p)):
                 r.err(f"{fw}.pos", "must be [x, y] with x, y >= 0")
-    for k in ("when_flags", "unless_flags"):
-        if k in st:
-            _str_list(r, f"{where}.{k}", st[k], RE_FLAG)
     if "allies" in st:
         _str_list(r, f"{where}.allies", st["allies"], RE_ID)
-    if "line" in st:
-        _str(r, f"{where}.line", st["line"], NEWS_MAX)
-    if "note" in st:
-        _str(r, f"{where}.note", st["note"], SUMMARY_MAX)
     if "waves" in st:
         if not isinstance(st["waves"], list):
             r.err(f"{where}.waves", "must be a list")
@@ -668,6 +691,9 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         for nid in st.get("allies", []) if isinstance(st.get("allies"), list) else []:
             if isinstance(nid, str):
                 need_npc(f"{w}.stage.allies", nid)
+        for i, n in enumerate(st.get("npcs", []) if isinstance(st.get("npcs"), list) else []):
+            if isinstance(n, dict) and isinstance(n.get("npc"), str):
+                need_npc(f"{w}.stage.npcs[{i}]", n["npc"])
         for i, wave in enumerate(st.get("waves", []) if isinstance(st.get("waves"), list) else []):
             for nid in wave.get("allies", []) if isinstance(wave, dict) and isinstance(wave.get("allies"), list) else []:
                 if isinstance(nid, str):

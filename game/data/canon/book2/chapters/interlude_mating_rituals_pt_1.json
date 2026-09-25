@@ -1,0 +1,124 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "interlude_mating_rituals_pt_1",
+	"events": {
+		"b2.krshia_selys_confront_erin_on_dating": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "gnoll_tavern",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "krshia", "selys"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.sex_life_discussed"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "The Interlude is explicitly not in strict chronological order with the main chapters (author's note); window is a loose guess and this does not gate or depend on other events."
+			},
+			"summary": "Over drinks, Krshia and Selys corner Erin about her lack of a love life and resolve to find her a partner, quietly betting on which species she will end up with first."
+		},
+		"b2.tkrn_courts_erin": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "suitor": {"prefer": ["tkrn"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "tkrn"], "flags": ["erin.sex_life_discussed"], "not_flags": []},
+			"depends_on": ["b2.krshia_selys_confront_erin_on_dating"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Floating Interlude event; see the tribe-confront event's note."
+			},
+			"summary": "Tkrn courts Erin with Gnoll custom: strong-smelling flowers, a cheap ring, and an offer to smell and groom her. She turns him down."
+		},
+		"b2.culyss_courts_erin": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "suitor": {"prefer": ["culyss"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "culyss"], "flags": ["erin.sex_life_discussed"], "not_flags": []},
+			"depends_on": ["b2.krshia_selys_confront_erin_on_dating"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Floating Interlude event; see the tribe-confront event's note."
+			},
+			"summary": "Culyss, a smooth-talking Drake suitor, visits; unaware that Drake tails are sensitive, Erin unknowingly gives him an intimate massage while being friendly."
+		},
+		"b2.erin_explains_reproduction_to_rags": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "chief": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "rags"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Floating Interlude event; see the tribe-confront event's note."
+			},
+			"summary": "Over chess, Erin explains human reproduction to Rags, who is horrified and flees; the knowledge quickly spreads through the tribe."
+		},
+		"b2.female_goblins_beat_up_culyss": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"suitor": {"prefer": ["culyss"], "fallback_tags": []}},
+			"requires": {"alive": ["culyss"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.culyss_courts_erin", "b2.erin_explains_reproduction_to_rags"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Floating Interlude event; see the tribe-confront event's note."
+			},
+			"summary": "When Culyss comes back for a second date, the tribe's female Goblins ambush him and drive him off for good."
+		},
+		"b2.krshia_selys_gift_erin_toys": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 50, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "krshia", "selys"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.krshia_selys_confront_erin_on_dating"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_mating_rituals_pt_1",
+				"confidence": "guess",
+				"note": "Floating Interlude event; a returned Toren appears on-page here, but since the Interlude is explicitly out of order this does NOT clear the main-timeline toren.missing flag (b2.toren_flees_armor_guardian_meets_rags does that)."
+			},
+			"summary": "Having failed to pair Erin off, Krshia and Selys give her carved wooden gag gifts; a mortified Erin is caught holding them."
+		}
+	},
+	"system": []
+}

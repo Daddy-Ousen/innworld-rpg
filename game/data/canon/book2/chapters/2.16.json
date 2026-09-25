@@ -1,0 +1,103 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.16",
+	"events": {
+		"b2.klbkch_reports_to_queen": {
+			"tier": 1,
+			"window": {"earliest": 45, "latest": 46, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "queen": {"prefer": ["free_queen"], "fallback_tags": []}},
+			"requires": {"alive": ["klbkch", "free_queen"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.antinium_rebuild_inn_in_a_day"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium.investigating_anomalies", "antinium.silverfang_second_warband_incoming"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "likely"},
+			"summary": "Klbkch briefs the Free Queen: a second Silverfang Gnoll warband is nearing Liscor, a human Courier is in the city, and he suspects Erin and Ryoka are tied to a pattern the Hives are tracking."
+		},
+		"b2.pisces_creates_undead_spider": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["pisces", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.toren_falls_into_ancient_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pisces.necromancy_non_bone_success"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "likely"},
+			"summary": "Pisces bursts in exhausted, having pioneered animating a spider corpse rather than bone or flesh. Erin makes him banish it. He still cannot sense Toren's aura anywhere."
+		},
+		"b2.valceif_delivers_chessboard_to_erin": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"scholar": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["valceif_godfrey", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_races_valceif", "b2.erin_hamburger_stand_debut"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.receives_magic_chessboard", "wandering_inn.hamburgers_copied_by_city"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "likely"},
+			"summary": "Val delivers an enchanted chessboard, a reward meant for Liscor's best chess player. Everyone assumes Olesm, but Erin turns out to be the real solver; meanwhile all of Liscor is now selling copycat hamburgers."
+		},
+		"b2.ryoka_finds_mystery_battlefield": {
+			"tier": 2,
+			"window": {"earliest": 45, "latest": 46, "confidence": "guess"},
+			"location": "death_beyond_death",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.toren_flees_armor_guardian_meets_rags"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.discovered_giant_armor_battlefield"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.16",
+				"confidence": "confirmed",
+				"note": "The armor and battlefield are the remains of b2.toren_flees_armor_guardian_meets_rags; Ryoka does not connect the two yet."
+			},
+			"summary": "Running through the night, Ryoka finds a two-mile muddy battle scar and a massive, battered, empty suit of giant plate armor near a mountain cave mouth—the aftermath of Toren's fight, though she has no way to know that."
+		},
+		"b2.ryoka_arrives_exhausted_reunites": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_finds_mystery_battlefield", "b2.valceif_delivers_chessboard_to_erin"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "likely"},
+			"summary": "Ryoka runs through the night into the inn, reuniting with Erin and friends and finding out she already knows Val."
+		},
+		"b2.ryoka_detects_curse_dreamcatcher": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ryoka_arrives_exhausted_reunites"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.dreamcatcher_destroyed", "ryoka.memory_restored"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "confirmed"},
+			"summary": "[Detect Magic] finds a powerful old curse on Ryoka's head. Val lends a valuable dreamcatcher charm that overloads breaking it, destroying itself but flooding Ryoka with suppressed memories."
+		}
+	},
+	"system": []
+}

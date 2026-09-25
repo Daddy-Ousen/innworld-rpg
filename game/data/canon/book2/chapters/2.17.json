@@ -1,0 +1,76 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.17",
+	"events": {
+		"b2.ryoka_remembers_teriarch_is_dragon": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.memory_restored"], "not_flags": []},
+			"depends_on": ["b2.ryoka_detects_curse_dreamcatcher"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_teriarch_is_dragon"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.17",
+				"confidence": "confirmed",
+				"note": "A reality-warping horror she also recalls near his cave is not a named canon monster the game has data for yet; left out rather than guessed."
+			},
+			"summary": "Ryoka's restored memory: on her first visit, wounded and dying, she saw Teriarch's true dragon form before he wiped it and adopted a human disguise."
+		},
+		"b2.erin_iphone_concert_night": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["wandering_inn.hamburgers_copied_by_city"], "not_flags": []},
+			"depends_on": ["b2.valceif_delivers_chessboard_to_erin", "b2.ryoka_detects_curse_dreamcatcher"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.level_21", "erin.class_singer", "wandering_inn.iphone_concert_legendary", "liscor.heard_earth_music_first_time"]},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [20, 24],
+				"kind": "scene",
+				"npcs": [
+					{"npc": "ceria_springwalker", "pos": [17, 14]},
+					{"npc": "pisces", "pos": [18, 14]},
+					{"npc": "selys", "pos": [19, 14]},
+					{"npc": "relc", "pos": [20, 14]},
+					{"npc": "krshia", "pos": [21, 14]}
+				],
+				"line": "A crowd fills the yard below the inn's door, drawn by a song none of them have ever heard.",
+				"note": "M8.2: a friendly gathering, not a fight. Erin is already home on her own schedule. Ryoka has no npc_behaviour entry yet, so she is not walkable, but keeps the runner role for the story."
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.17", "confidence": "confirmed"},
+			"summary": "To out-do the copycat vendors, Erin sings pop songs off Ryoka's phone from the inn's roof, amplified by Pisces. A huge crowd comes from Liscor for an all-night concert; she reaches Level 21 and unlocks the [Singer] class."
+		},
+		"b2.mystery_chess_opponent_first_move": {
+			"tier": 2,
+			"window": {"earliest": 46, "latest": 46, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.receives_magic_chessboard"], "not_flags": []},
+			"depends_on": ["b2.valceif_delivers_chessboard_to_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["chess.mystery_game_active"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.17", "confidence": "likely"},
+			"summary": "Overnight, the enchanted board's unseen opponent makes a move, confirming the magic link is live."
+		}
+	},
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Innkeeper]",
+			"level": 21,
+			"confidence": "guess",
+			"note": "Text says she reaches Level 21 here; not stated whether Innkeeper specifically."
+		},
+		{"who": "erin_solstice", "kind": "class", "name": "[Singer]", "level": null, "confidence": "confirmed"}
+	]
+}

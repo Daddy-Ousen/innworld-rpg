@@ -212,6 +212,72 @@ func test_canon_db_checks_the_stage_shape() -> void:
 	assert_string_contains(text, "event 'e.bad_ally' stage allies: unknown npc 'nobody'.")
 
 
+## A scene stage (M8.2) with the toy baker (npc_behaviour, normally off-map
+## or in the shop) moved into the field with no fight. The area is not the
+## toy game's start area (town), so the player must walk in for it to fire.
+func _scene_events(stage: Dictionary = {}, window: Array = [1, 2]) -> Dictionary:
+	if stage.is_empty():
+		stage = {"area": "field", "hours": [6, 22], "kind": "scene",
+			"npcs": [{"npc": "baker", "pos": [2, 1]}], "line": "A small crowd gathers."}
+	return {"e.gathering": ToyCanon.event(window[0], window[1],
+		{"stage": stage, "effects": {"set_flags": ["field.gathered"]}})}
+
+
+func test_a_scene_stage_moves_its_npcs_in_with_no_fight() -> void:
+	_make(_scene_events())
+	var gs := ToyNpcs.new_game(_db)
+	assert_ne(ToyNpcs.area(gs, "baker"), "field", "not there yet")
+	_to_field(gs)
+	assert_eq(gs.world.staged, {"e.gathering": 1})
+	assert_eq(ToyNpcs.area(gs, "baker"), "field")
+	assert_ne(ToyNpcs.pos(gs, "baker"), ToyNpcs.pos(gs, "farmer"),
+		"the farmer works at (2,1); baker takes the nearest free tile instead")
+	assert_true(gs.combat.monsters.is_empty(), "a scene has no monsters")
+	assert_has(gs.combat.lines, "A small crowd gathers.")
+
+
+func test_a_scene_stage_runs_once() -> void:
+	_make(_scene_events())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_eq(gs.world.staged, {"e.gathering": 1})
+	Commands.wait(gs, _db, 6)
+	assert_eq(gs.world.staged, {"e.gathering": 1}, "did not stage again")
+	assert_does_not_have(gs.combat.lines, "A small crowd gathers.", "no second line")
+
+
+func test_canon_db_checks_the_scene_stage_shape() -> void:
+	var bad := {
+		"e.bad_kind": ToyCanon.event(1, 1, {"stage": {"area": "town", "hours": [6, 12], "kind": "party"}}),
+		"e.no_npcs": ToyCanon.event(1, 1,
+			{"stage": {"area": "town", "hours": [6, 12], "kind": "scene"}}),
+		"e.bad_npc": ToyCanon.event(1, 1, {"stage": _scene_events()["e.gathering"]["stage"]
+			.merged({"npcs": [{"npc": "baker"}]}, true)}),
+		"e.unknown_npc": ToyCanon.event(1, 1, {"stage": _scene_events()["e.gathering"]["stage"]
+			.merged({"npcs": [{"npc": "nobody", "pos": [2, 2]}]}, true)}),
+		"e.scene_with_waves": ToyCanon.event(1, 1, {"stage": _scene_events()["e.gathering"]["stage"]
+			.merged({"waves": [{"after_seconds": 0, "allies": ["baker"]}]}, true)}),
+	}
+	var canon := CanonDb.from_dicts(ToyNpcs.npcs(), {}, bad)
+	var text := "\n".join(canon.errors)
+	assert_string_contains(text, "event 'e.bad_kind' stage: kind must be 'fight' or 'scene'.")
+	assert_string_contains(text, "event 'e.no_npcs' stage: missing 'npcs'.")
+	assert_string_contains(text, "event 'e.bad_npc' stage: each npc entry needs 'npc' and 'pos'")
+	assert_string_contains(text, "event 'e.unknown_npc' stage npcs: unknown npc 'nobody'.")
+	assert_string_contains(text, "event 'e.scene_with_waves' stage: a scene stage cannot have waves.")
+
+
+func test_combat_db_checks_scene_npc_tiles() -> void:
+	var base: Dictionary = _scene_events()["e.gathering"]["stage"]
+	var events := {
+		"e.on_an_exit": ToyCanon.event(1, 1,
+			{"stage": base.merged({"npcs": [{"npc": "baker", "pos": [0, 1]}]}, true)}),
+	}
+	_make(events)
+	var text := "\n".join(_db.combat.errors)
+	assert_string_contains(text, "event 'e.on_an_exit' stage: npc pos")
+
+
 func test_combat_db_checks_stage_enemies_and_tiles() -> void:
 	var events := {
 		"e.unknown_enemy": ToyCanon.event(1, 1, {"stage": _stage({"foes": [{"enemy": "dragon", "pos": [1, 1]}]})}),

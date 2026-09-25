@@ -1,0 +1,91 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.10T",
+	"events": {
+		"b2.toren_ordered_to_find_firewood": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["toren", "erin_solstice"], "flags": ["wandering_inn.short_of_firewood"], "not_flags": []},
+			"depends_on": ["b2.toren_walls_the_inn_with_snow"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.searching_for_firewood"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed"},
+			"summary": "Erin leaves to shop and check on friends in Liscor, telling Toren to find firewood on his own since none is left at the inn."
+		},
+		"b2.toren_discovers_boom_tree_forest": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "boom_tree_forest",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.searching_for_firewood"], "not_flags": []},
+			"depends_on": ["b2.toren_ordered_to_find_firewood"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.found_boom_tree_wood"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed"},
+			"summary": "Toren fails to cut the small blue-fruit orchard's trees, then finds a stand of strange, bark-stripped trees further out and drags a felled log back toward the inn."
+		},
+		"b2.toren_blows_up_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["toren"], "flags": ["toren.found_boom_tree_wood"], "not_flags": []},
+			"depends_on": ["b2.toren_discovers_boom_tree_forest"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.destroyed", "toren.discovers_boom_trees_explode"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed"},
+			"summary": "Toren lights the strange wood in the fireplace. The heated bark explodes, blasting out roughly half the inn and starting a fire."
+		},
+		"b2.erin_sends_toren_away": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["toren", "erin_solstice"], "flags": ["wandering_inn.destroyed"], "not_flags": []},
+			"depends_on": ["b2.toren_blows_up_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.exiled_temporarily", "erin.despair"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed"},
+			"summary": "Erin comes home to find the inn wrecked, breaks down crying, and tells a devastated Toren to leave. He obeys and wanders off alone."
+		},
+		"b2.toren_resists_the_call_south": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.exiled_temporarily"], "not_flags": []},
+			"depends_on": ["b2.erin_sends_toren_away"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.resisted_necromancer_call", "toren.bond_confirmed"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.10T", "confidence": "confirmed", "note": "Internal; not a hook the player can act on."},
+			"summary": "Alone in the snow, Toren wavers between a necromancer's call south (heard since Skinner died) and his bond to Erin. He chooses to go back to her."
+		},
+		"b2.toren_falls_into_ancient_ruins": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 44, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.resisted_necromancer_call"], "not_flags": []},
+			"depends_on": ["b2.toren_resists_the_call_south"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.discovers_underground_ruins", "toren.wields_skinners_gem", "toren.missing"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.10T",
+				"confidence": "confirmed",
+				"note": "Same ruin network as the book1 Skinner dungeon (liscor_dungeon): Toren recognises the corridors. Not the same fight as book1's b2.gazi_attacks_outside_the_ruins (that one is by the entrance; this is deep inside)."
+			},
+			"summary": "Toren falls through a snow-hidden chasm about 400 feet down into the same ruins where Skinner once lived. A headless armored guardian with a greatsword confronts him; he wedges Skinner's crimson gem into his own skull for power and fights."
+		}
+	},
+	"system": []
+}

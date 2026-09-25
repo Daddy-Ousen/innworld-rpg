@@ -1,0 +1,86 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.13",
+	"events": {
+		"b2.erin_hamburger_stand_debut": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"friend": {"prefer": ["selys"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "krshia"], "flags": ["wandering_inn.hamburgers"], "not_flags": []},
+			"depends_on": ["b2.erin_introduces_hamburgers"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.selling_hamburgers", "liscor.knows_hamburgers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.13", "confidence": "confirmed"},
+			"summary": "Erin sets up a grill at Krshia's market stall and sells hamburgers to Drakes and Gnolls all day, an overnight sensation with Selys helping manage the crowd."
+		},
+		"b2.erin_meets_hawk_courier": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "courier": {"prefer": ["hawk"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "hawk"], "flags": ["erin.selling_hamburgers"], "not_flags": []},
+			"depends_on": ["b2.erin_hamburger_stand_debut"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_hawk"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.13", "confidence": "confirmed"},
+			"summary": "At her stand, Erin meets Hawk, Liscor's Beastkin Courier, who buys a burger and loves it."
+		},
+		"b2.erin_spots_hungry_girl_in_alley": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.selling_hamburgers"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.13",
+				"confidence": "confirmed",
+				"note": "Identity unknown; the game invents no name or backstory for her yet. A possible future hook, not built here."
+			},
+			"summary": "Erin locks eyes for a moment with a starving, ragged girl watching her stand from an alley. The girl flees when she notices Erin has seen her."
+		},
+		"b2.ceria_night_terror_ice_spike": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["ceria_springwalker", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ceria.staying_at_inn", "ceria.traumatized", "ceria.hand_anomaly"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.13", "confidence": "confirmed"},
+			"summary": "Staying at the rebuilt inn, Ceria dreams she is trapped with Skinner again and her dead hand casts [Ice Spike] at Erin on its own, narrowly missing. Neither of them can explain how."
+		},
+		"b2.olesm_reveals_crypt_guardian_lore": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"scholar": {"prefer": ["olesm"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "olesm"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.ceria_night_terror_ice_spike"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.knows_crypt_guardians", "liscor_dungeon.more_guardians_exist"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.13", "confidence": "confirmed"},
+			"summary": "Olesm rushes over late at night: Liscor's oldest archives show the ruins were only a small chamber in a far larger tomb, and Skinner's full title was 'Lesser Guardian of the Crypts' — meaning other guardians exist."
+		}
+	},
+	"system": []
+}

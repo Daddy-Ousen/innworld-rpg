@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 2 canon (the magic call and 2.00 are day 41).
 const FIRST_DAY := 41
-## Last day with extracted Book 2 canon (M8.1: chapter 2.09 / 2.08, day 44).
-const LAST_DAY := 44
+## Last day with extracted Book 2 canon (M8.2: chapter 2.18, day 47).
+const LAST_DAY := 47
 const ARRIVAL_DAY := 8
 
 var _db: DataDb

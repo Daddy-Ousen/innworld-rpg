@@ -357,6 +357,39 @@ class ValidateTest(unittest.TestCase):
         self.ev()["stage"] = self.stage(line="Here the quick brown fox jumps over the lazy dog again.")
         self.assertError(self.fx.run(with_raw=True), "stage.line: copies book text")
 
+    # --- M8.2 scene stages
+
+    def scene(self, **over):
+        st = {"area": "hut_inside", "hours": [9, 12], "kind": "scene",
+              "npcs": [{"npc": "bob", "pos": [2, 3]}], "line": "A crowd gathers."}
+        st.update(over)
+        return st
+
+    def test_a_scene_stage_passes(self):
+        self.ev()["stage"] = self.scene()
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_scene_stage_shape_errors(self):
+        self.ev()["stage"] = self.scene(hours=[12, 12], npcs=[{"npc": "zed"}], boss=True)
+        rep = self.fx.run()
+        self.assertError(rep, "stage.hours")
+        self.assertError(rep, "stage.npcs[0]")
+        self.assertError(rep, "boss")
+        self.ev()["stage"] = self.scene(npcs=[])
+        self.assertError(self.fx.run(), "stage.npcs: must be a non-empty list")
+        self.ev()["stage"] = self.scene(kind="party")
+        self.assertError(self.fx.run(), "stage.kind: must be 'fight' or 'scene'")
+        self.ev()["stage"] = self.scene(waves=[{"after_seconds": 0, "allies": ["bob"]}])
+        self.assertError(self.fx.run(), "waves")
+
+    def test_scene_stage_npc_unknown(self):
+        self.ev()["stage"] = self.scene(npcs=[{"npc": "zed", "pos": [1, 1]}])
+        self.assertError(self.fx.run(), "stage.npcs[0]: unknown npc 'zed'")
+
+    def test_scene_stage_line_copy_check(self):
+        self.ev()["stage"] = self.scene(line="Here the quick brown fox jumps over the lazy dog again.")
+        self.assertError(self.fx.run(with_raw=True), "stage.line: copies book text")
+
     def test_cli_exit_codes(self):
         self.fx.write()
         self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 0)

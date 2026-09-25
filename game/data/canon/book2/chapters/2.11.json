@@ -1,0 +1,136 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.11",
+	"events": {
+		"b2.friends_rally_at_ruined_inn": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.destroyed"], "not_flags": []},
+			"depends_on": ["b2.toren_blows_up_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "confirmed"},
+			"summary": "Relc and Klbkch, then Selys, Ceria and Olesm arrive to find the inn destroyed. They comfort Erin and debate whether it can be rebuilt."
+		},
+		"b2.klbkch_offers_antinium_rebuild": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.friends_rally_at_ruined_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium.chess_visitation_deal", "wandering_inn.rebuild_begins"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.11",
+				"confidence": "confirmed",
+				"note": "Klbkch is introduced here as the newly reincarnated Revalantor of the Free Antinium, above Prognugator rank."
+			},
+			"summary": "Klbkch offers thirty levelled Antinium Workers to rebuild the inn for free, in trade for Antinium being allowed to visit and learn chess."
+		},
+		"b2.erin_confirms_boom_tree_reuse": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.rebuild_begins"], "not_flags": []},
+			"depends_on": ["b2.klbkch_offers_antinium_rebuild"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.built_from_boom_wood"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "likely"},
+			"summary": "Erin and Ceria test the boom-bark and confirm it only explodes when heated, so Erin has the tough wood harvested as free timber for the new inn."
+		},
+		"b2.inn_relocated_near_liscor": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": ["wandering_inn.built_from_boom_wood"], "not_flags": []},
+			"depends_on": ["b2.erin_confirms_boom_tree_reuse"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.relocated_near_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "confirmed"},
+			"summary": "At Erin's request, the new inn is built on a hill much closer to Liscor, in sight of the gates, instead of back at the old, out-of-the-way spot."
+		},
+		"b2.pawn_and_bird_lead_reconstruction": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"worker": {"prefer": ["pawn"], "fallback_tags": []},
+				"archer": {"prefer": ["bird"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "pawn"], "flags": ["wandering_inn.relocated_near_liscor"], "not_flags": []},
+			"depends_on": ["b2.inn_relocated_near_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.limbs_regenerating"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "confirmed"},
+			"summary": "Pawn and Bird, survivors of the Skinner fight, arrive with more Workers to direct the rebuild; an emotional reunion, and Pawn's severed limbs are visibly regrowing."
+		},
+		"b2.antinium_rebuild_inn_in_a_day": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "worker": {"prefer": ["pawn"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "pawn"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.pawn_and_bird_lead_reconstruction"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.rebuilt", "wandering_inn.upgraded", "wandering_inn.copper_nails"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.11",
+				"confidence": "confirmed",
+				"note": "The Faeries' iron objection and the Hive's glass-window gift are canon; exact scene order compressed."
+			},
+			"summary": "The Antinium Workers finish an entire new, upgraded inn by nightfall: a basement, an outhouse, glass windows and a gilded sign, built with copper nails after the Frost Faeries object to iron."
+		},
+		"b2.erin_introduces_hamburgers": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guest": {"prefer": [], "fallback_tags": ["liscor", "friend"]}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.rebuilt"], "not_flags": []},
+			"depends_on": ["b2.antinium_rebuild_inn_in_a_day"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.introduces_earth_food", "wandering_inn.hamburgers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "confirmed"},
+			"summary": "Erin cooks hamburgers and fries from a recipe Ryoka gave her for her gathered friends; Olesm suggests she could sell them."
+		},
+		"b2.erin_realizes_toren_is_missing": {
+			"tier": 2,
+			"window": {"earliest": 43, "latest": 43, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["toren.missing"], "not_flags": []},
+			"depends_on": ["b2.toren_falls_into_ancient_ruins", "b2.antinium_rebuild_inn_in_a_day"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.innkeeper_lvl19"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.11", "confidence": "confirmed"},
+			"summary": "Erin realizes Toren never came back, shouts for him from the roof with [Loud Voice] loud enough to annoy Watch Captain Zevara, and reaches Innkeeper Level 19."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 19, "confidence": "confirmed"},
+		{
+			"who": "klbkch",
+			"kind": "class",
+			"name": "[Revalantor]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Newly reincarnated, above Prognugator rank."
+		}
+	]
+}

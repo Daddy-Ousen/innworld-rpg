@@ -60,8 +60,10 @@ func test_winter_data_is_sound() -> void:
 		var st: Dictionary = _db.canon.events[id]["stage"]
 		if st["area"] != "inn_hill":
 			continue
-		for f: Dictionary in st["foes"]:
+		for f: Dictionary in st.get("foes", []):
 			assert_false(wall.has(Vector2i(int(f["pos"][0]), int(f["pos"][1]))), id)
+		for n: Dictionary in st.get("npcs", []):
+			assert_false(wall.has(Vector2i(int(n["pos"][0]), int(n["pos"][1]))), id)
 		for wave: Dictionary in st.get("waves", []):
 			assert_false(wall.has(Vector2i(int(wave["from"][0]), int(wave["from"][1]))), id)
 

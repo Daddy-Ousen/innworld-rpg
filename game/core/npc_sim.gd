@@ -40,6 +40,7 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 	var dt := to_sec - r.sec if r.is_placed() else 0
 	var jump := not r.is_placed() or dt > int(db.rules["npc"]["jump_seconds"])
 	var here := gs.player.area
+	var scene_held := Stage.scene_npcs_here(gs, db)
 	for id in db.behaviour.ids():
 		if not gs.world.is_alive(db.canon, id):
 			continue
@@ -60,14 +61,16 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 		var t: Dictionary = g["target"]
 		if t.has("stay"):
 			n["carry"] = 0
-		elif jump and _held_by_fight(gs, db, id, n, t):
+		elif jump and (_held_by_fight(gs, db, id, n, t) or scene_held.has(id)):
 			n["carry"] = 0
 		elif jump:
 			_place_at_target(gs, db, n, t)
 		elif here != "" and n["area"] == here:
 			if NpcRoster.pos_of(n) == gs.player.pos():
 				_put(gs, db, n, here, gs.player.pos())
-			if not (NpcReact.active(gs) and NpcReact.act(gs, db, id, n, maxi(dt, 0))):
+			if scene_held.has(id):
+				n["carry"] = 0
+			elif not (NpcReact.active(gs) and NpcReact.act(gs, db, id, n, maxi(dt, 0))):
 				_walk(gs, db, n, t, maxi(dt, 0))
 		else:
 			_move_offscreen(gs, db, n, t)
