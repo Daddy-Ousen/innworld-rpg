@@ -99,5 +99,5 @@ func test_focus_speeds_the_first_offer() -> void:
 			assert_eq(Commands.interact(gs, _db, work[0], work[1])["error"], "")
 		gs.clock.advance(14 * 60)
 		ToyMaps.walk_next_to(gs, _db, "bed")
-		Commands.sleep(gs, _db)
+		Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_gt(float(focused.progression.pools["innkeeper"]), float(plain.progression.pools["innkeeper"]))

@@ -1,0 +1,33 @@
+{
+	"schema_version": 1,
+	"note": "M8.6 economy (ADR 0015). Prices are in copper coins and are design guesses; the Book 1 text sets no price list. Goods have at most one use: food (eaten from the bag), heal (a potion), wear_flag (clothes, worn when bought), eat_now (a meal eaten where it is bought).",
+	"goods": {
+		"bread": {"name": "Bread", "confidence": "guess", "buy": 3, "sell": 1, "food": true},
+		"blue_fruit": {"name": "Blue fruit", "confidence": "likely", "buy": 0, "sell": 1, "food": true,
+			"canon_ref": {"book": 1, "chapter": "1.01", "confidence": "confirmed", "note": "Erin eats the blue fruit of the Floodplains. Its price is a guess."}},
+		"herbs": {"name": "Herbs", "confidence": "guess", "buy": 0, "sell": 3},
+		"firewood": {"name": "Firewood", "confidence": "guess", "buy": 3, "sell": 2},
+		"hot_meal": {"name": "Hot meal", "confidence": "guess", "buy": 5, "sell": 0, "eat_now": true},
+		"healing_potion": {"name": "Healing potion", "confidence": "guess", "buy": 30, "sell": 0, "heal": 10,
+			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "likely", "note": "Octavia is an [Alchemist] who sells potions at Stitchworks. This potion and its price are a guess."}},
+		"winter_clothes": {"name": "Winter clothes", "confidence": "guess", "buy": 60, "sell": 0,
+			"wear_flag": "player.warm_clothes"}
+	},
+	"shops": {
+		"krshia_stall": {"name": "Krshia's stall", "sells": ["bread", "firewood", "winter_clothes"],
+			"buys": ["blue_fruit", "herbs", "firewood"]},
+		"lism_stall": {"name": "Lism's stall", "sells": ["bread"], "buys": []},
+		"celum_stall": {"name": "Celum market stall", "sells": ["bread", "firewood", "winter_clothes"],
+			"buys": ["blue_fruit", "herbs", "firewood"]},
+		"stitchworks": {"name": "Stitchworks", "sells": ["healing_potion"], "buys": ["herbs"]},
+		"rats_tail": {"name": "The Rat's Tail", "sells": ["hot_meal"], "buys": []}
+	},
+	"yields": {
+		"forage_fruit": {"blue_fruit": 2},
+		"gather_herbs": {"herbs": 1},
+		"chop_wood": {"firewood": 1}
+	},
+	"jobs": {
+		"deliver_parcel": {"pay": [3, 6]}
+	}
+}

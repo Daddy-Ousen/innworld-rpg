@@ -1,4 +1,4 @@
-## Read-only character sheet (C key): HP, held item, stats, classes,
+## Read-only character sheet (C key): HP, held item, coins and bag (M8.6), stats, classes,
 ## levels, skills, focus, open offers. `lines` is static and headless, so tests can check it.
 ## Presentation only.
 class_name CharacterSheet
@@ -36,6 +36,13 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 		"Race: %s. Total level: %d." % [gs.race.capitalize(), p.total_level()],
 		Hud.health(gs, db),
 	]
+	if Economy.on(db):
+		out.append(Hud.purse(gs, db))
+		var bag := gs.economy.goods().map(func(g: String) -> String:
+			return "%s x%d" % [db.economy.goods[g]["name"], gs.economy.count(g)])
+		out.append("Bag: %s" % (", ".join(bag) if not bag.is_empty() else "empty"))
+		if not Economy.is_fed(gs):
+			out.append("You have not eaten today.")
 	var stats := Stats.of(gs, db)
 	out.append("Stats: %s" % ", ".join(stats.keys().map(func(s: String) -> String:
 		return "%s %d" % [s.capitalize(), int(stats[s])])))

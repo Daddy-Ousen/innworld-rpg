@@ -54,7 +54,7 @@ func test_sleep_status_and_offers() -> void:
 		c.execute("do serve_guests x2 guests=12")
 		c.execute("do clean_room location=wandering_inn")
 		c.execute("do talk_with_guest location=wandering_inn")
-		assert_string_contains(_text(c.execute("sleep")), "Day %d" % next)
+		assert_string_contains(_text(c.execute("sleep *")), "Day %d" % next)
 		status = _text(c.execute("status"))
 		if status.contains("Offer: [Innkeeper]"):
 			break

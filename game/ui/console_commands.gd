@@ -28,7 +28,13 @@ const HELP := [
 	"  knockout                           be knocked out now: the night, then the safe place (debug)",
 	"  wait <minutes>                     stand still while the world goes on",
 	"  npcs                               where every NPC is and what they do (debug)",
-	"  sleep                              end the day (night pipeline)",
+	"  sleep [bed | *]                    end the day where you stand (indoors or a camp),",
+	"                                     in a bed next to you, or anywhere (*, debug)",
+	"  bag                                coins, goods, hunger",
+	"  buy <object> <good> / sell <object> <good>   trade at a nearby shop",
+	"  eat <good>                         eat or drink a good from the bag",
+	"  ride <object>                      take a nearby paid ride (a wagon)",
+	"  give <copper> [good] [n]           add coins and goods (debug)",
 	"  status                             day, time, classes, skills, offers",
 	"  accept <class> / decline <class>   answer a class offer",
 	"  focus <tag ...> / focus clear      journal focus (conviction bonus)",
@@ -67,7 +73,31 @@ func execute(line: String) -> Array[String]:
 		"do":
 			out = _do(args)
 		"sleep":
-			out = _night(Commands.sleep(gs, db))
+			out = _night(Commands.sleep(gs, db, args[0] if not args.is_empty() else ""))
+		"bag":
+			out = _bag()
+		"buy", "sell":
+			if args.size() < 2:
+				out.append("Usage: %s <object> <good>." % parts[0])
+			else:
+				var r := Commands.buy(gs, db, args[0], args[1]) if parts[0] == "buy" \
+						else Commands.sell(gs, db, args[0], args[1])
+				out = _combat(r["error"])
+		"eat":
+			out = _need_arg(args, "eat <good>")
+			if out.is_empty():
+				out = _combat(Commands.use_good(gs, db, args[0]))
+		"ride":
+			out = _need_arg(args, "ride <object>")
+			if out.is_empty():
+				out = _combat(Commands.ride(gs, db, args[0]))
+				out.append_array(_where())
+		"give":
+			out = _need_arg(args, "give <copper> [good] [n]")
+			if out.is_empty():
+				var n := int(args[2]) if args.size() > 2 else 1
+				var err := Commands.give(gs, db, int(args[0]), args[1] if args.size() > 1 else "", n)
+				out.append(err if err != "" else "Coins %s." % Economy.format(db, gs.economy.coins))
 		"where":
 			out = _where()
 		"look":
@@ -251,6 +281,12 @@ func _look() -> Array[String]:
 	for o: Dictionary in options:
 		var actions: Array = (o["actions"] as Array) + ([Interact.SLEEP] if o["sleep"] else []) \
 				+ ([Interact.TAKE] if o["item"] != "" else [])
+		if int(o.get("price", 0)) > 0:
+			actions.append("(room %s)" % Economy.format(db, int(o["price"])))
+		for t: Dictionary in o.get("trades", []):
+			actions.append("%s %s %s" % [t["kind"], t["good"], Economy.format(db, int(t["price"]))])
+		if not (o.get("ride", {}) as Dictionary).is_empty():
+			actions.append("ride to %s %s" % [o["ride"]["to"], Economy.format(db, int(o["ride"]["price"]))])
 		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(actions)])
 	if options.is_empty():
 		out.append("  Nothing to use here.")
@@ -303,7 +339,7 @@ func _use(args: Array) -> Array[String]:
 		out.append("Usage: use <object> <action>. Type look.")
 		return out
 	if args[1] == Interact.SLEEP and Interact.can_sleep(gs, db, args[0]):
-		return _night(Commands.sleep(gs, db))
+		return _night(Commands.sleep(gs, db, args[0]))
 	if args[1] == Interact.TAKE:
 		return _combat(Commands.take(gs, db, args[0]))
 	var r := Commands.interact(gs, db, args[0], args[1])
@@ -359,6 +395,18 @@ func _after_lines() -> Array[String]:
 
 
 ## After a combat command: its error, or its combat text (and a knock-out).
+func _bag() -> Array[String]:
+	var out: Array[String] = ["Coins %s.%s" % [Economy.format(db, gs.economy.coins),
+			"" if Economy.is_fed(gs) else " Not fed today."]]
+	if gs.economy.hunger > 0:
+		out.append("Hungry nights: %d (max HP x%.1f)." % [gs.economy.hunger, Economy.hp_mult(gs, db)])
+	for g in gs.economy.goods():
+		out.append("  %-16s x%d" % [g, gs.economy.count(g)])
+	if gs.economy.bag.is_empty():
+		out.append("  The bag is empty.")
+	return out
+
+
 func _combat(err: String) -> Array[String]:
 	if err != "":
 		var out: Array[String] = [err]

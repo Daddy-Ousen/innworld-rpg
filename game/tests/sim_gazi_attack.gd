@@ -179,7 +179,7 @@ func test_a_knock_out_keeps_the_canon() -> void:
 			break
 		Commands.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 42)
 	assert_eq(gs.world.status(EVENT), Director.DONE)
 	assert_false(gs.flags.has("liscor.earther_fought_gazi"))

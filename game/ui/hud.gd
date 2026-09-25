@@ -25,6 +25,9 @@ func refresh(gs: GameState, db: DataDb) -> void:
 		place = "%s · %s" % [db.maps.areas[gs.player.area]["name"],
 				db.canon.locations.get(loc, {}).get("name", loc)]
 	_status.text = "Day %d  %s    %s" % [gs.clock.day(), gs.clock.time_string(), place]
+	var p := purse(gs, db)
+	if p != "":
+		_status.text += "    " + p
 	_health.text = health(gs, db)
 	if is_low(gs, db):
 		_health.add_theme_color_override("font_color", WARN_COLOR)
@@ -50,6 +53,17 @@ static func health(gs: GameState, db: DataDb) -> String:
 		out += " · Cold"
 	if gs.winter.slowed > 0:
 		out += " · Slowed"
+	return out
+
+
+## "Coins 1s 4c" (M8.6), plus " · Hungry" after a hungry night; "" with no
+## economy rules (toy dbs).
+static func purse(gs: GameState, db: DataDb) -> String:
+	if not Economy.on(db):
+		return ""
+	var out := "Coins %s" % Economy.format(db, gs.economy.coins)
+	if gs.economy.hunger > 0:
+		out += " · Hungry"
 	return out
 
 

@@ -207,7 +207,7 @@ func test_a_knock_out_on_the_hill_keeps_the_canon() -> void:
 			break
 		Commands.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 39)
 	assert_eq(gs.world.status(INN_EVENT), Director.DONE)
 	assert_false(gs.flags.has("wandering_inn.earther_fought_skinner"))

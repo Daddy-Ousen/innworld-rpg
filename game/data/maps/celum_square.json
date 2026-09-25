@@ -4,17 +4,17 @@
 	"name": "Celum town square",
 	"location": "celum",
 	"confidence": "guess",
-	"note": "Design map. The Runners' Guild (1.33R), the Rat's Tail (1.33R) and Stitchworks (2.08) are canon Celum places; where they stand is a guess.",
+	"note": "Design map. The Runners' Guild (1.33R), the Rat's Tail (1.33R) and Stitchworks (2.08) are canon Celum places; where they stand is a guess. M8.6: the Rat's Tail sells hot meals and rents rooms, Stitchworks (Octavia's shop) sells potions and buys herbs; prices are guesses.",
 	"zones": {"celum_runners_guild": [[4, 4, 5, 2]], "celum_rats_tail_inn": [[22, 4, 5, 2]], "stitchworks": [[2, 13, 3, 3]]},
 	"exits": [
 		{"at": [15, 19, 2, 1], "to": "celum_gate", "arrive": [16, 2], "minutes": 0},
 		{"at": [6, 3], "to": "celum_runners_guild", "arrive": [10, 10], "minutes": 0}
 	],
 	"objects": [
-		{"id": "rats_tail_door", "at": [24, 3], "name": "The Rat's Tail", "actions": []},
-		{"id": "stitchworks_door", "at": [1, 14], "name": "Stitchworks", "actions": []},
+		{"id": "rats_tail_door", "at": [24, 3], "name": "The Rat's Tail", "actions": ["buy_supplies"], "shop": "rats_tail", "sleep": true, "price": 10},
+		{"id": "stitchworks_door", "at": [1, 14], "name": "Stitchworks", "actions": ["buy_supplies", "sell_goods"], "shop": "stitchworks"},
 		{"id": "celum_well", "at": [16, 12], "name": "Well", "actions": ["carry_water"], "solid": true},
-		{"id": "celum_stall", "at": [26, 14], "name": "Market stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true},
+		{"id": "celum_stall", "at": [26, 14], "name": "Market stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "celum_stall"},
 		{"id": "celum_brazier_west", "at": [10, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "celum_brazier_east", "at": [22, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true}
 	],

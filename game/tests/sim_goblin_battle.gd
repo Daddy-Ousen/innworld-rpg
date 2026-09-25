@@ -148,7 +148,7 @@ func test_losing_the_battle_leaves_the_canon() -> void:
 			break
 		Commands.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 35)
 	assert_eq(gs.world.status(BATTLE_EVENT), Director.DONE)
 	assert_false(gs.flags.has("rags.earther_fought_beside_her"))

@@ -38,7 +38,7 @@ func test_book1_runs_as_canon() -> void:
 	var gs := GameState.new_game(1, _db)
 	var rumors := 0
 	while gs.world.last_day < LAST_DAY:  # a sleep at 06:00 is a nap: loop on days
-		var night := Commands.sleep(gs, _db)
+		var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 		for line: String in night["lines"]:
 			if line.begins_with("Rumor: "):
 				rumors += 1

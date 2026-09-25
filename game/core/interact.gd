@@ -10,31 +10,45 @@
 ## Commands.take, and the player holds that item.
 ## Frost Fairies next to the player (M8.W) are options too, with the id
 ## "fairy:<id>" and "fairy": true; talking to one goes to Winter.talk.
+## M8.6: a bed may have a "price" (a paid room: Commands.sleep with the bed
+## pays it); a shop object lists its "trades" (Economy.trades: the
+## presentation calls Commands.buy / Commands.sell); an object with a
+## "ride" offers it (Commands.ride).
 class_name Interact
 extends RefCounted
 
 const SLEEP := "sleep"
 const TAKE := "take"
+## Menu picks for the presentation (M8.6): "buy:<good>", "sell:<good>",
+## "use:<good>" (from the bag) and RIDE. They are not actions.
+const BUY := "buy:"
+const SELL := "sell:"
+const USE_GOOD := "use:"
+const RIDE := "ride"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
 ## player: [{"id", "name", "actions": [action ids], "npc": bool, "sleep": bool,
-## "item": item id to take or ""}].
+## "item": item id to take or "", "price": room price (copper, 0 = free),
+## "trades": Economy.trades, "ride": the object's ride or {}}].
 static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	if not Movement.ensure_placed(gs, db):
 		return out
 	for o: Dictionary in db.maps.objects_near(gs.player.area, gs.player.pos()):
 		out.append({"id": o["id"], "name": o["name"], "actions": (o["actions"] as Array).duplicate(),
-			"npc": false, "sleep": o.get("sleep", false), "item": o.get("item", "")})
+			"npc": false, "sleep": o.get("sleep", false), "item": o.get("item", ""),
+			"price": int(o.get("price", 0)), "trades": Economy.trades(gs, db, o),
+			"ride": (o.get("ride", {}) as Dictionary).duplicate()})
 	for id in NpcSim.near_player(gs):
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
-			"item": ""})
+			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {}})
 	for id in Winter.near(gs):
 		var fr: Dictionary = Winter.rules(db)["fairies"]
 		out.append({"id": Winter.FAIRY + id, "name": fr["name"], "npc": false, "fairy": true,
-			"actions": [fr["talk_action"]], "sleep": false, "item": ""})
+			"actions": [fr["talk_action"]], "sleep": false, "item": "", "price": 0,
+			"trades": [] as Array[Dictionary], "ride": {}})
 	return out
 
 
@@ -76,7 +90,7 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 			witnesses.push_front(object_id)
 		full["witnesses"] = witnesses
 	else:
-		context.merge(_object(db, p.area, object_id).get("context", {}), true)
+		context.merge(object_of(db, p.area, object_id).get("context", {}), true)
 	context.merge(opts.get("context", {}), true)
 	full["context"] = context
 	var rec := Actions.perform(gs, db, action_id, full)
@@ -88,7 +102,8 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	return {"record": rec, "error": ""}
 
 
-static func _object(db: DataDb, area: String, id: String) -> Dictionary:
+## The map object `id` of `area` (its JSON), or {}.
+static func object_of(db: DataDb, area: String, id: String) -> Dictionary:
 	for o: Dictionary in db.maps.areas[area]["objects"]:
 		if o["id"] == id:
 			return o

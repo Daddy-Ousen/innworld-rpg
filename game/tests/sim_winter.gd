@@ -26,7 +26,7 @@ func _fresh() -> GameState:
 func _sleep_to(gs: GameState, day: int) -> Array[String]:
 	var lines: Array[String] = []
 	while gs.clock.day() < day:
-		lines.append_array(Commands.sleep(gs, _db)["lines"])
+		lines.append_array(Commands.sleep(gs, _db, Rest.ANYWHERE)["lines"])
 	return lines
 
 
