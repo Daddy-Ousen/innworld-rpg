@@ -1,12 +1,11 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.1 merged (PR #26). Review flip PR #27 is open (waiting on the user to merge).
-- M8.W Winter built on branch `feat/m8w-winter` (based on the PR #27 branch): see ADR 0014 "M8.W Winter". Core: `core/winter.gd`, `core/winter_state.gd` (save v10), MapDb overlays + `indoor` + `warm` objects + tile `winter_color`, Movement (fairy blocks, slowed steps), Interact (fairy talk), Night (no chill at night, first-winter warning). Data: `rules.winter`, tiles (winter colours, `snow_wall`), inn hill overlay + horseshoe, Market braziers, action `talk_to_fairy`, tag `fae`, item `horseshoe`. View: snow look, overlay redraw, fairy diamonds, HUD Cold/Slowed. Tests `unit_winter` (17), `sim_winter` (4). GUT 529/529, checked on screen.
+- M8.1 done: PR #26 and review flip PR #27 merged; tag `m8.1-done` on bfb71a5 (pushed).
+- M8.W Winter built on branch `feat/m8w-winter` (main merged in): see ADR 0014 "M8.W Winter". Core: `core/winter.gd`, `core/winter_state.gd` (save v10), MapDb overlays + `indoor` + `warm` objects + tile `winter_color`, Movement (fairy blocks, slowed steps), Interact (fairy talk), Night (no chill at night, first-winter warning). Data: `rules.winter`, tiles (winter colours, `snow_wall`), inn hill overlay + horseshoe, Market braziers, action `talk_to_fairy`, tag `fae`, item `horseshoe`. View: snow look, overlay redraw, fairy diamonds, HUD Cold/Slowed. Tests `unit_winter` (17), `sim_winter` (4). GUT 529/529, checked on screen.
 
 ## Waiting on the user
-- Merge PR #27 (M8.1 review flip); tag `m8.1-done`.
-- Review / merge the M8.W PR.
+- Push `feat/m8w-winter` and open its PR (ask first), then review / merge.
 
 ## Next
 1. After merges: tag `m8w-done`.
