@@ -1,10 +1,11 @@
 # Handoff
 
-## Just done (2026-09-25, branch `data/book1-m7.4-reviewed`)
-PR #24 (M7.4) was merged by the user and the review was approved. This follow-up branch flips every M7.4 `candidate` to `reviewed` (9 chapter files, 8 NPCs, 1 location), accepts ADR 0012 M7.4, ticks M7.4 and M7 in ROADMAP and progress, and updates the README (M7 done; Book 1 complete: 1.00–1.63, days 1–41, 151 events, 50 NPCs, 44 locations; GUT 499 / 52 scripts, Python 40). A PR is open for it.
+## Just done (2026-09-25, on `main`)
+M7 is complete. PR #24 (M7.4 data) and PR #25 (review flip, docs) are merged. Tags `m7.4-done` and `m7-done` are on merge commit e656960 and pushed. Book 1 canon is complete: 1.00–1.63, days 1–41, 151 events, 50 NPCs, 44 locations. GUT 499 (52 scripts), Python 40, validator 0 errors.
+This handoff edit is not committed yet: commit it on the next branch.
 
 ## Waiting on the user
-- Merge the follow-up PR. Then tag its merge commit `m7.4-done` and `m7-done` and push the tags.
+- Nothing blocking. Start M8 when the user asks.
 - 1.16.json still has one old `candidate` event from M6.4 (left as is).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
 
