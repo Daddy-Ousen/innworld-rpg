@@ -1,0 +1,84 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.31",
+	"events": {
+		"b2.erin_invents_pizza_and_faerie_gold_coins": {
+			"tier": 2,
+			"window": {"earliest": 56, "latest": 56, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.invented_pizza", "wandering_inn.pizza_recipe_stolen_again", "erin.discovered_faerie_gold_coins"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.31",
+				"confidence": "confirmed",
+				"note": "Three Drake food-industry spies taste-steal the recipe within the hour, echoing the earlier hamburger theft. Ceria confirms the faerie-flower coins are physically indistinguishable from real gold for exactly a day; Erin decides not to exploit it."
+			},
+			"summary": "Erin invents pizza from memory and watches rival Drake chefs taste-steal the recipe within the hour; with Ceria she also discovers her window-box faerie flowers turn into perfect fake gold for exactly a day, and decides not to exploit it."
+		},
+		"b2.halrac_drinks_erins_faerie_memory_wine": {
+			"tier": 2,
+			"window": {"earliest": 56, "latest": 56, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "archer": {"prefer": ["halrac"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "halrac"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["halrac.saw_his_lost_village", "erin.wary_of_faerie_flower_drink"], "relationship": [{"from": "halrac", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.31",
+				"confidence": "confirmed",
+				"note": "Erin's [Wondrous Fare] leads her to mix faerie-flower nectar into Halrac's ale; it drops him into a true memory of his destroyed home village and a girl, Ariael, he lost. Erin throws a second drink in his face to snap him out of it."
+			},
+			"summary": "Trying to impress a foul-tempered Halrac, Erin mixes faerie-flower nectar into his ale; it drops him into a vivid true memory of the home and the girl he lost, and she has to shock him out of it before he begs for more."
+		},
+		"b2.pawns_faith_crisis_earns_the_acolyte_class": {
+			"tier": 1,
+			"window": {"earliest": 56, "latest": 56, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "pawn"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.crisis_of_purpose", "pawn.gained_acolyte_class", "liscor.first_antinium_acolyte"]},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [20, 24],
+				"kind": "scene",
+				"npcs": [{"npc": "pawn", "pos": [10, 8]}],
+				"line": "Pawn sits hunched at a corner table long after the last plate is cleared, listening to Erin's stories with a strange new hunger.",
+				"note": "M8.4: a quiet gathering, not a fight, like the M8.2 concert and M8.3 banquet scenes. Halrac keeps the archer role for the story but has no npc_behaviour entry yet, so he is not walkable."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_erins_stories",
+					"did": [{"action": ["talk_with_guest", "comfort_someone"], "outcome": ["success"]}],
+					"days": [56, 56],
+					"then": "change",
+					"effects": {"set_flags": ["liscor.earther_heard_erins_stories"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "pawn", "to": "player", "delta": 1}]},
+					"news": "A second Human sat late into the night at the Wandering Inn as its keeper told old Earth stories to a shaken Antinium individual."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.31",
+				"confidence": "confirmed",
+				"note": "Pawn's Queen questioned him and four other individual Antinium about what individuality means; he confesses guilt over Workers who died on his orders. Erin's Moses and Jesus stories calm him and a wary Halrac; his belief triggers the first system-granted [Acolyte] class for an Antinium."
+			},
+			"summary": "Distraught after his Queen questions what individuality even means, Pawn confesses his guilt over Workers who died on his orders; Erin's late-night Earth stories calm him and a wary Halrac, and Pawn's real belief earns Liscor's first Antinium [Acolyte] class."
+		}
+	},
+	"system": [
+		{"who": "pawn", "kind": "class", "name": "[Acolyte]", "level": 1, "confidence": "confirmed"},
+		{"who": "pawn", "kind": "skill", "name": "[Prayer]", "level": null, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "class", "name": "[Barmaid]", "level": null, "confidence": "confirmed", "note": "Levels up despite shirking her firewood errand; level not stated."}
+	]
+}

@@ -128,6 +128,57 @@
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed"},
 			"summary": "The border region of a small kingdom ruled by the Blighted King, Othius the Fourth, holding a wall against Demons beyond. Home to about twenty summoned Earther Heroes, including Tom."
+		},
+		"red_fang_territory": {
+			"name": "The Red Fang's territory",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["goblin", "wilderness", "mountains", "danger"],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.27G",
+				"confidence": "guess",
+				"note": "No proper name given in the text; wild highland country north of Liscor's territory where the Red Fang, Gold Stone and other goblin tribes range, including the valley of Rags's final battle with Garen and the road she later raids."
+			},
+			"summary": "Wild, mountainous country north of Liscor's territory, home to the powerful Red Fang Tribe and its neighbors and vassals. Rags conquers it tribe by tribe here, ending with the Red Fang itself, and stays on to train and rearm her people."
+		},
+		"stone_spears_camp": {
+			"name": "The Stone Spears camp",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["gnoll", "camp", "mountains", "mining"],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.28",
+				"confidence": "guess",
+				"note": "A sparse Gnoll mining camp near the Grisrith mountain range, south of the Blood Fields, per the text; its exact distance from Liscor is not given."
+			},
+			"summary": "A sparse Gnoll mining camp in the northern mountains, home to the Stone Spears Tribe under Chieftain Urksh. Shelters an injured Ryoka, then is nearly destroyed by the Goblin Lord's army in a single night."
+		},
+		"azkerash_castle": {
+			"name": "Az'kerash's castle",
+			"kind": "building",
+			"parent": null,
+			"tags": ["undead", "necromancer", "hidden", "danger"],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30",
+				"confidence": "confirmed",
+				"note": "Hidden behind a living, illogical maze findable only with fae or similarly strange guidance. Its exact location is otherwise unstated beyond 'somewhere in the war-torn north', near the Zel/Ilvriss battlefield."
+			},
+			"summary": "A vast black-stone fortress hidden behind a magical, ever-shifting maze, home to the legendary Necromancer Az'kerash and his undead court. Found only by Ryoka, guided by the Frost Faeries, to deliver Teriarch's letter."
+		},
+		"magnolia_estate": {
+			"name": "Magnolia Reinhart's estate",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": ["mansion", "noble", "magic", "house_reinhart"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed"},
+			"summary": "Lady Magnolia Reinhart's vast, heavily-warded mansion outside Invrisil, guarded by golems and illusions. Shelters newly-arrived Earth-transplants and is where Erin plays chess with Magnolia and hears her fears of a coming war."
 		}
 	}
 }

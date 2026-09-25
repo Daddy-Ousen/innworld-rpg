@@ -1,0 +1,45 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.38",
+	"events": {
+		"b2.erin_beats_magnolia_at_chess": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.met_other_earthers"], "not_flags": []},
+			"depends_on": ["b2.erin_meets_the_new_earth_arrivals"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.resisted_magnolias_charm", "erin.beat_magnolia_at_chess"], "relationship": [{"from": "magnolia_reinhart", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38",
+				"confidence": "confirmed",
+				"note": "Magnolia tries to charm Erin into staying at her estate for good, using a mind-reading Skill mid-game and a rune monocle that reads Skills and Levels. Erin bites her own tongue to break the compulsion, flings a teapot in anger, then beats Magnolia outright at a fair rematch."
+			},
+			"summary": "Magnolia tries to charm Erin into staying at her estate for good, using a mind-reading Skill mid-game; Erin bites her own tongue to break the compulsion, flings a teapot in anger, then beats Magnolia outright at a fair rematch."
+		},
+		"b2.magnolia_warns_erin_of_a_coming_world_war": {
+			"tier": 1,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.beat_magnolia_at_chess"], "not_flags": []},
+			"depends_on": ["b2.erin_beats_magnolia_at_chess"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.warned_of_world_war", "erin.knows_magnolias_fears_of_antinium", "erin.sent_home_by_magnolia"]},
+			"news": "Lady Magnolia Reinhart is said to be gathering every stranded Earth-born soul on the continent under her own roof, and warning her own circle of a coming war.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38",
+				"confidence": "confirmed",
+				"note": "Magnolia lists the continent's dangers - the Antinium Queens (not Klbkch or Pawn), the Goblin Lord, Az'kerash's undead, Flos's conquests - and her fear Earth weapons could tip the balance. Moved by Erin's honest answer, she sends her home, asking if Erin will act to save the world."
+			},
+			"summary": "Magnolia lays out the continent's dangers - the Antinium Queens, a rising Goblin Lord, Az'kerash's undead, Flos's conquests - and her fear Earth knowledge could tip the balance. Moved by Erin's honest answer, she sends her home rather than pressing her to stay."
+		}
+	},
+	"system": []
+}

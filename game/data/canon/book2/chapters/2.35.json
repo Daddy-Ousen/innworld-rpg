@@ -1,0 +1,72 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.35",
+	"events": {
+		"b2.ryoka_pulls_mrsha_from_the_crevasse": {
+			"tier": 2,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "mrsha"], "flags": ["ryoka.frost_fairies_bargain_struck"], "not_flags": []},
+			"depends_on": ["b2.frost_fairies_bargain_to_find_mrsha"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.rescued"], "clear_flags": ["mrsha.missing"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.35",
+				"confidence": "confirmed",
+				"note": "Climbing a trail-less mountain by faerie guidance, Ryoka finds Mrsha alive at the bottom of a hidden crevasse beside the armored Goblin that chased her there and died in the same fall; she free-climbs both of them out with Urksh's enchanted rope, losing two fingers to a Goblin bite along the way."
+			},
+			"summary": "Climbing a trail-less mountain by faerie guidance, Ryoka finds Mrsha alive at the bottom of a hidden crevasse and free-climbs both of them out with an enchanted rope, fighting off two Goblin ambushes and losing two fingers to a bite."
+		},
+		"b2.goblin_lords_army_destroys_stone_spears_camp": {
+			"tier": 1,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {
+				"chieftain": {"prefer": ["urksh"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true},
+				"lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["urksh"], "flags": ["mrsha.rescued"], "not_flags": []},
+			"depends_on": ["b2.ryoka_pulls_mrsha_from_the_crevasse"],
+			"on_fail": ["cancel"],
+			"effects": {"kill": ["urksh"], "set_flags": ["stone_spears.tribe_devastated", "goblin_lord.army_seen_in_the_north", "zel.retreated_to_save_gnolls"]},
+			"news": "Terrible word from the north: a Goblin Lord's army, a Necromancer commanding thousands, has all but destroyed a Gnoll tribe, and even General Zel Shivertail's Drakes had to fall back from it.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.35",
+				"confidence": "confirmed",
+				"note": "A vast army (thousands of Goblins, 100+ armored Hobs, a Necromancer Goblin Lord who raises the tribe's own dead) overruns the camp. Zel and Ilvriss cut in but choose to save the fleeing Gnolls over the kill; Urksh dies covering Ryoka and Mrsha's escape."
+			},
+			"summary": "A Goblin Lord's army - thousands of Goblins and armored Hobs, led by a Necromancer who raises the tribe's own dead - overruns the Stone Spears camp. Zel and Ilvriss choose to save the fleeing Gnolls rather than press the attack, and Urksh dies covering Ryoka and Mrsha's escape."
+		},
+		"b2.ryoka_escapes_with_mrsha_gains_first_class": {
+			"tier": 1,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "mrsha"], "flags": ["stone_spears.tribe_devastated"], "not_flags": []},
+			"depends_on": ["b2.goblin_lords_army_destroys_stone_spears_camp"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.gained_first_class", "ryoka.class_barefoot_runner", "mrsha.fur_turned_white"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.35",
+				"confidence": "confirmed",
+				"note": "The faeries carry Ryoka and Mrsha through the paralyzed battlefield at impossible speed, paying the price they warned of with Urksh's death. Ryoka, who had sworn she never levelled, gains [Barefoot Runner] Level 8 with three skills; a faerie blocks a further skill an outside force was granting her."
+			},
+			"summary": "The Frost Faeries carry Ryoka and Mrsha through the frozen battlefield at impossible speed to save them, at the cost they warned of. Sheltering the two through the night, Ryoka gains her first-ever class, [Barefoot Runner], while Mrsha's fur turns pure white for no reason anyone can explain."
+		}
+	},
+	"system": [
+		{"who": "ryoka_griffin", "kind": "class", "name": "[Barefoot Runner]", "level": 8, "confidence": "confirmed"},
+		{"who": "ryoka_griffin", "kind": "skill", "name": "[Flawless Stride]", "level": null, "confidence": "confirmed"},
+		{"who": "ryoka_griffin", "kind": "skill", "name": "[Enhanced Movement]", "level": null, "confidence": "confirmed"},
+		{"who": "ryoka_griffin", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed"}
+	]
+}

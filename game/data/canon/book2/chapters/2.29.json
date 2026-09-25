@@ -1,0 +1,53 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.29",
+	"events": {
+		"b2.ryoka_witnesses_zel_ilvriss_war": {
+			"tier": 1,
+			"window": {"earliest": 62, "latest": 62, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true},
+				"lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.frost_fairies_guide_her"], "not_flags": []},
+			"depends_on": ["b2.ryoka_earns_the_faeries_favor_with_stories"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.witnessed_zel_ilvriss_war", "ryoka.captured_by_ilvriss"]},
+			"news": "Word out of the north: Wall Lord Ilvriss and General Zel Shivertail, called Tidebreaker, are fighting an open war, with the Trisstral Alliance caught between them.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.29",
+				"confidence": "confirmed",
+				"note": "Roughly four days along her road from the Gnoll camp, Ryoka finds a corpse-strewn battlefield, is spotted and taken prisoner by Ilvriss's soldiers, and is brought before him; his aide's detection stone confirms Teriarch's ring is Tier 5+ magic."
+			},
+			"summary": "Days out from the Gnoll camp, Ryoka stumbles onto a corpse-strewn battlefield between Wall Lord Ilvriss's and General Zel Shivertail's Drake armies, is captured and brought before Ilvriss, who confirms her ring is powerful magic but detains her anyway."
+		},
+		"b2.ryoka_escapes_ilvriss_and_turns_the_battle": {
+			"tier": 1,
+			"window": {"earliest": 62, "latest": 62, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"lord": {"prefer": ["ilvriss"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "ilvriss"], "flags": ["ryoka.captured_by_ilvriss"], "not_flags": []},
+			"depends_on": ["b2.ryoka_witnesses_zel_ilvriss_war"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.escaped_ilvriss_camp", "zel.won_surprise_charge"], "relationship": [{"from": "zel_shivertail", "to": "ryoka_griffin", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.29",
+				"confidence": "confirmed",
+				"note": "Ryoka breaks free using Octavia's stink potion, a pepper-spray potion and a homemade smoke bomb, fighting past soldiers with Muay Thai. She runs straight into Zel's cresting charge; he uses [Glorious Charge] to exploit the chaos she left behind."
+			},
+			"summary": "Ryoka breaks free of Ilvriss's tent with a stink potion, pepper spray and a smoke bomb, fighting past soldiers to escape - straight into Zel Shivertail's surprise charge, unknowingly handing him the opening he needed to turn the battle."
+		}
+	},
+	"system": []
+}

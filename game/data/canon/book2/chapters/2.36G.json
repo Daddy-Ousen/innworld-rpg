@@ -1,0 +1,62 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.36G",
+	"events": {
+		"b2.rags_reorganizes_the_red_fang_tribe": {
+			"tier": 2,
+			"window": {"earliest": 59, "latest": 59, "confidence": "guess"},
+			"location": "red_fang_territory",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "rival": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "garen"], "flags": ["rags.leads_red_fang_tribe"], "not_flags": []},
+			"depends_on": ["b2.rags_defeats_garen_wins_red_fang"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.reorganized_red_fang_tribe"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.36G",
+				"confidence": "confirmed",
+				"note": "The day after victory. Rags takes over the disorganized Red Fang Tribe's logistics - food, camp order, six vetted Hobs to oversee groups - while Garen single-handedly slaughters a Corusdeer herd's alpha stag to fill their larder."
+			},
+			"summary": "The day after her victory, Rags takes over the disorganized Red Fang Tribe's logistics - food, camp order, six trusted Hobs to oversee groups - while Garen leads a hunt that fills their larder almost overnight."
+		},
+		"b2.garen_trains_rags_and_shows_the_goblin_key": {
+			"tier": 1,
+			"window": {"earliest": 60, "latest": 63, "confidence": "guess"},
+			"location": "red_fang_territory",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "rival": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "garen"], "flags": ["rags.reorganized_red_fang_tribe"], "not_flags": []},
+			"depends_on": ["b2.rags_reorganizes_the_red_fang_tribe"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.trains_with_garen", "rags.knows_of_garens_key", "goblin_lord.tribes_falling_to_him"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.36G",
+				"confidence": "confirmed",
+				"note": "Garen spars with Rags daily and leads a wagon raid for proper metal weapons; Rags kills its Mage escort. Around the fire he tells her his past betraying his own adventuring party and shows her a black key tied to 'the last Goblin King'. Two more tribes fall to the Goblin Lord."
+			},
+			"summary": "Garen spars with Rags daily and raids a human supply wagon to arm her tribe properly; around the fire he tells her his past as a betrayer of his own party and shows her a black key tied to 'the last Goblin King', while two more tribes fall to the rising Goblin Lord."
+		},
+		"b2.rags_and_garen_approach_the_wandering_inn": {
+			"tier": 1,
+			"window": {"earliest": 66, "latest": 66, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "rival": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "garen"], "flags": ["rags.trains_with_garen"], "not_flags": []},
+			"depends_on": ["b2.garen_trains_rags_and_shows_the_goblin_key"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.disguised_visit_to_inn_underway"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.36G",
+				"confidence": "confirmed",
+				"note": "About a week after her victory, restless and missing Liscor, Rags talks Garen into sneaking with her, both disguised, to watch the inn from outside as Erin and her friends gather for the evening. The text notes a fight begins shortly after; that scene is 2.39+, out of this batch's scope."
+			},
+			"summary": "About a week after her victory, restless and missing Liscor, Rags talks Garen into sneaking with her, both disguised, to watch the Wandering Inn from outside as Erin and her friends gather for the evening."
+		}
+	},
+	"system": []
+}

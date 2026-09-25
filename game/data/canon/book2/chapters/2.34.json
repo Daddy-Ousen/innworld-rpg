@@ -1,0 +1,62 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.34",
+	"events": {
+		"b2.ryoka_collapses_from_the_haste_potion": {
+			"tier": 2,
+			"window": {"earliest": 63, "latest": 64, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.drank_teriarchs_haste_potion"], "not_flags": []},
+			"depends_on": ["b2.ryoka_flees_on_an_uncontrolled_haste_potion"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.recovered_from_haste_potion", "ryoka.learned_flashbang_spell"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.34",
+				"confidence": "confirmed",
+				"note": "The potion burns out after covering roughly fifty miles in minutes; Ryoka collapses and spends two days alone recovering in a cave, inventing [Flashbang] from her [Light] and [Noise] spells, guilt-ridden over Periss."
+			},
+			"summary": "The potion's effect burns out after covering fifty miles in minutes; Ryoka collapses and spends two days alone recovering in a cave, inventing a new spell, [Flashbang], from her [Light] and [Noise] cantrips."
+		},
+		"b2.mrsha_vanishes_from_stone_spears_camp": {
+			"tier": 1,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "chieftain": {"prefer": ["urksh"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["mrsha", "urksh", "ryoka_griffin"], "flags": ["ryoka.recovered_from_haste_potion"], "not_flags": []},
+			"depends_on": ["b2.ryoka_collapses_from_the_haste_potion"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.missing", "stone_spears.mrsha_search_underway"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.34",
+				"confidence": "confirmed",
+				"note": "Back near the Stone Spears camp, Ryoka learns Mrsha vanished that morning with no sound or scent trail; a day-long search of the forest and mountain slopes turns up nothing, and Urksh fears she is dead."
+			},
+			"summary": "Back near the Stone Spears camp, Ryoka learns Mrsha vanished that morning without any sound or scent trail; a day-long search of the mountain turns up nothing, and Urksh grimly concludes she is likely dead."
+		},
+		"b2.frost_fairies_bargain_to_find_mrsha": {
+			"tier": 1,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "chieftain": {"prefer": ["urksh"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "urksh"], "flags": ["mrsha.missing"], "not_flags": []},
+			"depends_on": ["b2.mrsha_vanishes_from_stone_spears_camp"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.frost_fairies_bargain_struck"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.34",
+				"confidence": "confirmed",
+				"note": "As a blizzard closes in, Ryoka and Urksh beg the faeries for help; they warn of a steep price tied to fate but agree to lead Ryoka alone toward a chance of finding Mrsha. Urksh equips her with potions, a self-lengthening rope and furs."
+			},
+			"summary": "As a blizzard closes in, Ryoka and Urksh beg the Frost Faeries for help finding Mrsha; the faeries warn of a steep price tied to fate but agree to lead Ryoka alone toward a chance of finding her, and she departs into the storm."
+		}
+	},
+	"system": [{"who": "ryoka_griffin", "kind": "skill", "name": "[Flashbang]", "level": null, "confidence": "confirmed", "note": "Combines [Light] and [Noise]; invented during her two days of recovery."}]
+}

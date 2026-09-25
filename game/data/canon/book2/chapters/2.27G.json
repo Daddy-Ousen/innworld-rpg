@@ -1,0 +1,64 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.27G",
+	"events": {
+		"b2.rags_absorbs_gold_stone_tribe": {
+			"tier": 1,
+			"window": {"earliest": 56, "latest": 56, "confidence": "guess"},
+			"location": "red_fang_territory",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": ["rags.conquered_jawbreaker_tribe"], "not_flags": []},
+			"depends_on": ["b2.rags_ambushes_jawbreaker_chief"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.absorbed_gold_stone_tribe"]},
+			"news": "Word from the north: the goblin Rags's tribe has swallowed the Gold Stone Tribe whole, without a fight, and now numbers in the hundreds.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.27G",
+				"confidence": "confirmed",
+				"note": "Rags ambushes a tribe marching to a Red Fang summons, wounds its Chieftain non-lethally with a crossbow bolt, and absorbs its ~200 goblins and 4 Hobs. Remote thread; day is a placeholder like 2.22K/2.24T, not tightly synced to the Liscor calendar."
+			},
+			"summary": "Rags ambushes the Gold Stone Tribe marching to a Red Fang summons, wounds its Chieftain rather than killing him, and folds his surrendered goblins into her own tribe without losing a single one of her own."
+		},
+		"b2.garen_red_fang_tests_rags_with_raids": {
+			"tier": 1,
+			"window": {"earliest": 56, "latest": 58, "confidence": "guess"},
+			"location": "red_fang_territory",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "rival": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "garen"], "flags": ["rags.absorbed_gold_stone_tribe"], "not_flags": []},
+			"depends_on": ["b2.rags_absorbs_gold_stone_tribe"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_tested_by_red_fang", "rags.tribe_takes_heavy_losses"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.27G",
+				"confidence": "confirmed",
+				"note": "Garen's ~60 Carn Wolf riders repeatedly strike and vanish over several days, evading Rags's traps and killing well over a hundred of her goblins while she retreats toward a valley she has chosen near Liscor's edge."
+			},
+			"summary": "Red Fang's Hob chieftain Garen refuses Rags's submission and sets his small, elite band of riders to raid her retreating tribe again and again as a deliberate test of her leadership, inflicting heavy losses."
+		},
+		"b2.rags_defeats_garen_wins_red_fang": {
+			"tier": 1,
+			"window": {"earliest": 58, "latest": 58, "confidence": "guess"},
+			"location": "red_fang_territory",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "rival": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "garen"], "flags": ["rags.tribe_tested_by_red_fang"], "not_flags": []},
+			"depends_on": ["b2.garen_red_fang_tests_rags_with_raids"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.leads_red_fang_tribe", "rags.knows_of_goblin_lord"], "relationship": [{"from": "garen", "to": "rags", "delta": 3}]},
+			"news": "Word from the north: the goblin Rags has broken the mighty Red Fang Tribe in a valley battle and now leads it, along with every lesser tribe that once served it.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.27G",
+				"confidence": "confirmed",
+				"note": "Rags lures Garen's charge into a hidden ambush in old Shield Spider pits, wins a brutal duel with fire and acid, and heals them both after. Garen reveals he tested her to find a Chieftain fit to face a rising 'Goblin Lord', and that he once betrayed his own adventuring party."
+			},
+			"summary": "Rags springs a hidden trap on Garen's charging riders, then wins a grievous one-on-one duel against him with fire and acid, healing them both after. Garen submits the Red Fang Tribe and its vassals to her, warning that a Goblin Lord is rising in the south."
+		}
+	},
+	"system": []
+}

@@ -80,3 +80,21 @@ Status: in review. User choices (2026-09-25): mild cold; warm = indoors, near a 
 
 **Known limits.** Exact days are guesses except the two anchors above. The hungry girl in 2.13 gets no name or hook yet (identity unconfirmed in the text). Niers Astoragon's location is a placeholder (distant Baleros has no location entry). The concert's npc positions on `inn_hill` are a temporary guess at a "yard" spot, clear of Toren's snow wall overlay.
 
+## M8.4 Canon 2.27G–2.38 (days 56–67)
+
+Built by a delegated agent (chapters read and drafted outside the main session, per the context-discipline rules in `CLAUDE.md`), then independently re-verified: validator re-run, full GUT and Python suites re-run, and the diff spot-checked against the M8.2/M8.3 schema before trusting the batch summary.
+
+**Threads.** Rags absorbs the Gold Stone Tribe, survives Garen's week of testing-by-raid, then wins the legendary Red Fang Tribe in a valley duel; Garen submits and warns that a Goblin Lord is rising in the south. Ryoka is nursed by the Stone Spears Gnolls after a week of Frost Faerie torment, earns their truce with Earth stories, stumbles into the Zel Shivertail/Wall Lord Ilvriss war, escapes captivity into Az'kerash's hidden castle to deliver Teriarch's letter, then returns to find the cub Mrsha missing - she rescues her from a crevasse only for the Goblin Lord's army to overrun the camp (Chieftain Urksh killed), gaining her first class, [Barefoot Runner]. Erin invents pizza, discovers faerie-gold coins, calms Halrac's grief, and tells Bible stories that earn Pawn Liscor's first Antinium [Acolyte] class; the Horns of Hammerad reform and fight off a goblin raid; Magnolia hosts and briefs Erin on the coming war.
+
+**New data.** 11 NPCs (Garen, Urksh, Mrsha, Zel Shivertail, Ilvriss, Periss, Az'kerash, Reynold, Imani, Joseph, Rose), 4 locations (`red_fang_territory`, `stone_spears_camp`, `azkerash_castle`, `magnolia_estate`). No new enemies - none of this batch's fights land on a player-reachable map.
+
+**Stage + hook.** One `kind: "scene"` stage, `b2.pawns_faith_crisis_earns_the_acolyte_class` (2.31, `inn_interior`, Pawn placed on-map), with a `change` hook `player_heard_erins_stories` (`talk_with_guest`/`comfort_someone`). Halrac has no `npc_behaviour` entry yet, so he keeps a narrative role but is not placed.
+
+**Timeline.** Days 56-67. The Erin/Liscor thread is the day-by-day backbone; Rags' and Ryoka's remote arcs use placeholder days in the same spirit as M8.3's 2.22K/2.24T, noted in each event's `canon_ref.note` rather than forced into tight cross-thread sync.
+
+**Two judgment calls (not yet put to the user).**
+- Periss's death fighting Az'kerash's undead is implied (a shattered ring, a distant scream) but never shown on-page - left alive with a new flag `periss.presumed_dead` rather than asserted dead, per rule 9 (don't invent canon facts).
+- Ksmvr's second demotion (2.32H) uses a new flag `ksmvr.relieved_of_duty` rather than reusing `ksmvr.deposed`, since `sim_canon_book2` already asserts `ksmvr.deposed` is false through `LAST_DAY`. Two distinct demotions now have two distinct flags; worth reconsidering as a single acting-officer field if a third demotion ever happens.
+
+**Tests.** `sim_canon_book2`: `LAST_DAY` 55 → 67, drift 0 through the whole batch. `sim_player_hooks` hook count 11 → 12. Validator 0 errors (`--all`); GUT 533/533; Python 51/51.
+
