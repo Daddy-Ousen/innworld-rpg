@@ -19,7 +19,7 @@
 			"effects": {
 				"set_flags": ["wandering_inn.knight_died", "erin.overcame_skinners_fear", "erin.threw_acid_at_skinner", "pisces.sent_undead_to_the_inn"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.61", "confidence": "confirmed", "note": "Night of day 39. Bird counts at least thirty thousand dead at Liscor. In the city Pisces raises thirteen dead and sends them to guard Erin. Rags and her tribe watch from a hill and do not move."},
 			"summary": "The Workers dig a moat and kill the first thirty-four dead. Then Skinner comes up the hill, and his red stare freezes Erin inside. A Crypt Lord's spit breaks the line; Knight dies holding the door. Playing chess alone until fear is old, Erin walks out and hurls a huge jar of acid onto Skinner."
 		}

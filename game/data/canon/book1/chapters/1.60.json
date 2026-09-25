@@ -208,7 +208,7 @@
 					"news": "The dead poured into Liscor at sunset. At the east gate a Human stood with the Watch and helped cut down a Crypt Lord before the line gave way."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.60", "confidence": "confirmed", "note": "Evening of day 39. Skinner's [Terror] makes the gate guards flee. Ksmvr brings 15 Soldiers: the Queen's Rite must not be disturbed. Relc, immune to fear through [Indomitable Will], drives Skinner off; it raises the fallen and heads east."},
 			"summary": "Thousands of dead run at Liscor at sunset, and Skinner's red stare makes the gate guards flee with the gates still open. The Watch fights street by street; Pisces snaps necks for them. Ksmvr brings only fifteen Soldiers. Relc stands up to Skinner, so it raises the fallen and turns towards the inn."
 		},
@@ -228,7 +228,7 @@
 			"effects": {
 				"set_flags": ["antinium_hive.workers_named", "wandering_inn.guarded_by_workers", "erin.attacked_by_aberration", "bird.named"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.60", "confidence": "confirmed", "note": "Night of day 39. The mad Worker is one of the Aberrations that fled the Hive (Ksmvr). Knight is not an NPC (he dies in 1.61). Other names: Bishop, Vladimir, Calabrian, Emanuel, Garry, Milner-Barry, Belgrade, Jose, Magnus, Anand."},
 			"summary": "Erin feels an alarm of danger at sunset. That night a Worker gone mad blames her and pins her with a sword; another Worker breaks its neck. He is Knight. About thirty Workers of her chess club have left the Hive and named themselves; now they ring the inn with swords, rocks and rolling pins."
 		}

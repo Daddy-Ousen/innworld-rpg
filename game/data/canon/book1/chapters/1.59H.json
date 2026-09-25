@@ -24,7 +24,7 @@
 				"clear_flags": ["horns_of_hammerad.stay_at_inn"],
 				"kill": ["gerial", "sostrom", "cervial_dermondy"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.59H", "confidence": "confirmed", "note": "Skinned on the page: Gregor, Cervial, Menes, Sostrom, Gerial. Calruz and Ceria are last seen overrun and Olesm is not seen again; the text never shows them die, so they are missing (user choice, 2026-09-24). Yvlon leads the few who escape."},
 			"summary": "In a vast hall of tombs Ceria reads a rhyme warning of Skinner. Then the sealed vault opens from inside: a legless giant of stolen skin, wearing the dead captains' faces, whose red eyes freeze the living with fear. It skins Sostrom and Gerial; Calruz loses an arm and Ceria is left behind."
 		}

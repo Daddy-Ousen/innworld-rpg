@@ -20,7 +20,7 @@
 			"effects": {
 				"set_flags": ["ruins_expedition.crypt_lords_slain", "ruins_expedition.six_dead"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.58H", "confidence": "confirmed", "note": "Day 39. Six die in the ambush; Cervial's team loses four in all. Hunt of the Horns is paralysed by a Wight. Gregor and Menes are not NPCs."},
 			"summary": "The dead burst from hidden alcoves, led by four Crypt Lords; six adventurers die. Ceria lights the halls with [Illumination], and Olesm's [Rapid Retreat] gets nine mages clear. Then Calruz, his voice swollen by a spell, dares the dead to come; with Olesm's [Attack Formation] the teams destroy them."
 		}

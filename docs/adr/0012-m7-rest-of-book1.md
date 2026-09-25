@@ -109,7 +109,7 @@ Status: accepted; events reviewed by the user 2026-09-24 (timeline, the Goblin b
 - Monster and NPC name labels still overlap in a crowd.
 
 ## M7.4 Canon 1.55R–1.63 (days 38–41)
-Status: proposed; events `candidate` until the user reviews them. Two engine changes (a `revive` effect, user choice 2026-09-24, and a fix for stage allies). No save version change.
+Status: accepted; events reviewed by the user 2026-09-25 (timeline, likely links, the Tekshia name and the two stages as proposed). Two engine changes (a `revive` effect, user choice 2026-09-24, and a fix for stage allies). No save version change.
 
 **Timeline (all guesses).** Ryoka reaches the Bloodfields three or four days out of Esthelm: day 38 (1.55R). 1.56 is day 38, the day after 1.54; the ruins are 'tomorrow'. 1.57H–1.62 are day 39: the expedition goes in that morning, Skinner wakes in the afternoon, the dead reach Liscor at sunset and the inn at night, and Klbkch is reborn before dawn (the director counts the night as day 39). 1.63 is day 40 (Erin at dawn, Toren, Pisces) and day 41 (Selys's 'even after a day'; Ryoka comes back 'the day after Skinner died', after two days' running). Book 1 canon now ends on day 41.
 
