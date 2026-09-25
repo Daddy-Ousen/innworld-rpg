@@ -22,10 +22,10 @@ Work in progress. Placeholder graphics, no audio.
 | M4 | 2D world: Liscor gate and market, the Floodplains, the inn; NPC schedules; System dialog | Done |
 | M5 | Combat: Goblins, Rock Crabs, Razorbeaks; improvised weapons; knock-out, no death | Done |
 | M6 | Vertical slice: save slots, journal, player hooks on canon events, canon fights | Done |
-| M7 | Rest of Book 1 as canon data; big battles | 7.1, 7.B, 7.2, 7.3 done · 7.4 next |
-| M8 | Book 2 data, audio, polish | Later |
+| M7 | Rest of Book 1 as canon data; big battles | Done |
+| M8 | Book 2 data, audio, polish | Next |
 
-Book 1 canon so far: chapters 1.00–1.54 (days 1–37), 130 events, 47 NPCs, 44 locations.
+Book 1 canon is complete: chapters 1.00–1.63 (days 1–41), 151 events, 50 NPCs, 44 locations.
 Details: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Play
@@ -58,7 +58,7 @@ godot --headless --path game -s addons/gut/gut_cmdln.gd -gdir=res://tests -gincl
 python -m unittest discover -s tools/tests
 python tools/validate_data.py game/data/canon/book1
 ```
-GUT: 486 tests in 51 scripts. Python: 39 tests.
+GUT: 499 tests in 52 scripts. Python: 40 tests.
 
 ## Layout
 ```

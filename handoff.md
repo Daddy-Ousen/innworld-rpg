@@ -1,22 +1,16 @@
 # Handoff
 
-## Just done (2026-09-24, branch `data/book1-1.55-1.63`)
-M7.4, the last Book 1 batch, is written and waiting for the user's review (PR open).
-- `feat(director)`: new `effects.revive` (user choice). Director, CanonDb, validator + tests.
-- `fix(npc)`: a stage ally brought in during a long step (jump) stays in the fight if its goal is in another area.
-- `data(book1)`: 21 `candidate` events in `1.55R.json` … `1.63.json` (days 38–41). New NPCs `bird`, `tekshia`, `hawk`; updated `klbkch`, `toren`, `olesm`, `sostrom`, `selys` and location `liscor_dungeon` (all `candidate`). 7 new enemy types. Two stages with `change` hooks on day 39: east gate (`player_held_the_gate`) and inn hill (`player_fought_skinner`).
-- Docs: ADR 0012 M7.4 section, ROADMAP, progress.
-- GUT 499/499 (52 scripts), Python 40, validator 0 errors, `sim_canon_book1` to day 41 with drift 0. Checked on screen (inn hill fight).
+## Just done (2026-09-25, branch `data/book1-m7.4-reviewed`)
+PR #24 (M7.4) was merged by the user and the review was approved. This follow-up branch flips every M7.4 `candidate` to `reviewed` (9 chapter files, 8 NPCs, 1 location), accepts ADR 0012 M7.4, ticks M7.4 and M7 in ROADMAP and progress, and updates the README (M7 done; Book 1 complete: 1.00–1.63, days 1–41, 151 events, 50 NPCs, 44 locations; GUT 499 / 52 scripts, Python 40). A PR is open for it.
 
 ## Waiting on the user
-- Review the M7.4 events (timeline guesses, likely links, the Tekshia name conflict, balance). Then flip every `candidate` in M7.4 files and changed NPC/location entries to `reviewed`, accept ADR 0012 M7.4, tick ROADMAP M7.4 and M7, merge, tag `m7.4-done` and `m7-done`.
-- After the merge: update the README status table and counts (Book 1 done: 1.00–1.63, days 1–41, 151 events, 50 NPCs, 44 locations).
+- Merge the follow-up PR. Then tag its merge commit `m7.4-done` and `m7-done` and push the tags.
 - 1.16.json still has one old `candidate` event from M6.4 (left as is).
 - Old game-data suggestions still open: `[Basic Crafting]`, `[Gatherer]` + `[Detect Poison]`, `[Detect Guilt]`, `[Dangersense]`, `[Spearmaster]`, `[Swordslayer]`, `[Bar Fighting]`, `[Unerring Throw]`, `[Iron Scales]`, `[Alcohol Brewing]`, `[Loud Voice]`.
 
 ## Next
-- After review: M8 (see `docs/ROADMAP.md`).
-- Known limits: no fear aura or poison; fights only on the hill and at the east gate; allies rush in and go down fast (balance); Gazi, Tkrn, Ksmvr, the thief, Tekshia and Hawk have no map schedule.
+- M8 (Book 2 data, audio, polish): read `docs/ROADMAP.md`, plan first, ask the user.
+- Known limits from M7.4: no fear aura or poison; fights only on the hill and at the east gate; allies rush in and go down fast (balance); Gazi, Tkrn, Ksmvr, the thief, Tekshia and Hawk have no map schedule. Calruz, Ceria and Olesm are `missing` (alive in the data): Book 2 decides their fate.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
