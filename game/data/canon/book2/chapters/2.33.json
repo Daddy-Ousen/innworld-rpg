@@ -1,0 +1,63 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.33",
+	"events": {
+		"b2.klbkch_plants_the_albez_map_for_olesm": {
+			"tier": 2,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"guard": {"prefer": ["klbkch"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": []}},
+			"requires": {"alive": ["klbkch", "olesm"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["klbkch.plants_albez_map", "olesm.found_albez_map"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.33",
+				"confidence": "confirmed",
+				"note": "The Antinium Queen agrees to unearth the dungeon under Liscor in three days and, to Klbkch's surprise, now wants strong outside adventurers involved. Klbkch secretly plants an old map of the ruin of Albez in a disguised site for Olesm to 'find'."
+			},
+			"summary": "The Antinium Queen agrees to unearth the dungeon under Liscor within days and, to Klbkch's surprise, now wants strong outside adventurers involved; Klbkch secretly plants an old map of the ruin of Albez for Olesm to discover."
+		},
+		"b2.horns_of_hammerad_claim_the_albez_map": {
+			"tier": 1,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"tactician": {"prefer": ["olesm"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}},
+			"requires": {"alive": ["olesm", "ceria_springwalker"], "flags": ["olesm.found_albez_map", "horns_of_hammerad.first_fight_together"], "not_flags": []},
+			"depends_on": ["b2.klbkch_plants_the_albez_map_for_olesm", "b2.horns_of_hammerad_fight_off_the_goblin_raid"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.has_albez_map", "olesm.reports_goblin_lord_to_erin"]},
+			"news": "General Zel Shivertail himself clashed with a new Goblin Lord's army in the north and had to retreat - word is spreading fast through Liscor.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.33",
+				"confidence": "confirmed",
+				"note": "Over lunch, the party divides looted magic rings and a food-poisoning-resistant necklace from the raid, and Olesm - barred from adventuring, reporting Zel Shivertail's retreat from the new Goblin Lord - gives them what looks like the first complete map of the ruins of Albez."
+			},
+			"summary": "Over lunch, the party divides looted magic rings from the goblin raid, and Olesm - barred from adventuring himself, and reporting that General Zel Shivertail had to retreat from a new Goblin Lord - gives them what looks like the first complete map of the ruins of Albez."
+		},
+		"b2.magnolias_butler_invites_erin_to_invrisil": {
+			"tier": 1,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.invited_to_magnolias_estate"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.33",
+				"confidence": "confirmed",
+				"note": "Magnolia's Butler arrives by magical carriage with spectral horses that evening, inviting Erin to meet eight other Earth-transplants gathered at Magnolia's estate near Invrisil."
+			},
+			"summary": "That evening, Lady Magnolia Reinhart's Butler arrives at the inn by magical coach with an invitation: eight more Earth-transplanted people are gathered at her estate near Invrisil, and Magnolia wants Erin to meet them."
+		}
+	},
+	"system": []
+}

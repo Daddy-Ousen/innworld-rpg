@@ -310,6 +310,173 @@
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "1.00C", "confidence": "confirmed", "note": "A local boy of the frontier village, not an Earther."},
 			"summary": "A boy of the frontier village who watches Tom's clown act. Fatally wounded by a Troll during a Demon raid; dies in Tom's arms, the breaking point for Tom's [Clown] class."
+		},
+		"garen": {
+			"name": "Garen",
+			"race": "Goblin",
+			"tags": ["goblin", "hob", "red_fang_tribe", "dragoon", "beast_tamer"],
+			"faction": "red_fang_tribe",
+			"home": "red_fang_territory",
+			"classes": [{"name": "[Dragoon]", "level": null}, {"name": "[Beast Tamer]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.27G",
+				"confidence": "confirmed",
+				"note": "Former Chieftain of the Red Fang Tribe, now subordinate to Rags by his own design. A one-time Gold-rank adventurer who betrayed and killed his own party over a black key. Deliberately tested Rags with raids to find a Chieftain strong enough to face the rising Goblin Lord."
+			},
+			"summary": "Huge, battle-scarred Hobgoblin, former Chieftain of the legendary Red Fang Tribe. Tests Rags with raids, loses a brutal duel to her, and submits his tribe to her - then stays on to train her and hunt for the tribe."
+		},
+		"urksh": {
+			"name": "Urksh",
+			"race": "Gnoll",
+			"tags": ["gnoll", "stone_spears_tribe", "chieftain"],
+			"faction": "stone_spears_tribe",
+			"home": "stone_spears_camp",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.28", "confidence": "confirmed", "note": "Dies in 2.35 covering Ryoka and Mrsha's escape from the Goblin Lord's army, killed by an event effect, not a stage fight."},
+			"summary": "Chieftain of the Stone Spears Gnoll Tribe, a small mining camp in the northern mountains. Takes in and treats an injured Ryoka, then organizes the desperate search when Mrsha vanishes. Dies protecting Ryoka and Mrsha as his tribe is overrun."
+		},
+		"mrsha": {
+			"name": "Mrsha",
+			"race": "Gnoll",
+			"tags": ["gnoll", "cub", "stone_spears_tribe", "mute"],
+			"faction": "stone_spears_tribe",
+			"home": "stone_spears_camp",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.28",
+				"confidence": "confirmed",
+				"note": "Daughter of two Stone Spears warriors; cannot speak beyond small sounds. Her fur turns pure white in 2.35 for no reason the text explains."
+			},
+			"summary": "A young, mute Gnoll cub of the Stone Spears Tribe who finds an injured Ryoka by scent. Wanders off and falls into a hidden mountain crevasse while fleeing an armored Goblin; rescued by Ryoka during the Goblin Lord's assault on her tribe."
+		},
+		"zel_shivertail": {
+			"name": "Zel Shivertail",
+			"race": "Drake",
+			"tags": ["drake", "general", "tidebreaker", "defensive_commander"],
+			"faction": null,
+			"home": null,
+			"classes": [{"name": "[General]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.29",
+				"confidence": "confirmed",
+				"note": "Called 'Tidebreaker'; renowned as a purely defensive commander, which makes his offensive [Glorious Charge] a surprise. His home city is not named in these chapters."
+			},
+			"summary": "Drake General nicknamed Tidebreaker, fighting an outnumbered war against Wall Lord Ilvriss. Turns Ryoka's accidental chaos in Ilvriss's camp into a winning surprise charge, later chooses to save a Gnoll tribe over killing the Goblin Lord."
+		},
+		"ilvriss": {
+			"name": "Wall Lord Ilvriss",
+			"race": "Drake",
+			"tags": ["drake", "wall_lord", "commander"],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.29",
+				"confidence": "confirmed",
+				"note": "'Wall Lord' is his title; no bracketed class is confirmed on the page for him, so none is recorded. Captures and interrogates Ryoka, then loses a duel to Zel and is kept as his honor-bound prisoner."
+			},
+			"summary": "Arrogant, paranoid Drake Wall Lord at war with Zel Shivertail. Captures and interrogates Ryoka, is incapacitated by her stink-potion escape, then loses a formal duel to Zel and becomes his prisoner - fighting alongside him anyway when the Goblin Lord's army attacks."
+		},
+		"periss": {
+			"name": "Periss",
+			"race": "Drake",
+			"tags": ["drake", "commander", "soldier"],
+			"faction": null,
+			"home": null,
+			"classes": [{"name": "[Commander]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.29",
+				"confidence": "confirmed",
+				"note": "Ilvriss's second. Her death to Az'kerash's undead is strongly implied (a shattered bonded ring, a distant scream) but never shown, so she stays alive in the data; see flag 'periss.presumed_dead'."
+			},
+			"summary": "Wall Lord Ilvriss's capable second-in-command. Captures Ryoka, then leads a squad that chases her into Az'kerash's hidden maze and is caught by his undead guardians; her fate is left an open question in the text."
+		},
+		"azkerash": {
+			"name": "Az'kerash",
+			"race": "Human",
+			"tags": ["human", "necromancer", "undead_master", "hidden"],
+			"faction": null,
+			"home": "azkerash_castle",
+			"classes": [{"name": "[Necromancer]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30",
+				"confidence": "confirmed",
+				"note": "The legendary Necromancer, believed dead by most of the world. States he is turning 200 years old. Deep in an unspecified, all-consuming magical creation project; deliberately does not intervene in the Zel/Ilvriss war beyond ordering intruders killed."
+			},
+			"summary": "The legendary Necromancer, hidden behind a living maze with an undead court, engaged in a vast unexplained magical project. Nearly kills Ryoka on reflex before recognizing Teriarch's name, reads his letter with dry formality, and lets her go unharmed."
+		},
+		"reynold": {
+			"name": "Reynold",
+			"race": "Human",
+			"tags": ["human", "butler", "house_reinhart", "invrisil"],
+			"faction": "house_reinhart",
+			"home": "magnolia_estate",
+			"classes": [{"name": "[Butler]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed"},
+			"summary": "Lady Magnolia Reinhart's personable Butler, driving her magical coach. Warms into genuine friendliness with Erin on the four-hour ride to the estate before snapping back into formal reserve on arrival."
+		},
+		"imani": {
+			"name": "Imani",
+			"race": "Human",
+			"tags": ["human", "earther", "invrisil", "survivor"],
+			"faction": null,
+			"home": "magnolia_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.37",
+				"confidence": "confirmed",
+				"note": "Transported to this world separately from Joseph and Rose's group of seven; the sole survivor of her own group, killed around her by monsters called Crelers."
+			},
+			"summary": "A deeply traumatized Earth-transplant kept apart from the other new arrivals at Magnolia's estate, the only survivor of her group after monsters called Crelers killed the rest. Opens up briefly to Erin, who shares her own first-night ordeal."
+		},
+		"joseph": {
+			"name": "Joseph",
+			"race": "Human",
+			"tags": ["human", "earther", "invrisil"],
+			"faction": null,
+			"home": "magnolia_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed", "note": "American, pulled from a Chicago airport with six others about a week before Erin's visit."},
+			"summary": "Eager, excitable American among the group of Earth-transplants gathered at Magnolia's estate. Wants to become an adventurer with magical head-start gear and chafes at Ressa's restrictions on the group."
+		},
+		"rose": {
+			"name": "Rose",
+			"race": "Human",
+			"tags": ["human", "earther", "invrisil"],
+			"faction": null,
+			"home": "magnolia_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed", "note": "Was travelling to France when taken from the same Chicago airport as Joseph and five others."},
+			"summary": "More cautious member of the Earth-transplant group at Magnolia's estate. Wants to network with other world-transported people rather than adventure, and flatly rejects the idea that this world is 'a game'."
 		}
 	}
 }

@@ -1,0 +1,66 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.30",
+	"events": {
+		"b2.ryoka_reaches_azkerash_through_the_maze": {
+			"tier": 1,
+			"window": {"earliest": 62, "latest": 62, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true},
+				"lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.escaped_ilvriss_camp"], "not_flags": []},
+			"depends_on": ["b2.ryoka_escapes_ilvriss_and_turns_the_battle"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.reached_azkerash_castle", "zel.defeated_ilvriss_in_duel", "periss.presumed_dead"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30",
+				"confidence": "confirmed",
+				"note": "Faeries lead Ryoka through a living, illogical maze to the hidden castle; Ilvriss's second, Periss, and her squad follow and are wiped out by undead guardians, implied but not shown dying. Zel wins a formal duel with Ilvriss after Periss's bonded ring shatters, and carries him off the field."
+			},
+			"summary": "Guided by the Frost Faeries through a living, illogical maze, Ryoka reaches the Necromancer's hidden black castle; the squad chasing her is wiped out by his undead guardians. Zel wins a duel with a shaken Ilvriss and carries him from the field."
+		},
+		"b2.ryoka_delivers_teriarchs_letter_to_azkerash": {
+			"tier": 1,
+			"window": {"earliest": 62, "latest": 62, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "necromancer": {"prefer": ["azkerash"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "azkerash"], "flags": ["ryoka.reached_azkerash_castle"], "not_flags": []},
+			"depends_on": ["b2.ryoka_reaches_azkerash_through_the_maze"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.delivered_teriarchs_letter", "azkerash.received_teriarchs_gift"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30",
+				"confidence": "confirmed",
+				"note": "Az'kerash nearly kills Ryoka with a casual spell before she names Teriarch; he reads the letter (an anniversary gift for his 200th year) with dry formality and lets her go unharmed."
+			},
+			"summary": "Facing the Necromancer's casual, overwhelming power for a heartbeat, Ryoka blurts out Teriarch's name and hands over his letter and ring, a gift for Az'kerash's two-hundredth year, and is let go unharmed."
+		},
+		"b2.ryoka_flees_on_an_uncontrolled_haste_potion": {
+			"tier": 2,
+			"window": {"earliest": 62, "latest": 62, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.delivered_teriarchs_letter"], "not_flags": []},
+			"depends_on": ["b2.ryoka_delivers_teriarchs_letter_to_azkerash"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.drank_teriarchs_haste_potion", "ryoka.mission_for_teriarch_complete"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30",
+				"confidence": "confirmed",
+				"note": "With Az'kerash's undead debating whether to seize her despite his order, Ryoka drinks Teriarch's last unlabeled potion and is swept into an uncontrollable sprint away from the castle and the battlefield."
+			},
+			"summary": "With the Necromancer's undead debating whether to seize her anyway, Ryoka drinks Teriarch's last unlabeled potion and is swept into an unstoppable, superhuman sprint away from the castle and the war alike."
+		}
+	},
+	"system": [{"who": "ryoka_griffin", "kind": "skill", "name": "[Flashlight]", "level": null, "confidence": "confirmed", "note": "Her own variant of [Light], narrowed into a beam; invented mid-chase."}]
+}

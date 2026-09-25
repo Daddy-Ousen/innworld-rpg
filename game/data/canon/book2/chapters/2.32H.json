@@ -1,0 +1,79 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.32H",
+	"events": {
+		"b2.ceria_reforms_the_horns_of_hammerad": {
+			"tier": 2,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": []},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker", "yvlon_byres", "pisces"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.reformed", "olesm.rejected_from_new_party"], "relationship": [{"from": "olesm", "to": "ceria_springwalker", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.32H",
+				"confidence": "confirmed",
+				"note": "Ceria, still grieving Gerial and Calruz, rebuilds the Horns of Hammerad with Yvlon (guilt-stricken survivor of the Silver Spears) and Pisces (money-driven, barred from raising Drake/Gnoll dead in Liscor). They turn down Olesm, Erin's suggestions of Toren and Ryoka."
+			},
+			"summary": "Grieving her dead original teammates, Ceria resolves to rebuild the Horns of Hammerad one more time with Yvlon and Pisces over breakfast at Erin's inn; the three turn down Olesm's request to join as unsuited to a small team."
+		},
+		"b2.ksmvr_joins_the_horns_of_hammerad": {
+			"tier": 1,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ksmvr", "ceria_springwalker", "erin_solstice"], "flags": ["horns_of_hammerad.reformed"], "not_flags": []},
+			"depends_on": ["b2.ceria_reforms_the_horns_of_hammerad"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ksmvr.relieved_of_duty", "ksmvr.joined_horns_of_hammerad"], "relationship": [{"from": "ksmvr", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.32H",
+				"confidence": "confirmed",
+				"note": "Ksmvr stumbles into the inn missing an arm and stripped of his Prognugator rank, which passes to Klbkch. Erin tends his wounds and talks the reforming party into taking him on as their fourth, over their initial doubts."
+			},
+			"summary": "Ksmvr stumbles into the inn badly wounded and stripped of his Prognugator rank in favor of Klbkch; Erin tends his wounds and talks the reforming party into taking him on as their fourth member."
+		},
+		"b2.horns_of_hammerad_fight_off_the_goblin_raid": {
+			"tier": 1,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": []},
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []},
+				"archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker", "yvlon_byres", "pisces", "ksmvr"], "flags": ["ksmvr.joined_horns_of_hammerad"], "not_flags": []},
+			"depends_on": ["b2.ksmvr_joins_the_horns_of_hammerad"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.first_fight_together", "liscor.new_goblin_tribe_scouted"]},
+			"news": "The newly-reformed Horns of Hammerad and the Watch beat back a strangely disciplined goblin raiding party south of Liscor; Gold-rank Halrac alone dropped most of them with his bow.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.32H",
+				"confidence": "confirmed",
+				"note": "A notch-eared goblin war party, not Rags's tribe, raids a farming village. Halrac kills most alone; the new party fights a splinter group, Pisces raising fallen goblins with [Animate Dead]; the Watch arrives late. Loot points to a new tribe in the Blood Fields."
+			},
+			"summary": "A well-armed, unusually disciplined goblin war party - not Rags's tribe - raids a farming village. Halrac, the Watch and the newly-reformed Horns of Hammerad drive them off, and notched-ear markings on the dead point to something new and dangerous rising in the Blood Fields."
+		}
+	},
+	"system": []
+}

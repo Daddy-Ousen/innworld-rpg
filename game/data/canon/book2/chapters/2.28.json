@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.28",
+	"events": {
+		"b2.ryoka_rescued_by_stone_spears_gnolls": {
+			"tier": 2,
+			"window": {"earliest": 56, "latest": 56, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "chieftain": {"prefer": ["urksh"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.rescued_by_stone_spears", "ryoka.injured_from_frost_fairy_chase"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.28",
+				"confidence": "confirmed",
+				"note": "Over a week of Frost Faerie torment (cold water, burning coals, stolen clothes, a near-fatal Wyvern encounter) since Ryoka struck one defending Ceria at the inn. Chieftain Urksh treats her wounds; the cub Mrsha found her scent under the snow. Remote thread, placeholder day."
+			},
+			"summary": "Exhausted and hurt after more than a week of Frost Faerie torment while running Teriarch's errand, Ryoka is found buried in snow by a Gnoll cub, Mrsha, and taken in and treated by the Stone Spears Tribe's Chieftain, Urksh."
+		},
+		"b2.ryoka_earns_the_faeries_favor_with_stories": {
+			"tier": 1,
+			"window": {"earliest": 58, "latest": 58, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.rescued_by_stone_spears"], "not_flags": []},
+			"depends_on": ["b2.ryoka_rescued_by_stone_spears_gnolls"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.frost_fairies_owe_erins_favor", "ryoka.frost_fairies_guide_her", "frost_fairies.softened_toward_ryoka"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.28",
+				"confidence": "confirmed",
+				"note": "The faeries reveal they are easing off Ryoka as a favor owed to Erin, for honoring fey tradition and cooking food that pleased them. Ryoka spends a day telling them Earth stories - Superman, Batman, Tolkien, a Blake poem - moving them to tears."
+			},
+			"summary": "Learning the Frost Faeries are easing off her as a favor owed to Erin, Ryoka spends a day telling them Earth stories and wins a more cooperative truce; she leaves healed, now guided by them toward the Necromancer she must reach."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.37",
+	"events": {
+		"b2.erin_travels_to_magnolias_estate": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.invited_to_magnolias_estate"], "not_flags": []},
+			"depends_on": ["b2.magnolias_butler_invites_erin_to_invrisil"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.arrived_at_magnolias_estate"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.37",
+				"confidence": "confirmed",
+				"note": "Leaving Toren to mind a furious Lyonette and the inn, Erin rides Magnolia's magical coach roughly four hours to her vast, golem-guarded estate outside Invrisil, warming up to the butler Reynold along the way."
+			},
+			"summary": "Leaving Toren to mind a furious Lyonette and the closed inn, Erin rides Magnolia's magical coach for hours to her vast, golem-guarded estate outside Invrisil, warming up to the butler Reynold along the way."
+		},
+		"b2.erin_meets_the_new_earth_arrivals": {
+			"tier": 1,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true},
+				"survivor": {"prefer": ["imani"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.arrived_at_magnolias_estate"], "not_flags": []},
+			"depends_on": ["b2.erin_travels_to_magnolias_estate"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.met_other_earthers", "erin.knows_of_crelers"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.37",
+				"confidence": "confirmed",
+				"note": "Ressa leads Erin to a guest wing holding seven more people pulled from Earth about a week ago near a Chicago airport (Joseph, Rose and others), plus Imani, a separate survivor of a group wiped out by monsters called Crelers. Erin bonds with Imani over her own first night here."
+			},
+			"summary": "Magnolia's Head Maid Ressa leads Erin to a guest wing holding seven more people pulled from Earth about a week ago, plus a separate, traumatized survivor, Imani, whose whole group was wiped out by monsters called Crelers; Erin bonds with Imani over her own first night here."
+		}
+	},
+	"system": []
+}
