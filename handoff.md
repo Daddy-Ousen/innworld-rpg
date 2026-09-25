@@ -6,7 +6,7 @@
 - GUT 580/580 (61 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen (shop menu, coins on HUD, Hungry, bag menu, sleep refused outdoors).
 
 ## Waiting on the user
-- Review and merge the M8.6 PR. Then tag `m8.6-done` on the merge commit.
+- Review and merge [PR #33](https://github.com/Daddy-Ousen/innworld-rpg/pull/33). Then tag `m8.6-done` on the merge commit.
 
 ## Next
 1. After merge: update `progress.md` (PR number, merge commit, tag).
