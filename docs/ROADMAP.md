@@ -88,5 +88,23 @@ New engine systems only when a batch needs them; a new schema or system is asked
 **Done when:** all Book 1 canon is event data; `sim_canon_book1` runs to the last canon day with drift 0;
 each batch has at least one hook or stage the player can use to change canon; the validator reports 0 errors.
 
+## M8 — Book 2 (Fae and Fare) + Celum
+Plan approved 2026-09-25 (ADR 0014). One branch + PR each. Book 2 comes in 5 canon batches like M7.
+Celum becomes a playable map and a second start (day 8, 06:00, outside Celum's gate). Travel between
+Liscor and Celum: a paid ride and a road with one roadside camp map. Full economy: coins, a goods bag,
+simple hunger (one meal a day), a paid room in Celum. Winter systems added in M8.1 (user choice, 2026-09-25):
+snow look, cold rules and Frost Fairies on the map, as their own engine step (M8.W, like M7.B).
+- [ ] M8.1 Canon Interlude – The Call + 2.00–2.09 (days 41–44): the magic call, Ryoka meets Erin, the rescue of Ceria and Olesm from the Ruins, Gazi's attack outside the Ruins as a canon stage on a new `ruins_entrance` map (`change` hook; Gazi cannot die: enemy `escape`), winter arrives, Ryoka back in Celum, Octavia (in review)
+- [ ] M8.W Winter: snow look, cold rules, Frost Fairies on the map (details asked first) — save change
+- [ ] M8.2 Canon 2.10T–2.18 (incl. Interlude – Mating Rituals Pt. 1)
+- [ ] M8.3 Canon 2.19G–2.26 + 1.00C / 1.01C
+- [ ] M8.4 Canon 2.27G–2.38
+- [ ] M8.5 Celum map + Celum start (title start chooser, `rules.world.starts`)
+- [ ] M8.6 Economy + travel: coins, goods bag, hunger, rooms, paid ride, road camp map — save change
+- [ ] M8.7 Canon 3 interludes + 2.39–2.48 (Erin in Celum, Octavia)
+**Done when:** all Book 2 canon is event data and `sim_canon_book2` runs to the last Book 2 day with drift 0;
+a new player can start in Celum or Liscor and travel between them by ride or on foot, and earn, spend, eat
+and rent a room; each batch has a hook or stage the player can use; the validator reports 0 errors.
+
 ## Later
-- M8: Book 2 data · optional LLM flavour layer · audio · polish
+- Audio · polish (art tiles, balance, missing NPC schedules) · optional LLM flavour layer
