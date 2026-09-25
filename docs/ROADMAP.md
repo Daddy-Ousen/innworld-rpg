@@ -95,7 +95,7 @@ Liscor and Celum: a paid ride and a road with one roadside camp map. Full econom
 simple hunger (one meal a day), a paid room in Celum. Winter systems added in M8.1 (user choice, 2026-09-25):
 snow look, cold rules and Frost Fairies on the map, as their own engine step (M8.W, like M7.B).
 - [x] M8.1 Canon Interlude – The Call + 2.00–2.09 (days 41–44): the magic call, Ryoka meets Erin, the rescue of Ceria and Olesm from the Ruins, Gazi's attack outside the Ruins as a canon stage on a new `ruins_entrance` map (`change` hook; Gazi cannot die: enemy `escape`), winter arrives, Ryoka back in Celum, Octavia
-- [ ] M8.W Winter: snow look, cold rules, Frost Fairies on the map (details asked first) — save change
+- [ ] M8.W Winter: snow look + Toren's snow wall (map overlays), mild cold (indoors, fires and winter clothes keep you warm), Frost Fairies on the map (talk for `fae` XP, snow when annoyed, iron keeps them away) — save v10 (in review)
 - [ ] M8.2 Canon 2.10T–2.18 (incl. Interlude – Mating Rituals Pt. 1)
 - [ ] M8.3 Canon 2.19G–2.26 + 1.00C / 1.01C
 - [ ] M8.4 Canon 2.27G–2.38
