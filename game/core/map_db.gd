@@ -5,7 +5,11 @@
 ## flags hold. sync_flags(gs.flags) switches them; Commands, new games and
 ## loads call it. Tiles may have "winter_color" (the snow look, drawn only)
 ## and objects "warm": true (a fire: Winter). A map with "indoor": true is
-## inside a building (is_indoor: no cold, no fairies).
+## inside a building (is_indoor: no cold, no fairies). M8.6 (ADR 0015): a map
+## with "camp": true is a campsite (is_camp: you may sleep outdoors there);
+## an object may have "shop" (a shop id in data/economy.json), "price"
+## (copper, on a "sleep" object: a paid room) and "ride" ({"to", "pos",
+## "minutes", "price"}: a paid ride to a tile of another map).
 class_name MapDb
 extends RefCounted
 
@@ -76,6 +80,10 @@ static func from_dicts(tile_map: Dictionary, area_map: Dictionary) -> MapDb:
 
 func is_indoor(area: String) -> bool:
 	return bool(_indoor.get(area, false))
+
+
+func is_camp(area: String) -> bool:
+	return areas.has(area) and areas[area].get("camp", false) is bool and bool(areas[area].get("camp", false))
 
 
 ## Switches the overlays on or off for the world `flags`. Returns true if
@@ -317,6 +325,8 @@ func _validate_map(id: String, m: Dictionary, db: DataDb) -> void:
 		_validate_object(where, o, bounds, seen, db)
 	if m.has("indoor") and not m["indoor"] is bool:
 		errors.append("%s: indoor must be true or false." % where)
+	if m.has("camp") and not m["camp"] is bool:
+		errors.append("%s: camp must be true or false." % where)
 	var overlays: Variant = m.get("overlays", [])
 	if not overlays is Array:
 		errors.append("%s: overlays must be a list." % where)
@@ -421,6 +431,34 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 			errors.append("%s: unknown action '%s'." % [where, a])
 	if o.has("context") and not o["context"] is Dictionary:
 		errors.append("%s: context must be an object." % where)
+	if o.has("shop") and not db.economy.shops.has(o["shop"]):
+		errors.append("%s: unknown shop '%s'." % [where, o["shop"]])
+	elif o.has("shop"):
+		var shop: Dictionary = db.economy.shops[o["shop"]]
+		if not (shop.get("sells", []) as Array).is_empty() and not (o["actions"] as Array).has(Economy.BUY_ACTION):
+			errors.append("%s: a shop that sells needs the action '%s'." % [where, Economy.BUY_ACTION])
+		if not (shop.get("buys", []) as Array).is_empty() and not (o["actions"] as Array).has(Economy.SELL_ACTION):
+			errors.append("%s: a shop that buys needs the action '%s'." % [where, Economy.SELL_ACTION])
+	if o.has("price") and (not o.get("sleep", false) or int(o["price"]) < 1):
+		errors.append("%s: price needs \"sleep\": true and must be >= 1." % where)
+	if o.has("ride"):
+		_validate_ride(where, o["ride"], db)
+
+
+## A ride: {"to": a known map, "pos": a walkable tile there, "minutes" >= 1
+## (needs the action 'travel'), "price" >= 0}.
+func _validate_ride(where: String, r: Variant, db: DataDb) -> void:
+	if not r is Dictionary or not ["to", "pos", "minutes", "price"].all(
+			func(f: String) -> bool: return (r as Dictionary).has(f)):
+		errors.append("%s: ride must be {to, pos, minutes, price}." % where)
+		return
+	if not areas.has(r["to"]):
+		errors.append("%s: ride to unknown map '%s'." % [where, r["to"]])
+	elif not _pos_ok(r["pos"]) or not in_bounds(r["to"], _vec(r["pos"])) \
+			or not is_walkable(r["to"], _vec(r["pos"])):
+		errors.append("%s: ride pos must be a walkable tile of '%s'." % [where, r["to"]])
+	if int(r["minutes"]) < 1 or int(r["price"]) < 0 or not db.actions.has("travel"):
+		errors.append("%s: ride needs minutes >= 1, price >= 0 and the action 'travel'." % where)
 
 
 static func _pos_ok(a: Variant) -> bool:

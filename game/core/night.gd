@@ -23,7 +23,7 @@ const KNOCKOUT_LINE := "You were knocked out. The System still works while you s
 ## `world` (the director's rumors and drift warning). The lines are also
 ## stored in gs.morning for the morning summary.
 static func run(gs: GameState, db: DataDb, collapsed: bool = false,
-		knocked_out: bool = false) -> Dictionary:
+		knocked_out: bool = false, rest: String = Rest.BED) -> Dictionary:
 	collapsed = collapsed or knocked_out
 	var long_sleep := collapsed and not knocked_out
 	var lines: Array[String] = []
@@ -35,6 +35,10 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	var records := close_day(gs)
 	# 2. XP resolution → level-ups → skills.
 	var progress := resolve_xp(gs, db, records)
+	# 2b. Hunger (M8.6): fed today, or one more hungry night (lower max HP).
+	var long_sleep_hunger := collapsed and not knocked_out
+	var hunger := Economy.night(gs, db, records,
+			gs.clock.wake_day(db.rules["clock"], long_sleep_hunger) > gs.clock.day())
 	# 3. Class offers.
 	var budget := int(db.rules["offers"]["max_per_night"])
 	var offered := ClassSystem.make_offers(gs, db, ClassSystem.KIND_NEW, budget)
@@ -43,6 +47,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	offered.append_array(ClassSystem.make_offers(gs, db, ClassSystem.KIND_CONSOLIDATION,
 			budget - offered.size()))
 	lines.append_array(progress)
+	lines.append_array(hunger)
 	for id in offered:
 		lines.append("Class offered: %s. Accept or decline." % db.classes[id]["name"])
 	# 5. World director: canon events up to the day before the wake day.
@@ -62,7 +67,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
 	#    player wakes at a safe place); NPCs go where their goals put them
 	#    at wake time (the dead are gone).
-	Combat.night(gs, db, collapsed, knocked_out)
+	Combat.night(gs, db, collapsed, knocked_out, Rest.share(db, rest))
 	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], long_sleep)
 	NpcSim.advance_to(gs, db, wake * 60 + gs.player.sub_seconds)
 	Winter.night(gs, wake * 60 + gs.player.sub_seconds)

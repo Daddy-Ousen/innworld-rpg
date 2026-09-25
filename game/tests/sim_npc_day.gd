@@ -33,7 +33,7 @@ func _legs() -> Array[Callable]:
 		func(gs: GameState) -> void: _to_area(gs, "inn_interior"),
 		func(gs: GameState) -> void: _wait_until(gs, 18 * 60 + 10, "inn_interior"),
 		func(gs: GameState) -> void: _check_inn_evening(gs),
-		func(gs: GameState) -> void: Commands.sleep(gs, _db),
+		func(gs: GameState) -> void: Commands.sleep(gs, _db, Rest.ANYWHERE),
 	]
 
 
@@ -123,7 +123,7 @@ func test_npc_day() -> void:
 	assert_eq(_where(gs, "relc"), "inn_hill 16,13", "day 9 dawn: Relc brings his gift")
 	assert_eq(_where(gs, "goblin_chieftain"), "@wilds")
 	assert_true(Commands.wait(gs, _db, 14 * 3600) >= 0, "day 9 goes by")
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_eq(gs.clock.day(), 10)
 	assert_eq(gs.world.status("b1.erin_kills_chieftain"), Director.DONE)
 	assert_eq(_where(gs, "goblin_chieftain"), "gone", "dead NPCs leave the world")

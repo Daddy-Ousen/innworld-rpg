@@ -60,6 +60,8 @@
 			"context": [{"key": "location", "equals": "liscor_market", "add_tags": {"social.conversation": 0.2}}]},
 		"sell_goods": {"name": "Sell goods", "minutes": 30, "base_xp": 5, "risk": 0.0,
 			"tags": {"commerce.trade": 1.0}},
+		"deliver_parcel": {"name": "Deliver a parcel in town", "minutes": 60, "base_xp": 6, "risk": 0.0,
+			"tags": {"running": 1.0, "commerce.trade": 0.2}},
 		"play_chess": {"name": "Play chess", "minutes": 60, "base_xp": 8, "risk": 0.0,
 			"tags": {"games.chess": 1.0, "strategy": 0.5},
 			"context": [{"key": "opponent_skill", "min": 0.8, "add_tags": {"strategy": 0.5}}]},

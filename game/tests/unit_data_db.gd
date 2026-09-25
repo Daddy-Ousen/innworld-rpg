@@ -6,6 +6,7 @@ var _rules: Dictionary
 func before_all() -> void:
 	_rules = DataDb.load_dir().rules.duplicate(true)
 	_rules.erase("winter")  # its talk action is not in these toy actions
+	_rules.erase("economy")  # its inn work actions are not in these toy actions
 
 
 func _action(tags: Dictionary) -> Dictionary:
@@ -17,6 +18,21 @@ func test_shipped_data_is_valid() -> void:
 	assert_eq(db.errors, [] as Array[String])
 	assert_gte(db.actions.size(), 30)
 	assert_true(db.tags.has("cooking.stew"))
+
+
+func test_bad_economy_rules_are_errors() -> void:
+	var rules := DataDb.load_dir().rules.duplicate(true)
+	rules.erase("winter")
+	var e: Dictionary = rules["economy"]
+	e["hunger"]["floor"] = 0.0
+	e["hunger"]["inn_work_actions"] = ["no_such_work"]
+	(e["rest"] as Dictionary).erase("poor_line")
+	var db := DataDb.from_dicts({"cooking": ""}, {"a": _action({"cooking": 1.0})}, rules)
+	assert_true(db.errors.has("rules.economy.rest: missing 'poor_line'."))
+	e["rest"]["poor_line"] = "x"
+	db = DataDb.from_dicts({"cooking": ""}, {"a": _action({"cooking": 1.0})}, rules)
+	assert_true(db.errors.any(func(x: String) -> bool: return x.contains("floor must be in")))
+	assert_true(db.errors.any(func(x: String) -> bool: return x.contains("no_such_work")))
 
 
 func test_unknown_action_tag_is_an_error() -> void:

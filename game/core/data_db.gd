@@ -26,6 +26,12 @@ const WINTER_COLD_FIELDS := ["every_minutes", "damage", "floor_hp", "clothes_mul
 const WINTER_FAIRY_FIELDS := ["name", "chance", "count", "min_distance", "act_seconds", "iron_tag",
 	"iron_radius", "talk_action", "safe_talks_per_day", "annoy_chance", "snow_damage", "slow_steps",
 	"lines", "swat_line", "snow_line"]
+## rules.economy (M8.6, optional).
+const ECONOMY_FIELDS := ["copper_per_silver", "trade_minutes", "eat_minutes", "haggle_share", "rest",
+	"hunger"]
+const ECONOMY_REST_FIELDS := ["bed", "floor", "refused_line", "poor_line"]
+const ECONOMY_HUNGER_FIELDS := ["step", "floor", "inn_location", "inn_npc", "inn_work_actions",
+	"hungry_line", "fed_line"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
 	"race_limits", "loss", "consolidation", "canon_ref"]
 const SKILL_FIELDS := ["name", "rarity", "pools", "tag_affinity", "effects", "canon_ref"]
@@ -52,6 +58,8 @@ var maps: MapDb = MapDb.new()
 var behaviour: BehaviourDb = BehaviourDb.new()
 ## Enemies, improvised items and spawns (data/enemies.json, data/items.json). Empty in toy dbs.
 var combat: CombatDb = CombatDb.new()
+## Goods, shops, yields and jobs (data/economy.json, M8.6). Empty in toy dbs.
+var economy: EconomyDb = EconomyDb.new()
 var errors: Array[String] = []
 
 
@@ -70,12 +78,14 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.canon = CanonDb.load_root(dir.path_join("canon"))
 	db.maps = MapDb.load_dir(dir)
 	db.combat = CombatDb.load_dir(dir)
-	db.maps.validate(db)  # map objects name combat items
+	db.economy = EconomyDb.load_dir(dir)
+	db.economy.validate(db)
+	db.maps.validate(db)  # map objects name combat items and shops
 	db.behaviour = BehaviourDb.load_dir(dir)
 	db.behaviour.validate(db)
 	db.combat.validate(db)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
-			+ db.combat.errors
+			+ db.combat.errors + db.economy.errors
 	for e in db.errors:
 		push_error(e)
 	return db
@@ -129,6 +139,8 @@ func _validate_rules() -> void:
 				errors.append("rules.%s: missing '%s'." % [section, field])
 	if rules.has("winter"):  # optional (M8.W): toy dbs have no winter
 		_validate_winter(rules["winter"])
+	if rules.has("economy"):  # optional (M8.6): toy dbs have no economy
+		_validate_economy(rules["economy"])
 
 
 ## rules.winter (M8.W): see Winter.
@@ -163,6 +175,33 @@ func _validate_winter(w: Dictionary) -> void:
 		errors.append("rules.winter.fairies: lines must be a non-empty list.")
 	if int(f["act_seconds"]) < 1:
 		errors.append("rules.winter.fairies: act_seconds must be >= 1.")
+
+
+## rules.economy (M8.6): see Economy and Rest.
+func _validate_economy(e: Dictionary) -> void:
+	var need := {"": ECONOMY_FIELDS, "rest": ECONOMY_REST_FIELDS, "hunger": ECONOMY_HUNGER_FIELDS}
+	for part: String in need:
+		var d: Variant = e if part == "" else e.get(part, null)
+		var where := "rules.economy" + ("" if part == "" else "." + part)
+		if not d is Dictionary:
+			errors.append("%s: must be an object." % where)
+			continue
+		for field: String in need[part]:
+			if not (d as Dictionary).has(field):
+				errors.append("%s: missing '%s'." % [where, field])
+	if errors.any(func(x: String) -> bool: return x.begins_with("rules.economy")):
+		return
+	if int(e["copper_per_silver"]) < 1:
+		errors.append("rules.economy: copper_per_silver must be >= 1.")
+	var h: Dictionary = e["hunger"]
+	if float(h["floor"]) <= 0.0 or float(h["floor"]) > 1.0 or float(h["step"]) < 0.0:
+		errors.append("rules.economy.hunger: floor must be in (0, 1] and step >= 0.")
+	for a: Variant in h["inn_work_actions"]:
+		if not actions.has(a):
+			errors.append("rules.economy.hunger: unknown inn work action '%s'." % a)
+	var r: Dictionary = e["rest"]
+	if float(r["floor"]) <= 0.0 or float(r["floor"]) > float(r["bed"]):
+		errors.append("rules.economy.rest: floor must be > 0 and <= bed.")
 
 
 func _validate_action(id: String, a: Dictionary) -> void:

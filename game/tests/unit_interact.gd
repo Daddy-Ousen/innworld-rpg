@@ -21,7 +21,7 @@ func test_options_list_nearby_objects() -> void:
 	var opts := Interact.options(gs, _db)
 	assert_eq(opts.size(), 2)
 	assert_eq(opts[0], {"id": "dummy", "name": "Dummy", "actions": ["fight", "spar"], "npc": false,
-		"sleep": false, "item": ""})
+		"sleep": false, "item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {}})
 	assert_eq(opts[1]["id"], "stove")
 
 

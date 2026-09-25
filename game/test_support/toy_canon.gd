@@ -114,7 +114,7 @@ static func event(earliest: int, latest: int, extra: Dictionary = {}) -> Diction
 ## Sleeps until the director has run through `day`.
 static func sleep_through(gs: GameState, db: DataDb, day: int) -> void:
 	while gs.world.last_day < day:
-		Commands.sleep(gs, db)
+		Commands.sleep(gs, db, Rest.ANYWHERE)
 
 
 ## Compact history: ["D4 mutated e.mentor_dies", ...].

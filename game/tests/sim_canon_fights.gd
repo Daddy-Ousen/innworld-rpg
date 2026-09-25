@@ -127,7 +127,7 @@ func test_losing_to_the_chieftain_leaves_the_canon() -> void:
 			break
 		Commands.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 9)
 	assert_eq(gs.world.status(CHIEFTAIN_EVENT), Director.DONE)
 	assert_false(gs.flags.has("wandering_inn.earther_fought_chieftain"), "canon: Erin fought alone")

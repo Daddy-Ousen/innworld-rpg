@@ -123,13 +123,13 @@ func test_the_night_does_not_chill_and_warns_once() -> void:
 	var gs := _game()
 	gs.clock.advance(14 * 60)  # 20:00
 	Commands.wait(gs, _db, 6)
-	var night := Commands.sleep(gs, _db)
+	var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_has(night["lines"], _db.rules["winter"]["cold"]["morning_line"])
 	assert_eq(gs.winter.chill, 0)
 	assert_eq(Combat.hp(gs, _db), _max(gs))
 	gs.clock.advance(14 * 60)
 	Commands.wait(gs, _db, 6)
-	night = Commands.sleep(gs, _db)
+	night = Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_does_not_have(night["lines"], _db.rules["winter"]["cold"]["morning_line"])
 
 

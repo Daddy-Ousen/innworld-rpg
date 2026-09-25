@@ -22,7 +22,9 @@ static func get_stat(gs: GameState, db: DataDb, stat: String) -> int:
 	return int(of(gs, db).get(stat, 0))
 
 
-## hp_base + hp_per_endurance × endurance, at least 1.
+## hp_base + hp_per_endurance × endurance, times the hunger share (M8.6:
+## Economy.hp_mult), at least 1.
 static func max_hp(gs: GameState, db: DataDb) -> int:
 	var c: Dictionary = db.rules["combat"]
-	return maxi(int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance"), 1)
+	var full := int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance")
+	return maxi(roundi(full * Economy.hp_mult(gs, db)), 1)

@@ -60,7 +60,7 @@ func test_first_day_walk() -> void:
 	var spent := gs.clock.total_minutes - start
 	gut.p("walk day: %d min, now %s" % [spent, gs.clock.time_string()])
 	assert_gt(spent, 10 + 30 + 20 + 10 + 20 + 30 + 20 + 90 + 30, "actions + travel + steps")
-	var night := Commands.sleep(gs, _db)
+	var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_eq(night["records"], 9)
 	assert_eq(gs.clock.day(), 9)
 
@@ -70,22 +70,22 @@ func test_same_seed_same_day() -> void:
 	var b := GameState.new_game(SEED, _db)
 	_play(a)
 	_play(b)
-	Commands.sleep(a, _db)
-	Commands.sleep(b, _db)
+	Commands.sleep(a, _db, Rest.ANYWHERE)
+	Commands.sleep(b, _db, Rest.ANYWHERE)
 	assert_eq(a.to_json(), b.to_json())
 
 
 func test_save_and_load_mid_walk_changes_nothing() -> void:
 	var straight := GameState.new_game(SEED, _db)
 	_play(straight)
-	Commands.sleep(straight, _db)
+	Commands.sleep(straight, _db, Rest.ANYWHERE)
 
 	var gs := GameState.new_game(SEED, _db)
 	_play(gs, 0, 5)
 	var loaded := GameState.from_json(gs.to_json())
 	assert_eq(loaded.player.to_dict(), gs.player.to_dict())
 	_play(loaded, 5)
-	Commands.sleep(loaded, _db)
+	Commands.sleep(loaded, _db, Rest.ANYWHERE)
 	assert_eq(_diff(loaded.to_dict(), straight.to_dict(), "gs"), [] as Array[String])
 	assert_eq(loaded.to_json(), straight.to_json())
 

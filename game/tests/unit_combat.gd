@@ -313,7 +313,7 @@ func test_enemies_near_refuse_actions_uses_and_sleep() -> void:
 	assert_true(ToyMaps.walk_next_to(gs, _db, "dummy"))
 	assert_eq(Commands.interact(gs, _db, "dummy", "fight")["error"], Combat.REFUSED_DANGER)
 	var day := gs.clock.day()
-	assert_true(Commands.sleep(gs, _db).is_empty())
+	assert_true(Commands.sleep(gs, _db, Rest.ANYWHERE).is_empty())
 	assert_eq(gs.clock.day(), day)
 
 
@@ -321,7 +321,7 @@ func test_a_collapse_with_enemies_near_is_a_knock_out() -> void:
 	var gs := _game()
 	gs.clock.advance(int(_db.rules["clock"]["collapse_after_awake"]))
 	ToyCombat.spawn(gs, _db, "goblin", Vector2i(3, 2))
-	var night := Commands.sleep(gs, _db)
+	var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_true(night["knocked_out"])
 	assert_eq(gs.clock.time_string(), "06:00")
 
@@ -333,11 +333,11 @@ func test_bandage_heals_and_a_night_heals() -> void:
 	assert_eq(Combat.hp(gs, _db), 10, "+6")
 	assert_has(gs.combat.lines, "You recover 6 HP.")
 	gs.clock.advance(14 * 60)
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_eq(gs.player.hp, -1, "a night's sleep heals to full")
 	Combat.set_hp(gs, _db, 3)
 	gs.clock.advance(int(_db.rules["clock"]["collapse_after_awake"]))
-	Commands.sleep(gs, _db)
+	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_eq(Combat.hp(gs, _db), 10, "a collapse heals to half")
 
 

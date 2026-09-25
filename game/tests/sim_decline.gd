@@ -23,7 +23,7 @@ func test_declined_warrior_never_returns() -> void:
 	var declined_on := 0
 	for day in range(1, 41):
 		_fight_day(gs)
-		var night := Commands.sleep(gs, _db)
+		var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 		var offers: Array = night["offers"]
 		if declined_on > 0:
 			assert_false(offers.has("warrior"), "day %d: [Warrior] came back" % day)
@@ -46,4 +46,4 @@ func test_declined_warrior_never_returns() -> void:
 	var loaded := GameState.from_json(gs.to_json())
 	for day in 10:
 		_fight_day(loaded)
-		assert_false((Commands.sleep(loaded, _db)["offers"] as Array).has("warrior"))
+		assert_false((Commands.sleep(loaded, _db, Rest.ANYWHERE)["offers"] as Array).has("warrior"))

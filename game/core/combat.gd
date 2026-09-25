@@ -566,14 +566,16 @@ static func settle_fight(gs: GameState, db: DataDb) -> void:
 ## heals (a sleep to night_heal.sleep of max HP, a collapse to
 ## night_heal.collapse, a knock-out to knockout.wake_hp_frac); a knocked-out
 ## player wakes at the nearest safe place (knockout.wake, by area).
-static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool) -> void:
+## `rest_share` scales a normal sleep's heal (M8.6: Rest.share, the floor).
+static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool,
+		rest_share: float = 1.0) -> void:
 	var c := gs.combat
 	var rules: Dictionary = db.rules["combat"]
 	c.monsters.clear()
 	c.fight = {}
 	c.stage_run = {}
 	c.blocking = false
-	var share := float(rules["night_heal"]["sleep"])
+	var share := float(rules["night_heal"]["sleep"]) * rest_share
 	if knocked_out:
 		share = float(rules["knockout"]["wake_hp_frac"])
 	elif collapsed:

@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"id": "road_camp",
+	"name": "Roadside camp",
+	"location": "high_passes",
+	"confidence": "guess",
+	"note": "Design map (M8.6). A camp on the road between Celum (north) and Liscor (south), in the foothills of the High Passes. The road and the camp are guesses; the High Passes lie between the two cities (1.33R-1.36R).",
+	"camp": true,
+	"zones": {},
+	"exits": [
+		{"at": [16, 0, 2, 1], "to": "celum_gate", "arrive": [16, 18], "minutes": 600},
+		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600}
+	],
+	"objects": [
+		{"id": "campfire", "at": [20, 12], "name": "Campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
+		{"id": "bedroll", "at": [21, 14], "name": "Bedroll", "actions": [], "sleep": true},
+		{"id": "camp_dead_tree", "at": [10, 11], "name": "Dead tree", "actions": ["chop_wood"], "solid": true},
+		{"id": "camp_stream", "at": [22, 7], "name": "Stream crossing", "actions": ["carry_water"]},
+		{"id": "camp_herbs", "at": [9, 4], "name": "Herb patch", "actions": ["gather_herbs"]},
+		{"id": "camp_stones", "at": [12, 18], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {".": "grass", ",": "tall_grass", ":": "dirt_road", "T": "tree", "^": "rock", "~": "water", "s": "shallows"},
+	"rows": [
+		"^^^^^^^.........::.........^^^^^",
+		"^^^^^T..........::..........^^^^",
+		"^^^^............::...T.......^^^",
+		"^^^.....,,,.....::............^^",
+		"^^......,,,.....::.....~~~.....^",
+		"^.......,,,.....::.....~~~......",
+		"^...T...........::.....~~~......",
+		"^...............::.....sss......",
+		"^^..............::.....~~~...T..",
+		"^^..............::.....~~~......",
+		"^...............::.....~~~......",
+		"^.........T.....::.............^",
+		"^...............::.............^",
+		"^^..............::.............^",
+		"^^......^.......::....,,,......^",
+		"^...............::....,,,.....^^",
+		"^...............::....,,,.....^^",
+		"^^.....T........::...........^^^",
+		"^^^.............::.........T.^^^",
+		"^^^.............::...........^^^",
+		"^^^^............::..........^^^^",
+		"^^^^^...........::.........^^^^^",
+		"^^^^^^..........::........^^^^^^",
+		"^^^^^^^.........::.......^^^^^^^"
+	]
+}

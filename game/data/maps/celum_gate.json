@@ -4,15 +4,17 @@
 	"name": "Outside Celum's gate",
 	"location": "celum",
 	"confidence": "guess",
-	"note": "Design map. Celum is a walled Human city with a gate guard (1.19R: Wesle); the layout is a guess. The road south (to Liscor) becomes an exit in M8.6.",
+	"note": "Design map. Celum is a walled Human city with a gate guard (1.19R: Wesle); the layout is a guess. The road south leads to the roadside camp and on to Liscor (M8.6).",
 	"zones": {},
 	"exits": [
-		{"at": [16, 0, 2, 1], "to": "celum_square", "arrive": [15, 18], "minutes": 0}
+		{"at": [16, 0, 2, 1], "to": "celum_square", "arrive": [15, 18], "minutes": 0},
+		{"at": [16, 19, 2, 1], "to": "road_camp", "arrive": [16, 1], "minutes": 600}
 	],
 	"objects": [
 		{"id": "gate_brazier", "at": [13, 3], "name": "Guard's brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "celum_milestone", "at": [19, 8], "name": "Road stone", "actions": ["sprint_training"], "solid": true},
-		{"id": "celum_fallen_branch", "at": [8, 14], "name": "Fallen branch", "actions": ["weapon_practice", "throw_object"], "context": {"weapon": "improvised"}}
+		{"id": "celum_fallen_branch", "at": [8, 14], "name": "Fallen branch", "actions": ["weapon_practice", "throw_object"], "context": {"weapon": "improvised"}},
+		{"id": "celum_wagon", "at": [18, 5], "name": "Wagon to Liscor", "actions": [], "solid": true, "ride": {"to": "liscor_gate", "pos": [17, 9], "minutes": 480, "price": 40}}
 	],
 	"legend": {"#": "city_wall", ",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "_": "cobble"},
 	"rows": [

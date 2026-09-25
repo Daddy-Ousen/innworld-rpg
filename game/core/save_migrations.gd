@@ -26,6 +26,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			7: out = _migrate_7_to_8(out)
 			8: out = _migrate_8_to_9(out)
 			9: out = _migrate_9_to_10(out)
+			10: out = _migrate_10_to_11(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -105,4 +106,13 @@ static func _migrate_8_to_9(d: Dictionary) -> Dictionary:
 ## v10 (M8.W): winter. No cold felt yet and no Frost Fairies about.
 static func _migrate_9_to_10(d: Dictionary) -> Dictionary:
 	d["winter"] = {}
+	return d
+
+
+## v11 (M8.6): the economy. No coins, an empty bag, not hungry; fed on the
+## day of the save, so an old save does not wake up hungry.
+static func _migrate_10_to_11(d: Dictionary) -> Dictionary:
+	var minutes := int((d["clock"] as Dictionary)["total_minutes"])
+	@warning_ignore("integer_division")
+	d["economy"] = {"fed_day": minutes / 1440 + 1}
 	return d

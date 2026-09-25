@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 10
+const SAVE_VERSION := 11
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -29,6 +29,8 @@ var npcs: NpcRoster
 var combat: CombatState
 ## The cold and the Frost Fairies (M8.W).
 var winter: WinterState
+## Coins, goods and hunger (M8.6).
+var economy: EconomyState
 
 
 func _init(seed_value: int = 0) -> void:
@@ -41,6 +43,7 @@ func _init(seed_value: int = 0) -> void:
 	npcs = NpcRoster.new()
 	combat = CombatState.new()
 	winter = WinterState.new()
+	economy = EconomyState.new()
 
 
 ## A fresh game at the start time from data/rules.json, at the start place
@@ -51,6 +54,7 @@ static func new_game(seed_value: int, db: DataDb, start_id: String = "") -> Game
 	var gs := GameState.new(seed_value)
 	gs.clock = Clock.new(int(db.rules["clock"]["start_minute"]))
 	gs.progression.day_start = gs.clock.total_minutes
+	gs.economy.fed_day = gs.clock.day()
 	Director.run(gs, db, gs.clock.day() - 1)
 	gs.world.news.clear()
 	db.maps.sync_flags(gs.flags)
@@ -79,6 +83,7 @@ func to_dict() -> Dictionary:
 		"npcs": npcs.to_dict(),
 		"combat": combat.to_dict(),
 		"winter": winter.to_dict(),
+		"economy": economy.to_dict(),
 	}
 
 
@@ -98,6 +103,7 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.npcs = NpcRoster.from_dict(d["npcs"])
 	gs.combat = CombatState.from_dict(d["combat"])
 	gs.winter = WinterState.from_dict(d["winter"])
+	gs.economy = EconomyState.from_dict(d["economy"])
 	return gs
 
 

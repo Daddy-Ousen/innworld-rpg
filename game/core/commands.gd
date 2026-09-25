@@ -18,15 +18,18 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		return {}
 	var rec := Actions.perform(gs, db, action_id, opts)
 	Combat.heal_after_action(gs, db, rec)
+	Economy.after_action(gs, db, rec)
 	_after(gs, db)
 	return rec
 
 
-## Ends the day. If the player is past the awake limit, this is a collapse.
-## Knocked out, or a collapse with enemies near: a knock-out (see knock_out).
-## With enemies near otherwise: refused, returns {} (the reason is in
-## gs.combat.lines).
-static func sleep(gs: GameState, db: DataDb) -> Dictionary:
+## Ends the day. If the player is past the awake limit, this is a collapse
+## (anywhere). Knocked out, or a collapse with enemies near: a knock-out
+## (see knock_out). With enemies near otherwise, or where the player may
+## not sleep (Rest.place: outdoors, or a room they cannot pay for):
+## refused, returns {} (the reason is in gs.combat.lines). `bed` is a bed
+## object next to the player ("" = where you stand); a paid room is paid.
+static func sleep(gs: GameState, db: DataDb, bed: String = "") -> Dictionary:
 	Combat.begin_command(gs)
 	var collapse := gs.clock.is_collapse_due(db.rules["clock"])
 	if Combat.is_down(gs) or (collapse and Combat.in_danger(gs)):
@@ -34,8 +37,15 @@ static func sleep(gs: GameState, db: DataDb) -> Dictionary:
 	if Combat.in_danger(gs):
 		gs.combat.lines.append(Combat.REFUSED_DANGER)
 		return {}
+	var rest := Rest.place(gs, db, bed)
+	if not collapse and rest["rest"] == "":
+		gs.combat.lines.append(rest["error"])
+		return {}
+	if not collapse and int(rest["price"]) > 0:
+		gs.economy.coins -= int(rest["price"])
+		gs.combat.lines.append("You pay %s for the room." % Economy.format(db, int(rest["price"])))
 	Combat.settle_fight(gs, db)
-	var night := Night.run(gs, db, collapse)
+	var night := Night.run(gs, db, collapse, false, Rest.BED if collapse else String(rest["rest"]))
 	_after(gs, db)
 	return night
 
@@ -88,6 +98,17 @@ static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:
 		gs.flags[key] = value
 
 
+## Debug: adds coins (copper; negative takes, never below 0) and goods.
+## Returns "" or an error text.
+static func give(gs: GameState, db: DataDb, coins: int, good: String = "", count: int = 1) -> String:
+	if good != "" and not db.economy.goods.has(good):
+		return "Unknown good '%s'." % good
+	gs.economy.coins = maxi(gs.economy.coins + coins, 0)
+	if good != "":
+		gs.economy.add(good, count)
+	return ""
+
+
 ## One step on the world grid (n, s, e, w). See Movement.step. Stepping
 ## into a monster attacks it instead: the result then has "attack" (see
 ## Combat.player_attack). Stepping into a hidden monster (it looks like a
@@ -126,6 +147,49 @@ static func interact(gs: GameState, db: DataDb, object_id: String, action_id: St
 		return {"record": {}, "error": why}
 	var r := Interact.perform(gs, db, object_id, action_id, opts)
 	Combat.heal_after_action(gs, db, r["record"])
+	Economy.after_action(gs, db, r["record"], object_id)
+	_after(gs, db)
+	return r
+
+
+## Buys one `good` at the nearby shop object `object_id` (M8.6). Returns
+## {"record", "error"}; what happened is in gs.combat.lines.
+static func buy(gs: GameState, db: DataDb, object_id: String, good: String) -> Dictionary:
+	return _shop_command(gs, db, func() -> Dictionary: return Economy.buy(gs, db, object_id, good))
+
+
+## Sells one `good` from the bag at the nearby shop object `object_id`.
+static func sell(gs: GameState, db: DataDb, object_id: String, good: String) -> Dictionary:
+	return _shop_command(gs, db, func() -> Dictionary: return Economy.sell(gs, db, object_id, good))
+
+
+## Eats or drinks a good from the bag (Economy.use_good). Returns "" or an error.
+static func use_good(gs: GameState, db: DataDb, good: String) -> String:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why == "":
+		why = Economy.use_good(gs, db, good)
+	_after(gs, db)
+	return why
+
+
+## Takes the paid ride of the nearby object `object_id` (Economy.ride).
+## Returns "" or an error.
+static func ride(gs: GameState, db: DataDb, object_id: String) -> String:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why == "":
+		why = Economy.ride(gs, db, object_id)
+	_after(gs, db)
+	return why
+
+
+static func _shop_command(gs: GameState, db: DataDb, trade: Callable) -> Dictionary:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why != "":
+		return {"record": {}, "error": why}
+	var r: Dictionary = trade.call()
 	_after(gs, db)
 	return r
 

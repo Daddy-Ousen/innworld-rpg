@@ -53,7 +53,7 @@ func test_book2_runs_as_canon() -> void:
 	assert_eq(gs.clock.day(), FIRST_DAY)
 	var rumors := 0
 	while gs.world.last_day < LAST_DAY:
-		var night := Commands.sleep(gs, _db)
+		var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 		for line: String in night["lines"]:
 			if line.begins_with("Rumor: "):
 				rumors += 1

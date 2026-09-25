@@ -56,7 +56,7 @@ func _run(gs: GameState, from_day: int, to_day: int) -> Array[String]:
 	var trace: Array[String] = []
 	for day in range(from_day, to_day + 1):
 		_play_day(gs, day)
-		var night := Commands.sleep(gs, _db)
+		var night := Commands.sleep(gs, _db, Rest.ANYWHERE)
 		for line: String in night["lines"]:
 			trace.append("d%d %s" % [day, line])
 		for id: String in night["offers"]:
