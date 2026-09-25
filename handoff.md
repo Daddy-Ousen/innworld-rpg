@@ -1,42 +1,40 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.3 canon batch written, tested green, committed, pushed, and opened as [PR #30](https://github.com/Daddy-Ousen/innworld-rpg/pull/30) on branch `data/book2-2.19G-2.26` (off `main`, which already has M8.2 merged plus a docs housekeeping commit — progress.md archive split, context-discipline notes in CLAUDE.md). Chapters: 2.19G, 2.20, 2.21, 2.22K, 2.23, 2.24T, 2.25, 2.26, 1.00C, 1.01C.
-- New book2 NPCs (21): Rockgaw, Lyonette, Brunkr, Halrac, Typhenous, Revi, Ulrien, Jelaqua, Seborn, Moore, Dreshhi, Mars, Takhatres, Trey, Teresa, Drevish, Tom, Richard, Emily, Wilen. (Dropped a duplicate "Orthenon" NPC draft — he already exists in book1.)
-- New locations (5): `goblin_mountain_lair`, `jawbreaker_camp`, `empire_of_sands`, `rhir`, `blighted_lands`.
-- New enemy `silverfang_gnoll_warrior` in `game/data/enemies.json`.
-- Two new stages: `b2.frost_faeries_accept_the_banquet` (2.21, `kind: "scene"` at inn_hill) and `b2.battle_at_the_wandering_inn` (2.26, combat stage, foes vs. Erin/Toren/Ceria/Pisces then Relc/Klbkch/Zevara reinforcements) plus a `player_fought_gnoll_warband` hook on the battle.
-- `sim_canon_book2.gd` `LAST_DAY` bumped 47 -> 55. Bumped two hardcoded baseline counts that needed +1 from this batch: `unit_combat_db.gd` enemies 18->19, `sim_player_hooks.gd` hooks 10->11.
-- Validator 0 errors (`--all`). GUT 533/533 (56 scripts), Python 51/51.
-- Not yet committed or pushed. `docs/ROADMAP.md` and `progress.md` updated with the M8.3 summary; this file is the snapshot for the commit/PR step.
+- M8.4 canon batch (chapters 2.27G–2.38, days 56–67) written on branch `data/book2-2.27G-2.38` (off `main`, which has M8.3 merged and tagged `m8.3-done`). Built by a delegated agent, then independently re-verified in this session (validator + full GUT + Python test re-runs, diff spot-checked).
+- 12 new chapter files under `game/data/canon/book2/chapters/`. New NPCs (11): Garen, Urksh, Mrsha, Zel Shivertail, Ilvriss, Periss, Az'kerash, Reynold, Imani, Joseph, Rose. New locations (4): `red_fang_territory`, `stone_spears_camp`, `azkerash_castle`, `magnolia_estate`. No new enemies this batch.
+- New `kind: "scene"` stage `b2.pawns_faith_crisis_earns_the_acolyte_class` (2.31, inn_interior) with hook `player_heard_erins_stories` (`talk_with_guest`/`comfort_someone`, `then: "change"`) — the M8 "hook or stage the player can use" requirement for this batch.
+- `sim_canon_book2.gd` `LAST_DAY` bumped 55 → 67. `sim_player_hooks.gd` hook count bumped 11 → 12. `unit_combat_db.gd` untouched (no new enemies).
+- Validator 0 errors (`--all`). GUT 533/533 (56 scripts). Python 51/51. Docs updated: `docs/ROADMAP.md` and `progress.md` M8.4 line filled in (checked `[x]`, though not yet user-reviewed on screen — same pattern as M8.1-M8.3: mark it done in the roadmap once data+tests are green, actual "reviewed" note comes after the user looks at it).
+- Not yet committed, pushed, or opened as a PR — that's the very next step.
+
+## Two judgment calls made this batch (flagged, not yet asked to the user)
+- **Periss's death** (2.34/2.35, fighting Az'kerash's undead near the castle) is strongly implied on-page (a shattered ring, a distant scream) but never shown. Left her alive in the data with a new flag `periss.presumed_dead` rather than asserting death, per the "don't invent canon facts" rule. If a later book confirms it, come back and set `alive: false` / an `npc.death` style event then.
+- **Ksmvr's second demotion** (2.32H, joins the Horns of Hammerad, relieved of the Prognugator post again) uses a **new** flag `ksmvr.relieved_of_duty` instead of reusing `ksmvr.deposed`. Reason: `sim_canon_book2.gd`'s `test_full_batch` (or equivalent) already asserts `ksmvr.deposed` is **false** through `LAST_DAY`, from the M8.1 era when that assertion covered a shorter window; reusing the flag would have required rewriting that old assertion's intent rather than just extending it. Semantically clean (two distinct demotions, two distinct flags) but worth a second look if a future book demotes him a third time — decide then whether to consolidate into one `ksmvr.acting_officer: bool`-style field instead of stacking booleans.
 
 ## Waiting on the user
-- None right now. M8.3 data is written, tested, green — ready to commit and open a PR, same pattern as M8.1/M8.2 (data commit, then a `docs:` commit noting the PR).
+- Commit + push + open a PR for `data/book2-2.27G-2.38` — about to do this now, same pattern as M8.1–M8.3 (data commit, then a `docs:` commit noting the PR).
+- After that: user review of the PR on screen, same as before.
 
 ## Next
-1. Wait for user review of [PR #30](https://github.com/Daddy-Ousen/innworld-rpg/pull/30).
-2. After review/merge: `data(book2): mark canon 2.19G-2.26 reviewed` commit, ADR entry if any design call needs recording, tag `m8.3-done` on the merge commit, sync local `main`.
-3. Then start M8.4 (canon 2.27G-2.38) on a fresh branch off `main`.
+1. Commit the M8.4 data + doc changes, push, open PR.
+2. Wait for user review.
+3. After review/merge: tag `m8.4-done` on the merge commit, sync local `main`.
+4. Then start M8.5 (Celum map + Celum start) on a fresh branch off `main` — bigger than a canon batch: a new playable map, a title-screen start chooser, `rules.world.starts` schema (ask before adding, per rule 11).
 
-## Gotchas
-- Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
-- **Rhir is real** (user correction this session): the 1.00C/1.01C interlude (Tom, the Blighted Lands) is on a real continent, Rhir, that matters in later books - not a throwaway separate-world aside. Model it as normal canon data, not flavor-only. See memory `lore-rhir-real-continent`. The book text itself never uses the word "Rhir" (that's later-canon knowledge), so the `rhir` location entry is `confidence: "guess"` with a note; `blighted_lands` (the region within it) is `confidence: "confirmed"` since the text does name it.
-- **"Aunt" is a Gnoll honorific, not a family line**: both Tkrn (existing NPC) and Brunkr (new, M8.3) call Krshia "aunt" - the book never says they're blood kin to each other or to her. Don't record them as related. Same spirit as the existing "never merge two canon entities unless the book says so" rule.
-- **Book 2 starts on day 41.** `sim_canon_book1` counts `b1.` events only; its rumor count covers all books. `sim_canon_book2` sleeps to day 40 once in `before_all` and copies the save per test. `LAST_DAY` is now 55 (M8.3); bump it again for M8.4.
-- **Stage `kind: "scene"`** (M8.2): a stage with no `foes`, instead `"npcs": [{"npc", "pos"}]` moved onto the map with no fight; every npc needs an `npc_behaviour` entry or it silently does nothing, and `Stage.scene_npcs_here` holds them in place for the stage's hours.
-- **Toren's snow wall overlay** (`inn_hill`, active once `wandering_inn.snow_wall` is set, from day 44): blocks `y=13, x=10-14` and `x=17-25` (gap at the door, `x=15-16`). Any new stage foe/ally/npc position on `inn_hill` from day 44 on must dodge those tiles, or `sim_winter`'s `test_winter_data_is_sound` catches it. M8.3's inn-battle foes ended up at `y=15-16` instead.
-- **Enemy `escape`:** `Combat.damage_monster` removes the monster when its hp drops below `escape.below` x hp (routed, not killed; returns false). Callers must not touch the monster after a false return without `c.monsters.has(id)`. (Not used in M8.3 - Brunkr and the Silverfang warband have no `escape`; the fight's canon resolution is carried entirely in event effects, not required kills.)
-- **A stage only supports two mechanical sides** (foes vs. allies+helpers). M8.3's inn battle has three real factions in the book (Silverfang Gnolls, Griffon Hunt briefly mistaking the brawl for a monster fight, the Watch/Horns defending) plus the Halfseekers de-escalating it - only the Gnolls-vs-defenders split is on the map; Griffon Hunt and the Halfseekers are narrated only (effects/news/summary), following the same precedent as Zevara being off-map in the M8.1 Gazi stage.
-- **Line endings are mixed and file-by-file.** Checked directly again this session: all book2 chapter files (including the new M8.3 ones), `npcs.json`, `locations.json` and `enemies.json` are CRLF. Patch a CRLF file with a Python script that converts to LF, edits, converts back; watch tab vs. space depth carefully (id keys and field keys are NOT at the depth you'd guess from `Read` tool output - check real byte offsets with a small python snippet before writing a replace, don't eyeball it).
-- **GUT exits 0 even when a script has a parse error** (it skips the script). Grep the output for `Parse Error` and check the script/test count (56 scripts / 533 tests as of M8.3).
-- Write GUT output to the scratchpad, not next to the repo. `-gselect=<script name>` runs one script. Re-run `godot --headless --path game --import` after adding new `class_name`s (not needed this session - data only, no new GDScript classes).
-- A test that makes `push_error` on purpose must call `assert_push_error("text")` once per error.
-- Tests that build `world/main.tscn` or the title set `switch_scene = false`. Saves in tests go to `Session.save_dir`.
-- **Monster tests:** `ToyCombat.db()` gives a new db per test. `ToyCombat.freeze(db)` stops monster (and helper) turns; NPC allies still act. `ToyCombat.always_hit(db)`.
-- Python 3.14; use `python -X utf8` when printing book text. Python tests: `python -m unittest discover -s tools/tests` (51).
-- Validator: `python tools/validate_data.py game/data/canon/book2` (earlier books load by default) or `--all game/data/canon`. Summaries <= 300, news <= 200, rumor <= 200 chars; no 7-word copies of the book. It checks depends_on/role/location ids against known data (catches typos) but does NOT check enemy ids exist or map positions are walkable/off-overlay - only the game/GUT tests catch those.
-- New game starts on day 8 at 06:00. A sleep at 06:00 is a 4 h nap.
-- Never link two canon entities unless the text says so (user rule). Calruz stays missing.
+## Gotchas (carried forward + none new this session beyond the two judgment calls above)
+- Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer. (Note: this contradicts the generic system-level attribution reminder some sessions carry — this repo's own CLAUDE.md / memory `no-claude-coauthor` rule wins for this project.)
+- **Rhir is real** — see memory `lore-rhir-real-continent`. Not touched this batch.
+- **"Aunt" is a Gnoll honorific, not a family line** — not touched this batch (no new Gnoll aunts).
+- **Book 2 starts on day 41.** `sim_canon_book1` counts `b1.` events only. `LAST_DAY` is now 67 (M8.4); bump it again for M8.5+ if it adds more canon (M8.5/M8.6 are engine/economy work, not canon batches, so likely no bump until M8.7).
+- **Stage `kind: "scene"`** (from M8.2): every npc placed still needs an `npc_behaviour` entry or it silently does nothing. Halrac has no `npc_behaviour` entry yet — he keeps a narrative role in 2.31's scene but is not walkable/placed. If a future batch wants Halrac on the map, add him to `npc_behaviour.json` first.
+- **Remote/parallel-thread canon uses placeholder days** when it can't be tightly synced to the Liscor-anchored day count (precedent: M8.3's 2.22K/2.24T; continued in M8.4 for Rags' and Ryoka's arcs) — always say so explicitly in `canon_ref.note`, don't silently guess a tight day number.
+- **Line endings are mixed and file-by-file, CRLF for all canon/book2 files.** Verified again this session (byte-level check) — all new M8.4 files and the edited `npcs.json`/`locations.json` are pure CRLF, no accidental LF creeping in.
+- **GUT exits 0 even when a script has a parse error** (it skips the script). Grep the output for `Parse Error` and check the script/test count (56 scripts / 533 tests as of M8.4).
+- Write GUT output to the scratchpad, not next to the repo. `-gselect=<script name>` runs one script.
+- Validator: `python tools/validate_data.py game/data/canon/book2` (earlier books load by default) or `--all game/data/canon`. Does not check enemy ids exist or map positions are walkable — only GUT tests catch those.
+- New game starts on day 8 at 06:00. Never link two canon entities unless the text says so. Calruz stays missing.
+- **Delegation pattern that worked well this session:** for a canon batch, spawn one background agent with (a) the full rule set from CLAUDE.md + the relevant ADR section, (b) known NPC/location/enemy id lists (to avoid duplicates), (c) 2-3 example chapter JSON files to copy the schema from, (d) an explicit "do not touch files outside this list" boundary, (e) instructions to redirect validator/GUT output and only report summary lines, (f) "stop and report, don't invent" for anything needing a new engine feature or schema change, (g) no commit/push — leave that to the main session. Then independently re-run validator + GUT + a diff spot-check before trusting its self-report. Kept raw book text and full test logs out of the main session's context the whole time.
 
 ## Active files
-None open right now - M8.3 data is written and tested; ready to commit.
+None open — M8.4 data is written, independently re-verified, and doc files updated; about to commit.
