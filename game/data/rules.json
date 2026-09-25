@@ -62,7 +62,8 @@
 			"floodplains_south": {"area": "inn_interior", "pos": [20, 13]},
 			"inn_hill": {"area": "inn_interior", "pos": [20, 13]},
 			"liscor_gate": {"area": "liscor_gate", "pos": [3, 12]},
-			"liscor_market": {"area": "liscor_gate", "pos": [3, 12]}
+			"liscor_market": {"area": "liscor_gate", "pos": [3, 12]},
+			"ruins_entrance": {"area": "liscor_gate", "pos": [3, 12]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]

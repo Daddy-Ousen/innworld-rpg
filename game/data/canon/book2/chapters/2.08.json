@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.08",
+	"events": {
+		"b2.ryoka_reaches_celum_in_the_snow": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"senior_runner": {"prefer": ["fals"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.bound_for_celum"], "not_flags": []},
+			"depends_on": ["b2.ryoka_runs_north_for_gold"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.back_in_celum", "ryoka.has_guild_rulebook", "ryoka.knows_magnolia_in_invrisil", "runners_guild.courier_coming"],
+				"clear_flags": ["ryoka.bound_for_celum"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "'Nearly two days' after she left. The rulebook costs 15 silver. Fals: a fireball ring would cost three or four thousand gold; without levels Ryoka will never be a Courier. First Landing is nearly four thousand miles north."},
+			"summary": "Ryoka limps into Celum on blistered feet while her Frost Fairies freeze the gate guards. Fals and Garia welcome her back. She buys the Guild's rulebook, learns what real magic costs, hears a Courier is coming south from First Landing, and that Magnolia has gone north to Invrisil."
+		},
+		"b2.octavia_appraises_the_haste_potion": {
+			"tier": 2,
+			"window": {"earliest": 44, "latest": 44, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {
+				"alchemist": {"prefer": ["octavia"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["octavia", "ryoka_griffin"], "flags": ["ryoka.has_speed_potion"], "not_flags": []},
+			"depends_on": ["b2.ryoka_reaches_celum_in_the_snow"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.met_octavia", "octavia.covets_the_haste_potion"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "The potion was Teriarch's payment (1.43R). Octavia offers discounts and twenty gold for a sample; the chapter ends on Ryoka's threat. Her new stamina potion sells at 1 gold 8 silver."},
+			"summary": "Garia takes Ryoka to Stitchworks, the shop of the young [Alchemist] Octavia, one of the String People; her sewn arm falls off when Ryoka pushes it away. Octavia names Ryoka's potion one of haste or better, worth two hundred gold, and will not hand it back."
+		}
+	},
+	"system": [
+		{"who": "garia_strongheart", "kind": "level", "name": "[Runner]", "level": 11, "confidence": "likely", "note": "Her level when she first met Ryoka; Fals thinks she will outrun Ryoka in a year or two."}
+	]
+}

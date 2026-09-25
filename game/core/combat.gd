@@ -270,7 +270,8 @@ static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: i
 		out["killed"] = damage_monster(gs, db, id, out["damage"])
 	else:
 		c.lines.append("%s %s the %s." % [what, "misses" if what != "You" else "miss", who])
-	if not item.is_empty() and not out["killed"] and (thrown or out["hit"]) and _scares(item, e):
+	if not item.is_empty() and not out["killed"] and c.monsters.has(id) and (thrown or out["hit"]) \
+			and _scares(item, e):
 		m["state"] = CombatState.FLEE
 		m["scared"] = int(e["scare_turns"])
 		c.fight["routed"] += 1
@@ -409,11 +410,21 @@ static func damage_player(gs: GameState, db: DataDb, amount: int) -> void:
 
 
 ## Returns true if the monster died (it is removed; a foe counts as a kill,
-## a helper does not).
+## a helper does not). A monster with "escape" (M8.1) never dies: a hit that
+## takes it below its escape share removes it with the escape line, and a
+## foe counts as routed, not killed.
 static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -> bool:
 	var c := gs.combat
 	var m: Dictionary = c.monsters[id]
 	m["hp"] = int(m["hp"]) - amount
+	var e: Dictionary = db.combat.enemies.get(m["type"], {})
+	if e.has("escape") and float(m["hp"]) < float(e["escape"]["below"]) * float(e["hp"]):
+		c.lines.append(e["escape"]["line"])
+		var fled: bool = m["state"] != CombatState.ALLY
+		c.monsters.erase(id)
+		if c.has_fight() and fled:
+			c.fight["routed"] += 1
+		return false
 	if int(m["hp"]) > 0:
 		return false
 	c.lines.append("The %s dies." % name_of(db, m))

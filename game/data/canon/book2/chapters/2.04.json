@@ -1,0 +1,26 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.04",
+	"events": {
+		"b2.pisces_restores_the_call_log": {
+			"tier": 2,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"mage": {"prefer": ["pisces"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["pisces", "ryoka_griffin"], "flags": ["earthers.magic_call_held"], "not_flags": []},
+			"depends_on": ["b2.earthers_meet_in_a_magic_call", "b2.erin_leads_the_rescue_into_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pisces.saw_the_call_log", "pisces.knows_ryoka_is_different", "ryoka.knows_flos_returned"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.04", "confidence": "confirmed", "note": "In the Ruins before the climb out. Wistram's odds: Flos has a 30% chance to conquer the world. Ryoka also photographs the wall that names Skinner."},
+			"summary": "Pisces senses Wistram magic clinging to Ryoka's iPhone and calls the chat log back into the air. They read what came after she left: Flos of Reim naming himself. Pisces says Wistram's great mages rank the King of Destruction eighth among the likeliest ends of the world."
+		}
+	},
+	"system": []
+}

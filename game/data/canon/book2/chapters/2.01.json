@@ -1,0 +1,57 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.01",
+	"events": {
+		"b2.klbkch_toasts_the_survivors": {
+			"tier": 2,
+			"window": {"earliest": 41, "latest": 41, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"prognugator": {"prefer": ["klbkch"], "fallback_tags": []},
+				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"worker": {"prefer": ["pawn"], "fallback_tags": [], "optional": true},
+				"second": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": ["klbkch.reborn"], "not_flags": []},
+			"depends_on": ["b1.klbkch_is_reborn"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_hive.brews_rxlvn", "zevara.saw_the_inn", "zevara.means_to_deal_with_goblins", "selys.became_a_warrior", "pawn.no_longer_a_worker", "ksmvr.prognugator_again"],
+				"clear_flags": ["ksmvr.deposed"]
+			},
+			"news": "The Free Antinium poured a new black drink at the inn on the hill. Half of the guests woke far from their beds; the Watch Captain was found asleep in a gutter.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.01", "confidence": "confirmed", "note": "Night of day 41 into day 42. Zevara came to see the Human who killed Skinner. Pawn stays under Klbkch and offers to teach Ksmvr chess."},
+			"summary": "Liscor's survivors crowd into the inn: Klbkch, Relc, Zevara, Selys, Krshia, Pawn, Ksmvr, Pisces and Rags's Goblins. Klbkch, alive again, hands Ksmvr back the Prognugator's post and toasts with the Hive's new drink, rxlvn. It drugs everyone but Erin and the Antinium."
+		},
+		"b2.ceria_calls_pisces_from_the_ruins": {
+			"tier": 2,
+			"window": {"earliest": 41, "latest": 42, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"listener": {"prefer": ["pisces"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["ceria_springwalker", "pisces"], "flags": ["ceria.missing"], "not_flags": []},
+			"depends_on": ["b1.skinner_wakes_in_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ceria.called_for_help", "pisces.knows_ceria_lives"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.01", "confidence": "confirmed", "note": "Past midnight, after the party. The message said only: Ruins, second floor, inside (2.03)."},
+			"summary": "In the small hours Pisces blasts open the bolted inn door with a spell, pale as chalk. A faint message spell from Ceria has reached him: she is alive, starving, somewhere on the second floor of the Ruins. The Horns may not all be dead."
+		}
+	},
+	"system": [
+		{"who": "selys", "kind": "level", "name": "[Warrior]", "level": 4, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Alcohol Immunity]", "level": null, "confidence": "confirmed", "note": "Named [Immunity: Alcohol] in 1.63."}
+	]
+}

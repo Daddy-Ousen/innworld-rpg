@@ -79,6 +79,7 @@
 		},
 		"krshia": {
 			"confidence": "guess",
+			"combat": {"hp": 40, "accuracy": 7, "evasion": 4, "armor": 1, "damage": [3, 7]},
 			"goals": [
 				{"goal": "trade", "base": 2, "hours": [[7, 19, 1]],
 					"target": {"area": "liscor_market", "pos": [10, 5]}},
@@ -171,6 +172,14 @@
 			"goals": [
 				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "target": {"area": "inn_interior", "pos": [14, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"ksmvr": {
+			"confidence": "guess",
+			"notes": "The Prognugator of Liscor's Hive (1.46). He stays in the Hive (off the map); a canon stage brings him out to fight Gazi on day 42 (2.05). Combat block (M8.1): four arms, two swords and two daggers.",
+			"combat": {"hp": 50, "accuracy": 7, "evasion": 5, "armor": 3, "damage": [4, 8]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
 		"bird": {

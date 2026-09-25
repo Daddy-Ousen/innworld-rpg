@@ -4,6 +4,8 @@ Usage (PowerShell, from repo root):
     python tools/validate_data.py game/data/canon/book1
     python tools/validate_data.py game/data/canon/book1 --raw canon/raw/book1
     python tools/validate_data.py game/data/canon/book1 --actions game/data/actions.json
+    python tools/validate_data.py game/data/canon/book2        (book1 ids are known)
+    python tools/validate_data.py --all game/data/canon        (every book<N> folder)
 
 Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
     <dir>/npcs.json                {"schema_version": 1, "npcs": {id: npc}}
@@ -16,6 +18,10 @@ book text (no run of COPY_RUN words in common with the chapter).
 Default for --raw: canon/raw/book<N> next to the repo root, if it exists.
 --actions is the game's actions.json; hook "did" action ids must exist in it.
 Default: <dir>/../../actions.json, if it exists.
+Earlier books (sibling folders book1 .. book<N-1>) are loaded as known ids:
+a book<N> event may use their NPCs, locations and events, but may not
+redefine them (CanonDb merges all books into one set of ids).
+--no-earlier checks the folder alone.
 
 Exit code 0 = valid, 1 = errors. Stdlib only.
 """
@@ -449,6 +455,45 @@ def _book_from_dir(d: Path) -> int | None:
     return int(m.group(1)) if m else None
 
 
+class Known:
+    """Ids (and event windows) from earlier books. Loaded, not checked."""
+
+    def __init__(self) -> None:
+        self.npcs: dict[str, str] = {}        # id -> book folder name
+        self.locations: dict[str, str] = {}
+        self.events: dict[str, tuple[str, dict]] = {}  # id -> (where, event)
+
+
+def _read_quiet(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
+def load_known(canon_root: str | Path, book: int) -> Known:
+    """Reads book1 .. book<book-1> under canon_root (missing folders are skipped)."""
+    k = Known()
+    root = Path(canon_root)
+    for n in range(1, book):
+        d = root / f"book{n}"
+        if not d.is_dir():
+            continue
+        for fname, key, store in (("npcs.json", "npcs", k.npcs), ("locations.json", "locations", k.locations)):
+            doc = _read_quiet(d / fname)
+            if isinstance(doc, dict) and isinstance(doc.get(key), dict):
+                for rid in doc[key]:
+                    store[rid] = d.name
+        ch_dir = d / "chapters"
+        for f in sorted(ch_dir.glob("*.json")) if ch_dir.is_dir() else []:
+            doc = _read_quiet(f)
+            if isinstance(doc, dict) and isinstance(doc.get("events"), dict):
+                for eid, ev in doc["events"].items():
+                    if isinstance(ev, dict):
+                        k.events[eid] = (f"{d.name}/chapters/{f.name}", ev)
+    return k
+
+
 def _has_cycle(graph: dict[str, list[str]]) -> list[str] | None:
     WHITE, GREY, BLACK = 0, 1, 2
     color = {k: WHITE for k in graph}
@@ -479,13 +524,16 @@ def _has_cycle(graph: dict[str, list[str]]) -> list[str] | None:
 
 
 def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
-                 actions: set[str] | None = None) -> Report:
+                 actions: set[str] | None = None, known: Known | None = None) -> Report:
+    """known: ids from earlier books (see load_known); None = this folder alone."""
     r = Report()
     d = Path(data_dir)
     book = _book_from_dir(d)
     if book is None:
         r.err(str(d), "folder name must end in book<N>")
         return r
+    if known is None:
+        known = Known()
 
     chapters: set[str] | None = None
     raw_text: dict[str, str] = {}
@@ -518,11 +566,15 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                 where = f"{fname}:{key}.{rid}"
                 if not RE_ID.match(rid):
                     r.err(where, "id must be lowercase snake_case")
+                earlier = (known.npcs if key == "npcs" else known.locations).get(rid)
+                if earlier:
+                    r.err(where, f"duplicate id (also in {earlier})")
                 checker(r, where, rec, book, chapters)
                 store[rid] = rec
 
+    all_locations = set(locations) | set(known.locations)
     for lid, loc in locations.items():
-        if isinstance(loc, dict) and loc.get("parent") not in (None, *locations.keys()):
+        if isinstance(loc, dict) and loc.get("parent") not in (None, *all_locations):
             r.err(f"locations.json:locations.{lid}.parent", f"unknown location '{loc['parent']}'")
     parent_graph = {lid: [loc["parent"]] for lid, loc in locations.items()
                     if isinstance(loc, dict) and isinstance(loc.get("parent"), str)}
@@ -530,7 +582,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     if cyc:
         r.err("locations.json", f"parent cycle: {' -> '.join(cyc)}")
     for nid, npc in npcs.items():
-        if isinstance(npc, dict) and npc.get("home") not in (None, *locations.keys()):
+        if isinstance(npc, dict) and npc.get("home") not in (None, *all_locations):
             r.err(f"npcs.json:npcs.{nid}.home", f"unknown location '{npc['home']}'")
 
     # --- chapter files
@@ -563,6 +615,8 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                     r.err(where, f"event id must look like 'b{book}.snake_case'")
                 if eid in events:
                     r.err(where, f"duplicate event id (also in {events[eid][0]})")
+                elif eid in known.events:
+                    r.err(where, f"duplicate event id (also in {known.events[eid][0]})")
                 check_event(r, where, ev, book, chapters)
                 if isinstance(ev, dict) and isinstance(ev.get("canon_ref"), dict) and ev["canon_ref"].get("chapter") != ch:
                     r.err(f"{where}.canon_ref.chapter", f"must match the file's chapter '{ch}'")
@@ -577,7 +631,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
 
     # --- cross references
     def need_npc(where: str, nid: str) -> None:
-        if nid not in npcs:
+        if nid not in npcs and nid not in known.npcs:
             r.err(where, f"unknown npc '{nid}'")
 
     def effect_npcs(where: str, fx, player_ok: bool = False) -> None:
@@ -600,7 +654,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         if not isinstance(ev, dict):
             continue
         w = f"{fn}:events.{eid}"
-        if isinstance(ev.get("location"), str) and ev["location"] not in locations:
+        if isinstance(ev.get("location"), str) and ev["location"] not in all_locations:
             r.err(f"{w}.location", f"unknown location '{ev['location']}'")
         for rname, role in (ev.get("roles") or {}).items():
             if isinstance(role, dict):
@@ -635,10 +689,10 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
         for dep in deps:
             if dep == eid:
                 r.err(f"{w}.depends_on", "event depends on itself")
-            elif dep not in events:
+            elif dep not in events and dep not in known.events:
                 r.err(f"{w}.depends_on", f"unknown event '{dep}'")
             else:
-                dw, ew = events[dep][1].get("window"), ev.get("window")
+                dw, ew = (events.get(dep) or known.events[dep])[1].get("window"), ev.get("window")
                 if (isinstance(dw, dict) and isinstance(ew, dict)
                         and _int(dw.get("earliest")) and _int(ew.get("latest"))
                         and dw["earliest"] > ew["latest"]):
@@ -648,7 +702,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                 target = step[len("mutate:"):]
                 if target == eid:
                     r.err(mw, "event mutates into itself")
-                elif target not in events:
+                elif target not in events and target not in known.events:
                     r.err(mw, f"unknown mutate target '{target}'")
         if "delay" in (ev.get("on_fail") or []) and "delay_limit" not in ev:
             r.warn(w, "uses 'delay' without delay_limit; the director default applies")
@@ -701,39 +755,60 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     return r
 
 
-def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("data_dir", help="e.g. game/data/canon/book1")
-    ap.add_argument("--raw", help="extractor output, e.g. canon/raw/book1 (default: auto)")
-    ap.add_argument("--no-raw", action="store_true", help="skip chapter-id and copy checks")
-    ap.add_argument("--actions", help="the game's actions.json (default: <dir>/../../actions.json)")
-    args = ap.parse_args(argv)
+def _book_dirs(canon_root: Path) -> list[Path]:
+    dirs = [p for p in canon_root.iterdir() if p.is_dir() and _book_from_dir(p) is not None]
+    return sorted(dirs, key=lambda p: _book_from_dir(p))
 
-    actions = None
-    act_path = Path(args.actions) if args.actions else Path(args.data_dir).parent.parent / "actions.json"
-    if act_path.exists():
-        doc = json.loads(act_path.read_text(encoding="utf-8"))
-        actions = set(doc.get("actions", doc))
 
+def _run_one(data_dir: Path, args, actions, act_path) -> int:
     raw = None
+    book = _book_from_dir(data_dir)
     if not args.no_raw:
-        if args.raw:
+        if args.raw and not args.all:
             raw = args.raw
         else:
-            book = _book_from_dir(Path(args.data_dir))
             guess = Path(__file__).resolve().parent.parent / "canon" / "raw" / f"book{book}"
             if book is not None and (guess / "index.json").exists():
                 raw = guess
 
-    rep = validate_dir(args.data_dir, raw, actions)
+    known = None if args.no_earlier or book is None else load_known(data_dir.parent, book)
+    rep = validate_dir(data_dir, raw, actions, known)
     for w in rep.warnings:
         print(f"WARN  {w}")
     for e in rep.errors:
         print(f"ERROR {e}")
     mode = f"raw={raw}" if raw else "no raw text (chapter-id and copy checks skipped)"
     mode += f", actions={act_path}" if actions is not None else ", no actions.json (hook actions not checked)"
-    print(f"{len(rep.errors)} errors, {len(rep.warnings)} warnings ({mode})")
-    return 1 if rep.errors else 0
+    if known is not None and book and book > 1:
+        mode += f", earlier books: {len(known.npcs)} npcs, {len(known.locations)} locations, {len(known.events)} events"
+    prefix = f"{data_dir.name}: " if args.all else ""
+    print(f"{prefix}{len(rep.errors)} errors, {len(rep.warnings)} warnings ({mode})")
+    return len(rep.errors)
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("data_dir", help="e.g. game/data/canon/book1 (with --all: game/data/canon)")
+    ap.add_argument("--raw", help="extractor output, e.g. canon/raw/book1 (default: auto)")
+    ap.add_argument("--no-raw", action="store_true", help="skip chapter-id and copy checks")
+    ap.add_argument("--actions", help="the game's actions.json (default: <dir>/../../actions.json)")
+    ap.add_argument("--no-earlier", action="store_true", help="do not load earlier books as known ids")
+    ap.add_argument("--all", action="store_true", help="data_dir is the canon root; check every book<N> folder")
+    args = ap.parse_args(argv)
+
+    data_dir = Path(args.data_dir)
+    dirs = _book_dirs(data_dir) if args.all else [data_dir]
+    base = data_dir if args.all else data_dir.parent
+    actions = None
+    act_path = Path(args.actions) if args.actions else base.parent / "actions.json"
+    if act_path.exists():
+        doc = json.loads(act_path.read_text(encoding="utf-8"))
+        actions = set(doc.get("actions", doc))
+    if args.all and not dirs:
+        print(f"ERROR {data_dir}: no book<N> folders")
+        return 1
+    errors = sum(_run_one(d, args, actions, act_path) for d in dirs)
+    return 1 if errors else 0
 
 
 if __name__ == "__main__":

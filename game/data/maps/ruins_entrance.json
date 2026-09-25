@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"id": "ruins_entrance",
+	"name": "Outside the Ruins",
+	"location": "liscor_dungeon",
+	"confidence": "guess",
+	"note": "Design map (M8.1). The stone doors in a hillside (1.23A), and after the siege a palisade, a ditch and twenty guards at the entrance (2.02), are canon; the layout and the three-hour walk from the Floodplains are guesses. The stage of b2.gazi_attacks_outside_the_ruins happens here on day 42.",
+	"zones": {},
+	"exits": [
+		{"at": [0, 11, 1, 2], "to": "floodplains_south", "arrive": [30, 11], "minutes": 180}
+	],
+	"objects": [
+		{"id": "ruins_doors", "at": [15, 3], "name": "Great stone doors", "actions": [], "solid": true},
+		{"id": "watch_brazier", "at": [13, 9], "name": "Watch brazier", "actions": ["keep_watch"], "solid": true},
+		{"id": "loose_stones", "at": [20, 13], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "H": "wood_wall"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"..T..^^^^^^^^^^^^^^^^^^^^^^..T..",
+		"......^^^^^^^^^::^^^^^^^^^......",
+		"..........H::::::::::H..........",
+		"..,,,.....H::::::::::H.....,,,..",
+		"..,,,.....H::::::::::H.....,,,..",
+		"..........H::::::::::H..........",
+		"..........HHHHH::HHHHH..........",
+		"...............::...............",
+		"......T........::........T......",
+		"::::::::::::::::::..............",
+		"::::::::::::::::::..............",
+		"...........................,,,..",
+		"..,,,,.....................,,,..",
+		"..,,,,......^...................",
+		"............................T...",
+		".....T..........................",
+		"..................,,,,..........",
+		"..................,,,,....^.....",
+		"................................",
+		"...T.......,,,,.................",
+		"...........,,,,..........T......",
+		"................................"
+	]
+}
