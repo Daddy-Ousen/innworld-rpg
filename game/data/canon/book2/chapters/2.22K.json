@@ -1,0 +1,61 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.22K",
+	"events": {
+		"b2.gazi_returns_to_reim": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "reim",
+			"roles": {"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": []}, "king": {"prefer": ["flos_reimarch"], "fallback_tags": []}},
+			"requires": {"alive": ["gazi_pathseeker", "flos_reimarch"], "flags": ["gazi.gone_to_reim"], "not_flags": []},
+			"depends_on": ["b2.gazi_attacks_outside_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["gazi.returned_to_reim"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "confirmed", "note": "Remote thread on Chandrar; day number reuses the nearest Liscor day as a rough placeholder, not a confirmed sync (as with Niers Astoragon's Baleros scenes)."},
+			"summary": "Gazi returns through her portal to King Flos's court in Reim, part of a kingdom just waking after twenty-two idle years of grief."
+		},
+		"b2.mars_and_takhatres_return_to_reim": {
+			"tier": 2,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "reim",
+			"roles": {"illusionist": {"prefer": ["mars"], "fallback_tags": []}, "skylord": {"prefer": ["takhatres"], "fallback_tags": []}},
+			"requires": {"alive": ["mars", "takhatres"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["reim.two_more_of_seven_returned"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "likely"},
+			"summary": "Two more of Flos's Seven, Mars the Illusionist and Takhatres the Garuda, Lord of the Skies, have also made their way back to Reim."
+		},
+		"b2.gazi_reveals_erins_immortal_moment": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "reim",
+			"roles": {"adventurer": {"prefer": ["gazi_pathseeker"], "fallback_tags": []}, "king": {"prefer": ["flos_reimarch"], "fallback_tags": []}},
+			"requires": {"alive": ["gazi_pathseeker", "flos_reimarch"], "flags": ["gazi.returned_to_reim"], "not_flags": []},
+			"depends_on": ["b2.gazi_returns_to_reim"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["flos.knows_of_erin_solstice", "flos.knows_erin_has_immortal_moment"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "confirmed"},
+			"summary": "Gazi recounts her stay at the Wandering Inn to the war council, revealing that innkeeper Erin Solstice has a unique skill, [Immortal Moment], and that Erin herself put out Gazi's eye."
+		},
+		"b2.empire_of_sands_sends_drevishs_head": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "reim",
+			"roles": {"king": {"prefer": ["flos_reimarch"], "fallback_tags": []}},
+			"requires": {"alive": ["flos_reimarch"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"kill": ["drevish"], "set_flags": ["reim.at_war_with_empire_of_sands"]},
+			"news": "The Empire of Sands sent King Flos Reimarch of Reim the severed, ice-preserved head of Drevish the Architect, one of his Seven. Flos has declared open war.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "confirmed"},
+			"summary": "The rising Empire of Sands sends Flos the severed, ice-preserved head of his ally Drevish the Architect. Flos declares open war on the Empire."
+		}
+	},
+	"system": []
+}

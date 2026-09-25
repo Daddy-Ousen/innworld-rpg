@@ -1,0 +1,73 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.24T",
+	"events": {
+		"b2.toren_sneaks_off_to_hunt": {
+			"tier": 2,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.resents_being_overridden"], "not_flags": []},
+			"depends_on": ["b2.toren_begins_resenting_uselessness"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.left_to_hunt_alone"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "confirmed"},
+			"summary": "Toren sneaks away from the inn, using his stealth skill to slip past Erin's notice, and heads south to hunt monsters toward the Blood Fields and level up on his own."
+		},
+		"b2.toren_kills_corusdeer_and_snow_golem": {
+			"tier": 2,
+			"window": {"earliest": 50, "latest": 50, "confidence": "guess"},
+			"location": "blood_fields",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.left_to_hunt_alone"], "not_flags": []},
+			"depends_on": ["b2.toren_sneaks_off_to_hunt"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.level_16_skeleton_warrior"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "confirmed"},
+			"summary": "Toren fights and kills a Corusdeer and an animated Snow Golem in the same encounter, leveling to Skeleton Warrior 16 and gaining [Even Footing]."
+		},
+		"b2.toren_hunting_montage": {
+			"tier": 2,
+			"window": {"earliest": 50, "latest": 53, "confidence": "guess"},
+			"location": "blood_fields",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.level_16_skeleton_warrior"], "not_flags": []},
+			"depends_on": ["b2.toren_kills_corusdeer_and_snow_golem"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.survived_corusdeer_herd"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "confirmed"},
+			"summary": "Over several days, Toren kills goblins, a wolverine and a second Corusdeer, and narrowly escapes being trampled by a stampeding Corusdeer herd using a [Terror] gem."
+		},
+		"b2.toren_fights_griffon_hunt_scout": {
+			"tier": 1,
+			"window": {"earliest": 53, "latest": 53, "confidence": "guess"},
+			"location": "blood_fields",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "archer": {"prefer": ["halrac"], "fallback_tags": []}, "summoner": {"prefer": ["revi"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["ulrien"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["toren", "halrac"], "flags": ["toren.survived_corusdeer_herd"], "not_flags": []},
+			"depends_on": ["b2.toren_hunting_montage"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.fought_griffon_hunt", "toren.level_20_skeleton_knight"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "confirmed", "note": "Remote encounter, not near the player's usual map; no stage. Kelthor is a one-off summoned construct, not modelled as a persistent NPC or enemy."},
+			"summary": "The Gold-rank team Griffon Hunt, scouting the Liscor dungeon entrance, tests Toren with Revi's phantom construct Kelthor. Toren kills it, and Halrac shoots Toren 'dead' at range, not realizing he simply gets back up, leveling him to Skeleton Knight 20 with looted skills and armor."
+		},
+		"b2.toren_returns_finds_gnoll_siege": {
+			"tier": 1,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.fought_griffon_hunt"], "not_flags": []},
+			"depends_on": ["b2.toren_fights_griffon_hunt_scout", "b2.brunkr_leads_gnoll_warband_to_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.returned_to_gnoll_siege"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "confirmed", "note": "Ends on a cliffhanger, continued in 2.25/2.26."},
+			"summary": "Toren returns from his weeklong hunt to find the inn under a surprise Gnoll assault, and charges straight into the fight."
+		}
+	},
+	"system": []
+}

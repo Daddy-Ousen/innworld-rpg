@@ -97,7 +97,12 @@
 			"canon_ref": {"book": 2, "chapter": "2.05", "confidence": "confirmed", "note": "Shopkeepers, artisans and a tavern owner of Krshia's tribe with great war bows, out for blood. Only a stage helper on the player's side (M8.1), never hostile, never in a spawn. Helpers fight in melee; bows are not modelled."},
 			"tags": ["gnoll"], "color": "#9a7b52", "danger": 0.4, "behaviour": "pack",
 			"hp": 16, "armor": 1, "accuracy": 5, "evasion": 3, "damage": [2, 4], "act_seconds": 6,
-			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": []}
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": []},
+		"silverfang_gnoll_warrior": {"name": "Silverfang Gnoll warrior", "confidence": "guess",
+			"canon_ref": {"book": 2, "chapter": "2.26", "confidence": "confirmed", "note": "Armed Silverfang Gnoll warriors of Brunkr's war party, sword and shield. Only in the M8.3 inn-battle canon stage, never in a spawn."},
+			"tags": ["gnoll", "silverfang_tribe"], "color": "#6b5a3f", "danger": 0.7, "behaviour": "pack",
+			"hp": 26, "armor": 2, "accuracy": 6, "evasion": 4, "damage": [3, 6], "act_seconds": 6,
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.3, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

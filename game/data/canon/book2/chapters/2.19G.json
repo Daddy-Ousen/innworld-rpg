@@ -1,0 +1,91 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.19G",
+	"events": {
+		"b2.rags_tribe_takes_armor_dungeon": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "goblin_mountain_lair",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_found_mountain_dungeon"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed"},
+			"summary": "Rags' tribe defeats an animated, enchanted suit of armor guarding a mountain dungeon entrance, using crossbows and explosive boom-bark, without losing a single goblin."
+		},
+		"b2.toren_and_rags_learn_to_sign": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "goblin_mountain_lair",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["toren", "rags"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.rags_tribe_takes_armor_dungeon"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.can_talk_with_toren"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed", "note": "Rags reasons \"the dead speak all tongues\"."},
+			"summary": "Rags discovers Toren can understand goblin speech, and the two work out a rough sign system between a mute skeleton and a goblin."
+		},
+		"b2.rags_tribe_dungeon_trap_kills_six": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "goblin_mountain_lair",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": ["rags.tribe_found_mountain_dungeon"], "not_flags": []},
+			"depends_on": ["b2.rags_tribe_takes_armor_dungeon"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_lost_six_to_trap", "rags.tribe_has_cursed_pendant"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed"},
+			"summary": "Exploring a golem-guarded corridor deeper in, a trap kills six of Rags' goblins; the survivors flee with a cursed pendant that melts a bat that tries to wear it."
+		},
+		"b2.rags_tribe_seals_mountain_lair": {
+			"tier": 2,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "goblin_mountain_lair",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": ["rags.tribe_lost_six_to_trap"], "not_flags": []},
+			"depends_on": ["b2.rags_tribe_dungeon_trap_kills_six"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_settled_mountain_lair"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed"},
+			"summary": "Rags has the tribe wall off the dangerous corridor with rubble and settles her tribe at the dungeon's entrance rather than push further in."
+		},
+		"b2.relc_beats_rags_at_the_inn": {
+			"tier": 1,
+			"window": {"earliest": 47, "latest": 47, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"spearman": {"prefer": ["relc"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "leader": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["relc", "erin_solstice", "rags"], "flags": ["rags.tribe_settled_mountain_lair"], "not_flags": []},
+			"depends_on": ["b2.rags_tribe_seals_mountain_lair"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["relc.beat_rags_publicly", "erin.stood_up_to_relc"],
+				"relationship": [{"from": "erin_solstice", "to": "rags", "delta": 1}, {"from": "relc", "to": "rags", "delta": -2}]
+			},
+			"news": "Watch Sergeant Relc beat the Goblin Rags in the yard of the Wandering Inn and swore to kill her tribe on sight, until innkeeper Erin Solstice stepped between them.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed", "note": "Over the chess incident; a Frost Faerie chases Relc off in exchange for a favor (paid back in 2.20/2.21)."},
+			"summary": "Relc corners Rags at the inn over the chess incident, beats her, and threatens her whole tribe. Erin steps between them, and a Frost Faerie drives Relc off in return for a favor."
+		},
+		"b2.rags_ambushes_jawbreaker_chief": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "jawbreaker_camp",
+			"roles": {"leader": {"prefer": ["rags"], "fallback_tags": []}, "victim": {"prefer": ["rockgaw"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "rockgaw"], "flags": ["relc.beat_rags_publicly"], "not_flags": []},
+			"depends_on": ["b2.relc_beats_rags_at_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"kill": ["rockgaw"], "set_flags": ["rags.conquered_jawbreaker_tribe"]},
+			"news": "Word from the north: the goblin Rags has moved her tribe again and taken over the small Jawbreaker Tribe.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.19G", "confidence": "confirmed"},
+			"summary": "Rather than risk the Watch or the Red Fang, Rags decides to move her tribe north and swallow the small Jawbreaker Tribe, ambushing and killing its Hob chief, Rockgaw."
+		}
+	},
+	"system": []
+}

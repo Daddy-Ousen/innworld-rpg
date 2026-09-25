@@ -1,0 +1,75 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.21",
+	"events": {
+		"b2.erin_has_symbolic_fey_dream": {
+			"tier": 2,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.had_fey_dream"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.21", "confidence": "confirmed"},
+			"summary": "Erin dreams a symbolic Arthurian scene - a coffin, a sword in stone, a fey 'lady' - and wakes to find a Frost Faerie has eaten all her sugar, claiming the dream gave permission."
+		},
+		"b2.erin_prepares_faerie_banquet": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.had_fey_dream"], "not_flags": []},
+			"depends_on": ["b2.erin_has_symbolic_fey_dream", "b2.frost_fairy_swarm_torments_ceria"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.preparing_faerie_banquet"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.21", "confidence": "confirmed"},
+			"summary": "Determined to win the Frost Faeries' favor, Erin spends the day gathering first-milk, moonlit sugar-snow, spider venom, mushrooms and flowers for an elaborate ritual banquet, helped by Ceria and Toren."
+		},
+		"b2.lism_blames_humans_for_krshias_stall": {
+			"tier": 2,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {"agitator": {"prefer": ["lism"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["lism", "erin_solstice"], "flags": ["krshia.stall_destroyed"], "not_flags": []},
+			"depends_on": ["b2.thief_caught_stealing_in_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lism.publicly_rebuked_by_erin"], "relationship": [{"from": "lism", "to": "erin_solstice", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.21", "confidence": "confirmed"},
+			"summary": "Drake agitator Lism publicly blames all Humans for the destroyed stall; Erin rebukes him in front of a crowd of onlookers."
+		},
+		"b2.frost_faeries_accept_the_banquet": {
+			"tier": 1,
+			"window": {"earliest": 48, "latest": 48, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.preparing_faerie_banquet"], "not_flags": []},
+			"depends_on": ["b2.erin_prepares_faerie_banquet"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.level_up_innkeeper", "erin.class_skill_inns_aura", "erin.class_skill_wondrous_fare", "wandering_inn.paid_in_faerie_gold"]},
+			"news": "The Winter Sprites came down to the Wandering Inn in the hundreds last night for a feast innkeeper Erin Solstice laid out for them, and paid her in gold.",
+			"stage": {
+				"area": "inn_hill",
+				"hours": [19, 24],
+				"kind": "scene",
+				"npcs": [
+					{"npc": "ceria_springwalker", "pos": [17, 14]},
+					{"npc": "toren", "pos": [19, 14]}
+				],
+				"line": "Hundreds of tiny cold lights drop out of the dark sky onto the hill, and the grass turns to hoarfrost lace wherever they land.",
+				"note": "M8.3: a friendly gathering, not a fight, like the M8.2 concert scene. The Frost Faeries themselves are the Winter spawn system (M8.W), not npc_behaviour entries, so they are not walkable; only Ceria and Toren, who helped prepare, are on the map."
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.21", "confidence": "confirmed", "note": "About a hundred Frost Faeries attend. The 'gold' is faerie gold; it turns out to be flowers the next morning (2.23)."},
+			"summary": "Roughly a hundred Frost Faeries descend on the inn that night, formally accept Erin's banquet, and pay her in a mountain of gleaming gold. She gains four levels and two new skills, [Inn's Aura] and [Wondrous Fare]."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Inn's Aura]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Wondrous Fare]", "level": null, "confidence": "confirmed"}
+	]
+}

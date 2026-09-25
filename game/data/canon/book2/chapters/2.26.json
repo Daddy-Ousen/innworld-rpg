@@ -1,0 +1,116 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.26",
+	"events": {
+		"b2.selys_tries_warn_krshia_blocked": {
+			"tier": 2,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {"clerk": {"prefer": ["selys"], "fallback_tags": []}, "merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "leader": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["selys"], "flags": ["gnoll.silverfang_warband_attacks_inn"], "not_flags": []},
+			"depends_on": ["b2.brunkr_leads_gnoll_warband_to_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["selys.tried_to_warn_krshia", "halfseekers.forced_past_blockade"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.26", "confidence": "confirmed"},
+			"summary": "Selys learns the Silverfang war party is marching on the inn and tries to warn Krshia, but is blocked in the Guild. A demihuman adventuring team, later known as the Halfseekers, forces past the blockade to help."
+		},
+		"b2.battle_at_the_wandering_inn": {
+			"tier": 1,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"warrior": {"prefer": ["brunkr"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"mage2": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"leader": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "brunkr"], "flags": ["gnoll.silverfang_warband_attacks_inn"], "not_flags": []},
+			"depends_on": ["b2.brunkr_leads_gnoll_warband_to_inn", "b2.selys_tries_warn_krshia_blocked", "b2.toren_returns_finds_gnoll_siege"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.gnoll_battle_happened",
+					"erin.unlocks_minotaur_punch",
+					"toren.self_repaired_after_death",
+					"griffon_hunt.joined_the_brawl_by_mistake",
+					"halfseekers.deescalated_fight",
+					"klbkch.arrested_everyone",
+					"krshia.disciplines_brunkr"
+				],
+				"clear_flags": ["gnoll.silverfang_warband_attacks_inn"],
+				"relationship": [{"from": "krshia", "to": "erin_solstice", "delta": 2}, {"from": "relc", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "A brawl broke out at the Wandering Inn: Silverfang Gnolls, the Watch and Griffon Hunt traded blows before the Halfseekers stepped in. Klbkch arrested everyone; Krshia hauled off her kinsman Brunkr.",
+			"stage": {
+				"area": "inn_hill",
+				"hours": [17, 22],
+				"when_flags": ["gnoll.silverfang_warband_attacks_inn"],
+				"foes": [
+					{"enemy": "silverfang_gnoll_warrior", "pos": [11, 15]},
+					{"enemy": "silverfang_gnoll_warrior", "pos": [13, 16]},
+					{"enemy": "silverfang_gnoll_warrior", "pos": [21, 15]},
+					{"enemy": "silverfang_gnoll_warrior", "pos": [23, 15]},
+					{"enemy": "silverfang_gnoll_warrior", "pos": [17, 16]}
+				],
+				"line": "A tall, armed Gnoll grabs Erin's wrist in the yard, and more of his band spread out behind him in the snow.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [17, 12],
+						"allies": ["erin_solstice", "toren", "ceria_springwalker", "pisces"],
+						"helpers": [],
+						"line": "Erin twists free and throws a punch; Toren wades in beside her, and Ceria's ice spikes crack through the dark."
+					},
+					{
+						"after_seconds": 90,
+						"from": [3, 13],
+						"allies": ["relc", "klbkch", "zevara"],
+						"helpers": ["liscor_guardsman", "liscor_guardsman"],
+						"line": "The City Watch pours in from the road, Relc roaring ahead of Zevara and Klbkch."
+					}
+				],
+				"note": "M8.3: Griffon Hunt and the Halfseekers are real canon but not modelled as separate sides - the engine only supports two teams (as with Zevara in the M8.1 Gazi stage). Their roles live in effects, news and summary. Brunkr survives."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_gnoll_warband",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["silverfang_gnoll_warrior"]}}],
+					"days": [55, 55],
+					"then": "change",
+					"effects": {
+						"set_flags": ["liscor.earther_fought_gnoll_warband"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 3}, {"from": "krshia", "to": "player", "delta": 1}]
+					},
+					"news": "A second Human stood with Erin Solstice against the Silverfang war party at the Wandering Inn."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.26", "confidence": "confirmed"},
+			"summary": "Brunkr's war party attacks the inn; Erin, Toren, Ceria and Pisces fight them off before the Watch arrives. Griffon Hunt wades in, mistaking the chaos for a monster threat, until the Halfseekers force everyone apart. Klbkch arrests the whole brawl to end it, and Krshia hauls Brunkr off in disgrace."
+		},
+		"b2.halfseekers_reveal_species_offer_ceria": {
+			"tier": 1,
+			"window": {"earliest": 55, "latest": 55, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"leader": {"prefer": ["jelaqua"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["jelaqua", "ceria_springwalker"], "flags": ["halfseekers.deescalated_fight"], "not_flags": []},
+			"depends_on": ["b2.battle_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ceria.offered_halfseekers_spot", "erin.fainted_at_jelaqua_reveal"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.26", "confidence": "confirmed"},
+			"summary": "Over a post-battle gathering at the inn, the Halfseekers reveal their true natures - Moore is part-Giant, Seborn a Drowned Man, and Jelaqua a body-swapping Selphid who opens her own chest to prove it, fainting Erin - and offer Ceria a place on their Gold-rank team."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Minotaur Punch]", "level": null, "confidence": "confirmed", "note": "Replaces her unreliable [Power Strike], discovered mid-fight."}
+	]
+}
