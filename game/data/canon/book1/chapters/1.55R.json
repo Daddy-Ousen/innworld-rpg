@@ -18,7 +18,7 @@
 			"effects": {
 				"set_flags": ["ryoka.met_silver_merchant", "ryoka.wants_to_apologize"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.55R", "confidence": "confirmed", "note": "Three or four days out of Esthelm (guess: day 38). Ysara is a Level 34 [Merchant] from a minor northern house with a silver Dragon crest, not an NPC. Her sister is a Silver-rank adventurer and her brother a Gold-rank [Knight]; that she is Yvlon's sister is likely, not stated."},
 			"summary": "A caravan's 'Silver Merchant', Ysara, rides out to stop Ryoka from running into the red grass of the Bloodfields, first with a Skill, then with a kick. They wrestle; Ryoka swings, and Gazi's gauntlet catches her fist. At camp Ysara tells her regrets grow; Ryoka nearly turns back."
 		},
@@ -37,7 +37,7 @@
 				"set_flags": ["gazi.fought_silverfangs", "silverfangs.warriors_fled_north"]
 			},
 			"news": "Travellers from the south say Gazi of Reim fought a band of Silverfang Gnoll warriors by the Bloodfields and chased them north.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.55R", "confidence": "likely", "note": "Chief Warrior Rometh and his seventeen are not NPCs. What starts the fight is not seen. That they are the warriors Krshia expected within the week (1.51) is likely: they are Silverfangs bound for Liscor and speak of Krshia."},
 			"summary": "Eighteen Silverfang warriors bound for Liscor share the merchants' camp. Their leader tells Gazi his tribe seeks the same girl, and that all the Gnoll tribes would hear of it if she fought them. She tells them to go home. Then she beheads one and chases the rest north, laughing."
 		},
@@ -60,7 +60,7 @@
 				"kill": ["toriska"],
 				"relationship": [{"from": "claudeil", "to": "persua", "delta": -3}, {"from": "ryoka_griffin", "to": "persua", "delta": -2}]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.55R", "confidence": "confirmed", "note": "Masked, they hit her with crossbow bolts, knives and cheap wands of stone and ice. Toriska dies on a Watchertree root after Persua pushes her; Persua shoots Claudeil's legs and runs north. The wand is Teriarch's (1.43R); it burns out."},
 			"summary": "Persua's three ambush Ryoka from a ridge: bolts, knives, stone and ice from wands. Bleeding, Ryoka runs into the Bloodfields and sprays white fire from her wand over the sleeping growths, and they wake. Persua shoves Toriska onto a Watchertree root, cripples Claudeil with ice and flees."
 		},
@@ -81,7 +81,7 @@
 				"clear_flags": ["ryoka.geas_to_find_azkerash", "ryoka.bound_for_blood_fields", "ryoka.in_blood_fields"],
 				"relationship": [{"from": "claudeil", "to": "ryoka_griffin", "delta": 2}]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.55R", "confidence": "confirmed", "note": "The letter for Az'kerash is not delivered. Ysara's heirloom blade breaks in a Watchertree root. The merchants go south and keep Claudeil on a truth-stone oath. Ryoka refuses the Skill [Indomitable Will] and the level it brings."},
 			"summary": "Ryoka turns north against the geas; its golden script burns off her skin and she runs free, dodging Watchertree roots. Then she goes back in for the crippled Claudeil while Ysara hacks at a Watchertree until her family sword snaps. The merchants keep Claudeil; Ryoka runs for Liscor."
 		}

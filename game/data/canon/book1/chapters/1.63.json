@@ -18,7 +18,7 @@
 			"effects": {
 				"set_flags": ["erin.grieves_the_workers", "wandering_inn.needs_repairs", "antinium_hive.four_workers_left", "antinium_hive.owes_liscor"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "confirmed", "note": "Dawn of day 40. Of 32 Workers, four live: Bird, Garry, Belgrade and Anand. Liscor lost over two hundred guards and nearly a thousand civilians. Klbkch: the Rite cost him ten levels in every class."},
 			"summary": "At dawn the Antinium burn the dead on a huge pyre. Of the thirty-two Workers who came for Erin, four live. Klbkch tells her the Rite that brought him back cost ten levels and two weeks of his Queen's labour, and cannot bring the others back. Erin lies down in the grass and weeps."
 		},
@@ -35,7 +35,7 @@
 			"effects": {
 				"set_flags": ["toren.thinks_for_himself", "toren.hides_skinners_eye"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "confirmed", "note": "Day 40. The gem holds fear magic; its twin is lost. A red glint flashes in his eyes."},
 			"summary": "Toren is Level 11 now, eight levels up, and for the first time he wonders why he obeys and what Erin is to him. He keeps one of Skinner's red gem eyes, heavy with fear magic, and tars it inside his skull where Erin will not find it."
 		},
@@ -52,7 +52,7 @@
 			"effects": {
 				"set_flags": ["pisces.hoards_undead_remains"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "confirmed", "note": "Day 40. Who 'her' is, he does not say."},
 			"summary": "Pisces drags bodies he saved from the pyres to a dirt cave hidden on the plains, where part of a dead Crypt Lord lies. He means to copy its design, but better and more beautiful, to prove to her that he is different."
 		},
@@ -76,7 +76,7 @@
 				"relationship": [{"from": "princess_thief", "to": "magnolia_reinhart", "delta": -2}]
 			},
 			"news": "Lady Magnolia Reinhart's pink carriage came to Liscor. She left a large sum for the city and its wounded, visited an injured adventurer and went north.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "confirmed", "note": "'Even after a day': day 41 (guess). Yvlon is her distant kin. Tekshia uses the money to pay for wrecked homes and the families of dead guards. Magnolia speaks with Teriarch through a spell."},
 			"summary": "Zevara wants the surviving adventurers to pay; Tekshia shows her Yvlon, scarred and silent. Magnolia's pink carriage rolls past the begging [Princess] without stopping. At the Guild she leaves a large sum for the city and sits with Yvlon, who does not answer. Then she goes north."
 		},
@@ -96,7 +96,7 @@
 				"set_flags": ["ryoka.back_in_liscor", "ryoka.knows_horns_lost", "ryoka.phone_rang", "silverfangs.warriors_dead"],
 				"clear_flags": ["ryoka.bound_for_liscor", "gnolls.warriors_coming", "silverfangs.warriors_fled_north"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "likely", "note": "The day after Skinner died, after two days' run from the Bloodfields (guess: day 41). Who killed the Gnolls is not shown; Gazi, seen watching Ryoka from afar, is likely. End of Book 1: who calls is not said."},
 			"summary": "Near Liscor Ryoka finds the Silverfang warriors dead and stripped, spiders at the bodies. In the city she learns the Horns are gone and sits by the silent Yvlon. She screams on the plains; a Goblin with a knife spares her. At the inn's door she turns away. Then her phone rings."
 		}

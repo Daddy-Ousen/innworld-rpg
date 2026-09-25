@@ -24,7 +24,7 @@
 				"set_flags": ["zevara.breathed_fire", "zevara.called_ksmvr_coward", "selys.killed_undead", "jeiss.bones_broken", "ksmvr.pulled_soldiers_back"],
 				"relationship": [{"from": "zevara", "to": "ksmvr", "delta": -2}, {"from": "tekshia", "to": "selys", "delta": 1}]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Late in the night of day 39. Beilmark, Menolit (a one-tailed army [Veteran]) and Guildmistress Alonna of the Mages' Guild also fight. Menolit and Alonna are not NPCs. Tkrn reports the potions are gone."},
 			"summary": "The Watch falls back street by street to Market Street. Zevara breathes fire until she can barely breathe. Guildmistress Tekshia and Hawk the Hare burn and batter Crypt Lords; Selys kills her first undead. Ksmvr pulls his Soldiers back to guard the Hive, and Zevara calls him a coward to his face."
 		},
@@ -45,7 +45,7 @@
 				"revive": ["klbkch"]
 			},
 			"news": "Before dawn the Antinium poured out of their Hive and drove the dead from Liscor. Senior Guardsman Klbkch, who died defending the inn, led them.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "The Rite of Anastases (1.63): only a Prognugator is worth it; it took the Queen nearly two weeks. Klbkch strikes Ksmvr and sends the Hive out without the Queen's order. The Antinium lose 365 Soldiers and 147 Workers (1.63)."},
 			"summary": "Before dawn the Free Queen finishes the Rite of Anastases and Klbkch lives again, in a new, slimmer two-armed body. He strikes Ksmvr down, and the whole Hive, Soldiers and Workers, floods Liscor's streets and drives the dead back while he leads Soldiers to Erin's inn."
 		},
@@ -274,7 +274,7 @@
 					"news": "The dead attacked the inn on the hill. A Human stood with Erin and the Workers against their skin-clad leader until Goblins killed it."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Last hours of the night of day 39. Toren tears out one of Skinner's red eyes; Pisces's dead turn on Skinner's. Twenty-seven Goblins die. The fire spell is likely [Firefly] (1.45); her sword is bronze that shines like gold."},
 			"summary": "Erin and the last Workers go out to fight. Toren tears out one of Skinner's eyes; Erin cuts into its head and a red worm slithers out of the skin. Klbkch, alive again, drives it off with his Soldiers. Then Rags's Goblins swarm it with blades, acid and fire, and Rags stabs it dead."
 		}

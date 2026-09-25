@@ -20,7 +20,7 @@
 				"set_flags": ["erin.learned_power_strike", "erin.scared_crab_for_horns", "gerial.carries_acid_jar", "erin.has_inner_mana", "ruins_expedition.leave_at_dawn"],
 				"relationship": [{"from": "calruz", "to": "erin_solstice", "delta": 1}]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.56", "confidence": "confirmed", "note": "The day after 1.54 (guess: day 38); the ruins are 'tomorrow'. Ceria tells Erin everyone has some mana, which feeds Toren. Calruz calls her gifted: a Skill on her first day of training."},
 			"summary": "Erin scares a Rock Crab off the Horns' path with seed cores. Calruz spends the day teaching her to punch, kick and block, sparring against Toren. She knocks Toren's head down the hill and learns [Power Strike], then kicks Calruz below the belt. Gerial buys a jar of her acid."
 		},
@@ -41,7 +41,7 @@
 			"effects": {
 				"set_flags": ["olesm.joined_expedition", "ruins_expedition.cleared_by_guild", "liscor.council_hears_reinhart_messenger"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.56", "confidence": "confirmed", "note": "Day 38 (guess). Five teams and extras make over forty Silver-rank adventurers. Cervial's crossbow is Dwarven, from Deríthal-Vel. Pisces turned down Yvlon's offer to join."},
 			"summary": "At the Guild, Selys tells Gerial and Ceria the ruins need no permit, and learns the Human [Messenger] pestering the Council speaks for Magnolia Reinhart; she sends word at once. Cervial shows off a Dwarven crossbow. Olesm, a Level 24 [Tactician], asks to join the expedition and is taken on."
 		}

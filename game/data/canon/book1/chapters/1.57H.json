@@ -18,7 +18,7 @@
 			"effects": {
 				"set_flags": ["pawn.plays_boldly", "antinium_hive.workers_idle"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.57H", "confidence": "confirmed", "note": "Morning of the expedition. Pawn says the Workers have no tasks because they wait for the Queen, and 'it will be tomorrow'. In 1.60 Erin notes he plays with new confidence."},
 			"summary": "Four Workers carry the maimed Pawn to the inn to play chess. On the way they pass the Horns: the Workers have no tasks, Pawn says, because they wait for their Queen to finish her work. He plays boldly, taking chances, and leaves for the city promising to come back tomorrow."
 		},
@@ -41,7 +41,7 @@
 				"clear_flags": ["horns_of_hammerad.enter_ruins_soon"]
 			},
 			"news": "Five Silver-rank adventuring teams, over forty strong, went down into the ruins outside Liscor this morning while a crowd cheered.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.57H", "confidence": "confirmed", "note": "Day 39. Teams: Horns of Hammerad, Silver Spears, Kyrial's Vanguard (Gregor), Flawless Flights (Cervial), Circle of Reneë (Menes); a sixth captain pulled out. The Watch and Bronze-rank teams guard the door. Gregor and Menes are not NPCs."},
 			"summary": "Five Silver-rank teams enter the Ruins of Liscor with Olesm along. Arrows and shields cut down a charge of freshly dead zombies. Deeper lies a crypt: stone slabs for the dead, a broken statue, then sacks of looted gold left on the floor. The scouts never came back. Then the walls open."
 		}
