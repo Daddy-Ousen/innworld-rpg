@@ -179,6 +179,15 @@
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed"},
 			"summary": "Lady Magnolia Reinhart's vast, heavily-warded mansion outside Invrisil, guarded by golems and illusions. Shelters newly-arrived Earth-transplants and is where Erin plays chess with Magnolia and hears her fears of a coming war."
+		},
+		"frenzied_hare": {
+			"name": "The Frenzied Hare",
+			"kind": "building",
+			"parent": "celum",
+			"tags": ["inn", "tavern"],
+			"status": "reviewed",
+			"canon_ref": {"book": 2, "chapter": "2.47", "confidence": "confirmed"},
+			"summary": "A run-down inn in Celum kept by Agnes, a former [Tailor], while her husband and cook lies ill; Erin takes over its kitchen after Toren strands her."
 		}
 	}
 }

@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"id": "celum_frenzied_hare",
+	"name": "Inside the Frenzied Hare",
+	"location": "frenzied_hare",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. A run-down Celum inn kept by Agnes; Erin takes over its kitchen when Toren strands her (2.47). The layout, the room price and the menu are guesses (M8.7).",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "celum_square", "arrive": [14, 4], "minutes": 0}
+	],
+	"objects": [
+		{"id": "hare_bar", "at": [5, 2], "name": "Bar", "actions": ["buy_supplies", "wash_dishes"], "solid": true, "shop": "frenzied_hare"},
+		{"id": "hare_stove", "at": [17, 1], "name": "Kitchen stove", "actions": ["cook_simple_meal", "cook_stew"], "solid": true, "warm": true},
+		{"id": "hare_table_west", "at": [6, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
+		{"id": "hare_table_east", "at": [12, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
+		{"id": "hare_room", "at": [17, 9], "name": "Rented bed", "actions": [], "solid": true, "sleep": true, "price": 6}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHHHHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}

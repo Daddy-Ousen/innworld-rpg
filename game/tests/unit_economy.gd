@@ -182,7 +182,7 @@ func test_work_at_erins_inn_feeds_you_while_she_lives() -> void:
 	Commands.wait(gs, _db, maxi(22 * 60 - gs.clock.minute(), 0) * 60)
 	Commands.sleep(gs, _db)
 	assert_eq(gs.economy.hunger, 0)
-	assert_has(gs.morning, "Erin feeds you after your work at the inn.")
+	assert_has(gs.morning, "You eat at the inn after your work.")
 	gs.world.set_alive("erin_solstice", false)
 	assert_eq(Commands.interact(gs, _db, "broom", "sweep_floor")["error"], "")
 	Commands.wait(gs, _db, maxi(22 * 60 - gs.clock.minute(), 0) * 60)
