@@ -95,6 +95,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			open_use_menu()
 		KEY_Z:
 			sleep()
+		KEY_F:
+			open_bag()
 		KEY_C:
 			sheet.open(Session.gs, Session.db)
 		KEY_J:
@@ -207,9 +209,30 @@ func open_use_menu() -> void:
 		hud.add_lines(["There is nothing to use here."])
 
 
+## The bag (F): eat or drink something you carry.
+func open_bag() -> void:
+	if not menu.open_bag(Session.gs, Session.db):
+		hud.add_lines(["You have nothing to eat or drink. (Coins: %s)" % Economy.format(Session.db,
+				Session.gs.economy.coins)])
+
+
 func use(object_id: String, action_id: String) -> void:
+	var gs := Session.gs
+	var db := Session.db
 	if action_id == Interact.SLEEP:
-		sleep()
+		sleep(object_id)
+		return
+	if action_id.begins_with(Interact.BUY) or action_id.begins_with(Interact.SELL):
+		var buying := action_id.begins_with(Interact.BUY)
+		var good := action_id.substr((Interact.BUY if buying else Interact.SELL).length())
+		var r := Commands.buy(gs, db, object_id, good) if buying else Commands.sell(gs, db, object_id, good)
+		_command_error(r["error"])
+		return
+	if action_id.begins_with(Interact.USE_GOOD):
+		_command_error(Commands.use_good(gs, db, action_id.substr(Interact.USE_GOOD.length())))
+		return
+	if action_id == Interact.RIDE:
+		_command_error(Commands.ride(gs, db, object_id))
 		return
 	if action_id == Interact.TAKE:
 		_command_error(Commands.take(Session.gs, Session.db, object_id))
@@ -227,9 +250,10 @@ func use(object_id: String, action_id: String) -> void:
 
 ## Ends the day (a collapse if the player is past the awake limit, a
 ## knock-out if they are down) and shows the night in the System dialog.
-func sleep() -> void:
-	var night := Commands.sleep(Session.gs, Session.db)
-	if night.is_empty():  # refused: enemies near
+## `bed`: the bed picked in the use menu ("" = where you stand, Z).
+func sleep(bed: String = "") -> void:
+	var night := Commands.sleep(Session.gs, Session.db, bed)
+	if night.is_empty():  # refused: enemies near, outdoors, or no coins for the room
 		hud.add_lines(Session.gs.combat.lines)
 		Session.changed()
 		return
