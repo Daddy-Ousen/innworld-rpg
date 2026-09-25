@@ -1,7 +1,7 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.3 canon batch written and green: chapters 2.19G, 2.20, 2.21, 2.22K, 2.23, 2.24T, 2.25, 2.26, 1.00C, 1.01C, on branch `data/book2-2.19G-2.26` (off `main`, which already has M8.2 merged plus a docs housekeeping commit — progress.md archive split, context-discipline notes in CLAUDE.md).
+- M8.3 canon batch written, tested green, committed, pushed, and opened as [PR #30](https://github.com/Daddy-Ousen/innworld-rpg/pull/30) on branch `data/book2-2.19G-2.26` (off `main`, which already has M8.2 merged plus a docs housekeeping commit — progress.md archive split, context-discipline notes in CLAUDE.md). Chapters: 2.19G, 2.20, 2.21, 2.22K, 2.23, 2.24T, 2.25, 2.26, 1.00C, 1.01C.
 - New book2 NPCs (21): Rockgaw, Lyonette, Brunkr, Halrac, Typhenous, Revi, Ulrien, Jelaqua, Seborn, Moore, Dreshhi, Mars, Takhatres, Trey, Teresa, Drevish, Tom, Richard, Emily, Wilen. (Dropped a duplicate "Orthenon" NPC draft — he already exists in book1.)
 - New locations (5): `goblin_mountain_lair`, `jawbreaker_camp`, `empire_of_sands`, `rhir`, `blighted_lands`.
 - New enemy `silverfang_gnoll_warrior` in `game/data/enemies.json`.
@@ -14,10 +14,9 @@
 - None right now. M8.3 data is written, tested, green — ready to commit and open a PR, same pattern as M8.1/M8.2 (data commit, then a `docs:` commit noting the PR).
 
 ## Next
-1. Commit the M8.3 data (chapters, npcs.json, locations.json, enemies.json, the two test-count bumps, ROADMAP/progress updates) with a `data(book2): ...` message.
-2. Push branch `data/book2-2.19G-2.26`, open a PR, note it in `handoff.md`/`progress.md` with a follow-up `docs:` commit (same pattern as PR #26/#28/#29).
-3. After user review: `data(book2): mark canon 2.19G-2.26 reviewed` commit, ADR entry if any design call needs recording, tag `m8.3-done` on the merge commit.
-4. Then start M8.4 (canon 2.27G-2.38) on a fresh branch off `main`.
+1. Wait for user review of [PR #30](https://github.com/Daddy-Ousen/innworld-rpg/pull/30).
+2. After review/merge: `data(book2): mark canon 2.19G-2.26 reviewed` commit, ADR entry if any design call needs recording, tag `m8.3-done` on the merge commit, sync local `main`.
+3. Then start M8.4 (canon 2.27G-2.38) on a fresh branch off `main`.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
