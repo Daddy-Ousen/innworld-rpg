@@ -262,6 +262,20 @@ func test_a_wave_brings_an_ally_from_another_area_and_a_helper() -> void:
 	assert_eq(gs.combat.in_state(CombatState.ALLY).size(), 1, "the hound")
 
 
+func test_an_ally_brought_in_during_a_long_step_stays_in_the_fight() -> void:
+	_make(_battle([_wave(0, [], {"allies": ["farmer"], "line": "The farmer runs in."})]))
+	ToyCombat.freeze(_db)
+	var gs := ToyNpcs.new_game(_db)
+	gs.player.place("arena", Vector2i(2, 4))
+	Commands.wait(gs, _db, 600)  # longer than rules.npc.jump_seconds: the NPCs jump
+	assert_true(gs.combat.has_fight())
+	assert_eq(ToyNpcs.area(gs, "farmer"), "arena", "the wave's ally stays in the fight")
+	_kill(gs, _foes(gs)[0])
+	Commands.wait(gs, _db, 600)
+	assert_false(gs.combat.has_fight())
+	assert_eq(ToyNpcs.area(gs, "farmer"), "field", "after the fight it goes back to its goal")
+
+
 func test_leaving_the_arena_drops_the_rest_of_the_stage() -> void:
 	_make(_battle())
 	ToyCombat.freeze(_db)

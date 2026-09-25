@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.58H",
+	"events": {
+		"b1.expedition_breaks_the_crypt_ambush": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true},
+				"leader": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"undead": {"prefer": [], "fallback_tags": ["undead"]}
+			},
+			"requires": {"alive": [], "flags": ["ruins_expedition.entered"], "not_flags": []},
+			"depends_on": ["b1.expedition_enters_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ruins_expedition.crypt_lords_slain", "ruins_expedition.six_dead"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.58H", "confidence": "confirmed", "note": "Day 39. Six die in the ambush; Cervial's team loses four in all. Hunt of the Horns is paralysed by a Wight. Gregor and Menes are not NPCs."},
+			"summary": "The dead burst from hidden alcoves, led by four Crypt Lords; six adventurers die. Ceria lights the halls with [Illumination], and Olesm's [Rapid Retreat] gets nine mages clear. Then Calruz, his voice swollen by a spell, dares the dead to come; with Olesm's [Attack Formation] the teams destroy them."
+		}
+	},
+	"system": [
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Illumination]", "level": null, "confidence": "confirmed", "note": "Lights every place she has walked; she also casts [Fireball] and [Flashfire]. Her wand holds [Ice Spike]."},
+		{"who": "olesm", "kind": "skill", "name": "[Rapid Retreat]", "level": null, "confidence": "confirmed"},
+		{"who": "olesm", "kind": "skill", "name": "[Attack Formation]", "level": null, "confidence": "confirmed", "note": "Once a day at his level; the whole force fights lighter and stronger."},
+		{"who": "cervial_dermondy", "kind": "skill", "name": "[Point-Blank Shot]", "level": null, "confidence": "confirmed"},
+		{"who": "calruz", "kind": "skill", "name": "[Hammer Blow]", "level": null, "confidence": "confirmed", "note": "Used without a word to split a Crypt Lord: 'Not every Skill or spell must be shouted.'"}
+	]
+}

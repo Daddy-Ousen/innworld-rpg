@@ -1,0 +1,243 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.60",
+	"events": {
+		"b1.skinner_leads_the_dead_into_liscor": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {
+				"captain": {"prefer": ["zevara"], "fallback_tags": ["captain", "guard"]},
+				"spear": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"watch": {"prefer": ["tkrn"], "fallback_tags": [], "optional": true},
+				"undead": {"prefer": [], "fallback_tags": ["undead"]}
+			},
+			"requires": {"alive": [], "flags": ["skinner.awake"], "not_flags": []},
+			"depends_on": ["b1.skinner_wakes_in_the_ruins"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["liscor.undead_siege", "liscor.gates_left_open", "ksmvr.withheld_soldiers", "antinium_hive.workers_rebel", "pisces.fought_for_liscor", "relc.drove_off_skinner", "skinner.hunts_the_inn"],
+				"relationship": [{"from": "zevara", "to": "ksmvr", "delta": -2}, {"from": "selys", "to": "pisces", "delta": 1}]
+			},
+			"news": "At sunset a horde of undead from the ruins broke into Liscor through open gates. The Watch fought street by street; the Antinium sent only a handful of Soldiers.",
+			"stage": {
+				"area": "liscor_gate",
+				"hours": [
+					18,
+					23
+				],
+				"when_flags": [
+					"adventurers.ruins_raid_planned"
+				],
+				"foes": [
+					{
+						"enemy": "zombie",
+						"pos": [
+							27,
+							11
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							27,
+							12
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							28,
+							10
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							28,
+							13
+						]
+					},
+					{
+						"enemy": "skeleton",
+						"pos": [
+							26,
+							10
+						]
+					},
+					{
+						"enemy": "skeleton",
+						"pos": [
+							26,
+							13
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							29,
+							11
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							29,
+							12
+						]
+					}
+				],
+				"line": "Dead things sprint up the road towards the open gate, howling. Far behind them something huge and white drags itself along, and its red eyes fill you with dread.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							4,
+							11
+						],
+						"allies": [
+							"relc",
+							"zevara"
+						],
+						"line": "Relc and Watch Captain Zevara plant themselves on the road in front of the gate."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 3,
+						"from": [
+							30,
+							11
+						],
+						"foes": [
+							"zombie",
+							"zombie",
+							"zombie",
+							"zombie",
+							"crypt_lord"
+						],
+						"line": "A bloated Crypt Lord lumbers up the road behind a new pack of the dead, spitting black bile."
+					},
+					{
+						"after_seconds": 150,
+						"from": [
+							30,
+							12
+						],
+						"foes": [
+							"ghoul",
+							"ghoul",
+							"ghoul"
+						],
+						"line": "Ghouls come bounding out of the dark in long leaps."
+					},
+					{
+						"after_seconds": 180,
+						"from": [
+							4,
+							12
+						],
+						"allies": [
+							"pisces"
+						],
+						"line": "Pisces steps out of thin air and snaps the necks of the dead with a flick of his fingers."
+					},
+					{
+						"after_seconds": 240,
+						"from": [
+							4,
+							11
+						],
+						"helpers": [
+							"antinium_soldier",
+							"antinium_soldier",
+							"antinium_soldier"
+						],
+						"line": "A few Antinium Soldiers crash into the dead: all the Soldiers Ksmvr will spare."
+					}
+				],
+				"note": "Design: 16 foes in 3 waves and a few allies; canon has thirty thousand dead and fights in every street. The map is the east gate; the dead came through the north and east gates. Skinner stays out of reach here (canon: he meets Relc and leaves for the inn). Hours are a guess."
+			},
+			"hooks": [
+				{
+					"id": "player_held_the_gate",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"crypt_lord"
+								],
+								"location": [
+									"liscor_east_gate"
+								]
+							}
+						}
+					],
+					"days": [
+						39,
+						40
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_held_the_gate"
+						],
+						"relationship": [
+							{
+								"from": "zevara",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "relc",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "The dead poured into Liscor at sunset. At the east gate a Human stood with the Watch and helped cut down a Crypt Lord before the line gave way."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.60", "confidence": "confirmed", "note": "Evening of day 39. Skinner's [Terror] makes the gate guards flee. Ksmvr brings 15 Soldiers: the Queen's Rite must not be disturbed. Relc, immune to fear through [Indomitable Will], drives Skinner off; it raises the fallen and heads east."},
+			"summary": "Thousands of dead run at Liscor at sunset, and Skinner's red stare makes the gate guards flee with the gates still open. The Watch fights street by street; Pisces snaps necks for them. Ksmvr brings only fifteen Soldiers. Relc stands up to Skinner, so it raises the fallen and turns towards the inn."
+		},
+		"b1.workers_name_themselves": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"knight": {"prefer": [], "fallback_tags": ["antinium", "worker"]},
+				"counter": {"prefer": ["bird"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["antinium_hive.workers_play_chess"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_hive.workers_named", "wandering_inn.guarded_by_workers", "erin.attacked_by_aberration", "bird.named"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.60", "confidence": "confirmed", "note": "Night of day 39. The mad Worker is one of the Aberrations that fled the Hive (Ksmvr). Knight is not an NPC (he dies in 1.61). Other names: Bishop, Vladimir, Calabrian, Emanuel, Garry, Milner-Barry, Belgrade, Jose, Magnus, Anand."},
+			"summary": "Erin feels an alarm of danger at sunset. That night a Worker gone mad blames her and pins her with a sword; another Worker breaks its neck. He is Knight. About thirty Workers of her chess club have left the Hive and named themselves; now they ring the inn with swords, rocks and rolling pins."
+		}
+	},
+	"system": [
+		{"who": "relc", "kind": "skill", "name": "[Indomitable Will]", "level": null, "confidence": "confirmed", "note": "Makes him immune to Skinner's fear, like the Antinium."},
+		{"who": "relc", "kind": "skill", "name": "[Triple Thrust]", "level": null, "confidence": "confirmed"},
+		{"who": "relc", "kind": "other", "name": "The Gecko of Liscor", "level": null, "confidence": "confirmed", "note": "His nickname from his army days."},
+		{"who": "zevara", "kind": "other", "name": "Breathes fire", "level": null, "confidence": "confirmed", "note": "She is Oldblood (1.63): a Drake who can breathe fire, at a cost to her breath."},
+		{"who": "pisces", "kind": "other", "name": "Snaps the necks of the dead", "level": null, "confidence": "confirmed", "note": "He cannot do it to Wights or Crypt Lords."}
+	]
+}

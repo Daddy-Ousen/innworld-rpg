@@ -1,0 +1,38 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.59H",
+	"events": {
+		"b1.skinner_wakes_in_the_ruins": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"captain": {"prefer": ["calruz"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"vice": {"prefer": ["gerial"], "fallback_tags": [], "optional": true},
+				"second_mage": {"prefer": ["sostrom"], "fallback_tags": [], "optional": true},
+				"ranger": {"prefer": ["cervial_dermondy"], "fallback_tags": [], "optional": true},
+				"leader": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": ["ruins_expedition.crypt_lords_slain"], "not_flags": []},
+			"depends_on": ["b1.expedition_breaks_the_crypt_ambush"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["skinner.awake", "ruins_expedition.destroyed", "horns_of_hammerad.destroyed", "calruz.missing", "calruz.lost_an_arm", "ceria.missing", "ceria.broke_her_wand", "olesm.missing", "yvlon.survived_ruins"],
+				"clear_flags": ["horns_of_hammerad.stay_at_inn"],
+				"kill": ["gerial", "sostrom", "cervial_dermondy"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.59H", "confidence": "confirmed", "note": "Skinned on the page: Gregor, Cervial, Menes, Sostrom, Gerial. Calruz and Ceria are last seen overrun and Olesm is not seen again; the text never shows them die, so they are missing (user choice, 2026-09-24). Yvlon leads the few who escape."},
+			"summary": "In a vast hall of tombs Ceria reads a rhyme warning of Skinner. Then the sealed vault opens from inside: a legless giant of stolen skin, wearing the dead captains' faces, whose red eyes freeze the living with fear. It skins Sostrom and Gerial; Calruz loses an arm and Ceria is left behind."
+		}
+	},
+	"system": [
+		{"who": "ceria_springwalker", "kind": "other", "name": "Spell [Translate]", "level": null, "confidence": "confirmed", "note": "Learned at Wistram; slow and muddled on short texts."},
+		{"who": "ceria_springwalker", "kind": "other", "name": "Broken wand", "level": null, "confidence": "confirmed", "note": "She snaps her wand to loose a giant spike of ice that opens the way for Yvlon; the cold blackens her hand."},
+		{"who": "calruz", "kind": "other", "name": "Calruz of the Beriad", "level": null, "confidence": "confirmed", "note": "How he names himself when he challenges Skinner."},
+		{"who": "sostrom", "kind": "other", "name": "Spell [Sticky Ground]", "level": null, "confidence": "confirmed"}
+	]
+}

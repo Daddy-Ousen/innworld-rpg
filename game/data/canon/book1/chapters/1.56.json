@@ -1,0 +1,54 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.56",
+	"events": {
+		"b1.calruz_trains_erin": {
+			"tier": 2,
+			"window": {"earliest": 38, "latest": 39, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {"prefer": ["calruz"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["calruz", "erin_solstice"], "flags": ["calruz.will_train_erin"], "not_flags": []},
+			"depends_on": ["b1.calruz_shows_erin_hammer_blow"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.learned_power_strike", "erin.scared_crab_for_horns", "gerial.carries_acid_jar", "erin.has_inner_mana", "ruins_expedition.leave_at_dawn"],
+				"relationship": [{"from": "calruz", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.56", "confidence": "confirmed", "note": "The day after 1.54 (guess: day 38); the ruins are 'tomorrow'. Ceria tells Erin everyone has some mana, which feeds Toren. Calruz calls her gifted: a Skill on her first day of training."},
+			"summary": "Erin scares a Rock Crab off the Horns' path with seed cores. Calruz spends the day teaching her to punch, kick and block, sparring against Toren. She knocks Toren's head down the hill and learns [Power Strike], then kicks Calruz below the belt. Gerial buys a jar of her acid."
+		},
+		"b1.olesm_joins_the_expedition": {
+			"tier": 2,
+			"window": {"earliest": 38, "latest": 39, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"tactician": {"prefer": ["olesm"], "fallback_tags": []},
+				"receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"leader": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"ranger": {"prefer": ["cervial_dermondy"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["olesm"], "flags": ["horns_of_hammerad.enter_ruins_soon"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["olesm.joined_expedition", "ruins_expedition.cleared_by_guild", "liscor.council_hears_reinhart_messenger"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.56", "confidence": "confirmed", "note": "Day 38 (guess). Five teams and extras make over forty Silver-rank adventurers. Cervial's crossbow is Dwarven, from Deríthal-Vel. Pisces turned down Yvlon's offer to join."},
+			"summary": "At the Guild, Selys tells Gerial and Ceria the ruins need no permit, and learns the Human [Messenger] pestering the Council speaks for Magnolia Reinhart; she sends word at once. Cervial shows off a Dwarven crossbow. Olesm, a Level 24 [Tactician], asks to join the expedition and is taken on."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Power Strike]", "level": null, "confidence": "confirmed"},
+		{"who": "calruz", "kind": "other", "name": "House of Minos hand-to-hand training", "level": null, "confidence": "confirmed", "note": "Minotaurs learned it from [Martial Artists]; he thinks most Izrilians are [Brawlers]."},
+		{"who": "olesm", "kind": "class", "name": "[Tactician]", "level": 24, "confidence": "confirmed"}
+	]
+}

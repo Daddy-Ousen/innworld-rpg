@@ -81,8 +81,8 @@
 			"home": "liscor",
 			"classes": [{"name": "[Swordslayer]", "level": null}, {"name": "[Guardsman]", "level": null}],
 			"alive_at_start": true,
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels. 1.25: full name Klbkchhezeim of the Centenium, the Hive's Prognugator."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.05", "confidence": "confirmed", "note": "Named 1.05, met 1.06. Relc calls him 'the Slayer' in 1.09. Years, rank and Skills from 1.15; he has studied the Book of Levels. 1.25: full name Klbkchhezeim of the Centenium, the Hive's Prognugator. 1.62-1.63: reborn by the Rite of Anastases in a two-armed body, ten levels down in every class."},
 			"summary": "Four-armed Free Antinium, Relc's partner and a guard for ten years; fourth-highest [Guardsman] in Liscor, with [Enhanced Movement] and [Detect Guilt]. Polite, exact, rule-bound. Serves his Queen in the Hive. Quietly kind: twice spends potions on Erin."
 		},
 		"zevara": {
@@ -127,10 +127,10 @@
 			"tags": ["drake", "receptionist", "guild_staff", "friendly", "gossip"],
 			"faction": "liscor_adventurers_guild",
 			"home": "liscor",
-			"classes": [],
+			"classes": [{"name": "[Warrior]", "level": null}, {"name": "[Hunter]", "level": null}],
 			"alive_at_start": true,
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "1.21: has [Fast Stitching] and sews Erin washable pads."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "1.21: has [Fast Stitching] and sews Erin washable pads. Full name Selys Shivertail (1.62). 1.62: a Level 1 [Soldier] with [Swift Strike], trained as a girl by her grandmother and her uncle Zel; 1.63: after the battle she is a [Warrior] and gained levels in [Hunter]."},
 			"summary": "Young female Drake with pale green scales, receptionist at Liscor's Adventurer's Guild. Chatty and kind to Erin, shakes her hand Human-style and gives directions, but backs down when a Gnoll adventurer bullies her out."
 		},
 		"krshia": {
@@ -187,10 +187,10 @@
 			"tags": ["drake", "tactician", "chess", "scholar"],
 			"faction": null,
 			"home": "liscor",
-			"classes": [{"name": "[Tactician]", "level": 22}],
+			"classes": [{"name": "[Tactician]", "level": 24}],
 			"alive_at_start": true,
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "Works for the city Council and wears the same insignia as Relc's badge. Level from Klbkch in 1.18. Family name Swifttail and his liaison role from 1.25."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.17", "confidence": "confirmed", "note": "Works for the city Council and wears the same insignia as Relc's badge. Level from Klbkch in 1.18. Family name Swifttail and his liaison role from 1.25. Level 24 in 1.56. Missing after Skinner wakes in the ruins (1.59H)."},
 			"summary": "Young sky-blue Drake, Lism's nephew and Liscor's best chess player. Level 22 [Tactician] with ink-stained claws; neat, polite and eager. Crushed by Erin in a street game, he admires her and dreams of a [Grandmaster] class."
 		},
 		"ryoka_griffin": {
@@ -367,10 +367,10 @@
 			"tags": ["human", "adventurer", "mage", "self_taught"],
 			"faction": "horns_of_hammerad",
 			"home": null,
-			"classes": [],
+			"classes": [{"name": "[Elementalist]", "level": 16}],
 			"alive_at_start": true,
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Human confirmed in 1.54. 1.54 says he is completely bald under his mage's hat; 1.32R gave him a long wisp of black hair (conflict in the Book)."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Human confirmed in 1.54. 1.54 says he is completely bald under his mage's hat; 1.32R gave him a long wisp of black hair (conflict in the Book). A Level 16 [Elementalist] (1.57H). Skinned by Skinner in the ruins (1.59H)."},
 			"summary": "The Horns of Hammerad's second mage, a self-taught Human in a pointed mage's hat. Defers to Ceria because she trained at Wistram; mended Ryoka's phone."
 		},
 		"persua": {
@@ -489,8 +489,8 @@
 			"home": "wandering_inn",
 			"classes": [{"name": "[Skeleton Warrior]", "level": 3}],
 			"alive_at_start": true,
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46: the word for the chess rook in another language. Level 3 by 1.53."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46: the word for the chess rook in another language. Level 3 by 1.53. 1.63: Level 11 after the night of Skinner (the class is not named; a '[Tactician] part' of him is mentioned)."},
 			"summary": "Undead skeleton Pisces makes to guard Erin and pay his tab. It obeys only her, is weaker than she is, and cleans the whole upper floor in one night. No skeleton should level, but it is a Level 1, then Level 2, [Skeleton Warrior]."
 		},
 		"princess_thief": {
@@ -564,6 +564,42 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.46", "confidence": "confirmed", "note": "Calls Krshia 'Aunt'. Posted at the east gate for some days before 1.46; that he is the friendly Gnoll gate guard of 1.49 is likely."},
 			"summary": "Young Gnoll guardsman of Liscor's Watch with chainmail, sword and shield; Krshia's nephew. She has him watch the east gate for Erin and carry word to the Gnoll Runners. Eager, talks too much and gets cuffed for it."
+		},
+		"bird": {
+			"name": "Bird",
+			"race": "Antinium",
+			"tags": ["antinium", "worker", "individual", "chess", "counter"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.61", "confidence": "confirmed", "note": "One of the Workers of Erin's chess club who name themselves on day 39 (1.60); named on the page in 1.61-1.62. One of the four Workers who live (1.63)."},
+			"summary": "A Worker from Erin's chess club who names himself Bird. He counts the dead that attack Liscor, gives Erin his healing potion in the last stand at the inn and is badly bitten. After the battle he sits watching the smoke rise with plain wonder."
+		},
+		"tekshia": {
+			"name": "Tekshia",
+			"race": "Drake",
+			"tags": ["drake", "guildmaster", "adventurers_guild", "spear", "elder"],
+			"faction": "liscor_adventurers_guild",
+			"home": "liscor",
+			"classes": [{"name": "[Spearmaster]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Selys's grandmother and Guildmistress of Liscor's Adventurers' Guild (1.56, 1.62, 1.63). 1.62 calls her 'Tekshia Silverfang' once, though Selys is a Shivertail and Silverfang is Krshia's Gnoll tribe (conflict in the Book): no family name is used here."},
+			"summary": "Elderly Drake with dusky purple scales, Guildmistress of Liscor's Adventurers' Guild and Selys's grandmother; one of the city's two [Spearmasters]. Gruff and hard, she burns Crypt Lords with an enchanted spear and shields the surviving adventurers from blame."
+		},
+		"hawk": {
+			"name": "Hawk the Hare",
+			"race": "Beastkin",
+			"tags": ["beastkin", "runner", "courier", "fists"],
+			"faction": "runners_guild",
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Named in 1.55R as the nearest Courier, who would not risk the Bloodfields; fights on the page in 1.62."},
+			"summary": "Liscor's only Courier: a tall Beastkin with rabbit ears. He fights the dead with his fists and feet beside Guildmistress Tekshia, too fast for a Crypt Lord to catch."
 		}
 	}
 }

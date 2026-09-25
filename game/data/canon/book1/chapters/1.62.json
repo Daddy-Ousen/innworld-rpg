@@ -1,0 +1,290 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.62",
+	"events": {
+		"b1.watch_holds_market_street": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"captain": {"prefer": ["zevara"], "fallback_tags": ["captain", "guard"]},
+				"spear": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"guildmistress": {"prefer": ["tekshia"], "fallback_tags": [], "optional": true},
+				"courier": {"prefer": ["hawk"], "fallback_tags": [], "optional": true},
+				"swordsman": {"prefer": ["jeiss"], "fallback_tags": [], "optional": true},
+				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": ["liscor.undead_siege"], "not_flags": []},
+			"depends_on": ["b1.skinner_leads_the_dead_into_liscor"],
+			"on_fail": ["substitute", "cancel"],
+			"effects": {
+				"set_flags": ["zevara.breathed_fire", "zevara.called_ksmvr_coward", "selys.killed_undead", "jeiss.bones_broken", "ksmvr.pulled_soldiers_back"],
+				"relationship": [{"from": "zevara", "to": "ksmvr", "delta": -2}, {"from": "tekshia", "to": "selys", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Late in the night of day 39. Beilmark, Menolit (a one-tailed army [Veteran]) and Guildmistress Alonna of the Mages' Guild also fight. Menolit and Alonna are not NPCs. Tkrn reports the potions are gone."},
+			"summary": "The Watch falls back street by street to Market Street. Zevara breathes fire until she can barely breathe. Guildmistress Tekshia and Hawk the Hare burn and batter Crypt Lords; Selys kills her first undead. Ksmvr pulls his Soldiers back to guard the Hive, and Zevara calls him a coward to his face."
+		},
+		"b1.klbkch_is_reborn": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {"prefer": ["free_queen"], "fallback_tags": []},
+				"old_prognugator": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["free_queen"], "flags": ["klbkch.died_saving_erin"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["klbkch.reborn", "klbkch.new_body", "antinium_hive.rite_done", "antinium_hive.sallied", "ksmvr.deposed"],
+				"clear_flags": ["antinium_hive.new_prognugator", "antinium_hive.queen_on_secret_project"],
+				"revive": ["klbkch"]
+			},
+			"news": "Before dawn the Antinium poured out of their Hive and drove the dead from Liscor. Senior Guardsman Klbkch, who died defending the inn, led them.",
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "The Rite of Anastases (1.63): only a Prognugator is worth it; it took the Queen nearly two weeks. Klbkch strikes Ksmvr and sends the Hive out without the Queen's order. The Antinium lose 365 Soldiers and 147 Workers (1.63)."},
+			"summary": "Before dawn the Free Queen finishes the Rite of Anastases and Klbkch lives again, in a new, slimmer two-armed body. He strikes Ksmvr down, and the whole Hive, Soldiers and Workers, floods Liscor's streets and drives the dead back while he leads Soldiers to Erin's inn."
+		},
+		"b1.rags_kills_skinner": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"counter": {"prefer": ["bird"], "fallback_tags": [], "optional": true},
+				"goblins": {"prefer": [], "fallback_tags": ["goblin"]}
+			},
+			"requires": {"alive": ["rags", "erin_solstice"], "flags": ["rags.chieftain", "skinner.hunts_the_inn"], "not_flags": []},
+			"depends_on": ["b1.skinner_leads_the_dead_into_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["skinner.dead", "rags.killed_skinner", "goblin_tribe.ate_skinner", "toren.took_skinners_eye", "erin.cut_open_skinner", "wandering_inn.battle_scarred"],
+				"relationship": [{"from": "erin_solstice", "to": "rags", "delta": 2}, {"from": "rags", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "Below the inn on the hill, Goblins killed the thing that led the dead: a red worm hiding in a hide of stolen skin. Their small chieftain burned it with a spell.",
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					20,
+					24
+				],
+				"when_flags": [
+					"adventurers.ruins_raid_planned"
+				],
+				"foes": [
+					{
+						"enemy": "zombie",
+						"pos": [
+							14,
+							20
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							17,
+							20
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							13,
+							21
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							18,
+							21
+						]
+					},
+					{
+						"enemy": "skeleton",
+						"pos": [
+							15,
+							22
+						]
+					},
+					{
+						"enemy": "skeleton",
+						"pos": [
+							16,
+							22
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							12,
+							19
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							19,
+							19
+						]
+					}
+				],
+				"line": "The dead come running up the hill out of the dark, howling at the inn.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							16,
+							12
+						],
+						"allies": [
+							"erin_solstice",
+							"toren",
+							"bird"
+						],
+						"helpers": [
+							"antinium_worker",
+							"antinium_worker",
+							"antinium_worker",
+							"antinium_worker",
+							"antinium_worker"
+						],
+						"line": "Erin runs out with a frying pan. Workers from her chess club hold a line before the door with swords, rocks and rolling pins."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 2,
+						"from": [
+							16,
+							22
+						],
+						"foes": [
+							"zombie",
+							"zombie",
+							"zombie",
+							"ghoul",
+							"ghoul",
+							"crypt_lord"
+						],
+						"line": "More dead climb the hill. A Crypt Lord stops at the bottom and spits black bile over the Workers."
+					},
+					{
+						"after_seconds": 150,
+						"left_at_most": 2,
+						"from": [
+							16,
+							22
+						],
+						"foes": [
+							"skinner",
+							"zombie",
+							"zombie",
+							"skeleton",
+							"skeleton"
+						],
+						"line": "A mountain of dead white skin drags itself up the hill on two huge hands. Its red eyes fill you with terror."
+					},
+					{
+						"after_seconds": 240,
+						"from": [
+							3,
+							13
+						],
+						"helpers": [
+							"antinium_soldier",
+							"antinium_soldier",
+							"antinium_soldier"
+						],
+						"line": "Antinium Soldiers pour over the hill from Liscor and tear into the dead."
+					},
+					{
+						"after_seconds": 300,
+						"from": [
+							27,
+							20
+						],
+						"allies": [
+							"rags"
+						],
+						"helpers": [
+							"goblin_grunt",
+							"goblin_grunt",
+							"goblin_grunt",
+							"goblin_grunt",
+							"goblin_grunt"
+						],
+						"line": "Shrieking Goblins stream down the next hill with torches and acid jars. Rags throws fire at Skinner."
+					}
+				],
+				"note": "Design: 19 foes in 3 waves, 5 Workers, then Soldiers and Rags's band. Canon: 32 Workers and about a hundred dead; the fight runs to the last hours of the night. Klbkch is still dead while it lasts (he is reborn that night), so he is not on the map."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_skinner",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"skinner"
+								]
+							}
+						}
+					],
+					"days": [
+						39,
+						40
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_fought_skinner"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 3
+							},
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "rags",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "The dead attacked the inn on the hill. A Human stood with Erin and the Workers against their skin-clad leader until Goblins killed it."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.62", "confidence": "confirmed", "note": "Last hours of the night of day 39. Toren tears out one of Skinner's red eyes; Pisces's dead turn on Skinner's. Twenty-seven Goblins die. The fire spell is likely [Firefly] (1.45); her sword is bronze that shines like gold."},
+			"summary": "Erin and the last Workers go out to fight. Toren tears out one of Skinner's eyes; Erin cuts into its head and a red worm slithers out of the skin. Klbkch, alive again, drives it off with his Soldiers. Then Rags's Goblins swarm it with blades, acid and fire, and Rags stabs it dead."
+		}
+	},
+	"system": [
+		{"who": "selys", "kind": "class", "name": "[Soldier]", "level": 1, "confidence": "confirmed", "note": "With [Swift Strike], once every five minutes."},
+		{"who": "tekshia", "kind": "skill", "name": "[Spear Art: Tree Limb's Reach]", "level": null, "confidence": "confirmed"},
+		{"who": "tekshia", "kind": "skill", "name": "[Endless Spear Flurry]", "level": null, "confidence": "confirmed"},
+		{"who": "jeiss", "kind": "skill", "name": "[Cross Slash]", "level": null, "confidence": "confirmed"},
+		{"who": "jeiss", "kind": "skill", "name": "[Swiftsilver Riposte]", "level": null, "confidence": "confirmed"},
+		{"who": "rags", "kind": "other", "name": "Fire spell that circles its foe", "level": null, "confidence": "likely", "note": "A creature of fire that burns Skinner again and again; likely [Firefly]."}
+	]
+}

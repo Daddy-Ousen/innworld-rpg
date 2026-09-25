@@ -325,7 +325,8 @@ static func _add_news(gs: GameState, day: int, id: String, kind: String, text: S
 		gs.world.add_news(day, id, kind, text)
 
 
-## Effects on flags, NPCs and relationships. An NPC id in kill/relationship
+## Effects on flags, NPCs and relationships. kill runs before revive (M7.4:
+## an NPC brought back to life). An NPC id in kill/revive/relationship
 ## that a role replaced (substitute, or a later prefer) means the replacement.
 static func _apply_effects(gs: GameState, fx: Dictionary, ev: Dictionary,
 		roles: Dictionary) -> void:
@@ -340,6 +341,8 @@ static func _apply_effects(gs: GameState, fx: Dictionary, ev: Dictionary,
 				remap[npc] = roles[name]
 	for npc: String in fx.get("kill", []):
 		gs.world.set_alive(remap.get(npc, npc), false)
+	for npc: String in fx.get("revive", []):
+		gs.world.set_alive(remap.get(npc, npc), true)
 	for rel: Dictionary in fx.get("relationship", []):
 		gs.world.add_relationship(remap.get(rel["from"], rel["from"]),
 				remap.get(rel["to"], rel["to"]), int(rel["delta"]))

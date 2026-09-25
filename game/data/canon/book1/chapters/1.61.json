@@ -1,0 +1,33 @@
+{
+	"schema_version": 1,
+	"book": 1,
+	"chapter": "1.61",
+	"events": {
+		"b1.knight_dies_holding_the_door": {
+			"tier": 2,
+			"window": {"earliest": 39, "latest": 40, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"counter": {"prefer": ["bird"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.guarded_by_workers", "skinner.hunts_the_inn"], "not_flags": []},
+			"depends_on": ["b1.workers_name_themselves", "b1.skinner_leads_the_dead_into_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.knight_died", "erin.overcame_skinners_fear", "erin.threw_acid_at_skinner", "pisces.sent_undead_to_the_inn"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.61", "confidence": "confirmed", "note": "Night of day 39. Bird counts at least thirty thousand dead at Liscor. In the city Pisces raises thirteen dead and sends them to guard Erin. Rags and her tribe watch from a hill and do not move."},
+			"summary": "The Workers dig a moat and kill the first thirty-four dead. Then Skinner comes up the hill, and his red stare freezes Erin inside. A Crypt Lord's spit breaks the line; Knight dies holding the door. Playing chess alone until fear is old, Erin walks out and hurls a huge jar of acid onto Skinner."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "other", "name": "A Skill that stretches a moment", "level": null, "confidence": "likely", "note": "Not named here: it makes one moment last; while she plays chess she outlasts Skinner's fear."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Loud Voice]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Unerring Throw]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Lesser Strength]", "level": null, "confidence": "confirmed"}
+	]
+}

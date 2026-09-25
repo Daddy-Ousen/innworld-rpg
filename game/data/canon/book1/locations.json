@@ -249,8 +249,8 @@
 			"kind": "wild",
 			"parent": "floodplains_of_liscor",
 			"tags": ["ruins", "dungeon", "ancient", "danger"],
-			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Door dug out in 1.23A; 'ruins to the northeast' found in 1.24. That they are the same place is likely, not stated."},
+			"status": "candidate",
+			"canon_ref": {"book": 1, "chapter": "1.23A", "confidence": "likely", "note": "Door dug out in 1.23A; 'ruins to the northeast' found in 1.24. That they are the same place is likely, not stated. Called the Ruins of Liscor in 1.57H: a vast Drake-style crypt (Olesm's guess) whose sealed vault held Skinner (1.59H)."},
 			"summary": "A tall hillside outside Liscor hides a huge weathered stone door into an ancient complex; something moves in the dark within. Liscor talks of it as a large, unexplored dungeon."
 		},
 		"chandrar": {

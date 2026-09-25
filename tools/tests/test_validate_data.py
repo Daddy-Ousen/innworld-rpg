@@ -151,6 +151,17 @@ class ValidateTest(unittest.TestCase):
         self.assertError(rep, "unknown npc 'carol'")
         self.assertError(rep, "unknown npc 'dave'")
 
+    def test_revive(self):
+        ev = self.ev()
+        ev["effects"]["revive"] = ["dave"]
+        rep = self.fx.run()
+        self.assertError(rep, "unknown npc 'dave'")
+        ev["effects"]["revive"] = "bob"
+        self.assertError(self.fx.run(), "effects.revive")
+        ev["effects"]["kill"] = ["bob"]
+        ev["effects"]["revive"] = ["bob"]
+        self.assertError(self.fx.run(), "'bob' is also in kill")
+
     def test_unknown_system_npc(self):
         self.fx.data["chapters/9.00.json"]["system"][0]["who"] = "zed"
         self.assertError(self.fx.run(), "unknown npc 'zed'")

@@ -107,3 +107,41 @@ Status: accepted; events reviewed by the user 2026-09-24 (timeline, the Goblin b
 - The Horns have no combat blocks: if a monster gets into the inn, they step away.
 - Gazi, Tkrn, Ksmvr and the market thief still have no map schedule.
 - Monster and NPC name labels still overlap in a crowd.
+
+## M7.4 Canon 1.55R–1.63 (days 38–41)
+Status: proposed; events `candidate` until the user reviews them. Two engine changes (a `revive` effect, user choice 2026-09-24, and a fix for stage allies). No save version change.
+
+**Timeline (all guesses).** Ryoka reaches the Bloodfields three or four days out of Esthelm: day 38 (1.55R). 1.56 is day 38, the day after 1.54; the ruins are 'tomorrow'. 1.57H–1.62 are day 39: the expedition goes in that morning, Skinner wakes in the afternoon, the dead reach Liscor at sunset and the inn at night, and Klbkch is reborn before dawn (the director counts the night as day 39). 1.63 is day 40 (Erin at dawn, Toren, Pisces) and day 41 (Selys's 'even after a day'; Ryoka comes back 'the day after Skinner died', after two days' running). Book 1 canon now ends on day 41.
+
+**21 events**, all `candidate`, in 9 new chapter files.
+- New NPCs: `bird` (a Worker who lives), `tekshia` (Guildmistress, Selys's grandmother) and `hawk` (Hawk the Hare, Liscor's Courier).
+- Updated (back to `candidate`): `klbkch` (reborn), `toren` (Level 11), `olesm` ([Tactician] 24), `sostrom` ([Elementalist] 16), `selys` (Selys Shivertail; [Warrior], [Hunter]); location `liscor_dungeon` (the Ruins of Liscor).
+- Not NPCs: Ysara, Buleth, Rometh, Gregor, Menes, Hunt, Marian, Menolit, Alonna, and the named Workers except Bird (Knight dies in 1.61).
+- Deaths: Toriska (1.55R); Gerial, Sostrom and Cervial (1.59H).
+- **Missing (user choice, 2026-09-24).** Calruz, Ceria and Olesm stay alive in the data with the flags `calruz.missing`, `ceria.missing` and `olesm.missing`. The Book 1 text never shows them die: Calruz and Ceria are last seen overrun, and Olesm is not seen again. The Horns' lodging flag is cleared, so they leave the map.
+- **Conflict in the Book (flagged in data):** 1.62 calls the Guildmistress 'Tekshia Silverfang' once, but Selys is a Shivertail and Silverfang is Krshia's tribe. The NPC is named just 'Tekshia'.
+- **Likely links (not confirmed):** Ysara is Yvlon's sister; the Silverfang warriors Gazi fights are the ones Krshia expected (1.51); Gazi killed them (1.63); Rags's fire spell is [Firefly]. Each is marked `likely` in its note.
+
+**Engine: `revive` effect.** Canon events and `change` hooks may list NPCs in `effects.revive`. The director applies it after `kill`. CanonDb and `validate_data.py` check the ids; the validator also rejects an NPC in both lists. There is no save change: WorldState already stores alive per NPC. `b1.klbkch_is_reborn` revives Klbkch, and he walks his old schedule again from day 40. It needs only the Free Queen alive and `klbkch.died_saving_erin`; it does not need the Rite flag from Pawn's event (1.53), so killing Ksmvr does not stop it.
+
+**Engine fix: stage allies on a long step.** A long command (over `rules.npc.jump_seconds`, for example 20 minutes of walking onto the hill) jumps every NPC to its goal. If a stage started in that same command, its wave moved an ally in and the jump sent the ally straight back. Now a stage ally in the player's area, whose goal is in another area, stays while the fight is on. Allies whose goal is in the same area jump as before, so the older seeded sims do not change.
+
+**Two stages and hooks (user choice: inn hill + city gate).** Both need `adventurers.ruins_raid_planned` (`when_flags`).
+- **Gate — `b1.skinner_leads_the_dead_into_liscor` (1.60).** Area `liscor_gate`, 18–23, day 39. Eight foes (zombies, skeletons, ghouls). Waves: at once Relc and Zevara; at 60 s a Crypt Lord and four zombies; at 150 s three ghouls; at 180 s Pisces; at 240 s three Soldier helpers. Skinner is not on this map (canon: he meets Relc and leaves). Hook `player_held_the_gate`: a won fight whose top foe is `crypt_lord`, at `liscor_east_gate`, on day 39–40, is a `change`: flag `liscor.earther_held_the_gate`, Zevara → player +2, Relc +1, and its own news line. The location check keeps a Crypt Lord fight on the hill from matching.
+- **Inn hill — `b1.rags_kills_skinner` (1.62).** Area `inn_hill`, 20–24, day 39. Eight foes. Waves: at once Erin, Toren, Bird and five Worker helpers; at 60 s a Crypt Lord and five more; at 150 s Skinner and four more; at 240 s three Soldier helpers; at 300 s Rags and five Goblin helpers. Hook `player_fought_skinner`: a won fight against `skinner` on day 39–40 is a `change`: flag `wandering_inn.earther_fought_skinner`, Erin → player +3, Bird +2, Rags +1. Rags still kills Skinner. Klbkch is not on the map: he is reborn that night, after the fight.
+- **New enemies** (guesses, stage only, never in a spawn): `zombie`, `skeleton`, `ghoul`, `crypt_lord` (spits bile at range 3), `skinner` (hp 45, armor 3, danger 1.0, fights to the end). Helper types `antinium_worker` and `antinium_soldier` only fight on the player's side.
+
+**Behaviour.** The Horns still eat breakfast at the inn on day 39, but their dinner goal stops once `ruins_expedition.leave_at_dawn` is set (night 38). Pawn's evening visits stop once he is back in the Hive (`pawn.back_in_hive`, 1.53). `bird` is off the map unless a stage brings him. Zevara and Pisces get combat blocks.
+
+**Tests.**
+- `sim_canon_book1`: `LAST_DAY` is 41, drift 0. New tests: days 38–41 (days of all 21 events, deaths, the missing, Klbkch alive again) and 'kill Rags early' (Skinner's event and Toren's eye are cancelled; the rest goes on). The Free Queen test now also checks that Klbkch stays dead and the Workers do not guard the inn.
+- `sim_skinner_night` (new): stage data, a win at the gate and a win against Skinner change their events, a knock-out keeps the canon, no stage on day 38, the Horns miss dinner, Klbkch patrols again on day 40.
+- `unit_director`: revive (with a save), kill and revive in one event, unknown id. `unit_battle`: an ally brought in during a long step stays. Python: the validator's revive checks.
+- Counts updated in `unit_combat_db` (15 enemies) and `sim_player_hooks` (9 hooks).
+
+**Known limits.**
+- Skinner's fear and the Crypt Lord's poison are not modelled: they deal plain damage.
+- A player inside the inn or in the city streets on the night of day 39 sees no fight; the fights are on the hill and at the east gate.
+- The fights are small: 19 foes on the hill and 16 at the gate. Canon has about a hundred dead at the inn and thirty thousand at Liscor.
+- Ryoka's Bloodfields run and the ruins are off the map.
+- Balance (checked on screen): zombies and ghouls were softened after a first look, but Erin, Toren and Bird still rush into the pack and go down within minutes. Tune in play-testing.

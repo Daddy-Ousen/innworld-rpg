@@ -60,6 +60,8 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 		var t: Dictionary = g["target"]
 		if t.has("stay"):
 			n["carry"] = 0
+		elif jump and _held_by_fight(gs, db, id, n, t):
+			n["carry"] = 0
 		elif jump:
 			_place_at_target(gs, db, n, t)
 		elif here != "" and n["area"] == here:
@@ -70,6 +72,15 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 		else:
 			_move_offscreen(gs, db, n, t)
 	r.sec = maxi(to_sec, r.sec)
+
+
+## True if NPC `id` (roster entry `n`, goal target `t`) is a stage ally in
+## the player's area while the fight is on, and its goal is in another area:
+## a long step (jump) must not send it away, or a wave that brought it in
+## during that step would lose it at once (M7.4).
+static func _held_by_fight(gs: GameState, db: DataDb, id: String, n: Dictionary, t: Dictionary) -> bool:
+	var here := gs.player.area
+	return n["area"] == here and BehaviourDb.target_area(t) != here and NpcReact.active(gs) 			and NpcReact.is_ally(gs, db, id)
 
 
 ## The player talked with `npc` today: +rules.npc.talk_relationship, once
