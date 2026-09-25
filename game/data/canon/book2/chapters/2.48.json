@@ -1,0 +1,158 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.48",
+	"events": {
+		"b2.rags_burns_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "hob": {"prefer": ["garen"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.banned_from_inn"], "not_flags": []},
+			"depends_on": ["b2.rags_sent_away_from_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.burned", "rags.first_crossbow_built", "rags.tribe_turns_north"]},
+			"news": "Esthelm has fallen: a Goblin army stormed the city, looted it and left it burning. Celum has called its Watch and militia to the walls.",
+			"rumor": "Refugees on the northern road say Goblins on wolves burned Esthelm, but let anyone who ran get away.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Day is a placeholder; Celum hears of it that night. Garen wanted the whole city razed. Rags blames her ban from the inn in part: Goblins stand alone. The tribes head north to join the rest."
+			},
+			"summary": "Rags' tribes storm Esthelm, sparing those who flee but cutting down any who fight, and strip it while fire spreads through the city. Her [Tinkerers] hand her the first crossbow made from its parts, and she turns her army north, away from Liscor."
+		},
+		"b2.celum_watch_hears_esthelm_has_fallen": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"guard": {"prefer": ["wesle"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["wesle"], "flags": ["erin.won_the_hare_bar_fight", "esthelm.burned"], "not_flags": []},
+			"depends_on": ["b2.bar_fight_with_the_brilliant_swords", "b2.rags_burns_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["celum.walls_on_alert", "erin.worried_for_rags"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "The Watch locks up the adventurers for the night. Erin blames the dread on the cold; it comes at the moment [Dangersense] fires across the continent."
+			},
+			"summary": "Wesle scolds Erin and Ryoka over the brawl, then a mage's warning arrives: Goblins have burned Esthelm. The Watch and militia rush to Celum's walls. Back in the Hare, Erin feels a jolt of dread, calms a shaken Ryoka and greets a late guest."
+		},
+		"b2.azkerash_sends_venitra_after_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "azkerash_castle",
+			"roles": {"necromancer": {"prefer": ["azkerash"], "fallback_tags": []}, "chosen": {"prefer": ["venitra"], "fallback_tags": []}},
+			"requires": {"alive": ["azkerash", "venitra"], "flags": ["ryoka.delivered_teriarchs_letter"], "not_flags": []},
+			"depends_on": ["b2.ryoka_delivers_teriarchs_letter_to_azkerash"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.hunted_by_venitra", "azkerash.suspects_teriarch_takes_sides"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Placeholder day. The text states this Necromancer is Perril Chandler, the name Teriarch uses. Venitra takes one more Chosen (Ijvani or Oom). He also shows off a huge new undead for his army."
+			},
+			"summary": "Learning how a Runner slipped past all his undead, Az'kerash fears what she may tell. He sends Venitra, one of his Chosen, to track her down and judge whether to kill her, and wonders whether Teriarch is at last taking sides."
+		},
+		"b2.teriarch_answers_magnolia_while_playing_the_iphone": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"dragon": {"prefer": ["teriarch"], "fallback_tags": []}, "lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["teriarch"], "flags": ["teriarch.copied_the_iphone"], "not_flags": []},
+			"depends_on": ["b2.teriarch_trades_a_rihal_tome_for_the_iphone"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["teriarch.listens_to_earth_music"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "confirmed"},
+			"summary": "Teriarch, delighted, plays Earth songs on his copied iPhone. Magnolia breaks in by spell after an attack on her home and asks him to check it is secure; he grumbles at her manners, scans it, warns of one more spell at her door, and goes back to the music."
+		},
+		"b2.magnolia_warns_the_assassins_guild": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "assassin": {"prefer": ["theofore"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart"], "flags": ["magnolia.plans_to_recruit_zel"], "not_flags": []},
+			"depends_on": ["b2.magnolia_plans_to_bring_zel_north"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.attacked_by_assassins", "magnolia.warned_the_assassins_guild"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Placeholder day. She rules out Tyrion Veltras as the sender. She also worries about the Antinium delegation reaching Liscor and the dungeon there about to be opened."
+			},
+			"summary": "Two [Assassins] who broke into Magnolia's estate lie dead in a corner. She has Theofore dragged in and sends him back to his Guild demanding an answer at once, then frets that the killers knew about the young people from Earth."
+		},
+		"b2.griffon_hunt_opens_the_liscor_dungeon": {
+			"tier": 1,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"scout": {"prefer": ["halrac"], "fallback_tags": []},
+				"captain": {"prefer": ["ulrien"], "fallback_tags": []},
+				"mage": {"prefer": ["revi"], "fallback_tags": [], "optional": true},
+				"mage2": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["halrac", "ulrien"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor_dungeon.opened", "izril.dangersense_alarm"]},
+			"news": "Liscor's buried dungeon is open. Griffon Hunt threw its doors wide, and in that moment [Dangersense] Skills went off in cities across the continent.",
+			"rumor": "Mage [Message] reports say every [Dangersense] from Liscor to Wales and Zeres fired at the very same moment.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Revi wanted to wait for allies; Ulrien feared other teams would strip it first. The doors open on an empty dark corridor. Magnolia's spies expected the Antinium to unearth it within days."
+			},
+			"summary": "At the foot of a long dug-out ramp, Griffon Hunt throws open the dungeon's great doors while Klbkch and fifty Soldiers watch. Nothing comes out, but as Halrac steps in, [Dangersense] fires in him and in people all over Izril."
+		},
+		"b2.drake_assembly_silences_zel": {
+			"tier": 1,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "drake_assembly_hall",
+			"roles": {"general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "matriarch": {"prefer": ["serpentine_matriarch_of_zeres"], "fallback_tags": []}, "lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["zel_shivertail", "serpentine_matriarch_of_zeres"], "flags": ["zel.retreated_to_save_gnolls"], "not_flags": []},
+			"depends_on": ["b2.goblin_lords_army_destroys_stone_spears_camp"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["zel.silenced_by_drake_assembly", "zel.looks_north"]},
+			"news": "Drake rulers gathered to judge General Zel Shivertail waved off his warnings of the Goblin Lord and the Antinium, and Zeres' Matriarch ordered him to be silent.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Placeholder day; the hall and its city are not named. Lords of the Walled Cities, lesser rulers and Watch Captains sit in judgment; Ilvriss stands apart with his own case. The meeting sinks into feuding."
+			},
+			"summary": "Drake rulers meet to judge Zel's war with Ilvriss. He urges an alliance against the Goblin Lord, the Antinium and Flos; they scoff, and the Serpentine Matriarch of Zeres orders him silent. Then [Dangersense] fires in the room, pointing north."
+		},
+		"b2.niers_maps_the_dangersense_alarms": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"strategist": {"prefer": ["niers_astoragon"], "fallback_tags": []}},
+			"requires": {"alive": ["niers_astoragon"], "flags": ["niers.traced_chess_rival_to_liscor", "liscor_dungeon.opened"], "not_flags": []},
+			"depends_on": ["b2.niers_burns_magnolias_letters_before_battle", "b2.griffon_hunt_opens_the_liscor_dungeon"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["niers.suspects_another_ancient_ruin", "niers.worried_by_silent_chess_board"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.48",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Reports come from Liscor, Wales, Zeres and more; the circle is a bit bigger than a past one. The board has not moved in over two days, since Erin left the inn."
+			},
+			"summary": "In Baleros, Niers plots mage reports of [Dangersense] firing all at once across Izril, traces them to one point of origin, and guesses another great ruin has been found. He rereads a letter from Magnolia and frets that his chess rival has gone silent."
+		}
+	},
+	"system": []
+}

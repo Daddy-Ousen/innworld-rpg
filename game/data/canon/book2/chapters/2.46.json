@@ -1,0 +1,57 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.46",
+	"events": {
+		"b2.teriarch_scries_erin_and_spares_ryokas_memory": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "dragon": {"prefer": ["teriarch"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["teriarch.scrying_for_erin"], "not_flags": []},
+			"depends_on": ["b2.ryoka_loses_a_riddle_game_to_teriarch", "b2.wesle_brings_erin_to_stitchworks"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_erin_is_safe", "ryoka.kept_her_memories", "teriarch.knows_ryoka_is_earther"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.46", "confidence": "confirmed"},
+			"summary": "The spell shows Erin safe, chatting with Octavia in Celum. Ryoka pays her riddle debt - 'Ryoka' is a translation of her birth name, which foiled his scrying - and argues him out of wiping her memory of him."
+		},
+		"b2.teriarch_trades_a_rihal_tome_for_the_iphone": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "dragon": {"prefer": ["teriarch"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.kept_her_memories"], "not_flags": []},
+			"depends_on": ["b2.teriarch_scries_erin_and_spares_ryokas_memory"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.has_rihal_spellbook", "teriarch.copied_the_iphone"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.46",
+				"confidence": "confirmed",
+				"note": "The tome teaches a reader a spell at a glance. Ryoka means it as the Silverfang tribe's gift to the Gnoll meeting, to clear Erin's debt."
+			},
+			"summary": "Ryoka asks for a spellbook to replace the Silverfangs' lost gift. Teriarch shows off a teaching tome of the Rihal Imperium, then, enchanted by the music on her phone, conjures a copy for himself; Ryoka demands the tome in fair trade and gets it."
+		},
+		"b2.teriarch_teleports_ryoka_to_stitchworks": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"dragon": {"prefer": ["teriarch"], "fallback_tags": [], "optional": true},
+				"alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "erin_solstice"], "flags": ["ryoka.has_rihal_spellbook"], "not_flags": []},
+			"depends_on": ["b2.teriarch_trades_a_rihal_tome_for_the_iphone"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.in_celum", "ryoka.reunited_with_erin"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.46", "confidence": "confirmed"},
+			"summary": "Teriarch teleports Ryoka into Stitchworks just as Octavia, her shop still smoking from Erin's experiments with fire and fumes, is chasing Erin round the counter with a log. Ryoka lands on her feet, dizzy and sick."
+		}
+	},
+	"system": []
+}

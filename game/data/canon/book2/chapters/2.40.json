@@ -1,0 +1,111 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.40",
+	"events": {
+		"b2.ryoka_tells_liscor_the_stone_spears_are_gone": {
+			"tier": 1,
+			"window": {"earliest": 68, "latest": 68, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"warrior": {"prefer": ["brunkr"], "fallback_tags": [], "optional": true},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "krshia"], "flags": ["stone_spears.tribe_devastated", "ryoka.back_at_the_wandering_inn"], "not_flags": []},
+			"depends_on": ["b2.erin_and_ryoka_fight_over_magnolia"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.knows_stone_spears_fell", "liscor.knows_zel_lost_to_goblin_lord"]},
+			"news": "Word runs through Liscor's market: a Goblin Lord's army has wiped out the Stone Spears Gnoll tribe in the north, and even General Zel Shivertail could not stop it.",
+			"rumor": "Gnoll traders whisper that a whole tribe died in the northern snows, and that the Goblin Lord who did it is still on the march.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.40", "confidence": "confirmed"},
+			"summary": "Taking Mrsha through the market, Ryoka finds Krshia and Brunkr snarling at each other and hushes the whole street: she tells Krshia Silverfang, in front of every Gnoll within earshot, that the Stone Spears tribe is gone."
+		},
+		"b2.ryoka_takes_erins_debt_to_the_silverfangs": {
+			"tier": 2,
+			"window": {"earliest": 68, "latest": 68, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"warrior": {"prefer": ["brunkr"], "fallback_tags": [], "optional": true},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "krshia"], "flags": ["liscor.knows_stone_spears_fell"], "not_flags": []},
+			"depends_on": ["b2.ryoka_tells_liscor_the_stone_spears_are_gone"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.took_on_the_gnoll_debt", "ryoka.met_lyonette", "gnoll.tribes_must_meet"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.40",
+				"confidence": "confirmed",
+				"note": "That morning Ryoka meets Lyonette over crepes Mrsha helps cook. Ryoka's 800 gold from Teriarch would cover about 1.6% of the debt. Krshia says it must be paid soon; the young Gnolls want blood."
+			},
+			"summary": "In her home Krshia confirms a Goblin Lord beat Zel and slew the Stone Spears, and says the tribes must meet. The thief's debt of 50,000 gold falls on Erin while she shelters Lyonette, so Ryoka takes it on herself and vows to pay it."
+		},
+		"b2.erin_punches_brunkr_into_a_wall": {
+			"tier": 2,
+			"window": {"earliest": 68, "latest": 68, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"warrior": {"prefer": ["brunkr"], "fallback_tags": []},
+				"cub": {"prefer": ["mrsha"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "brunkr", "mrsha"], "flags": ["ryoka.took_on_the_gnoll_debt"], "not_flags": []},
+			"depends_on": ["b2.ryoka_takes_erins_debt_to_the_silverfangs"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["brunkr.punched_by_erin", "mrsha.bit_brunkr"], "relationship": [{"from": "krshia", "to": "erin_solstice", "delta": 1}, {"from": "brunkr", "to": "erin_solstice", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.40", "confidence": "confirmed"},
+			"summary": "Left in the kitchen with Mrsha, Brunkr tells the cub she is cursed and brought ruin on her tribe. Mrsha bites his hand, and Erin stands up without a word and punches him across the room into a wall. Krshia nods her approval."
+		},
+		"b2.rags_sent_away_from_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 68, "latest": 68, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"goblin": {"prefer": ["rags"], "fallback_tags": []},
+				"hob": {"prefer": ["garen"], "fallback_tags": [], "optional": true},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "rags"], "flags": ["erin.protects_goblins_openly"], "not_flags": []},
+			"depends_on": ["b2.erin_punches_brunkr_into_a_wall"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.banned_from_inn", "ryoka.hates_goblins"], "clear_flags": ["rags.disguised_visit_to_inn_underway"], "relationship": [{"from": "rags", "to": "erin_solstice", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.40",
+				"confidence": "confirmed",
+				"note": "2.43 and 2.48 confirm Rags counts herself banned, for reasons she understands but resents: she saw herself in Mrsha's eyes."
+			},
+			"summary": "Coming back with a sleeping Mrsha, Ryoka sees Rags and her Hob waiting outside the inn and demands they go. Erin reluctantly sends them away, and from then on Rags is barred from the inn."
+		},
+		"b2.ryoka_learns_of_the_faerie_flower_drink": {
+			"tier": 2,
+			"window": {"earliest": 68, "latest": 68, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"scout": {"prefer": ["halrac"], "fallback_tags": [], "optional": true},
+				"clerk": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["rags.banned_from_inn"], "not_flags": []},
+			"depends_on": ["b2.rags_sent_away_from_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.tasted_faerie_flower_drink", "frost_fairies.dismayed_by_the_drink"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.40", "confidence": "confirmed"},
+			"summary": "At a full inn that night, Ryoka realises the golden flowers on a table are faerie gold, and that Erin brews them into a drink through [Wondrous Fare]. She tries it, and the watching Frost Faeries are appalled a mortal found a use for their trick."
+		}
+	},
+	"system": []
+}

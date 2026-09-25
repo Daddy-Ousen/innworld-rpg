@@ -1,0 +1,138 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.42",
+	"events": {
+		"b2.lyonette_gains_the_barmaid_class": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"thief": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn"], "not_flags": []},
+			"depends_on": ["b2.erin_takes_in_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.class_barmaid", "lyonette.secretly_a_princess"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.42",
+				"confidence": "confirmed",
+				"note": "From her own narration: she is eighteen, and royal. Keep it a secret, not news. Spelled 'Terrandria' in this chapter. Whether she is book1's princess_thief is not linked in data."
+			},
+			"summary": "Lyonette, secretly a [Princess] and heir of a Terandrian kingdom, is outraged to find she has gained a common class - [Barmaid], Level 3, with [Lesser Stamina] - yet quietly glad to have levelled at all."
+		},
+		"b2.erin_builds_a_sledge_for_toren": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}, "merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "toren"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.built_a_sledge", "toren.pulls_the_sledge"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.42",
+				"confidence": "confirmed",
+				"note": "Selys takes Mrsha into the city for the day. Lyonette, grumbling, rides along on the trip."
+			},
+			"summary": "Wanting to roam the winter, Erin buys a sled, lumber and nails from Krshia and uses [Advanced Crafting] to build a long sledge on skis. Toren, who never tires, is harnessed to pull it through the deep snow."
+		},
+		"b2.erin_raids_the_giant_bee_cave": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "giant_bee_cave",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}, "thief": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "toren"], "flags": ["erin.built_a_sledge"], "not_flags": []},
+			"depends_on": ["b2.erin_builds_a_sledge_for_toren"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.has_ashfire_honey", "erin.has_ashfire_bees", "erin.collected_cave_mushrooms"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.42",
+				"confidence": "confirmed",
+				"note": "The bees, each bigger than a hand, are named Ashfire Bees in 2.44. Frost Faeries ride along and eat bees and larvae. Dropped from high up, Toren puts himself back together."
+			},
+			"summary": "Toren leads Erin and Lyonette to caves of mushrooms and mould, then to a nest of giant bees. The swarm chases the girls out and carries Toren into the sky, but he comes back with dead bees and a great slab of honeycomb."
+		},
+		"b2.snow_golems_attack_erins_sledge": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}, "thief": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "toren"], "flags": ["erin.has_ashfire_honey"], "not_flags": []},
+			"depends_on": ["b2.erin_raids_the_giant_bee_cave"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.fought_snow_golems", "erin.has_golem_core_snow", "erin.has_corusdeer_horns"]},
+			"stage": {
+				"area": "floodplains_south",
+				"hours": [10, 14],
+				"foes": [
+					{"enemy": "snow_golem", "pos": [11, 6]},
+					{"enemy": "snow_golem", "pos": [13, 8]},
+					{"enemy": "snow_golem", "pos": [9, 8]}
+				],
+				"line": "A snowman twice Erin's height heaves up out of a drift and drags her off the sledge; two more lurch at Toren.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [16, 4],
+						"allies": ["erin_solstice", "toren"],
+						"line": "Erin lays into her golem with frying pan and fists while Toren draws his sword."
+					}
+				],
+				"note": "M8.7: three golems of packed snow, slow and weak but hard to punch. Lyonette rides along but has no npc_behaviour entry, so she is not placed. The Frost Faeries only watch and bet."
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.42",
+				"confidence": "confirmed",
+				"note": "The Corusdeer lie hacked apart; the text hints Toren killed them earlier. Erin jars the magic snow from the golems' heads and wraps the horns so they cannot set the sledge alight."
+			},
+			"summary": "Three Snow Golems ambush the sledge; one hauls Erin off and bites her with stick teeth while two bury Toren. Erin digs free and smashes her golem's cold core, and Toren cuts down the rest. Farther out, Erin takes the horns of some slain Corusdeer."
+		},
+		"b2.toren_pulls_a_sledding_crowd": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"skeleton": {"prefer": ["toren"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true},
+				"clerk": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["toren", "erin_solstice"], "flags": ["erin.fought_snow_golems"], "not_flags": []},
+			"depends_on": ["b2.snow_golems_attack_erins_sledge"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.sledding_craze", "krshia.sells_sleds", "toren.used_as_a_sled_lift"]},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [14, 18],
+				"kind": "scene",
+				"npcs": [
+					{"npc": "toren", "pos": [18, 17]},
+					{"npc": "selys", "pos": [19, 16]},
+					{"npc": "klbkch", "pos": [20, 17]},
+					{"npc": "krshia", "pos": [21, 16]}
+				],
+				"line": "Laughing Drakes and Gnolls crowd the snowy slope, queuing for a turn on Erin's runaway sledge.",
+				"note": "M8.7: a friendly scene, no fight. The inn hill stands in for the slope under Liscor's walls. Erin keeps her own schedule. Ryoka and Mrsha have no npc_behaviour entry, so they keep story roles but are not placed."
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.42", "confidence": "confirmed"},
+			"summary": "Erin shoots down a steep hill by Liscor in the sledge while Toren hauls it back up. The Watch laughs from the walls, then a crowd joins in: Selys and Ryoka queue to ride, Mrsha gets a little sled Krshia starts selling, and Toren toils for hours."
+		}
+	},
+	"system": [
+		{"who": "lyonette", "kind": "class", "name": "[Barmaid]", "level": 3, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "skill", "name": "[Lesser Stamina]", "level": null, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "class", "name": "[Princess]", "level": null, "confidence": "confirmed", "note": "Her royal class, kept secret."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Advanced Crafting]", "level": null, "confidence": "confirmed", "note": "Used to build the sledge."}
+	]
+}

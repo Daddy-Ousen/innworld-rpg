@@ -188,6 +188,60 @@
 			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.47", "confidence": "confirmed"},
 			"summary": "A run-down inn in Celum kept by Agnes, a former [Tailor], while her husband and cook lies ill; Erin takes over its kitchen after Toren strands her."
+		},
+		"baleros": {
+			"name": "Baleros",
+			"kind": "region",
+			"parent": null,
+			"tags": ["continent", "jungle", "war"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "interlude_quiet_discussions", "confidence": "confirmed", "note": "Stands in for Niers' war camp and tent; the battlefield against General Grimvol is not named."},
+			"summary": "A hot, jungle-covered continent where armies are hired out to settle quarrels. Niers Astoragon camps there with his army and students on the eve of battle."
+		},
+		"liscor_park": {
+			"name": "Liscor's park",
+			"kind": "landmark",
+			"parent": "liscor",
+			"tags": ["park", "playground", "warded"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.41", "confidence": "confirmed"},
+			"summary": "A big park in the middle of walled Liscor, with trees, grass and a towering wooden playground whose safety spells a Wistram mage renews every year."
+		},
+		"giant_bee_cave": {
+			"name": "The giant bee cave",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["cave", "bees", "honey", "danger"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.42", "confidence": "confirmed", "note": "Its exact place is not given; one of several caves Toren had found."},
+			"summary": "A cave in the snowy land near Liscor holding a huge nest of hand-sized Ashfire Bees and their honey. Erin raids it with Toren on her first sledge trip."
+		},
+		"north_of_the_high_passes": {
+			"name": "North of the High Passes",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["wilderness", "snow", "forest", "wolves"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.44", "confidence": "likely", "note": "Distance to Celum is a guess; she walks under three hours before the wolves, then pushes the sledge for miles."},
+			"summary": "Flat, snowbound wild land just north of the High Passes, with woods, wolves and a hibernating bear, some hours from the road to Celum. Toren leaves Erin here."
+		},
+		"zeres": {
+			"name": "Zeres",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "drake", "walled_city"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "confirmed"},
+			"summary": "A Drake Walled City whose ruler, the Serpentine Matriarch, sits among the lords who judge Zel Shivertail. Its [Dangersense] alarm is one of those reported to Niers."
+		},
+		"drake_assembly_hall": {
+			"name": "The Drake assembly hall",
+			"kind": "building",
+			"parent": null,
+			"tags": ["drake", "assembly", "council"],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "guess", "note": "Neither the room nor its city is named; the id is ours."},
+			"summary": "A hall where rulers of the Drake cities lounge on long padded seats to hear and judge Zel Shivertail's account of his war with Ilvriss."
 		}
 	}
 }

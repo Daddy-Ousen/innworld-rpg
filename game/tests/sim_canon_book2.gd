@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 2 canon (the magic call and 2.00 are day 41).
 const FIRST_DAY := 41
-## Last day with extracted Book 2 canon (M8.4: chapters 2.27G-2.38, day 67).
-const LAST_DAY := 67
+## Last day with extracted Book 2 canon (M8.7: the whole book, through 2.48, day 71).
+const LAST_DAY := 71
 const ARRIVAL_DAY := 8
 
 var _db: DataDb
@@ -81,6 +81,31 @@ func test_book2_runs_as_canon() -> void:
 	assert_true(gs.flags.has("calruz.missing"), "Calruz is still missing")
 	assert_true(gs.world.is_alive(_db.canon, "calruz"))
 	assert_true(gs.world.is_alive(_db.canon, "gazi_pathseeker"))
+	# The end of Book 2 (M8.7): Erin stranded in Celum, Toren gone, Rags barred
+	# from the inn, Esthelm burned, the Liscor dungeon open.
+	for f: String in ["erin.stranded_north", "erin.left_liscor", "erin.in_celum", "toren.left_erin",
+			"rags.banned_from_inn", "esthelm.burned", "liscor_dungeon.opened", "ryoka.took_on_the_gnoll_debt",
+			"ryoka.hunted_by_venitra", "garen.hit_squad_hunts_erin", "teriarch.copied_the_iphone"]:
+		assert_true(gs.flags.has(f), f)
+	for f: String in ["toren.missing", "ksmvr.deposed"]:
+		assert_false(gs.flags.has(f), f)
+	# That night Erin sleeps at the Frenzied Hare and Toren is off the map.
+	for i in 200:
+		if gs.clock.minute() >= 23 * 60:
+			break
+		Commands.wait(gs, _db, 3600)
+	assert_gte(gs.clock.minute(), 23 * 60, "late at night")
+	assert_eq(_where(gs, "erin_solstice").get_slice(" ", 0), "celum_frenzied_hare", "Erin at the Hare")
+	assert_eq(_where(gs, "toren"), "off map", "Toren gone")
+
+
+func _where(gs: GameState, id: String) -> String:
+	var n: Dictionary = gs.npcs.npcs.get(id, {})
+	if n.is_empty():
+		return "gone"
+	if BehaviourDb.is_off_map(n["area"]):
+		return "off map"
+	return "%s %d,%d" % [n["area"], int(n["x"]), int(n["y"])]
 
 
 func test_without_pisces_no_one_hears_ceria() -> void:
