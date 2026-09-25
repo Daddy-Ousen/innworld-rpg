@@ -7,7 +7,7 @@ M8 plan approved (see `docs/ROADMAP.md` M8 and `docs/adr/0014-m8-book2-and-celum
 
 ## Waiting on the user
 - Review M8.1 events (all `candidate`), then flip to `reviewed` in a second PR (M7 flow).
-- Push the branch and open the PR (ask first).
+- PR #26 is open: https://github.com/Daddy-Ousen/innworld-rpg/pull/26
 - M8.W Winter details: cold rules (how much HP, what counts as warm, firewood?) and Frost Fairies on the map (what they do). Ask before building. Save change expected.
 
 ## Next
