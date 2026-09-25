@@ -1,19 +1,20 @@
 {
 	"schema_version": 1,
-	"note": "Tile types for data/maps. 'color' is for the placeholder tiles made in code (M4.3). Kenney atlas coords come later.",
+	"note": "Tile types for data/maps. 'color' is for the placeholder tiles made in code (M4.3). Kenney atlas coords come later. 'winter_color' is drawn instead of 'color' once winter has come (M8.W).",
 	"tiles": {
-		"grass": {"name": "Grass", "walk": true, "color": "#6a8f3a"},
-		"tall_grass": {"name": "Tall grass", "walk": true, "color": "#7f9a3c"},
-		"dirt_road": {"name": "Dirt road", "walk": true, "color": "#9c7a4f"},
-		"cobble": {"name": "Cobblestones", "walk": true, "color": "#8a8a82"},
+		"grass": {"name": "Grass", "walk": true, "color": "#6a8f3a", "winter_color": "#e4ebef"},
+		"tall_grass": {"name": "Tall grass", "walk": true, "color": "#7f9a3c", "winter_color": "#d6dfe4"},
+		"dirt_road": {"name": "Dirt road", "walk": true, "color": "#9c7a4f", "winter_color": "#c9c1b6"},
+		"cobble": {"name": "Cobblestones", "walk": true, "color": "#8a8a82", "winter_color": "#b9bcc0"},
 		"city_wall": {"name": "City wall", "walk": false, "color": "#4f4a44"},
 		"building": {"name": "Building", "walk": false, "color": "#6e5a48"},
 		"water": {"name": "Water", "walk": false, "color": "#3f6fa8"},
-		"shallows": {"name": "Shallow water", "walk": true, "color": "#6d97c4"},
-		"tree": {"name": "Tree", "walk": false, "color": "#2f5a2a"},
-		"rock": {"name": "Rock", "walk": false, "color": "#7a7468"},
+		"shallows": {"name": "Shallow water", "walk": true, "color": "#6d97c4", "winter_color": "#9dbad3"},
+		"tree": {"name": "Tree", "walk": false, "color": "#2f5a2a", "winter_color": "#3d5a4a"},
+		"rock": {"name": "Rock", "walk": false, "color": "#7a7468", "winter_color": "#9a9a98"},
 		"wood_floor": {"name": "Wooden floor", "walk": true, "color": "#a37b4c"},
 		"wood_wall": {"name": "Wooden wall", "walk": false, "color": "#5c4029"},
-		"door": {"name": "Door", "walk": true, "color": "#c49a5a"}
+		"door": {"name": "Door", "walk": true, "color": "#c49a5a"},
+		"snow_wall": {"name": "Wall of packed snow", "walk": false, "color": "#f4f8fb"}
 	}
 }

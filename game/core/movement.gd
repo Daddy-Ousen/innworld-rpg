@@ -20,13 +20,16 @@ static func ensure_placed(gs: GameState, db: DataDb) -> bool:
 
 ## Tries one step in `dir` (n, s, e, w). Returns
 ## {"moved": bool, "blocked": bool, "refused": bool, "exit_to": area or "", "minutes": int,
-##  "npc": id of the NPC in the way or "", "monster": id of the monster in the way or ""}.
+##  "npc": id of the NPC in the way or "", "monster": id of the monster in the way or "",
+##  "fairy": id of the Frost Fairy in the way or "" (M8.W)}.
 ## refused: collapse is due, the player is knocked out, or there is no world.
-## blocked: a wall, water, a solid object, an NPC, a monster or the map edge.
-## The player still turns to face `dir`.
+## blocked: a wall, water, a solid object, an NPC, a monster, a fairy or the
+## map edge. The player still turns to face `dir`. While slowed by fairy
+## snow (M8.W), a step costs double time.
 static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var out := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
-		"npc": "", "monster": ""}
+		"npc": "", "monster": "", "fairy": ""}
+	db.maps.sync_flags(gs.flags)
 	if not PlayerState.DIRS.has(dir) or not ensure_placed(gs, db) \
 			or gs.clock.is_collapse_due(db.rules["clock"]) or gs.player.hp == 0:
 		out["refused"] = true
@@ -36,7 +39,10 @@ static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var to := p.pos() + (PlayerState.DIRS[dir] as Vector2i)
 	out["npc"] = gs.npcs.at(p.area, to)
 	out["monster"] = gs.combat.at(p.area, to)
-	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "":
+	if gs.winter.area == p.area:
+		out["fairy"] = gs.winter.at(to)
+	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "" \
+			or out["fairy"] != "":
 		out["blocked"] = true
 		return out
 	var e := db.maps.exit_at(p.area, to)
@@ -47,7 +53,7 @@ static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 			return out
 		out["minutes"] = gs.clock.total_minutes - before
 	else:
-		out["minutes"] = _spend_step(gs, db)
+		out["minutes"] = _spend_seconds(gs, Winter.step_seconds(gs, int(db.rules["world"]["step_seconds"])))
 	if e.is_empty():
 		p.place(p.area, to)
 	else:

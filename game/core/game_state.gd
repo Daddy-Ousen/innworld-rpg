@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 9
+const SAVE_VERSION := 10
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -27,6 +27,8 @@ var player: PlayerState
 var npcs: NpcRoster
 ## Monsters in the player's area and the fight in progress (M5).
 var combat: CombatState
+## The cold and the Frost Fairies (M8.W).
+var winter: WinterState
 
 
 func _init(seed_value: int = 0) -> void:
@@ -38,6 +40,7 @@ func _init(seed_value: int = 0) -> void:
 	player = PlayerState.new()
 	npcs = NpcRoster.new()
 	combat = CombatState.new()
+	winter = WinterState.new()
 
 
 ## A fresh game at the start time and place from data/rules.json. The
@@ -49,6 +52,7 @@ static func new_game(seed_value: int, db: DataDb) -> GameState:
 	gs.progression.day_start = gs.clock.total_minutes
 	Director.run(gs, db, gs.clock.day() - 1)
 	gs.world.news.clear()
+	db.maps.sync_flags(gs.flags)
 	Movement.ensure_placed(gs, db)
 	Combat.sync(gs, db)
 	NpcSim.sync(gs, db)
@@ -70,6 +74,7 @@ func to_dict() -> Dictionary:
 		"player": player.to_dict(),
 		"npcs": npcs.to_dict(),
 		"combat": combat.to_dict(),
+		"winter": winter.to_dict(),
 	}
 
 
@@ -88,6 +93,7 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.player = PlayerState.from_dict(d["player"])
 	gs.npcs = NpcRoster.from_dict(d["npcs"])
 	gs.combat = CombatState.from_dict(d["combat"])
+	gs.winter = WinterState.from_dict(d["winter"])
 	return gs
 
 

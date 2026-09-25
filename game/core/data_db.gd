@@ -19,6 +19,13 @@ const RULE_FIELDS := {
 		"heal_actions", "night_heal", "knockout", "xp", "spare_tags", "stage"],
 }
 const CONTEXT_TESTS := ["min", "max", "equals"]
+## rules.winter (M8.W, optional).
+const WINTER_FIELDS := ["flag", "warned_flag", "clothes_flag", "cold", "fairies"]
+const WINTER_COLD_FIELDS := ["every_minutes", "damage", "floor_hp", "clothes_mult", "warm_radius",
+	"line", "morning_line"]
+const WINTER_FAIRY_FIELDS := ["name", "chance", "count", "min_distance", "act_seconds", "iron_tag",
+	"iron_radius", "talk_action", "safe_talks_per_day", "annoy_chance", "snow_damage", "slow_steps",
+	"lines", "swat_line", "snow_line"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
 	"race_limits", "loss", "consolidation", "canon_ref"]
 const SKILL_FIELDS := ["name", "rarity", "pools", "tag_affinity", "effects", "canon_ref"]
@@ -120,6 +127,42 @@ func _validate_rules() -> void:
 		for field: String in RULE_FIELDS[section]:
 			if not (rules[section] as Dictionary).has(field):
 				errors.append("rules.%s: missing '%s'." % [section, field])
+	if rules.has("winter"):  # optional (M8.W): toy dbs have no winter
+		_validate_winter(rules["winter"])
+
+
+## rules.winter (M8.W): see Winter.
+func _validate_winter(w: Dictionary) -> void:
+	var need := {"": WINTER_FIELDS, "cold": WINTER_COLD_FIELDS, "fairies": WINTER_FAIRY_FIELDS}
+	for part: String in need:
+		var d: Variant = w if part == "" else w.get(part, null)
+		var where := "rules.winter" + ("" if part == "" else "." + part)
+		if not d is Dictionary:
+			errors.append("%s: must be an object." % where)
+			continue
+		for field: String in need[part]:
+			if not (d as Dictionary).has(field):
+				errors.append("%s: missing '%s'." % [where, field])
+	if errors.any(func(e: String) -> bool: return e.begins_with("rules.winter")):
+		return
+	var cold: Dictionary = w["cold"]
+	if int(cold["every_minutes"]) < 1 or int(cold["damage"]) < 1 or int(cold["floor_hp"]) < 1:
+		errors.append("rules.winter.cold: every_minutes, damage and floor_hp must be >= 1.")
+	if float(cold["clothes_mult"]) < 1.0:
+		errors.append("rules.winter.cold: clothes_mult must be >= 1 (a longer tick).")
+	var f: Dictionary = w["fairies"]
+	if float(f["chance"]) < 0.0 or float(f["chance"]) > 1.0 or float(f["annoy_chance"]) < 0.0 \
+			or float(f["annoy_chance"]) > 1.0:
+		errors.append("rules.winter.fairies: chance and annoy_chance must be 0.0-1.0.")
+	var count: Variant = f["count"]
+	if not count is Array or (count as Array).size() != 2 or int(count[0]) < 1 or int(count[0]) > int(count[1]):
+		errors.append("rules.winter.fairies: count must be [min, max] with 1 <= min <= max.")
+	if not actions.has(f["talk_action"]):
+		errors.append("rules.winter.fairies: unknown talk_action '%s'." % f["talk_action"])
+	if not f["lines"] is Array or (f["lines"] as Array).is_empty():
+		errors.append("rules.winter.fairies: lines must be a non-empty list.")
+	if int(f["act_seconds"]) < 1:
+		errors.append("rules.winter.fairies: act_seconds must be >= 1.")
 
 
 func _validate_action(id: String, a: Dictionary) -> void:

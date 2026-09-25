@@ -7,6 +7,9 @@
 ## foe, the helpers and the LABEL_NEAREST foes nearest the player keep their
 ## label, and a label that would overlap another is left out (see
 ## labelled). A helper has a blue edge; a fallen NPC is faded, "(down)".
+## Winter (M8.W): once the winter flag is set, tiles with a "winter_color"
+## are drawn in it (the snow look); map overlays (the snow wall) redraw
+## when they switch; Frost Fairies are small pale diamonds.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -40,6 +43,8 @@ const DOWN_ALPHA := 0.35
 const CALM_EDGE := Color(0, 0, 0, 0.6)
 ## A dark ring between the edge and the body, so a green Goblin stands out on grass.
 const RING := Color(0.08, 0.08, 0.08, 1)
+const FAIRY_BODY := Color("#bfe8ff")
+const FAIRY_EDGE := Color("#ffffff")
 
 ## Map id on screen now ("" = none).
 var area := ""
@@ -52,22 +57,30 @@ var enemies: Dictionary = {}
 ## NPC id → max HP (NpcReact.stats), for the HP bars of hurt NPCs.
 var npc_max_hp: Dictionary = {}
 var _maps: MapDb
+## The world flag that turns on the snow look ("" = never), and whether
+## the tiles are drawn in winter colours now.
+var _winter_flag := ""
+var _winter := false
+var _overlay_key := ""
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var marks: Node2D = $Marks
 @onready var npcs: Node2D = $Npcs
 @onready var monsters: Node2D = $Monsters
+@onready var fairies: Node2D = $Fairies
 @onready var player: Node2D = $Player
 @onready var nose: ColorRect = $Player/Nose
 @onready var camera: Camera2D = $Player/Camera
 
 
 func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
-		max_hp: Dictionary = {}) -> void:
+		max_hp: Dictionary = {}, winter_flag: String = "") -> void:
 	_maps = maps
 	npc_names = names
 	enemies = enemy_defs
 	npc_max_hp = max_hp
+	_winter_flag = winter_flag
+	_winter = false
 	atlas.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas)
 	area = ""
@@ -77,11 +90,22 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 func refresh(gs: GameState) -> void:
 	if _maps == null or not gs.player.is_placed():
 		return
+	_maps.sync_flags(gs.flags)  # the overlays are a cache shared by every game on this db
+	var winter := _winter_flag != "" and gs.flags.has(_winter_flag)
+	if winter != _winter:
+		_winter = winter
+		atlas.clear()
+		tiles.tile_set = make_tile_set(_maps.tiles, atlas, winter)
+		area = ""
+	if _maps.overlay_key != _overlay_key:
+		_overlay_key = _maps.overlay_key
+		area = ""
 	var new_area := gs.player.area != area
 	if new_area:
 		_show_area(gs.player.area)
 	_show_npcs(gs)
 	_show_monsters(gs)
+	_show_fairies(gs)
 	player.position = cell_center(gs.player.pos())
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
 	if new_area:  # jump, do not glide across the new map
@@ -94,12 +118,13 @@ static func cell_center(cell: Vector2i) -> Vector2:
 
 ## One atlas row, one tile per tiles.json entry (file order). Tiles you
 ## cannot walk on get a darker edge. Fills `atlas_out` with id → coords.
-static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary) -> TileSet:
+## With `winter`, a tile's "winter_color" is used where it has one.
+static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: bool = false) -> TileSet:
 	var ids := tile_defs.keys()
 	var img := Image.create(TILE * maxi(ids.size(), 1), TILE, false, Image.FORMAT_RGBA8)
 	for i in ids.size():
 		var def: Dictionary = tile_defs[ids[i]]
-		var color := Color.html(def["color"])
+		var color := Color.html(def["winter_color"] if winter and def.has("winter_color") else def["color"])
 		var cell := Rect2i(i * TILE, 0, TILE, TILE)
 		if def["walk"]:
 			img.fill_rect(cell, color)
@@ -214,6 +239,23 @@ func _show_monsters(gs: GameState) -> void:
 				_add_label(marker, monster_label(m, e))
 			_bar(marker, float(m["hp"]) / maxi(int(e.get("hp", m["hp"])), 1))
 		monsters.add_child(marker)
+
+
+## A small pale diamond per Frost Fairy in the player's area (no label).
+func _show_fairies(gs: GameState) -> void:
+	for child in fairies.get_children():
+		fairies.remove_child(child)
+		child.queue_free()
+	if gs.winter.area != area:
+		return
+	for id in gs.winter.ids():
+		var marker := Node2D.new()
+		marker.name = id
+		marker.position = cell_center(WinterState.pos_of(gs.winter.fairies[id]))
+		marker.rotation = PI / 4.0
+		_square(marker, 3, FAIRY_EDGE)
+		_square(marker, 2, FAIRY_BODY)
+		fairies.add_child(marker)
 
 
 ## Ids of the monsters in the player's area that keep their label. In

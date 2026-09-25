@@ -8,6 +8,8 @@
 ## action: the presentation ends the day with Commands.sleep.
 ## Objects with an "item" (M5.2) also offer TAKE: the presentation calls
 ## Commands.take, and the player holds that item.
+## Frost Fairies next to the player (M8.W) are options too, with the id
+## "fairy:<id>" and "fairy": true; talking to one goes to Winter.talk.
 class_name Interact
 extends RefCounted
 
@@ -29,6 +31,10 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
 			"item": ""})
+	for id in Winter.near(gs):
+		var fr: Dictionary = Winter.rules(db)["fairies"]
+		out.append({"id": Winter.FAIRY + id, "name": fr["name"], "npc": false, "fairy": true,
+			"actions": [fr["talk_action"]], "sleep": false, "item": ""})
 	return out
 
 
@@ -55,6 +61,8 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	if not (obj["actions"] as Array).has(action_id):
 		return _fail(("You cannot %s with %s." if obj["npc"] else "You cannot %s at the %s.")
 				% [action_id, obj["name"]])
+	if obj.get("fairy", false):
+		return Winter.talk(gs, db, object_id.substr(Winter.FAIRY.length()))
 	var p := gs.player
 	var context := {"location": db.maps.areas[p.area]["location"]}
 	var zone := db.maps.zone_at(p.area, p.pos())

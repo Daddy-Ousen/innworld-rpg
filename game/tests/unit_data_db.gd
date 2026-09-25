@@ -4,7 +4,8 @@ var _rules: Dictionary
 
 
 func before_all() -> void:
-	_rules = DataDb.load_dir().rules
+	_rules = DataDb.load_dir().rules.duplicate(true)
+	_rules.erase("winter")  # its talk action is not in these toy actions
 
 
 func _action(tags: Dictionary) -> Dictionary:

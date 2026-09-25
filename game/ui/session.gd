@@ -23,6 +23,7 @@ func _ready() -> void:
 
 
 func set_state(new_gs: GameState) -> void:
+	db.maps.sync_flags(new_gs.flags)
 	gs = new_gs
 	fresh = false
 	state_changed.emit()

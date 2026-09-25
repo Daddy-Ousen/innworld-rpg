@@ -67,5 +67,48 @@
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]
+	},
+	"winter": {
+		"flag": "izril.winter",
+		"warned_flag": "player.warned_of_cold",
+		"clothes_flag": "player.warm_clothes",
+		"cold": {
+			"every_minutes": 30,
+			"damage": 1,
+			"floor_hp": 1,
+			"clothes_mult": 2.0,
+			"warm_radius": 2,
+			"line": "The cold bites through your clothes. (-%d HP)",
+			"morning_line": "Winter has come. Outdoors the cold wears you down: stay indoors or by a fire."
+		},
+		"fairies": {
+			"name": "Frost Fairy",
+			"chance": 0.6,
+			"count": [
+				2,
+				4
+			],
+			"min_distance": 3,
+			"act_seconds": 6,
+			"iron_tag": "iron",
+			"iron_radius": 4,
+			"talk_action": "talk_to_fairy",
+			"safe_talks_per_day": 1,
+			"annoy_chance": 0.5,
+			"snow_damage": 1,
+			"slow_steps": 10,
+			"lines": [
+				"Stop gawping, mortal. Ye look like a frozen fish.",
+				"Away with ye! This field is ours till the thaw.",
+				"Hah! Another lost one who can see us. How dull.",
+				"Yer nose is going blue. It suits ye.",
+				"Talk, talk, talk. Mortals never learn to be quiet.",
+				"We could bury ye to the chin and nobody would dig.",
+				"Bring us something shiny that isn't iron, and maybe we'll listen.",
+				"Ye smell of smoke and fear, wee thing."
+			],
+			"swat_line": "You swat at a Frost Fairy. It dodges, laughing.",
+			"snow_line": "A heap of snow drops on your head. You slog on slowly for a while."
+		}
 	}
 }

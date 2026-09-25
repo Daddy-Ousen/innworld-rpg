@@ -35,7 +35,9 @@ func refresh(gs: GameState, db: DataDb) -> void:
 
 
 ## "HP 14/20 · Held: Chair" (or "Held: nothing"); in a staged fight
-## (M7.B) also " · Foes left: 23" (on the map and in the waves to come).
+## (M7.B) also " · Foes left: 23" (on the map and in the waves to come);
+## in winter (M8.W) " · Cold" outdoors away from a fire, and " · Slowed"
+## under fairy snow.
 static func health(gs: GameState, db: DataDb) -> String:
 	var held := "nothing"
 	if gs.player.held != "":
@@ -44,6 +46,10 @@ static func health(gs: GameState, db: DataDb) -> String:
 	var left := Stage.foes_left(gs, db)
 	if left >= 0:
 		out += " · Foes left: %d" % left
+	if Winter.status(gs, db) == "cold":
+		out += " · Cold"
+	if gs.winter.slowed > 0:
+		out += " · Slowed"
 	return out
 
 

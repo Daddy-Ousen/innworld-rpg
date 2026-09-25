@@ -10,6 +10,7 @@ static func db() -> DataDb:
 	rules["levels"] = {"base_xp": 100, "growth": 2.0, "capstones": [3]}
 	rules["offers"] = {"max_per_night": 2}
 	rules["skills"] = {"on_accept": 1, "chance_per_level": 1.0, "base_weight": 0.1}
+	rules.erase("winter")  # no winter in toy worlds (M8.W); ToyWinter adds it
 	var tags := {"cooking": "", "cooking.stew": "", "combat": "", "hospitality": ""}
 	var actions := {
 		"cook": {"name": "Cook", "minutes": 60, "base_xp": 10, "risk": 0.0, "tags": {"cooking.stew": 1.0}},

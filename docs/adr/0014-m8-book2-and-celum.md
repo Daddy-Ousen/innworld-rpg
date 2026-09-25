@@ -46,3 +46,21 @@ Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 accepted, eve
 - The Ruins inside (the Ghouls, the zombies, the coffins) are not a map; only the entrance is.
 - Helpers fight in melee: the Gnolls' bows and Gazi's teleport scroll are not modelled.
 - News is not tied to where the player is.
+
+## M8.W Winter (engine step after M8.1)
+Status: in review. User choices (2026-09-25): mild cold; warm = indoors, near a fire, or in winter clothes; Frost Fairies as pests you can talk to, with XP for a new `fae` tag; snow look plus Toren's snow wall.
+
+**When.** Everything starts with the canon flag `izril.winter` (set by `b2.winter_arrives_with_the_frost_fairies`, so from the morning of day 43). New optional `rules.winter` (flag, cold, fairies); toy dbs have none.
+
+**Cold (`core/winter.gd`).** Outdoors and not warm, every 30 minutes the player loses 1 HP, never below 1 HP (the cold never knocks you out). Warm = a map with `"indoor": true` (new optional map field; only `inn_interior` now), or within 2 tiles of an object with `"warm": true` (new optional object field: the Market Street braziers, the Watch brazier at the Ruins). Winter clothes (flag `player.warm_clothes`) make a tick twice as long; they can be bought in M8.6 (console `flag` until then). Warmth resets the chill. A night does not chill (`Night.run` calls `Winter.night`). The first winter night adds a morning warning line (once, flag `player.warned_of_cold`). HUD: " · Cold".
+
+**Frost Fairies.** On entering an outdoor map: a 60% chance of 2–4 fairies at least 3 tiles away. They fly (any tile in the map, not onto the player or each other), one random step per 6 s; gaps over 300 s re-scatter them; they are gone indoors and after a night. Talking to one (Interact option `fairy:<id>`, action `talk_to_fairy`, tags `fae` 1.0 + `social.conversation` 0.3) gives a rude line. After the first talk of the day, each talk has a 50% chance to annoy: snow drops (1 HP, same floor) and the next 10 steps cost double time (" · Slowed"). Walking into a fairy is a swat: it dodges and drops snow; the swat costs a turn. Holding an item tagged `iron` (new item `horseshoe`, lying on the inn hill) makes them keep at least 4 tiles away and never drop snow. Drawn as small pale diamonds. All randomness goes through `gs.rng`.
+
+**Snow look and the snow wall.** Tiles may have `winter_color` (grass, tall grass, road, cobble, tree, rock, shallows); the view draws it once winter has come. New map field `overlays` (`id`, `tile`, `rects`, `when_flags`, `unless_flags`?): tiles laid over the map while the flags hold; they must not cover an exit or an object. The inn hill's `toren_snow_wall` (tile `snow_wall`, not walkable) rings the inn from flag `wandering_inn.snow_wall` (day 43 event, so from day 44), with a gap on the road to the door. `MapDb.sync_flags(flags)` switches overlays; it is a cache on the db, so every command, `Movement.step`, new games, loads and `WorldView.refresh` call it with the game's flags (the debug console makes its own spare game at start).
+
+**Save v10.** `GameState.winter` (`WinterState`: sec, chill, fairies' area and positions, next id, slowed steps). Migration 9 → 10: no cold yet, no fairies.
+
+**Tests.** `unit_winter` (toy maps: cold, floor, fire, indoor, chill reset, clothes, night and warning, fairies outdoors only, talk XP, snow, swat and slow, iron, overlays on and off, bad overlays and winter rules, save round trip, v9 save). `sim_winter` (real data: no cold before winter, the warning and two bites in an hour at the gate, warm by a Market brazier, the snow wall from day 44 with the road gap to the door, the wall covers no NPC goal or stage tile). `unit_data_db` and `ToyData` drop `rules.winter`.
+
+**Known limits.** Fairies do not follow Ryoka or Erin, and NPCs do not feel the cold. Travel through an exit counts its minutes as cold. Winter never ends yet (Book 2 has no spring).
+
