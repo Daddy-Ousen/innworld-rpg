@@ -9,12 +9,11 @@
 - Docs updated: `progress.md`, `docs/ROADMAP.md`, `docs/adr/0014-m8-book2-and-celum.md`. Not yet committed.
 
 ## Waiting on the user
-- Nothing yet — about to commit + push + open the M8.2 PR, matching the M8.1 pattern (branch `data/book2-2.10T-2.18` → PR → user reviews the batch → likely a small flip-PR after, same as M8.1's PR #26/#27).
+- Review / merge PR #29 (M8.2): https://github.com/Daddy-Ousen/innworld-rpg/pull/29
 
 ## Next
-1. Commit the M8.2 work (data + engine feature + docs) and the earlier uncommitted M8.W doc-tagging edits together, or as two commits — check `git status` first, there may be stray earlier edits.
-2. Push the branch, open a PR.
-3. After the user reviews and merges: tag `m8.2-done`, then start M8.3 canon 2.19G–2.26 + 1.00C/1.01C (same per-batch ask pattern: timeline, stage/hook, new NPCs).
+1. After merge: tag `m8.2-done` (like `m8.1-done`, `m8w-done`).
+2. Start M8.3 canon 2.19G–2.26 + 1.00C/1.01C (same per-batch ask pattern: timeline, stage/hook, new NPCs).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
