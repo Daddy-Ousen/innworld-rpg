@@ -27,7 +27,7 @@ func _where(gs: GameState, id: String) -> String:
 
 func _wait_hours(gs: GameState, hours: int) -> void:
 	for i in hours:
-		assert_true(Commands.wait(gs, _db, 60) >= 0, "wait")
+		assert_true(Commands.wait(gs, _db, 3600) >= 0, "wait")
 
 
 func _wait_until(gs: GameState, minute: int) -> void:
