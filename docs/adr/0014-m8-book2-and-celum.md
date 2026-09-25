@@ -1,6 +1,6 @@
 # ADR 0014 — M8 Book 2 and Celum
 
-Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 events are `candidate` until the user reviews them.
+Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 accepted, events reviewed by the user 2026-09-25 (timeline, Invrisil, Gazi balance as proposed).
 
 ## User choices (plan)
 - M8 = Book 2 canon + Celum. Audio, polish and the LLM layer move to "Later".
@@ -21,7 +21,7 @@ Date: 2026-09-25 · Status: plan accepted (user, 2026-09-25); M8.1 events are `c
 
 **Timeline (guesses).** Day 41: the call (1.63: Ryoka's phone rings), Ryoka comes back to the inn and meets Erin (2.00), the party (2.01). Night 41–42: Ceria's message reaches Pisces. Day 42: Zevara refuses, Krshia hears of her dead kin, the rescue in the Ruins, Pisces restores the call log, Gazi's attack, winter arrives, the talk at the inn, Ryoka runs north at sunset, the fairies bury the inn (2.02–2.07). Day 43: Toren's snow wall, the Tailless Thief, Ceria will lodge at the inn, winter prices (2.09). Day 43–44: Magnolia hears Theofore's report (2.06). Day 44: Ryoka in Celum, Octavia (2.08, 'nearly two days' after she left).
 
-**21 events**, all `candidate`, in 12 chapter files under `game/data/canon/book2/chapters/`.
+**21 events**, reviewed by the user 2026-09-25, in 12 chapter files under `game/data/canon/book2/chapters/`.
 - New NPCs (book2 `npcs.json`): `octavia` ([Alchemist], String People, Celum) and `peslas` (Level 30 [Innkeeper], the Tailless Thief).
 - New locations (book2 `locations.json`): `wistram_academy`, `invrisil` (Magnolia's winter home is likely there, not stated), `tailless_thief` (Liscor), `stitchworks` (Celum).
 - The people in the call (BlackMage, Kent Scott and the others) are not NPCs: they appear once, by handle.

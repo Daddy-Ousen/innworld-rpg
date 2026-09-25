@@ -1,19 +1,16 @@
 # Handoff
 
-## Just done (2026-09-25, branch `data/book2-call-2.09`)
-M8 plan approved (see `docs/ROADMAP.md` M8 and `docs/adr/0014-m8-book2-and-celum.md`). M8.0 tooling and M8.1 data are built on this branch.
-- M8.0: `tools/validate_data.py` knows earlier books' ids (`load_known`), new `--all` and `--no-earlier`. Book 2 extracted to `canon/raw/book2`. Committed (34d7a02).
-- M8.1: 21 `candidate` events in `game/data/canon/book2/` (Interlude – The Call + 2.00–2.09, days 41–44), NPCs `octavia`, `peslas`, locations `wistram_academy`, `invrisil`, `tailless_thief`, `stitchworks`. Map `ruins_entrance`. Gazi stage + hook. Enemy field `escape`. Tests `sim_canon_book2`, `sim_gazi_attack`.
+## Just done (2026-09-25)
+- M8.1 merged (PR #26). The user reviewed the 21 events (timeline, Invrisil, Gazi balance as proposed).
+- Branch `data/book2-m8.1-reviewed`: book2 events, NPCs and places flipped to `reviewed`; ADR 0014 M8.1 accepted; ROADMAP M8.1 ticked.
 
 ## Waiting on the user
-- Review M8.1 events (all `candidate`), then flip to `reviewed` in a second PR (M7 flow).
-- PR #26 is open: https://github.com/Daddy-Ousen/innworld-rpg/pull/26
+- Merge the review PR; then tag `m8.1-done` on the merge commit.
 - M8.W Winter details: cold rules (how much HP, what counts as warm, firewood?) and Frost Fairies on the map (what they do). Ask before building. Save change expected.
 
 ## Next
-1. After review: flip M8.1 to `reviewed`, ADR 0014 M8.1 accepted, tag `m8.1-done`.
-2. M8.W Winter (branch `feat/m8w-winter`): snow look from flag `izril.winter` (set day 42), cold rules, fairies.
-3. M8.2 canon 2.10T–2.18 (starts with Toren's POV; Relc said the inn "exploded" at the end of 2.09).
+1. M8.W Winter (branch `feat/m8w-winter`): snow look from flag `izril.winter` (set day 42), cold rules, fairies.
+2. M8.2 canon 2.10T–2.18 (starts with Toren's POV; Relc said the inn "exploded" at the end of 2.09).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.

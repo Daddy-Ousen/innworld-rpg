@@ -74,7 +74,7 @@
 					"news": "A second Human stood with the Watch against Gazi of Reim outside the Ruins until she fled through her portal."
 				}
 			],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.05", "confidence": "confirmed", "note": "Starts at the end of 2.04. Dead: two guardsmen and one Gnoll. Gazi reads classes: Relc [Spearmaster], Klbkch [Swordslayer], a Human [Assassin] hiding. Ryoka takes an arrow and a kick; Erin cracks ribs."},
 			"summary": "Gazi waits for the rescuers, stabs Zevara and cuts through guards, Relc, Klbkch, Ksmvr and Krshia's Gnoll archers with a teleport scroll open. As she lifts her sword over Ceria, Ryoka says Flos has returned; while every eye turns, Erin pokes out Gazi's great eye. Gazi flees through the portal."
 		},
@@ -92,7 +92,7 @@
 			},
 			"news": "Winter came down off the mountains in a single storm this afternoon. The plains around Liscor lie under waist-deep snow, and the Winter Sprites are about.",
 			"rumor": "Travellers say winter fell on the south in one afternoon, and the Winter Sprites came riding on it.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.05", "confidence": "confirmed", "note": "About sixteen minutes after Gazi's portal closes. Children call the sprites Frost Fairies (2.06). They hate the half-Elf and call Drakes once-Dragons."},
 			"summary": "A white wall of wind rolls off the mountains and buries the plains waist-deep in snow. Winter Sprites ride it, jeering at the half-Elf and the Drakes. Ryoka can see and hear them as tiny girls of ice with dragonfly wings; to everyone else they are blue blurs."
 		}

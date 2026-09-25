@@ -6,7 +6,7 @@
 			"kind": "settlement",
 			"parent": null,
 			"tags": ["academy", "mages", "island"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "interlude_the_call", "confidence": "confirmed", "note": "Kent Scott says only Wistram could cast a spell that reaches across the world. Pisces and Ceria studied there (2.04)."},
 			"summary": "The isle of mages. Its mages link stranded Earthers through their phones in a costly spell, and a gathering of great mages there ranks the world's likeliest disasters."
 		},
@@ -15,7 +15,7 @@
 			"kind": "settlement",
 			"parent": null,
 			"tags": ["city", "human", "adventurers"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "Fals: three hundred miles north of Celum. That Magnolia's winter home (2.06) is in Invrisil is likely, not stated."},
 			"summary": "The city of adventurers, far north of Celum. Magnolia Reinhart winters there and travels to it in a horseless magic carriage."
 		},
@@ -24,7 +24,7 @@
 			"kind": "building",
 			"parent": "liscor",
 			"tags": ["inn", "drake", "rich"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed"},
 			"summary": "The most famous and most expensive inn in Liscor, on the north side. Busy from morning, with bright lamps and Drake barmaids; almost all its guests are well-off Drakes."
 		},
@@ -33,7 +33,7 @@
 			"kind": "building",
 			"parent": "celum",
 			"tags": ["shop", "alchemist", "potions"],
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed"},
 			"summary": "Octavia's potion shop on a side street of Celum: herbs on the beams, potions on the walls, a safety lamp, and boards where the display glass should be."
 		}

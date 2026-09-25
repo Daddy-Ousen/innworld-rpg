@@ -9,7 +9,7 @@
 			"home": "stitchworks",
 			"classes": [{"name": "[Alchemist]", "level": null}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "confirmed", "note": "Garia's friend. Her body is cloth; a loose stitch lets her arm fall off and she sews it back on."},
 			"summary": "Young dark-skinned [Alchemist] who runs Stitchworks in Celum and calls herself the best in the city. One of the String People, with a body of sewn cloth she has bulked up for lifting. A pushy seller who wants every new recipe she sees."
 		},
@@ -21,7 +21,7 @@
 			"home": "tailless_thief",
 			"classes": [{"name": "[Innkeeper]", "level": 30}],
 			"alive_at_start": true,
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.09", "confidence": "confirmed", "note": "Knows Selys's grandmother Isshia. Selys says he has hardly levelled since his inn grew to be Liscor's largest."},
 			"summary": "Huge, loud, rich Drake who owns the Tailless Thief. Buys rounds for sad regulars and has an [Intuition] Skill he trusts. Looks down on Humans and on Erin's out-of-the-way inn."
 		}

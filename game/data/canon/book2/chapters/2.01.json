@@ -27,7 +27,7 @@
 				"clear_flags": ["ksmvr.deposed"]
 			},
 			"news": "The Free Antinium poured a new black drink at the inn on the hill. Half of the guests woke far from their beds; the Watch Captain was found asleep in a gutter.",
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.01", "confidence": "confirmed", "note": "Night of day 41 into day 42. Zevara came to see the Human who killed Skinner. Pawn stays under Klbkch and offers to teach Ksmvr chess."},
 			"summary": "Liscor's survivors crowd into the inn: Klbkch, Relc, Zevara, Selys, Krshia, Pawn, Ksmvr, Pisces and Rags's Goblins. Klbkch, alive again, hands Ksmvr back the Prognugator's post and toasts with the Hive's new drink, rxlvn. It drugs everyone but Erin and the Antinium."
 		},
@@ -45,7 +45,7 @@
 			"effects": {
 				"set_flags": ["ceria.called_for_help", "pisces.knows_ceria_lives"]
 			},
-			"status": "candidate",
+			"status": "reviewed",
 			"canon_ref": {"book": 2, "chapter": "2.01", "confidence": "confirmed", "note": "Past midnight, after the party. The message said only: Ruins, second floor, inside (2.03)."},
 			"summary": "In the small hours Pisces blasts open the bolted inn door with a spell, pale as chalk. A faint message spell from Ceria has reached him: she is alive, starving, somewhere on the second floor of the Ruins. The Horns may not all be dead."
 		}
