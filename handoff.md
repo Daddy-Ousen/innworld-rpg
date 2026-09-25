@@ -1,30 +1,32 @@
 # Handoff
 
-## Just done (2026-09-25)
-- M8.6 (economy + travel) is merged. [PR #33](https://github.com/Daddy-Ousen/innworld-rpg/pull/33), merge commit `1858f9d`, tagged `m8.6-done`. Local `main` synced.
-- Full detail: `docs/adr/0015-m8.6-economy-travel.md`.
-- GUT 580/580 (61 scripts), validator 0 errors (`--all`), Python 51/51.
+## Just done (2026-09-26)
+- M8.7 is built on branch `data/book2-2.39-2.48` (4 commits: world data, canon data, stage test, docs). A PR is open for the user to review and merge.
+- Detail: `docs/adr/0014-m8-book2-and-celum.md`, section "M8.7".
+- GUT 591/591 (63 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen: the bar fight in the Frenzied Hare on day 71.
+- With M8.7, all of M8 is done. The M8 detail moved to `docs/PROGRESS_ARCHIVE.md`.
 
 ## Waiting on the user
-- Whether to start M8.7 now.
-
-## Next
-1. M8.7: final canon batches (3 interludes + 2.39-2.48, Erin in Celum, Octavia). Plan first. `sim_canon_book2` `LAST_DAY` bumps then. Canon events can now use the road, the camp, the Rat's Tail and Stitchworks.
+- Review and merge the M8.7 PR. After the merge: sync `main`, tag `m8.7-done` and `m8-done` on the merge commit, push the tags, and add a `docs: M8.7 done` commit.
+- 2.35 (M8.4) says Ryoka gained her first class; the text has a faerie cancel it. Fix it or keep it?
+- What the next milestone is. ROADMAP has no M9; "Later" = audio, polish, LLM flavour layer. Book 3 would be a new M9.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
-- **Never use `sed -i` in Git Bash on repo files** - it strips CRLF. Patch with Python on bytes, or the Edit tool. All repo text files are CRLF. A Python helper that keeps line endings: write `patch(path, [(old, new)])` that detects `\r\n` first. Do NOT normalise whole folders: book1 chapter JSON files are LF on disk.
-- New `class_name` scripts need `godot --headless --path game --import` once, or other scripts fail to parse them.
-- `-gtest=` is ignored by this GUT setup; use `-gselect=<script name> -gdir=res://tests` to run one script.
-- Sleep: `Commands.sleep(gs, db, bed := "")`. Outdoors (not a `camp` map) it is refused and returns {}. A loop that sleeps "until day N" never ends if the sleep is refused: tests and `ToyCanon.sleep_through` use `Rest.ANYWHERE` ("*"). Console: `sleep *`.
-- Toy dbs (`ToyData`, `unit_data_db`) erase `rules.economy`: no hunger, sleep anywhere. Real-db tests have hunger on: long sims get lower max HP unless fed.
-- Hunger only counts a sleep into a new day (a 06:00 sleep is a nap). Tests that check hunger wait to 22:00 first.
-- Screenshots: a throwaway scene in `game/_scratch/` run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
-- GUT API: `assert_signal_not_emitted`. GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (61 / 580 now).
-- **Rhir is real** - see memory `lore-rhir-real-continent`. "Aunt" is a Gnoll honorific. Calruz stays missing. Never link two canon entities unless the text says so.
-- Book 2 starts on day 41. `sim_canon_book2` `LAST_DAY` is 67; no bump until M8.7.
-- Stage `kind: "scene"`: every npc placed needs an `npc_behaviour` entry. Halrac has none yet.
-- Validator: `python tools/validate_data.py --all game/data/canon`. It does not check maps, economy or walkable positions - only GUT does.
+- **Never use `sed -i` in Git Bash on repo files** - it strips CRLF. All working-copy text files are CRLF (autocrlf=true). Patch with Python on bytes, keeping `
+`, or with the Edit tool. Do NOT normalise whole folders.
+- `Commands.wait(gs, db, seconds)` takes SECONDS. It does not pass midnight; sleep (`Commands.sleep(gs, db, Rest.ANYWHERE)`) to reach the next day.
+- A GUT test helper named `_set` clashes with `Object._set` (parse error).
+- A stage starts only while its event is pending, the player is on the stage area, inside its hours and its `when_flags` hold (`Stage.is_open`).
+- Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`, not `change_scene_to_file` in `_ready`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
+- New `class_name` scripts or tests need `godot --headless --path game --import` once (it also makes the `.uid` files).
+- `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (63 now).
+- Toy dbs erase `rules.economy`; real-db tests have hunger on.
+- Rhir is real; Calruz stays missing; never link two canon entities unless the text says so.
+- Stage `kind: "scene"`: every npc placed needs an `npc_behaviour` entry. Ryoka, Garia, Halrac, Lyonette have none.
+- The Book 2 epub has web-serial author's notes (Mating Rituals interlude, 2.48). Ignore them.
+- Erin lives in Celum from day 71 (`erin.in_celum`). A Book 3 event must clear or override that to bring her home.
 
 ## Active files
-- `game/core/economy.gd`, `game/core/rest.gd`, `game/data/economy.json`, `game/data/maps/road_camp.json`.
+- `game/data/canon/book2/chapters/2.39.json`–`2.48.json`, `interlude_quiet_discussions.json`, `game/data/maps/celum_frenzied_hare.json`, `game/data/npc_behaviour.json`, `game/tests/sim_erin_in_celum.gd`, `game/tests/sim_book2_end_stages.gd`, `game/tests/sim_canon_book2.gd`.
