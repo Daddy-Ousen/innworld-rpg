@@ -1,0 +1,32 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.00",
+	"events": {
+		"b2.ryoka_meets_erin": {
+			"tier": 2,
+			"window": {"earliest": 41, "latest": 41, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["ryoka.back_in_liscor"], "not_flags": []},
+			"depends_on": ["b1.ryoka_returns_to_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.knows_erin_is_earther", "erin.knows_other_earthers"],
+				"relationship": [
+					{"from": "erin_solstice", "to": "ryoka_griffin", "delta": 3},
+					{"from": "ryoka_griffin", "to": "erin_solstice", "delta": 3}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.00", "confidence": "likely", "note": "Same evening as the call (1.63 ends with Ryoka turning from the door). The undead battle was 'two days ago'. Erin charges 3 copper for pasta, 2 for blue juice."},
+			"summary": "Ryoka comes back to the dark inn and finds Erin asleep on the kitchen floor. Over pasta and a pitcher of blue juice the grieving Runner hears of the Horns' last nights and tells her own runs. As she turns to leave for Celum, Erin sees her iPhone: they are both from Earth."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Basic Cooking]", "level": null, "confidence": "confirmed", "note": "She trusts it to make her random soup edible."}
+	]
+}

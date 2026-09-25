@@ -1,0 +1,79 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.02",
+	"events": {
+		"b2.zevara_refuses_to_send_the_watch": {
+			"tier": 2,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_watch_barracks",
+			"roles": {
+				"captain": {"prefer": ["zevara"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true},
+				"prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"bodyguard": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["zevara", "erin_solstice"], "flags": ["ceria.called_for_help"], "not_flags": []},
+			"depends_on": ["b2.ceria_calls_pisces_from_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["zevara.forbade_the_rescue", "ksmvr.guards_erin", "ryoka.called_adventurers_cowards"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Morning of day 42. By treaty, Soldiers may leave the Hive only when a city authority asks, in war, or to defend Liscor."},
+			"summary": "Zevara will not risk Relc or Klbkch for adventurers she blames for the siege, and forbids them to help. Klbkch may not bring Soldiers above ground, but orders Ksmvr to guard Erin with his life. The Adventurers' Guild refuses too, and Ryoka calls its warriors cowards."
+		},
+		"b2.krshia_learns_her_kin_are_dead": {
+			"tier": 2,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {
+				"shopkeeper": {"prefer": ["krshia"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["krshia", "ryoka_griffin"], "flags": ["silverfangs.warriors_dead"], "not_flags": []},
+			"depends_on": ["b1.ryoka_returns_to_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["krshia.hunts_gazi", "gnolls.howl_for_the_dead"]
+			},
+			"news": "Gnolls howled in every street of Liscor at midday. Word is that warriors of the Silverfang tribe were cut down on the south road.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Ryoka saw the bodies about forty miles out, each beheaded with one cut, and met Gazi near them (1.63)."},
+			"summary": "Krshia gives Erin healing potions and frying pans on credit and says warriors of her tribe will soon come up the south road. Ryoka tells her they are dead, beheaded, with Gazi close by. Krshia strings her great bow and howls, and Gnolls across the city take up the howl."
+		},
+		"b2.erin_leads_the_rescue_into_the_ruins": {
+			"tier": 2,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["pisces"], "fallback_tags": []},
+				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"bodyguard": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["ceria.called_for_help"], "not_flags": []},
+			"depends_on": ["b2.ceria_calls_pisces_from_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.fought_in_the_ruins", "ryoka.froze_before_the_dead", "rags.took_the_black_crossbow", "ruins.vault_found_looted", "ruins.guarded_by_palisade"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.02", "confidence": "confirmed", "note": "Goes on in 2.03. A palisade, a ditch and twenty guards now hold the entrance. Pisces thinks someone looted the vault and called the dead away (Az'kerash and others named as guesses)."},
+			"summary": "Erin shakes Rags upside down until she agrees to come, then pushes past the guards at the Ruins with Ryoka, Pisces, Toren and Ksmvr. Pisces snaps Ghouls' spines, Erin smashes zombies with a frying pan and thrown rocks, and Ryoka freezes. Skinner's vault is found stripped of magic."
+		}
+	},
+	"system": [
+		{"who": "ksmvr", "kind": "level", "name": "[Warrior]", "level": 12, "confidence": "confirmed", "note": "Gazi's reading, as are the rest of this chapter's entries."},
+		{"who": "pisces", "kind": "level", "name": "[Necromancer]", "level": 27, "confidence": "confirmed", "note": "Also has [Mage] levels."},
+		{"who": "rags", "kind": "level", "name": "[Warrior]", "level": 8, "confidence": "confirmed"},
+		{"who": "rags", "kind": "level", "name": "[Mage]", "level": 6, "confidence": "confirmed"},
+		{"who": "rags", "kind": "level", "name": "[Tactician]", "level": 10, "confidence": "confirmed"},
+		{"who": "toren", "kind": "level", "name": "[Skeleton Warrior]", "level": 11, "confidence": "confirmed", "note": "Carries a ruby enchanted with [Terror]."},
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 18, "confidence": "confirmed"},
+		{"who": "ryoka_griffin", "kind": "other", "name": "No level", "level": null, "confidence": "confirmed"}
+	]
+}

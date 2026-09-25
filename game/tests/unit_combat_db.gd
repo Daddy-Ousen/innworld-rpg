@@ -20,10 +20,11 @@ func _has_error(errors: Array[String], part: String) -> bool:
 func test_shipped_combat_data_is_valid() -> void:
 	var db := DataDb.load_dir()
 	assert_eq(db.combat.errors, [] as Array[String])
-	assert_eq(db.combat.enemies.keys().size(), 15)
+	assert_eq(db.combat.enemies.keys().size(), 18)
 	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain", "goblin_raid_leader",
 			"adventurer_brawler", "adventurer_axeman", "goblin_feathered_chieftain", "zombie", "skeleton", "ghoul",
-			"crypt_lord", "skinner", "antinium_worker", "antinium_soldier"]:
+			"crypt_lord", "skinner", "antinium_worker", "antinium_soldier", "gazi_of_reim", "liscor_guardsman",
+			"gnoll_hunter"]:
 		assert_true(db.combat.enemies.has(id), id)
 	for id: String in ["chair", "rolling_pin", "stone", "seed_core"]:
 		assert_true(db.combat.items.has(id), id)
@@ -72,6 +73,19 @@ func test_bad_ranged_and_ambush() -> void:
 	assert_true(_has_error(errs, "ranged: range"))
 	assert_true(_has_error(errs, "ranged chance"))
 	assert_true(_has_error(errs, "ambush: missing 'hit_bonus'"))
+
+
+func test_bad_escape() -> void:
+	var e := ToyCombat.enemies()
+	e["goblin"]["escape"] = {"below": 0.0, "line": ""}
+	e["crab"]["escape"] = {"line": "Gone."}
+	var errs := _check(e, ToyCombat.items())
+	assert_true(_has_error(errs, "goblin' escape: below must be > 0"))
+	assert_true(_has_error(errs, "goblin' escape: line must be a non-empty string"))
+	assert_true(_has_error(errs, "crab' escape: missing 'below'"))
+	e["crab"]["escape"] = {"below": 0.5, "line": "The crab digs in and is gone."}
+	e["goblin"].erase("escape")
+	assert_eq(_check(e, ToyCombat.items()), [] as Array[String])
 
 
 func test_bad_items() -> void:

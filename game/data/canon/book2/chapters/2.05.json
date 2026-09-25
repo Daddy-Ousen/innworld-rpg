@@ -1,0 +1,106 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.05",
+	"events": {
+		"b2.gazi_attacks_outside_the_ruins": {
+			"tier": 1,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"attacker": {"prefer": ["gazi_pathseeker"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["gazi_pathseeker", "erin_solstice"], "flags": ["gazi.hunts_ryoka"], "not_flags": []},
+			"depends_on": ["b2.erin_leads_the_rescue_into_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["gazi.lost_an_eye", "gazi.gone_to_reim", "zevara.stabbed_by_gazi", "relc.scarred_by_gazi", "erin.blinded_gazi", "krshia.fought_gazi", "liscor.guards_killed_by_gazi"],
+				"clear_flags": ["gazi.hunts_ryoka"],
+				"relationship": [
+					{"from": "krshia", "to": "erin_solstice", "delta": 2},
+					{"from": "relc", "to": "erin_solstice", "delta": 1}
+				]
+			},
+			"news": "Gazi of Reim stabbed Watch Captain Zevara outside the Ruins and cut down guards and Gnolls to take two Humans. The innkeeper Erin Solstice put out her great eye, and she fled through a portal.",
+			"rumor": "Runners say one of the King of Destruction's Seven came to Liscor for two Humans and left through a portal, missing an eye.",
+			"stage": {
+				"area": "ruins_entrance",
+				"hours": [13, 17],
+				"when_flags": ["gazi.hunts_ryoka"],
+				"foes": [
+					{"enemy": "gazi_of_reim", "pos": [18, 9]}
+				],
+				"line": "A woman in rust-red armor walks out of the grass by the palisade, five eyes turning. Her curved sword goes through the Watch Captain, and Zevara falls.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [14, 12],
+						"allies": ["relc", "klbkch", "ksmvr", "erin_solstice"],
+						"helpers": ["liscor_guardsman", "liscor_guardsman", "liscor_guardsman"],
+						"line": "Relc roars and charges. Klbkch shouts the guards into a ring around her."
+					},
+					{
+						"after_seconds": 90,
+						"from": [1, 11],
+						"allies": ["krshia"],
+						"helpers": ["gnoll_hunter", "gnoll_hunter", "gnoll_hunter", "gnoll_hunter"],
+						"line": "Howling Gnolls with war bows lope across the plain behind Krshia."
+					}
+				],
+				"note": "Design: Gazi cannot die on the map; hurt badly, she steps through her portal (enemy escape). Canon: twenty guards and fifteen Gnolls; three die. Zevara is down from the first blow, so she is not on the map. Erin, not the player, takes the eye."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_gazi",
+					"did": [
+						{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["gazi_of_reim"]}}
+					],
+					"days": [42, 42],
+					"then": "change",
+					"effects": {
+						"set_flags": ["liscor.earther_fought_gazi"],
+						"relationship": [
+							{"from": "erin_solstice", "to": "player", "delta": 3},
+							{"from": "relc", "to": "player", "delta": 2},
+							{"from": "krshia", "to": "player", "delta": 2}
+						]
+					},
+					"news": "A second Human stood with the Watch against Gazi of Reim outside the Ruins until she fled through her portal."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.05", "confidence": "confirmed", "note": "Starts at the end of 2.04. Dead: two guardsmen and one Gnoll. Gazi reads classes: Relc [Spearmaster], Klbkch [Swordslayer], a Human [Assassin] hiding. Ryoka takes an arrow and a kick; Erin cracks ribs."},
+			"summary": "Gazi waits for the rescuers, stabs Zevara and cuts through guards, Relc, Klbkch, Ksmvr and Krshia's Gnoll archers with a teleport scroll open. As she lifts her sword over Ceria, Ryoka says Flos has returned; while every eye turns, Erin pokes out Gazi's great eye. Gazi flees through the portal."
+		},
+		"b2.winter_arrives_with_the_frost_fairies": {
+			"tier": 1,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["izril.winter", "frost_fairies.abroad", "ryoka.sees_frost_fairies"],
+				"clear_flags": ["liscor.winter_coming"]
+			},
+			"news": "Winter came down off the mountains in a single storm this afternoon. The plains around Liscor lie under waist-deep snow, and the Winter Sprites are about.",
+			"rumor": "Travellers say winter fell on the south in one afternoon, and the Winter Sprites came riding on it.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.05", "confidence": "confirmed", "note": "About sixteen minutes after Gazi's portal closes. Children call the sprites Frost Fairies (2.06). They hate the half-Elf and call Drakes once-Dragons."},
+			"summary": "A white wall of wind rolls off the mountains and buries the plains waist-deep in snow. Winter Sprites ride it, jeering at the half-Elf and the Drakes. Ryoka can see and hear them as tiny girls of ice with dragonfly wings; to everyone else they are blue blurs."
+		}
+	},
+	"system": [
+		{"who": "relc", "kind": "class", "name": "[Spearmaster]", "level": null, "confidence": "confirmed", "note": "Gazi's reading."},
+		{"who": "klbkch", "kind": "class", "name": "[Swordslayer]", "level": null, "confidence": "confirmed", "note": "Gazi's reading."},
+		{"who": "relc", "kind": "skill", "name": "[Triple Thrust]", "level": null, "confidence": "confirmed"},
+		{"who": "gazi_pathseeker", "kind": "other", "name": "Gazi the Omniscient", "level": null, "confidence": "confirmed", "note": "Her title. Her armor, a gift from her lord, turns arrows and blades."}
+	]
+}

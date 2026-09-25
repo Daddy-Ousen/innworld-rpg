@@ -1,6 +1,7 @@
 extends GutTest
 ## Real Book 1 canon (game/data/canon/book1). With no player input, every
-## canon event in days 1–LAST_DAY happens as written: no drift.
+## canon event in days 1–LAST_DAY happens as written: no drift. CanonDb
+## merges all books, so the counts here look at b1. events only (M8.0).
 
 ## Last day with extracted canon (chapter 1.63, the end of Book 1).
 const LAST_DAY := 41
@@ -45,21 +46,24 @@ func test_book1_runs_as_canon() -> void:
 	var rumor_events := 0
 	for id: String in _db.canon.events:
 		var ev: Dictionary = _db.canon.events[id]
-		if int(ev["window"]["earliest"]) <= LAST_DAY and not _db.canon.alt_only.has(id):
+		if _b1(id) and int(ev["window"]["earliest"]) <= LAST_DAY and not _db.canon.alt_only.has(id):
 			expected += 1
 			assert_eq(gs.world.status(id), Director.DONE, id)
-			var seen := int(gs.world.events[id]["day"]) >= ARRIVAL_DAY
-			if int(ev["tier"]) == 1 and ev.has("rumor") and seen:
-				rumor_events += 1
-	assert_eq(gs.world.history.size(), expected, "one history entry per event")
+	for id: String in _db.canon.events:  # any book: Book 2 starts on day 41
+		var ev: Dictionary = _db.canon.events[id]
+		var seen := Director.happened(gs.world.status(id)) and int(gs.world.events[id]["day"]) >= ARRIVAL_DAY
+		if int(ev["tier"]) == 1 and ev.has("rumor") and seen:
+			rumor_events += 1
+	var b1_history := gs.world.history.filter(func(h: Dictionary) -> bool: return _b1(h["event"]))
+	assert_eq(b1_history.size(), expected, "one history entry per event")
 	assert_eq(gs.world.drift, 0.0)
 	assert_eq(rumors, rumor_events, "rumors only from the day the player arrives")
 	var news_events := []
 	for id: String in _db.canon.events:
-		if _db.canon.events[id].has("news") and int(gs.world.events.get(id, {}).get("day", 0)) >= ARRIVAL_DAY:
+		if _b1(id) and _db.canon.events[id].has("news") and int(gs.world.events.get(id, {}).get("day", 0)) >= ARRIVAL_DAY:
 			news_events.append(id)
 	news_events.sort()
-	var heard := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.NEWS) 			.map(func(n: Dictionary) -> String: return n["event"])
+	var heard := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.NEWS and _b1(n["event"])) 			.map(func(n: Dictionary) -> String: return n["event"])
 	heard.sort()
 	assert_eq(heard, news_events, "one news line per event with news")
 	assert_gte(news_events.size(), 34)
@@ -257,3 +261,7 @@ func test_without_rags_the_worm_still_falls_out_of_the_canon() -> void:
 			"b1.ryoka_returns_to_liscor"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_gt(gs.world.drift, 0.0)
+
+
+static func _b1(id: String) -> bool:
+	return id.begins_with("b1.")

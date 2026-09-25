@@ -1,0 +1,41 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.03",
+	"events": {
+		"b2.ceria_and_olesm_found_in_the_coffins": {
+			"tier": 2,
+			"window": {"earliest": 42, "latest": 42, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["ceria.missing"], "not_flags": []},
+			"depends_on": ["b2.erin_leads_the_rescue_into_the_ruins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ceria.rescued", "ceria.hand_ruined", "ceria.thinks_horns_all_dead", "olesm.rescued", "olesm.saved_ceria"],
+				"clear_flags": ["ceria.missing", "olesm.missing"],
+				"relationship": [
+					{"from": "ceria_springwalker", "to": "ryoka_griffin", "delta": 3},
+					{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 2},
+					{"from": "ceria_springwalker", "to": "olesm", "delta": 2},
+					{"from": "olesm", "to": "erin_solstice", "delta": 2}
+				]
+			},
+			"news": "Two survivors of the Ruins came out after days in the dark: the half-Elf mage Ceria Springwalker and the Watch's own [Tactician], Olesm.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.03", "confidence": "confirmed", "note": "Three or four days in the coffins; Ceria made ice to drink. Calruz is not found: Ceria saw Skinner tear off his arm and believes everyone else died (2.04). He stays missing."},
+			"summary": "In the tomb hall Ryoka guesses the survivors hid in the coffins. Ceria lies in one, starved, her right hand dead bone after she burned out her wand to open a gap; Olesm, who dragged her in and saved her, is in another. Ceria says everyone else is gone."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Bar Fighting]", "level": null, "confidence": "confirmed", "note": "Works only with things found in a bar or kitchen, so she fights with frying pans."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Unerring Aim]", "level": null, "confidence": "confirmed", "note": "Thrown rocks break skeletons."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Lesser Strength]", "level": null, "confidence": "confirmed"}
+	]
+}

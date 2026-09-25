@@ -1,0 +1,27 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "interlude_the_call",
+	"events": {
+		"b2.earthers_meet_in_a_magic_call": {
+			"tier": 1,
+			"window": {"earliest": 41, "latest": 41, "confidence": "guess"},
+			"location": "wistram_academy",
+			"roles": {
+				"king": {"prefer": ["flos_reimarch"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["flos_reimarch"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["earthers.magic_call_held", "flos.announced_return", "wistram.knows_of_earthers", "wistram.call_spied_on"]
+			},
+			"rumor": "Mages whisper that a great spell from Wistram spoke to strangers across the world, and that the King of Destruction answered it.",
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "interlude_the_call", "confidence": "confirmed", "note": "Day guess from 1.63: Ryoka's phone rings on day 41. She joins as the troll 'batman' (2.00). Who Kent Scott really is, is not said."},
+			"summary": "A Wistram mage links sixteen stranded Earthers through their phones in a magic chat. They trade levels, homes and the dates they left. A stranger calling himself Kent Scott fishes for full names to scry them and is unmasked. Then Flos of Reim speaks through one phone and warns Wistram."
+		}
+	},
+	"system": []
+}
