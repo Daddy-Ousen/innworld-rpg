@@ -1,12 +1,12 @@
 # Handoff
 
 ## Just done (2026-09-25)
-- M8.5 (Celum map + Celum start) is built and tested on branch `feat/m8.5-celum`. [PR #32](https://github.com/Daddy-Ousen/innworld-rpg/pull/32) is open, not merged.
+- M8.5 (Celum map + Celum start) is merged. [PR #32](https://github.com/Daddy-Ousen/innworld-rpg/pull/32), merge commit `53e9d9f`, tagged `m8.5-done`. Local `main` synced.
 - User choices this session: starts become a list (`rules.world.starts`); Celum gets 3 maps (gate, square, Runners' Guild inside).
 - Full detail: `docs/adr/0014-m8-book2-and-celum.md`, section "M8.5 Celum map + Celum start".
 
 ## Waiting on the user
-- Review and merge PR #32. After the merge: tag `m8.5-done` on the merge commit, sync local `main`, flip progress.md's M8.5 line to "merged".
+- Whether to start M8.6 (economy + travel) now.
 
 ## Next
 1. M8.6 economy + travel (ADR 0015, save change -> v11 + migration): coins, goods bag, simple hunger (one meal a day; Erin feeds you on a day you work at her inn), paid room in Celum (the Rat's Tail sign on `celum_square` is the hook), odd jobs (the `request_board` in `celum_runners_guild`), selling, paid ride, road with one camp map. The road exit goes on the south edge of `celum_gate` (road tiles at x 16-17). Plan first; ask before new JSON schemas (rule 11).
