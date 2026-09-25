@@ -12,7 +12,9 @@
 	"objects": [
 		{"id": "krshia_counter", "at": [10, 6], "name": "Krshia's stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true},
 		{"id": "lism_counter", "at": [20, 6], "name": "Lism's stall", "actions": ["buy_supplies", "haggle"], "solid": true},
-		{"id": "market_well", "at": [15, 15], "name": "Well", "actions": ["carry_water"], "solid": true}
+		{"id": "market_well", "at": [15, 15], "name": "Well", "actions": ["carry_water"], "solid": true},
+		{"id": "brazier_west", "at": [6, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "brazier_east", "at": [26, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true}
 	],
 	"legend": {"#": "city_wall", "B": "building", "_": "cobble"},
 	"rows": [

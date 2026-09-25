@@ -12,7 +12,12 @@
 	],
 	"objects": [
 		{"id": "woodpile", "at": [23, 9], "name": "Woodpile", "actions": ["chop_wood"], "solid": true},
-		{"id": "loose_stones", "at": [20, 20], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "loose_stones", "at": [20, 20], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "old_horseshoe", "at": [8, 15], "name": "Rusty horseshoe in the grass", "actions": [], "item": "horseshoe"}
+	],
+	"overlays": [
+		{"id": "toren_snow_wall", "tile": "snow_wall", "when_flags": ["wandering_inn.snow_wall"],
+			"rects": [[10, 3, 16, 1], [10, 4, 1, 9], [25, 4, 1, 9], [10, 13, 5, 1], [17, 13, 9, 1]]}
 	],
 	"legend": {"+": "door", ",": "tall_grass", ".": "grass", ":": "dirt_road", "H": "wood_wall", "T": "tree", "^": "rock"},
 	"rows": [

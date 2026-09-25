@@ -54,6 +54,9 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 		if n["kind"] == Director.NEWS:
 			news.append(n["text"])
 			lines.append("News: %s" % n["text"])
+	var warn := Winter.warning(gs, db)
+	if warn != "":
+		world.append(warn)
 	lines.append_array(world)
 	var events := gs.world.history.slice(history_before)
 	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
@@ -62,6 +65,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	Combat.night(gs, db, collapsed, knocked_out)
 	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], long_sleep)
 	NpcSim.advance_to(gs, db, wake * 60 + gs.player.sub_seconds)
+	Winter.night(gs, wake * 60 + gs.player.sub_seconds)
 	# 8. Advance to the next day and keep the morning summary.
 	var days := gs.clock.sleep(db.rules["clock"], long_sleep)
 	gs.clock.last_sleep_collapsed = collapsed

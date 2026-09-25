@@ -95,7 +95,9 @@ static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:
 static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
 	var r := Movement.step(gs, db, dir)
-	if r["monster"] != "":
+	if r["fairy"] != "":
+		Winter.swat(gs, db, r["fairy"])
+	elif r["monster"] != "":
 		if gs.combat.monsters[r["monster"]]["state"] == CombatState.HIDDEN:
 			r["ambush"] = MonsterSim.ambush(gs, db, r["monster"])
 		else:
@@ -191,6 +193,8 @@ static func settle(gs: GameState, db: DataDb) -> void:
 
 
 static func _after(gs: GameState, db: DataDb) -> void:
+	db.maps.sync_flags(gs.flags)
 	Combat.sync(gs, db)
 	NpcSim.sync(gs, db)
+	Winter.sync(gs, db)
 	Combat.settle_if_over(gs, db)

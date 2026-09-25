@@ -3,6 +3,7 @@
 	"id": "inn_interior",
 	"name": "Inside the inn",
 	"location": "wandering_inn",
+	"indoor": true,
 	"confidence": "guess",
 	"note": "Design map. The inn has a common room, a kitchen and rooms (1.00-1.01); the layout is a guess.",
 	"zones": {},

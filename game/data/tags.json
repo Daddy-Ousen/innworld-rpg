@@ -2,6 +2,7 @@
 	"schema_version": 1,
 	"tags": {
 		"cooking": "Making food.",
+		"fae": "Dealing with the fae: the Frost Fairies of winter (M8.W).",
 		"cooking.stew": "Slow-cooked pot food.",
 		"cooking.pasta": "Noodles and pasta dishes.",
 		"cooking.baking": "Bread and oven food.",

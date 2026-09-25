@@ -1,5 +1,11 @@
 ## World maps (ADR 0006): tile types from data/tiles.json and one grid map
-## per area from data/maps/<area>.json. Read-only after load.
+## per area from data/maps/<area>.json. Read-only after load, except the
+## overlays (M8.W): a map may list "overlays": [{"id", "tile", "rects",
+## "when_flags", "unless_flags"?}] that lay `tile` over its rects while the
+## flags hold. sync_flags(gs.flags) switches them; Commands, new games and
+## loads call it. Tiles may have "winter_color" (the snow look, drawn only)
+## and objects "warm": true (a fire: Winter). A map with "indoor": true is
+## inside a building (is_indoor: no cold, no fairies).
 class_name MapDb
 extends RefCounted
 
@@ -17,6 +23,12 @@ var areas: Dictionary = {}
 var errors: Array[String] = []
 ## area id → {Vector2i: object} for solid objects.
 var _solid: Dictionary = {}
+## area id → true for indoor maps (see is_indoor).
+var _indoor: Dictionary = {}
+## area id → {Vector2i: tile id} of the overlays that are on now.
+var _overlay: Dictionary = {}
+## The overlay ids that are on, joined (changes when sync_flags switches one).
+var overlay_key := ""
 
 
 ## Loads `dir`/tiles.json and every `dir`/maps/*.json (sorted). A missing
@@ -57,7 +69,52 @@ static func from_dicts(tile_map: Dictionary, area_map: Dictionary) -> MapDb:
 			if o.get("solid", false) and o.get("at", []).size() == 2:
 				solid[Vector2i(int(o["at"][0]), int(o["at"][1]))] = o
 		db._solid[id] = solid
+	for id: String in area_map:
+		db._indoor[id] = area_map[id].get("indoor", false) is bool and bool(area_map[id].get("indoor", false))
 	return db
+
+
+func is_indoor(area: String) -> bool:
+	return bool(_indoor.get(area, false))
+
+
+## Switches the overlays on or off for the world `flags`. Returns true if
+## any changed.
+func sync_flags(flags: Dictionary) -> bool:
+	var on: Array[String] = []
+	var layers := {}
+	var ids := areas.keys()
+	ids.sort()
+	for area: String in ids:
+		for o: Variant in areas[area].get("overlays", []):
+			if not o is Dictionary or not _flags_hold(o, flags):
+				continue
+			on.append("%s/%s" % [area, o.get("id", "")])
+			var layer: Dictionary = layers.get(area, {})
+			for r: Variant in o.get("rects", []):
+				if not _rect_ok(r):
+					continue
+				var rect := rect_of(r)
+				for y in range(rect.position.y, rect.end.y):
+					for x in range(rect.position.x, rect.end.x):
+						layer[Vector2i(x, y)] = o.get("tile", "")
+			layers[area] = layer
+	var key := ",".join(on)
+	if key == overlay_key:
+		return false
+	overlay_key = key
+	_overlay = layers
+	return true
+
+
+static func _flags_hold(o: Dictionary, flags: Dictionary) -> bool:
+	for f: Variant in o.get("when_flags", []):
+		if not flags.has(f):
+			return false
+	for f: Variant in o.get("unless_flags", []):
+		if flags.has(f):
+			return false
+	return true
 
 
 static func _read_json(path: String, errs: Array[String]) -> Dictionary:
@@ -89,6 +146,9 @@ func in_bounds(area: String, at: Vector2i) -> bool:
 func tile_at(area: String, at: Vector2i) -> String:
 	if not in_bounds(area, at):
 		return ""
+	var layer: Dictionary = _overlay.get(area, {})
+	if layer.has(at):
+		return layer[at]
 	var row: String = areas[area]["rows"][at.y]
 	if at.x >= row.length():
 		return ""
@@ -181,6 +241,8 @@ func _validate_tile(id: String, t: Dictionary) -> void:
 		errors.append("tile '%s': walk must be true or false." % id)
 	if t.has("color") and not Color.html_is_valid(str(t["color"])):
 		errors.append("tile '%s': color must be a #rrggbb colour." % id)
+	if t.has("winter_color") and not Color.html_is_valid(str(t["winter_color"])):
+		errors.append("tile '%s': winter_color must be a #rrggbb colour." % id)
 
 
 func _validate_map(id: String, m: Dictionary, db: DataDb) -> void:
@@ -228,6 +290,55 @@ func _validate_map(id: String, m: Dictionary, db: DataDb) -> void:
 	var seen := {}
 	for o: Dictionary in m["objects"]:
 		_validate_object(where, o, bounds, seen, db)
+	if m.has("indoor") and not m["indoor"] is bool:
+		errors.append("%s: indoor must be true or false." % where)
+	var overlays: Variant = m.get("overlays", [])
+	if not overlays is Array:
+		errors.append("%s: overlays must be a list." % where)
+		return
+	var overlay_ids := {}
+	for o: Variant in overlays:
+		_validate_overlay(where, id, o, bounds, overlay_ids)
+
+
+## An overlay: a known tile, rects inside the map that cover no exit and no
+## object, and flag lists.
+func _validate_overlay(where: String, id: String, o: Variant, bounds: Rect2i, seen: Dictionary) -> void:
+	if not o is Dictionary:
+		errors.append("%s overlay: must be an object." % where)
+		return
+	for f: String in ["id", "tile", "rects", "when_flags"]:
+		if not (o as Dictionary).has(f):
+			errors.append("%s overlay: missing '%s'." % [where, f])
+			return
+	where = "%s overlay '%s'" % [where, o["id"]]
+	if seen.has(o["id"]):
+		errors.append("%s: duplicate id." % where)
+	seen[o["id"]] = true
+	if not tiles.has(o["tile"]):
+		errors.append("%s: unknown tile '%s'." % [where, o["tile"]])
+	for k: String in ["when_flags", "unless_flags"]:
+		var flags: Variant = o.get(k, [])
+		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+			errors.append("%s: %s must be a list of strings." % [where, k])
+	var rects: Variant = o["rects"]
+	if not rects is Array or (rects as Array).is_empty():
+		errors.append("%s: rects must be a non-empty list." % where)
+		return
+	var objects := {}
+	for ob: Dictionary in areas[id]["objects"]:
+		if _pos_ok(ob.get("at", null)):
+			objects[_vec(ob["at"])] = true
+	for r: Variant in rects:
+		if not _rect_ok(r) or not bounds.encloses(rect_of(r)):
+			errors.append("%s: rects must be [x, y, w, h] inside the map." % where)
+			continue
+		var rect := rect_of(r)
+		for y in range(rect.position.y, rect.end.y):
+			for x in range(rect.position.x, rect.end.x):
+				var at := Vector2i(x, y)
+				if not exit_at(id, at).is_empty() or objects.has(at):
+					errors.append("%s: tile %s covers an exit or an object." % [where, at])
 
 
 func _validate_exit(where: String, id: String, e: Dictionary, bounds: Rect2i, db: DataDb) -> void:
@@ -276,6 +387,8 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 		errors.append("%s: 'at' must be [x, y] inside the map." % where)
 	if o.has("sleep") and not o["sleep"] is bool:
 		errors.append("%s: sleep must be true or false." % where)
+	if o.has("warm") and not o["warm"] is bool:
+		errors.append("%s: warm must be true or false." % where)
 	if o.has("item") and not db.combat.items.has(o["item"]):
 		errors.append("%s: unknown item '%s'." % [where, o["item"]])
 	for a: Variant in o["actions"]:
