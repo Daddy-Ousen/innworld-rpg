@@ -7,6 +7,8 @@
 ##   Yields and jobs: some actions put goods in the bag or pay coins.
 ##   Goods: food is eaten from the bag (fed today), a potion heals, clothes
 ##   are worn at once (wear_flag), a meal (eat_now) is eaten where bought.
+##   M9.2: a good with warm_minutes also keeps the cold off (Winter.warm_for);
+##   a good with from_flag is on sale only once that canon flag is set.
 ##   Hunger: at night, a player who was not fed today gets one more hungry
 ##   night; each lowers max HP by hunger.step (never below hunger.floor)
 ##   until they eat. Working at Erin's inn (an inn work action at
@@ -64,6 +66,8 @@ static func trades(gs: GameState, db: DataDb, obj: Dictionary) -> Array[Dictiona
 		return out
 	var s: Dictionary = db.economy.shops[shop]
 	for g: String in s["sells"]:
+		if not db.economy.on_sale(g, gs.flags):
+			continue
 		out.append({"kind": BUY, "good": g, "name": db.economy.goods[g]["name"],
 			"price": price(gs, db, shop, g, BUY)})
 	for g: String in s["buys"]:
@@ -82,6 +86,8 @@ static func buy(gs: GameState, db: DataDb, object_id: String, good: String) -> D
 	var shop: String = obj["shop"]
 	if not (db.economy.shops[shop]["sells"] as Array).has(good):
 		return _fail("%s does not sell that." % obj["name"])
+	if not db.economy.on_sale(good, gs.flags):
+		return _fail("That is not for sale yet.")
 	var cost := price(gs, db, shop, good, BUY)
 	if gs.economy.coins < cost:
 		return _fail("You cannot afford it (%s; you have %s)." % [format(db, cost),
@@ -95,7 +101,7 @@ static func buy(gs: GameState, db: DataDb, object_id: String, good: String) -> D
 	lines.append("You buy %s for %s." % [String(g["name"]).to_lower(), format(db, cost)])
 	match db.economy.use_of(good):
 		"eat_now":
-			_eat(gs, db)
+			_eat(gs, db, good)
 			lines.append("You eat it there and then.")
 		"wear_flag":
 			gs.flags[g["wear_flag"]] = true
@@ -158,8 +164,8 @@ static func use_good(gs: GameState, db: DataDb, good: String) -> String:
 	var name := String(db.economy.goods[good]["name"]).to_lower()
 	match db.economy.use_of(good):
 		"food":
-			_eat(gs, db)
 			gs.combat.lines.append("You eat the %s." % name)
+			_eat(gs, db, good)
 		"heal":
 			var before := Combat.hp(gs, db)
 			Combat.set_hp(gs, db, before + int(db.economy.goods[good]["heal"]))
@@ -248,11 +254,15 @@ static func _worked_at_inn(gs: GameState, db: DataDb, records: Array[Dictionary]
 				and (r.get("context", {}) as Dictionary).get("location", "") == h["inn_location"])
 
 
-static func _eat(gs: GameState, db: DataDb) -> void:
+static func _eat(gs: GameState, db: DataDb, good: String = "") -> void:
 	gs.economy.fed_day = gs.clock.day()
 	gs.economy.hunger = 0
 	if gs.player.hp > 0:
 		Combat.set_hp(gs, db, gs.player.hp)  # keeps HP; max HP is back
+	var warm := int(db.economy.goods.get(good, {}).get("warm_minutes", 0))
+	if warm > 0:
+		Winter.warm_for(gs, warm)
+		gs.combat.lines.append("Warmth spreads through you. The cold will not touch you for a while.")
 
 
 ## A nearby object with a known shop, or {}.

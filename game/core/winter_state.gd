@@ -15,6 +15,9 @@ var fairies: Dictionary = {}
 var next_id: int = 1
 ## Steps left that cost double (snow dropped by an annoyed fairy).
 var slowed: int = 0
+## World second until which a warm meal (a good with warm_minutes, M9.2)
+## keeps the cold off. -1 = none.
+var warm_until: int = -1
 
 
 func ids() -> Array[String]:
@@ -38,7 +41,7 @@ static func pos_of(f: Dictionary) -> Vector2i:
 
 func to_dict() -> Dictionary:
 	return {"sec": sec, "chill": chill, "area": area, "fairies": fairies.duplicate(true),
-		"next_id": next_id, "slowed": slowed}
+		"next_id": next_id, "slowed": slowed, "warm_until": warm_until}
 
 
 ## Accepts {} (a migrated v9 save): no cold yet, no fairies.
@@ -52,4 +55,5 @@ static func from_dict(d: Dictionary) -> WinterState:
 		w.fairies[id] = {"x": int(f["x"]), "y": int(f["y"])}
 	w.next_id = int(d.get("next_id", 1))
 	w.slowed = int(d.get("slowed", 0))
+	w.warm_until = int(d.get("warm_until", -1))
 	return w

@@ -287,6 +287,30 @@ func test_winter_survives_a_save() -> void:
 	assert_eq(copy.to_json(), gs.to_json(), "plays on the same")
 
 
+func test_a_warm_meal_keeps_the_cold_off_until_it_wears_off() -> void:
+	var gs := _game()
+	gs.winter.warm_until = NpcSim.world_sec(gs) + 3600
+	assert_eq(Winter.status(gs, _db), "warm")
+	Commands.wait(gs, _db, 59 * 60)
+	assert_eq(Combat.hp(gs, _db), _max(gs))
+	assert_eq(gs.winter.chill, 0)
+	Commands.wait(gs, _db, 60)
+	assert_eq(Winter.status(gs, _db), "cold")
+	Commands.wait(gs, _db, 30 * 60)
+	assert_eq(Combat.hp(gs, _db), _max(gs) - 1, "the cold comes back after the meal")
+	var copy := GameState.from_json(gs.to_json())
+	assert_eq(copy.winter.warm_until, gs.winter.warm_until)
+
+
+func test_a_v11_save_loads_with_no_warm_meal() -> void:
+	var d := _game().to_dict()
+	(d["winter"] as Dictionary).erase("warm_until")
+	d["save_version"] = 11
+	var gs := GameState.from_dict(SaveMigrations.migrate(d))
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
+	assert_eq(gs.winter.warm_until, -1)
+
+
 func test_a_v9_save_loads_without_winter() -> void:
 	var d := _game().to_dict()
 	d.erase("winter")

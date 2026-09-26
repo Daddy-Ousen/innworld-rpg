@@ -11,7 +11,10 @@
 		"healing_potion": {"name": "Healing potion", "confidence": "guess", "buy": 30, "sell": 0, "heal": 10,
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "likely", "note": "Octavia is an [Alchemist] who sells potions at Stitchworks. This potion and its price are a guess."}},
 		"winter_clothes": {"name": "Winter clothes", "confidence": "guess", "buy": 60, "sell": 0,
-			"wear_flag": "player.warm_clothes"}
+			"wear_flag": "player.warm_clothes"},
+		"corusdeer_soup": {"name": "Corusdeer soup", "confidence": "guess", "buy": 8, "sell": 0, "food": true,
+			"warm_minutes": 240, "from_flag": "erin.makes_corusdeer_soup",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "likely", "note": "Erin and Octavia make Corusdeer soup in Octavia's shop; it keeps Ryoka warm in the snow. That Stitchworks sells it, its price and its four hours are guesses (M9.2, user choice 2026-09-26)."}}
 	},
 	"shops": {
 		"krshia_stall": {"name": "Krshia's stall", "sells": ["bread", "firewood", "winter_clothes"],
@@ -19,7 +22,7 @@
 		"lism_stall": {"name": "Lism's stall", "sells": ["bread"], "buys": []},
 		"celum_stall": {"name": "Celum market stall", "sells": ["bread", "firewood", "winter_clothes"],
 			"buys": ["blue_fruit", "herbs", "firewood"]},
-		"stitchworks": {"name": "Stitchworks", "sells": ["healing_potion"], "buys": ["herbs"]},
+		"stitchworks": {"name": "Stitchworks", "sells": ["healing_potion", "corusdeer_soup"], "buys": ["herbs"]},
 		"rats_tail": {"name": "The Rat's Tail", "sells": ["hot_meal"], "buys": []},
 		"frenzied_hare": {"name": "The Frenzied Hare", "sells": ["hot_meal", "bread"], "buys": []},
 		"wandering_inn": {"name": "The Wandering Inn", "sells": ["hot_meal", "bread"], "buys": []}

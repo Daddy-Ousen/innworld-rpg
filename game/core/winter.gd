@@ -5,7 +5,9 @@
 ##   (MapDb.is_indoor) or within cold.warm_radius of an object with
 ##   "warm": true. Winter clothes (flag winter.clothes_flag) make each tick
 ##   cold.clothes_mult times longer. Warmth resets the chill; a night does
-##   not count (Night.run calls night()).
+##   not count (Night.run calls night()). A warm meal (M9.2: a good with
+##   warm_minutes, e.g. Corusdeer soup) keeps you warm anywhere until
+##   winter.warm_until.
 ##   Frost Fairies: on entering an outdoor map, a chance of a few fairies
 ##   that flit about (one step per fairies.act_seconds). Talking to one is
 ##   the action fairies.talk_action (a rude line); after the day's
@@ -37,8 +39,10 @@ static func has_clothes(gs: GameState, db: DataDb) -> bool:
 	return gs.flags.has(rules(db)["clothes_flag"])
 
 
-## Indoors, or near a warm object (a fire, a brazier).
+## Indoors, near a warm object (a fire, a brazier), or warmed by a meal.
 static func is_warm(gs: GameState, db: DataDb) -> bool:
+	if gs.winter.warm_until > NpcSim.world_sec(gs):
+		return true
 	var area := gs.player.area
 	if db.maps.is_indoor(area):
 		return true
@@ -98,6 +102,8 @@ static func _cold(gs: GameState, db: DataDb, dt: int) -> void:
 	if Combat.is_down(gs) or is_warm(gs, db):
 		w.chill = 0
 		return
+	# The part of dt that a warm meal still covered does not chill.
+	dt = mini(dt, maxi(NpcSim.world_sec(gs) - w.warm_until, 0)) if w.warm_until >= 0 else dt
 	var cold: Dictionary = rules(db)["cold"]
 	var tick := int(cold["every_minutes"]) * 60
 	if has_clothes(gs, db):
@@ -109,6 +115,11 @@ static func _cold(gs: GameState, db: DataDb, dt: int) -> void:
 		lost += _hurt(gs, db, int(cold["damage"]))
 	if lost > 0:
 		gs.combat.lines.append(String(cold["line"]) % lost)
+
+
+## A warm meal: no cold for `minutes` from now (or longer, if one still warms).
+static func warm_for(gs: GameState, minutes: int) -> void:
+	gs.winter.warm_until = maxi(gs.winter.warm_until, NpcSim.world_sec(gs) + minutes * 60)
 
 
 ## Takes up to `amount` HP, never below the cold floor. Returns the HP lost.
