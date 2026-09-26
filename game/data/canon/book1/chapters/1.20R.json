@@ -29,6 +29,6 @@
 		}
 	},
 	"system": [
-		{"who": "ryoka_griffin", "kind": "class", "name": "[Barefoot Runner]", "level": null, "confidence": "likely", "note": "She blocks the level messages each night; the text cuts off mid-word, so whether she ever takes the class is not shown."}
+		{"who": "ryoka_griffin", "kind": "other", "name": "[Barefoot Runner] offered, refused", "level": null, "confidence": "confirmed", "note": "She blocks the level messages each night and never takes the class. Ryoka never gains a level (user, 2026-09-26)."}
 	]
 }

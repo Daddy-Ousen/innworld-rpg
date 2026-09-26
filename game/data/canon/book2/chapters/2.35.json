@@ -52,21 +52,18 @@
 			"requires": {"alive": ["ryoka_griffin", "mrsha"], "flags": ["stone_spears.tribe_devastated"], "not_flags": []},
 			"depends_on": ["b2.goblin_lords_army_destroys_stone_spears_camp"],
 			"on_fail": ["cancel"],
-			"effects": {"set_flags": ["ryoka.gained_first_class", "ryoka.class_barefoot_runner", "mrsha.fur_turned_white"]},
+			"effects": {"set_flags": ["ryoka.class_offer_cancelled", "mrsha.fur_turned_white"]},
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,
 				"chapter": "2.35",
 				"confidence": "confirmed",
-				"note": "The faeries carry Ryoka and Mrsha through the paralyzed battlefield at impossible speed, paying the price they warned of with Urksh's death. Ryoka, who had sworn she never levelled, gains [Barefoot Runner] Level 8 with three skills; a faerie blocks a further skill an outside force was granting her."
+				"note": "The faeries carry Ryoka and Mrsha through the paralyzed battlefield, paying the price they warned of with Urksh's death. The System offers Ryoka [Barefoot Runner], but a faerie cancels it: she never gains a level (user, 2026-09-26). Event id kept for old saves."
 			},
-			"summary": "The Frost Faeries carry Ryoka and Mrsha through the frozen battlefield at impossible speed to save them, at the cost they warned of. Sheltering the two through the night, Ryoka gains her first-ever class, [Barefoot Runner], while Mrsha's fur turns pure white for no reason anyone can explain."
+			"summary": "The Frost Faeries carry Ryoka and Mrsha through the frozen battlefield at impossible speed to save them, at the cost they warned of. That night a class reaches for Ryoka and a faerie snuffs it out; she stays without a level. Mrsha's fur turns pure white for no reason anyone can explain."
 		}
 	},
 	"system": [
-		{"who": "ryoka_griffin", "kind": "class", "name": "[Barefoot Runner]", "level": 8, "confidence": "confirmed"},
-		{"who": "ryoka_griffin", "kind": "skill", "name": "[Flawless Stride]", "level": null, "confidence": "confirmed"},
-		{"who": "ryoka_griffin", "kind": "skill", "name": "[Enhanced Movement]", "level": null, "confidence": "confirmed"},
-		{"who": "ryoka_griffin", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed"}
+		{"who": "ryoka_griffin", "kind": "other", "name": "[Barefoot Runner] offered, cancelled", "level": null, "confidence": "confirmed", "note": "The System offers [Barefoot Runner] with three Skills, but a faerie cancels it. Ryoka never gains a level (user, 2026-09-26)."}
 	]
 }
