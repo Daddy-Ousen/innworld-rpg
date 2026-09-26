@@ -72,6 +72,126 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Seen in the mountain in 3.28G, named in 3.29G as a faction head. A rare old Goblin with a beard."},
 			"summary": "An old bearded Goblin from Tremborag's mountain who joins Rags' breakout and speaks for a faction of her new tribe."
+		},
+		"termin": {
+			"name": "Termin",
+			"race": "Human",
+			"tags": ["human", "driver"],
+			"faction": null,
+			"home": "celum",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "Named as the wagon's driver; his horses are Erma and Fox. Class not stated."},
+			"summary": "The driver who takes Erin, the Horns and the Albez door south from Celum toward Liscor in his wagon."
+		},
+		"poisonbite": {
+			"name": "Poisonbite",
+			"race": "Goblin",
+			"tags": ["goblin", "warrior", "poison"],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "First named in 3.31G. Fights with two poisoned daggers and leads a group of warriors in Rags' tribe."},
+			"summary": "A sharp-tongued female Goblin warrior in Rags' new tribe who fights with two poisoned daggers and does not like being told to train."
+		},
+		"cognita": {
+			"name": "Cognita",
+			"race": "Golem",
+			"tags": ["golem", "wistram", "guardian"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_1", "confidence": "confirmed", "note": "A Truestone Golem made by Archmage Zelkyr, called 'she'. In 3.32 Pisces says she was, and remains, the strongest being he has met. History only: known from Ceria's story."},
+			"summary": "A tall stone woman, the Golem made by Archmage Zelkyr to keep Wistram. She guards the sealed upper floors, killed the five mages who challenged them, and named Ceria and Pisces full mages when they left."
+		},
+		"illphres": {
+			"name": "Illphres",
+			"race": "Human",
+			"tags": ["human", "mage", "ice", "wistram", "teacher"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [{"name": "[Cryomancer]", "level": null}],
+			"alive_at_start": false,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_6", "confidence": "confirmed", "note": "Called one of Wistram's best [Cryomancers]; an Isolationist. Dies with four others challenging Zelkyr's Golems in Ceria's third year; 3.32 confirms it. Ceria's telling makes some of her deeds bigger."},
+			"summary": "The feared ice mage of Wistram who hid a frostbitten face under a mask of ice. She took Ceria as her apprentice, and died years before the story trying to beat the Golems that guard the upper floors."
+		},
+		"calvaron": {
+			"name": "Calvaron",
+			"race": "Centaur",
+			"tags": ["centaur", "mage", "wistram", "student"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [{"name": "[Mage]", "level": null}],
+			"alive_at_start": false,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_7", "confidence": "confirmed", "note": "A sixth-year generalist [Mage] and a broker of secrets; Beatrice's partner. Killed by the shades of Archmage Nekhret's curse after Pisces robbed her tomb."},
+			"summary": "A cheerful Centaur student at Wistram who traded in secrets and was Ceria's friend. He died in the curse that followed the robbing of an Archmage's tomb, years before the story."
+		},
+		"montressa_du_valeross": {
+			"name": "Montressa du Valeross",
+			"race": "Human",
+			"tags": ["human", "mage", "wistram", "noble", "wards"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_2", "confidence": "confirmed", "note": "Of the lesser Terandrian nobility. Has the Skill [Layered Ward]. Pisces tutored her. In 3.32 Ceria guesses she is a full mage by now."},
+			"summary": "A young Terandrian noble at Wistram who studies wards. Pisces tutored her, and she stayed his friend longer than most."
+		},
+		"beatrice": {
+			"name": "Beatrice",
+			"race": "Dullahan",
+			"tags": ["dullahan", "mage", "wistram", "runes"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [{"name": "[Runeshaper]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_3", "confidence": "confirmed", "note": "A Revivalist. She blamed Ceria for Calvaron's death. In 3.32 she is said to be all alone now."},
+			"summary": "A quiet Dullahan rune mage at Wistram and Calvaron's partner. After he died she blamed Ceria for it."
+		},
+		"charles_de_trevalier": {
+			"name": "Charles de Trevalier",
+			"race": "Human",
+			"tags": ["human", "mage", "wistram", "noble"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_4", "confidence": "confirmed", "note": "Calls himself heir of his house; his nation is not named. A Libertarian. Presumed alive."},
+			"summary": "A proud noble student at Wistram who hated Pisces and Ceria. He struck Ceria from behind in their exam and later threw Illphres' spellbook into the sea."
+		},
+		"amerys": {
+			"name": "Amerys",
+			"race": "Human",
+			"tags": ["human", "mage", "archmage", "lightning", "wistram"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_1", "confidence": "confirmed", "note": "Archmage of lightning and air who belongs to Flos's Seven; she calls Flos her lord, so she serves flos_reimarch. Alive when Ceria left; later state not given."},
+			"summary": "A Human Archmage of lightning who serves Flos of Reim as one of his Seven. She stays at Wistram while she waits for her king, and killed a sea serpent on Ceria's voyage to the isle."
+		},
+		"feor": {
+			"name": "Feor",
+			"race": "half-Elf",
+			"tags": ["half_elf", "mage", "archmage", "wistram", "leader"],
+			"faction": "wistram",
+			"home": "wistram_academy",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_7", "confidence": "confirmed", "note": "Has spoken for Wistram for over a century and is a hero to the half-Elves. He exiled Pisces on pain of death."},
+			"summary": "An old half-Elf Archmage who has led Wistram for more than a hundred years. He exiled Pisces and sent Ceria away."
 		}
 	}
 }

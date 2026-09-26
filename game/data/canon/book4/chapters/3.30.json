@@ -1,0 +1,89 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.30",
+	"events": {
+		"b4.erin_moves_the_door_anchor_to_the_stitchworks": {
+			"tier": 2,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.has_albez_door"], "not_flags": []},
+			"depends_on": ["b3.erin_leaves_celum_on_the_wagon"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["albez_door.linked_to_frenzied_hare"],
+				"set_flags": ["albez_door.anchor_at_stitchworks", "erin.promised_no_mail_by_door", "celum_watch.watches_the_stitchworks"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "Done off-page between night 87 and the 3.30 morning; day 89 is a guess (the text says it is only the second day since the door came). Erin does not trust Agnes with it. The Merchants' Guild offered 6,000 gold; the Runners' and Mages' Guilds asked her to carry no mail. Wesle has quit the Watch."},
+			"summary": "Erin moves the Celum end of the magic door from the Frenzied Hare to Octavia's shop, because she does not trust Agnes with it. She turns down offers to buy it and promises the guilds she will carry no mail, only her own things."
+		},
+		"b4.erin_hires_octavia_for_baking_powder": {
+			"tier": 2,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["albez_door.anchor_at_stitchworks"], "not_flags": []},
+			"depends_on": ["b4.erin_moves_the_door_anchor_to_the_stitchworks"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["octavia.researches_baking_powder"],
+				"relationship": [{"from": "octavia", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "Erin pays 3 gold 8 silver. Octavia says trade is slow: the cities wait for news of the Goblin Lord's armies."},
+			"summary": "Early in the morning Erin brings Octavia breakfast and pays her to work out how to make baking powder and baking soda. Octavia grumbles that business is slow while the cities wait for news of the Goblin armies."
+		},
+		"b4.teriarch_stops_the_wagon": {
+			"tier": 2,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {
+				"dragon": {"prefer": ["teriarch"], "fallback_tags": []},
+				"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"ice_mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"driver": {"prefer": ["termin"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["teriarch", "erin_solstice"], "flags": ["teriarch.copied_the_iphone", "erin.on_wagon_south"], "not_flags": []},
+			"depends_on": ["b4.erin_moves_the_door_anchor_to_the_stitchworks"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.met_teriarch", "horns_of_hammerad.humbled_by_teriarch"],
+				"relationship": [{"from": "teriarch", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "The Horns call him only 'Human': a huge old man with a white beard, one blue and one violet eye (1.40R showed him as a half-Elf; a flagged difference, not a conflict of identity). Pisces uses [Flash Step] and a flaming rapier. The copied phone came from Ryoka."},
+			"summary": "On the road south an old man in robes stops the wagon. He beats all four Horns with small spells and no effort, then asks Erin how to work the copied phone Ryoka gave him."
+		},
+		"b4.teriarch_hides_the_wagon_in_a_snowstorm": {
+			"tier": 1,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {
+				"dragon": {"prefer": ["teriarch"], "fallback_tags": []},
+				"ice_mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["teriarch", "ceria_springwalker"], "flags": ["erin.met_teriarch"], "not_flags": []},
+			"depends_on": ["b4.teriarch_stops_the_wagon"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ceria.teriarch_marked_a_spell", "pisces.refused_by_teriarch", "goblin_army.on_the_liscor_road"],
+				"relationship": [{"from": "ceria_springwalker", "to": "teriarch", "delta": 1}]
+			},
+			"rumor": "Travellers on the south road say a Goblin army thousands strong passed in black armour, with the dead walking in its ranks.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "The army is almost surely the Goblin Lord's, but the text does not name him: no link. He marks a spell in Ceria's burnt spellbook, asks about Archmage Zelkyr and turns Pisces down as an apprentice. Later, alone, he half-remembers Erin; do not link him to the 1.00 Dragon."},
+			"summary": "A Goblin army of thousands in black armour, with undead among them, comes down the road. The old man teaches Ceria and Pisces to raise a snowstorm from the snow around them, and the wagon stays hidden until the army has passed."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "skill", "name": "[Flash Step]", "level": null, "confidence": "confirmed", "note": "Used against the old man; learned at Wistram (Wistram Days)."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Dangersense]", "level": null, "confidence": "confirmed", "note": "Used on the road; no level-up in this chapter."}
+	]
+}

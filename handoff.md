@@ -1,28 +1,30 @@
 # Handoff
 
-## Just done (2026-09-26)
-- PR #40 (M10.0 Albez door) merged. Tag `m10.0-done` on 3284dea.
-- M10.1 (3.26G-3.29G) built on branch `data/book4-3.26-3.29`. Detail: ADR 0017 "M10.1".
-  - `game/data/canon/book4/`: 17 events, days 85-90. NPCs tremborag, ulvama, noears, pyrite, redscar, greybeard. Locations north_izril, tremborags_mountain, liscor_dungeon_rift.
-  - New map `dungeon_rift` (south exit of floodplains_south, 60 min), tile `chasm`, knock-out wake.
-  - Two scenes with hooks on day 85: Lyonette searches the snow (floodplains_south 11-16); rescuers at the rift (dungeon_rift 14-20, rope anchor offers keep_watch).
-  - Fix: Rags stops foraging on the floodplains after `rags.tribe_turns_north`.
-  - GUT 651/651 (70 scripts). Python 51 OK. Validator 0 errors. Rift scene checked on screen.
+## Just done (2026-09-27)
+- PR #41 (M10.1) merged. Tag `m10.1-done` on ce7d682 (pushed).
+- The old branch `data/book4-3.26-3.29` still exists on GitHub. The auto-mode check blocked its delete; the user can delete it.
+- M10.2 (3.30-3.31G + the 3.32 frame + Wistram Days as history) built on branch `data/book4-3.30-3.31`. Detail: ADR 0017 "M10.2".
+  - User choices: 3.30 is day 89; one scene, the Wistram story at the Frenzied Hare (night 89, 20-24); 8 key Wistram NPCs only.
+  - New files: `chapters/3.30.json` (4 events), `3.31G.json` (7 events, days 91-92), `3.32.json` (1 event: the story frame, with stage + hook `player_heard_the_wistram_story`).
+  - NPCs: termin, poisonbite, cognita, illphres (dead), calvaron (dead), montressa_du_valeross, beatrice, charles_de_trevalier, amerys, feor. Locations: celum_liscor_road, village_of_the_dead.
+  - Door: 3.30 sets `albez_door.anchor_at_stitchworks`, clears `albez_door.linked_to_frenzied_hare`.
+  - GUT 659/659 (71 scripts). Python 51 OK. Validator 0 errors. Scene checked on screen.
 - The PR for this branch is open for the user to merge.
 
 ## Next steps
-1. The user merges the M10.1 PR. Then tag `m10.1-done` on the merge commit.
-2. M10.2 (3.30-3.31G + Wistram Days 1-7 as history only): read with a subagent, then ask the user for stage and hook choices.
-3. Door flags the later batches must set:
-   - M10.2 (3.30): set `albez_door.anchor_at_stitchworks` and clear `albez_door.linked_to_frenzied_hare`.
-   - M10.3 (3.32-3.33): set `albez_door.at_wandering_inn`, then `erin.magical_grounds` on Erin's Level 30.
-   - Erin is home: her Liscor goals stop on `erin.left_liscor`, and her off-map goal holds while `erin.stranded_north` is set. Book 4 must clear or replace these. Check her goals.
-4. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. Keep him alive unless the text says he died (3.32 is not clear).
-5. Rags: `rags.leads_her_own_tribe`, `tremborag.hunts_rags`, `garen.stays_with_tremborag`. 3.31G continues her thread.
-6. Halrac, Jelaqua and Xrn have no `npc_behaviour` entries yet. Add them if a later scene must place them. The Halfseekers may move to the inn (`halfseekers.eye_the_wandering_inn`).
+1. The user merges the M10.2 PR. Then tag `m10.2-done` on the merge commit.
+2. M10.3 (3.32-3.35): read with a subagent, then ask the user for stage and hook choices. Add the rest of 3.32 to the existing `chapters/3.32.json`.
+   - Timeline from the reader: day 90 the wagon reaches Esthelm (Erin cooks at the Esthelm inn, no door use there); day 91 it reaches Liscor just before sunset.
+   - Set `albez_door.at_wandering_inn`, then `erin.magical_grounds` on Erin's Level 30 (3.33).
+   - Erin's goals: `erin.stranded_north` still holds her off the map; `erin.on_wagon_south` is set. Book 4 must bring her home to the inn (clear or replace these). Check her goals in `npc_behaviour.json`.
+   - Toren's four bones of "the [Archmage]" (3.32): do not link to Nekhret unless the text says so.
+3. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. Keep him alive unless the text says he died.
+4. Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`). `rags.tribe_turns_north` still blocks her foraging near Liscor; clear it when she arrives.
+5. Halrac, Jelaqua and Xrn have no `npc_behaviour` entries yet. Add them if a later scene must place them.
 
 ## Waiting on the user
-- Merge the M10.1 PR.
+- Merge the M10.2 PR.
+- Delete the old remote branch `data/book4-3.26-3.29` (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -36,7 +38,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (70 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (71 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -44,6 +46,9 @@
 - Save is v13 (M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: chain with `depends_on`. Siblings that share one dependency run in id order, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
 
+- Octavia matters to Book 3: killing her before day 87 cancels 3.25's goodbye and the wagon leaving, which cascades. Kill tests for her must run after day 87.
+- Never write a bash `cat > "$UNSET_VAR/..."` line without a heredoc: it waits on stdin and hangs the shell.
+
 ## Active files
-- M10.1: `game/data/canon/book4/**`, `game/data/maps/dungeon_rift.json`, `game/tests/sim_canon_book4.gd`, `game/tests/sim_book4_mrsha.gd`, `docs/adr/0017-m10-book4.md`.
-- M10.0: `game/core/portal.gd`, `game/core/map_db.gd`, `game/data/maps/celum_stitchworks.json`, `game/tests/unit_portal.gd`.
+- M10.2: `game/data/canon/book4/chapters/3.30.json`, `3.31G.json`, `3.32.json`, `game/data/canon/book4/npcs.json`, `locations.json`, `game/tests/sim_book4_wistram.gd`, `game/tests/sim_canon_book4.gd`, `docs/adr/0017-m10-book4.md`.
+- M10.0 door: `game/core/portal.gd`, `game/data/maps/celum_stitchworks.json`.

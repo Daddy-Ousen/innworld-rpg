@@ -1,0 +1,115 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.31G",
+	"events": {
+		"b4.rags_becomes_a_chieftain": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "warrior": {"prefer": ["redscar"], "fallback_tags": [], "optional": true}, "bodyguard": {"prefer": ["pyrite"], "fallback_tags": [], "optional": true}, "dagger_fighter": {"prefer": ["poisonbite"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.pike_squares"], "not_flags": []},
+			"depends_on": ["b4.rags_invents_pike_squares"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["rags.leader_class", "rags.tinkerer_class"],
+				"set_flags": ["rags.class_chieftain", "rags.tribe_fleet_foot", "rags.shared_tremborags_weapons"],
+				"relationship": [{"from": "redscar", "to": "rags", "delta": 1}, {"from": "pyrite", "to": "rags", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "Day 91 follows the guessed day 90 of the pike squares (3.29G); she levels in her sleep that night. Redscar gets the shock sword and the chest plate, Pyrite the shield; the Hob given the mace is not Redfang. Poisonbite now leads a group."},
+			"summary": "Rags wakes as a [Chieftain]. Her tribe feasts, brawls for the right to Tremborag's magic weapons, and Rags hands them out to her strongest fighters."
+		},
+		"b4.an_armored_crawler_hits_the_tribe": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "warrior": {"prefer": ["redscar"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.class_chieftain"], "not_flags": []},
+			"depends_on": ["b4.rags_becomes_a_chieftain"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_bloodied_by_a_crawler"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "The pike wall breaks; 35 Goblins die, 8 of them Redfang warriors."},
+			"summary": "A huge armoured crawler breaks the tribe's pike wall. The Goblins kill it, but dozens of them die, Redfang warriors among them."
+		},
+		"b4.rags_attacks_the_village_of_the_dead": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "village_of_the_dead",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "bodyguard": {"prefer": ["pyrite"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.tribe_bloodied_by_a_crawler"], "not_flags": []},
+			"depends_on": ["b4.an_armored_crawler_hits_the_tribe"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.wounded_by_a_ghoul", "pyrite.saved_rags", "rags.fears_the_village_of_the_dead"],
+				"relationship": [{"from": "rags", "to": "pyrite", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "The zombies rise again after they fall, and there are Ghouls. Under a hundred die at the village, over a hundred that day. The village has no name in the text."},
+			"summary": "Rags leads her tribe into a village held by the dead, but the zombies keep getting up. A Ghoul wounds Rags and knocks her down, and Pyrite carries her out as the tribe retreats with heavy losses."
+		},
+		"b4.greybeard_tells_of_the_goblin_kings": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"elder": {"prefer": ["greybeard"], "fallback_tags": []}, "chieftain": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["greybeard", "rags"], "flags": ["rags.wounded_by_a_ghoul"], "not_flags": []},
+			"depends_on": ["b4.rags_attacks_the_village_of_the_dead"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.knows_velan_and_curulac", "greybeard.speaks_plainly"],
+				"relationship": [{"from": "rags", "to": "greybeard", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "Velan the Kind ruled six years of peace and Greybeard saw him die; before him came Curulac of a Hundred Days. History only: neither has an npc record."},
+			"summary": "That night old Greybeard stops acting simple. He tells Rags of the Goblin Kings he has seen, and of the kind King who kept the peace and was killed for it."
+		},
+		"b4.rags_trains_with_redscar": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "warrior": {"prefer": ["redscar"], "fallback_tags": [], "optional": true}, "dagger_fighter": {"prefer": ["poisonbite"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.class_chieftain"], "not_flags": []},
+			"depends_on": ["b4.greybeard_tells_of_the_goblin_kings"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.tribe_trains", "rags.heading_south", "rags.wants_to_see_erin"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "Poisonbite pushes back and loses. Rags thinks of the old Redfang base and of talking to Erin. rags.tribe_turns_north stays set (no foraging near Liscor) until she arrives."},
+			"summary": "In the morning Rags makes every warrior train with Redscar. She decides to take the tribe south to fight the Goblin Lord, and to see Erin again."
+		},
+		"b4.rags_saves_the_furgather_tribe": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": ["rags.heading_south"], "not_flags": []},
+			"depends_on": ["b4.rags_trains_with_redscar"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.furgather_tribe_joined", "rags.spared_the_adventurers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "40 Bronze-rank and 6 Silver-rank adventurers. Rags kills one Silver [Ranger]; none of them are named. The day is a guess."},
+			"summary": "Rags' tribe finds adventurers wiping out a small tribe. She kills one of their leaders, strips the rest of their gear and lets them go, and the Furgather Goblins join her."
+		},
+		"b4.rags_robs_a_caravan_to_ostegrast": {
+			"tier": 1,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["rags"], "flags": ["rags.furgather_tribe_joined"], "not_flags": []},
+			"depends_on": ["b4.rags_saves_the_furgather_tribe"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["north_izril.goblins_rob_caravans", "rags.robbed_an_ostegrast_caravan"]},
+			"rumor": "Merchants swear a Goblin tribe took thirty wagons bound for Ostegrast and let the drivers run.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "30 wagons and about 100 guards; only five Humans die. Ostegrast is a city with no location record; the event uses north_izril. She plans one more raid before going south."},
+			"summary": "An hour later Rags ambushes a big caravan on its way to Ostegrast. She takes the wagons and lets the people run, and only a few Humans die."
+		}
+	},
+	"system": [
+		{"who": "rags", "kind": "level", "name": "[Tactician]", "level": 16, "confidence": "confirmed", "note": "Heard in her sleep at the start of the chapter."},
+		{"who": "rags", "kind": "class", "name": "[Chieftain]", "level": 15, "confidence": "confirmed", "note": "[Leader] becomes [Chieftain] at Level 15. [Scavenger] and [Tinkerer] are merged into it."},
+		{"who": "rags", "kind": "skill", "name": "[Tribe: Fleet Foot]", "level": null, "confidence": "confirmed"},
+		{"who": "rags", "kind": "skill", "name": "[Lesser Tinkering]", "level": null, "confidence": "confirmed"}
+	]
+}
