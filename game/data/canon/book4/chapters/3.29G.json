@@ -1,0 +1,61 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.29G",
+	"events": {
+		"b4.rags_breaks_out_of_tremborags_mountain": {
+			"tier": 1,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "tremborags_mountain",
+			"roles": {
+				"chieftain": {"prefer": ["rags"], "fallback_tags": []},
+				"ally": {"prefer": ["pyrite"], "fallback_tags": [], "optional": true},
+				"mage": {"prefer": ["noears"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["redscar"], "fallback_tags": [], "optional": true},
+				"elder": {"prefer": ["greybeard"], "fallback_tags": [], "optional": true},
+				"great_chieftain": {"prefer": ["tremborag"], "fallback_tags": [], "optional": true},
+				"hob": {"prefer": ["garen"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["rags"], "flags": ["rags.revolts_against_tremborag"], "not_flags": []},
+			"depends_on": ["b4.rags_names_pyrite_and_calls_a_revolt"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["rags.at_tremborags_mountain", "rags.lost_command_to_garen"],
+				"set_flags": ["rags.leads_her_own_tribe", "tremborag.armory_looted", "tremborag.captives_freed", "tremborag.hunts_rags", "garen.stays_with_tremborag", "tremborag.knows_where_the_other_key_is"],
+				"relationship": [{"from": "tremborag", "to": "rags", "delta": -2}, {"from": "garen", "to": "rags", "delta": -1}]
+			},
+			"rumor": "Northern riders say a Goblin tribe tore itself in two inside a mountain near Invrisil, and the smaller half marched out armed to the teeth.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Part told from Garen's side. Four Hob armoury guards die. Tremborag loses some 2,000 to 6,000 Goblins, most of Garen's warriors and wolves among them. Garen saves himself by telling Tremborag where 'the other' key is; the reader is not told. Tremborag vows to eat Rags."},
+			"summary": "Rags' followers empty Tremborag's armoury while Pyrite frees the Human women held captive in the mountain. Thousands of Goblins walk out with her. Garen stays behind with Tremborag, who swears he will hunt Rags down."
+		},
+		"b4.rags_frees_the_captives_at_a_human_city": {
+			"tier": 2,
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "ally": {"prefer": ["pyrite"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["tremborag.captives_freed"], "not_flags": []},
+			"depends_on": ["b4.rags_breaks_out_of_tremborags_mountain"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["north_izril.knows_of_tremborag", "rags.let_go_by_human_riders"]},
+			"news": "A Goblin tribe left freed Human captives at the gates of a northern city and warned of a Goblin Great Chieftain in the mountains who fought for the Goblin King.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "She wakes about six hours after the escape. Rags is unsure of the city's name (she guesses among three); it is left unnamed here. She warns an adventurer leader that Tremborag may join the Goblin Lord."},
+			"summary": "Rags leads the freed women to a Human city and lets them go at its gates. She warns their adventurers that Tremborag once fought for the Goblin King and may join the Goblin Lord. The city's riders let her tribe go."
+		},
+		"b4.rags_invents_pike_squares": {
+			"tier": 2,
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "warrior": {"prefer": ["redscar"], "fallback_tags": [], "optional": true}, "ally": {"prefer": ["pyrite"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags"], "flags": ["rags.leads_her_own_tribe"], "not_flags": []},
+			"depends_on": ["b4.rags_frees_the_captives_at_a_human_city"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["rags.pike_squares", "rags.tribe_camps_by_a_lake"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "They camp in a pine forest by a lake and kill six Mothbears. A Chieftain's memory shows Yaltes Byres, a [Knight] of House Byres, lancing a Hob Chieftain; history only, and not linked to Yvlon or Ylawes. The drills may fall on the next day (day is a guess)."},
+			"summary": "Rags' new tribe camps in a pine forest by a lake and kills six Mothbears. An old Chieftain's memory of a Human knight's charge gives her an idea: squares of Goblins with long spears that can move and still hold."
+		}
+	},
+	"system": []
+}

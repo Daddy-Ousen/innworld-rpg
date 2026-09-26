@@ -1,0 +1,43 @@
+{
+	"schema_version": 1,
+	"id": "dungeon_rift",
+	"name": "Edge of the rift",
+	"location": "liscor_dungeon_rift",
+	"confidence": "guess",
+	"note": "Design map (M10.1). The dark crack behind a low snowy slope where Mrsha falls into the dungeon under Liscor (3.27M). The text gives no direction or distance from the city: the walk south from the floodplains, the size and the shape of the crack are guesses. The rescue scene of b4.mrsha_rescued_from_the_dungeon happens at its edge on day 85.",
+	"zones": {},
+	"exits": [
+		{"at": [8, 0, 2, 1], "to": "floodplains_south", "arrive": [8, 22], "minutes": 60}
+	],
+	"objects": [
+		{"id": "rift_rope_anchor", "at": [12, 11], "name": "Rope anchor at the rift edge", "actions": ["keep_watch"]},
+		{"id": "rift_loose_stones", "at": [6, 16], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {",": "tall_grass", ".": "grass", "^": "rock", "T": "tree", "X": "chasm"},
+	"rows": [
+		"................................",
+		"................................",
+		"...,,,,.................,,,,....",
+		"...,,,,.................,,,,....",
+		"..........................T.....",
+		"..T.......^.....................",
+		"................................",
+		"..........,,,,,,,,,,,...........",
+		"................................",
+		"................................",
+		"................XX..............",
+		"..............XXXXX.............",
+		".............XXXXXXX............",
+		"..............XXXXXXX...........",
+		"...............XXXXX............",
+		"................XXX.............",
+		"................................",
+		"......^.........................",
+		"................................",
+		".....................,,,,,......",
+		"..T..................,,,,,...T..",
+		"................................",
+		"..........^.....................",
+		"................................"
+	]
+}

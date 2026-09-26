@@ -1,0 +1,69 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.28G",
+	"events": {
+		"b4.ulvama_mocks_rags_name": {
+			"tier": 2,
+			"window": {"earliest": 86, "latest": 86, "confidence": "guess"},
+			"location": "tremborags_mountain",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "shaman": {"prefer": ["ulvama"], "fallback_tags": []}, "great_chieftain": {"prefer": ["tremborag"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["rags", "ulvama"], "flags": ["rags.at_tremborags_mountain"], "not_flags": []},
+			"depends_on": ["b4.garen_fells_rags_at_tremborags_feast"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["rags.called_fake_name_goblin"],
+				"relationship": [{"from": "ulvama", "to": "rags", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "Rags explores the mountain: rival factions, a guarded armoury and a strict pecking order. Ulvama's offer comes with advice Rags finds vile; Rags kicks her. Tremborag then mocks Rags as a Goblin with a fake name."},
+			"summary": "Tremborag's chief [Shaman] Ulvama offers Rags an alliance but says a name given by a Human is no proper Goblin name. Rags kicks her, and soon the Great Chieftain himself is mocking Rags for her fake name."
+		},
+		"b4.tremborag_raids_a_human_town": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"great_chieftain": {"prefer": ["tremborag"], "fallback_tags": []}, "chieftain": {"prefer": ["rags"], "fallback_tags": []}, "hob": {"prefer": ["garen"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["tremborag", "rags"], "flags": ["rags.called_fake_name_goblin"], "not_flags": []},
+			"depends_on": ["b4.ulvama_mocks_rags_name"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["tremborag.raided_a_human_town", "rags.planned_tremborags_raid", "rags.saw_tremborags_true_form"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "The walled town is not named. Tremborag hid that its defenders included Gold-rank adventurers; two of them are killed (implied, not shown as confirmed). Garen kills one of Tremborag's Hobs during the stay."},
+			"summary": "Rags plans Tremborag's raid on a walled Human town, then learns he hid that Gold-rank adventurers guard it. In battle the Great Chieftain swells into a huge, monstrous form and tears through them. The town falls."
+		},
+		"b4.noears_warns_rags": {
+			"tier": 2,
+			"window": {"earliest": 88, "latest": 88, "confidence": "guess"},
+			"location": "tremborags_mountain",
+			"roles": {"mage": {"prefer": ["noears"], "fallback_tags": []}, "chieftain": {"prefer": ["rags"], "fallback_tags": []}},
+			"requires": {"alive": ["noears", "rags"], "flags": ["rags.planned_tremborags_raid"], "not_flags": []},
+			"depends_on": ["b4.tremborag_raids_a_human_town"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["noears.revealed_as_a_mage", "rags.warned_to_act_humble"],
+				"relationship": [{"from": "noears", "to": "rags", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "He fells a Hob with lightning in the breakout (3.29G); the text does not say the Hob died."},
+			"summary": "The earless Goblin everyone treats as a fool drops the act: he is a real [Mage]. He tells Rags to keep her head down in Tremborag's mountain if she wants to live."
+		},
+		"b4.rags_names_pyrite_and_calls_a_revolt": {
+			"tier": 2,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "tremborags_mountain",
+			"roles": {"chieftain": {"prefer": ["rags"], "fallback_tags": []}, "ally": {"prefer": ["pyrite"], "fallback_tags": []}},
+			"requires": {"alive": ["rags", "pyrite"], "flags": ["rags.warned_to_act_humble"], "not_flags": []},
+			"depends_on": ["b4.noears_warns_rags"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pyrite.named", "rags.revolts_against_tremborag"],
+				"relationship": [{"from": "pyrite", "to": "rags", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "On the fourth night. Pyrite once lived in the mountain and sits with one captive only to protect her. He refuses Rags' power play and says he will leave."},
+			"summary": "The Gold Stone Chieftain refuses to play Rags' power games and says he will leave the mountain. Rags gives him a name, Pyrite. Then, in the Redfang mess hall, she declares she is Goblin and asks who will follow her."
+		}
+	},
+	"system": []
+}

@@ -1,27 +1,28 @@
 # Handoff
 
 ## Just done (2026-09-26)
-- M9 is done: PR #39 merged, tags `m9.4-done` and `m9-done` on 9e8f179. M9 detail is in `docs/PROGRESS_ARCHIVE.md`.
-- M10 planned with the user (ADR 0017, ROADMAP M10): the door first, then 5 canon batches (3.26G-3.29G, 3.30-3.31G + Wistram Days as history only, 3.32-3.35, 3.36-3.39, 3.40-3.42 + Winter Solstice).
-- Book 4 extracted to `canon/raw/book4` (25 chapters).
-- M10.0 built on branch `plan/m10-book4`: the Albez door.
-  - The Celum end is the new map `celum_stitchworks` (Octavia's shop).
-  - 0 trips before `erin.magical_grounds`, then 4 a day.
-  - Save v13.
-  - GUT 640/640 (68 scripts). Checked on screen.
-- The PR for this branch is open for the user to merge. It also holds the M9 archive docs.
+- PR #40 (M10.0 Albez door) merged. Tag `m10.0-done` on 3284dea.
+- M10.1 (3.26G-3.29G) built on branch `data/book4-3.26-3.29`. Detail: ADR 0017 "M10.1".
+  - `game/data/canon/book4/`: 17 events, days 85-90. NPCs tremborag, ulvama, noears, pyrite, redscar, greybeard. Locations north_izril, tremborags_mountain, liscor_dungeon_rift.
+  - New map `dungeon_rift` (south exit of floodplains_south, 60 min), tile `chasm`, knock-out wake.
+  - Two scenes with hooks on day 85: Lyonette searches the snow (floodplains_south 11-16); rescuers at the rift (dungeon_rift 14-20, rope anchor offers keep_watch).
+  - Fix: Rags stops foraging on the floodplains after `rags.tribe_turns_north`.
+  - GUT 651/651 (70 scripts). Python 51 OK. Validator 0 errors. Rift scene checked on screen.
+- The PR for this branch is open for the user to merge.
 
 ## Next steps
-1. The user merges the M10.0 PR. Then tag `m10.0-done` on the merge commit.
-2. M10.1 (3.26G-3.29G): read the chapters with a subagent (the G chapters are Rags and the Goblin Lord; 3.27M is Mrsha). Then ask the user for stage and hook choices.
-3. Door flags the canon batches must set:
+1. The user merges the M10.1 PR. Then tag `m10.1-done` on the merge commit.
+2. M10.2 (3.30-3.31G + Wistram Days 1-7 as history only): read with a subagent, then ask the user for stage and hook choices.
+3. Door flags the later batches must set:
    - M10.2 (3.30): set `albez_door.anchor_at_stitchworks` and clear `albez_door.linked_to_frenzied_hare`.
    - M10.3 (3.32-3.33): set `albez_door.at_wandering_inn`, then `erin.magical_grounds` on Erin's Level 30.
    - Erin is home: her Liscor goals stop on `erin.left_liscor`, and her off-map goal holds while `erin.stranded_north` is set. Book 4 must clear or replace these. Check her goals.
-4. Toren: keep him alive unless the text says he died (3.32 is not clear).
+4. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. Keep him alive unless the text says he died (3.32 is not clear).
+5. Rags: `rags.leads_her_own_tribe`, `tremborag.hunts_rags`, `garen.stays_with_tremborag`. 3.31G continues her thread.
+6. Halrac, Jelaqua and Xrn have no `npc_behaviour` entries yet. Add them if a later scene must place them. The Halfseekers may move to the inn (`halfseekers.eye_the_wandering_inn`).
 
 ## Waiting on the user
-- Merge the M10.0 PR.
+- Merge the M10.1 PR.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -35,14 +36,14 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (68 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (70 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken, Geneva, Niers (3.22L) and Venitra use placeholder days.
 - Save is v13 (M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
-- Same-day canon order: chain with `depends_on`. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
+- Same-day canon order: chain with `depends_on`. Siblings that share one dependency run in id order, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
 
 ## Active files
-- M10.0: `game/core/portal.gd`, `game/core/map_db.gd`, `game/data/maps/celum_stitchworks.json`, `game/tests/unit_portal.gd`, `docs/adr/0017-m10-book4.md`.
-- `game/data/canon/book3/**`, `game/data/maps/bee_cave.json`, `game/data/enemies.json`, `game/data/npc_behaviour.json`, `game/tests/sim_book3_finale.gd`, `game/tests/sim_canon_book3.gd`, `docs/adr/0016-m9-book3.md`.
+- M10.1: `game/data/canon/book4/**`, `game/data/maps/dungeon_rift.json`, `game/tests/sim_canon_book4.gd`, `game/tests/sim_book4_mrsha.gd`, `docs/adr/0017-m10-book4.md`.
+- M10.0: `game/core/portal.gd`, `game/core/map_db.gd`, `game/data/maps/celum_stitchworks.json`, `game/tests/unit_portal.gd`.

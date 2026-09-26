@@ -15,6 +15,7 @@
 		"wood_floor": {"name": "Wooden floor", "walk": true, "color": "#a37b4c"},
 		"wood_wall": {"name": "Wooden wall", "walk": false, "color": "#5c4029"},
 		"door": {"name": "Door", "walk": true, "color": "#c49a5a"},
-		"snow_wall": {"name": "Wall of packed snow", "walk": false, "color": "#f4f8fb"}, "cave_floor": {"name": "Cave floor", "walk": true, "color": "#5b4d3f"}
+		"snow_wall": {"name": "Wall of packed snow", "walk": false, "color": "#f4f8fb"}, "cave_floor": {"name": "Cave floor", "walk": true, "color": "#5b4d3f"},
+		"chasm": {"name": "Chasm", "walk": false, "color": "#1c1a22"}
 	}
 }

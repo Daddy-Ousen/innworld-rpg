@@ -9,7 +9,8 @@
 	"exits": [
 		{"at": [0, 11, 1, 2], "to": "liscor_gate", "arrive": [30, 11], "minutes": 20},
 		{"at": [16, 0, 2, 1], "to": "inn_hill", "arrive": [15, 22], "minutes": 20},
-		{"at": [31, 11, 1, 2], "to": "ruins_entrance", "arrive": [1, 11], "minutes": 180}
+		{"at": [31, 11, 1, 2], "to": "ruins_entrance", "arrive": [1, 11], "minutes": 180},
+		{"at": [8, 23, 2, 1], "to": "dungeon_rift", "arrive": [8, 1], "minutes": 60}
 	],
 	"objects": [
 		{"id": "stream_bank", "at": [23, 8], "name": "Stream bank", "actions": ["carry_water"]},

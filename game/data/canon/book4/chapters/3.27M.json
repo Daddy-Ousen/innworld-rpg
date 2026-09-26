@@ -1,0 +1,201 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.27M",
+	"events": {
+		"b4.mrsha_flees_zels_scent": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "wandering_inn",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["mrsha", "zel_shivertail"], "flags": ["zel.at_wandering_inn", "mrsha.at_the_wandering_inn"], "not_flags": []},
+			"depends_on": ["b3.zel_takes_a_room_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.fled_into_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Zel arrived the night before (3.23L, day 84), so this is day 85. She enters Liscor by the south gate in the morning light and follows Halrac's trail to the Drake inn where the teams stay."},
+			"summary": "At breakfast the scent of the old Drake lodger drags Mrsha back to the night her tribe died. She bolts from the inn and runs alone through the snow into Liscor."
+		},
+		"b4.griffon_hunt_and_the_halfseekers_join_forces": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "liscor",
+			"roles": {"captain": {"prefer": ["ulrien"], "fallback_tags": []}, "selphid": {"prefer": ["jelaqua"], "fallback_tags": []}, "archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}, "half_giant": {"prefer": ["moore"], "fallback_tags": [], "optional": true}, "drowned_man": {"prefer": ["seborn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ulrien", "jelaqua"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["griffon_hunt.allied_with_halfseekers", "halfseekers.eye_the_wandering_inn"],
+				"relationship": [{"from": "ulrien", "to": "jelaqua", "delta": 1}, {"from": "jelaqua", "to": "ulrien", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "The text spells the team 'Griffin Hunt'; our data keeps griffon_hunt. An unnamed Lord of the Wall has taken Griffon Hunt's rooms; do not link him to Ilvriss. Mrsha overhears it hidden under a table."},
+			"summary": "In a crowded Drake inn Griffon Hunt and the Halfseekers agree to raid Liscor's dungeon as one force and split the spoils evenly. With every city room full, they talk about moving out to the half-empty inn beyond the walls."
+		},
+		"b4.mrsha_strays_into_the_hive": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "liscor_hive",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "antinium": {"prefer": ["klbkch"], "fallback_tags": []}, "queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true}, "worker": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["xrn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["mrsha", "klbkch"], "flags": ["mrsha.fled_into_liscor"], "not_flags": []},
+			"depends_on": ["b4.mrsha_flees_zels_scent"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["mrsha.met_the_free_queen"],
+				"relationship": [{"from": "klbkch", "to": "mrsha", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Xrn is in the Hive. Klbkch tells her he regrets not finishing the battle on Rhir, a real continent."},
+			"summary": "Mrsha trails Pawn into the Hive and wanders down to the Free Queen's chamber. Klbkch gets her out before harm comes to her and takes her to Krshia, the Gnoll he knows best."
+		},
+		"b4.brunkr_calls_mrsha_a_doombringer": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "krshia_home",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "accuser": {"prefer": ["brunkr"], "fallback_tags": ["gnoll"]}, "elder": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["mrsha"], "flags": ["mrsha.met_the_free_queen"], "not_flags": []},
+			"depends_on": ["b4.mrsha_strays_into_the_hive"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["mrsha.called_a_doombringer", "mrsha.ran_from_liscor", "brunkr.hand_infected"],
+				"relationship": [{"from": "mrsha", "to": "brunkr", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Klbkch asks what white fur means. Brunkr's hand is badly infected. The text calls him both Krshia's nephew and her cousin. She leaves the city by jumping from Krshia's balcony; the gate is not named."},
+			"summary": "At Krshia's home Klbkch asks what white fur means to Gnolls. Brunkr, sick with an infected hand, names Mrsha a Doombringer. She flees out of the city and runs over the snowy hills until she drops."
+		},
+		"b4.mrsha_falls_into_the_rift": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "liscor_dungeon_rift",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}},
+			"requires": {"alive": ["mrsha"], "flags": ["mrsha.ran_from_liscor"], "not_flags": []},
+			"depends_on": ["b4.brunkr_calls_mrsha_a_doombringer"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.missing", "mrsha.fell_into_the_dungeon"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "The crack lies behind the crest of a slight slope, almost hidden by snow. She lands in the dark far below and later howls for help. What frightens her to the edge is a separate event (b4.toren_watches_mrsha_fall)."},
+			"summary": "Fleeing in the snow, Mrsha ends up clinging to the lip of a hidden crack in the ground and loses her grip. She drops a long way into the dark, into the dungeon under Liscor."
+		},
+		"b4.toren_watches_mrsha_fall": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "liscor_dungeon_rift",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}},
+			"requires": {"alive": ["toren", "mrsha"], "flags": ["toren.heading_to_liscor"], "not_flags": []},
+			"depends_on": ["b4.mrsha_falls_into_the_rift"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.near_liscor", "toren.in_liscor_dungeon", "toren.spared_mrsha", "toren.has_a_sword_again"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "The text names Toren. He is alive but weak, his purple eye-flames guttering. He has a sword again after losing his at Esthelm (3.18T); where he got it is not said. He lowers the sword, seems to think, and reaches for her too slowly. Later he stands in the dungeon's dark, watching her."},
+			"summary": "A weak skeleton with guttering purple eyes stumbles out of the snow and chases Mrsha to the edge with a sword. It is Toren. He lowers the blade and reaches for her too late as she falls, then follows her down into the dark and only watches."
+		},
+		"b4.lyonette_searches_the_snow_for_mrsha": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "floodplains_of_liscor",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": ["mrsha.fled_into_liscor"], "not_flags": []},
+			"depends_on": ["b4.mrsha_falls_into_the_rift"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.searched_for_mrsha"]},
+			"stage": {
+				"area": "floodplains_south",
+				"hours": [11, 16],
+				"kind": "scene",
+				"when_flags": ["lyonette.works_at_inn", "mrsha.at_the_wandering_inn"],
+				"npcs": [
+					{"npc": "lyonette", "pos": [10, 14]}
+				],
+				"line": "A red-haired girl in a thin coat wades through the drifts, calling a name until her voice cracks. The wind fills her tracks behind her.",
+				"note": "M10.1: a scene. Lyonette alone in the snow before anyone hears Mrsha's howl. Hours are guesses (after she checks the inn and the gates)."
+			},
+			"hooks": [
+				{
+					"id": "player_searched_the_snow_with_lyonette",
+					"did": [
+						{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["floodplains_of_liscor"]}}
+					],
+					"days": [85, 85],
+					"then": "change",
+					"effects": {
+						"set_flags": ["floodplains.earther_searched_for_mrsha"],
+						"relationship": [{"from": "lyonette", "to": "player", "delta": 2}, {"from": "mrsha", "to": "player", "delta": 1}]
+					},
+					"news": "Lyonette did not search the floodplains alone for Mrsha: another Human walked the drifts with her, calling the cub's name."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "She checks the inn, the outhouse, the tracks and the city gates first; Mrsha had already left the city. She calls until she has lost her voice."},
+			"summary": "Lyonette finds Mrsha gone and searches everywhere: the inn, her tracks, the city gates. Then she goes out alone into the snow and calls for her until her voice gives out."
+		},
+		"b4.mrsha_rescued_from_the_dungeon": {
+			"tier": 1,
+			"window": {"earliest": 85, "latest": 85, "confidence": "likely"},
+			"location": "liscor_dungeon_rift",
+			"roles": {
+				"cub": {"prefer": ["mrsha"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": ["gold_rank"]},
+				"barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true},
+				"selphid": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true},
+				"antinium": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"prognugator": {"prefer": ["xrn"], "fallback_tags": [], "optional": true},
+				"elder": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["mrsha"], "flags": ["mrsha.fell_into_the_dungeon"], "not_flags": []},
+			"depends_on": ["b4.mrsha_falls_into_the_rift"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["mrsha.missing", "mrsha.fell_into_the_dungeon", "mrsha.fled_into_liscor", "mrsha.ran_from_liscor"],
+				"set_flags": ["mrsha.rescued_from_the_dungeon", "liscor.dungeon_rift_found", "lyonette.never_lets_mrsha_out_of_sight", "lyonette.asked_jelaqua_to_stay", "liscor.knows_zel_saved_mrsha"],
+				"relationship": [
+					{"from": "mrsha", "to": "zel_shivertail", "delta": 1},
+					{"from": "lyonette", "to": "zel_shivertail", "delta": 1},
+					{"from": "lyonette", "to": "jelaqua", "delta": 1},
+					{"from": "mrsha", "to": "krshia", "delta": 1}
+				]
+			},
+			"news": "Zel Shivertail went down a new crack into Liscor's dungeon with Gold-rank adventurers and two Antinium to bring back a lost Gnoll cub, and came up with her alive.",
+			"rumor": "They say a hole has opened in the snow outside Liscor that drops straight into the dungeon, and something big down there is already dead.",
+			"stage": {
+				"area": "dungeon_rift",
+				"hours": [14, 20],
+				"kind": "scene",
+				"when_flags": ["lyonette.works_at_inn", "mrsha.at_the_wandering_inn"],
+				"npcs": [
+					{"npc": "zel_shivertail", "pos": [11, 13]},
+					{"npc": "klbkch", "pos": [13, 9]},
+					{"npc": "krshia", "pos": [11, 10]},
+					{"npc": "lyonette", "pos": [9, 12]}
+				],
+				"line": "Krshia knots a rope around a rock at the edge of a black crack in the snow. An old Drake and an Antinium peer into the dark, and Lyonette calls down to a thin howl far below.",
+				"note": "M10.1: a scene at the rift before the rescuers go down. Halrac, Jelaqua and Xrn go too but have no schedules, so they are not placed. Hours are guesses (late in the day)."
+			},
+			"hooks": [
+				{
+					"id": "player_held_the_rope_at_the_rift",
+					"did": [
+						{"action": ["keep_watch", "comfort_someone", "talk_with_guest"], "context": {"location": ["liscor_dungeon_rift"]}}
+					],
+					"days": [85, 85],
+					"then": "change",
+					"effects": {
+						"set_flags": ["dungeon_rift.earther_held_the_rope"],
+						"relationship": [{"from": "mrsha", "to": "player", "delta": 2}, {"from": "lyonette", "to": "player", "delta": 2}, {"from": "zel_shivertail", "to": "player", "delta": 1}, {"from": "krshia", "to": "player", "delta": 1}]
+					},
+					"news": "When Mrsha was hauled out of the rift, another Human was at the top, holding the rope with Krshia."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Zel gets Lyonette past the gate guards; Halrac and Jelaqua come from the Guild; Klbkch fetches Xrn. Krshia and Halrac fix ropes; Xrn's [Featherfall] takes six down. A red worm-like monster lies dead below. In the text nobody waits at the top. Jelaqua only smiles at the offer of a room."},
+			"summary": "Lyonette hears a howl from a crack in the snow and runs for help. Zel, Halrac, Jelaqua, Klbkch, Xrn and Krshia go down into the dungeon and bring Mrsha up alive. Lyonette hugs her and swears never to let her out of her sight again."
+		}
+	},
+	"system": [
+		{"who": "mrsha", "kind": "class", "name": "[Last Survivor]", "level": 8, "confidence": "confirmed"},
+		{"who": "mrsha", "kind": "skill", "name": "[Natural Concealment]", "level": null, "confidence": "confirmed"},
+		{"who": "mrsha", "kind": "skill", "name": "[Lesser Toughness]", "level": null, "confidence": "confirmed"},
+		{"who": "jelaqua", "kind": "class", "name": "[Iron Tempest]", "level": 33, "confidence": "confirmed", "note": "Her class grew from [Flailmaster]."}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"liscor_dungeon_rift": {
+			"name": "The rift in the snow",
+			"kind": "wild",
+			"parent": "floodplains_of_liscor",
+			"tags": ["rift", "dungeon", "snow", "danger"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Mrsha runs a long way over hills from Liscor to reach it; the text gives no direction or distance. Halrac says it drops well over a hundred feet; Klbkch says it falls into the heart of the dungeon. Map: dungeon_rift (a guess, south of the floodplains)."},
+			"summary": "A dark crack in the ground, nearly hidden by snow behind the crest of a low slope some way from Liscor. Nobody knew of it before Mrsha fell in. It drops straight into the dungeon under the city, and people argue whether it is a danger or a new way in."
+		},
+		"north_izril": {
+			"name": "Northern Izril",
+			"kind": "region",
+			"parent": null,
+			"tags": ["human", "north_izril", "snow"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.26G", "confidence": "confirmed", "note": "The Human north of the continent, beyond the High Passes. Used for Rags' events at unnamed towns and camps (3.28G, 3.29G). No map."},
+			"summary": "The Human-ruled northern half of Izril, north of the High Passes: cities such as Invrisil and Celum, noble lands and wide snowy wilds where Goblin tribes roam in winter."
+		},
+		"tremborags_mountain": {
+			"name": "Tremborag's mountain",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": ["goblin", "mountain", "dwarf_ruins", "north_izril"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.26G", "confidence": "confirmed", "note": "A lone mountain north of the High Passes, near Invrisil (3.26G). Not the Goblin lair of Book 2 (goblin_mountain_lair). No map."},
+			"summary": "A lone mountain in the north of Izril, hollowed into an old Dwarf city, where the Great Chieftain Tremborag rules thousands of Goblins. It has halls, an armoury, a strict pecking order and a hall where captives are held."
+		}
+	}
+}
