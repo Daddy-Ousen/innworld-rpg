@@ -9,7 +9,8 @@
 	"exits": [
 		{"at": [15, 19, 2, 1], "to": "celum_gate", "arrive": [16, 2], "minutes": 0},
 		{"at": [6, 3], "to": "celum_runners_guild", "arrive": [10, 10], "minutes": 0},
-		{"at": [14, 3], "to": "celum_frenzied_hare", "arrive": [10, 10], "minutes": 0}
+		{"at": [14, 3], "to": "celum_frenzied_hare", "arrive": [10, 10], "minutes": 0},
+		{"at": [1, 13], "to": "celum_stitchworks", "arrive": [5, 6], "minutes": 0}
 	],
 	"objects": [
 		{"id": "rats_tail_door", "at": [24, 3], "name": "The Rat's Tail", "actions": ["buy_supplies"], "shop": "rats_tail", "sleep": true, "price": 10},
@@ -34,7 +35,7 @@
 		"________________________________",
 		"BB____________________________BB",
 		"BB____________________________BB",
-		"BB____________________________BB",
+		"BD____________________________BB",
 		"BB____________________________BB",
 		"BB____________________________BB",
 		"BB__T______________________T__BB",
