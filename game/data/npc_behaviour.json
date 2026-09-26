@@ -254,6 +254,14 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
 			]
 		},
+		"fals": {
+			"confidence": "guess",
+			"notes": "M9.2. A senior City Runner who takes his jobs at the Celum Runners' Guild (3.04, 3.09); he runs them off the map. Hours are guesses. The 3.09 scene brings him to the Frenzied Hare on day 76.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[6, 9, 1]], "target": {"area": "celum_runners_guild", "pos": [13, 6]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
 		"stenei": {
 			"confidence": "guess",
 			"notes": "[Receptionist] at Celum's Runners' Guild (1.33R). Hours are a guess (M8.5).",
