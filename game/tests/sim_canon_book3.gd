@@ -6,8 +6,9 @@ extends GutTest
 
 ## First day with Book 3 canon (Laken's placeholder thread starts on day 71).
 const FIRST_DAY := 71
-## Last day with extracted Book 3 canon (M9.1: 3.00 E – 3.05 L, 1.00 D, 1.01 D).
-const LAST_DAY := 76
+## Last day with extracted Book 3 canon (M9.1: 3.00 E – 3.05 L, 1.00 D, 1.01 D;
+## M9.2: 3.06 L – 3.14).
+const LAST_DAY := 80
 
 var _db: DataDb
 var _base_json := ""
@@ -49,11 +50,11 @@ func _where(gs: GameState, id: String) -> String:
 func test_book3_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b3_events().size(), 39)
+	assert_gte(_b3_events().size(), 80)
 	for npc: String in ["laken_godart", "durene", "prost", "yesel", "ivolethe", "geneva_scala", "okasha",
-			"thriss", "belgrade", "anand", "garry"]:
+			"thriss", "belgrade", "anand", "garry", "nemor", "frostwing", "gamel"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
-	for loc: String in ["riverfarm", "celum_adventurers_guild"]:
+	for loc: String in ["riverfarm", "celum_adventurers_guild", "ocre", "first_landing", "road_to_invrisil"]:
 		assert_true(_db.canon.locations.has(loc), loc)
 	# Laken's Earth friend Teresa is not an NPC; `teresa` stays Trey's twin (book2).
 	assert_true(_db.canon.npcs["teresa"]["tags"].has("reim"))
@@ -83,31 +84,36 @@ func test_book3_runs_as_canon() -> void:
 			.map(func(n: Dictionary) -> String: return n["event"])
 	heard.sort()
 	assert_eq(heard, news_events, "one news line per event with news")
-	# The state at the end of M9.1.
+	# The state at the end of M9.2.
 	for f: String in ["laken.emperor", "durene.revealed_half_troll", "durene.paladin", "laken.found_buried_gold",
-			"horns_of_hammerad.gone_to_albez", "horns_of_hammerad.trapped_in_albez",
+			"horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_ocre", "horns_of_hammerad.has_albez_treasure",
+			"yvlon.armor_fused_to_arms", "erin.makes_corusdeer_soup", "ryoka.banned_from_runners_guild",
+			"ryoka.gone_to_magnolia", "magnolia.allied_with_ryoka", "magnolia.gone_to_first_landing",
+			"liscor_hive.soldiers_died_for_heaven", "pawn.cares_for_the_soldiers", "pawn.allowed_to_pray",
+			"riverfarm.buried_by_avalanche", "laken.rules_riverfarm", "laken.left_for_invrisil",
 			"ryoka.friends_with_ivolethe", "ryoka.magic_stalled", "persua.beaten_by_ryoka", "persua.swore_to_kill_ryoka",
 			"celum_runners_guild.buried_in_snow", "ryoka.asked_to_leave_celum", "ryoka.learning_to_run_like_the_wind",
 			"liscor.goblin_army_passed", "wandering_inn.reopened_by_lyonette", "pawn.will_tell_klbkch_of_his_class",
 			"geneva.died_and_lives_through_okasha", "geneva.called_the_last_light",
 			"ryoka.in_celum", "erin.in_celum", "lyonette.works_at_inn", "mrsha.in_selys_care"]:
 		assert_true(gs.flags.has(f), f)
-	for f: String in ["ryoka.gone_to_magnolia", "ryoka.gained_first_class", "celum.earther_stood_with_ryoka",
-			"wandering_inn.earther_kept_lyonette_going"]:
+	for f: String in ["ryoka.gained_first_class", "celum.earther_stood_with_ryoka",
+			"wandering_inn.earther_kept_lyonette_going", "frenzied_hare.earther_sat_with_ryoka",
+			"horns_of_hammerad.trapped_in_albez", "pawn.may_not_pray"]:
 		assert_false(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "thriss"), "Okasha killed Thriss")
 	assert_true(gs.world.is_alive(_db.canon, "geneva_scala"), "Geneva lives on through Okasha")
 	assert_true(gs.world.is_alive(_db.canon, "persua"), "Persua was beaten, not killed")
-	# That evening Lyonette keeps the inn and Ryoka eats at the Hare; the Horns
-	# are far away in Albez and Mrsha is with Selys.
+	assert_false(gs.world.is_alive(_db.canon, "nemor"), "Magnolia killed Nemor")
+	# That evening Lyonette keeps the inn; Ryoka has gone north to Magnolia,
+	# the Horns are far away in Ocre and Mrsha is with Selys.
 	for i in 200:
 		if gs.clock.minute() >= 20 * 60:
 			break
 		Commands.wait(gs, _db, 3600)
 	assert_gte(gs.clock.minute(), 20 * 60, "evening")
 	assert_eq(_where(gs, "lyonette").get_slice(" ", 0), "inn_interior", "Lyonette keeps the inn")
-	assert_eq(_where(gs, "ryoka_griffin").get_slice(" ", 0), "celum_frenzied_hare", "Ryoka is still in Celum")
-	for npc: String in ["ceria_springwalker", "pisces", "ksmvr", "mrsha"]:
+	for npc: String in ["ryoka_griffin", "ceria_springwalker", "pisces", "ksmvr", "mrsha"]:
 		assert_eq(_where(gs, npc), "off map", npc)
 
 
@@ -116,7 +122,8 @@ func test_remote_threads_do_not_need_liscor_or_celum() -> void:
 	for npc: String in ["erin_solstice", "ryoka_griffin", "lyonette", "ceria_springwalker"]:
 		assert_eq(Commands.kill_npc(gs, _db, npc), "", npc)
 	ToyCanon.sleep_through(gs, _db, LAST_DAY)
-	for id: String in ["b3.laken_makes_durene_a_paladin", "b3.baleros_hears_of_the_last_light"]:
+	for id: String in ["b3.laken_makes_durene_a_paladin", "b3.baleros_hears_of_the_last_light",
+			"b3.laken_sets_out_for_invrisil"]:
 		assert_eq(gs.world.status(id), Director.DONE, id)
 	for id: String in ["b3.horns_run_out_of_coin_at_albez", "b3.ryoka_befriends_ivolethe",
 			"b3.ryoka_beats_persua_in_the_runners_guild", "b3.lyonette_reopens_the_inn"]:
