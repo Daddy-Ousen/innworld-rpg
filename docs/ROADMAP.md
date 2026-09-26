@@ -123,7 +123,7 @@ The seven "Wistram Days" interludes are the past (Ceria and Pisces at Wistram): 
 no events on the calendar, like the Antinium Wars interludes.
 - [x] M10.0 The Albez door: a magic door the player can use between the Liscor inn and the Frenzied Hare in Celum, with the limits the text gives (engine + save v13)
 - [x] M10.1 Canon 3.26 G – 3.29 G
-- [ ] M10.2 Canon 3.30 – 3.31 G + Wistram Days 1–7 as history notes
+- [x] M10.2 Canon 3.30 – 3.31 G + Wistram Days 1–7 as history notes
 - [ ] M10.3 Canon 3.32 – 3.35
 - [ ] M10.4 Canon 3.36 – 3.39
 - [ ] M10.5 Canon 3.40 – 3.42 + Interlude – Winter Solstice

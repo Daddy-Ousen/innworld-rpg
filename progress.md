@@ -15,8 +15,8 @@ M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
 - [ ] M10 — Book 4 (Winter Solstice). Plan chosen 2026-09-26 (ADR 0017, ROADMAP M10): the door first, then 5 canon batches; Wistram Days as history only.
   - [x] M10.0 The Albez door — merged ([PR #40](https://github.com/Daddy-Ousen/innworld-rpg/pull/40)), tag `m10.0-done` on merge commit 3284dea. Map objects with `when_flags`/`unless_flags` and `portal`; `rules.portal` (4 trips a day); `core/portal.gd`; save v13; new map `celum_stitchworks`. Flags for the canon batches: `albez_door.anchor_at_stitchworks`, `albez_door.at_wandering_inn`, `erin.magical_grounds`. GUT 640/640 (68 scripts). Checked on screen.
-  - [x] M10.1 3.26 G – 3.29 G — built on branch `data/book4-3.26-3.29` (PR pending merge). 17 events (days 85–90), 6 NPCs, 3 locations, new map `dungeon_rift` + tile `chasm`. Two scenes with hooks: Lyonette searches the snow; the rescuers at the rift. GUT 651/651 (70 scripts). Checked on screen.
-  - [ ] M10.2 3.30 – 3.31 G + Wistram Days (history)
+  - [x] M10.1 3.26 G – 3.29 G — merged ([PR #41](https://github.com/Daddy-Ousen/innworld-rpg/pull/41)), tag `m10.1-done` on merge commit ce7d682. 17 events (days 85–90), 6 NPCs, 3 locations, new map `dungeon_rift` + tile `chasm`. Two scenes with hooks: Lyonette searches the snow; the rescuers at the rift. GUT 651/651 (70 scripts). Checked on screen.
+  - [x] M10.2 3.30 – 3.31 G + Wistram Days (history) — built on branch `data/book4-3.30-3.31` (PR pending merge). 12 events (days 89–92), 10 NPCs (8 Wistram, history only), 2 locations. One scene with a hook: Ceria tells Erin of Wistram at the Frenzied Hare (night 89). Door anchor moves to the Stitchworks. GUT 659/659 (71 scripts).
   - [ ] M10.3 3.32 – 3.35
   - [ ] M10.4 3.36 – 3.39
   - [ ] M10.5 3.40 – 3.42 + Winter Solstice
@@ -24,12 +24,12 @@ M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
 
 ## Completed (current engine state)
-- Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4: 3.26G–3.29G (days 85–90).
+- Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4: 3.26G–3.31G and the 3.32 frame (days 85–92).
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
 - Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=13), `save_migrations` (1→…→13), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 70 GUT scripts, 651 tests, all pass, headless exit 0. Python tool tests: 51 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 71 GUT scripts, 659 tests, all pass, headless exit 0. Python tool tests: 51 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers
