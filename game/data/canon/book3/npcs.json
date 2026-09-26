@@ -1,0 +1,137 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"laken_godart": {
+			"name": "Laken Godart",
+			"race": "Human",
+			"tags": ["human", "earther", "blind", "emperor", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [{"name": "[Emperor]", "level": 4}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "From San Francisco; blind from birth. His diary counts days from his own arrival, not Erin's calendar. Level 4 as of 3.01E."},
+			"summary": "A blind young Earther who steps out of a mall food court into a forest near Riverfarm in north Izril. Calm and wry, he moves in with the shunned Durene, names himself an [Emperor] and gets the class, and makes her his [Paladin]."
+		},
+		"durene": {
+			"name": "Durene",
+			"race": "Half-Troll",
+			"tags": ["half_troll", "farmer", "paladin", "strong", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [{"name": "[Paladin]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Before 3.01E she was a Level 6 [Farmer] with [Enhanced Strength]. Her mother died when she was four; an adventurer killed her Troll father."},
+			"summary": "A huge, gentle half-Troll girl who lives alone in her dead mother's cottage outside Riverfarm. The village calls on her strength but keeps her apart and lets its children stone her. She takes in Laken, falls in love with him, and becomes his [Paladin]."
+		},
+		"prost": {
+			"name": "Prost",
+			"race": "Human",
+			"tags": ["human", "farmer", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [{"name": "[Farmer]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Married to Yesel. His old plow horse is Evera."},
+			"summary": "A Riverfarm farmer who first welcomes Laken and relies on Durene's strength, but fears her as a monster. He took her in as a child only at her mother's request, and fled when she finally shouted what she is."
+		},
+		"yesel": {
+			"name": "Yesel",
+			"race": "Human",
+			"tags": ["human", "villager", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "By village talk she found Durene's mother pregnant and alone, with Troll tracks nearby (3.01E)."},
+			"summary": "Prost's wife. Polite and generous to Laken with food and winter clothes, cold and bossy to Durene, and eager to move the blind stranger out of the half-Troll's house into the village."
+		},
+		"ivolethe": {
+			"name": "Ivolethe",
+			"race": "Frost Faerie",
+			"tags": ["fae", "frost_faerie", "winter_court"],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "Her true name is secret; Ivolethe is what Ryoka may call her. She says she is the faerie Ryoka struck, who warned her of the armies and took the second price of her bargain."},
+			"summary": "A Frost Faerie of the Winter Court who stays with Ryoka when her sisters grow bored and leave. Sharp-tongued and proud, she becomes Ryoka's friend, bites those who poke her, and offers to teach Ryoka to run like the wind."
+		},
+		"geneva_scala": {
+			"name": "Geneva Scala",
+			"race": "Human",
+			"tags": ["human", "earther", "doctor", "baleros", "distant"],
+			"faction": "raverian_fighters",
+			"home": "baleros",
+			"classes": [{"name": "[Doctor]", "level": 17}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.00D", "confidence": "likely", "note": "Third-year medical student from Wisconsin, 24. Level 17 is worked out from Level 11 plus six (1.01D). After 1.01D a Selphid, Okasha, lives inside her body and keeps it moving."},
+			"summary": "An Earther medical student stranded in Baleros who enlists with a mercenary company as its [Doctor]. With no potions and few tools she operates through a jungle battle, learns triage, treats any side under a red cross, and is called the Last Light."
+		},
+		"okasha": {
+			"name": "Okasha",
+			"race": "Selphid",
+			"tags": ["selphid", "rogue", "mercenary", "baleros", "distant"],
+			"faction": "burning_march_company",
+			"home": "baleros",
+			"classes": [{"name": "[Rogue]", "level": 23}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Of the Burning March 6th Division. Selphids are parasites that live in and move dead bodies."},
+			"summary": "A Selphid soldier whom Geneva moves into a fresh corpse after a spell tears her old host apart. Half paralysed, she becomes Geneva's steady surgical assistant, then enters Geneva's own body to keep her alive."
+		},
+		"thriss": {
+			"name": "Thriss",
+			"race": "Human",
+			"tags": ["human", "soldier", "sergeant", "mercenary", "baleros", "distant"],
+			"faction": "raverian_fighters",
+			"home": "baleros",
+			"classes": [{"name": "[Sergeant]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.00D", "confidence": "confirmed", "note": "Of the 4th Battalion of the Raverian Fighters. Killed by Okasha in 1.01D."},
+			"summary": "A loud, armoured [Sergeant] who recruits Geneva and trusts her with the potion key. Pushed by the war and the lost potions, he turns on her for healing an enemy Centaur and breaks her spine before Okasha kills him."
+		},
+		"belgrade": {
+			"name": "Belgrade",
+			"race": "Antinium",
+			"tags": ["antinium", "worker", "individual", "tactician", "chess"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [{"name": "[Tactician]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "One of the five surviving original Individuals of Erin's chess club (Pawn, Bird, Belgrade, Anand, Garry)."},
+			"summary": "A Worker of Liscor's Hive and one of the five original Individuals from Erin's chess club. A growing [Tactician] who leads Antinium against dungeon monsters in the tunnels below the Hive."
+		},
+		"anand": {
+			"name": "Anand",
+			"race": "Antinium",
+			"tags": ["antinium", "worker", "individual", "tactician", "chess"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [{"name": "[Tactician]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "One of the five surviving original Individuals of Erin's chess club."},
+			"summary": "A Worker of Liscor's Hive and one of the five original Individuals from Erin's chess club. Like Belgrade, a rising [Tactician] who fights the dungeon's monsters under the city."
+		},
+		"garry": {
+			"name": "Garry",
+			"race": "Antinium",
+			"tags": ["antinium", "worker", "individual", "cook", "chess"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "One of the five surviving original Individuals. He cooks, but his class is not named here."},
+			"summary": "A Worker of Liscor's Hive and one of the five original Individuals from Erin's chess club. He has taken to cooking, frying the birds Bird shoots into a snack the Hive can stand to eat."
+		}
+	}
+}

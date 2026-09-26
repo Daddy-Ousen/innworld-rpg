@@ -1,0 +1,72 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.02H",
+	"events": {
+		"b3.horns_run_out_of_coin_at_albez": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {
+				"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.has_albez_map", "izril.dangersense_alarm"], "not_flags": []},
+			"depends_on": ["b2.horns_of_hammerad_claim_the_albez_map"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.gone_to_albez", "horns_of_hammerad.nearly_broke"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.02H",
+				"confidence": "confirmed",
+				"note": "Day guess: their eighth night at Albez, and Yvlon brings word of the [Dangersense] surge from the Liscor dungeon (day 71), so day 72 at the earliest. Albez is book1's ruins_of_albez. The Horns stay away until 3.24."
+			},
+			"summary": "Eight nights into a two-day trip, the Horns camp by the sunken ruins of Albez without tents. Their map shows secret rooms that are buried or looted. Yvlon buys food from a Runner with their second-last coin, and Pisces grumbles that he may quit."
+		},
+		"b3.pisces_raises_skeletons_to_dig_albez": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker", "pisces"], "flags": ["horns_of_hammerad.gone_to_albez"], "not_flags": []},
+			"depends_on": ["b3.horns_run_out_of_coin_at_albez"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pisces.raised_skeletons_at_albez", "horns_of_hammerad.found_a_sealed_tunnel"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "Ceria and Pisces talk of their Wistram days and their friend Mons. Pisces thinks he could study a Lich's animating spell."},
+			"summary": "Out of time, Ceria lets Pisces raise six skeletons to dig, over Yvlon's silent dislike. They break into a buried corridor and set off a blue fire trap that melts stone, fresh and never triggered, so something worth guarding may lie ahead."
+		},
+		"b3.horns_wipe_out_a_creler_nest": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.found_a_sealed_tunnel"], "not_flags": []},
+			"depends_on": ["b3.pisces_raises_skeletons_to_dig_albez"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.killed_a_creler_nest", "ksmvr.hurt_by_crelers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "They creep through the tunnel with sticks and a skeleton trap-finder, past an arrow trap and an acid trap."},
+			"summary": "Young Crelers burst from the dark and shred the skeletons. Ceria freezes one in her bone hand and Ksmvr holds another down to saw at it. At Ksmvr's urging the Horns then kill eight larvae in a small nest before they can grow."
+		},
+		"b3.horns_teleported_into_the_insanity_pit": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.killed_a_creler_nest"], "not_flags": []},
+			"depends_on": ["b3.horns_wipe_out_a_creler_nest"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.trapped_in_albez", "horns_of_hammerad.under_insanity_rune"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "Cliffhanger, continued in 3.07H. Under the rune Yvlon takes herself for her aunt Yenelaw Byres (no entry) and Pisces for a fencing master."},
+			"summary": "A plain wooden door at the tunnel's end shrugs off spells and swords. When Ceria and Pisces study its enchantment, it notices them and teleports all four into a pit of bones, where a glowing [Insanity] rune drives them mad."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "skill", "name": "[Raise Skeleton]", "level": null, "confidence": "confirmed", "note": "A spell he casts at range, many at once; he calls skeletons the most mana-efficient undead."}
+	]
+}

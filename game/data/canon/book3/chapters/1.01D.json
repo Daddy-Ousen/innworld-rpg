@@ -1,0 +1,94 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "1.01D",
+	"events": {
+		"b3.geneva_operates_through_the_first_battle": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "selphid": {"prefer": ["okasha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala"], "flags": ["raverian_fighters.lost_their_potions"], "not_flags": []},
+			"depends_on": ["b3.centaurs_smash_the_battalions_potions"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["geneva.lost_most_patients", "geneva.saved_a_selphid"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Placeholder day. The officers keep the last potions; the battalion has over six hundred soldiers. She treats about thirty before her first break."},
+			"summary": "With no potions for the ranks, Geneva works alone in a buggy tent as the wounded pour in; nearly every serious case dies on her table. She burns a wounded Selphid's bleeding shut and moves it into a fresh corpse, then weeps herself to sleep."
+		},
+		"b3.okasha_joins_geneva_and_she_triages": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "selphid": {"prefer": ["okasha"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala", "okasha"], "flags": ["geneva.saved_a_selphid"], "not_flags": []},
+			"depends_on": ["b3.geneva_operates_through_the_first_battle"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["okasha.assists_geneva", "geneva.uses_triage", "geneva.flies_the_red_cross"],
+				"relationship": [{"from": "okasha", "to": "geneva_scala", "delta": 3}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Placeholder day; this covers several days of fighting. Clara and Lim turn on her when she makes Lim wait. Her soldiers start to level as [Field Medics]. A flying enemy [Mage] sees the red cross and spares the tent."},
+			"summary": "A grieving soldier punches Geneva. The Selphid, Okasha, walks up in the dead woman's body, half paralysed, and becomes her assistant. Geneva starts triage, faces her friends' fury, gains Skills that let her save most patients, and hangs a red cross over her tent."
+		},
+		"b3.geneva_shields_a_wounded_centaur": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": []}, "selphid": {"prefer": ["okasha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala", "thriss"], "flags": ["geneva.uses_triage"], "not_flags": []},
+			"depends_on": ["b3.okasha_joins_geneva_and_she_triages"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["geneva.spared_an_enemy_centaur", "thriss.hates_geneva"],
+				"relationship": [{"from": "thriss", "to": "geneva_scala", "delta": -3}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Placeholder day. She warns that breaking her oath could cost her the class."},
+			"summary": "Geneva saves an enemy Centaur speared in the side. Thriss comes to kill him for the raids on the potions; Geneva stands in his way, says her oath outranks his orders and dares him to execute her. He backs down, and she sends the Centaur off on a crutch."
+		},
+		"b3.thriss_breaks_genevas_spine_and_okasha_saves_her": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "selphid": {"prefer": ["okasha"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": []}},
+			"requires": {"alive": ["geneva_scala", "okasha", "thriss"], "flags": ["geneva.spared_an_enemy_centaur"], "not_flags": []},
+			"depends_on": ["b3.geneva_shields_a_wounded_centaur"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["geneva.died_and_lives_through_okasha", "okasha.lives_inside_geneva", "baleros.magehammer_ceded_the_mine"],
+				"kill": ["thriss"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Placeholder day. Okasha says a Selphid entering a living host is forbidden. Geneva's right arm will not move. Geneva is not dead in the data: Okasha keeps her body and mind going."},
+			"summary": "On the last day, Centaurs raid the camp; the one Geneva saved calls them off, and Thriss smashes his head in, calls Geneva a traitor and breaks her spine. Okasha kills Thriss and enters Geneva's dying body to keep her alive. Fresh potions arrive and she heals until she drops."
+		},
+		"b3.baleros_hears_of_the_last_light": {
+			"tier": 1,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}},
+			"requires": {"alive": ["geneva_scala"], "flags": ["geneva.died_and_lives_through_okasha"], "not_flags": []},
+			"depends_on": ["b3.thriss_breaks_genevas_spine_and_okasha_saves_her"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["geneva.called_the_last_light"]},
+			"rumor": "Mercenaries back from Baleros speak of a [Doctor] under a red cross who heals soldiers of any side. They call her the Last Light.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.01D", "confidence": "confirmed", "note": "Placeholder day. Okasha tells her the name before the last raid; the stories spread among mercenaries afterwards."},
+			"summary": "Soldiers on both sides of the jungle war come to call Geneva the Last Light, the last face the dying see. When the Magehammer Company withdraws, stories of the red-cross flag and a class that heals rather than kills travel from camp to camp across Baleros."
+		}
+	},
+	"system": [
+		{"who": "geneva_scala", "kind": "level", "name": "[Doctor]", "level": 11, "confidence": "confirmed", "note": "After the first day of battle."},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Injury Sense]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Sterile Equipment]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "level", "name": "[Doctor]", "level": 17, "confidence": "likely", "note": "She gains six levels in one night after the second day of battle; the number 17 is worked out, not stated."},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Numbing Touch]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Flawless Cut]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Speed Stitching]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Enhanced Thread]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Lesser Stamina]", "level": null, "confidence": "confirmed"},
+		{"who": "okasha", "kind": "class", "name": "[Rogue]", "level": 23, "confidence": "confirmed"}
+	]
+}

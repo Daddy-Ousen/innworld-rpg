@@ -1,0 +1,82 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.01E",
+	"events": {
+		"b3.yesel_tries_to_move_laken_to_the_village": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "wife": {"prefer": ["yesel"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["durene"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart"], "flags": ["laken.emperor"], "not_flags": []},
+			"depends_on": ["b3.laken_declares_himself_emperor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["riverfarm.snowed_in", "laken.refused_to_leave_durene"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.01E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 19-20. Placeholder day. Snow comes on his Day 20; if winter reached the north on the day it reached Liscor (day 42), his Day 1 would be near day 22, so this thread may really lie before day 71. Flagged, not synced."
+			},
+			"summary": "Laken reaches [Emperor] Level 2 while teaching Durene. Overnight the Winter Sprites bring snow. Yesel brings winter clothes and keeps pressing Laken to move into the village, away from Durene, until he politely sends her home."
+		},
+		"b3.laken_drives_off_the_children_with_his_aura": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "friend": {"prefer": ["durene"], "fallback_tags": []}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart", "durene"], "flags": ["laken.refused_to_leave_durene"], "not_flags": []},
+			"depends_on": ["b3.yesel_tries_to_move_laken_to_the_village"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["laken.used_aura_of_the_emperor", "durene.revealed_half_troll", "prost.fears_durene"],
+				"relationship": [
+					{"from": "prost", "to": "laken_godart", "delta": -2},
+					{"from": "prost", "to": "durene", "delta": -2}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.01E", "confidence": "confirmed", "note": "Laken's Day 22. Placeholder day. Durene breaks a table in her anger."},
+			"summary": "Village children pelt Durene with snowballs and pinecones and turn on Laken. His anger bursts out as [Aura of the Emperor] and they flee in terror. Prost comes to warn him off; Durene throws him out and screams after him that she is a Troll."
+		},
+		"b3.laken_finds_buried_gold": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "friend": {"prefer": ["durene"], "fallback_tags": []}},
+			"requires": {"alive": ["laken_godart", "durene"], "flags": ["durene.revealed_half_troll"], "not_flags": []},
+			"depends_on": ["b3.laken_drives_off_the_children_with_his_aura"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["laken.found_buried_gold", "laken.and_durene_are_lovers"],
+				"relationship": [
+					{"from": "durene", "to": "laken_godart", "delta": 3},
+					{"from": "laken_godart", "to": "durene", "delta": 3}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.01E", "confidence": "confirmed", "note": "Laken's Day 22-25. Placeholder day. The sack holds 141 gold coins and eight gems; Durene says it could buy Riverfarm six times. Laken thinks [King's Bounty] led him to it."},
+			"summary": "Laken touches Durene's face and knows she is half-Troll; he gains [King's Bounty]. She tells of her Troll father and her lonely childhood, then runs. Chasing her blind through the snow, he trips over a buried sack of gold. They count it, and become lovers."
+		},
+		"b3.laken_makes_durene_a_paladin": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": []}},
+			"requires": {"alive": ["laken_godart", "durene"], "flags": ["laken.and_durene_are_lovers"], "not_flags": []},
+			"depends_on": ["b3.laken_finds_buried_gold"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["durene.paladin", "durene.stands_up_to_riverfarm"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.01E", "confidence": "confirmed", "note": "Laken's Day 27-30. Placeholder day. The class sets in overnight; she announces it the next morning."},
+			"summary": "Durene comes home in tears after the village calls her a monster again while she lifts a fallen roof beam. Laken has her kneel and names her his [Paladin], his champion. She takes the class and starts chasing off the children who bully her."
+		}
+	},
+	"system": [
+		{"who": "laken_godart", "kind": "level", "name": "[Emperor]", "level": 2, "confidence": "confirmed", "note": "His Day 19; he thinks teaching his one subject counts as ruling."},
+		{"who": "laken_godart", "kind": "level", "name": "[Emperor]", "level": 4, "confidence": "confirmed", "note": "His Day 22, as he learns Durene is half-Troll."},
+		{"who": "laken_godart", "kind": "skill", "name": "[King's Bounty]", "level": null, "confidence": "confirmed"},
+		{"who": "durene", "kind": "class", "name": "[Paladin]", "level": null, "confidence": "confirmed", "note": "Given by Laken as [Emperor]; he says only an emperor can grant it."}
+	]
+}

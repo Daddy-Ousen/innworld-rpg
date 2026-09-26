@@ -1,0 +1,23 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"riverfarm": {
+			"name": "Riverfarm",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["village", "human", "farming", "north_izril"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "About sixty people. Bells, over thirty miles off, is the nearest city; Invrisil is the nearest major one (3.01E). Durene's cottage stands a few miles out, by a stream. No map."},
+			"summary": "A small, poor farming village by a river in north Izril, ruled only by its village head. Its folk rely on the half-Troll Durene's strength yet keep her out, and treat the blind stranger Laken as a charming novelty."
+		},
+		"celum_adventurers_guild": {
+			"name": "Celum Adventurers' Guild",
+			"kind": "building",
+			"parent": "celum",
+			"tags": ["guild", "adventurers"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "No map. Escorts are hired from the teams directly, not through the guild desk."},
+			"summary": "Celum's Adventurers' Guild, a large hall with six reception desks and tables of Bronze and Silver-rank adventurers. Erin is banned for a while after she flips a table on two men who insult the Horns of Hammerad."
+		}
+	}
+}
