@@ -1,0 +1,86 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.15",
+	"events": {
+		"b3.erin_brews_thickskin_soup": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["erin.in_celum", "erin.makes_corusdeer_soup"], "not_flags": []},
+			"depends_on": ["b3.erin_and_octavia_brew_corusdeer_soup"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.makes_thickskin_soup", "octavia.knows_only_erin_can_brew_the_soups"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Nearly a hundred tries and many gold coins of reagents; Erin pays two gold per test that harms Octavia. Octavia calls it a Thickskin potion made with far fewer reagents. Erin also has a strength stew."},
+			"summary": "Erin pays a wary Octavia to taste yet another alchemical soup. This one works: a pin bends against Octavia's skin. When Octavia follows the recipe herself, nothing mixes. Only Erin's [Wondrous Fare] makes the dish, so Octavia's dream of selling it to every inn dies."
+		},
+		"b3.erin_asks_the_hare_what_people_do_for_fun": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["maran"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_brews_thickskin_soup"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.bored_in_celum"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "About a day after Ryoka ran off and nearly a week after Erin reached Celum. Agnes says Erin earns them more in a week than they made in a month; Erin paid for Jerom's new potion. Safry cooks while Erin is out."},
+			"summary": "Homesick and bored, Erin stops cooking early and asks Agnes and Maran what people in Celum do for fun. A drink, a dance, a shepherd's flute, the coming Winter Solstice fair and the odd travelling [Bard] are all they can name. Erin finds it thin and goes to see Wesle."
+		},
+		"b3.wesle_shows_erin_the_goblin_map": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "celum_watch_house",
+			"roles": {"guard": {"prefer": ["wesle"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "wesle"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_asks_the_hare_what_people_do_for_fun"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.still_seeking_toren", "celum.watch_tracks_goblin_bands", "goblin_lord.warband_seen_near_verdun"]},
+			"news": "Celum's Watch pins every Goblin sighting around ruined Esthelm on a map. The village of Verdun saw about a hundred armed Goblins march north in good order.",
+			"rumor": "Guards whisper that the Goblins near Esthelm move like drilled soldiers. Some blame a war between tribes; others the Goblin Lord.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Erin asks Wesle about Toren every day; no city or Adventurers' Guild has seen a walking skeleton. Wesle's only fun is pitching horseshoes behind the barracks, which Erin pities."},
+			"summary": "Wesle has no word of Toren. The Watch works day and night since Esthelm fell; he shows Erin a map of sightings, among them a band of about a hundred armed Goblins near Verdun, and blames a tribal war or the Goblin Lord. Then he shows her the Watch's horseshoe game."
+		},
+		"b3.erin_catches_grev_pickpocketing": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "celum_poor_quarter",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "thief": {"prefer": ["grev"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "grev"], "flags": ["erin.in_celum", "grev.spared_by_erin"], "not_flags": []},
+			"depends_on": ["b3.wesle_shows_erin_the_goblin_map"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.met_jasi", "grev.caught_stealing_again"],
+				"relationship": [{"from": "jasi", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Grev is one crime short of exile from Celum. Jasi was a foundling raised by a Human couple, Grev's parents, who later split. She has never left Celum and knows no other Drakes."},
+			"summary": "In the poor streets Erin sees Grev about to cut a young woman's purse and chases him to a hut by the walls. A young Drake washer, Jasi, shields him, then learns he lured Erin to muggers and punishes him. Lye and scrubbing have torn the scales from her claws."
+		},
+		"b3.erin_hires_jasi_at_the_frenzied_hare": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "jasi"], "flags": ["erin.met_jasi"], "not_flags": []},
+			"depends_on": ["b3.erin_catches_grev_pickpocketing"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["jasi.works_at_frenzied_hare", "jasi.lives_at_frenzied_hare", "grev.lives_at_frenzied_hare", "agnes.doubts_about_jasi"],
+				"relationship": [{"from": "jasi", "to": "erin_solstice", "delta": 2}, {"from": "grev", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "A Drake now waits tables at the Frenzied Hare in Celum. The inn's new cook took her on, and her young Human brother sleeps there too.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Agnes agrees, but warns of the old grudge between Drakes and Humans. Guests stare but say nothing aloud. Erin wonders if she can take the pair to Liscor later. She levels in her sleep."},
+			"summary": "Erin brings Jasi and Grev to the Hare, asks Agnes to take Jasi on as a [Barmaid], and finds them a room. Grev eats until he drops asleep; Jasi serves all night under wary looks. In bed Erin fears she acted on a whim, but decides doing nothing would have been worse."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 27, "confidence": "confirmed", "note": "In her sleep after taking in Jasi and Grev (night of day 77, guess)."},
+		{"who": "erin_solstice", "kind": "other", "name": "Alchemical cooking with [Wondrous Fare]", "level": null, "confidence": "confirmed", "note": "Her soups copy potion effects (warmth, strength, tough skin) with fewer reagents. Agnes and Octavia get no reaction from the same recipe."},
+		{"who": "jasi", "kind": "class", "name": "[Washer]", "level": null, "confidence": "confirmed", "note": "Only a handful of levels, taken out of need."}
+	]
+}

@@ -1,0 +1,132 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.17T",
+	"events": {
+		"b3.toren_haunts_the_side_road": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "adventurers": {"prefer": [], "fallback_tags": ["adventurer"], "optional": true}},
+			"requires": {"alive": ["toren"], "flags": ["toren.left_erin"], "not_flags": []},
+			"depends_on": ["b2.toren_kills_travellers_on_the_road"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.made_a_kill_list", "toren.wants_to_match_griffon_hunt", "toren.wounded_a_bronze_team", "toren.drawn_to_esthelm"]},
+			"rumor": "Travellers keep vanishing on a side road near Celum. A Bronze-rank team swears a skeleton rose out of the snow and cut two of them badly.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "He has used his first victims as bait for about a score more. His kill list: the bees, Lyonette, Ryoka's shinbones, the sleigh and its bells. Erin's song still haunts him. The day is a guess."},
+			"summary": "Free of Erin, Toren hides in the snow beside corpses he uses as bait. He works out that he can dislike things, draws up a kill list, and drives off a Bronze-rank trio with [Mirage Cut]. Resolved to grow as strong as Griffon Hunt, he follows a pull of death to the south-east."
+		},
+		"b3.redfang_band_decides_to_return_to_rags": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 78, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {
+				"leader": {"prefer": ["grunter"], "fallback_tags": []},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["bugear"], "fallback_tags": [], "optional": true},
+				"cook": {"prefer": ["rocksoup"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["grunter"], "flags": ["garen.hit_squad_hunts_erin"], "not_flags": []},
+			"depends_on": ["b2.garen_sends_goblins_to_kill_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["redfang_band.turned_from_garens_order", "redfang_band.heading_to_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "Day six of the hunt (sent on day 71, so about day 77). Thirteen males, each over Level 10; the Redfang have no Shaman, so these are nicknames. Garen told them to keep it from Rags. They do not know Rags has gone north."},
+			"summary": "Thirteen Redfang elites under the Hob Grunter, sent by Garen to kill an unnamed Human [Innkeeper], are hopelessly lost. Over a poor meal they argue by gesture and agree Rags, not Garen, is their Chieftain. They turn south for Liscor to tell her of the order."
+		},
+		"b3.redfang_band_flees_into_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"leader": {"prefer": ["grunter"], "fallback_tags": []}, "archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true}, "commander": {"prefer": ["goblin_vanguard_commander"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["grunter"], "flags": ["redfang_band.heading_to_liscor"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_decides_to_return_to_rags"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["redfang_band.in_esthelm", "goblin_lord.vanguard_near_esthelm"]},
+			"news": "A Goblin host in black armour, walking dead at its front, marches the Liscor road near ruined Esthelm. It seems to be sent by the Goblin Lord.",
+			"rumor": "Pikes hung with body parts and a cart of corpses follow a Goblin army in the south, and its dead get up and walk.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "They walk north for hours by mistake before turning south. No women or children march with it, so it is a war band, not the Lord's whole host. Badarrow drops a pony rider. The main force goes on north."},
+			"summary": "Shadowing the road south, the band meets a Goblin army in black armour that marches like soldiers, with zombies in front: a force of the Goblin Lord. The thirteen run, shooting down the fastest riders, and lose their pursuers in the ruins of Esthelm. A vanguard turns to take the city."
+		},
+		"b3.esthelm_florist_becomes_a_corpse_eater": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []}},
+			"requires": {"alive": ["esthelm_florist"], "flags": ["esthelm.burned"], "not_flags": []},
+			"depends_on": ["b2.rags_burns_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm_florist.horror_corpse_eater", "esthelm_florist.terrible_hunger", "esthelm.survivors_prey_on_each_other"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "Day conflict: she eats on the ninth day after the fire, about day 80 counted from the day-71 burning, yet 3.18T (day 79) shows her already changed. Placed on 78. The Goblins took the city's food."},
+			"summary": "A young [Florist] who lost her family when Esthelm burned hides starving in a ruined house while gangs kill over grain and seize women. On the ninth day she eats a burned body. In her sleep the system names her a Rank 1 Horror; her teeth and nails turn sharp, and she loses levels and Skills."
+		},
+		"b3.esthelm_florist_sinks_to_carrion_eater": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm_sewers",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []}},
+			"requires": {"alive": ["esthelm_florist"], "flags": ["esthelm_florist.horror_corpse_eater"], "not_flags": []},
+			"depends_on": ["b3.esthelm_florist_becomes_a_corpse_eater"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm_florist.horror_carrion_eater", "esthelm_florist.wordless"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "The man who finds her was likely kin to the dead woman; he holds the body after. A gang chasing her for sport sees her face and stops. Her eyes now see in the dark."},
+			"summary": "Now eating rotten dead, she sinks to a Rank 2 Horror and loses her words. A man finds her at a young woman's corpse, kicks her face in and chases her off with a board; a gang that hunts her flees at the sight of her. In the sewers she eats a rat whole while the dead begin to stir."
+		},
+		"b3.esthelms_dead_begin_to_rise": {
+			"tier": 1,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": ["esthelm.burned"], "not_flags": []},
+			"depends_on": ["b2.rags_burns_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.dead_rising"]},
+			"news": "The unburied dead of Esthelm are rising out of its sewers and rubble. The survivors in the ruins now face zombies as well as each other.",
+			"rumor": "They say every corpse in Esthelm will walk before long, and that worse things than zombies wait in its sewers.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "Thousands died and lie unburied, so ambient magic raises them without any caster. First zombies; Ylawes later warns of Ghouls and worse (3.18T). The day is a guess."},
+			"summary": "Thousands of Goblin and Human dead lie unburied in the ruins. With so much death packed close, the magic in the air starts to wake them: corpses climb from the broken sewers and dig out of the rubble, hunting the living."
+		},
+		"b3.toren_kills_the_vanguards_head_shaman": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}, "shaman": {"prefer": ["goblin_vanguard_head_shaman"], "fallback_tags": []}, "commander": {"prefer": ["goblin_vanguard_commander"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["toren", "goblin_vanguard_head_shaman"], "flags": ["toren.drawn_to_esthelm"], "not_flags": []},
+			"depends_on": ["b3.toren_haunts_the_side_road"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"kill": ["goblin_vanguard_head_shaman"],
+				"set_flags": ["toren.defied_a_goblin_shaman", "toren.in_esthelm", "goblin_lord.vanguard_near_esthelm", "goblin_lord.vanguard_lacks_a_head_shaman"]
+			},
+			"rumor": "The Goblin army by Esthelm has stopped a few miles out. Some say it lost its chief [Shaman] and waits for another.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "The spell grips him like Erin's orders, only weaker, so he can walk through it. Two lesser [Shamans] take over the dead, and the vanguard halts to send for help. Toren leaves his ruined bronze armour behind."},
+			"summary": "Near Esthelm the vanguard's old [Shaman], with a staff of fused bone, orders Toren to come, and he must. But the order is weaker than Erin's. Toren walks right up, waves, and runs the Goblin through. The tattooed commander on a Shield Spider hews him apart; he reforms once the army has gone."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "class", "name": "[Skeleton Knight]", "level": null, "confidence": "confirmed", "note": "He thinks of himself as one since his last levels."},
+		{"who": "toren", "kind": "skill", "name": "[Mirage Cut]", "level": null, "confidence": "confirmed", "note": "His blade blurs and strikes impossibly fast."},
+		{"who": "esthelm_florist", "kind": "class", "name": "[Florist]", "level": 19, "confidence": "confirmed", "note": "Her level before she became a Horror."},
+		{"who": "esthelm_florist", "kind": "other", "name": "Rank 1 Horror: Corpse Eater", "level": 1, "confidence": "confirmed", "note": "In her sleep after she first eats the dead."},
+		{"who": "esthelm_florist", "kind": "other", "name": "Condition: Terrible Hunger", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Condition: Outcast Humanity", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Aspect: Body of the Eater", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Aspect: Rending Claws", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "[Florist] level loss, 19 to 16", "level": 16, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Skill lost: [Aroma of Spring]", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Skill lost: [Winter Growth]", "level": null, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Rank 2 Horror: Carrion Eater", "level": 2, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Condition: Wordless Thing", "level": null, "confidence": "confirmed", "note": "She loses all words, even her own name."},
+		{"who": "esthelm_florist", "kind": "skill", "name": "[Gaping Bite]", "level": null, "confidence": "confirmed", "note": "Her jaw opens far too wide."},
+		{"who": "esthelm_florist", "kind": "other", "name": "[Florist] level loss, 16 to 12", "level": 12, "confidence": "confirmed"},
+		{"who": "esthelm_florist", "kind": "other", "name": "Skill lost: [Quick Growth]", "level": null, "confidence": "confirmed"},
+		{"who": "goblin_vanguard_head_shaman", "kind": "class", "name": "[Shaman]", "level": null, "confidence": "confirmed", "note": "Can raise and command the dead, and briefly Toren."}
+	]
+}

@@ -14,20 +14,20 @@ M0–M8 detail (roadmap bullets, decisions, ADR 0001–0015) lives in
 - [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 merged ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34), tags `m8.7-done` and `m8-done` on merge commit ad436eb). Detail in the archive and ADR 0014 / 0015.
 - [ ] M9 — Book 3 (Flowers of Esthelm). Plan approved 2026-09-26 (ADR 0016, ROADMAP M9). 4 batches:
   - [x] M9.1 3.00 E – 3.05 L + 1.00 D / 1.01 D — merged ([PR #36](https://github.com/Daddy-Ousen/innworld-rpg/pull/36)), tag `m9.1-done` (4b31284). 39 events, Persua guild fight (stage) + Lyonette reopening (scene), both with hooks.
-  - [x] M9.2 3.06 L – 3.14 — built on branch `data/book3-3.06-3.14` (PR pending merge). 41 events; Ryoka and Fals at the Hare (scene + hook); Corusdeer soup keeps the cold off (save v12). GUT 609/609 (65 scripts), validator 0 errors (`--all`), Python 51/51.
-  - [ ] M9.3 3.15 – 3.20 T (Esthelm map + siege stage)
+  - [x] M9.2 3.06 L – 3.14 — merged ([PR #37](https://github.com/Daddy-Ousen/innworld-rpg/pull/37)), tag `m9.2-done` (a07b7fc). 41 events; Ryoka and Fals at the Hare (scene + hook); Corusdeer soup (save v12).
+  - [x] M9.3 3.15 – 3.20 T — built on branch `data/book3-3.15-3.20` (PR pending merge). 37 events; `esthelm_ruins` map; the last battle of Esthelm (wave stage, Redfang helpers, hook); Erin's play at the Hare (scene + hook). GUT 615/615 (66 scripts), validator 0 errors (`--all`), Python 51/51. Not checked on screen.
   - [ ] M9.4 3.21 L – 3.25
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
 
 ## Completed (current engine state)
-- Canon: Book 1 (1.00–1.63, days 1–41) and Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3: 3.00E–3.14 + 1.00D/1.01D (days 71–80, M9.1–M9.2).
+- Canon: Book 1 (1.00–1.63, days 1–41) and Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3: 3.00E–3.20T + 1.00D/1.01D (days 71–80, M9.1–M9.3).
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
 - Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=12), `save_migrations` (1→…→12), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
-- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`.
-- Tests: 65 GUT scripts, 609 tests, all pass, headless exit 0. Python tool tests: 51 pass (`python -m unittest discover -s tools/tests`).
+- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`.
+- Tests: 66 GUT scripts, 615 tests, all pass, headless exit 0. Python tool tests: 51 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
 
 ## Blockers

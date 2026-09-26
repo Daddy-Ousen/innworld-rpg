@@ -45,6 +45,51 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.10", "confidence": "guess", "note": "A game place for the snowy country between Ocre and Invrisil that Magnolia's coach crosses in a few hours; the coach often leaves the road. No map."},
 			"summary": "Open snowfields and hills between Ocre and Invrisil. A fleeing Goblin tribe with wolf riders crosses it in 3.10."
+		},
+		"celum_watch_house": {
+			"name": "Celum Watch House",
+			"kind": "building",
+			"parent": "celum",
+			"tags": ["watch", "barracks", "guard"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Called both the barracks and the Watch House. Has a nap room and a practice yard with a horseshoe pole. Guards audition there for Erin's play (3.16). No map."},
+			"summary": "The City Watch's barracks in Celum. A map on the wall tracks Goblin sightings around ruined Esthelm; behind it, a practice yard where bored guards pitch horseshoes."
+		},
+		"celum_poor_quarter": {
+			"name": "Celum's poor quarter",
+			"kind": "district",
+			"parent": "celum",
+			"tags": ["slum", "poor", "walls"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "guess", "note": "A game name for the poor streets Erin wanders into; the text gives none. Jasi's hut stands here by the city walls. No map."},
+			"summary": "Poor streets of wooden houses and mud lanes near Celum's walls, far from the market Ryoka uses. Thin, ragged people; Grev picks pockets here, and Jasi washes clothes in a cold hut."
+		},
+		"verdun": {
+			"name": "Verdun",
+			"kind": "settlement",
+			"parent": "high_passes",
+			"tags": ["village", "human", "walled", "mentioned"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Only named by Wesle as a village near Esthelm. Its place under the High Passes is a guess. No map."},
+			"summary": "A walled village near Esthelm. About a hundred armed, drilled Goblins pass it going north; its walls keep them off."
+		},
+		"esthelm_sewers": {
+			"name": "Esthelm's sewers",
+			"kind": "district",
+			"parent": "esthelm",
+			"tags": ["sewer", "ruins", "undead", "dark"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "Broken open in the fire; parts collapsed into the streets. The Florist hunts rats here, and Toren gains the [Leader] class here (3.18T). No map of its own."},
+			"summary": "Foul tunnels under burned Esthelm, choked with bodies. The first zombies and Ghouls rise here."
+		},
+		"esthelm_barricade_quarter": {
+			"name": "Ylawes' barricades",
+			"kind": "district",
+			"parent": "esthelm",
+			"tags": ["barricade", "ruins", "refuge", "battlefield"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "Nearly a quarter of the city, on the side furthest from the Goblin camp. One main entry with palisades is the killing ground of 3.20T. The name is a game name."},
+			"summary": "The part of ruined Esthelm Ylawes walls off with rubble and linked houses. Its survivors hold it against the dead and the Goblin Lord's vanguard in the last battle."
 		}
 	}
 }

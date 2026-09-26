@@ -1,0 +1,145 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.16",
+	"events": {
+		"b3.agnes_tries_to_ease_jasi_out": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"innkeeper": {"prefer": ["agnes"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["safry"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["agnes", "jasi"], "flags": ["jasi.works_at_frenzied_hare"], "not_flags": []},
+			"depends_on": ["b3.erin_hires_jasi_at_the_frenzied_hare"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["agnes.wants_jasi_gone"],
+				"relationship": [{"from": "erin_solstice", "to": "agnes", "delta": -1}, {"from": "agnes", "to": "erin_solstice", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "Agnes claims she talked it over with Jerom, who is too sick to answer. Maran has the day off. Erin sees Agnes as good to her own people and no better."},
+			"summary": "By morning Agnes has decided a Drake does not suit her inn and sits Jasi down to find her some other class; Grev has been sent out to play. Erin, angry, cooks crepes, French toast and bacon so that Agnes, Safry and Jasi run themselves ragged serving the rush."
+		},
+		"b3.erin_searches_for_a_class_for_jasi": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "jasi"], "flags": ["jasi.works_at_frenzied_hare"], "not_flags": []},
+			"depends_on": ["b3.agnes_tries_to_ease_jasi_out"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.sent_agnes_away_for_the_day", "grev.on_thin_ice_with_the_watch"],
+				"relationship": [{"from": "agnes", "to": "erin_solstice", "delta": -1}, {"from": "jasi", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "Jasi cannot sew or knead dough with claws and hates fighting. Wesle caught Grev lurking by a stall. A spoon thrown with [Unerring Throw] keeps Grev in his seat; Wesle is surprised an [Innkeeper] has it."},
+			"summary": "Erin and Agnes quiz Jasi about classes and find nothing she shines at. When Agnes pushes odd jobs, Erin tells her she is the better [Innkeeper] and shoos her and Safry out for the day. Wesle brings Grev back from near a stall, and a thrown spoon stops Grev from bolting."
+		},
+		"b3.erin_tells_of_romeo_and_juliet": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}, "washer": {"prefer": ["jasi"], "fallback_tags": [], "optional": true}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_searches_for_a_class_for_jasi"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_plays_by_heart", "erin.told_of_hollywood"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "Grev dreams of being a Named Adventurer with a flaming sword, Wesle of being a [Knight], Jasi of seeing Liscor and other Drakes. Wesle once saw a troupe act out a Griffin hunt; that is not a play to Erin."},
+			"summary": "Asked their dreams, Wesle admits he wanted to be a [Knight] and Jasi to see Drake lands. Neither has seen a play. Erin flips the table in frustration, climbs onto another and recites the whole prologue of Romeo and Juliet without a slip; her [Perfect Recall] holds plays as well as songs."
+		},
+		"b3.wesle_and_jasi_rehearse_the_balcony_scene": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"guard": {"prefer": ["wesle"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["wesle", "jasi"], "flags": ["erin.knows_plays_by_heart"], "not_flags": []},
+			"depends_on": ["b3.erin_tells_of_romeo_and_juliet"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wesle.acts_romeo", "jasi.acts_juliet"],
+				"relationship": [{"from": "wesle", "to": "jasi", "delta": 1}, {"from": "jasi", "to": "wesle", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "The verse is too dense for new actors. Grev plays Paris with a scabbard. Whether the kisses are only acting, the text leaves open."},
+			"summary": "Rehearsal stalls: Wesle forgets the verse and says he is only a [Guardsman], not a [Lord]. Erin tells him to become Romeo for a while. He drops the script and woos Jasi in his own words, a Human begging a Drake [Lady]; she answers in kind, and the two kiss."
+		},
+		"b3.erin_closes_the_hare_to_ready_the_play": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}, "baker": {"prefer": ["hess"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wesle.acts_romeo"], "not_flags": []},
+			"depends_on": ["b3.wesle_and_jasi_rehearse_the_balcony_scene"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["celum.talks_of_the_play", "octavia.joins_the_play", "hess.joins_the_play", "agnes.shut_out_of_her_inn"],
+				"relationship": [{"from": "agnes", "to": "erin_solstice", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "Entry is free; food and drink are sold. Erin kicks in a [Painter]'s door; the Watch is too busy auditioning to answer his cries. Hess the Drake [Baker] lives on Springbottom Street."},
+			"summary": "Erin shuts Agnes out of her own inn and plans a show for that night. Wesle recruits the Watch, Jasi goes for Hess the Drake [Baker], Grev takes a fistful of gold for noble clothes and big red curtains, and Erin drags a [Painter], a [Carpenter] and a kicking Octavia in to help."
+		},
+		"b3.erin_stages_romeo_and_juliet": {
+			"tier": 1,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"romeo": {"prefer": ["wesle"], "fallback_tags": []},
+				"juliet": {"prefer": ["jasi"], "fallback_tags": [], "optional": true},
+				"chorus": {"prefer": ["grev"], "fallback_tags": [], "optional": true},
+				"alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true},
+				"baker": {"prefer": ["hess"], "fallback_tags": [], "optional": true},
+				"innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true},
+				"barmaid": {"prefer": ["maran", "safry"], "fallback_tags": [], "optional": true},
+				"watch_captain": {"prefer": [], "fallback_tags": ["guard"], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "wesle"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_closes_the_hare_to_ready_the_play"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.staged_a_play", "celum.has_seen_a_play", "frenzied_hare.hosted_a_play", "wesle.found_hope_on_stage", "jasi.played_juliet"],
+				"relationship": [{"from": "wesle", "to": "erin_solstice", "delta": 2}, {"from": "jasi", "to": "erin_solstice", "delta": 1}, {"from": "agnes", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "The Frenzied Hare in Celum staged something new: a 'play' of a Human lord and a Drake lady who die for love. The Watch Captain took a part, and the crowd cheered past midnight.",
+			"rumor": "Folk in Celum talk of a show at an inn where people pretend to be others, and a Drake girl stabs herself for a Human.",
+			"stage": {
+				"area": "celum_frenzied_hare",
+				"hours": [19, 23],
+				"kind": "scene",
+				"when_flags": ["erin.in_celum"],
+				"npcs": [
+					{"npc": "erin_solstice", "pos": [9, 3]},
+					{"npc": "wesle", "pos": [10, 3]}
+				],
+				"line": "Every table in the Hare is full. Tables are pushed back into a stage, and a guardsman in borrowed finery waits for his cue while Erin runs between the pots and the crowd.",
+				"note": "M9.3: a scene. Erin and Wesle are placed; Jasi, Grev, Octavia, Hess and the Watch Captain have no npc_behaviour entry, so they are not placed. Hours are guesses (the play runs into the night)."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_erins_play",
+					"did": [
+						{"action": ["serve_guests", "talk_with_guest", "buy_supplies"], "context": {"location": ["frenzied_hare"]}}
+					],
+					"days": [78, 78],
+					"then": "change",
+					"effects": {
+						"set_flags": ["frenzied_hare.earther_saw_the_play"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 2}, {"from": "wesle", "to": "player", "delta": 1}]
+					},
+					"news": "Another Earther was in the packed Frenzied Hare the night Erin Solstice put on a play, and knew the story before the ending came."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.16", "confidence": "confirmed", "note": "Grev speaks the prologue; the unnamed Watch Captain plays the Prince; Octavia plays herself selling the false-death potion. The Drake who plays Tybalt is likely Hess. Erin cooks all night and sees little of it."},
+			"summary": "That night a packed Hare sees Romeo and Juliet remade for Celum: Human houses against Drake ones, real swords, Wesle as Romeo, Jasi as Juliet. The crowd forgets to eat, shouts at Juliet not to use the dagger, then begs for encores. Erin cooks till dawn and goes to bed content."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 29, "confidence": "confirmed", "note": "In her sleep after the play (night of day 78, guess)."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Crowd Control]", "level": 29, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "level", "name": "[Singer]", "level": 6, "confidence": "confirmed", "note": "She thinks of herself as a Level 6 [Singer]."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Perfect Recall]", "level": null, "confidence": "confirmed", "note": "A [Singer] Skill. Not a perfect memory: it holds songs, and she finds it also holds plays and anything else she counts as art."}
+	]
+}

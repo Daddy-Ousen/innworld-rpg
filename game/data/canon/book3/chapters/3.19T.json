@@ -1,0 +1,126 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.19T",
+	"events": {
+		"b3.ylawes_walls_off_a_quarter_of_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm_barricade_quarter",
+			"roles": {"knight": {"prefer": ["ylawes_byres"], "fallback_tags": []}, "adventurers": {"prefer": [], "fallback_tags": ["adventurer"], "optional": true}},
+			"requires": {"alive": ["ylawes_byres"], "flags": ["ylawes.rallies_esthelms_men"], "not_flags": []},
+			"depends_on": ["b3.ylawes_shames_the_men_of_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.survivors_united_under_ylawes", "esthelm.barricades_built"]},
+			"news": "In ruined Esthelm a Gold-rank [Knight] has gathered the survivors behind new barricades that seal about one quarter of the ruins.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "The darkest hours of the night of day 79 (guess). Close to a thousand come at first. He picks the side furthest from the Goblins. About a score die trying to leave past the Goblin archers."},
+			"summary": "Ylawes goes from camp to camp calling the people of Esthelm by that name. Close to a thousand follow, then nearly everyone. Folk who had half forgotten their classes use their Skills to clear rubble and link broken houses into walls, and armed guards stand against the rising dead."
+		},
+		"b3.toren_teaches_his_zombies_to_run": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.commands_lesser_undead"], "not_flags": []},
+			"depends_on": ["b3.toren_gains_the_leader_class"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.zombies_can_run"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "He cannot give them fine orders, such as hopping on one leg. Three of his six survive and he takes the gang leader's iron short sword. He spends the night setting them on gangs."},
+			"summary": "Toren dances for joy at his new power. He sends his six zombies down an alley at a gang of eight for its leader's sword. The men laugh at the slow dead and pelt them, until Toren orders the zombies to run; they sprint in and tear the gang apart. Running zombies, he sees, change everything."
+		},
+		"b3.redfang_band_shares_soup_with_the_florist": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []},
+				"leader": {"prefer": ["grunter"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["esthelm_florist"], "flags": ["esthelm_florist.follows_the_redfang_band"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_saves_the_florist_from_toren"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["esthelm_florist.fed_by_the_redfang_band", "redfang_band.knows_she_is_not_the_innkeeper"],
+				"relationship": [{"from": "esthelm_florist", "to": "grunter", "delta": 1}, {"from": "esthelm_florist", "to": "badarrow", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "Garen forbids his warriors to force themselves on anyone. Badarrow spares her as no enemy. Night watch: Badarrow, Headscratcher, Rocksoup, Rabbiteater, Bitefly, then Grunter."},
+			"summary": "In their swept, boarded-up camp the Goblins cook the dead into a peppered soup and hand her bowl after bowl. Grunter asks in broken words if she is an [Innkeeper]; she shakes her head. A pebble she throws lands in his soup and they all roar with laughter. She sleeps by the fire."
+		},
+		"b3.toren_ambushes_a_goblin_kill_team": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.zombies_can_run"], "not_flags": []},
+			"depends_on": ["b3.toren_teaches_his_zombies_to_run"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.hunts_goblin_kill_teams", "goblin_lord.kill_teams_sweep_esthelm"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "His [Fear] cannot freeze Goblins but makes them falter. He can only herd the wild dead, about sixty here, and keeps eight of his own. Fighting foes who fight back levels him faster."},
+			"summary": "At dawn black-armoured Goblin teams of twenty and more sweep the city, killing all they meet. Toren buries eight zombies in the snow, herds a wild mob at one team, then springs his hidden dead on its back and cuts in himself. The whole team dies, and he takes a better sword and a shield."
+		},
+		"b3.redfang_band_refuses_the_goblin_lord": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"leader": {"prefer": ["grunter"], "fallback_tags": []},
+				"cook": {"prefer": ["rocksoup"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["bugear"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["grunter"], "flags": ["redfang_band.plans_to_ambush_the_vanguard"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_makes_camp_in_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["redfang_band.refused_the_goblin_lord"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "They leave the Horror asleep at camp. They ambush one team at dawn and are cornered by a second an hour later. Badarrow shoots the enemy leader at point-blank range."},
+			"summary": "Cornered by twenty-five black-armoured Goblins, the thirteen are told to obey the Goblin Lord and live. Rocksoup flicks snot at their leader, and the band laughs: no true Goblin leaves its tribe. Grunter roars and leads the charge, and their higher levels break the larger force."
+		},
+		"b3.ylawes_runs_grunter_through": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"knight": {"prefer": ["ylawes_byres"], "fallback_tags": []},
+				"leader": {"prefer": ["grunter"], "fallback_tags": []},
+				"horror": {"prefer": ["esthelm_florist"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["bugear"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ylawes_byres", "grunter"], "flags": ["redfang_band.refused_the_goblin_lord"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_refuses_the_goblin_lord"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["grunter.badly_wounded", "ylawes.sent_for_help", "ylawes.saw_the_florist"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "Bugear lives through a blow that cracks his shield thanks to a Skill. Ylawes stays his sword on seeing her face. Toren's [Mirage Cut] opens his cheek. His message scroll shows a one-word reply: help is on the way."},
+			"summary": "Ylawes scatters the enemy Goblins, then turns on the Redfang band. Their arrows and blades cannot reach him; he breaks Grunter's arm and runs him through. The Horror leaps to shield them, Toren and his running zombies strike Ylawes from behind, and the Goblins drag Grunter away."
+		},
+		"b3.goblin_vanguard_marches_on_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"commander": {"prefer": ["goblin_vanguard_commander"], "fallback_tags": []}},
+			"requires": {"alive": ["goblin_vanguard_commander"], "flags": ["goblin_lord.vanguard_near_esthelm"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["goblin_lord.vanguard_assaults_esthelm"]},
+			"news": "The Goblin army camped outside Esthelm is on the move. Its drums can be heard as it marches on the ruins and the survivors inside.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.19T", "confidence": "confirmed", "note": "The two lesser [Shamans] cannot hold a fraction of the dead the head [Shaman] could. The commander's Shield Spider bites one; the other flees. He will not wait for reinforcements."},
+			"summary": "Scouts report the kill teams cut down by a Human in silver armour and by the dead. The furious commander has his spider kill a [Shaman] who cannot master the undead, and orders the whole vanguard to storm Esthelm at once and kill every Human in it."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "level", "name": "[Leader]", "level": 4, "confidence": "confirmed", "note": "After the ambush at dawn on day 80 (guess)."},
+		{"who": "toren", "kind": "skill", "name": "[Daring Charge]", "level": 4, "confidence": "confirmed"},
+		{"who": "bugear", "kind": "other", "name": "A defensive Skill", "level": null, "confidence": "confirmed", "note": "Unnamed; it keeps Ylawes' blow from cutting him in half through his shield."}
+	]
+}

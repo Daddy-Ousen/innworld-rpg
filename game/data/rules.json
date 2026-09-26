@@ -71,7 +71,8 @@
 			"ruins_entrance": {"area": "liscor_gate", "pos": [3, 12]},
 			"celum_gate": {"area": "celum_gate", "pos": [16, 4]},
 			"celum_square": {"area": "celum_gate", "pos": [16, 4]},
-			"road_camp": {"area": "road_camp", "pos": [19, 14]}
+			"road_camp": {"area": "road_camp", "pos": [19, 14]},
+			"esthelm_ruins": {"area": "esthelm_ruins", "pos": [5, 11]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]

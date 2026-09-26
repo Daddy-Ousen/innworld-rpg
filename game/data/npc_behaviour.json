@@ -4,7 +4,8 @@
 	"entries": {
 		"liscor": {"liscor_gate": [1, 11], "liscor_market": [2, 4]},
 		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]},
-		"celum": {"celum_square": [31, 9]}
+		"celum": {"celum_square": [31, 9]},
+		"esthelm": {"esthelm_ruins": [1, 4]}
 	},
 	"npcs": {
 		"erin_solstice": {
@@ -299,6 +300,15 @@
 				{"goal": "work", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_runners_guild", "pos": [6, 4]}},
 				{"goal": "eat", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [7, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"ylawes_byres": {
+			"confidence": "guess",
+			"notes": "M9.3. The Gold-rank [Knight] comes to Esthelm to lay its dead to rest (3.18T, ylawes.at_esthelm) and holds the north-west quarter of the ruins behind his barricades until the last battle (3.19T-3.20T). He stands by the palisade gate; where he sleeps is not shown. Before that he keeps story roles only. The combat block is a design number for a Gold-rank adventurer.",
+			"combat": {"hp": 70, "accuracy": 9, "evasion": 4, "armor": 5, "damage": [5, 10]},
+			"goals": [
+				{"goal": "guard_post", "base": 3, "when_flags": ["ylawes.at_esthelm"], "target": {"area": "esthelm_ruins", "pos": [10, 7]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "esthelm"}}
 			]
 		}
 	}

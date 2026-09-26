@@ -4,12 +4,13 @@
 	"name": "Roadside camp",
 	"location": "high_passes",
 	"confidence": "guess",
-	"note": "Design map (M8.6). A camp on the road between Celum (north) and Liscor (south), in the foothills of the High Passes. The road and the camp are guesses; the High Passes lie between the two cities (1.33R-1.36R).",
+	"note": "Design map (M8.6). A camp on the road between Celum (north) and Liscor (south), in the foothills of the High Passes. The road and the camp are guesses; the High Passes lie between the two cities (1.33R-1.36R). M9.3: a side road east to the ruins of Esthelm (guess; 1.44R puts Esthelm near the road to Liscor).",
 	"camp": true,
 	"zones": {},
 	"exits": [
 		{"at": [16, 0, 2, 1], "to": "celum_gate", "arrive": [16, 18], "minutes": 600},
-		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600}
+		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600},
+		{"at": [31, 5, 1, 2], "to": "esthelm_ruins", "arrive": [1, 4], "minutes": 180}
 	],
 	"objects": [
 		{"id": "campfire", "at": [20, 12], "name": "Campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},

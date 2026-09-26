@@ -112,7 +112,7 @@ Laken (Riverfarm) and Geneva (Baleros) are events only, like Tom on Rhir. Esthel
 with the siege as a wave stage. Lyonette, Mrsha and Zel get NPC schedules at the Liscor inn.
 - [x] M9.1 Canon 3.00 E – 3.05 L + 1.00 D / 1.01 D (days ~71–76): Laken becomes [Emperor]; the Horns enter Albez; Ryoka, Erin and Ivolethe in Celum; Ryoka beats Persua; Lyonette reopens the inn; Geneva the [Doctor]. Lyonette and Mrsha schedules
 - [x] M9.2 Canon 3.06 L – 3.14 (days ~73–80): Pawn and the Soldiers; the Albez treasury; Ocre; Ryoka meets Magnolia; Nemor's attack; Laken claims Riverfarm. Ryoka and Fals at the Hare (scene + hook); Corusdeer soup keeps the cold off (save v12)
-- [ ] M9.3 Canon 3.15 – 3.20 T (days ~76–81): Erin's plays; Toren, the Redfang Goblins, the Florist and Ylawes at Esthelm; new `esthelm_ruins` map and the last battle as a wave stage
+- [x] M9.3 Canon 3.15 – 3.20 T (days ~77–80): Erin's play; Toren, the Redfang Goblins, the Florist and Ylawes at Esthelm; new `esthelm_ruins` map and the last battle as a wave stage (Redfang helpers); the play as a scene
 - [ ] M9.4 Canon 3.21 L – 3.25 (days ~78–90): Lyonette's bees and classes; the painted Soldiers; the Antinium delegation; Scalelings and Zel; the Horns in Celum; the Albez door; Erin leaves Celum
 **Done when:** all Book 3 canon is event data and `sim_canon_book3` runs to the last Book 3 day with drift 0;
 Esthelm is playable with its siege stage; each batch has a hook or stage the player can use; the validator reports 0 errors.
