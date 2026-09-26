@@ -1,0 +1,84 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.13",
+	"events": {
+		"b3.ryoka_arrives_at_magnolias_estate": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.gone_to_magnolia"], "not_flags": []},
+			"depends_on": ["b3.magnolias_coach_runs_through_rags_tribe"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.at_magnolias_estate", "reynold.knows_ryoka_is_erins_friend"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "confirmed", "note": "Night of day 76 (guess). The maid Ressa sends for refreshments, Teresa, is not the book2 teresa and has no entry. Ivolethe is told to stay outside."},
+			"summary": "Warmed by wine, Ryoka and Reynold find they both know Erin. He starts to whisper that Magnolia is not a bad woman until Ressa's voice from inside the coach stops him. At the warded estate, spring-warm in winter, Magnolia's roaming cloud rains on Ryoka alone."
+		},
+		"b3.magnolia_questions_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart", "ryoka_griffin"], "flags": ["ryoka.at_magnolias_estate"], "not_flags": []},
+			"depends_on": ["b3.ryoka_arrives_at_magnolias_estate"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["magnolia.questioned_ryoka", "ryoka.broke_magnolias_command", "magnolia.wants_earth_inventions", "magnolia.watches_for_sulfur"],
+				"relationship": [{"from": "ressa", "to": "ryoka_griffin", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "confirmed", "note": "Ryoka's resistance is like her fight against Teriarch's geas; she tells no one how. Magnolia says her letter came after she had found other Earthers. Nemor sends two requests to be seen; she refuses."},
+			"summary": "Magnolia drops her mask, reads Ryoka with [Sense Intentions] and orders her to tell all. Ryoka breaks the command and swings at her; Ressa knocks her down. Magnolia says guns matter only by the million, learns one part of gunpowder, then asks for sweets, a first step to buying the world."
+		},
+		"b3.magnolia_banishes_ivolethe": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart", "ivolethe"], "flags": ["magnolia.questioned_ryoka"], "not_flags": []},
+			"depends_on": ["b3.magnolia_questions_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ivolethe.banished_from_magnolias_land"],
+				"relationship": [{"from": "ivolethe", "to": "magnolia_reinhart", "delta": -2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "confirmed", "note": "Magnolia can barely see the faerie; Ressa can. Her word works like a Skill on her own land. Later she lets Ivolethe back as Ryoka's guest."},
+			"summary": "Ryoka plays her first card and points to Ivolethe at the window, who frosts the glass and threatens the two women. Magnolia, who can barely make her out, tells the faerie this land is hers and she is not welcome; Ivolethe flees screaming into the sky."
+		},
+		"b3.ryoka_tells_magnolia_the_antinium_fear_a_god": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart", "ryoka_griffin"], "flags": ["magnolia.questioned_ryoka"], "not_flags": []},
+			"depends_on": ["b3.magnolia_banishes_ivolethe"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["magnolia.allied_with_ryoka", "magnolia.knows_the_antinium_fear_a_god", "ryoka.guest_of_magnolia", "ryoka.has_krsysl_antinium_history"],
+				"relationship": [{"from": "magnolia_reinhart", "to": "ryoka_griffin", "delta": 2}, {"from": "ryoka_griffin", "to": "magnolia_reinhart", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "confirmed", "note": "Magnolia met Klbkch the Slayer in the Second Antinium War. She funded Krsysl Wordsmith's book. The Antinium fled Rhir fighting what they took for a god; Klbkch told Ryoka so."},
+			"summary": "Ryoka plays her second card: she must stop the Antinium going to war, since their true enemy is a god, as Klbkch told her. Ressa nearly breaks her arm, but Magnolia senses no lie, calls it world-changing, gives her a history of the Antinium Wars and declares them allies."
+		},
+		"b3.nemor_blasts_into_magnolias_parlour": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"mage": {"prefer": ["nemor"], "fallback_tags": []}, "lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["nemor", "magnolia_reinhart"], "flags": ["magnolia.allied_with_ryoka"], "not_flags": []},
+			"depends_on": ["b3.ryoka_tells_magnolia_the_antinium_fear_a_god"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["circle_of_thorns.struck_at_magnolia", "ryoka.hurt_by_nemors_blast"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "confirmed", "note": "Cliffhanger, continued in 3.14. Magnolia and Ressa stand untouched inside a shield. A stone shard pierces Ryoka's thigh."},
+			"summary": "The parlour wall explodes and hurls Ryoka across the room. In the dust stands the robed mage Nemor, a guest who had begged all evening to see Magnolia. He declares that the Circle of Thorns seeks her life, and shadowy [Assassins] close in around her and Ressa."
+		}
+	},
+	"system": [
+		{"who": "magnolia_reinhart", "kind": "skill", "name": "[Sense Intentions]", "level": null, "confidence": "confirmed", "note": "She says she is adept with it. Her spoken orders also bind like a geas; that power is not named here."}
+	]
+}

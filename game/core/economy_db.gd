@@ -3,7 +3,10 @@
 ##          "sell" (copper a shop pays; 0 = no shop buys it), "canon_ref"?, and at
 ##          most one use: "food": true (eat it: fed today), "heal": HP (drink it),
 ##          "wear_flag": flag (worn at once when bought, sets the flag),
-##          "eat_now": true (a meal eaten where it is bought)}.
+##          "eat_now": true (a meal eaten where it is bought)}. M9.2: a food or
+##          eat_now good may add "warm_minutes" (no cold for that long after
+##          eating); any good may add "from_flag" (shops sell it only once
+##          that flag is set).
 ##   shops: shop id → {"name", "sells": [good], "buys": [good]}. A map object
 ##          names its shop with "shop".
 ##   yields: action id → {good: count} put in the bag when the action is done.
@@ -103,6 +106,12 @@ func use_of(good: String) -> String:
 	return _use_of(goods.get(good, {}))
 
 
+## True if shops may sell `good` now (its from_flag, if any, is set).
+func on_sale(good: String, flags: Dictionary) -> bool:
+	var f: String = goods.get(good, {}).get("from_flag", "")
+	return f == "" or bool(flags.get(f, false))
+
+
 func _validate_good(id: String, g: Dictionary) -> void:
 	var where := "good '%s'" % id
 	for f: String in GOOD_FIELDS:
@@ -117,3 +126,10 @@ func _validate_good(id: String, g: Dictionary) -> void:
 		errors.append("%s: at most one of %s." % [where, USES])
 	if g.has("heal") and int(g["heal"]) <= 0:
 		errors.append("%s: heal must be > 0." % where)
+	if g.has("warm_minutes"):
+		if not _use_of(g) in ["food", "eat_now"]:
+			errors.append("%s: warm_minutes needs food or eat_now." % where)
+		if int(g["warm_minutes"]) <= 0:
+			errors.append("%s: warm_minutes must be > 0." % where)
+	if g.has("from_flag") and (not g["from_flag"] is String or String(g["from_flag"]).is_empty()):
+		errors.append("%s: from_flag must be a flag name." % where)

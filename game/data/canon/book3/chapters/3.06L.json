@@ -1,0 +1,110 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.06L",
+	"events": {
+		"b3.klbkch_nearly_kills_pawn_over_god": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "klbkch"], "flags": ["pawn.will_tell_klbkch_of_his_class"], "not_flags": []},
+			"depends_on": ["b3.pawn_resolves_to_tell_klbkch_of_his_class"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.told_klbkch_of_his_class", "pawn.forbidden_to_speak_of_god", "klbkch.knows_of_erins_god"],
+				"relationship": [{"from": "pawn", "to": "klbkch", "delta": -2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "The evening he ate at Lyonette's inn. Klbkch tells him Erin is safe in Celum with Ryoka. He calls Erin different, and Pawn expendable."},
+			"summary": "After dawdling through the streets, Pawn tells Klbkch of his [Acolyte] class and of a living God. Klbkch goes still, then raises both swords to kill him. When Pawn begs, he sheathes them and forbids Pawn to speak of gods, his class or his Skills to any Worker."
+		},
+		"b3.pawn_eats_in_the_soldiers_mess": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.forbidden_to_speak_of_god"], "not_flags": []},
+			"depends_on": ["b3.klbkch_nearly_kills_pawn_over_god"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.eats_with_the_soldiers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "Workers and Soldiers never share a hall. The Soldiers sit on packed dirt benches because their hands are too clumsy for their deep bowls."},
+			"summary": "Shaken, Pawn wanders into the Soldiers' mess hall by mistake. Hundreds of silent Soldiers stare, but none throw him out, so he stays in line. When a Soldier slips and scoops dirt into his spilled meal, Pawn gives him his own bowl."
+		},
+		"b3.klbkch_questions_pawn_about_god": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "klbkch"], "flags": ["pawn.told_klbkch_of_his_class"], "not_flags": []},
+			"depends_on": ["b3.pawn_eats_in_the_soldiers_mess"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.spared_by_the_queen", "pawn.may_not_pray", "pawn.heard_of_the_centenium"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "The next morning. Klbkch relaxes once he hears the story's places are all on Erin's world. He will speak to Erin and Ryoka before he judges. Rhir is the real continent (see 1.00C)."},
+			"summary": "Having asked the Queen, Klbkch spares Pawn for now and makes him retell Erin's story of God, cutting in at every turn. He says a god is bound up with why the Antinium left Rhir and with his own task as one of the Centenium, and still forbids Pawn to pray."
+		},
+		"b3.pawn_tells_the_soldiers_of_god": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.eats_with_the_soldiers", "pawn.may_not_pray"], "not_flags": []},
+			"depends_on": ["b3.klbkch_questions_pawn_about_god"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.preaches_to_the_soldiers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "Soldiers cannot speak. Pawn describes the Garden of Eden as guarded by a giant white bird of fire, since no Antinium knows what an angel is."},
+			"summary": "Angry, Pawn sees a gap in his orders: he was barred from telling Workers, not Soldiers. At a mess table he starts the tale of creation and of a God who knows every name. The whole hall creeps closer to listen, and he promises to come back."
+		},
+		"b3.pawn_promises_the_soldiers_heaven": {
+			"tier": 2,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.preaches_to_the_soldiers"], "not_flags": []},
+			"depends_on": ["b3.pawn_tells_the_soldiers_of_god"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.promised_the_soldiers_heaven"], "relationship": [{"from": "pawn", "to": "klbkch", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "Day guess. Klbkch says a God that made Humans in its image is no God of the Antinium. Pawn then lies awake over sin, since Soldiers are made to kill."},
+			"summary": "After hours of arguing with Klbkch, who calls it a Human God and bans worship, Pawn storms off. That night he tells the Soldiers the last promise: Heaven, a place after death with good food, no orders, no fighting and no pain."
+		},
+		"b3.soldiers_kill_each_other_for_heaven": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.promised_the_soldiers_heaven"], "not_flags": []},
+			"depends_on": ["b3.pawn_promises_the_soldiers_heaven"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor_hive.soldiers_died_for_heaven", "pawn.prayed_for_the_soldiers", "pawn.no_god_for_the_antinium"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "About four hundred Soldiers were in the hall. Over a hundred died; Pawn fears more than two hundred. No exact count is given. He uses [Prayer], hears nothing, and prays anyway."},
+			"summary": "Klbkch drags Pawn from sleep to the mess hall: the Soldiers are beating each other to death and throwing themselves on his swords, to reach Heaven. Pawn prays and hears nothing, then shouts them still: there is no Heaven for Antinium yet, so they must live and build one."
+		},
+		"b3.klbkch_gives_pawn_the_wounded_soldiers": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "klbkch"], "flags": ["liscor_hive.soldiers_died_for_heaven"], "not_flags": []},
+			"depends_on": ["b3.soldiers_kill_each_other_for_heaven"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.cares_for_the_soldiers", "pawn.allowed_to_pray", "klbkch.told_pawn_of_galuc"],
+				"clear_flags": ["pawn.may_not_pray"],
+				"relationship": [{"from": "klbkch", "to": "pawn", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.06L", "confidence": "confirmed", "note": "Klbkch expects [Acolyte] to level that night and asks to be told; no level is shown. The talking ban was never lifted in words, but prayer is now allowed."},
+			"summary": "Pawn prays over each Soldier as Workers seal wounds, and some who were dying pull back. Klbkch spares him: killing him would lose the rest. He gives Pawn the wounded to care for and test as Individuals, lets him pray, and names Galuc the Builder, whose form every Worker wears."
+		}
+	},
+	"system": [
+		{"who": "pawn", "kind": "skill", "name": "[Prayer]", "level": null, "confidence": "confirmed", "note": "First used, over the dying Soldiers. He hears no answer."},
+		{"who": "pawn", "kind": "class", "name": "[Acolyte]", "level": 1, "confidence": "confirmed", "note": "He tells Klbkch he is Level 1. Klbkch expects a level after the massacre; none is shown in the chapter."},
+		{"who": "klbkch", "kind": "other", "name": "One of the Centenium", "level": null, "confidence": "confirmed", "note": "He says his first form was lost when he died at sea, while Galuc the Builder, another Centenium, lives on as the shape of every Worker."}
+	]
+}

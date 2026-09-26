@@ -4,12 +4,18 @@ extends GutTest
 ## Lyonette reopens the Wandering Inn and Pawn comes to eat (3.05 L, a
 ## scene). Persua cannot die: beaten, she runs (enemy escape). A player who
 ## fights beside Ryoka, or keeps Lyonette's inn going, changes the event.
+## M9.2: on the morning of day 76 Ryoka and Fals talk at the Frenzied Hare
+## (3.09, a scene); a player who serves or sits with them changes it. The
+## same day Erin's Corusdeer soup goes on sale at Stitchworks, and that
+## night Ryoka leaves Celum for Magnolia.
 ## The game is slept to day 74 once (before_all); each test starts from a
 ## copy of that save.
 
 const SEED := 20260926
 const GUILD_FIGHT := "b3.ryoka_beats_persua_in_the_runners_guild"
 const REOPENING := "b3.lyonette_reopens_the_inn"
+const HARE_TALK := "b3.ryoka_and_fals_talk_at_the_frenzied_hare"
+const HARE_SPOT := Vector2i(10, 10)
 const GUILD_SPOT := Vector2i(6, 8)
 const INN_SPOT := Vector2i(4, 10)
 
@@ -201,3 +207,51 @@ func test_keeping_lyonette_going_changes_the_event() -> void:
 	assert_true(gs.flags.has("wandering_inn.reopened_by_lyonette"), "the canon still happens")
 	assert_eq(gs.world.relationship("lyonette", NpcSim.PLAYER), 3)
 	assert_true(_texts(gs).has(_db.canon.events[REOPENING]["hooks"][0]["news"]))
+
+
+func test_ryoka_and_fals_talk_at_the_hare_in_the_morning() -> void:
+	assert_eq(_db.canon.events[HARE_TALK]["stage"]["kind"], "scene")
+	assert_true(_db.behaviour.npcs.has("fals"), "fals can be placed by a stage")
+	var gs := _copy(76)
+	_wait_for(gs, _db, HARE_TALK, "celum_frenzied_hare", HARE_SPOT)
+	var hour := gs.clock.minute() / 60
+	assert_true(hour >= 9 and hour < 12, "in the morning")
+	for npc: String in ["ryoka_griffin", "fals"]:
+		assert_eq(_area_of(gs, npc), "celum_frenzied_hare", npc)
+	Commands.wait(gs, _db, 1800)
+	assert_eq(_area_of(gs, "fals"), "celum_frenzied_hare", "Fals stays while the scene is live")
+
+
+func test_sitting_with_ryoka_and_fals_changes_the_event() -> void:
+	var gs := _copy(76)
+	gs.player.place("celum_frenzied_hare", HARE_SPOT)
+	Commands.settle(gs, _db)
+	assert_true(ToyMaps.walk_next_to(gs, _db, "hare_table_east"), "walk to a table")
+	var r := Commands.interact(gs, _db, "hare_table_east", "talk_with_guest")
+	assert_eq(r["error"], "")
+	assert_eq(r["record"]["context"]["location"], "frenzied_hare")
+	ToyCanon.sleep_through(gs, _db, 76)
+	assert_eq(gs.world.status(HARE_TALK), Director.CHANGED)
+	assert_eq(_hook_of(gs, HARE_TALK), "player_sat_with_ryoka_and_fals")
+	assert_true(gs.flags.has("frenzied_hare.earther_sat_with_ryoka"))
+	assert_true(gs.flags.has("ryoka.heard_the_horns_are_in_ocre"), "the canon still happens")
+	assert_eq(gs.world.relationship("ryoka_griffin", NpcSim.PLAYER), 2)
+	assert_eq(gs.world.relationship("fals", NpcSim.PLAYER), 2)
+	assert_true(_texts(gs).has(_db.canon.events[HARE_TALK]["hooks"][0]["news"]))
+
+
+func test_corusdeer_soup_goes_on_sale_and_ryoka_leaves_celum() -> void:
+	var gs := _copy(76)
+	var obj := Interact.object_of(_db, "celum_square", "stitchworks_door")
+	var goods := func() -> Array: return Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["good"])
+	assert_false(goods.call().has("corusdeer_soup"), "not before Erin makes it")
+	ToyCanon.sleep_through(gs, _db, 76)
+	assert_eq(gs.world.status("b3.erin_and_octavia_brew_corusdeer_soup"), Director.DONE)
+	assert_true(goods.call().has("corusdeer_soup"), "on sale from day 77")
+	assert_true(gs.flags.has("ryoka.gone_to_magnolia"))
+	for i in 24:
+		if gs.clock.minute() >= 19 * 60:
+			break
+		Commands.wait(gs, _db, 3600)
+	assert_true(BehaviourDb.is_off_map(_area_of(gs, "ryoka_griffin")), "Ryoka has left Celum")
+

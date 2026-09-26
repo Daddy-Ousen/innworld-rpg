@@ -1,0 +1,125 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.09",
+	"events": {
+		"b3.ivolethe_tries_to_teach_ryoka_the_wind": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "ivolethe"], "flags": ["ryoka.learning_to_run_like_the_wind", "ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b3.ivolethe_offers_to_teach_ryoka_the_wind"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.practising_fae_magic"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "The morning after the guild fight. Ivolethe admits she has never taught magic: the fae are born knowing it. Since then she rides in Ryoka's belt pouch, fed on dried fruit."},
+			"summary": "On a snowy hill outside Celum, Ivolethe has Ryoka stand still and feel the wind for an hour. Ryoka feels only cold feet. The faerie flies a spiral and asks if she saw the wind; she did not. It ends in a snowball fight Ryoka loses, and they jog back before midday."
+		},
+		"b3.erin_and_octavia_brew_corusdeer_soup": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.makes_corusdeer_soup", "erin.makes_mana_soup"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "The soup has been made before; a cupboard holds half a dozen jars. Ryoka pays for Octavia's potions that go into the pot. That Stitchworks sells the soup is a game choice (economy.json)."},
+			"summary": "Erin has turned Octavia's kitchen into a second workshop, and the two bicker over a green stew spoiled by a potion. Erin already makes a mana soup and warming Corusdeer soup, and hands Ryoka a jar of the orange soup that keeps her warm barefoot in the snow."
+		},
+		"b3.ryoka_and_fals_talk_at_the_frenzied_hare": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "friend": {"prefer": ["fals"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "fals"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b3.ivolethe_tries_to_teach_ryoka_the_wind"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.banned_from_runners_guild", "ryoka.heard_the_horns_are_in_ocre", "fals.lost_work_to_persua"],
+				"relationship": [{"from": "fals", "to": "ryoka_griffin", "delta": 1}, {"from": "ryoka_griffin", "to": "fals", "delta": 1}]
+			},
+			"stage": {
+				"area": "celum_frenzied_hare",
+				"hours": [9, 12],
+				"kind": "scene",
+				"when_flags": ["ryoka.in_celum"],
+				"npcs": [
+					{"npc": "ryoka_griffin", "pos": [7, 8]},
+					{"npc": "fals", "pos": [8, 8]}
+				],
+				"line": "A barefoot Runner and a tired older one share a table by the window. He is on his second strong drink before noon.",
+				"note": "M9.2: a quiet scene. Only Ryoka and Fals sit at the table; Agnes seats them but has no schedule, so she is not placed. Garia is not there (Fals says she may come in later). Ryoka leaves for Ocre about midday."
+			},
+			"hooks": [
+				{
+					"id": "player_sat_with_ryoka_and_fals",
+					"did": [
+						{"action": ["serve_guests", "talk_with_guest", "buy_supplies"], "context": {"location": ["frenzied_hare"]}}
+					],
+					"days": [76, 76],
+					"then": "change",
+					"effects": {
+						"set_flags": ["frenzied_hare.earther_sat_with_ryoka"],
+						"relationship": [
+							{"from": "ryoka_griffin", "to": "player", "delta": 2},
+							{"from": "fals", "to": "player", "delta": 2}
+						]
+					},
+					"news": "Another Human shared the Hare's morning table with Ryoka Griffin and Fals just before Ryoka ran off for Ocre."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "Fals has run for about sixteen years; his Skills are for stamina and defence. He heard of Ocre's parade in Remendia. The ban is from Celum's guild only; Ocre's guild still serves Ryoka in 3.10."},
+			"summary": "Fals finds Ryoka outside Stitchworks and takes her missing fingers in his stride. Over drinks at the Hare he says she is banned from Celum's guild, that Persua's new Skill stole the City Runners' work, and that Garia gets lost in snow. Then he mentions the Horns' parade in Ocre; Ryoka runs."
+		},
+		"b3.ryoka_runs_to_ocre_to_find_ceria": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": ["ryoka.heard_the_horns_are_in_ocre", "horns_of_hammerad.in_ocre"], "not_flags": []},
+			"depends_on": ["b3.ryoka_and_fals_talk_at_the_frenzied_hare", "b3.ocre_parades_the_horns_of_hammerad"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.reunited_with_ceria", "ivolethe.warned_by_her_sisters", "ceria.met_ivolethe"],
+				"relationship": [{"from": "ceria_springwalker", "to": "ryoka_griffin", "delta": 2}, {"from": "ivolethe", "to": "ceria_springwalker", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "On the way, Ivolethe's sisters scold her for risking death for a mortal and warn of a reckoning; she stays. Faeries hate what half-Elves are, not Ceria herself, and speak of their people's sin."},
+			"summary": "Ryoka runs to Ocre by late afternoon, is tackled by the inn's bouncers and hauled up to Ceria's room. They toast the old Horns. Ryoka lets Ivolethe out; the faerie, seen plainly indoors, insults Ceria as a half-breed and refuses to read the relics for her."
+		},
+		"b3.horns_plan_to_share_their_gold_and_send_the_relics_north": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ceria_springwalker", "ryoka_griffin"], "flags": ["ryoka.reunited_with_ceria"], "not_flags": []},
+			"depends_on": ["b3.ryoka_runs_to_ocre_to_find_ceria"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.paying_the_families_of_the_dead", "horns_of_hammerad.want_relics_read_in_invrisil", "horns_of_hammerad.hold_forty_gold_for_erin", "ceria.knows_erin_is_in_celum"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "The bag and the dead adventurer's pack are sealed by a binding spell, so no one opens them. Yvlon gives up her pick of the relics. Ceria fears Pisces has made Toren."},
+			"summary": "Ceria says the Horns levelled several times, yet will give most of their gold to the families of those who died in Liscor, keep forty gold for Erin, and want the burnt relics read in Invrisil, maybe by a Runner they trust. Ryoka tells her Erin is in Celum and that Toren must be found."
+		},
+		"b3.reynold_and_ressa_come_for_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "ressa"], "flags": ["ryoka.reunited_with_ceria"], "not_flags": []},
+			"depends_on": ["b3.horns_plan_to_share_their_gold_and_send_the_relics_north"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.summoned_ryoka"]},
+			"news": "A horseless Reinhart coach drew up at The Nobleman's Disgrace in Ocre. Lady Magnolia's own head maid came for a barefoot Runner.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "confirmed", "note": "Evening. Ceria's [Dangersense] rings at the sight of Ressa. The coach is drawn by magic, like Thresk's guardian."},
+			"summary": "Downstairs the party falls silent. A trim [Butler], Reynold of House Reinhart, stands waiting for Ryoka on Lady Magnolia's orders, a horseless coach outside. Ryoka refuses; he warns he did not come alone, and Ressa steps from the coach: her lady is expecting Ryoka."
+		}
+	},
+	"system": [
+		{"who": "ceria_springwalker", "kind": "other", "name": "Levels from Albez", "level": null, "confidence": "confirmed", "note": "Ceria says all four Horns levelled several times in the dungeon; no numbers are given."}
+	]
+}

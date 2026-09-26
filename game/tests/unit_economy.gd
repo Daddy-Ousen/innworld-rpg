@@ -212,6 +212,38 @@ func test_a_v10_save_loads_with_an_empty_purse_and_fed() -> void:
 	assert_eq(gs.economy.hunger, 0)
 
 
+func test_corusdeer_soup_is_on_sale_only_once_erin_makes_it() -> void:
+	var gs := _game_at("celum_square", "stitchworks_door")
+	Commands.give(gs, _db, 100)
+	var obj := Interact.object_of(_db, "celum_square", "stitchworks_door")
+	var goods := func() -> Array: return Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["good"])
+	assert_false(goods.call().has("corusdeer_soup"))
+	assert_string_contains(Commands.buy(gs, _db, "stitchworks_door", "corusdeer_soup")["error"], "not for sale yet")
+	gs.flags[_db.economy.goods["corusdeer_soup"]["from_flag"]] = true
+	assert_true(goods.call().has("corusdeer_soup"))
+	assert_eq(Commands.buy(gs, _db, "stitchworks_door", "corusdeer_soup")["error"], "")
+	assert_eq(gs.economy.count("corusdeer_soup"), 1)
+
+
+func test_corusdeer_soup_feeds_you_and_keeps_the_cold_off_for_hours() -> void:
+	var gs := _game_at("celum_square", "celum_well")
+	gs.flags[_db.rules["winter"]["flag"]] = true
+	gs.economy.fed_day = -1
+	Commands.give(gs, _db, 0, "corusdeer_soup", 1)
+	assert_eq(Winter.status(gs, _db), "cold")
+	assert_eq(Commands.use_good(gs, _db, "corusdeer_soup"), "")
+	assert_true(Economy.is_fed(gs))
+	var minutes := int(_db.economy.goods["corusdeer_soup"]["warm_minutes"])
+	assert_gt(minutes, 60)
+	assert_eq(Winter.status(gs, _db), "warm")
+	var hp := Combat.hp(gs, _db)
+	Commands.wait(gs, _db, (minutes - 30) * 60)
+	assert_eq(Combat.hp(gs, _db), hp, "no cold while the soup warms you")
+	assert_eq(Winter.status(gs, _db), "warm")
+	Commands.wait(gs, _db, 31 * 60)
+	assert_eq(Winter.status(gs, _db), "cold", "the warmth wears off")
+
+
 func test_economy_data_errors_are_caught() -> void:
 	var e := EconomyDb.from_dicts(
 		{"a": {"name": "A", "confidence": "guess", "buy": 0, "sell": 1, "food": true, "heal": 2}},
@@ -221,4 +253,11 @@ func test_economy_data_errors_are_caught() -> void:
 	var errs := e.validate(_db)
 	for want: String in ["at most one", "unknown good 'zz'", "no buy price", "unknown action 'no_such_action'",
 			"pay must be"]:
+		assert_true(errs.any(func(x: String) -> bool: return x.contains(want)), want)
+	e = EconomyDb.from_dicts({
+		"b": {"name": "B", "confidence": "guess", "buy": 1, "sell": 0, "warm_minutes": 60},
+		"c": {"name": "C", "confidence": "guess", "buy": 1, "sell": 0, "food": true, "warm_minutes": 0, "from_flag": ""},
+	}, {})
+	errs = e.validate(_db)
+	for want: String in ["warm_minutes needs food or eat_now", "warm_minutes must be > 0", "from_flag must be a flag"]:
 		assert_true(errs.any(func(x: String) -> bool: return x.contains(want)), want)

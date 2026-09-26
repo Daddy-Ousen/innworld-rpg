@@ -1,0 +1,77 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.11E",
+	"events": {
+		"b3.laken_adopts_the_eaglet_frostwing": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "eaglet": {"prefer": ["frostwing"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart"], "flags": ["durene.paladin"], "not_flags": []},
+			"depends_on": ["b3.laken_makes_durene_a_paladin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.has_frostwing", "laken.senses_his_domain"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.11E", "confidence": "confirmed", "note": "Laken's Day 31-32. Placeholder day. The domain sense comes with no Skill name; he thinks the cottage and its land are his by claim. Once he calls the class [Beastmaster]; the System says [Beast Tamer]."},
+			"summary": "A chick's cries wake Laken, and he finds he can sense every rock and root of Durene's land. By a fallen nest he picks up a big, green-fuzzed eaglet that ate its nestmates, feeds it Durene's sausage, names it Frostwing and takes it as a subject. The System makes him a [Beast Tamer]."
+		},
+		"b3.laken_buys_food_from_riverfarm": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmer": {"prefer": ["prost"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart", "prost"], "flags": ["laken.has_frostwing"], "not_flags": []},
+			"depends_on": ["b3.laken_adopts_the_eaglet_frostwing"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["laken.trades_gold_with_riverfarm", "prost.apologised_to_durene"],
+				"relationship": [
+					{"from": "prost", "to": "laken_godart", "delta": 2},
+					{"from": "prost", "to": "durene", "delta": 1}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.11E", "confidence": "confirmed", "note": "Laken's Day 34-38. Placeholder day. Durene says a family may have one gold coin in savings. The basket comes on Day 38; Prost's apology is short and Laken hears it only second-hand."},
+			"summary": "Prost comes to hint that Durene is not good enough for Laken. Laken turns it round and asks when Prost means to apologise to her. Then he pays two gold coins for meat, eggs and cheese from the village. Prost says he seems taller somehow, and later gives Durene a brief apology."
+		},
+		"b3.laken_ennobles_the_frost_faeries": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}},
+			"requires": {"alive": ["laken_godart"], "flags": ["laken.emperor"], "not_flags": []},
+			"depends_on": ["b3.laken_buys_food_from_riverfarm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.gave_the_faeries_titles", "laken.warned_of_a_disaster", "winter_court.promised_to_spare_lakens_land"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.11E", "confidence": "confirmed", "note": "Laken's Day 38. Placeholder day. The faeries heard his claim to the land weeks ago. Ivolethe is not among them (she is with Ryoka)."},
+			"summary": "Frost Faeries come to see the 'Emperor of the Unseen', and one lets slip that something bad is coming. They scorn his gold, but for titles he invents on the spot, a Comtesse of the Soup Spoon, a Baron, a score of Blumenritter, they swear the fate will not fall on his land."
+		},
+		"b3.avalanche_buries_riverfarm": {
+			"tier": 1,
+			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": [], "optional": true}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["riverfarm.buried_by_avalanche", "riverfarm.livestock_killed", "durenes_cottage.spared_by_the_faeries"]},
+			"news": "An avalanche off a distant mountain ran for miles and buried the village of Riverfarm. Only one cottage on its edge was left standing clear.",
+			"rumor": "Word comes from the north of an avalanche that swallowed a whole farming village under packed snow.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.11E", "confidence": "confirmed", "note": "Laken's Day 41. Placeholder day. No depends_on: the snow falls whatever Laken does. He credits the faeries for sparing the cottage; they never promised to spare the village."},
+			"summary": "Three days after the faeries' visit, snow breaks from a far mountain and runs for miles. Its tail smashes into Riverfarm, burying houses and uprooting the forest, yet splits around Durene's cottage. Laken takes it as the faeries' payment, then realises the village lay in its path."
+		}
+	},
+	"system": [
+		{"who": "laken_godart", "kind": "level", "name": "[Emperor]", "level": 5, "confidence": "confirmed", "note": "His Day 31, for taking Frostwing as a subject; he thinks rescuing a life on his land counted."},
+		{"who": "laken_godart", "kind": "class", "name": "[Beast Tamer]", "level": 1, "confidence": "confirmed"},
+		{"who": "laken_godart", "kind": "skill", "name": "[Lesser Bond: Frostwing]", "level": null, "confidence": "confirmed", "note": "He can tell when she is hungry, full or too cold."},
+		{"who": "laken_godart", "kind": "level", "name": "[Beast Tamer]", "level": 2, "confidence": "confirmed", "note": "His Day 32."},
+		{"who": "laken_godart", "kind": "level", "name": "[Emperor]", "level": 6, "confidence": "confirmed", "note": "His Day 34, after the trade with Prost."},
+		{"who": "laken_godart", "kind": "skill", "name": "[Intimidating Glare]", "level": null, "confidence": "confirmed"},
+		{"who": "laken_godart", "kind": "level", "name": "[Beast Tamer]", "level": 4, "confidence": "confirmed", "note": "By his Day 38."},
+		{"who": "laken_godart", "kind": "level", "name": "[Emperor]", "level": 7, "confidence": "confirmed", "note": "His Day 38, after ennobling the faeries."}
+	]
+}

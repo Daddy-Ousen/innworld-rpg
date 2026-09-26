@@ -27,6 +27,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			8: out = _migrate_8_to_9(out)
 			9: out = _migrate_9_to_10(out)
 			10: out = _migrate_10_to_11(out)
+			11: out = _migrate_11_to_12(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -115,4 +116,10 @@ static func _migrate_10_to_11(d: Dictionary) -> Dictionary:
 	var minutes := int((d["clock"] as Dictionary)["total_minutes"])
 	@warning_ignore("integer_division")
 	d["economy"] = {"fed_day": minutes / 1440 + 1}
+	return d
+
+
+## v12 (M9.2): warm meals. No meal warms the player yet.
+static func _migrate_11_to_12(d: Dictionary) -> Dictionary:
+	(d["winter"] as Dictionary)["warm_until"] = -1
 	return d
