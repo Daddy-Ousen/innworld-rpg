@@ -1,0 +1,203 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.25",
+	"events": {
+		"b3.pisces_sets_out_for_the_albez_door": {
+			"tier": 2,
+			"window": {"earliest": 86, "latest": 86, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces"], "flags": ["toren.link_severed"], "not_flags": []},
+			"depends_on": ["b3.pisces_severs_torens_link_to_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.seek_the_albez_door"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Pisces hints Toren's regeneration came from rare materials Ceria recognises (not named). A new skeleton would be either mindless or not Toren. Cognita is Archmage Zelkyr's creation. Erin gives her whole purse without a word; Ceria takes a few coins."},
+			"summary": "Erin wakes from a nightmare of a dead Toren and cooks in grim silence to an oddly empty inn. Over breakfast Pisces says he cannot simply make another Toren. He wants to fetch something they left in Albez; Erin hands over coin for a wagon, and he leaves with Ksmvr."
+		},
+		"b3.erin_talks_yvlon_out_of_harming_pisces": {
+			"tier": 2,
+			"window": {"earliest": 86, "latest": 86, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "yvlon_byres"], "flags": ["yvlon.distrusts_pisces"], "not_flags": []},
+			"depends_on": ["b3.pisces_sets_out_for_the_albez_door"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["yvlon.spares_pisces", "horns_of_hammerad.know_pisces_guarded_the_inn"],
+				"relationship": [{"from": "yvlon_byres", "to": "pisces", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Erin says Pisces froze the Acid Flies once and sent undead to guard her inn when Skinner attacked; she never told anyone. Yvlon's brother's team has a Dwarf he met by luck in a tavern. She calls Ylawes overprotective."},
+			"summary": "The [Actors] arrive for a new play while Ceria and Yvlon argue out of earshot: Yvlon fears a second Necromancer. Erin begs her not to kill Pisces, saying he saved her life twice without a word. Ceria adds that a teammate can watch him best, and Yvlon grudgingly agrees."
+		},
+		"b3.erin_stages_frozen": {
+			"tier": 1,
+			"window": {"earliest": 86, "latest": 86, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"elsa": {"prefer": ["jasi"], "fallback_tags": [], "optional": true},
+				"frost_mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"actor": {"prefer": ["wesle"], "fallback_tags": [], "optional": true},
+				"thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true},
+				"innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_talks_yvlon_out_of_harming_pisces"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.staged_frozen", "frenzied_hare.staged_frozen", "ceria.does_stage_magic", "jasi.played_elsa"],
+				"relationship": [{"from": "jasi", "to": "erin_solstice", "delta": 1}, {"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "The Frenzied Hare's new show has singing: a Drake as an [Ice Queen] raises a castle of ice while real snow falls on the crowd. It ran to three encores.",
+			"rumor": "They say a half-Elf mage makes it snow indoors at the Hare every night, and the whole city hums the Ice Queen's song.",
+			"stage": {
+				"area": "celum_frenzied_hare",
+				"hours": [19, 23],
+				"kind": "scene",
+				"when_flags": ["erin.in_celum"],
+				"npcs": [
+					{"npc": "erin_solstice", "pos": [8, 3]},
+					{"npc": "jasi", "pos": [10, 3]},
+					{"npc": "ceria_springwalker", "pos": [11, 3]}
+				],
+				"line": "A Drake in a pale gown sings beside a little wooden castle while fiddles saw away, and a thin snow drifts down from behind the curtain onto the cheering tables.",
+				"note": "M9.4: a scene. Erin, Jasi and Ceria are placed; Wesle, Grev and the [Musicians] are not. Hours are guesses (an evening show with encores)."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_frozen",
+					"did": [
+						{"action": ["serve_guests", "talk_with_guest", "buy_supplies"], "context": {"location": ["frenzied_hare"]}}
+					],
+					"days": [86, 86],
+					"then": "change",
+					"effects": {
+						"set_flags": ["frenzied_hare.earther_saw_frozen"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "ceria_springwalker", "to": "player", "delta": 2}, {"from": "jasi", "to": "player", "delta": 1}]
+					},
+					"news": "At the Frenzied Hare's first night of the Ice Queen, another Human in the crowd already knew every word of the song."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Erin gets the idea from Ceria's frost magic and the winter. Only the one song is named; the plot is not told. Supper is fish and chips. The cast shares the takings and pays Ceria and Yvlon too. Ceria tells Yvlon Erin and Ryoka come from the same far place."},
+			"summary": "Ceria's sparks give Erin an idea: frost magic and winter mean Frozen, and it has singing. That night Jasi plays Elsa, [Musicians] stand in for a piano, and Ceria casts snow from behind the curtain. The crowd demands three encores, and Erin, poking out of the kitchen, is happy again."
+		},
+		"b3.pisces_and_ksmvr_recover_the_albez_door": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": []}, "driver": {"prefer": ["adelynn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces", "ksmvr"], "flags": ["horns_of_hammerad.seek_the_albez_door"], "not_flags": []},
+			"depends_on": ["b3.pisces_sets_out_for_the_albez_door"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["horns_of_hammerad.seek_the_albez_door"],
+				"set_flags": ["horns_of_hammerad.have_the_albez_door", "pisces.can_trigger_the_albez_door"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "They travel the night of 86 and reach Albez at dawn on 87 (guess). Ksmvr asks what the artifact is 38 times. The door survived Thresk's fire construct. Pisces mudded the [Insanity] runes as Ceria did. Six skeletons carry the door to the wagon."},
+			"summary": "At Albez the driver Adelynn, fed up, blurts out the secret: it is the door. Pisces and Ksmvr dig it from the ash, cover the pit's [Insanity] runes with mud, and burn out the small anchor stone the door sends people to. On the ride back, Ksmvr's chance remark lets Pisces work the teleport on purpose."
+		},
+		"b3.erin_says_goodbye_to_octavia": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_stages_frozen"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.decided_to_go_home", "erin.said_goodbye_to_octavia"],
+				"relationship": [{"from": "octavia", "to": "erin_solstice", "delta": 1}, {"from": "erin_solstice", "to": "octavia", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Agnes begs her to stay; Jasi, Wesle and Grev give Agnes a flat look. Yvlon plans to stop at Esthelm and hopes to find her brother's team, though he may try to take her north. Selys told Erin that Lyonette runs the inn."},
+			"summary": "Next morning Erin announces it is time to go back to Liscor, to Mrsha and the inn. At Stitchworks Octavia seems delighted and tries to bill her for hazard pay and her part in the play. Erin threatens to hit her; they part with a hug, and Erin finds she will miss Celum."
+		},
+		"b3.the_horns_give_erin_the_albez_door": {
+			"tier": 1,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["horns_of_hammerad.have_the_albez_door"], "not_flags": []},
+			"depends_on": ["b3.pisces_and_ksmvr_recover_the_albez_door", "b3.erin_says_goodbye_to_octavia"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["horns_of_hammerad.have_the_albez_door"],
+				"set_flags": ["erin.has_albez_door", "albez_door.linked_to_frenzied_hare", "horns_of_hammerad.repaid_erin"],
+				"relationship": [{"from": "erin_solstice", "to": "ceria_springwalker", "delta": 1}, {"from": "pisces", "to": "erin_solstice", "delta": -1}]
+			},
+			"news": "The Horns of Hammerad gave a plain wooden door from the ruins of Albez to Erin Solstice. Witnesses in Celum saw an Antinium vanish and reappear beside it.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Flags only; no portal mechanic (Book 4). The door refills its mana over time. The anchor stone ends up set in a door of the Frenzied Hare that evening, after the wagon leaves, which is what links the Hare. Pisces guesses the door is worth thousands of gold."},
+			"summary": "Pisces and Ksmvr haul the door to the Hare and show it off: Ksmvr pops out of the air beside it with the anchor stone. Pisces talks of dungeon escapes and sale prices. Erin says she wants it. The Horns owe her, and Ceria, Yvlon and Ksmvr agree; Pisces gives in with a huff."
+		},
+		"b3.erin_leaves_celum_on_the_wagon": {
+			"tier": 1,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "celum",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true},
+				"barmaid": {"prefer": ["maran", "safry"], "fallback_tags": [], "optional": true},
+				"actor": {"prefer": ["wesle", "jasi"], "fallback_tags": [], "optional": true},
+				"thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true},
+				"alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "erin.has_albez_door"], "not_flags": []},
+			"depends_on": ["b3.the_horns_give_erin_the_albez_door", "b3.erin_says_goodbye_to_octavia"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "horns_of_hammerad.lodge_at_the_frenzied_hare"],
+				"set_flags": ["erin.left_celum", "erin.on_wagon_south", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"],
+				"relationship": [{"from": "wesle", "to": "erin_solstice", "delta": 1}, {"from": "grev", "to": "erin_solstice", "delta": 1}]
+			},
+			"news": "Erin Solstice has left Celum by wagon for Liscor with the Horns of Hammerad. Half the Frenzied Hare turned out to see her off.",
+			"stage": {
+				"area": "celum_gate",
+				"hours": [17, 20],
+				"kind": "scene",
+				"when_flags": ["erin.in_celum", "horns_of_hammerad.in_celum"],
+				"npcs": [
+					{"npc": "erin_solstice", "pos": [17, 6]},
+					{"npc": "ceria_springwalker", "pos": [19, 6]},
+					{"npc": "pisces", "pos": [19, 4]},
+					{"npc": "ksmvr", "pos": [20, 5]},
+					{"npc": "yvlon_byres", "pos": [17, 4]}
+				],
+				"line": "A loaded wagon waits by the gate with a heavy plain door strapped in the back. Erin hugs one friend after another while the Horns stamp their feet in the cold.",
+				"note": "M9.4: a scene. The farewell crowd has no schedules and is not placed. Hours are guesses (they leave in the evening to reach a settlement by nightfall)."
+			},
+			"hooks": [
+				{
+					"id": "player_saw_erin_off",
+					"did": [
+						{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["celum"]}}
+					],
+					"days": [87, 87],
+					"then": "change",
+					"effects": {
+						"set_flags": ["celum.earther_saw_erin_off"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 2}, {"from": "ceria_springwalker", "to": "player", "delta": 1}]
+					},
+					"news": "When Erin Solstice rode out of Celum for Liscor, another Human stood among the friends who saw her off."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "The driver south is a man, not Adelynn, and not named. That night Erin sees the stone could stay behind: Ksmvr runs it back to the Hare, and they step through to eat there while the wagon and door roll on. The trip should take one to three days."},
+			"summary": "Agnes, Maran, Safry, the [Actors], Octavia and regulars gather to say goodbye; Erin hugs them all and rides out of Celum with the Horns as evening falls, promising herself to return. On the road she realises the anchor stone could stay behind, and Pisces links the door to the Hare."
+		}
+	},
+	"system": [
+		{"who": "jasi", "kind": "other", "name": "Plays Elsa, the [Ice Queen]", "level": null, "confidence": "confirmed", "note": "Lead in Frozen at the Hare; she sings the famous song, with three encores on the first night."},
+		{"who": "adelynn", "kind": "class", "name": "[Merchant]", "level": null, "confidence": "likely", "note": "A Merchants' Guild wagon driver; she speaks of 'us [Merchants] and [Traders]' in 3.24. Her own class is not stated. She may have a Skill that speeds her horses."}
+	]
+}

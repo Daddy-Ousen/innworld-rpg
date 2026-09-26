@@ -1,0 +1,161 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.22L",
+	"events": {
+		"b3.pawn_leads_the_soldiers_on_patrol": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "named_soldier": {"prefer": ["robert"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.leads_a_soldier_patrol"], "not_flags": []},
+			"depends_on": ["b3.pawn_brings_twenty_soldiers_to_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.soldiers_patrol_the_floodplains", "pawn.spared_the_dino_bird_eggs", "floodplains.corusdeer_herd_driven_off"]},
+			"news": "Antinium Soldiers on patrol outside Liscor smashed Shield Spider nests and chased off both Corusdeer and a Rock Crab.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "That morning Pawn named a Soldier Robert; it meant nothing to him, and chess meant nothing to the Soldiers. Twenty Soldiers plus Pawn order a bee lunch from Lyonette first. The patrol lasts about two and a half hours."},
+			"summary": "Pawn shows the Soldiers snow, sky and trees. They tear apart eight Snow Golems that threw snow at him, crush a nest of Shield Spider hatchlings, chase off a Rock Crab and a Corusdeer herd, and spare dino-bird eggs at his word. A bitten Soldier is left to rest by the inn fire."
+		},
+		"b3.the_soldiers_paint_themselves": {
+			"tier": 1,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn", "lyonette"], "flags": ["lyonette.has_ashfire_bees"], "not_flags": []},
+			"depends_on": ["b3.pawn_leads_the_soldiers_on_patrol"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["liscor_hive.soldiers_painted", "liscor_hive.painted_soldiers_begin_to_level", "lyonette.sells_fried_bees", "wandering_inn.feeds_antinium_soldiers"],
+				"relationship": [{"from": "pawn", "to": "lyonette", "delta": 2}, {"from": "pawn", "to": "mrsha", "delta": 1}, {"from": "lyonette", "to": "pawn", "delta": 1}]
+			},
+			"news": "Twenty Antinium Soldiers came back to Liscor's Hive painted in every colour, each one different, after a meal of fried bees at the Wandering Inn.",
+			"rumor": "Gnolls swear they saw a Soldier with white paw prints all over his shell marching out of the inn on the hill.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [12, 18],
+				"kind": "scene",
+				"when_flags": ["lyonette.runs_the_inn"],
+				"npcs": [
+					{"npc": "pawn", "pos": [6, 6]},
+					{"npc": "lyonette", "pos": [8, 6]},
+					{"npc": "mrsha", "pos": [6, 10]}
+				],
+				"line": "Paint cans stand open on the tables. Huge Soldiers sit dabbing colour on each other's shells while a white Gnoll leaves paw prints on everything.",
+				"note": "M9.4: a scene. The Soldiers are not canon NPCs and are not placed. Hours are guesses (after the patrol)."
+			},
+			"hooks": [
+				{
+					"id": "player_painted_with_the_soldiers",
+					"did": [
+						{"action": ["buy_supplies", "serve_guests", "talk_with_guest"], "context": {"location": ["wandering_inn"]}}
+					],
+					"days": [82, 82],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_saw_the_painted_soldiers"],
+						"relationship": [{"from": "pawn", "to": "player", "delta": 2}, {"from": "lyonette", "to": "player", "delta": 2}]
+					},
+					"news": "When the Soldiers painted themselves at the Wandering Inn, another Human was there to hand round brushes and fried bees."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "The paint is Erin's, bought for the inn sign. Each Soldier gets two bees and a greasy soup only the Soldiers like. In the barracks that night the painted Soldiers think of themselves as [Soldiers] and begin to level; no levels are shown."},
+			"summary": "While Pawn was out, Mrsha got into Erin's paint and covered the resting Soldier in white paw prints. Pawn sees a name that needs no voice. He buys all the paint, and the Soldiers paint themselves, each unlike the rest, and eat fried bees. Back in the Hive every Antinium stops to stare."
+		},
+		"b3.pawn_buys_krshias_paint": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "krshia_stall",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "krshia"], "flags": ["liscor_hive.soldiers_painted"], "not_flags": []},
+			"depends_on": ["b3.the_soldiers_paint_themselves"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.bought_krshias_paint"],
+				"relationship": [{"from": "krshia", "to": "pawn", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Krshia's new stall is smaller and sells less since the theft. [Humble Presence] keeps the Gnoll customers from fleeing."},
+			"summary": "Later that day Pawn queues at Krshia's shrunken stall and asks for all the paint she can get, any colour but brown or black, and about twenty brushes. He sets a bag of gold on the counter and her jaw drops."
+		},
+		"b3.lyonette_plays_chess_with_the_unknown_player": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "opponent": {"prefer": ["niers_astoragon"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["erin.receives_magic_chessboard", "lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.the_soldiers_paint_themselves"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["lyonette.plays_the_magic_chessboard", "lyonette.class_carer", "lyonette.class_tactician", "mrsha.sleeps_at_the_inn"],
+				"relationship": [{"from": "mrsha", "to": "lyonette", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Selys lets Mrsha stay the night after a long chase. The unseen player is not named here; the next scene (Niers) makes it plain. Lyonette learned chess by watching Erin; it had just reached her home country when she ran."},
+			"summary": "That night, with bee money on the table, Lyonette finds Mrsha has scattered the magic chessboard. She resets it, and the far player moves. After she loses pieces fast, the other side slows to her level; she plays three games and wins the last. In her sleep she gains two classes."
+		},
+		"b3.niers_broods_over_the_silent_chessboard": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"strategist": {"prefer": ["niers_astoragon"], "fallback_tags": []}},
+			"requires": {"alive": ["niers_astoragon"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["niers.knows_a_stranger_has_the_board", "niers.tempted_to_go_to_izril"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Day is a placeholder, like Geneva's 1.00D: the text says only 'across the world' the same night as Lyonette's games. He is second to the head of a Great Company. No depends_on to Liscor events."},
+			"summary": "In the smallest room of an inn his company has hired on the way home, the Titan glowers at his little chessboard. His rival is gone and a novice has the board. A lavender letter from Magnolia sits beside it; he wants to go to Izril, but tells himself his duty keeps him."
+		},
+		"b3.zel_and_ilvriss_march_toward_liscor": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "wall_lord": {"prefer": ["ilvriss"], "fallback_tags": []}},
+			"requires": {"alive": ["zel_shivertail", "ilvriss"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.drake_assembly_silences_zel"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["zel.bound_for_liscor", "ilvriss.bound_for_liscor"]},
+			"rumor": "Two hooded Drakes and a long train of servants and horses were seen on the snowy road north of the Blood Fields.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "The Blood Fields lie a day behind them and Liscor a day ahead (so 83, but they enter the city on 84 in 3.23L; flagged). Zel seeks a Human in Liscor who is not named, and has business in the Human lands. Zel has a Skill for running."},
+			"summary": "Zel Shivertail and Wall Lord Ilvriss trudge north through blowing snow, trailed by the Wall Lord's attendants and horses, which slow Zel down. They dislike each other but respect each other. Ilvriss says he had to come; Zel hopes to find a certain Human in Liscor."
+		},
+		"b3.traveling_antinium_kill_goblin_raiders": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"mage": {"prefer": ["xrn"], "fallback_tags": [], "optional": true}, "flyer": {"prefer": ["pivr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium_delegation.nears_liscor", "goblin_lord.raiders_lost_to_the_antinium"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Not named here. The winged acid-spitter and the blue mage with a staff fit Pivr and Xrn of 3.23L (likely). Where they are is a guess: north toward Liscor, far from the road. The Goblins wore black armour like the Goblin Lord's."},
+			"summary": "Off the road to avoid watching eyes, a band of Antinium from four Hives marches north to Liscor. A hundred Goblin raiders in black armour attack and all die. A winged one spits acid into the snow; a blue-shelled one with a staff stops the snowstorm with a word."
+		},
+		"b3.venitra_and_ijvani_lose_their_way": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {"hunter": {"prefer": ["venitra"], "fallback_tags": []}, "companion": {"prefer": ["ijvani"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["venitra"], "flags": [], "not_flags": []},
+			"depends_on": ["b2.azkerash_sends_venitra_after_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["venitra.lost_hunting_ryoka"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "guess", "note": "Day and place are guesses. They have travelled three days, which from 2.48 (day 71) would be about day 74; the batch plan puts it on 82. They head for Liscor though Ryoka is in the north."},
+			"summary": "Venitra, a knight of bone, and Ijvani, a shifting shadow, stride tirelessly through the night snow on Az'kerash's order to find the Runner girl. When the moon rises Ijvani asks if they are lost. Venitra ignores her; they have strayed some seventy miles and are walking away from Liscor."
+		}
+	},
+	"system": [
+		{"who": "lyonette", "kind": "level", "name": "[Barmaid]", "level": 8, "confidence": "confirmed", "note": "In her sleep after the chess games (night of day 82, guess)."},
+		{"who": "lyonette", "kind": "skill", "name": "[Basic Cleaning]", "level": 8, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "class", "name": "[Carer]", "level": 2, "confidence": "confirmed", "note": "Gained and at Level 2 the same night, from caring for Mrsha (3.23L)."},
+		{"who": "lyonette", "kind": "skill", "name": "[Calming Touch]", "level": 2, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "class", "name": "[Tactician]", "level": 1, "confidence": "confirmed", "note": "From the chess games on the magic board (3.23L)."},
+		{"who": "lyonette", "kind": "skill", "name": "[Lesser Intuition]", "level": 1, "confidence": "confirmed"},
+		{"who": "robert", "kind": "other", "name": "Named by Pawn", "level": null, "confidence": "confirmed", "note": "A name does not make a Soldier Individual or Aberration the way it does a Worker; he answers to it as to 'you there'. Paint works where the name did not."}
+	]
+}

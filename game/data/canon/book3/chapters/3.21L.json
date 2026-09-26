@@ -1,0 +1,147 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.21L",
+	"events": {
+		"b3.pawn_takes_command_of_the_wounded_soldiers": {
+			"tier": 2,
+			"window": {"earliest": 81, "latest": 81, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "second_tactician": {"prefer": ["anand"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.cares_for_the_soldiers"], "not_flags": []},
+			"depends_on": ["b3.klbkch_gives_pawn_the_wounded_soldiers"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.commands_the_soldiers", "pawn.told_to_surprise_klbkch"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "Day guess: two days after Pawn's last visit to the inn by Lyonette's count, which the M9.2 dates would put on day 78; the batch plan uses day 81. Hundreds of Soldiers died in 3.06L. Klbkch says Pawn has only one [Tactician] Skill."},
+			"summary": "Pawn has no idea how to lead his maimed Soldiers. He sends them to rest and they clog the barracks another shift needs. Belgrade and Anand, mid-game, say Soldiers only fight, guard, patrol and scout. Klbkch will not risk Pawn in battle and tells him to surprise him."
+		},
+		"b3.pawn_eats_eggs_and_bacon_at_lyonettes_inn": {
+			"tier": 2,
+			"window": {"earliest": 81, "latest": 81, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.pawn_takes_command_of_the_wounded_soldiers"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.will_take_the_soldiers_above"],
+				"relationship": [{"from": "lyonette", "to": "pawn", "delta": 1}, {"from": "pawn", "to": "lyonette", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "His new [Humble Presence] lets him walk through Liscor unnoticed. Lyonette has a few coppers and two silver left; he pays in bronze coins. He would like cheese in his eggs next time."},
+			"summary": "In the evening Pawn walks up to the inn. Lyonette, with no guest for two days, panics, serves him eggs and bacon again and can barely talk. He leaves content, and under the stars on the way home he sees that he must take the Soldiers out of the Hive to see such things."
+		},
+		"b3.zevara_lets_twenty_soldiers_above_ground": {
+			"tier": 2,
+			"window": {"earliest": 81, "latest": 81, "confidence": "guess"},
+			"location": "liscor_watch_barracks",
+			"roles": {"captain": {"prefer": ["zevara"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["zevara", "klbkch"], "flags": [], "not_flags": []},
+			"depends_on": ["b3.pawn_eats_eggs_and_bacon_at_lyonettes_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.antinium_soldiers_may_patrol", "zevara.reports_on_the_antinium"]},
+			"news": "Liscor's Watch Captain has let a score of Antinium Soldiers patrol the land around the city for monsters and Goblin bands.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "By treaty Soldiers leave the Hive only in war or at the Watch Captain's request. The Hive may keep six hundred; Klbkch claims it has a little fewer, and Zevara knows he lies. Her copies go to every Walled City."},
+			"summary": "Late at night Klbkch, speaking for his Hive, asks Zevara to let forty Soldiers walk above ground to widen their view. She agrees to twenty, as a patrol against monsters and Goblins, kept off the north road and out of sight in the city. Then she writes her secret report."
+		},
+		"b3.lyonettes_first_bee_raid_fails": {
+			"tier": 2,
+			"window": {"earliest": 81, "latest": 81, "confidence": "guess"},
+			"location": "giant_bee_cave",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.pawn_eats_eggs_and_bacon_at_lyonettes_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.first_bee_raid_failed", "lyonette.knows_faerie_flower_smoke", "wandering_inn.faerie_flowers_wilting"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "She remembers smoke from a tutor's tale of [Beekeepers]. She leaves the wheelbarrow, wood and jars at the cave. Erin's faerie flowers have gone unwatered since Erin left; some are dead."},
+			"summary": "Desperate for food the Antinium will pay for, Lyonette wheels firewood and jars to the Ashfire Bees' cave by night and lights a smoky fire. The bees pour out, scatter the fire and hunt her; she survives buried in snow. Back home, a dead faerie flower thrown on the embers knocks her out."
+		},
+		"b3.lyonette_smokes_the_ashfire_bees": {
+			"tier": 1,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "giant_bee_cave",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.lyonettes_first_bee_raid_fails"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.has_ashfire_honey", "lyonette.has_ashfire_bees", "lyonette.raises_a_bee_grub", "lyonette.robbed_the_bee_cave"]},
+			"rumor": "Someone smoked out the giant bee nest near Liscor with a strange yellow smoke and walked off with its honey.",
+			"stage": {
+				"area": "bee_cave",
+				"hours": [3, 8],
+				"when_flags": ["lyonette.runs_the_inn"],
+				"foes": [
+					{"enemy": "ashfire_bee", "pos": [26, 10]},
+					{"enemy": "ashfire_bee", "pos": [26, 12]},
+					{"enemy": "ashfire_bee", "pos": [27, 9]},
+					{"enemy": "ashfire_bee", "pos": [27, 13]}
+				],
+				"line": "Grey smoke from burning dead faerie flowers rolls into the cave. Most of the nest drops asleep, but the bees on the comb wake and turn toward you.",
+				"waves": [
+					{"after_seconds": 0, "from": [3, 11], "allies": ["lyonette"], "line": "Lyonette creeps in behind you, a knife in one hand and an armful of empty jars in the other."},
+					{"after_seconds": 60, "left_at_most": 1, "from": [27, 7], "foes": ["ashfire_bee", "ashfire_bee", "ashfire_bee", "ashfire_bee", "ashfire_bee"], "line": "A buzz rises from the north comb as more bees shake off the smoke."},
+					{"after_seconds": 150, "left_at_most": 1, "from": [27, 15], "foes": ["ashfire_bee", "ashfire_bee", "ashfire_bee", "ashfire_bee", "ashfire_bee"], "line": "The smoke is thinning. A swarm lifts off the south comb in a single angry cloud."}
+				],
+				"note": "M9.4 design: the dawn raid of 3.21L as a fight in the bee cave; 14 bees stand in for the nest's hundreds. Lyonette is an ally; the text has her alone. Hours 3-8 run from before dawn to a late winter sunrise, so a player who wakes at 6 can still reach it."
+			},
+			"hooks": [
+				{
+					"id": "player_raided_the_bee_cave_with_lyonette",
+					"did": [
+						{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["ashfire_bee"]}}
+					],
+					"days": [82, 82],
+					"then": "change",
+					"effects": {
+						"set_flags": ["bee_cave.earther_helped_lyonette"],
+						"relationship": [{"from": "lyonette", "to": "player", "delta": 3}]
+					},
+					"news": "Lyonette of the Wandering Inn did not raid the Ashfire Bees alone: another Human fought the waking swarm at her side."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "She brings a handful of dead faerie flowers and one more jar. The smoke puts hundreds of bees to sleep; some wake as she scoops them up. The grub sits in royal jelly. The bees in the jars live for a while without air."},
+			"summary": "Just before dawn Lyonette lights a second fire inside the cave and throws in dead faerie flowers. The swarm comes and falls asleep in the smoke. She cuts comb from the nest and flees with three jars of honey, two jars of bees and a live grub, too weak to stand but proud."
+		},
+		"b3.mrsha_runs_back_to_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette", "mrsha"], "flags": ["lyonette.has_ashfire_honey"], "not_flags": []},
+			"depends_on": ["b3.lyonette_smokes_the_ashfire_bees"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["mrsha.in_selys_care"],
+				"set_flags": ["mrsha.at_the_wandering_inn", "lyonette.cares_for_mrsha"],
+				"relationship": [{"from": "mrsha", "to": "lyonette", "delta": 2}, {"from": "lyonette", "to": "mrsha", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "Selys says Mrsha has run off all week and will not eat what she is given, even steak. Selys threatens to fetch Krshia. Lyonette thinks the grub sits in royal jelly and means it for the Antinium."},
+			"summary": "Lyonette comes home to find a thin, sad Mrsha curled round a table leg, and they eat honey together as the sun rises. Selys bursts in looking for the runaway, but Mrsha will not be dragged out. Lyonette offers to keep her, and Selys, late for work, gives in for the day."
+		},
+		"b3.pawn_brings_twenty_soldiers_to_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn", "lyonette"], "flags": ["liscor.antinium_soldiers_may_patrol"], "not_flags": []},
+			"depends_on": ["b3.mrsha_runs_back_to_the_inn", "b3.zevara_lets_twenty_soldiers_above_ground"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.leads_a_soldier_patrol", "wandering_inn.antinium_soldiers_visited"]},
+			"rumor": "A Drake at the Adventurers' Guild says she fainted when a line of Antinium Soldiers came up to the inn on the hill.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "Twenty Soldiers come with Pawn; one is missing a hand. Nobody catches Selys. The chapter ends as Lyonette offers them food."},
+			"summary": "As Selys yanks the door open to leave, a huge Soldier stands behind Pawn and she faints on the spot. Pawn helps drag her in while twenty wounded Soldiers file into the common room. Lyonette sees customers, thinks of her jar of bees, and asks them all if they want to eat."
+		}
+	},
+	"system": [
+		{"who": "pawn", "kind": "level", "name": "[Acolyte]", "level": 6, "confidence": "confirmed", "note": "Gained after the night the Soldiers died (3.06L); he was Level 1 then."},
+		{"who": "pawn", "kind": "skill", "name": "[Humble Presence]", "level": null, "confidence": "confirmed", "note": "An [Acolyte] Skill. Others see him as an ordinary person in a crowd unless he stands out or is alone. Klbkch thinks it may have uses in battle."},
+		{"who": "belgrade", "kind": "level", "name": "[Tactician]", "level": 15, "confidence": "confirmed", "note": "Leads Soldiers in the tunnel fights."},
+		{"who": "anand", "kind": "level", "name": "[Tactician]", "level": 16, "confidence": "confirmed", "note": "Leads Soldiers in the tunnel fights."}
+	]
+}

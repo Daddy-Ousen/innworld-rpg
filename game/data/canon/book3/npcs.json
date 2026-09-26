@@ -202,7 +202,7 @@
 			"classes": [{"name": "[Knight]", "level": null}],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "Not linked to yvlon_byres: 3.15-3.20T never call them kin, though both are Byres and Yvlon's brother is a [Knight] of the Gold-rank Silver Swords (1.47R). Likely the same family; flagged, not merged."},
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "3.15-3.20T never call them kin; 3.24 does: Yvlon says Ylawes is her older brother, who usually works in the far north near their family estates. Linked by that text. His team has a Dwarf (3.25)."},
 			"summary": "A tall blond Gold-rank [Knight] in silver plate, with enchanted sword and shield, who comes alone to burned Esthelm to put its dead to rest. Proud, brave and blunt, he shames its gangs into a city again and holds the barricades until his team, the Silver Swords, arrives."
 		},
 		"esthelm_florist": {
@@ -396,6 +396,78 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "One of the thirteen Redfang warriors Garen sent after Erin. A band nickname; the Redfang have no Shaman to give names. Dies in 3.20T."},
 			"summary": "A Redfang warrior whose neck a zombie snaps from behind during the band's charge on Toren."
+		},
+		"robert": {
+			"name": "Robert",
+			"race": "Antinium",
+			"tags": ["antinium", "soldier", "free_antinium", "wounded"],
+			"faction": "free_antinium",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Only named, not followed; which painted Soldier he is, if any, is not said. Story role only: no npc_behaviour entry."},
+			"summary": "One of the wounded Soldiers under Pawn's command, the first Soldier Pawn gives a name. The name changes nothing for him: Soldiers cannot speak it, so it is just another word."
+		},
+		"xrn": {
+			"name": "Xrn",
+			"race": "Antinium",
+			"tags": ["antinium", "prognugator", "mage", "grand_hive", "staff"],
+			"faction": "grand_hive",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Leads the delegation. The only living Antinium who can cast spells; Klbkch has known her since he was made. Drakes call her the Small Queen. Class not named. Her eyes shift through many colours."},
+			"summary": "Prognugator of the Grand Hive: a slim, short Antinium with an azure shell and a staff, who casts magic. An old friend of Klbkch, sharp-tongued and commanding, she talked the Grand Queen into letting her visit Liscor. In the Antinium Wars she burned a Drake and Human command tent."
+		},
+		"tersk": {
+			"name": "Tersk",
+			"race": "Antinium",
+			"tags": ["antinium", "prognugator", "armored_antinium", "armor", "mace", "shield"],
+			"faction": "armored_antinium",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Brings three other Armored Antinium with swords and a spear. He defers to Xrn and Klbkch."},
+			"summary": "Prognugator of the Armored Antinium: a big, Soldier-like Antinium with two arms and true hands, clad in fitted steel plate, carrying a shield and mace. Polite and quiet."
+		},
+		"pivr": {
+			"name": "Pivr",
+			"race": "Antinium",
+			"tags": ["antinium", "revalantor", "flying_antinium", "wings", "daggers", "poison"],
+			"faction": "flying_antinium",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Brings five warriors like himself and one heavy, horned variant. His Queen ordered a show of force at Liscor's gate, over Xrn's head."},
+			"summary": "Revalantor of the Flying Antinium: hunched, with two sets of jade wings, four sets of eyes, twin daggers and poison spit. Pompous and tactless, he obeys his Queen over Xrn and leads his fliers into Liscor through the main gate."
+		},
+		"ijvani": {
+			"name": "Ijvani",
+			"race": "Undead",
+			"tags": ["undead", "azkerash_servant", "shadow"],
+			"faction": null,
+			"home": "azkerash_castle",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.22L", "confidence": "confirmed", "note": "Travels with Venitra on Az'kerash's order; her true form is hidden."},
+			"summary": "A servant of Az'kerash who moves like a dark shadow and speaks in a wet whisper. She goes with Venitra to hunt the Runner Ryoka and is the one who asks whether they are lost."
+		},
+		"adelynn": {
+			"name": "Adelynn",
+			"race": "Human",
+			"tags": ["human", "merchant", "wagon_driver", "merchants_guild"],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "Named in 3.25; the same driver took the Horns from Remendia to Celum in 3.24. The only driver willing to go near Albez."},
+			"summary": "A blunt Merchants' Guild wagon driver who carries the Horns from Remendia to Celum, then drives Pisces and Ksmvr to Albez for the door, pelting Pisces with snow whenever he scares her horses."
 		}
 	}
 }
