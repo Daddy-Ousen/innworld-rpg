@@ -126,11 +126,13 @@
 		"pisces": {
 			"confidence": "guess",
 			"combat": {"hp": 24, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [4, 7]},
-			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains.",
+			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains. M9.4: evenings at the Frenzied Hare with the Horns while they are in Celum (horns_of_hammerad.in_celum, 3.24-3.25); 3.24 clears gone_to_albez, so in_celum and left_celum keep him off the Floodplains too.",
 			"goals": [
 				{"goal": "forage", "base": 2, "hours": [[20, 5, 1]], "when_flags": ["liscor.hunting_pisces"],
-					"unless_flags": ["horns_of_hammerad.gone_to_albez"],
+					"unless_flags": ["horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_celum", "horns_of_hammerad.left_celum"],
 					"target": {"area": "floodplains_south", "pos": [27, 4]}},
+				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [12, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
 			]
 		},
@@ -189,9 +191,11 @@
 		},
 		"ksmvr": {
 			"confidence": "guess",
-			"notes": "The Prognugator of Liscor's Hive (1.46). He stays in the Hive (off the map); a canon stage brings him out to fight Gazi on day 42 (2.05). Combat block (M8.1): four arms, two swords and two daggers.",
+			"notes": "The Prognugator of Liscor's Hive (1.46). He stays in the Hive (off the map); a canon stage brings him out to fight Gazi on day 42 (2.05). Combat block (M8.1): four arms, two swords and two daggers. M9.4: with the Horns in Celum (horns_of_hammerad.in_celum, 3.24-3.25) he sits with them at the Frenzied Hare in the evening; hours and seat are guesses.",
 			"combat": {"hp": 50, "accuracy": 7, "evasion": 5, "armor": 3, "damage": [4, 8]},
 			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [12, 6]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -216,12 +220,14 @@
 		},
 		"ceria_springwalker": {
 			"confidence": "guess",
-			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone.",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone. M9.4: in Celum (horns_of_hammerad.in_celum, 3.24-3.25) the Horns eat at the Frenzied Hare in the evening; hours and seats are guesses.",
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"target": {"area": "inn_interior", "pos": [3, 8]}},
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"unless_flags": ["ruins_expedition.leave_at_dawn"], "target": {"area": "inn_interior", "pos": [3, 8]}},
+				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [11, 7]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -309,6 +315,36 @@
 			"goals": [
 				{"goal": "guard_post", "base": 3, "when_flags": ["ylawes.at_esthelm"], "target": {"area": "esthelm_ruins", "pos": [10, 7]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "esthelm"}}
+			]
+		},
+		"yvlon_byres": {
+			"confidence": "guess",
+			"notes": "M9.4. Yvlon comes to Celum with the Horns (3.24, horns_of_hammerad.in_celum), her plate armour gone and metal fused to her arms, and sits with them at the Frenzied Hare in the evening until they leave on the wagon (3.25). Hours and seat are guesses; the rest of the time she is off the map.",
+			"goals": [
+				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [13, 7]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"jasi": {
+			"confidence": "guess",
+			"notes": "M9.4. The young Drake Erin hires at the Frenzied Hare (3.15, jasi.works_at_frenzied_hare): she washes, serves and later acts in Erin's plays (3.16, 3.24, 3.25). Where she sleeps is not shown; the hours and the wash corner are guesses.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[7, 22, 1]], "when_flags": ["jasi.works_at_frenzied_hare"],
+					"target": {"area": "celum_frenzied_hare", "pos": [3, 9]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"zel_shivertail": {
+			"confidence": "guess",
+			"notes": "M9.4. Zel Shivertail, the Tidebreaker, reaches Liscor with Wall Lord Ilvriss (3.23L). The city inns are full, so he takes a room at the Wandering Inn (zel.at_wandering_inn): breakfast and evenings in the common room, days in the city (off the map). The room, the seat and the hours are guesses. The combat block is a design number for a famous Drake [General].",
+			"combat": {"hp": 90, "accuracy": 10, "evasion": 5, "armor": 5, "damage": [6, 12]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[22, 7, 1]], "when_flags": ["zel.at_wandering_inn"],
+					"target": {"area": "inn_interior", "pos": [19, 4]}},
+				{"goal": "eat", "base": 2, "hours": [[7, 9, 1], [18, 22, 1]], "when_flags": ["zel.at_wandering_inn"],
+					"target": {"area": "inn_interior", "pos": [10, 8]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		}
 	}

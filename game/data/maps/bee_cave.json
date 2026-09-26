@@ -1,0 +1,46 @@
+{
+	"schema_version": 1,
+	"id": "bee_cave",
+	"name": "The Ashfire Bee cave",
+	"location": "giant_bee_cave",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M9.4). The cave near the inn holding the giant Ashfire Bee nest that Erin raided with Toren (2.42) and Lyonette raids for honey before dawn (3.21L). The text gives no place or layout: the tunnel, the nest chamber, the walk from the inn hill and the indoor flag (out of the wind, no Frost Faeries) are guesses. The stage of b3.lyonette_smokes_the_ashfire_bees happens here on day 82.",
+	"zones": {},
+	"exits": [
+		{"at": [0, 11, 1, 2], "to": "inn_hill", "arrive": [30, 2], "minutes": 45}
+	],
+	"objects": [
+		{"id": "bee_nest", "at": [28, 11], "name": "Huge honeycomb nest", "actions": [], "solid": true},
+		{"id": "bee_comb_north", "at": [25, 6], "name": "Honeycomb on the wall", "actions": [], "solid": true},
+		{"id": "bee_comb_south", "at": [25, 16], "name": "Honeycomb on the wall", "actions": [], "solid": true},
+		{"id": "cave_loose_stones", "at": [8, 12], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {",": "tall_grass", ".": "cave_floor", "^": "rock"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^......^^^^^",
+		"^^^^^^^^^^^^^^^^^^^...........^^",
+		"^^^^^^^^^^^^^^^^^^.............^",
+		"^^^^^^^^^^^^^^^^^..............^",
+		"^^^^^^^^^^^^^^^^^.......^......^",
+		"^^^^^^^^^^^^^^^^...............^",
+		",,,^^^^^^^^^^......^...........^",
+		",,,............................^",
+		",,,............................^",
+		",,,^^^^^^^^^^..........^.......^",
+		"^^^^^^^^^^^^^^^^...............^",
+		"^^^^^^^^^^^^^^^^^..............^",
+		"^^^^^^^^^^^^^^^^^^.............^",
+		"^^^^^^^^^^^^^^^^^^^...........^^",
+		"^^^^^^^^^^^^^^^^^^^^^......^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+	]
+}
