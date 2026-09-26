@@ -1,0 +1,108 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.18T",
+	"events": {
+		"b3.toren_watches_esthelms_survivors": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.in_esthelm"], "not_flags": []},
+			"depends_on": ["b3.toren_kills_the_vanguards_head_shaman"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.studies_humans"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "Dusk. He freezes the woman with [Fear] and leaves her: killing what cannot fight bores him. He half misses the inn, where cleaning levelled his [Barmaid] class."},
+			"summary": "Toren strolls into Esthelm at dusk and watches its survivors: flimsy shacks, gangs ruling streets, a mob beating a man to death over a hut Toren himself knocked down. He clubs to death a naked man who was forcing himself on a woman, then goes looking for a real fight."
+		},
+		"b3.redfang_band_makes_camp_in_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"leader": {"prefer": ["grunter"], "fallback_tags": []},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true},
+				"tracker": {"prefer": ["numbtongue"], "fallback_tags": [], "optional": true},
+				"lookout": {"prefer": ["rabbiteater", "leftstep"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["grunter"], "flags": ["redfang_band.in_esthelm"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_flees_into_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["redfang_band.camps_in_esthelm", "redfang_band.plans_to_ambush_the_vanguard"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "A dead Goblin army lies in the streets, so they wonder if Rags came here. Grunter speaks a few words of the common tongue. They eat the dead, as Goblins do."},
+			"summary": "From a mound of rubble the band sees Humans barricading streets and fighting like rival tribes, and enemy campfires beyond the walls. They slip into the maze at the city's heart. Badarrow shoots a man about to kill a lost boy. Grunter's plan: ambush the vanguard in the chaos and slip away."
+		},
+		"b3.ylawes_byres_beats_toren_in_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"knight": {"prefer": ["ylawes_byres"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}, "adventurers": {"prefer": [], "fallback_tags": ["adventurer"], "optional": true}},
+			"requires": {"alive": ["ylawes_byres"], "flags": ["esthelm.burned"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ylawes.at_esthelm", "toren.beaten_by_ylawes", "bronze_team.follows_ylawes"]},
+			"news": "A Gold-rank [Knight] in silver armour, Ylawes Byres, has come to ruined Esthelm alone to lay its unburied dead to rest.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "The Bronze-rank trio Toren cut (now healed) trail him. Some magic turns blows from his bare head. Nearby Silver-ranks would not come. He fears the Goblins spared the people to raise an undead horde."},
+			"summary": "Ylawes, a Gold-rank [Knight] in silver plate, cuts down a gang attacking a family. Toren springs from hiding, but [Shield Breaker] throws him back and the Knight slices off the top of his skull. Before Ylawes can destroy the bones for good, a gang jumps him from behind."
+		},
+		"b3.ylawes_shames_the_men_of_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"knight": {"prefer": ["ylawes_byres"], "fallback_tags": []}},
+			"requires": {"alive": ["ylawes_byres"], "flags": ["ylawes.at_esthelm"], "not_flags": []},
+			"depends_on": ["b3.ylawes_byres_beats_toren_in_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ylawes.rallies_esthelms_men"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "Two club blows to the same spot on his head fail to drop him. The man who struck him is the first to follow. Toren's bones reform after they leave."},
+			"summary": "Clubbed and stoned, Ylawes will not kneel. He kills one attacker, rips weapons from others and sheathes his sword. He shames them for preying on their own while their families suffer, gives his name, and walks off asking those who still believe in Esthelm to follow. Most do."
+		},
+		"b3.redfang_band_saves_the_florist_from_toren": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": []},
+				"leader": {"prefer": ["grunter"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["esthelm_florist", "headscratcher"], "flags": ["redfang_band.camps_in_esthelm", "esthelm_florist.horror_carrion_eater"], "not_flags": []},
+			"depends_on": ["b3.redfang_band_makes_camp_in_esthelm", "b3.esthelm_florist_sinks_to_carrion_eater"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["esthelm_florist.follows_the_redfang_band", "redfang_band.wondered_if_she_was_the_innkeeper", "toren.lost_his_sword"],
+				"relationship": [{"from": "esthelm_florist", "to": "headscratcher", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "She had just torn apart a zombie to save a young man, who drove her off with a knife. Grunter calls her a Ghoul, yet she lives and thinks. Headscratcher leaps first; the other twelve follow. Toren's sword goes missing."},
+			"summary": "Toren catches the Horror in the street and beats her near to death. From a roof the Redfang band wonders if a young woman with a skeleton could be the [Innkeeper] they were sent for, and if Rags would want her saved. Headscratcher leaps down, Grunter stamps Toren flat, and she follows them."
+		},
+		"b3.toren_gains_the_leader_class": {
+			"tier": 2,
+			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"location": "esthelm_sewers",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.in_esthelm"], "not_flags": []},
+			"depends_on": ["b3.toren_watches_esthelms_survivors"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.leader_class", "toren.commands_lesser_undead"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "His mana, fed by Erin, is nearly spent after so many reformings; one more scattering might end him. He wonders if Skinner's gem lets him command the dead. Six zombies obey him."},
+			"summary": "Swordless and low on mana, Toren fears death for the first time and hides in the sewers, where a fresh Ghoul pins him and rips out his ribs. He cries for help, even to Erin, and six zombies drag the Ghoul off and eat it. The system grants him the [Leader] class and [Command Lesser Undead]."
+		}
+	},
+	"system": [
+		{"who": "toren", "kind": "class", "name": "[Barmaid]", "level": null, "confidence": "confirmed", "note": "Levelled by serving and scrubbing at the inn; he does not like the class, only the levels."},
+		{"who": "toren", "kind": "class", "name": "[Leader]", "level": 1, "confidence": "confirmed", "note": "In the sewers, when the zombies save him."},
+		{"who": "toren", "kind": "skill", "name": "[Command Lesser Undead]", "level": 1, "confidence": "confirmed", "note": "At first he can only make them move and attack."},
+		{"who": "ylawes_byres", "kind": "class", "name": "[Knight]", "level": null, "confidence": "confirmed", "note": "Gold-rank adventurer."},
+		{"who": "ylawes_byres", "kind": "skill", "name": "[Shield Breaker]", "level": null, "confidence": "confirmed", "note": "A glowing shield bash that cuts off Toren's [Mirage Cut] mid-Skill."}
+	]
+}

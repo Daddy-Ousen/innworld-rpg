@@ -1,0 +1,199 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.20T",
+	"events": {
+		"b3.the_florist_splints_grunters_arm": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []}, "leader": {"prefer": ["grunter"], "fallback_tags": []}},
+			"requires": {"alive": ["esthelm_florist", "grunter"], "flags": ["grunter.badly_wounded"], "not_flags": []},
+			"depends_on": ["b3.ylawes_runs_grunter_through"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["grunter.healed_by_potion", "esthelm_florist.trusted_by_the_redfang_band"],
+				"relationship": [{"from": "grunter", "to": "esthelm_florist", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "The potion is small and costly, the band's only one. It closes the stab wound but leaves the bones broken. The splint is cloth and the bar they hang the pot from."},
+			"summary": "Back at camp the Goblins pour a tiny, costly healing potion into Grunter's stomach wound and it closes at once, but his arm stays broken. He waves off his warriors, yet lets the Horror tie his splint, tighter, then thanks her with a grunt and wipes away her tears."
+		},
+		"b3.the_florist_loses_her_terrible_hunger": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []}, "warrior": {"prefer": ["headscratcher"], "fallback_tags": []}, "spearman": {"prefer": ["bugear"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["esthelm_florist", "headscratcher"], "flags": ["esthelm_florist.trusted_by_the_redfang_band"], "not_flags": []},
+			"depends_on": ["b3.the_florist_splints_grunters_arm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["esthelm_florist.hunger_lifted"],
+				"clear_flags": ["esthelm_florist.terrible_hunger"],
+				"relationship": [{"from": "headscratcher", "to": "esthelm_florist", "delta": 2}, {"from": "esthelm_florist", "to": "headscratcher", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "In the dirt she draws herself with horns, set apart from other Humans. The Goblins draw horns on themselves and a tear line: they too grieve when they eat their dead. She still looks monstrous and has no words."},
+			"summary": "She picks the ticks from Headscratcher's scalp and drowns the mites in Bugear's ear with soapy water. With drawings in the dirt she tells them she is a monster, alone; they show her they are the same. Headscratcher hugs her, and the system removes her Terrible Hunger."
+		},
+		"b3.the_last_battle_of_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"knight": {"prefer": ["ylawes_byres"], "fallback_tags": []},
+				"commander": {"prefer": ["goblin_vanguard_commander"], "fallback_tags": [], "optional": true},
+				"leader": {"prefer": ["grunter"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true},
+				"band": {"prefer": ["shorthilt", "bugear", "rabbiteater", "numbtongue"], "fallback_tags": [], "optional": true},
+				"fallen": {"prefer": ["rocksoup", "leftstep", "orangepoo", "bitefly", "patchhelm", "justrust"], "fallback_tags": [], "optional": true},
+				"horror": {"prefer": ["esthelm_florist"], "fallback_tags": [], "optional": true},
+				"skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true},
+				"relief": {"prefer": [], "fallback_tags": ["adventurer"], "optional": true}
+			},
+			"requires": {"alive": ["ylawes_byres"], "flags": ["ylawes.at_esthelm", "esthelm.barricades_built", "goblin_lord.vanguard_assaults_esthelm"], "not_flags": []},
+			"depends_on": ["b3.ylawes_walls_off_a_quarter_of_esthelm", "b3.goblin_vanguard_marches_on_esthelm", "b3.the_florist_loses_her_terrible_hunger"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"kill": ["grunter", "rocksoup", "leftstep", "orangepoo", "bitefly", "patchhelm", "justrust", "goblin_vanguard_commander"],
+				"set_flags": ["esthelm.saved", "goblin_lord.vanguard_routed", "silver_swords.at_esthelm", "grunter.killed_the_goblin_commander", "redfang_band.broke_toren", "esthelm_florist.shot_by_a_defender"]
+			},
+			"news": "Esthelm's survivors held their barricades against the Goblin Lord's vanguard until the Gold-rank Silver Swords and a score of Silver-rank adventurers struck the Goblins from behind.",
+			"rumor": "Defenders of Esthelm swear a small band of Goblins fought the Goblin army, and that their Hob killed its commander with a broken arm.",
+			"stage": {
+				"area": "esthelm_ruins",
+				"hours": [8, 18],
+				"when_flags": ["ylawes.at_esthelm"],
+				"foes": [
+					{"enemy": "goblin_lord_soldier", "pos": [28, 11]},
+					{"enemy": "goblin_lord_soldier", "pos": [28, 12]},
+					{"enemy": "goblin_lord_soldier", "pos": [27, 11]},
+					{"enemy": "goblin_lord_archer", "pos": [29, 10]},
+					{"enemy": "goblin_lord_archer", "pos": [29, 13]}
+				],
+				"line": "Drums beat outside the broken east gate. A kill team of Goblins in black armour files into the ruins, bows up, looking for anyone still alive.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [10, 6],
+						"allies": ["ylawes_byres"],
+						"helpers": ["esthelm_defender", "esthelm_defender", "esthelm_defender", "esthelm_defender"],
+						"line": "The knight in silver plate steps out of the palisade gate. Townsfolk with spears, pans and scavenged swords crowd behind him."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 2,
+						"from": [15, 21],
+						"foes": ["zombie", "zombie", "zombie", "zombie", "ghoul", "ghoul"],
+						"line": "The Shamans' dead climb out of the rubble to the south and stumble toward the barricades."
+					},
+					{
+						"after_seconds": 150,
+						"left_at_most": 2,
+						"from": [29, 11],
+						"foes": ["goblin_lord_soldier", "goblin_lord_soldier", "goblin_lord_soldier", "goblin_lord_archer", "goblin_lord_archer", "goblin_lord_shaman", "goblin_lord_shaman", "goblin_lord_hob"],
+						"line": "The main assault comes through the gate in ranks: shields locked, Shamans behind them, a huge Hob at the front."
+					},
+					{
+						"after_seconds": 240,
+						"left_at_most": 2,
+						"from": [26, 16],
+						"helpers": ["redfang_hob", "redfang_warrior", "redfang_warrior", "redfang_warrior", "redfang_warrior", "redfang_warrior"],
+						"line": "Goblins with red-painted faces burst out of the rubble and throw themselves at the black ranks. Their Hob swings an axe with his one good arm."
+					},
+					{
+						"after_seconds": 300,
+						"left_at_most": 2,
+						"from": [29, 12],
+						"foes": ["goblin_lord_commander", "goblin_lord_soldier", "goblin_lord_soldier"],
+						"line": "A tattooed Goblin on a Shield Spider rides in with a halberd and points it at the barricade."
+					},
+					{
+						"after_seconds": 420,
+						"left_at_most": 1,
+						"from": [29, 11],
+						"helpers": ["silver_rank_adventurer", "silver_rank_adventurer", "silver_rank_adventurer", "silver_rank_adventurer"],
+						"line": "Horns sound behind the Goblin lines. Adventurers in silver ride through the gate and cut into the vanguard from behind."
+					}
+				],
+				"note": "M9.3 design: one day assault stands in for 3.19T-3.20T; 22 foes stand in for hundreds. The Redfang band are helpers on the player's side. Toren fights everyone and the Horror is not placed."
+			},
+			"hooks": [
+				{
+					"id": "player_held_the_esthelm_barricade",
+					"did": [
+						{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["goblin_lord_soldier", "goblin_lord_archer", "goblin_lord_shaman", "goblin_lord_hob", "goblin_lord_commander"]}}
+					],
+					"days": [80, 80],
+					"then": "change",
+					"effects": {
+						"set_flags": ["esthelm.earther_held_the_barricade"],
+						"relationship": [{"from": "ylawes_byres", "to": "player", "delta": 3}, {"from": "headscratcher", "to": "player", "delta": 1}]
+					},
+					"news": "At Esthelm a stranger from no known city fought at Ylawes Byres' barricade until the Silver Swords broke the Goblin vanguard."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "Dead: Grunter, Rocksoup, Leftstep, Orangepoo, Bitefly, Patchhelm, Justrust. Badarrow shoots both lesser [Shamans]. A defender's arrow hits the Horror. The Silver Swords' half-Elf [Mage] and Dwarf are unnamed here."},
+			"summary": "Drums, spiders and held dead hit Ylawes' barricades while Toren's running zombies strike both sides. The Horror charges in and the Redfang follow. Grunter kills the commander and falls; Headscratcher's band breaks Toren. The Silver Swords arrive with Silver-ranks and the Goblins rout."
+		},
+		"b3.toren_stabs_the_dying_florist": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"horror": {"prefer": ["esthelm_florist"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["headscratcher"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["esthelm_florist"], "flags": ["esthelm_florist.shot_by_a_defender"], "not_flags": []},
+			"depends_on": ["b3.the_last_battle_of_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"kill": ["esthelm_florist"],
+				"set_flags": ["toren.saw_a_goblin_mourn_a_human", "headscratcher.lost_the_florist"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "Headscratcher had laid her by a dying fire after she spoke to the band. The text never gives her name. Toren does not attack the weeping Goblin."},
+			"summary": "Leaving the lost battle, Toren finds the dying Horror by a fire and stabs her to feel better. Headscratcher tackles him unarmed, and Toren's own sword ends up in his ribs. She dies smiling in the Goblin's arms, and the sight of a Goblin weeping for a Human stops Toren. He walks away."
+		},
+		"b3.redfang_band_leaves_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {
+				"warrior": {"prefer": ["headscratcher"], "fallback_tags": []},
+				"knight": {"prefer": ["ylawes_byres"], "fallback_tags": [], "optional": true},
+				"archer": {"prefer": ["badarrow"], "fallback_tags": [], "optional": true},
+				"band": {"prefer": ["shorthilt", "bugear", "rabbiteater", "numbtongue"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["headscratcher"], "flags": ["esthelm.saved"], "not_flags": []},
+			"depends_on": ["b3.the_last_battle_of_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["redfang_band.left_esthelm", "ylawes.let_the_redfang_go"],
+				"relationship": [{"from": "ylawes_byres", "to": "headscratcher", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "Six live: Rabbiteater, Bugear, Numbtongue, Shorthilt, Badarrow, Headscratcher. A badly made arrow saves Badarrow, who vows never to scorn one again. Where they go next is later canon."},
+			"summary": "Five Goblins carry the Horror's body to the victors. Ylawes praises their Hob, their archer and the killing of the skeleton; they cross her arms, ignore him and turn away. He wishes never to meet them again. They pass Grunter's remains, find Badarrow alive and laughing, and walk into the snow."
+		},
+		"b3.toren_leads_his_dead_toward_liscor": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.commands_lesser_undead"], "not_flags": []},
+			"depends_on": ["b3.the_last_battle_of_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.heading_to_liscor", "toren.leads_undead"]},
+			"rumor": "A skeleton with burning purple eyes was seen leaving Esthelm southward, a dozen zombies and a Ghoul shambling behind it.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.20T", "confidence": "confirmed", "note": "He feels beaten by something he has no name for and learns that killing is not enough. His arrival is later canon."},
+			"summary": "Beaten and without purpose, Toren walks out of the city with thirteen zombies and a Ghoul behind him, knowing they are only tools. Troubled by the Goblin and the dying girl, he turns south toward Liscor, back home."
+		}
+	},
+	"system": [
+		{"who": "esthelm_florist", "kind": "other", "name": "Condition removed: Terrible Hunger", "level": null, "confidence": "confirmed", "note": "When Headscratcher hugs her. She keeps her monstrous form and stays wordless."},
+		{"who": "ylawes_byres", "kind": "skill", "name": "[Shield of Valor]", "level": null, "confidence": "confirmed", "note": "A wall of air that hurls back everything in a cone before his shield."},
+		{"who": "ylawes_byres", "kind": "other", "name": "Enchanted arms, plain plate", "level": null, "confidence": "confirmed", "note": "His sword and shield are enchanted; his plate mail is not, so a javelin dents it."},
+		{"who": "badarrow", "kind": "class", "name": "[Archer]", "level": null, "confidence": "confirmed", "note": "Over Level 10 (3.17T); kills two [Shamans] at long range."}
+	]
+}
