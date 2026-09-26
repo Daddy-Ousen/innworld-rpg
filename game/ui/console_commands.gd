@@ -34,6 +34,7 @@ const HELP := [
 	"  buy <object> <good> / sell <object> <good>   trade at a nearby shop",
 	"  eat <good>                         eat or drink a good from the bag",
 	"  ride <object>                      take a nearby paid ride (a wagon)",
+	"  portal <object>                    step through a nearby magic door",
 	"  give <copper> [good] [n]           add coins and goods (debug)",
 	"  status                             day, time, classes, skills, offers",
 	"  accept <class> / decline <class>   answer a class offer",
@@ -91,6 +92,11 @@ func execute(line: String) -> Array[String]:
 			out = _need_arg(args, "ride <object>")
 			if out.is_empty():
 				out = _combat(Commands.ride(gs, db, args[0]))
+				out.append_array(_where())
+		"portal":
+			out = _need_arg(args, "portal <object>")
+			if out.is_empty():
+				out = _combat(Commands.portal(gs, db, args[0]))
 				out.append_array(_where())
 		"give":
 			out = _need_arg(args, "give <copper> [good] [n]")
@@ -251,7 +257,7 @@ func _look() -> Array[String]:
 		return out
 	var p := gs.player
 	var marks := {}
-	for o: Dictionary in db.maps.areas[p.area]["objects"]:
+	for o: Dictionary in db.maps.objects_on(p.area):
 		marks[Vector2i(int(o["at"][0]), int(o["at"][1]))] = "o"
 	for id in gs.npcs.in_area(p.area):
 		marks[NpcRoster.pos_of(gs.npcs.npcs[id])] = "&"
@@ -287,6 +293,8 @@ func _look() -> Array[String]:
 			actions.append("%s %s %s" % [t["kind"], t["good"], Economy.format(db, int(t["price"]))])
 		if not (o.get("ride", {}) as Dictionary).is_empty():
 			actions.append("ride to %s %s" % [o["ride"]["to"], Economy.format(db, int(o["ride"]["price"]))])
+		if not (o.get("portal", {}) as Dictionary).is_empty():
+			actions.append("portal to %s (%d left today)" % [o["portal"]["to"], Portal.trips_left(gs, db)])
 		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(actions)])
 	if options.is_empty():
 		out.append("  Nothing to use here.")

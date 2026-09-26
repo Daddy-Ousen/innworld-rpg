@@ -234,6 +234,9 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id == Interact.RIDE:
 		_command_error(Commands.ride(gs, db, object_id))
 		return
+	if action_id == Interact.PORTAL:
+		_command_error(Commands.portal(gs, db, object_id))
+		return
 	if action_id == Interact.TAKE:
 		_command_error(Commands.take(Session.gs, Session.db, object_id))
 		return

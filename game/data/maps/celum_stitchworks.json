@@ -1,0 +1,31 @@
+{
+	"schema_version": 1,
+	"id": "celum_stitchworks",
+	"name": "Stitchworks",
+	"location": "stitchworks",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M10.0, ADR 0017). Octavia's shop in Celum, where Erin sets the Celum end of the Albez door (3.30). The size, the layout and the door's place are guesses. The shop counter sells what the street door sells.",
+	"zones": {},
+	"exits": [
+		{"at": [5, 7, 1, 1], "to": "celum_square", "arrive": [2, 13], "minutes": 0}
+	],
+	"objects": [
+		{"id": "octavia_counter", "at": [3, 2], "name": "Octavia's counter", "actions": ["buy_supplies", "sell_goods"], "solid": true, "shop": "stitchworks"},
+		{"id": "potion_shelves", "at": [1, 1], "name": "Shelves of potions and dyes", "actions": [], "solid": true},
+		{"id": "albez_door_celum", "at": [10, 3], "name": "Magic door", "actions": [],
+			"when_flags": ["albez_door.anchor_at_stitchworks"],
+			"portal": {"to": "inn_interior", "pos": [3, 12], "power_flags": ["erin.magical_grounds"]}}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHH",
+		"H==========H",
+		"H==========H",
+		"H==========H",
+		"H==========H",
+		"H==========H",
+		"H==========H",
+		"HHHHH+HHHHHH"
+	]
+}

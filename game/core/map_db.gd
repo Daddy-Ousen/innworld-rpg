@@ -9,7 +9,11 @@
 ## with "camp": true is a campsite (is_camp: you may sleep outdoors there);
 ## an object may have "shop" (a shop id in data/economy.json), "price"
 ## (copper, on a "sleep" object: a paid room) and "ride" ({"to", "pos",
-## "minutes", "price"}: a paid ride to a tile of another map).
+## "minutes", "price"}: a paid ride to a tile of another map). M10.0 (ADR
+## 0017): an object with "when_flags" / "unless_flags" is on the map only
+## while the flags hold (sync_flags; a hidden object is not listed by
+## objects_near and must not be solid), and "portal" ({"to", "pos",
+## "power_flags"}) makes it a magic door (Portal).
 class_name MapDb
 extends RefCounted
 
@@ -31,7 +35,10 @@ var _solid: Dictionary = {}
 var _indoor: Dictionary = {}
 ## area id → {Vector2i: tile id} of the overlays that are on now.
 var _overlay: Dictionary = {}
-## The overlay ids that are on, joined (changes when sync_flags switches one).
+## area id → {object id: true} for objects hidden by their flags (M10.0).
+var _hidden: Dictionary = {}
+## The overlay ids that are on and the hidden object ids, joined (changes
+## when sync_flags switches one).
 var overlay_key := ""
 
 
@@ -107,12 +114,35 @@ func sync_flags(flags: Dictionary) -> bool:
 					for x in range(rect.position.x, rect.end.x):
 						layer[Vector2i(x, y)] = o.get("tile", "")
 			layers[area] = layer
+	var hidden := {}
+	for area: String in ids:
+		for o: Dictionary in areas[area].get("objects", []):
+			if (o.has("when_flags") or o.has("unless_flags")) and not _flags_hold(o, flags):
+				var h: Dictionary = hidden.get(area, {})
+				h[o.get("id", "")] = true
+				hidden[area] = h
+				on.append("-%s/%s" % [area, o.get("id", "")])
 	var key := ",".join(on)
 	if key == overlay_key:
 		return false
 	overlay_key = key
 	_overlay = layers
+	_hidden = hidden
 	return true
+
+
+## True unless object `o` of `area` is hidden by its flags (M10.0).
+func object_on(area: String, o: Dictionary) -> bool:
+	return not _hidden.get(area, {}).has(o.get("id", ""))
+
+
+## The objects of `area` that are on the map now (M10.0: not hidden).
+func objects_on(area: String) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for o: Dictionary in areas[area]["objects"]:
+		if object_on(area, o):
+			out.append(o)
+	return out
 
 
 static func _flags_hold(o: Dictionary, flags: Dictionary) -> bool:
@@ -199,7 +229,7 @@ func zone_at(area: String, at: Vector2i) -> String:
 ## Objects on or next to `at` (8 neighbours), nearest first, then by id.
 func objects_near(area: String, at: Vector2i) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
-	for o: Dictionary in areas[area]["objects"]:
+	for o: Dictionary in objects_on(area):
 		var d := _dist(at, _vec(o["at"]))
 		if d <= 1:
 			out.append(o)
@@ -443,6 +473,32 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 		errors.append("%s: price needs \"sleep\": true and must be >= 1." % where)
 	if o.has("ride"):
 		_validate_ride(where, o["ride"], db)
+	for k: String in ["when_flags", "unless_flags"]:
+		var flags: Variant = o.get(k, [])
+		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+			errors.append("%s: %s must be a list of strings." % [where, k])
+	if (o.has("when_flags") or o.has("unless_flags")) and o.get("solid", false):
+		errors.append("%s: an object with flags must not be solid." % where)
+	if o.has("portal"):
+		_validate_portal(where, o["portal"], db)
+
+
+## A portal (M10.0): {"to": a known map, "pos": a walkable tile there,
+## "power_flags": a list of flags}; needs rules.portal and the action 'travel'.
+func _validate_portal(where: String, p: Variant, db: DataDb) -> void:
+	if not p is Dictionary or not ["to", "pos", "power_flags"].all(
+			func(f: String) -> bool: return (p as Dictionary).has(f)):
+		errors.append("%s: portal must be {to, pos, power_flags}." % where)
+		return
+	if not areas.has(p["to"]):
+		errors.append("%s: portal to unknown map '%s'." % [where, p["to"]])
+	elif not _pos_ok(p["pos"]) or not in_bounds(p["to"], _vec(p["pos"])) 			or not is_walkable(p["to"], _vec(p["pos"])):
+		errors.append("%s: portal pos must be a walkable tile of '%s'." % [where, p["to"]])
+	var flags: Variant = p["power_flags"]
+	if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+		errors.append("%s: power_flags must be a list of strings." % where)
+	if not db.rules.has("portal") or not db.actions.has("travel"):
+		errors.append("%s: a portal needs rules.portal and the action 'travel'." % where)
 
 
 ## A ride: {"to": a known map, "pos": a walkable tile there, "minutes" >= 1

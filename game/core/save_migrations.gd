@@ -28,6 +28,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			9: out = _migrate_9_to_10(out)
 			10: out = _migrate_10_to_11(out)
 			11: out = _migrate_11_to_12(out)
+			12: out = _migrate_12_to_13(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -122,4 +123,13 @@ static func _migrate_10_to_11(d: Dictionary) -> Dictionary:
 ## v12 (M9.2): warm meals. No meal warms the player yet.
 static func _migrate_11_to_12(d: Dictionary) -> Dictionary:
 	(d["winter"] as Dictionary)["warm_until"] = -1
+	return d
+
+
+## v13 (M10.0): the Albez door. No trip through a magic door yet.
+static func _migrate_12_to_13(d: Dictionary) -> Dictionary:
+	var p: Dictionary = d.get("player", {})
+	p["portal_day"] = -1
+	p["portal_trips"] = 0
+	d["player"] = p
 	return d

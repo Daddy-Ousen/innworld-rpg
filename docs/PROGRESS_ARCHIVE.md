@@ -1,4 +1,4 @@
-# Progress archive (M0–M8)
+# Progress archive (M0–M9)
 
 Finished milestone detail, moved out of `progress.md` on 2026-09-25 to keep that
 file short. This file is read only when you need old detail — not every
@@ -109,3 +109,17 @@ session. Current work stays in `progress.md`.
 ## Architectural decisions (M8)
 - ADR 0014 (plan accepted 2026-09-25; M8.1 accepted 2026-09-25): cross-book validator; M8.1 timeline days 41–44; `ruins_entrance` map; enemy `escape` field (Gazi); Gazi stage + `change` hook; Ksmvr behaviour entry.
 - ADR 0015 (plan accepted 2026-09-25): M8.6 economy + travel. User: no sleep outdoors except a camp; floor half heal, bed full; hunger lowers max HP; road 2 x 10 h.
+
+## Roadmap status (M9, archived 2026-09-26)
+- [x] M9 — Book 3 (Flowers of Esthelm). Plan approved 2026-09-26 (ADR 0016, ROADMAP M9). 4 batches:
+  - [x] M9.1 3.00 E – 3.05 L + 1.00 D / 1.01 D — merged ([PR #36](https://github.com/Daddy-Ousen/innworld-rpg/pull/36)), tag `m9.1-done` (4b31284). 39 events, Persua guild fight (stage) + Lyonette reopening (scene), both with hooks.
+  - [x] M9.2 3.06 L – 3.14 — merged ([PR #37](https://github.com/Daddy-Ousen/innworld-rpg/pull/37)), tag `m9.2-done` (a07b7fc). 41 events; Ryoka and Fals at the Hare (scene + hook); Corusdeer soup (save v12).
+  - [x] M9.3 3.15 – 3.20 T — merged ([PR #38](https://github.com/Daddy-Ousen/innworld-rpg/pull/38)), tag `m9.3-done` (5cced62). 37 events; `esthelm_ruins` map; the Esthelm siege (wave stage) and Erin's play (scene).
+  - [x] M9.4 3.21 L – 3.25 — merged ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)), tags `m9.4-done` and `m9-done` (9e8f179). 38 events, Book 3 ends day 87; `bee_cave` map and the dawn bee raid (fight stage + hook); four scenes with hooks (painted Soldiers, Zel at the inn, Frozen, Erin leaves Celum); Zel, Jasi, Yvlon schedules; Albez door as flags only. GUT 629/629 (67 scripts), validator 0 errors (`--all`), Python 51/51. Not checked on screen.
+
+## M9 decisions (user, 2026-09-26)
+- Four canon batches, one branch + PR each. Laken and Geneva are events only. Esthelm is a playable map with the siege as a wave stage. Stage and hook choices are asked at the start of each batch.
+- M9.4: the dawn bee raid as a fight stage; four scenes (painted Soldiers, Zel at the inn, Frozen, Erin leaves Celum); the Albez door as flags only (portal is Book 4 work).
+
+## Architectural decisions (M9)
+- ADR 0016 (plan accepted 2026-09-26): Book 3 batches, placeholder days for far threads, Corusdeer soup warmth (save v12), `esthelm_ruins` and `bee_cave` maps.

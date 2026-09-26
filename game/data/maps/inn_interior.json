@@ -17,7 +17,10 @@
 		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true, "item": "chair"},
 		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true, "item": "chair"},
 		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true},
-		{"id": "inn_counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"}
+		{"id": "inn_counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"},
+		{"id": "albez_door", "at": [2, 12], "name": "Magic door", "actions": [],
+			"when_flags": ["albez_door.at_wandering_inn"],
+			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}}
 	],
 	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
 	"rows": [
