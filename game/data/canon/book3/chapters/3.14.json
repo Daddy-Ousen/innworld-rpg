@@ -1,0 +1,89 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.14",
+	"events": {
+		"b3.magnolia_kills_nemor_and_his_assassins": {
+			"tier": 1,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "mage": {"prefer": ["nemor"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart", "nemor"], "flags": ["circle_of_thorns.struck_at_magnolia"], "not_flags": []},
+			"depends_on": ["b3.nemor_blasts_into_magnolias_parlour"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"kill": ["nemor"],
+				"set_flags": ["magnolia.survived_the_circle_of_thorns", "magnolia.golems_compromised", "magnolia.spies_compromised"]
+			},
+			"news": "Assassins and a mage named Nemor attacked Magnolia Reinhart in her own house by Invrisil. Lightning from her garden cloud and a ray from her ring killed them all.",
+			"rumor": "Nobles whisper that something called the Circle of Thorns tried to murder Lady Reinhart, and that she burned every attacker.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Nemor once cast wards for her, so he could pass them. The killers seem to act without their Guild's leave. The last one, a Gnoll, is killed by Reynold and the maid Sacra. Several servants die."},
+			"summary": "Magnolia's and Ressa's shields unmake the first blades. A ring takes them outside, where her cloud's lightning burns the fleeing [Assassins]. Nemor brings ten of her own subverted Golems and blue fireballs; Ressa's mirror swallows one, and a thin red ray from Magnolia's ring turns him to ash."
+		},
+		"b3.ryoka_tends_magnolias_wounded_servants": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": [], "optional": true}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["magnolia.survived_the_circle_of_thorns"], "not_flags": []},
+			"depends_on": ["b3.magnolia_kills_nemor_and_his_assassins"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.helped_magnolias_servants", "ryoka.to_meet_invrisil_mage_experts"],
+				"relationship": [{"from": "magnolia_reinhart", "to": "ryoka_griffin", "delta": 1}, {"from": "ressa", "to": "ryoka_griffin", "delta": 1}, {"from": "reynold", "to": "ryoka_griffin", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Magnolia says no servant hurt in her service loses their place. She dodges every question about the Circle of Thorns. Ryoka sleeps at the estate near dawn."},
+			"summary": "Ryoka crawls out and presses cloth on stab wounds until potions arrive. Reynold heals her head and says his lady will now go to war. Magnolia, busy with that war, lets Ryoka go for now and promises her Invrisil's best magic experts for the Horns' relics the next day."
+		},
+		"b3.magnolia_leaves_for_first_landing": {
+			"tier": 2,
+			"window": {"earliest": 77, "latest": 77, "confidence": "guess"},
+			"location": "first_landing",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "dragon": {"prefer": ["teriarch"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart"], "flags": ["magnolia.survived_the_circle_of_thorns"], "not_flags": []},
+			"depends_on": ["b3.ryoka_tends_magnolias_wounded_servants"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.gone_to_first_landing", "magnolia.at_war_with_the_circle_of_thorns"]},
+			"news": "Magnolia Reinhart's coach left her Invrisil estate in the dark hours, bound for the Reinhart house in First Landing.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "guess", "note": "She orders the coach for that same night; day 77 is a guess for the departure. She hates the First Landing house; her great-grandmother's diary hints at the Circle. Teriarch speaks by mind, not in person."},
+			"summary": "Teriarch reaches her by mind, fusses, advises better Golems, and stays in his cave. Sure her spies were bought, Magnolia orders the coach that night to gather her trusted attendants and allies at the Reinhart estate in First Landing, a house she hates."
+		},
+		"b3.laken_rules_riverfarm_and_plans_for_invrisil": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}, "villager": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart"], "flags": ["laken.rules_riverfarm"], "not_flags": []},
+			"depends_on": ["b3.riverfarm_wakes_under_the_blessing_of_the_hearth"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["laken.funds_riverfarm", "laken.plans_to_go_to_invrisil"],
+				"relationship": [{"from": "prost", "to": "laken_godart", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 45. Placeholder day. Gamel camps outside the cottage to serve him. Foxes gnaw a frozen cow, so Laken has the dead animals stored in the barn and traps set."},
+			"summary": "Riverfarm hails Laken as Emperor; no one throws stones at Durene now. With the animals dead and monsters a threat, he tells the elders he has hundreds of gold coins and will buy food and hire guards in Invrisil. When they fear he will not return, he gives his word as Emperor, and Prost backs him."
+		},
+		"b3.laken_sets_out_for_invrisil": {
+			"tier": 2,
+			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "villager": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}, "eaglet": {"prefer": ["frostwing"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart"], "flags": ["laken.plans_to_go_to_invrisil"], "not_flags": []},
+			"depends_on": ["b3.laken_rules_riverfarm_and_plans_for_invrisil"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.left_for_invrisil", "durene.left_riverfarm", "gamel.travels_with_laken"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 46. Placeholder day. The villagers cleared the road overnight. None of the three has been to Invrisil. The arrival is later canon."},
+			"summary": "At dawn Durene pulls a wagon with Laken, Frostwing in her nest, a fortune in gold and supplies, while young Gamel walks beside them to talk to guards. The village cheers them off down the cleared road. Durene frets about how a city will treat a half-Troll."
+		}
+	},
+	"system": [
+		{"who": "durene", "kind": "level", "name": "[Paladin]", "level": 6, "confidence": "confirmed", "note": "Five levels from the rescue and the work after (3.12E), by Laken's Day 45."},
+		{"who": "durene", "kind": "skill", "name": "[Weapon Proficiency: Shield]", "level": null, "confidence": "confirmed"},
+		{"who": "durene", "kind": "skill", "name": "[Graceful Step]", "level": null, "confidence": "confirmed", "note": "She now moves quietly enough to sneak up on Laken."}
+	]
+}

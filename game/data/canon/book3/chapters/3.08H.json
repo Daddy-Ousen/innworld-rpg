@@ -1,0 +1,79 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.08H",
+	"events": {
+		"b3.horns_dig_gold_from_the_burnt_vault": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {
+				"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.lost_most_of_thresks_treasure"], "not_flags": []},
+			"depends_on": ["b3.yvlon_shatters_the_flame_guardian"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.escaped_albez", "horns_of_hammerad.has_albez_treasure", "horns_of_hammerad.has_a_sealed_bag"],
+				"clear_flags": ["horns_of_hammerad.trapped_in_albez"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.08H", "confidence": "confirmed", "note": "Nearly eighty pounds of fused gold and gems (Ceria says nearly a hundred in 3.09). Yvlon refuses undead porters. gone_to_albez stays set until 3.24."},
+			"summary": "They wake alive; Yvlon's melted vambraces are part of her arms. Pisces rebuilds the stair. The vault is charcoal, but under the ash lies a fused lump of gold and gems, and a small unburnt bag, likely of holding. With cracked relics on a sled Ksmvr drags, they leave Albez."
+		},
+		"b3.ocre_guards_shoot_at_ksmvr": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"soldier": {"prefer": ["ksmvr"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ksmvr"], "flags": ["horns_of_hammerad.escaped_albez"], "not_flags": []},
+			"depends_on": ["b3.horns_dig_gold_from_the_burnt_vault"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.in_ocre", "ksmvr.shot_by_ocre_guards"],
+				"relationship": [{"from": "ksmvr", "to": "yvlon_byres", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.08H", "confidence": "confirmed", "note": "They meant to reach Remendia; Yvlon knows Ocre by its size. A white flag goes up once the guards see the gold."},
+			"summary": "Lost in the snow, they reach the small walled city of Ocre instead of Remendia. A guard shouts that the Antinium are attacking, and arrows fly; Ksmvr is hit twice before Yvlon crouches over him behind her pack and wrecked armour until Ceria's magic voice stops the volley."
+		},
+		"b3.horns_bank_their_treasure_in_ocre": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.in_ocre"], "not_flags": []},
+			"depends_on": ["b3.ocre_guards_shoot_at_ksmvr"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.treasure_in_ocre_guild_vault", "horns_of_hammerad.known_alive"]},
+			"news": "The Horns of Hammerad, long thought dead, walked into Ocre's Adventurers' Guild half-burnt and hauling gold and relics from the ruins of Albez.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.08H", "confidence": "confirmed", "note": "They stay at The Nobleman's Disgrace, Ocre's best inn (no location entry). Yvlon is booked with a [Healer] and a [Blacksmith]."},
+			"summary": "Clearing grasping crowds with ice and fire, they slam their loot down at Ocre's Adventurers' Guild and ask for a receipt, a Healer, food and beds. The clerk thought the Horns were dead. The staff say yes to all; Silver-rank teams guard the vault, and the four sleep in the best inn."
+		},
+		"b3.ocre_parades_the_horns_of_hammerad": {
+			"tier": 1,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "ocre",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.treasure_in_ocre_guild_vault"], "not_flags": []},
+			"depends_on": ["b3.horns_bank_their_treasure_in_ocre"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.famous_in_ocre", "horns_of_hammerad.cleared_albez_dungeon"]},
+			"news": "Ocre lined its streets for the Horns of Hammerad: music, coloured flour, cheering from the roofs. Even their Antinium was cheered.",
+			"rumor": "Runners carry word south: a Silver-rank team came out of the ruins of Albez with a fortune, and Ocre threw them a parade.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.08H",
+				"confidence": "guess",
+				"note": "Day guess. Timeline does not fit: the parade is the midday after Ocre, Fals hears of it in Remendia by next morning (3.09), yet Ceria says not a day has passed since Albez. The dead Horn Marian she recalls is not the marian NPC."
+			},
+			"summary": "At midday the Horns step out of their inn into a roaring crowd. Pisces sends doves of light over the street, Yvlon walks straight with her ruined arms, Ksmvr waves three hands. Ceria sees the dead Horns beside her, Gerial, Calruz, Sostrom and the rest, for a moment."
+		}
+	},
+	"system": []
+}

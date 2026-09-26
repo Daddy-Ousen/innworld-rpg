@@ -1,0 +1,81 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.07H",
+	"events": {
+		"b3.ksmvr_and_ceria_smother_the_insanity_rune": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {
+				"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.trapped_in_albez"], "not_flags": []},
+			"depends_on": ["b3.horns_teleported_into_the_insanity_pit"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.covered_the_insanity_rune"],
+				"clear_flags": ["horns_of_hammerad.under_insanity_rune"],
+				"relationship": [{"from": "ceria_springwalker", "to": "ksmvr", "delta": 2}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "confirmed", "note": "How long they were mad is unknown. Under the spell Pisces plays his father, a fencing master; Yvlon plays Byres forebears, one of them calling himself Ylawes Byres (a persona, not linked to any NPC)."},
+			"summary": "Ceria's half-Elf blood keeps waking her, but each time the glowing rune drags her back. Ksmvr, fighting the spell through his Antinium conditioning, cuts her trousers into a blindfold. Guided by his calls, she smears conjured mud over the rune as Pisces and Yvlon duel."
+		},
+		"b3.pisces_builds_a_bone_stair_out_of_the_pit": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces"], "flags": ["horns_of_hammerad.covered_the_insanity_rune"], "not_flags": []},
+			"depends_on": ["b3.ksmvr_and_ceria_smother_the_insanity_rune"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pisces.built_a_bone_stair", "ceria.found_a_dead_adventurers_pack"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "confirmed", "note": "Ksmvr reasons the pit must have an air hole, and his eyes find it in the ceiling. Yvlon stays mad for hours and is kept tied up."},
+			"summary": "Pisces, himself again, lifts the bones of countless dead adventurers into a floating stair, and his skeletons dig up to the tunnel. A falling skeleton knocks loose old tar from a wall: the whole pit is lined with the rune. Ceria takes a dead adventurer's pack."
+		},
+		"b3.horns_break_into_warmage_thresks_vault": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["pisces.built_a_bone_stair"], "not_flags": []},
+			"depends_on": ["b3.pisces_builds_a_bone_stair_out_of_the_pit"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.found_thresks_vault"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "guess", "note": "Day guess: they may have lost hours or days in the pit. Warmage Thresk is named only by his guardian; no NPC."},
+			"summary": "They come out right before the door that trapped them. Skeletons chip at the stone round its hinges until it falls in, revealing a small vault: glowing weapons, shelves of spellbooks, gold and gems, and a staff whose power both mages can see."
+		},
+		"b3.yvlon_shatters_the_flame_guardian": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []},
+				"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["yvlon_byres"], "flags": ["horns_of_hammerad.found_thresks_vault"], "not_flags": []},
+			"depends_on": ["b3.horns_break_into_warmage_thresks_vault"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["yvlon.armor_fused_to_arms", "horns_of_hammerad.lost_most_of_thresks_treasure", "ceria.has_a_burnt_spellbook"],
+				"relationship": [{"from": "ceria_springwalker", "to": "yvlon_byres", "delta": 2}, {"from": "pisces", "to": "yvlon_byres", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "confirmed", "note": "Ceria's [Ice Spike] and [Frozen Wind] do nothing to it. Pisces gets badly burnt; Ksmvr's sword melts. The last page shows all four passing out in the heat of the pit."},
+			"summary": "A man of white fire rises to guard the vault. It ashes the skeletons and walls them in. Using the spell-proof door as a shield they stun it, and Yvlon cuts its heart-gem; her silver armour melts onto her arms. Dying, it burns the vault. Pisces' skeletons fetch what they can."
+		}
+	},
+	"system": [
+		{"who": "pisces", "kind": "skill", "name": "[Flash Step]", "level": null, "confidence": "confirmed", "note": "An old spell of his; Ceria thinks his footwork has slipped since Wistram."},
+		{"who": "ceria_springwalker", "kind": "skill", "name": "[Ice Spike]", "level": null, "confidence": "confirmed", "note": "Her best spell; at full effort she fires one from each finger."},
+		{"who": "ceria_springwalker", "kind": "skill", "name": "[Stone Fist]", "level": null, "confidence": "confirmed"}
+	]
+}

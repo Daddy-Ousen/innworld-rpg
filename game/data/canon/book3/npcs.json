@@ -132,6 +132,42 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "One of the five surviving original Individuals. He cooks, but his class is not named here."},
 			"summary": "A Worker of Liscor's Hive and one of the five original Individuals from Erin's chess club. He has taken to cooking, frying the birds Bird shoots into a snack the Hive can stand to eat."
+		},
+		"nemor": {
+			"name": "Nemor",
+			"race": "Human",
+			"tags": ["human", "mage", "traitor", "circle_of_thorns"],
+			"faction": "circle_of_thorns",
+			"home": null,
+			"classes": [{"name": "[Mage]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.13", "confidence": "likely", "note": "Race not stated; a man with a narrow face and a goatee. The maids call him Great Mage, which Magnolia scoffs at. Killed by Magnolia in 3.14."},
+			"summary": "A vain, gloating mage in yellow and green robes who once cast ward spells for Magnolia Reinhart and was trusted as her guest. He leads a band of [Assassins] against her for the Circle of Thorns, turns her Golems on her, and is burnt to ash by her ring."
+		},
+		"frostwing": {
+			"name": "Frostwing",
+			"race": "Bird",
+			"tags": ["bird", "eaglet", "beast", "pet", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.11E", "confidence": "likely", "note": "Laken and Durene take her for an eagle, but her fuzz is green and her nest was low in a tree, so they are unsure. Female. Bonded to Laken by [Lesser Bond: Frostwing]."},
+			"summary": "A big, fierce, meat-hungry chick Laken finds under a fallen nest by Durene's cottage; she ate her nestmates to survive. He names her Frostwing and makes her his subject. She pecks his fingers, shrieks for food and grows fast."
+		},
+		"gamel": {
+			"name": "Gamel",
+			"race": "Human",
+			"tags": ["human", "villager", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.12E", "confidence": "confirmed", "note": "His father was the village [Blacksmith] and died in the avalanche. He knows a weak flame spell. He dreams of being an adventurer or going to Wistram."},
+			"summary": "A young man of Riverfarm whom Laken digs out of the avalanche upside down. He then digs beside Laken all day, calls him Emperor, camps outside Durene's cottage to serve him, and goes with him and Durene to Invrisil."
 		}
 	}
 }

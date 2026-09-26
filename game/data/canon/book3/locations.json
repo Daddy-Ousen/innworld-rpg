@@ -18,6 +18,33 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "No map. Escorts are hired from the teams directly, not through the guild desk."},
 			"summary": "Celum's Adventurers' Guild, a large hall with six reception desks and tables of Bronze and Silver-rank adventurers. Erin is banned for a while after she flips a table on two men who insult the Horns of Hammerad."
+		},
+		"ocre": {
+			"name": "Ocre",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "human", "walled", "guild_city"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.08H", "confidence": "confirmed", "note": "Near Albez; smaller than Remendia. Ryoka runs there from Celum between late morning and late afternoon (3.09). Has an Adventurers' Guild, a Runners' Guild and The Nobleman's Disgrace, its best inn. No map."},
+			"summary": "A small walled Human city near the ruins of Albez. Its guards shoot at the Horns' Antinium, then the whole city throws the Horns a parade for their Albez treasure."
+		},
+		"first_landing": {
+			"name": "First Landing",
+			"kind": "settlement",
+			"parent": null,
+			"tags": ["city", "human", "house_reinhart", "north_izril"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Only named here, as the site of a Reinhart estate where Magnolia's attendants wait. Distance and direction not given. No map."},
+			"summary": "A city in north Izril with a Reinhart family estate. Magnolia keeps her trusted attendants there and hates the place, but goes there after the Circle of Thorns attack."
+		},
+		"road_to_invrisil": {
+			"name": "The road to Invrisil",
+			"kind": "wild",
+			"parent": null,
+			"tags": ["road", "snow", "north_izril"],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.10", "confidence": "guess", "note": "A game place for the snowy country between Ocre and Invrisil that Magnolia's coach crosses in a few hours; the coach often leaves the road. No map."},
+			"summary": "Open snowfields and hills between Ocre and Invrisil. A fleeing Goblin tribe with wolf riders crosses it in 3.10."
 		}
 	}
 }
