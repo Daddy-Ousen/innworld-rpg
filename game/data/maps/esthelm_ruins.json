@@ -1,0 +1,43 @@
+{
+	"schema_version": 1,
+	"id": "esthelm_ruins",
+	"name": "Ruins of Esthelm",
+	"location": "esthelm",
+	"confidence": "guess",
+	"note": "Design map (M9.3). Esthelm after the Goblins burned it (2.48): walls torn down, the east gate forced, the centre a maze of rubble and sewer pits, refugees in shacks near the walls (3.18T). The north-west quarter is the high ground Ylawes fortifies with barricades between half-fallen buildings and one palisade gate as a killing zone (3.19T). The text names no street or building; every place, the size and the road link from the camp are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [0, 3, 1, 2], "to": "road_camp", "arrive": [30, 5], "minutes": 180}
+	],
+	"objects": [
+		{"id": "esthelm_campfire", "at": [5, 9], "name": "Refugee campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
+		{"id": "esthelm_rubble_stones", "at": [6, 11], "name": "Loose rubble", "actions": [], "item": "stone"}
+	],
+	"legend": {".": "cobble", ",": "grass", ":": "dirt_road", "#": "building", "^": "rock", "W": "city_wall", "|": "wood_wall"},
+	"rows": [
+		"WWWWW,,WWWWWWWWWWWWW,,,WWWWWWWWW",
+		"W.......####|..................W",
+		"W...........|..###.......####..W",
+		"::::::::::::|.^###..##...####..W",
+		"::::::::::::|.......##.........W",
+		"W...........||.....^##..^......W",
+		"W.###......................##..W",
+		"W.###..###......##....###..##..W",
+		"W......###..||..##....###..##..W",
+		"W...........|........^.......^.W",
+		"W.##......##|.....^......^.....W",
+		"W.##......##|:::::::::::::::::::",
+		"W...........|:::::::::::::::::::",
+		"W||||||||||||..::.....^........W",
+		"W..............::.###......###.W",
+		"W......^....^.^::.###..##..###.W",
+		"W..####........::...^^.##.,....W",
+		",..####..###...::^.....##......W",
+		",........###...::............^.W",
+		"W........###...::...###...^....W",
+		"W...##.........::...###........W",
+		"W.^.##..^...^..::........^..^..W",
+		"W..............::..^...........W",
+		"WWWWWWWWW,WWWWW,,,WWWWWWWW,WWWWW"
+	]
+}
