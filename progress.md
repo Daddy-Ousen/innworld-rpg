@@ -11,11 +11,11 @@ M0–M8 detail (roadmap bullets, decisions, ADR 0001–0015) lives in
 
 ## Roadmap status
 - [x] M0–M7 — Book 1 and the engine. Tags `m0-done` … `m7-done`, `m7.4-done`, `m7b-done`.
-- [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 done on branch `data/book2-2.39-2.48` ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34) open; after merge, tags `m8.7-done` and `m8-done`). Detail in the archive and ADR 0014 / 0015.
+- [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 merged ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34), tags `m8.7-done` and `m8-done` on merge commit ad436eb). Detail in the archive and ADR 0014 / 0015.
 - [ ] Next milestone: not planned yet. ROADMAP has only "Later" (audio, polish, LLM flavour layer). Book 3 would be a new M9 — ask the user.
 
-## Open questions for the user
-- 2.35 (M8.4) sets `ryoka.gained_first_class`, but the text has a faerie cancel her level-ups and 2.39 shows her with no levels. Change 2.35's wording/flag, or keep?
+## After M8
+- [ ] Ryoka never gains a level (user, 2026-09-26): 2.35 flags and system records fixed on branch `fix/book2-ryoka-no-level`.
 
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41) and Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data.
