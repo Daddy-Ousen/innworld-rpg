@@ -1,0 +1,59 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "1.00D",
+	"events": {
+		"b3.geneva_joins_the_raverian_fighters": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["geneva.joined_the_raverian_fighters", "geneva.class_doctor"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "1.00D",
+				"confidence": "confirmed",
+				"note": "Placeholder day: Geneva's Baleros thread is not synced to Erin's calendar (like Tom on Rhir, 1.00C). She has been in Baleros about a week, in a lake city of Lizardfolk and Centaurs. Winter there is late."
+			},
+			"summary": "A week after walking out of a lecture into a jungle, hungry medical student Geneva Scala signs with Sergeant Thriss of the Raverian Fighters as a [Doctor]. She resets a recruit's shoulder in a staged test, buys carpet needles for sutures, and gains the class."
+		},
+		"b3.geneva_cuts_an_arrowhead_from_clara": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala"], "flags": ["geneva.joined_the_raverian_fighters"], "not_flags": []},
+			"depends_on": ["b3.geneva_joins_the_raverian_fighters"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["geneva.holds_the_potion_key", "geneva.treats_the_battalion"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.00D", "confidence": "confirmed", "note": "Placeholder day. Clara, Fortum and the young recruit Lim march with her (no entries). The battalion fights for the Burning March Company against the Magehammer Company and a Centaur tribe over a gold mine."},
+			"summary": "On the march, painted Centaur archers ambush the column. Geneva cuts an arrowhead out of Clara's shoulder with a boiled dagger, then seals it with half a potion. Thriss gives her the key to the potion chest, and she cleans a Dullahan's rotting arm."
+		},
+		"b3.centaurs_smash_the_battalions_potions": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {"doctor": {"prefer": ["geneva_scala"], "fallback_tags": []}, "sergeant": {"prefer": ["thriss"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["geneva_scala"], "flags": ["geneva.holds_the_potion_key"], "not_flags": []},
+			"depends_on": ["b3.geneva_cuts_an_arrowhead_from_clara"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["raverian_fighters.lost_their_potions"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "1.00D", "confidence": "confirmed", "note": "Placeholder day. From over a hundred potions they save less than twenty bottles' worth."},
+			"summary": "Centaurs gallop through the camp at night and smash the locked potion chest on the supply wagon. Almost all of it soaks into the jungle floor, and every soldier turns to look at Geneva, the only healer left."
+		}
+	},
+	"system": [
+		{"who": "geneva_scala", "kind": "class", "name": "[Doctor]", "level": 1, "confidence": "confirmed", "note": "Gained the night she recites her own oath, after Thriss has already hired her as one."},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Lesser Resistance: Disease]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "level", "name": "[Doctor]", "level": 4, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Hygienic Hands]", "level": null, "confidence": "confirmed"},
+		{"who": "geneva_scala", "kind": "skill", "name": "[Lesser Resistance: Infection]", "level": null, "confidence": "confirmed"},
+		{"who": "thriss", "kind": "class", "name": "[Sergeant]", "level": null, "confidence": "confirmed"}
+	]
+}

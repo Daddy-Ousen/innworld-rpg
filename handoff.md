@@ -1,16 +1,20 @@
 # Handoff
 
 ## Just done (2026-09-26)
-- PR #34 merged; tags `m8.7-done` and `m8-done` pushed on merge commit ad436eb.
-- Ryoka never gains a level (user). Branch `fix/book2-ryoka-no-level`: 2.35 sets `ryoka.class_offer_cancelled` instead of `ryoka.gained_first_class` / `ryoka.class_barefoot_runner` (event id kept for old saves); [Barefoot Runner] system records in 1.20R and 2.35 are now kind `other` (offered, refused). Docs fixed. GUT 591/591, validator 0 errors, Python 51/51. PR open.
-- M8.7 is built on branch `data/book2-2.39-2.48` (4 commits: world data, canon data, stage test, docs). [PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34) is open for the user to review and merge.
-- Detail: `docs/adr/0014-m8-book2-and-celum.md`, section "M8.7".
-- GUT 591/591 (63 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen: the bar fight in the Frenzied Hare on day 71.
-- With M8.7, all of M8 is done. The M8 detail moved to `docs/PROGRESS_ARCHIVE.md`.
+- PR #35 (Ryoka never levels) merged. M9 = Book 3 planned and approved: `docs/adr/0016-m9-book3.md`, ROADMAP M9 section.
+- Book 3 extracted to `canon/raw/book3` (28 chapters, 305,675 words).
+- M9.1 built on branch `data/book3-3.00-3.05`, 4 commits, [PR #36](https://github.com/Daddy-Ousen/innworld-rpg/pull/36) open for the user to review and merge.
+  - 39 events (3.00E–3.05L, 1.00D, 1.01D); stages `b3.ryoka_beats_persua_in_the_runners_guild` (day 75) and `b3.lyonette_reopens_the_inn` (scene, day 76), both with hooks.
+  - Schedules for Lyonette, Mrsha, Ryoka; enemies `persua_courier`, `celum_runner`; inn counter shop.
+  - GUT 602/602 (65 scripts), validator 0 errors (`--all`), Python 51/51. Checked on screen (guild fight, day 75 10:00).
+
+## Next steps
+1. User merges PR #36; tag `m9.1-done` on the merge commit.
+2. M9.2 (3.06 L – 3.14, days ~76–82): ask the stage/hook choices first. Most of it is far from any map (Hive, Albez, Ocre, Magnolia's estate, Riverfarm). Ideas: a Corusdeer soup item that keeps you warm (needs an engine hook, ask), a Liscor-side scene at the inn, or a `change` hook only. Set `ryoka.gone_to_magnolia` in 3.09/3.10.
+3. Same flow: world data by hand, canon JSON by a subagent, re-verify, commits, PR.
 
 ## Waiting on the user
-- Review and merge the Ryoka fix PR.
-- What the next milestone is. ROADMAP has no M9; "Later" = audio, polish, LLM flavour layer. Book 3 would be a new M9.
+- Review and merge PR #36.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -27,7 +31,10 @@
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so.
 - Stage `kind: "scene"`: every npc placed needs an `npc_behaviour` entry. Ryoka, Garia, Halrac, Lyonette have none.
 - The Book 2 epub has web-serial author's notes (Mating Rituals interlude, 2.48). Ignore them.
-- Erin lives in Celum from day 71 (`erin.in_celum`). A Book 3 event must clear or override that to bring her home.
+- Erin lives in Celum from day 71 (`erin.in_celum`) for ALL of Book 3. She leaves on the wagon in 3.25 (M9.4); she is home only in Book 4.
+- Book 3 "E" chapters (3.00, 3.01, 3.11, 3.12) are Laken (Emperor), not Erin. Laken and Geneva (1.00D/1.01D) use placeholder days from day 71 on.
+- Id clashes: maid Teresa (3.13) is not `teresa`; old Horn Marian (3.08) is not `marian`. The Hob in 3.10 is unnamed (not `garen`).
+- `ryoka.left_celum` is still set from Book 1; use `ryoka.gone_to_magnolia` (M9.2) to end her Celum schedule.
 
 ## Active files
-- `game/data/canon/book2/chapters/2.39.json`–`2.48.json`, `interlude_quiet_discussions.json`, `game/data/maps/celum_frenzied_hare.json`, `game/data/npc_behaviour.json`, `game/tests/sim_erin_in_celum.gd`, `game/tests/sim_book2_end_stages.gd`, `game/tests/sim_canon_book2.gd`.
+- `game/data/canon/book3/**`, `game/data/npc_behaviour.json`, `game/data/enemies.json`, `game/data/economy.json`, `game/data/maps/inn_interior.json`, `game/tests/sim_canon_book3.gd`, `game/tests/sim_book3_stages.gd`, `docs/adr/0016-m9-book3.md`.

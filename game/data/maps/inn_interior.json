@@ -16,7 +16,8 @@
 		{"id": "broom", "at": [2, 1], "name": "Broom", "actions": ["sweep_floor"]},
 		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true, "item": "chair"},
 		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true, "item": "chair"},
-		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true}
+		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true},
+		{"id": "inn_counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"}
 	],
 	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
 	"rows": [

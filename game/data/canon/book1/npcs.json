@@ -376,14 +376,14 @@
 		"persua": {
 			"name": "Persua Mavva",
 			"race": "Human",
-			"tags": ["human", "runner", "city_runner", "slow", "spiteful"],
+			"tags": ["human", "runner", "city_runner", "fast", "spiteful"],
 			"faction": "runners_guild",
 			"home": null,
 			"classes": [],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Surname from 1.33R."},
-			"summary": "Thin, pigtailed City Runner, slow and lazy, with heavy perfume and a following of Street Runners. Feels owed Magnolia's jobs. Arranges the 'accident' that crushes Ryoka's leg, and gloats about it."
+			"canon_ref": {"book": 1, "chapter": "1.26R", "confidence": "confirmed", "note": "Surname from 1.33R. Book 3 (3.04): below Level 20 she gains [Double Step] and means to become a Courier up north; beaten by Ryoka, she swears to have her killed."},
+			"summary": "Thin, pigtailed City Runner, lazy and spiteful, with a following of Street Runners. Arranges the 'accident' that crushes Ryoka's leg. In Book 3 a lucky Skill makes her fast enough to be a Courier-to-be, and Ryoka's beating makes her a sworn enemy."
 		},
 		"claudeil": {
 			"name": "Claudeil",

@@ -1,0 +1,143 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.04",
+	"events": {
+		"b3.ivolethe_bites_a_guest_at_the_frenzied_hare": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"faerie": {"prefer": ["ivolethe"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ivolethe", "ryoka_griffin"], "flags": ["ryoka.friends_with_ivolethe"], "not_flags": []},
+			"depends_on": ["b3.ryoka_befriends_ivolethe"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ivolethe.bit_a_hare_guest", "ivolethe.told_the_tale_of_arthur", "celum.has_seen_a_winter_sprite"]},
+			"news": "A Winter Sprite sat on a Runner's shoulder in the Frenzied Hare, bit a guest's finger to the bone, then told a tale of an old king until the whole room fell asleep.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "The evening Ryoka befriends her. Indoors the iron strips her glamour, so everyone can see and hear her. Nobody in this world knows the word faerie."},
+			"summary": "Indoors, among iron, Ivolethe cannot hide: the whole Hare sees her. A guest pokes her and she bites his finger to the bone. She refuses Erin's friendship, dodges talk of the faerie drink, then tells the true tale of King Arthur until everyone sleeps."
+		},
+		"b3.persua_flaunts_her_courier_skill": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {"rival": {"prefer": ["persua"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["persua", "ryoka_griffin"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b3.ivolethe_bites_a_guest_at_the_frenzied_hare"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["persua.has_double_step", "persua.bound_north_as_courier"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "The morning after the Arthur tale. Garia is jealous; the old man by Persua is probably the Guildmaster (not named). Fals is absent."},
+			"summary": "The whole Runners' Guild throws Persua a farewell party: below Level 20 she gained [Double Step], has taken half the guild's jobs, and means to be a Courier up north. She baits Ryoka about her lost fingers, calls in her cronies, then trips her."
+		},
+		"b3.ryoka_beats_persua_in_the_runners_guild": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"rival": {"prefer": ["persua"], "fallback_tags": []},
+				"faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true},
+				"friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "persua"], "flags": ["persua.has_double_step", "ryoka.friends_with_ivolethe"], "not_flags": []},
+			"depends_on": ["b3.persua_flaunts_her_courier_skill"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["persua.beaten_by_ryoka", "persua.swore_to_kill_ryoka", "ryoka.banned_from_celum_runners_guild"],
+				"relationship": [
+					{"from": "persua", "to": "ryoka_griffin", "delta": -3},
+					{"from": "garia_strongheart", "to": "ryoka_griffin", "delta": -1}
+				]
+			},
+			"news": "Ryoka Griffin beat Persua bloody in Celum's Runners' Guild after Persua's friends caught a Winter Sprite and asked for a ransom. Persua swore to have her killed.",
+			"stage": {
+				"area": "celum_runners_guild",
+				"hours": [10, 14],
+				"when_flags": ["ryoka.in_celum"],
+				"foes": [
+					{"enemy": "persua_courier", "pos": [12, 5]},
+					{"enemy": "celum_runner", "pos": [11, 6]},
+					{"enemy": "celum_runner", "pos": [13, 6]},
+					{"enemy": "celum_runner", "pos": [14, 4]}
+				],
+				"line": "Ivolethe flies screaming at Persua's face. A Runner snatches the faerie out of the air and grins: pay up, or she gets squashed.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [8, 7],
+						"allies": ["ryoka_griffin"],
+						"line": "Ryoka shouts a word and the room explodes in light and noise. She drives into the Runner holding the faerie."
+					}
+				],
+				"note": "M9.1 design: the guild's hall as it is. Persua cannot die on the map; beaten, she runs out (enemy escape). The text has ten of her Runners; three stand in for them. Garia and Ivolethe have no npc_behaviour entry, so they are not placed."
+			},
+			"hooks": [
+				{
+					"id": "player_stood_with_ryoka",
+					"did": [
+						{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["persua_courier", "celum_runner"]}}
+					],
+					"days": [75, 75],
+					"then": "change",
+					"effects": {
+						"set_flags": ["celum.earther_stood_with_ryoka"],
+						"relationship": [
+							{"from": "ryoka_griffin", "to": "player", "delta": 3},
+							{"from": "persua", "to": "player", "delta": -2}
+						]
+					},
+					"news": "A second Human stood with Ryoka Griffin against Persua and her Runners in Celum's guild until they broke."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "Ryoka uses [Flashbang] and one of Octavia's pepper potions; Ivolethe calls her sisters. Garia, her nose bleeding, pulls Ryoka off. Persua needs a Healer."},
+			"summary": "Ivolethe bursts from Ryoka's pouch and claws at Persua; a Runner catches her and demands Ryoka's gold. Ryoka sets off [Flashbang], frees the faerie, blinds the crowd with pepper and beats Persua until Garia drags her off. Persua swears to kill her."
+		},
+		"b3.frost_faeries_bury_the_celum_runners_guild": {
+			"tier": 1,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "celum_runners_guild",
+			"roles": {"faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": ["persua.beaten_by_ryoka"], "not_flags": []},
+			"depends_on": ["b3.ryoka_beats_persua_in_the_runners_guild"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["celum_runners_guild.buried_in_snow"]},
+			"news": "Winter Sprites dropped an avalanche into Celum's Runners' Guild. The hall is packed with ice and its Runners were driven off with ice shards.",
+			"rumor": "Runners say the Winter Sprites buried a whole Runners' Guild in the north under snow, in revenge for one of their own.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "Soon after Ryoka leaves. The guild was empty by then; staff chip at the ice for days."},
+			"summary": "Answering Ivolethe's call, the other Frost Faeries return, pelt the fleeing Runners with ice and drop an avalanche into the Runners' Guild. Nearly everything inside is wrecked and the hall is packed with snow."
+		},
+		"b3.celum_watch_asks_ryoka_to_leave": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["celum_runners_guild.buried_in_snow"], "not_flags": []},
+			"depends_on": ["b3.frost_faeries_bury_the_celum_runners_guild"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.asked_to_leave_celum"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "Seeing what the faeries did, neither the guild nor the Watch presses charges. She stays near Erin for now; ryoka.in_celum stays set until she leaves with Reynold (3.09/3.10, M9.2)."},
+			"summary": "After the avalanche, the guild staff drop the idea of charging Ryoka, and the Watch politely asks her to leave the city. She thinks she is likely banned from Runners' Guilds, and knows Persua will never forget."
+		},
+		"b3.ivolethe_offers_to_teach_ryoka_the_wind": {
+			"tier": 2,
+			"window": {"earliest": 75, "latest": 75, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "ivolethe"], "flags": ["ryoka.asked_to_leave_celum"], "not_flags": []},
+			"depends_on": ["b3.celum_watch_asks_ryoka_to_leave"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.learning_to_run_like_the_wind", "ivolethe.bargained_with_ryoka"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "Ivolethe says Persua's oath can only end in blood, and that had she been killed, others of the Winter Court would have killed Persua."},
+			"summary": "Sitting in the snow, Ryoka admits she envies Persua's Skill and wants to be faster. Ivolethe asks what she truly dreams of: to run like the wind. The faerie offers to teach her the ways of the fae, for the price of friendship, and they shake on it."
+		}
+	},
+	"system": [
+		{"who": "persua", "kind": "skill", "name": "[Double Step]", "level": null, "confidence": "confirmed", "note": "A core Courier Skill; she has it below Level 20."},
+		{"who": "ryoka_griffin", "kind": "other", "name": "Faerie bargain: to run like the wind", "level": null, "confidence": "confirmed", "note": "Ivolethe will teach her fae ways for friendship. Not a class; she never gains a level."}
+	]
+}

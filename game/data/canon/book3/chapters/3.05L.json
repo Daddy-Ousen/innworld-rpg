@@ -1,0 +1,150 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.05L",
+	"events": {
+		"b3.goblin_army_marches_past_liscor": {
+			"tier": 1,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.goblin_army_passed", "goblin_army.marches_north"]},
+			"news": "A Goblin army thousands strong marched past Liscor in the night, going north. It loosed arrows at the walls until the city's lightning ward drove it off.",
+			"rumor": "Travellers say a Goblin army of thousands went round Liscor by night and up the road into the Human lands.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.05L",
+				"confidence": "confirmed",
+				"note": "Day guess: the night after Selys took Mrsha (day 71). Who leads the army is not said; the Goblin Lord of 2.35 is likely but not stated. Olesm blames 'the Goblin army' for Esthelm, which book2 gives to Rags' tribe (2.48). Flagged, not linked."
+			},
+			"summary": "In the snowy night a Goblin host of thousands, torches glinting on steel, swings round Liscor's eastern side on its way north. It trades arrows with the walls until a crackling orb of lightning over the south wall scatters it."
+		},
+		"b3.lyonette_hides_alone_in_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn", "erin.left_liscor", "liscor.goblin_army_passed"], "not_flags": []},
+			"depends_on": ["b3.goblin_army_marches_past_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.alone_at_the_inn"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "She hides for days after; no fire, the guests stop coming, and she chases off Olesm once. Nobody in Celum or Liscor remembers to tell her anything."},
+			"summary": "Left behind when Erin vanished and Selys took Mrsha, Lyonette barricades the inn and hides under her bed as the Goblin army passes. For days she sits in the cold, dark inn without a fire, eating the last crumbs and sure Erin is dead."
+		},
+		"b3.selys_and_krshia_send_word_to_celum": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b2.erin_and_ryoka_send_messages_to_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_mrsha_is_safe"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "The day after the fight with Persua. Krshia's reply says the Gnolls will wait for Ryoka's delivery (the Rihal tome). Brunkr is still in bed with his paw."},
+			"summary": "Two [Message] spells reach Celum's Mages' Guild. Selys writes that Mrsha is with her, Olesm watches the inn and all is well; Krshia says the Gnolls will wait for Ryoka's delivery. Erin and Ryoka decide they can stay a while. No one mentions Lyonette."
+		},
+		"b3.lyonette_gets_olesm_to_fetch_supplies": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette", "olesm"], "flags": ["lyonette.alone_at_the_inn"], "not_flags": []},
+			"depends_on": ["b3.lyonette_hides_alone_in_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.supplied_by_olesm"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "About six days after Erin vanished (day 70). Lyonette is still banned from Liscor, so she cannot shop herself."},
+			"summary": "Starving, Lyonette waylays Olesm on his daily look at the inn, lights the fire and talks him into buying food with her list and Erin's last coins. He trudges back with eggs, cheese and flour, and she refuses him a free meal."
+		},
+		"b3.relc_klbkch_and_halrac_walk_out": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.supplied_by_olesm"], "not_flags": []},
+			"depends_on": ["b3.lyonette_gets_olesm_to_fetch_supplies"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.guests_turned_away"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "Relc would like to go back and hit her; Klbkch warns him Erin would ban him for life."},
+			"summary": "Lyonette's first pasta comes out bland. Relc knocks, hears Erin is not back and leaves before she can offer food, Klbkch with him. Later Halrac looks round the dim inn, grunts, and walks out without a word."
+		},
+		"b3.lyonette_reopens_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "acolyte": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn", "erin.left_liscor", "lyonette.supplied_by_olesm"], "not_flags": []},
+			"depends_on": ["b3.relc_klbkch_and_halrac_walk_out"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["wandering_inn.reopened_by_lyonette", "lyonette.runs_the_inn", "pawn.ate_at_lyonettes_inn", "lyonette.knows_erin_is_in_celum"],
+				"relationship": [{"from": "lyonette", "to": "pawn", "delta": 2}]
+			},
+			"news": "The Wandering Inn has its lights on again. Erin Solstice's barmaid keeps it open while she is away, though folk say the pasta is poor.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [18, 22],
+				"kind": "scene",
+				"when_flags": ["lyonette.works_at_inn"],
+				"npcs": [
+					{"npc": "lyonette", "pos": [8, 7]},
+					{"npc": "pawn", "pos": [10, 8]}
+				],
+				"line": "The fire is lit and the shutters are open. A thin young woman in an apron looks up hopefully as a lone Antinium Worker steps in from the snow.",
+				"note": "M9.1: a quiet scene, no fight. Lyonette works the common room on her own schedule; Pawn is brought in for the evening. Olesm has no npc_behaviour entry, so he keeps a story role only."
+			},
+			"hooks": [
+				{
+					"id": "player_ate_at_lyonettes_inn",
+					"did": [
+						{"action": ["buy_supplies"], "context": {"location": ["wandering_inn"]}},
+						{"action": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "wash_dishes", "sweep_floor"], "context": {"location": ["wandering_inn"]}}
+					],
+					"days": [72, 76],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_kept_lyonette_going"],
+						"relationship": [{"from": "lyonette", "to": "player", "delta": 3}]
+					},
+					"news": "Another Human kept Lyonette's lonely inn going with coin and work while Erin was away."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "Olesm brings the news of Esthelm and that Erin is safe in Celum, eats four bites and leaves. Pawn leaves more silver than two plates cost; Lyonette hopes the Antinium will come back regularly."},
+			"summary": "Olesm returns for supper but leaves after four bites of salty pasta and news that Erin is safe in Celum. Lyonette weeps on the floor. Then Pawn walks in looking for Erin, eats two plates of burnt bacon and runny eggs, and pays well. She resolves to keep the inn open."
+		},
+		"b3.pawn_resolves_to_tell_klbkch_of_his_class": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {
+				"acolyte": {"prefer": ["pawn"], "fallback_tags": []},
+				"archer": {"prefer": ["bird"], "fallback_tags": [], "optional": true},
+				"cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true},
+				"second_tactician": {"prefer": ["anand"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["pawn"], "flags": ["pawn.ate_at_lyonettes_inn"], "not_flags": []},
+			"depends_on": ["b3.lyonette_reopens_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.will_tell_klbkch_of_his_class", "antinium.individuals_specialise"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "Over a hundred new Individuals now play chess in the Hive, but only the five originals have real personalities. Pawn's [Tactician] class has stalled. Klbkch is now Revalantor."},
+			"summary": "In the Hive, the other original Individuals find roles: Bird shoots birds, Garry fries them, Belgrade and Anand lead fights in the tunnels. Pawn sits doubting his [Acolyte] faith. After Lyonette's meal he resolves to tell Klbkch of his class."
+		}
+	},
+	"system": [
+		{"who": "pawn", "kind": "class", "name": "[Tactician]", "level": null, "confidence": "confirmed", "note": "Stalled weeks ago."},
+		{"who": "pawn", "kind": "class", "name": "[Acolyte]", "level": null, "confidence": "confirmed", "note": "From 2.31; he has not levelled it since."},
+		{"who": "pawn", "kind": "skill", "name": "[Prayer]", "level": null, "confidence": "confirmed", "note": "Unused; he is afraid of what an answer might mean."},
+		{"who": "belgrade", "kind": "class", "name": "[Tactician]", "level": null, "confidence": "confirmed"},
+		{"who": "anand", "kind": "class", "name": "[Tactician]", "level": null, "confidence": "confirmed"}
+	]
+}

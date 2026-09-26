@@ -125,9 +125,10 @@
 		"pisces": {
 			"confidence": "guess",
 			"combat": {"hp": 24, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [4, 7]},
-			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage.",
+			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains.",
 			"goals": [
 				{"goal": "forage", "base": 2, "hours": [[20, 5, 1]], "when_flags": ["liscor.hunting_pisces"],
+					"unless_flags": ["horns_of_hammerad.gone_to_albez"],
 					"target": {"area": "floodplains_south", "pos": [27, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
 			]
@@ -258,6 +259,37 @@
 			"notes": "[Receptionist] at Celum's Runners' Guild (1.33R). Hours are a guess (M8.5).",
 			"goals": [
 				{"goal": "work", "base": 2, "hours": [[8, 18, 1]], "target": {"area": "celum_runners_guild", "pos": [10, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"lyonette": {
+			"confidence": "guess",
+			"notes": "M9.1. Erin takes her in on day 50 (lyonette.works_at_inn). She cooks and cleans in the kitchen, serves in the evening and sleeps in the back room. After Erin is gone (day 70) she runs the inn alone (3.05); the text has her hiding for some days first, which is not scheduled. Hours are guesses.",
+			"combat": {"hp": 12, "accuracy": 2, "evasion": 3, "armor": 0, "damage": [1, 2]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [20, 11]}},
+				{"goal": "work", "base": 2, "hours": [[17, 22, 1]], "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [8, 6]}},
+				{"goal": "work", "base": 1, "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [21, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"mrsha": {
+			"confidence": "guess",
+			"notes": "M9.1. The white Gnoll cub stays at the inn once Ryoka brings her (mrsha.at_the_wandering_inn, day 67). From day 71 Selys looks after her in Liscor (mrsha.in_selys_care), off the map, until she runs back to the inn (3.21, M9.4 clears the flag). Positions are guesses.",
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 7, 1]], "when_flags": ["mrsha.at_the_wandering_inn"], "unless_flags": ["mrsha.in_selys_care"], "target": {"area": "inn_interior", "pos": [19, 11]}},
+				{"goal": "work", "base": 2, "when_flags": ["mrsha.at_the_wandering_inn"], "unless_flags": ["mrsha.in_selys_care"], "target": {"area": "inn_interior", "pos": [6, 10]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"ryoka_griffin": {
+			"confidence": "guess",
+			"notes": "M9.1. Teriarch sends her to Celum on day 71 (ryoka.in_celum). There she takes deliveries at the Runners' Guild in the morning, runs them off the map, and eats and sleeps at the Frenzied Hare near Erin (3.03). She leaves Celum with Reynold in 3.09/3.10 (ryoka.gone_to_magnolia, set in M9.2). Before day 71 she keeps story roles only. Hours are guesses. She never gains a level; the combat block is a design number.",
+			"combat": {"hp": 20, "accuracy": 5, "evasion": 6, "armor": 0, "damage": [1, 3]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [14, 9]}},
+				{"goal": "work", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_runners_guild", "pos": [6, 4]}},
+				{"goal": "eat", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [7, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
 			]
 		}

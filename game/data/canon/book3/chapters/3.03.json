@@ -1,0 +1,104 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.03",
+	"events": {
+		"b3.erin_feeds_crepes_to_the_frost_faeries": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["erin.in_celum", "ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b2.erin_takes_over_the_frenzied_hares_kitchen"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.bribes_the_faeries_with_food", "celum.market_flees_the_faeries"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.03",
+				"confidence": "confirmed",
+				"note": "Day guess: the girls have been in Celum three days (day 71 plus three). Agnes asks Erin to stay and run the Hare for good. A [Merchant] warms to them on hearing they know Halrac."
+			},
+			"summary": "The Frenzied Hare is packed for Erin's crepes. Ryoka wants to plan Erin's way home; Erin would rather keep experimenting with Octavia. Out shopping for protective charms, Erin buys off the Frost Faeries with crepes, but the market's sellers still flee their swarm."
+		},
+		"b3.erin_flips_a_table_in_the_adventurers_guild": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "celum_adventurers_guild",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.bribes_the_faeries_with_food"], "not_flags": []},
+			"depends_on": ["b3.erin_feeds_crepes_to_the_frost_faeries"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.banned_from_celum_adventurers_guild", "ryoka.banned_from_celum_adventurers_guild", "erin.wants_the_horns_as_escort"]},
+			"news": "Erin Solstice flipped a table onto two adventurers in Celum's Adventurers' Guild for calling the Horns of Hammerad fools and cowards. She and her friend are banned there for a while.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "They came to hire an escort to Liscor. One of the Brilliant Swords from the Hare brawl (2.47) is there and edges away. Ryoka says she may try Albez to find the Horns."},
+			"summary": "At Celum's Adventurers' Guild, two adventurers sneer that the Horns of Hammerad got their friends killed and that Ceria and Yvlon are cowards. Erin asks them to take it back, then flips their table on them. She and Ryoka are banned for a while."
+		},
+		"b3.ryoka_pays_octavia_to_keep_helping_erin": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "octavia"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b3.erin_flips_a_table_in_the_adventurers_guild"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["octavia.paid_by_ryoka"],
+				"relationship": [{"from": "octavia", "to": "ryoka_griffin", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "Ryoka has about eight hundred gold from Teriarch in a bag of holding that also holds his spellbook."},
+			"summary": "Octavia storms out of Stitchworks: Erin's cooking experiments have cost her a fortune in ingredients over four days. Ryoka pours twenty gold coins into her hands, and Octavia suddenly calls Erin her favourite customer."
+		},
+		"b3.most_frost_faeries_leave_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}, "rival": {"prefer": ["persua"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b3.ryoka_pays_octavia_to_keep_helping_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["frost_fairies.bored_of_ryoka", "ryoka.saw_persua_outrun_her"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "On the cheap daily letter run to Wales. Winter stays; only the faeries' interest in Ryoka goes. They are still angry that she beat Teriarch's riddles with logic puzzles."},
+			"summary": "On a dull mail run to Wales, the Frost Faeries decide Ryoka has grown boring and fly off to bother kings and eat jungle berries. Only one keeps pace with her. Then a blur races past on the road, far faster than Ryoka: it looks like Persua."
+		},
+		"b3.ryoka_stalls_on_water_spray": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.has_rihal_spellbook"], "not_flags": []},
+			"depends_on": ["b3.most_frost_faeries_leave_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.magic_stalled"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "She learned a small lifting cantrip and an air trick before. Cantrips are not a class; Ryoka never gains a level (user, 2026-09-26)."},
+			"summary": "For days Ryoka has been stuck on one page of Teriarch's spellbook. She understands [Water Spray] but cannot believe magic can turn into water without breaking physics, and so the spell will not work. She decides her schooling has ruined magic for her."
+		},
+		"b3.ryoka_befriends_ivolethe": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "ivolethe"], "flags": ["frost_fairies.bored_of_ryoka"], "not_flags": []},
+			"depends_on": ["b3.ryoka_stalls_on_water_spray"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["ryoka.friends_with_ivolethe", "ivolethe.follows_ryoka"],
+				"relationship": [
+					{"from": "ivolethe", "to": "ryoka_griffin", "delta": 3},
+					{"from": "ryoka_griffin", "to": "ivolethe", "delta": 3}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.03", "confidence": "confirmed", "note": "Faeries cannot enter unless invited; Ryoka may invite her because she rents the room. The iron in the inn weakens her."},
+			"summary": "The last faerie waits at Ryoka's window. Invited in, she mocks Ryoka's book magic as a fragment of the real thing and says she stayed because Ryoka is worth watching. Ryoka guesses she wants a friend; the faerie agrees and gives her name, Ivolethe."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "skill", "name": "[Advanced Cooking]", "level": null, "confidence": "confirmed"},
+		{"who": "ryoka_griffin", "kind": "other", "name": "Stuck on [Water Spray]", "level": null, "confidence": "confirmed", "note": "A Tier 0 spell she cannot cast. Her cantrips are not a class; she never gains a level."}
+	]
+}
