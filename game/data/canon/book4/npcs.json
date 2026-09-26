@@ -1,0 +1,77 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"tremborag": {
+			"name": "Tremborag",
+			"race": "Goblin",
+			"tags": ["goblin", "hob", "great_chieftain", "leader", "shapeshifter"],
+			"faction": "tremborags_tribe",
+			"home": "tremborags_mountain",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.26G", "confidence": "confirmed", "note": "Says he met the Goblin King Velan the Kind about ten years ago. A Skill of his forces others to kneel. In 3.28G he swells into a huge muscled form in battle. Class not named."},
+			"summary": "The Great Chieftain of the mountain, a huge Goblin who speaks fluent common and rules thousands from an old Dwarf city. He wants Garen's key kept from the Goblin Lord. After Rags breaks out with part of his tribe, he vows to eat her."
+		},
+		"ulvama": {
+			"name": "Ulvama",
+			"race": "Goblin",
+			"tags": ["goblin", "hob", "shaman", "tremborags_tribe"],
+			"faction": "tremborags_tribe",
+			"home": "tremborags_mountain",
+			"classes": [{"name": "[Shaman]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "Tremborag's chief [Shaman]. She offers Rags an alliance and mocks her name as one a Human gave her."},
+			"summary": "A female Hob, the chief [Shaman] of Tremborag's mountain. She offers to ally with Rags on her own terms and scorns the name a Human gave her; Rags answers with a kick."
+		},
+		"noears": {
+			"name": "Noears",
+			"race": "Goblin",
+			"tags": ["goblin", "mage", "red_fang_tribe"],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [{"name": "[Mage]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "Named for his missing ears. Casts lightning in the breakout (3.29G). Leads a faction of Rags' new tribe."},
+			"summary": "An earless Goblin in the mountain who plays the fool until he shows Rags he is a real [Mage]. He warns her to act humble, then joins her breakout and heads her spellcasters."
+		},
+		"pyrite": {
+			"name": "Pyrite",
+			"race": "Goblin",
+			"tags": ["goblin", "hob", "chieftain", "gold_stone_tribe", "red_fang_tribe"],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "The Gold Stone Chieftain whose tribe Rags absorbed (b2.rags_absorbs_gold_stone_tribe). Stands with Rags in 3.26G; named by her in 3.28G. Once lived in the mountain."},
+			"summary": "The slow-spoken Hob Chieftain of the Gold Stone tribe, one of the few who stand by Rags at Tremborag's feast. He once lived in the mountain and guards a captive there. Rags names him Pyrite, and he frees the captives in her breakout."
+		},
+		"redscar": {
+			"name": "Redscar",
+			"race": "Goblin",
+			"tags": ["goblin", "hob", "red_fang_tribe", "warrior"],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Named in 3.29G as the head of Rags' Redfang warriors. A scarred Redfang warrior in 3.28G is likely him; the text does not say."},
+			"summary": "A scarred Redfang Hob who follows Rags out of the mountain instead of staying with Garen, and leads the Redfang warriors in her new tribe."
+		},
+		"greybeard": {
+			"name": "Greybeard",
+			"race": "Goblin",
+			"tags": ["goblin", "elder", "red_fang_tribe"],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Seen in the mountain in 3.28G, named in 3.29G as a faction head. A rare old Goblin with a beard."},
+			"summary": "An old bearded Goblin from Tremborag's mountain who joins Rags' breakout and speaks for a faction of her new tribe."
+		}
+	}
+}
