@@ -1,0 +1,105 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.24",
+	"events": {
+		"b3.horns_ride_a_wagon_out_of_remendia": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "remendia",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "driver": {"prefer": ["adelynn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.reformed"], "not_flags": []},
+			"depends_on": ["b3.yvlon_learns_the_metal_is_in_her_bones"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.nearly_broke", "horns_of_hammerad.bound_for_celum", "ceria.studies_the_burnt_spellbook"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "They leave Remendia, though 3.08H-3.10 left them in Ocre (flagged: where they spent the days between is not told). The driver is Adelynn, named in 3.25. The Guild takes a tenth of dungeon spoils; a [Blacksmith] cut and smoothed most of Yvlon's metal."},
+			"summary": "Cheered out of Remendia as the heroes of Albez, the Horns leave on a Merchants' Guild wagon, guarding it in exchange for the ride because they are broke: Guild fees, healers and the inn ate their coin and Ryoka holds the relics. They worry about Goblin war bands on the road to Liscor."
+		},
+		"b3.horns_reach_celum": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.bound_for_celum"], "not_flags": []},
+			"depends_on": ["b3.horns_ride_a_wagon_out_of_remendia"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_ocre", "horns_of_hammerad.bound_for_celum"],
+				"set_flags": ["horns_of_hammerad.in_celum"]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "A sleepless gate guard with a scraggly moustache mutters Hamlet's lines; he later plays Hamlet. No Goblins have come near Celum. Townsfolk all know the way to the Frenzied Hare because of the play."},
+			"summary": "There is no crowd at Celum's gate; nobody knows the Horns. A dazed guardsman reciting odd verse says no Goblins have come near. Everyone they ask points them to the Frenzied Hare and wishes them luck with the night's show, and they push in just before sunset."
+		},
+		"b3.horns_watch_hamlet_at_the_frenzied_hare": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "actor": {"prefer": ["wesle", "jasi"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "erin.staged_a_play"], "not_flags": []},
+			"depends_on": ["b3.horns_reach_celum", "b3.erin_stages_romeo_and_juliet"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.reunited_with_the_horns", "frenzied_hare.stages_hamlet", "horns_of_hammerad.lodge_at_the_frenzied_hare", "celum.acting_troupes_spread"],
+				"relationship": [{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}, {"from": "erin_solstice", "to": "yvlon_byres", "delta": 1}]
+			},
+			"news": "The Frenzied Hare in Celum now plays a new tale every night, a dark story of a prince, his father's ghost and poison. The Horns of Hammerad were in the crowd.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "Agnes now needs four [Barmaids]. Other groups copy the plays and tour. Some [Actors] have [Perfect Recall]. The Hamlet lead is the moustached guardsman, not Wesle (Wesle has no moustache in 3.25). Ksmvr eats raw dough under his food-poison charm."},
+			"summary": "The Hare is packed. Agnes tries to turn them away, but Erin, floured and sauced from making pizza, rushes out to hug them and offers free rooms when she learns they are broke. Then the troupe plays Hamlet. Pisces and Yvlon are gripped, Ksmvr stares, and Ceria mostly enjoys the pizza."
+		},
+		"b3.erin_passes_on_wesles_news": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.reunited_with_the_horns", "toren.left_erin"], "not_flags": []},
+			"depends_on": ["b3.horns_watch_hamlet_at_the_frenzied_hare"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_toren_killed_people", "erin.knows_of_esthelm", "yvlon.revealed_ylawes_is_her_brother"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "Near midnight. Wesle told Erin of the road killings some days before. Esthelm's survivors call Ylawes their Savior. Yvlon says he usually works in the far north near their family estates; she once claimed his name under the Albez [Insanity] spell."},
+			"summary": "After midnight Erin tells the Horns what Wesle heard: a skeleton killed over twenty travellers on the road and hid them in snow, and at Esthelm a purple-eyed skeleton led the dead until a Gold-rank [Knight], Ylawes Byres, saved the town. Yvlon says Ylawes is her older brother."
+		},
+		"b3.pisces_confesses_he_made_toren_to_level": {
+			"tier": 1,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces", "erin_solstice"], "flags": ["erin.knows_toren_killed_people"], "not_flags": []},
+			"depends_on": ["b3.erin_passes_on_wesles_news"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["horns_of_hammerad.know_pisces_made_toren", "erin.knows_toren_could_think", "yvlon.distrusts_pisces"],
+				"relationship": [{"from": "ceria_springwalker", "to": "pisces", "delta": -2}, {"from": "yvlon_byres", "to": "pisces", "delta": -2}, {"from": "erin_solstice", "to": "pisces", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "Cognita, a Truestone Construct at Wistram, taught him an incomplete formula; he says he told Wistram it was possible. He gave Toren reason like a Golem's but no conscience; he does not know how. Pisces senses Toren faintly, far to the south."},
+			"summary": "Ceria works it out: undead cannot change unless they can level, so Pisces built Toren to level. He smiles, and she tackles him. Ksmvr and Yvlon pull her off. Pisces admits Toren was a test of a Golem's formula; he never meant him to think, and gave him the urge to fight but no conscience."
+		},
+		"b3.pisces_severs_torens_link_to_erin": {
+			"tier": 1,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces", "erin_solstice"], "flags": ["horns_of_hammerad.know_pisces_made_toren"], "not_flags": []},
+			"depends_on": ["b3.pisces_confesses_he_made_toren_to_level"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["erin.still_seeking_toren"],
+				"set_flags": ["toren.link_severed", "erin.grieves_toren"],
+				"relationship": [{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "Toren runs on Erin's own mana at any distance. Pisces says he will die without it, but no death is shown, so Toren is not killed here. Ceria offers to hunt him down instead; Erin says no."},
+			"summary": "Pisces can cut the thread of Erin's mana that keeps Toren going. Ceria suggests hunting him instead, but Erin, shaking, says he killed because he wanted to and will kill again: do it now. Pisces lays his hands on her head and unpicks the link. Erin goes to bed and whispers goodbye."
+		}
+	},
+	"system": [
+		{"who": "wesle", "kind": "class", "name": "[Actor]", "level": null, "confidence": "confirmed", "note": "Wesle, Jasi and the first cast are the highest-level [Actors] and already have a few Skills."},
+		{"who": "jasi", "kind": "class", "name": "[Actor]", "level": null, "confidence": "confirmed", "note": "Among the highest-level [Actors] of the Hare's troupe."},
+		{"who": "yvlon_byres", "kind": "other", "name": "Sister of Ylawes Byres", "level": null, "confidence": "confirmed", "note": "He is her older brother, a Gold-rank [Knight] of the Silver Swords, famous in the north."},
+		{"who": "pisces", "kind": "other", "name": "Made a levelling undead", "level": null, "confidence": "confirmed", "note": "From Cognita's incomplete formula for beings that can level. Ceria thinks any levelling undead will rebel in time, like Golems."}
+	]
+}

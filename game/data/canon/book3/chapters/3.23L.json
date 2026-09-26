@@ -1,0 +1,244 @@
+{
+	"schema_version": 1,
+	"book": 3,
+	"chapter": "3.23L",
+	"events": {
+		"b3.selys_and_olesm_visit_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "courier": {"prefer": ["hawk"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.lyonette_plays_chess_with_the_unknown_player"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["olesm.sells_chess_games_by_mail", "lyonette.sells_honey_water", "selys.trusts_lyonette_with_mrsha"],
+				"relationship": [{"from": "selys", "to": "lyonette", "delta": 1}, {"from": "olesm", "to": "lyonette", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Olesm misspelled his name as 'Oresm', so replies sat at the Runners' Guild until Hawk brought them. He sent Erin's hardest puzzle and her annotated games. Lyonette hears that Ryoka has gone north. Selys is a few years into her twenties."},
+			"summary": "On her day off Selys brings Mrsha toys. Olesm arrives waving letters: [Tacticians] across the continent want Erin's chess games, a Walled City's head [Strategist] levelled from her puzzle, and one reply came with gold. Lyonette tells them of her new [Carer] and [Tactician] classes."
+		},
+		"b3.klbkch_praises_pawns_patrol": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "klbkch"], "flags": ["liscor_hive.soldiers_painted"], "not_flags": []},
+			"depends_on": ["b3.the_soldiers_paint_themselves"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.patrols_with_klbkchs_blessing", "klbkch.watches_the_painted_soldiers", "liscor.goodwill_for_the_soldiers"],
+				"relationship": [{"from": "klbkch", "to": "pawn", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "A [Shepherd] saw the Corusdeer chased off. Pawn cannot read Drake script; Klbkch will have the Individuals taught. The Hive's treasury rooms of gold go unguarded."},
+			"summary": "Klbkch goes over the patrol: avoid Corusdeer herds, beware Rock Crabs. Zevara was pleased, and citizens were glad to see Soldiers chase monsters. He raises Pawn's funds and wants trophies next time. Told the paint names the Soldiers without words, he asks to hear at once if they level."
+		},
+		"b3.pawn_buys_cheese_for_the_soldiers": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "krshia_stall",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "krshia"], "flags": ["pawn.patrols_with_klbkchs_blessing"], "not_flags": []},
+			"depends_on": ["b3.klbkch_praises_pawns_patrol"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["pawn.buys_cheese_for_the_soldiers"],
+				"relationship": [{"from": "krshia", "to": "pawn", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Enough for about two hundred and forty. Pawn trusts her because Erin does. Krshia expects her shop to need at least a year to recover; she blames the thief."},
+			"summary": "Pawn orders enough cheese at Krshia's empty stall to give every waiting Soldier a small meal. Krshia is stunned and grateful for the business. Asked how she fares, she says she will survive the winter but has fallen far because of one thief."
+		},
+		"b3.lyonette_sends_krshia_honey": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "krshia_stall",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pawn", "krshia", "lyonette"], "flags": ["lyonette.has_ashfire_honey"], "not_flags": []},
+			"depends_on": ["b3.pawn_buys_cheese_for_the_soldiers"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["lyonette.apologised_to_krshia", "krshia.sells_ashfire_honey"],
+				"relationship": [{"from": "krshia", "to": "lyonette", "delta": 1}, {"from": "krshia", "to": "pawn", "delta": 1}, {"from": "lyonette", "to": "pawn", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Pawn also books more Soldiers for a meal at the inn that day and has Lyonette send Olesm shopping. Krshia's anger stops growing but does not vanish."},
+			"summary": "Pawn hurries up to the inn and comes back with a huge jar of Ashfire honey, a gift from Lyonette with one message: she is very sorry. Krshia calls it no match for her stall, but tastes it, wags her tail, and names Pawn and Klbkch good for Liscor. Soon she sells honey in small jars."
+		},
+		"b3.klbkch_buys_a_jar_of_bees_for_the_queen": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true}, "cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["klbkch", "lyonette"], "flags": ["lyonette.has_ashfire_bees"], "not_flags": []},
+			"depends_on": ["b3.lyonette_sends_krshia_honey"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["liscor_hive.queen_eats_fried_bees"],
+				"relationship": [{"from": "klbkch", "to": "lyonette", "delta": 1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "That day Pawn's second patrol ate two or three bees each; Drakes came for honey water and honey. Selys taught Lyonette shepherd's pie. The jars are knee-high, made by [Glassblowers]."},
+			"summary": "At supper Klbkch comes in and buys a whole jar of bees for his Queen, a third of it fried so the Hive's [Cook] can learn. He eats five while he waits and plays a quiet game of hide and seek with Mrsha. Lyonette again forgets to offer the grub, and finds she is growing fond of it."
+		},
+		"b3.lyonette_becomes_a_beast_tamer": {
+			"tier": 2,
+			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.raises_a_bee_grub"], "not_flags": []},
+			"depends_on": ["b3.klbkch_buys_a_jar_of_bees_for_the_queen"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.class_beast_tamer", "lyonette.keeps_the_bee_grub"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "The night of day 83. She keeps the grub in royal jelly by the fire. She thinks she gets classes because she wants them so badly after years of not levelling as a [Princess]. She says the grub needs a name but gives none yet."},
+			"summary": "That night Lyonette levels in [Barmaid], [Carer] and [Tactician] again, then gains the [Beast Tamer] class for keeping the bee grub warm and fed. She wakes sure the class is useless, yet wants every class she can get, and adds checking the grub to her morning chores."
+		},
+		"b3.a_gnoll_runner_delivers_to_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "runner": {"prefer": [], "fallback_tags": ["gnoll"], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": ["b3.lyonette_becomes_a_beast_tamer"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.deliveries_resumed"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "The Gnoll is unnamed. Olesm had said no one would deliver to Lyonette; the text does not say what changed (the honey to Krshia the day before is the likely cause, not stated)."},
+			"summary": "Coming back from the stream with her buckets, Lyonette sees a Gnoll drag a sled up the hill, loaded with the meat and vegetables on the list she gave Olesm. The Gnoll says one word, delivery, and stomps off. Lyonette hauls it all in with Mrsha, smiling and crying."
+		},
+		"b3.klbkch_briefs_the_individuals": {
+			"tier": 2,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "acolyte": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "archer": {"prefer": ["bird"], "fallback_tags": [], "optional": true}, "cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "second_tactician": {"prefer": ["anand"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["klbkch"], "flags": [], "not_flags": []},
+			"depends_on": ["b3.klbkch_buys_a_jar_of_bees_for_the_queen"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium.delegation_expected", "pawn.told_to_hide_his_acolyte_class", "klbkch.knows_xrn_is_coming"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Just after dawn. Garry cooks for the Queen alone, which Klbkch resents. Belgrade and Anand helped kill a Crypt Worm. Bird wears a red feather. The Listeners heard spells: only one living Antinium casts magic. Klbkch was once one of the Centenium."},
+			"summary": "Klbkch gathers Pawn, Bird, Garry, Belgrade and Anand: a delegation from the other Hives arrives today to judge them. Bird, Belgrade and Anand will show their Skills and Garry will cook; no one may mention Pawn's [Acolyte] class. Alone, Klbkch shakes: the Listeners heard magic among the visitors."
+		},
+		"b3.zel_shield_walls_the_scaleling_attack": {
+			"tier": 1,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "liscor_dungeon",
+			"roles": {"general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "wall_lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["zel_shivertail"], "flags": ["zel.bound_for_liscor"], "not_flags": []},
+			"depends_on": ["b3.zel_and_ilvriss_march_toward_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"clear_flags": ["zel.bound_for_liscor", "ilvriss.bound_for_liscor"],
+				"set_flags": ["zel.in_liscor", "ilvriss.in_liscor", "ilvriss.at_the_tailless_thief", "liscor.scalelings_out_of_the_dungeon", "selys.knows_zel_is_in_liscor"]
+			},
+			"news": "General Zel Shivertail and a Wall Lord have come to Liscor. On arrival Zel steadied the Watch against Scalelings pouring out of the new dungeon.",
+			"rumor": "Guardsmen at the east dungeon say their feet grew roots and the child-shaped monsters bounced off their shields.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Noon. Scalelings are called Children in Human lands. Human adventurers in poor armour stirred the nest. Ilvriss knows the Tailless Thief's owner. Selys, who calls him Uncle Zel, feels his command aura from her desk."},
+			"summary": "Zel and Ilvriss enter Liscor at noon in time to see child-shaped Scalelings burst from the dungeon and drive back the gate guard. Zel speaks one Skill, [Shield Wall], and the guards stand like rock until help comes. Ilvriss goes to the Tailless Thief; Zel must see the Council first."
+		},
+		"b3.the_antinium_delegation_arrives": {
+			"tier": 1,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "prognugator": {"prefer": ["xrn"], "fallback_tags": []}, "armored": {"prefer": ["tersk"], "fallback_tags": [], "optional": true}, "flyer": {"prefer": ["pivr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["klbkch", "xrn"], "flags": ["antinium.delegation_expected"], "not_flags": []},
+			"depends_on": ["b3.klbkch_briefs_the_individuals", "b3.traveling_antinium_kill_goblin_raiders"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["antinium_delegation.at_liscor", "klbkch.reunited_with_xrn", "pivr.defies_xrn"],
+				"relationship": [{"from": "klbkch", "to": "xrn", "delta": 2}, {"from": "xrn", "to": "klbkch", "delta": 2}, {"from": "klbkch", "to": "pivr", "delta": -1}]
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "'A little less than twenty', yet the groups add up to twenty: Tersk and three Armored, Pivr and six Flying, Xrn with four Custodium and two giant Soldiers, and two Silent assassins. Wrymvr's Hive, the fifth, sent no one. Custodium: forty in the Grand Hive."},
+			"summary": "Klbkch meets the visitors outside the city in secret: Tersk of the Armored Antinium, Revalantor Pivr of the Flying Antinium, two Silent assassins, and Xrn of the Grand Hive, who casts magic and is an old friend. Then Pivr says his Queen orders a show of force, and his fliers speed for the main gate."
+		},
+		"b3.pawns_soldiers_stop_a_street_battle": {
+			"tier": 1,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {
+				"revalantor": {"prefer": ["klbkch"], "fallback_tags": []},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": []},
+				"acolyte": {"prefer": ["pawn"], "fallback_tags": []},
+				"prognugator": {"prefer": ["xrn"], "fallback_tags": [], "optional": true},
+				"wall_lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true},
+				"flyer": {"prefer": ["pivr"], "fallback_tags": [], "optional": true},
+				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true},
+				"spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["klbkch", "zel_shivertail", "pawn"], "flags": ["zel.in_liscor", "antinium_delegation.at_liscor", "liscor_hive.soldiers_painted"], "not_flags": []},
+			"depends_on": ["b3.the_antinium_delegation_arrives", "b3.zel_shield_walls_the_scaleling_attack"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["liscor.antinium_standoff_averted", "zel.saw_klbkch_the_slayer", "ilvriss.saw_xrn", "pawn.barred_klbkchs_way", "antinium_delegation.left_the_city"],
+				"relationship": [{"from": "klbkch", "to": "pawn", "delta": 1}, {"from": "zel_shivertail", "to": "klbkch", "delta": -1}, {"from": "ilvriss", "to": "xrn", "delta": -2}]
+			},
+			"news": "Strange Antinium from the southern Hives flew through Liscor's gate. Zel Shivertail and Klbkch nearly fought in the street until the Watch and a line of painted Soldiers stepped between.",
+			"rumor": "Old soldiers whisper that Liscor's Klbkch is Klbkch the Slayer of the Antinium Wars, and that the blue Antinium mage is Xrn, the Small Queen.",
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "Both sides relive the Antinium Wars: Zel duelled Klbkch there; Xrn burned a command tent and a bleeding Ilvriss charged her. Ilvriss strikes one of his own guards. Klbkch nearly cuts Pawn down before he sees who it is."},
+			"summary": "Pivr's fliers halt before Zel, Ilvriss and their guards. Klbkch and Xrn arrive, and war memories drag both pairs toward a fight. Pawn steps in front of Klbkch with his twenty painted Soldiers, Zevara's Watch walls off the Drakes, and Relc's cheerful shout breaks the spell."
+		},
+		"b3.zel_takes_a_room_at_the_wandering_inn": {
+			"tier": 1,
+			"window": {"earliest": 84, "latest": 84, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["zel_shivertail", "lyonette"], "flags": ["lyonette.runs_the_inn", "zel.in_liscor"], "not_flags": []},
+			"depends_on": ["b3.pawns_soldiers_stop_a_street_battle"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["zel.at_wandering_inn", "wandering_inn.has_a_lodger"],
+				"relationship": [{"from": "zel_shivertail", "to": "lyonette", "delta": 1}, {"from": "lyonette", "to": "zel_shivertail", "delta": 1}, {"from": "zel_shivertail", "to": "mrsha", "delta": 1}]
+			},
+			"news": "Zel Shivertail, the Tidebreaker, is lodging at the Wandering Inn outside Liscor rather than in the city.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [18, 23],
+				"kind": "scene",
+				"when_flags": ["lyonette.runs_the_inn"],
+				"npcs": [
+					{"npc": "zel_shivertail", "pos": [10, 8]},
+					{"npc": "lyonette", "pos": [8, 6]},
+					{"npc": "mrsha", "pos": [6, 10]}
+				],
+				"line": "A tired old Drake with scarred scales sits by the fire sipping hot honey water, while a small white Gnoll sniffs at his boots.",
+				"note": "M9.4: a scene. Zel's arrival at the inn after the street standoff. Hours are guesses (late, after the explanations in the city)."
+			},
+			"hooks": [
+				{
+					"id": "player_met_zel_at_the_inn",
+					"did": [
+						{"action": ["buy_supplies", "serve_guests", "talk_with_guest", "play_chess"], "context": {"location": ["wandering_inn"]}}
+					],
+					"days": [84, 84],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_met_zel"],
+						"relationship": [{"from": "zel_shivertail", "to": "player", "delta": 2}, {"from": "lyonette", "to": "player", "delta": 1}]
+					},
+					"news": "The night Zel Shivertail first slept at the Wandering Inn, another Human sat with him by the fire."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "He stayed at an inn in this spot long ago under a male [Innkeeper] (likely the old innkeeper, not stated). He finds the inn nearer the city than he remembers. The city inns are full of adventurers."},
+			"summary": "With every city inn full and no wish to share a roof with Ilvriss, Zel walks out to an inn he half remembers. Lyonette opens the door, explains the [Innkeeper] is away, serves hot honey water and offers him a room. He laughs as Mrsha sniffs his leg and takes it."
+		}
+	},
+	"system": [
+		{"who": "lyonette", "kind": "level", "name": "[Barmaid]", "level": null, "confidence": "confirmed", "note": "Levels again on the night of day 83; no number and no new Skill (was 8)."},
+		{"who": "lyonette", "kind": "level", "name": "[Carer]", "level": null, "confidence": "confirmed", "note": "Levels again on the night of day 83; no number and no new Skill (was 2)."},
+		{"who": "lyonette", "kind": "level", "name": "[Tactician]", "level": null, "confidence": "confirmed", "note": "Levels again on the night of day 83; no number and no new Skill (was 1)."},
+		{"who": "lyonette", "kind": "class", "name": "[Beast Tamer]", "level": 1, "confidence": "confirmed", "note": "For keeping the bee grub warm and fed."},
+		{"who": "lyonette", "kind": "skill", "name": "[Healthy Rearing]", "level": 1, "confidence": "confirmed"},
+		{"who": "lyonette", "kind": "class", "name": "[Princess]", "level": null, "confidence": "confirmed", "note": "Her 'true' class; she has not levelled in it for about four years."},
+		{"who": "garry", "kind": "class", "name": "[Cook]", "level": null, "confidence": "confirmed", "note": "He cooks monster parts into meals for the Queen alone. Klbkch calls him the Hive's [Cook]."},
+		{"who": "zel_shivertail", "kind": "skill", "name": "[Shield Wall]", "level": null, "confidence": "confirmed", "note": "Roots the [Guardsmen] he points at so the Scalelings rebound off them."},
+		{"who": "klbkch", "kind": "other", "name": "Klbkch the Slayer", "level": null, "confidence": "confirmed", "note": "His name in the Antinium Wars, where he fought Zel Shivertail."},
+		{"who": "xrn", "kind": "other", "name": "The Small Queen", "level": null, "confidence": "confirmed", "note": "Drake name for her. The only living Antinium who casts magic; she burned a Drake and Human command tent in the Antinium Wars."}
+	]
+}
