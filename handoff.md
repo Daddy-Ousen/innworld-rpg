@@ -1,20 +1,18 @@
 # Handoff
 
 ## Just done (2026-09-26)
-- PR #38 (M9.3) merged; tagged `m9.3-done` on 5cced62 and pushed.
-- M9.4 (3.21L–3.25, the end of Book 3) built on branch `data/book3-3.21-3.25`; PR opened for the user to review and merge.
-  - User choices: the dawn bee raid as a fight stage (Lyonette as ally); four scenes with hooks (painted Soldiers day 82, Zel at the inn day 84, Frozen day 86, Erin leaves Celum day 87); the Albez door as flags only.
-  - World: tile `cave_floor`, map `bee_cave` (from the inn hill east edge, 45 min, indoor), enemy `ashfire_bee` (stage only), schedules `zel_shivertail`, `jasi`, `yvlon_byres`, Horns' Celum evenings at the Hare. Knock-out wake for the cave is the inn.
-  - Canon: 38 events, 6 new NPCs (xrn, tersk, pivr, ijvani, adelynn, robert). Book 3 ends day 87. Detail in ADR 0016 M9.4.
-  - GUT 629/629 (67 scripts), validator 0 errors (`--all`), Python 51/51. Not checked on screen.
+- PR #39 (M9.4) merged. Tags `m9.4-done` and `m9-done` on 9e8f179, pushed. M9 (Book 3) is done.
+- M9 detail moved to `docs/PROGRESS_ARCHIVE.md`; `progress.md` now shows M9 done and M10 not planned.
+- Book 4 (Winter Solstice) extracted to `canon/raw/book4` (gitignored): 25 chapters, 282,404 words. Chapters 3.26G–3.42, seven "Wistram Days" interludes (Ceria and Pisces at Wistram in the past, with Calvaron), and "Interlude – Winter Solstice".
+- Branch `plan/m10-book4` holds the docs commit (not merged yet).
 
 ## Next steps
-1. User merges the M9.4 PR; tag `m9.4-done` and `m9-done` on the merge commit; mark M9 done in `progress.md` and move M9 detail to `docs/PROGRESS_ARCHIVE.md`.
-2. Plan M10 (Book 4) with the user: the Albez door as a working portal (engine + save change), Erin back at the inn, Toren (`toren.heading_to_liscor`, `toren.link_severed`, not dead), Venitra/Ijvani hunting Ryoka, the Antinium delegation, Zel and Ilvriss in Liscor.
-3. Optional: check the bee raid and the scenes on screen.
+1. Plan M10 (Book 4) with the user: batches, the Albez door as a real portal (engine + save change), how to treat Wistram Days (past events: history only, like the Antinium Wars interludes?). Then ADR 0017 and a ROADMAP M10 section.
+2. Toren: `toren.heading_to_liscor`, `toren.link_severed`, not dead. Check what Book 4 does with him.
+3. Same flow per batch: ask stage/hook choices, world data by hand, canon JSON by a subagent, re-verify class names, tests, commits, PR.
 
 ## Waiting on the user
-- Review and merge the M9.4 PR.
+- M10 plan choices.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
