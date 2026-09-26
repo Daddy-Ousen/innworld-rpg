@@ -1,0 +1,119 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.43",
+	"events": {
+		"b2.klbkch_confirms_the_level_theory": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"guard": {"prefer": ["klbkch"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": []},
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["klbkch", "ryoka_griffin", "krshia"], "flags": ["ryoka.level_cap_theory"], "not_flags": []},
+			"depends_on": ["b2.ryoka_explains_the_level_cap_theory"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["klbkch.confirmed_level_theory", "krshia.refused_the_secret_as_payment"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "confirmed",
+				"note": "Of several hundred high-level people, total levels rarely near 100, and those with over two classes rarely pass Level 30. Klbkch was once 'the Slayer', with a Level 40 Skill, until General Sserys killed him."
+			},
+			"summary": "At a busy inn that night, Klbkch reports that his Hive's records back Ryoka's theory. Krshia calls the secret great but not enough for the debt: it would push Gnoll cubs into one class while still young, a choice her people will not force."
+		},
+		"b2.toren_drags_erin_north_and_leaves_her": {
+			"tier": 2,
+			"window": {"earliest": 70, "latest": 70, "confidence": "guess"},
+			"location": "north_of_the_high_passes",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "toren"], "flags": ["erin.built_a_sledge"], "not_flags": []},
+			"depends_on": ["b2.erin_builds_a_sledge_for_toren"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.stranded_north", "erin.left_liscor", "toren.left_erin", "toren.broke_his_bond"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "confirmed",
+				"note": "She had slept two hours. Garen watches the sledge go north and tells no one. The text hints she wakes the same day; we put her waking on day 71 (see 2.44). A beheaded wolf lies by the sledge when she wakes."
+			},
+			"summary": "Before dawn Erin naps in the sledge, telling Toren to wake her at the next cave. Sick of bells and orders, he twists her words, snaps free of her will and hauls her far north past the mountains, then leaves her asleep in the open snow."
+		},
+		"b2.liscor_searches_for_erin": {
+			"tier": 2,
+			"window": {"earliest": 70, "latest": 70, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"scout": {"prefer": ["halrac"], "fallback_tags": []},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true},
+				"clerk": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
+				"thief": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["erin.left_liscor"], "not_flags": []},
+			"depends_on": ["b2.toren_drags_erin_north_and_leaves_her"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.searched_for_erin", "halrac.tracked_erin_north"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "confirmed",
+				"note": "Lyonette learns [Basic Cooking] that morning and says she knows nothing. Halrac finds no monster tracks. The Frost Faeries have flown south."
+			},
+			"summary": "Erin does not come back. By evening Krshia, Klbkch, Selys and her other friends are hunting for her, and Halrac follows the sledge tracks from the bee cave north for miles. Ryoka, who suspects Toren, spends a long night making plans."
+		},
+		"b2.ryoka_runs_north_after_erin": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"clerk": {"prefer": ["selys"], "fallback_tags": []},
+				"cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true},
+				"merchant": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "selys"], "flags": ["liscor.searched_for_erin"], "not_flags": []},
+			"depends_on": ["b2.liscor_searches_for_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.running_to_teriarch", "mrsha.in_selys_care", "ryoka.left_gold_for_mrsha"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "confirmed",
+				"note": "Day guess: 2.43 says she leaves the morning after the search, so day 71. 2.45-2.47 then put her at Teriarch's cave and in Celum that same day, since Erin reaches Celum the day Ryoka arrives."
+			},
+			"summary": "At first light Ryoka leaves Mrsha with Selys and most of her gold with Selys and Krshia, then runs north asking travellers for word of a sledge. Hearing nothing, she heads for the Dragon who can scry for anyone whose name he knows."
+		},
+		"b2.toren_kills_travellers_on_the_road": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "high_passes",
+			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
+			"requires": {"alive": ["toren"], "flags": ["toren.left_erin"], "not_flags": []},
+			"depends_on": ["b2.toren_drags_erin_north_and_leaves_her"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["toren.killed_travellers", "toren.bound_for_liscor_dungeon"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "confirmed",
+				"note": "Told in a short closing aside; place and day are guesses. He is called a [Skeleton Knight]. Whether he reaches the dungeon is left for Book 3."
+			},
+			"summary": "Free at last, Toren stabs two travellers to death on a road, pockets their coins, and walks back toward Liscor, meaning to level up in its dungeon until no one can ever command him again."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 26, "confidence": "confirmed", "note": "Levels up as she falls asleep on the night of day 69."},
+		{"who": "lyonette", "kind": "skill", "name": "[Basic Cooking]", "level": null, "confidence": "confirmed", "note": "Announced the next morning (day 70)."},
+		{"who": "klbkch", "kind": "skill", "name": "[Continuous Cut]", "level": null, "confidence": "confirmed", "note": "His Level 40 [Swordslayer] Skill from his peak; lost with his levels."}
+	]
+}

@@ -10,20 +10,30 @@
 		"erin_solstice": {
 			"confidence": "guess",
 			"combat": {"hp": 24, "accuracy": 4, "evasion": 4, "armor": 0, "damage": [1, 3]},
-			"notes": "Day 8: Erin walks to Liscor for supplies (b1.erin_walks_to_liscor, b1.lism_overcharges_erin). Otherwise she runs the inn and forages blue fruit.",
+			"notes": "Day 8: Erin walks to Liscor for supplies (b1.erin_walks_to_liscor, b1.lism_overcharges_erin). Otherwise she runs the inn and forages blue fruit. M8.7: Toren drags her north on day 70 (erin.stranded_north, erin.left_liscor, off the map); from day 71 (erin.in_celum) she cooks, serves and sleeps at the Frenzied Hare in Celum and visits Stitchworks after lunch. Hours in Celum are guesses.",
 			"goals": [
 				{"goal": "trade", "base": 5, "days": [8, 8], "hours": [[11, 13, 1]],
 					"target": {"area": "liscor_market", "pos": [20, 8]}},
 				{"goal": "travel", "base": 4, "days": [8, 8], "hours": [[8, 16, 1]],
 					"target": {"off_map": "liscor"}},
-				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]],
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "unless_flags": ["erin.left_liscor"], 
 					"target": {"area": "inn_interior", "pos": [18, 13]}},
-				{"goal": "work", "base": 2, "hours": [[6, 9, 1], [17, 20, 1]],
+				{"goal": "work", "base": 2, "hours": [[6, 9, 1], [17, 20, 1]], "unless_flags": ["erin.left_liscor"], 
 					"target": {"area": "inn_interior", "pos": [20, 2]}},
-				{"goal": "forage", "base": 2, "hours": [[13, 15, 1]], "when_flags": ["erin.knows_orchard"],
+				{"goal": "forage", "base": 2, "hours": [[13, 15, 1]], "when_flags": ["erin.knows_orchard"], "unless_flags": ["erin.left_liscor"], 
 					"target": {"area": "floodplains_south", "pos": [7, 17]}},
-				{"goal": "work", "base": 1,
-					"target": {"area": "inn_interior", "pos": [12, 6]}}
+				{"goal": "work", "base": 1, "unless_flags": ["erin.left_liscor"], 
+					"target": {"area": "inn_interior", "pos": [12, 6]}},
+				{"goal": "off_map", "base": 5, "when_flags": ["erin.stranded_north"], "unless_flags": ["erin.in_celum"],
+					"target": {"off_map": "wilds"}},
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["erin.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [16, 9]}},
+				{"goal": "work", "base": 2, "hours": [[6, 13, 1], [15, 22, 1]], "when_flags": ["erin.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [16, 2]}},
+				{"goal": "trade", "base": 2, "hours": [[13, 15, 1]], "when_flags": ["erin.in_celum"],
+					"target": {"area": "celum_square", "pos": [3, 12]}},
+				{"goal": "work", "base": 1, "when_flags": ["erin.in_celum"],
+					"target": {"area": "celum_frenzied_hare", "pos": [10, 5]}}
 			]
 		},
 		"relc": {
@@ -129,7 +139,7 @@
 			"goals": [
 				{"goal": "forage", "base": 2, "hours": [[7, 11, 1]],
 					"target": {"area": "floodplains_south", "pos": [5, 19]}},
-				{"goal": "visit_inn", "base": 2, "hours": [[15, 18, 1]], "when_flags": ["erin.spared_rags"],
+				{"goal": "visit_inn", "base": 2, "hours": [[15, 18, 1]], "when_flags": ["erin.spared_rags"], "unless_flags": ["rags.banned_from_inn"],
 					"target": {"area": "inn_hill", "pos": [6, 18]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
 			]
@@ -168,10 +178,10 @@
 		},
 		"toren": {
 			"confidence": "guess",
-			"notes": "Pisces's skeleton (1.41). Once it exists it never leaves the inn: it cleans, carries water and fruit, and guards Erin. Before day 27 it is not made yet (off the map).",
+			"notes": "Pisces's skeleton (1.41). Once it exists it never leaves the inn: it cleans, carries water and fruit, and guards Erin. Before day 27 it is not made yet (off the map). M8.7: on day 70 it drags Erin north and leaves her (toren.left_erin); from then on it is off the map.",
 			"combat": {"hp": 8, "accuracy": 3, "evasion": 2, "armor": 0, "damage": [1, 2]},
 			"goals": [
-				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "target": {"area": "inn_interior", "pos": [14, 4]}},
+				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "unless_flags": ["toren.left_erin"], "target": {"area": "inn_interior", "pos": [14, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
 			]
 		},

@@ -1,0 +1,63 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.39",
+	"events": {
+		"b2.erin_throws_relc_out_to_protect_the_goblins": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"spearman": {"prefer": ["relc"], "fallback_tags": []},
+				"goblin": {"prefer": ["rags"], "fallback_tags": []},
+				"hob": {"prefer": ["garen"], "fallback_tags": [], "optional": true},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "relc", "rags"], "flags": ["erin.sent_home_by_magnolia", "rags.disguised_visit_to_inn_underway"], "not_flags": []},
+			"depends_on": ["b2.magnolia_warns_erin_of_a_coming_world_war", "b2.rags_and_garen_approach_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.back_from_magnolias", "erin.threw_relc_out", "erin.protects_goblins_openly"], "relationship": [{"from": "relc", "to": "erin_solstice", "delta": -2}, {"from": "rags", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.39",
+				"confidence": "confirmed",
+				"note": "Magnolia's coach brings Erin back asleep, with a feast. Relc names three comrades killed by Goblins (Byssa, Invrss, Olivis). The hooded Hob is Garen; no one in the inn knows him."
+			},
+			"summary": "Home from Magnolia's at dusk, Erin welcomes Rags and a hooded Hob. Relc toasts friends he lost to Goblins and hurls his mug; Erin declares the Goblins under her protection, and when he mocks her she orders him out of the inn."
+		},
+		"b2.ryoka_returns_with_mrsha": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "mrsha"], "flags": ["mrsha.rescued"], "not_flags": []},
+			"depends_on": ["b2.ryoka_escapes_with_mrsha_gains_first_class", "b2.erin_throws_relc_out_to_protect_the_goblins"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.back_at_the_wandering_inn", "mrsha.at_the_wandering_inn", "erin.knows_of_the_goblin_lords_army"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.39",
+				"confidence": "confirmed",
+				"note": "Their food ran out a day before. Ryoka says the voice that offered her levels each night, which she always refused, has gone silent since the faeries saved her. 2.35 shows class messages ending in cancelled level-ups; whether she kept the class is left open."
+			},
+			"summary": "Late that night Ryoka stumbles to the door with Mrsha, both starving, her hand missing two fingers. She tells Erin of the Stone Spears, the faeries and the Goblin Lord who slaughtered the tribe, and swears the Goblins will pay."
+		},
+		"b2.erin_and_ryoka_fight_over_magnolia": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["ryoka.back_at_the_wandering_inn"], "not_flags": []},
+			"depends_on": ["b2.ryoka_returns_with_mrsha"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.fought_ryoka", "erin.made_up_with_ryoka", "ryoka.fears_magnolia_knows_of_earth"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.39", "confidence": "confirmed"},
+			"summary": "Ryoka is furious that Erin visited Magnolia and gave away where they come from. Shouting turns to blows; Erin's [Minotaur Punch] knocks the wind out of her and Mrsha bites Erin's ankle. Then Ryoka breaks down and weeps in Erin's arms."
+		}
+	},
+	"system": []
+}

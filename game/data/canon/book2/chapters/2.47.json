@@ -1,0 +1,111 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.47",
+	"events": {
+		"b2.erin_cooks_corusdeer_soup_against_the_cold": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["ryoka.reunited_with_erin", "erin.has_corusdeer_horns"], "not_flags": []},
+			"depends_on": ["b2.teriarch_teleports_ryoka_to_stitchworks"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.corusdeer_soup_recipe", "ryoka.warded_from_the_cold"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.47", "confidence": "confirmed"},
+			"summary": "In Octavia's wrecked kitchen Erin tames Corusdeer horn with flour and cold carrots into a fiery soup. Through [Wondrous Fare] it keeps Ryoka warm enough to walk the winter streets barefoot in shorts, and Octavia wants the recipe."
+		},
+		"b2.erin_and_ryoka_send_messages_to_liscor": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": ["b2.erin_cooks_corusdeer_soup_against_the_cold"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.knows_erin_is_safe", "krshia.told_ryoka_has_the_gift"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.47",
+				"confidence": "confirmed",
+				"note": "A costly message office on the Runners' Guild street, not the Mages' Guild. Clerks write every text out before it is sent, so nothing sent is private."
+			},
+			"summary": "They pay a clerk to send [Message] spells to Liscor: Erin tells Selys, Krshia and Klbkch she is well, and Ryoka tells Krshia alone that she has what the tribe needs and they must wait for her return."
+		},
+		"b2.erin_takes_over_the_frenzied_hares_kitchen": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"innkeeper": {"prefer": ["agnes"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"runner2": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true},
+				"barmaid": {"prefer": ["maran"], "fallback_tags": [], "optional": true},
+				"barmaid2": {"prefer": ["safry"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "agnes"], "flags": ["liscor.knows_erin_is_safe"], "not_flags": []},
+			"depends_on": ["b2.erin_and_ryoka_send_messages_to_liscor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.cooking_at_the_frenzied_hare", "ryoka.reunited_with_garia"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.47",
+				"confidence": "confirmed",
+				"note": "Agnes's husband Jerom is off-page and gets no npc entry. The barmaids are Maran and Safry. Garia stays at the Hare often because it is cheap."
+			},
+			"summary": "Over Ryoka's doubts, Erin picks the run-down Frenzied Hare, kept by Agnes, a former [Tailor], while her husband, the cook, is ill. Pitying the poor food, Erin takes over the kitchen, and Garia finds Ryoka there as hamburgers pour out."
+		},
+		"b2.bar_fight_with_the_brilliant_swords": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []},
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"runner2": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true},
+				"barmaid": {"prefer": ["maran"], "fallback_tags": [], "optional": true},
+				"barmaid2": {"prefer": ["safry"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["erin.cooking_at_the_frenzied_hare"], "not_flags": []},
+			"depends_on": ["b2.erin_takes_over_the_frenzied_hares_kitchen"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.won_the_hare_bar_fight", "brilliant_swords.thrown_out_of_the_hare"], "relationship": [{"from": "agnes", "to": "erin_solstice", "delta": 2}, {"from": "maran", "to": "erin_solstice", "delta": 1}, {"from": "safry", "to": "erin_solstice", "delta": 1}]},
+			"stage": {
+				"area": "celum_frenzied_hare",
+				"hours": [19, 23],
+				"when_flags": ["erin.stranded_north"],
+				"foes": [
+					{"enemy": "brilliant_swords_adventurer", "pos": [5, 6]},
+					{"enemy": "brilliant_swords_adventurer", "pos": [7, 6]},
+					{"enemy": "brilliant_swords_adventurer", "pos": [11, 6]},
+					{"enemy": "brilliant_swords_adventurer", "pos": [13, 6]},
+					{"enemy": "brilliant_swords_adventurer", "pos": [9, 8]}
+				],
+				"line": "A drunk Brilliant Sword slaps Erin as she turns away, and his four friends lurch up from their table.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [16, 3],
+						"allies": ["erin_solstice"],
+						"line": "Erin spins round and punches him clean out of his chair."
+					},
+					{
+						"after_seconds": 60,
+						"from": [10, 10],
+						"helpers": ["frenzied_hare_regular", "frenzied_hare_regular", "frenzied_hare_regular"],
+						"line": "Regulars who have had enough of the Brilliant Swords pile in behind Erin."
+					}
+				],
+				"note": "M8.7: four Bronze-rank and one Silver-rank adventurer. Ryoka and Garia fight too but have no npc_behaviour entry, so they keep story roles and are not placed. The regulars are a design helper wave; in the text most guests flee."
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.47", "confidence": "confirmed"},
+			"summary": "Five drunk adventurers, the Brilliant Swords of Celum, grope Safry and Maran. Erin asks them nicely to stop; when one slaps her rear, she breaks his nose and takes on all five, with Ryoka kicking and Garia hurling one into a wall."
+		}
+	},
+	"system": []
+}

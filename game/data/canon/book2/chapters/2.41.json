@@ -1,0 +1,54 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.41",
+	"events": {
+		"b2.klbkch_shares_hive_secrets_with_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"guard": {"prefer": ["klbkch"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["klbkch", "ryoka_griffin"], "flags": ["ryoka.took_on_the_gnoll_debt"], "not_flags": []},
+			"depends_on": ["b2.ryoka_takes_erins_debt_to_the_silverfangs"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.allied_with_klbkch", "ryoka.knows_of_the_god_in_rhir", "ryoka.knows_of_the_antinium_queens", "ryoka.knows_teriarch_burned_antinium_armies"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.41",
+				"confidence": "confirmed",
+				"note": "In the empty inn he checks no one is near, noting Magnolia's [Assassins] and [Scouts] hidden miles to the east. He offers Soldiers to guard the inn and will lie to his Queen for them. Keep all of this out of news."
+			},
+			"summary": "Klbkch tells Ryoka he knows she and Erin come from another world and hides it from his Queen. He shares Hive secrets: Listeners, six Queens under a Grand Queen, a God waking in Rhir that the Antinium fled, and Teriarch burning two of their armies."
+		},
+		"b2.ryoka_explains_the_level_cap_theory": {
+			"tier": 2,
+			"window": {"earliest": 69, "latest": 69, "confidence": "guess"},
+			"location": "liscor_park",
+			"roles": {
+				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []},
+				"guard": {"prefer": ["klbkch"], "fallback_tags": []},
+				"clerk": {"prefer": ["selys"], "fallback_tags": []},
+				"cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ryoka_griffin", "klbkch", "selys"], "flags": ["ryoka.allied_with_klbkch"], "not_flags": []},
+			"depends_on": ["b2.klbkch_shares_hive_secrets_with_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.level_cap_theory", "selys.keeps_the_level_secret", "klbkch.checks_hive_records"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.41",
+				"confidence": "confirmed",
+				"note": "Ryoka hopes the secret could pay the 50,000 gold debt. The park's playground is kept safe by spells a Wistram mage renews each year. Klbkch will check his Hive's records."
+			},
+			"summary": "Ryoka argues that levels are capped by the total across all of a person's classes, not by age, so extra classes stall the main one. Klbkch, far below his old peak, finds it fits; Selys, told at a warded playground, swears to keep it secret."
+		}
+	},
+	"system": [
+		{"who": "klbkch", "kind": "level", "name": "[Swordslayer]", "level": 21, "confidence": "confirmed", "note": "Secret, told to Ryoka. At his peak he was Level 44 [Swordslayer]."},
+		{"who": "klbkch", "kind": "level", "name": "[Commander]", "level": 18, "confidence": "confirmed"},
+		{"who": "klbkch", "kind": "level", "name": "[Diplomat]", "level": 11, "confidence": "confirmed"},
+		{"who": "klbkch", "kind": "level", "name": "[Assassin]", "level": 14, "confidence": "confirmed", "note": "At his peak he was Level 26 [Assassin]."}
+	]
+}

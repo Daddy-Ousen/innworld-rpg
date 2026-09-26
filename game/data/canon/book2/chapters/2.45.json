@@ -1,0 +1,39 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.45",
+	"events": {
+		"b2.ryoka_reaches_teriarch_and_punches_him": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "dragon": {"prefer": ["teriarch"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.running_to_teriarch"], "not_flags": []},
+			"depends_on": ["b2.ryoka_runs_north_after_erin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.paid_by_teriarch", "ryoka.healed_by_teriarch", "ryoka.punched_teriarch", "teriarch.showed_ryoka_his_true_form"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.45",
+				"confidence": "confirmed",
+				"note": "Frost Faeries follow her into the Passes. [Mend] does not restore the lost fingers. He asks if ring and letter reached Perril Chandler. She feels the run took over a day, or maybe hours; we keep it within day 71."
+			},
+			"summary": "Half-dead from a shoeless run, Ryoka reaches the cave. Teriarch mends her, checks his letter was delivered, and pays her 800 gold. When he tries to send her off, she punches his disguise in the nose, and he rears up in his true Dragon form."
+		},
+		"b2.ryoka_loses_a_riddle_game_to_teriarch": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "teriarch_cave",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "dragon": {"prefer": ["teriarch"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "teriarch"], "flags": ["ryoka.punched_teriarch"], "not_flags": []},
+			"depends_on": ["b2.ryoka_reaches_teriarch_and_punches_him"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.lost_riddle_game", "teriarch.scrying_for_erin"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.45", "confidence": "confirmed"},
+			"summary": "To win his help, she challenges him to the ancient game of riddles, staking the secret of her name. He solves even her paradoxes; when she gives up her pride and begs, he gently agrees to scry for Erin Solstice."
+		}
+	},
+	"system": []
+}

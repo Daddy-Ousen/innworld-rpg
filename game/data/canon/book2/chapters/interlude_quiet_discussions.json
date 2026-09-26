@@ -1,0 +1,70 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "interlude_quiet_discussions",
+	"events": {
+		"b2.magnolia_plans_to_bring_zel_north": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart"], "flags": ["erin.sent_home_by_magnolia"], "not_flags": []},
+			"depends_on": ["b2.magnolia_warns_erin_of_a_coming_world_war"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.plans_to_recruit_zel", "magnolia.knows_ryoka_survived"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_quiet_discussions",
+				"confidence": "confirmed",
+				"note": "Scouts rate the Goblin Lord's host near a Walled City's standing army, with 100+ Hobs and at least ten spellcasters. Magnolia will send Zel a [Message]. Ressa expects Ryoka back in 'two days', but 2.39 has her arrive that night."
+			},
+			"summary": "After Erin leaves, Magnolia and Ressa weigh the Goblin Lord's vast army and plan to win the disgraced Zel Shivertail to her side. Ressa reports that Theofore has found Ryoka, slowed, two fingers gone, with a rescued Gnoll cub."
+		},
+		"b2.niers_burns_magnolias_letters_before_battle": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "baleros",
+			"roles": {
+				"strategist": {"prefer": ["niers_astoragon"], "fallback_tags": []},
+				"student": {"prefer": ["umina"], "fallback_tags": [], "optional": true},
+				"student2": {"prefer": ["cameral"], "fallback_tags": [], "optional": true},
+				"student3": {"prefer": ["marian"], "fallback_tags": [], "optional": true},
+				"student4": {"prefer": ["venaz"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["niers_astoragon"], "flags": ["baleros.niers_astoragon_chess_rival_of_erin"], "not_flags": []},
+			"depends_on": ["b2.niers_astoragon_revealed_as_opponent"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["niers.traced_chess_rival_to_liscor", "niers.ignores_magnolias_letters"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_quiet_discussions",
+				"confidence": "confirmed",
+				"note": "Placeholder day (remote thread). Niers is a six-inch Fraerling nicknamed the Titan; he hides his level, but it is given as Level 64, [Grandmaster Strategist]. The book2 npcs entry (Human, Level 63 [Strategist]) predates this chapter."
+			},
+			"summary": "On the eve of battle with General Grimvol in Baleros, Niers has his students burn Magnolia's scented letters, walks Umina, Cameral, Marian and Venaz through a trap he has already turned, and admits he has traced his unknown chess rival to Liscor."
+		},
+		"b2.blackmage_opens_a_secret_earther_chat": {
+			"tier": 2,
+			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
+			"location": "wistram_academy",
+			"roles": {"mage": {"prefer": ["blackmage"], "fallback_tags": []}},
+			"requires": {"alive": ["blackmage"], "flags": ["earthers.magic_call_held"], "not_flags": []},
+			"depends_on": ["b2.earthers_meet_in_a_magic_call"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["earthers.secret_chat_formed", "wistram.courting_earthers"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "interlude_quiet_discussions",
+				"confidence": "confirmed",
+				"note": "Placeholder day. The others are strider_479, Humble Actor (a [Pop Star]) and Loran Grimnar. They fail to reach 'batman' (Ryoka, see interlude_the_call) and leave out the America Group as too big to trust. Only BlackMage gets an npc entry."
+			},
+			"summary": "An Earther at Wistram who calls himself BlackMage gathers three others in a smaller, guarded chat. With Wistram's mages behind him, he asks them to trade arrival stories and class clues, and to band together."
+		}
+	},
+	"system": [
+		{"who": "niers_astoragon", "kind": "class", "name": "[Grandmaster Strategist]", "level": 64, "confidence": "confirmed", "note": "Stated: Level 64; an odd subclass of [Strategist] he gained. He keeps the level hidden from others."}
+	]
+}

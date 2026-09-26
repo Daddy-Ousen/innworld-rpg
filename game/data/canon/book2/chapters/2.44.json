@@ -1,0 +1,114 @@
+{
+	"schema_version": 1,
+	"book": 2,
+	"chapter": "2.44",
+	"events": {
+		"b2.erin_wakes_stranded_and_fights_off_wolves": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "north_of_the_high_passes",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "hunter": {"prefer": ["jerad_riels"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.stranded_north"], "not_flags": []},
+			"depends_on": ["b2.toren_drags_erin_north_and_leaves_her"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.fought_off_wolves", "erin.scared_off_a_bear", "erin.met_jerad_riels"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.44",
+				"confidence": "confirmed",
+				"note": "Day guess: she wakes with the sun high, which reads like day 70, but 2.47 has Ryoka reach Celum the day Erin does, and Ryoka only sets out on day 71. Erin admits she slept a very long time."
+			},
+			"summary": "Erin wakes alone on flat snowy land north of the High Passes. A wolf pack circles; she kicks, yells and uses [Minotaur Punch] until they slink off, then [Loud Voice] turns a bear's charge. A hunter, Jerad Riels, helps her find the road to Celum."
+		},
+		"b2.garen_sends_goblins_to_kill_erin": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "north_of_the_high_passes",
+			"roles": {"hob": {"prefer": ["garen"], "fallback_tags": []}},
+			"requires": {"alive": ["garen"], "flags": ["erin.stranded_north"], "not_flags": []},
+			"depends_on": ["b2.toren_drags_erin_north_and_leaves_her"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["garen.hit_squad_hunts_erin"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.44",
+				"confidence": "confirmed",
+				"note": "Twelve Goblins and one Hob, told not to let their Chieftain know. They never find her in this book."
+			},
+			"summary": "Garen, who saw the sledge carry Erin north and kept quiet, has secretly sent a squad of his warriors to kill the [Innkeeper] behind Rags' back. With no tracker among them, they lose her trail and wander in circles."
+		},
+		"b2.erin_reaches_celum": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.fought_off_wolves"], "not_flags": []},
+			"depends_on": ["b2.erin_wakes_stranded_and_fights_off_wolves"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.in_celum", "erin.paid_the_celum_toll"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.44",
+				"confidence": "confirmed",
+				"note": "At the gate she learns she is more than a hundred miles north of Liscor. The guard she nicknames for his lip fuzz is Wesle (book1)."
+			},
+			"summary": "Pushing her sledge down the road, Erin reaches Celum's gate. A young guard with a sad moustache weighs her jars and charges a toll on the honey and the still-twitching Ashfire Bees, then points her toward the shops."
+		},
+		"b2.erin_beats_the_celum_muggers": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "boy": {"prefer": ["grev"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": ["b2.erin_reaches_celum"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.beat_celum_muggers", "grev.spared_by_erin"], "relationship": [{"from": "wesle", "to": "erin_solstice", "delta": 1}]},
+			"stage": {
+				"area": "celum_square",
+				"hours": [14, 18],
+				"when_flags": ["erin.stranded_north"],
+				"foes": [
+					{"enemy": "celum_mugger", "pos": [2, 9]},
+					{"enemy": "celum_mugger", "pos": [4, 10]},
+					{"enemy": "celum_mugger", "pos": [3, 11]}
+				],
+				"line": "A boy darts past three men lounging in a side street; they fan out, blades drawn, to trap the newcomer.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [6, 10],
+						"allies": ["erin_solstice"],
+						"line": "Erin sets down her jars and raises her fists."
+					},
+					{
+						"after_seconds": 60,
+						"from": [16, 17],
+						"allies": ["wesle"],
+						"line": "The Watch comes running, led by a young guard with a wispy moustache."
+					}
+				],
+				"note": "M8.7: the west street of celum_square stands in for the alley. Grev has no npc_behaviour entry, so he is not placed. In the text the Watch only comes after the fight; the Wesle wave is a softened version."
+			},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.44", "confidence": "confirmed"},
+			"summary": "A street boy, Grev, offers to guide her and leads her down an alley to three armed men who pay him. One is a former Bronze-rank adventurer. Erin knocks them all out with her fists and her bee jar, then makes Grev fetch the Watch and speaks up for him."
+		},
+		"b2.wesle_brings_erin_to_stitchworks": {
+			"tier": 2,
+			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"guard": {"prefer": ["wesle"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["erin.beat_celum_muggers"], "not_flags": []},
+			"depends_on": ["b2.erin_beats_the_celum_muggers"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.met_octavia", "octavia.covets_erins_ingredients"]},
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.44", "confidence": "confirmed"},
+			"summary": "Wesle walks Erin to Stitchworks, where Octavia snatches up her jar of bees, talks nonstop and tries to sell her a partnership in experiments, until Erin mentions she is an [Innkeeper]."
+		}
+	},
+	"system": []
+}

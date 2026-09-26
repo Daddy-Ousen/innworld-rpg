@@ -140,7 +140,7 @@
 			"inn_work_actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "serve_guests",
 				"clean_room", "sweep_floor", "wash_dishes", "repair_furniture", "chop_wood", "carry_water"],
 			"hungry_line": "You went to bed hungry. Your max HP is down %d%% until you eat.",
-			"fed_line": "Erin feeds you after your work at the inn."
+			"fed_line": "You eat at the inn after your work."
 		}
 	}
 }

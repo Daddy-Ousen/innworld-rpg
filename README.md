@@ -23,9 +23,10 @@ Work in progress. Placeholder graphics, no audio.
 | M5 | Combat: Goblins, Rock Crabs, Razorbeaks; improvised weapons; knock-out, no death | Done |
 | M6 | Vertical slice: save slots, journal, player hooks on canon events, canon fights | Done |
 | M7 | Rest of Book 1 as canon data; big battles | Done |
-| M8 | Book 2 data, audio, polish | Next |
+| M8 | Book 2 as canon data; Celum map and start; economy, hunger and travel; winter | Done |
 
 Book 1 canon is complete: chapters 1.00–1.63 (days 1–41), 151 events, 50 NPCs, 44 locations.
+Book 2 canon is complete: Interlude – The Call to 2.48 (days 41–71), 207 events, 48 NPCs, 23 locations. You can start in Liscor or Celum.
 Details: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Play
