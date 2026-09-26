@@ -7,8 +7,8 @@ extends GutTest
 ## First day with Book 3 canon (Laken's placeholder thread starts on day 71).
 const FIRST_DAY := 71
 ## Last day with extracted Book 3 canon (M9.1: 3.00 E – 3.05 L, 1.00 D, 1.01 D;
-## M9.2: 3.06 L – 3.14; M9.3: 3.15 – 3.20 T).
-const LAST_DAY := 80
+## M9.2: 3.06 L – 3.14; M9.3: 3.15 – 3.20 T; M9.4: 3.21 L – 3.25, the end of Book 3).
+const LAST_DAY := 87
 
 var _db: DataDb
 var _base_json := ""
@@ -50,10 +50,11 @@ func _where(gs: GameState, id: String) -> String:
 func test_book3_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b3_events().size(), 117)
+	assert_gte(_b3_events().size(), 155)
 	for npc: String in ["laken_godart", "durene", "prost", "yesel", "ivolethe", "geneva_scala", "okasha",
 			"thriss", "belgrade", "anand", "garry", "nemor", "frostwing", "gamel", "jasi", "ylawes_byres",
-			"esthelm_florist", "grunter", "headscratcher", "badarrow", "numbtongue", "rabbiteater"]:
+			"esthelm_florist", "grunter", "headscratcher", "badarrow", "numbtongue", "rabbiteater",
+			"xrn", "tersk", "pivr", "ijvani", "adelynn", "robert"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
 	for loc: String in ["riverfarm", "celum_adventurers_guild", "ocre", "first_landing", "road_to_invrisil"]:
 		assert_true(_db.canon.locations.has(loc), loc)
@@ -85,9 +86,9 @@ func test_book3_runs_as_canon() -> void:
 			.map(func(n: Dictionary) -> String: return n["event"])
 	heard.sort()
 	assert_eq(heard, news_events, "one news line per event with news")
-	# The state at the end of M9.3.
+	# The state at the end of Book 3 (M9.4).
 	for f: String in ["laken.emperor", "durene.revealed_half_troll", "durene.paladin", "laken.found_buried_gold",
-			"horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_ocre", "horns_of_hammerad.has_albez_treasure",
+			"horns_of_hammerad.has_albez_treasure",
 			"yvlon.armor_fused_to_arms", "erin.makes_corusdeer_soup", "ryoka.banned_from_runners_guild",
 			"ryoka.gone_to_magnolia", "magnolia.allied_with_ryoka", "magnolia.gone_to_first_landing",
 			"liscor_hive.soldiers_died_for_heaven", "pawn.cares_for_the_soldiers", "pawn.allowed_to_pray",
@@ -96,15 +97,22 @@ func test_book3_runs_as_canon() -> void:
 			"celum_runners_guild.buried_in_snow", "ryoka.asked_to_leave_celum", "ryoka.learning_to_run_like_the_wind",
 			"liscor.goblin_army_passed", "wandering_inn.reopened_by_lyonette", "pawn.will_tell_klbkch_of_his_class",
 			"geneva.died_and_lives_through_okasha", "geneva.called_the_last_light",
-			"ryoka.in_celum", "erin.in_celum", "lyonette.works_at_inn", "mrsha.in_selys_care",
+			"ryoka.in_celum", "lyonette.works_at_inn", "mrsha.at_the_wandering_inn",
 			"erin.staged_a_play", "jasi.works_at_frenzied_hare", "grev.lives_at_frenzied_hare", "ylawes.at_esthelm",
 			"esthelm.saved", "goblin_lord.vanguard_routed", "silver_swords.at_esthelm", "toren.heading_to_liscor",
-			"redfang_band.left_esthelm"]:
+			"redfang_band.left_esthelm", "lyonette.has_ashfire_honey", "lyonette.raises_a_bee_grub",
+			"liscor_hive.soldiers_painted", "antinium_delegation.at_liscor", "zel.at_wandering_inn",
+			"toren.link_severed", "erin.staged_frozen", "erin.has_albez_door", "albez_door.linked_to_frenzied_hare",
+			"erin.left_celum", "erin.on_wagon_south", "horns_of_hammerad.left_celum"]:
 		assert_true(gs.flags.has(f), f)
 	for f: String in ["ryoka.gained_first_class", "celum.earther_stood_with_ryoka",
 			"wandering_inn.earther_kept_lyonette_going", "frenzied_hare.earther_sat_with_ryoka",
 			"horns_of_hammerad.trapped_in_albez", "pawn.may_not_pray", "frenzied_hare.earther_saw_the_play",
-			"esthelm.earther_held_the_barricade"]:
+			"esthelm.earther_held_the_barricade", "bee_cave.earther_helped_lyonette",
+			"wandering_inn.earther_saw_the_painted_soldiers", "wandering_inn.earther_met_zel",
+			"frenzied_hare.earther_saw_frozen", "celum.earther_saw_erin_off",
+			"horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_ocre", "horns_of_hammerad.in_celum",
+			"erin.in_celum", "mrsha.in_selys_care"]:
 		assert_false(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "thriss"), "Okasha killed Thriss")
 	assert_true(gs.world.is_alive(_db.canon, "geneva_scala"), "Geneva lives on through Okasha")
@@ -114,15 +122,17 @@ func test_book3_runs_as_canon() -> void:
 		assert_false(gs.world.is_alive(_db.canon, npc), npc + " died at Esthelm")
 	for npc: String in ["ylawes_byres", "headscratcher", "badarrow", "numbtongue", "rabbiteater", "toren"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
-	# That evening Lyonette keeps the inn; Ryoka has gone north to Magnolia,
-	# the Horns are far away in Ocre and Mrsha is with Selys.
+	# That evening Lyonette keeps the inn with Mrsha and Zel as her guest;
+	# Ryoka has gone north to Magnolia, and Erin and the Horns are on the
+	# wagon south.
 	for i in 200:
 		if gs.clock.minute() >= 20 * 60:
 			break
 		Commands.wait(gs, _db, 3600)
 	assert_gte(gs.clock.minute(), 20 * 60, "evening")
-	assert_eq(_where(gs, "lyonette").get_slice(" ", 0), "inn_interior", "Lyonette keeps the inn")
-	for npc: String in ["ryoka_griffin", "ceria_springwalker", "pisces", "ksmvr", "mrsha"]:
+	for npc: String in ["lyonette", "mrsha", "zel_shivertail"]:
+		assert_eq(_where(gs, npc).get_slice(" ", 0), "inn_interior", npc + " is at the inn")
+	for npc: String in ["ryoka_griffin", "ceria_springwalker", "pisces", "ksmvr", "yvlon_byres", "erin_solstice"]:
 		assert_eq(_where(gs, npc), "off map", npc)
 
 
@@ -132,7 +142,8 @@ func test_remote_threads_do_not_need_liscor_or_celum() -> void:
 		assert_eq(Commands.kill_npc(gs, _db, npc), "", npc)
 	ToyCanon.sleep_through(gs, _db, LAST_DAY)
 	for id: String in ["b3.laken_makes_durene_a_paladin", "b3.baleros_hears_of_the_last_light",
-			"b3.laken_sets_out_for_invrisil"]:
+			"b3.laken_sets_out_for_invrisil", "b3.niers_broods_over_the_silent_chessboard",
+			"b3.venitra_and_ijvani_lose_their_way"]:
 		assert_eq(gs.world.status(id), Director.DONE, id)
 	for id: String in ["b3.horns_run_out_of_coin_at_albez", "b3.ryoka_befriends_ivolethe",
 			"b3.ryoka_beats_persua_in_the_runners_guild", "b3.lyonette_reopens_the_inn"]:
