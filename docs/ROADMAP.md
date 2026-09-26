@@ -106,5 +106,16 @@ snow look, cold rules and Frost Fairies on the map, as their own engine step (M8
 a new player can start in Celum or Liscor and travel between them by ride or on foot, and earn, spend, eat
 and rent a room; each batch has a hook or stage the player can use; the validator reports 0 errors.
 
+## M9 — Book 3 (Flowers of Esthelm)
+Plan approved 2026-09-26 (ADR 0016). One branch + PR each. Book 3 comes in 4 canon batches.
+Laken (Riverfarm) and Geneva (Baleros) are events only, like Tom on Rhir. Esthelm becomes a playable map
+with the siege as a wave stage. Lyonette, Mrsha and Zel get NPC schedules at the Liscor inn.
+- [x] M9.1 Canon 3.00 E – 3.05 L + 1.00 D / 1.01 D (days ~71–76): Laken becomes [Emperor]; the Horns enter Albez; Ryoka, Erin and Ivolethe in Celum; Ryoka beats Persua; Lyonette reopens the inn; Geneva the [Doctor]. Lyonette and Mrsha schedules
+- [ ] M9.2 Canon 3.06 L – 3.14 (days ~76–82): Pawn and the Soldiers; the Albez treasury; Ocre; Ryoka meets Magnolia; Nemor's attack; Laken claims Riverfarm
+- [ ] M9.3 Canon 3.15 – 3.20 T (days ~76–81): Erin's plays; Toren, the Redfang Goblins, the Florist and Ylawes at Esthelm; new `esthelm_ruins` map and the last battle as a wave stage
+- [ ] M9.4 Canon 3.21 L – 3.25 (days ~78–90): Lyonette's bees and classes; the painted Soldiers; the Antinium delegation; Scalelings and Zel; the Horns in Celum; the Albez door; Erin leaves Celum
+**Done when:** all Book 3 canon is event data and `sim_canon_book3` runs to the last Book 3 day with drift 0;
+Esthelm is playable with its siege stage; each batch has a hook or stage the player can use; the validator reports 0 errors.
+
 ## Later
 - Audio · polish (art tiles, balance, missing NPC schedules) · optional LLM flavour layer
