@@ -27,6 +27,24 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.26G", "confidence": "confirmed", "note": "A lone mountain north of the High Passes, near Invrisil (3.26G). Not the Goblin lair of Book 2 (goblin_mountain_lair). No map."},
 			"summary": "A lone mountain in the north of Izril, hollowed into an old Dwarf city, where the Great Chieftain Tremborag rules thousands of Goblins. It has halls, an armoury, a strict pecking order and a hall where captives are held."
+		},
+		"celum_liscor_road": {
+			"name": "The road south of Celum",
+			"kind": "wild",
+			"parent": "north_izril",
+			"tags": ["road", "snow", "travel"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "The wagon is more than 30 miles south of Celum on the way to Liscor when the old man stops it. No map."},
+			"summary": "The long snowy road from Celum south toward Esthelm and Liscor, where wagons and armies alike pass in winter."
+		},
+		"village_of_the_dead": {
+			"name": "The village of the dead",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": ["village", "undead", "danger", "snow"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "Unnamed in the text. Zombies rise again after they fall, and Ghouls hunt there. No map."},
+			"summary": "A dead Human village in the north held by zombies that will not stay down and by Ghouls. Rags' tribe loses many warriors there."
 		}
 	}
 }

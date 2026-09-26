@@ -1,0 +1,51 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.32",
+	"events": {
+		"b4.ceria_tells_erin_of_wistram": {
+			"tier": 2,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "frenzied_hare",
+			"roles": {"storyteller": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["ceria_springwalker", "erin_solstice"], "flags": ["erin.met_teriarch"], "not_flags": []},
+			"depends_on": ["b4.teriarch_hides_the_wagon_in_a_snowstorm"],
+			"on_fail": ["cancel"],
+			"effects": {
+				"set_flags": ["erin.knows_of_wistram", "ceria.told_the_wistram_story"],
+				"relationship": [{"from": "erin_solstice", "to": "ceria_springwalker", "delta": 1}, {"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}]
+			},
+			"stage": {
+				"area": "celum_frenzied_hare",
+				"hours": [20, 24],
+				"kind": "scene",
+				"when_flags": ["erin.on_wagon_south"],
+				"npcs": [
+					{"npc": "ceria_springwalker", "pos": [11, 7]},
+					{"npc": "erin_solstice", "pos": [13, 7]}
+				],
+				"line": "At a corner table the half-Elf from the Horns has eaten her fill. Over the last of the wine she starts to talk about an island of mages, and the young innkeeper stops clearing plates to listen.",
+				"note": "M10.2: a scene. The frame of the Wistram Days interludes (told at the start of 3.32). Hours are guesses (after an evening play; it ends just past midnight). Maran shows out the late drinkers; she has no npc record."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_the_wistram_story",
+					"did": [
+						{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["frenzied_hare"], "npc": ["ceria_springwalker", "erin_solstice"]}}
+					],
+					"days": [89, 89],
+					"then": "change",
+					"effects": {
+						"set_flags": ["frenzied_hare.earther_heard_of_wistram"],
+						"relationship": [{"from": "ceria_springwalker", "to": "player", "delta": 2}, {"from": "erin_solstice", "to": "player", "delta": 1}]
+					},
+					"news": "When Ceria told Erin how she and Pisces left Wistram, another Human sat at the Frenzied Hare's corner table and heard it all."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Night 89 is a guess: the first night of the Horns' straw draw, after the road (3.30). Only Erin hears it; Pisces, Yvlon and Ksmvr sleep on the wagon. Ceria admits she made some parts bigger. The story itself is the seven Wistram Days interludes: history, no events (ADR 0017)."},
+			"summary": "Back at the Frenzied Hare for the night, Ceria is fed by Erin and tells her the story of Wistram: how she and Pisces met there, their teacher Illphres, and why they both had to leave."
+		}
+	},
+	"system": []
+}
