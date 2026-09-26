@@ -20,11 +20,12 @@ extends RefCounted
 const SLEEP := "sleep"
 const TAKE := "take"
 ## Menu picks for the presentation (M8.6): "buy:<good>", "sell:<good>",
-## "use:<good>" (from the bag) and RIDE. They are not actions.
+## "use:<good>" (from the bag), RIDE and PORTAL (M10.0). They are not actions.
 const BUY := "buy:"
 const SELL := "sell:"
 const USE_GOOD := "use:"
 const RIDE := "ride"
+const PORTAL := "portal"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
@@ -39,7 +40,8 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		out.append({"id": o["id"], "name": o["name"], "actions": (o["actions"] as Array).duplicate(),
 			"npc": false, "sleep": o.get("sleep", false), "item": o.get("item", ""),
 			"price": int(o.get("price", 0)), "trades": Economy.trades(gs, db, o),
-			"ride": (o.get("ride", {}) as Dictionary).duplicate()})
+			"ride": (o.get("ride", {}) as Dictionary).duplicate(),
+			"portal": (o.get("portal", {}) as Dictionary).duplicate()})
 	for id in NpcSim.near_player(gs):
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
@@ -104,7 +106,7 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 
 ## The map object `id` of `area` (its JSON), or {}.
 static func object_of(db: DataDb, area: String, id: String) -> Dictionary:
-	for o: Dictionary in db.maps.areas[area]["objects"]:
+	for o: Dictionary in db.maps.objects_on(area):
 		if o["id"] == id:
 			return o
 	return {}

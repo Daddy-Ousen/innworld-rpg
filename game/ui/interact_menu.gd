@@ -2,7 +2,7 @@
 ## bed (Interact.SLEEP; "Rent a room" for a paid one) and "Take <item>" for
 ## an object with an item (Interact.TAKE). A shop lists its trades instead
 ## of the bare buy and sell actions (Interact.BUY / SELL + good), a wagon
-## its ride (Interact.RIDE). open_bag lists the goods in the bag
+## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
 ## (Interact.USE_GOOD + good). Enter or a double click picks one; Escape
 ## closes. Presentation only.
 class_name InteractMenu
@@ -34,6 +34,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 			var i := _items.add_item("%s — Ride to %s (%s, %d h)" % [o["name"], db.maps.areas[r["to"]]["name"],
 					Economy.format(db, int(r["price"])), int(r["minutes"]) / 60])
 			_items.set_item_metadata(i, [o["id"], Interact.RIDE])
+		if not (o.get("portal", {}) as Dictionary).is_empty():
+			var i := _items.add_item("%s — To %s (%d left today)" % [o["name"],
+					db.maps.areas[o["portal"]["to"]]["name"], Portal.trips_left(Session.gs, db)])
+			_items.set_item_metadata(i, [o["id"], Interact.PORTAL])
 		for action_id: String in o["actions"]:
 			if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
 				continue

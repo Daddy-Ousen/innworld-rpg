@@ -78,6 +78,14 @@
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]
 	},
+	"portal": {
+		"note": "M10.0 (ADR 0017). The Albez door. Before Erin's [Magical Grounds] (Level 30, 3.33) it has almost no mana, so its power_flags keep it shut to the player. After that the book gives about 16-30 people a day for everyone; the player's share is a design number. A trip is instant in the text; one minute here so it is a travel action.",
+		"trips_per_day": 4,
+		"minutes": 1,
+		"line": "You step through the door and come out in %s.",
+		"dry_line": "The door opens onto a blank wall. It has no mana to spare.",
+		"spent_line": "The door opens onto a blank wall. It has carried enough people for today."
+	},
 	"winter": {
 		"flag": "izril.winter",
 		"warned_flag": "player.warned_of_cold",

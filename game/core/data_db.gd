@@ -32,6 +32,8 @@ const ECONOMY_FIELDS := ["copper_per_silver", "trade_minutes", "eat_minutes", "h
 const ECONOMY_REST_FIELDS := ["bed", "floor", "refused_line", "poor_line"]
 const ECONOMY_HUNGER_FIELDS := ["step", "floor", "inn_location", "inn_npc", "inn_work_actions",
 	"hungry_line", "fed_line"]
+## rules.portal (M10.0, optional).
+const PORTAL_FIELDS := ["trips_per_day", "minutes", "line", "dry_line", "spent_line"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
 	"race_limits", "loss", "consolidation", "canon_ref"]
 const SKILL_FIELDS := ["name", "rarity", "pools", "tag_affinity", "effects", "canon_ref"]
@@ -141,6 +143,21 @@ func _validate_rules() -> void:
 		_validate_winter(rules["winter"])
 	if rules.has("economy"):  # optional (M8.6): toy dbs have no economy
 		_validate_economy(rules["economy"])
+	if rules.has("portal"):  # optional (M10.0): only maps with a portal need it
+		_validate_portal(rules["portal"])
+
+
+## rules.portal (M10.0): see Portal.
+func _validate_portal(p: Variant) -> void:
+	if not p is Dictionary:
+		errors.append("rules.portal: must be an object.")
+		return
+	for field: String in PORTAL_FIELDS:
+		if not (p as Dictionary).has(field):
+			errors.append("rules.portal: missing '%s'." % field)
+			return
+	if int(p["trips_per_day"]) < 0 or int(p["minutes"]) < 1:
+		errors.append("rules.portal: trips_per_day must be >= 0 and minutes >= 1.")
 
 
 ## rules.winter (M8.W): see Winter.

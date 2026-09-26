@@ -158,7 +158,7 @@ func _show_area(id: String) -> void:
 	for e: Dictionary in m["exits"]:
 		var r := MapDb.rect_of(e["at"])
 		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
-	for o: Dictionary in m["objects"]:
+	for o: Dictionary in _maps.objects_on(id):
 		var at := Vector2(int(o["at"][0]), int(o["at"][1])) * TILE
 		_rect(at + Vector2(2, 2), Vector2(TILE - 4, TILE - 4), OBJECT_COLOR)
 		var label := Label.new()

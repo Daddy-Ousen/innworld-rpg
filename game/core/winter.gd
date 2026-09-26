@@ -47,7 +47,7 @@ static func is_warm(gs: GameState, db: DataDb) -> bool:
 	if db.maps.is_indoor(area):
 		return true
 	var radius := int(rules(db)["cold"]["warm_radius"])
-	for o: Dictionary in db.maps.areas[area]["objects"]:
+	for o: Dictionary in db.maps.objects_on(area):
 		if bool(o.get("warm", false)):
 			var d := Vector2i(int(o["at"][0]), int(o["at"][1])) - gs.player.pos()
 			if maxi(absi(d.x), absi(d.y)) <= radius:
