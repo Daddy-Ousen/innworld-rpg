@@ -122,7 +122,18 @@
 			"canon_ref": {"book": 2, "chapter": "2.47", "confidence": "confirmed", "note": "Regular drinkers of the Frenzied Hare who join Erin, Ryoka and Garia against the Brilliant Swords. Only a stage helper on the player's side (M8.7), never hostile, never in a spawn."},
 			"tags": ["human"], "color": "#8a7a5a", "danger": 0.3, "behaviour": "pack",
 			"hp": 12, "armor": 0, "accuracy": 3, "evasion": 2, "damage": [1, 3], "act_seconds": 6,
-			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": []}
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": []},
+		"persua_courier": {"name": "Persua", "confidence": "guess",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "The Celum Runner, newly made a Courier, fast with [Double Step] but not yet Level 20. She trips Ryoka in the guild and loses the fight that follows. Only in the M9.1 Runners' Guild canon stage, never in a spawn. Design: she cannot die on the map; beaten, she runs out of the guild (escape)."},
+			"tags": ["human", "runner"], "color": "#c26a8a", "danger": 0.6, "behaviour": "pack",
+			"hp": 18, "armor": 0, "accuracy": 5, "evasion": 7, "damage": [1, 3], "act_seconds": 5,
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": [],
+			"escape": {"below": 0.4, "line": "Persua staggers to the door, nose bleeding, and swears she will kill the Runner girl. Then she is gone in a double step."}},
+		"celum_runner": {"name": "Celum Runner", "confidence": "guess",
+			"canon_ref": {"book": 3, "chapter": "3.04", "confidence": "confirmed", "note": "Runners of the Celum guild who side with Persua; one grabs Ivolethe and asks for a ransom. Only in the M9.1 Runners' Guild canon stage, never in a spawn. Design: street-level fighters who run when hurt."},
+			"tags": ["human", "runner"], "color": "#9a7a6a", "danger": 0.4, "behaviour": "pack",
+			"hp": 10, "armor": 0, "accuracy": 3, "evasion": 4, "damage": [1, 2], "act_seconds": 6,
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.4, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",
