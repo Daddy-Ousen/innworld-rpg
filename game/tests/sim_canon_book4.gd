@@ -7,8 +7,8 @@ extends GutTest
 ## First day with Book 4 canon (3.26 G and 3.27 M both fall on day 85, before
 ## the end of Book 3).
 const FIRST_DAY := 85
-## Last day with extracted Book 4 canon (M10.1: 3.26 G – 3.29 G).
-const LAST_DAY := 90
+## Last day with extracted Book 4 canon (M10.2: to 3.31 G and the 3.32 frame).
+const LAST_DAY := 92
 
 var _db: DataDb
 var _base_json := ""
@@ -46,10 +46,11 @@ func _area_of(gs: GameState, id: String) -> String:
 func test_book4_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b4_events().size(), 17)
-	for npc: String in ["tremborag", "ulvama", "noears", "pyrite", "redscar", "greybeard"]:
+	assert_gte(_b4_events().size(), 29)
+	for npc: String in ["tremborag", "ulvama", "noears", "pyrite", "redscar", "greybeard", "termin", "poisonbite",
+			"cognita", "illphres", "calvaron", "montressa_du_valeross", "beatrice", "charles_de_trevalier", "amerys", "feor"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
-	for loc: String in ["liscor_dungeon_rift", "tremborags_mountain", "north_izril"]:
+	for loc: String in ["liscor_dungeon_rift", "tremborags_mountain", "north_izril", "celum_liscor_road", "village_of_the_dead"]:
 		assert_true(_db.canon.locations.has(loc), loc)
 	# Tremborag's mountain is not the Goblin lair of Book 2.
 	assert_ne(_db.canon.locations["tremborags_mountain"]["parent"], "goblin_mountain_lair")
@@ -84,12 +85,18 @@ func test_book4_runs_as_canon() -> void:
 			"tremborag.captives_freed", "garen.stays_with_tremborag", "rags.pike_squares", "north_izril.knows_of_tremborag",
 			"griffon_hunt.allied_with_halfseekers", "mrsha.met_the_free_queen", "mrsha.called_a_doombringer",
 			"mrsha.rescued_from_the_dungeon", "liscor.dungeon_rift_found", "lyonette.searched_for_mrsha",
-			"toren.in_liscor_dungeon", "toren.spared_mrsha", "toren.heading_to_liscor", "mrsha.at_the_wandering_inn"]:
+			"toren.in_liscor_dungeon", "toren.spared_mrsha", "toren.heading_to_liscor", "mrsha.at_the_wandering_inn",
+			# M10.2: the door anchor moves, the old man on the road, the Wistram story, Rags goes south.
+			"albez_door.anchor_at_stitchworks", "octavia.researches_baking_powder", "erin.met_teriarch",
+			"ceria.teriarch_marked_a_spell", "erin.knows_of_wistram", "rags.class_chieftain", "rags.heading_south",
+			"rags.wants_to_see_erin", "north_izril.goblins_rob_caravans", "rags.tribe_turns_north"]:
 		assert_true(gs.flags.has(f), f)
 	for f: String in ["mrsha.missing", "mrsha.fell_into_the_dungeon", "mrsha.ran_from_liscor", "rags.at_tremborags_mountain",
-			"floodplains.earther_searched_for_mrsha", "dungeon_rift.earther_held_the_rope"]:
+			"floodplains.earther_searched_for_mrsha", "dungeon_rift.earther_held_the_rope",
+			"albez_door.linked_to_frenzied_hare", "rags.leader_class", "frenzied_hare.earther_heard_of_wistram",
+			"albez_door.at_wandering_inn", "erin.magical_grounds"]:
 		assert_false(gs.flags.has(f), f)
-	for npc: String in ["toren", "mrsha", "rags", "garen", "tremborag", "pyrite", "brunkr"]:
+	for npc: String in ["toren", "mrsha", "rags", "garen", "tremborag", "pyrite", "brunkr", "teriarch", "octavia"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 	# Mrsha sleeps at the inn again; Rags is far away in the north.
 	Commands.wait(gs, _db, 3600)
@@ -122,3 +129,26 @@ func test_without_tremborag_the_north_is_quiet() -> void:
 		assert_eq(gs.world.status(id), Director.CANCELLED, id)
 	assert_true(Director.happened(gs.world.status("b4.mrsha_rescued_from_the_dungeon")), "Liscor's day is its own")
 	assert_gt(gs.world.drift, 0.0)
+
+
+func test_wistram_days_are_history_only() -> void:
+	var gs := _fresh()
+	for npc: String in ["illphres", "calvaron"]:
+		assert_false(gs.world.is_alive(_db.canon, npc), npc + " died before the story")
+	for npc: String in ["cognita", "montressa_du_valeross", "beatrice", "charles_de_trevalier", "amerys", "feor"]:
+		assert_true(gs.world.is_alive(_db.canon, npc), npc)
+	# No Wistram Days chapter puts events on the calendar.
+	for id: String in _db.canon.events:
+		var ch: String = _db.canon.events[id]["canon_ref"]["chapter"]
+		assert_false(ch.begins_with("interlude_wistram_days"), id)
+
+
+func test_the_road_goes_on_without_octavia() -> void:
+	var gs := _fresh()
+	# Killed after 3.25 (day 87), where Erin still says goodbye to her.
+	ToyCanon.sleep_through(gs, _db, 88)
+	assert_eq(Commands.kill_npc(gs, _db, "octavia"), "")
+	ToyCanon.sleep_through(gs, _db, 89)
+	assert_eq(gs.world.status("b4.erin_hires_octavia_for_baking_powder"), Director.CANCELLED)
+	assert_true(gs.flags.has("albez_door.anchor_at_stitchworks"), "the door still moves")
+	assert_true(Director.happened(gs.world.status("b4.ceria_tells_erin_of_wistram")), "the story is still told")
