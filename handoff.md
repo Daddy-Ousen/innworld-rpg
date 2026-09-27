@@ -2,14 +2,14 @@
 
 ## Just done (2026-09-27)
 - PR #43 (M10.3) merged. Tag `m10.3-done` on 51fbbae (pushed).
-- M10.4 (3.36-3.39) built on branch `data/book4-3.36-3.39`. Detail: ADR 0017 "M10.4". Not committed yet if `git status` shows changes.
+- M10.4 (3.36-3.39) built on branch `data/book4-3.36-3.39`. Detail: ADR 0017 "M10.4". Committed; PR #44 is open.
   - User choices: one scene with a hook (the Rock Crab, day 93, 10:00-12:00, `floodplains_south`); slime scene moved to day 92; about 27 events.
   - 27 events: `chapters/3.36.json` (6), `3.37.json` (6), `3.38.json` (7), `3.39.json` (8). New NPCs `hedault`, `merec`, `raisha`, `regisand_curle`; new locations `hedault_house`, `invrisil_merchants_guild`.
   - Erin rides home on the night of day 92 (`erin.back_from_esthelm`; `erin.at_esthelm` cleared). Valceif dies on day 93. `ryoka.heading_home_to_liscor` is set. Christmas is named; the party is day 95.
   - GUT 679/679 (73 scripts). Python 51 OK. Validator 0 errors. The Rock Crab scene was NOT checked on screen.
 
 ## Next steps
-1. Commit and push the M10.4 branch, open the PR (if not done). The user merges it. Then tag `m10.4-done` on the merge commit.
+1. The user merges PR #44 (M10.4). Then tag `m10.4-done` on the merge commit.
 2. M10.5 (3.40-3.42 + Interlude - Winter Solstice; raw text in `canon/raw/book4/022..025`): read with a subagent, then ask the user for stage and hook choices. Christmas party is day 95.
    - Clear `ryoka.heading_home_to_liscor` when Ryoka arrives. She holds `ryoka.holds_magnolias_seal`, Hedault has the Horns' relics (`hedault.holds_the_horns_relics`) and she said she would return to him.
    - Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`); `rags.tribe_turns_north` still blocks her foraging near Liscor. Clear it when she arrives.
