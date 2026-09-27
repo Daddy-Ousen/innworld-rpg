@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-27)
 - M11.2 merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)); tag `m11.2-done` on d000380 (pushed).
-- M11.3 Animation built on branch `feat/m11.3-animation` (PR open). Detail: ADR 0018 "M11.3".
+- M11.3 Animation built on branch `feat/m11.3-animation` ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49) open). Detail: ADR 0018 "M11.3".
   - Sheet layout v2 (768x1088): 64 px rows walk 0-3, hurt 4, idle 5-8; a 128 px attack block under them (y 576).
     `tools/build_sprites.py` picks the attack per look from its weapon (`attack_kind`: slash_128, slash_oversize,
     thrust, slash). All 43 sheets rebuilt.

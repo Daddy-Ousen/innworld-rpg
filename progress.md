@@ -18,7 +18,7 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
   - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
   - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
   - [x] M11.2 Characters: merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)), tag `m11.2-done` on d000380. 43 looks, Antinium edits.
-  - [ ] M11.3 Animation (branch `feat/m11.3-animation`): built, PR open, waiting for the user to check it. Sheet layout v2 with a 128 px attack block (weapons stay in the swing), `world/anim_diff.gd` (state compare → events), WorldView plays glides, hit flash, damage numbers, falls, fades, swings, fairy bob. GUT 721/721 (77 scripts), Python 66/66, validator 0 errors.
+  - [ ] M11.3 Animation (branch `feat/m11.3-animation`): built, [PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49) open, waiting for the user to check it. Sheet layout v2 with a 128 px attack block (weapons stay in the swing), `world/anim_diff.gd` (state compare → events), WorldView plays glides, hit flash, damage numbers, falls, fades, swings, fairy bob. GUT 721/721 (77 scripts), Python 66/66, validator 0 errors.
   - [ ] M11.4 Monsters (36 enemies)
   - [ ] M11.5 Atmosphere (later)
 
