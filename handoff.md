@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-27)
 - M11.0 merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)); tag `m11.0-done` on ea93b99 (pushed).
-- M11.1 Tiles and objects built on branch `feat/m11.1-tiles-objects` (PR open). Detail: ADR 0018 "M11.1".
+- M11.1 Tiles and objects built on branch `feat/m11.1-tiles-objects` ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47) open). Detail: ADR 0018 "M11.1".
   - User OKs: 5 LPC downloads (base assets, tavern, house interior, well, campfire - campfire not used) and 2 schema changes (object `kind` + `data/objects.json`; tile sprite `edges` + `z`).
   - New art: `game/assets/objects/` (tavern_furniture/cooking/deco, lpc_interior, lpc_well, edits + credit txts), `game/assets/tiles/lpc_house.png`, `lpc_inside.png`, `lpc_base_CREDITS.txt`. CREDITS.md has a "Map objects" section.
   - Code: `world/ground_art.gd` (new, pure: ground plan + soft edges), `world/world_view.gd` (Edges layer, object sprites, `sheet_path`, `object_look`, `_process` for 6 fps frames), `world_view.tscn` (Edges TileMapLayer), `core/map_db.gd` (kind must be a string).
