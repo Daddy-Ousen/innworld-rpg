@@ -17,7 +17,7 @@ M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
 - [ ] M12 — Audio (plan accepted 2026-09-27, ADR 0019). Sources: free CC0/CC-BY packs + `tools/build_sfx.py`; music by place and mood plus canon moments.
   - [x] M12.0 Audio spike: merged ([PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52)), tag `m12.0-done` on 65aa03b. The user approved the sound (2026-09-27).
-  - [ ] M12.1 Audio core + settings: done on branch `feat/m12.1-audio-core` (GUT 762/762, 82 scripts; Python 77/77). Waiting: the user checks the Options menu, then PR.
+  - [x] M12.1 Audio core + settings: merged ([PR #53](https://github.com/Daddy-Ousen/innworld-rpg/pull/53)), tag `m12.1-done`. The user checked the Options menu (2026-09-27).
   - [ ] M12.2 Sound effects · [ ] M12.3 Music · [ ] M12.4 Ambience · [ ] M12.5 Canon moments
 
 ## After M8
