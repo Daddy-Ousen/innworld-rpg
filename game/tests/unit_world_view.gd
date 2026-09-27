@@ -41,10 +41,10 @@ func test_player_marker_follows_the_player() -> void:
 	var v := _view()
 	var gs := ToyMaps.new_game(_db)
 	v.refresh(gs)
-	assert_eq(v.player.position, Vector2(1 * 16 + 8, 2 * 16 + 8))
+	assert_eq(v.player.position, WorldView.cell_center(Vector2i(1, 2)))
 	Commands.move(gs, _db, "e")
 	v.refresh(gs)
-	assert_eq(v.player.position, Vector2(2 * 16 + 8, 2 * 16 + 8))
+	assert_eq(v.player.position, WorldView.cell_center(Vector2i(2, 2)))
 
 
 func test_area_change_redraws() -> void:
@@ -56,7 +56,7 @@ func test_area_change_redraws() -> void:
 	v.refresh(gs)
 	assert_eq(v.area, "shop")
 	assert_eq(v.tiles.get_used_cells().size(), 9)
-	assert_eq(v.camera.limit_right, 3 * 16)
+	assert_eq(v.camera.limit_right, 3 * WorldView.TILE)
 
 
 func test_hud_warns_when_tired() -> void:

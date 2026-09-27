@@ -1,27 +1,29 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #44 (M10.4) merged. Tag `m10.4-done` on 2696cfe (pushed).
-- M10.5 (3.40-3.42 + Interlude - Winter Solstice) built on branch `data/book4-3.40-solstice`. Detail: ADR 0017 "M10.5". This ends Book 4 and M10's canon.
-  - User choices: two scenes with hooks (Santa thieves in `liscor_market`, day 94 18-22, allies Relc + Klbkch arrive after 30 s; Erin in the snow on `inn_hill`, day 95 19-23, hook `comfort_someone` with Erin); Ryoka rests at Riverfarm on day 95 (guess); about 32 events.
-  - 32 events: `3.40.json` (7), `3.41.json` (9), `3.42.json` (11), `interlude_winter_solstice.json` (5). New NPCs `anabelle`, `tamaroth`; locations `crag_pig`, `invrisil_runners_guild`, `riverfarm_road`; enemy `liscor_house_thief`.
-  - GUT 689/689 (74 scripts). Python 51 OK. Validator 0 errors. Scenes NOT checked on screen.
+- M10 closed: tags `m10.5-done`, `m10-done` on 25b8d94 (pushed). M11 plan accepted (ADR 0018).
+- M11.0 art spike built on branch `feat/m11.0-art-spike` (pushed; [PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46) open, look approved by the user). Detail: ADR 0018 "M11.0".
+  - User OKs: download 3 art sources; Pillow for tools (`tools/requirements.txt`).
+  - Art: `game/assets/tiles/lpc_terrains.png` (LPC Terrains v7), `lpc_atlas.png` (LPC Tile Atlas), their credit files; `game/assets/characters/{player,relc,krshia,goblin_grunt}.png` baked by `tools/build_sprites.py` from `game/data/appearance.json`. `CREDITS.md` at repo root.
+  - Code: `WorldView.TILE` 32 (U = 2 scales old sizes), zoom 2, y-sort + `Props` layer, tile `sprite`/`prop` from `tiles.json`, `world/character_sprite.gd` (new), player glide per step, NPC sprites.
+  - GUT 697/697 (75 scripts), Python 57/57, validator 0. Screenshots sent to the user (gate, market).
 
 ## Next steps
-1. PR #45 (M10.5) is open. User merges. Then tag `m10.5-done` and `m10-done` on the merge commit, tick M10 in `progress.md`, move M10 detail to `docs/PROGRESS_ARCHIVE.md`.
-2. Plan M11 (Book 5) with the user. Open threads carried into Book 5:
-   - Ryoka: `ryoka.heading_home_to_liscor` is set again on day 96 (via Invrisil; Reynold drives her). Clear it when she arrives. Hedault is making the Horns' gear (`hedault.makes_gear_for_the_horns`, pickup not shown); `hedault.owes_the_horns_a_debt`. She still holds `ryoka.holds_magnolias_seal`.
-   - Rags: `rags.heading_south`, `rags.wants_to_see_erin`, `rags.tribe_turns_north` still set. Clear the last when she arrives.
-   - Brunkr: `brunkr.hand_infected` + treated flags still set (at the party, bandaged; no result shown).
-   - Octavia: `octavia.researches_penicillin` still set. Matches are done.
-   - Toren alive in the dungeon (`toren.in_liscor_dungeon`). Hawk asked about him (`hawk.asked_about_the_skeleton`).
-   - Tyrion Veltras knows of Erin (`tyrion_veltras.hears_of_erin`); no NPC record yet. Sserys and Wrymvr are named only.
-   - Erin has the white coin (`erin.has_the_white_coin`). Lyonette swore an oath (`lyonette.swore_an_oath_to_the_stars`).
-3. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn, Olesm, Belgrade, Octavia and Hedault have no `npc_behaviour` entries. Add them if a later scene must place them.
+1. User merges PR #46. Then tick M11.0 in ROADMAP and `progress.md`, tag `m11.0-done` on the merge commit.
+   - Also commit the 4 missing `game/tests/sim_book4_*.gd.uid` files (made by import; already in the branch as a chore commit).
+2. M11.1 Tiles and objects: terrain edges (LPC Terrains blocks are 3 wide: rows of inner corners, a 3×3 edge ring, fill variants; `terrain-map-v7.png` has wang tiles but is 31488 px tall, too tall for a GPU texture: cut it or do corner lookup in code), all 16 tiles, winter art, sprites for about 66 map objects (by kind), buildings (brown squares now).
+3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess.
+
+## How to rebuild character sheets
+- The LPC generator part clone is in the session scratchpad (gone next session). Make a new one:
+  `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
+  then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
+- `python tools/build_sprites.py --ulpc <clone>` then `godot --headless --path game --import`.
+- Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M10.5 PR.
-- Delete old remote branches `data/book4-3.26-3.29` ... `data/book4-3.36-3.39` (optional).
+- Merge PR #46 (M11.0).
+- Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -54,7 +56,14 @@
 - Fight-stage tests: a helper that walks to `Pathfind.around(at)` can stop on a diagonal square and never attack. Walk to the four side squares instead (`sim_book4_christmas._fight_turn`). Strong allies that arrive at once can kill weak foes before the player strikes; delay the ally wave.
 - A throwaway `extends SceneTree` script that errors before `quit()` hangs Godot headless forever. Use `_initialize()`, and run with `timeout 300`.
 
+## Graphics notes (M11)
+- Core must not change for art. The view compares old and new state after each command and plays tweens; tweens never block input.
+- Missing art must fall back to today's squares, so headless tests and new data never break.
+- `.import` and `.uid` files are kept in git (ADR 0001). Run `godot --headless --path game --import` after adding art or scripts.
+- The player marker moves at once; only the `CharacterSprite` child glides (tests read `player.position`).
+- Monster markers must stay squares until M11.4: `unit_world_view` checks their child order (edge, ring, body, label, bar).
+- LPC tile packs: `lpc_terrains` fills: grass (1,10) + tufts (0..2,12), light grass tufts (3..4,12), dirt (1,3)/(1,5), grey cobble (13,3), snow (22,10)/(21..22,12), water (1,17), frozen dirt (25,12). `lpc_atlas`: pine (30,0,2,5), round tree (29,28,3,4), grey rock (28,26,1,1), stone wall face (17,24).
+- Screenshots: `godot --path game --write-movie <file>.png --fixed-fps 10 --quit-after 12 res://_scratch/shot.tscn` (window is 1152x648; `--resolution` is ignored).
+
 ## Active files
-- M10.5: `game/data/canon/book4/chapters/3.40.json`, `3.41.json`, `3.42.json`, `interlude_winter_solstice.json`, `npcs.json`, `locations.json`, `game/data/enemies.json`, `game/tests/sim_book4_christmas.gd` (new), `sim_canon_book4.gd` (LAST_DAY 96), `sim_book4_relief_home.gd`, `sim_player_hooks.gd` (30 hooks), `unit_combat_db.gd` (36 enemies), `docs/adr/0017-m10-book4.md`. Generator script was a throwaway (not in repo).
-- M10.4: `chapters/3.36.json` to `3.39.json`, `sim_book4_relief_home.gd`.
-- M10.0 door: `game/core/portal.gd`, `game/data/maps/celum_stitchworks.json`.
+- `docs/adr/0018-m11-graphics.md`, `game/world/world_view.gd`, `game/world/world_view.tscn`, `game/world/character_sprite.gd`, `game/data/tiles.json`, `game/data/appearance.json`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/tests/unit_art.gd`, `game/tests/unit_world_view.gd`, `CREDITS.md`.

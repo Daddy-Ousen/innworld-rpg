@@ -1,6 +1,6 @@
 # Progress
 
-M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
+M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -13,13 +13,15 @@ M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
 - [x] M0–M7 — Book 1 and the engine. Tags `m0-done` … `m7-done`, `m7.4-done`, `m7b-done`.
 - [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 merged ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34), tags `m8.7-done` and `m8-done` on merge commit ad436eb). Detail in the archive and ADR 0014 / 0015.
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
-- [ ] M10 — Book 4 (Winter Solstice). Plan chosen 2026-09-26 (ADR 0017, ROADMAP M10): the door first, then 5 canon batches; Wistram Days as history only.
-  - [x] M10.0 The Albez door — merged ([PR #40](https://github.com/Daddy-Ousen/innworld-rpg/pull/40)), tag `m10.0-done` on merge commit 3284dea. Map objects with `when_flags`/`unless_flags` and `portal`; `rules.portal` (4 trips a day); `core/portal.gd`; save v13; new map `celum_stitchworks`. Flags for the canon batches: `albez_door.anchor_at_stitchworks`, `albez_door.at_wandering_inn`, `erin.magical_grounds`. GUT 640/640 (68 scripts). Checked on screen.
-  - [x] M10.1 3.26 G – 3.29 G — merged ([PR #41](https://github.com/Daddy-Ousen/innworld-rpg/pull/41)), tag `m10.1-done` on merge commit ce7d682. 17 events (days 85–90), 6 NPCs, 3 locations, new map `dungeon_rift` + tile `chasm`. Two scenes with hooks: Lyonette searches the snow; the rescuers at the rift. GUT 651/651 (70 scripts). Checked on screen.
-  - [x] M10.2 3.30 – 3.31 G + Wistram Days (history) — merged ([PR #42](https://github.com/Daddy-Ousen/innworld-rpg/pull/42)), tag `m10.2-done` on merge commit ccf8743. 12 events (days 89–92), 10 NPCs (8 Wistram, history only), 2 locations. One scene with a hook: Ceria tells Erin of Wistram at the Frenzied Hare (night 89). Door anchor moves to the Stitchworks. GUT 659/659 (71 scripts).
-  - [x] M10.3 3.32 – 3.35 — merged ([PR #43](https://github.com/Daddy-Ousen/innworld-rpg/pull/43)), tag `m10.3-done` on merge commit 51fbbae. 22 events (days 90–93), 1 new NPC (Umbral), class `magical_innkeeper` + Erin's two Skills. Two scenes with hooks: Zel scolds Erin (day 91), Erin pitches the Esthelm relief (day 92). Erin is home on day 91, Level 30 that night, the door runs from day 92; from day 92 she is at Esthelm (`erin.at_esthelm`). GUT 670/670 (72 scripts).
-  - [x] M10.4 3.36 – 3.39 — merged ([PR #44](https://github.com/Daddy-Ousen/innworld-rpg/pull/44)), tag `m10.4-done` on merge commit 2696cfe. 27 events (all day 93; Erin's ride home is day 92), 4 NPCs (Hedault, Merec, Raisha, Regisand Curle), 2 locations. One scene with a hook: the Rock Crab by the inn road (Erin, Lyonette). Valceif dies on day 93. The slime scene (3.35) moved to day 92. GUT 679/679 (73 scripts).
-  - [x] M10.5 3.40 – 3.42 + Winter Solstice — built on branch `data/book4-3.40-solstice` ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45), pending merge). 32 events (days 93–96), 2 NPCs (Anabelle, Tamaroth), 3 locations, enemy `liscor_house_thief`. Two scenes with hooks: the Santa thieves in Liscor market (day 94, Relc and Klbkch), Erin in the snow on Christmas night (day 95, comfort her). Ryoka runs to Riverfarm (rests there day 95, user choice) and turns for home on day 96. Book 4 ends on day 96. GUT 689/689 (74 scripts).
+- [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
+- [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
+  - [ ] M11.0 Art spike (branch `feat/m11.0-art-spike`): look approved by the user 2026-09-27; [PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46) open, pending merge. 32 px cells, zoom 2; LPC tiles for the `liscor_gate` tiles; `tools/build_sprites.py` (Pillow) bakes `appearance.json` looks (player, Relc, Krshia, Goblin grunt); `CharacterSprite`; the player glides per step; `CREDITS.md`. GUT 697/697 (75 scripts), Python 57/57, validator 0 errors.
+  - [ ] M11.1 Tiles and objects
+  - [ ] M11.2 Characters (`appearance.json`, layered node, 33 NPCs + player)
+  - [ ] M11.3 Animation (standard set)
+  - [ ] M11.4 Monsters (36 enemies)
+  - [ ] M11.5 Atmosphere (later)
+
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
 
@@ -29,8 +31,8 @@ M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
 - Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=13), `save_migrations` (1→…→13), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 74 GUT scripts, 689 tests, all pass, headless exit 0. Python tool tests: 51 pass (`python -m unittest discover -s tools/tests`).
-- Tools: `tools/extract_epub.py`, `tools/validate_data.py`.
+- Tests: 75 GUT scripts, 697 tests, all pass, headless exit 0. Python tool tests: 57 pass (`python -m unittest discover -s tools/tests`).
+- Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py` (needs Pillow: `pip install -r tools/requirements.txt`).
 
 ## Blockers
 - None.

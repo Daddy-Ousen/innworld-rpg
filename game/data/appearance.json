@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"note": "Character looks (ADR 0018). Id = NPC id, enemy type or 'player'. tools/build_sprites.py bakes game/assets/characters/<id>.png from LPC parts. body = LPC body type; skin = body palette colour; parts = LPC sheet definition names with a palette colour. Colours not stated in the Book text are marked confidence 'guess'.",
+	"looks": {
+		"player": {
+			"body": "male", "skin": "light",
+			"parts": [
+				{"part": "heads_human_male"},
+				{"part": "hair_plain", "color": "dark_brown"},
+				{"part": "torso_clothes_longsleeve", "color": "blue"},
+				{"part": "legs_pants", "color": "charcoal"},
+				{"part": "feet_shoes_basic", "color": "black"}
+			],
+			"confidence": "guess", "note": "The player is an unnamed Earther; plain modern clothes."
+		},
+		"relc": {
+			"body": "male", "skin": "green",
+			"parts": [
+				{"part": "heads_lizard_male"},
+				{"part": "tail_lizard"},
+				{"part": "torso_clothes_longsleeve", "color": "leather"},
+				{"part": "legs_pants", "color": "brown"}
+			],
+			"confidence": "guess", "note": "A big Drake of the Watch. Scale colour not clear in the Book 1 text."
+		},
+		"krshia": {
+			"body": "female", "skin": "fur_brown",
+			"parts": [
+				{"part": "heads_wolf_female"},
+				{"part": "tail_wolf", "color": "fur_brown"},
+				{"part": "torso_clothes_longsleeve", "color": "forest"},
+				{"part": "legs_pants", "color": "brown"}
+			],
+			"confidence": "guess", "note": "A Gnoll shopkeeper. LPC wolf parts stand in for Gnoll parts."
+		},
+		"goblin_grunt": {
+			"body": "child", "skin": "green",
+			"parts": [
+				{"part": "heads_goblin_child"}
+			],
+			"confidence": "guess", "note": "Small green Goblin. Clothes come in M11.4."
+		}
+	}
+}
