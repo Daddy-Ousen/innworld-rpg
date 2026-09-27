@@ -9,8 +9,8 @@
   GUT 745/745 (80 scripts), Python 77/77, `python tools/build_sfx.py --check` OK.
 
 ## Next steps
-1. The user listens (`godot --path game`: title music, walk on grass and wood, a fight, the night page)
-   and approves the sound. Then PR for M12.0, merge, tag `m12.0-done`.
+1. The user approved the sound (2026-09-27). [PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52) is open (no CI checks).
+   After the merge: tag `m12.0-done` on the merge commit, tick M12.0 in ROADMAP and progress.
 2. M12.1: show the user the `audio.json` schema (draft in ADR 0019 / the plan) before coding (rule 11).
    Move the temporary tables (`Audio.CUES`, `Audio.TRACKS`, `SoundCues.STEPS`) into `game/data/audio.json`.
    Add cross-fade, `user://settings.cfg` volumes and an Options menu (title + pause).
@@ -43,7 +43,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Listen to the M12.0 spike and approve the sound.
+- Merge PR #52 (M12.0). OK the `audio.json` schema for M12.1.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
