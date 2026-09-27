@@ -1,25 +1,22 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M12.0 merged ([PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52)); tag `m12.0-done` on 65aa03b.
-- M12.1 on branch `feat/m12.1-audio-core`: `game/data/audio.json` (schema OK by the user), `AudioDb` loader and
-  checks, `AudioSettings` (`user://settings.cfg`), music cross-fade, Options menu (title + pause).
-  GUT 762/762 (82 scripts), Python 77/77, validator 0 errors. Detail: ADR 0019 "M12.1".
+- M12.1 merged ([PR #53](https://github.com/Daddy-Ousen/innworld-rpg/pull/53)); tag `m12.1-done` on c9f40fa.
+- M12.2 on branch `feat/m12.2-sound-effects`: 3 new CC0 packs (swishes, creature, water; user OK), fight sounds
+  and monster voices for all 36 enemies, use-menu action sounds, doors, System page sounds by kind, 6 new tool
+  sounds. GUT 771/771 (83 scripts), Python 77/77. Detail: ADR 0019 "M12.2".
 
 ## Next steps
-1. The user checks the Options menu in game (`godot --path game`: title > Options, pause > Options).
-   Then commit is done already; open the PR, merge, tag `m12.1-done`, tick ROADMAP and progress.
-2. M12.2 Sound effects (new branch): UI sounds already work. Add System page chimes by page kind
-   (`pages` in audio.json: progress, offer, knockout, morning, news), doors / area change, use-object sounds by
-   action (`actions`), coins, combat swing / fall / gone / block / throw (`combat`), monster voices (`enemies`).
-   Needs new downloads (ask the user: Kenney RPG Audio, maybe Kenney "Interface Sounds" / creature sounds).
-   Put new cues in audio.json only; SoundCues reads them.
-3. Then M12.3 music (fill `moods`, `mood_tracks`, `states`; new `world/music_pick.gd`), M12.4 ambience (ask before
-   adding `"sound"` to objects.json), M12.5 moments.
+1. The user listens (fight Goblins / a Rock Crab, chop wood, cook, buy something, walk into the inn, sleep).
+   Then PR, merge, tag `m12.2-done`, tick ROADMAP and progress.
+2. M12.3 Music (new branch): ask the user before downloads (RandomMind CC0 tracks: Market Day, Minstrel Dance,
+   The Bard's Tale, King's Feast; Sir Gawain's CC0 collection for battle, cave, town). New pure
+   `world/music_pick.gd`; fill `moods`, `mood_tracks`, `states` in audio.json; main.gd calls it after each command.
+3. Then M12.4 ambience (ask before adding `"sound"` to objects.json), M12.5 moments.
 
 ## Audio notes (M12)
-- Downloads so far are in the session scratchpad (gone next session): Kenney RPG Audio zip (doors, coins,
-  chop, cloth, book, metal pot, knife: for M12.2). Re-download: https://kenney.nl/assets/rpg-audio (CC0).
+- Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
+  creature + water packs (the water pack has loops: rain, bubbles, water; useful for M12.4). Re-download from CREDITS.md links.
 - Music candidates (CC0, RandomMind on OpenGameArt, full + loop versions): "Medieval: Market Day",
   "Minstrel Dance", "The Bard's Tale", "King's Feast". Sir Gawain's "CC0 Fantasy Music & Sounds" collection
   has battle, cave, town and forest ambience tracks. Ask the user before each download (file, source, size).
@@ -46,7 +43,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the Options menu (M12.1), then the PR.
+- Listen to the M12.2 sound effects, then the PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -61,7 +58,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (82 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (83 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
