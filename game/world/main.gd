@@ -43,13 +43,15 @@ var switch_scene := true
 
 func _ready() -> void:
 	var names := {}
+	var races := {}
 	for id: String in Session.db.canon.npcs:
 		names[id] = Session.db.canon.npcs[id]["name"]
+		races[id] = String(Session.db.canon.npcs[id].get("race", ""))
 	var max_hp := {}
 	for id in Session.db.behaviour.ids():
 		max_hp[id] = int(NpcReact.stats(Session.db, id)["hp"])
 	view.setup(Session.db.maps, names, Session.db.combat.enemies, max_hp,
-			String(Winter.rules(Session.db).get("flag", "")))
+			String(Winter.rules(Session.db).get("flag", "")), races)
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)

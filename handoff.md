@@ -1,29 +1,35 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.0 merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)); tag `m11.0-done` on ea93b99 (pushed).
-- M11.1 Tiles and objects built on branch `feat/m11.1-tiles-objects` ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47) open). Detail: ADR 0018 "M11.1".
-  - User OKs: 5 LPC downloads (base assets, tavern, house interior, well, campfire - campfire not used) and 2 schema changes (object `kind` + `data/objects.json`; tile sprite `edges` + `z`).
-  - New art: `game/assets/objects/` (tavern_furniture/cooking/deco, lpc_interior, lpc_well, edits + credit txts), `game/assets/tiles/lpc_house.png`, `lpc_inside.png`, `lpc_base_CREDITS.txt`. CREDITS.md has a "Map objects" section.
-  - Code: `world/ground_art.gd` (new, pure: ground plan + soft edges), `world/world_view.gd` (Edges layer, object sprites, `sheet_path`, `object_look`, `_process` for 6 fps frames), `world_view.tscn` (Edges TileMapLayer), `core/map_db.gd` (kind must be a string).
-  - Tool: `tools/build_objects.py` makes `assets/objects/edits.png`; `--check` compares objects.json regions with the layout.
-  - GUT 705/705 (76 scripts), Python 61/61, validator 0. Screenshots sent to the user.
+- M11.1 merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)); tag `m11.1-done` on 84eab06 (pushed).
+- M11.2 Characters built on branch `feat/m11.2-characters` (PR open; link in progress.md after it is made). Detail: ADR 0018 "M11.2".
+  - `game/data/appearance.json`: 43 looks. Every NPC in `npc_behaviour.json` has its own look; 8 `race_*` generic looks.
+    Facts come from a subagent check of the Books 1-4 text (chapter refs in each `note`).
+  - New value kinds (shape unchanged; the user sees them with the PR): `race_<race>` look ids, `all.lpcr.<name>` colours,
+    `innworld_*` edit parts (Antinium arms, antennae, mandibles, drawn by `tools/build_sprites.py`).
+  - Code: `CharacterSprite.look_for(id, race)`; `WorldView.setup(..., races)` (last arg); `main.gd` passes canon races.
+  - Tests: GUT 708/708 (76 scripts), Python 64/64, validator 0 errors. Screenshots sent to the user.
 
 ## Next steps
-1. User checks the look and merges the M11.1 PR. Then tick M11.1 in ROADMAP and `progress.md`, tag `m11.1-done` on the merge commit.
-2. Possible polish (ask the user): roofs for buildings (flat brick now), a better two-cell stream (draws as small ponds), winter art for objects (`winter_region`).
-3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess. The LPC generator clone must be made again (below).
+1. User checks the look and merges the M11.2 PR. Then tick M11.2 in ROADMAP and `progress.md`, tag `m11.2-done` on the merge commit.
+2. Possible polish (ask the user): Antinium back shell; Toren's blue eye-flames; per-book looks (Klbkch two arms after 1.63, Toren purple flames after 3.17T) would need a look switch by flag (a schema change).
+3. M11.3 Animation: NPC and monster facing from their last move, walk cycle for NPCs, attack swing, hit flash, damage numbers, knock-out fall.
+   Many LPC weapons have walk frames but no slash frames: the weapon vanishes in a swing. Fix in M11.3 (for example use the
+   LPC `1h_slash`/`thrust` animations, or hide the weapon layer in the walk rows).
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
-- Character sheets: the LPC generator part clone is in the session scratchpad (gone next session). Make a new one:
+- Character sheets: the LPC generator part clone is in the session scratchpad (gone next session). Make a new one
+  (the fastest: all parts, only the 4 animations we use; about 100 MB, 30 s):
+  `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout add '/spritesheets/**/walk.png' '/spritesheets/**/slash.png' '/spritesheets/**/hurt.png' '/spritesheets/**/idle.png' '/spritesheets/**/walk/' '/spritesheets/**/slash/' '/spritesheets/**/hurt/' '/spritesheets/**/idle/'`
+  Or part by part:
   `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
   then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
 - `python tools/build_sprites.py --ulpc <clone>` then `godot --headless --path game --import`.
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the M11.1 look, merge its PR.
+- Check the M11.2 character looks (screenshots) and the new appearance.json value kinds, merge its PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -70,5 +76,10 @@
 - Object regions are PIXELS in objects.json (tile props in tiles.json are CELLS).
 - Picking art: a scratch `zoom.py` (crop + 16 px grid + px labels) was the fastest way to read exact pixel rects.
 
+- Weapon parts keep one file per colour (walk/<colour>.png): they need a `color` (sword "steel", spear "iron", waraxe "waraxe", dagger "dagger", staff "simple"). The `muscular` body has almost no clothes: use `male`.
+- A look preview is fastest with a scratch `preview.py` that imports `build_sprites` and pastes the standing frames of each look into one image.
+- Screenshots of NPCs: `_scratch/shot.gd` must be the script of a `_scratch/shot.tscn` (running the .gd alone opens the title menu). Fill `gs.npcs.npcs[id] = {"area", "x", "y", "facing"}` by hand to line up many NPCs.
+- Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
+
 ## Active files
-- `docs/adr/0018-m11-graphics.md`, `game/world/world_view.gd`, `game/world/ground_art.gd`, `game/world/world_view.tscn`, `game/data/tiles.json`, `game/data/objects.json`, `game/data/maps/*.json` (kinds), `tools/build_objects.py`, `tools/tests/test_build_objects.py`, `game/tests/unit_ground_art.gd`, `game/tests/unit_art.gd`, `CREDITS.md`.
+- `game/data/appearance.json`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/world/character_sprite.gd`, `game/world/world_view.gd`, `game/world/main.gd`, `game/tests/unit_art.gd`, `docs/adr/0018-m11-graphics.md`, `CREDITS.md`, `game/assets/characters/`.

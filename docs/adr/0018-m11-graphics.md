@@ -114,6 +114,31 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
 - Tests: `unit_ground_art.gd` (8), `tools/tests/test_build_objects.py` (4). GUT 705/705 (76 scripts),
   Python 61/61, validator 0 errors.
 
+## M11.2 Characters (2026-09-27)
+- **Looks for all 33 NPCs with a schedule**, the player and 8 generic race looks (43 sheets with the Goblin grunt).
+  The canon facts come from a check of the Books 1-4 text (chapter refs in each look's `note`). Colours or gear the
+  text does not state are `"confidence": "guess"`. Known conflicts are noted, not solved (Zevara's eyes, Krshia's fur,
+  Sostrom's hair). One look per character for the whole game: Klbkch keeps four arms after 1.63, Mrsha is white,
+  Pawn and Ksmvr keep all their limbs.
+- **`appearance.json` keeps its shape; three new kinds of value** (shown to the user with the screenshots):
+  - look id `race_<race>`: the generic look of an NPC with no own look. The race is canon `npcs.json` `race`, in lower
+    case with `-` and ` ` as `_` (`race_half_elf`). `CharacterSprite.look_for(id, race)` picks own look, then race
+    look, then none (a square). Generic looks: Human, Drake, Gnoll, Antinium, Goblin, Undead, Minotaur, half-Elf.
+  - colour `all.lpcr.<name>`: any LPC colour on any material (the LPC generator's "all" palettes). Drake scales need
+    it (lemon, garnet, azure, apple...).
+  - part `innworld_extra_arms`, `innworld_antennae`, `innworld_mandibles`: our Antinium edits. `build_sprites.py`
+    draws them per frame from the look's body and `heads_*` layers (the LPC alien head is the base): a second,
+    darker pair of arms (the body's sides moved down 6 px and out 2 px, behind the body; front and back views),
+    two feelers on the head, two pincers at the jaw (one from the side). Credited in CREDITS.md as CC-BY-SA edits.
+- **The view** gets NPC races from `main.gd` (`WorldView.setup(..., races)`). The ADR plan's "layered node" stays a
+  baked sheet (M11.0 decision); 4 directions come from the sheet rows. NPC facing from their moves is M11.3.
+- **Weapons:** LPC weapons are drawn where the part has walk frames (Relc's spear, swords, axes, Sostrom's staff).
+  Many have no slash frames, so they vanish during an attack swing; M11.3 must handle this. No bow walk frames
+  (Bird), no club for the male body (Beilmark), no weapons for child bodies (Rags).
+- Not drawn yet: shells on Antinium backs, Toren's eye-flames and armour, Ceria's bone hand, scars.
+- Tests: `unit_art.gd` +3 (race fallback, every NPC with a schedule has its own look, the view uses the race look),
+  `test_build_sprites.py` +3 (all palette, edits, edit needs a head). GUT 708/708 (76 scripts), Python 64/64.
+
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character
   node picks the right frame for facing and state; a step tween ends on the cell centre; the state diff

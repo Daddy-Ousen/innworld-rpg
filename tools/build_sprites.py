@@ -14,11 +14,15 @@ appearance.json:
     look = {"body": "male", "skin": "light", "base": "body",
             "parts": [{"part": "<sheet definition name>", "color": "<palette colour>"}]}
     body   LPC body type: male, female, muscular, teen, child (picks each part's folder)
-    skin   body colour (palette name, "green" or "ulpc.green"); parts made of skin use it
+    skin   body colour (palette name, "green" or "ulpc.green", or "all.lpcr.lemon" for any
+           LPC colour); parts made of skin use it
     base   the body part, default "body" (a skeleton look uses "body_skeleton")
-    parts  drawn in LPC zPos order, whatever order they are listed in
-The id is an NPC id, an enemy type, or "player". The game draws
-game/assets/characters/<id>.png for it, and a square when there is none.
+    parts  drawn in LPC zPos order, whatever order they are listed in. A part can also be
+           one of our edits (EDITS: innworld_extra_arms, innworld_antennae,
+           innworld_mandibles), drawn from the look's body and heads_* part
+The id is an NPC id, an enemy type, "player", or "race_<race>" (the look of an
+NPC with no own look). The game draws game/assets/characters/<id>.png for it,
+and a square when there is none.
 
 Sheet layout (64×64 frames, rows up/left/down/right as in LPC):
     rows 0-3   walk  9 frames (frame 0 = standing)
@@ -91,8 +95,13 @@ class Ulpc:
         return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
 
     def palette(self, material: str, colour: str) -> list[tuple[int, int, int]]:
-        """Colours of `colour` ("green" or "ulpc.green") in `material`."""
+        """Colours of `colour` ("green", "ulpc.green", or "all.lpcr.lemon" for a
+        palette of another material, as the LPC generator's "all.lpcr" list)."""
+        bits = colour.split(".")
+        if len(bits) == 3:
+            material = bits[0]
         scheme, _, name = colour.rpartition(".")
+        scheme = scheme.rpartition(".")[2]
         for s in [scheme] if scheme else SCHEMES:
             key = f"{material}_{s}"
             if key not in self._palettes:
@@ -195,28 +204,172 @@ def load_anim(layer: dict, anim: str) -> Image.Image | None:
     return img.convert("RGBA")
 
 
+def layer_sheet(layer: dict) -> Image.Image:
+    """One layer laid out as a whole sheet (empty where an animation is missing)."""
+    sheet = Image.new("RGBA", (COLUMNS * FRAME, ROWS * FRAME), (0, 0, 0, 0))
+    rows = anim_offsets()
+    for anim, frames, nrows in ANIMS:
+        img = load_anim(layer, anim)
+        if img is None:
+            continue
+        img = img.crop((0, 0, frames * FRAME, nrows * FRAME))
+        sheet.paste(img, (0, rows[anim] * FRAME))
+    return sheet
+
+
 def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
     """The sheet for one look, and the LPC folders it used."""
     parts = [{"part": look.get("base", "body")}] + list(look.get("parts", []))
-    layers = []
+    layers, edits, used = [], [], []
+    body = head = None
     for i, p in enumerate(parts):
+        if p["part"] in EDITS:
+            edits.append(p["part"])
+            continue
         for layer in part_layers(ulpc, p, look):
-            layers.append((layer["z"], i, layer))
+            img = layer_sheet(layer)
+            used.append(layer["rel"])
+            layers.append((layer["z"], i, img))
+            if i == 0 and body is None:
+                body = img
+            if p["part"].startswith("heads_") and head is None:
+                head = img
+    for name in edits:
+        z, make = EDITS[name]
+        if body is None or head is None:
+            raise BuildError(f"edit '{name}' needs a body and a heads_* part")
+        layers.append((z, len(parts), make(body, head)))
     layers.sort(key=lambda t: (t[0], t[1]))
     sheet = Image.new("RGBA", (COLUMNS * FRAME, ROWS * FRAME), (0, 0, 0, 0))
-    rows = anim_offsets()
-    used = []
-    for _, _, layer in layers:
-        used.append(layer["rel"])
-        for anim, frames, nrows in ANIMS:
-            img = load_anim(layer, anim)
-            if img is None:
-                continue
-            img = img.crop((0, 0, frames * FRAME, nrows * FRAME))
-            piece = Image.new("RGBA", sheet.size, (0, 0, 0, 0))
-            piece.paste(img, (0, rows[anim] * FRAME))
-            sheet = Image.alpha_composite(sheet, piece)
+    for _, _, img in layers:
+        sheet = Image.alpha_composite(sheet, img)
     return sheet, used
+
+
+# --- Our own edits (Antinium). Drawn from the body and head of the same look.
+
+def frames_of_sheet():
+    """(column, row, facing) of every frame in the sheet; the hurt row faces down."""
+    dirs = ["n", "w", "s", "e"]
+    row = 0
+    for anim, frames, nrows in ANIMS:
+        for r in range(nrows):
+            for c in range(frames):
+                yield c, row + r, dirs[r] if nrows == 4 else "s"
+        row += nrows
+
+
+def bbox(img: Image.Image, x0: int, y0: int) -> tuple[int, int, int, int] | None:
+    """Opaque box (left, top, right, bottom; inclusive) of the frame at x0, y0."""
+    b = img.crop((x0, y0, x0 + FRAME, y0 + FRAME)).getchannel("A").getbbox()
+    return None if b is None else (b[0], b[1], b[2] - 1, b[3] - 1)
+
+
+def shades(img: Image.Image, box: tuple[int, int, int, int]) -> tuple[tuple, tuple]:
+    """The darkest colour (the outline) and a lighter colour of the opaque pixels in `box`."""
+    px = [p for p in img.crop(box).getdata() if p[3] > 200]
+    if not px:
+        return (0, 0, 0, 255), (160, 160, 160, 255)
+    px.sort(key=lambda p: p[0] + p[1] + p[2])
+    return px[0], px[len(px) * 3 // 4]
+
+
+def _plot(img: Image.Image, x0: int, y0: int, pts, colour) -> None:
+    for x, y in pts:
+        if 0 <= x < FRAME and 0 <= y < FRAME:
+            img.putpixel((x0 + x, y0 + y), colour)
+
+
+def _outlined(img: Image.Image, x0: int, y0: int, core, rim_colour, core_colour) -> None:
+    """`core` pixels with a one-pixel rim round them (8 neighbours)."""
+    inside = set(core)
+    rim = {(x + dx, y + dy) for x, y in core for dx in (-1, 0, 1) for dy in (-1, 0, 1)} - inside
+    _plot(img, x0, y0, sorted(rim), rim_colour)
+    _plot(img, x0, y0, sorted(inside), core_colour)
+
+
+def edit_antennae(body: Image.Image, head: Image.Image) -> Image.Image:
+    """Two thin feelers on the top of the head, bent out (to the front from the side)."""
+    out = Image.new("RGBA", head.size, (0, 0, 0, 0))
+    for c, r, d in frames_of_sheet():
+        x0, y0 = c * FRAME, r * FRAME
+        b = bbox(head, x0, y0)
+        if b is None:
+            continue
+        dark, _ = shades(head, (x0 + b[0], y0 + b[1], x0 + b[2] + 1, y0 + b[3] + 1))
+        cx, top = (b[0] + b[2]) // 2, b[1]
+        one = [(0, 0), (-1, -1), (-2, -2), (-3, -3), (-4, -4), (-5, -4)]
+        if d in ("s", "n"):
+            _plot(out, x0, y0, [(cx - 2 + x, top + 1 + y) for x, y in one], dark)
+            _plot(out, x0, y0, [(cx + 2 - x, top + 1 + y) for x, y in one], dark)
+        else:
+            k = -1 if d == "w" else 1
+            _plot(out, x0, y0, [(cx + k * (1 - x), top + 1 + y) for x, y in one], dark)
+            _plot(out, x0, y0, [(cx + k * (3 - x), top + 2 + y) for x, y in one[:-1]], dark)
+    return out
+
+
+def edit_mandibles(body: Image.Image, head: Image.Image) -> Image.Image:
+    """Two small pincers at the jaw (one from the side, none from behind)."""
+    out = Image.new("RGBA", head.size, (0, 0, 0, 0))
+    for c, r, d in frames_of_sheet():
+        if d == "n":
+            continue
+        x0, y0 = c * FRAME, r * FRAME
+        b = bbox(head, x0, y0)
+        if b is None:
+            continue
+        dark, light = shades(head, (x0 + b[0], y0 + b[1], x0 + b[2] + 1, y0 + b[3] + 1))
+        cx, bot = (b[0] + b[2]) // 2, b[3]
+        # One long pincer, curving down and in (x grows outward, y down), as a
+        # light core with a dark rim. From the front there are two, from the side one.
+        core = [(2, -1), (3, 0), (3, 1), (3, 2), (2, 3)]
+        if d == "s":
+            for k in (-1, 1):
+                _outlined(out, x0, y0, [(cx + k * (1 + x), bot - 1 + y) for x, y in core], dark, light)
+        else:
+            k = -1 if d == "w" else 1
+            front = b[0] if d == "w" else b[2]
+            _outlined(out, x0, y0, [(front + k * (x - 2), bot - 2 + y) for x, y in core], dark, light)
+    return out
+
+
+ARM_DROP = 6
+ARM_OUT = 2
+
+
+def edit_extra_arms(body: Image.Image, head: Image.Image) -> Image.Image:
+    """A second, darker pair of arms under the first: the sides of the body from the
+    shoulders to the hips, moved down ARM_DROP px and out ARM_OUT px. Drawn behind
+    the body, so only the part below and beside the first pair shows. Front and
+    back views only."""
+    out = Image.new("RGBA", body.size, (0, 0, 0, 0))
+    for c, r, d in frames_of_sheet():
+        if d not in ("s", "n"):
+            continue
+        x0, y0 = c * FRAME, r * FRAME
+        hb = bbox(head, x0, y0)
+        if hb is None:
+            continue
+        cx, neck = (hb[0] + hb[2]) // 2, hb[3]
+        for y in range(neck + 2, min(neck + 18, FRAME - ARM_DROP)):
+            for x in range(FRAME):
+                if abs(x - cx) < 5:
+                    continue
+                p = body.getpixel((x0 + x, y0 + y))
+                tx = x + (ARM_OUT if x > cx else -ARM_OUT)
+                if p[3] > 0 and 0 <= tx < FRAME:
+                    dark = (p[0] * 4 // 5, p[1] * 4 // 5, p[2] * 4 // 5, p[3])
+                    out.putpixel((x0 + tx, y0 + y + ARM_DROP), dark)
+    return out
+
+
+# name → (zPos, maker). The body is zPos 10 and heads 100 (LPC).
+EDITS = {
+    "innworld_extra_arms": (5, edit_extra_arms),
+    "innworld_antennae": (105, edit_antennae),
+    "innworld_mandibles": (105, edit_mandibles),
+}
 
 
 def credits_for(ulpc: Ulpc, parts: set[str], used: set[str]) -> list[dict]:
@@ -279,7 +432,7 @@ def build(ulpc_dir: Path, appearance: Path, out_dir: Path, credits: Path,
             continue
         used.update(folders)
         parts.add(look.get("base", "body"))
-        parts.update(p["part"] for p in look.get("parts", []))
+        parts.update(p["part"] for p in look.get("parts", []) if p["part"] not in EDITS)
         if only is None or look_id in only:
             sheet.save(out_dir / f"{look_id}.png")
     if not errors:

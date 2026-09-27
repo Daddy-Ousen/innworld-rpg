@@ -75,6 +75,9 @@ var object_art: Dictionary = {}
 var look: CharacterSprite
 ## NPC id → name shown over its marker.
 var npc_names: Dictionary = {}
+## NPC id → race (canon npcs.json), for the generic look of an NPC with
+## no own sheet (CharacterSprite.look_for).
+var npc_races: Dictionary = {}
 ## Enemy type → enemies.json entry (name, color, hp).
 var enemies: Dictionary = {}
 ## NPC id → max HP (NpcReact.stats), for the HP bars of hurt NPCs.
@@ -103,9 +106,10 @@ var _anim_time := 0.0
 
 
 func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
-		max_hp: Dictionary = {}, winter_flag: String = "") -> void:
+		max_hp: Dictionary = {}, winter_flag: String = "", races: Dictionary = {}) -> void:
 	_maps = maps
 	npc_names = names
+	npc_races = races
 	enemies = enemy_defs
 	npc_max_hp = max_hp
 	_winter_flag = winter_flag
@@ -331,7 +335,7 @@ func _show_npcs(gs: GameState) -> void:
 		var marker := Node2D.new()
 		marker.name = id
 		marker.position = cell_center(NpcRoster.pos_of(n))
-		var sprite := CharacterSprite.make(id)
+		var sprite := CharacterSprite.make(CharacterSprite.look_for(id, String(npc_races.get(id, ""))))
 		if sprite != null:
 			sprite.pose(String(n.get("facing", "s")), down)
 			marker.add_child(sprite)

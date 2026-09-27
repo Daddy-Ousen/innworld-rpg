@@ -16,8 +16,8 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
   - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
-  - [ ] M11.1 Tiles and objects (branch `feat/m11.1-tiles-objects`): built, [PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47) open, waiting for the user to check the look. All 16 tiles have art (soft terrain edges via `world/ground_art.gd`, winter snow); all 67 map objects have a `kind` with art in `data/objects.json` (33 kinds; our edits in `assets/objects/edits.png` from `tools/build_objects.py`). GUT 705/705 (76 scripts), Python 61/61, validator 0 errors.
-  - [ ] M11.2 Characters (`appearance.json`, layered node, 33 NPCs + player)
+  - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
+  - [ ] M11.2 Characters (branch `feat/m11.2-characters`): built, PR open, waiting for the user to check the look. 43 looks in `data/appearance.json` (player, 33 NPCs with a schedule, 8 `race_*` generic looks, goblin_grunt), facts from a Books 1-4 text check. Antinium edits (extra arms, antennae, mandibles) in `tools/build_sprites.py`. GUT 708/708 (76 scripts), Python 64/64, validator 0 errors.
   - [ ] M11.3 Animation (standard set)
   - [ ] M11.4 Monsters (36 enemies)
   - [ ] M11.5 Atmosphere (later)

@@ -45,6 +45,15 @@ static func frame_of(anim: String, dir: String, i: int) -> int:
 	return row * COLUMNS + posmod(i, int(a[1]))
 
 
+## The look of a character: its own sheet `id`, else the generic look of
+## its race ("race_" + race, e.g. race_drake, race_half_elf), else "".
+static func look_for(id: String, race: String = "") -> String:
+	if has_sheet(id):
+		return id
+	var generic := "race_" + race.to_lower().replace("-", "_").replace(" ", "_")
+	return generic if race != "" and has_sheet(generic) else ""
+
+
 ## A new sprite for `id`, or null when there is no sheet.
 static func make(id: String) -> CharacterSprite:
 	if not has_sheet(id):

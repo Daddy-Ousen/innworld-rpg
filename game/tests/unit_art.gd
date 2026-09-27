@@ -143,3 +143,33 @@ func test_npc_with_a_sheet_is_a_sprite_and_others_stay_squares() -> void:
 	assert_eq((r.get_child(1) as Label).text, "Relc")
 	assert_lt((r.get_child(1) as Label).position.y, -CharacterSprite.HEAD, "name above the head")
 	assert_true(v.npcs.get_node("guard").get_child(0) is ColorRect)
+
+
+func test_look_for_uses_own_sheet_then_race_then_none() -> void:
+	assert_eq(CharacterSprite.look_for("relc", "Drake"), "relc", "own look first")
+	assert_eq(CharacterSprite.look_for("olesm", "Drake"), "race_drake")
+	assert_eq(CharacterSprite.look_for("someone", "Half-Elf"), "race_half_elf")
+	assert_eq(CharacterSprite.look_for("someone", "half-Elf"), "race_half_elf", "case does not matter")
+	assert_eq(CharacterSprite.look_for("someone", "String People"), "", "no generic look: a square")
+	assert_eq(CharacterSprite.look_for("someone"), "")
+
+
+func test_every_npc_with_a_schedule_has_a_look() -> void:
+	var canon := CanonDb.load_root()
+	var beh := BehaviourDb.load_dir()
+	assert_gt(beh.ids().size(), 30)
+	for id: String in beh.ids():
+		assert_true(canon.npcs.has(id), id)
+		var race := String(canon.npcs.get(id, {}).get("race", ""))
+		assert_eq(CharacterSprite.look_for(id, race), id, "own look for %s" % id)
+
+
+func test_npc_with_no_own_sheet_takes_its_race_look() -> void:
+	var d := ToyNpcs.db()
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(d.maps, {"guard": "Guard"}, {}, {}, "", {"guard": "Gnoll"})
+	var gs := ToyNpcs.new_game(d)
+	v.refresh(gs)
+	var s: Node = v.npcs.get_node("guard").get_child(0)
+	assert_true(s is CharacterSprite, "the generic Gnoll look")
+	assert_eq((s as CharacterSprite).texture.resource_path, CharacterSprite.path_for("race_gnoll"))
