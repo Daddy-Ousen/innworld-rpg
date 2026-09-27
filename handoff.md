@@ -1,27 +1,23 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #44 (M10.4) merged. Tag `m10.4-done` on 2696cfe (pushed).
-- M10.5 (3.40-3.42 + Interlude - Winter Solstice) built on branch `data/book4-3.40-solstice`. Detail: ADR 0017 "M10.5". This ends Book 4 and M10's canon.
-  - User choices: two scenes with hooks (Santa thieves in `liscor_market`, day 94 18-22, allies Relc + Klbkch arrive after 30 s; Erin in the snow on `inn_hill`, day 95 19-23, hook `comfort_someone` with Erin); Ryoka rests at Riverfarm on day 95 (guess); about 32 events.
-  - 32 events: `3.40.json` (7), `3.41.json` (9), `3.42.json` (11), `interlude_winter_solstice.json` (5). New NPCs `anabelle`, `tamaroth`; locations `crag_pig`, `invrisil_runners_guild`, `riverfarm_road`; enemy `liscor_house_thief`.
-  - GUT 689/689 (74 scripts). Python 51 OK. Validator 0 errors. Scenes NOT checked on screen.
+- PR #45 (M10.5) merged. Tags `m10.5-done` and `m10-done` on merge commit 25b8d94 (pushed). M10 moved to `docs/PROGRESS_ARCHIVE.md`.
+- User paused new books. M11 (graphics) planned: ADR 0018, ROADMAP M11. Plan docs committed on branch `feat/m11.0-art-spike` (not pushed yet).
+- User choices: 2D top-down pixel art, 32 px cells; free LPC packs (characters + tiles) plus our own edits, with `CREDITS.md`; standard animation first (smooth steps, walk cycle, facing, attack swing, hit flash, damage numbers, knock-out fall).
 
 ## Next steps
-1. PR #45 (M10.5) is open. User merges. Then tag `m10.5-done` and `m10-done` on the merge commit, tick M10 in `progress.md`, move M10 detail to `docs/PROGRESS_ARCHIVE.md`.
-2. Plan M11 (Book 5) with the user. Open threads carried into Book 5:
-   - Ryoka: `ryoka.heading_home_to_liscor` is set again on day 96 (via Invrisil; Reynold drives her). Clear it when she arrives. Hedault is making the Horns' gear (`hedault.makes_gear_for_the_horns`, pickup not shown); `hedault.owes_the_horns_a_debt`. She still holds `ryoka.holds_magnolias_seal`.
-   - Rags: `rags.heading_south`, `rags.wants_to_see_erin`, `rags.tribe_turns_north` still set. Clear the last when she arrives.
-   - Brunkr: `brunkr.hand_infected` + treated flags still set (at the party, bandaged; no result shown).
-   - Octavia: `octavia.researches_penicillin` still set. Matches are done.
-   - Toren alive in the dungeon (`toren.in_liscor_dungeon`). Hawk asked about him (`hawk.asked_about_the_skeleton`).
-   - Tyrion Veltras knows of Erin (`tyrion_veltras.hears_of_erin`); no NPC record yet. Sserys and Wrymvr are named only.
-   - Erin has the white coin (`erin.has_the_white_coin`). Lyonette swore an oath (`lyonette.swore_an_oath_to_the_stars`).
-3. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn, Olesm, Belgrade, Octavia and Hedault have no `npc_behaviour` entries. Add them if a later scene must place them.
+1. M11.0 Art spike on `feat/m11.0-art-spike`:
+   - Find the LPC parts: human body, lizard head + tail (Drake), wolf head + tail (Gnoll), goblin, skeleton. Check each licence. Source: the Universal LPC Spritesheet Generator repo and OpenGameArt. Downloading needs the user's OK (name, source, size).
+   - Make `game/assets/{tiles,objects,characters,fx}/` and `CREDITS.md` (author, licence, link per file).
+   - `WorldView.TILE` 16 -> 32; camera zoom to match. Tests in `unit_world_view` that use pixel sizes must follow.
+   - `liscor_gate` drawn with LPC tiles; the player as a layered LPC character that walks.
+   - Screenshot with the `_scratch` scene; the user approves the look.
+   - Before M11.1/M11.2: show the user the schema for `tiles.json` `sprite`, object sprites and `appearance.json` (rule 11).
+2. Book 5 threads (for later, from M10): Ryoka heading home, Rags heading south, Brunkr's arm, Octavia's penicillin, Toren in the dungeon, Tyrion Veltras has no NPC record, Erin's white coin, Lyonette's oath. Detail in ADR 0017.
 
 ## Waiting on the user
-- Merge the M10.5 PR.
-- Delete old remote branches `data/book4-3.26-3.29` ... `data/book4-3.36-3.39` (optional).
+- Approve the M11 plan (ADR 0018). Then M11.0 starts.
+- Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -54,7 +50,10 @@
 - Fight-stage tests: a helper that walks to `Pathfind.around(at)` can stop on a diagonal square and never attack. Walk to the four side squares instead (`sim_book4_christmas._fight_turn`). Strong allies that arrive at once can kill weak foes before the player strikes; delay the ally wave.
 - A throwaway `extends SceneTree` script that errors before `quit()` hangs Godot headless forever. Use `_initialize()`, and run with `timeout 300`.
 
+## Graphics notes (M11)
+- Core must not change for art. The view compares old and new state after each command and plays tweens; tweens never block input.
+- Missing art must fall back to today's squares, so headless tests and new data never break.
+- `.import` files for new PNGs are kept in git (ADR 0001). Run `godot --headless --path game --import` after adding art.
+
 ## Active files
-- M10.5: `game/data/canon/book4/chapters/3.40.json`, `3.41.json`, `3.42.json`, `interlude_winter_solstice.json`, `npcs.json`, `locations.json`, `game/data/enemies.json`, `game/tests/sim_book4_christmas.gd` (new), `sim_canon_book4.gd` (LAST_DAY 96), `sim_book4_relief_home.gd`, `sim_player_hooks.gd` (30 hooks), `unit_combat_db.gd` (36 enemies), `docs/adr/0017-m10-book4.md`. Generator script was a throwaway (not in repo).
-- M10.4: `chapters/3.36.json` to `3.39.json`, `sim_book4_relief_home.gd`.
-- M10.0 door: `game/core/portal.gd`, `game/data/maps/celum_stitchworks.json`.
+- `docs/adr/0018-m11-graphics.md`, `docs/ROADMAP.md` (M11), `game/world/world_view.gd` (TILE, drawing), `game/world/main.gd` (input, refresh), `game/data/tiles.json`, `game/tests/unit_world_view.gd`.

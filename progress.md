@@ -1,6 +1,6 @@
 # Progress
 
-M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
+M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -13,13 +13,15 @@ M0–M9 detail (roadmap bullets, decisions, ADR 0001–0016) lives in
 - [x] M0–M7 — Book 1 and the engine. Tags `m0-done` … `m7-done`, `m7.4-done`, `m7b-done`.
 - [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 merged ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34), tags `m8.7-done` and `m8-done` on merge commit ad436eb). Detail in the archive and ADR 0014 / 0015.
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
-- [ ] M10 — Book 4 (Winter Solstice). Plan chosen 2026-09-26 (ADR 0017, ROADMAP M10): the door first, then 5 canon batches; Wistram Days as history only.
-  - [x] M10.0 The Albez door — merged ([PR #40](https://github.com/Daddy-Ousen/innworld-rpg/pull/40)), tag `m10.0-done` on merge commit 3284dea. Map objects with `when_flags`/`unless_flags` and `portal`; `rules.portal` (4 trips a day); `core/portal.gd`; save v13; new map `celum_stitchworks`. Flags for the canon batches: `albez_door.anchor_at_stitchworks`, `albez_door.at_wandering_inn`, `erin.magical_grounds`. GUT 640/640 (68 scripts). Checked on screen.
-  - [x] M10.1 3.26 G – 3.29 G — merged ([PR #41](https://github.com/Daddy-Ousen/innworld-rpg/pull/41)), tag `m10.1-done` on merge commit ce7d682. 17 events (days 85–90), 6 NPCs, 3 locations, new map `dungeon_rift` + tile `chasm`. Two scenes with hooks: Lyonette searches the snow; the rescuers at the rift. GUT 651/651 (70 scripts). Checked on screen.
-  - [x] M10.2 3.30 – 3.31 G + Wistram Days (history) — merged ([PR #42](https://github.com/Daddy-Ousen/innworld-rpg/pull/42)), tag `m10.2-done` on merge commit ccf8743. 12 events (days 89–92), 10 NPCs (8 Wistram, history only), 2 locations. One scene with a hook: Ceria tells Erin of Wistram at the Frenzied Hare (night 89). Door anchor moves to the Stitchworks. GUT 659/659 (71 scripts).
-  - [x] M10.3 3.32 – 3.35 — merged ([PR #43](https://github.com/Daddy-Ousen/innworld-rpg/pull/43)), tag `m10.3-done` on merge commit 51fbbae. 22 events (days 90–93), 1 new NPC (Umbral), class `magical_innkeeper` + Erin's two Skills. Two scenes with hooks: Zel scolds Erin (day 91), Erin pitches the Esthelm relief (day 92). Erin is home on day 91, Level 30 that night, the door runs from day 92; from day 92 she is at Esthelm (`erin.at_esthelm`). GUT 670/670 (72 scripts).
-  - [x] M10.4 3.36 – 3.39 — merged ([PR #44](https://github.com/Daddy-Ousen/innworld-rpg/pull/44)), tag `m10.4-done` on merge commit 2696cfe. 27 events (all day 93; Erin's ride home is day 92), 4 NPCs (Hedault, Merec, Raisha, Regisand Curle), 2 locations. One scene with a hook: the Rock Crab by the inn road (Erin, Lyonette). Valceif dies on day 93. The slime scene (3.35) moved to day 92. GUT 679/679 (73 scripts).
-  - [x] M10.5 3.40 – 3.42 + Winter Solstice — built on branch `data/book4-3.40-solstice` ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45), pending merge). 32 events (days 93–96), 2 NPCs (Anabelle, Tamaroth), 3 locations, enemy `liscor_house_thief`. Two scenes with hooks: the Santa thieves in Liscor market (day 94, Relc and Klbkch), Erin in the snow on Christmas night (day 95, comfort her). Ryoka runs to Riverfarm (rests there day 95, user choice) and turns for home on day 96. Book 4 ends on day 96. GUT 689/689 (74 scripts).
+- [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
+- [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
+  - [ ] M11.0 Art spike (branch `feat/m11.0-art-spike`): LPC parts and licences, `game/assets/` + `CREDITS.md`, cell size 32, `liscor_gate` in LPC tiles, the player walks. User approves the look.
+  - [ ] M11.1 Tiles and objects
+  - [ ] M11.2 Characters (`appearance.json`, layered node, 33 NPCs + player)
+  - [ ] M11.3 Animation (standard set)
+  - [ ] M11.4 Monsters (36 enemies)
+  - [ ] M11.5 Atmosphere (later)
+
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
 
