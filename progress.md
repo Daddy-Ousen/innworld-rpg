@@ -16,7 +16,7 @@ M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
 - [ ] M12 — Audio (plan accepted 2026-09-27, ADR 0019). Sources: free CC0/CC-BY packs + `tools/build_sfx.py`; music by place and mood plus canon moments.
-  - [ ] M12.0 Audio spike: code, sounds and tests done on branch `feat/m12.0-audio-spike` (GUT 745/745, 80 scripts; Python 77/77). The user approved the sound (2026-09-27). [PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52) open; waiting on merge.
+  - [x] M12.0 Audio spike: merged ([PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52)), tag `m12.0-done` on 65aa03b. The user approved the sound (2026-09-27).
   - [ ] M12.1 Audio core + settings · [ ] M12.2 Sound effects · [ ] M12.3 Music · [ ] M12.4 Ambience · [ ] M12.5 Canon moments
 
 ## After M8
