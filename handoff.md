@@ -1,25 +1,25 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.3 merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)); tag `m11.3-done` on ebdcbf0 (pushed).
-- M11.4 Monsters built on branch `feat/m11.4-monsters` ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50) open). Detail: ADR 0018 "M11.4".
-  - User OKs: download 3 LPC creature files; a new creature look kind in `appearance.json`.
-  - 30 people enemies: LPC looks in `appearance.json` (canon check of Books 1-4 by a subagent; notes carry chapter refs).
-  - 6 creatures: new `tools/build_creatures.py` bakes them into the normal character sheet layout (so the game
-    needs no new schema code). Sources in `tools/art/creatures/` (golem, bee, big_worm, eagle); rock_crab and
-    snowman are drawn by the tool. `build_sprites.py` skips looks with a `creature` key.
-  - `WorldView._show_monsters`: a type with a sheet = CharacterSprite + state ring (Polygon2D "Ring") + label
-    (at HEAD) + bar. Gone monster: its sprite falls, then fades. Hidden monster: the `rock` tile prop.
-  - Tests: GUT 726/726 (78 scripts), Python 73/73, validator 0 errors. Screenshots sent to the user
-    (all 36 on floodplains_south; a fight strip).
+- M11.4 merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)); tag `m11.4-done` on b76ff4a (pushed).
+- M11.5 Atmosphere built on branch `feat/m11.5-atmosphere` ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51) open). Detail: ADR 0018 "M11.5".
+  - New `game/world/atmosphere.gd` (`Atmosphere`, child of `WorldView`, made in `setup`): CanvasModulate tint
+    by minute of day (`sky_tint`), warm `room_tint` on indoor maps, PointLight2D per object kind with
+    `"light"` in `objects.json` (campfire, brazier, hearth, stove), CPUParticles2D snow outdoors in winter.
+  - User OK: the optional `"light"` key in `objects.json` kinds (schema change).
+  - Night colour tuned by screenshots to stay playable (0.44, 0.50, 0.74). Room night must stay brighter than
+    the sky night (a test checks it).
+  - Tests: `unit_atmosphere.gd` (10). GUT 736/736 (79 scripts), Python 73/73, validator 0 errors.
+    Screenshots sent to the user (camp noon/dusk/night, market snow night, guild noon/night, gate snow, inn night).
 
 ## Next steps
-1. User checks M11.4 and merges its PR. Then tick M11.4 in ROADMAP and `progress.md`, tag `m11.4-done` on the merge commit.
-2. M11.5 Atmosphere (ask the user first; it was marked "later"): day/night tint from the clock, falling snow,
-   fire and lamp light. Then M11 "done when": the user checks the game on screen; tag `m11-done`.
-3. Possible polish (ask the user): bigger sprites for big foes (Hobs, Soldier, Crypt Lord, Rock Crab, Razorbeak,
-   Snow Golem; needs a frame larger than 64 px), Antinium back shell; Toren's eye-flames; the player's own
-   knock-out fall; the Goblin commander's Shield Spider.
+1. User checks M11.5 and merges its PR. Then tick M11.5 in ROADMAP and `progress.md`, tag `m11.5-done` on the merge commit.
+2. M11 "done when": the user checks the game on screen (`godot --path game`). Then tag `m11-done` and move
+   M11 detail to `docs/PROGRESS_ARCHIVE.md`.
+3. Possible polish (ask the user): lamp objects in the inn (map data change), bigger sprites for big foes
+   (Hobs, Soldier, Crypt Lord, Rock Crab, Razorbeak, Snow Golem; needs a frame larger than 64 px), Antinium back
+   shell; Toren's eye-flames; the player's own knock-out fall; the Goblin commander's Shield Spider.
+4. Then: back to new books (Book 5), or other "Later" items in ROADMAP.
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
@@ -37,7 +37,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check M11.4 (screenshots, or play: meet monsters on the Floodplains), merge its PR.
+- Check M11.5 (screenshots, or play at night / in winter), merge its PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -87,6 +87,8 @@
   `torso_clothes_tunic` has no male body.
 - LPC tile packs: `lpc_terrains` fills: grass (1,10) + tufts (0..2,12), light grass tufts (3..4,12), dirt (1,3)/(1,5), grey cobble (13,3), snow (22,10)/(21..22,12), water (1,17), frozen dirt (25,12). `lpc_atlas`: pine (30,0,2,5), round tree (29,28,3,4), grey rock (28,26,1,1), stone wall face (17,24).
 - Screenshots: `godot --path game --write-movie <file>.png --fixed-fps 10 --quit-after 12 res://_scratch/shot.tscn` (window is 1152x648; `--resolution` is ignored).
+- M11.5 shot scene: `_scratch/shot.gd` reads AREA, X, Y, MINUTE, ZOOM (0 = keep 2), WINTER=1 from env vars;
+  use `--quit-after 30` so snow has fallen. Stitch frames with PIL.
 - M11.1 shot scene: a `_scratch/shot.gd` that makes a WorldView, a `GameState.new(1)`, `gs.player.place(AREA, pos)`, `v.refresh(gs)`, and sets `v.camera.zoom` (0.8 shows a whole 32x24 map). Read AREA/X/Y/ZOOM/WINTER from env vars. Winter: pass "winter" as the winter flag to `setup` and set `gs.flags["winter"]`.
 - Terrain block layout (`lpc_terrains`, 3x6): rows 0-1 inner corners (SE gap (1,0), SW (2,0), NE (1,1), NW (2,1)), rows 2-4 ring, row 5 fills. Blocks used: dirt (0,0), cave (15,0), chasm (24,0), grass (0,7), light grass (3,7), snow wall (18,7), snow (21,7), frozen dirt (24,7), shallows water (0,14), light sea (24,14).
 - Object regions are PIXELS in objects.json (tile props in tiles.json are CELLS).
@@ -103,6 +105,5 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `tools/build_creatures.py`, `tools/art/creatures/`, `tools/build_sprites.py`, `game/data/appearance.json`,
-  `game/world/world_view.gd`, `game/tests/unit_monster_art.gd`, `tools/tests/test_build_creatures.py`,
-  `docs/adr/0018-m11-graphics.md`, `CREDITS.md`, `game/assets/characters/`.
+- `game/world/atmosphere.gd`, `game/world/world_view.gd`, `game/data/objects.json`, `game/tests/unit_atmosphere.gd`,
+  `docs/adr/0018-m11-graphics.md`.
