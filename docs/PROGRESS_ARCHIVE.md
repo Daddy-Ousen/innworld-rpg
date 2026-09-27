@@ -147,3 +147,15 @@ session. Current work stays in `progress.md`.
 
 ## Architectural decisions (M11)
 - ADR 0018 (plan accepted 2026-09-27): 2D pixel art, 32 px cells, LPC packs plus our edits (`CREDITS.md`); art picked by data with square fallbacks; core and saves unchanged; M11.5 `"light"` key in `objects.json`.
+
+## Roadmap status (M12, archived 2026-09-28)
+- [x] M12 — Audio (plan accepted 2026-09-27, ADR 0019). Sources: free CC0/CC-BY packs + `tools/build_sfx.py`; music by place and mood plus canon moments.
+  - [x] M12.0 Audio spike: merged ([PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52)), tag `m12.0-done` on 65aa03b. The user approved the sound (2026-09-27).
+  - [x] M12.1 Audio core + settings: merged ([PR #53](https://github.com/Daddy-Ousen/innworld-rpg/pull/53)), tag `m12.1-done`. The user checked the Options menu (2026-09-27).
+  - [x] M12.2 Sound effects: merged ([PR #54](https://github.com/Daddy-Ousen/innworld-rpg/pull/54)), tag `m12.2-done`. The user approved the sounds (2026-09-27).
+  - [x] M12.3 Music: merged ([PR #55](https://github.com/Daddy-Ousen/innworld-rpg/pull/55)), tag `m12.3-done` on 081b377. The user approved the music (2026-09-27).
+  - [x] M12.4 Ambience: merged ([PR #56](https://github.com/Daddy-Ousen/innworld-rpg/pull/56)), tag `m12.4-done` on bf84ad6. The user approved the ambience (2026-09-27).
+  - [x] M12.5 Canon moments: merged ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)), tags `m12.5-done` and `m12-done` on 95fb6c4. 7 CC0 tracks, 9 moments, sad sting on death news. GUT 800/800 (86 scripts), Python 77/77, validator 0 errors. The user approved it (2026-09-28).
+
+## Architectural decisions (M12)
+- ADR 0019 (plan accepted 2026-09-27): audio is presentation only (no core or save change); volumes in `user://settings.cfg`; all cues, moods, moments and beds in `data/audio.json`; `"sound"` key in `objects.json` (M12.4); CC0 / CC-BY packs plus `tools/build_sfx.py`; about 60 MB audio at most (56 MB used).

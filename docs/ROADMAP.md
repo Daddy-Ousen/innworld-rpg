@@ -154,7 +154,7 @@ Volumes are user settings in `user://settings.cfg`, not game state.
 - [x] M12.2 Sound effects: UI, System pages, footsteps by ground, doors, object use, combat, monster voices
 - [x] M12.3 Music: a track per kind of place with day / night / winter, fight, big battle, warm scene
 - [x] M12.4 Ambience: area beds (birds, crickets, wind, cave, crowd) and object sounds (fires, well, bees)
-- [ ] M12.5 Canon moments: special tracks for at least 6 canon moments; a sad sting for deaths in the news
+- [x] M12.5 Canon moments: special tracks for at least 6 canon moments; a sad sting for deaths in the news
 **Done when:** every map has mood music; night, winter, fights, battles and scenes change it with a
 cross-fade; walking, using objects, combat, menus and System pages make sounds; volumes are saved; at least
 6 canon moments have their own music; missing audio gives silence, not errors; GUT, the Python tool tests

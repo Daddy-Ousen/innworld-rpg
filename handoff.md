@@ -1,19 +1,13 @@
 # Handoff
 
-## Just done (2026-09-27)
-- M12.5 Canon moments built on branch `feat/m12.5-canon-moments` (PR open, not merged).
-  7 CC0 tracks (user OK): lament, undead_siege, last_stand (WAV -> OGG), faerie_night, heavenly, stage_play,
-  christmas. 9 moments in `audio.json` `moments`, each tied to canon stage ids (fights via `combat.stage_run`,
-  scenes via `Stage.is_scene_live`). Sad sting: `tools/build_sfx.py` `sad_sting`; `SystemMessages.news_deaths`
-  puts `"deaths"` on the Local News page; `SoundCues.page_sound` plays `pages.death`. Audio is 56 MB.
-  GUT 800/800 (86 scripts), Python 77/77, validator 0 errors. Detail: ADR 0019 "M12.5".
-- M12.4 merged ([PR #56](https://github.com/Daddy-Ousen/innworld-rpg/pull/56)); tag `m12.4-done` on bf84ad6.
+## Just done (2026-09-28)
+- M12 is done. M12.5 merged ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)); tags `m12.5-done` and
+  `m12-done` on 95fb6c4. The user approved the moment music and the sad sting. M12 detail is in
+  `docs/PROGRESS_ARCHIVE.md` and ADR 0019.
 
 ## Next steps
-1. The user listens to the M12.5 tracks (fastest: debug console / a save near a moment) and approves.
-2. Merge the PR. Tag `m12.5-done` and `m12-done` on the merge commit. Tick M12.5 and M12 in `docs/ROADMAP.md`
-   and `progress.md`; move M12 detail to `docs/PROGRESS_ARCHIVE.md`.
-3. Ask the user for the next milestone (see `docs/ROADMAP.md`).
+1. Ask the user for the next milestone. `docs/ROADMAP.md` "Later": Book 5 and on (paused), UI skin and portraits,
+   balance and missing NPC schedules, optional LLM flavour layer.
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -48,7 +42,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Listen to and approve the M12.5 moment music and the sad sting; then merge.
+- Pick the next milestone.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas

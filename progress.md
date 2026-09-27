@@ -1,6 +1,6 @@
 # Progress
 
-M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
+M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -15,13 +15,8 @@ M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
-- [ ] M12 — Audio (plan accepted 2026-09-27, ADR 0019). Sources: free CC0/CC-BY packs + `tools/build_sfx.py`; music by place and mood plus canon moments.
-  - [x] M12.0 Audio spike: merged ([PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52)), tag `m12.0-done` on 65aa03b. The user approved the sound (2026-09-27).
-  - [x] M12.1 Audio core + settings: merged ([PR #53](https://github.com/Daddy-Ousen/innworld-rpg/pull/53)), tag `m12.1-done`. The user checked the Options menu (2026-09-27).
-  - [x] M12.2 Sound effects: merged ([PR #54](https://github.com/Daddy-Ousen/innworld-rpg/pull/54)), tag `m12.2-done`. The user approved the sounds (2026-09-27).
-  - [x] M12.3 Music: merged ([PR #55](https://github.com/Daddy-Ousen/innworld-rpg/pull/55)), tag `m12.3-done` on 081b377. The user approved the music (2026-09-27).
-  - [x] M12.4 Ambience: merged ([PR #56](https://github.com/Daddy-Ousen/innworld-rpg/pull/56)), tag `m12.4-done` on bf84ad6. The user approved the ambience (2026-09-27).
-  - [ ] M12.5 Canon moments: built on branch `feat/m12.5-canon-moments` (7 CC0 tracks, user OK 2026-09-27; 9 moments; sad sting on death news). GUT 800/800. Waiting: the user listens, then merge and tag `m12.5-done` / `m12-done`.
+- [x] M12 — Audio: music, sound effects, ambience. M12.0–M12.5 merged; tags `m12.0-done` … `m12.5-done` and `m12-done` on merge commit 95fb6c4 ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)). Detail in the archive and ADR 0019.
+- [ ] Next milestone: not chosen yet (ask the user; see `docs/ROADMAP.md` "Later").
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
@@ -33,7 +28,7 @@ M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 86 GUT scripts, 800 tests, all pass, headless exit 0 (branch M12.5). Python tool tests: 77 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 86 GUT scripts, 800 tests, all pass, headless exit 0 (main after M12.5). Python tool tests: 77 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
 ## Blockers
