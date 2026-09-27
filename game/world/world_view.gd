@@ -10,16 +10,26 @@
 ## Winter (M8.W): once the winter flag is set, tiles with a "winter_color"
 ## are drawn in it (the snow look); map overlays (the snow wall) redraw
 ## when they switch; Frost Fairies are small pale diamonds.
+## Art (M11, ADR 0018): cells are 32 px. A tile with a "sprite" is drawn from
+## game/assets/tiles/<sheet>.png (one of its cells, picked by position), and
+## a "prop" (a tree, a rock) is drawn over it, y-sorted with the characters.
+## The player and NPCs with a baked sheet are CharacterSprites; the player's
+## sprite glides one cell per step. Anything with no art is drawn as before.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
 
-const TILE := 16
+const TILE := 32
+## Old 16 px sizes are scaled by this.
+const U := TILE / 16
+const SHEET_PATH := "res://assets/tiles/%s.png"
+## One step glide, the same as the held-key repeat in main.gd.
+const STEP_TIME := 0.14
 const OBJECT_COLOR := Color("#e8c547")
 const EXIT_COLOR := Color(1.0, 1.0, 0.7, 0.3)
-const NOSE := 4
+const NOSE := 4 * U
 const NPC_COLOR := Color("#3b6fd1")
-const NPC_NAME_SIZE := 7
+const NPC_NAME_SIZE := 10
 ## Names are drawn this many times larger, then scaled down, so they stay
 ## sharp under the camera zoom.
 const TEXT_SCALE := 3
@@ -50,6 +60,10 @@ const FAIRY_EDGE := Color("#ffffff")
 var area := ""
 ## tile id → atlas coords.
 var atlas: Dictionary = {}
+## tile id → {"source": id, "cells": Array[Vector2i]} for tiles with art.
+var sprites: Dictionary = {}
+## The player's sprite (null = the red square).
+var look: CharacterSprite
 ## NPC id → name shown over its marker.
 var npc_names: Dictionary = {}
 ## Enemy type → enemies.json entry (name, color, hp).
@@ -68,7 +82,9 @@ var _overlay_key := ""
 @onready var npcs: Node2D = $Npcs
 @onready var monsters: Node2D = $Monsters
 @onready var fairies: Node2D = $Fairies
+@onready var props: Node2D = $Props
 @onready var player: Node2D = $Player
+@onready var body: ColorRect = $Player/Body
 @onready var nose: ColorRect = $Player/Nose
 @onready var camera: Camera2D = $Player/Camera
 
@@ -82,8 +98,17 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	_winter_flag = winter_flag
 	_winter = false
 	atlas.clear()
-	tiles.tile_set = make_tile_set(maps.tiles, atlas)
+	sprites.clear()
+	tiles.tile_set = make_tile_set(maps.tiles, atlas, false, sprites)
 	area = ""
+	if look != null:
+		player.remove_child(look)
+		look.queue_free()
+	look = CharacterSprite.make("player")
+	if look != null:
+		player.add_child(look)
+	body.visible = look == null
+	nose.visible = look == null
 
 
 ## Redraws the map if the player changed area, then moves the marker.
@@ -95,7 +120,8 @@ func refresh(gs: GameState) -> void:
 	if winter != _winter:
 		_winter = winter
 		atlas.clear()
-		tiles.tile_set = make_tile_set(_maps.tiles, atlas, winter)
+		sprites.clear()
+		tiles.tile_set = make_tile_set(_maps.tiles, atlas, winter, sprites)
 		area = ""
 	if _maps.overlay_key != _overlay_key:
 		_overlay_key = _maps.overlay_key
@@ -106,8 +132,15 @@ func refresh(gs: GameState) -> void:
 	_show_npcs(gs)
 	_show_monsters(gs)
 	_show_fairies(gs)
+	var old := player.position
 	player.position = cell_center(gs.player.pos())
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
+	if look != null:
+		if not new_area and old.distance_to(player.position) == TILE:
+			look.walk(gs.player.facing, old - player.position, STEP_TIME)
+		elif new_area or old != player.position or not look.is_walking():
+			look.finish()
+			look.pose(gs.player.facing)
 	if new_area:  # jump, do not glide across the new map
 		camera.reset_smoothing()
 
@@ -116,10 +149,27 @@ static func cell_center(cell: Vector2i) -> Vector2:
 	return Vector2(cell * TILE) + Vector2(TILE, TILE) / 2.0
 
 
+## The art cell of a tile with more than one look, picked by map position
+## (the same cell every time; no randomness).
+static func pick_cell(cells: Array, cell: Vector2i) -> Vector2i:
+	var h := absi((cell.x * 73856093) ^ (cell.y * 19349663))
+	return cells[h % cells.size()]
+
+
+## The sprite (or winter sprite) entry of a tile def, {} when none.
+static func sprite_def(def: Dictionary, winter: bool, key: String = "sprite") -> Dictionary:
+	if winter and def.has("winter_" + key):
+		return def["winter_" + key]
+	return def.get(key, {})
+
+
 ## One atlas row, one tile per tiles.json entry (file order). Tiles you
 ## cannot walk on get a darker edge. Fills `atlas_out` with id → coords.
 ## With `winter`, a tile's "winter_color" is used where it has one.
-static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: bool = false) -> TileSet:
+## Tiles with a sprite whose sheet exists also get an atlas source per sheet;
+## `sprites_out` gets id → {"source", "cells"} for them.
+static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: bool = false,
+		sprites_out: Dictionary = {}) -> TileSet:
 	var ids := tile_defs.keys()
 	var img := Image.create(TILE * maxi(ids.size(), 1), TILE, false, Image.FORMAT_RGBA8)
 	for i in ids.size():
@@ -140,17 +190,43 @@ static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: 
 	ts.add_source(source, 0)
 	for i in ids.size():
 		source.create_tile(Vector2i(i, 0))
+	var sheets := {}
+	for id in ids:
+		var sp := sprite_def(tile_defs[id], winter)
+		if sp.is_empty() or not ResourceLoader.exists(SHEET_PATH % sp["sheet"]):
+			continue
+		if not sheets.has(sp["sheet"]):
+			var s := TileSetAtlasSource.new()
+			s.texture = load(SHEET_PATH % sp["sheet"])
+			s.texture_region_size = Vector2i(TILE, TILE)
+			sheets[sp["sheet"]] = ts.add_source(s)
+		var src: TileSetAtlasSource = ts.get_source(sheets[sp["sheet"]])
+		var cells: Array[Vector2i] = []
+		for c: Array in sp["cells"]:
+			var v := Vector2i(int(c[0]), int(c[1]))
+			if not src.has_tile(v):
+				src.create_tile(v)
+			cells.append(v)
+		sprites_out[id] = {"source": sheets[sp["sheet"]], "cells": cells}
 	return ts
 
 
 func _show_area(id: String) -> void:
 	area = id
 	tiles.clear()
+	for child in props.get_children():
+		props.remove_child(child)
+		child.queue_free()
 	var size := _maps.size(id)
 	for y in size.y:
 		for x in size.x:
 			var cell := Vector2i(x, y)
-			tiles.set_cell(cell, 0, atlas[_maps.tile_at(id, cell)])
+			var t := _maps.tile_at(id, cell)
+			if sprites.has(t):
+				tiles.set_cell(cell, sprites[t]["source"], pick_cell(sprites[t]["cells"], cell))
+			else:
+				tiles.set_cell(cell, 0, atlas[t])
+			_add_prop(t, cell)
 	for child in marks.get_children():
 		marks.remove_child(child)
 		child.queue_free()
@@ -160,10 +236,10 @@ func _show_area(id: String) -> void:
 		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
 	for o: Dictionary in _maps.objects_on(id):
 		var at := Vector2(int(o["at"][0]), int(o["at"][1])) * TILE
-		_rect(at + Vector2(2, 2), Vector2(TILE - 4, TILE - 4), OBJECT_COLOR)
+		_rect(at + Vector2(2, 2) * U, Vector2(TILE - 4 * U, TILE - 4 * U), OBJECT_COLOR)
 		var label := Label.new()
 		label.text = String(o["name"]).left(1)
-		label.add_theme_font_size_override("font_size", 10)
+		label.add_theme_font_size_override("font_size", 10 * U)
 		label.add_theme_color_override("font_color", Color.BLACK)
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marks.add_child(label)
@@ -186,16 +262,22 @@ func _show_npcs(gs: GameState) -> void:
 		var marker := Node2D.new()
 		marker.name = id
 		marker.position = cell_center(NpcRoster.pos_of(n))
-		var body := ColorRect.new()
-		body.position = Vector2(-5, -5)
-		body.size = Vector2(10, 10)
-		body.color = NPC_COLOR
-		if down:
-			body.color.a = DOWN_ALPHA
-		body.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		marker.add_child(body)
+		var sprite := CharacterSprite.make(id)
+		if sprite != null:
+			sprite.pose(String(n.get("facing", "s")), down)
+			marker.add_child(sprite)
+		else:
+			var square := ColorRect.new()
+			square.position = Vector2(-5, -5) * U
+			square.size = Vector2(10, 10) * U
+			square.color = NPC_COLOR
+			if down:
+				square.color.a = DOWN_ALPHA
+			square.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			marker.add_child(square)
 		var name_text := String(npc_names.get(id, id))
-		_add_label(marker, name_text + " (down)" if down else name_text)
+		_add_label(marker, name_text + " (down)" if down else name_text,
+				CharacterSprite.HEAD if sprite != null else 5.0 * U)
 		var most := int(npc_max_hp.get(id, 0))
 		var now := int(n.get("hp", -1))
 		if most > 0 and now >= 0:
@@ -223,7 +305,7 @@ func _show_monsters(gs: GameState) -> void:
 		if m["state"] == CombatState.HIDDEN:
 			var rock := Color.html(_maps.tiles.get(HIDDEN_TILE, e).get("color", "#7a7468"))
 			_square(marker, TILE / 2.0, rock.darkened(0.35))
-			_square(marker, TILE / 2.0 - 2, rock)
+			_square(marker, TILE / 2.0 - 2 * U, rock)
 		else:
 			var edge := CALM_EDGE
 			if m["state"] == CombatState.HOSTILE:
@@ -232,9 +314,9 @@ func _show_monsters(gs: GameState) -> void:
 				edge = FLEE_EDGE
 			elif m["state"] == CombatState.ALLY:
 				edge = ALLY_EDGE
-			_square(marker, 6, edge)
-			_square(marker, 5, RING)
-			_square(marker, 4, Color.html(e.get("color", "#ff00ff")))
+			_square(marker, 6 * U, edge)
+			_square(marker, 5 * U, RING)
+			_square(marker, 4 * U, Color.html(e.get("color", "#ff00ff")))
 			if named.has(id):
 				_add_label(marker, monster_label(m, e))
 			_bar(marker, float(m["hp"]) / maxi(int(e.get("hp", m["hp"])), 1))
@@ -253,8 +335,8 @@ func _show_fairies(gs: GameState) -> void:
 		marker.name = id
 		marker.position = cell_center(WinterState.pos_of(gs.winter.fairies[id]))
 		marker.rotation = PI / 4.0
-		_square(marker, 3, FAIRY_EDGE)
-		_square(marker, 2, FAIRY_BODY)
+		_square(marker, 3 * U, FAIRY_EDGE)
+		_square(marker, 2 * U, FAIRY_BODY)
 		fairies.add_child(marker)
 
 
@@ -322,14 +404,14 @@ static func _king(a: Vector2i, b: Vector2i) -> int:
 func _bar(marker: Node2D, share: float) -> void:
 	share = clampf(share, 0.0, 1.0)
 	var back := ColorRect.new()
-	back.position = Vector2(-6, 6)
-	back.size = Vector2(12, 2)
+	back.position = Vector2(-6, 6) * U
+	back.size = Vector2(12, 2) * U
 	back.color = BAR_BACK
 	back.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	marker.add_child(back)
 	var fill := ColorRect.new()
-	fill.position = Vector2(-6, 6)
-	fill.size = Vector2(12 * share, 2)
+	fill.position = Vector2(-6, 6) * U
+	fill.size = Vector2(12 * share, 2) * U
 	fill.color = BAR_LOW_FILL if share <= BAR_LOW else BAR_FILL
 	fill.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	marker.add_child(fill)
@@ -350,8 +432,9 @@ func _square(marker: Node2D, half: float, color: Color) -> void:
 	marker.add_child(r)
 
 
-## A small sharp name label centred above a marker.
-func _add_label(marker: Node2D, text: String) -> void:
+## A small sharp name label centred above a marker, its bottom `top` px
+## above the marker's centre.
+func _add_label(marker: Node2D, text: String, top: float = 5.0 * U) -> void:
 	var label := Label.new()
 	label.text = text
 	label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
@@ -362,7 +445,26 @@ func _add_label(marker: Node2D, text: String) -> void:
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	marker.add_child(label)
 	var size := label.get_minimum_size() / TEXT_SCALE
-	label.position = Vector2(-size.x / 2.0, -5 - size.y)
+	label.position = Vector2(-size.x / 2.0, -top - size.y)
+
+
+## A tile's prop (a tree, a rock) on `cell`: a region of its sheet,
+## bottom-centred on the cell, in the y-sorted Props layer.
+func _add_prop(tile: String, cell: Vector2i) -> void:
+	var def: Dictionary = _maps.tiles.get(tile, {})
+	var p := sprite_def(def, _winter, "prop")
+	if p.is_empty() or not ResourceLoader.exists(SHEET_PATH % p["sheet"]):
+		return
+	var r: Array = p["region"]
+	var size := Vector2(int(r[2]), int(r[3])) * TILE
+	var s := Sprite2D.new()
+	s.texture = load(SHEET_PATH % p["sheet"])
+	s.region_enabled = true
+	s.region_rect = Rect2(Vector2(int(r[0]), int(r[1])) * TILE, size)
+	s.centered = false
+	s.offset = Vector2(-size.x / 2.0, TILE / 2.0 - size.y)
+	s.position = cell_center(cell)
+	props.add_child(s)
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:

@@ -28,8 +28,11 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
   - The exact schemas are shown to the user before M11.1 and M11.2 (rule 11).
 - **Fallback always works.** A tile, object or character with no art still draws as today (square
   and colour). New canon batches and headless tests never break on missing art.
-- **Characters are layered at run time.** One node stacks the LPC layer sheets (body, head, clothes,
-  hair, tail, weapon) in a fixed order. No baked sheets in git. A tool may bake later if speed needs it.
+- **Characters are baked by a tool** (changed in M11.0; the plan said layered at run time). LPC parts
+  are one file per animation in a base palette plus colour palettes; recolouring them in Godot needs a
+  shader per layer. `tools/build_sprites.py` (Pillow, user OK 2026-09-27) recolours and stacks the parts
+  and writes one sheet per look to `game/assets/characters/<id>.png`. The LPC generator clone stays
+  outside the repo; CREDITS.md records its commit.
 - **Animation reads state changes.** After each command the view compares the old and new state
   (positions, facing, HP, `down`) and plays tweens. It never changes state and never blocks input:
   a new command finishes the running tweens at once.
@@ -56,6 +59,32 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
   Gnolls, Ashfire Bees, Snow Golem, human foes).
 - **M11.5 Atmosphere (later).** Day/night tint from the clock, falling snow, fire and lamp light.
 - Later: UI skin and font, portraits for the main cast, emotes.
+
+## M11.0 Art spike (2026-09-27)
+- Sources downloaded (user OK): "[LPC] Terrains" (`terrain-v7.png` → `game/assets/tiles/lpc_terrains.png`),
+  "LPC Tile Atlas" (`terrain_atlas.png` → `lpc_atlas.png`), and a part clone of the Universal LPC
+  Spritesheet Character Generator (data files and the part folders we use; kept in the scratchpad).
+  The credit files of both tile packs are copied next to the sheets. `CREDITS.md` lists every source.
+- LPC has the parts we hoped for: lizard heads and tails (Drakes), wolf heads, ears and tails (Gnolls),
+  goblin heads (adult, child), skeleton body and head. Each part lists authors and licences in its
+  sheet definition; the tool copies them into CREDITS.md.
+- **`tiles.json` (schema, shown to the user with the screenshots):** optional per tile
+  `"sprite": {"sheet": s, "cells": [[x, y], ...]}` (32 px cells of `game/assets/tiles/<s>.png`; one is
+  picked per map cell by a fixed hash of its position, no RNG), `"prop": {"sheet": s, "region": [x, y, w, h]}`
+  (in cells; drawn over the ground, bottom-centred on the cell, y-sorted with characters), and
+  `winter_sprite` / `winter_prop`. A missing sheet or field = the colour square.
+- **`appearance.json` (new file):** `{"schema_version": 1, "looks": {id: {"body", "skin", "base"?,
+  "parts": [{"part", "color"?}], "confidence", "note"}}}`. Id = NPC id, enemy type or `player`.
+  Colours not in the Book text are `"confidence": "guess"` (rule 9).
+- Sheet layout: 64×64 frames, 9 columns, 13 rows (walk 0-3, slash 4-7, hurt 8, idle 9-12).
+- View: `WorldView.TILE` 32, camera zoom 2 (was 3 at 16 px). World nodes are y-sorted; new `Props` layer.
+  `CharacterSprite` (new) draws a sheet; the player's sprite glides one cell in 0.14 s with half a walk
+  cycle; the marker itself moves at once, so logic and tests see the exact cell. NPCs with a sheet are
+  sprites (a down NPC lies down); others and all monsters stay squares until M11.2 / M11.4.
+- Art in this step: ground for `liscor_gate` tiles (grass, tall grass, dirt road, cobble, city wall,
+  tree and rock props) and snow versions; looks for the player, Relc, Krshia and the Goblin grunt
+  (the Goblin sheet is not drawn yet: monsters are M11.4).
+- Tests: `unit_art.gd` (8), `tools/tests/test_build_sprites.py` (6). GUT 697/697 (75 scripts), Python 57/57.
 
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character

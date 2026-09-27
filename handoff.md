@@ -1,22 +1,28 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #45 (M10.5) merged. Tags `m10.5-done` and `m10-done` on merge commit 25b8d94 (pushed). M10 moved to `docs/PROGRESS_ARCHIVE.md`.
-- User paused new books. M11 (graphics) planned: ADR 0018, ROADMAP M11. Plan docs committed on branch `feat/m11.0-art-spike` (not pushed yet).
-- User choices: 2D top-down pixel art, 32 px cells; free LPC packs (characters + tiles) plus our own edits, with `CREDITS.md`; standard animation first (smooth steps, walk cycle, facing, attack swing, hit flash, damage numbers, knock-out fall).
+- M10 closed: tags `m10.5-done`, `m10-done` on 25b8d94 (pushed). M11 plan accepted (ADR 0018).
+- M11.0 art spike built on branch `feat/m11.0-art-spike` (committed, NOT pushed). Detail: ADR 0018 "M11.0".
+  - User OKs: download 3 art sources; Pillow for tools (`tools/requirements.txt`).
+  - Art: `game/assets/tiles/lpc_terrains.png` (LPC Terrains v7), `lpc_atlas.png` (LPC Tile Atlas), their credit files; `game/assets/characters/{player,relc,krshia,goblin_grunt}.png` baked by `tools/build_sprites.py` from `game/data/appearance.json`. `CREDITS.md` at repo root.
+  - Code: `WorldView.TILE` 32 (U = 2 scales old sizes), zoom 2, y-sort + `Props` layer, tile `sprite`/`prop` from `tiles.json`, `world/character_sprite.gd` (new), player glide per step, NPC sprites.
+  - GUT 697/697 (75 scripts), Python 57/57, validator 0. Screenshots sent to the user (gate, market).
 
 ## Next steps
-1. M11.0 Art spike on `feat/m11.0-art-spike`:
-   - Find the LPC parts: human body, lizard head + tail (Drake), wolf head + tail (Gnoll), goblin, skeleton. Check each licence. Source: the Universal LPC Spritesheet Generator repo and OpenGameArt. Downloading needs the user's OK (name, source, size).
-   - Make `game/assets/{tiles,objects,characters,fx}/` and `CREDITS.md` (author, licence, link per file).
-   - `WorldView.TILE` 16 -> 32; camera zoom to match. Tests in `unit_world_view` that use pixel sizes must follow.
-   - `liscor_gate` drawn with LPC tiles; the player as a layered LPC character that walks.
-   - Screenshot with the `_scratch` scene; the user approves the look.
-   - Before M11.1/M11.2: show the user the schema for `tiles.json` `sprite`, object sprites and `appearance.json` (rule 11).
-2. Book 5 threads (for later, from M10): Ryoka heading home, Rags heading south, Brunkr's arm, Octavia's penicillin, Toren in the dungeon, Tyrion Veltras has no NPC record, Erin's white coin, Lyonette's oath. Detail in ADR 0017.
+1. User approves the look (and the schemas in ADR 0018 M11.0). Then push `feat/m11.0-art-spike`, open the PR, tick M11.0 after merge, tag `m11.0-done`.
+   - Also commit the 4 missing `game/tests/sim_book4_*.gd.uid` files (made by import; already in the branch as a chore commit).
+2. M11.1 Tiles and objects: terrain edges (LPC Terrains blocks are 3 wide: rows of inner corners, a 3×3 edge ring, fill variants; `terrain-map-v7.png` has wang tiles but is 31488 px tall, too tall for a GPU texture: cut it or do corner lookup in code), all 16 tiles, winter art, sprites for about 66 map objects (by kind), buildings (brown squares now).
+3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess.
+
+## How to rebuild character sheets
+- The LPC generator part clone is in the session scratchpad (gone next session). Make a new one:
+  `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
+  then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
+- `python tools/build_sprites.py --ulpc <clone>` then `godot --headless --path game --import`.
+- Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Approve the M11 plan (ADR 0018). Then M11.0 starts.
+- Approve the M11.0 look. Push/PR after that.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -53,7 +59,11 @@
 ## Graphics notes (M11)
 - Core must not change for art. The view compares old and new state after each command and plays tweens; tweens never block input.
 - Missing art must fall back to today's squares, so headless tests and new data never break.
-- `.import` files for new PNGs are kept in git (ADR 0001). Run `godot --headless --path game --import` after adding art.
+- `.import` and `.uid` files are kept in git (ADR 0001). Run `godot --headless --path game --import` after adding art or scripts.
+- The player marker moves at once; only the `CharacterSprite` child glides (tests read `player.position`).
+- Monster markers must stay squares until M11.4: `unit_world_view` checks their child order (edge, ring, body, label, bar).
+- LPC tile packs: `lpc_terrains` fills: grass (1,10) + tufts (0..2,12), light grass tufts (3..4,12), dirt (1,3)/(1,5), grey cobble (13,3), snow (22,10)/(21..22,12), water (1,17), frozen dirt (25,12). `lpc_atlas`: pine (30,0,2,5), round tree (29,28,3,4), grey rock (28,26,1,1), stone wall face (17,24).
+- Screenshots: `godot --path game --write-movie <file>.png --fixed-fps 10 --quit-after 12 res://_scratch/shot.tscn` (window is 1152x648; `--resolution` is ignored).
 
 ## Active files
-- `docs/adr/0018-m11-graphics.md`, `docs/ROADMAP.md` (M11), `game/world/world_view.gd` (TILE, drawing), `game/world/main.gd` (input, refresh), `game/data/tiles.json`, `game/tests/unit_world_view.gd`.
+- `docs/adr/0018-m11-graphics.md`, `game/world/world_view.gd`, `game/world/world_view.tscn`, `game/world/character_sprite.gd`, `game/data/tiles.json`, `game/data/appearance.json`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/tests/unit_art.gd`, `game/tests/unit_world_view.gd`, `CREDITS.md`.
