@@ -1,24 +1,25 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.2 merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)); tag `m11.2-done` on d000380 (pushed).
-- M11.3 Animation built on branch `feat/m11.3-animation` ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49) open). Detail: ADR 0018 "M11.3".
-  - Sheet layout v2 (768x1088): 64 px rows walk 0-3, hurt 4, idle 5-8; a 128 px attack block under them (y 576).
-    `tools/build_sprites.py` picks the attack per look from its weapon (`attack_kind`: slash_128, slash_oversize,
-    thrust, slash). All 43 sheets rebuilt.
-  - `CharacterSprite` uses regions: `region_of`, `shown`, `walk`, `attack`, `fall`, `finish`, `half`.
-  - New `world/anim_diff.gd` (`AnimDiff.snapshot` / `events`): move, hit, fall, gone, swing, read from state only.
-  - `WorldView.refresh(gs, db)` plays the events (new `Fx` layer for numbers and fades); `main.gd` passes the db.
-  - Tests: GUT 721/721 (77 scripts), Python 66/66, validator 0 errors. A fight screenshot sent to the user.
+- M11.3 merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)); tag `m11.3-done` on ebdcbf0 (pushed).
+- M11.4 Monsters built on branch `feat/m11.4-monsters` (PR opened this session). Detail: ADR 0018 "M11.4".
+  - User OKs: download 3 LPC creature files; a new creature look kind in `appearance.json`.
+  - 30 people enemies: LPC looks in `appearance.json` (canon check of Books 1-4 by a subagent; notes carry chapter refs).
+  - 6 creatures: new `tools/build_creatures.py` bakes them into the normal character sheet layout (so the game
+    needs no new schema code). Sources in `tools/art/creatures/` (golem, bee, big_worm, eagle); rock_crab and
+    snowman are drawn by the tool. `build_sprites.py` skips looks with a `creature` key.
+  - `WorldView._show_monsters`: a type with a sheet = CharacterSprite + state ring (Polygon2D "Ring") + label
+    (at HEAD) + bar. Gone monster: its sprite falls, then fades. Hidden monster: the `rock` tile prop.
+  - Tests: GUT 726/726 (78 scripts), Python 73/73, validator 0 errors. Screenshots sent to the user
+    (all 36 on floodplains_south; a fight strip).
 
 ## Next steps
-1. User checks M11.3 and merges its PR. Then tick M11.3 in ROADMAP and `progress.md`, tag `m11.3-done` on the merge commit.
-2. M11.4 Monsters: all 36 enemies with art (enemies.json ids: goblin_grunt, rock_crab, razorbeak, undead, Antinium,
-   Gnolls, ashfire_bee, snow_golem, human foes...). Monster markers become CharacterSprites (or object-like sprites
-   for crabs, bees, golems). `WorldView.monster_facing` already holds their facing; `_lunge` is the square fallback.
-   `unit_world_view` checks the square child order (edge, ring, body, label, bar): keep squares for enemies with no art.
-3. Possible polish (ask the user): Antinium back shell; Toren's eye-flames; per-book looks; the player's own
-   knock-out fall (a knock-out ends the day at once, so it needs a pause before the night dialog).
+1. User checks M11.4 and merges its PR. Then tick M11.4 in ROADMAP and `progress.md`, tag `m11.4-done` on the merge commit.
+2. M11.5 Atmosphere (ask the user first; it was marked "later"): day/night tint from the clock, falling snow,
+   fire and lamp light. Then M11 "done when": the user checks the game on screen; tag `m11-done`.
+3. Possible polish (ask the user): bigger sprites for big foes (Hobs, Soldier, Crypt Lord, Rock Crab, Razorbeak,
+   Snow Golem; needs a frame larger than 64 px), Antinium back shell; Toren's eye-flames; the player's own
+   knock-out fall; the Goblin commander's Shield Spider.
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
@@ -30,10 +31,13 @@
   `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
   then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
 - `python tools/build_sprites.py --ulpc <clone>` then `godot --headless --path game --import`.
+- Creatures: `python tools/build_creatures.py` (no clone needed; sources in `tools/art/creatures/`).
+- The clone now also needs `/spritesheets/weapon/` and `/spritesheets/shield/` in full (halberd, mace, saber,
+  scimitar, bows, shields): `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout add '/spritesheets/weapon/' '/spritesheets/shield/'`.
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check M11.3 (fight screenshot, or play: walk next to a monster and attack), merge its PR.
+- Check M11.4 (screenshots, or play: meet monsters on the Floodplains), merge its PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -72,7 +76,15 @@
 - Missing art must fall back to today's squares, so headless tests and new data never break.
 - `.import` and `.uid` files are kept in git (ADR 0001). Run `godot --headless --path game --import` after adding art or scripts.
 - The player marker moves at once; only the `CharacterSprite` child glides (tests read `player.position`).
-- Monster markers must stay squares until M11.4: `unit_world_view` checks their child order (edge, ring, body, label, bar).
+- Monster markers: toy enemy types (`goblin`, `crab`) have no sheet and stay squares; `unit_world_view` checks their
+  child order (edge, ring, body, label, bar). A sprite monster is (Ring, CharacterSprite, label, bar back, fill).
+- A test that needs a sprite monster copies the toy goblin def to a real look id (`unit_monster_art.ART_GOBLIN`).
+- Screenshot scenes: monsters added by hand with `Combat.add_monster` (no spawn entry) are removed by the first
+  command (`Commands.attack`), and the view plays a fall for each. Change state by hand instead
+  (`gs.combat.monsters.erase(id)`, `Combat.set_hp`).
+- Part colours: a variant-folder part takes the file name as its colour (`kite_gray`, not `kite gray`).
+  `body_zombie` needs a colour it cannot get: use body `male` with skin `zombie` / `zombie_green` and `heads_zombie`.
+  `torso_clothes_tunic` has no male body.
 - LPC tile packs: `lpc_terrains` fills: grass (1,10) + tufts (0..2,12), light grass tufts (3..4,12), dirt (1,3)/(1,5), grey cobble (13,3), snow (22,10)/(21..22,12), water (1,17), frozen dirt (25,12). `lpc_atlas`: pine (30,0,2,5), round tree (29,28,3,4), grey rock (28,26,1,1), stone wall face (17,24).
 - Screenshots: `godot --path game --write-movie <file>.png --fixed-fps 10 --quit-after 12 res://_scratch/shot.tscn` (window is 1152x648; `--resolution` is ignored).
 - M11.1 shot scene: a `_scratch/shot.gd` that makes a WorldView, a `GameState.new(1)`, `gs.player.place(AREA, pos)`, `v.refresh(gs)`, and sets `v.camera.zoom` (0.8 shows a whole 32x24 map). Read AREA/X/Y/ZOOM/WINTER from env vars. Winter: pass "winter" as the winter flag to `setup` and set `gs.flags["winter"]`.
@@ -91,4 +103,6 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/world/anim_diff.gd`, `game/world/character_sprite.gd`, `game/world/world_view.gd` (+ `.tscn` Fx layer), `game/world/main.gd`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/tests/unit_anim.gd`, `game/tests/unit_art.gd`, `docs/adr/0018-m11-graphics.md`, `game/assets/characters/`.
+- `tools/build_creatures.py`, `tools/art/creatures/`, `tools/build_sprites.py`, `game/data/appearance.json`,
+  `game/world/world_view.gd`, `game/tests/unit_monster_art.gd`, `tools/tests/test_build_creatures.py`,
+  `docs/adr/0018-m11-graphics.md`, `CREDITS.md`, `game/assets/characters/`.

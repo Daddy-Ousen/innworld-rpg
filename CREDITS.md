@@ -45,6 +45,24 @@ Our edits: the Antinium antennae, mandibles and second pair of arms are drawn by
 (`innworld_*` parts) from the LPC body and the LPC alien head of the same sheet (credits below).
 Licence of the edits: CC-BY-SA 3.0 (the same as the art they use).
 
+### Creatures (M11.4)
+
+Built by `tools/build_creatures.py` (recoloured and laid out as character sheets) from these files in
+`tools/art/creatures/`:
+- `golem-walk.png`, `golem-atk.png`, `golem-die.png` from "[LPC] Golem" by Stephen "Redshrike" Challener
+  (art) and William.Thompsonj. Licence: CC-BY 4.0 / CC-BY 3.0 / GPL 3.0 / GPL 2.0 / OGA-BY 3.0.
+  https://opengameart.org/content/lpc-golem. Used for `crypt_lord` (recoloured).
+- `bee.png`, `big_worm.png` from "[LPC] Monsters" by bluecarrot16, Charles Sanchez (CharlesGabriel) and bagzie,
+  based on the LPC base assets. Licence: CC-BY-SA 3.0 / GPL 3.0. https://opengameart.org/content/lpc-monsters.
+  Used for `ashfire_bee` and `skinner` (recoloured).
+- `bird_2_eagle.png` from "[LPC] Birds" by bluecarrot16 (commissioned by castelonia), inspired by "winter
+  birds" by Refuzzle. Licence: CC-BY 4.0 / CC-BY 3.0 / CC-BY-SA 4.0 / CC-BY-SA 3.0 / GPL 3.0 / GPL 2.0 /
+  OGA-BY 3.0. https://opengameart.org/content/lpc-birds. Used for `razorbeak` (recoloured, twice the size).
+
+Our edits: `rock_crab` (a boulder crab in the colours of the "LPC Tile Atlas" rock) and `snow_golem` (a
+snowman) are drawn by `tools/build_creatures.py`. The recoloured sheets are CC-BY-SA 3.0 where the source
+is CC-BY-SA, else CC-BY 4.0 like their source.
+
 <!-- build_sprites:begin -->
 Built by `tools/build_sprites.py` from the Universal LPC Spritesheet Character Generator
 (https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator, commit `4963a69795255fb15a934c47f478a8bdcf3668f5`).
@@ -103,6 +121,22 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `body/tail/lizard` by Nila122, bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/drakes-and-lizardfolk
   - Notes: edited for v3 bases and recolored by bluecarrot16, additional animations added by JaidynReiman
+- `cape/solid/bg` by Nila122, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+  - https://opengameart.org/content/lpc-roman-armor
+- `cape/solid/fg` by bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+  - https://opengameart.org/content/lpc-roman-armor
+  - http://opengameart.org/content/lpc-clothing-updates
+- `cape/tattered/bg` by Nila122, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+  - https://opengameart.org/content/lpc-roman-armor
+- `cape/tattered/fg` by Nila122, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+  - https://opengameart.org/content/lpc-roman-armor
+- `eyes/cyclops` by kirts, JaidynReiman. Licence: CC0.
+  - https://opengameart.org/content/cyclops-and-his-eye
+  - Notes: original by kirts, repositioned by JaidynReiman
 - `feet/armour/plate` by Matthew Krohn (makrohn), Johannes Sjölund (wulax). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - Notes: original by wulax, recolors by bigbeargames, edits for v3 base and recolors by bluecarrot16
@@ -129,6 +163,8 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://github.com/ElizaWy/LPC/blob/main/Characters/Hair
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - Notes: Original by bluecarrot16. Edited and animated by ElizaWy.
+- `hair/dreadlocks_long` by bluecarrot16. Licence: CC0.
+  - https://opengameart.org/content/lpc-hair
 - `hair/high_ponytail` by JaidynReiman, ElizaWy, bluecarrot16. Licence: OGA-BY 3.0.
   - https://opengameart.org/content/lpc-hair
   - https://opengameart.org/content/lpc-expanded-hair
@@ -145,10 +181,32 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `hair/ponytail` by JaidynReiman, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-expanded-hair
+- `hat/cloth/bandana` by Matthew Krohn (makrohn), JaidynReiman, Marcel van de Steeg (MadMarcel), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0.
+  - https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle
+  - https://github.com/makrohn/Universal-LPC-spritesheet/commit/f50007cb47c235d8896cafae7a613f0b6a9a09a8?short_path=02b86d4#diff-02b86d45789a3e3e8e79519c7d17d15c9e6ecc9b4ddecb1bcd8dfbbaef430b75
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+- `hat/cloth/hood` by Johannes Sjölund (wulax), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+  - Notes: Brown hood by Wulax, original black/white recolors by ??, mapped to idle/run/jump/revised combat by JaidynReiman, along with additional recolors.
+- `hat/cloth/leather_cap` by Johannes Sjölund (wulax), Matthew Krohn (Makrohn), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+  - Notes: original by Johannes Sjölund (wulax), female by Matthew Krohn, mapped to all frames w/recolors by JaidynReiman
 - `hat/helmet/barbarian` by bluecarrot16, JaidynReiman, Napsio (Vitruvian Studio). Licence: CC-BY 3.0 / CC-BY 4.0 / OGA-BY 3.0 / GPL 2.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-helmets
   - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
   - Notes: original version by bluecarrot16, color reduction by Napsio (Vitruvian Studio)
+- `hat/helmet/close` by bluecarrot16. Licence: OGA-BY 3.0 / CC-BY 3.0 / CC-BY 4.0 / GPL 2.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-helmets
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+- `hat/helmet/kettle` by Johannes Sjölund (wulax), JaidynReiman, Napsio (Vitruvian Studio). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+  - Notes: previously referred to as chain-hat, color reduction by Napsio (Vitruvian Studio)
+- `hat/helmet/nasal` by bluecarrot16. Licence: CC-BY 3.0 / CC-BY 4.0 / OGA-BY 3.0 / GPL 2.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-helmets
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
 - `hat/magic/wizard` by Michael Whitlock (bigbeargames), Tuomo Untinen (reemax), JaidynReiman. Licence: CC-BY-SA 3.0 / GPL 2.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-items-and-game-effects
   - https://opengameart.org/content/lpc-pointed-hats
@@ -222,6 +280,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-wolfman
   - https://opengameart.org/content/lpc-character-bases
   - Notes: original wolf animation by Redshrike, commissioned by William.Thompsonj; wolfman sprite by BenCreating, commissioned by castelonia; tweaks and headless version by bluecarrot16
+- `head/heads/zombie` by bluecarrot16, Benjamin K. Smith (BenCreating), Sander Frenken (castelonia), Stephen Challener (Redshrike). Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://opengameart.org/content/lpc-zombie
+  - https://opengameart.org/content/lpc-character-bases
 - `legs/armour/plate` by bluecarrot16, JaidynReiman, Michael Whitlock (bigbeargames), Matthew Krohn (makrohn), Johannes Sjölund (wulax). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - Notes: reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman
@@ -243,11 +305,21 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - https://opengameart.org/content/lpc-expanded-pants
   - Notes: Original bases by Redshrike, thrust/shoot bases by Wulax, original shorts by ElizaWy, climb/jump/run/sit/emotes/revised combat by JaidynReiman
+- `legs/shorts/shorts/male` by JaidynReiman, ElizaWy, Bluecarrot16, Johannes Sjölund (wulax), Stephen Challener (Redshrike). Licence: OGA-BY 3.0 / GPL 3.0.
+  - https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+  - https://opengameart.org/content/lpc-expanded-pants
+  - Notes: Original bases by Redshrike, thrust/shoot bases by Wulax, original overalls and shorts by ElizaWy, base animations adapted from v3 overalls by bluecarrot16, shorts by JaidynReiman
 - `legs/skirts/plain` by bluecarrot16, Pierre Vigier (pvigier), Johannes Sjölund (wulax), Ahmad3366, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - Notes: original by wulax, edited for female base by pvigier, edited for v3 base by bluecarrot16, idle & sit by Ahmad3366, color reduced & female sit/emote by JaidynReiman
 - `shield/heater/revised/trim` by bluecarrot16, Sander Frenken (castelonia), ElizaWy, JaidynReiman. Licence: OGA-BY 3.0.
   - https://opengameart.org/content/lpc-shields
+- `shield/kite` by DarkwallLKE, Tuomo Untinen (reemax), Michael Whitlock (bigbeargames). Licence: CC-BY-SA 3.0 / GPL 2.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-kite-shield
+  - https://opengameart.org/content/lpc-shields-pack
+- `shield/round` by Johannes Sjölund (wulax), Michael Whitlock (bigbeargames), DarkwallLKE, Tuomo Untinen (reemax). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-shields-pack
 - `torso/aprons/apron` by Nila122. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 2.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-aprons
 - `torso/armour/leather` by Johannes Sjölund (wulax), bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
@@ -298,6 +370,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - https://opengameart.org/content/lpc-expanded-simple-shirts
   - Notes: original by ElizaWy; spellcast/thrust/shoot/hurt/male adapted from original by JaidynReiman
+- `torso/clothes/vest_open` by bluecarrot16, Thane Brimhall (pennomi), laetissima. Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-2-characters
+  - https://opengameart.org/content/lpc-gentleman
+  - https://opengameart.org/content/lpc-pirates
 - `weapon/blunt/waraxe` by Benjamin K. Smith (BenCreating), bluecarrot16, Sander Frenken (castelonia). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-weapons
 - `weapon/magic/simple` by bluecarrot16, Dr. Jamgo. Licence: CC0.
@@ -305,14 +381,29 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - Notes: original by DrJamgo, hands switched and split into to layers by bluecarrot16
 - `weapon/magic/wand` by Matthew Krohn (makrohn). Licence: CC-BY-SA 3.0 / GPL 3.0 / OGA-BY 3.0.
   - https://opengameart.org/content/lpc-wands
+- `weapon/polearm/halberd` by Benjamin K. Smith (BenCreating), bluecarrot16, Sander Frenken (castelonia). Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-medieval-weapons
 - `weapon/polearm/spear` by Pierre Vigier (pvigier), Johannes Sjölund (wulax), Inboxninja. Licence: CC-BY-SA 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - https://opengameart.org/content/lpc-spear-and-shovel-reworked
   - Notes: original by wulax, walk animations redone by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16
+- `weapon/ranged/bow/great` by Daniel Eddeland (daneeklu), gr3yh47, Johannes Sjölund (wulax), Pierre Vigier (pvigier). Licence: CC-BY-SA 3.0.
+  - https://opengameart.org/content/lpc-weapons-two-bows-a-spear-and-a-trident
+  - https://opengameart.org/content/lpc-walk-animations-for-bows
+  - Notes: modified by daneeklu, from "normal" bow by wulax; walk animations by pvigier; split into layers and tweaked for v3 character bases by bluecarrot16
+- `weapon/ranged/bow/normal` by Johannes Sjölund (wulax), Pierre Vigier (pvigier). Licence: OGA-BY 3.0+ / GPL 3.0 / CC-BY 4.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-walk-animations-for-bows
+  - Notes: original by wulax, walk animations by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16. pvigier has agreed to license this sheet as OGA-BY 3.0+.
 - `weapon/sword/arming` by ElizaWy; walk and down by JaidynReiman. Licence: OGA-BY 3.0.
   - https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
 - `weapon/sword/dagger` by bluecarrot16, Johannes Sjölund (wulax), Matthew Krohn (makrohn). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - https://opengameart.org/content/lpc-extended-weapon-animations
+- `weapon/sword/longsword` by Johannes Sjölund (wulax), bluecarrot16. Licence: OGA-BY 3.0 / CC-BY-SA 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-extended-weapon-animations
+- `weapon/sword/scimitar` by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). Licence: OGA-BY 3.0.
+  - https://opengameart.org/content/lpc-dcss-swords
 <!-- build_sprites:end -->

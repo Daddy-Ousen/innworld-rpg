@@ -37,6 +37,8 @@ Sheet layout (rows up/left/down/right as in LPC), 768×1088 px:
                or staff thrust (6 of its 8 frames), else a plain slash. A layer with no
                frames for the attack keeps its standing walk frame, so no part vanishes.
 
+Looks with a "creature" key are skipped: tools/build_creatures.py builds them.
+
 The credits of every LPC file used go into CREDITS.md between the
 build_sprites markers. Exit code 0 = built, 1 = errors.
 """
@@ -502,6 +504,8 @@ def build(ulpc_dir: Path, appearance: Path, out_dir: Path, credits: Path,
     out_dir.mkdir(parents=True, exist_ok=True)
     for look_id in sorted(looks):
         look = looks[look_id]
+        if "creature" in look:  # tools/build_creatures.py builds these
+            continue
         try:
             sheet, folders = build_look(ulpc, look)
         except BuildError as e:

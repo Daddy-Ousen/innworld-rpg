@@ -1,6 +1,6 @@
 {
 	"schema_version": 1,
-	"note": "Character looks (ADR 0018). Id = NPC id, enemy type, 'player', or 'race_<race>' (the generic look of an NPC with no own look; the race from canon npcs.json in lower case, '-' and ' ' as '_'). tools/build_sprites.py bakes game/assets/characters/<id>.png from LPC parts. body = LPC body type; skin = body palette colour ('all.lpcr.<name>' picks any LPC colour); parts = LPC sheet definition names with a palette colour, or our own edits (innworld_extra_arms, innworld_antennae, innworld_mandibles). Colours not stated in the Book text are marked confidence 'guess'.",
+	"note": "Character looks (ADR 0018). Id = NPC id, enemy type, 'player', or 'race_<race>' (the generic look of an NPC with no own look; the race from canon npcs.json in lower case, '-' and ' ' as '_'). tools/build_sprites.py bakes game/assets/characters/<id>.png from LPC parts. body = LPC body type; skin = body palette colour ('all.lpcr.<name>' picks any LPC colour); parts = LPC sheet definition names with a palette colour, or our own edits (innworld_extra_arms, innworld_antennae, innworld_mandibles). Colours not stated in the Book text are marked confidence 'guess'. A look with a 'creature' key (a monster that is not a person) is built by tools/build_creatures.py instead (ADR 0018 M11.4).",
 	"looks": {
 		"player": {
 			"body": "male",
@@ -1040,10 +1040,849 @@
 			"parts": [
 				{
 					"part": "heads_goblin_child"
+				},
+				{
+					"part": "legs_childpants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Small, wiry green Goblin in rags (1.02, 1.13); red eyes not drawn. Its rusty knife is not drawn: LPC child bodies have no weapons."
+		},
+		"goblin_raid_leader": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_clothes_vest_open",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "A head taller and brawnier than other Goblins, not a Hob; a short sword (1.29). Rags are a guess."
+		},
+		"adventurer_brawler": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "hat_helmet_kettle",
+					"color": "steel"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Burly Human in armour with a sword; one wears a pot-like helmet (1.42). Colours are a guess."
+		},
+		"adventurer_axeman": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "redhead"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "likely",
+			"note": "The biggest of the three, in armour, with an axe (1.42). Hair and armour colours are a guess."
+		},
+		"goblin_feathered_chieftain": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_cap_leather_feather",
+					"color": "brown"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "likely",
+			"note": "Heavyset, nearly twice a Goblin's size, rusty patched armour, an axe (1.52R). The tribe wears feathers; where is a guess (a feathered cap)."
+		},
+		"zombie": {
+			"body": "male",
+			"skin": "zombie",
+			"parts": [
+				{
+					"part": "heads_zombie"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "gray"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Rotting dead with glowing eyes; some in old gear (1.57H, 1.58H). Rags are a guess."
+		},
+		"skeleton": {
+			"body": "male",
+			"skin": "light",
+			"base": "body_skeleton",
+			"parts": [
+				{
+					"part": "heads_skeleton"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Bare bones with crimson eye-light (not drawn); one has a broken sword (1.58H)."
+		},
+		"ghoul": {
+			"body": "male",
+			"skin": "zombie_green",
+			"parts": [
+				{
+					"part": "heads_zombie"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
 				}
 			],
 			"confidence": "guess",
-			"note": "Small green Goblin. Clothes come in M11.4."
+			"note": "A fast zombie with claws and crimson eyes (1.58H). A greener, bare zombie look to tell it apart (guess)."
+		},
+		"antinium_worker": {
+			"body": "male",
+			"skin": "all.lpcr.chocolate",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "likely",
+			"note": "Brown-black Worker, four arms, antennae, mandibles (1.06, 1.25); armed with what it found, e.g. a knife (1.29)."
+		},
+		"antinium_soldier": {
+			"body": "male",
+			"skin": "all.lpcr.black",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Bigger than a Worker, four arms with spiked chitin gauntlets and spade hands, no weapon (1.30, 1.60). The gauntlets are drawn as dark arm armour; the size is not drawn."
+		},
+		"gazi_of_reim": {
+			"body": "female",
+			"skin": "all.lpcr.bronze",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "eyes_cyclops",
+					"color": "yellow"
+				},
+				{
+					"part": "hair_dreadlocks_long",
+					"color": "black"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "copper"
+				},
+				{
+					"part": "arms_armour",
+					"color": "copper"
+				},
+				{
+					"part": "legs_pants",
+					"color": "maroon"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_scimitar",
+					"color": "scimitar"
+				}
+			],
+			"confidence": "likely",
+			"note": "Half-Gazer: reddish-brown skin, black dreadlocks, one big central eye (1.36); rusty-looking armour and a curved sword (1.38, 2.05). Her four small eyes and extra arm joint are not drawn."
+		},
+		"liscor_guardsman": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "hat_helmet_nasal",
+					"color": "iron"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Drake guardsman with a helmet and a spear (2.02). Scale colour and armour are a guess."
+		},
+		"gnoll_hunter": {
+			"body": "male",
+			"skin": "fur_brown",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_ranged_bow_great",
+					"color": "medium"
+				}
+			],
+			"confidence": "likely",
+			"note": "A city Gnoll (shopkeeper) with a great war bow (2.05). Fur and clothes are a guess."
+		},
+		"silverfang_gnoll_warrior": {
+			"body": "male",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_grey"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_longsword",
+					"color": "longsword"
+				},
+				{
+					"part": "shield_round",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Tall furred Silverfang Gnoll (2.25, 2.26); sword and shield like Brunkr's. Note: most Gnolls at the inn had no weapons (2.26). Fur is a guess."
+		},
+		"celum_mugger": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "dark_brown"
+				},
+				{
+					"part": "hat_hood_cloth",
+					"color": "charcoal"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "charcoal"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "likely",
+			"note": "Men in dark clothes with daggers (the leader has a sword too) (2.44). The hood is a guess."
+		},
+		"brilliant_swords_adventurer": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "sandy"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "steel"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Drunk Human adventurers with swords; two still wear armour (2.47). Colours are a guess."
+		},
+		"frenzied_hare_regular": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Tired workers in plain clothes who fight with fists (2.47). Clothes are a guess."
+		},
+		"persua_courier": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_ponytail",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "rose"
+				},
+				{
+					"part": "legs_shorts",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Pale, sharp-faced Runner in new running gear, no weapon (1.26R, 3.04). Hair colour is not in Books 1-4 (guess)."
+		},
+		"celum_runner": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "tan"
+				},
+				{
+					"part": "legs_shorts",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young Street Runner; fights with bare hands in 3.04. Clothes are a guess."
+		},
+		"goblin_lord_soldier": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_helmet_close",
+					"color": "iron"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "iron"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				},
+				{
+					"part": "legs_armour",
+					"color": "iron"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Goblin in black armour, face hidden by a dark helmet, with a pike (3.17T). LPC has no black metal: dark iron."
+		},
+		"goblin_lord_archer": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_helmet_nasal",
+					"color": "iron"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "weapon_ranged_bow_normal",
+					"color": "dark"
+				}
+			],
+			"confidence": "likely",
+			"note": "Archer of the vanguard (3.19T). Dark armour like the soldiers is a guess."
+		},
+		"goblin_lord_shaman": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "black"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "guess",
+			"note": "Lesser [Shaman]: no armour; a bone staff like the head Shaman's (3.17T) is a guess."
+		},
+		"goblin_lord_hob": {
+			"body": "male",
+			"skin": "dark_green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "iron"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				},
+				{
+					"part": "legs_armour",
+					"color": "iron"
+				},
+				{
+					"part": "weapon_sword_longsword",
+					"color": "longsword"
+				}
+			],
+			"confidence": "likely",
+			"note": "A big Hob with a sword (3.20T). Black armour is a guess; the size is not drawn."
+		},
+		"goblin_lord_commander": {
+			"body": "male",
+			"skin": "dark_green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "cape_solid",
+					"color": "black"
+				},
+				{
+					"part": "weapon_polearm_halberd",
+					"color": "halberd"
+				}
+			],
+			"confidence": "likely",
+			"note": "Tattooed commander with a shining silver halberd (3.17T, 3.20T). His Shield Spider and tattoos are not drawn."
+		},
+		"redfang_warrior": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_bandana",
+					"color": "red"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "cape_tattered",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Elite Goblin, armed, armoured, in a rough cloak (3.17T). The red bandana is a guess (no red marks in Books 1-4)."
+		},
+		"redfang_hob": {
+			"body": "male",
+			"skin": "dark_green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_bandana",
+					"color": "red"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "cape_tattered",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "likely",
+			"note": "Grunter: a heavy Hob in armour with an axe (3.17T, 3.20T). The red bandana is a guess; the size is not drawn."
+		},
+		"esthelm_defender": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Armed townsfolk of Esthelm (3.20T). Clothes and the spear are a guess."
+		},
+		"silver_rank_adventurer": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "silver"
+				},
+				{
+					"part": "arms_armour",
+					"color": "silver"
+				},
+				{
+					"part": "legs_armour",
+					"color": "silver"
+				},
+				{
+					"part": "feet_armour",
+					"color": "silver"
+				},
+				{
+					"part": "weapon_sword_longsword",
+					"color": "longsword"
+				},
+				{
+					"part": "shield_kite",
+					"color": "kite_gray"
+				}
+			],
+			"confidence": "guess",
+			"note": "Silver-rank adventurer, weapon drawn (3.20T). Armour and gear are a guess."
+		},
+		"liscor_house_thief": {
+			"body": "male",
+			"skin": "brown",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "hat_bandana",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "charcoal"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "likely",
+			"note": "Masked Drake with a knife (3.41). The LPC mask hides the whole Drake head, so a black bandana stands in for it. Scale and mask colours are a guess."
+		},
+		"rock_crab": {
+			"creature": "rock_crab",
+			"confidence": "likely",
+			"note": "A shell like a boulder, big dark-brown pincers, eye stalks, many legs (1.01). Drawn by build_creatures.py in the LPC rock colours. It is taller than a school bus in the Book; here it fills one 64 px frame."
+		},
+		"razorbeak": {
+			"creature": "eagle",
+			"hue": 75,
+			"sat": 0.9,
+			"light": "#c0392b",
+			"confidence": "guess",
+			"note": "Light-green dino-bird with red marks on the head (1.05). The LPC eagle turned green, its white head red; its size, leathery wings and toothed beak are not drawn."
+		},
+		"ashfire_bee": {
+			"creature": "bee",
+			"ramp": [
+				"#0b090c",
+				"#1c1820",
+				"#2e2833",
+				"#c8902a",
+				"#f2cf5b"
+			],
+			"confidence": "likely",
+			"note": "Black carapace with a yellow fuzzy patch, bigger than a hand (2.42). The LPC bee recoloured."
+		},
+		"snow_golem": {
+			"creature": "snowman",
+			"confidence": "likely",
+			"note": "Snowman shape with blobby snow hands and stick teeth, twice Erin's height (2.42). Drawn by build_creatures.py; here it fills one 64 px frame."
+		},
+		"crypt_lord": {
+			"creature": "golem",
+			"die": "crumble",
+			"ramp": [
+				"#140d10",
+				"#3a2e2a",
+				"#5e5a44",
+				"#8a8662",
+				"#c9c3a0"
+			],
+			"confidence": "guess",
+			"note": "Huge, hunched undead of fused rotten flesh with bone teeth and glowing blue eyes (1.58H). The LPC golem in grey-green flesh colours; the face and eyes are not drawn."
+		},
+		"skinner": {
+			"creature": "big_worm",
+			"ramp": [
+				"#2a1612",
+				"#6b5436",
+				"#b39c68",
+				"#e3d6ad",
+				"#fbf6e6"
+			],
+			"confidence": "guess",
+			"note": "A legless giant of yellowed dead skin with a white face and two red eyes; it drags itself on its hands (1.59H, 1.60). The LPC big worm in yellowed skin colours; hands and eyes are not drawn."
 		}
 	}
 }

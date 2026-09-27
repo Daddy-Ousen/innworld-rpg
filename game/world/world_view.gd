@@ -24,6 +24,9 @@
 ## layer), a fallen NPC falls over, a gone monster fades out, the player and
 ## monsters swing (a sprite attack, a square lunges). Frost Fairies bob.
 ## Nothing waits for these: a new command draws the new state at once.
+## M11.4: a monster whose type has a sheet is a CharacterSprite with a ring
+## in its state colour under its feet (a gone one falls and fades); a
+## hidden Rock Crab is the rock prop. Types with no sheet stay squares.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -84,6 +87,12 @@ const LUNGE := 3.0 * U
 const LUNGE_TIME := 0.2
 ## A gone monster fades out in this time.
 const GONE_TIME := 0.35
+## The ring under a monster sprite's feet: half-size, px below the cell
+## centre, points, and how strong its state colour shows.
+const FOOT_RING := Vector2(11, 4)
+const FOOT_RING_Y := 11.0
+const FOOT_RING_POINTS := 16
+const FOOT_RING_ALPHA := 0.7
 
 ## Map id on screen now ("" = none).
 var area := ""
@@ -104,8 +113,8 @@ var npc_races: Dictionary = {}
 var enemies: Dictionary = {}
 ## NPC id → max HP (NpcReact.stats), for the HP bars of hurt NPCs.
 var npc_max_hp: Dictionary = {}
-## Monster id → facing (n, s, e, w) from its last step or swing (for the
-## monster sprites of M11.4).
+## Monster id → facing (n, s, e, w) from its last step or swing (the
+## monster sprites stand this way).
 var monster_facing: Dictionary = {}
 ## The state last drawn (AnimDiff.snapshot), and the walk-cycle half of each
 ## NPC (their markers are made anew each refresh).
@@ -235,7 +244,7 @@ func play(changes: Array) -> void:
 				if lying != null:
 					lying.fall()
 			AnimDiff.GONE:
-				_fade_out(e["cell"], String(e["monster_type"]))
+				_fade_out(e["cell"], String(e["monster_type"]), String(monster_facing.get(id, "s")))
 			AnimDiff.SWING:
 				if id != AnimDiff.PLAYER:
 					monster_facing[id] = e["dir"]
@@ -328,18 +337,31 @@ func _number(at: Vector2, amount: int, you: bool) -> void:
 	t.chain().tween_callback(label.queue_free)
 
 
-## A gone monster: a copy of its square shrinks and fades on its old cell.
-func _fade_out(cell: Vector2i, type: String) -> void:
+## A gone monster on its old cell: its sprite falls (the hurt frames) and
+## fades; with no sheet, a copy of its square shrinks and fades.
+func _fade_out(cell: Vector2i, type: String, dir: String = "s") -> void:
 	var ghost := Node2D.new()
 	ghost.name = "gone"
 	ghost.position = cell_center(cell)
-	_square(ghost, 5 * U, RING)
-	_square(ghost, 4 * U, Color.html(enemies.get(type, {}).get("color", "#ff00ff")))
+	var sprite := CharacterSprite.make(type)
+	if sprite != null:
+		sprite.pose(dir)
+		ghost.add_child(sprite)
+	else:
+		_square(ghost, 5 * U, RING)
+		_square(ghost, 4 * U, Color.html(enemies.get(type, {}).get("color", "#ff00ff")))
 	fx.add_child(ghost)
-	var t := ghost.create_tween().set_parallel(true)
-	t.tween_property(ghost, "scale", Vector2(0.3, 0.3), GONE_TIME)
-	t.tween_property(ghost, "modulate:a", 0.0, GONE_TIME)
-	t.chain().tween_callback(ghost.queue_free)
+	var t := ghost.create_tween()
+	if sprite != null:
+		sprite.fall(CharacterSprite.FALL_TIME)
+		t.tween_interval(CharacterSprite.FALL_TIME)
+		t.tween_property(ghost, "modulate:a", 0.0, GONE_TIME)
+	else:
+		t.set_parallel(true)
+		t.tween_property(ghost, "scale", Vector2(0.3, 0.3), GONE_TIME)
+		t.tween_property(ghost, "modulate:a", 0.0, GONE_TIME)
+		t = t.chain()
+	t.tween_callback(ghost.queue_free)
 
 
 ## The file of an art sheet: game/assets/tiles/<name>.png, else
@@ -530,10 +552,12 @@ func _show_npcs(gs: GameState) -> void:
 		npcs.add_child(marker)
 
 
-## One marker per monster in the area (named after the monster id): an
-## edge by state, a dark ring, a body in the enemy colour, "Goblin 5/8"
-## above it (see labelled) and an HP bar below. A hidden monster is a rock
-## tile with no label.
+## One marker per monster in the area (named after the monster id). With a
+## sheet for its type (M11.4): a foot ring in the state colour, the sprite
+## (facing its last step or swing), "Goblin 5/8" above the head (see
+## labelled) and an HP bar below. With no sheet: an edge by state, a dark
+## ring, a body in the enemy colour, the label and the bar. A hidden monster
+## is the rock tile's prop (or a rock-coloured square) with no label.
 func _show_monsters(gs: GameState) -> void:
 	for child in monsters.get_children():
 		monsters.remove_child(child)
@@ -548,24 +572,55 @@ func _show_monsters(gs: GameState) -> void:
 		marker.name = id
 		marker.position = cell_center(CombatState.pos_of(m))
 		if m["state"] == CombatState.HIDDEN:
-			var rock := Color.html(_maps.tiles.get(HIDDEN_TILE, e).get("color", "#7a7468"))
-			_square(marker, TILE / 2.0, rock.darkened(0.35))
-			_square(marker, TILE / 2.0 - 2 * U, rock)
+			var prop := _tile_prop(HIDDEN_TILE)
+			if prop != null:
+				marker.add_child(prop)
+			else:
+				var rock := Color.html(_maps.tiles.get(HIDDEN_TILE, e).get("color", "#7a7468"))
+				_square(marker, TILE / 2.0, rock.darkened(0.35))
+				_square(marker, TILE / 2.0 - 2 * U, rock)
+			monsters.add_child(marker)
+			continue
+		var edge := state_edge(String(m["state"]))
+		var sprite := CharacterSprite.make(String(m["type"]))
+		if sprite != null:
+			_foot_ring(marker, edge)
+			sprite.pose(String(monster_facing.get(id, "s")))
+			marker.add_child(sprite)
 		else:
-			var edge := CALM_EDGE
-			if m["state"] == CombatState.HOSTILE:
-				edge = HOSTILE_EDGE
-			elif m["state"] == CombatState.FLEE:
-				edge = FLEE_EDGE
-			elif m["state"] == CombatState.ALLY:
-				edge = ALLY_EDGE
 			_square(marker, 6 * U, edge)
 			_square(marker, 5 * U, RING)
 			_square(marker, 4 * U, Color.html(e.get("color", "#ff00ff")))
-			if named.has(id):
-				_add_label(marker, monster_label(m, e))
-			_bar(marker, float(m["hp"]) / maxi(int(e.get("hp", m["hp"])), 1))
+		if named.has(id):
+			_add_label(marker, monster_label(m, e), CharacterSprite.HEAD if sprite != null else 5.0 * U)
+		_bar(marker, float(m["hp"]) / maxi(int(e.get("hp", m["hp"])), 1))
 		monsters.add_child(marker)
+
+
+## The marker edge colour of a monster state: hostile, fleeing, ally, else calm.
+static func state_edge(state: String) -> Color:
+	match state:
+		CombatState.HOSTILE:
+			return HOSTILE_EDGE
+		CombatState.FLEE:
+			return FLEE_EDGE
+		CombatState.ALLY:
+			return ALLY_EDGE
+	return CALM_EDGE
+
+
+## A flat ring under a monster sprite's feet in its state colour.
+func _foot_ring(marker: Node2D, color: Color) -> void:
+	var ring := Polygon2D.new()
+	ring.name = "Ring"
+	var pts := PackedVector2Array()
+	for i in FOOT_RING_POINTS:
+		var a := TAU * i / FOOT_RING_POINTS
+		pts.append(Vector2(cos(a) * FOOT_RING.x, sin(a) * FOOT_RING.y))
+	ring.polygon = pts
+	ring.color = Color(color, maxf(color.a, 0.35) * FOOT_RING_ALPHA)
+	ring.position = Vector2(0, FOOT_RING_Y)
+	marker.add_child(ring)
 
 
 ## A small pale diamond per Frost Fairy in the player's area (no label).
@@ -698,30 +753,46 @@ func _add_label(marker: Node2D, text: String, top: float = 5.0 * U) -> void:
 ## A tile's prop (a tree, a rock) on `cell`: a region of its sheet (in
 ## cells), bottom-centred on the cell, in the y-sorted Props layer.
 func _add_prop(tile: String, cell: Vector2i) -> void:
+	var s := _tile_prop(tile)
+	if s != null:
+		s.position = cell_center(cell)
+		props.add_child(s)
+
+
+## A new sprite of a tile's prop, bottom-centred on (0, 0); null when the
+## tile has no prop art.
+func _tile_prop(tile: String) -> Sprite2D:
 	var def: Dictionary = _maps.tiles.get(tile, {})
 	var p := sprite_def(def, _winter, "prop")
 	if p.is_empty() or sheet_path(String(p["sheet"])) == "":
-		return
+		return null
 	var r: Array = p["region"]
-	_add_sprite(p["sheet"], Rect2(Vector2(int(r[0]), int(r[1])) * TILE,
-			Vector2(int(r[2]), int(r[3])) * TILE), cell)
+	return _region_sprite(p["sheet"], Rect2(Vector2(int(r[0]), int(r[1])) * TILE,
+			Vector2(int(r[2]), int(r[3])) * TILE))
 
 
 ## A region (pixels) of a sheet, bottom-centred on `cell`, in the y-sorted
 ## Props layer. With `frames` > 1 it is animated (the frames follow to the right).
 func _add_sprite(sheet: String, region: Rect2, cell: Vector2i, frames: int = 1) -> Sprite2D:
-	var s := Sprite2D.new()
-	s.texture = load(sheet_path(sheet))
-	s.region_enabled = true
-	s.region_rect = region
-	s.centered = false
-	s.offset = Vector2(-region.size.x / 2.0, TILE / 2.0 - region.size.y)
+	var s := _region_sprite(sheet, region)
 	s.position = cell_center(cell)
 	props.add_child(s)
 	if frames > 1:
 		s.set_meta("frames", frames)
 		s.set_meta("x0", region.position.x)
 		_animated.append(s)
+	return s
+
+
+## A sprite of a region (pixels) of a sheet, bottom-centred on a cell whose
+## centre is the sprite's position.
+static func _region_sprite(sheet: String, region: Rect2) -> Sprite2D:
+	var s := Sprite2D.new()
+	s.texture = load(sheet_path(sheet))
+	s.region_enabled = true
+	s.region_rect = region
+	s.centered = false
+	s.offset = Vector2(-region.size.x / 2.0, TILE / 2.0 - region.size.y)
 	return s
 
 
