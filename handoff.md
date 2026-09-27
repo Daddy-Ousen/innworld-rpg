@@ -8,7 +8,7 @@
   - Erin comes home on day 91 (`erin.home_at_the_inn`; the wagon, Celum and stranded flags cleared). Level 30 that night: `erin.magical_grounds`, `erin.class_magical_innkeeper`. The inn door shows from day 92 and runs. Second door `albez_door.second_door_in_stitchworks` (day 92).
   - Erin is at Esthelm from day 92 (`erin.at_esthelm`, a new off_map goal in `npc_behaviour.json`).
   - GUT 670/670 (72 scripts). Python 51 OK. Validator 0 errors. Zel scene checked on screen.
-- The branch is committed and the PR is open for the user to merge.
+- The branch is committed and PR #43 is open for the user to merge.
 
 ## Next steps
 1. The user merges the M10.3 PR. Then tag `m10.3-done` on the merge commit.
