@@ -168,6 +168,33 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
 - Tests: `unit_anim.gd` (13), `unit_art.gd` updated (regions), `test_build_sprites.py` +2 (attack kind, weapons stay
   in the swing). GUT 721/721 (77 scripts), Python 66/66, validator 0 errors.
 
+## M11.4 Monsters (2026-09-27)
+- **User OKs (2026-09-27):** download three free LPC creature files ([LPC] Monsters, [LPC] Golem, [LPC] Birds)
+  plus our own edits, and a new creature look kind in `appearance.json`.
+- **People (30 enemies)** are LPC looks like the NPCs (`build_sprites.py`). Canon facts come from a check of the
+  Books 1-4 text (chapter refs in each look's `note`); what the text does not say is a guess. Known limits: sizes are
+  not drawn (Hobs, Soldiers, the Crypt Lord are the size of a person); LPC child bodies have no weapons (Goblin
+  grunt); LPC bows sit behind the back; the Goblin commander's Shield Spider is not drawn; the LPC mask hides a
+  whole Drake head, so the Drake thieves wear a bandana.
+- **Creatures (6 enemies).** The creature look is a different shape from the one shown to the user
+  (`{"sheet", "frame", "rows", "frames"}`): the new `tools/build_creatures.py` bakes each creature into the
+  character sheet layout, so the game draws it as a `CharacterSprite` and needs no new code or schema for it.
+  A creature look is `{"creature": source, "ramp"?: [colours dark → light], "hue"?, "sat"?, "val"?,
+  "light"?: colour for white pixels, "die"?: "melt" | "crumble", "confidence", "note"}`. Sources: `golem`,
+  `bee`, `big_worm`, `eagle` (art files in `tools/art/creatures/`, not shipped), `rock_crab` and `snowman`
+  (drawn by the tool). A source with no fall frames gets a made one (it sinks and fades). `build_sprites.py`
+  skips creature looks. Rock Crab: a boulder with dark-brown pincers and eye stalks (1.01). Razorbeak: the
+  LPC eagle, green with a red head, twice the size (1.05; its leathery wings and teeth are not drawn). Ashfire
+  Bee: black and yellow (2.42). Snow Golem: a snowman with stick teeth (2.42). Crypt Lord: the LPC golem in
+  rotten-flesh colours (guess). Skinner: the LPC big worm in yellowed-skin colours (guess).
+- **The view.** A monster whose type has a sheet is a `CharacterSprite` (it stands the way of
+  `monster_facing`, walks, swings), a flat ring under its feet in its state colour (hostile red, fleeing
+  yellow, ally blue, calm dark), its label above the head and its HP bar. A gone monster plays the fall and
+  fades. A hidden monster is the `rock` tile's prop. Types with no sheet (toy tests, future data) stay squares.
+- The validator does not check looks; the GUT test `unit_monster_art` checks that all 36 enemies have a sheet.
+- Tests: `unit_monster_art.gd` (5), `tools/tests/test_build_creatures.py` (7). GUT 726/726 (78 scripts),
+  Python 73/73, validator 0 errors.
+
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character
   node picks the right frame for facing and state; a step tween ends on the cell centre; the state diff
