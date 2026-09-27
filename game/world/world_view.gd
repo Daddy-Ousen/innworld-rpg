@@ -31,7 +31,8 @@
 ## indoors), lights objects whose kind has "light" in objects.json and lets
 ## snow fall outdoors in winter.
 ## M12 (ADR 0019): each refresh emits `sounds` with the sound cues of the
-## change (SoundCues): the player's footstep and AnimDiff hits. main.gd
+## change (SoundCues): the player's footstep and the AnimDiff hits, falls,
+## swings and gone monsters (with monster voices, M12.2). main.gd
 ## sends them to the Audio autoload, so the view needs no audio nodes.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
@@ -235,7 +236,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	var changes: Array = [] if new_area else AnimDiff.events(_last, snap)
 	_last = snap
 	play(changes)
-	cues.append_array(SoundCues.from_events(audio, changes))
+	cues.append_array(SoundCues.from_events(audio, changes, snap["units"]))
 	if not cues.is_empty():
 		sounds.emit(cues)
 

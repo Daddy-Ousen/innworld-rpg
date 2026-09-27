@@ -146,6 +146,7 @@ func _held_direction() -> String:
 func step(dir: String) -> void:
 	var gs := Session.gs
 	var db := Session.db
+	var was_indoor := db.maps.is_indoor(gs.player.area)
 	var r := {"refused": Commands.wait(gs, db, int(db.rules["world"]["step_seconds"])) < 0,
 			"exit_to": "", "npc": ""} if dir == WAIT else Commands.move(gs, db, dir)
 	if r["refused"] and gs.clock.is_collapse_due(db.rules["clock"]):
@@ -156,6 +157,7 @@ func step(dir: String) -> void:
 		hud.add_lines(["%s is in the way." % db.canon.npcs[r["npc"]]["name"]])
 	_bumped = r["npc"]
 	if r["exit_to"] != "":
+		Audio.play_cues([SoundCues.door_cue(Audio.db, was_indoor, db.maps.is_indoor(r["exit_to"]))])
 		hud.add_lines(["You travel to %s (%d min)." % [
 			Session.db.maps.areas[r["exit_to"]]["name"], int(r["minutes"])]])
 	if r.has("attack") or r.has("ambush"):
@@ -167,7 +169,7 @@ func step(dir: String) -> void:
 
 ## Raises the guard for one turn (B).
 func block() -> void:
-	_command_error(Commands.block(Session.gs, Session.db))
+	_command_error(_sound_if_ok(Commands.block(Session.gs, Session.db), "block"))
 
 
 ## Throws the held item at the nearest monster you can see (T).
@@ -179,12 +181,27 @@ func throw() -> void:
 	if target == "":
 		hud.add_lines(["There is nothing to throw at."])
 		return
-	_command_error(Commands.throw(Session.gs, Session.db, target)["error"])
+	_command_error(_sound_if_ok(Commands.throw(Session.gs, Session.db, target)["error"], "throw"))
 
 
 ## Puts the held item down (X).
 func drop() -> void:
-	_command_error(Commands.drop(Session.gs, Session.db))
+	_command_error(_sound_if_ok(Commands.drop(Session.gs, Session.db), "drop"))
+
+
+## Plays the "combat" cue `key` when a command worked (no error); returns
+## the error (M12.2).
+func _sound_if_ok(err: String, key: String) -> String:
+	if err == "":
+		Audio.play_key("combat", key)
+	return err
+
+
+## Plays the sound of a use-menu action when it worked; returns the error.
+func _action_sound_if_ok(err: String, action_id: String) -> String:
+	if err == "":
+		Audio.play_cues([SoundCues.action_cue(Audio.db, action_id)])
+	return err
 
 
 ## After a combat command: its error (too tired: the day ends), else the
@@ -231,21 +248,23 @@ func use(object_id: String, action_id: String) -> void:
 		var buying := action_id.begins_with(Interact.BUY)
 		var good := action_id.substr((Interact.BUY if buying else Interact.SELL).length())
 		var r := Commands.buy(gs, db, object_id, good) if buying else Commands.sell(gs, db, object_id, good)
-		_command_error(r["error"])
+		_command_error(_action_sound_if_ok(r["error"], action_id))
 		return
 	if action_id.begins_with(Interact.USE_GOOD):
-		_command_error(Commands.use_good(gs, db, action_id.substr(Interact.USE_GOOD.length())))
+		_command_error(_action_sound_if_ok(
+				Commands.use_good(gs, db, action_id.substr(Interact.USE_GOOD.length())), action_id))
 		return
 	if action_id == Interact.RIDE:
-		_command_error(Commands.ride(gs, db, object_id))
+		_command_error(_action_sound_if_ok(Commands.ride(gs, db, object_id), action_id))
 		return
 	if action_id == Interact.PORTAL:
-		_command_error(Commands.portal(gs, db, object_id))
+		_command_error(_action_sound_if_ok(Commands.portal(gs, db, object_id), action_id))
 		return
 	if action_id == Interact.TAKE:
-		_command_error(Commands.take(Session.gs, Session.db, object_id))
+		_command_error(_action_sound_if_ok(Commands.take(Session.gs, Session.db, object_id), action_id))
 		return
 	var r := Commands.interact(Session.gs, Session.db, object_id, action_id)
+	_action_sound_if_ok(r["error"], action_id)
 	if r["error"] != "":
 		hud.add_lines([r["error"]])
 		if Session.gs.clock.is_collapse_due(Session.db.rules["clock"]):
@@ -265,6 +284,7 @@ func sleep(bed: String = "") -> void:
 		hud.add_lines(Session.gs.combat.lines)
 		Session.changed()
 		return
+	Audio.play_cues([SoundCues.action_cue(Audio.db, Interact.SLEEP)])
 	_show_night(night)
 
 

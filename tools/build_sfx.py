@@ -36,6 +36,24 @@ SOUNDS: dict[str, dict] = {
     # A System page opens: a bright C major arpeggio (the Voice of the World).
     "chime": {"partials": BELL, "decay": 4.5, "notes": [
         (1046.5, 0.0, 0.9, 0.7), (1318.5, 0.09, 0.8, 0.6), (1568.0, 0.18, 0.7, 0.6), (2093.0, 0.27, 0.6, 0.4)]},
+    # Levels and Skills page: a longer, higher run up to a held top note.
+    "level_up": {"partials": BELL, "decay": 3.0, "notes": [
+        (523.3, 0.0, 0.5, 0.6), (659.3, 0.08, 0.5, 0.6), (784.0, 0.16, 0.5, 0.6),
+        (1046.5, 0.24, 0.6, 0.7), (1318.5, 0.32, 1.0, 0.8)]},
+    # A class offer: an open minor chord that waits for an answer.
+    "offer": {"partials": BELL, "decay": 2.2, "notes": [
+        (440.0, 0.0, 1.3, 0.6), (659.3, 0.12, 1.2, 0.5), (880.0, 0.24, 1.1, 0.5), (1046.5, 0.5, 0.9, 0.5)]},
+    # Knocked out: low notes falling away.
+    "knockout": {"partials": BELL, "decay": 3.0, "notes": [
+        (392.0, 0.0, 0.5, 0.7), (293.7, 0.2, 0.5, 0.7), (196.0, 0.4, 0.9, 0.8)]},
+    # Morning page: two soft notes.
+    "morning": {"partials": PURE, "decay": 4.0, "notes": [(784.0, 0.0, 0.6, 0.6), (1046.5, 0.18, 0.8, 0.6)]},
+    # The magic door: a fast shimmer going up.
+    "portal": {"partials": BELL, "decay": 6.0, "notes": [
+        (600.0 * 2 ** (i / 4), i * 0.05, 0.5, 0.5) for i in range(9)]},
+    # A Frost Faerie: a few quick high twinkles.
+    "sparkle": {"partials": PURE, "decay": 18.0, "notes": [
+        (2637.0, 0.0, 0.2, 0.6), (3136.0, 0.07, 0.2, 0.5), (2349.3, 0.14, 0.2, 0.5), (3520.0, 0.21, 0.25, 0.5)]},
 }
 
 

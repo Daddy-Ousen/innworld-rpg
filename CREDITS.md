@@ -410,9 +410,20 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 
 ## Audio (`game/assets/audio/`, M12, ADR 0019)
 
-- `sfx/footstep_*.ogg` and `sfx/impactPunch_medium_*.ogg` from "Impact Sounds" by Kenney (www.kenney.nl).
+- `sfx/footstep_*.ogg` and `sfx/impact*.ogg` from "Impact Sounds" by Kenney (www.kenney.nl).
   Licence: CC0 1.0. https://kenney.nl/assets/impact-sounds
   Licence file: `game/assets/audio/sfx/kenney_impact_sounds_License.txt`.
 - `music/old_tower_inn.mp3` is "Medieval: The Old Tower Inn" (`The_Old_Tower_Inn.mp3`) by RandomMind.
   Licence: CC0 1.0. https://opengameart.org/content/medieval-the-old-tower-inn
-- `ui/*.wav` are made by `tools/build_sfx.py` (our own blips and chimes). Licence: CC0 1.0.
+- `sfx/chop.ogg`, `sfx/knifeSlice*.ogg`, `sfx/metalPot*.ogg`, `sfx/cloth*.ogg`, `sfx/doorOpen_*.ogg`,
+  `sfx/handleCoins*.ogg`, `sfx/dropLeather.ogg`, `sfx/handleSmallLeather*.ogg`, `sfx/bookFlip*.ogg` and
+  `sfx/creak*.ogg` from "RPG Audio" by Kenney (www.kenney.nl). Licence: CC0 1.0. https://kenney.nl/assets/rpg-audio
+  Licence file: `game/assets/audio/sfx/kenney_rpg_audio_License.txt`.
+- `sfx/swish-*.wav` from "Swishes Sound Pack" by artisticdude. Licence: CC0 1.0.
+  https://opengameart.org/content/swishes-sound-pack
+- `sfx/creature_*.ogg` from "80 CC0 creature SFX" by rubberduck (the file names have a `creature_` prefix).
+  Licence: CC0 1.0. https://opengameart.org/content/80-cc0-creature-sfx
+- `sfx/water_splash_*.ogg` from "40 CC0 water / splash / slime SFX" by rubberduck (`splash_*.ogg`).
+  Licence: CC0 1.0. https://opengameart.org/content/40-cc0-water-splash-slime-sfx
+- `ui/*.wav` are made by `tools/build_sfx.py` (our own blips, chimes, the magic door and the faerie twinkle).
+  Licence: CC0 1.0.

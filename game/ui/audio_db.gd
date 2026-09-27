@@ -53,6 +53,16 @@ func cue(section: String, key: String) -> String:
 	return String(_section(section).get(key, ""))
 
 
+func has_key(section: String, key: String) -> bool:
+	return _section(section).has(key)
+
+
+## The cue an enemy type makes for `event` (hurt, gone; "" = none).
+func enemy_cue(type: String, event: String) -> String:
+	var e: Variant = _section("enemies").get(type, {})
+	return String(e.get(event, "")) if e is Dictionary else ""
+
+
 ## The track for a state (title, fight, battle, scene; "" = none).
 func state_track(state: String) -> String:
 	return String(_section("states").get(state, ""))

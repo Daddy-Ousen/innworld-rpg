@@ -36,7 +36,6 @@ func open(pages: Array[Dictionary], gs: GameState, db: DataDb) -> void:
 	_db = db
 	_pages = pages.duplicate()
 	_index = -1
-	Audio.play_key("pages", "open")
 	_advance()
 
 
@@ -75,6 +74,7 @@ func _advance() -> void:
 
 func _show(page: Dictionary) -> void:
 	current = page
+	Audio.play_cues([SoundCues.page_cue(Audio.db, String(page.get("kind", "")))])
 	_title.text = "[%s]" % page["title"]
 	_text.text = "\n".join(page["lines"])
 	for b in _buttons.get_children():
