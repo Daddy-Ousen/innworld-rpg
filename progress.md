@@ -16,7 +16,10 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
 - [x] M12 — Audio: music, sound effects, ambience. M12.0–M12.5 merged; tags `m12.0-done` … `m12.5-done` and `m12-done` on merge commit 95fb6c4 ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)). Detail in the archive and ADR 0019.
-- [ ] Next milestone: not chosen yet (ask the user; see `docs/ROADMAP.md` "Later").
+- [ ] M13 — Book 5 (The Last Light). Plan accepted 2026-09-28 (ADR 0020). Plan file: `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
+  - [ ] M13.0 World: gated exits, inn third floor + watchtower, depths + crypt maps, new enemies (branch `feat/m13.0-world`)
+  - [ ] M13.T Traps (save v14)
+  - [ ] M13.1 – M13.7 canon batches
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
