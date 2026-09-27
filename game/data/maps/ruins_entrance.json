@@ -10,9 +10,9 @@
 		{"at": [0, 11, 1, 2], "to": "floodplains_south", "arrive": [30, 11], "minutes": 180}
 	],
 	"objects": [
-		{"id": "ruins_doors", "at": [15, 3], "name": "Great stone doors", "actions": [], "solid": true},
-		{"id": "watch_brazier", "at": [13, 9], "name": "Watch brazier", "actions": ["keep_watch"], "solid": true, "warm": true},
-		{"id": "loose_stones", "at": [20, 13], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "ruins_doors", "kind": "stone_doors", "at": [15, 3], "name": "Great stone doors", "actions": [], "solid": true},
+		{"id": "watch_brazier", "kind": "brazier", "at": [13, 9], "name": "Watch brazier", "actions": ["keep_watch"], "solid": true, "warm": true},
+		{"id": "loose_stones", "kind": "stones", "at": [20, 13], "name": "Loose stones", "actions": [], "item": "stone"}
 	],
 	"legend": {",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "H": "wood_wall"},
 	"rows": [

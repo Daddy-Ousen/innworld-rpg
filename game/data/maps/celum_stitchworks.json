@@ -11,9 +11,9 @@
 		{"at": [5, 7, 1, 1], "to": "celum_square", "arrive": [2, 13], "minutes": 0}
 	],
 	"objects": [
-		{"id": "octavia_counter", "at": [3, 2], "name": "Octavia's counter", "actions": ["buy_supplies", "sell_goods"], "solid": true, "shop": "stitchworks"},
-		{"id": "potion_shelves", "at": [1, 1], "name": "Shelves of potions and dyes", "actions": [], "solid": true},
-		{"id": "albez_door_celum", "at": [10, 3], "name": "Magic door", "actions": [],
+		{"id": "octavia_counter", "kind": "counter", "at": [3, 2], "name": "Octavia's counter", "actions": ["buy_supplies", "sell_goods"], "solid": true, "shop": "stitchworks"},
+		{"id": "potion_shelves", "kind": "shelves", "at": [1, 1], "name": "Shelves of potions and dyes", "actions": [], "solid": true},
+		{"id": "albez_door_celum", "kind": "door", "at": [10, 3], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.anchor_at_stitchworks"],
 			"portal": {"to": "inn_interior", "pos": [3, 12], "power_flags": ["erin.magical_grounds"]}}
 	],

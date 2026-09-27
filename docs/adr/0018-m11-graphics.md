@@ -86,6 +86,34 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
   (the Goblin sheet is not drawn yet: monsters are M11.4).
 - Tests: `unit_art.gd` (8), `tools/tests/test_build_sprites.py` (6). GUT 697/697 (75 scripts), Python 57/57.
 
+## M11.1 Tiles and objects (2026-09-27)
+- **User OKs (2026-09-27):** download five free LPC files (LPC Base Assets, [LPC] Tavern, LPC House Interior
+  and Decorations, LPC Style Well, a campfire animation) and the two schema changes below. The campfire file
+  was not needed in the end (the Tavern pack has a 32 px campfire) and is not in the repo.
+- **Terrain edges are done in code, not with Godot terrain sets.** `world/ground_art.gd` (`GroundArt.plan`)
+  is pure and headless-tested. `tiles.json` sprites get optional `"edges": [x, y]` (top-left cell of the
+  3×6 LPC terrain block: rows 0-1 inner corners, rows 2-4 the edge ring, row 5 fills) and `"z"`. A cell draws
+  the edge piece where a side or corner neighbour has another terrain with a lower z; the neighbour's ground
+  goes in the `Tiles` layer under it, the piece in the new `Edges` layer. Tiles with no z (walls, buildings)
+  keep hard edges. A strip one cell wide between two lower cells keeps a hard edge (LPC has no piece).
+  z order: chasm 8, snow wall 7, water 6, shallows 5, tall grass 4, grass / snow 3, dirt / cave floor 2, cobble 1.
+- **Props borrow ground.** `tree` and `rock` lost their grass sprite: a tile with a prop and no sprite takes the
+  ground of its first neighbour with art, so a rock in the bee cave stands on cave floor and trees in winter on snow.
+- **Object art (schema, user OK):** a map object gets `"kind"`; the new `data/objects.json` holds
+  `{"kinds": {kind: {"sheet", "region": [x, y, w, h] (pixels), "frames"?: n, "winter_region"?}}}`. The
+  sheet is looked up in `assets/tiles/` then `assets/objects/`. Drawn bottom-centred on the object's cell in
+  the y-sorted `Props` layer; `frames` animate at 6 fps (fires, braziers). No kind or no art = the yellow square.
+  MapDb checks that `kind` is a string. All 67 objects on the 15 maps have a kind (33 kinds).
+- **Our edits:** `tools/build_objects.py` makes `assets/objects/edits.png` (wagon, chess table, market stall,
+  notice board, broom, horseshoe, honeycomb, bee nest, blue fruit tree, dead tree, bedroll, mat, rope anchor,
+  4-frame brazier, stone doors). `--check` compares objects.json with its layout.
+- **Tile art:** grass, tall grass, dirt road, cobble, water, shallows, cave floor, chasm, snow wall from
+  `lpc_terrains`; city wall from `lpc_atlas`; building (brick) from `lpc_house`; wood floor and door (a floor
+  gap) from `lpc_inside`; wood wall from `lpc_interior`. Winter: snow and frozen dirt.
+- Known limits: buildings are flat brick (no roofs yet); a two-cell stream draws as a row of small ponds.
+- Tests: `unit_ground_art.gd` (8), `tools/tests/test_build_objects.py` (4). GUT 705/705 (76 scripts),
+  Python 61/61, validator 0 errors.
+
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character
   node picks the right frame for facing and state; a step tween ends on the cell centre; the state diff
