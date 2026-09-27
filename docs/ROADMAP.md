@@ -151,7 +151,7 @@ Music follows the place, time, winter and danger, plus special tracks for canon 
 Volumes are user settings in `user://settings.cfg`, not game state.
 - [x] M12.0 Audio spike: sources and licences checked, `game/assets/audio/`, CREDITS, buses, `Audio` autoload skeleton, first blips; one title track, footsteps and a hit. The user approves the sound
 - [x] M12.1 Audio core + settings: `audio.json`, cross-fade, volume settings, Options menu (title and pause)
-- [ ] M12.2 Sound effects: UI, System pages, footsteps by ground, doors, object use, combat, monster voices
+- [x] M12.2 Sound effects: UI, System pages, footsteps by ground, doors, object use, combat, monster voices
 - [ ] M12.3 Music: a track per kind of place with day / night / winter, fight, big battle, warm scene
 - [ ] M12.4 Ambience: area beds (birds, crickets, wind, cave, crowd) and object sounds (fires, well, bees)
 - [ ] M12.5 Canon moments: special tracks for at least 6 canon moments; a sad sting for deaths in the news

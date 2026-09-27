@@ -415,6 +415,18 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   Licence file: `game/assets/audio/sfx/kenney_impact_sounds_License.txt`.
 - `music/old_tower_inn.mp3` is "Medieval: The Old Tower Inn" (`The_Old_Tower_Inn.mp3`) by RandomMind.
   Licence: CC0 1.0. https://opengameart.org/content/medieval-the-old-tower-inn
+- `music/market_day.mp3` ("Medieval: Market Day", loop version), `music/bards_tale.mp3` ("Medieval: The Bard's
+  Tale"), `music/kings_feast.mp3` ("Medieval: King's Feast") and `music/medieval_battle.mp3` ("Medieval: Battle")
+  by RandomMind. Licence: CC0 1.0. https://opengameart.org/content/medieval-market-day ,
+  https://opengameart.org/content/medieval-the-bards-tale , https://opengameart.org/content/medieval-kings-feast ,
+  https://opengameart.org/content/medieval-battle
+- `music/town_theme.mp3` ("Town Theme RPG") and `music/battle_theme_a.mp3` ("Battle Theme A") by cynicmusic.
+  Licence: CC0 1.0 (Battle Theme A is also offered as CC-BY 3.0 / CC-BY-SA 3.0; we use CC0).
+  https://opengameart.org/content/town-theme-rpg , https://opengameart.org/content/battle-theme-a
+- `music/field_of_dreams.mp3` ("The Field Of Dreams") by pauliuw. Licence: CC0 1.0.
+  https://opengameart.org/content/the-field-of-dreams
+- `music/forgotten_tombs.mp3` ("Forgoten tomb ambience", `Forgoten_tombs_1.mp3`) by kindland. Licence: CC0 1.0.
+  https://opengameart.org/content/forgoten-tomb-ambience
 - `sfx/chop.ogg`, `sfx/knifeSlice*.ogg`, `sfx/metalPot*.ogg`, `sfx/cloth*.ogg`, `sfx/doorOpen_*.ogg`,
   `sfx/handleCoins*.ogg`, `sfx/dropLeather.ogg`, `sfx/handleSmallLeather*.ogg`, `sfx/bookFlip*.ogg` and
   `sfx/creak*.ogg` from "RPG Audio" by Kenney (www.kenney.nl). Licence: CC0 1.0. https://kenney.nl/assets/rpg-audio
