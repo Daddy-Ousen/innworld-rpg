@@ -2,14 +2,14 @@
 
 ## Just done (2026-09-27)
 - M10 closed: tags `m10.5-done`, `m10-done` on 25b8d94 (pushed). M11 plan accepted (ADR 0018).
-- M11.0 art spike built on branch `feat/m11.0-art-spike` (committed, NOT pushed). Detail: ADR 0018 "M11.0".
+- M11.0 art spike built on branch `feat/m11.0-art-spike` (pushed; [PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46) open, look approved by the user). Detail: ADR 0018 "M11.0".
   - User OKs: download 3 art sources; Pillow for tools (`tools/requirements.txt`).
   - Art: `game/assets/tiles/lpc_terrains.png` (LPC Terrains v7), `lpc_atlas.png` (LPC Tile Atlas), their credit files; `game/assets/characters/{player,relc,krshia,goblin_grunt}.png` baked by `tools/build_sprites.py` from `game/data/appearance.json`. `CREDITS.md` at repo root.
   - Code: `WorldView.TILE` 32 (U = 2 scales old sizes), zoom 2, y-sort + `Props` layer, tile `sprite`/`prop` from `tiles.json`, `world/character_sprite.gd` (new), player glide per step, NPC sprites.
   - GUT 697/697 (75 scripts), Python 57/57, validator 0. Screenshots sent to the user (gate, market).
 
 ## Next steps
-1. User approves the look (and the schemas in ADR 0018 M11.0). Then push `feat/m11.0-art-spike`, open the PR, tick M11.0 after merge, tag `m11.0-done`.
+1. User merges PR #46. Then tick M11.0 in ROADMAP and `progress.md`, tag `m11.0-done` on the merge commit.
    - Also commit the 4 missing `game/tests/sim_book4_*.gd.uid` files (made by import; already in the branch as a chore commit).
 2. M11.1 Tiles and objects: terrain edges (LPC Terrains blocks are 3 wide: rows of inner corners, a 3×3 edge ring, fill variants; `terrain-map-v7.png` has wang tiles but is 31488 px tall, too tall for a GPU texture: cut it or do corner lookup in code), all 16 tiles, winter art, sprites for about 66 map objects (by kind), buildings (brown squares now).
 3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess.
@@ -22,7 +22,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Approve the M11.0 look. Push/PR after that.
+- Merge PR #46 (M11.0).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
