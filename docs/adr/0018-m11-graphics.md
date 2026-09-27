@@ -195,6 +195,27 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
 - Tests: `unit_monster_art.gd` (5), `tools/tests/test_build_creatures.py` (7). GUT 726/726 (78 scripts),
   Python 73/73, validator 0 errors.
 
+## M11.5 Atmosphere (2026-09-27)
+- **One node.** `world/atmosphere.gd` (`Atmosphere`, a child of `WorldView`) holds a `CanvasModulate`
+  (Tint), a `Lights` node and a `CPUParticles2D` (Snow). The view calls `show_area(indoor, lights)` when it
+  draws a new map and `set_time(minute, winter)` on every refresh. Core and saves do not change.
+- **Day and night.** Outdoors the tint follows sky keyframes by minute of the day: night blue until 5:00,
+  dawn 5:00-8:00, white 8:00-17:30, dusk 17:30-20:30, night after. Mixed between keys, so there is no jump.
+  Indoor maps (`"indoor": true`) get a warm room light that dims at night, but stays brighter than the night
+  sky. The HUD and menus are on their own CanvasLayers, so the tint does not touch them. Night is kept light
+  enough to play (labels and damage numbers are tinted too).
+- **Light data (user OK: a schema change).** A kind in `data/objects.json` may have `"light": {"color",
+  "radius" (cells), "energy"? (1), "flicker"? (false)}`. Now: campfire, brazier, hearth, stove. A bad light
+  is ignored (`Atmosphere.light_of`). Each light is a `PointLight2D` with one shared soft round texture.
+  Outdoors its energy follows the darkness (off at noon); indoors it glows at 45% by day, full at night.
+  "Lamp light": no lamp object exists yet; any future kind gets light by data.
+- **Flicker** is a fixed double sine wave with a phase from the cell. No randomness (rule 3 is for state;
+  this is presentation, but a fixed wave is enough).
+- **Snow** falls outdoors while the winter flag is set. The emitter follows the camera and drops flakes in
+  world space, so they drift past as the player walks. Particle randomness is Godot's own: presentation
+  only, it never touches GameState.
+- Tests: `unit_atmosphere.gd` (10). GUT 736/736 (79 scripts), Python 73/73, validator 0 errors.
+
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character
   node picks the right frame for facing and state; a step tween ends on the cell centre; the state diff

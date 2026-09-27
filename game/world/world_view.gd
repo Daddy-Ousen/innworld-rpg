@@ -27,6 +27,9 @@
 ## M11.4: a monster whose type has a sheet is a CharacterSprite with a ring
 ## in its state colour under its feet (a gone one falls and fades); a
 ## hidden Rock Crab is the rock prop. Types with no sheet stay squares.
+## M11.5: an Atmosphere child tints the map by the clock (a warm room light
+## indoors), lights objects whose kind has "light" in objects.json and lets
+## snow fall outdoors in winter.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -129,6 +132,8 @@ var _overlay_key := ""
 ## Animated object sprites on the map now, and the animation clock.
 var _animated: Array[Sprite2D] = []
 var _anim_time := 0.0
+## Day/night tint, fire light and snow (M11.5).
+var atmosphere: Atmosphere
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var edges: TileMapLayer = $Edges
@@ -154,6 +159,10 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	_winter_flag = winter_flag
 	_winter = false
 	object_art = load_object_art()
+	if atmosphere == null:
+		atmosphere = Atmosphere.new()
+		atmosphere.tile = TILE
+		add_child(atmosphere)
 	atlas.clear()
 	sprites.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas, false, sprites)
@@ -190,6 +199,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	var new_area := gs.player.area != area
 	if new_area:
 		_show_area(gs.player.area)
+	atmosphere.set_time(gs.clock.minute(), winter)
 	_show_npcs(gs)
 	_show_monsters(gs)
 	_show_fairies(gs)
@@ -496,8 +506,12 @@ func _show_area(id: String) -> void:
 	for e: Dictionary in m["exits"]:
 		var r := MapDb.rect_of(e["at"])
 		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
+	var light_sources: Array = []
 	for o: Dictionary in _maps.objects_on(id):
 		var cell := Vector2i(int(o["at"][0]), int(o["at"][1]))
+		var light := Atmosphere.light_of(object_art.get(String(o.get("kind", "")), {}))
+		if not light.is_empty():
+			light_sources.append({"cell": cell, "light": light})
 		var look_art := object_look(o, object_art, _winter)
 		if not look_art.is_empty():
 			_add_sprite(look_art["sheet"], look_art["region"], cell, look_art["frames"])
@@ -511,6 +525,7 @@ func _show_area(id: String) -> void:
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marks.add_child(label)
 		label.position = at + (Vector2(TILE, TILE) - label.get_minimum_size()) / 2.0
+	atmosphere.show_area(_maps.is_indoor(id), light_sources)
 	camera.limit_left = 0
 	camera.limit_top = 0
 	camera.limit_right = size.x * TILE
