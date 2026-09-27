@@ -30,9 +30,15 @@
 ## M11.5: an Atmosphere child tints the map by the clock (a warm room light
 ## indoors), lights objects whose kind has "light" in objects.json and lets
 ## snow fall outdoors in winter.
+## M12 (ADR 0019): each refresh emits `sounds` with the sound cues of the
+## change (SoundCues): the player's footstep and AnimDiff hits. main.gd
+## sends them to the Audio autoload, so the view needs no audio nodes.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
+
+## The sound cues of one refresh, in order (M12).
+signal sounds(cues: Array[String])
 
 const TILE := 32
 ## Old 16 px sizes are scaled by this.
@@ -205,6 +211,11 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	_show_fairies(gs)
 	var old := player.position
 	player.position = cell_center(gs.player.pos())
+	var cues: Array[String] = []
+	if not new_area and old.distance_to(player.position) == TILE:
+		var step := SoundCues.footstep(_maps.tile_at(area, gs.player.pos()), winter)
+		if step != "":
+			cues.append(step)
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
 	if look != null:
 		if not new_area and old.distance_to(player.position) == TILE:
@@ -218,6 +229,9 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	var changes: Array = [] if new_area else AnimDiff.events(_last, snap)
 	_last = snap
 	play(changes)
+	cues.append_array(SoundCues.from_events(changes))
+	if not cues.is_empty():
+		sounds.emit(cues)
 
 
 func _process(delta: float) -> void:

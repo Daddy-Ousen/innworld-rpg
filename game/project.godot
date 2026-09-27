@@ -14,6 +14,7 @@ config/features=PackedStringArray("4.7")
 [autoload]
 
 Session="*res://ui/session.gd"
+Audio="*res://ui/audio.gd"
 
 [editor_plugins]
 

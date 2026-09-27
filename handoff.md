@@ -1,25 +1,31 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.4 merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)); tag `m11.4-done` on b76ff4a (pushed).
-- M11.5 Atmosphere built on branch `feat/m11.5-atmosphere` ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51) open). Detail: ADR 0018 "M11.5".
-  - New `game/world/atmosphere.gd` (`Atmosphere`, child of `WorldView`, made in `setup`): CanvasModulate tint
-    by minute of day (`sky_tint`), warm `room_tint` on indoor maps, PointLight2D per object kind with
-    `"light"` in `objects.json` (campfire, brazier, hearth, stove), CPUParticles2D snow outdoors in winter.
-  - User OK: the optional `"light"` key in `objects.json` kinds (schema change).
-  - Night colour tuned by screenshots to stay playable (0.44, 0.50, 0.74). Room night must stay brighter than
-    the sky night (a test checks it).
-  - Tests: `unit_atmosphere.gd` (10). GUT 736/736 (79 scripts), Python 73/73, validator 0 errors.
-    Screenshots sent to the user (camp noon/dusk/night, market snow night, guild noon/night, gate snow, inn night).
+- M11 closed. The user picked **M12 Audio**. Plan accepted: ADR `docs/adr/0019-m12-audio.md`, ROADMAP M12 section.
+  User choices: free packs + our own tool (`tools/build_sfx.py`); music by place and mood **plus canon moments**.
+- Branch `feat/m12.0-audio-spike` (off main): commit 1 = the open M11 docs edits; then the M12.0 spike:
+  bus layout, autoload `Audio` (`game/ui/audio.gd`), `game/world/sound_cues.gd`, `WorldView.sounds` signal,
+  footsteps (grass / wood / snow / stone), hit sound, System chime, button blips, title music (also in game).
+  GUT 745/745 (80 scripts), Python 77/77, `python tools/build_sfx.py --check` OK.
 
 ## Next steps
-1. User checks M11.5 and merges its PR. Then tick M11.5 in ROADMAP and `progress.md`, tag `m11.5-done` on the merge commit.
-2. M11 "done when": the user checks the game on screen (`godot --path game`). Then tag `m11-done` and move
-   M11 detail to `docs/PROGRESS_ARCHIVE.md`.
-3. Possible polish (ask the user): lamp objects in the inn (map data change), bigger sprites for big foes
-   (Hobs, Soldier, Crypt Lord, Rock Crab, Razorbeak, Snow Golem; needs a frame larger than 64 px), Antinium back
-   shell; Toren's eye-flames; the player's own knock-out fall; the Goblin commander's Shield Spider.
-4. Then: back to new books (Book 5), or other "Later" items in ROADMAP.
+1. The user approved the sound (2026-09-27). [PR #52](https://github.com/Daddy-Ousen/innworld-rpg/pull/52) is open (no CI checks).
+   After the merge: tag `m12.0-done` on the merge commit, tick M12.0 in ROADMAP and progress.
+2. M12.1: show the user the `audio.json` schema (draft in ADR 0019 / the plan) before coding (rule 11).
+   Move the temporary tables (`Audio.CUES`, `Audio.TRACKS`, `SoundCues.STEPS`) into `game/data/audio.json`.
+   Add cross-fade, `user://settings.cfg` volumes and an Options menu (title + pause).
+3. Then M12.2 effects, M12.3 music, M12.4 ambience (ask before adding `"sound"` to objects.json), M12.5 moments.
+
+## Audio notes (M12)
+- Downloads so far are in the session scratchpad (gone next session): Kenney RPG Audio zip (doors, coins,
+  chop, cloth, book, metal pot, knife: for M12.2). Re-download: https://kenney.nl/assets/rpg-audio (CC0).
+- Music candidates (CC0, RandomMind on OpenGameArt, full + loop versions): "Medieval: Market Day",
+  "Minstrel Dance", "The Bard's Tale", "King's Feast". Sir Gawain's "CC0 Fantasy Music & Sounds" collection
+  has battle, cave, town and forest ambience tracks. Ask the user before each download (file, source, size).
+- After adding audio run `godot --headless --path game --import`, then set `loop=true` in a music `.import`
+  and import again. Then `git checkout -- game/assets/characters game/assets/objects game/assets/tiles`
+  (import noise).
+- `Audio` hooks every button through `get_tree().node_added`: menus need no audio code.
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
@@ -37,7 +43,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check M11.5 (screenshots, or play at night / in winter), merge its PR.
+- Merge PR #52 (M12.0). OK the `audio.json` schema for M12.1.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -52,7 +58,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (77 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (80 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -105,5 +111,5 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/world/atmosphere.gd`, `game/world/world_view.gd`, `game/data/objects.json`, `game/tests/unit_atmosphere.gd`,
-  `docs/adr/0018-m11-graphics.md`.
+- `game/ui/audio.gd`, `game/world/sound_cues.gd`, `game/world/world_view.gd`, `game/world/main.gd`,
+  `game/tests/unit_audio.gd`, `tools/build_sfx.py`, `docs/adr/0019-m12-audio.md`.
