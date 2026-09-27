@@ -182,12 +182,13 @@ func test_no_scenes_on_other_days() -> void:
 
 
 func test_erin_is_at_esthelm_after_the_convoy() -> void:
-	var gs := _fresh(93)
-	assert_true(gs.flags.has("erin.at_esthelm"))
-	for i in 4:
-		Commands.wait(gs, _db, 3600)
-		assert_ne(_area_of(gs, "erin_solstice"), "inn_interior", "hour %d" % i)
-		assert_ne(_area_of(gs, "erin_solstice"), "celum_frenzied_hare", "hour %d" % i)
+	# She rides home in the night of day 92 (M10.4), so she is away only on that day.
+	var gs := _fresh(92)
+	assert_false(gs.flags.has("erin.at_esthelm"), "the convoy leaves after the morning pitch")
+	ToyCanon.sleep_through(gs, _db, 92)
+	assert_eq(gs.clock.day(), 93)
+	assert_false(gs.flags.has("erin.at_esthelm"), "home again by day 93")
+	assert_true(gs.flags.has("erin.back_from_esthelm"))
 
 
 func test_ryoka_and_laken_meet_in_invrisil_on_day_93() -> void:

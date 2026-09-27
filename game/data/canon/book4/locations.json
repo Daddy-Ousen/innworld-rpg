@@ -45,6 +45,24 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.31G", "confidence": "confirmed", "note": "Unnamed in the text. Zombies rise again after they fall, and Ghouls hunt there. No map."},
 			"summary": "A dead Human village in the north held by zombies that will not stay down and by Ghouls. Rags' tribe loses many warriors there."
+		},
+		"hedault_house": {
+			"name": "Hedault's house",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": ["invrisil", "enchanter", "warded", "shop"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "A stone house in Invrisil with wards that keep talk private. No map."},
+			"summary": "A warded stone house in Invrisil where an [Enchanter] appraises and repairs magic items. He takes visitors only from dawn to dusk."
+		},
+		"invrisil_merchants_guild": {
+			"name": "Merchants' Guild of Invrisil",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": ["invrisil", "guild", "merchant", "truth_stone"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Truth stones are used to swear oaths there. No map."},
+			"summary": "The Merchants' Guild of Invrisil, where big orders are placed and sworn on truth stones."
 		}
 	}
 }

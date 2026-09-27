@@ -1,0 +1,88 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.37",
+	"events": {
+		"b4.reynold_admits_magnolias_standing_orders": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "reynold"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.hedault_quotes_the_repair_bill"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_reynold_is_ordered_to_follow", "reynold.escorts_ryoka_everywhere", "reynold.has_ressas_orders_if_attacked"], "relationship": [{"from": "ryoka_griffin", "to": "reynold", "delta": -1}, {"from": "reynold", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Magnolia expected Ryoka to guess it, and Reynold was told to admit it if asked."},
+			"summary": "Reynold will not leave her side. Ryoka works out that Magnolia ordered him to follow her, and thinks of knocking him out. He says Ressa has told him what to do if she tries. She backs down and resents it."
+		},
+		"b4.reynold_meets_laken_in_the_plaza": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "retainer": {"prefer": ["gamel"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "reynold", "laken_godart", "durene", "gamel"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.reynold_admits_magnolias_standing_orders"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["reynold.felt_an_emperors_presence", "laken.knows_ryoka_is_watched_by_magnolia", "durene.distrusts_ryoka", "gamel.meets_ryoka"], "relationship": [{"from": "gamel", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Laken keeps quiet about the bow. Gamel has joined them with lunch."},
+			"summary": "Ryoka arrives late with a man in a butler's suit. Reynold names himself Lady Reinhart's servant and bows too deeply to Laken without meaning to. Ryoka warns Laken in German that Reynold is a friend who also spies."
+		},
+		"b4.ryoka_warns_laken_about_magnolia": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "retainer": {"prefer": ["gamel"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart", "reynold"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.reynold_meets_laken_in_the_plaza"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.knows_magnolia_is_powerful", "laken.knows_invrisil_politics", "laken.knows_of_erin", "ryoka.shared_earther_secret_carefully", "ryoka.knows_laken_and_durene_are_a_couple"], "relationship": [{"from": "ryoka_griffin", "to": "laken_godart", "delta": 1}, {"from": "laken_godart", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Ryoka says only that a few other Earthers exist and that Magnolia knows them. Regisand Curle is named as the Mayor."},
+			"summary": "On the way to the Merchants' Guild Reynold tells Laken how Invrisil is run: the Mayor only administers, Magnolia holds real sway. Then Laken tells Ryoka that Durene is his partner, and she warns him of Magnolia and mentions Erin."
+		},
+		"b4.laken_holds_court_in_the_merchants_guild": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil_merchants_guild",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "retainer": {"prefer": ["gamel"], "fallback_tags": []}, "merchant": {"prefer": ["merec"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart", "durene", "gamel", "merec"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_warns_laken_about_magnolia"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["riverfarm.relief_convoy_ordered", "laken.hired_celestial_trackers_and_windfrozen_riders", "laken.passes_as_a_mysterious_noble", "invrisil.wonders_who_laken_is", "ryoka.shook_off_reynold_for_now", "laken.used_aura_of_the_emperor"], "relationship": [{"from": "gamel", "to": "laken_godart", "delta": 1}]},
+			"news": "A blind young man with a farm girl and gems bought twelve wagons of winter supplies at the Merchants' Guild in Invrisil and would not give his name.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Food and tools for about a hundred villagers; two teams, chosen by Gamel because they were kind to him. Laken swears the money came from his class and will not say what it is."},
+			"summary": "Every eye turns as Durene opens the doors. Laken pays in gems, passes a truth-stone oath, and orders twelve wagons of winter goods and a month of guards for his village. Ryoka pushes Reynold into the talk and slips out."
+		},
+		"b4.ryoka_learns_valceif_is_dead": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "valceif_godfrey"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_greets_laken_in_german", "b4.ryoka_visits_the_invrisil_runners_guild"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.grieves_valceif", "ryoka.blames_herself_for_valceif", "valceif.killed_by_bandits_with_a_sleep_spell"], "kill": ["valceif_godfrey"]},
+			"news": "Valceif Godfrey, a fast Courier out of First Landing, was killed on the road by bandits with a sleep spell. The Runners' Guild in Invrisil says so.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "About two weeks ago, on a delivery; not an assassination. Our death lands on the day Ryoka hears it. Ryoka never levels; no class change."},
+			"summary": "The Runners' Guild receptionist tells Ryoka that bandits with a sleep spell killed Valceif. Ryoka realises he wore the warding charm she broke and is sick on the floor. The receptionist says it was bad luck and to keep quiet about the charm."
+		},
+		"b4.ryoka_sends_replies_to_liscor": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_greets_laken_in_german"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.decides_to_go_home", "ryoka.sent_relic_report_to_ceria", "ryoka.sent_apology_to_liscor", "krshia.knows_ryoka_is_coming", "ryoka.holds_krshias_spellbook_debt"], "relationship": [{"from": "ryoka_griffin", "to": "lyonette", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Messages from Krshia, Ceria, Pisces, Lyonette and a long one from Erin about Brunkr's arm and Christmas. She keeps the report short in case others read it."},
+			"summary": "Ryoka reads her stack of short messages from Liscor. Lyonette's line about Mrsha breaks her. She pays for quick replies: an apology to all, a report of only three weapons to Ceria, and lines for Krshia and Mrsha."
+		}
+	},
+	"system": []
+}

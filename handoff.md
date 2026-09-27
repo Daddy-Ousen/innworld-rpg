@@ -1,29 +1,27 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #42 (M10.2) merged. Tag `m10.2-done` on ccf8743 (pushed).
-- M10.3 (3.32-3.35) built on branch `data/book4-3.32-3.35`. Detail: ADR 0017 "M10.3".
-  - User choices: two scenes with hooks (Zel scolds Erin, day 91; Erin pitches the Esthelm relief, day 92); add class `magical_innkeeper` + Erin's two Skills; 3.35 on day 93; clear `ivolethe.banished_from_magnolias_land`.
-  - 22 events: `chapters/3.32.json` (5 more), new `3.33.json` (5), `3.34.json` (7), `3.35.json` (5). New NPC `umbral`.
-  - Erin comes home on day 91 (`erin.home_at_the_inn`; the wagon, Celum and stranded flags cleared). Level 30 that night: `erin.magical_grounds`, `erin.class_magical_innkeeper`. The inn door shows from day 92 and runs. Second door `albez_door.second_door_in_stitchworks` (day 92).
-  - Erin is at Esthelm from day 92 (`erin.at_esthelm`, a new off_map goal in `npc_behaviour.json`).
-  - GUT 670/670 (72 scripts). Python 51 OK. Validator 0 errors. Zel scene checked on screen.
-- The branch is committed and PR #43 is open for the user to merge.
+- PR #43 (M10.3) merged. Tag `m10.3-done` on 51fbbae (pushed).
+- M10.4 (3.36-3.39) built on branch `data/book4-3.36-3.39`. Detail: ADR 0017 "M10.4". Not committed yet if `git status` shows changes.
+  - User choices: one scene with a hook (the Rock Crab, day 93, 10:00-12:00, `floodplains_south`); slime scene moved to day 92; about 27 events.
+  - 27 events: `chapters/3.36.json` (6), `3.37.json` (6), `3.38.json` (7), `3.39.json` (8). New NPCs `hedault`, `merec`, `raisha`, `regisand_curle`; new locations `hedault_house`, `invrisil_merchants_guild`.
+  - Erin rides home on the night of day 92 (`erin.back_from_esthelm`; `erin.at_esthelm` cleared). Valceif dies on day 93. `ryoka.heading_home_to_liscor` is set. Christmas is named; the party is day 95.
+  - GUT 679/679 (73 scripts). Python 51 OK. Validator 0 errors. The Rock Crab scene was NOT checked on screen.
 
 ## Next steps
-1. The user merges the M10.3 PR. Then tag `m10.3-done` on the merge commit.
-2. M10.4 (3.36-3.39): read with a subagent, then ask the user for stage and hook choices. Start `chapters/3.36.json`.
-   - Clear `erin.at_esthelm` when the text brings Erin home (or keep her at Esthelm if it does not).
-   - Esthelm relief flags to build on: `esthelm_relief.planned`, `esthelm.receives_aid_from_liscor_and_celum`, `antinium.expedition_to_esthelm`, `esthelm.sings_erins_carol`.
-   - The Horns, Pawn, Zel and Klbkch were at Esthelm on day 92 in the text but have no Esthelm schedule. Add `off_map` goals if a later scene must place them.
-3. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. The town of Esthelm believes he died (`esthelm.believes_the_purple_eyed_skeleton_died`). Keep him alive unless the text says he died.
-4. Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`). `rags.tribe_turns_north` still blocks her foraging near Liscor; clear it when she arrives.
-5. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn and Octavia have no `npc_behaviour` entries. Add them if a later scene must place them.
-6. Laken has only Durene in 3.35; our flags say Gamel goes with him and he has Frostwing. Reconcile if a later chapter shows them.
+1. Commit and push the M10.4 branch, open the PR (if not done). The user merges it. Then tag `m10.4-done` on the merge commit.
+2. M10.5 (3.40-3.42 + Interlude - Winter Solstice; raw text in `canon/raw/book4/022..025`): read with a subagent, then ask the user for stage and hook choices. Christmas party is day 95.
+   - Clear `ryoka.heading_home_to_liscor` when Ryoka arrives. She holds `ryoka.holds_magnolias_seal`, Hedault has the Horns' relics (`hedault.holds_the_horns_relics`) and she said she would return to him.
+   - Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`); `rags.tribe_turns_north` still blocks her foraging near Liscor. Clear it when she arrives.
+   - Brunkr: `brunkr.hand_infected` and `brunkr.treated_with_honey_and_salt_water` are both set. Resolve when the text shows the result.
+   - Octavia researches matches and penicillin (`octavia.researches_matches`, `octavia.researches_penicillin`).
+3. Toren is alive in the Liscor dungeon (`toren.in_liscor_dungeon`). Keep him alive unless the text says he died.
+4. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn, Olesm, Belgrade and Octavia have no `npc_behaviour` entries. Add them if a later scene must place them.
+5. Laken has Durene and Gamel in 3.36-3.37 (Frostwing at the inn); flags are consistent now.
 
 ## Waiting on the user
-- Merge the M10.3 PR.
-- Delete the old remote branches `data/book4-3.26-3.29` and `data/book4-3.30-3.31` (optional).
+- Merge the M10.4 PR (once opened).
+- Delete the old remote branches `data/book4-3.26-3.29`, `data/book4-3.30-3.31`, `data/book4-3.32-3.35` (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -37,7 +35,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (72 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (73 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -51,7 +49,11 @@
 - Python patching: converting line ends twice (LF to CRLF on a string that already has CRLF) leaves a stray CR, and git then shows the file as `-text` and changed in full. Check `git ls-files --eol` after patching.
 - Never write a bash `cat > "$UNSET_VAR/..."` line without a heredoc: it waits on stdin and hangs the shell.
 
+- Director dependencies are hard: an event whose `depends_on` was cancelled is cancelled too. Chain events only to events that always happen, or one dead NPC cancels a whole day (M10.4 cut the chains this way). Siblings run in id order, so name ids to sort in story order.
+- Effects and scene flags: a flag set by an event on day N is visible on day N+1. An event set and cleared in the same night never shows in a schedule (`erin.at_esthelm`).
+
 ## Active files
+- M10.4: `game/data/canon/book4/chapters/3.36.json` to `3.39.json`, `npcs.json`, `locations.json`, `3.35.json` (slime window), `game/tests/sim_book4_relief_home.gd`, `sim_canon_book4.gd`, `sim_book4_homecoming.gd`, `sim_player_hooks.gd`, `docs/adr/0017-m10-book4.md`. Generator script was a throwaway (not in repo).
 - M10.3: `game/data/canon/book4/chapters/3.32.json`, `3.33.json`, `3.34.json`, `3.35.json`, `game/data/canon/book4/npcs.json`, `game/data/classes.json`, `game/data/skills.json`, `game/data/npc_behaviour.json` (Erin), `game/tests/sim_book4_homecoming.gd`, `game/tests/sim_canon_book4.gd`, `docs/adr/0017-m10-book4.md`.
 - M10.2: `game/tests/sim_book4_wistram.gd`, `chapters/3.30.json`, `3.31G.json`.
 - M10.0 door: `game/core/portal.gd`, `game/data/maps/celum_stitchworks.json`.

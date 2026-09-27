@@ -1,0 +1,86 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.36",
+	"events": {
+		"b4.a_thief_lifts_durenes_pouch_in_invrisil": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "guard": {"prefer": ["raisha"], "fallback_tags": [], "optional": true}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["laken_godart", "durene"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.laken_says_enough_in_invrisil"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["durene.caught_a_pickpocket", "laken.pouch_recovered", "laken.knows_truth_stones"], "clear_flags": ["laken.left_for_invrisil"], "relationship": [{"from": "durene", "to": "laken_godart", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "Gamel is begging adventurers in another square and Frostwing is at the inn, which explains why 3.35 shows only Durene. The thief may have used a Skill to pick her (Laken's guess)."},
+			"summary": "A plain man bumps Durene and lifts her pouch of coin and gems. Laken tells her to run. She catches the thief and breaks his arm, and a Gnoll guard returns the pouch after a truth-stone check on Laken."
+		},
+		"b4.ryoka_greets_laken_in_german": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.a_thief_lifts_durenes_pouch_in_invrisil"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.met_laken", "laken.knows_other_earthers_exist", "laken.warned_about_iphone_tracking", "ryoka.told_laken_phone_can_be_recharged", "durene.knows_laken_met_an_earther", "laken.waits_for_ryoka"], "relationship": [{"from": "ryoka_griffin", "to": "laken_godart", "delta": 1}, {"from": "laken_godart", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "Ryoka says only that there are 'more of us' and gives no detail. Laken tells Durene everything and waits on a bench for Gamel and Ryoka."},
+			"summary": "While Durene chases the thief, Ryoka asks Laken in German where he is from, and both know the other is from Earth. She warns that his phone may be tracked and promises to come back within the hour. Laken tells Durene."
+		},
+		"b4.reynold_leads_ryoka_to_the_enchanter": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "reynold"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_greets_laken_in_german"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.decides_to_protect_laken", "ryoka.wants_to_hide_laken_from_magnolia", "reynold.has_auxiliary_combat_classes"], "relationship": [{"from": "ryoka_griffin", "to": "reynold", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "Ivolethe's view is her own; Ryoka does not accept it. Reynold's combat classes are only hinted at."},
+			"summary": "Shaken by what she found, Ryoka decides to keep Laken hidden from Magnolia. Ivolethe says it is not her business and Ryoka disagrees. Reynold walks her to the enchanter's stone house and admits he has some combat training."
+		},
+		"b4.hedault_appraises_the_albez_weapons": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "hedault_house",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}, "enchanter": {"prefer": ["hedault"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "reynold", "hedault"], "flags": ["ryoka.carries_the_horns_relics"], "not_flags": []},
+			"depends_on": ["b4.reynold_leads_ryoka_to_the_enchanter"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.met_hedault", "horns_of_hammerad.relics_appraised", "ryoka.knows_the_albez_dagger_ignites", "ryoka.knows_the_albez_buckler_is_a_force_shield", "ryoka.knows_the_albez_sword_is_weight_enchanted"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "He knows the style from the enchanting. Ryoka carries the relics for the Horns of Hammerad."},
+			"summary": "Hedault, a young pale [Enchanter], names the Horns' relics as Albez work. A dagger spreads flame, a sword changes its weight, a cracked buckler throws a force shield, and a melted blade is beyond saving. His wards keep it private."
+		},
+		"b4.hedault_reveals_the_bag_the_rings_and_the_wand": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "hedault_house",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}, "enchanter": {"prefer": ["hedault"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "reynold", "hedault"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.hedault_appraises_the_albez_weapons"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.bag_of_holding_is_perfect", "ryoka.refused_hedaults_18000_gold_offer", "ryoka.knows_the_albez_wand_is_priceless", "ryoka.wants_the_gravity_ring", "ryoka.knows_her_bag_of_holding_is_extraordinary", "reynold.recorded_ryokas_bag_of_holding"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "The rings pierce spells, give Barkskin and add gravity; Ryoka wants the last. Reynold is seen writing, but that he reports it is a guess, so the flag says only 'recorded'. Ryoka's own bag is Teriarch's gift."},
+			"summary": "The pack holds potions and pebbles, a flawless bag of holding, three rings and an iron-wood wand of unknown core. Hedault offers 18,000 gold for the wand if she stops asking. She refuses. He gasps at Ryoka's own bag."
+		},
+		"b4.hedault_quotes_the_repair_bill": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "hedault_house",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "enchanter": {"prefer": ["hedault"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "hedault"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.hedault_reveals_the_bag_the_rings_and_the_wand"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.faces_repair_bill_for_the_buckler", "hedault.offers_to_trade_for_the_wand", "ryoka.will_return_to_hedault_tomorrow", "hedault.holds_the_horns_relics", "hedault.sells_a_few_items", "invrisil.guilds_hold_messages_for_ryoka"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "About 1,600 gold for the buckler and 450 for the sword hilt; a botched repair loses the enchantment. He takes visitors only from dawn to dusk. Both guild receptionists hold messages for Ryoka."},
+			"summary": "The buckler needs five days and about 2,050 gold in all. Hedault offers a better price for the wand. Ryoka leaves the relics with him and says she will come back tomorrow. Snow starts to fall as she goes."
+		}
+	},
+	"system": []
+}
