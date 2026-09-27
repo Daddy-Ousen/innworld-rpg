@@ -40,6 +40,9 @@ extends Node2D
 
 ## The sound cues of one refresh, in order (M12).
 signal sounds(cues: Array[String])
+## A new map: the object loops on it (AmbiencePick.loops_on, M12.4). The
+## Audio autoload places their players under `loop_spots`.
+signal area_loops(loops: Array)
 
 const TILE := 32
 ## Old 16 px sizes are scaled by this.
@@ -143,6 +146,8 @@ var _animated: Array[Sprite2D] = []
 var _anim_time := 0.0
 ## Day/night tint, fire light and snow (M11.5).
 var atmosphere: Atmosphere
+## Holds the object loop players (M12.4), in map pixels.
+var loop_spots: Node2D
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var edges: TileMapLayer = $Edges
@@ -174,6 +179,10 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 		atmosphere = Atmosphere.new()
 		atmosphere.tile = TILE
 		add_child(atmosphere)
+	if loop_spots == null:
+		loop_spots = Node2D.new()
+		loop_spots.name = "LoopSpots"
+		add_child(loop_spots)
 	atlas.clear()
 	sprites.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas, false, sprites)
@@ -547,6 +556,7 @@ func _show_area(id: String) -> void:
 		marks.add_child(label)
 		label.position = at + (Vector2(TILE, TILE) - label.get_minimum_size()) / 2.0
 	atmosphere.show_area(_maps.is_indoor(id), light_sources)
+	area_loops.emit(AmbiencePick.loops_on(_maps, id, object_art))
 	camera.limit_left = 0
 	camera.limit_top = 0
 	camera.limit_right = size.x * TILE

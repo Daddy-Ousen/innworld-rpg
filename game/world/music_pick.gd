@@ -100,7 +100,12 @@ static func mood_of(audio: AudioDb, maps: MapDb, area: String) -> String:
 ## winter_night -> night -> winter_day -> day; winter_day -> day;
 ## night -> day.
 static func place_track(audio: AudioDb, mood: String, night: bool, winter: bool) -> String:
-	var variants: Dictionary = audio.data.get("mood_tracks", {}).get(mood, {})
+	return pick_variant(audio.data.get("mood_tracks", {}).get(mood, {}), night, winter)
+
+
+## The first non-empty variant for the time and season (the fallback order
+## of place_track). Also used for area beds (AmbiencePick).
+static func pick_variant(variants: Dictionary, night: bool, winter: bool) -> String:
 	var order: Array[String] = []
 	if winter and night:
 		order = ["winter_night", "night", "winter_day", "day"]
