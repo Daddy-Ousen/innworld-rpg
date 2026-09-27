@@ -444,6 +444,22 @@
 			"tag_affinity": {"strategy": 1.0, "combat": 0.5},
 			"effects": [{"type": "xp_mult", "tags": ["strategy", "combat"], "value": 1.25}],
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"inn_magical_grounds": {
+			"name": "[Inn: Magical Grounds]",
+			"rarity": "rare",
+			"pools": [{"class": "magical_innkeeper", "min_level": 1, "max_level": 10, "weight": 1.0}],
+			"tag_affinity": {"hospitality": 1.0},
+			"effects": [],
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Fills the inn with ambient mana, like a leyline: mages cast almost twice as many spells. The mana effect is not modelled (no effects)."}
+		},
+		"inn_field_of_preservation": {
+			"name": "[Inn: Field of Preservation]",
+			"rarity": "rare",
+			"pools": [{"class": "magical_innkeeper", "min_level": 1, "max_level": 10, "weight": 1.0}],
+			"tag_affinity": {"cooking": 1.0},
+			"effects": [],
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "guess", "note": "The name is confirmed; the effect (food kept fresh) is a guess from a cut apple left to see. Not modelled."}
 		}
 	}
 }

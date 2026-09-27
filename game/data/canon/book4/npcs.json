@@ -192,6 +192,18 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "interlude_wistram_days_pt_7", "confidence": "confirmed", "note": "Has spoken for Wistram for over a century and is a hero to the half-Elves. He exiled Pisces on pain of death."},
 			"summary": "An old half-Elf Archmage who has led Wistram for more than a hundred years. He exiled Pisces and sent Ceria away."
+		},
+		"umbral": {
+			"name": "Umbral",
+			"race": "Human",
+			"tags": ["human", "soldier", "esthelm", "gatekeeper"],
+			"faction": null,
+			"home": "esthelm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "A former [Soldier] in leather who runs Esthelm's gate; class and level not stated. He says Goblins killed a skeleton with purple eyes at Esthelm (the townsfolk's belief; not linked to Toren)."},
+			"summary": "A former [Soldier] in leather who runs the gate of Esthelm. He tells Erin's party how Ylawes and the Silver Swords saved the city and that Ylawes has gone north for his sister."
 		}
 	}
 }

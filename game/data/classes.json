@@ -187,6 +187,17 @@
 			"loss": {"neglect_days": 40, "neglect_tags": ["strategy", "combat"]},
 			"consolidation": {"from": ["warrior", "strategist"], "level_cost": 2},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
+		},
+		"magical_innkeeper": {
+			"name": "[Magical Innkeeper]",
+			"tag_weights": {"hospitality": 1.0, "cooking": 0.5, "social.conversation": 0.3},
+			"offer_threshold": 400,
+			"prereqs": {"classes": ["innkeeper"], "flags": ["erin.magical_grounds"]},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 60, "neglect_tags": ["hospitality", "cooking"]},
+			"consolidation": null,
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Erin's class at [Innkeeper] Level 30. The prereqs, threshold and weights are design guesses (mostly so that a player cannot reach it before Erin's Level 30)."}
 		}
 	}
 }
