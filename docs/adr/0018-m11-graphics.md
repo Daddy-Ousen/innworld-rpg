@@ -139,6 +139,35 @@ Date: 2026-09-27 · Status: plan accepted by the user 2026-09-27 (sub-steps get 
 - Tests: `unit_art.gd` +3 (race fallback, every NPC with a schedule has its own look, the view uses the race look),
   `test_build_sprites.py` +3 (all palette, edits, edit needs a head). GUT 708/708 (76 scripts), Python 64/64.
 
+## M11.3 Animation (2026-09-27)
+- **Sheet layout v2** (`tools/build_sprites.py`, 768×1088 px): the 64 px rows are walk 0-3, hurt 4, idle 5-8 (the old
+  64 px slash rows are gone). Under them (y 576) an **attack block** of 128×128 frames, 4 rows × 6 frames, with the
+  character in the middle of each frame. The tool picks the attack from the weapon part: the LPC oversize sword slash
+  (`slash_128`), the oversize axe slash (`slash_oversize`, 192 px frames, the middle 128 px kept), a thrust for a
+  weapon with thrust and no slash (spear, staff; 6 of the 8 frames), else a plain slash (unarmed, dagger, wand). A
+  layer with no frames for the attack keeps its standing walk frame, so no part vanishes in a swing. The Antinium
+  edits are drawn on the attack frames too. No data schema change.
+- **`CharacterSprite`** now uses sheet regions (`region_of(anim, dir, i)`; `shown` = the frame on show):
+  `walk` (glide + half a walk cycle), `attack(dir)`, `fall()` (the hurt frames, then lying down), `finish()`.
+- **`AnimDiff`** (`world/anim_diff.gd`, pure, headless-tested) compares two snapshots of the player's area (player,
+  NPCs, visible monsters: cell, hp, down, side) and gives events: move (one cell, also diagonal), hit (hp dropped;
+  the player's full hp is known from `Stats.max_hp` when `refresh` gets the db), fall, gone (a monster was removed),
+  swing. The sim keeps no record of who hit whom and core must not change, so swings are read from state: the
+  player swings when the fight's attacks + throws count grows (or when there is no fight left and the monster in
+  front of the unmoved player was hit or is gone); a monster swings at a hit or gone unit of the other side next to it
+  (king move) if it did not move. NPCs never swing (helpers in a fight are monsters). A miss by a monster shows no swing.
+- **`WorldView.refresh(gs, db)`** keeps the last snapshot and plays the events: NPC sprites walk one cell (their
+  names and bars slide too; the walk-cycle half is kept per NPC), monster squares slide; a hit tints the unit red for
+  0.25 s and shows a rising damage number in the new `Fx` layer (red when you are hurt); a fallen NPC plays the fall;
+  a gone monster leaves a shrinking, fading square; a swing plays the sprite attack or a square lunge (6 px). Frost
+  Fairies bob 3 px. `monster_facing` keeps each monster's facing from its last step or swing, for M11.4 sprites.
+  Nothing blocks input: markers are made anew on each refresh, which ends their tweens; numbers finish on their own; a
+  new map clears the `Fx` layer.
+- Not in this step: the player's own knock-out fall (a knock-out ends the day at once), throw projectiles, monster
+  sprites (M11.4).
+- Tests: `unit_anim.gd` (13), `unit_art.gd` updated (regions), `test_build_sprites.py` +2 (attack kind, weapons stay
+  in the swing). GUT 721/721 (77 scripts), Python 66/66, validator 0 errors.
+
 ## Tests
 - GUT: appearance data loads and falls back; tile and object sprite lookup (and fallback); the character
   node picks the right frame for facing and state; a step tween ends on the cell centre; the state diff

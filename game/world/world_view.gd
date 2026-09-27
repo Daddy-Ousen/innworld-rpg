@@ -18,6 +18,12 @@
 ## M11.1: the ground comes from GroundArt (soft edges between terrains in the
 ## Edges layer), and a map object with a "kind" is drawn from
 ## data/objects.json (a "frames" object is animated).
+## M11.3: after each refresh the view compares the new state with the last
+## one (AnimDiff) and plays the changes: NPCs and monsters glide one step
+## (NPC sprites walk), a hit flashes red and shows a damage number (Fx
+## layer), a fallen NPC falls over, a gone monster fades out, the player and
+## monsters swing (a sprite attack, a square lunges). Frost Fairies bob.
+## Nothing waits for these: a new command draws the new state at once.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -62,6 +68,22 @@ const CALM_EDGE := Color(0, 0, 0, 0.6)
 const RING := Color(0.08, 0.08, 0.08, 1)
 const FAIRY_BODY := Color("#bfe8ff")
 const FAIRY_EDGE := Color("#ffffff")
+## Frost Fairies float up and down this many px, this fast (radians/s).
+const FAIRY_BOB := 1.5 * U
+const FAIRY_BOB_SPEED := 4.0
+## A hit: the unit is tinted this colour, back to normal in FLASH_TIME.
+const HIT_TINT := Color(1.0, 0.25, 0.25)
+const FLASH_TIME := 0.25
+## Damage numbers rise NUMBER_RISE px and fade in NUMBER_TIME seconds.
+const NUMBER_TIME := 0.8
+const NUMBER_RISE := 8.0 * U
+const HURT_YOU_COLOR := Color("#ff5a5a")
+const HURT_OTHER_COLOR := Color("#fff2a8")
+## A square's swing: it lunges this far toward the target and back.
+const LUNGE := 3.0 * U
+const LUNGE_TIME := 0.2
+## A gone monster fades out in this time.
+const GONE_TIME := 0.35
 
 ## Map id on screen now ("" = none).
 var area := ""
@@ -82,6 +104,13 @@ var npc_races: Dictionary = {}
 var enemies: Dictionary = {}
 ## NPC id → max HP (NpcReact.stats), for the HP bars of hurt NPCs.
 var npc_max_hp: Dictionary = {}
+## Monster id → facing (n, s, e, w) from its last step or swing (for the
+## monster sprites of M11.4).
+var monster_facing: Dictionary = {}
+## The state last drawn (AnimDiff.snapshot), and the walk-cycle half of each
+## NPC (their markers are made anew each refresh).
+var _last: Dictionary = {}
+var _halves: Dictionary = {}
 var _maps: MapDb
 ## The world flag that turns on the snow look ("" = never), and whether
 ## the tiles are drawn in winter colours now.
@@ -99,6 +128,7 @@ var _anim_time := 0.0
 @onready var monsters: Node2D = $Monsters
 @onready var fairies: Node2D = $Fairies
 @onready var props: Node2D = $Props
+@onready var fx: Node2D = $Fx
 @onready var player: Node2D = $Player
 @onready var body: ColorRect = $Player/Body
 @onready var nose: ColorRect = $Player/Nose
@@ -130,8 +160,10 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	nose.visible = look == null
 
 
-## Redraws the map if the player changed area, then moves the marker.
-func refresh(gs: GameState) -> void:
+## Redraws the map if the player changed area, then moves the marker and
+## plays what changed since the last refresh. `db` (optional) gives the
+## player's max HP, for a damage number when they were at full HP.
+func refresh(gs: GameState, db: DataDb = null) -> void:
 	if _maps == null or not gs.player.is_placed():
 		return
 	_maps.sync_flags(gs.flags)  # the overlays are a cache shared by every game on this db
@@ -163,16 +195,151 @@ func refresh(gs: GameState) -> void:
 			look.pose(gs.player.facing)
 	if new_area:  # jump, do not glide across the new map
 		camera.reset_smoothing()
+	var snap := AnimDiff.snapshot(gs, Stats.max_hp(gs, db) if db != null else 0)
+	var changes: Array = [] if new_area else AnimDiff.events(_last, snap)
+	_last = snap
+	play(changes)
 
 
 func _process(delta: float) -> void:
-	if _animated.is_empty():
+	if _animated.is_empty() and fairies.get_child_count() == 0:
 		return
 	_anim_time += delta
 	var step := int(_anim_time * ANIM_FPS)
 	for s in _animated:
 		var n := int(s.get_meta("frames"))
 		s.region_rect.position.x = float(s.get_meta("x0")) + (step % n) * s.region_rect.size.x
+	for f in fairies.get_children():
+		var base: Vector2 = f.get_meta("base")
+		f.position = base + Vector2(0, sin(_anim_time * FAIRY_BOB_SPEED + float(f.get_meta("phase"))) * FAIRY_BOB)
+
+
+## Plays AnimDiff events on the markers drawn now. The player's own step is
+## played by refresh (the sprite glide).
+func play(changes: Array) -> void:
+	for e: Dictionary in changes:
+		var id := String(e["id"])
+		var node := _unit_node(id)
+		match e["type"]:
+			AnimDiff.MOVE:
+				if node != null and id != AnimDiff.PLAYER:
+					_glide(node, id, Vector2(e["from"] - e["to"]) * TILE, e["dir"])
+				if _is_monster(id):
+					monster_facing[id] = e["dir"]
+			AnimDiff.HIT:
+				if node != null:
+					_flash(node)
+					_number(node.position, int(e["amount"]), id == AnimDiff.PLAYER)
+			AnimDiff.FALL:
+				var lying := _sprite_of(node)
+				if lying != null:
+					lying.fall()
+			AnimDiff.GONE:
+				_fade_out(e["cell"], String(e["monster_type"]))
+			AnimDiff.SWING:
+				if id != AnimDiff.PLAYER:
+					monster_facing[id] = e["dir"]
+				var swinging := _sprite_of(node)
+				if swinging != null:
+					swinging.attack(e["dir"])
+				elif node != null:
+					_lunge(node, e["dir"])
+
+
+## The marker of a unit: the player, an NPC or a monster (null = none).
+func _unit_node(id: String) -> Node2D:
+	if id == AnimDiff.PLAYER:
+		return player
+	var n := npcs.get_node_or_null(NodePath(id)) as Node2D
+	return n if n != null else monsters.get_node_or_null(NodePath(id)) as Node2D
+
+
+static func _is_monster(id: String) -> bool:
+	return id.begins_with("m") and id.substr(1).is_valid_int()
+
+
+## The CharacterSprite of a marker, or null (a square).
+func _sprite_of(node: Node2D) -> CharacterSprite:
+	if node == player:
+		return look
+	if node == null:
+		return null
+	for c in node.get_children():
+		if c is CharacterSprite:
+			return c
+	return null
+
+
+## A marker glides one step: its sprite walks from `from` (old cell minus new
+## cell, px); its squares, label and bar slide.
+func _glide(node: Node2D, id: String, from: Vector2, dir: String) -> void:
+	var t: Tween = null
+	for c in node.get_children():
+		if c is CharacterSprite:
+			var s: CharacterSprite = c
+			s.half = int(_halves.get(id, 0))
+			s.walk(dir, from, STEP_TIME)
+			_halves[id] = s.half
+		elif c is Control or c is Node2D:
+			if t == null:
+				t = node.create_tween().set_parallel(true)
+			var base: Vector2 = c.position
+			c.position = base + from
+			t.tween_property(c, "position", base, STEP_TIME)
+
+
+## A square marker lunges toward `dir` and back.
+func _lunge(node: Node2D, dir: String) -> void:
+	var to := Vector2(PlayerState.DIRS.get(dir, Vector2i.ZERO)) * LUNGE
+	var t := node.create_tween().set_parallel(true)
+	for c in node.get_children():
+		if (c is Control or c is Node2D) and not c is Camera2D:
+			var base: Vector2 = c.position
+			t.tween_property(c, "position", base + to, LUNGE_TIME / 2.0)
+			t.tween_property(c, "position", base, LUNGE_TIME / 2.0).set_delay(LUNGE_TIME / 2.0)
+
+
+## A red flash on a hit unit (its sprite, else the whole marker).
+func _flash(node: Node2D) -> void:
+	var item: CanvasItem = _sprite_of(node)
+	if item == null:
+		item = node if node != player else body
+	item.modulate = HIT_TINT
+	item.create_tween().tween_property(item, "modulate", Color.WHITE, FLASH_TIME)
+
+
+## "-3" over a unit at `at`; it rises and fades (red when you are hurt).
+func _number(at: Vector2, amount: int, you: bool) -> void:
+	var label := Label.new()
+	label.text = "-%d" % amount
+	label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
+	label.add_theme_color_override("font_color", HURT_YOU_COLOR if you else HURT_OTHER_COLOR)
+	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	label.add_theme_constant_override("outline_size", 8)
+	label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	label.scale = Vector2.ONE / TEXT_SCALE
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fx.add_child(label)
+	var size := label.get_minimum_size() / TEXT_SCALE
+	label.position = at + Vector2(-size.x / 2.0, -CharacterSprite.HEAD - size.y)
+	var t := label.create_tween().set_parallel(true)
+	t.tween_property(label, "position:y", label.position.y - NUMBER_RISE, NUMBER_TIME)
+	t.tween_property(label, "modulate:a", 0.0, NUMBER_TIME).set_ease(Tween.EASE_IN)
+	t.chain().tween_callback(label.queue_free)
+
+
+## A gone monster: a copy of its square shrinks and fades on its old cell.
+func _fade_out(cell: Vector2i, type: String) -> void:
+	var ghost := Node2D.new()
+	ghost.name = "gone"
+	ghost.position = cell_center(cell)
+	_square(ghost, 5 * U, RING)
+	_square(ghost, 4 * U, Color.html(enemies.get(type, {}).get("color", "#ff00ff")))
+	fx.add_child(ghost)
+	var t := ghost.create_tween().set_parallel(true)
+	t.tween_property(ghost, "scale", Vector2(0.3, 0.3), GONE_TIME)
+	t.tween_property(ghost, "modulate:a", 0.0, GONE_TIME)
+	t.chain().tween_callback(ghost.queue_free)
 
 
 ## The file of an art sheet: game/assets/tiles/<name>.png, else
@@ -280,6 +447,11 @@ func _show_area(id: String) -> void:
 	tiles.clear()
 	edges.clear()
 	_animated.clear()
+	monster_facing.clear()
+	_halves.clear()
+	for child in fx.get_children():
+		fx.remove_child(child)
+		child.queue_free()
 	for child in props.get_children():
 		props.remove_child(child)
 		child.queue_free()
@@ -407,6 +579,8 @@ func _show_fairies(gs: GameState) -> void:
 		var marker := Node2D.new()
 		marker.name = id
 		marker.position = cell_center(WinterState.pos_of(gs.winter.fairies[id]))
+		marker.set_meta("base", marker.position)
+		marker.set_meta("phase", float(id.hash() % 628) / 100.0)
 		marker.rotation = PI / 4.0
 		_square(marker, 3 * U, FAIRY_EDGE)
 		_square(marker, 2 * U, FAIRY_BODY)

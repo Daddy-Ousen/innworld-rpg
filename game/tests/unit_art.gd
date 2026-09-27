@@ -20,12 +20,16 @@ func _art_view() -> WorldView:
 
 
 func test_frames_follow_the_sheet_layout() -> void:
-	assert_eq(CharacterSprite.frame_of("walk", "s", 0), 2 * 9, "walk row 2 faces down")
-	assert_eq(CharacterSprite.frame_of("walk", "n", 3), 3)
-	assert_eq(CharacterSprite.frame_of("walk", "s", 10), 2 * 9 + 1, "frames wrap")
-	assert_eq(CharacterSprite.frame_of("slash", "e", 3), 7 * 9 + 3)
-	assert_eq(CharacterSprite.frame_of("hurt", "w", 5), 8 * 9 + 5, "hurt has one row")
-	assert_eq(CharacterSprite.frame_of("idle", "w", 1), 10 * 9 + 1)
+	assert_eq(CharacterSprite.region_of("walk", "s", 0), Rect2(0, 2 * 64, 64, 64), "walk row 2 faces down")
+	assert_eq(CharacterSprite.region_of("walk", "n", 3), Rect2(3 * 64, 0, 64, 64))
+	assert_eq(CharacterSprite.region_of("walk", "s", 10), Rect2(64, 2 * 64, 64, 64), "frames wrap")
+	assert_eq(CharacterSprite.region_of("hurt", "w", 5), Rect2(5 * 64, 4 * 64, 64, 64), "hurt has one row")
+	assert_eq(CharacterSprite.region_of("idle", "w", 1), Rect2(64, 6 * 64, 64, 64))
+	assert_eq(CharacterSprite.region_of("attack", "e", 3), Rect2(3 * 128, 9 * 64 + 3 * 128, 128, 128),
+			"the attack block: 128 px frames under the 64 px rows")
+	assert_eq(CharacterSprite.region_of("attack", "s", 6), Rect2(0, 9 * 64 + 2 * 128, 128, 128))
+	var sheet: Texture2D = load(CharacterSprite.path_for("player"))
+	assert_eq(sheet.get_size(), Vector2(768, 1088), "tools/build_sprites.py makes this layout")
 
 
 func test_sheets_exist_only_for_built_looks() -> void:
@@ -35,10 +39,10 @@ func test_sheets_exist_only_for_built_looks() -> void:
 	assert_null(CharacterSprite.make("no_such_look"))
 	var s := CharacterSprite.make("player")
 	assert_not_null(s)
-	assert_eq(s.hframes, CharacterSprite.COLUMNS)
-	assert_eq(s.vframes, CharacterSprite.ROWS)
+	assert_true(s.region_enabled)
 	s.pose("w", true)
-	assert_eq(s.frame, CharacterSprite.frame_of("hurt", "s", 5), "down = lying")
+	assert_eq(s.shown, ["hurt", "s", 5], "down = lying")
+	assert_eq(s.region_rect, CharacterSprite.region_of("hurt", "s", 5))
 	s.free()
 
 
@@ -119,7 +123,7 @@ func test_player_sprite_glides_one_step_and_jumps_on_area_change() -> void:
 	assert_true(v.look.is_walking())
 	v.look.finish()
 	assert_eq(v.look.position, Vector2.ZERO)
-	assert_eq(v.look.frame, CharacterSprite.frame_of("walk", "e", 0), "standing, facing east")
+	assert_eq(v.look.shown, ["walk", "e", 0], "standing, facing east")
 	gs.player.place("town", Vector2i(6, 2))
 	Commands.move(gs, d, "s")  # the shop door
 	v.refresh(gs)

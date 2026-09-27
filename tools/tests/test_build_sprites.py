@@ -67,7 +67,7 @@ def make_ulpc(root: Path) -> None:
     _write(root / "sheet_definitions/body/tail.json", {
         "layer_1": {"zPos": 5, "male": "tail/"}, "credits": []})
     # Body: skin block at the top left of every animation; walk as a palette image.
-    for anim, frames, rows in bs.ANIMS:
+    for anim, frames, rows in bs.ANIMS + [("slash", 6, 4), ("thrust", 8, 4)]:
         mode = "P" if anim == "walk" else "RGBA"
         _png(root / f"spritesheets/body/male/{anim}.png", frames * 64, rows * 64, LIGHT, mode=mode)
         _png(root / f"spritesheets/torso/shirt/{anim}.png", frames * 64, rows * 64, WHITE, box=(4, 4, 8, 8))
@@ -79,6 +79,23 @@ def make_ulpc(root: Path) -> None:
         "recolors": {"material": "body"}, "credits": []})
     # Tail: one file per colour, walk only.
     _png(root / "spritesheets/tail/walk/red.png", 9 * 64, 4 * 64, "#c02020", box=(0, 0, 2, 2))
+    # A spear: walk and thrust (no slash). A sword: walk, plus an oversize slash in
+    # 128 px frames (its own layers, the LPC "custom_animation").
+    _write(root / "sheet_definitions/weapons/weapon_spear.json", {
+        "layer_1": {"zPos": 140, "male": "weapon/spear/"}, "animations": ["walk", "thrust"], "credits": []})
+    _png(root / "spritesheets/weapon/spear/walk/iron.png", 9 * 64, 4 * 64, BLUE, box=(60, 0, 64, 4))
+    _frames_png(root / "spritesheets/weapon/spear/thrust/iron.png", 8, 4, BLUE, (60, 60, 64, 64))
+    _write(root / "sheet_definitions/weapons/weapon_sword.json", {
+        "layer_1": {"zPos": 140, "male": "weapon/sword/fg/"},
+        "layer_2": {"zPos": 150, "custom_animation": "slash_128", "male": "weapon/sword/attack/"},
+        "animations": ["walk", "slash_128"], "credits": []})
+    _png(root / "spritesheets/weapon/sword/fg/walk/steel.png", 9 * 64, 4 * 64, WHITE, box=(60, 0, 64, 4))
+    img = Image.new("RGBA", (6 * 128, 4 * 128), (0, 0, 0, 0))
+    for r in range(4):
+        for c in range(6):
+            img.paste(Image.new("RGBA", (4, 4), bs.hex_rgb(LEMON) + (255,)), (c * 128 + 120, r * 128))
+    (root / "spritesheets/weapon/sword/attack").mkdir(parents=True, exist_ok=True)
+    img.save(root / "spritesheets/weapon/sword/attack/steel.png")
 
 
 class BuildSpritesTest(unittest.TestCase):
@@ -102,10 +119,14 @@ class BuildSpritesTest(unittest.TestCase):
         errors = self._build({"lizard": {"body": "male", "skin": "green"}})
         self.assertEqual(errors, [])
         sheet = Image.open(self.out / "lizard.png").convert("RGBA")
-        self.assertEqual(sheet.size, (bs.COLUMNS * 64, bs.ROWS * 64))
+        self.assertEqual(sheet.size, (768, 1088))
+        self.assertEqual((bs.SHEET_W, bs.SHEET_H), (768, 1088))
         rows = bs.anim_offsets()
-        for anim in ("walk", "slash", "hurt", "idle"):
+        for anim in ("walk", "hurt", "idle"):
             self.assertEqual(sheet.getpixel((1, rows[anim] * 64 + 1)), bs.hex_rgb(GREEN) + (255,), anim)
+        # The attack block: the 64 px slash frame in the middle of a 128 px frame.
+        self.assertEqual(sheet.getpixel((32 + 1, bs.ATTACK_Y + 32 + 1)), bs.hex_rgb(GREEN) + (255,))
+        self.assertEqual(sheet.getpixel((1, bs.ATTACK_Y + 1))[3], 0, "the frame's rim is empty")
 
     def test_layers_follow_z_order_and_cloth_colour(self):
         # The shirt (z 35) is listed first but drawn over the body (z 10).
@@ -171,8 +192,34 @@ class BuildSpritesTest(unittest.TestCase):
         # Back view (walk row 0): antennae and arms, no mandibles.
         up = Image.open(self.out / "ant.png").convert("RGBA").crop((0, 0, 64, 64))
         self.assertGreater(sum(1 for y in range(10) for x in range(64) if up.getpixel((x, y))[3]), 4)
+        # The attack frames get the edits too (facing down, in the middle of the frame).
+        swing = sheet.crop((32, bs.ATTACK_Y + 2 * 128 + 32, 96, bs.ATTACK_Y + 2 * 128 + 96))
+        self.assertGreater(sum(1 for y in range(10) for x in range(64) if swing.getpixel((x, y))[3]), 4)
         credits = self.credits.read_text(encoding="utf-8")
         self.assertNotIn("innworld", credits, "edits are not LPC parts")
+
+    def test_attack_kind_follows_the_weapon(self):
+        u = bs.Ulpc(self.ulpc)
+        self.assertEqual(bs.attack_kind(u, {"parts": []}), "slash")
+        self.assertEqual(bs.attack_kind(u, {"parts": [{"part": "weapon_spear"}]}), "thrust")
+        self.assertEqual(bs.attack_kind(u, {"parts": [{"part": "weapon_sword"}]}), "slash_128")
+        self.assertEqual(bs.attack_kind(u, {"parts": [{"part": "innworld_antennae"}]}), "slash")
+
+    def test_weapons_stay_in_the_swing(self):
+        self.assertEqual(self._build({
+            "spear": {"body": "male", "skin": "light", "parts": [{"part": "weapon_spear", "color": "iron"}]},
+            "sword": {"body": "male", "skin": "light", "parts": [{"part": "weapon_sword", "color": "steel"}]}}), [])
+        blue, lemon, white = bs.hex_rgb(BLUE) + (255,), bs.hex_rgb(LEMON) + (255,), bs.hex_rgb(WHITE) + (255,)
+        spear = Image.open(self.out / "spear.png").convert("RGBA")
+        self.assertEqual(spear.getpixel((32 + 61, bs.ATTACK_Y + 32 + 61)), blue, "the thrust frames")
+        sword = Image.open(self.out / "sword.png").convert("RGBA")
+        self.assertEqual(sword.getpixel((121, bs.ATTACK_Y + 1)), lemon, "the 128 px slash, not cut to 64")
+        attack = sword.crop((0, bs.ATTACK_Y, bs.SHEET_W, bs.SHEET_H))
+        self.assertNotIn(white, attack.getdata(), "no walking sword in the swing")
+        # The tail has no slash frames: it keeps its standing frame (at the frame's top left).
+        layer = bs.part_layers(bs.Ulpc(self.ulpc), {"part": "tail", "color": "red"}, {"body": "male"})[0]
+        tail = bs.layer_sheet(layer, "slash")
+        self.assertEqual(tail.getpixel((32, bs.ATTACK_Y + 32))[:3], (0xc0, 0x20, 0x20))
 
     def test_edits_need_a_head(self):
         errors = self._build({"x": {"body": "male", "parts": [{"part": "innworld_antennae"}]}})

@@ -137,8 +137,8 @@ Plan accepted 2026-09-27 (ADR 0018). New books are paused. One branch + PR each.
 Art is picked by data (`tiles.json` sprites, object sprites, new `appearance.json`); missing art falls back to today's squares.
 - [x] M11.0 Art spike: LPC parts and licences checked, `game/assets/` + `CREDITS.md`, cell size 32, `liscor_gate` in LPC tiles, the player walks as an LPC character. The user approves the look
 - [x] M11.1 Tiles and objects: all 16 tiles (plus winter and terrain edges), all map objects on the 15 maps
-- [ ] M11.2 Characters: `appearance.json`, baked character sheets, 4 directions; the player and the 33 NPCs with a schedule (Human, Drake, Gnoll, Antinium, Goblin, half-Elf, Minotaur, skeleton), generic looks per race (built; PR #48 open, the user checks the look)
-- [ ] M11.3 Animation: smooth steps, walk cycle, facing, attack swing, hit flash, damage numbers, knock-out fall
+- [x] M11.2 Characters: `appearance.json`, baked character sheets, 4 directions; the player and the 33 NPCs with a schedule (Human, Drake, Gnoll, Antinium, Goblin, half-Elf, Minotaur, skeleton), generic looks per race
+- [ ] M11.3 Animation: smooth steps, walk cycle, facing, attack swing, hit flash, damage numbers, knock-out fall (built; PR open, the user checks it)
 - [ ] M11.4 Monsters: all 36 enemies with art
 - [ ] M11.5 Atmosphere: day/night light, falling snow, fire and lamp light
 **Done when:** every map, every NPC with a schedule and every enemy draws with art; walking and combat animate;
