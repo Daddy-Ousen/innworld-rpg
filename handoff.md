@@ -1,30 +1,29 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #41 (M10.1) merged. Tag `m10.1-done` on ce7d682 (pushed).
-- The old branch `data/book4-3.26-3.29` still exists on GitHub. The auto-mode check blocked its delete; the user can delete it.
-- M10.2 (3.30-3.31G + the 3.32 frame + Wistram Days as history) built on branch `data/book4-3.30-3.31`. Detail: ADR 0017 "M10.2".
+- PR #42 (M10.2) merged. Tag `m10.2-done` on ccf8743 (pushed). Local main is up to date.
+- Now on new branch `data/book4-3.32-3.35` (empty, for M10.3).
+- The old remote branches `data/book4-3.26-3.29` and `data/book4-3.30-3.31` may still exist on GitHub; the user can delete them.
+- M10.2 (3.30-3.31G + the 3.32 frame + Wistram Days as history). Detail: ADR 0017 "M10.2".
   - User choices: 3.30 is day 89; one scene, the Wistram story at the Frenzied Hare (night 89, 20-24); 8 key Wistram NPCs only.
   - New files: `chapters/3.30.json` (4 events), `3.31G.json` (7 events, days 91-92), `3.32.json` (1 event: the story frame, with stage + hook `player_heard_the_wistram_story`).
   - NPCs: termin, poisonbite, cognita, illphres (dead), calvaron (dead), montressa_du_valeross, beatrice, charles_de_trevalier, amerys, feor. Locations: celum_liscor_road, village_of_the_dead.
   - Door: 3.30 sets `albez_door.anchor_at_stitchworks`, clears `albez_door.linked_to_frenzied_hare`.
   - GUT 659/659 (71 scripts). Python 51 OK. Validator 0 errors. Scene checked on screen.
-- The PR for this branch is open for the user to merge.
 
 ## Next steps
-1. The user merges the M10.2 PR. Then tag `m10.2-done` on the merge commit.
-2. M10.3 (3.32-3.35): read with a subagent, then ask the user for stage and hook choices. Add the rest of 3.32 to the existing `chapters/3.32.json`.
+1. M10.3 (3.32-3.35): read with a subagent, then ask the user for stage and hook choices. Add the rest of 3.32 to the existing `chapters/3.32.json`.
    - Timeline from the reader: day 90 the wagon reaches Esthelm (Erin cooks at the Esthelm inn, no door use there); day 91 it reaches Liscor just before sunset.
    - Set `albez_door.at_wandering_inn`, then `erin.magical_grounds` on Erin's Level 30 (3.33).
    - Erin's goals: `erin.stranded_north` still holds her off the map; `erin.on_wagon_south` is set. Book 4 must bring her home to the inn (clear or replace these). Check her goals in `npc_behaviour.json`.
    - Toren's four bones of "the [Archmage]" (3.32): do not link to Nekhret unless the text says so.
-3. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. Keep him alive unless the text says he died.
-4. Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`). `rags.tribe_turns_north` still blocks her foraging near Liscor; clear it when she arrives.
-5. Halrac, Jelaqua and Xrn have no `npc_behaviour` entries yet. Add them if a later scene must place them.
+2. Toren is in the Liscor dungeon (`toren.in_liscor_dungeon`), alive. Keep him alive unless the text says he died.
+3. Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`). `rags.tribe_turns_north` still blocks her foraging near Liscor; clear it when she arrives.
+4. Halrac, Jelaqua and Xrn have no `npc_behaviour` entries yet. Add them if a later scene must place them.
 
 ## Waiting on the user
-- Merge the M10.2 PR.
-- Delete the old remote branch `data/book4-3.26-3.29` (optional).
+- Nothing. M10.3 can start.
+- Delete the old remote branches (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
