@@ -1,0 +1,100 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.40",
+	"events": {
+		"b4.reynold_reports_lakens_convoy": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.met_laken"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.bought_food_and_goods_for_riverfarm", "ivolethe.predicts_the_solstice_blizzard"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "Ivolethe says the storm will last two or three days."},
+			"summary": "On the street after the Mages' Guild, Reynold tells Ryoka what Laken has done in Invrisil: he has paid for a load of food and goods and hired two adventurer teams to guard it. Ivolethe warns that a blizzard is coming and will peak by nightfall."
+		},
+		"b4.ryoka_unmasks_one_of_magnolias_maids": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.met_laken"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.has_a_maid_watching_laken", "ryoka.unmasked_a_disguised_maid"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "The Maid is not named. The ring is a disguise item. Magnolia is watching Laken."},
+			"summary": "Ivolethe points out an old man who is following them. When Ryoka calls him out, he twists a ring and turns back into one of Magnolia's [Maids] in disguise. She shows Ryoka to the inn where Laken is staying."
+		},
+		"b4.ryoka_meets_frostwing_and_arms_durene": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "crag_pig",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "guard": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "follower": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}, "bird": {"prefer": ["frostwing"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": ["laken.reached_invrisil"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["durene.carries_a_pepper_potion", "ryoka.met_frostwing", "laken.stays_at_the_crag_pig"], "relationship": [{"from": "durene", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "The Crag Pig is a rough inn with a tusked skull over the door. Frostwing is about the size of a chicken."},
+			"summary": "Durene blocks the door of the Crag Pig until Ryoka gives her one of Octavia's pepper potions and tells her to carry gear. Inside, Ryoka meets Frostwing, now a big blue nestling, and plays Laken a Pokemon tune on her phone."
+		},
+		"b4.laken_tells_ryoka_he_is_an_emperor": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "crag_pig",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_meets_frostwing_and_arms_durene"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.knows_laken_is_an_emperor", "laken.has_ryokas_notes_on_farming_and_defence", "laken.knows_of_magnolia_and_the_antinium", "ivolethe.made_an_archduchess", "ivolethe.buried_the_crag_pig_in_snow"], "relationship": [{"from": "ryoka_griffin", "to": "laken_godart", "delta": 1}, {"from": "laken_godart", "to": "ryoka_griffin", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "Ryoka is 21, Laken 24, Erin 20 (their words). Ivolethe buries the ground floor in snow to drive off listeners. The notes: greenhouses, heavy plough, crop rotation, walls, siege engines, water mills. Ryoka records Laken on her phone."},
+			"summary": "Alone, Ryoka and Laken swap ages and pasts. In German he tells her he is an [Emperor]. She tells him about Erin, Magnolia, the Antinium and a summoning in Rhir, writes him notes on farming and defence, and talks him into making Ivolethe an archduchess."
+		},
+		"b4.laken_speaks_to_wistram_by_phone": {
+			"tier": 1,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "crag_pig",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "caller": {"prefer": ["blackmage"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.laken_tells_ryoka_he_is_an_emperor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wistram.knows_of_two_more_earthers", "laken.asked_wistram_to_call_earthers_home", "blackmage.invited_ryoka_to_wistram"]},
+			"rumor": "Wistram's mages say a strange voice spoke to them through an artifact and asked them to shout a message to the whole world.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "They tell [BlackMage] to use only the chat from now on. Wistram learns two more Earthers exist, not where. Laken warns that some arrivals may be dangerous."},
+			"summary": "[BlackMage] rings Ryoka from Wistram with mages listening and invites her there. She swears at him for the risk. Laken takes the phone and asks that Wistram send a call home in many languages and help anyone who can prove they came from Earth."
+		},
+		"b4.ryoka_trades_the_wand_to_hedault": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "hedault_house",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "enchanter": {"prefer": ["hedault"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "hedault"], "flags": ["hedault.offers_to_trade_for_the_wand"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["hedault.owns_the_albez_wand", "hedault.owes_the_horns_a_debt", "hedault.makes_gear_for_the_horns", "ryoka.knows_the_wand_holds_a_tree_seed"], "clear_flags": ["ryoka.will_return_to_hedault_tomorrow"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "The gear is to be ready the next day; no chapter in this batch shows the pickup. Ryoka plans to lie to the Horns about the wand."},
+			"summary": "Ryoka sells the Horns' wand to Hedault, not for gold but for gear: armour, a sword, wands, a robe, a spellbook, rings, 200 gold and a written debt owed to the Horns of Hammerad. Ivolethe says the wand's core is a seed of an ancient tree."
+		},
+		"b4.laken_asks_ryoka_to_run_to_riverfarm": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil_runners_guild",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.laken_tells_ryoka_he_is_an_emperor"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["invrisil.snowed_in_for_a_week", "laken.convoy_delayed_a_week", "ryoka.carries_lakens_food_to_riverfarm", "reynold.to_drive_ryoka_only_to_liscor"], "clear_flags": ["ryoka.heading_home_to_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "Riverfarm is a one-day run for the best Runners. Reynold is told to drive Ryoka only to Liscor. The Rudolph plan starts here."},
+			"summary": "At the Runners' Guild a [Weather Mage] says feet more snow will fall and no convoy can leave for a week. Laken asks Ryoka to run a bag of holding full of food and presents to Riverfarm before Christmas."
+		}
+	},
+	"system": []
+}

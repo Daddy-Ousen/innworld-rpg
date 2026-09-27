@@ -1,0 +1,144 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.41",
+	"events": {
+		"b4.ivolethe_leads_the_run_as_rudolph": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil_runners_guild",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": [], "optional": true}, "guard": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "follower": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.laken_asks_ryoka_to_run_to_riverfarm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ivolethe.glows_red_as_rudolph", "frost_faeries.light_ryokas_run", "laken.promised_ivolethe_a_statue", "ryoka.running_to_riverfarm", "durene.got_her_first_present"], "relationship": [{"from": "durene", "to": "laken_godart", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "The text says 'two days before Christmas'. Ryoka carries Guild potions, a second bag of holding with food and tools, and the presents."},
+			"summary": "Outside the Runners' Guild at night, Laken promises Ivolethe a statue and Ryoka's [Flare] shows her the colour, so she glows red to guide the run. Younger faeries join in many colours and Ryoka sets off west. Afterwards Laken gives Durene the first present of her life."
+		},
+		"b4.erin_hangs_mistletoe_and_starts_secret_santa": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "healer": {"prefer": ["revi"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true}, "old_mage": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true}, "actor": {"prefer": ["jasi"], "fallback_tags": [], "optional": true}, "queen": {"prefer": ["xrn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.back_from_esthelm", "wandering_inn.christmas_party_planned"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.secret_santa", "krshia.sold_mistletoe_and_wrapping", "wandering_inn.mistletoe_game", "pisces.won_the_cherry_knot", "xrn.looking_for_klbkch"], "relationship": [{"from": "krshia", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "The day before Christmas. Jelaqua kisses Typhenous; Pisces kisses Revi. Ceria says Pisces practised at Wistram."},
+			"summary": "Erin sets up a Secret Santa so each guest gets two gifts, and hangs mistletoe bought from Krshia. It turns into a kissing game; Pisces wins a cherry-stem knot contest. Xrn comes looking for Klbkch, misses him, and stays to watch."
+		},
+		"b4.octavia_makes_matches": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}, "child": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["octavia"], "flags": ["octavia.researches_matches"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["octavia.makes_matches", "octavia.made_baking_powder"], "clear_flags": ["octavia.researches_matches", "octavia.researches_baking_powder"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "Octavia also helped with the baking powder that makes Erin's bread rise. Penicillin is not mentioned."},
+			"summary": "Octavia shows Erin working matches she made overnight from Corusdeer horn and sulphur, struck on a rough box. Mrsha steals a box."
+		},
+		"b4.mrsha_sells_matches_in_celum": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"child": {"prefer": ["mrsha"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["mrsha"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.octavia_makes_matches"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.sells_matches", "octavia.shop_mobbed_for_matches", "celum.buys_matches", "mrsha.saves_coins_in_lyonettes_jar"], "relationship": [{"from": "octavia", "to": "mrsha", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "Lyonette thinks Mrsha is taking coins out, not putting them in. About 123 matches were made."},
+			"summary": "Mrsha lights matches in a Celum street and a woman buys a box. Octavia gives her more to sell, and by afternoon the shop is mobbed. Mrsha puts her coins in Lyonette's jar at home."
+		},
+		"b4.relc_and_klbkch_play_santa": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "liscor",
+			"roles": {"guard": {"prefer": ["relc"], "fallback_tags": []}, "partner": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["relc", "klbkch"], "flags": ["christmas.word_spreads_in_liscor_and_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["relc.dressed_as_santa", "klbkch.hides_from_the_hive", "relc.scared_the_bitterscale_family"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "The Bitterscales (Wress, Vessra and two children) are not NPC records."},
+			"summary": "Relc has no gift for anyone, so he paints his armour red and drags Klbkch, who is hiding from the Hive, out to do good deeds as Santa. Their first visit, to the Bitterscale family, goes badly: Relc offers a wrapped dagger point first."
+		},
+		"b4.santa_catches_two_drake_thieves": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "liscor_market",
+			"roles": {"guard": {"prefer": ["relc"], "fallback_tags": []}, "partner": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["relc", "klbkch"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.relc_and_klbkch_play_santa"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["liscor.santa_caught_two_thieves", "klbkch.knows_santa_is_not_real", "relc.and_klbkch_are_each_others_secret_santa"], "relationship": [{"from": "relc", "to": "klbkch", "delta": 1}, {"from": "klbkch", "to": "relc", "delta": 1}]},
+			"stage": {
+				"area": "liscor_market",
+				"hours": [18, 22],
+				"when_flags": ["christmas.word_spreads_in_liscor_and_celum"],
+				"foes": [{"enemy": "liscor_house_thief", "pos": [12, 18]}, {"enemy": "liscor_house_thief", "pos": [14, 18]}],
+				"line": "Two masked Drakes back out of a Gnoll family's door with a sack of wrapped presents and run into the square.",
+				"waves": [{"after_seconds": 30, "from": [29, 11], "allies": ["relc", "klbkch"], "line": "A Drake in red-painted armour and an Antinium in a goat-hair beard charge in from the gate road."}],
+				"note": "M10.5: a fight. Hours are guesses (evening). The Santas come 30 seconds later (design), so a player on the spot gets the first blow. The thieves run when hurt. In the text the Santas win alone; here the player may help."
+			},
+			"hooks": [
+				{
+					"id": "player_helped_santa_catch_the_thieves",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["liscor_house_thief"]}}],
+					"days": [94, 94],
+					"then": "change",
+					"effects": {"set_flags": ["liscor.earther_helped_santa_catch_thieves"], "relationship": [{"from": "relc", "to": "player", "delta": 2}, {"from": "klbkch", "to": "player", "delta": 2}]},
+					"news": "Two thieves who robbed a Gnoll family on the eve of Christmas were caught by 'Santa', his bearded friend and a Human who happened by."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "Relc and Klbkch turn out to be each other's Secret Santa. The robbery is in a Gnoll home; the stage puts the fight in the market."},
+			"summary": "The two Santas catch two masked Drakes robbing a Gnoll family and knock them down with a black 'coal' rock and a brick. The street cheers. They give away the presents and the costumes and jail the thieves; Klbkch works out that Santa is not real."
+		},
+		"b4.ryoka_meets_a_frost_golem_on_the_road": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "riverfarm_road",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ivolethe_leads_the_run_as_rudolph"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.fell_down_a_cliff", "ryoka.met_a_frost_golem"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "The golem seems to wear a top hat. It is not linked to any NPC or enemy."},
+			"summary": "Eight hours into the run the bored faeries copy Ivolethe's voice and Ryoka falls down a cliff. She finds the real Ivolethe by asking about her German. A huge golem of snow and ice wakes and chases the faeries off, and Ryoka thanks 'Frosty'."
+		},
+		"b4.ryoka_brings_food_and_presents_to_riverfarm": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "riverfarm",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}, "child": {"prefer": ["anabelle"], "fallback_tags": [], "optional": true}, "wife": {"prefer": ["yesel"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ivolethe_leads_the_run_as_rudolph"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["riverfarm.fed_for_two_weeks", "riverfarm.got_presents_from_santa", "anabelle.has_an_adventurer_doll", "laken.kept_his_food_promise", "ryoka.at_riverfarm"], "clear_flags": ["ryoka.running_to_riverfarm"], "relationship": [{"from": "prost", "to": "ryoka_griffin", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "The food lasts one or two weeks. The faeries light the barn roof while Ryoka tells Santa and Rudolph stories."},
+			"summary": "Late at night Prost meets Ryoka with his father's sword until he sees her Runner's Seal. She hands over the food and the villagers weep and praise their [Emperor]. She gives out presents 'from Santa'; Anabelle, whose brother died in the avalanche, gets a doll and is told it was not her fault."
+		},
+		"b4.erin_sings_silent_night_at_midnight": {
+			"tier": 2,
+			"window": {"earliest": 94, "latest": 94, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}, "child": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.erin_hangs_mistletoe_and_starts_secret_santa"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.gift_pile_ready", "erin.burned_the_mistletoe", "erin.wrapped_gifts_for_relc_and_klbkch"], "relationship": [{"from": "mrsha", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "Earlier Selys wins the knot contest and Mrsha kisses Erin and Halrac. Erin says she has the [Singer] class (already in the data since 2.17)."},
+			"summary": "Minutes before midnight the inn closes. Erin bans kissing, burns the mistletoe, sings 'Silent Night' and adds her own gifts for Relc and Klbkch to the pile."
+		}
+	},
+	"system": []
+}

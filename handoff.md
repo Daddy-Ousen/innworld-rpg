@@ -1,27 +1,27 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- PR #43 (M10.3) merged. Tag `m10.3-done` on 51fbbae (pushed).
-- M10.4 (3.36-3.39) built on branch `data/book4-3.36-3.39`. Detail: ADR 0017 "M10.4". Committed; PR #44 is open.
-  - User choices: one scene with a hook (the Rock Crab, day 93, 10:00-12:00, `floodplains_south`); slime scene moved to day 92; about 27 events.
-  - 27 events: `chapters/3.36.json` (6), `3.37.json` (6), `3.38.json` (7), `3.39.json` (8). New NPCs `hedault`, `merec`, `raisha`, `regisand_curle`; new locations `hedault_house`, `invrisil_merchants_guild`.
-  - Erin rides home on the night of day 92 (`erin.back_from_esthelm`; `erin.at_esthelm` cleared). Valceif dies on day 93. `ryoka.heading_home_to_liscor` is set. Christmas is named; the party is day 95.
-  - GUT 679/679 (73 scripts). Python 51 OK. Validator 0 errors. The Rock Crab scene was NOT checked on screen.
+- PR #44 (M10.4) merged. Tag `m10.4-done` on 2696cfe (pushed).
+- M10.5 (3.40-3.42 + Interlude - Winter Solstice) built on branch `data/book4-3.40-solstice`. Detail: ADR 0017 "M10.5". This ends Book 4 and M10's canon.
+  - User choices: two scenes with hooks (Santa thieves in `liscor_market`, day 94 18-22, allies Relc + Klbkch arrive after 30 s; Erin in the snow on `inn_hill`, day 95 19-23, hook `comfort_someone` with Erin); Ryoka rests at Riverfarm on day 95 (guess); about 32 events.
+  - 32 events: `3.40.json` (7), `3.41.json` (9), `3.42.json` (11), `interlude_winter_solstice.json` (5). New NPCs `anabelle`, `tamaroth`; locations `crag_pig`, `invrisil_runners_guild`, `riverfarm_road`; enemy `liscor_house_thief`.
+  - GUT 689/689 (74 scripts). Python 51 OK. Validator 0 errors. Scenes NOT checked on screen.
 
 ## Next steps
-1. The user merges PR #44 (M10.4). Then tag `m10.4-done` on the merge commit.
-2. M10.5 (3.40-3.42 + Interlude - Winter Solstice; raw text in `canon/raw/book4/022..025`): read with a subagent, then ask the user for stage and hook choices. Christmas party is day 95.
-   - Clear `ryoka.heading_home_to_liscor` when Ryoka arrives. She holds `ryoka.holds_magnolias_seal`, Hedault has the Horns' relics (`hedault.holds_the_horns_relics`) and she said she would return to him.
-   - Rags heads south (`rags.heading_south`, `rags.wants_to_see_erin`); `rags.tribe_turns_north` still blocks her foraging near Liscor. Clear it when she arrives.
-   - Brunkr: `brunkr.hand_infected` and `brunkr.treated_with_honey_and_salt_water` are both set. Resolve when the text shows the result.
-   - Octavia researches matches and penicillin (`octavia.researches_matches`, `octavia.researches_penicillin`).
-3. Toren is alive in the Liscor dungeon (`toren.in_liscor_dungeon`). Keep him alive unless the text says he died.
-4. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn, Olesm, Belgrade and Octavia have no `npc_behaviour` entries. Add them if a later scene must place them.
-5. Laken has Durene and Gamel in 3.36-3.37 (Frostwing at the inn); flags are consistent now.
+1. PR #45 (M10.5) is open. User merges. Then tag `m10.5-done` and `m10-done` on the merge commit, tick M10 in `progress.md`, move M10 detail to `docs/PROGRESS_ARCHIVE.md`.
+2. Plan M11 (Book 5) with the user. Open threads carried into Book 5:
+   - Ryoka: `ryoka.heading_home_to_liscor` is set again on day 96 (via Invrisil; Reynold drives her). Clear it when she arrives. Hedault is making the Horns' gear (`hedault.makes_gear_for_the_horns`, pickup not shown); `hedault.owes_the_horns_a_debt`. She still holds `ryoka.holds_magnolias_seal`.
+   - Rags: `rags.heading_south`, `rags.wants_to_see_erin`, `rags.tribe_turns_north` still set. Clear the last when she arrives.
+   - Brunkr: `brunkr.hand_infected` + treated flags still set (at the party, bandaged; no result shown).
+   - Octavia: `octavia.researches_penicillin` still set. Matches are done.
+   - Toren alive in the dungeon (`toren.in_liscor_dungeon`). Hawk asked about him (`hawk.asked_about_the_skeleton`).
+   - Tyrion Veltras knows of Erin (`tyrion_veltras.hears_of_erin`); no NPC record yet. Sserys and Wrymvr are named only.
+   - Erin has the white coin (`erin.has_the_white_coin`). Lyonette swore an oath (`lyonette.swore_an_oath_to_the_stars`).
+3. Halrac, Jelaqua, Xrn, Typhenous, Revi, Moore, Ulrien, Seborn, Olesm, Belgrade, Octavia and Hedault have no `npc_behaviour` entries. Add them if a later scene must place them.
 
 ## Waiting on the user
-- Merge the M10.4 PR (once opened).
-- Delete the old remote branches `data/book4-3.26-3.29`, `data/book4-3.30-3.31`, `data/book4-3.32-3.35` (optional).
+- Merge the M10.5 PR.
+- Delete old remote branches `data/book4-3.26-3.29` ... `data/book4-3.36-3.39` (optional).
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -51,9 +51,10 @@
 
 - Director dependencies are hard: an event whose `depends_on` was cancelled is cancelled too. Chain events only to events that always happen, or one dead NPC cancels a whole day (M10.4 cut the chains this way). Siblings run in id order, so name ids to sort in story order.
 - Effects and scene flags: a flag set by an event on day N is visible on day N+1. An event set and cleared in the same night never shows in a schedule (`erin.at_esthelm`).
+- Fight-stage tests: a helper that walks to `Pathfind.around(at)` can stop on a diagonal square and never attack. Walk to the four side squares instead (`sim_book4_christmas._fight_turn`). Strong allies that arrive at once can kill weak foes before the player strikes; delay the ally wave.
+- A throwaway `extends SceneTree` script that errors before `quit()` hangs Godot headless forever. Use `_initialize()`, and run with `timeout 300`.
 
 ## Active files
-- M10.4: `game/data/canon/book4/chapters/3.36.json` to `3.39.json`, `npcs.json`, `locations.json`, `3.35.json` (slime window), `game/tests/sim_book4_relief_home.gd`, `sim_canon_book4.gd`, `sim_book4_homecoming.gd`, `sim_player_hooks.gd`, `docs/adr/0017-m10-book4.md`. Generator script was a throwaway (not in repo).
-- M10.3: `game/data/canon/book4/chapters/3.32.json`, `3.33.json`, `3.34.json`, `3.35.json`, `game/data/canon/book4/npcs.json`, `game/data/classes.json`, `game/data/skills.json`, `game/data/npc_behaviour.json` (Erin), `game/tests/sim_book4_homecoming.gd`, `game/tests/sim_canon_book4.gd`, `docs/adr/0017-m10-book4.md`.
-- M10.2: `game/tests/sim_book4_wistram.gd`, `chapters/3.30.json`, `3.31G.json`.
+- M10.5: `game/data/canon/book4/chapters/3.40.json`, `3.41.json`, `3.42.json`, `interlude_winter_solstice.json`, `npcs.json`, `locations.json`, `game/data/enemies.json`, `game/tests/sim_book4_christmas.gd` (new), `sim_canon_book4.gd` (LAST_DAY 96), `sim_book4_relief_home.gd`, `sim_player_hooks.gd` (30 hooks), `unit_combat_db.gd` (36 enemies), `docs/adr/0017-m10-book4.md`. Generator script was a throwaway (not in repo).
+- M10.4: `chapters/3.36.json` to `3.39.json`, `sim_book4_relief_home.gd`.
 - M10.0 door: `game/core/portal.gd`, `game/data/maps/celum_stitchworks.json`.
