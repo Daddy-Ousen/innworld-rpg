@@ -97,7 +97,7 @@ static func walk(gs: GameState, d: DataDb, steps: Array) -> bool:
 ## Walks to the exit of the current map that leads to `to_area` and takes it.
 static func walk_to_area(gs: GameState, d: DataDb, to_area: String) -> bool:
 	var goals := {}
-	for e: Dictionary in d.maps.areas[gs.player.area]["exits"]:
+	for e: Dictionary in d.maps.exits_on(gs.player.area):
 		if e["to"] == to_area:
 			var r := MapDb.rect_of(e["at"])
 			for y in range(r.position.y, r.end.y):

@@ -34,6 +34,11 @@
 		"table": {"sheet": "tavern_furniture", "region": [384, 200, 32, 32]},
 		"wagon": {"sheet": "edits", "region": [0, 72, 96, 56]},
 		"well": {"sheet": "lpc_well", "region": [0, 16, 64, 48], "sound": {"cue": "amb_water", "radius": 3}},
-		"woodpile": {"sheet": "tavern_cooking", "region": [228, 4, 56, 58]}
+		"woodpile": {"sheet": "tavern_cooking", "region": [228, 4, 56, 58]},
+		"stairs": {"sheet": "lpc_atlas", "region": [416, 592, 32, 64]},
+		"ladder": {"sheet": "lpc_atlas", "region": [288, 128, 32, 88]},
+		"papers": {"sheet": "lpc_interior", "region": [288, 64, 32, 32]},
+		"tombstone": {"sheet": "lpc_atlas", "region": [448, 672, 32, 56]},
+		"grave_cross": {"sheet": "lpc_atlas", "region": [480, 672, 32, 56]}
 	}
 }

@@ -220,7 +220,7 @@ func _check_tile(where: String, area: String, a: Variant, db: DataDb) -> void:
 	var at := Vector2i(int(a[0]), int(a[1]))
 	if not db.maps.in_bounds(area, at) or not db.maps.is_walkable(area, at):
 		errors.append("%s: tile %s in '%s' is not walkable." % [where, at, area])
-	elif not db.maps.exit_at(area, at).is_empty():
+	elif not db.maps.raw_exit_at(area, at).is_empty():
 		errors.append("%s: tile %s in '%s' is an exit." % [where, at, area])
 
 

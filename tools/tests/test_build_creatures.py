@@ -108,7 +108,7 @@ class BuildCreaturesTest(unittest.TestCase):
     def test_real_creature_looks_build(self):
         data = json.loads(bs.DEFAULT_APPEARANCE.read_text(encoding="utf-8"))
         creatures = {k: v for k, v in data["looks"].items() if bc.is_creature(v)}
-        self.assertEqual(len(creatures), 6)
+        self.assertEqual(len(creatures), 9)  # M13.0: crypt_worm, giant_leech, shield_spider
         for look in creatures.values():
             self.assertEqual(bc.build_creature(look).size, (bs.SHEET_W, bs.SHEET_H))
 

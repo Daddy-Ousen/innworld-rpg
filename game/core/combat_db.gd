@@ -8,7 +8,8 @@
 ##            "scared_by": [item tag, ...], "scare_turns" (needed if scared_by),
 ##            "ranged"?: {"range", "damage", "chance"}, "ambush"?: {"spot_radius", "hit_bonus"},
 ##            "escape"?: {"below" 0–1, "line"} (M8.1: it cannot die; a hit that takes
-##            it below this share of its hp makes it vanish with the line, like Gazi's portal)}.
+##            it below this share of its hp makes it vanish with the line, like Gazi's portal),
+##            "look"?: another enemy id (M13.0: drawn with that enemy's art)}.
 ##   items: item id → {"name", "confidence", "canon_ref"?, "melee": [min, max],
 ##          "throw": [min, max], "throw_range", "break_chance" 0–1, "tags": [...]}.
 ##   spawns: [{"id", "area": map id, "enemy": enemy id, "confidence",
@@ -136,20 +137,20 @@ func _validate_stage(event_id: String, st: Dictionary, db: DataDb) -> void:
 		if not f is Dictionary or not f.get("pos", null) is Array or (f["pos"] as Array).size() != 2:
 			continue
 		var at := Vector2i(int(f["pos"][0]), int(f["pos"][1]))
-		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+		if not db.maps.is_walkable(area, at) or not db.maps.raw_exit_at(area, at).is_empty():
 			errors.append("%s: foe pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
 	for n: Variant in npcs:
 		if not n is Dictionary or not n.get("pos", null) is Array or (n["pos"] as Array).size() != 2:
 			continue
 		var at := Vector2i(int(n["pos"][0]), int(n["pos"][1]))
-		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+		if not db.maps.is_walkable(area, at) or not db.maps.raw_exit_at(area, at).is_empty():
 			errors.append("%s: npc pos %s must be a walkable tile in '%s', not an exit." % [where, at, area])
 	for i in waves.size():
 		var w: Variant = waves[i]
 		if not w is Dictionary or not w.get("from", null) is Array or (w["from"] as Array).size() != 2:
 			continue
 		var at := Vector2i(int(w["from"][0]), int(w["from"][1]))
-		if not db.maps.is_walkable(area, at) or not db.maps.exit_at(area, at).is_empty():
+		if not db.maps.is_walkable(area, at) or not db.maps.raw_exit_at(area, at).is_empty():
 			errors.append("%s wave %d: from %s must be a walkable tile in '%s', not an exit."
 					% [where, i + 1, at, area])
 
@@ -273,6 +274,8 @@ func _validate_enemy(id: String, e: Dictionary, item_tags: Dictionary) -> void:
 			errors.append("%s escape: below must be > 0." % where)
 		if not x["line"] is String or (x["line"] as String).is_empty():
 			errors.append("%s escape: line must be a non-empty string." % where)
+	if e.has("look") and (not e["look"] is String or not enemies.has(e["look"]) or e["look"] == id):
+		errors.append("%s: look must be the id of another enemy." % where)
 
 
 func _validate_rules(db: DataDb) -> void:

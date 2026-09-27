@@ -4,10 +4,11 @@
 	"name": "Edge of the rift",
 	"location": "liscor_dungeon_rift",
 	"confidence": "guess",
-	"note": "Design map (M10.1). The dark crack behind a low snowy slope where Mrsha falls into the dungeon under Liscor (3.27M). The text gives no direction or distance from the city: the walk south from the floodplains, the size and the shape of the crack are guesses. The rescue scene of b4.mrsha_rescued_from_the_dungeon happens at its edge on day 85.",
+	"note": "Design map (M10.1). The dark crack behind a low snowy slope where Mrsha falls into the dungeon under Liscor (3.27M). The text gives no direction or distance from the city: the walk south from the floodplains, the size and the shape of the crack are guesses. The rescue scene of b4.mrsha_rescued_from_the_dungeon happens at its edge on day 85. M13.0: once adventurers have found the new section (liscor_dungeon.new_section_found, 4.08 T) ropes lead down the crack into it; the climb of over 100 feet takes 10 minutes here.",
 	"zones": {},
 	"exits": [
-		{"at": [8, 0, 2, 1], "to": "floodplains_south", "arrive": [8, 22], "minutes": 60}
+		{"at": [8, 0, 2, 1], "to": "floodplains_south", "arrive": [8, 22], "minutes": 60},
+		{"id": "rift_ropes", "at": [12, 12], "to": "liscor_depths", "arrive": [3, 2], "minutes": 10, "when_flags": ["liscor_dungeon.new_section_found"]}
 	],
 	"objects": [
 		{"id": "rift_rope_anchor", "kind": "rope_anchor", "at": [12, 11], "name": "Rope anchor at the rift edge", "actions": ["keep_watch"]},

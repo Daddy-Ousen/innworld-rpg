@@ -14,7 +14,9 @@
 ## while the flags hold (sync_flags; a hidden object is not listed by
 ## objects_near and must not be solid), and "portal" ({"to", "pos",
 ## "power_flags"}) makes it a magic door (Portal). M11.1: "kind" names its art
-## in data/objects.json (drawn only; see WorldView.object_look).
+## in data/objects.json (drawn only; see WorldView.object_look). M13.0 (ADR
+## 0020): an exit with "when_flags" / "unless_flags" (and an "id") is there
+## only while the flags hold; a hidden exit is plain floor (exit_at skips it).
 class_name MapDb
 extends RefCounted
 
@@ -38,6 +40,8 @@ var _indoor: Dictionary = {}
 var _overlay: Dictionary = {}
 ## area id → {object id: true} for objects hidden by their flags (M10.0).
 var _hidden: Dictionary = {}
+## area id → {exit id: true} for exits hidden by their flags (M13.0).
+var _hidden_exits: Dictionary = {}
 ## The overlay ids that are on and the hidden object ids, joined (changes
 ## when sync_flags switches one).
 var overlay_key := ""
@@ -123,12 +127,21 @@ func sync_flags(flags: Dictionary) -> bool:
 				h[o.get("id", "")] = true
 				hidden[area] = h
 				on.append("-%s/%s" % [area, o.get("id", "")])
+	var hidden_exits := {}
+	for area: String in ids:
+		for e: Dictionary in areas[area].get("exits", []):
+			if _gated(e) and not _flags_hold(e, flags):
+				var h: Dictionary = hidden_exits.get(area, {})
+				h[e.get("id", "")] = true
+				hidden_exits[area] = h
+				on.append("x-%s/%s" % [area, e.get("id", "")])
 	var key := ",".join(on)
 	if key == overlay_key:
 		return false
 	overlay_key = key
 	_overlay = layers
 	_hidden = hidden
+	_hidden_exits = hidden_exits
 	return true
 
 
@@ -144,6 +157,24 @@ func objects_on(area: String) -> Array[Dictionary]:
 		if object_on(area, o):
 			out.append(o)
 	return out
+
+
+## True unless exit `e` of `area` is hidden by its flags (M13.0).
+func exit_on(area: String, e: Dictionary) -> bool:
+	return not _gated(e) or not _hidden_exits.get(area, {}).has(e.get("id", ""))
+
+
+## The exits of `area` that are there now (M13.0: not hidden).
+func exits_on(area: String) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for e: Dictionary in areas[area]["exits"]:
+		if exit_on(area, e):
+			out.append(e)
+	return out
+
+
+static func _gated(e: Dictionary) -> bool:
+	return e.has("when_flags") or e.has("unless_flags")
 
 
 static func _flags_hold(o: Dictionary, flags: Dictionary) -> bool:
@@ -201,8 +232,18 @@ func is_walkable(area: String, at: Vector2i) -> bool:
 			and not _solid.get(area, {}).has(at)
 
 
-## The exit whose rect holds `at`, or {}.
+## The exit whose rect holds `at`, or {}. A hidden exit (M13.0) is not
+## there: its tiles are plain floor.
 func exit_at(area: String, at: Vector2i) -> Dictionary:
+	for e: Dictionary in areas[area]["exits"]:
+		if rect_of(e["at"]).has_point(at) and exit_on(area, e):
+			return e
+	return {}
+
+
+## Like exit_at, but hidden exits count too. For validators: the flag cache
+## is shared by every game on one db, so checks must not depend on it.
+func raw_exit_at(area: String, at: Vector2i) -> Dictionary:
 	for e: Dictionary in areas[area]["exits"]:
 		if rect_of(e["at"]).has_point(at):
 			return e
@@ -349,8 +390,9 @@ func _validate_map(id: String, m: Dictionary, db: DataDb) -> void:
 		for r: Variant in m["zones"][zone]:
 			if not _rect_ok(r) or not bounds.encloses(rect_of(r)):
 				errors.append("%s zone '%s': rects must be [x, y, w, h] inside the map." % [where, zone])
+	var exit_ids := {}
 	for e: Dictionary in m["exits"]:
-		_validate_exit(where, id, e, bounds, db)
+		_validate_exit(where, id, e, bounds, db, exit_ids)
 	var seen := {}
 	for o: Dictionary in m["objects"]:
 		_validate_object(where, o, bounds, seen, db)
@@ -383,10 +425,7 @@ func _validate_overlay(where: String, id: String, o: Variant, bounds: Rect2i, se
 	seen[o["id"]] = true
 	if not tiles.has(o["tile"]):
 		errors.append("%s: unknown tile '%s'." % [where, o["tile"]])
-	for k: String in ["when_flags", "unless_flags"]:
-		var flags: Variant = o.get(k, [])
-		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
-			errors.append("%s: %s must be a list of strings." % [where, k])
+	_check_flag_lists(where, o)
 	var rects: Variant = o["rects"]
 	if not rects is Array or (rects as Array).is_empty():
 		errors.append("%s: rects must be a non-empty list." % where)
@@ -403,16 +442,32 @@ func _validate_overlay(where: String, id: String, o: Variant, bounds: Rect2i, se
 		for y in range(rect.position.y, rect.end.y):
 			for x in range(rect.position.x, rect.end.x):
 				var at := Vector2i(x, y)
-				if not exit_at(id, at).is_empty() or objects.has(at):
+				if not raw_exit_at(id, at).is_empty() or objects.has(at):
 					errors.append("%s: tile %s covers an exit or an object." % [where, at])
 
 
-func _validate_exit(where: String, id: String, e: Dictionary, bounds: Rect2i, db: DataDb) -> void:
+## An exit. M13.0: a gated exit (when_flags / unless_flags) needs an id,
+## unique on its map, and its target map needs an ungated exit back.
+func _validate_exit(where: String, id: String, e: Dictionary, bounds: Rect2i, db: DataDb,
+		seen: Dictionary) -> void:
 	for f: String in EXIT_FIELDS:
 		if not e.has(f):
 			errors.append("%s exit: missing '%s'." % [where, f])
 			return
 	where = "%s exit to '%s'" % [where, e["to"]]
+	if e.has("id"):
+		if not e["id"] is String or String(e["id"]) == "":
+			errors.append("%s: id must be a non-empty string." % where)
+		elif seen.has(e["id"]):
+			errors.append("%s: duplicate exit id '%s'." % [where, e["id"]])
+		seen[e.get("id", "")] = true
+	if _gated(e):
+		_check_flag_lists(where, e)
+		if not e.has("id"):
+			errors.append("%s: an exit with flags needs an id." % where)
+		if areas.has(e["to"]) and not (areas[e["to"]]["exits"] as Array).any(
+				func(b: Dictionary) -> bool: return b.get("to", "") == id and not _gated(b)):
+			errors.append("%s: map '%s' needs an exit back with no flags." % [where, e["to"]])
 	if not _rect_ok(e["at"]) or not bounds.encloses(rect_of(e["at"])):
 		errors.append("%s: 'at' must be [x, y] or [x, y, w, h] inside the map." % where)
 		return
@@ -435,7 +490,7 @@ func _validate_exit(where: String, id: String, e: Dictionary, bounds: Rect2i, db
 			var to := arrival(e, from)
 			if not in_bounds(e["to"], to) or not is_walkable(e["to"], to):
 				errors.append("%s: arrive tile %s is not walkable." % [where, to])
-			elif not exit_at(e["to"], to).is_empty():
+			elif not raw_exit_at(e["to"], to).is_empty():
 				errors.append("%s: arrive tile %s is an exit." % [where, to])
 
 
@@ -476,10 +531,7 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 		errors.append("%s: price needs \"sleep\": true and must be >= 1." % where)
 	if o.has("ride"):
 		_validate_ride(where, o["ride"], db)
-	for k: String in ["when_flags", "unless_flags"]:
-		var flags: Variant = o.get(k, [])
-		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
-			errors.append("%s: %s must be a list of strings." % [where, k])
+	_check_flag_lists(where, o)
 	if (o.has("when_flags") or o.has("unless_flags")) and o.get("solid", false):
 		errors.append("%s: an object with flags must not be solid." % where)
 	if o.has("portal"):
@@ -518,6 +570,14 @@ func _validate_ride(where: String, r: Variant, db: DataDb) -> void:
 		errors.append("%s: ride pos must be a walkable tile of '%s'." % [where, r["to"]])
 	if int(r["minutes"]) < 1 or int(r["price"]) < 0 or not db.actions.has("travel"):
 		errors.append("%s: ride needs minutes >= 1, price >= 0 and the action 'travel'." % where)
+
+
+## when_flags / unless_flags, if there, must be lists of strings.
+func _check_flag_lists(where: String, o: Dictionary) -> void:
+	for k: String in ["when_flags", "unless_flags"]:
+		var flags: Variant = o.get(k, [])
+		if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+			errors.append("%s: %s must be a list of strings." % [where, k])
 
 
 static func _pos_ok(a: Variant) -> bool:

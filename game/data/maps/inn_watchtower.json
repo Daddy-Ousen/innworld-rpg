@@ -1,0 +1,28 @@
+{
+	"schema_version": 1,
+	"id": "inn_watchtower",
+	"name": "The Bird's Nest",
+	"location": "wandering_inn",
+	"confidence": "guess",
+	"note": "Design map (M13.0). The roofless tower at the back of the inn that Erin sketches as the Bird's Nest (4.12) and the Antinium finish in 4.29; Bird keeps watch, shoots birds and sleeps there (4.18, 4.29, 4.30). Out in the open, so winter cold applies. The size, the wooden rail and the ladder are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [4, 7], "to": "inn_upper_floor", "arrive": [2, 5], "minutes": 0}
+	],
+	"objects": [
+		{"id": "tower_ladder_down", "kind": "ladder", "at": [4, 7], "name": "Ladder down", "actions": []},
+		{"id": "watch_post", "kind": "bench", "at": [4, 1], "name": "Watch post", "actions": ["keep_watch"]}
+	],
+	"legend": {"=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHH",
+		"H=======H",
+		"H=======H",
+		"H=======H",
+		"H=======H",
+		"H=======H",
+		"H=======H",
+		"H=======H",
+		"HHHHHHHHH"
+	]
+}
