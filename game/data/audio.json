@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "M12 audio (ADR 0019). Files are relative to res://assets/audio/. Buses: Music, Ambience, SFX, UI. A cue's variants play round-robin. footsteps: tile id -> cue; the key winter is the step on snow-covered ground (a tile with a winter_color, outdoors in winter). actions: action id -> cue, plus the use-menu ids (sleep, take, buy, sell, use, ride, portal) and door (walking between indoors and outdoors). pages: System page kind -> cue; open is the sound of a kind that is not listed, and an empty cue is silent. enemies: enemy type -> {hurt, gone}; Gnolls, Goblins and Antinium are people in the books, so no animal noises for Gnolls. Presentation only.",
+  "note": "M12 audio (ADR 0019). Files are relative to res://assets/audio/. Buses: Music, Ambience, SFX, UI. A cue's variants play round-robin. footsteps: tile id -> cue; the key winter is the step on snow-covered ground (a tile with a winter_color, outdoors in winter). actions: action id -> cue, plus the use-menu ids (sleep, take, buy, sell, use, ride, portal) and door (walking between indoors and outdoors). pages: System page kind -> cue; open is the sound of a kind that is not listed, and an empty cue is silent. enemies: enemy type -> {hurt, gone}; Gnolls, Goblins and Antinium are people in the books, so no animal noises for Gnolls. moods: map id (else the map's location) -> mood; mood_tracks: mood -> {day, night, winter_day, winter_night} track (a missing variant falls back to night, then day); states: title, fight, battle (a staged fight), scene (a scene stage). Presentation only.",
   "sounds": {
     "step_grass": {"bus": "SFX", "volume_db": -12.0, "files": ["sfx/footstep_grass_000.ogg", "sfx/footstep_grass_001.ogg", "sfx/footstep_grass_002.ogg", "sfx/footstep_grass_003.ogg", "sfx/footstep_grass_004.ogg"]},
     "step_wood": {"bus": "SFX", "volume_db": -12.0, "files": ["sfx/footstep_wood_000.ogg", "sfx/footstep_wood_001.ogg", "sfx/footstep_wood_002.ogg", "sfx/footstep_wood_003.ogg", "sfx/footstep_wood_004.ogg"]},
@@ -50,11 +50,31 @@
     "big_roar": {"bus": "SFX", "volume_db": -6.0, "files": ["sfx/creature_roar_01.ogg", "sfx/creature_roar_02.ogg", "sfx/creature_roar_03.ogg"]}
   },
   "music": {
-    "title": {"file": "music/old_tower_inn.mp3", "volume_db": -10.0}
+    "title": {"file": "music/old_tower_inn.mp3", "volume_db": -10.0},
+    "inn_day": {"file": "music/old_tower_inn.mp3", "volume_db": -12.0},
+    "inn_night": {"file": "music/bards_tale.mp3", "volume_db": -12.0},
+    "liscor": {"file": "music/market_day.mp3", "volume_db": -12.0},
+    "celum": {"file": "music/town_theme.mp3", "volume_db": -12.0},
+    "wilds": {"file": "music/field_of_dreams.mp3", "volume_db": -12.0},
+    "dark": {"file": "music/forgotten_tombs.mp3", "volume_db": -10.0},
+    "fight": {"file": "music/medieval_battle.mp3", "volume_db": -10.0},
+    "battle": {"file": "music/battle_theme_a.mp3", "volume_db": -9.0},
+    "feast": {"file": "music/kings_feast.mp3", "volume_db": -12.0}
   },
-  "moods": {"by_map": {}, "by_location": {}, "default": ""},
-  "mood_tracks": {},
-  "states": {"title": "title", "fight": "", "battle": "", "scene": ""},
+  "moods": {
+    "by_map": {"inn_interior": "inn", "inn_hill": "inn", "liscor_gate": "liscor", "liscor_market": "liscor", "celum_gate": "celum", "celum_square": "celum", "celum_runners_guild": "celum", "celum_stitchworks": "celum", "celum_frenzied_hare": "inn_celum", "floodplains_south": "wilds", "road_camp": "wilds", "ruins_entrance": "wilds", "bee_cave": "dark", "dungeon_rift": "dark", "esthelm_ruins": "dark"},
+    "by_location": {},
+    "default": "wilds"
+  },
+  "mood_tracks": {
+    "inn": {"day": "inn_day", "night": "inn_night"},
+    "inn_celum": {"day": "celum", "night": "inn_night"},
+    "liscor": {"day": "liscor", "night": "inn_night"},
+    "celum": {"day": "celum", "night": "inn_night"},
+    "wilds": {"day": "wilds", "night": "dark"},
+    "dark": {"day": "dark"}
+  },
+  "states": {"title": "title", "fight": "fight", "battle": "battle", "scene": "feast"},
   "moments": [],
   "footsteps": {
     "grass": "step_grass",
@@ -161,6 +181,10 @@
     "rumors": "book",
     "drift": "offer"
   },
-  "ui": {"move": "ui_move", "confirm": "ui_ok", "back": "ui_back"},
+  "ui": {
+    "move": "ui_move",
+    "confirm": "ui_ok",
+    "back": "ui_back"
+  },
   "ambience": {}
 }

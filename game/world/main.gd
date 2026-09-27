@@ -54,7 +54,6 @@ func _ready() -> void:
 	view.setup(Session.db.maps, names, Session.db.combat.enemies, max_hp,
 			String(Winter.rules(Session.db).get("flag", "")), races)
 	view.sounds.connect(Audio.play_cues)
-	Audio.music(Audio.db.state_track("title"))  # one track everywhere until M12.3
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)
@@ -75,6 +74,7 @@ func _ready() -> void:
 func _redraw() -> void:
 	view.refresh(Session.gs, Session.db)
 	hud.refresh(Session.gs, Session.db)
+	Audio.music(MusicPick.track(Session.gs, Session.db, Audio.db))
 
 
 ## True while a menu, the sheet, the journal, the System dialog or the
