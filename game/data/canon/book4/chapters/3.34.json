@@ -1,0 +1,105 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.34",
+	"events": {
+		"b4.klbkch_and_erin_talk_on_the_roof": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "klbkch"], "flags": ["erin.level_30"], "not_flags": []},
+			"depends_on": ["b4.erin_reaches_level_30"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["klbkch.learned_friendship_from_erin", "erin.wants_to_help_goblin_victims"], "relationship": [{"from": "klbkch", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "The Queen has no friends, not even him. Some Antinium Queens plan war; others would ally against a true enemy."},
+			"summary": "Klbkch has waited outside all night. On the roof Erin tells him about the Celum plays and what she thinks friends do. He tells her that over fourteen villages are ruined and a Drake city has lost many. Erin says she wants to help."
+		},
+		"b4.erin_pitches_the_esthelm_relief": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.level_30"], "not_flags": []},
+			"depends_on": ["b4.klbkch_and_erin_talk_on_the_roof"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm_relief.planned", "wandering_inn.mages_praise_the_mana"], "relationship": [{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}]},
+			"stage": {"area": "inn_interior", "hours": [7, 9], "kind": "scene", "when_flags": ["erin.magical_grounds"], "npcs": [{"npc": "erin_solstice", "pos": [11, 6]}, {"npc": "ceria_springwalker", "pos": [10, 7]}, {"npc": "pisces", "pos": [12, 7]}, {"npc": "yvlon_byres", "pos": [11, 8]}], "line": "Breakfast is half eaten. A young woman in an apron is on her feet, asking a table of mages how many people they can push through one door.", "note": "M10.3: a scene. Hours are guesses (the plan comes at breakfast). The Gold teams have no npc_behaviour entries, so only the Horns are placed."},
+			"hooks": [{"id": "player_backed_erins_relief_plan", "did": [{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["wandering_inn"], "npc": ["erin_solstice", "ceria_springwalker", "pisces", "yvlon_byres"]}}], "days": [92, 92], "then": "change", "effects": {"set_flags": ["esthelm_relief.earther_backed_the_plan"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 2}, {"from": "ceria_springwalker", "to": "player", "delta": 1}]}, "news": "When Erin laid out her plan for Esthelm at breakfast, an Earther at the next seat argued it through with the mages."}],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "Erin's plan sends Typhenous, Revi and Moore to Celum's Mages' Guild, Halrac, Ulrien, Jelaqua and Seborn to Celum's council and guilds, Zel to Liscor's leaders and Klbkch to the Queen. Lyonette and Mrsha cook."},
+			"summary": "At breakfast the mages praise the inn's mana. Erin asks how many people the door can carry: Pisces says 16 to 30 a day, Ceria at least a hundred. She asks them to fetch every mage and helper from both cities to Esthelm and gives out jobs. Griffon Hunt and the Halfseekers agree to help free."
+		},
+		"b4.the_wagons_gather_for_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"merchant": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}, "tavern_keeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["esthelm_relief.planned", "albez_door.anchor_at_stitchworks"], "not_flags": []},
+			"depends_on": ["b4.erin_pitches_the_esthelm_relief"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["albez_door.second_door_in_stitchworks", "celum.sends_aid_to_esthelm", "liscor.sends_aid_to_esthelm"]},
+			"rumor": "Wagons and carts are lining up on both sides of the strange door in Celum and Liscor. Half the guilds are loading for Esthelm.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "The Celum end of the door is now Octavia's shop. The only link in Book 4 is Liscor-Celum. Anyone may use the door; Erin charges no fee."},
+			"summary": "By midday wagons queue at Octavia's shop in Celum, a wall is knocked through and a second door stands there. Agnes gives out free drinks. Liscor's runners and drivers are called up under Zel while Erin shouts at everyone who will listen outside the walls."
+		},
+		"b4.the_free_queen_sends_help_to_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"queen": {"prefer": ["free_queen"], "fallback_tags": []}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": []}, "armored_leader": {"prefer": ["tersk"], "fallback_tags": [], "optional": true}, "grand_hive_envoy": {"prefer": ["xrn"], "fallback_tags": [], "optional": true}, "flying_leader": {"prefer": ["pivr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["free_queen", "klbkch"], "flags": ["esthelm_relief.planned"], "not_flags": []},
+			"depends_on": ["b4.erin_pitches_the_esthelm_relief"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["antinium.expedition_to_esthelm", "xrn.approves_the_individuals", "pivr.stays_in_liscor_hive", "xrn.asked_for_an_individual"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "Off the map. The Individuals Pivr counts are Pawn, Belgrade, Anand and Bird; Garry is not among them."},
+			"summary": "Klbkch reports to the Free Queen, with Pivr, Tersk and Xrn of the Grand Hive present. He asks for 150 Soldiers and 300 Workers, painted, for goodwill at Esthelm. Tersk and Xrn join, Pivr stays, and Xrn asks for one Individual to be sent for appraisal."
+		},
+		"b4.the_relief_convoy_reaches_esthelm": {
+			"tier": 1,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "driver": {"prefer": ["termin"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "gatekeeper": {"prefer": ["umbral"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["esthelm_relief.planned"], "not_flags": []},
+			"depends_on": ["b4.the_wagons_gather_for_esthelm", "b4.the_free_queen_sends_help_to_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.at_esthelm", "esthelm.receives_aid_from_liscor_and_celum"], "relationship": [{"from": "umbral", "to": "erin_solstice", "delta": 1}]},
+			"rumor": "A column of wagons, adventurers and painted Antinium has left for Esthelm on the strength of one innkeeper's word.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "The convoy covers the road in half a day where the wagon needed a day going south; the text credits Skills. Erin stays at Esthelm from here (erin.at_esthelm) until the text brings her home."},
+			"summary": "That afternoon over a hundred adventurers, [Healers], [Masons] and [Hunters] ride and walk to Esthelm with the Antinium at the side, and Erin rides on Termin's wagon with the Horns. Ceria shouts a Fortress Beaver off the road. Umbral hugs Erin at the gate. Pisces asks to be paid and Erin kicks him."
+		},
+		"b4.pawn_asks_zel_what_to_tell_the_dying": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"priest": {"prefer": ["pawn"], "fallback_tags": []}, "general": {"prefer": ["zel_shivertail"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn", "zel_shivertail"], "flags": ["erin.at_esthelm"], "not_flags": []},
+			"depends_on": ["b4.the_relief_convoy_reaches_esthelm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.learned_what_to_say_to_the_dying", "zel.tolerates_pawn"], "relationship": [{"from": "pawn", "to": "zel_shivertail", "delta": 1}, {"from": "zel_shivertail", "to": "pawn", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "The scene is that evening at Esthelm. Zel's presence at Esthelm is from the text."},
+			"summary": "Pawn now leads the Antinium in Esthelm. He asks Zel what he should say to a dying soldier, and the old Drake gives him plain, gentle advice. Belgrade and Anand mend the wall and Bird hunts birds."
+		},
+		"b4.esthelm_sings_erins_carol": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "armored_leader": {"prefer": ["tersk"], "fallback_tags": [], "optional": true}, "gatekeeper": {"prefer": ["umbral"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.at_esthelm"], "not_flags": []},
+			"depends_on": ["b4.pawn_asks_zel_what_to_tell_the_dying"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.sings_erins_carol"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.34", "confidence": "confirmed", "note": "The carol is Earth music. Only a comic moment for the town; nobody yet knows where the tune comes from."},
+			"summary": "At dusk in the plaza by the flower grave Erin gathers singers and teaches them an altered Jingle Bells. Klbkch tells Tersk to listen."
+		}
+	},
+	"system": [
+		{"who": "termin", "kind": "skill", "name": "[Continuous Rolling]", "level": null, "confidence": "confirmed", "note": "The driver's Skill that keeps the wagon rolling faster."}
+	]
+}

@@ -45,6 +45,72 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Night 89 is a guess: the first night of the Horns' straw draw, after the road (3.30). Only Erin hears it; Pisces, Yvlon and Ksmvr sleep on the wagon. Ceria admits she made some parts bigger. The story itself is the seven Wistram Days interludes: history, no events (ADR 0017)."},
 			"summary": "Back at the Frenzied Hare for the night, Ceria is fed by Erin and tells her the story of Wistram: how she and Pisces met there, their teacher Illphres, and why they both had to leave."
+		},
+		"b4.erin_doubts_the_wistram_story": {
+			"tier": 2,
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "storyteller": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.on_wagon_south", "erin.knows_of_wistram"], "not_flags": []},
+			"depends_on": ["b4.ceria_tells_erin_of_wistram"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_of_torens_four_bones", "ksmvr.wants_to_go_home_to_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Day 90 (a guess, the morning after the Wistram story). The text does not say whose bones the four are; not linked to Nekhret. Ceria's story is bigger than the interludes; the interludes win."},
+			"summary": "Over breakfast on the wagon Erin doubts Ceria's tale, and Ceria admits she made parts of it bigger. Pisces names Cognita the most powerful being he has met. He also says Toren's four bones belong to \"the [Archmage]\" and drain too much mana to run alone. Ksmvr wants to go home to Liscor."
+		},
+		"b4.erin_feeds_the_horns_corusdeer_soup": {
+			"tier": 2,
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {"cook": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
+			"depends_on": ["b4.erin_doubts_the_wistram_story"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.fed_the_horns_corusdeer_soup", "erin.tested_the_door_on_the_road", "pisces.practises_flash_step"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "The soup keeps people warm; it is not the mana soup of the reader's first note. The door still works on the road (before Erin's Level 30), but the Horns will not open it again until Esthelm."},
+			"summary": "At the midday stop Erin crawls through the door into Octavia's shop and back to show it works, then serves her Corusdeer soup so the whole party stays warm in the snow. Pisces spends half an hour practising [Flash Step] beside the wagon."
+		},
+		"b4.the_horns_reach_esthelm": {
+			"tier": 2,
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "gatekeeper": {"prefer": ["umbral"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south", "esthelm.saved"], "not_flags": []},
+			"depends_on": ["b4.erin_feeds_the_horns_corusdeer_soup"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.fed_by_erin", "esthelm.believes_the_purple_eyed_skeleton_died", "yvlon.knows_ylawes_searches_for_her", "horns_of_hammerad.hide_names_in_esthelm", "ylawes.gone_north_to_find_yvlon"], "clear_flags": ["ylawes.at_esthelm"], "relationship": [{"from": "umbral", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Toren lives. Umbral only tells what the town believes; nobody says it is Toren. The flower grave by the plaza fits the Florist but is never named. The Horns will not open the door here. Ylawes has left, so the siblings do not meet."},
+			"summary": "The wagon reaches Esthelm. Umbral, a former [Soldier] who keeps the gate, lets it in. Erin hands out blankets and cooks stew, and Yvlon hides her name. Umbral tells how Ylawes saved the city, that he went north for his sister, and that Goblins killed a purple-eyed skeleton."
+		},
+		"b4.lyonette_finds_the_hidden_basement": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["lyonette"], "fallback_tags": []}, "helper": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}, "supplier": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "ranger": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.has_a_hidden_basement", "zel.helps_the_inn_with_the_guilds", "krshia.supplies_the_inn"], "relationship": [{"from": "lyonette", "to": "zel_shivertail", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Erin later says the Antinium built the basement; that is her own vague memory, not stated. Halrac explains that 'Griffon' is a dog name picked by a dead team member."},
+			"summary": "While she waits for Erin, Lyonette finds a trapdoor under a supply closet. Below it is a hidden basement, and Zel helps her look. Zel says he is dealing with Zevara and the guilds for her. Krshia now sells to the inn and teaches Mrsha."
+		},
+		"b4.erin_comes_home_to_the_wandering_inn": {
+			"tier": 1,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "watchman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
+			"depends_on": ["b4.the_horns_reach_esthelm", "b4.lyonette_finds_the_hidden_basement"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.home_at_the_inn", "albez_door.at_wandering_inn"], "clear_flags": ["erin.on_wagon_south", "erin.left_celum", "erin.in_celum", "erin.stranded_north", "erin.left_liscor", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"]},
+			"rumor": "Erin Solstice is back at the Wandering Inn. The whole hill has heard the Gnoll cub howl.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Day 91 is confirmed by the text (the wagon reaches Esthelm on day 90). The door is shown in the inn from day 92 but stays dry until Erin's Level 30."},
+			"summary": "Just before sunset on day 91 the wagon reaches Liscor and the hill. Mrsha howls, Krshia answers, and word runs through the city: Erin Solstice is home. Klbkch knew when she crossed the floodplains, and Relc kicks over a table for joy. The door is carried into the common room."
 		}
 	},
 	"system": []

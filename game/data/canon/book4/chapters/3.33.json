@@ -1,0 +1,81 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.33",
+	"events": {
+		"b4.zel_scolds_erin_for_lyonette": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"scolder": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["zel_shivertail", "erin_solstice", "lyonette"], "flags": ["erin.home_at_the_inn"], "not_flags": []},
+			"depends_on": ["b4.erin_comes_home_to_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.apologised_to_lyonette", "zel.respects_lyonette", "erin.knows_zel_is_selys_uncle"], "relationship": [{"from": "erin_solstice", "to": "lyonette", "delta": 2}, {"from": "lyonette", "to": "erin_solstice", "delta": 1}, {"from": "zel_shivertail", "to": "lyonette", "delta": 1}]},
+			"stage": {"area": "inn_interior", "hours": [17, 19], "kind": "scene", "when_flags": ["erin.on_wagon_south"], "npcs": [{"npc": "erin_solstice", "pos": [11, 10]}, {"npc": "zel_shivertail", "pos": [9, 10]}, {"npc": "lyonette", "pos": [11, 12]}, {"npc": "mrsha", "pos": [9, 12]}], "line": "Erin has only just come in from the snow, and an old Drake in a coat has gone very quiet by the fire. The barmaid at the back looks as if she is bracing for a blow.", "note": "M10.3: a scene. Hours are guesses; the wagon arrives near sunset. The player can stand by Lyonette or add a word."},
+			"hooks": [{"id": "player_stood_by_lyonette", "did": [{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["wandering_inn"], "npc": ["lyonette", "zel_shivertail", "erin_solstice"]}}], "days": [91, 91], "then": "change", "effects": {"set_flags": ["wandering_inn.earther_stood_by_lyonette"], "relationship": [{"from": "lyonette", "to": "player", "delta": 2}, {"from": "zel_shivertail", "to": "player", "delta": 1}]}, "news": "When Zel took Erin to task at the inn, another Human stood beside Lyonette and spoke up for her."}],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Erin learns here that Zel is Selys' uncle. If Lyonette or Zel is dead the scene is cancelled."},
+			"summary": "Erin brushes off the flowers on the windowsill and the trouble Lyonette has had. Zel stops her and lists what the girl did: she took honey to feed a child, saved Mrsha and kept the inn and its guests alive. Erin apologises and hugs Lyonette."
+		},
+		"b4.the_gold_teams_fill_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "halfseeker": {"prefer": ["jelaqua"], "fallback_tags": []}, "giant": {"prefer": ["moore"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["seborn"], "fallback_tags": [], "optional": true}, "ranger": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true}, "sneak": {"prefer": ["revi"], "fallback_tags": [], "optional": true}, "leader": {"prefer": ["ulrien"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "jelaqua"], "flags": ["erin.home_at_the_inn", "griffon_hunt.allied_with_halfseekers"], "not_flags": []},
+			"depends_on": ["b4.zel_scolds_erin_for_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["griffon_hunt.lodges_at_the_wandering_inn", "halfseekers.lodge_at_the_wandering_inn", "erin.met_the_halfseekers"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Our spelling is griffon_hunt (Lyonette says Griffin, then is corrected). The flag names for the lodging are guesses."},
+			"summary": "The two Gold-rank teams staying at the inn meet Erin. She is not afraid of a Selphid or a half-Giant, and jokes with Jelaqua about the chest-bursting lady. The rooms are full, so the Horns are given the basement."
+		},
+		"b4.the_door_runs_dry_and_the_mages_link_hands": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "elder_mage": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true}, "sneak": {"prefer": ["revi"], "fallback_tags": [], "optional": true}, "giant": {"prefer": ["moore"], "fallback_tags": [], "optional": true}, "merchant": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["erin.home_at_the_inn", "albez_door.anchor_at_stitchworks"], "not_flags": []},
+			"depends_on": ["b4.the_gold_teams_fill_the_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["albez_door.reopened_by_mage_link", "albez_door.is_a_mana_sponge", "albez_door.can_trap_its_user"], "relationship": [{"from": "erin_solstice", "to": "octavia", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "The door stays dry in game until erin.magical_grounds (Level 30, that night). Pisces later guesses 16-30 people a day."},
+			"summary": "Erin hops through the door between the inn and Octavia's shop until its mana runs out and she is stranded in Celum. Five mages link hands to reopen it. Revi calls it a mana sponge, and Typhenous warns it can trap its user. Octavia joins the dinner and sells potions."
+		},
+		"b4.the_wandering_inn_throws_a_homecoming_party": {
+			"tier": 2,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}, "merchant": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}, "actor": {"prefer": ["jasi"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "gnoll": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "watchman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "scholar": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}, "priest": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.home_at_the_inn"], "not_flags": []},
+			"depends_on": ["b4.the_door_runs_dry_and_the_mages_link_hands"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.promised_to_teach_go", "klbkch.zel_hostile_truce"], "relationship": [{"from": "zel_shivertail", "to": "klbkch", "delta": -1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Relc and Olesm both feel Erin is no longer only theirs."},
+			"summary": "Guests from Celum come through the door and guests from Liscor climb the hill. Erin teaches a room the Macbeth chant and talks of a game called Go. By the bar Zel tells Klbkch he will keep the truce but will not pretend to like him."
+		},
+		"b4.erin_reaches_level_30": {
+			"tier": 1,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.home_at_the_inn"], "not_flags": []},
+			"depends_on": ["b4.the_wandering_inn_throws_a_homecoming_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.level_30", "erin.class_magical_innkeeper", "erin.magical_grounds", "erin.has_field_of_preservation", "wandering_inn.filled_with_mana"]},
+			"rumor": "They say the Wandering Inn glowed green before dawn, and mages there now cast spells twice over.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Day 91 night (about 05:00 on day 92 in the text). The two Skills are read from the text; their effects are given in 3.34 (mages cast about twice as many spells) and for Field of Preservation only implied."},
+			"summary": "Before dawn the walls of the inn shake and glow, and Lyonette's [Light] swells into a huge green orb with more rising behind it. Erin wakes in the kitchen as a [Magical Innkeeper] with two new Skills. The inn fills with mana, and the door can now run."
+		}
+	},
+	"system": [
+		{"who": "erin_solstice", "kind": "level", "name": "[Innkeeper]", "level": 30, "confidence": "confirmed"},
+		{"who": "erin_solstice", "kind": "class", "name": "[Magical Innkeeper]", "level": 30, "confidence": "confirmed", "note": "Gained when [Innkeeper] reaches Level 30."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Inn: Magical Grounds]", "level": null, "confidence": "confirmed", "note": "Fills the inn with ambient mana, like a leyline (3.34)."},
+		{"who": "erin_solstice", "kind": "skill", "name": "[Inn: Field of Preservation]", "level": null, "confidence": "likely", "note": "The effect is only hinted at (a cut apple kept fresh). Read as keeping food fresh."}
+	]
+}

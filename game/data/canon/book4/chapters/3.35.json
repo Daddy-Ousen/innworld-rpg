@@ -1,0 +1,73 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.35",
+	"events": {
+		"b4.ceria_stops_erin_touching_a_slime": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "esthelm",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.at_esthelm"], "not_flags": []},
+			"depends_on": ["b4.esthelm_sings_erins_carol"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["esthelm.snow_has_stopped"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "likely", "note": "Day 93 is a guess for the whole chapter. Comic filler; it only carries Ivolethe to Invrisil."},
+			"summary": "Ceria stops Erin from touching a slime from the sewers, which turns out to be a poo slime. The faeries watch, and Ivolethe leaves. It has stopped snowing over Esthelm."
+		},
+		"b4.ryoka_reads_magnolias_library": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ceria_stops_erin_touching_a_slime"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.researched_magnolias_library", "ryoka.promised_ivolethe_to_stop_reading"], "clear_flags": ["ivolethe.banished_from_magnolias_land"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "likely", "note": "The lore is Ryoka's reading, not confirmed fact. Ivolethe was banished from Magnolia's land (3.13) but stays inside the mansion here; the flag is cleared. Text says 'over a week' and 'a few days' since the attack; our attack is day 76, so day 93 is 17 days on."},
+			"summary": "For a week Ryoka reads in Magnolia's library: no gods for ten thousand years, Rhir always at war with a recurring dead-God threat, five continents, the [Hero] class, Dragons mostly dead. She promises Ivolethe to stop reading."
+		},
+		"b4.reynold_gives_ryoka_magnolias_seal": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "magnolia_estate",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin", "reynold"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_reads_magnolias_library"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.holds_magnolias_seal", "ryoka.knows_the_earthers_are_training"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "confirmed", "note": "No names are given for the Earthers; likely Imani, Joseph and Rose (guess, not linked)."},
+			"summary": "Reynold tells Ryoka he can only advise inside Invrisil. He says the other Earthers are learning to be adventurers to the southeast. He gives her Magnolia's sapphire-and-silver seal, which carries a tracking spell."
+		},
+		"b4.ryoka_visits_the_invrisil_runners_guild": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.reynold_gives_ryoka_magnolias_seal"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.delivered_remendia_packages", "ryoka.asked_after_valceif"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "confirmed", "note": "Ryoka never levels; the guild talk here is only about deliveries."},
+			"summary": "At the Runners' Guild in Invrisil the receptionist tallies Ryoka's Remendia deliveries. Ryoka asks about Valceif Godfrey and hears he has not been seen lately."
+		},
+		"b4.laken_says_enough_in_invrisil": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "invrisil",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmgirl": {"prefer": ["durene"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin", "laken_godart", "durene"], "flags": ["laken.left_for_invrisil"], "not_flags": []},
+			"depends_on": ["b4.ryoka_visits_the_invrisil_runners_guild"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["laken.reached_invrisil", "ryoka.suspects_laken_is_an_earther"], "relationship": [{"from": "ryoka_griffin", "to": "laken_godart", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "confirmed", "note": "Laken has only Durene with him here; our flags say Gamel travels with him and he has Frostwing. Not reconciled. Ivolethe sees 'the mark of command' on him."},
+			"summary": "In Invrisil's plaza a Silver-rank adventurer picks on Durene. Laken says 'Enough' and his voice carries force that Ryoka feels. The Watch lieutenant lets the adventurer go, and Laken insults him in German. Ryoka hears it and follows them."
+		}
+	},
+	"system": []
+}

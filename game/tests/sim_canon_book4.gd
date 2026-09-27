@@ -7,8 +7,8 @@ extends GutTest
 ## First day with Book 4 canon (3.26 G and 3.27 M both fall on day 85, before
 ## the end of Book 3).
 const FIRST_DAY := 85
-## Last day with extracted Book 4 canon (M10.2: to 3.31 G and the 3.32 frame).
-const LAST_DAY := 92
+## Last day with extracted Book 4 canon (M10.3: to 3.35; Ryoka and Laken on day 93).
+const LAST_DAY := 93
 
 var _db: DataDb
 var _base_json := ""
@@ -46,9 +46,9 @@ func _area_of(gs: GameState, id: String) -> String:
 func test_book4_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b4_events().size(), 29)
+	assert_gte(_b4_events().size(), 51)
 	for npc: String in ["tremborag", "ulvama", "noears", "pyrite", "redscar", "greybeard", "termin", "poisonbite",
-			"cognita", "illphres", "calvaron", "montressa_du_valeross", "beatrice", "charles_de_trevalier", "amerys", "feor"]:
+			"cognita", "illphres", "calvaron", "montressa_du_valeross", "beatrice", "charles_de_trevalier", "amerys", "feor", "umbral"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
 	for loc: String in ["liscor_dungeon_rift", "tremborags_mountain", "north_izril", "celum_liscor_road", "village_of_the_dead"]:
 		assert_true(_db.canon.locations.has(loc), loc)
@@ -89,12 +89,18 @@ func test_book4_runs_as_canon() -> void:
 			# M10.2: the door anchor moves, the old man on the road, the Wistram story, Rags goes south.
 			"albez_door.anchor_at_stitchworks", "octavia.researches_baking_powder", "erin.met_teriarch",
 			"ceria.teriarch_marked_a_spell", "erin.knows_of_wistram", "rags.class_chieftain", "rags.heading_south",
-			"rags.wants_to_see_erin", "north_izril.goblins_rob_caravans", "rags.tribe_turns_north"]:
+			"rags.wants_to_see_erin", "north_izril.goblins_rob_caravans", "rags.tribe_turns_north",
+				# M10.3: Esthelm, the homecoming, Level 30, the relief, Ryoka in Invrisil.
+				"esthelm.fed_by_erin", "erin.home_at_the_inn", "albez_door.at_wandering_inn", "albez_door.reopened_by_mage_link",
+				"erin.apologised_to_lyonette", "erin.magical_grounds", "erin.class_magical_innkeeper", "esthelm_relief.planned",
+				"albez_door.second_door_in_stitchworks", "antinium.expedition_to_esthelm", "erin.at_esthelm", "esthelm.sings_erins_carol",
+				"ryoka.holds_magnolias_seal", "ryoka.suspects_laken_is_an_earther", "toren.in_liscor_dungeon"]:
 		assert_true(gs.flags.has(f), f)
 	for f: String in ["mrsha.missing", "mrsha.fell_into_the_dungeon", "mrsha.ran_from_liscor", "rags.at_tremborags_mountain",
 			"floodplains.earther_searched_for_mrsha", "dungeon_rift.earther_held_the_rope",
 			"albez_door.linked_to_frenzied_hare", "rags.leader_class", "frenzied_hare.earther_heard_of_wistram",
-			"albez_door.at_wandering_inn", "erin.magical_grounds"]:
+			"erin.on_wagon_south", "erin.left_celum", "erin.in_celum", "erin.stranded_north", "erin.left_liscor",
+			"ivolethe.banished_from_magnolias_land", "wandering_inn.earther_stood_by_lyonette", "esthelm_relief.earther_backed_the_plan"]:
 		assert_false(gs.flags.has(f), f)
 	for npc: String in ["toren", "mrsha", "rags", "garen", "tremborag", "pyrite", "brunkr", "teriarch", "octavia"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
