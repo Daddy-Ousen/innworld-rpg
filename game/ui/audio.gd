@@ -6,6 +6,9 @@
 ##   order and the pitch changes by a fixed table, so there is no randomness
 ##   (rule 3).
 ## - Music cross-fades: the new track fades in while the old one fades out.
+##   The area bed (a looping sound on the Ambience bus, M12.4) cross-fades
+##   the same way. Objects with a loop (a fire, a well, a bee nest) get an
+##   AudioStreamPlayer2D that fades out with distance from the camera.
 ## - Volumes are the player's settings (AudioSettings, user://settings.cfg).
 ## - A missing cue or file is silent and warns once.
 ## - Every button in the game ticks when the keys move the focus to it and
@@ -32,21 +35,58 @@ var settings_path := AudioSettings.PATH
 var plays := {}
 ## The track playing now ("" = none).
 var track := ""
+## The area bed cue playing now ("" = none).
+var bed := ""
 var _pool: Array[AudioStreamPlayer] = []
 var _next := 0
 var _ui: AudioStreamPlayer
-## Two music players; `_active` is the one playing `track`.
-var _music: Array[AudioStreamPlayer] = []
-var _active := 0
-var _fade: Tween
+var _music: Fader
+var _bed: Fader
 var _warned := {}
+
+
+## Two players on one bus: a new stream fades in on one while the old one
+## fades out on the other.
+class Fader:
+	extends RefCounted
+	var players: Array[AudioStreamPlayer] = []
+	## The player of the stream playing now.
+	var active := 0
+	var tween: Tween
+
+	func player() -> AudioStreamPlayer:
+		return players[active]
+
+	## Fades to `stream` at `target` dB over `fade` seconds (null = silence;
+	## 0 seconds switches at once).
+	func to(owner: Node, stream: AudioStream, target: float, fade: float) -> void:
+		if tween != null:
+			tween.kill()
+			tween = null
+		var old := players[active]
+		active = 1 - active
+		var next := players[active]
+		next.stop()
+		if stream != null:
+			next.stream = stream
+			next.volume_db = SILENT_DB if fade > 0.0 else target
+			next.play()
+		if fade <= 0.0:
+			old.stop()
+			return
+		tween = owner.create_tween().set_parallel(true)
+		tween.tween_property(old, "volume_db", SILENT_DB, fade)
+		if stream != null:
+			tween.tween_property(next, "volume_db", target, fade)
+		tween.chain().tween_callback(old.stop)
 
 
 func _ready() -> void:
 	for i in POOL_SIZE:
 		_pool.append(_player("SFX"))
 	_ui = _player("UI")
-	_music = [_player("Music"), _player("Music")]
+	_music = _fader("Music")
+	_bed = _fader("Ambience")
 	db = AudioDb.load_file()
 	for e in db.validate():
 		_warn("audio.json: " + e)
@@ -59,6 +99,12 @@ func _player(bus: String) -> AudioStreamPlayer:
 	p.bus = bus
 	add_child(p)
 	return p
+
+
+func _fader(bus: String) -> Fader:
+	var f := Fader.new()
+	f.players = [_player(bus), _player(bus)]
+	return f
 
 
 func load_settings() -> void:
@@ -148,30 +194,65 @@ func music(id: String, fade: float = FADE) -> void:
 			stream = _load(AudioDb.path_of(String(t["file"])))
 			target = float(t.get("volume_db", 0.0))
 	track = id
-	if _fade != null:
-		_fade.kill()
-		_fade = null
-	var old := _music[_active]
-	_active = 1 - _active
-	var next := _music[_active]
-	next.stop()
-	if stream != null:
-		next.stream = stream
-		next.volume_db = SILENT_DB if fade > 0.0 else target
-		next.play()
-	if fade <= 0.0:
-		old.stop()
-		return
-	_fade = create_tween().set_parallel(true)
-	_fade.tween_property(old, "volume_db", SILENT_DB, fade)
-	if stream != null:
-		_fade.tween_property(next, "volume_db", target, fade)
-	_fade.chain().tween_callback(old.stop)
+	_music.to(self, stream, target, fade)
 
 
 ## The player of the track playing now.
 func music_player() -> AudioStreamPlayer:
-	return _music[_active]
+	return _music.player()
+
+
+## Cross-fades to the area bed `cue` (a sound cue; its first file loops).
+## "" fades the bed out. The same cue keeps playing.
+func ambience(cue: String, fade: float = FADE) -> void:
+	if cue == bed:
+		return
+	var stream: AudioStream = null
+	var target := 0.0
+	if cue != "":
+		var def := db.sound(cue)
+		if def.is_empty():
+			_warn("unknown ambience cue: " + cue)
+		else:
+			stream = _load(AudioDb.path_of(variant(def["files"], 0)))
+			target = float(def.get("volume_db", 0.0))
+	bed = cue
+	_bed.to(self, stream, target, fade)
+
+
+## The player of the bed playing now.
+func ambience_player() -> AudioStreamPlayer:
+	return _bed.player()
+
+
+## Replaces the object loops under `parent` with one AudioStreamPlayer2D
+## per entry of `loops` ([{"cue", "cell": Vector2i, "radius": cells}], see
+## AmbiencePick.loops_on), placed at the cell centre (`tile` pixels a cell).
+## Returns how many play.
+func place_loops(parent: Node, loops: Array, tile: int) -> int:
+	for child in parent.get_children():
+		if child is AudioStreamPlayer2D:
+			parent.remove_child(child)
+			child.queue_free()
+	var n := 0
+	for l: Dictionary in loops:
+		var def := db.sound(String(l["cue"]))
+		if def.is_empty():
+			_warn("unknown loop cue: " + String(l["cue"]))
+			continue
+		var stream := _load(AudioDb.path_of(variant(def["files"], 0)))
+		if stream == null:
+			continue
+		var p := AudioStreamPlayer2D.new()
+		p.bus = String(def["bus"])
+		p.stream = stream
+		p.volume_db = float(def.get("volume_db", 0.0))
+		p.max_distance = float(l["radius"]) * tile
+		p.position = (Vector2(l["cell"]) + Vector2(0.5, 0.5)) * tile
+		parent.add_child(p)
+		p.play()
+		n += 1
+	return n
 
 
 ## The file for the n-th play of a cue with these variants.

@@ -439,3 +439,20 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   Licence: CC0 1.0. https://opengameart.org/content/40-cc0-water-splash-slime-sfx
 - `ui/*.wav` are made by `tools/build_sfx.py` (our own blips, chimes, the magic door and the faerie twinkle).
   Licence: CC0 1.0.
+- `ambience/amb_cave.ogg` is "Loopable Dungeon Ambience" (`dungeon_ambient_1.ogg`) by JaggedStone.
+  Licence: CC0 1.0. https://opengameart.org/content/loopable-dungeon-ambience
+- `ambience/amb_crickets.ogg` is "Crickets Ambient Noise - loopable" (`crickets.mp3`) by Wolfgang_ (credit: Ted
+  Kerr), turned into OGG. Licence: CC0 1.0. https://opengameart.org/content/crickets-ambient-noise-loopable
+- `ambience/amb_birds.ogg` is cut from "Ambient Bird Sounds" (`birds-isaiah658.ogg`) by isaiah658 (26 s, the end
+  cross-faded into the start to loop). Licence: CC0 1.0. https://opengameart.org/content/ambient-bird-sounds
+- `ambience/amb_wind.ogg` is "wind whoosh loop" by SketchMan3. Licence: CC0 1.0.
+  https://opengameart.org/content/wind-whoosh-loop
+- `ambience/amb_fire.ogg` is cut from "Fireplace Sound loop" (`fire.wav`) by PagDev (20 s, mono, cross-faded to
+  loop). Licence: CC0 1.0. https://opengameart.org/content/fireplace-sound-loop
+- `ambience/amb_water.ogg` is `loop_water_02.ogg` from "40 CC0 water / splash / slime SFX" by rubberduck.
+  Licence: CC0 1.0. https://opengameart.org/content/40-cc0-water-splash-slime-sfx
+- `ambience/amb_crowd.ogg` is cut from "Crowd Cheering Sounds - 10 - Ambience" in "Free Crowd Cheering Sounds" by
+  Gregor Quendel (30 s, cross-faded to loop). Licence: CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+  https://opengameart.org/content/free-crowd-cheering-sounds
+- `ambience/amb_bees.ogg` is cut from "Single Bee sound" (`bee.wav`) by IMadeIt (2 s, mono, cross-faded to loop).
+  Licence: CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/). https://opengameart.org/content/single-bee-sound

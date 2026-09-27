@@ -35,6 +35,7 @@ func _ready() -> void:
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
 	Audio.music(Audio.db.state_track("title"))
+	Audio.ambience("")
 	refresh()
 
 

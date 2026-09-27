@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "M12 audio (ADR 0019). Files are relative to res://assets/audio/. Buses: Music, Ambience, SFX, UI. A cue's variants play round-robin. footsteps: tile id -> cue; the key winter is the step on snow-covered ground (a tile with a winter_color, outdoors in winter). actions: action id -> cue, plus the use-menu ids (sleep, take, buy, sell, use, ride, portal) and door (walking between indoors and outdoors). pages: System page kind -> cue; open is the sound of a kind that is not listed, and an empty cue is silent. enemies: enemy type -> {hurt, gone}; Gnolls, Goblins and Antinium are people in the books, so no animal noises for Gnolls. moods: map id (else the map's location) -> mood; mood_tracks: mood -> {day, night, winter_day, winter_night} track (a missing variant falls back to night, then day); states: title, fight, battle (a staged fight), scene (a scene stage). Presentation only.",
+  "note": "M12 audio (ADR 0019). Files are relative to res://assets/audio/. Buses: Music, Ambience, SFX, UI. A cue's variants play round-robin. footsteps: tile id -> cue; the key winter is the step on snow-covered ground (a tile with a winter_color, outdoors in winter). actions: action id -> cue, plus the use-menu ids (sleep, take, buy, sell, use, ride, portal) and door (walking between indoors and outdoors). pages: System page kind -> cue; open is the sound of a kind that is not listed, and an empty cue is silent. enemies: enemy type -> {hurt, gone}; Gnolls, Goblins and Antinium are people in the books, so no animal noises for Gnolls. moods: map id (else the map's location) -> mood; mood_tracks: mood -> {day, night, winter_day, winter_night} track (a missing variant falls back to night, then day); states: title, fight, battle (a staged fight), scene (a scene stage). ambience (M12.4): the area bed, a looping sound cue on the Ambience bus; by_map: map id -> place, else indoor / outdoor; beds: place -> {day, night, winter_day, winter_night} cue (the music fallback; an empty cue is silent). Object loops: an object kind's \"sound\" in objects.json names a cue here. Presentation only.",
   "sounds": {
     "step_grass": {"bus": "SFX", "volume_db": -12.0, "files": ["sfx/footstep_grass_000.ogg", "sfx/footstep_grass_001.ogg", "sfx/footstep_grass_002.ogg", "sfx/footstep_grass_003.ogg", "sfx/footstep_grass_004.ogg"]},
     "step_wood": {"bus": "SFX", "volume_db": -12.0, "files": ["sfx/footstep_wood_000.ogg", "sfx/footstep_wood_001.ogg", "sfx/footstep_wood_002.ogg", "sfx/footstep_wood_003.ogg", "sfx/footstep_wood_004.ogg"]},
@@ -47,7 +47,15 @@
     "undead_hurt": {"bus": "SFX", "volume_db": -8.0, "files": ["sfx/creature_monster_01.ogg", "sfx/creature_monster_02.ogg", "sfx/creature_monster_03.ogg", "sfx/creature_monster_04.ogg"]},
     "undead_gone": {"bus": "SFX", "volume_db": -8.0, "files": ["sfx/creature_monster_05.ogg", "sfx/creature_monster_06.ogg", "sfx/creature_monster_07.ogg"]},
     "ghoul_hurt": {"bus": "SFX", "volume_db": -8.0, "files": ["sfx/creature_burble_01.ogg", "sfx/creature_burble_02.ogg", "sfx/creature_breath.ogg"]},
-    "big_roar": {"bus": "SFX", "volume_db": -6.0, "files": ["sfx/creature_roar_01.ogg", "sfx/creature_roar_02.ogg", "sfx/creature_roar_03.ogg"]}
+    "big_roar": {"bus": "SFX", "volume_db": -6.0, "files": ["sfx/creature_roar_01.ogg", "sfx/creature_roar_02.ogg", "sfx/creature_roar_03.ogg"]},
+    "amb_birds": {"bus": "Ambience", "volume_db": -3.0, "files": ["ambience/amb_birds.ogg"]},
+    "amb_crickets": {"bus": "Ambience", "volume_db": 0.0, "files": ["ambience/amb_crickets.ogg"]},
+    "amb_wind": {"bus": "Ambience", "volume_db": -3.0, "files": ["ambience/amb_wind.ogg"]},
+    "amb_cave": {"bus": "Ambience", "volume_db": -2.0, "files": ["ambience/amb_cave.ogg"]},
+    "amb_crowd": {"bus": "Ambience", "volume_db": -13.0, "files": ["ambience/amb_crowd.ogg"]},
+    "amb_fire": {"bus": "Ambience", "volume_db": 6.0, "files": ["ambience/amb_fire.ogg"]},
+    "amb_water": {"bus": "Ambience", "volume_db": -6.0, "files": ["ambience/amb_water.ogg"]},
+    "amb_bees": {"bus": "Ambience", "volume_db": -8.0, "files": ["ambience/amb_bees.ogg"]}
   },
   "music": {
     "title": {"file": "music/old_tower_inn.mp3", "volume_db": -10.0},
@@ -186,5 +194,15 @@
     "confirm": "ui_ok",
     "back": "ui_back"
   },
-  "ambience": {}
+  "ambience": {
+    "by_map": {"bee_cave": "cave", "dungeon_rift": "cave", "liscor_market": "market", "celum_square": "market", "celum_frenzied_hare": "tavern"},
+    "outdoor": "outdoor",
+    "indoor": "",
+    "beds": {
+      "outdoor": {"day": "amb_birds", "night": "amb_crickets", "winter_day": "amb_wind", "winter_night": "amb_wind"},
+      "market": {"day": "amb_crowd", "night": "amb_crickets", "winter_night": "amb_wind"},
+      "tavern": {"day": "amb_crowd"},
+      "cave": {"day": "amb_cave"}
+    }
+  }
 }

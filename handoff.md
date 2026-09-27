@@ -1,20 +1,28 @@
 # Handoff
 
 ## Just done (2026-09-27)
+- M12.4 Ambience on branch `feat/m12.4-ambience` (committed, not pushed). 7 downloads (user OK) + the old
+  water loop: 8 loops in `assets/audio/ambience/` (3.2 MB, `loop=true`). Area beds in `audio.json` `ambience`
+  (birds / crickets / wind outdoors, crowd in the markets and the Frenzied Hare, cave bed in the bee cave and the
+  rift; indoors quiet). Object loops: `"sound"` in objects.json (fires, well, bee nest) ->
+  `Audio.place_loops` (AudioStreamPlayer2D). `world/ambience_pick.gd`. GUT 793/793 (85 scripts). ADR 0019 "M12.4".
 - M12.3 merged ([PR #55](https://github.com/Daddy-Ousen/innworld-rpg/pull/55)); tag `m12.3-done` on 081b377.
   The user approved the music. M12.3 had: 8 CC0 tracks (user OK; audio limit raised to about 60 MB, audio is 33 MB),
   moods for all 15 maps, fight / battle / scene music, `world/music_pick.gd`. GUT 780/780 (84 scripts).
   Detail: ADR 0019 "M12.3".
 
 ## Next steps
-1. M12.4 Ambience (new branch): ask the user before adding `"sound"` to objects.json (rule 11) and before
-   downloads. The rubberduck water pack has loops (rain, water, bubbles). Wind, birds, crickets, crowd and fire
-   loops still need a source. `ambience` in audio.json keys: outdoor_day, outdoor_night, winter, cave, crowd.
+1. The user listens to M12.4 (the Floodplains by day and at night, Liscor market, the Frenzied Hare, the bee
+   cave, a brazier or campfire, a well; winter wind if a save is past the Solstice start). Tune `volume_db` in
+   `audio.json` if asked. Then push, PR, merge, tag `m12.4-done`, tick ROADMAP and progress.
 2. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
   creature + water packs (the water pack has loops: rain, bubbles, water; useful for M12.4). Re-download from CREDITS.md links.
+- M12.4 loop cutter: `scratchpad/amb/loopify.py` (ffmpeg + numpy; gone next session). It cuts a stretch and
+  cross-fades the tail into the head, then writes OGG. ffmpeg is on PATH (WinGet). Not in the repo on purpose (no
+  new tool dependency). Raw downloads (fire.wav 10 MB, crowd zip 20 MB) stay out of git.
 - Music still unused (CC0): RandomMind "Minstrel Dance" (5.3 MB), "Harvest Season" (8.2 MB); Sir Gawain's
   "CC0 Fantasy Music & Sounds" collection (curator; authors differ per track) has "Forest Ambience", "New Sunrise",
   "Cave Theme" (licence unclear: CC0 or OGA-BY). Ask the user before each download (file, source, size).
@@ -42,7 +50,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Start M12.4 Ambience (asks: `"sound"` in objects.json, downloads).
+- Listen to the M12.4 ambience, then the PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas

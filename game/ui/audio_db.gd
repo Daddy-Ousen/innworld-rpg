@@ -1,6 +1,7 @@
 ## The audio data from data/audio.json (M12.1, ADR 0019): which files a
 ## sound cue or a music track plays, and which cue or track goes with a
-## tile, an action, a fight event, a page, a mood or a canon moment.
+## tile, an action, a fight event, a page, a mood, a canon moment, an area
+## bed (`ambience`, M12.4) or an object loop.
 ## Pure (no nodes). `validate` lists every problem; the game still runs with
 ## bad data (a bad cue is silent). Presentation only.
 class_name AudioDb
@@ -11,7 +12,7 @@ const DIR := "res://assets/audio/"
 const SCHEMA_VERSION := 1
 const BUSES := ["Music", "Ambience", "SFX", "UI"]
 ## Sections that map a key to a sound cue.
-const CUE_MAPS := ["footsteps", "actions", "combat", "pages", "ui", "ambience"]
+const CUE_MAPS := ["footsteps", "actions", "combat", "pages", "ui"]
 const MOOD_VARIANTS := ["day", "night", "winter_day", "winter_night"]
 ## The footstep key for snow-covered ground.
 const WINTER_STEP := "winter"
@@ -66,6 +67,23 @@ func enemy_cue(type: String, event: String) -> String:
 ## The track for a state (title, fight, battle, scene; "" = none).
 func state_track(state: String) -> String:
 	return String(_section("states").get(state, ""))
+
+
+## The area bed of a place ("" = none) in the `ambience` section:
+## `by_map` (map id -> place), else `indoor` or `outdoor`.
+func ambience_place(map_id: String, is_indoor: bool) -> String:
+	var a := _section("ambience")
+	var by_map: Variant = a.get("by_map", {})
+	if by_map is Dictionary and (by_map as Dictionary).has(map_id):
+		return String(by_map[map_id])
+	return String(a.get("indoor" if is_indoor else "outdoor", ""))
+
+
+## A place's bed variants ({day, night, winter_day, winter_night} -> cue).
+func ambience_beds(place: String) -> Dictionary:
+	var beds: Variant = _section("ambience").get("beds", {})
+	var v: Variant = beds.get(place, {}) if beds is Dictionary else {}
+	return v if v is Dictionary else {}
 
 
 ## The full path of a file in the audio folder.
@@ -143,6 +161,7 @@ func validate(check_files: bool = true) -> Array[String]:
 		for key: String in m:
 			_check_ref(errs, "moods.%s.%s" % [by, key], m[key], moods, "mood")
 	_check_ref(errs, "moods.default", place.get("default", ""), moods, "mood")
+	_validate_ambience(errs, sounds)
 	var moments: Variant = data.get("moments", [])
 	if moments is Array:
 		for i in (moments as Array).size():
@@ -155,6 +174,30 @@ func validate(check_files: bool = true) -> Array[String]:
 				if not mo.get(key, []) is Array:
 					errs.append("moments.%s.%s must be a list" % [mo["id"], key])
 	return errs
+
+
+func _validate_ambience(errs: Array[String], sounds: Dictionary) -> void:
+	var a := _section("ambience")
+	var beds: Variant = a.get("beds", {})
+	if not beds is Dictionary:
+		errs.append("ambience.beds must be an object")
+		return
+	for place: String in beds:
+		if not beds[place] is Dictionary:
+			errs.append("ambience.beds.%s must be an object" % place)
+			continue
+		for variant: String in beds[place]:
+			if not MOOD_VARIANTS.has(variant):
+				errs.append("ambience.beds.%s.%s: variant must be one of %s" % [place, variant, MOOD_VARIANTS])
+			_check_ref(errs, "ambience.beds.%s.%s" % [place, variant], beds[place][variant], sounds, "sound")
+	var by_map: Variant = a.get("by_map", {})
+	if not by_map is Dictionary:
+		errs.append("ambience.by_map must be an object")
+	else:
+		for key: String in by_map:
+			_check_ref(errs, "ambience.by_map.%s" % key, by_map[key], beds, "place")
+	for key in ["indoor", "outdoor"]:
+		_check_ref(errs, "ambience.%s" % key, a.get(key, ""), beds, "place")
 
 
 static func _check_file(errs: Array[String], where: String, f: Variant, check_files: bool) -> void:
