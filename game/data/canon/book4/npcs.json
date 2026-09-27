@@ -204,6 +204,54 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "A former [Soldier] in leather who runs Esthelm's gate; class and level not stated. He says Goblins killed a skeleton with purple eyes at Esthelm (the townsfolk's belief; not linked to Toren)."},
 			"summary": "A former [Soldier] in leather who runs the gate of Esthelm. He tells Erin's party how Ylawes and the Silver Swords saved the city and that Ylawes has gone north for his sister."
+		},
+		"hedault": {
+			"name": "Hedault",
+			"race": "Human",
+			"tags": ["human", "enchanter", "invrisil", "shopkeeper"],
+			"faction": null,
+			"home": "hedault_house",
+			"classes": [{"name": "[Enchanter]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "Young, pale, missing a finger on his left hand, and taps things twice. Reynold takes Ryoka to him. He keeps his house warded and takes visitors only from dawn to dusk."},
+			"summary": "An [Enchanter] in Invrisil who lives in a warded stone house. He names the Horns' Albez relics, offers 18,000 gold for the wand and quotes the repair bill for the buckler."
+		},
+		"merec": {
+			"name": "Merec",
+			"race": "Human",
+			"tags": ["human", "merchant", "invrisil"],
+			"faction": null,
+			"home": "invrisil_merchants_guild",
+			"classes": [{"name": "[Merchant]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "A balding, portly man at the Merchants' Guild in Invrisil. Minor."},
+			"summary": "The [Merchant] who takes Laken's order for twelve wagons of winter supplies and a month of guards for Riverfarm."
+		},
+		"raisha": {
+			"name": "Raisha",
+			"race": "Gnoll",
+			"tags": ["gnoll", "guard", "invrisil"],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [{"name": "[Guardswoman]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.36", "confidence": "confirmed", "note": "A Gnoll [Guardswoman] in Invrisil. Minor."},
+			"summary": "A Gnoll [Guardswoman] who returns Durene's stolen pouch after a truth-stone check on Laken."
+		},
+		"regisand_curle": {
+			"name": "Regisand Curle",
+			"race": "Human",
+			"tags": ["human", "mayor", "invrisil", "history_only"],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [{"name": "[Mayor]", "level": null}],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "likely", "note": "Named only by Reynold, who calls the Mayor an administrator while Magnolia holds real sway. History only; no event uses him."},
+			"summary": "Invrisil's [Mayor], an administrator whom Reynold names to Laken. The Guilds and nobles compete for real power in the city."
 		}
 	}
 }

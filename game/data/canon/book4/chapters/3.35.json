@@ -5,7 +5,7 @@
 	"events": {
 		"b4.ceria_stops_erin_touching_a_slime": {
 			"tier": 2,
-			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
 			"location": "esthelm",
 			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.at_esthelm"], "not_flags": []},
@@ -13,7 +13,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["esthelm.snow_has_stopped"]},
 			"status": "candidate",
-			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "likely", "note": "Day 93 is a guess for the whole chapter. Comic filler; it only carries Ivolethe to Invrisil."},
+			"canon_ref": {"book": 4, "chapter": "3.35", "confidence": "likely", "note": "Moved to day 92 in M10.4: 3.38 has Erin ride home before dawn on day 93. Comic filler; it only carries Ivolethe to Invrisil."},
 			"summary": "Ceria stops Erin from touching a slime from the sewers, which turns out to be a poo slime. The faeries watch, and Ivolethe leaves. It has stopped snowing over Esthelm."
 		},
 		"b4.ryoka_reads_magnolias_library": {

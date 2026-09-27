@@ -1,0 +1,102 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.38",
+	"events": {
+		"b4.the_north_hears_esthelm_has_risen": {
+			"tier": 1,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": [], "flags": ["esthelm.receives_aid_from_liscor_and_celum"], "not_flags": []},
+			"depends_on": ["b4.esthelm_sings_erins_carol"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["north_izril.hears_esthelm_has_risen", "esthelm.holds_against_the_goblin_lord"]},
+			"rumor": "They say Esthelm is not dead: Liscor's Antinium and a Celum convoy came, and the town is raising its walls again.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "Neither is named. The Lady is probably Magnolia (guess). The Lord is not linked to any NPC."},
+			"summary": "A [Message] carries the news north: Esthelm is rebuilding its walls with help from Liscor, the Antinium and Celum, and will stand against the Goblin Lord. Few care, but one great Lady and one dreaded Lord change their plans."
+		},
+		"b4.erin_rides_home_and_names_christmas": {
+			"tier": 2,
+			"window": {"earliest": 92, "latest": 92, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "driver": {"prefer": ["termin"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.at_esthelm"], "not_flags": []},
+			"depends_on": ["b4.ceria_stops_erin_touching_a_slime"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.back_from_esthelm", "esthelm.garrisoned_by_hired_adventurers", "anand.stays_at_esthelm", "termin.wants_a_meal_at_the_inn", "goblin_lord.second_army_burns_a_town", "erin.announces_christmas", "lyonette.told_to_think_of_gifts"], "clear_flags": ["erin.at_esthelm"], "relationship": [{"from": "erin_solstice", "to": "lyonette", "delta": 1}, {"from": "lyonette", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "Window day 92 (the night): she is home for day 93. Hired adventurers, [Healers] and Anand's crew stay at Esthelm; the rest follow. Termin will only travel with a convoy: a second Goblin army has burned a town about fifty miles north."},
+			"summary": "Erin dozes on Termin's wagon and is set down at the hill before dawn. Lyonette and she share silent crepes. Erin says Christmas is coming: everyone must give small gifts to two people."
+		},
+		"b4.erin_makes_peace_with_krshia_over_lyonette": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "krshia_stall",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "krshia"], "flags": ["erin.back_from_esthelm"], "not_flags": []},
+			"depends_on": ["b4.erin_rides_home_and_names_christmas"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["krshia.accepts_lyonettes_effort", "lyonette.pays_krshia_part_of_her_wages", "lyonette.keeps_out_of_the_city", "erin.promised_to_help_krshia_sell", "krshia.learns_christmas", "erin.learns_the_liscor_council", "olesm.promised_a_game_after_lunch"], "relationship": [{"from": "krshia", "to": "erin_solstice", "delta": 1}, {"from": "olesm", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "Zel's word, not Krshia's pride, let Lyonette back in. The council: the heads of the Adventurers', Mages' and Merchants' Guilds, Watch Captain Zevara, and Olesm as chief tactician."},
+			"summary": "At dawn Erin asks Krshia to forgive Lyonette. Krshia says the debt is large but she sees the effort. Erin promises part of Lyonette's pay, tells her of Christmas, and promises Olesm a Go lesson after lunch."
+		},
+		"b4.erin_sees_brunkrs_infected_arm": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}, "gnoll": {"prefer": ["brunkr"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "krshia", "brunkr"], "flags": ["brunkr.hand_infected"], "not_flags": []},
+			"depends_on": ["b4.erin_makes_peace_with_krshia_over_lyonette"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["brunkr.faces_amputation", "erin.asks_ryoka_about_the_infection", "krshia.will_give_all_to_save_his_hand", "brunkr.calls_mrsha_a_doombringer_again"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "A healing potion would only speed a deep rot, and burning it failed. Krshia thinks the hand and the arm must go."},
+			"summary": "Krshia shows Erin her nephew's arm, swollen and foul since Mrsha's bite. Brunkr blames Mrsha. Krshia says it must be cut off. Erin says no and says she knows someone to ask."
+		},
+		"b4.erin_and_ryoka_chat_across_the_mages_guilds": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "liscor_mages_guild",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.ryoka_sends_replies_to_liscor", "b4.erin_sees_brunkrs_infected_arm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.knows_honey_and_salt_water_cleaning", "erin.knows_penicillin_recipe_in_outline", "erin.knows_how_matches_are_made", "erin.invited_ryoka_to_christmas", "ryoka.knows_of_brunkrs_infection", "ryoka.heading_home_to_liscor"], "relationship": [{"from": "erin_solstice", "to": "ryoka_griffin", "delta": 2}, {"from": "ryoka_griffin", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "Penicillin needs a blue-green mould grown on orange or bread; matches need red phosphorus on the striker. Each reply takes about ten minutes. This is the same chat Ryoka set up from her end in Invrisil."},
+			"summary": "Erin pays for a two-way spell chat. In clipped lines Ryoka says to clean the wound with hot salt water and dress it with honey, that a mould might make real medicine, and how matches are made. Erin invites her to Christmas."
+		},
+		"b4.lyonette_and_erin_harvest_honey_and_a_crab_dies": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "floodplains_of_liscor",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "lyonette"], "flags": ["lyonette.has_ashfire_bees"], "not_flags": []},
+			"depends_on": ["b4.erin_rides_home_and_names_christmas"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.helped_harvest_ashfire_honey", "lyonette.leads_the_bee_run", "wandering_inn.faerie_flowers_are_sprouting", "erin.killed_a_rock_crab_with_bees", "erin.and_lyonette_carry_seed_cores_from_now"], "relationship": [{"from": "erin_solstice", "to": "lyonette", "delta": 2}, {"from": "lyonette", "to": "erin_solstice", "delta": 2}]},
+			"stage": {"area": "floodplains_south", "hours": [10, 12], "when_flags": ["erin.back_from_esthelm"], "foes": [{"enemy": "rock_crab", "pos": [12, 10]}], "line": "A grey boulder in the snow lifts on two big claws and clicks toward a red-haired girl dragging a sled of honey jars.", "waves": [{"after_seconds": 0, "from": [6, 11], "allies": ["erin_solstice", "lyonette"], "line": "Erin runs up the dirt road with a jar in each hand. Lyonette hauls the sled behind her."}], "note": "M10.4: a fight. Hours are guesses (mid-morning, after the bee run). In the text the bees do the killing; here the player may take the crab first."},
+			"hooks": [{"id": "player_fought_the_rock_crab", "did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"], "context": {"enemy": ["rock_crab"]}}], "days": [93, 93], "then": "change", "effects": {"set_flags": ["floodplains.earther_helped_against_the_crab"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 2}, {"from": "lyonette", "to": "player", "delta": 2}]}, "news": "A Rock Crab rose from the snow by the inn road, and another Human stood with Erin and Lyonette against it."}],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "Mrsha stays at the inn. Erin's [Dangersense] warns her. They lose a honey jar and the sled is damaged. Afterwards they cry and laugh, and Erin orders a bath."},
+			"summary": "Lyonette shows Erin how to cut honey from the hive using sleep smoke from burnt faerie flowers. On the way home a Rock Crab rises from the snow. Erin breaks two jars of bees into its shell and they kill it, dying too."
+		},
+		"b4.the_honey_dressing_on_brunkrs_arm": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "krshia_home",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "gnoll": {"prefer": ["brunkr"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "brunkr", "krshia"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.erin_sees_brunkrs_infected_arm"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["brunkr.treated_with_honey_and_salt_water", "brunkr.agrees_to_try_erins_cure", "krshia.trusts_erins_cure", "erin.promised_to_return_with_a_saw", "erin.used_minotaur_punch_on_brunkr"], "relationship": [{"from": "brunkr", "to": "erin_solstice", "delta": 1}, {"from": "krshia", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.38", "confidence": "confirmed", "note": "The rule is to clean it three times a day and reapply. Brunkr's hand stays infected until a later chapter shows the result."},
+			"summary": "Brunkr hits her and she beats him into sitting. Then she trims the fur, cleans the arm with hot salt water, coats it in honey and bandages it. If it fails she will come back with a saw. Krshia thanks her at the door."
+		}
+	},
+	"system": []
+}

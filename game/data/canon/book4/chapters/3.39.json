@@ -1,0 +1,113 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.39",
+	"events": {
+		"b4.the_convoy_eats_at_the_wandering_inn": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}, "priest": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "worker": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "hero": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.back_from_esthelm"], "not_flags": []},
+			"depends_on": ["b4.erin_rides_home_and_names_christmas"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.hosts_the_returning_relief_convoy", "esthelm_relief.convoy_home", "lyonette.cooked_for_the_convoy", "lyonette.sells_fried_bees", "revi.was_fed_hidden_mushrooms"], "relationship": [{"from": "erin_solstice", "to": "lyonette", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "Klbkch is away on Hive business. Fried bees are the Antinium's favourite."},
+			"summary": "Erin comes up the hill to find Lyonette has cooked a buffet for the returning teams: mushrooms, beef and fried cheese bees for the Antinium. Erin makes a picky mage's sandwich and Lyonette hides mushrooms in it."
+		},
+		"b4.erin_teaches_go_and_olesm_shows_his_newsletter": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": []}, "priest": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "worker": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "hero": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "olesm"], "flags": ["erin.promised_to_teach_go", "olesm.sells_chess_games_by_mail"], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.taught_go", "liscor.plays_go", "belgrade.wants_to_beat_anand_at_go", "zel.spoke_kindly_to_belgrade", "pawn.beats_zel_at_go", "wandering_inn.has_go_boards_carved_in_tables", "olesm.newsletter_has_twenty_readers", "erin.suggested_magazines_and_crosswords"], "clear_flags": ["erin.promised_to_teach_go"], "relationship": [{"from": "olesm", "to": "erin_solstice", "delta": 1}, {"from": "belgrade", "to": "erin_solstice", "delta": 1}, {"from": "zel_shivertail", "to": "pawn", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "The crossword idea flops. Soldiers paint stones and Halrac carves boards into the tables. The Antinium plan to teach Go in the Hive."},
+			"summary": "Olesm shows off his chess newsletter to twenty readers, and Erin suggests a tactician of the week. She teaches Go to a full room. Belgrade fears he cannot improvise, and Zel tells him each rank has its place. Pawn beats Zel."
+		},
+		"b4.erin_pays_octavia_to_research_matches_and_penicillin": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "stitchworks",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["albez_door.at_wandering_inn"], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["octavia.researches_matches", "octavia.researches_penicillin", "octavia.shop_wall_boarded_with_plywood", "erin.paid_octavia_36_gold", "erin.reclaimed_the_magical_soups", "erin.apologised_to_octavia"], "relationship": [{"from": "octavia", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "Octavia will not research further until she is paid. Erin explains red phosphorus badly, and Octavia asks for a test subject."},
+			"summary": "Erin steps through the door and finds Octavia sulking about the broken wall. Erin pays 36 gold for the wall and a research job. She describes matches and penicillin mould, takes back her magical soups and invites Octavia to dinner."
+		},
+		"b4.erin_recruits_the_celum_actors_for_christmas": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "actor": {"prefer": ["jasi"], "fallback_tags": []}, "actor2": {"prefer": ["wesle"], "fallback_tags": []}, "boy": {"prefer": ["grev"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["agnes.on_holiday_with_her_sick_husband", "celum_actors.join_christmas_gifts", "jasi.wants_pisces_on_her_list", "grev.joins_the_gift_list"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "The troupe is rehearsing My Fair Lady."},
+			"summary": "The Frenzied Hare is shut: Agnes has gone on a holiday. Erin finds the troupe at its own theatre and explains Christmas. They join. Jasi asks to give Pisces a gift and Erin refuses on principle."
+		},
+		"b4.relc_slips_back_into_the_inn": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guardsman": {"prefer": ["relc"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice", "relc"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["relc.returns_to_the_inn", "relc.approves_of_mrsha", "relc.knows_erin_banished_the_skeleton", "relc.says_dungeon_is_busy"], "relationship": [{"from": "relc", "to": "erin_solstice", "delta": 2}, {"from": "erin_solstice", "to": "relc", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "Erin says she 'had to' get rid of the skeleton. Toren is bond-severed but alive in the dungeon; the text does not say he died."},
+			"summary": "Relc sneaks in, eats an apple that is still fresh and asks for everything on the menu. They talk about the dungeon, the skeleton and the Gnoll child. Relc says taking Mrsha in was good."
+		},
+		"b4.erin_pitches_the_magical_soups_and_krshia_takes_octavia": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": []}, "guildmaster": {"prefer": ["selys"], "fallback_tags": []}, "scout": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["ulrien"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["typhenous"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "octavia", "krshia"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.erin_pays_octavia_to_research_matches_and_penicillin"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["krshia.sells_octavias_potions", "selys.will_sell_erins_magical_soups_through_the_guild", "halrac.thinks_scouts_would_buy_the_thin_clothing_soup", "octavia.wins_a_worse_cut_from_krshia"], "relationship": [{"from": "krshia", "to": "octavia", "delta": 1}, {"from": "selys", "to": "erin_solstice", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "Selys will not drink it but will sell it through the Guild."},
+			"summary": "At the busy inn Erin lets the Gold teams and Selys taste the blue soup that lets wearers go light in the cold. Halrac likes it. Krshia sits by Octavia uninvited and bargains a deal to sell her potions. Octavia leaves shaken."
+		},
+		"b4.halrac_explains_the_shifting_dungeon": {
+			"tier": 2,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "scout": {"prefer": ["halrac"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "ksmvr": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "halrac"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["griffon_hunt.maps_the_dungeon_rotation", "halrac.likes_the_inn", "erin.wants_teleport_stones_for_adventurers", "horns_of_hammerad.await_ryokas_full_report", "griffon_hunt.considers_the_rift_route"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "Many children have died in the dungeon and only Griffon Hunt is working it."},
+			"summary": "Halrac says the dungeon rooms change every day and the rift is a risky shortcut into a monster-filled level. Erin promises rooms and hopes Pisces can make teleport stones. The Horns fret that Ryoka's short list hides more."
+		},
+		"b4.erin_sleeps_at_the_table_and_christmas_spreads": {
+			"tier": 1,
+			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.exhausted", "christmas.word_spreads_in_liscor_and_celum", "wandering_inn.christmas_party_planned", "erin.has_no_christmas_tree"]},
+			"rumor": "They say the Human innkeeper has a new holiday. It is called Christmas, and everyone gives small gifts.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.39", "confidence": "confirmed", "note": "The party is in two days (day 95, M10.5)."},
+			"summary": "Alone at night Erin thinks over all the small smiles of the day and falls asleep at the table. In the morning Lyonette finds her, and the word Christmas is already going round two cities."
+		}
+	},
+	"system": []
+}
