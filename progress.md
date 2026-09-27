@@ -1,6 +1,6 @@
 # Progress
 
-M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
+M0–M11 detail (roadmap bullets, decisions, ADR 0001–0018) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -14,14 +14,8 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - [x] M8 — Book 2 (Fae and Fare) + Celum. M8.0–M8.6 merged and tagged; M8.7 merged ([PR #34](https://github.com/Daddy-Ousen/innworld-rpg/pull/34), tags `m8.7-done` and `m8-done` on merge commit ad436eb). Detail in the archive and ADR 0014 / 0015.
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
-- [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
-  - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
-  - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
-  - [x] M11.2 Characters: merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)), tag `m11.2-done` on d000380. 43 looks, Antinium edits.
-  - [x] M11.3 Animation: merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)), tag `m11.3-done` on ebdcbf0. Sheet layout v2 (128 px attack block), `world/anim_diff.gd`, glides, hit flash, damage numbers, falls, swings.
-  - [x] M11.4 Monsters: merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)), tag `m11.4-done` on b76ff4a. All 36 enemies have a sheet: 30 LPC people looks, 6 creatures from `tools/build_creatures.py` (LPC golem, bee, big worm, eagle recoloured; Rock Crab and snowman Snow Golem drawn). Monsters with a sheet are sprites with a state ring; gone ones fall and fade; a hidden crab is the rock prop. GUT 726/726 (78 scripts), Python 73/73, validator 0 errors.
-  - [ ] M11.5 Atmosphere (branch `feat/m11.5-atmosphere`): built, [PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51) open, waiting for the user to check it. New `world/atmosphere.gd`: sky tint by the clock (room light indoors), fire light from `"light"` in `objects.json` (campfire, brazier, hearth, stove; user OK for the schema change), snow outdoors in winter. GUT 736/736 (79 scripts), Python 73/73, validator 0 errors.
-  - [ ] M11 done: the user checks the game on screen, then tag `m11-done`.
+- [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
+- [ ] Next milestone: not chosen yet (ask the user). Options in ROADMAP "Later": Book 5, audio, UI skin and portraits, balance and missing NPC schedules.
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).

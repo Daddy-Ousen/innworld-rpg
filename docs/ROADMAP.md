@@ -140,7 +140,7 @@ Art is picked by data (`tiles.json` sprites, object sprites, new `appearance.jso
 - [x] M11.2 Characters: `appearance.json`, baked character sheets, 4 directions; the player and the 33 NPCs with a schedule (Human, Drake, Gnoll, Antinium, Goblin, half-Elf, Minotaur, skeleton), generic looks per race
 - [x] M11.3 Animation: smooth steps, walk cycle, facing, attack swing, hit flash, damage numbers, knock-out fall
 - [x] M11.4 Monsters: all 36 enemies with art (30 LPC people looks, 6 creatures from `tools/build_creatures.py`)
-- [ ] M11.5 Atmosphere: day/night light, falling snow, fire and lamp light (built; PR #51 open, the user checks it)
+- [x] M11.5 Atmosphere: day/night light, falling snow, fire and lamp light
 **Done when:** every map, every NPC with a schedule and every enemy draws with art; walking and combat animate;
 GUT and the validator pass; the user has checked the game on screen.
 

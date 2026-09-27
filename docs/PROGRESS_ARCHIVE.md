@@ -135,3 +135,15 @@ session. Current work stays in `progress.md`.
 
 ## Architectural decisions (M10)
 - ADR 0017 (plan chosen 2026-09-26): the Albez door first (save v13, `core/portal.gd`), then 5 canon batches; Wistram Days as history only. Book 4 ends on day 96.
+
+## Roadmap status (M11, archived 2026-09-27)
+- [x] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
+  - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
+  - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
+  - [x] M11.2 Characters: merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)), tag `m11.2-done` on d000380. 43 looks, Antinium edits.
+  - [x] M11.3 Animation: merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)), tag `m11.3-done` on ebdcbf0. Sheet layout v2 (128 px attack block), `world/anim_diff.gd`, glides, hit flash, damage numbers, falls, swings.
+  - [x] M11.4 Monsters: merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)), tag `m11.4-done` on b76ff4a. All 36 enemies have a sheet: 30 LPC people looks, 6 creatures from `tools/build_creatures.py` (LPC golem, bee, big worm, eagle recoloured; Rock Crab and snowman Snow Golem drawn). Monsters with a sheet are sprites with a state ring; gone ones fall and fade; a hidden crab is the rock prop. GUT 726/726 (78 scripts), Python 73/73, validator 0 errors.
+  - [x] M11.5 Atmosphere: merged ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)), tags `m11.5-done` and `m11-done` on 7bb4656. `world/atmosphere.gd`: sky tint by the clock (room light indoors), fire light from `"light"` in `objects.json` (campfire, brazier, hearth, stove; user OK for the schema change), snow outdoors in winter. GUT 736/736 (79 scripts), Python 73/73, validator 0 errors. The user checked it and merged.
+
+## Architectural decisions (M11)
+- ADR 0018 (plan accepted 2026-09-27): 2D pixel art, 32 px cells, LPC packs plus our edits (`CREDITS.md`); art picked by data with square fallbacks; core and saves unchanged; M11.5 `"light"` key in `objects.json`.

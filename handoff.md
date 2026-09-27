@@ -1,25 +1,18 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.4 merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)); tag `m11.4-done` on b76ff4a (pushed).
-- M11.5 Atmosphere built on branch `feat/m11.5-atmosphere` ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51) open). Detail: ADR 0018 "M11.5".
-  - New `game/world/atmosphere.gd` (`Atmosphere`, child of `WorldView`, made in `setup`): CanvasModulate tint
-    by minute of day (`sky_tint`), warm `room_tint` on indoor maps, PointLight2D per object kind with
-    `"light"` in `objects.json` (campfire, brazier, hearth, stove), CPUParticles2D snow outdoors in winter.
-  - User OK: the optional `"light"` key in `objects.json` kinds (schema change).
-  - Night colour tuned by screenshots to stay playable (0.44, 0.50, 0.74). Room night must stay brighter than
-    the sky night (a test checks it).
-  - Tests: `unit_atmosphere.gd` (10). GUT 736/736 (79 scripts), Python 73/73, validator 0 errors.
-    Screenshots sent to the user (camp noon/dusk/night, market snow night, guild noon/night, gate snow, inn night).
+- M11.5 merged ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)); tags `m11.5-done` and `m11-done` on 7bb4656 (pushed). **M11 is done.**
+- Local branch `feat/m11.5-atmosphere` deleted. On `main` now. M11 detail moved to `docs/PROGRESS_ARCHIVE.md`.
+- The ROADMAP / progress / archive / handoff edits for this are NOT committed yet: commit them on the next
+  branch (main only gets merge commits).
 
 ## Next steps
-1. User checks M11.5 and merges its PR. Then tick M11.5 in ROADMAP and `progress.md`, tag `m11.5-done` on the merge commit.
-2. M11 "done when": the user checks the game on screen (`godot --path game`). Then tag `m11-done` and move
-   M11 detail to `docs/PROGRESS_ARCHIVE.md`.
-3. Possible polish (ask the user): lamp objects in the inn (map data change), bigger sprites for big foes
-   (Hobs, Soldier, Crypt Lord, Rock Crab, Razorbeak, Snow Golem; needs a frame larger than 64 px), Antinium back
-   shell; Toren's eye-flames; the player's own knock-out fall; the Goblin commander's Shield Spider.
-4. Then: back to new books (Book 5), or other "Later" items in ROADMAP.
+1. Ask the user for the next milestone. Options (ROADMAP "Later"): Book 5 canon (paused since 2026-09-27),
+   audio, UI skin and portraits, balance and missing NPC schedules, optional LLM flavour layer.
+   Graphics polish is also open: lamp objects in the inn, bigger sprites for big foes (Hobs, Soldier,
+   Crypt Lord, Rock Crab, Razorbeak, Snow Golem; frame larger than 64 px), Antinium back shell, Toren's
+   eye-flames, the player's own knock-out fall, the Goblin commander's Shield Spider.
+2. New milestone: plan first (plan mode), new ADR, ROADMAP section, one branch + PR per part.
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
@@ -37,7 +30,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check M11.5 (screenshots, or play at night / in winter), merge its PR.
+- Pick the next milestone.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
