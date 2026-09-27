@@ -1,18 +1,16 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M12.2 merged ([PR #54](https://github.com/Daddy-Ousen/innworld-rpg/pull/54)); tag `m12.2-done` on af38e2f.
-- M12.3 on branch `feat/m12.3-music`: 8 CC0 tracks (user OK; audio limit raised to about 60 MB, audio is 33 MB),
+- M12.3 merged ([PR #55](https://github.com/Daddy-Ousen/innworld-rpg/pull/55)); tag `m12.3-done` on 081b377.
+  The user approved the music. M12.3 had: 8 CC0 tracks (user OK; audio limit raised to about 60 MB, audio is 33 MB),
   moods for all 15 maps, fight / battle / scene music, `world/music_pick.gd`. GUT 780/780 (84 scripts).
   Detail: ADR 0019 "M12.3".
 
 ## Next steps
-1. The user listens (the inn by day and at night, Liscor, Celum, the Floodplains, a fight, a cave).
-   Then PR, merge, tag `m12.3-done`, tick ROADMAP and progress.
-2. M12.4 Ambience (new branch): ask the user before adding `"sound"` to objects.json (rule 11) and before
+1. M12.4 Ambience (new branch): ask the user before adding `"sound"` to objects.json (rule 11) and before
    downloads. The rubberduck water pack has loops (rain, water, bubbles). Wind, birds, crickets, crowd and fire
    loops still need a source. `ambience` in audio.json keys: outdoor_day, outdoor_night, winter, cave, crowd.
-3. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
+2. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -44,7 +42,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Listen to the M12.3 music, then the PR.
+- Start M12.4 Ambience (asks: `"sound"` in objects.json, downloads).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
