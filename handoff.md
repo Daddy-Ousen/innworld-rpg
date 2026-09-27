@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-27)
 - M11.4 merged ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50)); tag `m11.4-done` on b76ff4a (pushed).
-- M11.5 Atmosphere built on branch `feat/m11.5-atmosphere` (PR open). Detail: ADR 0018 "M11.5".
+- M11.5 Atmosphere built on branch `feat/m11.5-atmosphere` ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51) open). Detail: ADR 0018 "M11.5".
   - New `game/world/atmosphere.gd` (`Atmosphere`, child of `WorldView`, made in `setup`): CanvasModulate tint
     by minute of day (`sky_tint`), warm `room_tint` on indoor maps, PointLight2D per object kind with
     `"light"` in `objects.json` (campfire, brazier, hearth, stove), CPUParticles2D snow outdoors in winter.
