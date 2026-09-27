@@ -111,7 +111,7 @@ func test_valceif_dies_when_ryoka_hears() -> void:
 	assert_false(gs.world.is_alive(_db.canon, "valceif_godfrey"))
 	for f: String in ["ryoka.grieves_valceif", "ryoka.met_laken", "ryoka.met_hedault", "horns_of_hammerad.relics_appraised",
 			"ryoka.faces_repair_bill_for_the_buckler", "ryoka.knows_reynold_is_ordered_to_follow", "riverfarm.relief_convoy_ordered",
-			"ryoka.heading_home_to_liscor", "krshia.knows_ryoka_is_coming"]:
+			"ryoka.running_to_riverfarm", "krshia.knows_ryoka_is_coming"]:  # M10.5: Riverfarm before home
 		assert_true(gs.flags.has(f), f)
 	assert_false(gs.flags.has("laken.left_for_invrisil"), "Laken has arrived")
 	assert_true(gs.world.is_alive(_db.canon, "ryoka_griffin"))

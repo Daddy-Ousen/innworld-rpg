@@ -126,7 +126,7 @@ no events on the calendar, like the Antinium Wars interludes.
 - [x] M10.2 Canon 3.30 – 3.31 G + Wistram Days 1–7 as history notes
 - [x] M10.3 Canon 3.32 – 3.35 (the wagon home, Erin's Level 30, the door runs, the Esthelm relief, Ryoka and Laken in Invrisil)
 - [x] M10.4 Canon 3.36 – 3.39 (Ryoka and Laken in Invrisil, Valceif dead, Erin home and Christmas named, the Go lesson, Brunkr's arm, the Rock Crab scene)
-- [ ] M10.5 Canon 3.40 – 3.42 + Interlude – Winter Solstice
+- [x] M10.5 Canon 3.40 – 3.42 + Interlude – Winter Solstice (the wand deal, Riverfarm fed, matches, the Santa thieves, Christmas and Wrymvr, the solstice visitors)
 **Done when:** all Book 4 canon is event data and `sim_canon_book4` runs to the last Book 4 day with drift 0;
 the player can use the Albez door within its limits; each batch has a hook or stage the player can use;
 the validator reports 0 errors.

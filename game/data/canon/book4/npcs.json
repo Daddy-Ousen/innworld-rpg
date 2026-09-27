@@ -252,6 +252,30 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "likely", "note": "Named only by Reynold, who calls the Mayor an administrator while Magnolia holds real sway. History only; no event uses him."},
 			"summary": "Invrisil's [Mayor], an administrator whom Reynold names to Laken. The Guilds and nobles compete for real power in the city."
+		},
+		"anabelle": {
+			"name": "Anabelle",
+			"race": "Human",
+			"tags": ["human", "child", "riverfarm"],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "confirmed", "note": "Her brother died in the avalanche. She gets a doll of a blond adventurer from Ryoka and says she may want to be a [Runner] (Winter Solstice)."},
+			"summary": "A small girl in Riverfarm who thinks she cannot be good because her brother died in the avalanche. Ryoka tells her it was not her fault."
+		},
+		"tamaroth": {
+			"name": "Tamaroth",
+			"race": "Unknown",
+			"tags": ["mystery", "solstice_visitor"],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "interlude_winter_solstice", "confidence": "confirmed", "note": "He says only that some call him Tamaroth. Tall and bearded. His two companions (a scholar with an old book, a man who moves like a dancer) are unnamed. Not linked to any other entity."},
+			"summary": "One of three strangers who come to the Wandering Inn on the solstice night, eat with Erin and offer her three gifts for her soul."
 		}
 	}
 }

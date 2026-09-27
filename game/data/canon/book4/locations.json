@@ -63,6 +63,33 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.37", "confidence": "confirmed", "note": "Truth stones are used to swear oaths there. No map."},
 			"summary": "The Merchants' Guild of Invrisil, where big orders are placed and sworn on truth stones."
+		},
+		"crag_pig": {
+			"name": "The Crag Pig",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": ["invrisil", "inn"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "A rough inn with a big tusked skull over the door, run by a scarred former adventurer (unnamed). No map."},
+			"summary": "A dirty inn in Invrisil where Laken, Durene and Gamel stay."
+		},
+		"invrisil_runners_guild": {
+			"name": "Invrisil Runners' Guild",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": ["invrisil", "runners_guild"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.40", "confidence": "confirmed", "note": "A [Weather Mage] posts forecasts here. No map."},
+			"summary": "The Runners' Guild of Invrisil, where Laken hires Ryoka to run food to Riverfarm."
+		},
+		"riverfarm_road": {
+			"name": "The road to Riverfarm",
+			"kind": "wild",
+			"parent": "north_izril",
+			"tags": ["road", "forest", "wild"],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.41", "confidence": "guess", "note": "Design place for the country between Invrisil and Riverfarm: the cliff where Ryoka meets the snow golem (3.41) and the wood that loops back on itself (Winter Solstice). Neither is named in the text. No map."},
+			"summary": "Snowy forest and cliffs on the way from Invrisil west to Riverfarm."
 		}
 	}
 }

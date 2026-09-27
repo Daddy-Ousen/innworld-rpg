@@ -1,0 +1,172 @@
+{
+	"schema_version": 1,
+	"book": 4,
+	"chapter": "3.42",
+	"events": {
+		"b4.erin_cooks_for_christmas": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}, "cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["wandering_inn.christmas_party_planned"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.cooked_the_christmas_feast", "erin.got_ryokas_christmas_note", "ryoka.missed_christmas"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "The note came through the Mages' Guild. Garry helps in the kitchen."},
+			"summary": "Erin is up before dawn on Christmas and cooks all day: soup, dumplings, burgers, pizza, popcorn, ribs, fries and eggnog. She keeps rereading a note from Ryoka: an emergency delivery, and she will try to come. Ryoka does not come."
+		},
+		"b4.liscor_and_celum_come_to_the_party": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "shopkeeper": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "gnoll": {"prefer": ["brunkr"], "fallback_tags": [], "optional": true}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}, "priest": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "worker": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "runner": {"prefer": ["hawk"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.erin_cooks_for_christmas"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.hosts_christmas", "brunkr.at_the_party_with_a_bandaged_arm", "octavia.slept_at_the_party", "liscor.watched_antinium_play_go"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Brunkr's arm is clean and bandaged; the text does not say it has healed, so his flags stay. Agnes and Anand are absent. Wesle breaks a window in a knife game with Relc."},
+			"summary": "From noon the guests come: the Watch, Krshia and a tired Brunkr with his arm bandaged, Octavia through the door, the Celum actors, the Antinium, the Horns, the Halfseekers and Griffon Hunt. Pawn and Belgrade play Go against the whole room."
+		},
+		"b4.zel_and_ilvriss_come_north_for_ryoka": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "liscor_walls",
+			"roles": {"hero": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "lord": {"prefer": ["ilvriss"], "fallback_tags": []}},
+			"requires": {"alive": ["zel_shivertail", "ilvriss"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.erin_cooks_for_christmas"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["zel.at_the_christmas_party", "ilvriss.refuses_to_meet_the_antinium", "zel.and_ilvriss_seek_ryoka"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "The Runner is Ryoka (Zel reacts to her name later that night)."},
+			"summary": "At Liscor's gate Zel and Ilvriss argue. Ilvriss will not go near the Antinium. Both are to find out why Xrn is here, and both came north looking for the Human Runner. Zel goes up to the party, where Selys puts Mrsha in his lap."
+		},
+		"b4.ksmvr_gives_xrn_the_goblin_amulet": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"scout": {"prefer": ["ksmvr"], "fallback_tags": []}, "queen": {"prefer": ["xrn"], "fallback_tags": []}},
+			"requires": {"alive": ["ksmvr", "xrn"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["xrn.copied_the_goblin_amulet_spell", "xrn.asks_why_klbkch_exiled_ksmvr"], "relationship": [{"from": "xrn", "to": "ksmvr", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "What the spell does is not certain: it seems to let the Antinium eat food like bread (guess). She will not cast it on Klbkch."},
+			"summary": "Ksmvr gives Xrn the amulet he took from a dead Goblin who shrugged off poisoned food. She copies its spell on the spot and hands it back, then asks why Klbkch exiled Ksmvr and why Ksmvr moves like him."
+		},
+		"b4.griffon_hunt_sees_erin_needs_staff": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"captain": {"prefer": ["ulrien"], "fallback_tags": []}, "leader": {"prefer": ["halrac"], "fallback_tags": []}, "runner": {"prefer": ["hawk"], "fallback_tags": [], "optional": true}, "gnoll": {"prefer": ["brunkr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ulrien", "halrac"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["griffon_hunt.thinks_erin_needs_staff", "hawk.asked_about_the_skeleton", "hawk.wants_a_room_at_the_inn", "brunkr.met_zel_shivertail"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Toren: only Hawk's question. He stays alive in the dungeon."},
+			"summary": "Ulrien, Halrac and Hawk see that Erin is worn out and needs more staff. Hawk wants to rent a room and asks what became of the skeleton who worked here; nobody answers. Brunkr realises the Drake guest is Zel Shivertail and is star-struck."
+		},
+		"b4.erin_sings_and_runs_into_the_snow": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "healer": {"prefer": ["revi"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.cried_for_home_at_christmas", "pisces.guarded_erin_invisibly"], "relationship": [{"from": "pisces", "to": "erin_solstice", "delta": 1}]},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [19, 23],
+				"kind": "scene",
+				"when_flags": ["wandering_inn.gift_pile_ready"],
+				"npcs": [{"npc": "erin_solstice", "pos": [20, 16]}],
+				"line": "The inn door bangs open and the innkeeper stumbles out into the falling snow, crying, with the song still going on behind her.",
+				"note": "M10.5: a scene. Hours are guesses (evening, after the food). Pisces follows invisibly, so he is not placed. Canon has no one talk to her; a player who comforts her changes the event."
+			},
+			"hooks": [
+				{
+					"id": "player_comforted_erin_in_the_snow",
+					"did": [{"action": ["comfort_someone"], "context": {"location": ["wandering_inn"], "npc": ["erin_solstice"]}}],
+					"days": [95, 95],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.someone_followed_erin_into_the_snow"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 3}]},
+					"news": "On Christmas night the innkeeper ran crying from her own party, and another Human went out into the snow after her."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "The instruments 'might have been her Skill'; no Skill is named, so no record. The songs are Jingle Bells, Don't Stop Believin', Silent Night and Home for the Holidays."},
+			"summary": "Revi asks for music, so Erin sings, and the guests hear instruments that are not there. On a song about coming home for the holidays she breaks down and runs out into the snow. Pisces follows her, invisible, to keep her safe."
+		},
+		"b4.the_guests_ask_where_erin_is_from": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"tactician": {"prefer": ["olesm"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["klbkch"], "fallback_tags": []}, "hero": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true}, "merchant_boy": {"prefer": ["grev"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["klbkch"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["wandering_inn.guests_think_a_dragon_is_near_liscor", "zel.heard_ryokas_name_at_the_inn", "klbkch.will_not_deny_a_dragon"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Olesm says she knew nothing of the King of Destruction. The Dragon near Liscor is only what the guests believe; the flag keeps it that way."},
+			"summary": "With Erin outside, the guests argue about where she comes from. Ceria says the same place as Ryoka Griffin, and Zel starts at the name. Relc says she came out of nowhere, burned, saying she fled a Dragon. Klbkch will neither confirm nor deny a Dragon, and the room takes that as a yes."
+		},
+		"b4.xrn_names_wrymvr_as_sserys_killer": {
+			"tier": 1,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"hero": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "antinium": {"prefer": ["klbkch"], "fallback_tags": []}, "queen": {"prefer": ["xrn"], "fallback_tags": []}, "captain": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true}, "leader": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["zel_shivertail", "klbkch", "xrn"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.zel_and_ilvriss_come_north_for_ryoka"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["zel.knows_wrymvr_killed_sserys", "xrn.revealed_herself_as_the_small_queen", "klbkch.nearly_fought_zel", "zel.walked_out_into_the_storm"]},
+			"rumor": "They say Zel Shivertail and the Antinium Slayer nearly came to blows at a Human's inn, until a small Antinium stopped them with a word.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Sserys and Wrymvr are not NPC records (history only). Xrn says this was one of her reasons for coming."},
+			"summary": "Klbkch and Zel nearly fight over old dead comrades; the Halfseekers and Griffon Hunt step between them and the guests. Xrn names herself the Small Queen and orders peace. She tells Zel she was with General Sserys when he died, but the killer was Wrymvr the Deathless. Zel walks out into the storm."
+		},
+		"b4.the_christmas_presents": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "antinium": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "child": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "leader": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["klbkch.wears_erins_scarf", "relc.has_free_drinks_in_every_tavern", "pisces.has_white_robes", "ceria.has_a_gold_nugget", "wandering_inn.guests_give_erin_a_day_off"], "relationship": [{"from": "klbkch", "to": "erin_solstice", "delta": 2}, {"from": "relc", "to": "erin_solstice", "delta": 1}, {"from": "halrac", "to": "mrsha", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Klbkch wears the scarf. Zel and Xrn get nothing. The guests leave coins on the tables and agree to spend the next day in the city so Erin can rest."},
+			"summary": "Erin comes back calm and nobody tells her what happened. Presents go round: a black scarf for Klbkch, honey cookies for Relc, a dagger from Relc to Klbkch, free drinks in every tavern from Klbkch to Relc, white robes for Pisces, a gold nugget for Ceria, honey and sausage for Halrac."
+		},
+		"b4.typhenous_reports_erin_to_tyrion_veltras": {
+			"tier": 1,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"old_mage": {"prefer": ["typhenous"], "fallback_tags": []}, "leader": {"prefer": ["halrac"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ulrien"], "fallback_tags": [], "optional": true}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["typhenous"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["tyrion_veltras.hears_of_erin", "griffon_hunt.looks_into_erin", "pisces.knows_typhenous_reports_to_a_lord", "ceria.warned_by_pisces"]},
+			"rumor": "A mage paid well for a quiet [Message] out of Liscor to one of the great Lords of the north.",
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "Tyrion Veltras is only named here; he is not an NPC record yet."},
+			"summary": "Halrac asks Ulrien to use his contacts to learn who Erin is. Typhenous secretly pays for a [Message] to Lord Tyrion Veltras. Pisces, still invisible, hears it and tells Ceria in their finger code that much is afoot."
+		},
+		"b4.lyonette_swears_an_oath_to_the_stars": {
+			"tier": 2,
+			"window": {"earliest": 95, "latest": 95, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "antinium": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": ["b4.liscor_and_celum_come_to_the_party"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.swore_an_oath_to_the_stars", "erin.wants_to_go_home", "klbkch.apologised_to_erin"], "relationship": [{"from": "lyonette", "to": "erin_solstice", "delta": 2}]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.42", "confidence": "confirmed", "note": "She names herself Lyonette du Marquin. The oath is cut off before it ends."},
+			"summary": "Klbkch says sorry to Erin and leaves with Xrn. By the dying fire Erin cries that she wants to go home and falls asleep on the floor. Lyonette watches, goes to her room and begins an oath to the stars in her full name."
+		}
+	},
+	"system": []
+}
