@@ -50,10 +50,11 @@ func _ready() -> void:
 	var max_hp := {}
 	for id in Session.db.behaviour.ids():
 		max_hp[id] = int(NpcReact.stats(Session.db, id)["hp"])
+	view.audio = Audio.db
 	view.setup(Session.db.maps, names, Session.db.combat.enemies, max_hp,
 			String(Winter.rules(Session.db).get("flag", "")), races)
 	view.sounds.connect(Audio.play_cues)
-	Audio.music("title")  # M12.0 spike: one track everywhere until M12.3
+	Audio.music(Audio.db.state_track("title"))  # one track everywhere until M12.3
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
 	dialog.closed.connect(_on_dialog_closed)

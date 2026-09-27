@@ -1,33 +1,30 @@
-## Which sounds a change on screen makes (M12, ADR 0019). Pure and headless
-## (no nodes), so tests can check it. Presentation only: never changes
-## GameState (CLAUDE.md rule 1).
-## M12.0 spike: the tables below are temporary. M12.1 moves them to
-## data/audio.json (rule 4).
+## Which sounds a change on screen makes (M12, ADR 0019). The cues come from
+## data/audio.json (AudioDb). Pure and headless (no nodes), so tests can
+## check it. Presentation only: never changes GameState (CLAUDE.md rule 1).
 class_name SoundCues
 extends RefCounted
 
-## Ground tile -> footstep cue. Snow covers the outdoor ground in winter.
-const STEPS := {
-	"grass": "step_grass", "tall_grass": "step_grass", "dirt_road": "step_grass",
-	"cobble": "step_stone", "cave_floor": "step_stone",
-	"wood_floor": "step_wood", "door": "step_wood",
-}
-const SNOW_COVERED := ["grass", "tall_grass", "dirt_road", "cobble"]
-const SNOW_STEP := "step_snow"
-const HIT := "hit"
 
-
-## The footstep cue for a step onto `tile` ("" = no sound).
-static func footstep(tile: String, winter: bool = false) -> String:
-	if winter and SNOW_COVERED.has(tile):
-		return SNOW_STEP
-	return String(STEPS.get(tile, ""))
+## The footstep cue for a step onto a tile ("" = no sound). In winter a
+## tile that turns white (it has a "winter_color") and has a footstep of
+## its own sounds like snow; indoor maps never get snow.
+static func footstep(audio: AudioDb, tile: String, tile_def: Dictionary = {},
+		winter: bool = false) -> String:
+	var step := audio.cue("footsteps", tile)
+	if step != "" and winter and tile_def.has("winter_color"):
+		var snow := audio.cue("footsteps", AudioDb.WINTER_STEP)
+		if snow != "":
+			return snow
+	return step
 
 
 ## The cues of AnimDiff events, in order.
-static func from_events(events: Array) -> Array[String]:
+static func from_events(audio: AudioDb, events: Array) -> Array[String]:
 	var out: Array[String] = []
 	for e: Dictionary in events:
+		var c := ""
 		if e["type"] == AnimDiff.HIT:
-			out.append(HIT)
+			c = audio.cue("combat", "hit")
+		if c != "":
+			out.append(c)
 	return out
