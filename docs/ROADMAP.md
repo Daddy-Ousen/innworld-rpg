@@ -144,5 +144,21 @@ Art is picked by data (`tiles.json` sprites, object sprites, new `appearance.jso
 **Done when:** every map, every NPC with a schedule and every enemy draws with art; walking and combat animate;
 GUT and the validator pass; the user has checked the game on screen.
 
+## M12 — Audio: music, sound effects, ambience
+Plan accepted 2026-09-27 (ADR 0019). One branch + PR each. Core and saves do not change.
+Sources: free CC0 / CC-BY / CC-BY-SA packs (Kenney, OpenGameArt) plus `tools/build_sfx.py` for UI blips.
+Music follows the place, time, winter and danger, plus special tracks for canon moments (data in `audio.json`).
+Volumes are user settings in `user://settings.cfg`, not game state.
+- [ ] M12.0 Audio spike: sources and licences checked, `game/assets/audio/`, CREDITS, buses, `Audio` autoload skeleton, first blips; one title track, footsteps and a hit. The user approves the sound
+- [ ] M12.1 Audio core + settings: `audio.json`, cross-fade, volume settings, Options menu (title and pause)
+- [ ] M12.2 Sound effects: UI, System pages, footsteps by ground, doors, object use, combat, monster voices
+- [ ] M12.3 Music: a track per kind of place with day / night / winter, fight, big battle, warm scene
+- [ ] M12.4 Ambience: area beds (birds, crickets, wind, cave, crowd) and object sounds (fires, well, bees)
+- [ ] M12.5 Canon moments: special tracks for at least 6 canon moments; a sad sting for deaths in the news
+**Done when:** every map has mood music; night, winter, fights, battles and scenes change it with a
+cross-fade; walking, using objects, combat, menus and System pages make sounds; volumes are saved; at least
+6 canon moments have their own music; missing audio gives silence, not errors; GUT, the Python tool tests
+and the validator pass; the user has listened to the game.
+
 ## Later
-- Book 5 and on (paused 2026-09-27) · audio · UI skin and portraits · balance, missing NPC schedules · optional LLM flavour layer
+- Book 5 and on (paused 2026-09-27) · UI skin and portraits · balance, missing NPC schedules · optional LLM flavour layer

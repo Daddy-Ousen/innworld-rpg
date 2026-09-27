@@ -407,3 +407,12 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `weapon/sword/scimitar` by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). Licence: OGA-BY 3.0.
   - https://opengameart.org/content/lpc-dcss-swords
 <!-- build_sprites:end -->
+
+## Audio (`game/assets/audio/`, M12, ADR 0019)
+
+- `sfx/footstep_*.ogg` and `sfx/impactPunch_medium_*.ogg` from "Impact Sounds" by Kenney (www.kenney.nl).
+  Licence: CC0 1.0. https://kenney.nl/assets/impact-sounds
+  Licence file: `game/assets/audio/sfx/kenney_impact_sounds_License.txt`.
+- `music/old_tower_inn.mp3` is "Medieval: The Old Tower Inn" (`The_Old_Tower_Inn.mp3`) by RandomMind.
+  Licence: CC0 1.0. https://opengameart.org/content/medieval-the-old-tower-inn
+- `ui/*.wav` are made by `tools/build_sfx.py` (our own blips and chimes). Licence: CC0 1.0.

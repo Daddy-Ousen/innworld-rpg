@@ -1,18 +1,31 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.5 merged ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)); tags `m11.5-done` and `m11-done` on 7bb4656 (pushed). **M11 is done.**
-- Local branch `feat/m11.5-atmosphere` deleted. On `main` now. M11 detail moved to `docs/PROGRESS_ARCHIVE.md`.
-- The ROADMAP / progress / archive / handoff edits for this are NOT committed yet: commit them on the next
-  branch (main only gets merge commits).
+- M11 closed. The user picked **M12 Audio**. Plan accepted: ADR `docs/adr/0019-m12-audio.md`, ROADMAP M12 section.
+  User choices: free packs + our own tool (`tools/build_sfx.py`); music by place and mood **plus canon moments**.
+- Branch `feat/m12.0-audio-spike` (off main): commit 1 = the open M11 docs edits; then the M12.0 spike:
+  bus layout, autoload `Audio` (`game/ui/audio.gd`), `game/world/sound_cues.gd`, `WorldView.sounds` signal,
+  footsteps (grass / wood / snow / stone), hit sound, System chime, button blips, title music (also in game).
+  GUT 745/745 (80 scripts), Python 77/77, `python tools/build_sfx.py --check` OK.
 
 ## Next steps
-1. Ask the user for the next milestone. Options (ROADMAP "Later"): Book 5 canon (paused since 2026-09-27),
-   audio, UI skin and portraits, balance and missing NPC schedules, optional LLM flavour layer.
-   Graphics polish is also open: lamp objects in the inn, bigger sprites for big foes (Hobs, Soldier,
-   Crypt Lord, Rock Crab, Razorbeak, Snow Golem; frame larger than 64 px), Antinium back shell, Toren's
-   eye-flames, the player's own knock-out fall, the Goblin commander's Shield Spider.
-2. New milestone: plan first (plan mode), new ADR, ROADMAP section, one branch + PR per part.
+1. The user listens (`godot --path game`: title music, walk on grass and wood, a fight, the night page)
+   and approves the sound. Then PR for M12.0, merge, tag `m12.0-done`.
+2. M12.1: show the user the `audio.json` schema (draft in ADR 0019 / the plan) before coding (rule 11).
+   Move the temporary tables (`Audio.CUES`, `Audio.TRACKS`, `SoundCues.STEPS`) into `game/data/audio.json`.
+   Add cross-fade, `user://settings.cfg` volumes and an Options menu (title + pause).
+3. Then M12.2 effects, M12.3 music, M12.4 ambience (ask before adding `"sound"` to objects.json), M12.5 moments.
+
+## Audio notes (M12)
+- Downloads so far are in the session scratchpad (gone next session): Kenney RPG Audio zip (doors, coins,
+  chop, cloth, book, metal pot, knife: for M12.2). Re-download: https://kenney.nl/assets/rpg-audio (CC0).
+- Music candidates (CC0, RandomMind on OpenGameArt, full + loop versions): "Medieval: Market Day",
+  "Minstrel Dance", "The Bard's Tale", "King's Feast". Sir Gawain's "CC0 Fantasy Music & Sounds" collection
+  has battle, cave, town and forest ambience tracks. Ask the user before each download (file, source, size).
+- After adding audio run `godot --headless --path game --import`, then set `loop=true` in a music `.import`
+  and import again. Then `git checkout -- game/assets/characters game/assets/objects game/assets/tiles`
+  (import noise).
+- `Audio` hooks every button through `get_tree().node_added`: menus need no audio code.
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
@@ -30,7 +43,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Pick the next milestone.
+- Listen to the M12.0 spike and approve the sound.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -45,7 +58,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (77 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (80 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -98,5 +111,5 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/world/atmosphere.gd`, `game/world/world_view.gd`, `game/data/objects.json`, `game/tests/unit_atmosphere.gd`,
-  `docs/adr/0018-m11-graphics.md`.
+- `game/ui/audio.gd`, `game/world/sound_cues.gd`, `game/world/world_view.gd`, `game/world/main.gd`,
+  `game/tests/unit_audio.gd`, `tools/build_sfx.py`, `docs/adr/0019-m12-audio.md`.

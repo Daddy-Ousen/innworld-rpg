@@ -31,6 +31,7 @@ func _ready() -> void:
 	%Quit.pressed.connect(func() -> void: get_tree().quit())
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
+	Audio.music("title")
 	refresh()
 
 
