@@ -8,7 +8,7 @@
   - GUT 689/689 (74 scripts). Python 51 OK. Validator 0 errors. Scenes NOT checked on screen.
 
 ## Next steps
-1. Commit, push, open the M10.5 PR (if not yet done). User merges. Then tag `m10.5-done` and `m10-done` on the merge commit, tick M10 in `progress.md`, move M10 detail to `docs/PROGRESS_ARCHIVE.md`.
+1. PR #45 (M10.5) is open. User merges. Then tag `m10.5-done` and `m10-done` on the merge commit, tick M10 in `progress.md`, move M10 detail to `docs/PROGRESS_ARCHIVE.md`.
 2. Plan M11 (Book 5) with the user. Open threads carried into Book 5:
    - Ryoka: `ryoka.heading_home_to_liscor` is set again on day 96 (via Invrisil; Reynold drives her). Clear it when she arrives. Hedault is making the Horns' gear (`hedault.makes_gear_for_the_horns`, pickup not shown); `hedault.owes_the_horns_a_debt`. She still holds `ryoka.holds_magnolias_seal`.
    - Rags: `rags.heading_south`, `rags.wants_to_see_erin`, `rags.tribe_turns_north` still set. Clear the last when she arrives.
