@@ -1,5 +1,5 @@
 ## The title screen (M6.1, the main scene): New game, Continue (the newest
-## save), Load, Quit. With more than one start in rules.world.starts, New
+## save), Load, Options (volumes, M12.1), Quit. With more than one start in rules.world.starts, New
 ## game first asks where the player arrives (M8.5). Sets Session's game,
 ## then opens the game screen. Presentation only.
 class_name TitleMenu
@@ -15,23 +15,26 @@ var switch_scene := true
 var new_game_seed := -1
 
 @onready var slots: SlotList = %Slots
+@onready var options: OptionsMenu = %Options
 @onready var _new_game: Button = %NewGame
 @onready var _continue: Button = %Continue
 @onready var _load: Button = %Load
 @onready var _note: Label = %Note
 @onready var _starts: VBoxContainer = %Starts
-## The New game, Continue, Load and Quit buttons (hidden while choosing a start).
-@onready var _menu: Array[Control] = [%NewGame, %Continue, %Load, %Quit]
+## The New game, Continue, Load, Options and Quit buttons (hidden while choosing a start).
+@onready var _menu: Array[Control] = [%NewGame, %Continue, %Load, %OptionsButton, %Quit]
 
 
 func _ready() -> void:
 	_new_game.pressed.connect(open_starts)
 	_continue.pressed.connect(continue_game)
 	_load.pressed.connect(open_load)
+	%OptionsButton.pressed.connect(open_options)
+	options.closed.connect(close_options)
 	%Quit.pressed.connect(func() -> void: get_tree().quit())
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
-	Audio.music("title")
+	Audio.music(Audio.db.state_track("title"))
 	refresh()
 
 
@@ -66,6 +69,17 @@ func open_starts() -> void:
 	_starts.add_child(back)
 	_show_starts(true)
 	(_starts.get_child(1) as Button).grab_focus()
+
+
+## Options hides the menu buttons, so the keys stay in the panel.
+func open_options() -> void:
+	$Center.visible = false
+	options.open()
+
+
+func close_options() -> void:
+	$Center.visible = true
+	_focus_first()
 
 
 func close_starts() -> void:

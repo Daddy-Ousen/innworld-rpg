@@ -130,6 +130,8 @@ var monster_facing: Dictionary = {}
 var _last: Dictionary = {}
 var _halves: Dictionary = {}
 var _maps: MapDb
+## The sound data (M12.1); setup loads data/audio.json when it is not set.
+var audio: AudioDb
 ## The world flag that turns on the snow look ("" = never), and whether
 ## the tiles are drawn in winter colours now.
 var _winter_flag := ""
@@ -165,6 +167,8 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	_winter_flag = winter_flag
 	_winter = false
 	object_art = load_object_art()
+	if audio == null:
+		audio = AudioDb.load_file()
 	if atmosphere == null:
 		atmosphere = Atmosphere.new()
 		atmosphere.tile = TILE
@@ -213,7 +217,9 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	player.position = cell_center(gs.player.pos())
 	var cues: Array[String] = []
 	if not new_area and old.distance_to(player.position) == TILE:
-		var step := SoundCues.footstep(_maps.tile_at(area, gs.player.pos()), winter)
+		var tile := _maps.tile_at(area, gs.player.pos())
+		var step := SoundCues.footstep(audio, tile, _maps.tiles.get(tile, {}),
+				winter and not _maps.is_indoor(area))
 		if step != "":
 			cues.append(step)
 	nose.position = Vector2(PlayerState.DIRS[gs.player.facing]) * NOSE - nose.size / 2.0
@@ -229,7 +235,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	var changes: Array = [] if new_area else AnimDiff.events(_last, snap)
 	_last = snap
 	play(changes)
-	cues.append_array(SoundCues.from_events(changes))
+	cues.append_array(SoundCues.from_events(audio, changes))
 	if not cues.is_empty():
 		sounds.emit(cues)
 

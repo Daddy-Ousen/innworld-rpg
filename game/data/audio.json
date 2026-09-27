@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "note": "M12 audio (ADR 0019). Files are relative to res://assets/audio/. Buses: Music, Ambience, SFX, UI. A cue's variants play round-robin. footsteps: tile id -> cue; the key winter is the step on snow-covered ground (a tile with a winter_color, outdoors in winter). Presentation only.",
+  "sounds": {
+    "step_grass": {"bus": "SFX", "volume_db": -12.0, "files": [
+      "sfx/footstep_grass_000.ogg", "sfx/footstep_grass_001.ogg", "sfx/footstep_grass_002.ogg",
+      "sfx/footstep_grass_003.ogg", "sfx/footstep_grass_004.ogg"]},
+    "step_wood": {"bus": "SFX", "volume_db": -12.0, "files": [
+      "sfx/footstep_wood_000.ogg", "sfx/footstep_wood_001.ogg", "sfx/footstep_wood_002.ogg",
+      "sfx/footstep_wood_003.ogg", "sfx/footstep_wood_004.ogg"]},
+    "step_snow": {"bus": "SFX", "volume_db": -10.0, "files": [
+      "sfx/footstep_snow_000.ogg", "sfx/footstep_snow_001.ogg", "sfx/footstep_snow_002.ogg",
+      "sfx/footstep_snow_003.ogg", "sfx/footstep_snow_004.ogg"]},
+    "step_stone": {"bus": "SFX", "volume_db": -12.0, "files": [
+      "sfx/footstep_concrete_000.ogg", "sfx/footstep_concrete_001.ogg", "sfx/footstep_concrete_002.ogg",
+      "sfx/footstep_concrete_003.ogg", "sfx/footstep_concrete_004.ogg"]},
+    "hit": {"bus": "SFX", "volume_db": -4.0, "files": [
+      "sfx/impactPunch_medium_000.ogg", "sfx/impactPunch_medium_001.ogg", "sfx/impactPunch_medium_002.ogg",
+      "sfx/impactPunch_medium_003.ogg", "sfx/impactPunch_medium_004.ogg"]},
+    "ui_move": {"bus": "UI", "volume_db": -14.0, "files": ["ui/ui_move.wav"]},
+    "ui_ok": {"bus": "UI", "volume_db": -8.0, "files": ["ui/ui_ok.wav"]},
+    "ui_back": {"bus": "UI", "volume_db": -8.0, "files": ["ui/ui_back.wav"]},
+    "chime": {"bus": "UI", "volume_db": -8.0, "files": ["ui/chime.wav"]}
+  },
+  "music": {
+    "title": {"file": "music/old_tower_inn.mp3", "volume_db": -10.0}
+  },
+  "moods": {"by_map": {}, "by_location": {}, "default": ""},
+  "mood_tracks": {},
+  "states": {"title": "title", "fight": "", "battle": "", "scene": ""},
+  "moments": [],
+  "footsteps": {
+    "grass": "step_grass", "tall_grass": "step_grass", "dirt_road": "step_grass",
+    "cobble": "step_stone", "cave_floor": "step_stone",
+    "wood_floor": "step_wood", "door": "step_wood",
+    "winter": "step_snow"
+  },
+  "actions": {},
+  "combat": {"hit": "hit"},
+  "enemies": {},
+  "pages": {"open": "chime"},
+  "ui": {"move": "ui_move", "confirm": "ui_ok", "back": "ui_back"},
+  "ambience": {}
+}

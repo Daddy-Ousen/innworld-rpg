@@ -36,7 +36,7 @@ func open(pages: Array[Dictionary], gs: GameState, db: DataDb) -> void:
 	_db = db
 	_pages = pages.duplicate()
 	_index = -1
-	Audio.play("chime")
+	Audio.play_key("pages", "open")
 	_advance()
 
 

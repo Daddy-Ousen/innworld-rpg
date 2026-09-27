@@ -1,4 +1,4 @@
-## The pause menu (Esc, M6.1): Resume, Save, Load, Quit to title. Save and
+## The pause menu (Esc, M6.1): Resume, Save, Load, Options (M12.1), Quit to title. Save and
 ## load go through Session and work at any time, also in a fight (the save
 ## holds the fight). Presentation only.
 class_name PauseMenu
@@ -9,6 +9,7 @@ signal message(text: String)
 signal quit_requested
 
 @onready var slots: SlotList = %Slots
+@onready var options: OptionsMenu = %Options
 @onready var _panel: PanelContainer = %Panel
 @onready var _resume: Button = %Resume
 
@@ -18,7 +19,9 @@ func _ready() -> void:
 	_resume.pressed.connect(close)
 	%Save.pressed.connect(open_save)
 	%Load.pressed.connect(open_load)
+	%OptionsButton.pressed.connect(open_options)
 	%Quit.pressed.connect(quit_to_title)
+	options.closed.connect(_show_buttons)
 	slots.picked.connect(_on_picked)
 	slots.cancelled.connect(_show_buttons)
 
@@ -30,6 +33,7 @@ func open() -> void:
 
 func close() -> void:
 	slots.close()
+	options.close()
 	hide()
 
 
@@ -41,6 +45,11 @@ func open_save() -> void:
 func open_load() -> void:
 	_panel.hide()
 	slots.open(SlotList.LOAD, Session.save_dir, Session.db)
+
+
+func open_options() -> void:
+	_panel.hide()
+	options.open()
 
 
 func save_to(slot: String) -> bool:
@@ -77,7 +86,7 @@ func _show_buttons() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and not slots.visible and event is InputEventKey and event.pressed \
+	if visible and not slots.visible and not options.visible and event is InputEventKey and event.pressed \
 			and not event.echo and event.physical_keycode == KEY_ESCAPE:
 		close()
 		get_viewport().set_input_as_handled()
