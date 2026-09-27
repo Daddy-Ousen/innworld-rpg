@@ -427,6 +427,19 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   https://opengameart.org/content/the-field-of-dreams
 - `music/forgotten_tombs.mp3` ("Forgoten tomb ambience", `Forgoten_tombs_1.mp3`) by kindland. Licence: CC0 1.0.
   https://opengameart.org/content/forgoten-tomb-ambience
+- `music/lament_warriors_soul.mp3` ("Fantasy: Lament for a Warrior's Soul", `Lament_for_a_Warriors_Soul.mp3`) and
+  `music/rising_moon.mp3` ("Fantasy: Rising Moon", `Rising_Moon.mp3`) by RandomMind. Licence: CC0 1.0.
+  https://opengameart.org/content/fantasy-lament-for-a-warriors-soul , https://opengameart.org/content/fantasy-rising-moon
+- `music/doom_in_the_morning.mp3` ("Doom in the Morning", `MorningAttack.mp3`) by VishwaJai. Licence: CC0 1.0.
+  https://opengameart.org/content/doom-in-the-morning
+- `music/fall_of_nightmares.ogg` ("Fall of Nightmares [Epic, Orchestral]") by nene, turned from WAV into OGG.
+  Licence: CC0 1.0. https://opengameart.org/content/fall-of-nightmares-epic-orchestral
+- `music/heavenly_loop.ogg` ("Heavenly Loop") by isaiah658. Licence: CC0 1.0.
+  https://opengameart.org/content/heavenly-loop
+- `music/snowfall.ogg` ("Snowfall", looped version) by Kistol. Licence: CC0 1.0.
+  https://opengameart.org/content/snowfall
+- `music/cold_hands.ogg` ("Cold Hands") by SkyleTheFrench. Licence: CC0 1.0.
+  https://opengameart.org/content/cold-hands
 - `sfx/chop.ogg`, `sfx/knifeSlice*.ogg`, `sfx/metalPot*.ogg`, `sfx/cloth*.ogg`, `sfx/doorOpen_*.ogg`,
   `sfx/handleCoins*.ogg`, `sfx/dropLeather.ogg`, `sfx/handleSmallLeather*.ogg`, `sfx/bookFlip*.ogg` and
   `sfx/creak*.ogg` from "RPG Audio" by Kenney (www.kenney.nl). Licence: CC0 1.0. https://kenney.nl/assets/rpg-audio
@@ -437,7 +450,7 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   Licence: CC0 1.0. https://opengameart.org/content/80-cc0-creature-sfx
 - `sfx/water_splash_*.ogg` from "40 CC0 water / splash / slime SFX" by rubberduck (`splash_*.ogg`).
   Licence: CC0 1.0. https://opengameart.org/content/40-cc0-water-splash-slime-sfx
-- `ui/*.wav` are made by `tools/build_sfx.py` (our own blips, chimes, the magic door and the faerie twinkle).
+- `ui/*.wav` are made by `tools/build_sfx.py` (our own blips, chimes, the magic door, the faerie twinkle and the sad sting).
   Licence: CC0 1.0.
 - `ambience/amb_cave.ogg` is "Loopable Dungeon Ambience" (`dungeon_ambient_1.ogg`) by JaggedStone.
   Licence: CC0 1.0. https://opengameart.org/content/loopable-dungeon-ambience

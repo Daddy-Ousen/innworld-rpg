@@ -88,7 +88,7 @@ func test_page_keys_are_real_page_kinds() -> void:
 		SystemMessages.NEWS, SystemMessages.RUMORS, SystemMessages.DRIFT, SystemMessages.OFFER,
 		SystemMessages.CONFIRM, SystemMessages.RESULT, SystemMessages.MORNING, SystemMessages.WELCOME]
 	for key: String in _audio.data["pages"]:
-		assert_true(kinds.has(key) or key == SoundCues.OPEN_PAGE, key)
+		assert_true(kinds.has(key) or key == SoundCues.OPEN_PAGE or key == SoundCues.DEATH_PAGE, key)
 	for kind: String in kinds:
 		assert_true(_audio.has_key("pages", kind), "page %s is listed" % kind)
 
