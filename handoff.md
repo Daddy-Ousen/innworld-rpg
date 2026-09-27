@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-27)
 - M11.3 merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)); tag `m11.3-done` on ebdcbf0 (pushed).
-- M11.4 Monsters built on branch `feat/m11.4-monsters` (PR opened this session). Detail: ADR 0018 "M11.4".
+- M11.4 Monsters built on branch `feat/m11.4-monsters` ([PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50) open). Detail: ADR 0018 "M11.4".
   - User OKs: download 3 LPC creature files; a new creature look kind in `appearance.json`.
   - 30 people enemies: LPC looks in `appearance.json` (canon check of Books 1-4 by a subagent; notes carry chapter refs).
   - 6 creatures: new `tools/build_creatures.py` bakes them into the normal character sheet layout (so the game

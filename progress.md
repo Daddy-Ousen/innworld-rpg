@@ -19,7 +19,7 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
   - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
   - [x] M11.2 Characters: merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)), tag `m11.2-done` on d000380. 43 looks, Antinium edits.
   - [x] M11.3 Animation: merged ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49)), tag `m11.3-done` on ebdcbf0. Sheet layout v2 (128 px attack block), `world/anim_diff.gd`, glides, hit flash, damage numbers, falls, swings.
-  - [ ] M11.4 Monsters (branch `feat/m11.4-monsters`): built, waiting for the user to check it. All 36 enemies have a sheet: 30 LPC people looks, 6 creatures from `tools/build_creatures.py` (LPC golem, bee, big worm, eagle recoloured; Rock Crab and snowman Snow Golem drawn). Monsters with a sheet are sprites with a state ring; gone ones fall and fade; a hidden crab is the rock prop. GUT 726/726 (78 scripts), Python 73/73, validator 0 errors.
+  - [ ] M11.4 Monsters (branch `feat/m11.4-monsters`): built, [PR #50](https://github.com/Daddy-Ousen/innworld-rpg/pull/50) open, waiting for the user to check it. All 36 enemies have a sheet: 30 LPC people looks, 6 creatures from `tools/build_creatures.py` (LPC golem, bee, big worm, eagle recoloured; Rock Crab and snowman Snow Golem drawn). Monsters with a sheet are sprites with a state ring; gone ones fall and fade; a hidden crab is the rock prop. GUT 726/726 (78 scripts), Python 73/73, validator 0 errors.
   - [ ] M11.5 Atmosphere (later)
 
 ## After M8
