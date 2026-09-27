@@ -17,7 +17,7 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
   - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
   - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
-  - [ ] M11.2 Characters (branch `feat/m11.2-characters`): built, PR open, waiting for the user to check the look. 43 looks in `data/appearance.json` (player, 33 NPCs with a schedule, 8 `race_*` generic looks, goblin_grunt), facts from a Books 1-4 text check. Antinium edits (extra arms, antennae, mandibles) in `tools/build_sprites.py`. GUT 708/708 (76 scripts), Python 64/64, validator 0 errors.
+  - [ ] M11.2 Characters (branch `feat/m11.2-characters`): built, [PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48) open, waiting for the user to check the look. 43 looks in `data/appearance.json` (player, 33 NPCs with a schedule, 8 `race_*` generic looks, goblin_grunt), facts from a Books 1-4 text check. Antinium edits (extra arms, antennae, mandibles) in `tools/build_sprites.py`. GUT 708/708 (76 scripts), Python 64/64, validator 0 errors.
   - [ ] M11.3 Animation (standard set)
   - [ ] M11.4 Monsters (36 enemies)
   - [ ] M11.5 Atmosphere (later)

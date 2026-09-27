@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-27)
 - M11.1 merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)); tag `m11.1-done` on 84eab06 (pushed).
-- M11.2 Characters built on branch `feat/m11.2-characters` (PR open; link in progress.md after it is made). Detail: ADR 0018 "M11.2".
+- M11.2 Characters built on branch `feat/m11.2-characters` ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48) open). Detail: ADR 0018 "M11.2".
   - `game/data/appearance.json`: 43 looks. Every NPC in `npc_behaviour.json` has its own look; 8 `race_*` generic looks.
     Facts come from a subagent check of the Books 1-4 text (chapter refs in each `note`).
   - New value kinds (shape unchanged; the user sees them with the PR): `race_<race>` look ids, `all.lpcr.<name>` colours,
