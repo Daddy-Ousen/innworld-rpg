@@ -1,44 +1,1049 @@
 {
 	"schema_version": 1,
-	"note": "Character looks (ADR 0018). Id = NPC id, enemy type or 'player'. tools/build_sprites.py bakes game/assets/characters/<id>.png from LPC parts. body = LPC body type; skin = body palette colour; parts = LPC sheet definition names with a palette colour. Colours not stated in the Book text are marked confidence 'guess'.",
+	"note": "Character looks (ADR 0018). Id = NPC id, enemy type, 'player', or 'race_<race>' (the generic look of an NPC with no own look; the race from canon npcs.json in lower case, '-' and ' ' as '_'). tools/build_sprites.py bakes game/assets/characters/<id>.png from LPC parts. body = LPC body type; skin = body palette colour ('all.lpcr.<name>' picks any LPC colour); parts = LPC sheet definition names with a palette colour, or our own edits (innworld_extra_arms, innworld_antennae, innworld_mandibles). Colours not stated in the Book text are marked confidence 'guess'.",
 	"looks": {
 		"player": {
-			"body": "male", "skin": "light",
+			"body": "male",
+			"skin": "light",
 			"parts": [
-				{"part": "heads_human_male"},
-				{"part": "hair_plain", "color": "dark_brown"},
-				{"part": "torso_clothes_longsleeve", "color": "blue"},
-				{"part": "legs_pants", "color": "charcoal"},
-				{"part": "feet_shoes_basic", "color": "black"}
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "blue"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
 			],
-			"confidence": "guess", "note": "The player is an unnamed Earther; plain modern clothes."
+			"confidence": "guess",
+			"note": "The player is an unnamed Earther; plain modern clothes."
+		},
+		"erin_solstice": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_ponytail",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "T-shirt, blue jeans and shoes (1.00, 1.01, 1.11). Hair and eye colour are not stated in Books 1-4: a brown ponytail is a guess."
+		},
+		"pisces": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male_gaunt"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "gray"
+				},
+				{
+					"part": "legs_pants",
+					"color": "gray"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "likely",
+			"note": "Thin and pale, unkempt brown hair, grey robes (1.08). LPC has no male robe: a grey shirt and trousers stand in."
+		},
+		"gerial": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "chestnut"
+				},
+				{
+					"part": "beards_mustache",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "steel"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				},
+				{
+					"part": "shield_heater_revised_trim",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Tall, moustache, armour, sword and shield (1.26R, 1.32R). Hair colour and armour type are guesses."
+		},
+		"sostrom": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hat_magic_wizard",
+					"color": "blue"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "navy"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "likely",
+			"note": "Bald under a pointed mage hat, with a staff (1.36, 1.39R, 1.54). 1.32R gives an unnamed Horns mage long black hair (conflict); bald is used. Clothes colour is a guess."
+		},
+		"wesle": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "light_brown"
+				},
+				{
+					"part": "beards_mustache",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young gate guard: weak moustache, cheap leather armour, sword (1.19R). Hair colour is a guess."
+		},
+		"fals": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "sky"
+				},
+				{
+					"part": "legs_pants",
+					"color": "tan"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "guess",
+			"note": "Tall, handsome City Runner with two daggers and good leather shoes (1.20R, 1.33R). Blond is from our npcs.json summary; the Books 1-4 check found the hair colour not stated."
+		},
+		"stenei": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female_elderly"
+				},
+				{
+					"part": "hair_bob",
+					"color": "gray"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "maroon"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "An older woman, [Receptionist] of the Celum Runners' Guild (1.39R). Race likely Human. Hair and clothes are guesses."
+		},
+		"lyonette": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "red"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Red hair, shorter than Yvlon (2.25). Thick winter clothes (2.31); clothes colours are guesses."
+		},
+		"ryoka_griffin": {
+			"body": "female",
+			"skin": "olive",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_high_ponytail",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "white"
+				},
+				{
+					"part": "legs_shorts",
+					"color": "black"
+				}
+			],
+			"confidence": "likely",
+			"note": "Tall, light brown skin, long black hair in a ponytail (1.20R), green eyes (1.27R). Barefoot in a t-shirt and shorts (2.48). Clothes colours are guesses."
+		},
+		"ylawes_byres": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "silver"
+				},
+				{
+					"part": "arms_armour",
+					"color": "silver"
+				},
+				{
+					"part": "legs_armour",
+					"color": "silver"
+				},
+				{
+					"part": "feet_armour",
+					"color": "silver"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				},
+				{
+					"part": "shield_heater_revised_trim",
+					"color": "silver"
+				}
+			],
+			"confidence": "likely",
+			"note": "Knight in gleaming silver armour with sword and shield (3.18T-3.19T). Hair is not stated: blond (like Yvlon) is a guess."
+		},
+		"yvlon_byres": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "gold"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "silver"
+				},
+				{
+					"part": "arms_armour",
+					"color": "silver"
+				},
+				{
+					"part": "legs_armour",
+					"color": "silver"
+				},
+				{
+					"part": "feet_armour",
+					"color": "silver"
+				}
+			],
+			"confidence": "confirmed",
+			"note": "Tall, fair, long golden-blonde hair, silver full plate with gauntlets (1.47R, 1.57H). The face scars after 1.63 are not drawn."
+		},
+		"ceria_springwalker": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "head_ears_elven"
+				},
+				{
+					"part": "hair_long",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "sky"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_wand"
+				}
+			],
+			"confidence": "likely",
+			"note": "Half-Elf with pointed ears, blonde hair, a wand and mage robes (1.26R, 1.32R). The LPC robe has no walk frames: a shirt and long skirt stand in. Her skeletal right hand (from 2.03) is not drawn."
+		},
+		"calruz": {
+			"body": "male",
+			"skin": "fur_brown",
+			"parts": [
+				{
+					"part": "heads_minotaur"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "steel"
+				},
+				{
+					"part": "legs_armour",
+					"color": "steel"
+				},
+				{
+					"part": "feet_armour",
+					"color": "steel"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "guess",
+			"note": "Minotaur in plate armour with a steel battleaxe (1.26R, 1.32R). Fur colour is not stated: brown is a guess."
 		},
 		"relc": {
-			"body": "male", "skin": "green",
+			"body": "male",
+			"skin": "all.lpcr.apple",
 			"parts": [
-				{"part": "heads_lizard_male"},
-				{"part": "tail_lizard"},
-				{"part": "torso_clothes_longsleeve", "color": "leather"},
-				{"part": "legs_pants", "color": "brown"}
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
 			],
-			"confidence": "guess", "note": "A big Drake of the Watch. Scale colour not clear in the Book 1 text."
+			"confidence": "confirmed",
+			"note": "Huge Drake with light green scales, very yellow eyes and a long tail (1.06), leather chest armour (1.10), spear (1.09+)."
+		},
+		"zevara": {
+			"body": "female",
+			"skin": "all.lpcr.azure",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "steel"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "confirmed",
+			"note": "Watch Captain, smaller than Relc; light blue, almost cobalt scales; chainmail and a sword (1.07). The eye colour conflict (yellow 1.07/1.30, light purple 1.28A/2.02) does not show at this size."
+		},
+		"belsc": {
+			"body": "male",
+			"skin": "all.lpcr.yellow",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Eastern gate guard (1.12). That he is the pale yellow, armoured gate guard of 1.11 is likely, not stated."
+		},
+		"lism": {
+			"body": "male",
+			"skin": "all.lpcr.purple",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				}
+			],
+			"confidence": "likely",
+			"note": "Drake [Shopkeeper] with grungy purple scales, taller than Olesm (1.17). Clothes are guesses."
+		},
+		"selys": {
+			"body": "female",
+			"skin": "pale_green",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "lavender"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "lavender"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Light green scales, like light grass (1.11, 1.37); wears a dress. The dress colour is a guess."
+		},
+		"drassi": {
+			"body": "female",
+			"skin": "all.lpcr.lemon",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "red"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "red"
+				}
+			],
+			"confidence": "likely",
+			"note": "Bright yellow scales and a tavern-girl outfit (1.11). Outfit colours are guesses."
+		},
+		"jasi": {
+			"body": "female",
+			"skin": "all.lpcr.garnet",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Dark red scales, poor clothes (3.15). Clothes are guesses."
+		},
+		"zel_shivertail": {
+			"body": "male",
+			"skin": "all.lpcr.fern",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Huge Drake, green scales tinted grey, scars; fights with his claws (3.33). The armour is a guess."
 		},
 		"krshia": {
-			"body": "female", "skin": "fur_brown",
+			"body": "female",
+			"skin": "fur_brown",
 			"parts": [
-				{"part": "heads_wolf_female"},
-				{"part": "tail_wolf", "color": "fur_brown"},
-				{"part": "torso_clothes_longsleeve", "color": "forest"},
-				{"part": "legs_pants", "color": "brown"}
+				{
+					"part": "heads_wolf_female"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "forest"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
 			],
-			"confidence": "guess", "note": "A Gnoll shopkeeper. LPC wolf parts stand in for Gnoll parts."
+			"confidence": "guess",
+			"note": "Tall Gnoll shopkeeper with earrings (1.18). Fur: russet spotted black (1.12) or light brown (1.18), a conflict; brown is used. Clothes are guesses."
+		},
+		"beilmark": {
+			"body": "female",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_wolf_female"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_grey"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Gnoll Senior Guardswoman (1.28A) who swings a club (1.62; LPC has no club for this body, so none is drawn). Fur colour is not stated: grey is a guess."
+		},
+		"mrsha": {
+			"body": "child",
+			"skin": "fur_white",
+			"parts": [
+				{
+					"part": "heads_wolf_child"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_white"
+				}
+			],
+			"confidence": "confirmed",
+			"note": "Small Gnoll cub. Forest-brown fur that turns pure white in 2.35; the white look is used for all of her time in the game."
+		},
+		"rags": {
+			"body": "child",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin_child"
+				},
+				{
+					"part": "torso_clothes_child_shirt",
+					"color": "brown"
+				},
+				{
+					"part": "legs_childpants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "The smallest Goblin, in the most tattered rags (1.07, 1.25). Her short sword (1.53) is not drawn: LPC child bodies have no weapons."
+		},
+		"goblin_gatherer": {
+			"body": "child",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin_child"
+				},
+				{
+					"part": "torso_clothes_child_shirt",
+					"color": "brown"
+				},
+				{
+					"part": "legs_childpants",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Older female Goblin with black hair and a spider-claw hairpin (1.07). Hair and hairpin are not drawn (LPC has no hair for child Goblin heads)."
+		},
+		"goblin_chieftain": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "hat_helmet_barbarian"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "likely",
+			"note": "A head taller than Erin, rusted helmet, rusted chainmail over ragged furs, axes (1.13-1.14)."
+		},
+		"toren": {
+			"body": "male",
+			"skin": "light",
+			"base": "body_skeleton",
+			"parts": [
+				{
+					"part": "heads_skeleton"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Skeleton with yellow-white bones, taller than Erin (1.41); a sword from about 1.46. Blue eye-flames (purple from 3.17T) and bronze armour (2.42) are not drawn."
+		},
+		"klbkch": {
+			"body": "male",
+			"skin": "all.lpcr.soot",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Four arms, carapace dark brown almost black, two swords (1.06, 1.16, 1.29). Reborn with two arms in 1.62-1.63; the four-armed look is kept. Our edits: second pair of arms, antennae, mandibles."
+		},
+		"ksmvr": {
+			"body": "male",
+			"skin": "all.lpcr.coffee",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Four arms, brown-black carapace, two swords and two daggers (1.49, 1.60). He loses an arm by 2.32H; not drawn."
+		},
+		"pawn": {
+			"body": "male",
+			"skin": "all.lpcr.chocolate",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Worker with a brown carapace (1.25). From 1.50 he is missing limbs until about 3.05L; the whole Worker look is kept."
+		},
+		"designated_worker": {
+			"body": "male",
+			"skin": "all.lpcr.chocolate",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "confirmed",
+			"note": "A Worker with no weapon (1.29): four arms, antennae, mandibles, brown carapace (1.23A, 1.25)."
+		},
+		"bird": {
+			"body": "male",
+			"skin": "all.lpcr.chocolate",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Worker (1.61); hunts birds with a bow (3.05L); LPC has no walk frames for the bow, so none is drawn."
+		},
+		"race_human": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Any Human with no own look."
+		},
+		"race_drake": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				}
+			],
+			"confidence": "likely",
+			"note": "Any Drake with no own look. Most scales are green or blue (1.11)."
+		},
+		"race_gnoll": {
+			"body": "male",
+			"skin": "fur_tan",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_tan"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Any Gnoll with no own look: chestnut fur, light clothes (1.11)."
+		},
+		"race_antinium": {
+			"body": "male",
+			"skin": "all.lpcr.chocolate",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "likely",
+			"note": "Any Antinium with no own look: a Worker (1.23A, 1.25)."
+		},
+		"race_goblin": {
+			"body": "child",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin_child"
+				},
+				{
+					"part": "legs_childpants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Any Goblin with no own look: small, green, ragged (1.02, 1.13)."
+		},
+		"race_undead": {
+			"body": "male",
+			"skin": "light",
+			"base": "body_skeleton",
+			"parts": [
+				{
+					"part": "heads_skeleton"
+				}
+			],
+			"confidence": "guess",
+			"note": "Any Undead with no own look: a plain skeleton."
+		},
+		"race_minotaur": {
+			"body": "male",
+			"skin": "fur_brown",
+			"parts": [
+				{
+					"part": "heads_minotaur"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Any Minotaur with no own look."
+		},
+		"race_half_elf": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "head_ears_elven"
+				},
+				{
+					"part": "hair_long",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "forest"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Any half-Elf with no own look."
 		},
 		"goblin_grunt": {
-			"body": "child", "skin": "green",
+			"body": "child",
+			"skin": "green",
 			"parts": [
-				{"part": "heads_goblin_child"}
+				{
+					"part": "heads_goblin_child"
+				}
 			],
-			"confidence": "guess", "note": "Small green Goblin. Clothes come in M11.4."
+			"confidence": "guess",
+			"note": "Small green Goblin. Clothes come in M11.4."
 		}
 	}
 }
