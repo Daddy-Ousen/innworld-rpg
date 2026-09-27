@@ -1,7 +1,8 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M12.4 Ambience on branch `feat/m12.4-ambience` (committed, not pushed). 7 downloads (user OK) + the old
+- M12.4 merged ([PR #56](https://github.com/Daddy-Ousen/innworld-rpg/pull/56)); tag `m12.4-done` on bf84ad6.
+  The user approved the ambience. M12.4 had: 7 downloads (user OK) + the old
   water loop: 8 loops in `assets/audio/ambience/` (3.2 MB, `loop=true`). Area beds in `audio.json` `ambience`
   (birds / crickets / wind outdoors, crowd in the markets and the Frenzied Hare, cave bed in the bee cave and the
   rift; indoors quiet). Object loops: `"sound"` in objects.json (fires, well, bee nest) ->
@@ -12,10 +13,7 @@
   Detail: ADR 0019 "M12.3".
 
 ## Next steps
-1. The user listens to M12.4 (the Floodplains by day and at night, Liscor market, the Frenzied Hare, the bee
-   cave, a brazier or campfire, a well; winter wind if a save is past the Solstice start). Tune `volume_db` in
-   `audio.json` if asked. Then push, PR, merge, tag `m12.4-done`, tick ROADMAP and progress.
-2. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
+1. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -50,7 +48,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Listen to the M12.4 ambience, then the PR.
+- Start M12.5 Canon moments (downloads need an OK: file, source, size).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
