@@ -1,19 +1,19 @@
 # Handoff
 
 ## Just done (2026-09-27)
+- M12.5 Canon moments built on branch `feat/m12.5-canon-moments` (PR open, not merged).
+  7 CC0 tracks (user OK): lament, undead_siege, last_stand (WAV -> OGG), faerie_night, heavenly, stage_play,
+  christmas. 9 moments in `audio.json` `moments`, each tied to canon stage ids (fights via `combat.stage_run`,
+  scenes via `Stage.is_scene_live`). Sad sting: `tools/build_sfx.py` `sad_sting`; `SystemMessages.news_deaths`
+  puts `"deaths"` on the Local News page; `SoundCues.page_sound` plays `pages.death`. Audio is 56 MB.
+  GUT 800/800 (86 scripts), Python 77/77, validator 0 errors. Detail: ADR 0019 "M12.5".
 - M12.4 merged ([PR #56](https://github.com/Daddy-Ousen/innworld-rpg/pull/56)); tag `m12.4-done` on bf84ad6.
-  The user approved the ambience. M12.4 had: 7 downloads (user OK) + the old
-  water loop: 8 loops in `assets/audio/ambience/` (3.2 MB, `loop=true`). Area beds in `audio.json` `ambience`
-  (birds / crickets / wind outdoors, crowd in the markets and the Frenzied Hare, cave bed in the bee cave and the
-  rift; indoors quiet). Object loops: `"sound"` in objects.json (fires, well, bee nest) ->
-  `Audio.place_loops` (AudioStreamPlayer2D). `world/ambience_pick.gd`. GUT 793/793 (85 scripts). ADR 0019 "M12.4".
-- M12.3 merged ([PR #55](https://github.com/Daddy-Ousen/innworld-rpg/pull/55)); tag `m12.3-done` on 081b377.
-  The user approved the music. M12.3 had: 8 CC0 tracks (user OK; audio limit raised to about 60 MB, audio is 33 MB),
-  moods for all 15 maps, fight / battle / scene music, `world/music_pick.gd`. GUT 780/780 (84 scripts).
-  Detail: ADR 0019 "M12.3".
 
 ## Next steps
-1. M12.5 canon moments: a subagent finds the flags / stage ids in canon data (no book text in the main session).
+1. The user listens to the M12.5 tracks (fastest: debug console / a save near a moment) and approves.
+2. Merge the PR. Tag `m12.5-done` and `m12-done` on the merge commit. Tick M12.5 and M12 in `docs/ROADMAP.md`
+   and `progress.md`; move M12 detail to `docs/PROGRESS_ARCHIVE.md`.
+3. Ask the user for the next milestone (see `docs/ROADMAP.md`).
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -48,7 +48,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Start M12.5 Canon moments (downloads need an OK: file, source, size).
+- Listen to and approve the M12.5 moment music and the sad sting; then merge.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -116,5 +116,5 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/data/audio.json`, `game/ui/audio.gd`, `game/ui/audio_db.gd`, `game/ui/audio_settings.gd`,
+- `game/data/audio.json`, `game/ui/system_messages.gd` (news_deaths), `game/tests/unit_canon_moments.gd`, `game/ui/audio.gd`, `game/ui/audio_db.gd`, `game/ui/audio_settings.gd`,
   `game/ui/options_menu.gd`, `game/world/sound_cues.gd`, `game/tests/unit_audio*.gd`, `docs/adr/0019-m12-audio.md`.

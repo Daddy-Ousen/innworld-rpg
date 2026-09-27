@@ -5,7 +5,9 @@
 ## it. Reads state only; the dialog sends the answers as Commands.
 ##
 ## A page: {"kind", "title", "lines": Array[String], "choices": Array[String],
-## "class": String}. `class` is set on offer and confirm pages only.
+## "class": String}. `class` is set on offer and confirm pages only. The
+## news page also has "deaths": the NPCs whose death tonight's news tells
+## of (M12.5: the dialog plays a sad sting for them).
 class_name SystemMessages
 extends RefCounted
 
@@ -52,7 +54,9 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 		out.append(page(PROGRESS, "Levels and Skills", progress))
 	var news: Array = night.get("news", [])
 	if not news.is_empty():
-		out.append(page(NEWS, "Local News", news))
+		var p := page(NEWS, "Local News", news)
+		p["deaths"] = news_deaths(night, gs, db)
+		out.append(p)
 	var rumors: Array = (night.get("world", []) as Array).filter(func(l: String) -> bool:
 		return l != Director.UNRELIABLE_LINE)
 	if not rumors.is_empty():
@@ -137,6 +141,30 @@ static func result(lines: Array) -> Dictionary:
 ## withdraw other offers). The dialog skips such pages.
 static func is_open(p: Dictionary, gs: GameState) -> bool:
 	return p["kind"] != OFFER or gs.progression.has_offer(p["class"])
+
+
+## The NPCs killed tonight by canon events that made local news: an
+## event that ran (done, substituted or changed) with news (its own or its
+## hook's) and a `kill` effect whose NPC is dead now. A role filled by
+## another NPC means that NPC (as Director._apply_effects does).
+static func news_deaths(night: Dictionary, gs: GameState, db: DataDb) -> Array[String]:
+	var out: Array[String] = []
+	for entry: Dictionary in night.get("events", []):
+		if not [Director.DONE, Director.SUBSTITUTED, Director.CHANGED].has(entry.get("outcome", "")):
+			continue
+		var ev: Dictionary = db.canon.events.get(String(entry.get("event", "")), {})
+		if String(ev.get("news", "")) == "" and not entry.has("hook"):
+			continue
+		var roles: Dictionary = entry.get("roles", {})
+		for npc: String in ev.get("effects", {}).get("kill", []):
+			var who := npc
+			for name: String in roles:
+				var prefer: Array = ev.get("roles", {}).get(name, {}).get("prefer", [])
+				if prefer.has(npc) and roles[name] != npc and not roles.values().has(npc):
+					who = roles[name]
+			if not gs.world.is_alive(db.canon, who) and not out.has(who):
+				out.append(who)
+	return out
 
 
 static func page(kind: String, title: String, lines: Array, choices: Array = [NEXT]) -> Dictionary:

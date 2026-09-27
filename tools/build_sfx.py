@@ -54,6 +54,9 @@ SOUNDS: dict[str, dict] = {
     # A Frost Faerie: a few quick high twinkles.
     "sparkle": {"partials": PURE, "decay": 18.0, "notes": [
         (2637.0, 0.0, 0.2, 0.6), (3136.0, 0.07, 0.2, 0.5), (2349.3, 0.14, 0.2, 0.5), (3520.0, 0.21, 0.25, 0.5)]},
+    # A death in the news: a slow minor line falling to a low held D.
+    "sad_sting": {"partials": BELL, "decay": 1.8, "notes": [
+        (440.0, 0.0, 0.6, 0.6), (349.2, 0.3, 0.6, 0.6), (293.7, 0.6, 0.85, 0.7), (146.8, 0.6, 0.85, 0.5)]},
 }
 
 

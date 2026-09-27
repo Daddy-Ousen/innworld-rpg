@@ -74,7 +74,7 @@ func _advance() -> void:
 
 func _show(page: Dictionary) -> void:
 	current = page
-	Audio.play_cues([SoundCues.page_cue(Audio.db, String(page.get("kind", "")))])
+	Audio.play_cues([SoundCues.page_sound(Audio.db, page)])
 	_title.text = "[%s]" % page["title"]
 	_text.text = "\n".join(page["lines"])
 	for b in _buttons.get_children():

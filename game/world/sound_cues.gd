@@ -8,6 +8,7 @@ extends RefCounted
 const MAX_SAME := 2
 const DOOR := "door"
 const OPEN_PAGE := "open"
+const DEATH_PAGE := "death"
 
 
 ## The footstep cue for a step onto a tile ("" = no sound). In winter a
@@ -69,3 +70,11 @@ static func door_cue(audio: AudioDb, from_indoor: bool, to_indoor: bool) -> Stri
 ## The cue of a System page kind; a kind not in the data plays "open".
 static func page_cue(audio: AudioDb, kind: String) -> String:
 	return audio.cue("pages", kind if audio.has_key("pages", kind) else OPEN_PAGE)
+
+
+## The cue of a System page: a page that tells of a death (its "deaths",
+## M12.5) plays the "death" cue when the data has one, else its kind's cue.
+static func page_sound(audio: AudioDb, page: Dictionary) -> String:
+	if not (page.get("deaths", []) as Array).is_empty() and audio.has_key("pages", DEATH_PAGE):
+		return audio.cue("pages", DEATH_PAGE)
+	return page_cue(audio, String(page.get("kind", "")))
