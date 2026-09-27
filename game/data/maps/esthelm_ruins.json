@@ -10,8 +10,8 @@
 		{"at": [0, 3, 1, 2], "to": "road_camp", "arrive": [30, 5], "minutes": 180}
 	],
 	"objects": [
-		{"id": "esthelm_campfire", "at": [5, 9], "name": "Refugee campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
-		{"id": "esthelm_rubble_stones", "at": [6, 11], "name": "Loose rubble", "actions": [], "item": "stone"}
+		{"id": "esthelm_campfire", "kind": "campfire", "at": [5, 9], "name": "Refugee campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
+		{"id": "esthelm_rubble_stones", "kind": "stones", "at": [6, 11], "name": "Loose rubble", "actions": [], "item": "stone"}
 	],
 	"legend": {".": "cobble", ",": "grass", ":": "dirt_road", "#": "building", "^": "rock", "W": "city_wall", "|": "wood_wall"},
 	"rows": [

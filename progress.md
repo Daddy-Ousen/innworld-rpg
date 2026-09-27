@@ -15,8 +15,8 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - [x] M9 — Book 3 (Flowers of Esthelm). M9.1–M9.4 merged; tags `m9.1-done` … `m9.4-done` and `m9-done` on merge commit 9e8f179 ([PR #39](https://github.com/Daddy-Ousen/innworld-rpg/pull/39)). Detail in the archive and ADR 0016.
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
-  - [ ] M11.0 Art spike (branch `feat/m11.0-art-spike`): look approved by the user 2026-09-27; [PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46) open, pending merge. 32 px cells, zoom 2; LPC tiles for the `liscor_gate` tiles; `tools/build_sprites.py` (Pillow) bakes `appearance.json` looks (player, Relc, Krshia, Goblin grunt); `CharacterSprite`; the player glides per step; `CREDITS.md`. GUT 697/697 (75 scripts), Python 57/57, validator 0 errors.
-  - [ ] M11.1 Tiles and objects
+  - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
+  - [ ] M11.1 Tiles and objects (branch `feat/m11.1-tiles-objects`): built, [PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47) open, waiting for the user to check the look. All 16 tiles have art (soft terrain edges via `world/ground_art.gd`, winter snow); all 67 map objects have a `kind` with art in `data/objects.json` (33 kinds; our edits in `assets/objects/edits.png` from `tools/build_objects.py`). GUT 705/705 (76 scripts), Python 61/61, validator 0 errors.
   - [ ] M11.2 Characters (`appearance.json`, layered node, 33 NPCs + player)
   - [ ] M11.3 Animation (standard set)
   - [ ] M11.4 Monsters (36 enemies)
@@ -31,8 +31,8 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=13), `save_migrations` (1→…→13), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 75 GUT scripts, 697 tests, all pass, headless exit 0. Python tool tests: 57 pass (`python -m unittest discover -s tools/tests`).
-- Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py` (needs Pillow: `pip install -r tools/requirements.txt`).
+- Tests: 76 GUT scripts, 705 tests, all pass, headless exit 0. Python tool tests: 61 pass (`python -m unittest discover -s tools/tests`).
+- Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py` (both need Pillow: `pip install -r tools/requirements.txt`).
 
 ## Blockers
 - None.

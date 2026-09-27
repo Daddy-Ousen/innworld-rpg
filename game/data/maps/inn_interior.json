@@ -11,14 +11,14 @@
 		{"at": [12, 15, 1, 1], "to": "inn_hill", "arrive": [16, 12], "minutes": 0}
 	],
 	"objects": [
-		{"id": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true, "item": "rolling_pin"},
-		{"id": "wash_basin", "at": [22, 3], "name": "Wash basin", "actions": ["wash_dishes"], "solid": true},
-		{"id": "broom", "at": [2, 1], "name": "Broom", "actions": ["sweep_floor"]},
-		{"id": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true, "item": "chair"},
-		{"id": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true, "item": "chair"},
-		{"id": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true},
-		{"id": "inn_counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"},
-		{"id": "albez_door", "at": [2, 12], "name": "Magic door", "actions": [],
+		{"id": "stove", "kind": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true, "item": "rolling_pin"},
+		{"id": "wash_basin", "kind": "basin", "at": [22, 3], "name": "Wash basin", "actions": ["wash_dishes"], "solid": true},
+		{"id": "broom", "kind": "broom", "at": [2, 1], "name": "Broom", "actions": ["sweep_floor"]},
+		{"id": "chess_table", "kind": "chess_table", "at": [5, 5], "name": "Table with a chessboard", "actions": ["play_chess", "repair_furniture"], "solid": true, "item": "chair"},
+		{"id": "table", "kind": "table", "at": [9, 8], "name": "Table", "actions": ["repair_furniture"], "solid": true, "item": "chair"},
+		{"id": "bed", "kind": "bed", "at": [21, 13], "name": "Bed", "actions": ["clean_room"], "solid": true, "sleep": true},
+		{"id": "inn_counter", "kind": "counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"},
+		{"id": "albez_door", "kind": "door", "at": [2, 12], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.at_wandering_inn"],
 			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}}
 	],

@@ -12,9 +12,9 @@
 		{"at": [16, 0, 2, 1], "to": "road_camp", "arrive": [16, 22], "minutes": 600}
 	],
 	"objects": [
-		{"id": "milestone", "at": [8, 10], "name": "Road stone", "actions": ["sprint_training"], "solid": true},
-		{"id": "fallen_branch", "at": [14, 15], "name": "Fallen branch", "actions": ["weapon_practice", "throw_object"], "context": {"weapon": "improvised"}},
-		{"id": "liscor_wagon", "at": [18, 9], "name": "Wagon to Celum", "actions": [], "solid": true, "ride": {"to": "celum_gate", "pos": [17, 5], "minutes": 480, "price": 40}}
+		{"id": "milestone", "kind": "milestone", "at": [8, 10], "name": "Road stone", "actions": ["sprint_training"], "solid": true},
+		{"id": "fallen_branch", "kind": "branch", "at": [14, 15], "name": "Fallen branch", "actions": ["weapon_practice", "throw_object"], "context": {"weapon": "improvised"}},
+		{"id": "liscor_wagon", "kind": "wagon", "at": [18, 9], "name": "Wagon to Celum", "actions": [], "solid": true, "ride": {"to": "celum_gate", "pos": [17, 5], "minutes": 480, "price": 40}}
 	],
 	"legend": {"#": "city_wall", ",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "_": "cobble"},
 	"rows": [

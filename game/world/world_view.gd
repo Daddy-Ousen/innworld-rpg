@@ -15,6 +15,9 @@
 ## a "prop" (a tree, a rock) is drawn over it, y-sorted with the characters.
 ## The player and NPCs with a baked sheet are CharacterSprites; the player's
 ## sprite glides one cell per step. Anything with no art is drawn as before.
+## M11.1: the ground comes from GroundArt (soft edges between terrains in the
+## Edges layer), and a map object with a "kind" is drawn from
+## data/objects.json (a "frames" object is animated).
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -23,6 +26,10 @@ const TILE := 32
 ## Old 16 px sizes are scaled by this.
 const U := TILE / 16
 const SHEET_PATH := "res://assets/tiles/%s.png"
+const OBJECT_SHEET_PATH := "res://assets/objects/%s.png"
+const OBJECT_ART_PATH := "res://data/objects.json"
+## Frames per second of animated objects (a fire).
+const ANIM_FPS := 6.0
 ## One step glide, the same as the held-key repeat in main.gd.
 const STEP_TIME := 0.14
 const OBJECT_COLOR := Color("#e8c547")
@@ -62,6 +69,8 @@ var area := ""
 var atlas: Dictionary = {}
 ## tile id → {"source": id, "cells": Array[Vector2i]} for tiles with art.
 var sprites: Dictionary = {}
+## Object kind → objects.json entry (see object_look).
+var object_art: Dictionary = {}
 ## The player's sprite (null = the red square).
 var look: CharacterSprite
 ## NPC id → name shown over its marker.
@@ -76,8 +85,12 @@ var _maps: MapDb
 var _winter_flag := ""
 var _winter := false
 var _overlay_key := ""
+## Animated object sprites on the map now, and the animation clock.
+var _animated: Array[Sprite2D] = []
+var _anim_time := 0.0
 
 @onready var tiles: TileMapLayer = $Tiles
+@onready var edges: TileMapLayer = $Edges
 @onready var marks: Node2D = $Marks
 @onready var npcs: Node2D = $Npcs
 @onready var monsters: Node2D = $Monsters
@@ -97,9 +110,11 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	npc_max_hp = max_hp
 	_winter_flag = winter_flag
 	_winter = false
+	object_art = load_object_art()
 	atlas.clear()
 	sprites.clear()
 	tiles.tile_set = make_tile_set(maps.tiles, atlas, false, sprites)
+	edges.tile_set = tiles.tile_set
 	area = ""
 	if look != null:
 		player.remove_child(look)
@@ -122,6 +137,7 @@ func refresh(gs: GameState) -> void:
 		atlas.clear()
 		sprites.clear()
 		tiles.tile_set = make_tile_set(_maps.tiles, atlas, winter, sprites)
+		edges.tile_set = tiles.tile_set
 		area = ""
 	if _maps.overlay_key != _overlay_key:
 		_overlay_key = _maps.overlay_key
@@ -143,6 +159,50 @@ func refresh(gs: GameState) -> void:
 			look.pose(gs.player.facing)
 	if new_area:  # jump, do not glide across the new map
 		camera.reset_smoothing()
+
+
+func _process(delta: float) -> void:
+	if _animated.is_empty():
+		return
+	_anim_time += delta
+	var step := int(_anim_time * ANIM_FPS)
+	for s in _animated:
+		var n := int(s.get_meta("frames"))
+		s.region_rect.position.x = float(s.get_meta("x0")) + (step % n) * s.region_rect.size.x
+
+
+## The file of an art sheet: game/assets/tiles/<name>.png, else
+## game/assets/objects/<name>.png; "" when neither exists.
+static func sheet_path(sheet_name: String) -> String:
+	if sheet_name == "":
+		return ""
+	for f: String in [SHEET_PATH, OBJECT_SHEET_PATH]:
+		if ResourceLoader.exists(f % sheet_name):
+			return f % sheet_name
+	return ""
+
+
+## data/objects.json "kinds" ({} when the file is missing or broken).
+static func load_object_art(path: String = OBJECT_ART_PATH) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not d is Dictionary or not (d as Dictionary).get("kinds", {}) is Dictionary:
+		return {}
+	return d["kinds"]
+
+
+## The art of a map object: {"sheet", "region": Rect2 (pixels, frame 0),
+## "frames"}, or {} when its kind has no art (it is drawn as a square).
+static func object_look(o: Dictionary, kinds: Dictionary, winter: bool = false) -> Dictionary:
+	var art: Variant = kinds.get(String(o.get("kind", "")), {})
+	if not art is Dictionary or sheet_path(String(art.get("sheet", ""))) == "":
+		return {}
+	var r: Variant = art["winter_region"] if winter and art.has("winter_region") else art.get("region")
+	if not r is Array or (r as Array).size() != 4:
+		return {}
+	return {"sheet": String(art["sheet"]), "region": Rect2(r[0], r[1], r[2], r[3]),
+		"frames": maxi(int(art.get("frames", 1)), 1)}
 
 
 static func cell_center(cell: Vector2i) -> Vector2:
@@ -193,11 +253,11 @@ static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: 
 	var sheets := {}
 	for id in ids:
 		var sp := sprite_def(tile_defs[id], winter)
-		if sp.is_empty() or not ResourceLoader.exists(SHEET_PATH % sp["sheet"]):
+		if sp.is_empty() or sheet_path(String(sp["sheet"])) == "":
 			continue
 		if not sheets.has(sp["sheet"]):
 			var s := TileSetAtlasSource.new()
-			s.texture = load(SHEET_PATH % sp["sheet"])
+			s.texture = load(sheet_path(String(sp["sheet"])))
 			s.texture_region_size = Vector2i(TILE, TILE)
 			sheets[sp["sheet"]] = ts.add_source(s)
 		var src: TileSetAtlasSource = ts.get_source(sheets[sp["sheet"]])
@@ -214,18 +274,22 @@ static func make_tile_set(tile_defs: Dictionary, atlas_out: Dictionary, winter: 
 func _show_area(id: String) -> void:
 	area = id
 	tiles.clear()
+	edges.clear()
+	_animated.clear()
 	for child in props.get_children():
 		props.remove_child(child)
 		child.queue_free()
 	var size := _maps.size(id)
+	var ground := GroundArt.plan(_maps, id, _winter)
 	for y in size.y:
 		for x in size.x:
 			var cell := Vector2i(x, y)
 			var t := _maps.tile_at(id, cell)
-			if sprites.has(t):
-				tiles.set_cell(cell, sprites[t]["source"], pick_cell(sprites[t]["cells"], cell))
-			else:
+			var art: Dictionary = ground.get(cell, {})
+			if art.is_empty() or not _set_art(tiles, cell, art["base"]):
 				tiles.set_cell(cell, 0, atlas[t])
+			if art.has("over"):
+				_set_art(edges, cell, art["over"])
 			_add_prop(t, cell)
 	for child in marks.get_children():
 		marks.remove_child(child)
@@ -235,7 +299,12 @@ func _show_area(id: String) -> void:
 		var r := MapDb.rect_of(e["at"])
 		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
 	for o: Dictionary in _maps.objects_on(id):
-		var at := Vector2(int(o["at"][0]), int(o["at"][1])) * TILE
+		var cell := Vector2i(int(o["at"][0]), int(o["at"][1]))
+		var look_art := object_look(o, object_art, _winter)
+		if not look_art.is_empty():
+			_add_sprite(look_art["sheet"], look_art["region"], cell, look_art["frames"])
+			continue
+		var at := Vector2(cell * TILE)
 		_rect(at + Vector2(2, 2) * U, Vector2(TILE - 4 * U, TILE - 4 * U), OBJECT_COLOR)
 		var label := Label.new()
 		label.text = String(o["name"]).left(1)
@@ -448,23 +517,64 @@ func _add_label(marker: Node2D, text: String, top: float = 5.0 * U) -> void:
 	label.position = Vector2(-size.x / 2.0, -top - size.y)
 
 
-## A tile's prop (a tree, a rock) on `cell`: a region of its sheet,
-## bottom-centred on the cell, in the y-sorted Props layer.
+## A tile's prop (a tree, a rock) on `cell`: a region of its sheet (in
+## cells), bottom-centred on the cell, in the y-sorted Props layer.
 func _add_prop(tile: String, cell: Vector2i) -> void:
 	var def: Dictionary = _maps.tiles.get(tile, {})
 	var p := sprite_def(def, _winter, "prop")
-	if p.is_empty() or not ResourceLoader.exists(SHEET_PATH % p["sheet"]):
+	if p.is_empty() or sheet_path(String(p["sheet"])) == "":
 		return
 	var r: Array = p["region"]
-	var size := Vector2(int(r[2]), int(r[3])) * TILE
+	_add_sprite(p["sheet"], Rect2(Vector2(int(r[0]), int(r[1])) * TILE,
+			Vector2(int(r[2]), int(r[3])) * TILE), cell)
+
+
+## A region (pixels) of a sheet, bottom-centred on `cell`, in the y-sorted
+## Props layer. With `frames` > 1 it is animated (the frames follow to the right).
+func _add_sprite(sheet: String, region: Rect2, cell: Vector2i, frames: int = 1) -> Sprite2D:
 	var s := Sprite2D.new()
-	s.texture = load(SHEET_PATH % p["sheet"])
+	s.texture = load(sheet_path(sheet))
 	s.region_enabled = true
-	s.region_rect = Rect2(Vector2(int(r[0]), int(r[1])) * TILE, size)
+	s.region_rect = region
 	s.centered = false
-	s.offset = Vector2(-size.x / 2.0, TILE / 2.0 - size.y)
+	s.offset = Vector2(-region.size.x / 2.0, TILE / 2.0 - region.size.y)
 	s.position = cell_center(cell)
 	props.add_child(s)
+	if frames > 1:
+		s.set_meta("frames", frames)
+		s.set_meta("x0", region.position.x)
+		_animated.append(s)
+	return s
+
+
+## Draws `art` ([sheet, cell of the sheet]) on `cell` of `layer`; false when
+## the sheet or its cell is missing (the caller draws the colour square).
+func _set_art(layer: TileMapLayer, cell: Vector2i, art: Array) -> bool:
+	var path := sheet_path(String(art[0]))
+	if path == "":
+		return false
+	var ts := tiles.tile_set
+	var id := -1
+	for i in ts.get_source_count():
+		var sid := ts.get_source_id(i)
+		var src := ts.get_source(sid) as TileSetAtlasSource
+		if src != null and src.texture != null and src.texture.resource_path == path:
+			id = sid
+			break
+	if id < 0:
+		var s := TileSetAtlasSource.new()
+		s.texture = load(path)
+		s.texture_region_size = Vector2i(TILE, TILE)
+		id = ts.add_source(s)
+	var atlas_src: TileSetAtlasSource = ts.get_source(id)
+	var c: Vector2i = art[1]
+	var cells := atlas_src.texture.get_size() / TILE
+	if c.x < 0 or c.y < 0 or c.x >= int(cells.x) or c.y >= int(cells.y):
+		return false
+	if not atlas_src.has_tile(c):
+		atlas_src.create_tile(c)
+	layer.set_cell(cell, id, c)
+	return true
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:

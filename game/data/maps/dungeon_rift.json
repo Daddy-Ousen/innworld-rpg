@@ -10,8 +10,8 @@
 		{"at": [8, 0, 2, 1], "to": "floodplains_south", "arrive": [8, 22], "minutes": 60}
 	],
 	"objects": [
-		{"id": "rift_rope_anchor", "at": [12, 11], "name": "Rope anchor at the rift edge", "actions": ["keep_watch"]},
-		{"id": "rift_loose_stones", "at": [6, 16], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "rift_rope_anchor", "kind": "rope_anchor", "at": [12, 11], "name": "Rope anchor at the rift edge", "actions": ["keep_watch"]},
+		{"id": "rift_loose_stones", "kind": "stones", "at": [6, 16], "name": "Loose stones", "actions": [], "item": "stone"}
 	],
 	"legend": {",": "tall_grass", ".": "grass", "^": "rock", "T": "tree", "X": "chasm"},
 	"rows": [

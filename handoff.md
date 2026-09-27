@@ -1,28 +1,29 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M10 closed: tags `m10.5-done`, `m10-done` on 25b8d94 (pushed). M11 plan accepted (ADR 0018).
-- M11.0 art spike built on branch `feat/m11.0-art-spike` (pushed; [PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46) open, look approved by the user). Detail: ADR 0018 "M11.0".
-  - User OKs: download 3 art sources; Pillow for tools (`tools/requirements.txt`).
-  - Art: `game/assets/tiles/lpc_terrains.png` (LPC Terrains v7), `lpc_atlas.png` (LPC Tile Atlas), their credit files; `game/assets/characters/{player,relc,krshia,goblin_grunt}.png` baked by `tools/build_sprites.py` from `game/data/appearance.json`. `CREDITS.md` at repo root.
-  - Code: `WorldView.TILE` 32 (U = 2 scales old sizes), zoom 2, y-sort + `Props` layer, tile `sprite`/`prop` from `tiles.json`, `world/character_sprite.gd` (new), player glide per step, NPC sprites.
-  - GUT 697/697 (75 scripts), Python 57/57, validator 0. Screenshots sent to the user (gate, market).
+- M11.0 merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)); tag `m11.0-done` on ea93b99 (pushed).
+- M11.1 Tiles and objects built on branch `feat/m11.1-tiles-objects` ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47) open). Detail: ADR 0018 "M11.1".
+  - User OKs: 5 LPC downloads (base assets, tavern, house interior, well, campfire - campfire not used) and 2 schema changes (object `kind` + `data/objects.json`; tile sprite `edges` + `z`).
+  - New art: `game/assets/objects/` (tavern_furniture/cooking/deco, lpc_interior, lpc_well, edits + credit txts), `game/assets/tiles/lpc_house.png`, `lpc_inside.png`, `lpc_base_CREDITS.txt`. CREDITS.md has a "Map objects" section.
+  - Code: `world/ground_art.gd` (new, pure: ground plan + soft edges), `world/world_view.gd` (Edges layer, object sprites, `sheet_path`, `object_look`, `_process` for 6 fps frames), `world_view.tscn` (Edges TileMapLayer), `core/map_db.gd` (kind must be a string).
+  - Tool: `tools/build_objects.py` makes `assets/objects/edits.png`; `--check` compares objects.json regions with the layout.
+  - GUT 705/705 (76 scripts), Python 61/61, validator 0. Screenshots sent to the user.
 
 ## Next steps
-1. User merges PR #46. Then tick M11.0 in ROADMAP and `progress.md`, tag `m11.0-done` on the merge commit.
-   - Also commit the 4 missing `game/tests/sim_book4_*.gd.uid` files (made by import; already in the branch as a chore commit).
-2. M11.1 Tiles and objects: terrain edges (LPC Terrains blocks are 3 wide: rows of inner corners, a 3×3 edge ring, fill variants; `terrain-map-v7.png` has wang tiles but is 31488 px tall, too tall for a GPU texture: cut it or do corner lookup in code), all 16 tiles, winter art, sprites for about 66 map objects (by kind), buildings (brown squares now).
-3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess.
+1. User checks the look and merges the M11.1 PR. Then tick M11.1 in ROADMAP and `progress.md`, tag `m11.1-done` on the merge commit.
+2. Possible polish (ask the user): roofs for buildings (flat brick now), a better two-cell stream (draws as small ponds), winter art for objects (`winter_region`).
+3. M11.2 Characters: looks for the 33 NPCs with a schedule. Relc's scale colour is a guess. The LPC generator clone must be made again (below).
 
-## How to rebuild character sheets
-- The LPC generator part clone is in the session scratchpad (gone next session). Make a new one:
+## How to rebuild art
+- Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
+- Character sheets: the LPC generator part clone is in the session scratchpad (gone next session). Make a new one:
   `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
   then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
 - `python tools/build_sprites.py --ulpc <clone>` then `godot --headless --path game --import`.
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge PR #46 (M11.0).
+- Check the M11.1 look, merge its PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -37,7 +38,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (73 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (76 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -64,6 +65,10 @@
 - Monster markers must stay squares until M11.4: `unit_world_view` checks their child order (edge, ring, body, label, bar).
 - LPC tile packs: `lpc_terrains` fills: grass (1,10) + tufts (0..2,12), light grass tufts (3..4,12), dirt (1,3)/(1,5), grey cobble (13,3), snow (22,10)/(21..22,12), water (1,17), frozen dirt (25,12). `lpc_atlas`: pine (30,0,2,5), round tree (29,28,3,4), grey rock (28,26,1,1), stone wall face (17,24).
 - Screenshots: `godot --path game --write-movie <file>.png --fixed-fps 10 --quit-after 12 res://_scratch/shot.tscn` (window is 1152x648; `--resolution` is ignored).
+- M11.1 shot scene: a `_scratch/shot.gd` that makes a WorldView, a `GameState.new(1)`, `gs.player.place(AREA, pos)`, `v.refresh(gs)`, and sets `v.camera.zoom` (0.8 shows a whole 32x24 map). Read AREA/X/Y/ZOOM/WINTER from env vars. Winter: pass "winter" as the winter flag to `setup` and set `gs.flags["winter"]`.
+- Terrain block layout (`lpc_terrains`, 3x6): rows 0-1 inner corners (SE gap (1,0), SW (2,0), NE (1,1), NW (2,1)), rows 2-4 ring, row 5 fills. Blocks used: dirt (0,0), cave (15,0), chasm (24,0), grass (0,7), light grass (3,7), snow wall (18,7), snow (21,7), frozen dirt (24,7), shallows water (0,14), light sea (24,14).
+- Object regions are PIXELS in objects.json (tile props in tiles.json are CELLS).
+- Picking art: a scratch `zoom.py` (crop + 16 px grid + px labels) was the fastest way to read exact pixel rects.
 
 ## Active files
-- `docs/adr/0018-m11-graphics.md`, `game/world/world_view.gd`, `game/world/world_view.tscn`, `game/world/character_sprite.gd`, `game/data/tiles.json`, `game/data/appearance.json`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/tests/unit_art.gd`, `game/tests/unit_world_view.gd`, `CREDITS.md`.
+- `docs/adr/0018-m11-graphics.md`, `game/world/world_view.gd`, `game/world/ground_art.gd`, `game/world/world_view.tscn`, `game/data/tiles.json`, `game/data/objects.json`, `game/data/maps/*.json` (kinds), `tools/build_objects.py`, `tools/tests/test_build_objects.py`, `game/tests/unit_ground_art.gd`, `game/tests/unit_art.gd`, `CREDITS.md`.

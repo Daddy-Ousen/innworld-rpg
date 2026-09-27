@@ -13,7 +13,8 @@
 ## 0017): an object with "when_flags" / "unless_flags" is on the map only
 ## while the flags hold (sync_flags; a hidden object is not listed by
 ## objects_near and must not be solid), and "portal" ({"to", "pos",
-## "power_flags"}) makes it a magic door (Portal).
+## "power_flags"}) makes it a magic door (Portal). M11.1: "kind" names its art
+## in data/objects.json (drawn only; see WorldView.object_look).
 class_name MapDb
 extends RefCounted
 
@@ -450,6 +451,8 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 	seen[o["id"]] = true
 	if not _pos_ok(o["at"]) or not bounds.has_point(_vec(o["at"])):
 		errors.append("%s: 'at' must be [x, y] inside the map." % where)
+	if o.has("kind") and not o["kind"] is String:
+		errors.append("%s: kind must be a string (data/objects.json)." % where)
 	if o.has("sleep") and not o["sleep"] is bool:
 		errors.append("%s: sleep must be true or false." % where)
 	if o.has("warm") and not o["warm"] is bool:
