@@ -70,7 +70,7 @@ func _ready() -> void:
 
 
 func _redraw() -> void:
-	view.refresh(Session.gs)
+	view.refresh(Session.gs, Session.db)
 	hud.refresh(Session.gs, Session.db)
 
 

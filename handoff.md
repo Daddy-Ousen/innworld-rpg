@@ -1,27 +1,31 @@
 # Handoff
 
 ## Just done (2026-09-27)
-- M11.1 merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)); tag `m11.1-done` on 84eab06 (pushed).
-- M11.2 Characters built on branch `feat/m11.2-characters` ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48) open). Detail: ADR 0018 "M11.2".
-  - `game/data/appearance.json`: 43 looks. Every NPC in `npc_behaviour.json` has its own look; 8 `race_*` generic looks.
-    Facts come from a subagent check of the Books 1-4 text (chapter refs in each `note`).
-  - New value kinds (shape unchanged; the user sees them with the PR): `race_<race>` look ids, `all.lpcr.<name>` colours,
-    `innworld_*` edit parts (Antinium arms, antennae, mandibles, drawn by `tools/build_sprites.py`).
-  - Code: `CharacterSprite.look_for(id, race)`; `WorldView.setup(..., races)` (last arg); `main.gd` passes canon races.
-  - Tests: GUT 708/708 (76 scripts), Python 64/64, validator 0 errors. Screenshots sent to the user.
+- M11.2 merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)); tag `m11.2-done` on d000380 (pushed).
+- M11.3 Animation built on branch `feat/m11.3-animation` ([PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49) open). Detail: ADR 0018 "M11.3".
+  - Sheet layout v2 (768x1088): 64 px rows walk 0-3, hurt 4, idle 5-8; a 128 px attack block under them (y 576).
+    `tools/build_sprites.py` picks the attack per look from its weapon (`attack_kind`: slash_128, slash_oversize,
+    thrust, slash). All 43 sheets rebuilt.
+  - `CharacterSprite` uses regions: `region_of`, `shown`, `walk`, `attack`, `fall`, `finish`, `half`.
+  - New `world/anim_diff.gd` (`AnimDiff.snapshot` / `events`): move, hit, fall, gone, swing, read from state only.
+  - `WorldView.refresh(gs, db)` plays the events (new `Fx` layer for numbers and fades); `main.gd` passes the db.
+  - Tests: GUT 721/721 (77 scripts), Python 66/66, validator 0 errors. A fight screenshot sent to the user.
 
 ## Next steps
-1. User checks the look and merges the M11.2 PR. Then tick M11.2 in ROADMAP and `progress.md`, tag `m11.2-done` on the merge commit.
-2. Possible polish (ask the user): Antinium back shell; Toren's blue eye-flames; per-book looks (Klbkch two arms after 1.63, Toren purple flames after 3.17T) would need a look switch by flag (a schema change).
-3. M11.3 Animation: NPC and monster facing from their last move, walk cycle for NPCs, attack swing, hit flash, damage numbers, knock-out fall.
-   Many LPC weapons have walk frames but no slash frames: the weapon vanishes in a swing. Fix in M11.3 (for example use the
-   LPC `1h_slash`/`thrust` animations, or hide the weapon layer in the walk rows).
+1. User checks M11.3 and merges its PR. Then tick M11.3 in ROADMAP and `progress.md`, tag `m11.3-done` on the merge commit.
+2. M11.4 Monsters: all 36 enemies with art (enemies.json ids: goblin_grunt, rock_crab, razorbeak, undead, Antinium,
+   Gnolls, ashfire_bee, snow_golem, human foes...). Monster markers become CharacterSprites (or object-like sprites
+   for crabs, bees, golems). `WorldView.monster_facing` already holds their facing; `_lunge` is the square fallback.
+   `unit_world_view` checks the square child order (edge, ring, body, label, bar): keep squares for enemies with no art.
+3. Possible polish (ask the user): Antinium back shell; Toren's eye-flames; per-book looks; the player's own
+   knock-out fall (a knock-out ends the day at once, so it needs a pause before the night dialog).
 
 ## How to rebuild art
 - Object edits: `python tools/build_objects.py` then `godot --headless --path game --import`. Append new edits at the END of `EDITS` (the order sets the regions in objects.json). Print regions with `--print`.
 - Character sheets: the LPC generator part clone is in the session scratchpad (gone next session). Make a new one
-  (the fastest: all parts, only the 4 animations we use; about 100 MB, 30 s):
-  `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout add '/spritesheets/**/walk.png' '/spritesheets/**/slash.png' '/spritesheets/**/hurt.png' '/spritesheets/**/idle.png' '/spritesheets/**/walk/' '/spritesheets/**/slash/' '/spritesheets/**/hurt/' '/spritesheets/**/idle/'`
+  (the fastest: all parts, only the animations we use plus the oversize weapon slashes; about 200 MB, 1 min):
+  `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout add '/spritesheets/**/walk.png' '/spritesheets/**/slash.png' '/spritesheets/**/hurt.png' '/spritesheets/**/idle.png' '/spritesheets/**/thrust.png' '/spritesheets/**/walk/' '/spritesheets/**/slash/' '/spritesheets/**/hurt/' '/spritesheets/**/idle/' '/spritesheets/**/thrust/' '/spritesheets/weapon/sword/arming/' '/spritesheets/weapon/blunt/waraxe/'`
+  (a new look with another oversize weapon needs that weapon's `attack_slash` folder too).
   Or part by part:
   `git clone --depth 1 --filter=blob:none --sparse https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git ulpc`
   then in Git Bash use `MSYS_NO_PATHCONV=1 git -C ulpc sparse-checkout set --no-cone /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/` and `... sparse-checkout add /spritesheets/<part folder>/` for each part folder (the folder is `layer_1.<body>` in the part's sheet definition).
@@ -29,7 +33,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the M11.2 character looks (screenshots) and the new appearance.json value kinds, merge its PR.
+- Check M11.3 (fight screenshot, or play: walk next to a monster and attack), merge its PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -44,7 +48,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (76 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (77 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -76,10 +80,15 @@
 - Object regions are PIXELS in objects.json (tile props in tiles.json are CELLS).
 - Picking art: a scratch `zoom.py` (crop + 16 px grid + px labels) was the fastest way to read exact pixel rects.
 
+- M11.3: a fight screenshot is a `--write-movie` run (`--fixed-fps 20 --quit-after 30`) of a `_scratch` scene whose
+  `_process` sends commands at set times (attack at 0.25 s, then `Combat.set_hp` to hurt the player); stitch frames with
+  PIL. Freeze monsters (`act_seconds` huge) and set `rules.combat.hit` min/max 1.0. A hand-made NPC entry needs every
+  field of `NpcSim` (`carry`, `route_i`, ...) or the sim errors.
+- AnimDiff guesses swings from state (core has no hit log): a monster miss shows nothing; NPCs never swing.
 - Weapon parts keep one file per colour (walk/<colour>.png): they need a `color` (sword "steel", spear "iron", waraxe "waraxe", dagger "dagger", staff "simple"). The `muscular` body has almost no clothes: use `male`.
 - A look preview is fastest with a scratch `preview.py` that imports `build_sprites` and pastes the standing frames of each look into one image.
 - Screenshots of NPCs: `_scratch/shot.gd` must be the script of a `_scratch/shot.tscn` (running the .gd alone opens the title menu). Fill `gs.npcs.npcs[id] = {"area", "x", "y", "facing"}` by hand to line up many NPCs.
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/data/appearance.json`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/world/character_sprite.gd`, `game/world/world_view.gd`, `game/world/main.gd`, `game/tests/unit_art.gd`, `docs/adr/0018-m11-graphics.md`, `CREDITS.md`, `game/assets/characters/`.
+- `game/world/anim_diff.gd`, `game/world/character_sprite.gd`, `game/world/world_view.gd` (+ `.tscn` Fx layer), `game/world/main.gd`, `tools/build_sprites.py`, `tools/tests/test_build_sprites.py`, `game/tests/unit_anim.gd`, `game/tests/unit_art.gd`, `docs/adr/0018-m11-graphics.md`, `game/assets/characters/`.

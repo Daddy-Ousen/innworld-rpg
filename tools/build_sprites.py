@@ -24,11 +24,18 @@ The id is an NPC id, an enemy type, "player", or "race_<race>" (the look of an
 NPC with no own look). The game draws game/assets/characters/<id>.png for it,
 and a square when there is none.
 
-Sheet layout (64×64 frames, rows up/left/down/right as in LPC):
+Sheet layout (rows up/left/down/right as in LPC), 768×1088 px:
+    64×64 frames from the top:
     rows 0-3   walk  9 frames (frame 0 = standing)
-    rows 4-7   slash 6 frames
-    row  8     hurt  6 frames (the fall)
-    rows 9-12  idle  2 frames
+    row  4     hurt  6 frames (the fall)
+    rows 5-8   idle  2 frames
+    128×128 frames from y 576 (ATTACK_Y), the attack block:
+    rows 0-3   attack 6 frames. The 64 px character is in the middle of each frame,
+               so a big weapon swing has room. The kind of attack comes from the
+               weapon part (attack_kind): LPC oversize sword slash (slash_128), oversize
+               axe slash (slash_oversize, 192 px, the middle 128 px are kept), a spear
+               or staff thrust (6 of its 8 frames), else a plain slash. A layer with no
+               frames for the attack keeps its standing walk frame, so no part vanishes.
 
 The credits of every LPC file used go into CREDITS.md between the
 build_sprites markers. Exit code 0 = built, 1 = errors.
@@ -46,9 +53,19 @@ from PIL import Image
 
 FRAME = 64
 # (animation, frames, rows) in sheet order.
-ANIMS = [("walk", 9, 4), ("slash", 6, 4), ("hurt", 6, 1), ("idle", 2, 4)]
+ANIMS = [("walk", 9, 4), ("hurt", 6, 1), ("idle", 2, 4)]
 COLUMNS = 9
 ROWS = sum(r for _, _, r in ANIMS)
+# The attack block: 128 px frames under the 64 px rows.
+BIG = 128
+ATTACK_FRAMES = 6
+ATTACK_Y = ROWS * FRAME
+SHEET_W = max(COLUMNS * FRAME, ATTACK_FRAMES * BIG)
+SHEET_H = ATTACK_Y + 4 * BIG
+# Attack kinds: LPC custom animation → its frame size.
+CUSTOM_SIZE = {"slash_128": 128, "slash_oversize": 192}
+# The thrust frames kept (of 8): ready, pull back, then the stab.
+THRUST_PICK = [0, 2, 4, 5, 6, 7]
 SCHEMES = ["ulpc", "lpcr"]
 TOLERANCE = 1
 BEGIN = "<!-- build_sprites:begin -->"
@@ -177,8 +194,27 @@ def part_layers(ulpc: Ulpc, part: dict, look: dict) -> list[dict]:
             src = ulpc.palette(material, base)
             dst = ulpc.palette(material, colour)
         out.append({"z": int(layer.get("zPos", 0)), "dir": folder, "rel": layer[body].rstrip("/"),
-                    "src": src, "dst": dst, "colour": colour, "part": name})
+                    "src": src, "dst": dst, "colour": colour, "part": name,
+                    "custom": layer.get("custom_animation", "")})
     return out
+
+
+def attack_kind(ulpc: Ulpc, look: dict) -> str:
+    """The attack of a look: "slash_128" or "slash_oversize" (a weapon with an LPC
+    oversize slash), "thrust" (a weapon with a thrust but no slash: spear, staff),
+    else "slash"."""
+    kind = "slash"
+    for p in look.get("parts", []):
+        if p["part"] in EDITS:
+            continue
+        d = ulpc.definition(p["part"])
+        for key in sorted(k for k in d if k.startswith("layer_")):
+            if d[key].get("custom_animation") in CUSTOM_SIZE:
+                return d[key]["custom_animation"]
+        anims = d.get("animations", [])
+        if p["part"].startswith("weapon_") and "thrust" in anims and "slash" not in anims:
+            kind = "thrust"
+    return kind
 
 
 def variant_folder(folder: Path) -> bool:
@@ -204,30 +240,69 @@ def load_anim(layer: dict, anim: str) -> Image.Image | None:
     return img.convert("RGBA")
 
 
-def layer_sheet(layer: dict) -> Image.Image:
-    """One layer laid out as a whole sheet (empty where an animation is missing)."""
-    sheet = Image.new("RGBA", (COLUMNS * FRAME, ROWS * FRAME), (0, 0, 0, 0))
+def load_custom(layer: dict) -> Image.Image | None:
+    """The sheet of a custom-animation layer: <folder>/<colour>.png, already coloured."""
+    f = layer["dir"] / f"{layer['colour']}.png"
+    return Image.open(f).convert("RGBA") if layer["colour"] and f.exists() else None
+
+
+def layer_sheet(layer: dict, kind: str = "slash", has_custom: bool = False) -> Image.Image:
+    """One layer laid out as a whole sheet (empty where an animation is missing).
+    `kind` is the look's attack (attack_kind); `has_custom`: the layer's part has its
+    own layers for that attack, so this plain layer stays out of the attack block."""
+    sheet = Image.new("RGBA", (SHEET_W, SHEET_H), (0, 0, 0, 0))
+    if layer["custom"]:
+        img = load_custom(layer) if layer["custom"] == kind else None
+        if img is not None:
+            size = CUSTOM_SIZE[kind]
+            cut = (size - BIG) // 2
+            for r in range(4):
+                for c in range(ATTACK_FRAMES):
+                    x, y = c * size + cut, r * size + cut
+                    sheet.paste(img.crop((x, y, x + BIG, y + BIG)), (c * BIG, ATTACK_Y + r * BIG))
+        return sheet
     rows = anim_offsets()
+    walk = None
     for anim, frames, nrows in ANIMS:
         img = load_anim(layer, anim)
+        if anim == "walk":
+            walk = img
         if img is None:
             continue
         img = img.crop((0, 0, frames * FRAME, nrows * FRAME))
         sheet.paste(img, (0, rows[anim] * FRAME))
+    if has_custom:
+        return sheet
+    anim = "thrust" if kind == "thrust" else "slash"
+    img = load_anim(layer, anim)
+    pick = THRUST_PICK if anim == "thrust" else list(range(ATTACK_FRAMES))
+    pad = (BIG - FRAME) // 2
+    for r in range(4):
+        for c, src in enumerate(pick):
+            if img is not None:
+                frame = img.crop((src * FRAME, r * FRAME, (src + 1) * FRAME, (r + 1) * FRAME))
+            elif walk is not None:  # no attack frames: stand still
+                frame = walk.crop((0, r * FRAME, FRAME, (r + 1) * FRAME))
+            else:
+                continue
+            sheet.paste(frame, (c * BIG + pad, ATTACK_Y + r * BIG + pad))
     return sheet
 
 
 def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
     """The sheet for one look, and the LPC folders it used."""
     parts = [{"part": look.get("base", "body")}] + list(look.get("parts", []))
+    kind = attack_kind(ulpc, look)
     layers, edits, used = [], [], []
     body = head = None
     for i, p in enumerate(parts):
         if p["part"] in EDITS:
             edits.append(p["part"])
             continue
-        for layer in part_layers(ulpc, p, look):
-            img = layer_sheet(layer)
+        part = part_layers(ulpc, p, look)
+        has_custom = any(layer["custom"] == kind for layer in part)
+        for layer in part:
+            img = layer_sheet(layer, kind, has_custom)
             used.append(layer["rel"])
             layers.append((layer["z"], i, img))
             if i == 0 and body is None:
@@ -240,7 +315,7 @@ def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
             raise BuildError(f"edit '{name}' needs a body and a heads_* part")
         layers.append((z, len(parts), make(body, head)))
     layers.sort(key=lambda t: (t[0], t[1]))
-    sheet = Image.new("RGBA", (COLUMNS * FRAME, ROWS * FRAME), (0, 0, 0, 0))
+    sheet = Image.new("RGBA", (SHEET_W, SHEET_H), (0, 0, 0, 0))
     for _, _, img in layers:
         sheet = Image.alpha_composite(sheet, img)
     return sheet, used
@@ -249,14 +324,19 @@ def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
 # --- Our own edits (Antinium). Drawn from the body and head of the same look.
 
 def frames_of_sheet():
-    """(column, row, facing) of every frame in the sheet; the hurt row faces down."""
+    """(x0, y0, facing): the top left of the 64 px character in every frame of the
+    sheet (the middle of an attack frame); the hurt row faces down."""
     dirs = ["n", "w", "s", "e"]
     row = 0
     for anim, frames, nrows in ANIMS:
         for r in range(nrows):
             for c in range(frames):
-                yield c, row + r, dirs[r] if nrows == 4 else "s"
+                yield c * FRAME, (row + r) * FRAME, dirs[r] if nrows == 4 else "s"
         row += nrows
+    pad = (BIG - FRAME) // 2
+    for r in range(4):
+        for c in range(ATTACK_FRAMES):
+            yield c * BIG + pad, ATTACK_Y + r * BIG + pad, dirs[r]
 
 
 def bbox(img: Image.Image, x0: int, y0: int) -> tuple[int, int, int, int] | None:
@@ -291,8 +371,7 @@ def _outlined(img: Image.Image, x0: int, y0: int, core, rim_colour, core_colour)
 def edit_antennae(body: Image.Image, head: Image.Image) -> Image.Image:
     """Two thin feelers on the top of the head, bent out (to the front from the side)."""
     out = Image.new("RGBA", head.size, (0, 0, 0, 0))
-    for c, r, d in frames_of_sheet():
-        x0, y0 = c * FRAME, r * FRAME
+    for x0, y0, d in frames_of_sheet():
         b = bbox(head, x0, y0)
         if b is None:
             continue
@@ -312,10 +391,9 @@ def edit_antennae(body: Image.Image, head: Image.Image) -> Image.Image:
 def edit_mandibles(body: Image.Image, head: Image.Image) -> Image.Image:
     """Two small pincers at the jaw (one from the side, none from behind)."""
     out = Image.new("RGBA", head.size, (0, 0, 0, 0))
-    for c, r, d in frames_of_sheet():
+    for x0, y0, d in frames_of_sheet():
         if d == "n":
             continue
-        x0, y0 = c * FRAME, r * FRAME
         b = bbox(head, x0, y0)
         if b is None:
             continue
@@ -344,10 +422,9 @@ def edit_extra_arms(body: Image.Image, head: Image.Image) -> Image.Image:
     the body, so only the part below and beside the first pair shows. Front and
     back views only."""
     out = Image.new("RGBA", body.size, (0, 0, 0, 0))
-    for c, r, d in frames_of_sheet():
+    for x0, y0, d in frames_of_sheet():
         if d not in ("s", "n"):
             continue
-        x0, y0 = c * FRAME, r * FRAME
         hb = bbox(head, x0, y0)
         if hb is None:
             continue

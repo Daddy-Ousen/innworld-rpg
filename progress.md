@@ -17,8 +17,8 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - [ ] M11 — Graphics, characters and animation. Plan accepted 2026-09-27 (ADR 0018, ROADMAP M11). New books paused. User choices: 2D pixel art, 32 px cells; free LPC packs + our edits (credits file); standard animation first.
   - [x] M11.0 Art spike: merged ([PR #46](https://github.com/Daddy-Ousen/innworld-rpg/pull/46)), tag `m11.0-done` on ea93b99. 32 px cells, LPC tiles, baked character sheets, player step glide.
   - [x] M11.1 Tiles and objects: merged ([PR #47](https://github.com/Daddy-Ousen/innworld-rpg/pull/47)), tag `m11.1-done` on 84eab06. All 16 tiles and 67 map objects have art.
-  - [ ] M11.2 Characters (branch `feat/m11.2-characters`): built, [PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48) open, waiting for the user to check the look. 43 looks in `data/appearance.json` (player, 33 NPCs with a schedule, 8 `race_*` generic looks, goblin_grunt), facts from a Books 1-4 text check. Antinium edits (extra arms, antennae, mandibles) in `tools/build_sprites.py`. GUT 708/708 (76 scripts), Python 64/64, validator 0 errors.
-  - [ ] M11.3 Animation (standard set)
+  - [x] M11.2 Characters: merged ([PR #48](https://github.com/Daddy-Ousen/innworld-rpg/pull/48)), tag `m11.2-done` on d000380. 43 looks, Antinium edits.
+  - [ ] M11.3 Animation (branch `feat/m11.3-animation`): built, [PR #49](https://github.com/Daddy-Ousen/innworld-rpg/pull/49) open, waiting for the user to check it. Sheet layout v2 with a 128 px attack block (weapons stay in the swing), `world/anim_diff.gd` (state compare → events), WorldView plays glides, hit flash, damage numbers, falls, fades, swings, fairy bob. GUT 721/721 (77 scripts), Python 66/66, validator 0 errors.
   - [ ] M11.4 Monsters (36 enemies)
   - [ ] M11.5 Atmosphere (later)
 
@@ -31,7 +31,7 @@ M0–M10 detail (roadmap bullets, decisions, ADR 0001–0017) lives in
 - Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=13), `save_migrations` (1→…→13), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 76 GUT scripts, 705 tests, all pass, headless exit 0. Python tool tests: 61 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 77 GUT scripts, 721 tests, all pass, headless exit 0. Python tool tests: 66 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py` (both need Pillow: `pip install -r tools/requirements.txt`).
 
 ## Blockers
