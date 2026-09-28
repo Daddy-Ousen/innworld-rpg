@@ -63,7 +63,7 @@ func test_hook_data_is_sound() -> void:
 			for m: Dictionary in hook["did"]:
 				for a: String in m["action"]:
 					assert_true(_db.actions.has(a), "%s: action %s" % [id, a])
-	assert_eq(hooks, 36)  # M13.2: + Ryoka in the street, the Horns' gear, the building contract; M13.1: + Lyonette's levels, Bird's birds, the soup samples; M10.5: + the Santa thieves, Erin in the snow; M10.4: + the Rock Crab by the inn road; M10.3: + Zel scolding Erin, the Esthelm relief pitch; M10.2: + the Wistram story at the Hare; M10.1: + the search for Mrsha, the rope at the rift; M9.4: + the bee raid, the painted Soldiers, Zel, Frozen, Erin's leaving; M9.1: + player_stood_with_ryoka, player_ate_at_lyonettes_inn; M9.2: + player_sat_with_ryoka_and_fals; M9.3: + player_watched_erins_play, player_held_the_esthelm_barricade
+	assert_eq(hooks, 38)  # M13.3: + Pawn after the battle, the Soldiers' soup; M13.2: + Ryoka in the street, the Horns' gear, the building contract; M13.1: + Lyonette's levels, Bird's birds, the soup samples; M10.5: + the Santa thieves, Erin in the snow; M10.4: + the Rock Crab by the inn road; M10.3: + Zel scolding Erin, the Esthelm relief pitch; M10.2: + the Wistram story at the Hare; M10.1: + the search for Mrsha, the rope at the rift; M9.4: + the bee raid, the painted Soldiers, Zel, Frozen, Erin's leaving; M9.1: + player_stood_with_ryoka, player_ate_at_lyonettes_inn; M9.2: + player_sat_with_ryoka_and_fals; M9.3: + player_watched_erins_play, player_held_the_esthelm_barricade
 	assert_true(_db.canon.alt_only.has("b1.player_beat_rock_crab_first"))
 
 

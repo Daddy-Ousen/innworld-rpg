@@ -1,0 +1,163 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.17",
+	"events": {
+		"b5.zl_ryoka_brings_mrsha_to_the_strongheart_farm": {
+			"tier": 2,
+			"window": {
+				"earliest": 105,
+				"latest": 105,
+				"confidence": "guess"
+			},
+			"location": "strongheart_farm",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"farmgirl": {
+					"prefer": [
+						"garia_strongheart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner_2": {
+					"prefer": [
+						"fals"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"father": {
+					"prefer": [
+						"wailant_strongheart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mother": {
+					"prefer": [
+						"viceria_strongheart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.home_at_the_wandering_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.away_at_the_strongheart_farm",
+					"mrsha.away_at_the_strongheart_farm",
+					"ryoka.teaches_garia_to_fight",
+					"wailant_strongheart.was_a_pirate"
+				],
+				"clear_flags": [
+					"ryoka.plans_to_visit_garias_farm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.17",
+				"confidence": "confirmed",
+				"note": "Day 105 is a guess: Ryoka leaves 'tonight' in 4.15 L and arrives by dinner. Wailant's past (a Level 27 [Pirate] of Baleros) is his own story. Ivolethe stays outside (iron)."
+			},
+			"summary": "Ryoka carries Mrsha through Celum to Garia's farm and meets her parents: Wailant, an old pirate, and Viceria, a mage. Wailant warms to her when he hears Garia punched out an adventurer. Ryoka will teach Garia to fight."
+		},
+		"b5.zm_ryoka_sees_the_wind": {
+			"tier": 2,
+			"window": {
+				"earliest": 106,
+				"latest": 106,
+				"confidence": "guess"
+			},
+			"location": "strongheart_farm",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"farmgirl": {
+					"prefer": [
+						"garia_strongheart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.away_at_the_strongheart_farm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zl_ryoka_brings_mrsha_to_the_strongheart_farm"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.saw_the_wind",
+					"ivolethe.teaches_ryoka_faerie_magic",
+					"garia_strongheart.learns_to_fight"
+				],
+				"clear_flags": [
+					"ivolethe.will_teach_ryoka_at_the_farm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.17",
+				"confidence": "confirmed",
+				"note": "The next day. No class or Skill: Ryoka never levels. Her phone is out of power."
+			},
+			"summary": "Ryoka teaches Garia and Fals to punch while Mrsha copies them. Ivolethe's first lesson fails, but mid-flip the wind lifts Ryoka high and she lands on her face. Ivolethe says Ryoka saw the wind herself."
+		}
+	},
+	"system": []
+}

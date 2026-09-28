@@ -1,0 +1,243 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.16",
+	"events": {
+		"b5.zh_the_drake_armies_join_below_the_high_pass": {
+			"tier": 1,
+			"window": {
+				"earliest": 103,
+				"latest": 103,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"general": {
+					"prefer": [
+						"thrissiam_blackwing"
+					],
+					"fallback_tags": []
+				},
+				"general_2": {
+					"prefer": [
+						"garusa_weatherfur"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"thrissiam_blackwing"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drake_armies.joined_below_the_high_pass"
+				]
+			},
+			"rumor": "Travellers say two Drake armies have joined in the hills below the High Pass to hunt the Goblin Lord.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "The chapter's own 'Day 59' is game day 103 (a guess: Venitra still spoke of two armies on day 102). Days 59-67 are 103-111."
+			},
+			"summary": "Below the High Pass, General Thrissiam's army from Pallass joins General Garusa's from the Trisstral Alliance: over 20,000 soldiers. Garusa hands him command, but Zel warned her about this Goblin Lord."
+		},
+		"b5.zi_the_goblin_lord_ambushes_the_drake_armies": {
+			"tier": 1,
+			"window": {
+				"earliest": 106,
+				"latest": 106,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"general": {
+					"prefer": [
+						"thrissiam_blackwing"
+					],
+					"fallback_tags": []
+				},
+				"general_2": {
+					"prefer": [
+						"garusa_weatherfur"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"thrissiam_blackwing"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zh_the_drake_armies_join_below_the_high_pass"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.ambushed_the_drake_armies",
+					"goblin_lord.blocks_message_spells"
+				]
+			},
+			"rumor": "Runners say the Drake armies are fighting Goblins and the walking dead in the hills below the High Pass.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "Day 106 is 'Day 62'. On 'Day 64' [Message] spells are blocked and Garusa saves Osthia from a rash charge."
+			},
+			"summary": "For days the Drake scouts vanish. Then Goblins and undead burst from under the snow, and grey Goblins explode among the ranks. Osthia sees the Goblin Lord kill a Drake [Mage]."
+		},
+		"b5.zj_the_drake_armies_are_destroyed": {
+			"tier": 1,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"general": {
+					"prefer": [
+						"thrissiam_blackwing"
+					],
+					"fallback_tags": []
+				},
+				"general_2": {
+					"prefer": [
+						"garusa_weatherfur"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"thrissiam_blackwing"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zi_the_goblin_lord_ambushes_the_drake_armies"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drake_armies.destroyed_by_the_goblin_lord",
+					"thrissiam_blackwing.risen_as_undead",
+					"osthia_blackwing.captured_by_the_goblin_lord",
+					"azkerash.fights_through_the_goblin_lord",
+					"goblin_lord_army.marches_north"
+				],
+				"clear_flags": [
+					"drake_armies.joined_below_the_high_pass"
+				],
+				"kill": [
+					"garusa_weatherfur",
+					"thrissiam_blackwing"
+				]
+			},
+			"rumor": "No word has come from the Drake armies below the High Pass for days. [Message] spells find no one.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "'Day 66'. The Necromancer is named Az'kerash later (4.26 M). The Goblin army loots the camp and goes north. Liscor hears only in 4.24 (a dying scout)."
+			},
+			"summary": "Garusa reaches the Goblin Lord, but the Necromancer speaks through him and kills her. A black scythe cuts the lines and the dead rise. Thrissiam sends Runners south, falls and rises undead; Osthia is caught."
+		},
+		"b5.zk_osthia_speaks_with_the_goblin_lord": {
+			"tier": 1,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"osthia_blackwing"
+				],
+				"flags": [
+					"osthia_blackwing.captured_by_the_goblin_lord"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.resents_the_necromancer",
+					"osthia_blackwing.knows_the_necromancer_lives"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "'Day 67'. The Goblin Lord is unnamed (no NPC id). He calls the Necromancer their shared enemy."
+			},
+			"summary": "Osthia wakes in chains in her uncle's tent. She hears the Necromancer scold the Goblin Lord through his own mouth. The Goblin Lord shows her a Goblin child his master raised, and asks her about the Necromancer."
+		}
+	},
+	"system": []
+}

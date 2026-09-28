@@ -1,0 +1,194 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.13L",
+	"events": {
+		"b5.w_old_drakes_cheer_pawns_painted_soldiers": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.old_drakes_cheer_pawns_soldiers",
+					"yellow_splatters.used_a_skill"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.13L",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess (the day before the battle). The first Soldier seen using a Skill. The old Drakes (one teased as 'Shivertail') are not linked to Zel."
+			},
+			"summary": "Pawn's painted Soldiers march through Liscor, and old Drakes pick favourites by their paint. Outside the walls a Shield Spider nest caves in; the yellow-splattered Soldier kills with a Skill."
+		},
+		"b5.x_klbkch_sends_pawn_to_the_dungeon_front": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"visitor": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch",
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_hive.losing_more_than_it_breeds",
+					"anand.too_hurt_to_command",
+					"liscor_hive.hides_its_weakness_from_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.13L",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess. That night Pawn calms a frightened Belgrade and needles Tersk into fighting without armour."
+			},
+			"summary": "Klbkch tells Pawn the Hive is losing more Antinium to the waking dungeon than it can make. Anand is hurt. Pawn must bring a hundred Soldiers to Belgrade and keep the Hive's weakness from Erin."
+		},
+		"b5.y_the_hive_holds_the_dungeon_front": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"visitor": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pawn.lost_25_soldiers",
+					"liscor_hive.soldier_memorial_wall",
+					"belgrade.maimed_and_healed_by_xrn",
+					"xrn.turned_the_dungeon_battle",
+					"tersk.fought_without_armour"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.13L",
+				"confidence": "confirmed",
+				"note": "Day 102 matches Bird in 4.12 ('sent to fight today'). Belgrade loses an antenna and two arms; Xrn heals him. The survivors paint a wall for the dead. Belgrade counts over 200 Workers and about 100 Soldiers lost."
+			},
+			"summary": "Belgrade holds the tunnels by the dungeon against spiders, Crypt Worms and the risen dead. A Worker turns Aberration, a worm maims Belgrade, and Xrn arrives to turn the day. Pawn's Soldiers hold; 25 die."
+		}
+	},
+	"system": []
+}

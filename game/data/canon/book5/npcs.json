@@ -479,6 +479,160 @@
 				"note": "Of the Hawkarrow Tribe. Skill [Triple Shot]. Class not named. He takes a not-Gnoll's head as proof."
 			},
 			"summary": "The Gnoll archer of Vuliel Drae."
+		},
+		"ishkr": {
+			"name": "Ishkr",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"liscor",
+				"inn_staff",
+				"waiter"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.14L",
+				"confidence": "confirmed",
+				"note": "Red-brown fur, born in Liscor; Krshia sends him. Level 16 [Waiter]."
+			},
+			"summary": "A quiet Gnoll who works at the Wandering Inn from 4.14 L."
+		},
+		"yellow_splatters": {
+			"name": "Yellow Splatters",
+			"race": "Antinium",
+			"tags": [
+				"antinium",
+				"soldier",
+				"liscor_hive",
+				"painted_soldier"
+			],
+			"faction": "liscor_hive",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.13L",
+				"confidence": "confirmed",
+				"note": "Named by his paint. The first Soldier seen using a Skill (4.13 L); Pawn makes him a [Sergeant] (4.15 L)."
+			},
+			"summary": "One of Pawn's painted Soldiers, marked with yellow paint."
+		},
+		"thrissiam_blackwing": {
+			"name": "Thrissiam Blackwing",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"general",
+				"pallass",
+				"oldblood"
+			],
+			"faction": "pallass",
+			"home": "pallass",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "[Lineholder General]; Skill [Crescent Arc]. Dies on 'Day 66' and rises undead."
+			},
+			"summary": "The Pallassian general who leads the Drake armies against the Goblin Lord."
+		},
+		"garusa_weatherfur": {
+			"name": "Garusa Weatherfur",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"general",
+				"trisstral_alliance"
+			],
+			"faction": "trisstral_alliance",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "Of the Longstride Clan. A [General] of Zel's alliance. Killed by the Necromancer on 'Day 66'."
+			},
+			"summary": "The Gnoll general who brings the Trisstral Alliance's army against the Goblin Lord."
+		},
+		"osthia_blackwing": {
+			"name": "Osthia Blackwing",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"soldier",
+				"captain",
+				"pallass",
+				"oldblood",
+				"flier"
+			],
+			"faction": "pallass",
+			"home": "pallass",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.16",
+				"confidence": "confirmed",
+				"note": "Captain of the Ancestor Guard. Yellow scales, wings, acid breath. Thrissiam's niece (also called cousin)."
+			},
+			"summary": "A winged Oldblood captain of Pallass, taken alive by the Goblin Lord."
+		},
+		"wailant_strongheart": {
+			"name": "Wailant Strongheart",
+			"race": "Human",
+			"tags": [
+				"human",
+				"farmer",
+				"former_pirate"
+			],
+			"faction": null,
+			"home": "strongheart_farm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.17",
+				"confidence": "confirmed",
+				"note": "Garia's father. Says he was a Level 27 [Pirate] of Baleros who bought his bounty away; his family rolls their eyes."
+			},
+			"summary": "Garia's father, a tattooed farmer with a pirate's past."
+		},
+		"viceria_strongheart": {
+			"name": "Viceria Strongheart",
+			"race": "Human",
+			"tags": [
+				"human",
+				"farmer",
+				"mage",
+				"green_mage"
+			],
+			"faction": null,
+			"home": "strongheart_farm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.17",
+				"confidence": "confirmed",
+				"note": "Garia's mother. A [Green Mage] from Wistram; met Wailant on the Blood Fields."
+			},
+			"summary": "Garia's mother, a Wistram mage who farms."
 		}
 	}
 }

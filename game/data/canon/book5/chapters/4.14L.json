@@ -1,0 +1,389 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.14L",
+	"events": {
+		"b5.z_erins_new_staff_start_work": {
+			"tier": 2,
+			"window": {
+				"earliest": 103,
+				"latest": 103,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff_2": {
+					"prefer": [
+						"ishkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff_3": {
+					"prefer": [
+						"safry"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff_4": {
+					"prefer": [
+						"maran"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [
+					"erin.offered_safry_and_maran_jobs"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drassi.works_at_the_inn",
+					"ishkr.works_at_the_inn",
+					"safry.works_at_the_inn",
+					"maran.works_at_the_inn",
+					"lyonette.trains_the_new_staff"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.14L",
+				"confidence": "confirmed",
+				"note": "Day 103 is a guess ('day one', the morning after the offer). Erin never says who is in charge. Safry and Maran shun Mrsha and Bird; Drassi and Ishkr work well."
+			},
+			"summary": "Erin's four new hires start at dawn: Safry and Maran from Agnes' inn, Drassi, and the quiet Gnoll Ishkr. Lyonette must train them, but Safry and Maran think their levels put them in charge."
+		},
+		"b5.za_pawn_comes_back_from_the_front": {
+			"tier": 2,
+			"window": {
+				"earliest": 104,
+				"latest": 104,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn",
+					"lyonette"
+				],
+				"flags": [
+					"pawn.lost_25_soldiers"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pawn.has_erins_censer",
+					"ryoka.taught_pawn_about_faiths",
+					"erin.confronted_klbkch_about_pawn"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					12,
+					16
+				],
+				"kind": "scene",
+				"when_flags": [
+					"pawn.lost_25_soldiers"
+				],
+				"npcs": [
+					{
+						"npc": "pawn",
+						"pos": [
+							11,
+							9
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							12,
+							9
+						]
+					},
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							11,
+							10
+						]
+					}
+				],
+				"line": "Pawn sits at a table with a mug of honey milk he has not touched. Lyonette stays close. When Ryoka comes in, he tells them about the Soldiers who did not come back.",
+				"note": "M13.3: a scene. Hours are guesses (Lyonette finds him at midday; Erin and Ryoka come back in the afternoon)."
+			},
+			"hooks": [
+				{
+					"id": "player_sat_with_pawn_after_the_battle",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"pawn",
+									"lyonette",
+									"ryoka_griffin"
+								]
+							}
+						}
+					],
+					"days": [
+						104,
+						104
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_sat_with_pawn"
+						],
+						"relationship": [
+							{
+								"from": "pawn",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "When Pawn came back from the Hive's battle, a Human at the Wandering Inn sat with him until Erin came home."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.14L",
+				"confidence": "confirmed",
+				"note": "Day 104 is a guess ('the second day'). 4.13 ends with Pawn going to see Erin; he arrives here. The censer is two colanders on a chain with coal and cinnamon. What Klbkch agrees to is only implied."
+			},
+			"summary": "Safry turns Pawn away, but Lyonette runs after him and brings him in. He tells Erin and Ryoka about his dead Soldiers. Erin storms off to Klbkch; Ryoka teaches Pawn about faiths, and Erin makes him a censer."
+		},
+		"b5.zb_erin_scolds_safry_and_maran": {
+			"tier": 2,
+			"window": {
+				"earliest": 104,
+				"latest": 104,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"staff": {
+					"prefer": [
+						"safry"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff_2": {
+					"prefer": [
+						"maran"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"lyonette"
+				],
+				"flags": [
+					"safry.works_at_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.scolded_safry_and_maran_in_public",
+					"lyonette.at_odds_with_safry_and_maran",
+					"maran.bought_water_barrels_in_celum"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.14L",
+				"confidence": "confirmed",
+				"note": "Day 104 is a guess. About 12 silver from the jar. Ryoka thinks the public scolding is a mistake."
+			},
+			"summary": "Safry and Maran chase tips from Gold-rank guests, and Maran buys water barrels in Celum with the inn's coins. Erin praises the idea until Lyonette tells the truth; then she scolds them in front of everyone."
+		}
+	},
+	"system": [
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Barmaid]",
+			"level": 11,
+			"confidence": "confirmed",
+			"note": "Her level as the text states it; the level-ups are not shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "skill",
+			"name": "[Charming Smile]",
+			"level": 11,
+			"confidence": "confirmed",
+			"note": "Named as her newest Skills with [Lesser Strength]."
+		},
+		{
+			"who": "lyonette",
+			"kind": "skill",
+			"name": "[Lesser Strength]",
+			"level": 11,
+			"confidence": "confirmed",
+			"note": "Named as her newest Skills with [Charming Smile]."
+		},
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Beast Tamer]",
+			"level": 4,
+			"confidence": "confirmed",
+			"note": "Stated, not shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Carer]",
+			"level": 6,
+			"confidence": "confirmed",
+			"note": "Stated, not shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Tactician]",
+			"level": 2,
+			"confidence": "confirmed",
+			"note": "Stated, not shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Princess]",
+			"level": 5,
+			"confidence": "confirmed",
+			"note": "Stated, not shown; it has never gone higher (4.15 L)."
+		},
+		{
+			"who": "drassi",
+			"kind": "level",
+			"name": "[Barmaid]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Stated; she was a [Receptionist] before."
+		},
+		{
+			"who": "ishkr",
+			"kind": "level",
+			"name": "[Waiter]",
+			"level": 16,
+			"confidence": "confirmed",
+			"note": "Stated."
+		},
+		{
+			"who": "safry",
+			"kind": "level",
+			"name": "[Barmaid]",
+			"level": 21,
+			"confidence": "confirmed",
+			"note": "Stated."
+		},
+		{
+			"who": "maran",
+			"kind": "level",
+			"name": "[Barmaid]",
+			"level": 22,
+			"confidence": "confirmed",
+			"note": "Stated."
+		}
+	]
+}

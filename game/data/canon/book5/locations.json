@@ -106,6 +106,24 @@
 				"note": "History only (4.03K). Its gates open to Flos; the Mayor is killed by a mob."
 			},
 			"summary": "A starving city near Reim that opens its gates to the King of Destruction."
+		},
+		"strongheart_farm": {
+			"name": "The Strongheart farm",
+			"kind": "building",
+			"parent": "north_izril",
+			"tags": [
+				"farm",
+				"north_izril",
+				"near_celum"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.17",
+				"confidence": "confirmed",
+				"note": "A few miles west of Celum, off the roads. A big barn and a fine house. No map."
+			},
+			"summary": "Garia Strongheart's family farm near Celum."
 		}
 	}
 }
