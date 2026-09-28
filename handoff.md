@@ -3,7 +3,7 @@
 ## Just done (2026-09-28)
 - M13.3 merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)); ticked on main (commit 8f319ec),
   tag `m13.3-done` on merge commit 539ff32.
-- M13.4 done on branch `data/book5-m13.4` (PR open, not merged). User choices: days "60-90 or 45-75 ish" -> we use
+- M13.4 done on branch `data/book5-m13.4` ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) open, not merged). User choices: days "60-90 or 45-75 ish" -> we use
   days 77-90 (Geneva's 1.01D ends day 76; these chapters come after); core cast of 15 NPCs; one tier-1 rumor at
   the end (the United Nations company); no scene, no hook.
 - Chapters `1.02D` ... `1.06D`: 14 events `b5.zn_` ... `b5.zz_`, then `b5.zza_` (all at `baleros`). Deaths:
@@ -75,7 +75,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.4 PR.
+- Merge [PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) (M13.4).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
