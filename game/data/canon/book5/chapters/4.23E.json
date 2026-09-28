@@ -1,0 +1,323 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.23E",
+	"events": {
+		"b5.zzx_laken_claims_his_land_with_markers": {
+			"tier": 2,
+			"window": {
+				"earliest": 117,
+				"latest": 117,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"carver": {
+					"prefer": [
+						"jelov"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"jelov.carves_laken_markers"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.claimed_land_with_markers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.23E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 69 = game day 117: his days 55-70 squeezed into 111-118 (user choice). Seven markers were made; six planted."
+			},
+			"summary": "Riders plant Jelov's markers in a ring four miles out. At the sixth, Laken's senses fill the ring. He counts over sixty Goblins and two Hobs coming."
+		},
+		"b5.zzy_riverfarm_breaks_the_goblin_attack": {
+			"tier": 1,
+			"window": {
+				"earliest": 117,
+				"latest": 117,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"baker": {
+					"prefer": [
+						"yesel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.claimed_land_with_markers"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.broke_the_goblin_attack",
+					"gamel.lives_by_undying_loyalty",
+					"yesel.lost_a_leg"
+				]
+			},
+			"rumor": "Travellers from north of Invrisil say a village that calls itself an Empire beat off a Goblin raid with farmers, and no Goblin left alive.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.23E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 69-70 = game day 117 (night): his days 55-70 squeezed into 111-118 (user choice). Of those Laken raised, only Gamel lives. Yesel loses a leg. The Goblins are a local band, never tied to the Goblin Lord."
+			},
+			"summary": "At midnight about forty Goblins hit the village while the Riders break a flanking band. Laken's command keeps the dying fighting; Wiskeria's Mossbear kills the Shaman and Durene the Hob. No Goblin escapes, but 31 villagers die."
+		},
+		"b5.zzz_wiskeria_becomes_lakens_general": {
+			"tier": 2,
+			"window": {
+				"earliest": 117,
+				"latest": 117,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart",
+					"wiskeria"
+				],
+				"flags": [
+					"riverfarm.broke_the_goblin_attack"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wiskeria.lakens_general"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.23E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 69 = game day 117 (night): his days 55-70 squeezed into 111-118 (user choice). A '[Witch General]' is only floated."
+			},
+			"summary": "After the battle Prost talks of the bond between ruler and people. Laken offers Wiskeria the post of [General] and she takes it."
+		},
+		"b5.zzza_riverfarm_buries_its_dead": {
+			"tier": 2,
+			"window": {
+				"earliest": 118,
+				"latest": 118,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"riverfarm.broke_the_goblin_attack"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.buried_its_dead",
+					"invrisil_nobles.write_to_laken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.23E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 70 = game day 118: his days 55-70 squeezed into 111-118 (user choice). The informant is not named; do not link."
+			},
+			"summary": "Riverfarm buries its dead. Laken tells Durene his tricks came from an informant he met in Invrisil. A City Runner brings letters from Lady Rie, two [Merchants] and a [Lord]."
+		}
+	},
+	"system": [
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Emperor]",
+			"level": 15,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Empire: Art of the Builder]",
+			"level": 15,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Undying Loyalty]",
+			"level": 15,
+			"confidence": "confirmed",
+			"note": "Shown as learned."
+		},
+		{
+			"who": "wiskeria",
+			"kind": "class",
+			"name": "[General]",
+			"level": 4,
+			"confidence": "confirmed",
+			"note": "Stated as Level 4, not shown."
+		},
+		{
+			"who": "durene",
+			"kind": "skill",
+			"name": "[Lesser Endurance]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Narrated; she levels, no number."
+		}
+	]
+}

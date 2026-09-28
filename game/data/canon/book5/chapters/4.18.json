@@ -1,0 +1,737 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.18",
+	"events": {
+		"b5.zzb_ryoka_and_mrsha_come_home_from_the_farm": {
+			"tier": 2,
+			"window": {
+				"earliest": 106,
+				"latest": 106,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.away_at_the_strongheart_farm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.back_from_the_strongheart_farm"
+				],
+				"clear_flags": [
+					"ryoka.away_at_the_strongheart_farm",
+					"mrsha.away_at_the_strongheart_farm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "4.18 opens the day after they came back ('yesterday'). The day is a guess (the evening after the lessons)."
+			},
+			"summary": "Ryoka carries Mrsha back from Garia's farm to the Wandering Inn."
+		},
+		"b5.zzc_erin_throws_out_the_celum_innkeepers": {
+			"tier": 2,
+			"window": {
+				"earliest": 107,
+				"latest": 107,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hare": {
+					"prefer": [
+						"agnes"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordsman": {
+					"prefer": [
+						"timbor_parithad"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"blazehound": {
+					"prefer": [
+						"ulia_ovena"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [
+					"safry.fired_from_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.threw_out_the_celum_innkeepers",
+					"timbor_parithad.hires_safry_and_maran"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Morning of the first day of 4.18 (Erin guesses a Monday). Octavia peeks through the door and backs off from a thrown knife."
+			},
+			"summary": "Agnes, Timbor and Ulia come through the door from Celum over the barmaids Erin fired. Erin throws them out with a knife in hand and Pisces and Bird behind her. Timbor will take Safry and Maran into his inn."
+		},
+		"b5.zzd_erin_plays_the_unseen_chess_opponent_all_night": {
+			"tier": 2,
+			"window": {
+				"earliest": 107,
+				"latest": 107,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker_2": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.played_the_unseen_opponent_all_night",
+					"lyonette.punished_mrsha_for_the_chessboard"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					17,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							5,
+							6
+						]
+					},
+					{
+						"npc": "pawn",
+						"pos": [
+							4,
+							5
+						]
+					},
+					{
+						"npc": "olesm",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "anand",
+						"pos": [
+							4,
+							4
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							8,
+							6
+						]
+					}
+				],
+				"line": "Erin sits at the magic chessboard with cold food beside her. The pieces move by themselves across from her. Pawn, Olesm and two Workers crowd round and do not speak.",
+				"note": "M13.5: a scene. Hours are guesses (the evening of the long game). Belgrade is in the text only."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_erins_chess_marathon",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"pawn",
+									"olesm",
+									"anand"
+								]
+							}
+						},
+						{
+							"action": [
+								"play_chess"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								]
+							}
+						}
+					],
+					"days": [
+						107,
+						107
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_the_chess_marathon"
+						],
+						"relationship": [
+							{
+								"from": "olesm",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "pawn",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "Another Human sat up with Erin's watchers at the chessboard long past midnight."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "The opponent is not named or linked. The day is the same as the innkeepers' visit."
+			},
+			"summary": "Mrsha plays with the magic chessboard and Lyonette brings it to Erin. Erin plays the unseen opponent all day and into the night while Pawn, Olesm, Anand and Belgrade watch. She reaches Level 31 and sleeps on the kitchen floor."
+		},
+		"b5.zze_the_workers_start_building_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 108,
+				"latest": 108,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"builder": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"wandering_inn.expansion_planned"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.expansion_begun",
+					"bird.asked_for_a_tall_tower"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Construction starts at midday on the second day of 4.18."
+			},
+			"summary": "Pawn's Workers put up scaffolding and a new foundation on the hill. The west wall comes down next. Bird asks for a very tall tower."
+		},
+		"b5.zzf_erin_buys_bird_a_bow_and_halrac_teaches_him": {
+			"tier": 2,
+			"window": {
+				"earliest": 108,
+				"latest": 108,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bowyer": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.has_a_yew_bow",
+					"bird.learning_the_bow",
+					"erin.promised_lyonette_a_sword"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					14,
+					17
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "bird",
+						"pos": [
+							20,
+							16
+						]
+					},
+					{
+						"npc": "halrac",
+						"pos": [
+							22,
+							16
+						]
+					},
+					{
+						"npc": "pawn",
+						"pos": [
+							23,
+							11
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							18,
+							14
+						]
+					}
+				],
+				"line": "Workers climb new scaffolding beside the inn. Out in the snow a grim archer corrects how a Worker holds a yew bow. Bird hums and loses another arrow.",
+				"note": "M13.5: a scene. Hours are guesses (the afternoon of the second day)."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_bird_learn_the_bow",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"bird",
+									"halrac",
+									"pawn"
+								]
+							}
+						}
+					],
+					"days": [
+						108,
+						108
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_bird_learn_the_bow"
+						],
+						"relationship": [
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "halrac",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human from the inn stood with Halrac while Bird learned to shoot his new bow."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "The bow costs 26 gold and repays a favour to Ryoka. The Gnoll [Bowyer] may be named Brathiak; not an NPC."
+			},
+			"summary": "Erin buys Bird a yew recurve bow in Liscor's market. Halrac, back early from the dungeon, shows Bird how to shoot outside the inn. Erin promises Lyonette a sword."
+		},
+		"b5.zzg_erin_stocks_up_at_octavias_shop": {
+			"tier": 2,
+			"window": {
+				"earliest": 108,
+				"latest": 108,
+				"confidence": "guess"
+			},
+			"location": "stitchworks",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"octavia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.stocked_up_on_potions",
+					"octavia.rich_from_matches",
+					"erin.asks_about_healing_slimes"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Octavia levels several times from the matches and the mold; no numbers."
+			},
+			"summary": "Octavia is growing rich on Erin's matches. Erin calls in the favour and takes healing and pepper potions, a tripvine bag and the mold poultice for fifteen gold. She asks about healing slimes."
+		},
+		"b5.zzh_erin_treats_brunkrs_arm": {
+			"tier": 2,
+			"window": {
+				"earliest": 108,
+				"latest": 108,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"warrior": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": []
+				},
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"brunkr"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.asked_brunkr_to_train_lyonette",
+					"erin.senses_danger_from_the_northeast"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Brunkr is a [Warrior] who wants to be a [Knight]. Erin's feeling has no stated source."
+			},
+			"summary": "At sunset Erin cleans Brunkr's infected arm and asks him to train Lyonette, and maybe Bird. She tells him something bad is coming from the northeast."
+		},
+		"b5.zzi_venitra_takes_the_wrong_road": {
+			"tier": 2,
+			"window": {
+				"earliest": 108,
+				"latest": 108,
+				"confidence": "guess"
+			},
+			"location": "esthelm",
+			"roles": {
+				"chosen": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venitra.turns_for_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "No time marker; runs beside Erin's second day (a guess). The text says 'the Runner' only."
+			},
+			"summary": "Venitra and Ijvani, hunting the Runner, find they took the wrong road to Esthelm and turn for Liscor."
+		}
+	},
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 31,
+			"confidence": "confirmed",
+			"note": "Shown; she says Level 30 earlier the same day."
+		},
+		{
+			"who": "timbor_parithad",
+			"kind": "level",
+			"name": "[Innkeeper]",
+			"level": 24,
+			"confidence": "confirmed",
+			"note": "Stated by himself, not shown."
+		},
+		{
+			"who": "ulia_ovena",
+			"kind": "level",
+			"name": "[Innkeeper]",
+			"level": 27,
+			"confidence": "confirmed",
+			"note": "Stated by Timbor, not shown."
+		}
+	]
+}

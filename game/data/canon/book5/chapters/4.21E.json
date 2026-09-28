@@ -1,0 +1,333 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.21E",
+	"events": {
+		"b5.zzq_windrest_joins_the_unseen_empire": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"smith": {
+					"prefer": [
+						"helm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"carver": {
+					"prefer": [
+						"jelov"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sweetheart": {
+					"prefer": [
+						"tessia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.took_in_windrest"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.took_in_windrest",
+					"jelov.carves_laken_markers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 61 = game day 114: his days 55-70 squeezed into 111-118 (user choice). Beniar reports another village burned."
+			},
+			"summary": "The people of Windrest arrive and Riverfarm doubles. Laken promises to protect them if they obey. Jelov starts carving marker poles with an eye in a pyramid. Laken reaches Level 10."
+		},
+		"b5.zzr_laken_raises_a_militia": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bird": {
+					"prefer": [
+						"frostwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.took_in_windrest"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.has_a_militia",
+					"frostwing.can_fly",
+					"laken.cottage_intruder_unknown"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 62-63 = game day 115: his days 55-70 squeezed into 111-118 (user choice). The intruder is not named here."
+			},
+			"summary": "Laken senses rat nests under the village and Frostwing makes her first flight. After a looted caravan he orders a militia; Beniar drills the villagers and Durene. Someone slips into his cottage unseen."
+		},
+		"b5.zzs_laken_half_tames_the_mossbear": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.back_in_riverfarm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.half_tamed_the_mossbear"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 65 = game day 115: his days 55-70 squeezed into 111-118 (user choice)."
+			},
+			"summary": "Laken and Durene feed the Mossbear in its cave and he half tames it. Durene finds a neat patch of fur cut from its neck. Laken calls rats out of the ground and most obey."
+		},
+		"b5.zzt_goblins_kill_fabiel_and_poison_beniar": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": []
+				},
+				"fallen": {
+					"prefer": [
+						"fabiel"
+					],
+					"fallback_tags": []
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"beniar",
+					"fabiel"
+				],
+				"flags": [
+					"laken.took_in_windrest"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"beniar.poisoned_by_a_goblin_arrow",
+					"riverfarm.goblins_near"
+				],
+				"kill": [
+					"fabiel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 66 = game day 115 (night): his days 55-70 squeezed into 111-118 (user choice). Fabiel's body is never found (4.22 E)."
+			},
+			"summary": "Just after midnight Beniar rides in with a poisoned Goblin arrow in his stomach. Five Goblins killed Fabiel in an ambush. Wiskeria's paste beats the poison. Goblin horns sound near the village."
+		}
+	},
+	"system": [
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Emperor]",
+			"level": 10,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Empire: Low-born Militias]",
+			"level": 10,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Rallying Presence]",
+			"level": 10,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Beast Tamer]",
+			"level": 5,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Beast Tamer]",
+			"level": 7,
+			"confidence": "confirmed",
+			"note": "Shown; no Level 6 message."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Animals: Basic Command]",
+			"level": 7,
+			"confidence": "confirmed",
+			"note": "Shown."
+		}
+	]
+}

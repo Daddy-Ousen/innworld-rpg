@@ -388,6 +388,44 @@
 					"target": {"area": "inn_interior", "pos": [10, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
+		},
+		"olesm": {
+			"confidence": "guess",
+			"notes": "M13.5. Liscor's [Tactician]; off the map in the city. A canon scene brings him to the chessboard on day 107 (4.18).",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"anand": {
+			"confidence": "guess",
+			"notes": "M13.5. A Worker of the chess club and a Hive [Tactician]; off the map in the Hive. A canon scene brings him to the chessboard on day 107 (4.18).",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"halrac": {
+			"confidence": "guess",
+			"notes": "M13.5. Griffon Hunt's archer; off the map in Liscor. Canon stages bring him to the inn hill on day 108 (he teaches Bird the bow, 4.18) and to the Floodplains fight on day 109 (4.19). The combat block is a design number for a Gold-rank archer.",
+			"combat": {"hp": 40, "accuracy": 9, "evasion": 5, "armor": 2, "damage": [4, 8]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"revi": {
+			"confidence": "guess",
+			"notes": "M13.5. Griffon Hunt's [Summoner]; off the map in Liscor. A canon stage brings her to the Floodplains fight on day 109 (4.19). Her summons are not placed; the combat block is a design number.",
+			"combat": {"hp": 30, "accuracy": 7, "evasion": 4, "armor": 1, "damage": [3, 7]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"typhenous": {
+			"confidence": "guess",
+			"notes": "M13.5. Griffon Hunt's old mage; off the map in Liscor. A canon stage brings him to the Floodplains fight on day 109 (4.19); his [Fireballs] are plain damage. The combat block is a design number.",
+			"combat": {"hp": 30, "accuracy": 8, "evasion": 3, "armor": 1, "damage": [4, 9]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
 		}
 	}
 }
