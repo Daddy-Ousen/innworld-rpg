@@ -74,7 +74,11 @@
 			"road_camp": {"area": "road_camp", "pos": [19, 14]},
 			"esthelm_ruins": {"area": "esthelm_ruins", "pos": [5, 11]},
 			"bee_cave": {"area": "inn_interior", "pos": [20, 13]},
-			"dungeon_rift": {"area": "inn_interior", "pos": [20, 13]}
+			"dungeon_rift": {"area": "inn_interior", "pos": [20, 13]},
+			"inn_upper_floor": {"area": "inn_interior", "pos": [20, 13]},
+			"inn_watchtower": {"area": "inn_interior", "pos": [20, 13]},
+			"liscor_depths": {"area": "inn_interior", "pos": [20, 13]},
+			"liscor_crypt": {"area": "inn_interior", "pos": [20, 13]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"]

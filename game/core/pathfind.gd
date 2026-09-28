@@ -86,7 +86,7 @@ static func _hops(maps: MapDb, entries: Dictionary, area: String) -> Array[Dicti
 		return out
 	if not maps.areas.has(area):
 		return out
-	for e: Dictionary in maps.areas[area]["exits"]:
+	for e: Dictionary in maps.exits_on(area):
 		var r := MapDb.rect_of(e["at"])
 		var tiles := {}
 		for y in range(r.position.y, r.end.y):

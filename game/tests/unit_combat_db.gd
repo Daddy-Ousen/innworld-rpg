@@ -20,12 +20,13 @@ func _has_error(errors: Array[String], part: String) -> bool:
 func test_shipped_combat_data_is_valid() -> void:
 	var db := DataDb.load_dir()
 	assert_eq(db.combat.errors, [] as Array[String])
-	assert_eq(db.combat.enemies.keys().size(), 36)
+	assert_eq(db.combat.enemies.keys().size(), 41)
 	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain", "goblin_raid_leader",
 			"adventurer_brawler", "adventurer_axeman", "goblin_feathered_chieftain", "zombie", "skeleton", "ghoul",
 			"crypt_lord", "skinner", "antinium_worker", "antinium_soldier", "gazi_of_reim", "liscor_guardsman",
 			"gnoll_hunter", "silverfang_gnoll_warrior", "snow_golem", "celum_mugger",
-			"brilliant_swords_adventurer", "frenzied_hare_regular", "ashfire_bee", "liscor_house_thief"]:
+			"brilliant_swords_adventurer", "frenzied_hare_regular", "ashfire_bee", "liscor_house_thief",
+			"crypt_worm", "giant_leech", "shield_spider", "cave_goblin", "not_gnoll"]:
 		assert_true(db.combat.enemies.has(id), id)
 	for id: String in ["chair", "rolling_pin", "stone", "seed_core"]:
 		assert_true(db.combat.items.has(id), id)
@@ -89,6 +90,17 @@ func test_bad_escape() -> void:
 	assert_eq(_check(e, ToyCombat.items()), [] as Array[String])
 
 
+func test_look_must_name_another_enemy() -> void:
+	var e := ToyCombat.enemies()
+	e["goblin"]["look"] = "crab"
+	assert_eq(_check(e, ToyCombat.items()), [] as Array[String])
+	e["goblin"]["look"] = "dragon"
+	e["crab"]["look"] = "crab"
+	var errs := _check(e, ToyCombat.items())
+	assert_true(_has_error(errs, "goblin': look must be the id of another enemy"))
+	assert_true(_has_error(errs, "crab': look must be the id of another enemy"))
+
+
 func test_bad_items() -> void:
 	var it := ToyCombat.items()
 	it["stick"]["throw_range"] = 0
@@ -134,12 +146,14 @@ func _good_spawn() -> Dictionary:
 func test_shipped_spawns() -> void:
 	var db := DataDb.load_dir()
 	var ids := db.combat.spawns.map(func(s: Dictionary) -> String: return s["id"])
-	assert_eq(ids, ["crab_valley", "goblins_orchard", "goblins_hill", "razorbeak_nest", "crab_hill_unpatrolled"])
+	assert_eq(ids, ["crab_valley", "goblins_orchard", "goblins_hill", "razorbeak_nest", "crab_hill_unpatrolled",
+			"depths_spider_shaft", "depths_rune_hall_goblins", "crypt_graves_skeletons", "crypt_graves_zombies",
+			"crypt_worm_tunnels", "crypt_leech_wall", "crypt_goblin_den", "crypt_not_gnolls"])
 	var types := {}
 	for s: Dictionary in db.combat.spawns:
 		types[s["enemy"]] = true
 		assert_eq(s["confidence"], "guess", s["id"])
-	assert_eq(types.size(), 3, "all 3 enemy types spawn")
+	assert_eq(types.size(), 10, "3 overworld enemy types and 7 in the dungeon (M13.0)")
 
 
 func test_good_toy_spawns_are_valid() -> void:

@@ -33,9 +33,26 @@ func _sprite(v: WorldView, id: String) -> CharacterSprite:
 
 func test_every_enemy_has_a_sheet() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))
-	assert_eq(data["enemies"].size(), 36)
+	assert_eq(data["enemies"].size(), 41)
 	for type: String in data["enemies"]:
-		assert_true(CharacterSprite.has_sheet(type), "no sheet for %s (tools/build_sprites.py or build_creatures.py)" % type)
+		var look := String(data["enemies"][type].get("look", type))
+		assert_true(CharacterSprite.has_sheet(look), "no sheet for %s (tools/build_sprites.py or build_creatures.py)" % type)
+
+
+## M13.0: an enemy with a "look" is drawn with that enemy's sheet.
+func test_an_enemy_look_borrows_another_sheet() -> void:
+	var a := _arena()
+	var d: DataDb = a[0]
+	var gs: GameState = a[1]
+	d.combat.enemies["pale_goblin"] = (d.combat.enemies["goblin"] as Dictionary).duplicate(true)
+	d.combat.enemies["pale_goblin"]["look"] = ART_GOBLIN
+	var v := _view(d)
+	var id := ToyCombat.spawn(gs, d, "pale_goblin", Vector2i(4, 7))
+	v.refresh(gs, d)
+	assert_eq(v.monster_look("pale_goblin"), ART_GOBLIN)
+	assert_eq(v.monster_look("goblin"), "goblin", "no look: its own type")
+	assert_eq((v.monsters.get_node(id).get_child(1) as CharacterSprite).texture.resource_path,
+			CharacterSprite.path_for(ART_GOBLIN))
 
 
 func test_a_monster_with_a_sheet_is_a_sprite_with_a_state_ring() -> void:

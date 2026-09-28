@@ -377,13 +377,19 @@ func _number(at: Vector2, amount: int, you: bool) -> void:
 	t.chain().tween_callback(label.queue_free)
 
 
+## The sheet id of enemy `type`: its "look" (M13.0: art borrowed from
+## another enemy) or the type itself.
+func monster_look(type: String) -> String:
+	return String(enemies.get(type, {}).get("look", type))
+
+
 ## A gone monster on its old cell: its sprite falls (the hurt frames) and
 ## fades; with no sheet, a copy of its square shrinks and fades.
 func _fade_out(cell: Vector2i, type: String, dir: String = "s") -> void:
 	var ghost := Node2D.new()
 	ghost.name = "gone"
 	ghost.position = cell_center(cell)
-	var sprite := CharacterSprite.make(type)
+	var sprite := CharacterSprite.make(monster_look(type))
 	if sprite != null:
 		sprite.pose(dir)
 		ghost.add_child(sprite)
@@ -532,8 +538,7 @@ func _show_area(id: String) -> void:
 	for child in marks.get_children():
 		marks.remove_child(child)
 		child.queue_free()
-	var m: Dictionary = _maps.areas[id]
-	for e: Dictionary in m["exits"]:
+	for e: Dictionary in _maps.exits_on(id):
 		var r := MapDb.rect_of(e["at"])
 		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
 	var light_sources: Array = []
@@ -628,7 +633,7 @@ func _show_monsters(gs: GameState) -> void:
 			monsters.add_child(marker)
 			continue
 		var edge := state_edge(String(m["state"]))
-		var sprite := CharacterSprite.make(String(m["type"]))
+		var sprite := CharacterSprite.make(monster_look(String(m["type"])))
 		if sprite != null:
 			_foot_ring(marker, edge)
 			sprite.pose(String(monster_facing.get(id, "s")))

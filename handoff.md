@@ -1,13 +1,34 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M12 is done. M12.5 merged ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)); tags `m12.5-done` and
-  `m12-done` on 95fb6c4. The user approved the moment music and the sad sting. M12 detail is in
-  `docs/PROGRESS_ARCHIVE.md` and ADR 0019.
+- M13 (Book 5) plan accepted: `docs/ROADMAP.md` M13 section, `docs/adr/0020-m13-book5.md`. Plan file:
+  `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
+- M13.0 World done on branch `feat/m13.0-world`, [PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)
+  (not merged). Gated exits, 4 new maps, 5 new enemies, Bird on the tower, Toren in the depths. Detail: ADR 0020
+  "M13.0 World". Screenshot sheet was sent to the user.
+- Book 5 text is extracted to `canon/raw/book5` (gitignored, 37 chapters).
 
 ## Next steps
-1. Ask the user for the next milestone. `docs/ROADMAP.md` "Later": Book 5 and on (paused), UI skin and portraits,
-   balance and missing NPC schedules, optional LLM flavour layer.
+1. Wait for the user to check the screenshot and merge PR #58. Then on main: tick M13.0 in `docs/ROADMAP.md`,
+   tag `m13.0-done` on the merge commit, update `progress.md`.
+2. M13.T Traps (save v14): see the plan file. Traps go in `liscor_depths`: rune (rune hall 13..22,1..7), pit
+   (pit corridor 17..18,8..13, `drop_to` liscor_crypt tunnels), spike ceiling (spike room 13..22,14..18),
+   exploding books (library 1..9,10..18; shelves at y 10), acid grate (acid room 26..30,2..9).
+   Canon (4.08 T, 4.19): rune traps recharge; spike ceiling resets after about 1 hour; acid eats magic
+   protection; there is also a fire room and a leech wall.
+3. Then M13.1 canon batch (ask the user stage/hook choices first).
+
+## M13 notes
+- `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
+  use `raw_exit_at`.
+- New object kinds use existing sheets: `stairs`, `ladder`, `tombstone`, `grave_cross`, `papers`. Every map
+  object needs a kind with art (`unit_ground_art`).
+- A new enemy needs: a sheet (or `look`), a voice entry in `audio.json` "enemies" (`unit_sound_cues`), and the
+  counts in `unit_combat_db` / `unit_monster_art`. A new creature look also bumps `tools/tests/test_build_creatures.py`.
+- A new map needs a mood in `audio.json` and, with spawns, a knock-out wake spot (`sim_liscor_depths` guard).
+- Skeletons and zombies now spawn in the dungeon; `sim_skinner_night` allows that only for dungeon maps.
+- Godot on this machine: `godot` (WinGet link) returns at once while the real process keeps writing; wait for
+  the `Godot_v4` process to exit before reading a log.
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -42,7 +63,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Pick the next milestone.
+- Check the M13.0 screenshot and merge PR #58.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -57,7 +78,7 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (84 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (89 now).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
@@ -110,5 +131,6 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- `game/data/audio.json`, `game/ui/system_messages.gd` (news_deaths), `game/tests/unit_canon_moments.gd`, `game/ui/audio.gd`, `game/ui/audio_db.gd`, `game/ui/audio_settings.gd`,
-  `game/ui/options_menu.gd`, `game/world/sound_cues.gd`, `game/tests/unit_audio*.gd`, `docs/adr/0019-m12-audio.md`.
+- `game/core/map_db.gd`, `game/data/maps/liscor_depths.json`, `game/data/maps/liscor_crypt.json`,
+  `game/data/maps/inn_upper_floor.json`, `game/data/maps/inn_watchtower.json`, `game/data/enemies.json`,
+  `game/tests/unit_gated_exits.gd`, `game/tests/sim_liscor_depths.gd`, `game/tests/sim_inn_third_floor.gd`, `docs/adr/0020-m13-book5.md`.

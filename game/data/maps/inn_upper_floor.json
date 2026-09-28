@@ -1,0 +1,40 @@
+{
+	"schema_version": 1,
+	"id": "inn_upper_floor",
+	"name": "The inn's new upper floor",
+	"location": "wandering_inn",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M13.0). The new floors of guest rooms that Antinium builders add to the inn in Book 5: planned in 4.12, started in 4.18, finished in 4.29 (a full third floor and two new second-floor rooms). The stairs open with wandering_inn.third_floor_built. The inn's older upper rooms are not mapped, so this map stands for the whole upstairs. The layout, the number of rooms, the price and the ladder up to the tower are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [18, 6], "to": "inn_interior", "arrive": [15, 13], "minutes": 0},
+		{"at": [1, 5], "to": "inn_watchtower", "arrive": [4, 6], "minutes": 0}
+	],
+	"objects": [
+		{"id": "stairs_down", "kind": "stairs", "at": [18, 6], "name": "Stairs down", "actions": []},
+		{"id": "tower_ladder", "kind": "ladder", "at": [1, 5], "name": "Ladder to the tower", "actions": []},
+		{"id": "guest_bed_1", "kind": "bed", "at": [1, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_2", "kind": "bed", "at": [6, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_3", "kind": "bed", "at": [11, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_4", "kind": "bed", "at": [18, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_5", "kind": "bed", "at": [1, 9], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_6", "kind": "bed", "at": [6, 9], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "guest_bed_7", "kind": "bed", "at": [11, 9], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
+		{"id": "hall_broom", "kind": "broom", "at": [10, 6], "name": "Broom", "actions": ["sweep_floor"]}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHHHHHHHH",
+		"H====H====H====H===H",
+		"H====H====H====H===H",
+		"H====H====H====H===H",
+		"HH+HHHH+HHHH+HHH+HHH",
+		"H==================H",
+		"H==================H",
+		"HH+HHHH+HHHH+HHHH+HH",
+		"H====H====H====H===H",
+		"H====H====H====H===H",
+		"HHHHHHHHHHHHHHHHHHHH"
+	]
+}

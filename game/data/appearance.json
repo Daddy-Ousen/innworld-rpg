@@ -1883,6 +1883,42 @@
 			],
 			"confidence": "guess",
 			"note": "A legless giant of yellowed dead skin with a white face and two red eyes; it drags itself on its hands (1.59H, 1.60). The LPC big worm in yellowed skin colours; hands and eyes are not drawn."
+		},
+		"crypt_worm": {
+			"creature": "big_worm",
+			"ramp": [
+				"#1a0806",
+				"#4a1810",
+				"#8a3a2a",
+				"#b8624a",
+				"#e0a088"
+			],
+			"confidence": "guess",
+			"note": "Huge red-brown worm with a faceless head, feelers and whip-like arms (4.13 L, 4.19). The LPC big worm in red-brown flesh colours; the arms and feelers are not drawn."
+		},
+		"giant_leech": {
+			"creature": "big_worm",
+			"ramp": [
+				"#2a2620",
+				"#6e685c",
+				"#b0aa9c",
+				"#e8e4d8",
+				"#fbfaf4"
+			],
+			"confidence": "guess",
+			"note": "A white leech as long as a person (4.08 T). The LPC big worm in pale colours."
+		},
+		"shield_spider": {
+			"creature": "rock_crab",
+			"ramp": [
+				"#0c0c10",
+				"#24242c",
+				"#4a4a52",
+				"#76767e",
+				"#a8a8b0"
+			],
+			"confidence": "guess",
+			"note": "A spider with a hard shell that turns swords, some bigger than a Rock Crab (4.08 T). The Rock Crab shape in dark grey; the eight legs and fangs are not drawn."
 		}
 	}
 }

@@ -1,0 +1,51 @@
+{
+	"schema_version": 1,
+	"id": "liscor_depths",
+	"name": "The dungeon's trapped rooms",
+	"location": "liscor_dungeon",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M13.0). The new part of Liscor's dungeon under the rift, reached by ropes hanging from a hole in the ceiling (4.08 T, 4.19). The rooms come from the text: the rope landing, a corridor of glowing runes and a pit with stone spikes (4.08 T), a room whose ceiling spikes drop, a library of books that explode when read and a grate that sprays acid (4.19), and a shaft full of Shield Spider webs (4.08 T). In the Book the rooms change on each visit; here they stay put. The order, sizes and the stairs down to the crypt level are guesses. The ropes open with liscor_dungeon.new_section_found.",
+	"zones": {},
+	"exits": [
+		{"at": [3, 1], "to": "dungeon_rift", "arrive": [11, 12], "minutes": 10},
+		{"at": [28, 20], "to": "liscor_crypt", "arrive": [2, 2], "minutes": 0}
+	],
+	"objects": [
+		{"id": "depths_ropes", "kind": "rope_anchor", "at": [3, 1], "name": "Ropes up to the rift", "actions": []},
+		{"id": "depths_stairs_down", "kind": "stairs", "at": [28, 20], "name": "Stairs down into the dark", "actions": []},
+		{"id": "library_shelf_1", "kind": "shelves", "at": [2, 10], "name": "Bookshelf", "actions": [], "solid": true},
+		{"id": "library_shelf_2", "kind": "shelves", "at": [4, 10], "name": "Bookshelf", "actions": [], "solid": true},
+		{"id": "library_shelf_3", "kind": "shelves", "at": [6, 10], "name": "Bookshelf", "actions": [], "solid": true},
+		{"id": "library_shelf_4", "kind": "shelves", "at": [8, 10], "name": "Bookshelf", "actions": [], "solid": true},
+		{"id": "library_papers", "kind": "papers", "at": [5, 15], "name": "Loose pages", "actions": ["read_book"]},
+		{"id": "depths_loose_stones", "kind": "stones", "at": [15, 17], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {".": "cave_floor", "^": "rock"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^......^^^^^^..........^^^^^^^^^",
+		"^......^^^^^^..........^^^.....^",
+		"^......................^^^.....^",
+		"^......^^^^^^..................^",
+		"^......^^^^^^..........^^^.....^",
+		"^^^..^^^^^^^^..........^^^.....^",
+		"^^^..^^^^^^^^..........^^^.....^",
+		"^^^..^^^^^^^^^^^^..^^^^^^^.....^",
+		"^^^..^^^^^^^^^^^^..^^^^^^^.....^",
+		"^.........^^^^^^^..^^^^^^^^..^^^",
+		"^.........^^^^^^^..^^^^^^^^..^^^",
+		"^.........^^^^^^^..^^^^^^^.....^",
+		"^.........^^^^^^^..^^^^^^^.....^",
+		"^.........^^^..........^^^.....^",
+		"^.........^^^..........^^^.....^",
+		"^..............................^",
+		"^.........^^^..........^^^.....^",
+		"^.........^^^..........^^^.....^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^.....^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^.....^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+	]
+}

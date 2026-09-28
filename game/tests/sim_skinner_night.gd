@@ -125,8 +125,10 @@ func test_the_night_stage_data_is_sound() -> void:
 		assert_true(_db.behaviour.npcs.has(npc), npc + " can be a stage ally")
 		assert_true(_db.behaviour.npcs[npc].has("combat"), npc + " has a combat block")
 	var stage_only := ["zombie", "skeleton", "ghoul", "crypt_lord", "skinner", "antinium_worker", "antinium_soldier"]
+	var dungeon := ["liscor_depths", "liscor_crypt"]  # M13.0: undead live in the dungeon
 	for s: Dictionary in _db.combat.spawns:
-		assert_false(stage_only.has(s["enemy"]), "only a stage brings " + str(s["enemy"]))
+		if not dungeon.has(s["area"]):
+			assert_false(stage_only.has(s["enemy"]), "only a stage brings " + str(s["enemy"]))
 	for id: String in [GATE_EVENT, INN_EVENT]:
 		for type: String in _foe_types(id):
 			assert_false(str(type).begins_with("antinium_"), "Antinium only fight on the player's side")

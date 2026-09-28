@@ -54,13 +54,13 @@ Built by `tools/build_creatures.py` (recoloured and laid out as character sheets
   https://opengameart.org/content/lpc-golem. Used for `crypt_lord` (recoloured).
 - `bee.png`, `big_worm.png` from "[LPC] Monsters" by bluecarrot16, Charles Sanchez (CharlesGabriel) and bagzie,
   based on the LPC base assets. Licence: CC-BY-SA 3.0 / GPL 3.0. https://opengameart.org/content/lpc-monsters.
-  Used for `ashfire_bee` and `skinner` (recoloured).
+  Used for `ashfire_bee`, `skinner`, `crypt_worm` and `giant_leech` (recoloured).
 - `bird_2_eagle.png` from "[LPC] Birds" by bluecarrot16 (commissioned by castelonia), inspired by "winter
   birds" by Refuzzle. Licence: CC-BY 4.0 / CC-BY 3.0 / CC-BY-SA 4.0 / CC-BY-SA 3.0 / GPL 3.0 / GPL 2.0 /
   OGA-BY 3.0. https://opengameart.org/content/lpc-birds. Used for `razorbeak` (recoloured, twice the size).
 
-Our edits: `rock_crab` (a boulder crab in the colours of the "LPC Tile Atlas" rock) and `snow_golem` (a
-snowman) are drawn by `tools/build_creatures.py`. The recoloured sheets are CC-BY-SA 3.0 where the source
+Our edits: `rock_crab` (a boulder crab in the colours of the "LPC Tile Atlas" rock; `shield_spider` is the
+same shape in dark grey) and `snow_golem` (a snowman) are drawn by `tools/build_creatures.py`. The recoloured sheets are CC-BY-SA 3.0 where the source
 is CC-BY-SA, else CC-BY 4.0 like their source.
 
 <!-- build_sprites:begin -->

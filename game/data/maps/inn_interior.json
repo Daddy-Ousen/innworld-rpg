@@ -5,10 +5,11 @@
 	"location": "wandering_inn",
 	"indoor": true,
 	"confidence": "guess",
-	"note": "Design map. The inn has a common room, a kitchen and rooms (1.00-1.01); the layout is a guess.",
+	"note": "Design map. The inn has a common room, a kitchen and rooms (1.00-1.01); the layout is a guess. M13.0: stairs up to the new floors open once they are built (4.29).",
 	"zones": {},
 	"exits": [
-		{"at": [12, 15, 1, 1], "to": "inn_hill", "arrive": [16, 12], "minutes": 0}
+		{"at": [12, 15, 1, 1], "to": "inn_hill", "arrive": [16, 12], "minutes": 0},
+		{"id": "stairs_up", "at": [15, 14], "to": "inn_upper_floor", "arrive": [17, 6], "minutes": 0, "when_flags": ["wandering_inn.third_floor_built"]}
 	],
 	"objects": [
 		{"id": "stove", "kind": "stove", "at": [20, 1], "name": "Stove", "actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "solid": true, "item": "rolling_pin"},
@@ -20,7 +21,8 @@
 		{"id": "inn_counter", "kind": "counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"},
 		{"id": "albez_door", "kind": "door", "at": [2, 12], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.at_wandering_inn"],
-			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}}
+			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}},
+		{"id": "stairs_up", "kind": "stairs", "at": [15, 14], "name": "Stairs up", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]}
 	],
 	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
 	"rows": [
