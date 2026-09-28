@@ -6,7 +6,7 @@
 ## held item at the nearest monster, X drops it. After every command the
 ## combat text goes to the log; a knocked-out player gets the night at once
 ## (Commands.knock_out) and the System dialog. Esc opens the pause menu
-## (save, load, quit to title), J the journal. A new game opens with the
+## (save, load, quit to title), J the journal, I the bag (M14.0). A new game opens with the
 ## welcome page; the game autosaves each time the System dialog closes
 ## (each morning) and on quit.
 ## Presentation only (CLAUDE.md rule 1).
@@ -35,6 +35,7 @@ var switch_scene := true
 @onready var menu: InteractMenu = $MenuLayer/InteractMenu
 @onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
 @onready var journal: Journal = $MenuLayer/Journal
+@onready var bag: Bag = $MenuLayer/Bag
 @onready var pause: PauseMenu = $MenuLayer/PauseMenu
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
 @onready var console_layer: CanvasLayer = $ConsoleLayer
@@ -58,6 +59,7 @@ func _ready() -> void:
 		Audio.place_loops(view.loop_spots, loops, WorldView.TILE))
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
+	bag.chosen.connect(use_from_bag)
 	dialog.closed.connect(_on_dialog_closed)
 	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
@@ -80,10 +82,11 @@ func _redraw() -> void:
 	Audio.ambience(AmbiencePick.bed(Session.gs, Session.db, Audio.db))
 
 
-## True while a menu, the sheet, the journal, the System dialog or the
-## console has the keyboard.
+## True while a menu, the sheet, the journal, the bag, the System dialog or
+## the console has the keyboard.
 func is_busy() -> bool:
-	return console_layer.visible or menu.visible or sheet.visible or journal.visible 			or pause.visible or dialog.visible
+	return console_layer.visible or menu.visible or sheet.visible or journal.visible \
+			or bag.visible or pause.visible or dialog.visible
 
 
 func _input(event: InputEvent) -> void:
@@ -109,6 +112,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			sheet.open(Session.gs, Session.db)
 		KEY_J:
 			journal.open(Session.gs, Session.db)
+		KEY_I:
+			bag.open(Session.gs, Session.db)
 		KEY_ESCAPE:
 			pause.open()
 		KEY_B:
@@ -241,6 +246,14 @@ func open_bag() -> void:
 				Session.gs.economy.coins)])
 
 
+## A pick on the bag screen: runs it like a use-menu pick, then shows the
+## bag again (not when the player went down or the day ended).
+func use_from_bag(action_id: String) -> void:
+	use("bag", action_id)
+	if not Combat.is_down(Session.gs) and not dialog.visible:
+		bag.open(Session.gs, Session.db)
+
+
 func use(object_id: String, action_id: String) -> void:
 	var gs := Session.gs
 	var db := Session.db
@@ -256,6 +269,16 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id.begins_with(Interact.USE_GOOD):
 		_command_error(_action_sound_if_ok(
 				Commands.use_good(gs, db, action_id.substr(Interact.USE_GOOD.length())), action_id))
+		return
+	if action_id.begins_with(Interact.HOLD_GOOD):
+		_command_error(Commands.hold_good(gs, db, action_id.substr(Interact.HOLD_GOOD.length())))
+		return
+	if action_id.begins_with(Interact.DROP_GOOD):
+		_command_error(_sound_if_ok(
+				Commands.drop_good(gs, db, action_id.substr(Interact.DROP_GOOD.length())), "drop"))
+		return
+	if action_id == Interact.STOW:
+		_command_error(Commands.stow(gs, db))
 		return
 	if action_id == Interact.RIDE:
 		_command_error(_action_sound_if_ok(Commands.ride(gs, db, object_id), action_id))
@@ -327,6 +350,7 @@ func toggle_console() -> void:
 		menu.close()
 		sheet.close()
 		journal.close()
+		bag.close()
 		pause.close()
 		console_input.grab_focus()
 	else:

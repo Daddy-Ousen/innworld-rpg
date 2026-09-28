@@ -1,16 +1,21 @@
 # Handoff
 
-## Just done (2026-09-28)
-- M13.7 merged ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). M13 (Book 5) is closed: ticked
-  on main (commit 026d8aa), tags `m13.7-done` and `m13-done` on merge commit 17b6bab, M13 detail moved to
-  `docs/PROGRESS_ARCHIVE.md`.
-- New test policy (user choice): `CLAUDE.md` rule 6 and new section "Test scope". Data-only sub-milestones
-  run targeted tests only. The full suite runs only for `game/core/` code, save/schema changes, and at a
-  milestone's end.
+## Just done (2026-09-28/29)
+- M14 "Engine works" planned and accepted (ADR `docs/adr/0021-m14-engine-works.md`, ROADMAP M14 section,
+  plan file `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`). 9 sub-milestones.
+- M14.0 Bag screen on branch `feat/m14.0-bag` (not committed yet):
+  - `core/economy.gd`: `good_for_item`, `hold_good`, `stow`, `drop_good`; `economy_db.gd` validates the good
+    `item` field; `economy.json` new tool goods rolling_pin, horseshoe, stone.
+  - `core/combat.gd`: public `cannot_act`. `core/commands.gd`: `hold_good`, `stow`, `drop_good`.
+  - `core/interact.gd`: picks `HOLD_GOOD`, `DROP_GOOD`, `STOW`.
+  - `ui/bag.gd` + `ui/bag.tscn` (key I), wired in `world/main.gd` / `main.tscn`; HUD help text.
+  - `tests/unit_bag.gd` (11 tests). Targeted runs green.
 
 ## Next steps
-1. Ask the user for the next milestone: Book 6, or engine work (see `docs/ROADMAP.md` "Later").
-2. Plan it (plan mode), write an ADR, then build it one sub-milestone per branch + PR.
+1. M14.0 full suite: 99 scripts, 925 tests, all pass (about 15 min). Run the full suite with Bash
+   run_in_background, not in a subagent: a subagent hands back before it ends and kills the run.
+2. M14.0 is committed and has a PR. After merge: tick ROADMAP M14.0 on main, tag `m14.0-done`.
+3. M14.1 Cooking recipes (see the plan file).
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -64,7 +69,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Choose the next milestone.
+- M14.6: approve the pixel font download (name, source, size) when we get there.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Book 5 canon notes (M13.7)

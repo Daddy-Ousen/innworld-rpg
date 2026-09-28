@@ -181,6 +181,12 @@ static func _roll(gs: GameState, r: Array) -> int:
 
 
 ## Why the player cannot take a combat turn now, or "".
+## Why the player cannot act at all now (down or too tired), or "". Unlike
+## refusal, enemies near do not stop it (take, drop, the bag).
+static func cannot_act(gs: GameState, db: DataDb) -> String:
+	return _cannot_act(gs, db)
+
+
 static func _cannot_act(gs: GameState, db: DataDb) -> String:
 	if is_down(gs):
 		return REFUSED_DOWN

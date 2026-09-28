@@ -18,7 +18,13 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
 - [x] M12 — Audio: music, sound effects, ambience. M12.0–M12.5 merged; tags `m12.0-done` … `m12.5-done` and `m12-done` on merge commit 95fb6c4 ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)). Detail in the archive and ADR 0019.
 - [x] M13 — Book 5 (The Last Light). M13.0, M13.T, M13.1–M13.7 merged; tags `m13.0-done` … `m13.7-done` and `m13-done` on merge commit 17b6bab ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). Detail in the archive and ADR 0020.
-- [ ] Next milestone: not chosen yet (ask the user: Book 6, or engine work; see `docs/ROADMAP.md` "Later").
+- [ ] M14 — Engine works (plan accepted 2026-09-28, ADR 0021; plan file `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`).
+  User choices: all four areas (inn play, living world, UI skin + portraits, balance); attack NPCs with a fate
+  warning; guests = patrons + canon NPCs; free pixel font (ask before the download).
+  - [ ] M14.0 Bag screen — branch `feat/m14.0-bag`: code + `unit_bag` done, targeted tests green (bag 11, economy 19,
+    play_loop 15, system_messages 17). Full suite: 99 scripts, 925 tests, all pass. PR open; tick after merge.
+  - [ ] M14.1 Cooking recipes · M14.2 Guests (v15) · M14.3 Standing (v16) · M14.4 NPC schedules · M14.5 Attack NPCs ·
+    M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
