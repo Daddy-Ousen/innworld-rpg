@@ -170,7 +170,7 @@ Stage and hook choices are asked at the start of each canon batch.
 - [x] M13.2 Canon 4.08 T – 4.12 (Toren in the depths, Ryoka home, the Horns' gear, the building contract, new staff)
 - [x] M13.3 Canon 4.13 L – 4.17 (the Hive battles, the staff trouble, the Goblin Lord crushes the Drakes, the Strongheart farm)
 - [x] M13.4 Canon 1.02 D – 1.06 D (Geneva in Baleros; off-map only)
-- [ ] M13.5 Canon 4.18 – 4.23 E (the chess marathon, the building starts, the undead from the rift, Laken's Riverfarm)
+- [x] M13.5 Canon 4.18 – 4.23 E (the chess marathon, the building starts, the undead from the rift, Laken's Riverfarm)
 - [ ] M13.6 Canon 4.24 – 4.27 H (winter ends, Brunkr knighted, "Regrika" and "Imenet", Magnolia's army, the Creler nest)
 - [ ] M13.7 Canon 4.28 – 4.31 ([Word of Death], Brunkr and Ulrien killed, the third floor done, Venitra's attack, Ryoka dies and is revived)
 **Done when:** all Book 5 canon is event data and `sim_canon_book5` runs to the last Book 5 day with drift 0;
