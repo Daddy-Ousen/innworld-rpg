@@ -1,0 +1,345 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.09",
+	"events": {
+		"b5.l_zel_and_ilvriss_hear_of_the_goblin_lord": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "tailless_thief",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"zel_shivertail",
+					"ilvriss"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.knows_goblin_lord_near_blood_fields",
+					"ilvriss.watches_for_ryoka",
+					"drakes.two_armies_hunt_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.09",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess (Ryoka arrives that day). Peslas hosts. Each Drake army is about 10,000 under a [General]; Zel thinks that is too few."
+			},
+			"summary": "Over lunch at the Tailless Thief, Zel and Ilvriss hear that the Goblin Lord was seen near the Blood Fields, falling back before two Drake armies. Ilvriss has people watching for Ryoka Griffin."
+		},
+		"b5.m_ryoka_comes_home_to_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"gnoll": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"patient": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.heading_home_to_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.home_at_the_wandering_inn",
+					"ryoka.gave_krshia_the_rihal_tome",
+					"krshia.clan_holds_the_rihal_tome",
+					"krshia.friends_with_ryoka",
+					"krshias_clan.remembers_teriarchs_name"
+				],
+				"clear_flags": [
+					"ryoka.heading_home_to_liscor",
+					"ryoka.near_celum",
+					"erin.waits_for_ryoka",
+					"ryoka.has_rihal_spellbook",
+					"ryoka.holds_krshias_spellbook_debt"
+				],
+				"relationship": [
+					{
+						"from": "krshia",
+						"to": "ryoka_griffin",
+						"delta": 2
+					},
+					{
+						"from": "mrsha",
+						"to": "ryoka_griffin",
+						"delta": 1
+					}
+				]
+			},
+			"news": "Gnolls ran through Liscor's gate with a Human Runner held over their heads, laughing. The Watch laughed too.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.09",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess (ADR 0020). She slept outside the night before. Teriarch is named as a mage only; the Gnolls do not learn he is a Dragon."
+			},
+			"summary": "Ryoka runs the last miles through deep snow. Mrsha knocks her flat at the foot of the inn's hill, and Krshia's Gnolls carry her into Liscor. She pays her debt with a huge, light spellbook from lost Rihal, and asks only for friendship."
+		},
+		"b5.n_ilvriss_confronts_ryoka_in_the_street": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watch_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"gnoll": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss",
+					"ryoka_griffin"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.m_ryoka_comes_home_to_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.demands_the_truth_about_periss",
+					"erin.hit_ilvriss_with_a_pan",
+					"erin.fined_four_gold_for_the_pan",
+					"erin.and_ryoka_meet_again"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "ryoka_griffin",
+						"delta": -1
+					},
+					{
+						"from": "ryoka_griffin",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "liscor_market",
+				"hours": [
+					12,
+					15
+				],
+				"kind": "scene",
+				"when_flags": [
+					"ryoka.near_celum"
+				],
+				"npcs": [
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							10,
+							9
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							9,
+							9
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							16,
+							9
+						]
+					},
+					{
+						"npc": "zel_shivertail",
+						"pos": [
+							14,
+							9
+						]
+					},
+					{
+						"npc": "zevara",
+						"pos": [
+							13,
+							11
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							11
+						]
+					}
+				],
+				"line": "A crowd of Gnolls stands shoulder to shoulder around a tired Human girl. A Drake lord in fine armour has his sword out. Behind him, a white-scaled Drake is trying very hard to stop this.",
+				"note": "M13.2: a scene. The text is on the street below Krshia's home; liscor_market is the nearest map. Hours are guesses (early afternoon). Krshia stays at her stall."
+			},
+			"hooks": [
+				{
+					"id": "player_stood_with_ryoka_in_the_street",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"liscor_market"
+								],
+								"npc": [
+									"ryoka_griffin",
+									"krshia",
+									"zel_shivertail",
+									"zevara",
+									"erin_solstice"
+								]
+							}
+						}
+					],
+					"days": [
+						101,
+						101
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_stood_with_ryoka_against_ilvriss"
+						],
+						"relationship": [
+							{
+								"from": "ryoka_griffin",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "krshia",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "When a Wall Lord drew steel on Ryoka Griffin, a Human stranger stood in the street beside her with the Gnolls."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.09",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess. Ends in 4.10: Zevara fines Erin 4 gold (paid to Klbkch). Who threw the first two pans is not said. Ryoka keeps Periss's death secret (Runner's confidence); periss.presumed_dead stays."
+			},
+			"summary": "Ilvriss and his retainers corner Ryoka below Krshia's home and demand to know how Periss died. The Gnolls close ranks, Zevara forbids swords in her city, and a frying pan hits the Wall Lord's head. Erin and three adventurer teams stand behind it."
+		}
+	},
+	"system": []
+}

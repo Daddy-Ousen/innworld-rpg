@@ -901,6 +901,44 @@
 			"confidence": "guess",
 			"note": "Any Human with no own look."
 		},
+		"ilvriss": {
+			"body": "male",
+			"skin": "all.lpcr.bronze",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "gold"
+				},
+				{
+					"part": "arms_armour",
+					"color": "gold"
+				},
+				{
+					"part": "legs_armour",
+					"color": "gold"
+				},
+				{
+					"part": "feet_armour",
+					"color": "gold"
+				},
+				{
+					"part": "cape_solid",
+					"color": "red"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "likely",
+			"note": "Wall Lord in gold and crimson armour (2.29); the red cape stands for the crimson. His scale colour is not stated: bronze is a guess. Sword: he draws one in 4.09."
+		},
 		"race_drake": {
 			"body": "male",
 			"skin": "green",

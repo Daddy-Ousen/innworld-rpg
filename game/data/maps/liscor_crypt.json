@@ -5,14 +5,14 @@
 	"location": "liscor_dungeon",
 	"indoor": true,
 	"confidence": "guess",
-	"note": "Design map (M13.0). A deeper level of Liscor's dungeon down a big staircase from the trapped rooms (4.08 T). What lives down there is in the text: undead like the ones that climb out of the rift (4.19), Crypt Worms and their tunnels (4.13 L, 4.19), a wall that pours out leeches (4.08 T), cave Goblins and Not-Gnolls (4.08 T), and a sealed door with an old warning, 'Mother of Graves' (4.08 T), which never opens here. The layout and the grave hall are guesses.",
+	"note": "Design map (M13.0). A deeper level of Liscor's dungeon below the trapped rooms. In 4.08 T a big staircase leads UP to the trapped rooms from the rift's level; here the crypt is below them (a layout guess). What lives down there is in the text: undead like the ones that climb out of the rift (4.19), Crypt Worms and their tunnels (4.13 L, 4.19), a wall that pours out leeches (4.08 T), cave Goblins and Not-Gnolls (4.08 T), and a rune-marked metal door at the top of a short stair with the warning 'Mother of Graves' (4.08 T). Toren opens it and flees from what is inside; here it stays shut (the art is the stone doors). The layout and the grave hall are guesses.",
 	"zones": {},
 	"exits": [
 		{"at": [1, 1], "to": "liscor_depths", "arrive": [28, 19], "minutes": 0}
 	],
 	"objects": [
 		{"id": "crypt_stairs_up", "kind": "stairs", "at": [1, 1], "name": "Stairs up", "actions": []},
-		{"id": "mother_of_graves_door", "kind": "stone_doors", "at": [16, 1], "name": "Sealed door: 'Mother of Graves'", "actions": [], "solid": true},
+		{"id": "mother_of_graves_door", "kind": "stone_doors", "at": [16, 1], "name": "Rune-marked metal door: 'Mother of Graves'", "actions": [], "solid": true},
 		{"id": "grave_1", "kind": "tombstone", "at": [12, 3], "name": "Old grave", "actions": [], "solid": true},
 		{"id": "grave_2", "kind": "grave_cross", "at": [15, 4], "name": "Old grave", "actions": [], "solid": true},
 		{"id": "grave_3", "kind": "tombstone", "at": [18, 3], "name": "Old grave", "actions": [], "solid": true},

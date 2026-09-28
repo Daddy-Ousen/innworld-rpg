@@ -1,0 +1,151 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.11",
+	"events": {
+		"b5.q_erin_and_ryoka_talk_in_celum": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "celum_runners_guild",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"friend": {
+					"prefer": [
+						"garia_strongheart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"friend_2": {
+					"prefer": [
+						"fals"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin",
+					"erin_solstice"
+				],
+				"flags": [
+					"ryoka.home_at_the_wandering_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.and_ryoka_talked_it_out",
+					"erin.plans_to_hire_staff",
+					"erin.plans_to_expand_the_inn",
+					"erin.plans_to_batch_cook",
+					"ryoka.plans_to_become_a_courier",
+					"ryoka.knows_erin_met_teriarch",
+					"ryoka.knows_of_erins_solstice_coin",
+					"garia.sprained_her_ankle",
+					"olesm.has_a_walled_city_chess_letter",
+					"bird.brought_erin_a_fresh_bird"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "ryoka_griffin",
+						"delta": 2
+					},
+					{
+						"from": "ryoka_griffin",
+						"to": "erin_solstice",
+						"delta": 2
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.11",
+				"confidence": "confirmed",
+				"note": "Day 102 is a guess (the morning after Ryoka comes home). The campfire visitors are not named; the coin's Tamaroth is not linked. The letter's content is not given. Lyonette runs the inn for the day."
+			},
+			"summary": "Ryoka takes Erin and Mrsha through the door to Celum and borrows a private room at the Runners' Guild. They talk for hours: Christmas, Toren, Magnolia, Teriarch. They make up, and Erin makes plans to hire staff and grow the inn."
+		},
+		"b5.r_venitra_warns_the_goblin_lord": {
+			"tier": 1,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "blood_fields",
+			"roles": {
+				"servant": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"servant_2": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venitra.hunts_ryoka_near_liscor",
+					"goblin_lord.warned_of_the_drake_armies",
+					"goblin_lord.army_turns_to_face_the_drakes"
+				]
+			},
+			"rumor": "Scouts found a hundred dead Goblins in the snow south of Liscor, killed fast, and no sign of who did it.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.11",
+				"confidence": "confirmed",
+				"note": "Day 102 and the place are guesses ('south of Liscor, in the snow'). The Goblin Lord is unnamed; no NPC id. The battle with the Drake armies is the next day (M13.3). Ivolethe watches and does not act."
+			},
+			"summary": "South of Liscor, Venitra and Ijvani cut down a Goblin ambush. The Goblin Lord comes, and Venitra tells him two Drake armies are closing in. Then she turns toward Liscor, looking for Ryoka Griffin."
+		}
+	},
+	"system": []
+}

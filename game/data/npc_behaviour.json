@@ -65,6 +65,13 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"ilvriss": {
+			"confidence": "guess",
+			"notes": "M13.2. Wall Lord Ilvriss of Salazsar stays in Liscor (the Tailless Thief) and is off the map. A canon scene brings him into the street to confront Ryoka on day 101 (4.09). No combat block yet.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
 		"zevara": {
 			"confidence": "guess",
 			"combat": {"hp": 50, "accuracy": 7, "evasion": 4, "armor": 2, "damage": [4, 8]},
@@ -128,13 +135,15 @@
 		"pisces": {
 			"confidence": "guess",
 			"combat": {"hp": 24, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [4, 7]},
-			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains. M9.4: evenings at the Frenzied Hare with the Horns while they are in Celum (horns_of_hammerad.in_celum, 3.24-3.25); 3.24 clears gone_to_albez, so in_celum and left_celum keep him off the Floodplains too.",
+			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains. M9.4: evenings at the Frenzied Hare with the Horns while they are in Celum (horns_of_hammerad.in_celum, 3.24-3.25); 3.24 clears gone_to_albez, so in_celum and left_celum keep him off the Floodplains too. M13.2: from day 101 he eats with the Horns in the inn's common room (horns_of_hammerad.lodge_in_the_inn_basement); hours and seat are guesses.",
 			"goals": [
 				{"goal": "forage", "base": 2, "hours": [[20, 5, 1]], "when_flags": ["liscor.hunting_pisces"],
 					"unless_flags": ["horns_of_hammerad.gone_to_albez", "horns_of_hammerad.in_celum", "horns_of_hammerad.left_celum"],
 					"target": {"area": "floodplains_south", "pos": [27, 4]}},
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
 					"target": {"area": "celum_frenzied_hare", "pos": [12, 8]}},
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_interior", "pos": [4, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
 			]
 		},
@@ -194,11 +203,13 @@
 		},
 		"ksmvr": {
 			"confidence": "guess",
-			"notes": "The Prognugator of Liscor's Hive (1.46). He stays in the Hive (off the map); a canon stage brings him out to fight Gazi on day 42 (2.05). Combat block (M8.1): four arms, two swords and two daggers. M9.4: with the Horns in Celum (horns_of_hammerad.in_celum, 3.24-3.25) he sits with them at the Frenzied Hare in the evening; hours and seat are guesses.",
+			"notes": "The Prognugator of Liscor's Hive (1.46). He stays in the Hive (off the map); a canon stage brings him out to fight Gazi on day 42 (2.05). Combat block (M8.1): four arms, two swords and two daggers. M9.4: with the Horns in Celum (horns_of_hammerad.in_celum, 3.24-3.25) he sits with them at the Frenzied Hare in the evening; hours and seat are guesses. M13.2: from day 101 he eats with the Horns in the inn's common room (horns_of_hammerad.lodge_in_the_inn_basement); hours and seat are guesses.",
 			"combat": {"hp": 50, "accuracy": 7, "evasion": 5, "armor": 3, "damage": [4, 8]},
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
 					"target": {"area": "celum_frenzied_hare", "pos": [12, 6]}},
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_interior", "pos": [4, 9]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -224,7 +235,7 @@
 		},
 		"ceria_springwalker": {
 			"confidence": "guess",
-			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone. M9.4: in Celum (horns_of_hammerad.in_celum, 3.24-3.25) the Horns eat at the Frenzied Hare in the evening; hours and seats are guesses.",
+			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone. M9.4: in Celum (horns_of_hammerad.in_celum, 3.24-3.25) the Horns eat at the Frenzied Hare in the evening; hours and seats are guesses. M13.2: from day 101 the Horns sleep in the inn's basement (4.11, horns_of_hammerad.lodge_in_the_inn_basement) and eat in the common room; hours and seats are guesses.",
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"target": {"area": "inn_interior", "pos": [3, 8]}},
@@ -232,6 +243,8 @@
 					"unless_flags": ["ruins_expedition.leave_at_dawn"], "target": {"area": "inn_interior", "pos": [3, 8]}},
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
 					"target": {"area": "celum_frenzied_hare", "pos": [11, 7]}},
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_interior", "pos": [3, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -303,12 +316,16 @@
 		},
 		"ryoka_griffin": {
 			"confidence": "guess",
-			"notes": "M9.1. Teriarch sends her to Celum on day 71 (ryoka.in_celum). There she takes deliveries at the Runners' Guild in the morning, runs them off the map, and eats and sleeps at the Frenzied Hare near Erin (3.03). She leaves Celum with Reynold in 3.09/3.10 (ryoka.gone_to_magnolia, set in M9.2). Before day 71 she keeps story roles only. Hours are guesses. She never gains a level; the combat block is a design number.",
+			"notes": "M9.1. Teriarch sends her to Celum on day 71 (ryoka.in_celum). There she takes deliveries at the Runners' Guild in the morning, runs them off the map, and eats and sleeps at the Frenzied Hare near Erin (3.03). She leaves Celum with Reynold in 3.09/3.10 (ryoka.gone_to_magnolia, set in M9.2). Before day 71 she keeps story roles only. Hours are guesses. She never gains a level; the combat block is a design number. M13.2: home at the inn from day 101 (4.09, ryoka.home_at_the_wandering_inn): she sleeps in Lyonette's room and eats in the common room; days off the map. Hours and seats are guesses.",
 			"combat": {"hp": 20, "accuracy": 5, "evasion": 6, "armor": 0, "damage": [1, 3]},
 			"goals": [
 				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [14, 9]}},
 				{"goal": "work", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_runners_guild", "pos": [6, 4]}},
 				{"goal": "eat", "base": 2, "hours": [[18, 22, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [7, 8]}},
+				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["ryoka.home_at_the_wandering_inn"],
+					"target": {"area": "inn_interior", "pos": [20, 12]}},
+				{"goal": "eat", "base": 2, "hours": [[7, 9, 1], [18, 22, 1]], "when_flags": ["ryoka.home_at_the_wandering_inn"],
+					"target": {"area": "inn_interior", "pos": [7, 8]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
 			]
 		},
@@ -323,10 +340,12 @@
 		},
 		"yvlon_byres": {
 			"confidence": "guess",
-			"notes": "M9.4. Yvlon comes to Celum with the Horns (3.24, horns_of_hammerad.in_celum), her plate armour gone and metal fused to her arms, and sits with them at the Frenzied Hare in the evening until they leave on the wagon (3.25). Hours and seat are guesses; the rest of the time she is off the map.",
+			"notes": "M9.4. Yvlon comes to Celum with the Horns (3.24, horns_of_hammerad.in_celum), her plate armour gone and metal fused to her arms, and sits with them at the Frenzied Hare in the evening until they leave on the wagon (3.25). Hours and seat are guesses; the rest of the time she is off the map. M13.2: from day 101 she eats with the Horns in the inn's common room (horns_of_hammerad.lodge_in_the_inn_basement); hours and seat are guesses.",
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
 					"target": {"area": "celum_frenzied_hare", "pos": [13, 7]}},
+				{"goal": "eat", "base": 2, "hours": [[6, 9, 1], [18, 23, 1]], "when_flags": ["horns_of_hammerad.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_interior", "pos": [3, 9]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
 			]
 		},
