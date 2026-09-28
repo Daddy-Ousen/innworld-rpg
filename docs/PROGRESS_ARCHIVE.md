@@ -159,3 +159,18 @@ session. Current work stays in `progress.md`.
 
 ## Architectural decisions (M12)
 - ADR 0019 (plan accepted 2026-09-27): audio is presentation only (no core or save change); volumes in `user://settings.cfg`; all cues, moods, moments and beds in `data/audio.json`; `"sound"` key in `objects.json` (M12.4); CC0 / CC-BY packs plus `tools/build_sfx.py`; about 60 MB audio at most (56 MB used).
+
+## Roadmap status (M13, archived 2026-09-28)
+- [x] M13 — Book 5 (The Last Light). Plan accepted 2026-09-28 (ADR 0020).
+  - [x] M13.0 World: gated exits, inn third floor + watchtower, depths + crypt maps, new enemies. Merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)), tag `m13.0-done` on 39e94da.
+  - [x] M13.T Traps (save v14). Merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)), tag `m13.t-done` on 85dd0e9.
+  - [x] M13.1 Canon 4.00 K – 4.07 (days 97–100). Merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)), tag `m13.1-done` on 67fef71.
+  - [x] M13.2 Canon 4.08 T – 4.12 (days 101–102). Merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)), tag `m13.2-done` on db1e2dd.
+  - [x] M13.3 Canon 4.13 L – 4.17 (days 101–111). Merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)), tag `m13.3-done` on 539ff32.
+  - [x] M13.4 Canon 1.02 D – 1.06 D (Geneva in Baleros, days 77–90, off-map). Merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)), tag `m13.4-done` on 069a265.
+  - [x] M13.5 Canon 4.18 – 4.23 E (Liscor days 106–109; Laken days 111–118, off-map). Merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)), tag `m13.5-done` on 62806ef.
+  - [x] M13.6 Canon 4.24 – 4.27 H (Liscor days 110–111; Niers and Magnolia off-map to 113; Creler cave map). Merged ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65)), tag `m13.6-done` on 9c37803.
+  - [x] M13.7 Canon 4.28 – 4.31 (days 111–114). 32 events, Imenet merged into Ijvani, Regrika fight + feast and pyre scenes. Merged ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)), tags `m13.7-done` and `m13-done` on 17b6bab. GUT 914 tests (98 scripts), Python 78 OK, validator 0 errors.
+
+## Architectural decisions (M13)
+- ADR 0020 (plan accepted 2026-09-28): one branch + PR per sub-milestone; world and traps first, then 7 canon batches; 4.00 K – 4.06 K are history notes only; stage and hook choices asked at the start of each canon batch; traps in save v14.

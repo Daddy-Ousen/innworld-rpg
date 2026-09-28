@@ -1,6 +1,6 @@
 # Progress
 
-M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
+M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -16,16 +16,8 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 - [x] M10 — Book 4 (Winter Solstice). M10.0–M10.5 merged; tags `m10.0-done` … `m10.5-done` and `m10-done` on merge commit 25b8d94 ([PR #45](https://github.com/Daddy-Ousen/innworld-rpg/pull/45)). Detail in the archive and ADR 0017.
 - [x] M11 — Graphics, characters and animation. M11.0–M11.5 merged; tags `m11.0-done` … `m11.5-done` and `m11-done` on merge commit 7bb4656 ([PR #51](https://github.com/Daddy-Ousen/innworld-rpg/pull/51)). Detail in the archive and ADR 0018.
 - [x] M12 — Audio: music, sound effects, ambience. M12.0–M12.5 merged; tags `m12.0-done` … `m12.5-done` and `m12-done` on merge commit 95fb6c4 ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)). Detail in the archive and ADR 0019.
-- [ ] M13 — Book 5 (The Last Light). Plan accepted 2026-09-28 (ADR 0020). Plan file: `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
-  - [x] M13.0 World: gated exits, inn third floor + watchtower, depths + crypt maps, new enemies. Merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)), tag `m13.0-done` on merge commit 39e94da.
-  - [x] M13.T Traps (save v14). Merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)), tag `m13.t-done` on merge commit 85dd0e9.
-  - [x] M13.1 Canon 4.00 K – 4.07 (days 97–100). Merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)), tag `m13.1-done` on merge commit 67fef71.
-  - [x] M13.2 Canon 4.08 T – 4.12 (days 101–102). Merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)), tag `m13.2-done` on merge commit db1e2dd.
-  - [x] M13.3 Canon 4.13 L – 4.17 (days 101–111). Merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)), tag `m13.3-done` on merge commit 539ff32.
-  - [x] M13.4 Canon 1.02 D – 1.06 D (Geneva in Baleros, days 77–90, off-map). Merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)), tag `m13.4-done` on merge commit 069a265.
-  - [x] M13.5 Canon 4.18 – 4.23 E (days 106–109 at Liscor; Laken days 111–118, off-map). Merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)), tag `m13.5-done` on merge commit 62806ef.
-  - [x] M13.6 Canon 4.24 – 4.27 H (Liscor days 110–111; Niers and Magnolia off-map to 113; the Creler cave map). Merged ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65)), tag `m13.6-done` on merge commit 9c37803.
-  - [ ] M13.7 Canon 4.28 – 4.31 (days 111–114). Done and tested on branch `data/book5-m13.7`: 32 events, Imenet merged into Ijvani, Regrika fight + feast and pyre scenes. [PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66) open, waiting on the user to merge. Tick after merge (tags `m13.7-done`, `m13-done`).
+- [x] M13 — Book 5 (The Last Light). M13.0, M13.T, M13.1–M13.7 merged; tags `m13.0-done` … `m13.7-done` and `m13-done` on merge commit 17b6bab ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). Detail in the archive and ADR 0020.
+- [ ] Next milestone: not chosen yet (ask the user: Book 6, or engine work; see `docs/ROADMAP.md` "Later").
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
