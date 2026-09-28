@@ -1,0 +1,440 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.15L",
+	"events": {
+		"b5.zc_klbkch_pulls_pawns_soldiers_back": {
+			"tier": 2,
+			"window": {
+				"earliest": 105,
+				"latest": 105,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch",
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pawn.soldiers_back_on_patrol",
+					"xrn.helps_hold_the_dungeon_front"
+				],
+				"clear_flags": [
+					"pawn.on_combat_duty"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.15L",
+				"confidence": "confirmed",
+				"note": "Day 105 is a guess ('the third day'). Pawn levels to [Acolyte] 8 and gains [Mass Prayer]. Belgrade and Anand will recover."
+			},
+			"summary": "Pawn finds Klbkch badly hurt at the dungeon front. Klbkch drinks a potion and takes Pawn's Soldiers off the front: back to patrols above. Xrn will help hold the tunnels."
+		},
+		"b5.zd_erin_fires_safry_and_maran": {
+			"tier": 2,
+			"window": {
+				"earliest": 105,
+				"latest": 105,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"staff": {
+					"prefer": [
+						"safry"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"staff_2": {
+					"prefer": [
+						"maran"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"lyonette"
+				],
+				"flags": [
+					"safry.works_at_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"safry.fired_from_the_inn",
+					"maran.fired_from_the_inn",
+					"lyonette.in_charge_of_the_staff",
+					"lyonette.confronted_erin_about_toren",
+					"erin.has_octavias_mould_for_brunkr"
+				],
+				"clear_flags": [
+					"safry.works_at_the_inn",
+					"maran.works_at_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.15L",
+				"confidence": "confirmed",
+				"note": "Day 105 is a guess. Ryoka spent the day invisible (Pisces' spell) and tripped Safry. Erin also brought back Octavia's potion-grown mould to try on Brunkr. The next day she argues with Agnes in Celum."
+			},
+			"summary": "Safry and Maran bring Human friends and serve only them. Erin puts Lyonette in charge and fires the two; her aura sends them fleeing through the door into Octavia's shop. Then Lyonette yells at Erin about Toren."
+		},
+		"b5.ze_ryoka_learns_lyonette_is_a_princess": {
+			"tier": 2,
+			"window": {
+				"earliest": 105,
+				"latest": 105,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin",
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.knows_lyonette_is_a_princess",
+					"lyonette.will_learn_magic_and_the_sword"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.15L",
+				"confidence": "confirmed",
+				"note": "Day 105 is a guess. Ryoka calls her trick [Flashbang]; it is a [Light] spell, not a Skill. Ryoka leaves that night for Garia's farm."
+			},
+			"summary": "Ryoka finds Lyonette in the snow near the inn and works out that she is a [Princess]. They agree to keep it quiet. Ryoka shows her a blinding light trick and tells her to learn magic and the sword."
+		},
+		"b5.zf_pawn_leads_his_soldiers_in_prayer": {
+			"tier": 2,
+			"window": {
+				"earliest": 106,
+				"latest": 106,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"visitor": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pawn.knows_lyonette_is_a_princess",
+					"yellow_splatters.promoted_to_sergeant",
+					"pawn.leads_soldiers_in_prayer",
+					"pawn.on_combat_duty"
+				],
+				"clear_flags": [
+					"pawn.soldiers_back_on_patrol"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.15L",
+				"confidence": "confirmed",
+				"note": "Day 106 is a guess (106-107). Belgrade calls what he sees 'Faith'. Some painted Soldiers die; no count."
+			},
+			"summary": "Zel tells Pawn to find a spark in his ranks; Lyonette tells him she is a [Princess] and to walk proudly. Pawn makes Yellow Splatters a [Sergeant] and leads his Soldiers back to the front with his censer."
+		},
+		"b5.zg_pawns_soldiers_eat_bee_soup_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 106,
+				"latest": 106,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"visitor": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn",
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.fed_pawns_soldiers",
+					"tersk.learning_to_pray"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					19,
+					23
+				],
+				"kind": "scene",
+				"when_flags": [
+					"pawn.lost_25_soldiers"
+				],
+				"npcs": [
+					{
+						"npc": "pawn",
+						"pos": [
+							13,
+							14
+						]
+					},
+					{
+						"npc": "tersk",
+						"pos": [
+							12,
+							15
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							18,
+							14
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							18,
+							12
+						]
+					}
+				],
+				"line": "Over a hundred painted Soldiers sit on the snowy hill with bowls of Erin's bee soup. Lyonette carries the pot. Tersk, without his armour, asks Pawn how one prays.",
+				"note": "M13.3: a scene. Hours are guesses (night). The Soldiers are the line only; no Soldier NPCs."
+			},
+			"hooks": [
+				{
+					"id": "player_served_soup_to_pawns_soldiers",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"pawn",
+									"tersk",
+									"lyonette"
+								]
+							}
+						}
+					],
+					"days": [
+						106,
+						106
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_served_the_soldiers_soup"
+						],
+						"relationship": [
+							{
+								"from": "pawn",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "tersk",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human from the Wandering Inn carried bowls down the hill to Pawn's Soldiers. Tersk asked their name."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.15L",
+				"confidence": "confirmed",
+				"note": "Day 106 is a guess (night). Tersk will soon go home to report to his Hive."
+			},
+			"summary": "After the fight, Pawn's Soldiers eat Erin's bee soup on the hill while Lyonette serves. Tersk suggests armour from Shield Spider shells, asks for the recipe, and asks Pawn to teach him to pray."
+		}
+	},
+	"system": [
+		{
+			"who": "pawn",
+			"kind": "level",
+			"name": "[Acolyte]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Shown as Level 8; he speaks of two levels (from 6)."
+		},
+		{
+			"who": "pawn",
+			"kind": "skill",
+			"name": "[Mass Prayer]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Shown with the level-up."
+		}
+	]
+}

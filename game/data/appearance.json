@@ -1957,6 +1957,49 @@
 			],
 			"confidence": "guess",
 			"note": "A spider with a hard shell that turns swords, some bigger than a Rock Crab (4.08 T). The Rock Crab shape in dark grey; the eight legs and fangs are not drawn."
+		},
+		"ishkr": {
+			"body": "male",
+			"skin": "fur_copper",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_copper"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Red-brown fur (4.14 L). Clothes are guesses."
+		},
+		"tersk": {
+			"body": "male",
+			"skin": "all.lpcr.charcoal",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "guess",
+			"note": "An Armored Antinium; drawn without his armour, as he fights and visits in 4.13 L - 4.15 L. Carapace colour is a guess."
 		}
 	}
 }
