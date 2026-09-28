@@ -1,0 +1,507 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.28",
+	"events": {
+		"b5.zzzze_ijvani_drops_her_imenet_disguise_in_the_alley": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ijvani"
+				],
+				"flags": [
+					"venitra.seized_ryoka_in_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.knows_imenet_is_ijvani",
+					"ryoka.pinkie_broken_by_venitra",
+					"ryoka.watched_by_a_listening_spell"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "The text names her outright: Imenet is Ijvani. Ivolethe warns Ryoka that a listening spell is on her."
+			},
+			"summary": "In the alley 'Imenet' sheds the illusion: it is Ijvani, a black skeleton mage. A truth spell shows Ryoka told no one of their master; Venitra breaks her finger twice. Relc, chasing Ivolethe, walks in, and the pair take Ryoka to the feast."
+		},
+		"b5.zzzzf_brunkrs_feast_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"knight": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": []
+				},
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"brunkr"
+				],
+				"flags": [
+					"krshia.plans_a_feast_for_brunkr"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.held_brunkrs_feast",
+					"erin.baked_a_knight_cake",
+					"brunkr.thanked_erin_for_his_arm",
+					"brunkr.thinks_of_joining_adventurers"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					18,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "brunkr",
+						"pos": [
+							7,
+							4
+						]
+					},
+					{
+						"npc": "krshia",
+						"pos": [
+							8,
+							4
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							6,
+							3
+						]
+					},
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							9,
+							5
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							7,
+							6
+						]
+					},
+					{
+						"npc": "zel_shivertail",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "klbkch",
+						"pos": [
+							12,
+							4
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							10,
+							4
+						]
+					}
+				],
+				"line": "The common room is packed with Gnolls in their best. Brunkr sits in the middle of them, grinning, while Erin hides something pink in the kitchen.",
+				"note": "M13.7: a scene. 'Regrika' and 'Imenet' are not placed (their looks would give them away)."
+			},
+			"hooks": [
+				{
+					"id": "player_ate_brunkrs_cake",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"brunkr",
+									"krshia",
+									"ryoka_griffin"
+								]
+							}
+						}
+					],
+					"days": [
+						111,
+						111
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_ate_brunkrs_cake"
+						],
+						"relationship": [
+							{
+								"from": "brunkr",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "krshia",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human guest ate Erin's first cake with Brunkr at his [Knight] feast."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "'Regrika', 'Imenet', Zel, Ilvriss, Klbkch and Xrn are there too. Hours are guesses (evening to near midnight)."
+			},
+			"summary": "Krshia's Gnolls fill the inn for Brunkr's feast. Erin brings out a pink cake that says [Knight] and teaches the room to sing. Later Brunkr thanks Erin for his arm and says he may join adventurers one day."
+		},
+		"b5.zzzzg_a_standoff_over_ryoka_at_the_feast": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"slayer": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"small_queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"venitra.seized_ryoka_in_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"xrn.met_ryoka",
+					"ilvriss.pressed_ryoka_about_periss_again",
+					"azkerash.saw_zel_and_xrn_at_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "The text calls it a Balerosian Standoff. Klbkch nearly says that Xrn is preparing to leave."
+			},
+			"summary": "Zel and Ilvriss, then Klbkch and Xrn, sit down with Ryoka. She sends them away, knowing she is heard. Through Venitra's eyes the Necromancer sees Zel Shivertail, a Wall Lord, the Slayer and the Small Queen in one room."
+		},
+		"b5.zzzzh_the_necromancer_lays_word_of_death_on_ryoka": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"venitra.seized_ryoka_in_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.under_word_of_death",
+					"azkerash.forbids_harming_ryoka",
+					"ryoka.pinkie_mended_by_the_necromancer"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "Ivolethe sees the spell; Xrn does not. Ryoka calls Pisces a man who likes dead bodies to dodge the word."
+			},
+			"summary": "Az'kerash speaks through 'Regrika'. He mends Ryoka's finger, forbids his servants to harm her for now, and lays [Word of Death] on her: if she speaks his name or of necromancy, she dies."
+		},
+		"b5.zzzzi_erin_beats_imenet_at_chess": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"opponent": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [
+					"ijvani.disguised_as_imenet"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.lost_at_chess_to_erin",
+					"azkerash.curious_about_erin_and_the_door"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "The first game is Erin's; then one each. Olesm, Typhenous, Pisces and Klbkch watch."
+			},
+			"summary": "'Imenet' asks Erin for a game. She wins twice and loses once with a hypermodern style. It is the Necromancer who plays through him; Venitra cannot bear to see her master lose."
+		},
+		"b5.zzzzj_venitra_murders_brunkr": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"killer": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"victim": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": []
+				},
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra",
+					"brunkr"
+				],
+				"flags": [
+					"venitra.disguised_as_regrika_blackpaw"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"brunkr.murdered_by_venitra",
+					"venitra.hid_brunkr_in_the_dungeon_rift"
+				],
+				"kill": [
+					"brunkr"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.28",
+				"confidence": "confirmed",
+				"note": "Near midnight. Eight more dead lie with him (a Silver-rank Gnoll team and Bronze Gnolls); unnamed, no NPCs."
+			},
+			"summary": "Stung that her master lost a game, Venitra lures Brunkr into a side street as 'Regrika', drops the disguise and kills him. Ijvani hides the body in the dungeon rift with other murdered Gnolls."
+		}
+	},
+	"system": []
+}

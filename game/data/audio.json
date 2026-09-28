@@ -198,7 +198,8 @@
     "cave_goblin": {"hurt": "goblin_hurt", "gone": "goblin_gone"},
     "not_gnoll": {"hurt": "human_hurt"},
     "creler_hatchling": {"hurt": "bug_hurt"},
-    "creler_juvenile": {"hurt": "bug_hurt", "gone": "big_roar"}
+    "creler_juvenile": {"hurt": "bug_hurt", "gone": "big_roar"},
+    "regrika_blackpaw": {"hurt": "human_hurt"}
   },
   "pages": {
     "open": "chime",

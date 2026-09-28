@@ -316,9 +316,10 @@
 		},
 		"lyonette": {
 			"confidence": "guess",
-			"notes": "M9.1. Erin takes her in on day 50 (lyonette.works_at_inn). She cooks and cleans in the kitchen, serves in the evening and sleeps in the back room. After Erin is gone (day 70) she runs the inn alone (3.05); the text has her hiding for some days first, which is not scheduled. Hours are guesses.",
+			"notes": "M9.1. Erin takes her in on day 50 (lyonette.works_at_inn). She cooks and cleans in the kitchen, serves in the evening and sleeps in the back room. After Erin is gone (day 70) she runs the inn alone (3.05); the text has her hiding for some days first, which is not scheduled. Hours are guesses. M13.7: from day 114 she shelters in Celum from the Goblin Lord (4.31, lyonette.sheltering_in_celum), off the map.",
 			"combat": {"hp": 12, "accuracy": 2, "evasion": 3, "armor": 0, "damage": [1, 2]},
 			"goals": [
+				{"goal": "off_map", "base": 6, "when_flags": ["lyonette.sheltering_in_celum"], "target": {"off_map": "celum"}},
 				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [20, 11]}},
 				{"goal": "work", "base": 2, "hours": [[17, 22, 1]], "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [8, 6]}},
 				{"goal": "work", "base": 1, "when_flags": ["lyonette.works_at_inn"], "target": {"area": "inn_interior", "pos": [21, 2]}},
@@ -327,8 +328,9 @@
 		},
 		"mrsha": {
 			"confidence": "guess",
-			"notes": "M9.1. The white Gnoll cub stays at the inn once Ryoka brings her (mrsha.at_the_wandering_inn, day 67). From day 71 Selys looks after her in Liscor (mrsha.in_selys_care), off the map, until she runs back to the inn (3.21, M9.4 clears the flag). Positions are guesses. M13.3: away with Ryoka at the Strongheart farm from day 105 (4.17, mrsha.away_at_the_strongheart_farm).",
+			"notes": "M9.1. The white Gnoll cub stays at the inn once Ryoka brings her (mrsha.at_the_wandering_inn, day 67). From day 71 Selys looks after her in Liscor (mrsha.in_selys_care), off the map, until she runs back to the inn (3.21, M9.4 clears the flag). Positions are guesses. M13.3: away with Ryoka at the Strongheart farm from day 105 (4.17, mrsha.away_at_the_strongheart_farm). M13.7: from day 114 she shelters in Celum with Lyonette (4.31, mrsha.sheltering_in_celum), off the map.",
 			"goals": [
+				{"goal": "off_map", "base": 6, "when_flags": ["mrsha.sheltering_in_celum"], "target": {"off_map": "celum"}},
 				{"goal": "sleep", "base": 3, "hours": [[21, 7, 1]], "when_flags": ["mrsha.at_the_wandering_inn"], "unless_flags": ["mrsha.in_selys_care", "mrsha.away_at_the_strongheart_farm"], "target": {"area": "inn_interior", "pos": [19, 11]}},
 				{"goal": "work", "base": 2, "when_flags": ["mrsha.at_the_wandering_inn"], "unless_flags": ["mrsha.in_selys_care", "mrsha.away_at_the_strongheart_farm"], "target": {"area": "inn_interior", "pos": [6, 10]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
@@ -336,7 +338,7 @@
 		},
 		"ryoka_griffin": {
 			"confidence": "guess",
-			"notes": "M9.1. Teriarch sends her to Celum on day 71 (ryoka.in_celum). There she takes deliveries at the Runners' Guild in the morning, runs them off the map, and eats and sleeps at the Frenzied Hare near Erin (3.03). She leaves Celum with Reynold in 3.09/3.10 (ryoka.gone_to_magnolia, set in M9.2). Before day 71 she keeps story roles only. Hours are guesses. She never gains a level; the combat block is a design number. M13.2: home at the inn from day 101 (4.09, ryoka.home_at_the_wandering_inn): she sleeps in Lyonette's room and eats in the common room; days off the map. Hours and seats are guesses. M13.3: away at the Strongheart farm from day 105 (4.17, ryoka.away_at_the_strongheart_farm).",
+			"notes": "M9.1. Teriarch sends her to Celum on day 71 (ryoka.in_celum). There she takes deliveries at the Runners' Guild in the morning, runs them off the map, and eats and sleeps at the Frenzied Hare near Erin (3.03). She leaves Celum with Reynold in 3.09/3.10 (ryoka.gone_to_magnolia, set in M9.2). Before day 71 she keeps story roles only. Hours are guesses. She never gains a level; the combat block is a design number. M13.2: home at the inn from day 101 (4.09, ryoka.home_at_the_wandering_inn): she sleeps in Lyonette's room and eats in the common room; days off the map. Hours and seats are guesses. M13.3: away at the Strongheart farm from day 105 (4.17, ryoka.away_at_the_strongheart_farm). M13.7: on day 114 she runs north from Celum (4.31 clears ryoka.home_at_the_wandering_inn), so she is off the map.",
 			"combat": {"hp": 20, "accuracy": 5, "evasion": 6, "armor": 0, "damage": [1, 3]},
 			"goals": [
 				{"goal": "sleep", "base": 3, "hours": [[22, 6, 1]], "when_flags": ["ryoka.in_celum"], "unless_flags": ["ryoka.gone_to_magnolia"], "target": {"area": "celum_frenzied_hare", "pos": [14, 9]}},
@@ -431,7 +433,7 @@
 		},
 		"brunkr": {
 			"confidence": "guess",
-			"notes": "M13.6. Silverfang Gnoll warrior; off the map in Liscor. A canon stage brings him to the inn hill on day 110, where he trains Lyonette and she knights him (4.24).",
+			"notes": "M13.6. Silverfang Gnoll warrior; off the map in Liscor. A canon stage brings him to the inn hill on day 110, where he trains Lyonette and she knights him (4.24), and into the inn for his feast on day 111 (4.28). Venitra kills him that night.",
 			"goals": [
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]

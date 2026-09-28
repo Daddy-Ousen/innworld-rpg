@@ -1,0 +1,331 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.30",
+	"events": {
+		"b5.zzzzs_regrika_brings_madness_to_celum": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [
+					"ryoka.ran_for_the_high_passes",
+					"azkerash.ordered_ryokas_head"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"celum.mists_of_madness",
+					"venitra.crossed_the_door_to_celum",
+					"pisces.cracked_venitra_with_bone_fracture",
+					"pisces.knows_regrika_is_no_gnoll",
+					"azkerash.spoke_to_pisces"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "The 'Ryoka' she catches is Ivolethe. The Necromancer speaks into Pisces' mind. People die in the madness; none named."
+			},
+			"summary": "Regrika walks through the door to Celum and finds 'Ryoka' with the Horns at the Frenzied Hare. She lets loose [Mists of Madness] and the street turns on itself. Pisces, immune the second time, cracks her arm with [Bone Fracture]."
+		},
+		"b5.zzzzt_the_necromancer_readies_his_chosen_for_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"chosen": {
+					"prefer": [
+						"kerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scryer": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hunter": {
+					"prefer": [
+						"oom"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"azkerash"
+				],
+				"flags": [
+					"ijvani.broken_and_pulled_home"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.readied_his_chosen_for_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "They never go: Teriarch's fire (4.31) burns the scrolls. The spell would take thirty minutes."
+			},
+			"summary": "In his castle Az'kerash scries Ryoka running for the High Passes. He readies Kerash, Bea, Oom and the broken Ijvani with scrolls of [Greater Teleportation] to kill Zel Shivertail in Liscor, and every witness."
+		},
+		"b5.zzzzu_relc_holds_regrika_on_the_road": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"spear": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"relc",
+					"venitra"
+				],
+				"flags": [
+					"ryoka.ran_for_the_high_passes"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"relc.fought_regrika_on_the_high_pass_road",
+					"relc.chest_cut_by_regrika"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "Relc says he is out of shape. He uses [Lightning Sprint] and [Triple Thrust]."
+			},
+			"summary": "Near the High Passes Venitra, hasted, catches Ryoka and breaks her fingers. Relc runs out of the snow, kicks her and fights with a plain spear until it breaks and she opens his chest. He runs; Ryoka runs on."
+		},
+		"b5.zzzzv_ivolethe_breaks_faerie_law_to_save_ryoka": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ivolethe",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.ran_for_the_high_passes"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ivolethe.broke_faerie_law",
+					"ivolethe.shattered",
+					"venitra.frozen_by_ivolethe"
+				],
+				"clear_flags": [
+					"ivolethe.melting_as_winter_ends",
+					"ivolethe.disguised_as_ryoka"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "Not a death in the data: in 4.31 Teriarch believes she is banished, not dead."
+			},
+			"summary": "Venitra has Ryoka at the mountains. Against her sisters' pleas, Ivolethe breaks her King's law: she freezes the pass and Venitra in it, tells Ryoka to remember, dares her King, then falls and shatters into water."
+		},
+		"b5.zzzzw_ryoka_names_the_necromancer_and_dies": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "teriarch_cave",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin",
+					"teriarch"
+				],
+				"flags": [
+					"ryoka.under_word_of_death",
+					"ryoka.ran_for_the_high_passes"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.killed_by_word_of_death",
+					"teriarch.knows_the_necromancer_hunted_ryoka"
+				],
+				"kill": [
+					"ryoka_griffin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "Teriarch brings her back at once (4.31)."
+			},
+			"summary": "Ryoka reaches the Dragon's cave bleeding and screams at him: why did Brunkr die for a birthday letter? She names Perril Chandler, Az'kerash. The [Word of Death] bursts her heart and she falls dead before Teriarch."
+		}
+	},
+	"system": []
+}
