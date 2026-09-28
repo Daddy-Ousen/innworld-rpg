@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-28)
 - M13.T merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)); ticked on main, tag `m13.t-done` on merge commit 85dd0e9.
-- M13.1 done on branch `data/book5-m13.1` (PR open, not merged). New `game/data/canon/book5/`: chapters
+- M13.1 done on branch `data/book5-m13.1` ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60) open, not merged). New `game/data/canon/book5/`: chapters
   `4.06KM.json` (Magnolia's gathering, Patricia Melissar's murder, Magnolia re-forms her circle; day 97) and
   `4.07.json` (Xrn's Rhir plan day 99; Lyonette's levels, Bird's birds, the soup samples, Erin waits, Ryoka near
   Celum; day 100). 14 NPCs, 6 locations. Three scenes with hooks on day 100. Detail: ADR 0020 "M13.1".
@@ -68,7 +68,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.1 PR.
+- Merge [PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60) (M13.1).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
