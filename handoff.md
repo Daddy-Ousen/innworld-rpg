@@ -1,22 +1,19 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13 (Book 5) plan accepted: `docs/ROADMAP.md` M13 section, `docs/adr/0020-m13-book5.md`. Plan file:
-  `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
-- M13.0 World done on branch `feat/m13.0-world`, [PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)
-  (not merged). Gated exits, 4 new maps, 5 new enemies, Bird on the tower, Toren in the depths. Detail: ADR 0020
-  "M13.0 World". Screenshot sheet was sent to the user.
-- Book 5 text is extracted to `canon/raw/book5` (gitignored, 37 chapters).
+- M13.0 merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)); ticked on main, tag `m13.0-done`
+  on merge commit 39e94da.
+- M13.T Traps done on branch `feat/m13.t-traps` (PR open, not merged). New `game/core/traps.gd`, save v14
+  (`CombatState.traps`), `rules.traps`, actions `search_for_traps` / `disarm_trap`, tags `vigilance.traps` /
+  `crafting.traps`, 9 traps in `liscor_depths`. Detail: ADR 0020 "M13.T Traps". Screenshot sent to the user
+  (red diamond = found and armed, grey = spent or disarmed).
+- Tests: 90 GUT scripts, 836 tests; Python 77 OK; validator 0 errors.
 
 ## Next steps
-1. Wait for the user to check the screenshot and merge PR #58. Then on main: tick M13.0 in `docs/ROADMAP.md`,
-   tag `m13.0-done` on the merge commit, update `progress.md`.
-2. M13.T Traps (save v14): see the plan file. Traps go in `liscor_depths`: rune (rune hall 13..22,1..7), pit
-   (pit corridor 17..18,8..13, `drop_to` liscor_crypt tunnels), spike ceiling (spike room 13..22,14..18),
-   exploding books (library 1..9,10..18; shelves at y 10), acid grate (acid room 26..30,2..9).
-   Canon (4.08 T, 4.19): rune traps recharge; spike ceiling resets after about 1 hour; acid eats magic
-   protection; there is also a fire room and a leech wall.
-3. Then M13.1 canon batch (ask the user stage/hook choices first).
+1. Wait for the user to check the screenshot and merge the M13.T PR. Then on main: tick M13.T in
+   `docs/ROADMAP.md` and `progress.md`, tag `m13.t-done` on the merge commit.
+2. M13.1 canon batch (4.00 K – 4.07, days ~96–100): ask the user the stage/hook choices first (M10 rule).
+   Book 5 text is in `canon/raw/book5` (gitignored). Delegate chapter reading to subagents.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -27,6 +24,11 @@
   counts in `unit_combat_db` / `unit_monster_art`. A new creature look also bumps `tools/tests/test_build_creatures.py`.
 - A new map needs a mood in `audio.json` and, with spawns, a knock-out wake spot (`sim_liscor_depths` guard).
 - Skeletons and zombies now spawn in the dungeon; `sim_skinner_night` allows that only for dungeon maps.
+- Traps (M13.T): walking helpers (`ToyMaps.walk_to`) do not avoid hidden traps. A walking test through the
+  depths must disarm them first (`gs.combat.traps[Traps.key(area, id)] = {"disarmed": true}`), or a pit drops the
+  player into the crypt mid-walk. Use `Traps.key`, never build the key by hand.
+- Git Bash heredocs eat a `\` at the end of a line even with `<<'EOF'`. Write Python patch scripts to the
+  scratchpad with the Write tool, then run them.
 - Godot on this machine: `godot` (WinGet link) returns at once while the real process keeps writing; wait for
   the `Godot_v4` process to exit before reading a log.
 
@@ -63,7 +65,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the M13.0 screenshot and merge PR #58.
+- Check the M13.T screenshot and merge the M13.T PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -83,7 +85,7 @@
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken, Geneva, Niers (3.22L) and Venitra use placeholder days.
-- Save is v13 (M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
+- Save is v14 on the M13.T branch (traps; v13 = M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: chain with `depends_on`. Siblings that share one dependency run in id order, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
 
 - Octavia matters to Book 3: killing her before day 87 cancels 3.25's goodbye and the wagon leaving, which cascades. Kill tests for her must run after day 87.
