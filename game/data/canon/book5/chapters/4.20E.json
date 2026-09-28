@@ -1,0 +1,295 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.20E",
+	"events": {
+		"b5.zzm_laken_comes_home_to_riverfarm": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tracker": {
+					"prefer": [
+						"sacra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bird": {
+					"prefer": [
+						"frostwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.bought_food_and_goods_for_riverfarm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.back_in_riverfarm",
+					"windfrozen_riders.serve_laken",
+					"celestial_trackers.serve_laken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 55 = game day 111: his days 55-70 squeezed into 111-118 (user choice). 4.19 shows him on the road."
+			},
+			"summary": "Laken's convoy reaches Riverfarm with the Windfrozen Riders and the Celestial Trackers. The village cheers the Unseen Empire, and the adventurers learn he is an [Emperor]."
+		},
+		"b5.zzn_laken_makes_prost_his_steward": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": []
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart",
+					"prost"
+				],
+				"flags": [
+					"laken.back_in_riverfarm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"prost.steward",
+					"laken.plans_a_new_riverfarm",
+					"wiskeria.told_invrisil_of_laken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 56-57 = game day 112: his days 55-70 squeezed into 111-118 (user choice)."
+			},
+			"summary": "Laken plans a new village with Prost and names him his [Steward]. His land sense stops at the village edge. Wiskeria admits she already sent word of his class to Invrisil."
+		},
+		"b5.zzo_a_mossbear_raids_riverfarm": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.back_in_riverfarm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.drove_off_a_mossbear",
+					"durene.fought_a_mossbear"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 59 = game day 113: his days 55-70 squeezed into 111-118 (user choice)."
+			},
+			"summary": "A Mossbear raids the village. Durene fights it bare-handed and is clawed. Laken's command and his glare drive it off, and he stops Beniar from chasing it."
+		},
+		"b5.zzp_laken_takes_in_windrest": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"smith": {
+					"prefer": [
+						"helm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [
+					"laken.back_in_riverfarm"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"windrest.burned_by_goblins",
+					"laken.took_in_windrest"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Laken's Day 60 = game day 113: his days 55-70 squeezed into 111-118 (user choice). Helm says a Great Chieftain has risen near Invrisil for the Goblin Lord."
+			},
+			"summary": "Helm brings word that Goblins burned Windrest, killed a dozen people and took two young women. Over Prost's worry, Laken takes in the whole village."
+		}
+	},
+	"system": [
+		{
+			"who": "prost",
+			"kind": "level",
+			"name": "[Steward]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Stated by others, not shown. [Farmer], [Builder] and [Trader] merge into it."
+		},
+		{
+			"who": "prost",
+			"kind": "skill",
+			"name": "[Talent Finder]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Stated with the new class."
+		},
+		{
+			"who": "prost",
+			"kind": "skill",
+			"name": "[Eye of Need]",
+			"level": 8,
+			"confidence": "confirmed",
+			"note": "Stated with the new class."
+		}
+	]
+}

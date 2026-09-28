@@ -1022,6 +1022,303 @@
 				"note": "The War Walker Geneva saves is her brother."
 			},
 			"summary": "A Razorshard Armor commander who pays Geneva for saving her brother."
+		},
+		"timbor_parithad": {
+			"name": "Timbor Parithad",
+			"race": "Human",
+			"tags": [
+				"human",
+				"innkeeper",
+				"celum"
+			],
+			"faction": null,
+			"home": "celum",
+			"classes": [
+				{
+					"name": "[Innkeeper]",
+					"level": 24
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Owns the Drunken Swordsman in Celum. Race is a guess."
+			},
+			"summary": "A Celum innkeeper who comes to scold Erin over the fired barmaids and hires them."
+		},
+		"ulia_ovena": {
+			"name": "Ulia Ovena",
+			"race": "Human",
+			"tags": [
+				"human",
+				"innkeeper",
+				"celum"
+			],
+			"faction": null,
+			"home": "celum",
+			"classes": [
+				{
+					"name": "[Innkeeper]",
+					"level": 27
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.18",
+				"confidence": "confirmed",
+				"note": "Owns the Blazehound in Celum; has a charm Skill. Race is a guess."
+			},
+			"summary": "A charming Celum innkeeper who comes with Timbor and Agnes to confront Erin."
+		},
+		"wiskeria": {
+			"name": "Wiskeria",
+			"race": "Human",
+			"tags": [
+				"human",
+				"witch",
+				"adventurer",
+				"celestial_trackers",
+				"riverfarm"
+			],
+			"faction": "celestial_trackers",
+			"home": "riverfarm",
+			"classes": [
+				{
+					"name": "[Witch]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Wears glasses. Becomes Laken's [General] (Level 4, stated) in 4.23 E. Race is a guess."
+			},
+			"summary": "A sharp Witch of the Celestial Trackers who stays at Riverfarm and becomes Laken's General."
+		},
+		"beniar": {
+			"name": "Beniar",
+			"race": "Human",
+			"tags": [
+				"human",
+				"rider",
+				"adventurer",
+				"windfrozen_riders"
+			],
+			"faction": "windfrozen_riders",
+			"home": "invrisil",
+			"classes": [
+				{
+					"name": "[Rider]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Leader of the Windfrozen Riders, a boastful Silver-rank swordsman (4.19). Race is a guess."
+			},
+			"summary": "The brash leader of the Windfrozen Riders who trains Riverfarm's militia."
+		},
+		"sacra": {
+			"name": "Sacra",
+			"race": "Human",
+			"tags": [
+				"human",
+				"spy",
+				"adventurer",
+				"magnolia_servant"
+			],
+			"faction": "house_reinhart",
+			"home": "invrisil",
+			"classes": [
+				{
+					"name": "[Macewoman]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "Posed as Odveig, leader of the Celestial Trackers, until 4.22 E. Says spying is not her class."
+			},
+			"summary": "Magnolia's agent who led the Celestial Trackers as 'Odveig' to watch Laken, then fled."
+		},
+		"helm": {
+			"name": "Helm",
+			"race": "Human",
+			"tags": [
+				"human",
+				"blacksmith",
+				"windrest",
+				"riverfarm"
+			],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [
+				{
+					"name": "[Blacksmith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "From Windrest; short of iron at Riverfarm."
+			},
+			"summary": "Windrest's blacksmith who brings word of the Goblin raid and moves to Riverfarm."
+		},
+		"jelov": {
+			"name": "Jelov",
+			"race": "Human",
+			"tags": [
+				"human",
+				"carver",
+				"riverfarm"
+			],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [
+				{
+					"name": "[Carver]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Elderly and limping. His heir is called a granddaughter once and a daughter once."
+			},
+			"summary": "An old carver who makes Laken's marker poles."
+		},
+		"tessia": {
+			"name": "Tessia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"villager",
+				"riverfarm"
+			],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Survived the avalanche."
+			},
+			"summary": "A Riverfarm girl, Gamel's sweetheart."
+		},
+		"rehanna": {
+			"name": "Rehanna",
+			"race": "Human",
+			"tags": [
+				"human",
+				"villager",
+				"windrest",
+				"riverfarm"
+			],
+			"faction": null,
+			"home": "riverfarm",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.22E",
+				"confidence": "confirmed",
+				"note": "The name is given with a hedge."
+			},
+			"summary": "A woman of Windrest who challenges Laken in public and is forced to kneel."
+		},
+		"jeighya": {
+			"name": "Jeighya",
+			"race": "Human",
+			"tags": [
+				"human",
+				"tracker",
+				"adventurer",
+				"celestial_trackers"
+			],
+			"faction": "celestial_trackers",
+			"home": "invrisil",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.22E",
+				"confidence": "confirmed",
+				"note": "Race is a guess."
+			},
+			"summary": "A scout of the Celestial Trackers who examines the dead Goblin."
+		},
+		"fabiel": {
+			"name": "Fabiel",
+			"race": "Human",
+			"tags": [
+				"human",
+				"rider",
+				"adventurer",
+				"windfrozen_riders"
+			],
+			"faction": "windfrozen_riders",
+			"home": "invrisil",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.21E",
+				"confidence": "confirmed",
+				"note": "Killed in a Goblin ambush (4.21 E); body never found (4.22 E)."
+			},
+			"summary": "A Windfrozen Rider killed by Goblins while hunting with Beniar."
+		},
+		"rie": {
+			"name": "Rie",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"invrisil",
+				"distant"
+			],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.23E",
+				"confidence": "confirmed",
+				"note": "Only a letter; no surname given."
+			},
+			"summary": "A [Lady] of Invrisil who writes to Laken after the battle."
 		}
 	}
 }

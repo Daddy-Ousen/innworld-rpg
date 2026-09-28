@@ -1,0 +1,353 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.19",
+	"events": {
+		"b5.zzj_silver_teams_go_into_the_rift": {
+			"tier": 2,
+			"window": {
+				"earliest": 109,
+				"latest": 109,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_dungeon.silver_teams_went_into_the_rift"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.19",
+				"confidence": "confirmed",
+				"note": "Petra's Bane and Twinfold Daggers are named teams; no NPCs."
+			},
+			"summary": "About twenty Bronze and Silver adventurers eat Erin's enchanted food and boast they will go down the rift. Jelaqua and Halrac tell them they will die. They go north anyway."
+		},
+		"b5.zzk_the_gold_teams_chart_the_trap_rooms": {
+			"tier": 2,
+			"window": {
+				"earliest": 109,
+				"latest": 109,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"ulrien"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rogue": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_dungeon.gold_teams_charted_the_trap_rooms",
+					"jelaqua.told_of_garens_betrayal",
+					"typhenous.ordered_door_lodestones"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.19",
+				"confidence": "confirmed",
+				"note": "Revi is stung by a wall scorpion and healed. Typhenous ordered lodestones so the door can link to more places."
+			},
+			"summary": "Griffon Hunt and the Halfseekers go in by the guarded official entrance and spend six hours in trap rooms: spikes, a pit, exploding books, an acid grate. Jelaqua tells how Garen Redfang betrayed them."
+		},
+		"b5.zzl_undead_climb_out_of_the_rift": {
+			"tier": 2,
+			"window": {
+				"earliest": 109,
+				"latest": 109,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"ulrien"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zzj_silver_teams_go_into_the_rift"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_dungeon.undead_climbed_out_of_the_rift",
+					"liscor_dungeon.rift_party_presumed_dead"
+				]
+			},
+			"stage": {
+				"area": "floodplains_south",
+				"hours": [
+					15,
+					19
+				],
+				"foes": [
+					{
+						"enemy": "zombie",
+						"pos": [
+							10,
+							20
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							12,
+							21
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							15,
+							20
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							12,
+							19
+						]
+					}
+				],
+				"line": "Grey shapes crawl up from the south, where the rift is. Some still wear the badges of the teams that went down this morning.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							16,
+							2
+						],
+						"allies": [
+							"halrac",
+							"revi",
+							"typhenous"
+						],
+						"line": "Halrac runs down the hill with an arrow on the string. Revi and Typhenous come behind him."
+					},
+					{
+						"after_seconds": 90,
+						"left_at_most": 2,
+						"from": [
+							9,
+							21
+						],
+						"foes": [
+							"ghoul",
+							"ghoul",
+							"skeleton",
+							"skeleton",
+							"crypt_worm"
+						],
+						"line": "A huge worm of dead flesh drags itself over the lip of the rift with more dead behind it."
+					},
+					{
+						"after_seconds": 200,
+						"left_at_most": 1,
+						"from": [
+							9,
+							21
+						],
+						"foes": [
+							"crypt_lord"
+						],
+						"line": "A Crypt Lord heaves itself out of the dark and roars at the living."
+					}
+				],
+				"note": "M13.5: a fight. Eleven foes stand in for about twenty-five. Hours are guesses (late afternoon, after Liscor shuts its gates)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_the_rift_undead",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"zombie",
+									"ghoul",
+									"skeleton",
+									"crypt_worm",
+									"crypt_lord"
+								]
+							}
+						}
+					],
+					"days": [
+						109,
+						109
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"floodplains.earther_fought_the_rift_undead"
+						],
+						"relationship": [
+							{
+								"from": "halrac",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "revi",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "typhenous",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "When the dead came up out of the rift, a Human from the Wandering Inn fought beside Griffon Hunt on the plain."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.19",
+				"confidence": "confirmed",
+				"note": "The dead party is implied, not shown. The text puts the rift north of the inn; our rift map is south of the Floodplains."
+			},
+			"summary": "Undead climb out of the rift: Flesh Worms, Crypt Lords and ghouls, likely the party that went down. Liscor shuts its gates. The Gold teams destroy them on the plain before the inn."
+		}
+	},
+	"system": []
+}

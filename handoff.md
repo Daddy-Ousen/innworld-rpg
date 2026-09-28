@@ -1,27 +1,26 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.3 merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)); ticked on main (commit 8f319ec),
-  tag `m13.3-done` on merge commit 539ff32.
-- M13.4 done on branch `data/book5-m13.4` ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) open, not merged). User choices: days "60-90 or 45-75 ish" -> we use
-  days 77-90 (Geneva's 1.01D ends day 76; these chapters come after); core cast of 15 NPCs; one tier-1 rumor at
-  the end (the United Nations company); no scene, no hook.
-- Chapters `1.02D` ... `1.06D`: 14 events `b5.zn_` ... `b5.zz_`, then `b5.zza_` (all at `baleros`). Deaths:
-  Johanas (84), Ulvial and Etretta Fulvrie (88). Geneva lives (Okasha restarts her heart, 88).
-- 15 new NPCs: quallet_marshhand, kenjiro_murata, aiko_nonomura, luan_khumalo, daly, paige, johanas, quexa,
-  etretta_fulvrie, calectus, xalandrass, exara, ulvial, zalthia_werskiv, grishka. No looks needed (off-map).
-- Tests: new `sim_book5_geneva` (5); `sim_canon_book5` loads the new NPCs. Full suite 95 scripts / 876 tests pass;
-  Python 78 OK; validator 0 errors. Detail: ADR 0020 "M13.4".
+- M13.4 merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)); ticked on main (commit c2be549),
+  tag `m13.4-done` on merge commit 069a265.
+- M13.5 done on branch `data/book5-m13.5` ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) open, not merged). User choices: 4.18 = days 107-108, 4.19 = day
+  109 (Ryoka and Mrsha come home on day 106); Laken's Day 55-70 squeezed into days 111-118; scenes: chess marathon
+  (107), Halrac teaches Bird (108), undead-from-the-rift fight (109); Riverfarm core cast.
+- 26 events `b5.zzb_` ... `b5.zzz_`, `b5.zzza_`; 12 new NPCs; location `windrest`; 5 new looks + behaviours
+  (olesm, anand, halrac, revi, typhenous). Fabiel dies (115). Ryoka/Mrsha away flags cleared (106).
+- Tests: new `sim_book5_rift_undead` (9); `sim_canon_book5` LAST_DAY 118 + 3 kill tests; `sim_player_hooks` 41;
+  `unit_art` now uses a look-less Drake id (Olesm has a look). Full suite 96 scripts / 888 tests pass; Python 78
+  OK; validator 0 errors. Detail: ADR 0020 "M13.5".
 
 ## Next steps
-1. Wait for the user to merge the M13.4 PR. Then on main: tick M13.4 in `docs/ROADMAP.md` and `progress.md`,
-   tag `m13.4-done` on the merge commit.
-2. M13.5 canon batch (4.18 - 4.23 E: the chess marathon, the building starts, the undead from the rift, Laken's
-   Riverfarm). Ask the user the choices first (scenes, hooks). Delegate chapter reading to subagents (files
-   `canon/raw/book5/024_4-18.txt` ... `029_4-23E.txt`). Day after 4.17 is 112.
-3. M13.5 must bring Ryoka and Mrsha home: clear `ryoka.away_at_the_strongheart_farm` and
-   `mrsha.away_at_the_strongheart_farm`, or they stay off the inn's schedule for good.
-4. Event ids: after `b5.zz_` the next ids are `b5.zza_`, `b5.zzb_` ... (`_` sorts before letters, so `zz_` < `zza_`).
+1. Wait for the user to merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64). Then on main: tick M13.5 in `docs/ROADMAP.md` and `progress.md`,
+   tag `m13.5-done` on the merge commit.
+2. M13.6 canon batch (4.24 - 4.27 H: winter ends, the slime, Brunkr knighted, "Regrika" and "Imenet", Niers,
+   Magnolia's army, the Creler nest). Ask the user the choices first (days, scenes, hooks). Delegate chapter
+   reading to subagents (files `canon/raw/book5/030_4-24.txt` ... `033_4-27H.txt`). Liscor's last day is 109;
+   Laken's arc runs to 118 (off-map), so 4.24 can start at day 110. Liscor hears the Drake armies fell (day 110)
+   from a dying scout in 4.24.
+3. Event ids: after `b5.zzza_` the next are `b5.zzzb_`, `b5.zzzc_` ... (`_` sorts before letters).
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -75,7 +74,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) (M13.4).
+- Merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) (M13.5).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -143,6 +142,9 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
+- M13.5: `game/data/canon/book5/chapters/4.18.json` ... `4.23E.json`, `game/data/canon/book5/npcs.json`,
+  `locations.json`, `game/data/npc_behaviour.json`, `game/data/appearance.json`, `game/tests/sim_book5_rift_undead.gd`,
+  `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
 - M13.4: `game/data/canon/book5/chapters/1.02D.json` ... `1.06D.json`, `game/data/canon/book5/npcs.json`,
   `game/tests/sim_book5_geneva.gd`, `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
 - M13.3: `game/data/canon/book5/chapters/4.13L.json` ... `4.17.json`, `game/data/canon/book5/npcs.json`,
@@ -176,3 +178,12 @@
   before_all and checks every b5 event up to LAST_DAY). Kill tests for them need their own file that starts earlier
   (`sim_book5_geneva` sleeps to day 76).
 - A chapter generator script was in the scratchpad (gone next session).
+
+## Book 5 canon notes (M13.5)
+- The LPC clone for M13.5 is in this session's scratchpad (`.../c8921a2b-.../scratchpad/ulpc`; gone next session).
+- The chapter generator was `scratchpad/gen_m135.py` (gone next session). DataDb checks that stage foe tiles are
+  walkable; the Python validator does not, so run the new sim test once before the full suite.
+- `sim_book5_geneva.gd.uid` was missing from the M13.4 commit; added in M13.5.
+- Laken's events need only Laken alive and chain on flags. The Laken kill test is in `sim_canon_book5`.
+- Never pass text with backticks through an unquoted bash heredoc (`<<EOF`): bash runs them as commands. Write
+  Python patch scripts to the scratchpad with the Write tool.

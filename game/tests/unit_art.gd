@@ -151,7 +151,7 @@ func test_npc_with_a_sheet_is_a_sprite_and_others_stay_squares() -> void:
 
 func test_look_for_uses_own_sheet_then_race_then_none() -> void:
 	assert_eq(CharacterSprite.look_for("relc", "Drake"), "relc", "own look first")
-	assert_eq(CharacterSprite.look_for("olesm", "Drake"), "race_drake")
+	assert_eq(CharacterSprite.look_for("a_drake_with_no_look", "Drake"), "race_drake")
 	assert_eq(CharacterSprite.look_for("someone", "Half-Elf"), "race_half_elf")
 	assert_eq(CharacterSprite.look_for("someone", "half-Elf"), "race_half_elf", "case does not matter")
 	assert_eq(CharacterSprite.look_for("someone", "String People"), "", "no generic look: a square")

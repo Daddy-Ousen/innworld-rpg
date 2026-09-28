@@ -2000,6 +2000,147 @@
 			],
 			"confidence": "guess",
 			"note": "An Armored Antinium; drawn without his armour, as he fights and visits in 4.13 L - 4.15 L. Carapace colour is a guess."
+		},
+		"olesm": {
+			"body": "male",
+			"skin": "all.lpcr.sky",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young sky-blue Drake with a neat look (1.17). Clothes are guesses."
+		},
+		"anand": {
+			"body": "male",
+			"skin": "all.lpcr.coffee",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				}
+			],
+			"confidence": "guess",
+			"note": "A Worker of the chess club. His carapace colour is not stated; a darker brown than Pawn's is a guess."
+		},
+		"halrac": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_ranged_bow_normal",
+					"color": "dark"
+				}
+			],
+			"confidence": "guess",
+			"note": "Grim Gold-rank archer of Griffon Hunt (1.58H, 4.19). Hair and armour are guesses."
+		},
+		"revi": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "purple"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_magic_wand"
+				}
+			],
+			"confidence": "guess",
+			"note": "Griffon Hunt's [Summoner], one of the Stitch-folk ('Stitch Girl', 4.19). Her stitched cloth body is not drawn; colours are guesses."
+		},
+		"typhenous": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "white"
+				},
+				{
+					"part": "beards_mustache",
+					"color": "white"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "blue"
+				},
+				{
+					"part": "legs_pants",
+					"color": "blue"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "guess",
+			"note": "The older mage of Griffon Hunt (1.58H, 4.19). White hair, blue clothes and a staff are guesses."
 		}
 	}
 }

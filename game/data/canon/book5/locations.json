@@ -124,6 +124,24 @@
 				"note": "A few miles west of Celum, off the roads. A big barn and a fine house. No map."
 			},
 			"summary": "Garia Strongheart's family farm near Celum."
+		},
+		"windrest": {
+			"name": "Windrest",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"village",
+				"human",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "confirmed",
+				"note": "About fourteen miles east of Riverfarm. Burned by Goblins; its people move to Riverfarm. No map."
+			},
+			"summary": "A small village east of Riverfarm, burned by Goblins."
 		}
 	}
 }

@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 5 canon (4.06 M: Magnolia's gathering, a guess).
 const FIRST_DAY := 97
-## Last day with extracted Book 5 canon (M13.3: 4.16, Osthia and the Goblin Lord, day 111).
-const LAST_DAY := 111
+## Last day with extracted Book 5 canon (M13.5: 4.23 E, Riverfarm buries its dead, day 118).
+const LAST_DAY := 118
 
 var _db: DataDb
 var _base_json := ""
@@ -52,9 +52,11 @@ func test_book5_loads() -> void:
 			"ishkr", "yellow_splatters", "thrissiam_blackwing", "garusa_weatherfur", "osthia_blackwing",
 			"wailant_strongheart", "viceria_strongheart",
 			"quallet_marshhand", "kenjiro_murata", "aiko_nonomura", "luan_khumalo", "daly", "paige", "johanas", "quexa",
-			"etretta_fulvrie", "calectus", "xalandrass", "exara", "ulvial", "zalthia_werskiv", "grishka"]:
+			"etretta_fulvrie", "calectus", "xalandrass", "exara", "ulvial", "zalthia_werskiv", "grishka",
+			"timbor_parithad", "ulia_ovena", "wiskeria", "beniar", "sacra", "helm", "jelov", "tessia", "rehanna",
+			"jeighya", "fabiel", "rie"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
-	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast", "strongheart_farm"]:
+	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast", "strongheart_farm", "windrest"]:
 		assert_true(_db.canon.locations.has(loc), loc)
 	assert_eq(_db.canon.locations["melissar_estate"]["parent"], "north_izril")
 	assert_eq(_db.canon.locations["strongheart_farm"]["parent"], "north_izril")
@@ -102,28 +104,41 @@ func test_book5_runs_as_canon() -> void:
 			"goblin_lord.ambushed_the_drake_armies", "drake_armies.destroyed_by_the_goblin_lord",
 			"thrissiam_blackwing.risen_as_undead", "osthia_blackwing.captured_by_the_goblin_lord",
 			"goblin_lord.resents_the_necromancer",
-			"ryoka.away_at_the_strongheart_farm", "mrsha.away_at_the_strongheart_farm", "ryoka.teaches_garia_to_fight",
-			"ryoka.saw_the_wind", "ivolethe.teaches_ryoka_faerie_magic"]:
+			"ryoka.teaches_garia_to_fight", "ryoka.saw_the_wind", "ivolethe.teaches_ryoka_faerie_magic",
+			# M13.5: home from the farm, the innkeepers, the chess, the build, the bow, the undead; Laken's Riverfarm.
+			"ryoka.back_from_the_strongheart_farm", "erin.threw_out_the_celum_innkeepers",
+			"erin.played_the_unseen_opponent_all_night", "wandering_inn.expansion_begun", "bird.has_a_yew_bow",
+			"erin.stocked_up_on_potions", "erin.asked_brunkr_to_train_lyonette", "venitra.turns_for_liscor",
+			"liscor_dungeon.gold_teams_charted_the_trap_rooms", "liscor_dungeon.undead_climbed_out_of_the_rift",
+			"laken.back_in_riverfarm", "prost.steward", "laken.took_in_windrest", "riverfarm.has_a_militia",
+			"laken.half_tamed_the_mossbear", "beniar.poisoned_by_a_goblin_arrow", "sacra.unmasked_as_magnolias_spy",
+			"wiskeria.leads_the_trackers", "laken.claimed_land_with_markers", "riverfarm.broke_the_goblin_attack",
+			"wiskeria.lakens_general", "invrisil_nobles.write_to_laken"]:
 		assert_true(gs.flags.has(f), f)
 	# Safry and Maran are gone; Pawn's Soldiers went back to the front; the armies no longer stand; the trip is made.
 	for f: String in ["safry.works_at_the_inn", "maran.works_at_the_inn", "pawn.soldiers_back_on_patrol",
-			"drake_armies.joined_below_the_high_pass", "ryoka.plans_to_visit_garias_farm", "ivolethe.will_teach_ryoka_at_the_farm"]:
+			"drake_armies.joined_below_the_high_pass", "ryoka.plans_to_visit_garias_farm", "ivolethe.will_teach_ryoka_at_the_farm",
+			"ryoka.away_at_the_strongheart_farm", "mrsha.away_at_the_strongheart_farm"]:
 		assert_false(gs.flags.has(f), f)
 	for npc: String in ["garusa_weatherfur", "thrissiam_blackwing"]:
 		assert_false(gs.world.is_alive(_db.canon, npc), npc + " dies below the High Pass (4.16)")
 	assert_true(gs.world.is_alive(_db.canon, "osthia_blackwing"), "Osthia is taken alive")
-	# Ryoka is home: the road flags and the spellbook debt are gone. The build has not started (4.18).
+	# Ryoka is home: the road flags and the spellbook debt are gone.
 	for f: String in ["erin.waits_for_ryoka", "ryoka.near_celum", "ryoka.heading_home_to_liscor", "ryoka.has_rihal_spellbook",
-			"ryoka.holds_krshias_spellbook_debt", "toren.leads_undead", "wandering_inn.expansion_begun"]:
+			"ryoka.holds_krshias_spellbook_debt", "toren.leads_undead"]:
 		assert_false(gs.flags.has(f), f)
 	for f: String in ["wandering_inn.earther_heard_lyonettes_levels", "wandering_inn.earther_talked_birds_with_bird",
 			"liscor.earther_helped_price_erins_soups", "liscor.earther_stood_with_ryoka_against_ilvriss",
 			"wandering_inn.earther_toasted_the_horns", "wandering_inn.earther_weighed_in_on_the_building",
-			"wandering_inn.earther_sat_with_pawn", "wandering_inn.earther_served_the_soldiers_soup"]:
+			"wandering_inn.earther_sat_with_pawn", "wandering_inn.earther_served_the_soldiers_soup",
+			"wandering_inn.earther_watched_the_chess_marathon", "wandering_inn.earther_watched_bird_learn_the_bow",
+			"floodplains.earther_fought_the_rift_undead"]:
 		assert_false(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "patricia_melissar"), "murdered at the gathering (4.06 M)")
+	assert_false(gs.world.is_alive(_db.canon, "fabiel"), "killed by Goblins (4.21 E)")
 	for npc: String in ["magnolia_reinhart", "tyrion_veltras", "eliasor", "xrn", "klbkch", "bird", "lyonette", "ryoka_griffin",
-			"ilvriss", "toren", "anith", "pawn"]:
+			"ilvriss", "toren", "anith", "pawn",
+			"laken_godart", "durene", "gamel", "wiskeria", "beniar", "sacra", "halrac", "brunkr", "venitra"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 
 
@@ -178,6 +193,8 @@ func test_without_ryoka_there_is_no_homecoming_and_no_contract() -> void:
 			"b5.t_klbkch_takes_the_building_contract", "b5.v_bird_takes_the_watch_and_pawn_goes_to_war"]:
 		assert_eq(gs.world.status(id), Director.CANCELLED, id)
 	assert_false(gs.flags.has("wandering_inn.expansion_planned"), "nobody pays for the build")
+	assert_eq(gs.world.status("b5.zze_the_workers_start_building_the_inn"), Director.CANCELLED, "so no build starts (4.18)")
+	assert_eq(gs.world.status("b5.zzb_ryoka_and_mrsha_come_home_from_the_farm"), Director.CANCELLED)
 	assert_true(gs.flags.has("ryoka.has_rihal_spellbook"), "the tome never reaches Krshia")
 	for id: String in ["b5.k_vuliel_drae_find_the_new_section", "b5.r_venitra_warns_the_goblin_lord",
 			"b5.u_erin_offers_safry_and_maran_jobs",
@@ -213,3 +230,35 @@ func test_without_garusa_the_armies_still_fall() -> void:
 	assert_true(Director.happened(gs.world.status("b5.zj_the_drake_armies_are_destroyed")))
 	assert_false(gs.world.is_alive(_db.canon, "thrissiam_blackwing"))
 	assert_true(gs.flags.has("osthia_blackwing.captured_by_the_goblin_lord"))
+
+
+func test_without_wiskeria_riverfarm_still_holds() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "wiskeria"), "")
+	_sleep_to_last_day(gs)
+	assert_eq(gs.world.status("b5.zzz_wiskeria_becomes_lakens_general"), Director.CANCELLED)
+	assert_false(gs.flags.has("wiskeria.lakens_general"))
+	for id: String in ["b5.zzw_odveig_is_unmasked_as_sacra", "b5.zzy_riverfarm_breaks_the_goblin_attack",
+			"b5.zzza_riverfarm_buries_its_dead"]:
+		assert_true(Director.happened(gs.world.status(id)), id + " goes on")
+
+
+func test_without_laken_there_is_no_unseen_empire_arc() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "laken_godart"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzm_laken_comes_home_to_riverfarm", "b5.zzn_laken_makes_prost_his_steward",
+			"b5.zzy_riverfarm_breaks_the_goblin_attack", "b5.zzza_riverfarm_buries_its_dead"]:
+		assert_eq(gs.world.status(id), Director.CANCELLED, id)
+	assert_true(gs.world.is_alive(_db.canon, "fabiel"), "no Riverfarm, no ambush")
+	assert_true(Director.happened(gs.world.status("b5.zzl_undead_climb_out_of_the_rift")), "Liscor goes on")
+
+
+func test_without_halrac_the_undead_still_come_and_bird_still_gets_his_bow() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "halrac"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzf_erin_buys_bird_a_bow_and_halrac_teaches_him", "b5.zzk_the_gold_teams_chart_the_trap_rooms",
+			"b5.zzl_undead_climb_out_of_the_rift"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+	assert_true(gs.flags.has("bird.has_a_yew_bow"))
