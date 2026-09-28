@@ -186,6 +186,12 @@ class ValidateTest(unittest.TestCase):
         self.ev()["canon_ref"]["chapter"] = "9.01"
         self.assertError(self.fx.run(), "must match the file's chapter")
 
+    def test_chapter_ids_allow_two_pov_letters(self):
+        for ch in ("1.00", "3.27M", "4.06KM", "interlude_winter_solstice"):
+            self.assertTrue(vd.RE_CHAPTER.match(ch), ch)
+        for ch in ("4.06KMX", "4.06km", "four"):
+            self.assertFalse(vd.RE_CHAPTER.match(ch), ch)
+
     def test_duplicate_event_id_across_chapters(self):
         self.fx.data["chapters/9.01.json"]["events"]["b9.soup"] = event(canon_ref=ref("9.01"))
         self.assertError(self.fx.run(), "duplicate event id")
