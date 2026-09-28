@@ -1,0 +1,352 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"tyrion_veltras": {
+			"name": "Tyrion Veltras",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"north_izril",
+				"leader"
+			],
+			"faction": "house_veltras",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Named in 3.42 (Typhenous reports to him); first seen here. He has not met Magnolia in four years. Class level not given."
+			},
+			"summary": "The head of House Veltras, a stern lord and warrior with great sway over the northern nobles. He wants the Drakes bled by the Goblins before the Humans move on Liscor."
+		},
+		"patricia_melissar": {
+			"name": "Patricia Melissar",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"north_izril"
+			],
+			"faction": "house_melissar",
+			"home": "melissar_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Hosts the gathering and is murdered there (b5.b_patricia_melissar_murdered_at_the_gathering). Class not named."
+			},
+			"summary": "The lady of House Melissar, who hosts the northern nobles' meeting."
+		},
+		"eliasor": {
+			"name": "Eliasor",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"child",
+				"north_izril"
+			],
+			"faction": "house_melissar",
+			"home": "melissar_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Nine years old. Surname not given in this chapter; assumed House Melissar because Magnolia names him its head."
+			},
+			"summary": "Patricia Melissar's young son. After her murder, Magnolia names him head of his house."
+		},
+		"bethal": {
+			"name": "Bethal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "likely",
+				"note": "The ebook gives no surname here. The wiki surname comes from the web serial and is not used."
+			},
+			"summary": "A fierce lady of the north and an old friend of Magnolia's. She suspects Magnolia of sending an assassin, then joins her circle again."
+		},
+		"thomast": {
+			"name": "Thomast",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"duelist",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Uses the Skill [Affair of Honor] to force a duel. Class not named. He is at Bethal's side."
+			},
+			"summary": "A quiet noble swordsman who kills the assassin in a duel of honour."
+		},
+		"pryde": {
+			"name": "Pryde",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Named only; she joins Magnolia's re-formed circle."
+			},
+			"summary": "A northern noble whom Magnolia calls back to her side."
+		},
+		"wuvren": {
+			"name": "Wuvren",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Named only; she joins Magnolia's re-formed circle."
+			},
+			"summary": "A northern noble whom Magnolia calls back to her side."
+		},
+		"zanthia": {
+			"name": "Zanthia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "confirmed",
+				"note": "Named only; she joins Magnolia's re-formed circle."
+			},
+			"summary": "A northern noble whom Magnolia calls back to her side."
+		},
+		"venith_crusland": {
+			"name": "Venith Crusland",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"reim",
+				"history_only"
+			],
+			"faction": "kingdom_of_reim",
+			"home": "manimar",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.02K",
+				"confidence": "confirmed",
+				"note": "History only (4.00K-4.06K). Skill [Flawless Defence]. Refuses Flos in 4.02K, rejoins him in 4.05K."
+			},
+			"summary": "An old vassal of Flos who once tried to kill him for a bounty, then served him. He duels Flos, refuses him, and then rides to save him."
+		},
+		"maresar": {
+			"name": "Maresar",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"archer",
+				"reim",
+				"history_only"
+			],
+			"faction": "kingdom_of_reim",
+			"home": "manimar",
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.02K",
+				"confidence": "confirmed",
+				"note": "History only. Once a [Bandit Lord]. Venith's wife. Leads Reim's archers."
+			},
+			"summary": "Venith's wife, a former bandit leader and a deadly archer. She joins Flos before her husband does."
+		},
+		"calac_crusland": {
+			"name": "Calac Crusland",
+			"race": "Human",
+			"tags": [
+				"human",
+				"reim",
+				"history_only"
+			],
+			"faction": "kingdom_of_reim",
+			"home": "manimar",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.02K",
+				"confidence": "confirmed",
+				"note": "History only. Tries to spear Flos in 4.02K; warns Mars of the ambush in 4.05K."
+			},
+			"summary": "Venith and Maresar's son, who hates Flos at first and later warns Reim of an ambush."
+		},
+		"tengrip": {
+			"name": "Tengrip",
+			"race": "Human",
+			"tags": [
+				"human",
+				"soldier",
+				"reim",
+				"history_only"
+			],
+			"faction": "kingdom_of_reim",
+			"home": "reim",
+			"classes": [
+				{
+					"name": "[Axe Guard]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.04K",
+				"confidence": "confirmed",
+				"note": "History only. Retired; his wrist is broken in the ambush (4.05K)."
+			},
+			"summary": "An old retired soldier of Reim who takes up his axe again for his king."
+		},
+		"uleth": {
+			"name": "Uleth",
+			"race": "Human",
+			"tags": [
+				"human",
+				"general",
+				"chandrar",
+				"history_only"
+			],
+			"faction": null,
+			"home": "chandrar",
+			"classes": [
+				{
+					"name": "[General]",
+					"level": null
+				}
+			],
+			"alive_at_start": false,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.05K",
+				"confidence": "likely",
+				"note": "History only. Very likely killed by [Storm Keep] in 4.05K. The date in our calendar is unknown, so he is dead at the start of Book 5 data."
+			},
+			"summary": "The general of the six-nation army that marched on Reim."
+		},
+		"siyal": {
+			"name": "Siyal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"prince",
+				"hellios",
+				"history_only"
+			],
+			"faction": null,
+			"home": "hellios",
+			"classes": [
+				{
+					"name": "[Prince]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.04K",
+				"confidence": "confirmed",
+				"note": "History only. Son of Queen Calliope; Flos killed his father, King Treland."
+			},
+			"summary": "The Prince of Hellios, who leads his nation into the war against Reim."
+		}
+	}
+}

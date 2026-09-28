@@ -1,0 +1,111 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"melissar_estate": {
+			"name": "The Melissar estate",
+			"kind": "building",
+			"parent": "north_izril",
+			"tags": [
+				"mansion",
+				"noble",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "likely",
+				"note": "Where the northern nobles meet. The text gives no city or road. No map."
+			},
+			"summary": "The manor of House Melissar in the north, where the great houses gather about the King of Destruction."
+		},
+		"germina": {
+			"name": "Germina",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": [
+				"nation",
+				"chandrar",
+				"quarass"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.04K",
+				"confidence": "confirmed",
+				"note": "Ruled by the Quarass. Named in the chandrar summary already. 4.06KM reports Flos broke it and killed the Quarass."
+			},
+			"summary": "A nation of Chandrar ruled by the Quarass, one of the six that went to war against Reim."
+		},
+		"hellios": {
+			"name": "Hellios",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": [
+				"nation",
+				"chandrar"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.04K",
+				"confidence": "confirmed",
+				"note": "Queen Calliope rules; Prince Siyal leads its army."
+			},
+			"summary": "A nation of Chandrar whose king Flos killed long ago. It leads the war against Reim."
+		},
+		"house_of_minos": {
+			"name": "The House of Minos",
+			"kind": "region",
+			"parent": null,
+			"tags": [
+				"nation",
+				"minotaur",
+				"mentioned"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.06KM",
+				"confidence": "likely",
+				"note": "Home of the Minotaurs. The text calls its ruler both 'King' and 'she'; left unsettled."
+			},
+			"summary": "The Minotaurs' nation, whose envoy offers the northern nobles an army against Flos."
+		},
+		"manimar": {
+			"name": "Manimar",
+			"kind": "settlement",
+			"parent": "chandrar",
+			"tags": [
+				"village",
+				"reim",
+				"crusland"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.01K",
+				"confidence": "confirmed",
+				"note": "History only (4.01K-4.02K). On Crusland land near Reim."
+			},
+			"summary": "A village on Venith Crusland's land that swears to Flos again."
+		},
+		"rast": {
+			"name": "Rast",
+			"kind": "settlement",
+			"parent": "chandrar",
+			"tags": [
+				"city",
+				"reim"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.03K",
+				"confidence": "confirmed",
+				"note": "History only (4.03K). Its gates open to Flos; the Mayor is killed by a mob."
+			},
+			"summary": "A starving city near Reim that opens its gates to the King of Destruction."
+		}
+	}
+}
