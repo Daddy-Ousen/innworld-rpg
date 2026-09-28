@@ -1,28 +1,29 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.1 merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)); ticked on main, tag `m13.1-done` on merge commit 67fef71.
-- M13.2 done on branch `data/book5-m13.2` ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61) open, not merged). Chapters `4.08T`, `4.09`, `4.10` (day 101) and
-  `4.11`, `4.12` (day 102): 13 events `b5.j_` ... `b5.v_`. Toren hides below in a mask; Vuliel Drae find the new
-  section (`liscor_dungeon.new_section_found`, ropes open day 102); Ryoka comes home (`ryoka.home_at_the_wandering_inn`),
-  gives Krshia the Rihal tome; Ilvriss corners her (scene); the Horns' gear and party (scene); Erin and Ryoka talk in
-  Celum; Venitra warns the Goblin Lord (tier 1); the door test; the building contract (scene, 328 gold, Ryoka pays,
-  `wandering_inn.expansion_planned`); the job offer to Safry and Maran (flag only); Bird guards, Pawn goes to fight.
-- 5 new NPCs (Vuliel Drae: anith, insill, pekona, dasha, larr). Schedules: Ryoka and the four Horns at the inn
-  (flags above / `horns_of_hammerad.lodge_in_the_inn_basement`); `ilvriss` behaviour entry + his own look (sheet
-  built from an old LPC clone in `.../918d8889-.../scratchpad/ulpc`).
-- Fixes: 4.07 summary (a day from Liscor, not Celum); `liscor_crypt` door note and name (metal door, Toren opens it).
-- Tests: new `sim_book5_ryoka_home` (10); `sim_canon_book5` LAST_DAY 102 (+2 kill tests); `sim_player_hooks` 36.
-  Detail: ADR 0020 "M13.2".
+- M13.2 merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)); ticked on main, tag `m13.2-done` on merge commit db1e2dd.
+- M13.3 done on branch `data/book5-m13.3` (PR open, not merged). User choices: two scenes (Pawn back at the inn,
+  day 104, 12-16; the Soldiers' soup on `inn_hill`, day 106, 19-23); Strongheart farm is a location only; 4.16
+  "Day 59" = day 103; Drassi and Ishkr get inn schedules, Safry and Maran are flags only.
+- Chapters `4.13L`, `4.14L`, `4.15L`, `4.16`, `4.17`: 17 events `b5.w_` ... `b5.zm_` (after `z` ids go `za`, `zb`...).
+  Hive battle day 102 (25 of Pawn's Soldiers die); staff start day 103; Safry and Maran fired day 105
+  (`lyonette.in_charge_of_the_staff`); Yellow Splatters made [Sergeant] day 106; Drake armies (tier 1,
+  `high_passes`) join 103, ambushed 106, destroyed 110 (Garusa and Thrissiam die, Osthia captured), Osthia and the
+  Goblin Lord 111; Ryoka and Mrsha at `strongheart_farm` from day 105 (`ryoka.away_at_the_strongheart_farm`,
+  `mrsha.away_at_the_strongheart_farm`: still set at day 111), the wind lifts Ryoka day 106.
+- 7 new NPCs (ishkr, yellow_splatters, thrissiam_blackwing, garusa_weatherfur, osthia_blackwing,
+  wailant_strongheart, viceria_strongheart), 1 location, 13 system lines. New looks: `ishkr`, `tersk`.
+- Tests: new `sim_book5_pawns_faith` (8); `sim_canon_book5` LAST_DAY 111 (+2 kill tests); `sim_player_hooks` 38.
+  Full suite 94 scripts / 871 tests pass; Python 78 OK; validator 0 errors. Detail: ADR 0020 "M13.3".
 
 ## Next steps
-1. Wait for the user to merge the M13.2 PR. Then on main: tick M13.2 in `docs/ROADMAP.md` and `progress.md`,
-   tag `m13.2-done` on the merge commit.
-2. M13.3 canon batch (4.13 L - 4.17: the Hive battles, the staff trouble, the Goblin Lord crushes the Drakes (the
-   armies meet on day 103, set up in 4.11), the Strongheart farm (Ryoka's trip: "a day or two" after day 102)).
-   Ask the user the stage/hook choices first. Delegate chapter reading to subagents (files
-   `canon/raw/book5/014_4-13L.txt` ... `018_4-17.txt`). Safry and Maran start at the inn there
-   (`erin.offered_safry_and_maran_jobs`). `sim_canon_book5` `LAST_DAY` moves on.
+1. Wait for the user to merge the M13.3 PR. Then on main: tick M13.3 in `docs/ROADMAP.md` and `progress.md`,
+   tag `m13.3-done` on the merge commit.
+2. M13.4 canon batch (1.02 D - 1.06 D: Geneva in Baleros; off-map only, placeholder days like Laken/Niers).
+   Ask the user the choices first (maybe no scene: nothing on our maps). Delegate chapter reading to subagents
+   (files `canon/raw/book5/019_1-02D.txt` ... `023_1-06D.txt`).
+3. M13.5 (4.18 - 4.23 E) must bring Ryoka and Mrsha home: clear `ryoka.away_at_the_strongheart_farm` and
+   `mrsha.away_at_the_strongheart_farm`, or they stay off the inn's schedule for good.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -39,7 +40,9 @@
 - Git Bash heredocs eat a `\` at the end of a line even with `<<'EOF'`. Write Python patch scripts to the
   scratchpad with the Write tool, then run them.
 - Godot on this machine: `godot` (WinGet link) returns at once while the real process keeps writing; wait for
-  the `Godot_v4` process to exit before reading a log.
+  the `Godot_v4` process to exit before reading a log. Better (M13.3): call the console exe directly, it blocks and
+  exits cleanly: `/c/Users/rhasa/AppData/Local/Microsoft/WinGet/Packages/GodotEngine.GodotEngine_Microsoft.Winget.Source_8wekyb3d8bbwe/Godot_v4.7.2-stable_win64_console.exe`.
+  The link segfaulted once on `--import` in M13.3.
 
 ## Audio notes (M12)
 - Downloads are in an old session scratchpad (may be gone): Kenney RPG Audio + Impact Sounds, swishes, rubberduck
@@ -74,7 +77,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61) (M13.2).
+- Merge the M13.3 PR (branch `data/book5-m13.3`).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -142,9 +145,9 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
-- M13.2: `game/data/canon/book5/chapters/4.08T.json` ... `4.12.json`, `game/data/canon/book5/npcs.json`,
-  `game/data/npc_behaviour.json`, `game/data/appearance.json`, `game/tests/sim_book5_ryoka_home.gd`,
-  `game/tests/sim_canon_book5.gd`.
+- M13.3: `game/data/canon/book5/chapters/4.13L.json` ... `4.17.json`, `game/data/canon/book5/npcs.json`,
+  `locations.json`, `game/data/npc_behaviour.json`, `game/data/appearance.json`, `game/tests/sim_book5_pawns_faith.gd`,
+  `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
 - M13.0: `game/core/map_db.gd`, `game/data/maps/liscor_depths.json`, `game/data/maps/liscor_crypt.json`,
   `game/data/maps/inn_upper_floor.json`, `game/data/maps/inn_watchtower.json`, `game/data/enemies.json`,
   `game/tests/unit_gated_exits.gd`, `game/tests/sim_liscor_depths.gd`, `game/tests/sim_inn_third_floor.gd`, `docs/adr/0020-m13-book5.md`.
@@ -160,3 +163,10 @@
   `git checkout -- game/assets/characters` (import noise; the new png/import are untracked so they stay).
 - Chapter data for M13.2 came from a generator script (scratchpad, gone next session). New NPCs appended to
   `book5/npcs.json` by `json.dumps(indent="	")` keep the file format.
+
+## Book 5 canon notes (M13.3)
+- 4.12's `ryoka.plans_to_visit_garias_farm` is set by an event that needs Pawn AND Bird alive; do not require it.
+  The farm trip requires `ryoka.home_at_the_wandering_inn` instead.
+- `--import` also rewrites every audio/character `.import` with LF: `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
+  and `git ls-files -m game/assets/characters | xargs -r git checkout --` (keeps new untracked sheets).
+- The LPC clone for M13.3 is in this session's scratchpad (`.../5c0f7f5b-.../scratchpad/ulpc`; gone next session).

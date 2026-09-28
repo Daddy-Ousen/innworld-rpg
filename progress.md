@@ -21,7 +21,8 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
   - [x] M13.T Traps (save v14). Merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)), tag `m13.t-done` on merge commit 85dd0e9.
   - [x] M13.1 Canon 4.00 K – 4.07 (days 97–100). Merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)), tag `m13.1-done` on merge commit 67fef71.
   - [x] M13.2 Canon 4.08 T – 4.12 (days 101–102). Merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)), tag `m13.2-done` on merge commit db1e2dd.
-  - [ ] M13.3 – M13.7 canon batches
+  - [ ] M13.3 Canon 4.13 L – 4.17 (days 101–111). Done and tested on branch `data/book5-m13.3`; PR open, waiting on the user to merge. Tick after merge (tag `m13.3-done`).
+  - [ ] M13.4 – M13.7 canon batches
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
@@ -34,8 +35,8 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
 - Tests: 86 GUT scripts, 800 tests, all pass, headless exit 0 (main after M12.5). Python tool tests: 77 pass (`python -m unittest discover -s tools/tests`).
-- Canon: Book 5 has days 97–102 (4.06 M – 4.12; days 101–102 on the M13.2 branch); 4.00 K – 4.06 K are history notes in ADR 0020.
-- Main after M13.T: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. Main after M13.1: 92 GUT scripts, 849 tests. M13.2 branch: 93 GUT scripts, 861 tests; Python 78 OK. Maps now 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 41.
+- Canon: Book 5 has days 97–102 (4.06 M – 4.12) on main, days 97–111 (to 4.17) on the M13.3 branch; 4.00 K – 4.06 K are history notes in ADR 0020.
+- Main after M13.T: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. Main after M13.1: 92 GUT scripts, 849 tests. Main after M13.2: 93 GUT scripts, 861 tests. M13.3 branch: 94 GUT scripts, 871 tests; Python 78 OK; validator 0 errors. Maps now 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 41.
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
 ## Blockers
