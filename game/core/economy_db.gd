@@ -6,7 +6,8 @@
 ##          "eat_now": true (a meal eaten where it is bought)}. M9.2: a food or
 ##          eat_now good may add "warm_minutes" (no cold for that long after
 ##          eating); any good may add "from_flag" (shops sell it only once
-##          that flag is set).
+##          that flag is set). M14.0: a good with no use may add "item": an
+##          items.json id (a tool you can hold from the bag, Economy.hold_good).
 ##   shops: shop id → {"name", "sells": [good], "buys": [good]}. A map object
 ##          names its shop with "shop".
 ##   yields: action id → {good: count} put in the bag when the action is done.
@@ -61,8 +62,19 @@ func is_empty() -> bool:
 
 ## Checks goods, shops, yields and jobs against the actions. Adds to and returns `errors`.
 func validate(db: DataDb) -> Array[String]:
+	var items_seen := {}
 	for id: String in goods:
 		_validate_good(id, goods[id])
+		if goods[id].has("item"):
+			var item: Variant = goods[id]["item"]
+			if not db.combat.items.has(item):
+				errors.append("good '%s': unknown item '%s'." % [id, item])
+			elif items_seen.has(item):
+				errors.append("good '%s': item '%s' already has good '%s'." % [id, item, items_seen[item]])
+			else:
+				items_seen[item] = id
+			if _use_of(goods[id]) != "":
+				errors.append("good '%s': an item good has no other use." % id)
 	for id: String in shops:
 		var s: Dictionary = shops[id]
 		var where := "shop '%s'" % id

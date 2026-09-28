@@ -177,5 +177,21 @@ Stage and hook choices are asked at the start of each canon batch.
 the third floor and tower open after the building flag; the depths are reachable by rope with working traps;
 each batch has a hook or stage; GUT, the Python tool tests and the validator pass.
 
+## M14 — Engine works
+Plan accepted 2026-09-28 (ADR 0021). One branch + PR each. Inn play first, balance last.
+- [ ] M14.0 Bag screen: every good in one screen (I), eat / drink / hold a tool / leave behind, tools stow in the bag
+- [ ] M14.1 Cooking recipes: `recipes.json`, ingredients from shops, cook actions turn them into dishes
+- [ ] M14.2 Guests and serving: patrons at meal times, canon NPCs as guests, serve dishes for coin (save v15)
+- [ ] M14.3 Relationships and reputation: night step 7 decay, town/faction reputation, prices and helpers read it (save v16)
+- [ ] M14.4 Missing NPC schedules: canon NPCs who live on our maps get schedules and looks
+- [ ] M14.5 Attack NPCs: attack any NPC, a one-time fate warning for major NPCs, witnesses and reputation react
+- [ ] M14.6 UI skin: one theme and a free pixel font for every menu
+- [ ] M14.7 Portraits: NPC faces cut from the character sheets in talk, System pages and news
+- [ ] M14.8 Balance pass: probe tests, HP per level, tuned XP, prices and fights
+**Done when:** the inn earns coin from cooked food served to guests; relationships and reputation change over
+time and change prices and help; the on-map canon NPCs have schedules; any NPC can be attacked with the fate
+warning; menus share one skin with portraits; the balance probes pass; GUT, the Python tool tests and the
+validator pass; the user has played it.
+
 ## Later
-- UI skin and portraits · balance, missing NPC schedules · optional LLM flavour layer
+- optional LLM flavour layer

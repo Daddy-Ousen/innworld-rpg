@@ -15,6 +15,8 @@
 ##   hunger.inn_location while hunger.inn_npc lives) feeds you that day.
 ##   Ride: a map object with "ride" takes you to another map for a price;
 ##   it is a covered ride, so its minutes do not chill (Winter).
+##   M14.0 (ADR 0021): the bag screen. A good with "item" is a tool: hold
+##   it (bag to hand), stow the held item (hand to bag), drop any good.
 ## A db without rules.economy (toy dbs) has no hunger and no money rules.
 ## Randomness (job pay) goes through gs.rng (CLAUDE.md rule 3).
 class_name Economy
@@ -175,6 +177,72 @@ static func use_good(gs: GameState, db: DataDb, good: String) -> String:
 	gs.economy.add(good, -1)
 	Movement.wait(gs, db, int(rules(db).get("eat_minutes", 0)) * 60)
 	return ""
+
+
+## M14.0: the good that carries the held item `item` (its "item"), or "".
+static func good_for_item(db: DataDb, item: String) -> String:
+	if item == "":
+		return ""
+	for g: String in db.economy.goods:
+		if String(db.economy.goods[g].get("item", "")) == item:
+			return g
+	return ""
+
+
+## M14.0: takes a tool good (one with "item") out of the bag into the hand.
+## A held item goes in the bag if it fits (it has a good), else it is put
+## down (gone). One turn. Returns "" or an error.
+static func hold_good(gs: GameState, db: DataDb, good: String) -> String:
+	if gs.economy.count(good) <= 0:
+		return "You have no %s." % _good_name(db, good)
+	var item: String = db.economy.goods[good].get("item", "")
+	if item == "":
+		return "You cannot hold the %s in your hand." % _good_name(db, good)
+	gs.economy.add(good, -1)
+	_put_away_held(gs, db)
+	gs.player.held = item
+	gs.combat.lines.append("You take the %s from your bag." % _good_name(db, good))
+	Movement.spend_turn(gs, db)
+	return ""
+
+
+## M14.0: puts the held item in the bag. One turn. Returns "" or an error.
+static func stow(gs: GameState, db: DataDb) -> String:
+	if gs.player.held == "":
+		return "You hold nothing."
+	if good_for_item(db, gs.player.held) == "":
+		return "The %s will not fit in your bag." % String(db.combat.items[gs.player.held]["name"]).to_lower()
+	_put_away_held(gs, db)
+	Movement.spend_turn(gs, db)
+	return ""
+
+
+## M14.0: leaves one `good` behind (it is gone). One turn. Returns "" or an error.
+static func drop_good(gs: GameState, db: DataDb, good: String) -> String:
+	if gs.economy.count(good) <= 0:
+		return "You have no %s." % _good_name(db, good)
+	gs.economy.add(good, -1)
+	gs.combat.lines.append("You leave the %s behind." % _good_name(db, good))
+	Movement.spend_turn(gs, db)
+	return ""
+
+
+## The held item into the bag (it has a good) or put down (gone).
+static func _put_away_held(gs: GameState, db: DataDb) -> void:
+	if gs.player.held == "":
+		return
+	var name := String(db.combat.items[gs.player.held]["name"]).to_lower()
+	var g := good_for_item(db, gs.player.held)
+	if g != "":
+		gs.economy.add(g, 1)
+		gs.combat.lines.append("You put the %s in your bag." % name)
+	else:
+		gs.combat.lines.append("You put the %s down." % name)
+	gs.player.held = ""
+
+
+static func _good_name(db: DataDb, good: String) -> String:
+	return String(db.economy.goods.get(good, {}).get("name", good)).to_lower()
 
 
 ## Fed today (ate, or worked at Erin's inn and it is night).

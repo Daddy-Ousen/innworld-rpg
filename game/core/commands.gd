@@ -181,6 +181,31 @@ static func use_good(gs: GameState, db: DataDb, good: String) -> String:
 	return why
 
 
+## Bag screen (M14.0): a tool good from the bag into the hand
+## (Economy.hold_good). Works with enemies near. Returns "" or an error.
+static func hold_good(gs: GameState, db: DataDb, good: String) -> String:
+	return _bag_command(gs, db, func() -> String: return Economy.hold_good(gs, db, good))
+
+
+## Bag screen: the held item into the bag (Economy.stow). Returns "" or an error.
+static func stow(gs: GameState, db: DataDb) -> String:
+	return _bag_command(gs, db, func() -> String: return Economy.stow(gs, db))
+
+
+## Bag screen: leaves one `good` behind (Economy.drop_good). Returns "" or an error.
+static func drop_good(gs: GameState, db: DataDb, good: String) -> String:
+	return _bag_command(gs, db, func() -> String: return Economy.drop_good(gs, db, good))
+
+
+static func _bag_command(gs: GameState, db: DataDb, act: Callable) -> String:
+	Combat.begin_command(gs)
+	var why := Combat.cannot_act(gs, db)
+	if why == "":
+		why = act.call()
+	_after(gs, db)
+	return why
+
+
 ## Takes the paid ride of the nearby object `object_id` (Economy.ride).
 ## Returns "" or an error.
 static func ride(gs: GameState, db: DataDb, object_id: String) -> String:

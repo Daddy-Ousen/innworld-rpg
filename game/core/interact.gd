@@ -27,6 +27,11 @@ const TAKE := "take"
 const BUY := "buy:"
 const SELL := "sell:"
 const USE_GOOD := "use:"
+## Bag screen picks (M14.0): "hold:<good>" (a tool from the bag into the
+## hand), "drop_good:<good>" (leave one behind), STOW (the held item into the bag).
+const HOLD_GOOD := "hold:"
+const DROP_GOOD := "drop_good:"
+const STOW := "stow"
 const RIDE := "ride"
 const PORTAL := "portal"
 
