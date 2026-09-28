@@ -1,0 +1,321 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "1.06D",
+	"events": {
+		"b5.zy_the_valley_battle_breaks_its_lines": {
+			"tier": 2,
+			"window": {
+				"earliest": 88,
+				"latest": 88,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_2": {
+					"prefer": [
+						"exara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_3": {
+					"prefer": [
+						"ulvial"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"veteran": {
+					"prefer": [
+						"etretta_fulvrie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"leader": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"merchant": {
+					"prefer": [
+						"xalandrass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"gravetenders_fist.clears_the_valley_battlefield"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"baleros.valley_battle_turned_to_slaughter",
+					"quexa.lost_a_leg_and_her_tail"
+				],
+				"kill": [
+					"ulvial",
+					"etretta_fulvrie"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.06D",
+				"confidence": "confirmed",
+				"note": "Placeholder day, the same day as the camp attack. Xalandrass warns that neither side wants witnesses. The text spells Ulvial 'Ulviel' once."
+			},
+			"summary": "Both armies leave their agreed lines and kill everyone on the field. Ulvial dies; Etretta dies shielding Daly from lightning; Quexa loses a leg and her tail. Quallet, Exara and the wounded Xalandrass hold together in the neutral ground."
+		},
+		"b5.zz_okasha_restarts_genevas_heart_and_she_leads_them_out": {
+			"tier": 2,
+			"window": {
+				"earliest": 88,
+				"latest": 88,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"selphid": {
+					"prefer": [
+						"okasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rower": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"assistant": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_2": {
+					"prefer": [
+						"exara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"merchant": {
+					"prefer": [
+						"xalandrass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"zalthia_werskiv"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala"
+				],
+				"flags": [
+					"red_cross_company.camp_burned"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zx_zalthia_burns_the_red_cross_camp"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"geneva.led_everyone_off_the_battlefield",
+					"earthers.know_okasha_lives_in_geneva",
+					"calectus.wears_a_dullahan_body",
+					"aiko_nonomura.killed_an_assassin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.06D",
+				"confidence": "confirmed",
+				"note": "Same day as the attack. Calectus kills most assassins and takes a Dullahan body (called she after). A Centaur captain and the War Walker Bastiom guard their flanks; Zalthia turns away and waves."
+			},
+			"summary": "Okasha pumps Geneva's stopped heart by hand and a potion brings her back; Ken, Luan and Aiko learn her secret. With a borrowed voice ring Ken names everyone to the whole field, and Geneva walks them out unarmed. The soldiers let them pass."
+		},
+		"b5.zza_the_united_nations_company_is_founded": {
+			"tier": 1,
+			"window": {
+				"earliest": 90,
+				"latest": 90,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rower": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"assistant": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"leader": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala"
+				],
+				"flags": [
+					"geneva.led_everyone_off_the_battlefield"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zz_okasha_restarts_genevas_heart_and_she_leads_them_out"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"united_nations_company.founded",
+					"razorshard_armor.ruined",
+					"roving_arrow.ruined"
+				]
+			},
+			"rumor": "Mercenaries from Baleros say a valley war broke two companies, and a new one called the United Nations has formed around the Last Light.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.06D",
+				"confidence": "confirmed",
+				"note": "Placeholder day; the text says about a week after the walk-out. Luan tells Aiko he is married with a child. Daly carves Quexa a leg. Niers' report says both valley companies were ruined."
+			},
+			"summary": "In a quiet Lizardfolk port in the east, Geneva admits neutrality alone cannot protect her. The Earthers, Quallet's core and her Selphids form one company of small units: the United Nations. In his tower Niers reads of it."
+		}
+	},
+	"system": [
+		{
+			"who": "kenjiro_murata",
+			"kind": "level",
+			"name": "[Negotiator]",
+			"level": 18,
+			"confidence": "confirmed",
+			"note": "Stated, not shown gained."
+		}
+	]
+}

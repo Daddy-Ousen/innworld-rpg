@@ -50,7 +50,9 @@ func test_book5_loads() -> void:
 			"venith_crusland", "maresar", "calac_crusland", "tengrip", "uleth", "siyal",
 			"anith", "insill", "pekona", "dasha", "larr",
 			"ishkr", "yellow_splatters", "thrissiam_blackwing", "garusa_weatherfur", "osthia_blackwing",
-			"wailant_strongheart", "viceria_strongheart"]:
+			"wailant_strongheart", "viceria_strongheart",
+			"quallet_marshhand", "kenjiro_murata", "aiko_nonomura", "luan_khumalo", "daly", "paige", "johanas", "quexa",
+			"etretta_fulvrie", "calectus", "xalandrass", "exara", "ulvial", "zalthia_werskiv", "grishka"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
 	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast", "strongheart_farm"]:
 		assert_true(_db.canon.locations.has(loc), loc)
