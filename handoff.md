@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-28)
 - M13.1 merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)); ticked on main, tag `m13.1-done` on merge commit 67fef71.
-- M13.2 done on branch `data/book5-m13.2` (PR open, not merged). Chapters `4.08T`, `4.09`, `4.10` (day 101) and
+- M13.2 done on branch `data/book5-m13.2` ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61) open, not merged). Chapters `4.08T`, `4.09`, `4.10` (day 101) and
   `4.11`, `4.12` (day 102): 13 events `b5.j_` ... `b5.v_`. Toren hides below in a mask; Vuliel Drae find the new
   section (`liscor_dungeon.new_section_found`, ropes open day 102); Ryoka comes home (`ryoka.home_at_the_wandering_inn`),
   gives Krshia the Rihal tome; Ilvriss corners her (scene); the Horns' gear and party (scene); Erin and Ryoka talk in
@@ -74,7 +74,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.2 PR.
+- Merge [PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61) (M13.2).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
