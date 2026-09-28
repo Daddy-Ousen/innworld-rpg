@@ -3,7 +3,7 @@
 ## Just done (2026-09-28)
 - M13.5 merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)); ticked on main (commit 02b138f),
   tag `m13.5-done` on merge commit 62806ef.
-- M13.6 done on branch `data/book5-m13.6` (PR open, not merged). User choices: 4.24 = day 110, Council that
+- M13.6 done on branch `data/book5-m13.6` ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65) open, not merged). User choices: 4.24 = day 110, Council that
   night, 4.27 H = day 111; Niers 110-113 and Magnolia 111-112 off-map; stages: Razorbeak fight, Brunkr's lesson,
   the bad news (day 110); Creler nest = NEW cave map + 2 new enemies; unowned [Warrior] 1 = Lyonette (likely).
 - Data made by `scratchpad/gen_m136.py` (this session's scratchpad; gone next session). All data, art (brunkr,
@@ -69,7 +69,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.6 PR.
+- Merge [PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65) (M13.6).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas

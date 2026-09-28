@@ -24,7 +24,7 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
   - [x] M13.3 Canon 4.13 L – 4.17 (days 101–111). Merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)), tag `m13.3-done` on merge commit 539ff32.
   - [x] M13.4 Canon 1.02 D – 1.06 D (Geneva in Baleros, days 77–90, off-map). Merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)), tag `m13.4-done` on merge commit 069a265.
   - [x] M13.5 Canon 4.18 – 4.23 E (days 106–109 at Liscor; Laken days 111–118, off-map). Merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)), tag `m13.5-done` on merge commit 62806ef.
-  - [ ] M13.6 Canon 4.24 – 4.27 H (Liscor days 110–111; Niers and Magnolia off-map to 113; the Creler cave map). Done and tested on branch `data/book5-m13.6`; PR open, waiting on the user to merge. Tick after merge (tag `m13.6-done`).
+  - [ ] M13.6 Canon 4.24 – 4.27 H (Liscor days 110–111; Niers and Magnolia off-map to 113; the Creler cave map). Done and tested on branch `data/book5-m13.6`; [PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65) open, waiting on the user to merge. Tick after merge (tag `m13.6-done`).
   - [ ] M13.7 Canon 4.28 – 4.31
 
 ## After M8
