@@ -1,19 +1,22 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.0 merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)); ticked on main, tag `m13.0-done`
-  on merge commit 39e94da.
-- M13.T Traps done on branch `feat/m13.t-traps` ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59) open, not merged). New `game/core/traps.gd`, save v14
-  (`CombatState.traps`), `rules.traps`, actions `search_for_traps` / `disarm_trap`, tags `vigilance.traps` /
-  `crafting.traps`, 9 traps in `liscor_depths`. Detail: ADR 0020 "M13.T Traps". Screenshot sent to the user
-  (red diamond = found and armed, grey = spent or disarmed).
-- Tests: 90 GUT scripts, 836 tests; Python 77 OK; validator 0 errors.
+- M13.T merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)); ticked on main, tag `m13.t-done` on merge commit 85dd0e9.
+- M13.1 done on branch `data/book5-m13.1` ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60) open, not merged). New `game/data/canon/book5/`: chapters
+  `4.06KM.json` (Magnolia's gathering, Patricia Melissar's murder, Magnolia re-forms her circle; day 97) and
+  `4.07.json` (Xrn's Rhir plan day 99; Lyonette's levels, Bird's birds, the soup samples, Erin waits, Ryoka near
+  Celum; day 100). 14 NPCs, 6 locations. Three scenes with hooks on day 100. Detail: ADR 0020 "M13.1".
+- User choices: gathering day 97 (date clash flagged), soups as flags only (no items).
+- Validator: chapter ids may have two POV letters (`4.06KM`).
+- Tests: new `sim_canon_book5` (5), `sim_book5_soups` (8); `sim_player_hooks` 33 hooks.
 
 ## Next steps
-1. Wait for the user to check the screenshot and merge [PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59). Then on main: tick M13.T in
-   `docs/ROADMAP.md` and `progress.md`, tag `m13.t-done` on the merge commit.
-2. M13.1 canon batch (4.00 K – 4.07, days ~96–100): ask the user the stage/hook choices first (M10 rule).
-   Book 5 text is in `canon/raw/book5` (gitignored). Delegate chapter reading to subagents.
+1. Wait for the user to merge the M13.1 PR. Then on main: tick M13.1 in `docs/ROADMAP.md` and `progress.md`,
+   tag `m13.1-done` on the merge commit.
+2. M13.2 canon batch (4.08 T - 4.12: Toren in the depths, Ryoka home on day 101, the Horns' gear, the building
+   contract, new staff). Ask the user the stage/hook choices first. Delegate chapter reading to subagents
+   (files `canon/raw/book5/009_4-08T.txt` ... `013_4-12.txt`). `sim_canon_book5` `LAST_DAY` moves on.
+   Clear `ryoka.near_celum` and `ryoka.heading_home_to_liscor` when she arrives; clear `erin.waits_for_ryoka`.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -65,7 +68,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the M13.T screenshot and merge [PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59).
+- Merge [PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60) (M13.1).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -80,12 +83,12 @@
 - Screenshots: a throwaway scene in `game/_scratch/` that adds `world/main.tscn` as a child (`add_child.call_deferred`), run with `godot --path game res://_scratch/shot.tscn`. Delete `game/_scratch` before committing.
 - New `class_name` scripts need `godot --headless --path game --import` once.
 - `-gtest=` is ignored; use `-gselect=<script name> -gdir=res://tests`.
-- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (89 now).
+- GUT exits 0 even on a parse error - grep for `Parse Error` and check the script count (92 on the M13.1 branch).
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken, Geneva, Niers (3.22L) and Venitra use placeholder days.
-- Save is v14 on the M13.T branch (traps; v13 = M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
+- Save is v14 (M13.T traps; v13 = M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: chain with `depends_on`. Siblings that share one dependency run in id order, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
 
 - Octavia matters to Book 3: killing her before day 87 cancels 3.25's goodbye and the wagon leaving, which cascades. Kill tests for her must run after day 87.
@@ -136,3 +139,9 @@
 - `game/core/map_db.gd`, `game/data/maps/liscor_depths.json`, `game/data/maps/liscor_crypt.json`,
   `game/data/maps/inn_upper_floor.json`, `game/data/maps/inn_watchtower.json`, `game/data/enemies.json`,
   `game/tests/unit_gated_exits.gd`, `game/tests/sim_liscor_depths.gd`, `game/tests/sim_inn_third_floor.gd`, `docs/adr/0020-m13-book5.md`.
+
+## Book 5 canon notes (M13.1)
+- Event ids carry a letter after `b5.` (`b5.a_...`) so same-day siblings sort in story order.
+- Scene NPC talks: `ToyMaps.walk_next_to` works on objects only. For an NPC, walk to its four side squares with
+  `ToyMaps.walk_to(gs, db, sides)` (`sim_book5_soups._do_with`).
+- Canon notes and summaries are capped at 300 characters by the validator; put long reasoning in the ADR.

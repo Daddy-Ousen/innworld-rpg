@@ -1,0 +1,50 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.06KM",
+	"events": {
+		"b5.a_northern_nobles_gather_over_flos": {
+			"tier": 1,
+			"window": {"earliest": 97, "latest": 97, "confidence": "guess"},
+			"location": "melissar_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "lord": {"prefer": ["tyrion_veltras"], "fallback_tags": [], "optional": true}, "hostess": {"prefer": ["patricia_melissar"], "fallback_tags": [], "optional": true}, "noble": {"prefer": ["bethal"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["izril_nobles.back_minos_against_flos", "izril_nobles.leave_goblin_lord_to_drakes", "germina.quarass_reported_dead", "tyrion_veltras.knows_esthelm_was_retaken", "magnolia.warned_the_nobles_of_the_goblin_lord"]},
+			"rumor": "The great houses of the north met at a Melissar manor. They say the lords will pay a Minotaur army to fight the King of Destruction, and let the Drakes deal with the Goblins alone.",
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.06KM", "confidence": "confirmed", "note": "Day 97 is a guess (user choice); the text puts it six weeks after Flos's war call, which clashes with our dates (ADR 0020). The Quarass's death is only news here. The Minotaur envoy is unnamed."},
+			"summary": "The northern nobles meet about Flos. They hear he broke Germina and killed its Quarass. A Minotaur envoy offers to fight him, and the room votes gold and a treaty. Magnolia warns of the Goblin Lord, but Tyrion Veltras says to let the Drakes bleed first, and the room sides with him."
+		},
+		"b5.b_patricia_melissar_murdered_at_the_gathering": {
+			"tier": 1,
+			"window": {"earliest": 97, "latest": 97, "confidence": "guess"},
+			"location": "melissar_estate",
+			"roles": {"victim": {"prefer": ["patricia_melissar"], "fallback_tags": []}, "duelist": {"prefer": ["thomast"], "fallback_tags": [], "optional": true}, "lord": {"prefer": ["tyrion_veltras"], "fallback_tags": [], "optional": true}, "lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["patricia_melissar"], "flags": [], "not_flags": []},
+			"depends_on": ["b5.a_northern_nobles_gather_over_flos"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["patricia_melissar.murdered_by_an_assassin", "tyrion_veltras.saved_magnolia_from_a_dagger", "thomast.killed_the_assassin"], "kill": ["patricia_melissar"]},
+			"rumor": "An assassin struck at a noble gathering in the north. Lady Patricia Melissar is dead, and a dagger was thrown at Magnolia Reinhart herself.",
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.06KM", "confidence": "confirmed", "note": "The assassin also kills the head butler (unnamed). Tyrion knocks the dagger aside; Thomast kills the assassin in a duel with [Affair of Honor]. Ressa finds no second killer. Nobody names who sent him; Magnolia suspects the Circle of Thorns."},
+			"summary": "A killer slips past the guards, murders the butler and throws the head of their hostess into the hall. His dagger flies at Magnolia, but Tyrion swats it away. Thomast calls a duel of honour and cuts the assassin down."
+		},
+		"b5.c_magnolia_reforms_her_circle": {
+			"tier": 1,
+			"window": {"earliest": 97, "latest": 97, "confidence": "guess"},
+			"location": "melissar_estate",
+			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "heir": {"prefer": ["eliasor"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["bethal"], "fallback_tags": [], "optional": true}, "noble_1": {"prefer": ["pryde"], "fallback_tags": [], "optional": true}, "noble_2": {"prefer": ["wuvren"], "fallback_tags": [], "optional": true}, "noble_3": {"prefer": ["zanthia"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["magnolia_reinhart"], "flags": [], "not_flags": []},
+			"depends_on": ["b5.b_patricia_melissar_murdered_at_the_gathering"],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["eliasor.heads_house_melissar", "magnolia.reforms_her_entourage", "magnolia.goes_for_her_grandfathers_army", "magnolia.swears_revenge_on_the_circle_of_thorns"], "relationship": [{"from": "bethal", "to": "magnolia_reinhart", "delta": 1}]},
+			"rumor": "Magnolia Reinhart has called her old friends back to her side, and she is on her way to take command of her family's army.",
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.06KM", "confidence": "confirmed", "note": "Eliasor is nine. Magnolia's grandfather is unnamed. She thinks of the Circle of Thorns but has no proof."},
+			"summary": "Magnolia names Patricia's young son Eliasor head of his house and swears he will have justice. She calls Bethal, Pryde, Wuvren and Zanthia to her again, and leaves to take up her grandfather's army."
+		}
+	},
+	"system": []
+}

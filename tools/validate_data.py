@@ -52,7 +52,7 @@ PLAYER = "player"  # relationship id of the player (a hook's effects may name it
 RE_ID = re.compile(r"^[a-z][a-z0-9_]*$")
 RE_FLAG = re.compile(r"^[a-z][a-z0-9_]*(\.[a-z0-9_]+)*$")
 RE_TAG = RE_FLAG
-RE_CHAPTER = re.compile(r"^(\d+\.\d+[A-Z]?|interlude_[a-z0-9_]+)$")
+RE_CHAPTER = re.compile(r"^(\d+\.\d+[A-Z]{0,2}|interlude_[a-z0-9_]+)$")  # 4.06KM has two POV letters
 RE_WORD = re.compile(r"[a-z0-9']+")
 
 

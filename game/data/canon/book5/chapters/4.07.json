@@ -1,0 +1,341 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.07",
+	"events": {
+		"b5.d_xrn_shares_her_plan_with_klbkch": {
+			"tier": 2,
+			"window": {"earliest": 99, "latest": 99, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"prognugator": {"prefer": ["klbkch"], "fallback_tags": []}, "small_queen": {"prefer": ["xrn"], "fallback_tags": []}},
+			"requires": {"alive": ["klbkch", "xrn"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["xrn.plans_rhir_expedition", "xrn.regained_her_lost_levels", "klbkch.joins_xrns_plan", "klbkch.knows_queens_stopped_making_queens"], "relationship": [{"from": "xrn", "to": "klbkch", "delta": 1}]},
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 99 is a guess (after Christmas, before the soups). Anand and Belgrade are named as leaders for the strike force. Xrn has not told the Grand Queen about her levels. Rhir is a real continent (it matters in later books)."},
+			"summary": "Xrn finds Klbkch in his room and admits the Individuals have worth. The Queens have stopped trying to make new Queens. She plans a strike force of Individuals to sail to Rhir for a Queen or the lost knowledge, and Klbkch says it must come sooner."
+		},
+		"b5.e_lyonette_levels_and_apista_pupates": {
+			"tier": 2,
+			"window": {"earliest": 100, "latest": 100, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["lyonette.class_beast_tamer", "lyonette.class_carer", "apista.pupating", "erin.promised_lyonette_wages", "lyonette.takes_mrsha_to_liscor"], "relationship": [{"from": "lyonette", "to": "erin_solstice", "delta": 1}]},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					9,
+					12
+				],
+				"kind": "scene",
+				"when_flags": [
+					"lyonette.works_at_inn"
+				],
+				"npcs": [
+					{
+						"npc": "lyonette",
+						"pos": [
+							11,
+							12
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							9,
+							12
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							11,
+							10
+						]
+					}
+				],
+				"line": "Lyonette sets a jar on the bar with care. The fat larva inside has gone still and hard. She looks tired, and oddly pleased with herself.",
+				"note": "M13.1: a scene. Hours are guesses (the morning before Bird comes in). Erin and Lyonette talk over her new levels."
+			},
+			"hooks": [
+				{
+					"id": "player_talked_with_lyonette_about_her_levels",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"lyonette"
+								]
+							}
+						}
+					],
+					"days": [
+						100,
+						100
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_heard_lyonettes_levels"
+						],
+						"relationship": [
+							{
+								"from": "lyonette",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "Lyonette told another Human at the inn about her new levels. It was the first time she said them out loud without shame."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 100 is a guess (ADR 0020). Apista is her pet bee larva. Erin gives her pay and a gold coin for Mrsha."},
+			"summary": "Lyonette levelled in the night and gained two new classes: [Beast Tamer] and [Carer]. Her pet larva Apista is hardening into a pupa. Erin promises her a real wage and sends her and Mrsha into Liscor with money to spend."
+		},
+		"b5.f_bird_brings_erin_his_birds": {
+			"tier": 2,
+			"window": {"earliest": 100, "latest": 100, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"hunter": {"prefer": ["bird"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["bird", "erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["bird.hunts_birds_for_erin", "erin.cooks_birds_for_bird", "mrsha.grabbed_a_maggot"], "relationship": [{"from": "bird", "to": "erin_solstice", "delta": 1}]},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					12,
+					14
+				],
+				"kind": "scene",
+				"when_flags": [
+					"erin.home_at_the_inn"
+				],
+				"npcs": [
+					{
+						"npc": "bird",
+						"pos": [
+							13,
+							10
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							11,
+							12
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							9,
+							12
+						]
+					}
+				],
+				"line": "A tall Antinium with a bow on his back drops a lumpy sack on a table. It smells very bad. He looks very happy.",
+				"note": "M13.1: a scene. Hours are guesses (early afternoon). The sack holds two-week-old birds; Erin offers to cook fresh ones for free."
+			},
+			"hooks": [
+				{
+					"id": "player_talked_birds_with_bird",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"bird"
+								]
+							}
+						}
+					],
+					"days": [
+						100,
+						100
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_talked_birds_with_bird"
+						],
+						"relationship": [
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "Bird has a new friend at the inn: a Human who listened to all of his bird facts, and asked for more."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 100 is a guess (ADR 0020). Bird eats some birds raw; the rest go to the Hive as paste. The birds in the sack are about two weeks old. Lyonette makes Mrsha throw the maggot out."},
+			"summary": "Bird explains that he loves birds, and so he shoots them. He opens a sack of old, rotten ones, and Mrsha grabs a maggot. Erin makes him a deal: bring her fresh birds and she will cook them for him for free."
+		},
+		"b5.g_erin_sells_soup_samples_at_the_guild": {
+			"tier": 2,
+			"window": {"earliest": 100, "latest": 100, "confidence": "guess"},
+			"location": "liscor_adventurers_guild",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "guard": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "gossip": {"prefer": ["drassi"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.sells_magic_soups", "liscor.adventurers_order_erins_soups", "erin.knows_her_soups_are_underpriced", "relc.punched_a_soup_tester"], "relationship": [{"from": "selys", "to": "erin_solstice", "delta": 1}]},
+			"news": "Erin Solstice gave out soup samples by the Adventurers' Guild. One makes scales too hard for a knife; another makes you steam in the snow. Teams have ordered more.",
+			"stage": {
+				"area": "liscor_market",
+				"hours": [
+					14,
+					17
+				],
+				"kind": "scene",
+				"when_flags": [
+					"erin.home_at_the_inn"
+				],
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							15,
+							12
+						]
+					},
+					{
+						"npc": "selys",
+						"pos": [
+							14,
+							11
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							17,
+							12
+						]
+					},
+					{
+						"npc": "drassi",
+						"pos": [
+							13,
+							12
+						]
+					}
+				],
+				"line": "Erin stands by a crate of jars with a knife in one hand. A black-scaled Drake has just agreed to be stabbed. A crowd is gathering.",
+				"note": "M13.1: a scene. The text is on the street outside the Adventurers' Guild; liscor_market is the nearest map. Hours are guesses (afternoon). The player can help sell or talk Erin into a fair price."
+			},
+			"hooks": [
+				{
+					"id": "player_helped_price_erins_soups",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"haggle"
+							],
+							"context": {
+								"location": [
+									"liscor_market"
+								],
+								"npc": [
+									"erin_solstice",
+									"selys",
+									"relc"
+								]
+							}
+						}
+					],
+					"days": [
+						100,
+						100
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_helped_price_erins_soups"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "selys",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "Erin nearly sold her magic soups for pocket change. Another Human at the stall talked her into a fair price."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 100 is a guess (ADR 0020). Defence soup: red-purple, maybe the 3.15 thickskin soup (not stated). Warming soup: blue, not the orange corusdeer_soup. Soups spoil in about a week. Flags only, no items (user choice). The adventurer team is unnamed."},
+			"summary": "Erin hands out soup samples by the Adventurers' Guild. She stabs a volunteer Drake to prove one soup stops blades, and Relc punches him too. A blue soup makes a swordswoman steam in the cold. Selys and the crowd tell Erin she is charging far too little, and the teams order more for tomorrow."
+		},
+		"b5.h_erin_watches_the_north_road": {
+			"tier": 2,
+			"window": {"earliest": 100, "latest": 100, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["ryoka.heading_home_to_liscor"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.waits_for_ryoka", "erin.plans_to_ask_octavia_for_ingredients"]},
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 100 is a guess (ADR 0020). She plans a meat hotpot for dinner."},
+			"summary": "Erin walks home and stands on the hill looking up the road to the northwest. She has heard Ryoka is coming, and she wants to be there when she does."
+		},
+		"b5.i_ryoka_is_a_day_from_celum": {
+			"tier": 1,
+			"window": {"earliest": 100, "latest": 100, "confidence": "guess"},
+			"location": "north_izril",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.heading_home_to_liscor"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["ryoka.near_celum"]},
+			"rumor": "A Runner on the road south of Invrisil was seen running hard through the snow with something cold and glittering at her shoulder.",
+			"status": "candidate",
+			"canon_ref": {"book": 5, "chapter": "4.07", "confidence": "confirmed", "note": "Day 100 is a guess (ADR 0020). The Frost Faerie is unnamed, so not linked to Ivolethe. Reynold broke an axle on bandits; our data does not track him with her. She does not know about the door."},
+			"summary": "Ryoka is one hard day's run from Celum, with a Frost Faerie for company. She does not yet know about the door that could take her straight to Erin."
+		}
+	},
+	"system": [
+		{"who": "lyonette", "kind": "class", "name": "[Beast Tamer]", "level": 3, "confidence": "confirmed", "note": "New overnight, with Apista."},
+		{"who": "lyonette", "kind": "class", "name": "[Carer]", "level": 4, "confidence": "confirmed", "note": "New overnight."},
+		{"who": "lyonette", "kind": "level", "name": "[Barmaid]", "level": 9, "confidence": "confirmed", "note": "Her level as she tells Erin; not a new level."}
+	]
+}
