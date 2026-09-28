@@ -255,6 +255,7 @@
 		"ceria_springwalker": {
 			"confidence": "guess",
 			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone. M9.4: in Celum (horns_of_hammerad.in_celum, 3.24-3.25) the Horns eat at the Frenzied Hare in the evening; hours and seats are guesses. M13.2: from day 101 the Horns sleep in the inn's basement (4.11, horns_of_hammerad.lodge_in_the_inn_basement) and eat in the common room; hours and seats are guesses.",
+			"combat": {"hp": 26, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [3, 7]},
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"target": {"area": "inn_interior", "pos": [3, 8]}},
@@ -360,6 +361,7 @@
 		"yvlon_byres": {
 			"confidence": "guess",
 			"notes": "M9.4. Yvlon comes to Celum with the Horns (3.24, horns_of_hammerad.in_celum), her plate armour gone and metal fused to her arms, and sits with them at the Frenzied Hare in the evening until they leave on the wagon (3.25). Hours and seat are guesses; the rest of the time she is off the map. M13.2: from day 101 she eats with the Horns in the inn's common room (horns_of_hammerad.lodge_in_the_inn_basement); hours and seat are guesses.",
+			"combat": {"hp": 45, "accuracy": 7, "evasion": 3, "armor": 4, "damage": [4, 8]},
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[18, 23, 1]], "when_flags": ["horns_of_hammerad.in_celum"],
 					"target": {"area": "celum_frenzied_hare", "pos": [13, 7]}},
@@ -423,6 +425,20 @@
 			"confidence": "guess",
 			"notes": "M13.5. Griffon Hunt's old mage; off the map in Liscor. A canon stage brings him to the Floodplains fight on day 109 (4.19); his [Fireballs] are plain damage. The combat block is a design number.",
 			"combat": {"hp": 30, "accuracy": 8, "evasion": 3, "armor": 1, "damage": [4, 9]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"brunkr": {
+			"confidence": "guess",
+			"notes": "M13.6. Silverfang Gnoll warrior; off the map in Liscor. A canon stage brings him to the inn hill on day 110, where he trains Lyonette and she knights him (4.24).",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"hawk": {
+			"confidence": "guess",
+			"notes": "M13.6. Rabbit Beastkin Courier of Liscor; off the map. A canon stage brings him into the inn on the night of day 110 with the dying soldier (4.24).",
 			"goals": [
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]

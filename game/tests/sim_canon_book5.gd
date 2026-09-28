@@ -54,9 +54,11 @@ func test_book5_loads() -> void:
 			"quallet_marshhand", "kenjiro_murata", "aiko_nonomura", "luan_khumalo", "daly", "paige", "johanas", "quexa",
 			"etretta_fulvrie", "calectus", "xalandrass", "exara", "ulvial", "zalthia_werskiv", "grishka",
 			"timbor_parithad", "ulia_ovena", "wiskeria", "beniar", "sacra", "helm", "jelov", "tessia", "rehanna",
-			"jeighya", "fabiel", "rie"]:
+			"jeighya", "fabiel", "rie",
+			"welsca_crimsonscale", "imenet", "foliana", "peclir_im", "wil", "yerranola", "wullst", "regis_reinhart"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
-	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast", "strongheart_farm", "windrest"]:
+	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast", "strongheart_farm", "windrest",
+			"elvallian", "leadenfurt", "reinhart_estate", "esthelm_bear_cave"]:
 		assert_true(_db.canon.locations.has(loc), loc)
 	assert_eq(_db.canon.locations["melissar_estate"]["parent"], "north_izril")
 	assert_eq(_db.canon.locations["strongheart_farm"]["parent"], "north_izril")
@@ -108,17 +110,31 @@ func test_book5_runs_as_canon() -> void:
 			# M13.5: home from the farm, the innkeepers, the chess, the build, the bow, the undead; Laken's Riverfarm.
 			"ryoka.back_from_the_strongheart_farm", "erin.threw_out_the_celum_innkeepers",
 			"erin.played_the_unseen_opponent_all_night", "wandering_inn.expansion_begun", "bird.has_a_yew_bow",
-			"erin.stocked_up_on_potions", "erin.asked_brunkr_to_train_lyonette", "venitra.turns_for_liscor",
+			"erin.stocked_up_on_potions", "erin.asked_brunkr_to_train_lyonette",
 			"liscor_dungeon.gold_teams_charted_the_trap_rooms", "liscor_dungeon.undead_climbed_out_of_the_rift",
 			"laken.back_in_riverfarm", "prost.steward", "laken.took_in_windrest", "riverfarm.has_a_militia",
 			"laken.half_tamed_the_mossbear", "beniar.poisoned_by_a_goblin_arrow", "sacra.unmasked_as_magnolias_spy",
 			"wiskeria.leads_the_trackers", "laken.claimed_land_with_markers", "riverfarm.broke_the_goblin_attack",
-			"wiskeria.lakens_general", "invrisil_nobles.write_to_laken"]:
+			"wiskeria.lakens_general", "invrisil_nobles.write_to_laken",
+			# M13.6: the slime, the Razorbeak, Ilvriss' agents, the knighting, the news, Regrika, the Council, Niers,
+			# Magnolia's army, Royal Tax, the Pisces ban, the Creler nest, Venitra unmasked.
+			"erin.keeps_a_slime_core", "mrsha.snatched_at_by_a_razorbeak", "erin.made_up_with_ryoka",
+			"free_queen.experiments_to_make_a_queen", "relc.freed_ryoka_from_the_barracks", "lyonette.swore_brunkr_as_a_knight",
+			"wandering_inn.healing_slime_loose_near_the_inn", "erin.agreed_to_a_pallass_door_anchor",
+			"horns_of_hammerad.take_contracts_near_esthelm", "liscor.knows_the_drake_armies_fell",
+			"venitra.disguised_as_regrika_blackpaw", "drake_cities.warned_of_the_goblin_lord", "ivolethe.melting_as_winter_ends",
+			"forgotten_wing.fundraiser_held", "niers.read_olesms_newsletter", "niers.plays_go", "niers.shook_off_his_boredom",
+			"liscor.prepares_for_a_siege", "olesm.named_ryoka_to_regrika", "antinium.visitors_prepare_to_go_home",
+			"goblin_lord.ordered_north_past_liscor", "leadenfurt.sends_magnolia_cavalry", "magnolia.has_reinhart_knights_and_golems",
+			"lyonette.has_royal_tax", "brunkr.class_knight", "brunkr.arm_healed", "pisces.banned_from_raising_people_near_liscor",
+			"ceria.knows_ice_wall", "termin.fled_north_from_the_goblin_lord", "horns_of_hammerad.burned_a_creler_nest",
+			"venitra.seized_ryoka_in_liscor", "ryoka.knows_regrika_is_venitra"]:
 		assert_true(gs.flags.has(f), f)
 	# Safry and Maran are gone; Pawn's Soldiers went back to the front; the armies no longer stand; the trip is made.
 	for f: String in ["safry.works_at_the_inn", "maran.works_at_the_inn", "pawn.soldiers_back_on_patrol",
 			"drake_armies.joined_below_the_high_pass", "ryoka.plans_to_visit_garias_farm", "ivolethe.will_teach_ryoka_at_the_farm",
-			"ryoka.away_at_the_strongheart_farm", "mrsha.away_at_the_strongheart_farm"]:
+			"ryoka.away_at_the_strongheart_farm", "mrsha.away_at_the_strongheart_farm", "venitra.turns_for_liscor",
+			"brunkr.hand_infected"]:
 		assert_false(gs.flags.has(f), f)
 	for npc: String in ["garusa_weatherfur", "thrissiam_blackwing"]:
 		assert_false(gs.world.is_alive(_db.canon, npc), npc + " dies below the High Pass (4.16)")
@@ -132,13 +148,15 @@ func test_book5_runs_as_canon() -> void:
 			"wandering_inn.earther_toasted_the_horns", "wandering_inn.earther_weighed_in_on_the_building",
 			"wandering_inn.earther_sat_with_pawn", "wandering_inn.earther_served_the_soldiers_soup",
 			"wandering_inn.earther_watched_the_chess_marathon", "wandering_inn.earther_watched_bird_learn_the_bow",
-			"floodplains.earther_fought_the_rift_undead"]:
+			"floodplains.earther_fought_the_rift_undead", "wandering_inn.earther_saved_mrsha_from_a_razorbeak",
+			"wandering_inn.earther_watched_brunkr_train_lyonette", "wandering_inn.earther_heard_the_armies_fell",
+			"esthelm.earther_fought_the_creler_nest"]:
 		assert_false(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "patricia_melissar"), "murdered at the gathering (4.06 M)")
 	assert_false(gs.world.is_alive(_db.canon, "fabiel"), "killed by Goblins (4.21 E)")
 	for npc: String in ["magnolia_reinhart", "tyrion_veltras", "eliasor", "xrn", "klbkch", "bird", "lyonette", "ryoka_griffin",
 			"ilvriss", "toren", "anith", "pawn",
-			"laken_godart", "durene", "gamel", "wiskeria", "beniar", "sacra", "halrac", "brunkr", "venitra"]:
+			"laken_godart", "durene", "gamel", "wiskeria", "beniar", "sacra", "halrac", "brunkr", "venitra", "imenet", "foliana", "wullst", "hawk"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 
 
@@ -262,3 +280,44 @@ func test_without_halrac_the_undead_still_come_and_bird_still_gets_his_bow() -> 
 			"b5.zzl_undead_climb_out_of_the_rift"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_true(gs.flags.has("bird.has_a_yew_bow"))
+
+
+func test_without_venitra_there_is_no_regrika_but_liscor_still_hears() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "venitra"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzzl_regrika_blackpaw_comes_to_liscor", "b5.zzzs_regrika_asks_the_council_for_a_runner",
+			"b5.zzzzd_venitra_shows_ryoka_her_face"]:
+		assert_false(Director.happened(gs.world.status(id)), id)
+	for id: String in ["b5.zzzk_hawk_brings_word_the_drake_armies_fell", "b5.zzzr_the_liscor_council_plans_for_a_siege",
+			"b5.zzzzc_the_horns_burn_a_creler_nest"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+	assert_false(gs.flags.has("ryoka.knows_regrika_is_venitra"))
+
+
+func test_without_brunkr_there_is_no_knight_but_lyonette_still_levels() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "brunkr"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzzg_brunkr_trains_lyonette_and_she_knights_him", "b5.zzzy_brunkr_wakes_a_knight"]:
+		assert_false(Director.happened(gs.world.status(id)), id)
+	assert_true(Director.happened(gs.world.status("b5.zzzx_lyonette_levels_and_gains_royal_tax")))
+	assert_false(gs.flags.has("brunkr.class_knight"))
+
+
+func test_without_hawk_the_news_still_comes() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "hawk"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzzk_hawk_brings_word_the_drake_armies_fell", "b5.zzzm_warnings_go_out_to_the_cities",
+			"b5.zzzi_door_anchors_and_a_stone_for_pallass"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+
+
+func test_without_yvlon_there_is_no_bear_request_and_no_nest() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "yvlon_byres"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.zzzza_ceria_learns_ice_wall_and_yvlon_takes_a_request", "b5.zzzzc_the_horns_burn_a_creler_nest"]:
+		assert_false(Director.happened(gs.world.status(id)), id)
+	assert_true(Director.happened(gs.world.status("b5.zzzz_the_guild_bans_pisces_from_raising_the_dead")), "the ban still comes")

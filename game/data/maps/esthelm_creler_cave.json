@@ -1,0 +1,43 @@
+{
+	"schema_version": 1,
+	"id": "esthelm_creler_cave",
+	"name": "The bear cave past Esthelm",
+	"location": "esthelm_bear_cave",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M13.6). A cave a few miles past Esthelm, off the road, where a Hunter reported three bears (4.27 H). The Horns find the bears eaten and a Creler nest. The text gives no layout: the tunnel, the chamber and the walk from Esthelm are guesses. The track opens once the Horns take work near Esthelm (4.24). The stage of b5.zzzzc_the_horns_burn_a_creler_nest happens here on day 111.",
+	"zones": {},
+	"exits": [
+		{"at": [0, 11, 1, 2], "to": "esthelm_ruins", "arrive": [30, 11], "minutes": 120}
+	],
+	"objects": [
+		{"id": "creler_cave_stones", "kind": "stones", "at": [9, 12], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"legend": {",": "tall_grass", ".": "cave_floor", "^": "rock"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^.........^^^^^^",
+		"^^^^^^^^^^^^^^^...^.........^^^^",
+		"^^^^^^^^^^^^^^...........^...^^^",
+		"^^^^^^^^^^^^^^...............^^^",
+		"^^^^^^^^^^^^^.................^^",
+		"^^^^^^^^^^^^^.................^^",
+		",,,..................^........^^",
+		",,,...........................^^",
+		"^^^^^^^^^^^^^.................^^",
+		"^^^^^^^^^^^^^.................^^",
+		"^^^^^^^^^^^^^^.............^.^^^",
+		"^^^^^^^^^^^^^^...^...........^^^",
+		"^^^^^^^^^^^^^^^.............^^^^",
+		"^^^^^^^^^^^^^^^^^.........^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^.^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+	]
+}

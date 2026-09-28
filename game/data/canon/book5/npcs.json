@@ -1319,6 +1319,188 @@
 				"note": "Only a letter; no surname given."
 			},
 			"summary": "A [Lady] of Invrisil who writes to Laken after the battle."
+		},
+		"welsca_crimsonscale": {
+			"name": "Welsca Crimsonscale",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"aide",
+				"salazsar"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Red scales and an arm scar. Her home city is not stated."
+			},
+			"summary": "An older Drake, Wall Lord Ilvriss' aide, who presses Ryoka about Periss in a bathhouse and is kicked into a pool."
+		},
+		"imenet": {
+			"name": "Imenet",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"mage",
+				"adventurer"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "Dark purple scales; called Gold-rank. Unnamed in 4.24. Not linked to anyone else."
+			},
+			"summary": "A young Drake [Mage] with a staff who travels with 'Regrika Blackpaw' and helps her find Ryoka."
+		},
+		"foliana": {
+			"name": "Foliana",
+			"race": "Beastkin",
+			"tags": [
+				"beastkin",
+				"squirrel",
+				"rogue",
+				"forgotten_wing",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "elvallian",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "Squirrel Beastkin, the 'Three-Color Stalker'."
+			},
+			"summary": "Leader of the Forgotten Wing Company, a [Rogue] who vanishes at will, and Niers' oldest friend."
+		},
+		"peclir_im": {
+			"name": "Peclir Im",
+			"race": "Human",
+			"tags": [
+				"human",
+				"chamberlain",
+				"forgotten_wing",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "elvallian",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "About four years in the company's service."
+			},
+			"summary": "The Forgotten Wing's [Chamberlain], who runs its fundraiser at Elvallian."
+		},
+		"wil": {
+			"name": "Wil",
+			"race": "Human",
+			"tags": [
+				"human",
+				"student",
+				"forgotten_wing",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "elvallian",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "No surname in this chapter."
+			},
+			"summary": "One of Niers' advanced students. He writes to a Zeres [Strategist] and brings Niers Olesm's newsletter."
+		},
+		"yerranola": {
+			"name": "Yerranola",
+			"race": "Selphid",
+			"tags": [
+				"selphid",
+				"student",
+				"forgotten_wing",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "elvallian",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "Wears a male Naga body; she is female."
+			},
+			"summary": "A Selphid among Niers' advanced students."
+		},
+		"wullst": {
+			"name": "Wullst",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mayor",
+				"rider",
+				"north_izril",
+				"distant"
+			],
+			"faction": null,
+			"home": "leadenfurt",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "A former [Rider]."
+			},
+			"summary": "[Mayor] of Leadenfurt, squeezed between Tyrion's levy and Magnolia's."
+		},
+		"regis_reinhart": {
+			"name": "Regis Reinhart",
+			"race": "Human",
+			"tags": [
+				"human",
+				"reinhart",
+				"undead",
+				"ancestor",
+				"north_izril",
+				"distant"
+			],
+			"faction": null,
+			"home": "reinhart_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "Kept by necromancy; dead about 3,800 years."
+			},
+			"summary": "A long-dead Reinhart who guards the family vault with four ghost [Maids]."
 		}
 	}
 }

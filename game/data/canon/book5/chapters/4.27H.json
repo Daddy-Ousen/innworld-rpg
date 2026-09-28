@@ -1,0 +1,635 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.27H",
+	"events": {
+		"b5.zzzx_lyonette_levels_and_gains_royal_tax": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.has_royal_tax"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "The [Warrior] lines above her level are not given an owner."
+			},
+			"summary": "Lyonette levels in the night and gains [Royal Tax]. All day guests tip her without knowing why. She tells no one, while the Workers build the third floor and a new wing."
+		},
+		"b5.zzzy_brunkr_wakes_a_knight": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"knight": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": []
+				},
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"brunkr"
+				],
+				"flags": [
+					"lyonette.swore_brunkr_as_a_knight"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"brunkr.class_knight",
+					"brunkr.arm_healed",
+					"krshia.plans_a_feast_for_brunkr",
+					"krshia.knows_lyonette_is_a_princess"
+				],
+				"clear_flags": [
+					"brunkr.hand_infected"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "The feast itself is in 4.28."
+			},
+			"summary": "Brunkr wakes a [Knight] with his arm healed. At Krshia's home Ryoka tells them Lyonette must be a princess. Krshia plans a feast for Brunkr at Erin's inn tonight."
+		},
+		"b5.zzzz_the_guild_bans_pisces_from_raising_the_dead": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guildmaster": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.banned_from_raising_people_near_liscor",
+					"horns_of_hammerad.not_yet_gold_rank"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "Lizardfolk are a joke exception."
+			},
+			"summary": "At the Guild Selys says the Horns must earn Gold rank with requests first. Pisces may no longer raise the dead of any people near Liscor. Ksmvr objects in public and is dragged out."
+		},
+		"b5.zzzza_ceria_learns_ice_wall_and_yvlon_takes_a_request": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"yvlon_byres"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ceria.knows_ice_wall",
+					"horns_of_hammerad.hunt_bears_near_esthelm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "Ceria's class changed the day before."
+			},
+			"summary": "At lunch Ceria traps Pisces in her new [Ice Wall]. Yvlon has taken a request without asking: three bears near Esthelm. Halrac and Jelaqua warn them about Mothbears and rabies."
+		},
+		"b5.zzzzb_termin_drives_the_horns_and_flees_north": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "esthelm",
+			"roles": {
+				"driver": {
+					"prefer": [
+						"termin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"termin"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"termin.fled_north_from_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "Yvlon and Pisces argue about necromancy on the way."
+			},
+			"summary": "Termin drives the Horns to Esthelm, then goes on north toward Invrisil for fear of the Goblin Lord."
+		},
+		"b5.zzzzc_the_horns_burn_a_creler_nest": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "esthelm_bear_cave",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": []
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yvlon_byres"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.burned_a_creler_nest",
+					"ceria.poisoned_by_a_creler",
+					"yvlon.arm_broken_by_a_creler",
+					"horns_of_hammerad.shared_their_levels",
+					"yvlon.allows_pisces_necromancy",
+					"horns_of_hammerad.haul_with_skeleton_bears"
+				]
+			},
+			"stage": {
+				"area": "esthelm_creler_cave",
+				"hours": [
+					13,
+					23
+				],
+				"foes": [
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							20,
+							8
+						]
+					},
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							23,
+							9
+						]
+					},
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							19,
+							13
+						]
+					},
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							24,
+							13
+						]
+					},
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							22,
+							15
+						]
+					},
+					{
+						"enemy": "creler_hatchling",
+						"pos": [
+							26,
+							11
+						]
+					}
+				],
+				"line": "Bones crack under your boots. Something small and spiked with too many legs skitters out of the dark, then another.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							4,
+							11
+						],
+						"allies": [
+							"ceria_springwalker",
+							"pisces",
+							"yvlon_byres",
+							"ksmvr"
+						],
+						"line": "The Horns of Hammerad come down the tunnel with weapons out. Ceria shouts one word: Crelers."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 3,
+						"from": [
+							28,
+							11
+						],
+						"foes": [
+							"creler_hatchling",
+							"creler_hatchling",
+							"creler_hatchling",
+							"creler_hatchling",
+							"creler_hatchling",
+							"creler_hatchling"
+						],
+						"line": "More young Crelers boil out of a crack at the back of the cave."
+					},
+					{
+						"after_seconds": 150,
+						"left_at_most": 2,
+						"from": [
+							28,
+							11
+						],
+						"foes": [
+							"creler_juvenile"
+						],
+						"line": "A Creler as big as a cart crawls out behind them, spikes rattling."
+					}
+				],
+				"note": "M13.6: a fight. Twelve young stand in for eighteen. Hours are guesses (the Horns ride out after lunch; a player from Liscor must leave at dawn)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_the_creler_nest",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"creler_hatchling",
+									"creler_juvenile"
+								]
+							}
+						}
+					],
+					"days": [
+						111,
+						111
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"esthelm.earther_fought_the_creler_nest"
+						],
+						"relationship": [
+							{
+								"from": "ceria_springwalker",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "pisces",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "yvlon_byres",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "ksmvr",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "A Human fought beside the Horns of Hammerad at the Creler nest past Esthelm."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "The big one is a juvenile (Ksmvr): adults are bigger and fly."
+			},
+			"summary": "In a cave past Esthelm the bears are already eaten: it is a Creler nest. The Horns kill eighteen young and a juvenile; Ceria is poisoned and Yvlon's arm broken. Pisces' skeleton bears drag Ceria home."
+		},
+		"b5.zzzzd_venitra_shows_ryoka_her_face": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"companion": {
+					"prefer": [
+						"imenet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"venitra.disguised_as_regrika_blackpaw"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"regrika.asked_ryoka_to_scout_the_goblin_lord",
+					"ryoka.knows_regrika_is_venitra",
+					"venitra.seized_ryoka_in_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "Hawk refused the job. What happens to Ryoka is in 4.28."
+			},
+			"summary": "'Regrika' and her mage Imenet find Ryoka and ask her to scout the Goblin Lord's army. In an alley Regrika twists a ring and becomes Venitra, grips Ryoka's throat and threatens all she loves."
+		}
+	},
+	"system": [
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Princess]",
+			"level": 6,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "skill",
+			"name": "[Royal Tax]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Shown."
+		},
+		{
+			"who": "lyonette",
+			"kind": "level",
+			"name": "[Warrior]",
+			"level": 1,
+			"confidence": "likely",
+			"note": "Shown with no owner named; hers by context (she tried for it in 4.24)."
+		},
+		{
+			"who": "lyonette",
+			"kind": "skill",
+			"name": "[Basic Footwork]",
+			"level": null,
+			"confidence": "likely",
+			"note": "Shown with no owner named; hers by context."
+		},
+		{
+			"who": "brunkr",
+			"kind": "class",
+			"name": "[Knight]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Stated; he woke with it after Lyonette's oath. No level given."
+		},
+		{
+			"who": "yvlon_byres",
+			"kind": "skill",
+			"name": "[Ignore Pain]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Stated; gained with [Wounded Warrior] after the dungeon."
+		},
+		{
+			"who": "pisces",
+			"kind": "level",
+			"name": "[Necromancer]",
+			"level": 29,
+			"confidence": "confirmed",
+			"note": "Stated when the team shares levels."
+		},
+		{
+			"who": "pisces",
+			"kind": "level",
+			"name": "[Mage]",
+			"level": 18,
+			"confidence": "confirmed",
+			"note": "Stated."
+		},
+		{
+			"who": "ceria_springwalker",
+			"kind": "level",
+			"name": "[Cryomancer]",
+			"level": 25,
+			"confidence": "confirmed",
+			"note": "Stated; her class changed the day before."
+		},
+		{
+			"who": "ceria_springwalker",
+			"kind": "other",
+			"name": "Spell [Ice Wall]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Learned at lunch. A spell, not a Skill."
+		},
+		{
+			"who": "ksmvr",
+			"kind": "level",
+			"name": "[Warrior]",
+			"level": 16,
+			"confidence": "confirmed",
+			"note": "Stated; Level 12 when he joined."
+		}
+	]
+}

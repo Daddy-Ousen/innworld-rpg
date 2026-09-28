@@ -142,6 +142,78 @@
 				"note": "About fourteen miles east of Riverfarm. Burned by Goblins; its people move to Riverfarm. No map."
 			},
 			"summary": "A small village east of Riverfarm, burned by Goblins."
+		},
+		"elvallian": {
+			"name": "Elvallian",
+			"kind": "settlement",
+			"parent": "baleros",
+			"tags": [
+				"city",
+				"baleros",
+				"forgotten_wing"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "No map."
+			},
+			"summary": "A Baleros trading city; the Forgotten Wing's home, an academy in an old palace."
+		},
+		"leadenfurt": {
+			"name": "Leadenfurt",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"city",
+				"human",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "A small city. No map."
+			},
+			"summary": "A small Human city whose [Mayor] Wullst owes levies to Tyrion and Magnolia."
+		},
+		"reinhart_estate": {
+			"name": "The Reinhart estate",
+			"kind": "building",
+			"parent": "first_landing",
+			"tags": [
+				"estate",
+				"reinhart",
+				"vault"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "No map."
+			},
+			"summary": "The Reinhart family seat in First Landing, with an old armoury vault below it."
+		},
+		"esthelm_bear_cave": {
+			"name": "The bear cave past Esthelm",
+			"kind": "wild",
+			"parent": "esthelm",
+			"tags": [
+				"cave",
+				"crelers",
+				"danger"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "confirmed",
+				"note": "A few miles past Esthelm off the road; the place and layout of our map are guesses."
+			},
+			"summary": "A cave where three bears were said to live. The Horns find a Creler nest in it."
 		}
 	}
 }
