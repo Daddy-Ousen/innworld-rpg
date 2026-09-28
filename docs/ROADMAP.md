@@ -165,7 +165,7 @@ Plan accepted 2026-09-28 (ADR 0020). One branch + PR each. World and traps first
 4.00 K – 4.05 K and the Trey half of 4.06 (Flos in Chandrar, the past) are history notes only, like the Wistram Days.
 Stage and hook choices are asked at the start of each canon batch.
 - [x] M13.0 World: exits gated by flags, inn third floor + Bird's watchtower, the dungeon depths and crypt maps, new enemies (no save change)
-- [ ] M13.T Traps: hidden traps, search and disarm, a trap system in the depths (engine + save v14)
+- [x] M13.T Traps: hidden traps, search and disarm, a trap system in the depths (engine + save v14)
 - [ ] M13.1 Canon 4.00 K – 4.07 (Flos history notes, Magnolia's gathering, Xrn's plan, Erin's magic soups)
 - [ ] M13.2 Canon 4.08 T – 4.12 (Toren in the depths, Ryoka home, the Horns' gear, the building contract, new staff)
 - [ ] M13.3 Canon 4.13 L – 4.17 (the Hive battles, the staff trouble, the Goblin Lord crushes the Drakes, the Strongheart farm)
