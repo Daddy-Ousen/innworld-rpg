@@ -68,7 +68,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.7 PR (link in `progress.md` once opened).
+- Merge [PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66) (M13.7).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Book 5 canon notes (M13.7)

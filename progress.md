@@ -25,7 +25,7 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
   - [x] M13.4 Canon 1.02 D – 1.06 D (Geneva in Baleros, days 77–90, off-map). Merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)), tag `m13.4-done` on merge commit 069a265.
   - [x] M13.5 Canon 4.18 – 4.23 E (days 106–109 at Liscor; Laken days 111–118, off-map). Merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)), tag `m13.5-done` on merge commit 62806ef.
   - [x] M13.6 Canon 4.24 – 4.27 H (Liscor days 110–111; Niers and Magnolia off-map to 113; the Creler cave map). Merged ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65)), tag `m13.6-done` on merge commit 9c37803.
-  - [ ] M13.7 Canon 4.28 – 4.31 (days 111–114). Done and tested on branch `data/book5-m13.7`: 32 events, Imenet merged into Ijvani, Regrika fight + feast and pyre scenes. PR open, waiting on the user to merge. Tick after merge (tags `m13.7-done`, `m13-done`).
+  - [ ] M13.7 Canon 4.28 – 4.31 (days 111–114). Done and tested on branch `data/book5-m13.7`: 32 events, Imenet merged into Ijvani, Regrika fight + feast and pyre scenes. [PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66) open, waiting on the user to merge. Tick after merge (tags `m13.7-done`, `m13-done`).
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
