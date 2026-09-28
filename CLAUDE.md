@@ -34,7 +34,7 @@ The Wandering Inn Books 1-17 Pirateaba/   source epubs (read-only, gitignored)
 3. **Deterministic.** All randomness goes through `core/rng.gd` (seeded). Never call `randi()`/`randf()` directly. Same seed + same commands = same result.
 4. **Content is data.** Classes, skills, action tags, NPCs, events: JSON in `game/data/`. Do not hard-code content in scripts. New books add data, not engine code.
 5. **Canon is data, not script.** Canon events are nodes with roles, preconditions, fallbacks and effects (see DESIGN §4). Never write `if day == 12: kill(x)`.
-6. **Tests before done.** Every core feature gets GUT tests. Run the full suite before each commit. A task is not done if tests fail.
+6. **Tests before done.** Every core feature gets GUT tests. Run the tests that fit the change before each commit (see "Test scope" below). A task is not done if tests fail.
 7. **Small commits.** One feature per commit. Conventional message: `feat(core): …`, `fix(director): …`, `data(book1): …`.
 8. **Save format is versioned.** `GameState.save_version`. Any schema change adds a migration in `core/save_migrations.gd`.
 9. **Lore accuracy.** Canon source is the **Book 1 ebook (rewrite)**, not the web serial. The wikis follow the web serial — use them for background only and flag conflicts. Do not invent canon facts; mark guesses with `"confidence": "guess"` in data.
@@ -62,7 +62,7 @@ If `godot` is not on PATH, use the full path to the Godot exe or set `$env:GODOT
 1. Read the milestone in `docs/ROADMAP.md`.
 2. Plan first (plan mode). List files you will touch.
 3. Write tests, then code.
-4. Run tests. Fix until green.
+4. Run the tests in "Test scope". Fix until green.
 5. Update `docs/ROADMAP.md` checkboxes and add an ADR in `docs/adr/` for any design decision.
 6. Commit.
 
@@ -72,3 +72,16 @@ Canon batches and full test runs blow up context fast. To keep quality without t
 - Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent (Agent tool). Only its short summary should return to the main session — not raw book text or raw test logs.
 - Don't re-read a file right after Edit/Write.
 - Keep `progress.md` to current-milestone status only; finished milestones live in `docs/PROGRESS_ARCHIVE.md`.
+
+## Test scope (agreed 2026-09-28)
+The full suite is slow (about 100 scripts, 900+ tests). Do not run it after every sub-milestone.
+- **Data-only change** (canon batch, maps, NPCs, enemies, audio data): run only
+  - the new or changed test scripts,
+  - `sim_canon_book<N>` for the current book,
+  - the unit tests that check the kind of data you touched (a new enemy: `unit_combat_db`, `unit_monster_art`, `unit_sound_cues`; see `handoff.md` for others),
+  - the validator and the Python tool tests (`python -m unittest discover -s tools/tests`).
+  One script: `godot --headless --path game -s addons/gut/gut_cmdln.gd -gdir=res://tests -gselect=<script name> -gexit`.
+- **Full suite** (in a subagent) only when:
+  - code changes in `game/core/`, or the save format or a JSON schema changes,
+  - the last sub-milestone of a milestone, before its PR,
+  - a targeted run fails in a way that may touch other areas.

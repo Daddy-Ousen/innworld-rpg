@@ -7,6 +7,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - Redirect GUT / validator runs to a file (scratchpad). Read only the pass/fail summary line and any FAIL/Error/Parse Error lines — never the full run.
 - Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent. Only its short summary should land in the main session's context, not raw book text or raw test logs.
 - Don't re-read a file right after Edit/Write — the tool already confirms the change.
+- Test scope (user, 2026-09-28): data-only sub-milestones run targeted tests only; the full suite runs only for `game/core/` code, save/schema changes, and at a milestone's end. Detail in `CLAUDE.md` "Test scope".
 - See `handoff.md` "Gotchas" for the GUT-exits-0-on-parse-error trap and other run-output pitfalls.
 
 ## Roadmap status

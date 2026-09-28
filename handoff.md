@@ -1,20 +1,16 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.6 merged ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65)); ticked on main (commit cb068d6),
-  tag `m13.6-done` on merge commit 9c37803.
-- M13.7 (4.28 - 4.31, days 111-114) built on branch `data/book5-m13.7`. User choices: days 111-114; `imenet` merged
-  into `ijvani` (4.28 says so); stages: Brunkr's feast (scene, 111), Regrika's attack (fight, 112 night; she
-  escapes), the pyres (scene, 113); Regrika has a new LPC sheet. Detail: ADR 0020 "M13.7".
-- Data made by `scratchpad/gen_m137.py` (this session's scratchpad; gone next session). 32 events, NPCs bea /
-  kerash / oom, enemy `regrika_blackpaw`, schedules (Ryoka off the map after 114; Lyonette and Mrsha in Celum).
-  New test `sim_book5_last_light.gd` (9 tests, pass). Validator 0 errors; Python 78 OK.
+- M13.7 merged ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). M13 (Book 5) is closed: ticked
+  on main (commit 026d8aa), tags `m13.7-done` and `m13-done` on merge commit 17b6bab, M13 detail moved to
+  `docs/PROGRESS_ARCHIVE.md`.
+- New test policy (user choice): `CLAUDE.md` rule 6 and new section "Test scope". Data-only sub-milestones
+  run targeted tests only. The full suite runs only for `game/core/` code, save/schema changes, and at a
+  milestone's end.
 
 ## Next steps
-1. Finish the M13.7 checks (full suite), commit, push, open the PR. Then wait for the user to merge.
-2. After the merge, on main: tick M13.7 and M13 in `docs/ROADMAP.md` and `progress.md`, tags `m13.7-done` and
-   `m13-done` on the merge commit. Move M13 detail to `docs/PROGRESS_ARCHIVE.md`.
-3. Book 5 is then done. Next milestone is not planned yet (ask the user: Book 6, or engine work).
+1. Ask the user for the next milestone: Book 6, or engine work (see `docs/ROADMAP.md` "Later").
+2. Plan it (plan mode), write an ADR, then build it one sub-milestone per branch + PR.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -68,7 +64,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66) (M13.7).
+- Choose the next milestone.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Book 5 canon notes (M13.7)
