@@ -1,0 +1,203 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "1.03D",
+	"events": {
+		"b5.zp_ken_becomes_the_companys_negotiator": {
+			"tier": 2,
+			"window": {
+				"earliest": 81,
+				"latest": 81,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"veteran": {
+					"prefer": [
+						"etretta_fulvrie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"kenjiro_murata"
+				],
+				"flags": [
+					"gravetenders_fist.clears_the_valley_battlefield"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zo_gravetenders_fist_reaches_the_valley_battle"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"kenjiro_murata.speaks_for_gravetenders_fist"
+				],
+				"relationship": [
+					{
+						"from": "etretta_fulvrie",
+						"to": "kenjiro_murata",
+						"delta": 2
+					},
+					{
+						"from": "quexa",
+						"to": "kenjiro_murata",
+						"delta": 2
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.03D",
+				"confidence": "confirmed",
+				"note": "Placeholder day; covers the company's nights 3-6. It is winter. Geneva (a Level 26 [Doctor]) opens the chapter in her own camp, north of the valley, with Okasha moving her right arm."
+			},
+			"summary": "Ken befriends the Lizardfolk, calms Dullahans an American insulted by greeting them in rank order, and gains a new class. Then he talks a Centaur officer into letting the company work their ground, and Quallet makes him the go-between."
+		},
+		"b5.zq_centaurs_shoot_luan_with_an_evercut_arrow": {
+			"tier": 2,
+			"window": {
+				"earliest": 82,
+				"latest": 82,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"patient": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": []
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spear": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"luan_khumalo"
+				],
+				"flags": [
+					"gravetenders_fist.clears_the_valley_battlefield"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zo_gravetenders_fist_reaches_the_valley_battle"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"luan_khumalo.has_an_arrowhead_inside"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.03D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. The Americans plan to desert. Ken, Aiko and Quexa carry him; they reach Geneva's camp at sunrise."
+			},
+			"summary": "Centaurs ambush Luan's patrol on their own ground. An enchanted arrowhead stays in his side and tears the wound open past every potion, so Quallet sends him on a stretcher under a white flag to the Last Light."
+		}
+	},
+	"system": [
+		{
+			"who": "geneva_scala",
+			"kind": "level",
+			"name": "[Doctor]",
+			"level": 26,
+			"confidence": "confirmed",
+			"note": "Stated at the start of 1.03D (Level 17 after 1.01D)."
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "level",
+			"name": "[Warrior]",
+			"level": 4,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "class",
+			"name": "[Negotiator]",
+			"level": 1,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "level",
+			"name": "[Negotiator]",
+			"level": 2,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "skill",
+			"name": "[Amateur Linguist]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "skill",
+			"name": "[Polite Demeanor]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

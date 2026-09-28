@@ -633,6 +633,395 @@
 				"note": "Garia's mother. A [Green Mage] from Wistram; met Wailant on the Blood Fields."
 			},
 			"summary": "Garia's mother, a Wistram mage who farms."
+		},
+		"quallet_marshhand": {
+			"name": "Quallet Marshhand",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mercenary",
+				"captain",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Mercenary Captain]",
+					"level": 32
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Captain of Gravetender's Fist, a company that burns the dead and kills the undead on battlefields."
+			},
+			"summary": "A hard, practical mercenary captain who recruits the stranded Earthers into his undead-clearing company, then joins Geneva's new company."
+		},
+		"kenjiro_murata": {
+			"name": "Kenjiro Murata",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"negotiator",
+				"medic",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Warrior]",
+					"level": 4
+				},
+				{
+					"name": "[Negotiator]",
+					"level": 18
+				},
+				{
+					"name": "[Medic]",
+					"level": 4
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Ken. Japanese business student, 21, taken from a Melbourne airport. [Negotiator] Level 18 is stated in 1.06D."
+			},
+			"summary": "A polite Japanese student who talks his way between armies, becomes a Red Cross medic, and speaks for Geneva when she walks out of the valley."
+		},
+		"aiko_nonomura": {
+			"name": "Aiko Nonomura",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"spear",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Japanese illustration student, 22. Draws hygiene and bandaging guides. No class named."
+			},
+			"summary": "A Japanese art student who fights with a spear, then becomes Geneva's surgical assistant and kills an assassin with scalpels."
+		},
+		"luan_khumalo": {
+			"name": "Luan Khumalo",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rower",
+				"medic",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "South African, 25, an Olympic rowing hopeful. Married with a young child on Earth. His [Medic] class is implied only."
+			},
+			"summary": "A tall South African rower who survives an enchanted arrow thanks to Geneva and carries her wounded as a Red Cross medic."
+		},
+		"daly": {
+			"name": "Daly",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"warrior",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.03D",
+				"confidence": "confirmed",
+				"note": "Australian. Classes named: [Rogue] (1.03D), [Warrior] and [Axe Fighter] (1.06D). No levels."
+			},
+			"summary": "A blond Australian who leads the Earthers who stay with Gravetender's Fist, then joins Geneva's new company."
+		},
+		"paige": {
+			"name": "Paige",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.03D",
+				"confidence": "confirmed",
+				"note": "Australian. A scarred bite on one arm."
+			},
+			"summary": "An Australian Earther in Gravetender's Fist, one of those who stay with Daly."
+		},
+		"johanas": {
+			"name": "Johanas",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "American. Beheaded by Dullahans in 1.04D for deserting."
+			},
+			"summary": "A loud American Earther who leads the Americans' desertion and is executed for it."
+		},
+		"quexa": {
+			"name": "Quexa",
+			"race": "Lizardfolk",
+			"tags": [
+				"lizardfolk",
+				"sorcerer",
+				"mercenary",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Sorcerer]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Blue scales. Loses a leg and her tail in 1.06D; Daly carves her a new leg."
+			},
+			"summary": "A chatty Lizardfolk fire mage in Gravetender's Fist who befriends Ken."
+		},
+		"etretta_fulvrie": {
+			"name": "Etretta Fulvrie",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"soldier",
+				"mercenary",
+				"baleros",
+				"distant"
+			],
+			"faction": "gravetenders_fist",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.03D",
+				"confidence": "confirmed",
+				"note": "Killed shielding Daly from lightning (1.06D)."
+			},
+			"summary": "A veteran Dullahan of Gravetender's Fist, first in her group's armour rank."
+		},
+		"calectus": {
+			"name": "Calectus",
+			"race": "Selphid",
+			"tags": [
+				"selphid",
+				"guard",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Honor Guard]",
+					"level": 36
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.04D",
+				"confidence": "confirmed",
+				"note": "Leads the Selphids serving Geneva. Called he in a Lizardman body, she after taking a Dullahan body (1.06D)."
+			},
+			"summary": "A senior Selphid who guards Geneva, hoping she can cure the Selphids' Wasting."
+		},
+		"xalandrass": {
+			"name": "Xalandrass",
+			"race": "Naga",
+			"tags": [
+				"naga",
+				"merchant",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Merchant]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "Xal. A war vendor; sold the Evercut arrows."
+			},
+			"summary": "A jewelled Naga war vendor who trades with Ken and stands with the cleanup companies when the battle turns on them."
+		},
+		"exara": {
+			"name": "Exara",
+			"race": "Centaur",
+			"tags": [
+				"centaur",
+				"mercenary",
+				"captain",
+				"baleros",
+				"distant"
+			],
+			"faction": "rots_bane",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Captain]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Rot's Bane is named as her company in 1.06D."
+			},
+			"summary": "The disciplined Centaur captain of Rot's Bane, a small cleanup company."
+		},
+		"ulvial": {
+			"name": "Ulvial",
+			"race": "Unknown",
+			"tags": [
+				"mercenary",
+				"captain",
+				"baleros",
+				"distant"
+			],
+			"faction": "untimely_demise",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Species not stated. Spelled Ulviel once. Killed in 1.06D."
+			},
+			"summary": "The bald captain of Untimely Demise, who told Quallet of the valley battle."
+		},
+		"zalthia_werskiv": {
+			"name": "Zalthia Werskiv",
+			"race": "Unknown",
+			"tags": [
+				"mage",
+				"fire_mage",
+				"mercenary",
+				"baleros",
+				"distant"
+			],
+			"faction": "tripartite_law",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "The Firebringer, of Tripartite Law. Species not stated. Geneva says she destroyed the Raverian Fighters."
+			},
+			"summary": "A flying fire mage who burns armies and Geneva's camp for pay."
+		},
+		"grishka": {
+			"name": "Grishka",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"commander",
+				"baleros",
+				"distant"
+			],
+			"faction": "razorshard_armor",
+			"home": "baleros",
+			"classes": [
+				{
+					"name": "[Commander]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "The War Walker Geneva saves is her brother."
+			},
+			"summary": "A Razorshard Armor commander who pays Geneva for saving her brother."
 		}
 	}
 }

@@ -1,29 +1,27 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.2 merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)); ticked on main, tag `m13.2-done` on merge commit db1e2dd.
-- M13.3 done on branch `data/book5-m13.3` ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62) open, not merged). User choices: two scenes (Pawn back at the inn,
-  day 104, 12-16; the Soldiers' soup on `inn_hill`, day 106, 19-23); Strongheart farm is a location only; 4.16
-  "Day 59" = day 103; Drassi and Ishkr get inn schedules, Safry and Maran are flags only.
-- Chapters `4.13L`, `4.14L`, `4.15L`, `4.16`, `4.17`: 17 events `b5.w_` ... `b5.zm_` (after `z` ids go `za`, `zb`...).
-  Hive battle day 102 (25 of Pawn's Soldiers die); staff start day 103; Safry and Maran fired day 105
-  (`lyonette.in_charge_of_the_staff`); Yellow Splatters made [Sergeant] day 106; Drake armies (tier 1,
-  `high_passes`) join 103, ambushed 106, destroyed 110 (Garusa and Thrissiam die, Osthia captured), Osthia and the
-  Goblin Lord 111; Ryoka and Mrsha at `strongheart_farm` from day 105 (`ryoka.away_at_the_strongheart_farm`,
-  `mrsha.away_at_the_strongheart_farm`: still set at day 111), the wind lifts Ryoka day 106.
-- 7 new NPCs (ishkr, yellow_splatters, thrissiam_blackwing, garusa_weatherfur, osthia_blackwing,
-  wailant_strongheart, viceria_strongheart), 1 location, 13 system lines. New looks: `ishkr`, `tersk`.
-- Tests: new `sim_book5_pawns_faith` (8); `sim_canon_book5` LAST_DAY 111 (+2 kill tests); `sim_player_hooks` 38.
-  Full suite 94 scripts / 871 tests pass; Python 78 OK; validator 0 errors. Detail: ADR 0020 "M13.3".
+- M13.3 merged ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62)); ticked on main (commit 8f319ec),
+  tag `m13.3-done` on merge commit 539ff32.
+- M13.4 done on branch `data/book5-m13.4` ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) open, not merged). User choices: days "60-90 or 45-75 ish" -> we use
+  days 77-90 (Geneva's 1.01D ends day 76; these chapters come after); core cast of 15 NPCs; one tier-1 rumor at
+  the end (the United Nations company); no scene, no hook.
+- Chapters `1.02D` ... `1.06D`: 14 events `b5.zn_` ... `b5.zz_`, then `b5.zza_` (all at `baleros`). Deaths:
+  Johanas (84), Ulvial and Etretta Fulvrie (88). Geneva lives (Okasha restarts her heart, 88).
+- 15 new NPCs: quallet_marshhand, kenjiro_murata, aiko_nonomura, luan_khumalo, daly, paige, johanas, quexa,
+  etretta_fulvrie, calectus, xalandrass, exara, ulvial, zalthia_werskiv, grishka. No looks needed (off-map).
+- Tests: new `sim_book5_geneva` (5); `sim_canon_book5` loads the new NPCs. Full suite 95 scripts / 876 tests pass;
+  Python 78 OK; validator 0 errors. Detail: ADR 0020 "M13.4".
 
 ## Next steps
-1. Wait for the user to merge the M13.3 PR. Then on main: tick M13.3 in `docs/ROADMAP.md` and `progress.md`,
-   tag `m13.3-done` on the merge commit.
-2. M13.4 canon batch (1.02 D - 1.06 D: Geneva in Baleros; off-map only, placeholder days like Laken/Niers).
-   Ask the user the choices first (maybe no scene: nothing on our maps). Delegate chapter reading to subagents
-   (files `canon/raw/book5/019_1-02D.txt` ... `023_1-06D.txt`).
-3. M13.5 (4.18 - 4.23 E) must bring Ryoka and Mrsha home: clear `ryoka.away_at_the_strongheart_farm` and
+1. Wait for the user to merge the M13.4 PR. Then on main: tick M13.4 in `docs/ROADMAP.md` and `progress.md`,
+   tag `m13.4-done` on the merge commit.
+2. M13.5 canon batch (4.18 - 4.23 E: the chess marathon, the building starts, the undead from the rift, Laken's
+   Riverfarm). Ask the user the choices first (scenes, hooks). Delegate chapter reading to subagents (files
+   `canon/raw/book5/024_4-18.txt` ... `029_4-23E.txt`). Day after 4.17 is 112.
+3. M13.5 must bring Ryoka and Mrsha home: clear `ryoka.away_at_the_strongheart_farm` and
    `mrsha.away_at_the_strongheart_farm`, or they stay off the inn's schedule for good.
+4. Event ids: after `b5.zz_` the next ids are `b5.zza_`, `b5.zzb_` ... (`_` sorts before letters, so `zz_` < `zza_`).
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -77,7 +75,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62) (M13.3).
+- Merge [PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63) (M13.4).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -145,6 +143,8 @@
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
 ## Active files
+- M13.4: `game/data/canon/book5/chapters/1.02D.json` ... `1.06D.json`, `game/data/canon/book5/npcs.json`,
+  `game/tests/sim_book5_geneva.gd`, `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
 - M13.3: `game/data/canon/book5/chapters/4.13L.json` ... `4.17.json`, `game/data/canon/book5/npcs.json`,
   `locations.json`, `game/data/npc_behaviour.json`, `game/data/appearance.json`, `game/tests/sim_book5_pawns_faith.gd`,
   `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
@@ -170,3 +170,9 @@
 - `--import` also rewrites every audio/character `.import` with LF: `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
   and `git ls-files -m game/assets/characters | xargs -r git checkout --` (keeps new untracked sheets).
 - The LPC clone for M13.3 is in this session's scratchpad (`.../5c0f7f5b-.../scratchpad/ulpc`; gone next session).
+
+## Book 5 canon notes (M13.4)
+- Off-map arcs on days before Book 5's FIRST_DAY (97) still count in `sim_canon_book5` (it sleeps to 96 in
+  before_all and checks every b5 event up to LAST_DAY). Kill tests for them need their own file that starts earlier
+  (`sim_book5_geneva` sleeps to day 76).
+- A chapter generator script was in the scratchpad (gone next session).

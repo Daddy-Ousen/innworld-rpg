@@ -1,0 +1,391 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "1.05D",
+	"events": {
+		"b5.zu_the_red_cross_company_is_founded": {
+			"tier": 2,
+			"window": {
+				"earliest": 85,
+				"latest": 85,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": []
+				},
+				"rower": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"assistant": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"merchant": {
+					"prefer": [
+						"xalandrass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala",
+					"kenjiro_murata"
+				],
+				"flags": [
+					"kenjiro_murata.with_geneva"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zt_ken_luan_and_aiko_go_to_the_last_light"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"red_cross_company.founded",
+					"aiko_nonomura.assists_geneva"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Calectus says the Earthers die if they leave the camp: her name is Geneva's only shield. Xalandrass sold the Evercut arrows to Roving Arrow."
+			},
+			"summary": "Aiko becomes Geneva's surgical assistant. Ken sells Luan's arrowhead to the Naga war vendor Xalandrass for paint, and red-cross signs soon ring the camp. The tallest names it the Red Cross Company."
+		},
+		"b5.zv_geneva_saves_a_war_walker": {
+			"tier": 2,
+			"window": {
+				"earliest": 85,
+				"latest": 85,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"commander": {
+					"prefer": [
+						"grishka"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala"
+				],
+				"flags": [
+					"geneva.called_the_last_light"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"geneva.saved_a_war_walker",
+					"geneva.paid_by_both_sides"
+				],
+				"relationship": [
+					{
+						"from": "grishka",
+						"to": "geneva_scala",
+						"delta": 3
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Geneva takes the gifts only as donations. Days later she makes a Centaur captain's angry son wait while she treats worse cases, then saves the captain. The six War Walkers are of Razorshard Armor."
+			},
+			"summary": "Twenty Dullahans carry in a giant War Walker bristling with enchanted arrows, his arm half off. Geneva pulls every head and rebuilds the arm. His sister, Commander Grishka, sends potions and gold; Roving Arrow soon sends twice as much."
+		},
+		"b5.zw_the_red_cross_medics_carry_the_wounded": {
+			"tier": 2,
+			"window": {
+				"earliest": 86,
+				"latest": 86,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"medic": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": []
+				},
+				"medic_2": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"zalthia_werskiv"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watcher": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watcher_2": {
+					"prefer": [
+						"paige"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watcher_3": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watcher_4": {
+					"prefer": [
+						"etretta_fulvrie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"kenjiro_murata"
+				],
+				"flags": [
+					"red_cross_company.founded"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zu_the_red_cross_company_is_founded"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"kenjiro_murata.red_cross_medic",
+					"luan_khumalo.red_cross_medic"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Gravetender's Fist cheers them from afar. Later Centaurs complain she saves more Dullahans, then eight of them beat the medics. Both sides send armed escorts for their wounded."
+			},
+			"summary": "Tripartite Law's mages strike: Zalthia burns the Dullahan lines and another fouls a wing with poison mist. Ken and Luan paint their armour white and red and carry stretchers from the fight; both armies hold fire. No gas victim lives."
+		},
+		"b5.zx_zalthia_burns_the_red_cross_camp": {
+			"tier": 2,
+			"window": {
+				"earliest": 88,
+				"latest": 88,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"zalthia_werskiv"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"okasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"assistant": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala"
+				],
+				"flags": [
+					"red_cross_company.founded"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zu_the_red_cross_company_is_founded"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"red_cross_company.camp_burned"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.05D",
+				"confidence": "confirmed",
+				"note": "Placeholder day; the sixteenth day since Ken reached the valley. Okasha had begged her to leave for four days. Geneva thinks the Centaurs paid Zalthia. Her fate is left open until 1.06D."
+			},
+			"summary": "Zalthia's fire kills a Dullahan escort and burns every tent, potion and bandage. Fake sleeping patients rise as assassins and kill the wounded. Geneva will not let Okasha kill; a Dullahan in dark red stabs her and cuts her throat."
+		}
+	},
+	"system": [
+		{
+			"who": "geneva_scala",
+			"kind": "skill",
+			"name": "[Flash Hands]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used, not shown gained."
+		},
+		{
+			"who": "geneva_scala",
+			"kind": "skill",
+			"name": "[Flawless Cut]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used, not shown gained."
+		},
+		{
+			"who": "geneva_scala",
+			"kind": "skill",
+			"name": "[Hemostatic Pause]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used, not shown gained."
+		},
+		{
+			"who": "geneva_scala",
+			"kind": "skill",
+			"name": "[Detect Injury]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used, not shown gained."
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "class",
+			"name": "[Medic]",
+			"level": 1,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "level",
+			"name": "[Medic]",
+			"level": 4,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "skill",
+			"name": "[Quick Sprint]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "skill",
+			"name": "[Sympathetic Ear]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "luan_khumalo",
+			"kind": "class",
+			"name": "[Medic]",
+			"level": null,
+			"confidence": "likely",
+			"note": "Not shown; Daly expects it and the text later calls Ken and Luan the [Medics]."
+		}
+	]
+}

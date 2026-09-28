@@ -1,0 +1,187 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "1.02D",
+	"events": {
+		"b5.zn_quallet_recruits_the_earthers_into_gravetenders_fist": {
+			"tier": 2,
+			"window": {
+				"earliest": 77,
+				"latest": 77,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": []
+				},
+				"recruit": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"recruit_2": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"recruit_3": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"recruit_4": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"recruit_5": {
+					"prefer": [
+						"paige"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"recruit_6": {
+					"prefer": [
+						"johanas"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"quexa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"quallet_marshhand"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"earthers.in_gravetenders_fist"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Placeholder day (user choice: days 77-90, after Geneva's 1.01D on day 76). Winter in Baleros. Pay: 1 silver a night of work, 4 copper a night off; free gear and potions. The company doubles in size."
+			},
+			"summary": "At a Baleros recruiting ground Quallet Marshhand sells his undead-clearing company as the safe choice. Over eighty sign, among them a big group of stranded Earthers from a Melbourne airport, broke and hungry."
+		},
+		"b5.zo_gravetenders_fist_reaches_the_valley_battle": {
+			"tier": 2,
+			"window": {
+				"earliest": 79,
+				"latest": 79,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": []
+				},
+				"recruit": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_2": {
+					"prefer": [
+						"exara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_3": {
+					"prefer": [
+						"ulvial"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"quallet_marshhand"
+				],
+				"flags": [
+					"earthers.in_gravetenders_fist"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gravetenders_fist.clears_the_valley_battlefield",
+					"baleros.razorshard_armor_fights_roving_arrow",
+					"raverian_fighters.retreated_broken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.02D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Ken gets [Warrior] the night before the zombies and saves Aiko. Exara (Rot's Bane) and Ulvial (Untimely Demise) share the field. The Raverian Fighters fell back at a quarter strength."
+			},
+			"summary": "After a march of drills and a zombie pack, the company reaches a long valley where Razorshard Armor and Roving Arrow kill each other by the hundred. Three cleanup companies split the dead between them; a neutral [Doctor] is said to heal both sides."
+		}
+	},
+	"system": [
+		{
+			"who": "quallet_marshhand",
+			"kind": "level",
+			"name": "[Mercenary Captain]",
+			"level": 32,
+			"confidence": "confirmed",
+			"note": "Stated, not gained. Skills shown: [Talent Seeker], [Commanding Presence]."
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "class",
+			"name": "[Warrior]",
+			"level": 1,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "kenjiro_murata",
+			"kind": "skill",
+			"name": "[Lesser Stamina]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

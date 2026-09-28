@@ -1,0 +1,260 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "1.04D",
+	"events": {
+		"b5.zr_geneva_cuts_the_arrowhead_out_of_luan": {
+			"tier": 2,
+			"window": {
+				"earliest": 83,
+				"latest": 83,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"patient": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": []
+				},
+				"selphid": {
+					"prefer": [
+						"okasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"calectus"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala",
+					"luan_khumalo"
+				],
+				"flags": [
+					"luan_khumalo.has_an_arrowhead_inside",
+					"geneva.called_the_last_light"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zq_centaurs_shoot_luan_with_an_evercut_arrow"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"geneva.saved_luan",
+					"calectus.guards_geneva",
+					"geneva.knows_okashas_secret_plan"
+				],
+				"clear_flags": [
+					"luan_khumalo.has_an_arrowhead_inside"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.04D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Six Selphids now serve her; Calectus wants her to reach Level 30, then leave. Taking a living host is a crime punished by death. She charges no fee and keeps no side."
+			},
+			"summary": "Geneva wakes, sorts the wounded with coloured stones and chases the moving arrowhead through Luan's gut until she pulls it out. That night a hidden recording stone tells her Okasha puts her to sleep and plans with the Selphid Calectus."
+		},
+		"b5.zs_dullahans_behead_the_deserting_americans": {
+			"tier": 2,
+			"window": {
+				"earliest": 84,
+				"latest": 84,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"deserter": {
+					"prefer": [
+						"johanas"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"johanas"
+				],
+				"flags": [
+					"gravetenders_fist.clears_the_valley_battlefield"
+				],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zo_gravetenders_fist_reaches_the_valley_battle"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"earthers.americans_executed_for_desertion"
+				],
+				"kill": [
+					"johanas"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.04D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. Five women and two men die with Johanas. The text never answers whether Quallet told."
+			},
+			"summary": "The Americans slip away at night. At dawn Dullahans behead eight of them in front of their army, Johanas among them. Ken later asks Quallet whether he tipped the Dullahans off; the captain turns away."
+		},
+		"b5.zt_ken_luan_and_aiko_go_to_the_last_light": {
+			"tier": 2,
+			"window": {
+				"earliest": 84,
+				"latest": 84,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"negotiator": {
+					"prefer": [
+						"kenjiro_murata"
+					],
+					"fallback_tags": []
+				},
+				"rower": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spear": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"leader": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala",
+					"kenjiro_murata"
+				],
+				"flags": [
+					"earthers.in_gravetenders_fist",
+					"geneva.called_the_last_light"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"kenjiro_murata.with_geneva",
+					"luan_khumalo.with_geneva",
+					"aiko_nonomura.with_geneva",
+					"daly.stays_with_gravetenders_fist"
+				],
+				"clear_flags": [
+					"kenjiro_murata.speaks_for_gravetenders_fist"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.04D",
+				"confidence": "confirmed",
+				"note": "Placeholder day. About forty Earthers are in the company. Geneva will not leave the valley while the battle lasts."
+			},
+			"summary": "Under a white flag Luan asks Geneva if she comes from another world. She does, and offers food and shelter to every Earther. Only Ken, Luan and Aiko take it; Daly and the rest stay. Quallet lets them go as deserters."
+		}
+	},
+	"system": [
+		{
+			"who": "okasha",
+			"kind": "level",
+			"name": "[Rogue]",
+			"level": 23,
+			"confidence": "confirmed",
+			"note": "Stated."
+		},
+		{
+			"who": "okasha",
+			"kind": "class",
+			"name": "[Medical Assistant]",
+			"level": 15,
+			"confidence": "confirmed",
+			"note": "Stated as Level 15."
+		},
+		{
+			"who": "calectus",
+			"kind": "level",
+			"name": "[Honor Guard]",
+			"level": 36,
+			"confidence": "confirmed",
+			"note": "Stated."
+		},
+		{
+			"who": "geneva_scala",
+			"kind": "skill",
+			"name": "[Sterile Field]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "An upgrade of [Sterile Equipment]."
+		}
+	]
+}
