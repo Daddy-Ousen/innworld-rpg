@@ -16,7 +16,10 @@
 ##   lines: combat text from the last command (the UI shows it).
 ##   stage_run: {} or the staged fight in progress (M7.B): {"event": event id,
 ##              "start": world second it began, "next": index of its next wave}.
-## Combat and MonsterSim change this; nothing else does.
+##   traps (M13.T, save v14): "<area>/<trap id>" → {"found", "spent",
+##          "disarmed", "sprung"} (see Traps); only traps that changed. Unlike
+##          monsters, traps keep their state when the player leaves.
+## Combat, MonsterSim and Traps change this; nothing else does.
 class_name CombatState
 extends RefCounted
 
@@ -45,6 +48,7 @@ var lines: Array[String] = []
 var monsters: Dictionary = {}
 var fight: Dictionary = {}
 var stage_run: Dictionary = {}
+var traps: Dictionary = {}
 
 
 func has_fight() -> bool:
@@ -87,7 +91,8 @@ func to_dict() -> Dictionary:
 		list[id] = (monsters[id] as Dictionary).duplicate()
 	return {"next_id": next_id, "sec": sec, "area": area, "checked": checked,
 		"spawn_last": spawn_last.duplicate(), "blocking": blocking, "lines": lines.duplicate(),
-		"monsters": list, "fight": fight.duplicate(true), "stage_run": stage_run.duplicate()}
+		"monsters": list, "fight": fight.duplicate(true), "stage_run": stage_run.duplicate(),
+		"traps": traps.duplicate(true)}
 
 
 ## Accepts {} (a migrated v5 save): no monsters, no fight.
@@ -119,4 +124,12 @@ static func from_dict(d: Dictionary) -> CombatState:
 		run["start"] = int(run["start"])
 		run["next"] = int(run["next"])
 	c.stage_run = run
+	for k: String in d.get("traps", {}):
+		var s: Dictionary = (d["traps"][k] as Dictionary).duplicate()
+		for field: String in ["found", "spent", "disarmed"]:
+			if s.has(field):
+				s[field] = bool(s[field])
+		if s.has("sprung"):
+			s["sprung"] = int(s["sprung"])
+		c.traps[k] = s
 	return c

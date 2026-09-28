@@ -37,6 +37,8 @@ func test_the_ropes_are_hidden_until_the_new_section_is_found() -> void:
 	assert_eq(gs.player.area, "liscor_depths")
 	assert_eq(gs.player.pos(), Vector2i(3, 2))
 	assert_eq(gs.clock.total_minutes - before, 10, "a 10-minute climb")
+	for t: Dictionary in _db.maps.areas["liscor_depths"]["traps"]:  # walking only here (M13.T)
+		gs.combat.traps[Traps.key("liscor_depths", t["id"])] = {"disarmed": true}
 	assert_true(ToyMaps.walk_to_area(gs, _db, "liscor_crypt"), "the stairs down to the crypt level")
 	assert_true(ToyMaps.walk_to_area(gs, _db, "liscor_depths"))
 	assert_true(ToyMaps.walk_to_area(gs, _db, "dungeon_rift"), "and up the ropes again")
@@ -95,3 +97,33 @@ func test_every_map_has_a_mood_and_every_spawn_map_a_wake_spot() -> void:
 	var wake: Dictionary = _db.rules["combat"]["knockout"]["wake"]
 	for s: Dictionary in _db.combat.spawns:
 		assert_true(wake.has(s["area"]), "%s has a wake spot" % s["area"])
+
+
+## M13.T: the real traps. A rune in the rune hall springs; the covered pit
+## drops you to the crypt level; a search next to a rune can find it.
+func test_the_trapped_rooms_have_traps() -> void:
+	var gs := _at_the_rift([FOUND])
+	gs.player.place("liscor_depths", Vector2i(14, 3))
+	Commands.settle(gs, _db)
+	var r := Commands.move(gs, _db, "e")
+	assert_eq(r["sprung"].get("id", ""), "rune_hall_glyph_1")
+	assert_true(Combat.hp(gs, _db) < Stats.max_hp(gs, _db))
+	gs.player.place("liscor_depths", Vector2i(17, 9))
+	Commands.settle(gs, _db)
+	r = Commands.move(gs, _db, "s")
+	assert_eq(r["sprung"].get("drop_to", ""), "liscor_crypt")
+	assert_eq(gs.player.area, "liscor_crypt")
+	var found := false
+	for i in 20:
+		var g := GameState.new_game(SEED + i, _db)
+		g.flags[FOUND] = true
+		g.player.place("liscor_depths", Vector2i(20, 4))
+		Commands.settle(g, _db)
+		g.combat.monsters.clear()  # no spawned foes in the way of the search
+		g.combat.fight = {}
+		assert_eq(Commands.interact(g, _db, Traps.SEARCH, "search_for_traps")["error"], "")
+		var t := Traps.trap_of(g, _db, "liscor_depths", "rune_hall_glyph_2")
+		if Traps.state(g, "liscor_depths", t)["found"]:
+			found = true
+			break
+	assert_true(found, "a search finds the rune sooner or later")

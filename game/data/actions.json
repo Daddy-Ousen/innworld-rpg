@@ -83,6 +83,10 @@
 		"bandage_wound": {"name": "Bandage a wound", "minutes": 20, "base_xp": 6, "risk": 0.0,
 			"tags": {"medicine.first_aid": 1.0}},
 		"keep_watch": {"name": "Keep watch", "minutes": 120, "base_xp": 5, "risk": 0.1,
-			"tags": {"vigilance": 1.0}}
+			"tags": {"vigilance": 1.0}},
+		"search_for_traps": {"name": "Search for traps", "minutes": 10, "base_xp": 5, "risk": 0.2,
+			"tags": {"vigilance.traps": 1.0}},
+		"disarm_trap": {"name": "Disarm the trap", "minutes": 15, "base_xp": 8, "risk": 0.5,
+			"tags": {"crafting.traps": 1.0}}
 	}
 }

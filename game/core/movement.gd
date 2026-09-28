@@ -35,14 +35,15 @@ static func place_at_start(gs: GameState, start: Dictionary) -> void:
 ## Tries one step in `dir` (n, s, e, w). Returns
 ## {"moved": bool, "blocked": bool, "refused": bool, "exit_to": area or "", "minutes": int,
 ##  "npc": id of the NPC in the way or "", "monster": id of the monster in the way or "",
-##  "fairy": id of the Frost Fairy in the way or "" (M8.W)}.
+##  "fairy": id of the Frost Fairy in the way or "" (M8.W),
+##  "trap": id of the found, armed trap in the way or "" (M13.T)}.
 ## refused: collapse is due, the player is knocked out, or there is no world.
-## blocked: a wall, water, a solid object, an NPC, a monster, a fairy or the
-## map edge. The player still turns to face `dir`. While slowed by fairy
+## blocked: a wall, water, a solid object, an NPC, a monster, a fairy, a
+## found trap or the map edge. The player still turns to face `dir`. While slowed by fairy
 ## snow (M8.W), a step costs double time.
 static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var out := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
-		"npc": "", "monster": "", "fairy": ""}
+		"npc": "", "monster": "", "fairy": "", "trap": ""}
 	db.maps.sync_flags(gs.flags)
 	if not PlayerState.DIRS.has(dir) or not ensure_placed(gs, db) \
 			or gs.clock.is_collapse_due(db.rules["clock"]) or gs.player.hp == 0:
@@ -58,6 +59,10 @@ static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "" \
 			or out["fairy"] != "":
 		out["blocked"] = true
+		return out
+	if Traps.blocks(gs, db, p.area, to):
+		out["blocked"] = true
+		out["trap"] = Traps.trap_at(gs, db, p.area, to)["id"]
 		return out
 	var e := db.maps.exit_at(p.area, to)
 	if not e.is_empty() and int(e["minutes"]) > 0:

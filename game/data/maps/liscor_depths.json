@@ -5,7 +5,7 @@
 	"location": "liscor_dungeon",
 	"indoor": true,
 	"confidence": "guess",
-	"note": "Design map (M13.0). The new part of Liscor's dungeon under the rift, reached by ropes hanging from a hole in the ceiling (4.08 T, 4.19). The rooms come from the text: the rope landing, a corridor of glowing runes and a pit with stone spikes (4.08 T), a room whose ceiling spikes drop, a library of books that explode when read and a grate that sprays acid (4.19), and a shaft full of Shield Spider webs (4.08 T). In the Book the rooms change on each visit; here they stay put. The order, sizes and the stairs down to the crypt level are guesses. The ropes open with liscor_dungeon.new_section_found.",
+	"note": "Design map (M13.0). The new part of Liscor's dungeon under the rift, reached by ropes hanging from a hole in the ceiling (4.08 T, 4.19). The rooms come from the text: the rope landing, a corridor of glowing runes and a pit with stone spikes (4.08 T), a room whose ceiling spikes drop, a library of books that explode when read and a grate that sprays acid (4.19), and a shaft full of Shield Spider webs (4.08 T). In the Book the rooms change on each visit; here they stay put. The order, sizes and the stairs down to the crypt level are guesses. The ropes open with liscor_dungeon.new_section_found. M13.T traps: the runes recharge and the ceiling spikes reset after about an hour (4.19); the acid eats magic protection (4.19; there is no magic protection here). Only one tile of each two-wide passage is trapped. The fire room of 4.19 is not placed. The spots are guesses.",
 	"zones": {},
 	"exits": [
 		{"at": [3, 1], "to": "dungeon_rift", "arrive": [11, 12], "minutes": 10},
@@ -20,6 +20,17 @@
 		{"id": "library_shelf_4", "kind": "shelves", "at": [8, 10], "name": "Bookshelf", "actions": [], "solid": true},
 		{"id": "library_papers", "kind": "papers", "at": [5, 15], "name": "Loose pages", "actions": ["read_book"]},
 		{"id": "depths_loose_stones", "kind": "stones", "at": [15, 17], "name": "Loose stones", "actions": [], "item": "stone"}
+	],
+	"traps": [
+		{"id": "rune_hall_glyph_1", "at": [15, 3], "name": "A glowing rune", "damage": [3, 6], "hidden": true, "spot": 0.45, "disarm": 0.4, "once": false, "rearm_minutes": 30, "line": "A rune flares under your foot and a bolt of force hits you."},
+		{"id": "rune_hall_glyph_2", "at": [20, 5], "name": "A glowing rune", "damage": [3, 6], "hidden": true, "spot": 0.45, "disarm": 0.4, "once": false, "rearm_minutes": 30, "line": "A rune flares under your foot and a bolt of force hits you."},
+		{"id": "pit_corridor_pit_1", "at": [17, 10], "name": "A covered pit", "damage": [2, 5], "hidden": true, "spot": 0.35, "disarm": 0.5, "once": false, "drop_to": {"to": "liscor_crypt", "pos": [3, 16]}, "line": "The floor gives way. You fall past stone spikes into the tunnels below."},
+		{"id": "pit_corridor_pit_2", "at": [18, 12], "name": "A covered pit", "damage": [2, 5], "hidden": true, "spot": 0.35, "disarm": 0.5, "once": false, "drop_to": {"to": "liscor_crypt", "pos": [3, 16]}, "line": "The floor gives way. You fall past stone spikes into the tunnels below."},
+		{"id": "spike_room_ceiling_1", "at": [16, 15], "name": "A loose floor plate", "damage": [5, 9], "hidden": true, "spot": 0.4, "disarm": 0.35, "once": false, "rearm_minutes": 60, "line": "Something clicks. Spikes drop from the ceiling."},
+		{"id": "spike_room_ceiling_2", "at": [19, 17], "name": "A loose floor plate", "damage": [5, 9], "hidden": true, "spot": 0.4, "disarm": 0.35, "once": false, "rearm_minutes": 60, "line": "Something clicks. Spikes drop from the ceiling."},
+		{"id": "library_book_1", "at": [3, 12], "name": "A trapped book", "damage": [3, 6], "hidden": true, "spot": 0.5, "disarm": 0.6, "once": true, "line": "You kick a book. It bursts into flame and explodes."},
+		{"id": "library_book_2", "at": [7, 11], "name": "A trapped book", "damage": [3, 6], "hidden": true, "spot": 0.5, "disarm": 0.6, "once": true, "line": "You kick a book. It bursts into flame and explodes."},
+		{"id": "acid_room_grate", "at": [28, 5], "name": "A floor grate", "damage": [4, 7], "hidden": true, "spot": 0.4, "disarm": 0.35, "once": false, "rearm_minutes": 30, "line": "The grate hisses. Acid sprays up at you."}
 	],
 	"legend": {".": "cave_floor", "^": "rock"},
 	"rows": [

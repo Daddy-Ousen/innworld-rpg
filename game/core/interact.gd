@@ -14,6 +14,9 @@
 ## pays it); a shop object lists its "trades" (Economy.trades: the
 ## presentation calls Commands.buy / Commands.sell); an object with a
 ## "ride" offers it (Commands.ride).
+## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
+## armed trap next to the player ("trap:<id>") are options with "trap": true;
+## using them goes to Traps.search / Traps.disarm.
 class_name Interact
 extends RefCounted
 
@@ -51,6 +54,7 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		out.append({"id": Winter.FAIRY + id, "name": fr["name"], "npc": false, "fairy": true,
 			"actions": [fr["talk_action"]], "sleep": false, "item": "", "price": 0,
 			"trades": [] as Array[Dictionary], "ride": {}})
+	out.append_array(Traps.options(gs, db))
 	return out
 
 
@@ -79,6 +83,10 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 				% [action_id, obj["name"]])
 	if obj.get("fairy", false):
 		return Winter.talk(gs, db, object_id.substr(Winter.FAIRY.length()))
+	if obj.get("trap", false):
+		var t := Traps.search(gs, db) if object_id == Traps.SEARCH \
+				else Traps.disarm(gs, db, object_id.substr(Traps.TRAP.length()))
+		return {"record": t["record"], "error": t["error"]}
 	var p := gs.player
 	var context := {"location": db.maps.areas[p.area]["location"]}
 	var zone := db.maps.zone_at(p.area, p.pos())
