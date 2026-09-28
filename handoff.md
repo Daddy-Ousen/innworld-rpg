@@ -2,7 +2,7 @@
 
 ## Just done (2026-09-28)
 - M13.2 merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)); ticked on main, tag `m13.2-done` on merge commit db1e2dd.
-- M13.3 done on branch `data/book5-m13.3` (PR open, not merged). User choices: two scenes (Pawn back at the inn,
+- M13.3 done on branch `data/book5-m13.3` ([PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62) open, not merged). User choices: two scenes (Pawn back at the inn,
   day 104, 12-16; the Soldiers' soup on `inn_hill`, day 106, 19-23); Strongheart farm is a location only; 4.16
   "Day 59" = day 103; Drassi and Ishkr get inn schedules, Safry and Maran are flags only.
 - Chapters `4.13L`, `4.14L`, `4.15L`, `4.16`, `4.17`: 17 events `b5.w_` ... `b5.zm_` (after `z` ids go `za`, `zb`...).
@@ -77,7 +77,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.3 PR (branch `data/book5-m13.3`).
+- Merge [PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62) (M13.3).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas

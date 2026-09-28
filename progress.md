@@ -21,7 +21,7 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
   - [x] M13.T Traps (save v14). Merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)), tag `m13.t-done` on merge commit 85dd0e9.
   - [x] M13.1 Canon 4.00 K – 4.07 (days 97–100). Merged ([PR #60](https://github.com/Daddy-Ousen/innworld-rpg/pull/60)), tag `m13.1-done` on merge commit 67fef71.
   - [x] M13.2 Canon 4.08 T – 4.12 (days 101–102). Merged ([PR #61](https://github.com/Daddy-Ousen/innworld-rpg/pull/61)), tag `m13.2-done` on merge commit db1e2dd.
-  - [ ] M13.3 Canon 4.13 L – 4.17 (days 101–111). Done and tested on branch `data/book5-m13.3`; PR open, waiting on the user to merge. Tick after merge (tag `m13.3-done`).
+  - [ ] M13.3 Canon 4.13 L – 4.17 (days 101–111). Done and tested on branch `data/book5-m13.3`; [PR #62](https://github.com/Daddy-Ousen/innworld-rpg/pull/62) open, waiting on the user to merge. Tick after merge (tag `m13.3-done`).
   - [ ] M13.4 – M13.7 canon batches
 
 ## After M8
