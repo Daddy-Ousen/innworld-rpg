@@ -3,7 +3,7 @@
 ## Just done (2026-09-28)
 - M13.4 merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)); ticked on main (commit c2be549),
   tag `m13.4-done` on merge commit 069a265.
-- M13.5 done on branch `data/book5-m13.5` (PR open, not merged). User choices: 4.18 = days 107-108, 4.19 = day
+- M13.5 done on branch `data/book5-m13.5` ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) open, not merged). User choices: 4.18 = days 107-108, 4.19 = day
   109 (Ryoka and Mrsha come home on day 106); Laken's Day 55-70 squeezed into days 111-118; scenes: chess marathon
   (107), Halrac teaches Bird (108), undead-from-the-rift fight (109); Riverfarm core cast.
 - 26 events `b5.zzb_` ... `b5.zzz_`, `b5.zzza_`; 12 new NPCs; location `windrest`; 5 new looks + behaviours
@@ -13,7 +13,7 @@
   OK; validator 0 errors. Detail: ADR 0020 "M13.5".
 
 ## Next steps
-1. Wait for the user to merge the M13.5 PR. Then on main: tick M13.5 in `docs/ROADMAP.md` and `progress.md`,
+1. Wait for the user to merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64). Then on main: tick M13.5 in `docs/ROADMAP.md` and `progress.md`,
    tag `m13.5-done` on the merge commit.
 2. M13.6 canon batch (4.24 - 4.27 H: winter ends, the slime, Brunkr knighted, "Regrika" and "Imenet", Niers,
    Magnolia's army, the Creler nest). Ask the user the choices first (days, scenes, hooks). Delegate chapter
@@ -74,7 +74,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge the M13.5 PR.
+- Merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) (M13.5).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
