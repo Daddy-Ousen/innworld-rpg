@@ -1,0 +1,150 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.08T",
+	"events": {
+		"b5.j_toren_hides_in_the_new_dungeon": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"skeleton": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"toren"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"toren.thinks_erin_is_dead",
+					"toren.senses_mana",
+					"toren.drained_his_undead_band",
+					"toren.disguised_as_a_masked_swordswoman",
+					"toren.copies_blade_dancer_moves",
+					"toren.opened_the_mother_of_graves_door"
+				],
+				"clear_flags": [
+					"toren.leads_undead"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess: Vuliel Drae come after Erin's soups (day 100). The draining of his undead is a flashback to day 85. He levels, but no class or level is given. He sees himself as 'she' in the disguise: not a new NPC."
+			},
+			"summary": "Alone under the rift, Toren thinks Erin is dead because their link is gone. He learns to sense mana, slips past traps and a Shield Spider nest, flees a door marked 'Mother of Graves', and takes a dead adventurer's cloak and a carapace mask."
+		},
+		"b5.k_vuliel_drae_find_the_new_section": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"leader": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": []
+				},
+				"rogue": {
+					"prefer": [
+						"insill"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"blade_dancer": {
+					"prefer": [
+						"pekona"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"axe": {
+					"prefer": [
+						"dasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"larr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordswoman": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"anith"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_dungeon.new_section_found",
+					"vuliel_drae.have_a_shrieking_mace",
+					"vuliel_drae.took_a_not_gnoll_head",
+					"vuliel_drae.mapped_the_new_section",
+					"liscor.rumour_of_a_masked_swordswoman"
+				],
+				"relationship": [
+					{
+						"from": "anith",
+						"to": "toren",
+						"delta": 1
+					},
+					{
+						"from": "pekona",
+						"to": "toren",
+						"delta": 1
+					}
+				]
+			},
+			"news": "A Silver-rank team climbed out of the rift with a monster's head, a screaming mace and a tale of a masked swordswoman who fought alone in the dark.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess. They ate Erin's soup (one enchantment at a time, 8 hours). The monsters are unnamed (not-Gnolls); no wiki names. The Drake who bought soup in 4.07 is female; Insill is male: not linked."
+			},
+			"summary": "Silver-rank Vuliel Drae climb down the rift ropes into a new part of the dungeon. A masked, silent swordswoman saves them from a leech wall and a band of not-Gnolls and cave Goblins. They climb out with a monster's head and a shrieking mace; she stays below."
+		}
+	},
+	"system": []
+}

@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 5 canon (4.06 M: Magnolia's gathering, a guess).
 const FIRST_DAY := 97
-## Last day with extracted Book 5 canon (M13.1: 4.07, the soups, day 100).
-const LAST_DAY := 100
+## Last day with extracted Book 5 canon (M13.2: 4.12, the building contract, day 102).
+const LAST_DAY := 102
 
 var _db: DataDb
 var _base_json := ""
@@ -45,9 +45,10 @@ func _sleep_to_last_day(gs: GameState) -> void:
 func test_book5_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b5_events().size(), 9)
+	assert_gte(_b5_events().size(), 22)
 	for npc: String in ["tyrion_veltras", "patricia_melissar", "eliasor", "bethal", "thomast", "pryde", "wuvren", "zanthia",
-			"venith_crusland", "maresar", "calac_crusland", "tengrip", "uleth", "siyal"]:
+			"venith_crusland", "maresar", "calac_crusland", "tengrip", "uleth", "siyal",
+			"anith", "insill", "pekona", "dasha", "larr"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
 	for loc: String in ["melissar_estate", "germina", "hellios", "house_of_minos", "manimar", "rast"]:
 		assert_true(_db.canon.locations.has(loc), loc)
@@ -77,13 +78,26 @@ func test_book5_runs_as_canon() -> void:
 			"tyrion_veltras.saved_magnolia_from_a_dagger", "eliasor.heads_house_melissar", "magnolia.reforms_her_entourage",
 			"xrn.plans_rhir_expedition", "klbkch.joins_xrns_plan", "lyonette.class_beast_tamer", "apista.pupating",
 			"bird.hunts_birds_for_erin", "erin.sells_magic_soups", "liscor.adventurers_order_erins_soups",
-			"erin.waits_for_ryoka", "ryoka.near_celum", "ryoka.heading_home_to_liscor", "izril.winter"]:
+			"izril.winter",
+			# M13.2: Toren below, Vuliel Drae, Ryoka home, the Horns' gear, the talk in Celum, the contract, the job offer.
+			"toren.disguised_as_a_masked_swordswoman", "liscor_dungeon.new_section_found", "ryoka.home_at_the_wandering_inn",
+			"krshia.clan_holds_the_rihal_tome", "erin.hit_ilvriss_with_a_pan", "zel.knows_ryoka_did_not_kill_periss",
+			"horns_of_hammerad.have_hedaults_gear", "horns_of_hammerad.lodge_in_the_inn_basement", "erin.and_ryoka_talked_it_out",
+			"venitra.hunts_ryoka_near_liscor", "wandering_inn.door_range_known", "wandering_inn.expansion_planned",
+			"ryoka.pays_for_the_inn_expansion", "erin.offered_safry_and_maran_jobs", "bird.accepted_the_inn_guard_job",
+			"pawn.on_combat_duty"]:
 		assert_true(gs.flags.has(f), f)
+	# Ryoka is home: the road flags and the spellbook debt are gone. The build has not started (4.18).
+	for f: String in ["erin.waits_for_ryoka", "ryoka.near_celum", "ryoka.heading_home_to_liscor", "ryoka.has_rihal_spellbook",
+			"ryoka.holds_krshias_spellbook_debt", "toren.leads_undead", "wandering_inn.expansion_begun"]:
+		assert_false(gs.flags.has(f), f)
 	for f: String in ["wandering_inn.earther_heard_lyonettes_levels", "wandering_inn.earther_talked_birds_with_bird",
-			"liscor.earther_helped_price_erins_soups"]:
+			"liscor.earther_helped_price_erins_soups", "liscor.earther_stood_with_ryoka_against_ilvriss",
+			"wandering_inn.earther_toasted_the_horns", "wandering_inn.earther_weighed_in_on_the_building"]:
 		assert_false(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "patricia_melissar"), "murdered at the gathering (4.06 M)")
-	for npc: String in ["magnolia_reinhart", "tyrion_veltras", "eliasor", "xrn", "klbkch", "bird", "lyonette", "ryoka_griffin"]:
+	for npc: String in ["magnolia_reinhart", "tyrion_veltras", "eliasor", "xrn", "klbkch", "bird", "lyonette", "ryoka_griffin",
+			"ilvriss", "toren", "anith", "pawn"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 
 
@@ -117,3 +131,28 @@ func test_without_bird_erin_still_sells_her_soups() -> void:
 	assert_false(gs.flags.has("bird.hunts_birds_for_erin"))
 	assert_true(Director.happened(gs.world.status("b5.g_erin_sells_soup_samples_at_the_guild")))
 	assert_true(Director.happened(gs.world.status("b5.e_lyonette_levels_and_apista_pupates")))
+
+func test_without_ilvriss_ryoka_still_comes_home() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "ilvriss"), "")
+	_sleep_to_last_day(gs)
+	assert_eq(gs.world.status("b5.n_ilvriss_confronts_ryoka_in_the_street"), Director.CANCELLED)
+	assert_false(gs.flags.has("erin.hit_ilvriss_with_a_pan"))
+	for id: String in ["b5.m_ryoka_comes_home_to_liscor", "b5.p_ryoka_hands_the_horns_their_gear",
+			"b5.t_klbkch_takes_the_building_contract"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
+
+
+func test_without_ryoka_there_is_no_homecoming_and_no_contract() -> void:
+	var gs := _fresh()
+	assert_eq(Commands.kill_npc(gs, _db, "ryoka_griffin"), "")
+	_sleep_to_last_day(gs)
+	for id: String in ["b5.m_ryoka_comes_home_to_liscor", "b5.n_ilvriss_confronts_ryoka_in_the_street",
+			"b5.p_ryoka_hands_the_horns_their_gear", "b5.q_erin_and_ryoka_talk_in_celum",
+			"b5.t_klbkch_takes_the_building_contract", "b5.v_bird_takes_the_watch_and_pawn_goes_to_war"]:
+		assert_eq(gs.world.status(id), Director.CANCELLED, id)
+	assert_false(gs.flags.has("wandering_inn.expansion_planned"), "nobody pays for the build")
+	assert_true(gs.flags.has("ryoka.has_rihal_spellbook"), "the tome never reaches Krshia")
+	for id: String in ["b5.k_vuliel_drae_find_the_new_section", "b5.r_venitra_warns_the_goblin_lord",
+			"b5.u_erin_offers_safry_and_maran_jobs"]:
+		assert_true(Director.happened(gs.world.status(id)), id + " goes on")

@@ -347,6 +347,138 @@
 				"note": "History only. Son of Queen Calliope; Flos killed his father, King Treland."
 			},
 			"summary": "The Prince of Hellios, who leads his nation into the war against Reim."
+		},
+		"anith": {
+			"name": "Anith",
+			"race": "Beastkin",
+			"tags": [
+				"beastkin",
+				"jackal",
+				"adventurer",
+				"silver_rank",
+				"vuliel_drae",
+				"leader",
+				"mage"
+			],
+			"faction": "vuliel_drae",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Of the Duskclaw Tribe. Skills [Seeking Arrows], [Repulsion Barrier], [Dangersense]. Level not given."
+			},
+			"summary": "The Jackal Beastkin [Mage] who leads the Silver-rank team Vuliel Drae, careful and bookish."
+		},
+		"insill": {
+			"name": "Insill",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"adventurer",
+				"silver_rank",
+				"vuliel_drae",
+				"rogue"
+			],
+			"faction": "vuliel_drae",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Rogue]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Black scales. His trap-finding Skill misses a rune that Toren spots. Level not given."
+			},
+			"summary": "The black-scaled Drake [Rogue] of Vuliel Drae, who scouts for traps."
+		},
+		"pekona": {
+			"name": "Pekona",
+			"race": "Human",
+			"tags": [
+				"human",
+				"adventurer",
+				"silver_rank",
+				"vuliel_drae",
+				"blade_dancer"
+			],
+			"faction": "vuliel_drae",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Blade Dancer]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Her class comes from 'where she is from'; the place is not named. She teaches Toren her moves."
+			},
+			"summary": "A Human [Blade Dancer] of Vuliel Drae who fights with spinning, acrobatic sword work."
+		},
+		"dasha": {
+			"name": "Dasha",
+			"race": "Dwarf",
+			"tags": [
+				"dwarf",
+				"adventurer",
+				"silver_rank",
+				"vuliel_drae",
+				"warrior"
+			],
+			"faction": "vuliel_drae",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Part-Dwarf from Terandria, raised by Dwarves. Fights with an axe; Skill [Impact Charge]. Class not named."
+			},
+			"summary": "The axe fighter of Vuliel Drae, part-Dwarf and proud of it, badly hurt by the not-Gnolls."
+		},
+		"larr": {
+			"name": "Larr",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"adventurer",
+				"silver_rank",
+				"vuliel_drae",
+				"archer"
+			],
+			"faction": "vuliel_drae",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.08T",
+				"confidence": "confirmed",
+				"note": "Of the Hawkarrow Tribe. Skill [Triple Shot]. Class not named. He takes a not-Gnoll's head as proof."
+			},
+			"summary": "The Gnoll archer of Vuliel Drae."
 		}
 	}
 }

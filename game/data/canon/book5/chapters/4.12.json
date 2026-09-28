@@ -1,0 +1,378 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.12",
+	"events": {
+		"b5.s_the_inn_door_is_tested": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"mage_2": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage_3": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.home_at_the_wandering_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.door_range_known",
+					"pisces.can_charge_the_door",
+					"wandering_inn.gold_teams_study_the_new_dungeon",
+					"griffon_hunt.has_vuliel_draes_map"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.12",
+				"confidence": "confirmed",
+				"note": "Day 102 is a guess. 536 miles for Ryoka's weight (plus or minus 20 lb) empties the door; a full recharge is about 8.2 hours. Halrac brings a copy of Vuliel Drae's map; the masked swordswoman stays unnamed."
+			},
+			"summary": "All afternoon Pisces and the Gold-rank mages measure the magic door, while Ryoka carries a marked mug miles out and blinks back. It can send one Runner 536 miles. Griffon Hunt bring news and a map of the new dungeon."
+		},
+		"b5.t_klbkch_takes_the_building_contract": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hunter": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch",
+					"erin_solstice",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.home_at_the_wandering_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.expansion_planned",
+					"ryoka.pays_for_the_inn_expansion",
+					"klbkch.antinium_to_build_the_inn",
+					"erin.refused_garry_as_cook",
+					"klbkch.wounded_arm",
+					"bird.to_guard_the_inn"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "ryoka_griffin",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					13,
+					17
+				],
+				"kind": "scene",
+				"when_flags": [
+					"ryoka.home_at_the_wandering_inn"
+				],
+				"npcs": [
+					{
+						"npc": "klbkch",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							12,
+							7
+						]
+					},
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							10,
+							6
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							3,
+							12
+						]
+					}
+				],
+				"line": "Pisces stands by the magic door with a mug in one hand, muttering sums. At a table, Klbkch studies a drawing of the inn with a tower on top, and names a price.",
+				"note": "M13.2: a scene. Hours are guesses (the afternoon of tests). The door tests and the contract share the afternoon in the text."
+			},
+			"hooks": [
+				{
+					"id": "player_weighed_in_on_the_inn_plans",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"klbkch",
+									"pisces",
+									"ryoka_griffin"
+								]
+							}
+						}
+					],
+					"days": [
+						102,
+						102
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_weighed_in_on_the_building"
+						],
+						"relationship": [
+							{
+								"from": "klbkch",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ryoka_griffin",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "When Klbkch priced the new floors of the Wandering Inn, a Human guest had ideas. Klbkch wrote two of them down."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.12",
+				"confidence": "confirmed",
+				"note": "Day 102 is a guess. 328 gold: the Liscor treaty tax, guards for the Workers, glass at about 8 gold a window. Bird accepts at dinner. Work starts later (4.18). A Hive 'situation' is not linked to Xrn's plan."
+			},
+			"summary": "Klbkch prices Erin's sketch: a bigger common room, a longer second floor, a third floor and a tower on the roof. It comes to 328 gold, and Ryoka pays. Klbkch will not lend Garry as a cook. Bird may guard the inn."
+		},
+		"b5.u_erin_offers_safry_and_maran_jobs": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "frenzied_hare",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"safry"
+					],
+					"fallback_tags": []
+				},
+				"barmaid_2": {
+					"prefer": [
+						"maran"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"safry"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.offered_safry_and_maran_jobs",
+					"safry.wants_to_work_for_erin",
+					"maran.wants_to_work_for_erin",
+					"agnes.innkeeper_lvl18"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.12",
+				"confidence": "confirmed",
+				"note": "Day 102 is a guess. The offer is 1 silver 6 copper an hour plus rush bonuses. No clear yes on the page; they start in M13.3 when the text shows it (user choice). Agnes has a new [Barmaid] and [Cook]."
+			},
+			"summary": "Erin asks Safry and Maran at the Frenzied Hare how to hire barmaids, and they ask to work for her instead. Agnes pays little and gave no sick days. Erin offers a fair hourly wage; Safry could start tomorrow."
+		},
+		"b5.v_bird_takes_the_watch_and_pawn_goes_to_war": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hunter": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird",
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.t_klbkch_takes_the_building_contract"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.accepted_the_inn_guard_job",
+					"pawn.on_combat_duty",
+					"erin.fears_for_pawn",
+					"relc.wants_his_old_spear_back",
+					"olesm.told_erin_of_a_walled_city_strategist",
+					"ryoka.plans_to_visit_garias_farm",
+					"ivolethe.will_teach_ryoka_at_the_farm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.12",
+				"confidence": "confirmed",
+				"note": "Day 102 is a guess. Pawn's danger is only a possibility: no injury. The Walled City [Strategist] is unnamed and not linked. The farm trip is 'a day or two' away (tentative)."
+			},
+			"summary": "Over dinner, Relc wants his old army spear back and Olesm says a Walled City strategist wants to play Erin. Bird takes the guard job, then says Pawn was sent to fight with his Soldiers today. The room goes quiet."
+		}
+	},
+	"system": []
+}

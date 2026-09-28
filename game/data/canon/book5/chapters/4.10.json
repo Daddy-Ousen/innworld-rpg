@@ -1,0 +1,283 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.10",
+	"events": {
+		"b5.o_ryoka_answers_krshia_klbkch_and_zel": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.m_ryoka_comes_home_to_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.knows_ryoka_did_not_kill_periss",
+					"klbkch.knows_ryoka_told_magnolia",
+					"zel.will_tell_ilvriss_the_truth",
+					"pisces.spied_on_ryoka_with_a_spider"
+				],
+				"relationship": [
+					{
+						"from": "zel_shivertail",
+						"to": "ryoka_griffin",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.10",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess. Zel thinks Ilvriss and Periss were lovers (his opinion). What Ryoka told Magnolia about Klbkch is not said. Mrsha smashes Pisces's undead spiderling; Ceria sees it."
+			},
+			"summary": "At the inn, Ryoka's visitors wait in a line. She tells Klbkch quietly that she told Magnolia, and he leaves at once. Zel asks about Periss; Ryoka says she did not kill him, and his truth stone agrees."
+		},
+		"b5.p_ryoka_hands_the_horns_their_gear": {
+			"tier": 2,
+			"window": {
+				"earliest": 101,
+				"latest": 101,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin",
+					"ceria_springwalker"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.m_ryoka_comes_home_to_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.have_hedaults_gear",
+					"horns_of_hammerad.lodge_in_the_inn_basement",
+					"horns_of_hammerad.advised_to_seek_gold_rank",
+					"yvlon.has_enchanted_arms_and_armour",
+					"pisces.has_a_spell_ring_and_bone_wand",
+					"ceria.has_a_gazereye_wand_and_ice_ring",
+					"ksmvr.has_rings_bow_and_cloak",
+					"wandering_inn.party_for_the_horns",
+					"ryoka.knows_of_the_magic_door"
+				],
+				"clear_flags": [
+					"ryoka.carries_the_horns_relics",
+					"hedault.holds_the_horns_relics"
+				],
+				"relationship": [
+					{
+						"from": "ceria_springwalker",
+						"to": "ryoka_griffin",
+						"delta": 2
+					},
+					{
+						"from": "yvlon_byres",
+						"to": "ryoka_griffin",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					18,
+					23
+				],
+				"kind": "scene",
+				"when_flags": [
+					"ryoka.near_celum"
+				],
+				"npcs": [
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							10,
+							9
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							8,
+							9
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							9,
+							10
+						]
+					},
+					{
+						"npc": "yvlon_byres",
+						"pos": [
+							10,
+							10
+						]
+					},
+					{
+						"npc": "ksmvr",
+						"pos": [
+							8,
+							10
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							11,
+							8
+						]
+					}
+				],
+				"line": "Ryoka upends a small bag over a table, and it does not stop. Rings, wands, a buckler, a robe, a gleaming helmet. The whole room goes quiet, then very loud.",
+				"note": "M13.2: a scene. Hours are guesses (evening into the party). The value is Griffon Hunt's guess."
+			},
+			"hooks": [
+				{
+					"id": "player_toasted_the_horns_new_gear",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"ryoka_griffin",
+									"ceria_springwalker",
+									"pisces",
+									"yvlon_byres",
+									"ksmvr"
+								]
+							}
+						}
+					],
+					"days": [
+						101,
+						101
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_toasted_the_horns"
+						],
+						"relationship": [
+							{
+								"from": "ceria_springwalker",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ryoka_griffin",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "At the Horns' party a Human guest got Pisces and Yvlon to toast each other's new gear. It almost counted as a truce."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.10",
+				"confidence": "confirmed",
+				"note": "Day 101 is a guess. The item Hedault took is not named (our 3.36 data: the Albez wand). The gravity ring of 3.36 is likely the Ring of Jumping. Value about 25,000 gold (a guess). Gold rank is advice only."
+			},
+			"summary": "Ryoka empties her bag of holding: Hedault traded one relic for a matched set of enchanted gear. Yvlon gets arms and armour, Pisces a ring and wand, Ceria a wand and ice ring, Ksmvr rings, a bow and a cloak. Then the inn throws the Horns a party."
+		}
+	},
+	"system": []
+}
