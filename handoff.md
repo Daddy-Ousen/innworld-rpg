@@ -3,14 +3,14 @@
 ## Just done (2026-09-28)
 - M13.0 merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)); ticked on main, tag `m13.0-done`
   on merge commit 39e94da.
-- M13.T Traps done on branch `feat/m13.t-traps` (PR open, not merged). New `game/core/traps.gd`, save v14
+- M13.T Traps done on branch `feat/m13.t-traps` ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59) open, not merged). New `game/core/traps.gd`, save v14
   (`CombatState.traps`), `rules.traps`, actions `search_for_traps` / `disarm_trap`, tags `vigilance.traps` /
   `crafting.traps`, 9 traps in `liscor_depths`. Detail: ADR 0020 "M13.T Traps". Screenshot sent to the user
   (red diamond = found and armed, grey = spent or disarmed).
 - Tests: 90 GUT scripts, 836 tests; Python 77 OK; validator 0 errors.
 
 ## Next steps
-1. Wait for the user to check the screenshot and merge the M13.T PR. Then on main: tick M13.T in
+1. Wait for the user to check the screenshot and merge [PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59). Then on main: tick M13.T in
    `docs/ROADMAP.md` and `progress.md`, tag `m13.t-done` on the merge commit.
 2. M13.1 canon batch (4.00 K – 4.07, days ~96–100): ask the user the stage/hook choices first (M10 rule).
    Book 5 text is in `canon/raw/book5` (gitignored). Delegate chapter reading to subagents.
@@ -65,7 +65,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Check the M13.T screenshot and merge the M13.T PR.
+- Check the M13.T screenshot and merge [PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59).
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas

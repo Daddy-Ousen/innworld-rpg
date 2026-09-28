@@ -18,7 +18,7 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 - [x] M12 — Audio: music, sound effects, ambience. M12.0–M12.5 merged; tags `m12.0-done` … `m12.5-done` and `m12-done` on merge commit 95fb6c4 ([PR #57](https://github.com/Daddy-Ousen/innworld-rpg/pull/57)). Detail in the archive and ADR 0019.
 - [ ] M13 — Book 5 (The Last Light). Plan accepted 2026-09-28 (ADR 0020). Plan file: `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
   - [x] M13.0 World: gated exits, inn third floor + watchtower, depths + crypt maps, new enemies. Merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)), tag `m13.0-done` on merge commit 39e94da.
-  - [ ] M13.T Traps (save v14). Done and tested on branch `feat/m13.t-traps` (PR open); waiting on the user to check the screenshot and merge. Tick after merge (tag `m13.t-done`).
+  - [ ] M13.T Traps (save v14). Done and tested on branch `feat/m13.t-traps` ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59) open); waiting on the user to check the screenshot and merge. Tick after merge (tag `m13.t-done`).
   - [ ] M13.1 – M13.7 canon batches
 
 ## After M8
