@@ -34,6 +34,8 @@
 ## change (SoundCues): the player's footstep and the AnimDiff hits, falls,
 ## swings and gone monsters (with monster voices, M12.2). main.gd
 ## sends them to the Audio autoload, so the view needs no audio nodes.
+## M13.T: a found trap is a small diamond on its tile (red while armed,
+## grey once spent or disarmed); hidden traps are not drawn.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -87,6 +89,10 @@ const FAIRY_EDGE := Color("#ffffff")
 ## Frost Fairies float up and down this many px, this fast (radians/s).
 const FAIRY_BOB := 1.5 * U
 const FAIRY_BOB_SPEED := 4.0
+## A found trap (M13.T): armed, or spent / disarmed.
+const TRAP_ARMED := Color("#e03a3a")
+const TRAP_SAFE := Color(0.55, 0.55, 0.55, 0.8)
+const TRAP_EDGE := Color(0.08, 0.08, 0.08, 0.9)
 ## A hit: the unit is tinted this colour, back to normal in FLASH_TIME.
 const HIT_TINT := Color(1.0, 0.25, 0.25)
 const FLASH_TIME := 0.25
@@ -152,6 +158,7 @@ var loop_spots: Node2D
 @onready var tiles: TileMapLayer = $Tiles
 @onready var edges: TileMapLayer = $Edges
 @onready var marks: Node2D = $Marks
+@onready var traps: Node2D = $Traps
 @onready var npcs: Node2D = $Npcs
 @onready var monsters: Node2D = $Monsters
 @onready var fairies: Node2D = $Fairies
@@ -223,6 +230,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	_show_npcs(gs)
 	_show_monsters(gs)
 	_show_fairies(gs)
+	_show_traps(gs)
 	var old := player.position
 	player.position = cell_center(gs.player.pos())
 	var cues: Array[String] = []
@@ -691,6 +699,24 @@ func _show_fairies(gs: GameState) -> void:
 		_square(marker, 3 * U, FAIRY_EDGE)
 		_square(marker, 2 * U, FAIRY_BODY)
 		fairies.add_child(marker)
+
+
+## One diamond per found trap on the player's map (named after the trap
+## id): red while armed, grey once spent or disarmed.
+func _show_traps(gs: GameState) -> void:
+	for child in traps.get_children():
+		traps.remove_child(child)
+		child.queue_free()
+	for t: Dictionary in _maps.areas[area].get("traps", []):
+		if not MapDb.flags_hold(t, gs.flags) or not Traps.state(gs, area, t)["found"]:
+			continue
+		var marker := Node2D.new()
+		marker.name = String(t["id"])
+		marker.position = cell_center(Vector2i(int(t["at"][0]), int(t["at"][1])))
+		marker.rotation = PI / 4.0
+		_square(marker, 5 * U, TRAP_EDGE)
+		_square(marker, 4 * U, TRAP_ARMED if Traps.is_armed(gs, area, t) else TRAP_SAFE)
+		traps.add_child(marker)
 
 
 ## Ids of the monsters in the player's area that keep their label. In

@@ -13,6 +13,7 @@
 		"cleaning.dishes": "Washing dishes and pots.",
 		"crafting": "Making and repairing things.",
 		"crafting.carpentry": "Working with wood.",
+		"crafting.traps": "Taking traps apart (M13.T).",
 		"labor": "Hard physical work.",
 		"labor.woodcutting": "Chopping wood.",
 		"labor.hauling": "Carrying heavy loads.",
@@ -42,6 +43,7 @@
 		"stealth": "Not being seen or heard.",
 		"medicine": "Treating hurt people.",
 		"medicine.first_aid": "Quick care for wounds.",
-		"vigilance": "Watching for danger."
+		"vigilance": "Watching for danger.",
+		"vigilance.traps": "Looking for traps (M13.T)."
 	}
 }

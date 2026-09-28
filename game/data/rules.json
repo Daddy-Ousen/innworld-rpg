@@ -91,6 +91,21 @@
 		"dry_line": "The door opens onto a blank wall. It has no mana to spare.",
 		"spent_line": "The door opens onto a blank wall. It has carried enough people for today."
 	},
+	"traps": {
+		"note": "M13.T (ADR 0020). The trapped rooms of Liscor's dungeon (4.08 T, 4.19). The chances and damage are design numbers. A search takes 10 minutes and checks every hidden trap within search_radius tiles.",
+		"search_action": "search_for_traps",
+		"search_name": "The floor and walls around you",
+		"disarm_action": "disarm_trap",
+		"search_radius": 3,
+		"spot_per_point": 0.05,
+		"disarm_per_point": 0.05,
+		"sprung_line": "Trap! %s.",
+		"found_line": "You spot a trap: %s.",
+		"none_line": "You find no traps nearby.",
+		"disarmed_line": "Disarmed: %s.",
+		"disarm_fail_line": "It goes off in your hands: %s!",
+		"blocked_line": "%s is there. Disarm it or go around."
+	},
 	"winter": {
 		"flag": "izril.winter",
 		"warned_flag": "player.warned_of_cold",

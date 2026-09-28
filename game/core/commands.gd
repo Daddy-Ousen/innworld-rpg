@@ -113,6 +113,9 @@ static func give(gs: GameState, db: DataDb, coins: int, good: String = "", count
 ## into a monster attacks it instead: the result then has "attack" (see
 ## Combat.player_attack). Stepping into a hidden monster (it looks like a
 ## rock) springs its ambush: the result has "ambush" (see MonsterSim.ambush).
+## M13.T: a step (not through an exit) onto an armed trap springs it: the
+## result has "sprung" (see Traps.on_step; {} if none). Walking into a found
+## trap says so.
 static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
 	var r := Movement.step(gs, db, dir)
@@ -123,6 +126,11 @@ static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 			r["ambush"] = MonsterSim.ambush(gs, db, r["monster"])
 		else:
 			r["attack"] = Combat.player_attack(gs, db, dir)
+	elif r["trap"] != "":
+		gs.combat.lines.append(String(Traps.rules(db)["blocked_line"])
+				% Traps.trap_of(gs, db, gs.player.area, r["trap"])["name"])
+	elif r["moved"] and r["exit_to"] == "":
+		r["sprung"] = Traps.on_step(gs, db)
 	_after(gs, db)
 	return r
 

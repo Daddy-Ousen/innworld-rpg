@@ -26,6 +26,8 @@ const MAP_FIELDS := ["id", "name", "location", "confidence", "legend", "rows", "
 	"exits", "objects"]
 const EXIT_FIELDS := ["at", "to", "arrive", "minutes"]
 const OBJECT_FIELDS := ["id", "at", "name", "actions"]
+## A map trap (M13.T, Traps).
+const TRAP_FIELDS := ["id", "at", "name", "damage", "hidden", "spot", "disarm", "once"]
 
 ## tile id → {"name", "walk", "color"}.
 var tiles: Dictionary = {}
@@ -107,7 +109,7 @@ func sync_flags(flags: Dictionary) -> bool:
 	ids.sort()
 	for area: String in ids:
 		for o: Variant in areas[area].get("overlays", []):
-			if not o is Dictionary or not _flags_hold(o, flags):
+			if not o is Dictionary or not flags_hold(o, flags):
 				continue
 			on.append("%s/%s" % [area, o.get("id", "")])
 			var layer: Dictionary = layers.get(area, {})
@@ -122,7 +124,7 @@ func sync_flags(flags: Dictionary) -> bool:
 	var hidden := {}
 	for area: String in ids:
 		for o: Dictionary in areas[area].get("objects", []):
-			if (o.has("when_flags") or o.has("unless_flags")) and not _flags_hold(o, flags):
+			if (o.has("when_flags") or o.has("unless_flags")) and not flags_hold(o, flags):
 				var h: Dictionary = hidden.get(area, {})
 				h[o.get("id", "")] = true
 				hidden[area] = h
@@ -130,7 +132,7 @@ func sync_flags(flags: Dictionary) -> bool:
 	var hidden_exits := {}
 	for area: String in ids:
 		for e: Dictionary in areas[area].get("exits", []):
-			if _gated(e) and not _flags_hold(e, flags):
+			if _gated(e) and not flags_hold(e, flags):
 				var h: Dictionary = hidden_exits.get(area, {})
 				h[e.get("id", "")] = true
 				hidden_exits[area] = h
@@ -177,7 +179,8 @@ static func _gated(e: Dictionary) -> bool:
 	return e.has("when_flags") or e.has("unless_flags")
 
 
-static func _flags_hold(o: Dictionary, flags: Dictionary) -> bool:
+## True if the when_flags of `o` all hold and none of its unless_flags do.
+static func flags_hold(o: Dictionary, flags: Dictionary) -> bool:
 	for f: Variant in o.get("when_flags", []):
 		if not flags.has(f):
 			return false
@@ -407,6 +410,75 @@ func _validate_map(id: String, m: Dictionary, db: DataDb) -> void:
 	var overlay_ids := {}
 	for o: Variant in overlays:
 		_validate_overlay(where, id, o, bounds, overlay_ids)
+	var traps: Variant = m.get("traps", [])
+	if not traps is Array:
+		errors.append("%s: traps must be a list." % where)
+		return
+	var trap_ids := {}
+	for t: Variant in traps:
+		_validate_trap(where, id, t, bounds, db, trap_ids)
+
+
+## A trap (M13.T): the fields, a unique id, a walkable tile that is no exit,
+## no exit's arrive tile, no object and under no overlay; damage [min, max]
+## with 0 <= min <= max; spot and disarm 0..1; rearm_minutes >= 1 only on a
+## trap that is not once; drop_to a walkable tile of a known map; rules.traps
+## with known actions.
+func _validate_trap(where: String, id: String, t: Variant, bounds: Rect2i, db: DataDb,
+		seen: Dictionary) -> void:
+	if not t is Dictionary:
+		errors.append("%s trap: must be an object." % where)
+		return
+	for f: String in TRAP_FIELDS:
+		if not (t as Dictionary).has(f):
+			errors.append("%s trap: missing '%s'." % [where, f])
+			return
+	where = "%s trap '%s'" % [where, t["id"]]
+	if seen.has(t["id"]):
+		errors.append("%s: duplicate id." % where)
+	seen[t["id"]] = true
+	var tr: Dictionary = db.rules.get("traps", {})
+	if not ["search_action", "disarm_action"].all(
+			func(f: String) -> bool: return db.actions.has(tr.get(f, ""))):
+		errors.append("%s: a trap needs rules.traps with known search and disarm actions." % where)
+	_check_flag_lists(where, t)
+	var dmg: Variant = t["damage"]
+	if not dmg is Array or (dmg as Array).size() != 2 or int(dmg[0]) < 0 or int(dmg[0]) > int(dmg[1]):
+		errors.append("%s: damage must be [min, max] with 0 <= min <= max." % where)
+	for f: String in ["spot", "disarm"]:
+		if float(t[f]) < 0.0 or float(t[f]) > 1.0:
+			errors.append("%s: %s must be 0..1." % [where, f])
+	for f: String in ["hidden", "once"]:
+		if not t[f] is bool:
+			errors.append("%s: %s must be true or false." % [where, f])
+	if t.has("rearm_minutes") and (bool(t["once"]) or int(t["rearm_minutes"]) < 1):
+		errors.append("%s: rearm_minutes must be >= 1, on a trap that is not once." % where)
+	if t.has("drop_to"):
+		var d: Variant = t["drop_to"]
+		if not d is Dictionary or not areas.has((d as Dictionary).get("to", "")) \
+				or not _pos_ok(d.get("pos", null)) or not in_bounds(d["to"], _vec(d["pos"])) \
+				or not is_walkable(d["to"], _vec(d["pos"])):
+			errors.append("%s: drop_to must be {to, pos} on a walkable tile of a known map." % where)
+	if not _pos_ok(t["at"]) or not bounds.has_point(_vec(t["at"])):
+		errors.append("%s: 'at' must be [x, y] inside the map." % where)
+		return
+	var at := _vec(t["at"])
+	if not is_walkable(id, at) or not raw_exit_at(id, at).is_empty():
+		errors.append("%s: must be on a walkable tile that is not an exit." % where)
+	for o: Dictionary in areas[id]["objects"]:
+		if _pos_ok(o.get("at", null)) and _vec(o["at"]) == at:
+			errors.append("%s: is on the object '%s'." % [where, o.get("id", "")])
+	for o: Variant in areas[id].get("overlays", []):
+		if o is Dictionary and (o.get("rects", []) as Array).any(
+				func(r: Variant) -> bool: return _rect_ok(r) and rect_of(r).has_point(at)):
+			errors.append("%s: is under the overlay '%s'." % [where, o.get("id", "")])
+	for from: String in areas:
+		for e: Dictionary in areas[from]["exits"]:
+			if e.get("to", "") != id or not _rect_ok(e.get("at", null)) or not _pos_ok(e.get("arrive", null)):
+				continue
+			var r := rect_of(e["at"])
+			if Rect2i(_vec(e["arrive"]), r.size).has_point(at):
+				errors.append("%s: is on the arrive tile of an exit from '%s'." % [where, from])
 
 
 ## An overlay: a known tile, rects inside the map that cover no exit and no

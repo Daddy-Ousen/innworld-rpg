@@ -34,6 +34,10 @@ const ECONOMY_HUNGER_FIELDS := ["step", "floor", "inn_location", "inn_npc", "inn
 	"hungry_line", "fed_line"]
 ## rules.portal (M10.0, optional).
 const PORTAL_FIELDS := ["trips_per_day", "minutes", "line", "dry_line", "spent_line"]
+## rules.traps (M13.T, optional).
+const TRAP_FIELDS := ["search_action", "search_name", "disarm_action", "search_radius",
+	"spot_per_point", "disarm_per_point", "sprung_line", "found_line", "none_line",
+	"disarmed_line", "disarm_fail_line", "blocked_line"]
 const CLASS_FIELDS := ["name", "tag_weights", "offer_threshold", "prereqs", "excludes",
 	"race_limits", "loss", "consolidation", "canon_ref"]
 const SKILL_FIELDS := ["name", "rarity", "pools", "tag_affinity", "effects", "canon_ref"]
@@ -145,6 +149,22 @@ func _validate_rules() -> void:
 		_validate_economy(rules["economy"])
 	if rules.has("portal"):  # optional (M10.0): only maps with a portal need it
 		_validate_portal(rules["portal"])
+	if rules.has("traps"):  # optional (M13.T): only maps with traps need it
+		_validate_traps(rules["traps"])
+
+
+## rules.traps (M13.T): see Traps. MapDb checks its actions on maps with traps.
+func _validate_traps(t: Variant) -> void:
+	if not t is Dictionary:
+		errors.append("rules.traps: must be an object.")
+		return
+	for field: String in TRAP_FIELDS:
+		if not (t as Dictionary).has(field):
+			errors.append("rules.traps: missing '%s'." % field)
+			return
+	if int(t["search_radius"]) < 0 or float(t["spot_per_point"]) < 0.0 \
+			or float(t["disarm_per_point"]) < 0.0:
+		errors.append("rules.traps: search_radius and the per-point bonuses must be >= 0.")
 
 
 ## rules.portal (M10.0): see Portal.

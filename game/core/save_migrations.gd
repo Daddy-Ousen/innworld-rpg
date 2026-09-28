@@ -29,6 +29,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			10: out = _migrate_10_to_11(out)
 			11: out = _migrate_11_to_12(out)
 			12: out = _migrate_12_to_13(out)
+			13: out = _migrate_13_to_14(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -132,4 +133,12 @@ static func _migrate_12_to_13(d: Dictionary) -> Dictionary:
 	p["portal_day"] = -1
 	p["portal_trips"] = 0
 	d["player"] = p
+	return d
+
+
+## v14 (M13.T): traps. No trap found, sprung or disarmed yet.
+static func _migrate_13_to_14(d: Dictionary) -> Dictionary:
+	var c: Dictionary = d.get("combat", {})
+	c["traps"] = {}
+	d["combat"] = c
 	return d
