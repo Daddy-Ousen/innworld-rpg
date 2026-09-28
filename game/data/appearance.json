@@ -2141,6 +2141,83 @@
 			],
 			"confidence": "guess",
 			"note": "The older mage of Griffon Hunt (1.58H, 4.19). White hair, blue clothes and a staff are guesses."
+		},
+		"brunkr": {
+			"body": "male",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_grey"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_longsword",
+					"color": "longsword"
+				},
+				{
+					"part": "shield_round",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Tall Silverfang Gnoll warrior with sword and shield (2.25). Fur and armour are guesses."
+		},
+		"hawk": {
+			"body": "male",
+			"skin": "fur_tan",
+			"parts": [
+				{
+					"part": "heads_rabbit"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Rabbit Beastkin Courier of Liscor (1.21). Fur and clothes are guesses."
+		},
+		"creler_hatchling": {
+			"creature": "rock_crab",
+			"ramp": [
+				"#08060a",
+				"#1a1420",
+				"#342a3a",
+				"#5a4a60",
+				"#8a7a90"
+			],
+			"confidence": "guess",
+			"note": "Young Creler: a spiked, many-legged armoured body (4.27 H). The Rock Crab shape in black-violet; spikes and size are not drawn."
+		},
+		"creler_juvenile": {
+			"creature": "rock_crab",
+			"ramp": [
+				"#050305",
+				"#180c10",
+				"#3a1a20",
+				"#6a2a30",
+				"#a04a48"
+			],
+			"confidence": "guess",
+			"note": "A juvenile Creler as big as a cart, spiked black shell (4.27 H). The Rock Crab shape in black and dark red."
 		}
 	}
 }

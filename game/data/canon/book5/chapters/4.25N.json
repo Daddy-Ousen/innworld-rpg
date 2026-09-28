@@ -1,0 +1,163 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.25N",
+	"events": {
+		"b5.zzzo_niers_hosts_the_forgotten_wing_fundraiser": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "elvallian",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"foliana"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chamberlain": {
+					"prefer": [
+						"peclir_im"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"niers_astoragon"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"forgotten_wing.fundraiser_held",
+					"niers.tired_of_the_company"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "Placeholder days (guess). Niers' dice and coin 'curse' is left unexplained."
+			},
+			"summary": "At Elvallian the Forgotten Wing holds its yearly fundraiser. Bored, Niers tells Foliana he might quit; she warns the company would be attacked. He teaches, greets guests and runs mock battles."
+		},
+		"b5.zzzp_niers_reads_olesms_newsletter_and_learns_go": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "elvallian",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": []
+				},
+				"student": {
+					"prefer": [
+						"wil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"niers_astoragon"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"niers.read_olesms_newsletter",
+					"niers.plays_go",
+					"niers.ordered_a_gift_for_olesm",
+					"niers.scried_the_chess_board"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "The inn in the scrying is not named. The gift is ordered only; it is not shown arriving."
+			},
+			"summary": "Wil brings a copy of Olesm's newsletter with Niers' own game in it and the rules of Go. Niers learns Go, orders gold and a ring sent to Olesm, and has the twin board scried, then looks away before he sees who plays."
+		},
+		"b5.zzzq_niers_kills_the_rats_and_beats_his_students": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "elvallian",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"foliana"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"niers_astoragon"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"niers.shook_off_his_boredom"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.25N",
+				"confidence": "confirmed",
+				"note": "Queravia's death in the old duel is implied, not stated."
+			},
+			"summary": "Niers burns his lace and kills the colony of clever rats in the walls alone. At the banquet Foliana tells of Queravia, and Niers beats all his students at once in a mock battle."
+		}
+	},
+	"system": []
+}

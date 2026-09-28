@@ -1,0 +1,337 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.26M",
+	"events": {
+		"b5.zzzr_the_liscor_council_plans_for_a_siege": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watch_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zzzk_hawk_brings_word_the_drake_armies_fell"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.prepares_for_a_siege",
+					"liscor.clears_the_northern_villages",
+					"zel.wants_erins_door_for_the_siege"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "The Antinium treaty question is left open."
+			},
+			"summary": "The Council meets for hours. Liscor will warn the cities, man the walls and clear the northern villages; its own army can spare one unit. Zel says Erin's door could keep the city fed in a siege."
+		},
+		"b5.zzzs_regrika_asks_the_council_for_a_runner": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zzzl_regrika_blackpaw_comes_to_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"regrika.asked_for_a_city_runner",
+					"olesm.named_ryoka_to_regrika"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "Jelaqua offers to take her to the inn."
+			},
+			"summary": "At the Council 'Regrika' asks for a list of City Runners. Olesm names Ryoka as the best. Regrika asks to meet her and says she will bring her [Mage] companion."
+		},
+		"b5.zzzt_the_visiting_queens_prepare_to_leave": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {
+					"prefer": [
+						"free_queen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"small_queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prognugator": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"antinium.visitors_prepare_to_go_home",
+					"tersk.will_ask_his_queen_to_recognise_the_free_hive"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "Pivr is still wounded."
+			},
+			"summary": "Xrn tells the Free Queen that she, Tersk and Pivr will go home in a few days. Tersk and Pivr will ask their Queens to recognise the Free Hive; the Hives will speak through Listeners."
+		},
+		"b5.zzzu_the_necromancer_orders_the_goblin_lord_north": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"osthia_blackwing.captured_by_the_goblin_lord"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.ordered_north_past_liscor",
+					"azkerash.believes_his_servants_are_in_liscor",
+					"goblin_lord.keeps_osthia_alive_in_spite"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "Orders only; the march is not an outcome yet. The Goblin Lord says he met the servants 'a week ago'."
+			},
+			"summary": "Through the Goblin Lord's mouth the Necromancer orders him north past Liscor to take the mountain Goblins and burn Human cities, and to kill Osthia. The Goblin Lord keeps her alive to spite him."
+		},
+		"b5.zzzv_magnolia_cuts_leadenfurts_levy": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "leadenfurt",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"mayor": {
+					"prefer": [
+						"wullst"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"magnolia_reinhart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"leadenfurt.sends_magnolia_cavalry",
+					"magnolia.raises_an_army_against_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "Placeholder day (guess)."
+			},
+			"summary": "On a snowy road Magnolia pulls Mayor Wullst of Leadenfurt into her carriage. Tyrion already asked him for twice her levy, so she cuts hers to 200 riders and any mages he can spare."
+		},
+		"b5.zzzw_magnolia_opens_the_reinhart_vault": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "reinhart_estate",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ancestor": {
+					"prefer": [
+						"regis_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"magnolia_reinhart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.has_reinhart_knights_and_golems",
+					"ressa.carries_vision_of_grasses",
+					"magnolia.plans_to_strike_dwarfhalls_rest",
+					"bethal.ordered_to_hunt_a_goblin_chieftain"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.26M",
+				"confidence": "confirmed",
+				"note": "The Great Chieftain at Dwarfhalls Rest is not named; not linked to Tremborag. Bethal is to hunt a road Chieftain first."
+			},
+			"summary": "At the Reinhart estate Magnolia goes down to the vault. Its dead guardian Regis refuses her the Crown of Flowers but gives two companies of [Knights], three golems and old arms. She plans some 40,000 soldiers."
+		}
+	},
+	"system": []
+}

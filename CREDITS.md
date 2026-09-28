@@ -257,6 +257,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-lizard-headgear
   - https://opengameart.org/content/lpc-faun-and-minotaur
   - Notes: original cow by daneeklu, combined with horns by Nila122 and adapted to minotaur by Evert
+- `head/heads/rabbit` by bluecarrot16, Stephen Challener (Redshrike), Napsio (Vitruvian Studio), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY 3.0 / CC-BY-SA 3.0.
+  - https://opengameart.org/content/bunny-rabbit-lpc-style-for-pixelfarm
+  - http://opengameart.org/content/lpc-folk
+  - Notes: original rabbit by Redshrike, adapted to modular head by bluecarrot16, color reduction by napsio (Vitruvian Studio) and JaidynReiman
 - `head/heads/skeleton` by bluecarrot16, Napsio, JaidynReiman, Johannes Sjölund (wulax), Stephen Challener (Redshrike). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites

@@ -213,7 +213,17 @@
 			"canon_ref": {"book": 5, "chapter": "4.08 T", "confidence": "confirmed", "note": "Bear-like monsters that look like Gnolls but bulkier, with broad backs, bigger teeth and squat heads; they howl and fight with mauls, knives and clubs (4.08 T, 4.13 L). Drawn with the Gnoll art (look)."},
 			"tags": ["not_gnoll"], "color": "#5a4a3a", "danger": 0.7, "behaviour": "pack", "look": "gnoll_hunter",
 			"hp": 18, "armor": 1, "accuracy": 4, "evasion": 2, "damage": [2, 5], "act_seconds": 7,
-			"aggro_radius": 8, "lose_radius": 12, "chase_turns": 15, "flee_below": 0.0, "scared_by": []}
+			"aggro_radius": 8, "lose_radius": 12, "chase_turns": 15, "flee_below": 0.0, "scared_by": []},
+		"creler_hatchling": {"name": "Creler Hatchling", "confidence": "guess",
+			"canon_ref": {"book": 5, "chapter": "4.27 H", "confidence": "confirmed", "note": "Young Crelers boil out of a nest in a cave past Esthelm; small but spiked and armoured, they swarm and bite (4.27 H). M13.6: only in the Creler nest stage."},
+			"tags": ["creler"], "color": "#342a3a", "danger": 0.5, "behaviour": "pack",
+			"hp": 8, "armor": 2, "accuracy": 4, "evasion": 3, "damage": [1, 3], "act_seconds": 5,
+			"aggro_radius": 8, "lose_radius": 12, "chase_turns": 20, "flee_below": 0.0, "scared_by": []},
+		"creler_juvenile": {"name": "Juvenile Creler", "confidence": "guess",
+			"canon_ref": {"book": 5, "chapter": "4.27 H", "confidence": "confirmed", "note": "A Creler as big as a cart with a spiked shell and a poisoned bite; not an adult, which is bigger and can fly (Ksmvr, 4.27 H). It takes the Horns twenty minutes to kill. M13.6: only in the Creler nest stage."},
+			"tags": ["creler"], "color": "#3a1a20", "danger": 0.95, "behaviour": "pack",
+			"hp": 45, "armor": 4, "accuracy": 6, "evasion": 3, "damage": [3, 6], "act_seconds": 6,
+			"aggro_radius": 10, "lose_radius": 14, "chase_turns": 30, "flee_below": 0.0, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

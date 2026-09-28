@@ -1,0 +1,1018 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.24",
+	"events": {
+		"b5.zzzb_erins_water_slime_jumps_on_ryoka": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.keeps_a_slime_core",
+					"ryoka.nearly_drowned_by_a_slime"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Apista is grown and bonded to Lyonette the same morning; no NPC id for the bee."
+			},
+			"summary": "At breakfast Erin shows off a water slime she made with Typhenous and Octavia. It leaps onto Ryoka's face and nearly drowns her. Erin pulls out its core and promises to make only a tiny healing slime."
+		},
+		"b5.zzzc_a_razorbeak_tries_to_carry_off_mrsha": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.snatched_at_by_a_razorbeak",
+					"erin.killed_a_razorbeak_with_a_knife"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					7,
+					11
+				],
+				"foes": [
+					{
+						"enemy": "razorbeak",
+						"pos": [
+							17,
+							16
+						]
+					}
+				],
+				"line": "A shriek comes out of the grey sky. A Razorbeak drops toward Mrsha where she plays in the snow.",
+				"waves": [
+					{
+						"after_seconds": 40,
+						"from": [
+							16,
+							12
+						],
+						"allies": [
+							"ryoka_griffin",
+							"erin_solstice"
+						],
+						"line": "Ryoka runs out of the inn with a hand up and Erin comes behind her with a kitchen knife."
+					}
+				],
+				"note": "M13.6: a fight. One Razorbeak, as in the text. The allies come late so the player gets a turn."
+			},
+			"hooks": [
+				{
+					"id": "player_drove_off_the_razorbeak",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"razorbeak"
+								],
+								"location": [
+									"wandering_inn"
+								]
+							}
+						}
+					],
+					"days": [
+						110,
+						110
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_saved_mrsha_from_a_razorbeak"
+						],
+						"relationship": [
+							{
+								"from": "mrsha",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "ryoka_griffin",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "When a Razorbeak went for Mrsha on the inn's hill, a Human guest fought it off."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Hours are guesses (the morning, after breakfast)."
+			},
+			"summary": "Out on the snowy hill a Razorbeak swoops at Mrsha. Ryoka blinds it with [Flare] and Erin kills it with a thrown kitchen knife."
+		},
+		"b5.zzzd_erin_and_ryoka_fight_then_make_up": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"barmaid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"ryoka_griffin"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.made_up_with_ryoka"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The fight is at the inn; the apology is at a Liscor bathhouse (no id)."
+			},
+			"summary": "Ryoka mocks the slime and Erin's trust in Goblins and Toren. They come to blows until Mrsha bites both and Lyonette douses them. In a Liscor bathhouse Ryoka says sorry and they make up."
+		},
+		"b5.zzze_the_free_queen_sets_out_to_make_a_queen": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {
+					"prefer": [
+						"free_queen"
+					],
+					"fallback_tags": []
+				},
+				"revalantor": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"free_queen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"free_queen.knows_the_grand_queen_makes_no_queens",
+					"free_queen.experiments_to_make_a_queen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The Free Queen's lore of the Queens who crossed from Rhir is background only."
+			},
+			"summary": "Klbkch passes on Xrn's word: the Grand Queen makes no new Queens. The Free Queen feels betrayed and starts secret experiments in her sealed rooms to make a Queen herself."
+		},
+		"b5.zzzf_ilvriss_agents_press_ryoka_about_periss": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_barracks",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"aide": {
+					"prefer": [
+						"welsca_crimsonscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watch_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.agents_pressed_ryoka_about_periss",
+					"relc.freed_ryoka_from_the_barracks"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The fake guardsman is unnamed (no NPC)."
+			},
+			"summary": "Welsca, Ilvriss' aide, corners Ryoka in her bath about Periss and gets kicked into a pool. A fake guardsman questions her at the barracks with threats. Relc sees through him, knocks him out and frees her."
+		},
+		"b5.zzzg_brunkr_trains_lyonette_and_she_knights_him": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"warrior": {
+					"prefer": [
+						"brunkr"
+					],
+					"fallback_tags": []
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"waiter": {
+					"prefer": [
+						"ishkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"brunkr",
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.swore_brunkr_as_a_knight",
+					"ishkr.heard_lyonette_knight_brunkr",
+					"brunkr.dreams_of_being_a_knight"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					13,
+					17
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "brunkr",
+						"pos": [
+							20,
+							16
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							21,
+							16
+						]
+					},
+					{
+						"npc": "ishkr",
+						"pos": [
+							18,
+							14
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							23,
+							11
+						]
+					}
+				],
+				"line": "In the trampled snow a tall Gnoll with a bandaged arm drills a red-haired girl with a practice sword. A Gnoll waiter stands in the doorway with a tray.",
+				"note": "M13.6: a scene. Hours are guesses (the afternoon)."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_brunkr_train_lyonette",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"brunkr",
+									"lyonette",
+									"ishkr"
+								]
+							}
+						}
+					],
+					"days": [
+						110,
+						110
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_brunkr_train_lyonette"
+						],
+						"relationship": [
+							{
+								"from": "brunkr",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "lyonette",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human from the inn stood in the snow while Brunkr taught Lyonette the sword."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The oath is cut off in 4.24; 4.27 H confirms Brunkr woke a [Knight]."
+			},
+			"summary": "Brunkr teaches Lyonette the sword on the hill and admits he dreams of being a [Knight]. Softly she speaks an oath as Lyonette du Marquin. Brunkr, Ishkr and Mrsha hear it and pretend they did not."
+		},
+		"b5.zzzh_the_healing_slime_escapes": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.knows_slimes_can_think",
+					"wandering_inn.healing_slime_loose_near_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The slime lives on, loose near the inn; no enemy or NPC."
+			},
+			"summary": "Erin's tiny healing slime closes a cut, then shows fear. She sees it can think, pours it out of the window into the snow, and tells Typhenous and Octavia it failed and ran off."
+		},
+		"b5.zzzi_door_anchors_and_a_stone_for_pallass": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"typhenous.brought_door_lodestones",
+					"erin.agreed_to_a_pallass_door_anchor",
+					"hawk.hired_to_carry_the_pallass_stone"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Hawk turns back with a dying soldier; whether the stone reaches Pallass is not said. Relc beats Ulrien at arm wrestling."
+			},
+			"summary": "Typhenous brings lodestones to anchor the magic door: an emergency stone and Celum, with Invrisil proposed. Zel asks for Pallass too. Erin agrees and Zel hires Hawk to run the stone south tonight."
+		},
+		"b5.zzzj_the_horns_choose_work_near_esthelm": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.take_contracts_near_esthelm",
+					"yvlon.hides_her_new_class"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Yvlon's class is stated in her own thoughts."
+			},
+			"summary": "The Horns decide to take requests around Esthelm to earn Gold rank. Yvlon still has not told them about her new class."
+		},
+		"b5.zzzk_hawk_brings_word_the_drake_armies_fell": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.knows_the_drake_armies_fell",
+					"liscor.alarm_sounded_for_the_goblin_lord",
+					"liscor.knows_the_goblin_lord_is_a_necromancer"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					19,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "hawk",
+						"pos": [
+							5,
+							6
+						]
+					},
+					{
+						"npc": "zel_shivertail",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							4,
+							5
+						]
+					},
+					{
+						"npc": "ryoka_griffin",
+						"pos": [
+							8,
+							6
+						]
+					}
+				],
+				"line": "The door bangs open. A Rabbit Beastkin Courier staggers in with a bloody Drake soldier in his arms, and the room goes silent.",
+				"note": "M13.6: a scene. A Gnoll Named Adventurer in gold plate also came in that night; she is not placed."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_the_news_from_the_south",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"hawk",
+									"zel_shivertail",
+									"ryoka_griffin"
+								]
+							}
+						}
+					],
+					"days": [
+						110,
+						110
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_heard_the_armies_fell"
+						],
+						"relationship": [
+							{
+								"from": "hawk",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "zel_shivertail",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn helped Hawk with the dying soldier the night the news came."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "The soldier is unnamed and dies. Hours are guesses."
+			},
+			"summary": "Late at night Hawk carries in a dying Drake soldier from thirty miles south. The Goblin Lord crushed both armies, Garusa is dead, and he raises the dead. The alarm horn sounds and Zel runs to the Council."
+		},
+		"b5.zzzl_regrika_blackpaw_comes_to_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"companion": {
+					"prefer": [
+						"imenet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venitra.disguised_as_regrika_blackpaw",
+					"liscor.hosts_regrika_blackpaw"
+				],
+				"clear_flags": [
+					"venitra.turns_for_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "4.27 H shows this 'Regrika' is Venitra in a ring's disguise. Her mage is named Imenet in 4.27 H; not linked to Ijvani."
+			},
+			"summary": "That night a Named Adventurer, the Gnoll Regrika Blackpaw in gold plate, comes to the inn with a young Drake [Mage]. The Gnolls crowd to greet her. She follows Zel to the Council."
+		},
+		"b5.zzzm_warnings_go_out_to_the_cities": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b5.zzzk_hawk_brings_word_the_drake_armies_fell"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drake_cities.warned_of_the_goblin_lord",
+					"typhenous.informs_tyrion_and_magnolia",
+					"magnolia.knows_the_drake_armies_fell",
+					"tyrion_veltras.knows_the_drake_armies_fell"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "That Typhenous sells news is hinted, not stated."
+			},
+			"summary": "Zel and Ilvriss send [Message] spells to the Drake cities. Typhenous quietly sends his own to Tyrion Veltras and to Magnolia, whose maid Ressa swears. The Human cities hear by morning."
+		},
+		"b5.zzzn_ivolethe_begins_to_melt": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ivolethe.melting_as_winter_ends",
+					"winter.thaw_is_coming"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "confirmed",
+				"note": "Snow still lies deep; the winter rules are not ended here."
+			},
+			"summary": "Ivolethe feels many threads of fate meet at the inn today. By night she has begun to melt: winter is ending."
+		}
+	},
+	"system": [
+		{
+			"who": "yvlon_byres",
+			"kind": "level",
+			"name": "[Wounded Warrior]",
+			"level": 26,
+			"confidence": "confirmed",
+			"note": "Stated in her own thoughts; she was a Level 22 [Warrior]. A secret from her team."
+		},
+		{
+			"who": "garia_strongheart",
+			"kind": "class",
+			"name": "[Martial Artist]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Stated by Garia; no level given."
+		},
+		{
+			"who": "garia_strongheart",
+			"kind": "skill",
+			"name": "[Basic Footwork]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Stated by Garia."
+		},
+		{
+			"who": "ryoka_griffin",
+			"kind": "other",
+			"name": "Spell [Flare]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Cast to blind the Razorbeak. A spell, not a Skill."
+		}
+	]
+}

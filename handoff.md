@@ -1,26 +1,21 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.4 merged ([PR #63](https://github.com/Daddy-Ousen/innworld-rpg/pull/63)); ticked on main (commit c2be549),
-  tag `m13.4-done` on merge commit 069a265.
-- M13.5 done on branch `data/book5-m13.5` ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) open, not merged). User choices: 4.18 = days 107-108, 4.19 = day
-  109 (Ryoka and Mrsha come home on day 106); Laken's Day 55-70 squeezed into days 111-118; scenes: chess marathon
-  (107), Halrac teaches Bird (108), undead-from-the-rift fight (109); Riverfarm core cast.
-- 26 events `b5.zzb_` ... `b5.zzz_`, `b5.zzza_`; 12 new NPCs; location `windrest`; 5 new looks + behaviours
-  (olesm, anand, halrac, revi, typhenous). Fabiel dies (115). Ryoka/Mrsha away flags cleared (106).
-- Tests: new `sim_book5_rift_undead` (9); `sim_canon_book5` LAST_DAY 118 + 3 kill tests; `sim_player_hooks` 41;
-  `unit_art` now uses a look-less Drake id (Olesm has a look). Full suite 96 scripts / 888 tests pass; Python 78
-  OK; validator 0 errors. Detail: ADR 0020 "M13.5".
+- M13.5 merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)); ticked on main (commit 02b138f),
+  tag `m13.5-done` on merge commit 62806ef.
+- M13.6 done on branch `data/book5-m13.6` (PR open, not merged). User choices: 4.24 = day 110, Council that
+  night, 4.27 H = day 111; Niers 110-113 and Magnolia 111-112 off-map; stages: Razorbeak fight, Brunkr's lesson,
+  the bad news (day 110); Creler nest = NEW cave map + 2 new enemies; unowned [Warrior] 1 = Lyonette (likely).
+- Data made by `scratchpad/gen_m136.py` (this session's scratchpad; gone next session). All data, art (brunkr,
+  hawk, creler_hatchling, creler_juvenile), ADR 0020 "M13.6", count tests, `sim_canon_book5` and new
+  `sim_book5_creler_nest.gd` (10 tests). Full suite 97 scripts / 902 tests pass; validator 0 errors; Python 78 OK.
+  Detail: ADR 0020 "M13.6".
 
 ## Next steps
-1. Wait for the user to merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64). Then on main: tick M13.5 in `docs/ROADMAP.md` and `progress.md`,
-   tag `m13.5-done` on the merge commit.
-2. M13.6 canon batch (4.24 - 4.27 H: winter ends, the slime, Brunkr knighted, "Regrika" and "Imenet", Niers,
-   Magnolia's army, the Creler nest). Ask the user the choices first (days, scenes, hooks). Delegate chapter
-   reading to subagents (files `canon/raw/book5/030_4-24.txt` ... `033_4-27H.txt`). Liscor's last day is 109;
-   Laken's arc runs to 118 (off-map), so 4.24 can start at day 110. Liscor hears the Drake armies fell (day 110)
-   from a dying scout in 4.24.
-3. Event ids: after `b5.zzza_` the next are `b5.zzzb_`, `b5.zzzc_` ... (`_` sorts before letters).
+1. Wait for the user to merge the M13.6 PR. Then on main: tick M13.6 in `docs/ROADMAP.md` and `progress.md`,
+   tag `m13.6-done` on the merge commit.
+2. M13.7 canon batch (4.28 - 4.31). 4.28 starts the night of day 111 (Brunkr's feast; Ryoka held by Venitra).
+3. Event ids: after `b5.zzzzd_` the next are `b5.zzzze_`, ... (`_` sorts before letters).
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -74,7 +69,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64) (M13.5).
+- Merge the M13.6 PR.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Gotchas
@@ -141,7 +136,20 @@
 - Screenshots of NPCs: `_scratch/shot.gd` must be the script of a `_scratch/shot.tscn` (running the .gd alone opens the title menu). Fill `gs.npcs.npcs[id] = {"area", "x", "y", "facing"}` by hand to line up many NPCs.
 - Godot `--import` rewrites some old `.import` files with LF; they show as changed with no content diff. `git checkout -- game/assets/objects game/assets/tiles` before committing.
 
+## Book 5 canon notes (M13.6)
+- Test trap: a test that waits on `inn_hill` on the morning of day 110 is attacked by the Razorbeak stage and
+  knocked out; `Commands.wait` then returns -1 forever. An unbounded `while _hour(gs) < N` loop spews 800k lines.
+  Wait indoors and bound every wait loop (`sim_book5_creler_nest._wait_indoors_until`).
+- "Regrika" at Liscor is Venitra (4.27 H): no NPC for Regrika; never place Venitra in a scene before 4.27 H (the name
+  would spoil it). Imenet is its own NPC (not linked to Ijvani).
+- The LPC clone for M13.6 is in this session's scratchpad (`.../854c7124-.../scratchpad/ulpc`; gone next session).
+- The Bash tool's safety check sometimes stalls on long Godot runs in subagents; PowerShell works.
+
 ## Active files
+- M13.6: `game/data/canon/book5/chapters/4.24.json` ... `4.27H.json`, `game/data/maps/esthelm_creler_cave.json`,
+  `game/data/maps/esthelm_ruins.json`, `game/data/enemies.json`, `game/data/appearance.json`, `game/data/audio.json`,
+  `game/data/rules.json`, `game/data/npc_behaviour.json`, `game/tests/sim_book5_creler_nest.gd`,
+  `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.
 - M13.5: `game/data/canon/book5/chapters/4.18.json` ... `4.23E.json`, `game/data/canon/book5/npcs.json`,
   `locations.json`, `game/data/npc_behaviour.json`, `game/data/appearance.json`, `game/tests/sim_book5_rift_undead.gd`,
   `game/tests/sim_canon_book5.gd`, `docs/adr/0020-m13-book5.md`.

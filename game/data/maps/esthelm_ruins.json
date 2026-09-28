@@ -7,7 +7,8 @@
 	"note": "Design map (M9.3). Esthelm after the Goblins burned it (2.48): walls torn down, the east gate forced, the centre a maze of rubble and sewer pits, refugees in shacks near the walls (3.18T). The north-west quarter is the high ground Ylawes fortifies with barricades between half-fallen buildings and one palisade gate as a killing zone (3.19T). The text names no street or building; every place, the size and the road link from the camp are guesses.",
 	"zones": {},
 	"exits": [
-		{"at": [0, 3, 1, 2], "to": "road_camp", "arrive": [30, 5], "minutes": 180}
+		{"at": [0, 3, 1, 2], "to": "road_camp", "arrive": [30, 5], "minutes": 180},
+		{"id": "bear_cave_track", "at": [31, 11, 1, 2], "to": "esthelm_creler_cave", "arrive": [1, 11], "minutes": 120, "when_flags": ["horns_of_hammerad.take_contracts_near_esthelm"]}
 	],
 	"objects": [
 		{"id": "esthelm_campfire", "kind": "campfire", "at": [5, 9], "name": "Refugee campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
