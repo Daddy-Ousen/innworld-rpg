@@ -1,0 +1,855 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.31",
+	"events": {
+		"b5.zzzzx_teriarch_revives_ryoka_and_burns_venitra": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "teriarch_cave",
+			"roles": {
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"teriarch"
+				],
+				"flags": [
+					"ryoka.killed_by_word_of_death"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.revived_by_teriarch",
+					"venitra.burned_by_teriarch",
+					"ryoka.flew_home_with_teriarch"
+				],
+				"clear_flags": [
+					"ryoka.under_word_of_death",
+					"venitra.disguised_as_regrika_blackpaw"
+				],
+				"revive": [
+					"ryoka_griffin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Ryoka dreams of a road and Ivolethe ahead of her. She is back before Relc."
+			},
+			"summary": "Teriarch mends Ryoka's shredded heart and she wakes. Venitra comes in after her; the Dragon throws her against the mountain and burns her black and broken, then flies Ryoka home to Liscor under a spell of invisibility."
+		},
+		"b5.zzzzy_teriarch_and_the_necromancer_strike_an_accord": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": []
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"teriarch",
+					"azkerash"
+				],
+				"flags": [
+					"venitra.burned_by_teriarch"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.castle_burned_by_teriarch",
+					"azkerash.lost_his_teleport_scrolls",
+					"ryoka.under_teriarchs_protection",
+					"azkerash.accord_with_teriarch_over_ryoka"
+				],
+				"clear_flags": [
+					"azkerash.readied_his_chosen_for_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Kerash is sent for what is left of Venitra. Teriarch puts no geas on Ryoka."
+			},
+			"summary": "Teriarch's fire comes through a [Message] spell and burns a wing of the Necromancer's castle and his teleport scrolls. Ryoka is under his protection, he says. Az'kerash agrees to leave her and her friends alone."
+		},
+		"b5.zzzzz_liscor_burns_brunkr_and_ulrien": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"brunkr.murdered_by_venitra",
+					"griffon_hunt.lost_ulrien"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.held_the_pyres_for_brunkr_and_ulrien",
+					"griffon_hunt.fired_a_last_salute"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					19,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "krshia",
+						"pos": [
+							18,
+							16
+						]
+					},
+					{
+						"npc": "halrac",
+						"pos": [
+							22,
+							16
+						]
+					},
+					{
+						"npc": "revi",
+						"pos": [
+							23,
+							17
+						]
+					},
+					{
+						"npc": "typhenous",
+						"pos": [
+							22,
+							18
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							19,
+							15
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							20,
+							17
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							19,
+							17
+						]
+					}
+				],
+				"line": "Two shrouded bodies lie on a pyre in the snow below the inn. The Gnolls lay a sword and shield by one; the other has nothing at all.",
+				"note": "M13.7: a scene. Many more stand at the pyres; only these are placed. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_mourned_at_the_pyres",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"krshia",
+									"halrac",
+									"erin_solstice"
+								]
+							}
+						}
+					],
+					"days": [
+						113,
+						113
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_mourned_at_the_pyres"
+						],
+						"relationship": [
+							{
+								"from": "krshia",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "halrac",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human guest stood at the pyres for Brunkr and Ulrien."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "The day is a guess (the night after Ryoka's return). Zel, Ilvriss, Xrn and Klbkch stand on both sides of the pyre."
+			},
+			"summary": "Below the inn Brunkr and Ulrien burn side by side. The Gnolls lay Brunkr's sword and shield by him; Erin adds a faerie flower. Halrac shoots two arrows that burst in the sky, and every adventurer answers with spells and fire."
+		},
+		"b5.zzzzza_erin_reaches_level_32": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.inn_reinforced_structure"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Ryoka sits by the fire all night; Halrac will not drink the nectar Erin offers."
+			},
+			"summary": "After the pyres the inn gives free food and drink. Erin lies down on the kitchen floor and sleeps. She levels to [Magical Innkeeper] 32 with [Inn: Reinforced Structure], wakes, cries, and sleeps again."
+		},
+		"b5.zzzzzb_erin_sends_ryoka_away": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.left_a_goodbye_letter"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.read_ryokas_letter",
+					"erin.asked_ryoka_to_stay_away"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Erin guesses Teriarch; Ryoka will neither say yes nor no."
+			},
+			"summary": "At dawn Erin brings the letter that says it was all Ryoka's fault. Ryoka says she saw something on a delivery and cannot name who sent Regrika. Erin tells her to leave for a while."
+		},
+		"b5.zzzzzc_griffon_hunt_leave_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [
+					"griffon_hunt.lost_ulrien"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"griffon_hunt.left_the_wandering_inn",
+					"halrac.swore_to_find_regrikas_master",
+					"jelaqua.needs_a_new_body"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "The Halfseekers stay at the inn."
+			},
+			"summary": "Griffon Hunt pack and leave the inn for the city; without Ulrien they may break up. Halrac swears to learn who sent Regrika. Jelaqua stays: her body is torn from her Rampage, and she tells Erin that tragedy comes anywhere."
+		},
+		"b5.zzzzzd_ryoka_tells_krshia_and_zel_the_truth": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "tailless_thief",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ryoka.revived_by_teriarch"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.knows_the_necromancer_lives",
+					"ilvriss.knows_the_necromancer_killed_periss",
+					"zel.will_answer_magnolias_letter",
+					"krshia.asked_ryoka_to_stay_away",
+					"gnolls.name_regrika_a_traitor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Zel names Sserys' unique class, [Spear of the Drakes] (history). The Gnolls call Regrika a traitor everywhere."
+			},
+			"summary": "Ryoka tells Krshia only that Regrika was no true Gnoll; Krshia asks her to stay away for a while. In the Tailless Thief she tells Zel and Ilvriss: the Necromancer lives, killed Periss and sent the undead. Zel will write to Magnolia."
+		},
+		"b5.zzzzze_teriarch_says_ivolethe_is_banished": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"teriarch",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ivolethe.broke_faerie_law"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ivolethe.banished_by_the_faerie_king",
+					"ryoka.believes_ivolethe_lives"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Teriarch says he does not know if he could win a war with Az'kerash."
+			},
+			"summary": "Teriarch comes to the inn in his old man's shape to apologize. He believes Ivolethe's spirit lives: her King banished her from this world, maybe for thousands of years. He will not strike back at the Necromancer."
+		},
+		"b5.zzzzzf_the_goblin_lords_drums_reach_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.hears_the_goblin_lords_drums",
+					"liscor.walls_sound_the_alarm"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Teriarch thinks the army will pass the city by."
+			},
+			"summary": "At midday war drums roll up from the south and Liscor's walls blow their horns. Teriarch will not burn the Goblin Lord's army: Goblins are a people like any other, and he will not choose who lives."
+		},
+		"b5.zzzzzg_ryoka_runs_north": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"liscor.hears_the_goblin_lords_drums"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.ran_north_alone"
+				],
+				"clear_flags": [
+					"ryoka.home_at_the_wandering_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Where she goes is not said."
+			},
+			"summary": "Ryoka packs, says goodbye and goes through the door to Celum. She puts in her earbuds and runs north. Erin shouts after her from the gate; Ryoka raises a hand once and is gone."
+		},
+		"b5.zzzzzh_winter_ends_and_the_faeries_fly_north": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"liscor.hears_the_goblin_lords_drums"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.spring"
+				],
+				"clear_flags": [
+					"izril.winter",
+					"frost_fairies.abroad",
+					"winter.thaw_is_coming"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "Clears the winter rules (izril.winter). Deep snow still crusts over in places."
+			},
+			"summary": "The last Frost Faeries stream north high overhead, laughing, and none look down. The skies warm. Winter is over."
+		},
+		"b5.zzzzzi_lyonette_and_mrsha_shelter_in_celum": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lyonette"
+				],
+				"flags": [
+					"liscor.hears_the_goblin_lords_drums"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.sheltering_in_celum",
+					"mrsha.sheltering_in_celum",
+					"wandering_inn.boarded_up_for_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "How long they stay in Celum is not said (Book 6)."
+			},
+			"summary": "As the drums go on, Lyonette and Mrsha carry their things through the door to Celum and Octavia's shop. Ishkr boards up the inn's windows. Erin sits alone in her inn and listens: the Goblins have come."
+		},
+		"b5.zzzzzj_the_necromancer_turns_to_the_goblins": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chosen": {
+					"prefer": [
+						"kerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"azkerash"
+				],
+				"flags": [
+					"azkerash.accord_with_teriarch_over_ryoka"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venitra.lost_her_masters_favor",
+					"kerash.holds_the_necromancers_authority",
+					"azkerash.watches_ryoka_as_teriarchs_weakness",
+					"azkerash.turns_to_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "confirmed",
+				"note": "He muses on a new servant. The day is a guess."
+			},
+			"summary": "In his burnt castle Az'kerash strips Venitra of his favour, shames Ijvani and gives Kerash his authority. He sees in Ryoka the Dragon's weakness, and turns his mind to his other plague: the Goblins."
+		}
+	},
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 32,
+			"confidence": "confirmed",
+			"note": "Shown, in her sleep after the pyres."
+		},
+		{
+			"who": "erin_solstice",
+			"kind": "skill",
+			"name": "[Inn: Reinforced Structure]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Shown."
+		}
+	]
+}

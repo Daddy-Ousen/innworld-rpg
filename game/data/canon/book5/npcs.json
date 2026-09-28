@@ -1341,27 +1341,6 @@
 			},
 			"summary": "An older Drake, Wall Lord Ilvriss' aide, who presses Ryoka about Periss in a bathhouse and is kicked into a pool."
 		},
-		"imenet": {
-			"name": "Imenet",
-			"race": "Drake",
-			"tags": [
-				"drake",
-				"mage",
-				"adventurer"
-			],
-			"faction": null,
-			"home": null,
-			"classes": [],
-			"alive_at_start": true,
-			"status": "candidate",
-			"canon_ref": {
-				"book": 5,
-				"chapter": "4.27H",
-				"confidence": "confirmed",
-				"note": "Dark purple scales; called Gold-rank. Unnamed in 4.24. Not linked to anyone else."
-			},
-			"summary": "A young Drake [Mage] with a staff who travels with 'Regrika Blackpaw' and helps her find Ryoka."
-		},
 		"foliana": {
 			"name": "Foliana",
 			"race": "Beastkin",
@@ -1501,6 +1480,69 @@
 				"note": "Kept by necromancy; dead about 3,800 years."
 			},
 			"summary": "A long-dead Reinhart who guards the family vault with four ghost [Maids]."
+		},
+		"bea": {
+			"name": "Bea",
+			"race": "Undead",
+			"tags": [
+				"undead",
+				"azkerash_servant",
+				"mage"
+			],
+			"faction": null,
+			"home": "azkerash_castle",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "4.28: she and Kerash killed Periss' soldiers. A spellcaster among the Chosen."
+			},
+			"summary": "One of Az'kerash's Chosen: a rotting undead woman and a spellcaster. She scries Ryoka running for the High Passes."
+		},
+		"kerash": {
+			"name": "Kerash",
+			"race": "Undead",
+			"tags": [
+				"undead",
+				"azkerash_servant",
+				"gnoll",
+				"warrior"
+			],
+			"faction": null,
+			"home": "azkerash_castle",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "An undead Gnoll as tall as Venitra, with an axe. 4.28: he and Bea killed Periss' soldiers."
+			},
+			"summary": "One of Az'kerash's Chosen: a giant undead Gnoll with an axe. After Venitra fails, the Necromancer gives him his authority."
+		},
+		"oom": {
+			"name": "Oom",
+			"race": "Undead",
+			"tags": [
+				"undead",
+				"azkerash_servant"
+			],
+			"faction": null,
+			"home": "azkerash_castle",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.30",
+				"confidence": "confirmed",
+				"note": "One of the two eldest Chosen with Ijvani (4.28). Race under the coat is not stated."
+			},
+			"summary": "One of Az'kerash's eldest Chosen: dark and faceless in a long coat and hat, made to kill warriors like Zel Shivertail."
 		}
 	}
 }

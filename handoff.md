@@ -1,21 +1,20 @@
 # Handoff
 
 ## Just done (2026-09-28)
-- M13.5 merged ([PR #64](https://github.com/Daddy-Ousen/innworld-rpg/pull/64)); ticked on main (commit 02b138f),
-  tag `m13.5-done` on merge commit 62806ef.
-- M13.6 done on branch `data/book5-m13.6` ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65) open, not merged). User choices: 4.24 = day 110, Council that
-  night, 4.27 H = day 111; Niers 110-113 and Magnolia 111-112 off-map; stages: Razorbeak fight, Brunkr's lesson,
-  the bad news (day 110); Creler nest = NEW cave map + 2 new enemies; unowned [Warrior] 1 = Lyonette (likely).
-- Data made by `scratchpad/gen_m136.py` (this session's scratchpad; gone next session). All data, art (brunkr,
-  hawk, creler_hatchling, creler_juvenile), ADR 0020 "M13.6", count tests, `sim_canon_book5` and new
-  `sim_book5_creler_nest.gd` (10 tests). Full suite 97 scripts / 902 tests pass; validator 0 errors; Python 78 OK.
-  Detail: ADR 0020 "M13.6".
+- M13.6 merged ([PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65)); ticked on main (commit cb068d6),
+  tag `m13.6-done` on merge commit 9c37803.
+- M13.7 (4.28 - 4.31, days 111-114) built on branch `data/book5-m13.7`. User choices: days 111-114; `imenet` merged
+  into `ijvani` (4.28 says so); stages: Brunkr's feast (scene, 111), Regrika's attack (fight, 112 night; she
+  escapes), the pyres (scene, 113); Regrika has a new LPC sheet. Detail: ADR 0020 "M13.7".
+- Data made by `scratchpad/gen_m137.py` (this session's scratchpad; gone next session). 32 events, NPCs bea /
+  kerash / oom, enemy `regrika_blackpaw`, schedules (Ryoka off the map after 114; Lyonette and Mrsha in Celum).
+  New test `sim_book5_last_light.gd` (9 tests, pass). Validator 0 errors; Python 78 OK.
 
 ## Next steps
-1. Wait for the user to merge the M13.6 PR. Then on main: tick M13.6 in `docs/ROADMAP.md` and `progress.md`,
-   tag `m13.6-done` on the merge commit.
-2. M13.7 canon batch (4.28 - 4.31). 4.28 starts the night of day 111 (Brunkr's feast; Ryoka held by Venitra).
-3. Event ids: after `b5.zzzzd_` the next are `b5.zzzze_`, ... (`_` sorts before letters).
+1. Finish the M13.7 checks (full suite), commit, push, open the PR. Then wait for the user to merge.
+2. After the merge, on main: tick M13.7 and M13 in `docs/ROADMAP.md` and `progress.md`, tags `m13.7-done` and
+   `m13-done` on the merge commit. Move M13 detail to `docs/PROGRESS_ARCHIVE.md`.
+3. Book 5 is then done. Next milestone is not planned yet (ask the user: Book 6, or engine work).
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
@@ -69,8 +68,19 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Merge [PR #65](https://github.com/Daddy-Ousen/innworld-rpg/pull/65) (M13.6).
+- Merge the M13.7 PR (link in `progress.md` once opened).
 - Delete old remote branches `data/book4-*` (optional).
+
+## Book 5 canon notes (M13.7)
+- A fight stage with helpers who come at once lets them box the foe in on all four sides; the player never gets a
+  hit and the hook never fires. Delay the helper wave (M13.7 uses 30 s). Klbkch joins inn fights 18-21.
+- Ryoka dies and is revived in two same-night events (`kill`, then `revive`); nothing between them in id order may
+  need her alive.
+- 4.31 clears `izril.winter` on day 114: winter rules and snow end there.
+- The LPC clone for M13.7 is in this session's scratchpad (`.../47ef78fc-.../scratchpad/ulpc`, only Regrika's parts;
+  gone next session).
+- The auto-mode safety check failed for a long stretch this session (Bash, PowerShell and Agent all blocked). Read,
+  Grep, Write and Edit still worked, so chapter reading and data prep went on by hand.
 
 ## Gotchas
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
@@ -146,6 +156,10 @@
 - The Bash tool's safety check sometimes stalls on long Godot runs in subagents; PowerShell works.
 
 ## Active files
+- M13.7: `game/data/canon/book5/chapters/4.28.json` ... `4.31.json`, `4.24.json`, `4.27H.json`, `book5/npcs.json`,
+  `book3/npcs.json` (Ijvani), `game/data/enemies.json`, `appearance.json`, `audio.json`, `npc_behaviour.json`,
+  `game/assets/characters/regrika_blackpaw.png`, `game/tests/sim_book5_last_light.gd`, `sim_canon_book5.gd`,
+  `docs/adr/0020-m13-book5.md`.
 - M13.6: `game/data/canon/book5/chapters/4.24.json` ... `4.27H.json`, `game/data/maps/esthelm_creler_cave.json`,
   `game/data/maps/esthelm_ruins.json`, `game/data/enemies.json`, `game/data/appearance.json`, `game/data/audio.json`,
   `game/data/rules.json`, `game/data/npc_behaviour.json`, `game/tests/sim_book5_creler_nest.gd`,

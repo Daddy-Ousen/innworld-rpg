@@ -2218,6 +2218,45 @@
 			],
 			"confidence": "guess",
 			"note": "A juvenile Creler as big as a cart, spiked black shell (4.27 H). The Rock Crab shape in black and dark red."
+		},
+		"regrika_blackpaw": {
+			"body": "female",
+			"skin": "fur_black",
+			"parts": [
+				{
+					"part": "heads_wolf_female"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_black"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "gold"
+				},
+				{
+					"part": "arms_armour",
+					"color": "gold"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_longsword",
+					"color": "longsword"
+				},
+				{
+					"part": "shield_round",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Venitra disguised as the Gnoll Named Adventurer Regrika Blackpaw: black fur, gold plate, a great sword and shield (4.24, 4.29)."
 		}
 	}
 }

@@ -1,0 +1,627 @@
+{
+	"schema_version": 1,
+	"book": 5,
+	"chapter": "4.29",
+	"events": {
+		"b5.zzzzk_the_workers_finish_the_third_floor_and_tower": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"builder": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"wandering_inn.expansion_begun"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.third_floor_built",
+					"bird.has_his_watchtower"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "Warmer than yesterday; the snow melts. Bird finds the tower too short."
+			},
+			"summary": "The Antinium finish: a bigger common room, two new rooms, a third floor, two outhouses and Bird's watchtower at the back. Erin frets that the tower is off-centre; Pawn says it leaves room for a second."
+		},
+		"b5.zzzzl_brunkrs_body_is_found_in_the_rift": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon_rift",
+			"roles": {
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"brunkr.murdered_by_venitra"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.gnolls_mourn_brunkr",
+					"erin.sure_brunkr_was_murdered"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "Erin is sure it was murder: Brunkr promised her he would not go into the dungeon."
+			},
+			"summary": "Krshia hunts all day for her nephew. At sunset Brunkr is found at the bottom of the dungeon rift with eight other Gnolls, torn as if by monsters. Liscor fills with howling; Mrsha smells him and knows."
+		},
+		"b5.zzzzm_klbkch_truth_tests_the_feast_guests": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"slayer": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"spear": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch"
+				],
+				"flags": [
+					"brunkr.murdered_by_venitra"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"klbkch.found_no_murderer_with_a_truth_stone",
+					"regrika.passed_a_truth_stone"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "Stones differ by maker: Relc's shows blue for truth, Klbkch's white. Pisces says an Archmage could fool one."
+			},
+			"summary": "Relc tests Ryoka on the hills with a truth stone; Klbkch tests every guest of the feast at the inn. 'Regrika' swears she never met Brunkr after the party and the stone shows true. Klbkch finds no murderer."
+		},
+		"b5.zzzzn_the_necromancer_warns_ryoka_and_ivolethe_strikes_ijvani": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ijvani",
+					"ryoka_griffin",
+					"ivolethe"
+				],
+				"flags": [
+					"ryoka.under_word_of_death"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ivolethe.foresaw_ryokas_death",
+					"azkerash.thinks_ivolethe_a_winter_sprite",
+					"ivolethe.told_ryoka_to_seek_teriarch"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "The Necromancer cannot see Ivolethe at all; Ijvani sees only a blur."
+			},
+			"summary": "Outside the inn Az'kerash speaks through Ijvani: Brunkr was Venitra's error, nothing more. Ivolethe freezes Ijvani and is taken for a harmless Winter Sprite. She tells Ryoka to fight and to run to the Dragon, though it means her death."
+		},
+		"b5.zzzzo_ryoka_writes_a_letter_and_runs_for_the_dragon": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				},
+				"faerie": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ivolethe.told_ryoka_to_seek_teriarch"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.left_a_goodbye_letter",
+					"ryoka.ran_for_the_high_passes",
+					"ivolethe.disguised_as_ryoka",
+					"azkerash.ordered_ryokas_head"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "Ijvani reports her 'drinking in a tavern in Celum': that is Ivolethe (4.30). Hearing it, the Necromancer orders her head."
+			},
+			"summary": "Ryoka writes a few lines, leaves her pouches and bag of holding in her room and steps through the door to Celum. Ivolethe stays behind in her shape to fool Ijvani's spell while Ryoka runs for the High Passes."
+		},
+		"b5.zzzzp_erin_feeds_regrika_a_steak_of_bone": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"venitra"
+				],
+				"flags": [
+					"erin.sure_brunkr_was_murdered"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.exposed_regrika_as_a_fake"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "Ulrien agreed at once to help Erin set the trap; Revi and Typhenous argued."
+			},
+			"summary": "Pisces admits the pair frighten him. Erin bakes a 'steak' of bone, blood, mana potion and Shield Spider poison. Regrika and Imenet love it. Then Erin says what they ate, and that no true Gnoll would ask whose child Mrsha is."
+		},
+		"b5.zzzzq_regrika_kills_ulrien_in_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"disguised": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"ulrien"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venitra"
+				],
+				"flags": [
+					"erin.exposed_regrika_as_a_fake"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"griffon_hunt.lost_ulrien",
+					"jelaqua.head_cut_open",
+					"revi.cut_in_half_and_sewn_back",
+					"halrac.ribs_broken_by_regrika",
+					"erin.broke_her_hands_on_regrika",
+					"bird.hit_regrika_with_a_bucket",
+					"venitra.cracked_by_halracs_arrows",
+					"wandering_inn.wrecked_by_regrika",
+					"erin.spared_on_the_necromancers_order"
+				],
+				"clear_flags": [
+					"liscor.hosts_regrika_blackpaw"
+				],
+				"kill": [
+					"ulrien"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					20,
+					24
+				],
+				"foes": [
+					{
+						"enemy": "regrika_blackpaw",
+						"pos": [
+							7,
+							4
+						]
+					}
+				],
+				"line": "Regrika Blackpaw rolls out of her chair with sword and shield in her hands. Griffon Hunt and the Halfseekers close in around her.",
+				"waves": [
+					{
+						"after_seconds": 30,
+						"from": [
+							4,
+							6
+						],
+						"allies": [
+							"halrac",
+							"revi",
+							"typhenous"
+						],
+						"line": "Halrac looses, Revi throws down her talismans and Typhenous begins a spell."
+					},
+					{
+						"after_seconds": 120,
+						"from": [
+							12,
+							13
+						],
+						"allies": [
+							"bird"
+						],
+						"line": "Bird walks in from the hill with his bow in two hands and a bucket in the other two."
+					}
+				],
+				"note": "M13.7: a fight. She cannot die here (escape). Ulrien, Jelaqua, Moore and Seborn fight too; they have no looks and are not placed. The allies come late so the player gets a turn. Hours are guesses (after dusk)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_regrika",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"regrika_blackpaw"
+								],
+								"location": [
+									"wandering_inn"
+								]
+							}
+						}
+					],
+					"days": [
+						112,
+						112
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_fought_regrika"
+						],
+						"relationship": [
+							{
+								"from": "halrac",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "revi",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "typhenous",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "A Human guest stood with Griffon Hunt against 'Regrika Blackpaw' the night Ulrien died."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "4.29 - 4.30. Imenet teleports Zel and Ilvriss away first. Moore, Seborn and Typhenous flee; Erin breaks her hands."
+			},
+			"summary": "Regrika turns on them. Her sword takes Ulrien's head; Jelaqua and Revi are cut down but live, a Selphid and a Stitch-Girl. Nothing hurts her until Halrac's arrows crack her. Her master forbids her to kill Erin; Bird hits her with filth and runs."
+		},
+		"b5.zzzzr_imenet_fights_zel_and_ilvriss_in_the_streets": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"servant": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"small_queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ijvani"
+				],
+				"flags": [
+					"erin.exposed_regrika_as_a_fake"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.homes_burned_by_imenet",
+					"ijvani.broken_and_pulled_home",
+					"xrn.helped_zel_find_imenet",
+					"zel.knows_imenet_was_no_drake"
+				],
+				"clear_flags": [
+					"ijvani.disguised_as_imenet"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.29",
+				"confidence": "confirmed",
+				"note": "4.29 - 4.30. People die in the fires, a child among them; none are named. Klbkch, Zevara and the Watch come after."
+			},
+			"summary": "Imenet teleports Zel and Ilvriss into Liscor and burns homes to pin them down. Xrn looks where the hidden mage stands; Zel and Ilvriss tear off an arm and a leg. Imenet cries for her master in a woman's voice and is pulled away."
+		}
+	},
+	"system": []
+}

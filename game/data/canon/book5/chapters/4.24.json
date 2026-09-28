@@ -845,7 +845,7 @@
 				},
 				"companion": {
 					"prefer": [
-						"imenet"
+						"ijvani"
 					],
 					"fallback_tags": [],
 					"optional": true
@@ -865,7 +865,8 @@
 			"effects": {
 				"set_flags": [
 					"venitra.disguised_as_regrika_blackpaw",
-					"liscor.hosts_regrika_blackpaw"
+					"liscor.hosts_regrika_blackpaw",
+					"ijvani.disguised_as_imenet"
 				],
 				"clear_flags": [
 					"venitra.turns_for_liscor"
@@ -876,7 +877,7 @@
 				"book": 5,
 				"chapter": "4.24",
 				"confidence": "confirmed",
-				"note": "4.27 H shows this 'Regrika' is Venitra in a ring's disguise. Her mage is named Imenet in 4.27 H; not linked to Ijvani."
+				"note": "4.27 H shows this 'Regrika' is Venitra in a ring's disguise; 4.28 shows her mage 'Imenet' is Ijvani."
 			},
 			"summary": "That night a Named Adventurer, the Gnoll Regrika Blackpaw in gold plate, comes to the inn with a young Drake [Mage]. The Gnolls crowd to greet her. She follows Zel to the Council."
 		},

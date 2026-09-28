@@ -223,7 +223,13 @@
 			"canon_ref": {"book": 5, "chapter": "4.27 H", "confidence": "confirmed", "note": "A Creler as big as a cart with a spiked shell and a poisoned bite; not an adult, which is bigger and can fly (Ksmvr, 4.27 H). It takes the Horns twenty minutes to kill. M13.6: only in the Creler nest stage."},
 			"tags": ["creler"], "color": "#3a1a20", "danger": 0.95, "behaviour": "pack",
 			"hp": 45, "armor": 4, "accuracy": 6, "evasion": 3, "damage": [3, 6], "act_seconds": 6,
-			"aggro_radius": 10, "lose_radius": 14, "chase_turns": 30, "flee_below": 0.0, "scared_by": []}
+			"aggro_radius": 10, "lose_radius": 14, "chase_turns": 30, "flee_below": 0.0, "scared_by": []},
+		"regrika_blackpaw": {"name": "Regrika Blackpaw", "confidence": "guess",
+			"canon_ref": {"book": 5, "chapter": "4.29", "confidence": "confirmed", "note": "Venitra in the ring's disguise of a black-furred Gnoll Named Adventurer with a great sword and shield. Blades and spells barely mark her body of spelled bone; Halrac's [Piercing Shot] cracks her. Design: she cannot die on the map; hurt, she walks through the door to Celum (escape). M13.7: only in the inn-fight canon stage, never in a spawn."},
+			"tags": ["gnoll", "named_adventurer", "undead"], "color": "#1f1b18", "danger": 1.0, "behaviour": "pack",
+			"hp": 90, "armor": 6, "accuracy": 9, "evasion": 3, "damage": [3, 7], "act_seconds": 6,
+			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": [],
+			"escape": {"below": 0.75, "line": "Regrika stops laughing. She shoves Erin aside, opens the magic door to Celum and walks through. It swings shut behind her."}}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",
