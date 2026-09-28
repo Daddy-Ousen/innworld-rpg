@@ -19,7 +19,8 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 - [ ] M13 — Book 5 (The Last Light). Plan accepted 2026-09-28 (ADR 0020). Plan file: `~/.claude/plans/start-planning-adding-the-keen-spring.md`.
   - [x] M13.0 World: gated exits, inn third floor + watchtower, depths + crypt maps, new enemies. Merged ([PR #58](https://github.com/Daddy-Ousen/innworld-rpg/pull/58)), tag `m13.0-done` on merge commit 39e94da.
   - [x] M13.T Traps (save v14). Merged ([PR #59](https://github.com/Daddy-Ousen/innworld-rpg/pull/59)), tag `m13.t-done` on merge commit 85dd0e9.
-  - [ ] M13.1 – M13.7 canon batches
+  - [ ] M13.1 Canon 4.00 K – 4.07 (days 97–100). Done and tested on branch `data/book5-m13.1`; PR open, waiting on the user to merge. Tick after merge (tag `m13.1-done`).
+  - [ ] M13.2 – M13.7 canon batches
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
@@ -27,12 +28,13 @@ M0–M12 detail (roadmap bullets, decisions, ADR 0001–0019) lives in
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=13; 14 on the M13.T branch), `save_migrations` (1→…→13), `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=14), `save_migrations` (1→…→14), `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
 - Tests: 86 GUT scripts, 800 tests, all pass, headless exit 0 (main after M12.5). Python tool tests: 77 pass (`python -m unittest discover -s tools/tests`).
-- Main after M13.0: 89 GUT scripts, 818 tests. M13.T branch: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. Maps now 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 41.
+- Canon: Book 5 has days 97–100 (4.06 M, 4.07) on the M13.1 branch; 4.00 K – 4.06 K are history notes in ADR 0020.
+- Main after M13.T: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. M13.1 branch: 92 GUT scripts, 849 tests; Python 78 OK. Maps now 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 41.
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
 ## Blockers
