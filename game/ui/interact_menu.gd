@@ -5,25 +5,33 @@
 ## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
 ## (Interact.USE_GOOD + good). A guest lists the dishes you can serve them
 ## (Interact.SERVE + good, M14.2). An NPC shows their standing band, e.g. "Erin (friend)" (M14.3),
-## and an Attack row last, in red (Interact.ATTACK, M14.5). Enter or a double click picks one; Escape
+## and an Attack row last, in red (Interact.ATTACK, M14.5). An NPC or a patron shows their face beside
+## the list while their row is selected (Portrait, M14.7). Enter or a double click picks one; Escape
 ## closes. Presentation only.
 class_name InteractMenu
 extends PanelContainer
 
 signal chosen(object_id: String, action_id: String)
 
+## Row index → the look (sheet id) of the object the row is for, "" for no face.
+var _looks: Array[String] = []
+
 @onready var _items: ItemList = %Items
+@onready var _face: TextureRect = %Face
 
 
 func _ready() -> void:
 	hide()
 	_items.item_activated.connect(_on_activated)
+	_items.item_selected.connect(_show_face)
 
 
 ## options: Interact.options(). Shows nothing and returns false if empty.
 func open(options: Array[Dictionary], db: DataDb) -> bool:
 	_items.clear()
+	_looks.clear()
 	for o: Dictionary in options:
+		var rows_before := _items.item_count
 		var label := String(o["name"])
 		if String(o.get("standing", "")) != "":
 			label += " (%s)" % o["standing"]
@@ -71,17 +79,40 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 			var i := _items.add_item("%s — Attack" % label)
 			_items.set_item_metadata(i, [o["id"], Interact.ATTACK])
 			_items.set_item_custom_fg_color(i, Color(0.9, 0.35, 0.3))
+		var look := look_of(o, db, Session.gs)
+		for _row in range(rows_before, _items.item_count):
+			_looks.append(look)
 	if _items.item_count == 0:
 		return false
 	show()
 	_items.select(0)
+	_show_face(0)
 	_items.grab_focus()
 	return true
+
+
+## The look (sheet id) of an Interact option's object: an NPC's own or race look, a patron's look,
+## else "" (an object has no face).
+static func look_of(o: Dictionary, db: DataDb, gs: GameState) -> String:
+	if o.get("npc", false):
+		return Portrait.look_of_npc(db, String(o["id"]))
+	if o.get("guest", false) and gs != null:
+		var pid := String(o["id"]).trim_prefix(Guests.GUEST)
+		for g: Dictionary in Guests.present(gs):
+			if g["id"] == pid:
+				return String(g.get("look", ""))
+	return ""
+
+
+func _show_face(index: int) -> void:
+	Portrait.show_in(_face, _looks[index] if index < _looks.size() else "")
 
 
 ## The bag: one entry per good you can eat or drink. Returns false if none.
 func open_bag(gs: GameState, db: DataDb) -> bool:
 	_items.clear()
+	_looks.clear()
+	_show_face(0)
 	for g in gs.economy.goods():
 		var use := db.economy.use_of(g)
 		if use not in ["food", "heal"]:

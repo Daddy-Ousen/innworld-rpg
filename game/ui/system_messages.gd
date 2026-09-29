@@ -7,7 +7,8 @@
 ## A page: {"kind", "title", "lines": Array[String], "choices": Array[String],
 ## "class": String}. `class` is set on offer and confirm pages only. The
 ## news page also has "deaths": the NPCs whose death tonight's news tells
-## of (M12.5: the dialog plays a sad sting for them).
+## of (M12.5: the dialog plays a sad sting for them). A fate page has "npc". The dialog shows the
+## face of `portrait_npc` beside the text (M14.7).
 class_name SystemMessages
 extends RefCounted
 
@@ -132,6 +133,15 @@ static func fate_page(db: DataDb, npc: String) -> Dictionary:
 	p["npc"] = npc
 	p["delay"] = float(r["fate_delay"])
 	return p
+
+
+## The NPC whose face a page shows: its "npc" (a fate warning), else the first NPC the page's news
+## tells the death of, else "".
+static func portrait_npc(p: Dictionary) -> String:
+	if String(p.get("npc", "")) != "":
+		return p["npc"]
+	var deaths: Array = p.get("deaths", [])
+	return "" if deaths.is_empty() else String(deaths[0])
 
 
 ## The "are you sure?" page shown after Decline.
