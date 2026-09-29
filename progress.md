@@ -24,11 +24,13 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   - [x] M14.0 Bag screen — merged ([PR #67](https://github.com/Daddy-Ousen/innworld-rpg/pull/67)), tag `m14.0-done` on merge commit 801e382.
   - [x] M14.1 Cooking recipes — merged ([PR #68](https://github.com/Daddy-Ousen/innworld-rpg/pull/68)), tag `m14.1-done` on merge commit 7c31db7.
   - [x] M14.2 Guests and serving (save v15) — merged ([PR #69](https://github.com/Daddy-Ousen/innworld-rpg/pull/69)), tag `m14.2-done` on merge commit 12c4ddd.
-  - [ ] M14.3 Standing (save v16) — branch `feat/m14.3-standing`: `core/standing.gd`, `rules.standing`,
-    `WorldState.reputation` + `contact`, night step 7 decay, greeting bands, price shift by town, friends fight,
-    inn guest bonus, character sheet lines. `unit_standing` (21 tests) green. Full suite: 103 scripts, 978 tests, all pass (after one `unit_npc_sim` fix); Python 78 OK; validator 0 errors. PR open; tick after merge.
-  - [ ] M14.4 NPC schedules · M14.5 Attack NPCs ·
-    M14.6 UI skin · M14.7 Portraits · M14.8 Balance
+  - [x] M14.3 Standing (save v16) — merged ([PR #70](https://github.com/Daddy-Ousen/innworld-rpg/pull/70)), tag `m14.3-done` on merge commit 8365ae8.
+  - [ ] M14.4 NPC schedules (data only) — branch `feat/m14.4-schedules`: 14 NPCs get schedules and looks
+    (tkrn, jeiss, dreshhi, culyss, gazi_pathseeker, grev, hess, octavia, agnes, maran, safry, eterell, umbral;
+    13 new sheets). Targeted tests green (unit_art, unit_behaviour_db, unit_npc_sim, unit_guests, unit_standing,
+    unit_data_db, sim_canon_book1..5, sim_npc_day, sim_celum_*, sim_inn_service, sim_m6_done); Python 78 OK;
+    validator 0 errors. Not yet committed/PR'd; tick after merge.
+  - [ ] M14.5 Attack NPCs · M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).

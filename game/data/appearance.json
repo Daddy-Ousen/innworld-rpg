@@ -2257,6 +2257,388 @@
 			],
 			"confidence": "guess",
 			"note": "Venitra disguised as the Gnoll Named Adventurer Regrika Blackpaw: black fur, gold plate, a great sword and shield (4.24, 4.29)."
+		},
+		"tkrn": {
+			"body": "male",
+			"skin": "fur_tan",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_tan"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				},
+				{
+					"part": "shield_round",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young Gnoll guardsman in chainmail with sword and shield (1.46). Fur colour is not stated: tan is a guess."
+		},
+		"jeiss": {
+			"body": "male",
+			"skin": "all.lpcr.cerulean",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Senior Drake guardsman with a sword (1.28A). Scale colour is not stated: blue is a guess."
+		},
+		"dreshhi": {
+			"body": "male",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_grey"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				}
+			],
+			"confidence": "guess",
+			"note": "Gnoll [Butcher] of Krshia's tribe (2.23). Sex and fur colour are not stated; an apron marks the trade."
+		},
+		"culyss": {
+			"body": "male",
+			"skin": "all.lpcr.emerald",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "maroon"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Smooth-talking Drake (Interlude - Mating Rituals). Scale colour and clothes are guesses."
+		},
+		"grev": {
+			"body": "teen",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "tan"
+				},
+				{
+					"part": "legs_shorts",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Scruffy street boy of Celum (2.44). A teen body: LPC has no child hair or shirt for a human boy we can build. Hair and clothes are guesses."
+		},
+		"hess": {
+			"body": "male",
+			"skin": "all.lpcr.mustard",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "tan"
+				}
+			],
+			"confidence": "guess",
+			"note": "Drake [Baker] of Celum (3.16). Scale colour is not stated; an apron marks the trade."
+		},
+		"octavia": {
+			"body": "female",
+			"skin": "brown",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_high_ponytail",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "sky"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "red"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young dark-skinned [Alchemist] of the String People (2.08). Her sewn-cloth body is not drawn; hair and clothes are guesses."
+		},
+		"agnes": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_bob",
+					"color": "gray"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "brown"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Kind, tired innkeeper of the Frenzied Hare (2.47). Hair and clothes are guesses."
+		},
+		"maran": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_ponytail",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "red"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "black"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Cheerful, worn-out barmaid (2.47). Hair and clothes are guesses."
+		},
+		"safry": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "rose"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Friendly barmaid (2.47). Hair and clothes are guesses."
+		},
+		"eterell": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "sandy"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "maroon"
+				},
+				{
+					"part": "legs_pants",
+					"color": "tan"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Rich, comfortable Runners' Guild master of Celum (1.33R). Looks are guesses."
+		},
+		"umbral": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Former [Soldier] in leather who runs the gate of Esthelm (3.32). Hair and gear are guesses."
+		},
+		"gazi_pathseeker": {
+			"body": "female",
+			"skin": "all.lpcr.bronze",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "eyes_cyclops",
+					"color": "yellow"
+				},
+				{
+					"part": "hair_dreadlocks_long",
+					"color": "black"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "copper"
+				},
+				{
+					"part": "arms_armour",
+					"color": "copper"
+				},
+				{
+					"part": "legs_pants",
+					"color": "maroon"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_scimitar",
+					"color": "scimitar"
+				}
+			],
+			"confidence": "likely",
+			"note": "Same look as gazi_of_reim (the Half-Gazer, 1.36); the schedule NPC needs an own look id (M14.4)."
 		}
 	}
 }
