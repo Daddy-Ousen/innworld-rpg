@@ -184,16 +184,33 @@ def fruit_tree() -> Image.Image:
 
 
 def dead_tree() -> Image.Image:
-    """The big atlas tree with its leaves turned grey-brown."""
+    """A bare tree: no leaves, a forked trunk and branches drawn in the LPC wood colours.
+    The roots come from the big atlas tree (its trunk is the only non-leaf part)."""
+    img, d = canvas(96, 128)
+
+    def limb(pts: list[tuple[int, int]], width: int) -> None:
+        d.line(pts, fill=OUTLINE, width=width + 2, joint="curve")
+        d.line(pts, fill=WOOD, width=width, joint="curve")
+        d.line([(x - 1, y) for x, y in pts], fill=WOOD_LIGHT, width=max(1, width // 3), joint="curve")
+
+    limb([(48, 112), (47, 88), (46, 64), (48, 44)], 9)  # trunk
+    limb([(47, 84), (34, 70), (24, 50), (20, 36)], 5)  # left fork
+    limb([(24, 52), (12, 46)], 3)
+    limb([(30, 62), (30, 44), (34, 30)], 3)
+    limb([(47, 66), (62, 54), (72, 40), (76, 24)], 5)  # right fork
+    limb([(72, 42), (86, 38)], 3)
+    limb([(62, 54), (64, 36), (58, 22)], 3)
+    limb([(48, 46), (46, 28), (48, 12)], 4)  # crown
+    limb([(46, 32), (38, 20)], 2)
+    limb([(48, 26), (56, 14)], 2)
     src = crop("tiles/lpc_atlas.png", (928, 896, 96, 128))
     px = src.load()
-    for y in range(src.height):
+    for y in range(100, src.height):
         for x in range(src.width):
             r, g, b, a = px[x, y]
-            if a and g > r and g > b:  # leaves: grey-brown, darker
-                v = (r + g + b) // 3
-                px[x, y] = (v * 3 // 4 + 20, v * 3 // 4 + 8, v * 3 // 4, a)
-    return src
+            if a and not (g > r and g > b):  # trunk and roots, not leaves
+                img.putpixel((x, y), (r, g, b, a))
+    return img
 
 
 def bedroll() -> Image.Image:

@@ -1,6 +1,6 @@
 # ADR 0023 — M16.0 art audit
 
-Date: 2026-09-29 · Status: list written, the user checks it
+Date: 2026-09-29 · Status: list written; M16.1 done 2026-09-29 (result at the end)
 
 ## Context
 M16 fixes maps and art (ADR 0022 items 3–6). M16.0 only looks and lists. No map, art or code changes.
@@ -90,3 +90,21 @@ Cell numbers are (x, y) from the top left, read from the images (±1). Fix = the
 - Is item 12 (a real inn building on `inn_hill`) in scope now, or only the door and sign?
 - Art source for cliffs, boulders and houses: the LPC packs we already use (`lpc_terrains`, `lpc_atlas`) hold
   cliff and house pieces; a new pack needs your OK (rule 11: dependency).
+
+## M16.1 result (2026-09-29)
+Art source: the LPC sheets already in the repo (no new dependency); the user did not answer the open points, so the
+inn building (item 12) stays in M16.2. Schema change (rule 11, approved with the M16.1 plan): tile field `cliff` /
+`winter_cliff` = `{sheet, block [x, y]}` in `tiles.json`.
+
+| Audit item | What changed |
+|---|---|
+| 1, 2 cliffs | New tiles `cliff` (earth, road camp, ruins entrance) and `stone_cliff` (bee cave, creler cave, depths, crypt). `GroundArt.cliff_piece` picks the rim, top, upper face, front face or side piece from the cell's place in the wall mass; the map edge counts as mass. Art: `game/assets/tiles/cliffs.png`, built by `tools/build_cliffs.py` from the atlas plateau (earth, stone, and both under snow). Map legends `^` changed; isolated `^` cells became `R` (rock). |
+| 3 boulders | `rock` prop = one grey rock (atlas 26,25). New tile `boulder` (atlas 27,26, 3x2: a boulder and a standing slab) placed on road camp, ruins entrance, floodplains, inn hill (`O`). |
+| 4 thin water | `shallows` now uses the water ground (same terrain, no square) plus a stepping-stones prop, so a ford reads as a crossing; the road camp ponds are one pond with a ford. `water` and `shallows` get an ice look in winter (`lpc_terrains` 27,14 block). |
+| 5 dead tree | `dead_tree` (objects) is a bare tree drawn by `tools/build_objects.py`, not a recoloured leafy tree. |
+| 6, 7 rift tips, tall-grass tails | `GroundArt.edge_pieces` returns one piece per corner or side when lower ground touches opposite sides or 3-4 sides; `GroundArt.mix` merges them (see-through where any piece is, bank where any piece has one) and `WorldView` draws the result as a sprite over the Edges layer. |
+| 9 winter | Water freezes (ice look), cliffs get snow tops. Pines still carry no snow (no LPC art for it). |
+
+Left for later: item 8 (trees on walls or roofs) waits for the M16.2 roofs; the winter pond is a plain
+rectangle (the ice block has no soft bank); a one-cell rock wall inside a cave draws a thin sliver (use `rock`).
+Tests: `unit_ground_art` (pieces, mix, cliff pieces, art check for `cliff`), `tools/tests/test_build_cliffs.py`.

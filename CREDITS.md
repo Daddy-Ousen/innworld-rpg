@@ -15,6 +15,8 @@ Our edits of CC-BY-SA art are CC-BY-SA too. See ADR 0018.
   base assets by Lanea Zimmerman (Sharm) and LPC entries by Casper Nilsson, Daniel Eddeland and others.
   Licence: CC-BY-SA 3.0 / GPL 3.0. https://opengameart.org/content/lpc-tile-atlas
   Full credits: `game/assets/tiles/lpc_atlas_Attribution.txt`.
+- `cliffs.png` is made by `tools/build_cliffs.py` (our edit): the earth plateau of "LPC Tile Atlas" copied and
+  recoloured (stone grey, and both under snow). Licence of the edit: CC-BY-SA 3.0 (the same as the art it uses).
 
 - `lpc_house.png` (`house.png`) and `lpc_inside.png` (`inside.png`) from "Liberated Pixel Cup (LPC) Base Assets"
   by Lanea Zimmerman (Sharm) and others. Licence: CC-BY-SA 3.0 / GPL 3.0.
@@ -34,7 +36,7 @@ Our edits of CC-BY-SA art are CC-BY-SA too. See ADR 0018.
 - `lpc_well.png` (`lpc-well.png`) "LPC Style Well" by Xenodora, buckets by Lanea Zimmerman (Sharm).
   Licence: CC-BY 3.0 / GPL 3.0. https://opengameart.org/content/lpc-style-well
 - `edits.png` is made by `tools/build_objects.py` (our edits): the wagon, chess table and market stall use
-  "[LPC] Tavern" pieces; the blue fruit tree, dead tree and stone doors use "LPC Tile Atlas" pieces; the rope
+  "[LPC] Tavern" pieces; the blue fruit tree and stone doors use "LPC Tile Atlas" pieces; the dead tree is drawn by the tool with the roots of an atlas tree; the rope
   anchor uses "LPC House Interior and Decorations"; the brazier flames use "[LPC] Tavern". The notice board,
   broom, horseshoe, honeycomb, bee nest, bedroll and mat are drawn by the tool in the LPC style.
   Licence of the edits: CC-BY-SA 3.0 (the same as the art they use).

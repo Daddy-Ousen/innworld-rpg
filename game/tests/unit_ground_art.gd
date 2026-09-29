@@ -42,7 +42,45 @@ func test_edge_pieces_follow_the_lpc_block() -> void:
 	assert_eq(GroundArt.edge_piece({down: true, right: true, Vector2i(1, 1): true}), Vector2i(2, 4))
 	assert_eq(GroundArt.edge_piece({Vector2i(1, 1): true}), Vector2i(1, 0), "inner corner")
 	assert_eq(GroundArt.edge_piece({Vector2i(-1, -1): true}), Vector2i(2, 1))
-	assert_eq(GroundArt.edge_piece({up: true, down: true}), null, "a one-cell strip keeps a hard edge")
+	assert_eq(GroundArt.edge_piece({up: true, down: true}), null, "a one-cell strip has no single piece")
+
+
+func test_strips_and_tips_get_one_piece_per_corner_or_side() -> void:
+	var up := GroundArt.UP
+	var down := GroundArt.DOWN
+	var left := GroundArt.LEFT
+	var right := GroundArt.RIGHT
+	assert_eq(GroundArt.edge_pieces({up: true, down: true}), [Vector2i(1, 2), Vector2i(1, 4)] as Array[Vector2i])
+	assert_eq(GroundArt.edge_pieces({left: true, right: true}), [Vector2i(0, 3), Vector2i(2, 3)] as Array[Vector2i])
+	assert_eq(GroundArt.edge_pieces({up: true, left: true, right: true}),
+			[Vector2i(0, 2), Vector2i(2, 2)] as Array[Vector2i], "a tip: both top corners")
+	assert_eq(GroundArt.edge_pieces({up: true, down: true, left: true, right: true}).size(), 4, "an island")
+	assert_eq(GroundArt.edge_pieces({up: true, left: true}), [Vector2i(0, 2)] as Array[Vector2i])
+	assert_true(GroundArt.edge_pieces({}).is_empty())
+
+
+## A 3×6 block (96×192): the plain fill is opaque green; the top piece (1,2) is
+## see-through on its top row and has a red bank on its second row; the bottom piece
+## (1,4) the same at the bottom.
+func _block_sheet() -> Image:
+	var img := Image.create(96, 192, false, Image.FORMAT_RGBA8)
+	img.fill(Color.GREEN)
+	for x in 32:
+		img.set_pixel(32 + x, 64, Color(0, 0, 0, 0))
+		img.set_pixel(32 + x, 65, Color.RED)
+		img.set_pixel(32 + x, 128 + 31, Color(0, 0, 0, 0))
+		img.set_pixel(32 + x, 128 + 30, Color.RED)
+	return img
+
+
+func test_mix_is_see_through_where_any_piece_is_and_keeps_every_bank() -> void:
+	var cells: Array[Vector2i] = [Vector2i(1, 2), Vector2i(1, 4)]
+	var m := GroundArt.mix(_block_sheet(), cells, Vector2i(1, 5), 32)
+	assert_eq(m.get_pixel(5, 0).a, 0.0, "top row is see-through")
+	assert_eq(m.get_pixel(5, 1), Color.RED, "top bank")
+	assert_eq(m.get_pixel(5, 31).a, 0.0, "bottom row is see-through")
+	assert_eq(m.get_pixel(5, 30), Color.RED, "bottom bank")
+	assert_eq(m.get_pixel(5, 15), Color.GREEN, "the middle is the fill")
 
 
 func test_higher_ground_draws_a_soft_edge_over_lower_ground() -> void:
@@ -55,6 +93,66 @@ func test_higher_ground_draws_a_soft_edge_over_lower_ground() -> void:
 	assert_eq(plan[Vector2i(1, 0)]["over"], [T, Vector2i(0, 7) + Vector2i(1, 0)], "dirt on a corner")
 	assert_false(plan[Vector2i(4, 1)].has("over"), "no lower neighbour: plain grass")
 	assert_eq(plan[Vector2i(4, 1)]["base"], [T, Vector2i(1, 10)])
+
+
+func test_a_one_cell_strip_is_a_mix_and_a_view_draws_it() -> void:
+	var maps := _maps(["ddd", "ggg", "ddd"])
+	var plan := GroundArt.plan(maps, "m", false)
+	var mixed: Dictionary = plan[Vector2i(1, 1)]["mix"]
+	assert_eq(mixed["fill"], Vector2i(0, 7) + Vector2i(1, 5))
+	assert_eq((mixed["cells"] as Array).size(), 2)
+	assert_false(plan[Vector2i(1, 1)].has("over"))
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(maps)
+	var gs := GameState.new(1)
+	gs.player.place("m", Vector2i(0, 0))
+	v.refresh(gs)
+	var spots := []
+	for sprite: Sprite2D in v.mixes.get_children():
+		spots.append(sprite.position)
+	assert_eq(spots, [Vector2(0, 32), Vector2(32, 32), Vector2(64, 32)], "one mixed sprite per strip cell")
+
+
+func _cliff_maps(rows: Array) -> MapDb:
+	var tiles := _tiles()
+	tiles["cliff"] = {"name": "Cliff", "walk": false, "color": "#775533",
+		"cliff": {"sheet": "cliffs", "block": [0, 0]}, "winter_cliff": {"sheet": "cliffs", "block": [6, 0]}}
+	var a := ToyMaps.area("m", "toy_town", rows, {}, [], [])
+	a["legend"] = {"g": "grass", "^": "cliff"}
+	return MapDb.from_dicts(tiles, {"m": a})
+
+
+func test_cliff_cells_draw_the_piece_for_their_place_in_the_mass() -> void:
+	var plan := GroundArt.plan(_cliff_maps(["ggggg", "g^^^g", "g^^^g", "g^^^g", "ggggg"]), "m", false)
+	var over := func(x: int, y: int) -> Vector2i:
+		var entry: Dictionary = plan[Vector2i(x, y)]
+		return (entry["over"] if entry.has("over") else entry["base"])[1]
+	assert_eq(over.call(1, 1), Vector2i(0, 0), "top left rim")
+	assert_eq(over.call(2, 1), Vector2i(1, 0), "top rim")
+	assert_eq(over.call(3, 1), Vector2i(2, 0), "top right rim")
+	assert_eq(over.call(2, 2), Vector2i(1, 2), "the upper half of the face (one cell of mass below)")
+	assert_eq(over.call(2, 3), Vector2i(1, 3), "the front face")
+	assert_eq(over.call(1, 3), Vector2i(0, 3), "front face, left end")
+	assert_eq(plan[Vector2i(2, 3)]["base"], [T, Vector2i(1, 10)], "grass under the piece")
+	assert_eq(plan[Vector2i(2, 3)]["over"][0], "cliffs")
+
+
+func test_a_cliff_along_the_map_edge_shows_no_rim_or_face() -> void:
+	var plan := GroundArt.plan(_cliff_maps(["^^^^", "^^^^", "^^^^", "gggg"]), "m", false)
+	assert_eq(plan[Vector2i(1, 0)]["base"], ["cliffs", Vector2i(1, 1)], "top surface: the map edge is mass")
+	assert_eq(plan[Vector2i(0, 0)]["base"], ["cliffs", Vector2i(1, 1)], "no left end on the edge")
+	assert_eq(plan[Vector2i(0, 1)]["base"], ["cliffs", Vector2i(1, 2)], "upper face; no left end on the edge")
+	assert_eq(plan[Vector2i(1, 2)]["over"], ["cliffs", Vector2i(1, 3)], "grass below: front face")
+
+
+func test_cliff_winter_look_and_a_missing_sheet() -> void:
+	var maps := _cliff_maps(["ggg", "g^g", "ggg"])
+	assert_eq(GroundArt.cliff_look(maps.tiles["cliff"], true)["block"], Vector2i(6, 0))
+	assert_eq(GroundArt.cliff_look(maps.tiles["cliff"], false)["block"], Vector2i(0, 0))
+	var def: Dictionary = (maps.tiles["cliff"] as Dictionary).duplicate(true)
+	def["cliff"]["sheet"] = "no_such_sheet"
+	assert_eq(GroundArt.cliff_look(def, false), {}, "no sheet: the colour square")
+	assert_eq(GroundArt.cliff_look({"walk": true}, false), {})
 
 
 func test_ground_with_no_z_keeps_hard_edges_and_props_borrow_ground() -> void:
@@ -147,6 +245,15 @@ func test_every_real_tile_and_map_object_has_art() -> void:
 				assert_true(int(c[0]) < cells.x and int(c[1]) < cells.y, "tile %s: cell %s inside %s" % [id, c, sp["sheet"]])
 			has_art = true
 		has_art = has_art or def.has("prop")
+		for key: String in ["cliff", "winter_cliff"]:
+			if def.has(key):
+				var look := GroundArt.cliff_look({"cliff": def[key]}, false)
+				assert_false(look.is_empty(), "tile %s: %s sheet exists" % [id, key])
+				if not look.is_empty():
+					var size := (load(WorldView.sheet_path(look["sheet"])) as Texture2D).get_size() / WorldView.TILE
+					var b: Vector2i = look["block"]
+					assert_true(b.x + 3 <= int(size.x) and b.y + 4 <= int(size.y), "tile %s: %s block inside the sheet" % [id, key])
+				has_art = true
 		assert_true(has_art, "tile %s has art" % id)
 	var kinds := WorldView.load_object_art()
 	assert_gt(kinds.size(), 0)

@@ -1,21 +1,37 @@
 # Handoff
 
-## Just done (2026-09-29, M16.0)
-- M15 merged (PR #77, b93e2df) and archived. M16.0 art audit on branch `feat/m16.0-art-audit` (from main; not pushed):
-  `docs/adr/0023-m16-art-audit.md` lists 25 problems, each mapped to M16.1 (rocks, cliffs, water), M16.2 (buildings),
-  M16.3 (doors, signs), M16.4/5 (cities), M16.6 (other maps). Docs only; no code, so no tests run.
-- Waiting on the user: check the list (3 open questions at the end of the ADR: missing items, inn building scope,
-  art source). Then tick M16.0 in `docs/ROADMAP.md` and start M16.1 (plan mode first).
+## Just done (2026-09-29, M16.1)
+- M16.1 nature art on branch `feat/m16.1-nature-art` (stacked on `feat/m16.0-art-audit`; nothing pushed, ask before
+  push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.1 result"). Targeted tests pass
+  (`unit_ground_art`, `unit_art`, `unit_world_view`, `unit_map_db`, `unit_sound_cues`, `unit_monster_art`,
+  `unit_gated_exits`, `unit_console`, `sim_liscor_depths`, `sim_canon_book5`), Python 81 OK, validator 0 errors.
+- Waiting on the user: look at the maps in the game (`godot --path game`; road camp, ruins entrance, bee cave, crypt,
+  floodplains) and say if the cliffs, boulders and ford look right. Still open from M16.0: is the audit list complete;
+  the inn building (item 12) is planned for M16.2 unless the user says otherwise.
+- Next: M16.2 buildings (plan mode first). Art in `lpc_house` (red brick wall block, grey stone wall, slate roof with
+  dormer, doors, windows; see its cells with `zoom.py`-style grid crops). `building` tile is still one flat brick cell.
+- New code: `GroundArt.edge_pieces` / `mix` (several edge pieces per cell, drawn by `WorldView._add_mix` in the
+  `EdgeMixes` node), `GroundArt.cliff_look` / `cliff_piece` (tile field `cliff`), `tools/build_cliffs.py` (writes
+  `game/assets/tiles/cliffs.png`: earth, stone, snow_earth, snow_stone blocks, 3x4 cells each).
+- Map legend chars added: `R` = rock (isolated cliff cell), `O` = boulder. Cliff maps use `^` = `cliff` (outdoor) or
+  `stone_cliff` (caves).
+- Screenshot tools live in the session scratchpad (gone next session): recipe below still works. Grid zoom of a sheet:
+  a 20-line PIL script (crop cells, 32 px grid, cell labels).
 - Screenshot recipe (scratch scene, deleted): `game/_scratch/shot.tscn` + `shot.gd` (`extends Node`, `_ready` calls a
   deferred coroutine). For each map id in `db.maps.areas`: a `SubViewport` sized `MapDb.size * WorldView.TILE`
   (`UPDATE_ALWAYS`) holds a `WorldView` from `res://world/world_view.tscn`; `v.setup(db.maps, {}, db.combat.enemies, {}, "winter")`;
   `gs = GameState.new(1)`; `gs.flags["winter"] = true` for winter; `gs.player.place(id, Vector2i(0,0))`;
   `v.refresh(gs, db)`; hide `v.player` and `v.atmosphere`; camera zoom 1; wait 4 frames; `get_texture().get_image().save_png`.
-  Run with the console exe (not `--headless`, needs the renderer): `OUT=<dir> WINTER=1 Godot..._console.exe --path game res://_scratch/shot.tscn`.
-  Whole run for 20 maps takes seconds.
-- Tile facts for M16.1/2: `rock` tile = 1x1 slab prop (`lpc_atlas` 28,26), used for both stones and cliffs; `building` =
-  `lpc_house` cell (1,1) repeated; inn = `wood_wall` cells; `water` (walk false) and `shallows` (walk true) have one
-  ground cell each with `edges` blocks (0,14) and (24,14).
+  Run with the console exe (not `--headless`, needs the renderer): `OUT=<dir> WINTER=1 ONLY=id1,id2 Godot..._console.exe --path game res://_scratch/shot.tscn`.
+- `godot --headless --import` may segfault (known) but still imports; then `git checkout -- game/assets/audio game/assets/fonts`
+  and the LF-rewritten `.import` files under `assets/tiles|objects|characters` (keep new untracked ones).
+- Tile facts: `rock` = one grey rock (atlas 26,25), `boulder` = atlas 27,26 (3x2), `shallows` shares the water ground
+  and adds stepping stones; `water`/`shallows` have `winter_sprite` (ice, terrains block 27,14); `building` =
+  `lpc_house` (1,1) still flat; inn = `wood_wall` cells.
+
+## M16.0 (2026-09-29)
+- M15 merged (PR #77, b93e2df) and archived. M16.0 audit is on branch `feat/m16.0-art-audit`
+  (`docs/adr/0023-m16-art-audit.md`, 25 problems mapped to M16.1-M16.6). Docs only.
 
 ## M15 (2026-09-29, merged)
 - M15.0–M15.3 merged as one PR (#77) and archived in `docs/PROGRESS_ARCHIVE.md`.

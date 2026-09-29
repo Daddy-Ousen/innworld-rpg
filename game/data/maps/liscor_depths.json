@@ -32,7 +32,7 @@
 		{"id": "library_book_2", "at": [7, 11], "name": "A trapped book", "damage": [3, 6], "hidden": true, "spot": 0.5, "disarm": 0.6, "once": true, "line": "You kick a book. It bursts into flame and explodes."},
 		{"id": "acid_room_grate", "at": [28, 5], "name": "A floor grate", "damage": [4, 7], "hidden": true, "spot": 0.4, "disarm": 0.35, "once": false, "rearm_minutes": 30, "line": "The grate hisses. Acid sprays up at you."}
 	],
-	"legend": {".": "cave_floor", "^": "rock"},
+	"legend": {".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [
 		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
 		"^......^^^^^^..........^^^^^^^^^",

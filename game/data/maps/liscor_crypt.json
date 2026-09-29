@@ -25,7 +25,7 @@
 		{"id": "goblin_bedroll_2", "kind": "bedroll", "at": [29, 7], "name": "Filthy bedroll", "actions": []},
 		{"id": "crypt_loose_stones", "kind": "stones", "at": [6, 13], "name": "Loose stones", "actions": [], "item": "stone"}
 	],
-	"legend": {".": "cave_floor", "^": "rock"},
+	"legend": {".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [
 		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
 		"^........^^............^^......^",

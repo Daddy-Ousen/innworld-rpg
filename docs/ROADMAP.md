@@ -209,9 +209,9 @@ log covers at most a strip at the bottom left; GUT tests for the changed UI pass
 
 ## M16 — Maps, art and cities
 Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change; maps and art are data.
-- [ ] M16.0 Art audit: a screenshot of every map; a list of every bad tile or prop (rocks, cliffs, thin water,
+- [x] M16.0 Art audit: a screenshot of every map; a list of every bad tile or prop (rocks, cliffs, thin water,
   flat building blocks) in the ADR. The user checks the list
-- [ ] M16.1 Nature art: boulder props (1x1, 2x2) that read as rocks; a cliff tile set (top and face) for rock walls
+- [x] M16.1 Nature art: boulder props (1x1, 2x2) that read as rocks; a cliff tile set (top and face) for rock walls
   and mountains; water edges that work for thin water; a bridge / stepping-stones object for crossings; fix the maps
 - [ ] M16.2 Buildings: a building block draws as a house: roof on top, front wall with windows and a door on the
   bottom row. Styles: Drake stone (Liscor), Human timber and brick (Celum), plain (villages)

@@ -155,6 +155,9 @@ var _anim_time := 0.0
 var atmosphere: Atmosphere
 ## Holds the object loop players (M12.4), in map pixels.
 var loop_spots: Node2D
+## Tiles that mix several edge pieces (thin water, one-cell strips), over the Edges layer.
+var mixes: Node2D
+var _mix_cache := {}
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var edges: TileMapLayer = $Edges
@@ -187,6 +190,11 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 		atmosphere = Atmosphere.new()
 		atmosphere.tile = TILE
 		add_child(atmosphere)
+	if mixes == null:
+		mixes = Node2D.new()
+		mixes.name = "EdgeMixes"
+		add_child(mixes)
+		move_child(mixes, edges.get_index() + 1)
 	if loop_spots == null:
 		loop_spots = Node2D.new()
 		loop_spots.name = "LoopSpots"
@@ -524,6 +532,9 @@ func _show_area(id: String) -> void:
 	area = id
 	tiles.clear()
 	edges.clear()
+	for child in mixes.get_children():
+		mixes.remove_child(child)
+		child.queue_free()
 	_animated.clear()
 	monster_facing.clear()
 	_halves.clear()
@@ -544,6 +555,8 @@ func _show_area(id: String) -> void:
 				tiles.set_cell(cell, 0, atlas[t])
 			if art.has("over"):
 				_set_art(edges, cell, art["over"])
+			if art.has("mix"):
+				_add_mix(cell, art["mix"])
 			_add_prop(t, cell)
 	for child in marks.get_children():
 		marks.remove_child(child)
@@ -944,6 +957,24 @@ func _set_art(layer: TileMapLayer, cell: Vector2i, art: Array) -> bool:
 		atlas_src.create_tile(c)
 	layer.set_cell(cell, id, c)
 	return true
+
+
+## A cell whose ground needs several edge pieces at once (GroundArt.mix): a
+## sprite over the Edges layer. The mixed picture is made once per combination.
+func _add_mix(cell: Vector2i, mix: Dictionary) -> void:
+	var key := "%s|%s" % [mix["sheet"], mix["cells"]]
+	if not _mix_cache.has(key):
+		var path := sheet_path(String(mix["sheet"]))
+		if path == "":
+			return
+		var image: Image = (load(path) as Texture2D).get_image()
+		_mix_cache[key] = ImageTexture.create_from_image(
+				GroundArt.mix(image, mix["cells"], mix["fill"], TILE))
+	var sprite := Sprite2D.new()
+	sprite.texture = _mix_cache[key]
+	sprite.centered = false
+	sprite.position = Vector2(cell * TILE)
+	mixes.add_child(sprite)
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:
