@@ -85,7 +85,12 @@ Cell numbers are (x, y) from the top left, read from the images (±1). Fix = the
 - Fix by art in `tiles.json` / `objects.json` and by map edits. No core change; no save change.
 - Screenshot helper: a scratch scene (not in git), see `handoff.md`.
 
-## Open points for the user
+## User answers (2026-09-29)
+- The audit list is complete (no items added).
+- The inn building (item 12) is left for M16.2 and gets the standard house art with the other buildings.
+- Art source: the LPC sheets already in the repo (assumed in M16.1; no objection).
+
+## Open points for the user (answered above)
 - Is the list complete? Anything you saw that is not here?
 - Is item 12 (a real inn building on `inn_hill`) in scope now, or only the door and sign?
 - Art source for cliffs, boulders and houses: the LPC packs we already use (`lpc_terrains`, `lpc_atlas`) hold

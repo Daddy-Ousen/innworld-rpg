@@ -5,9 +5,9 @@
   push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.1 result"). Targeted tests pass
   (`unit_ground_art`, `unit_art`, `unit_world_view`, `unit_map_db`, `unit_sound_cues`, `unit_monster_art`,
   `unit_gated_exits`, `unit_console`, `sim_liscor_depths`, `sim_canon_book5`), Python 81 OK, validator 0 errors.
+- Answered 2026-09-29: audit list is complete; the inn building waits for M16.2 (ADR 0023 "User answers").
 - Waiting on the user: look at the maps in the game (`godot --path game`; road camp, ruins entrance, bee cave, crypt,
-  floodplains) and say if the cliffs, boulders and ford look right. Still open from M16.0: is the audit list complete;
-  the inn building (item 12) is planned for M16.2 unless the user says otherwise.
+  floodplains) and say if the cliffs, boulders and ford look right.
 - Next: M16.2 buildings (plan mode first). Art in `lpc_house` (red brick wall block, grey stone wall, slate roof with
   dormer, doors, windows; see its cells with `zoom.py`-style grid crops). `building` tile is still one flat brick cell.
 - New code: `GroundArt.edge_pieces` / `mix` (several edge pieces per cell, drawn by `WorldView._add_mix` in the
