@@ -24,9 +24,9 @@
 		{"id": "hare_kitchen_shelves", "kind": "shelves", "at": [18, 3], "name": "Kitchen shelves", "actions": [], "solid": true},
 		{"id": "hare_woodpile", "kind": "woodpile", "at": [18, 6], "name": "Woodpile", "actions": [], "solid": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHH",
+		"HHHHHHVHHHVHHHVHHHHH",
 		"H==================H",
 		"H==================H",
 		"H==================H",

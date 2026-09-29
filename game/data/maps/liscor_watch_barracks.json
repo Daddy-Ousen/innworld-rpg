@@ -25,9 +25,9 @@
 		{"id": "ledger_table", "kind": "table", "at": [18, 6], "name": "Ledger table", "actions": [], "solid": true},
 		{"id": "stairs_up", "kind": "stairs", "at": [21, 10], "name": "Stairs up to the office", "actions": []}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHVHHHVHHHVHHHVHHHHH",
 		"H======================H",
 		"H======================H",
 		"H======================H",

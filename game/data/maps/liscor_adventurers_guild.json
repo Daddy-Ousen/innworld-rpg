@@ -24,9 +24,9 @@
 		{"id": "guild_table_4", "kind": "table", "at": [15, 10], "name": "Table", "actions": [], "solid": true},
 		{"id": "guild_table_5", "kind": "table", "at": [5, 10], "name": "Table", "actions": [], "solid": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHVHHHHHHHVHHHHH",
 		"H==================H",
 		"H==================H",
 		"H==================H",

@@ -21,9 +21,9 @@
 			"when_flags": ["albez_door.anchor_at_stitchworks"],
 			"portal": {"to": "inn_interior", "pos": [3, 12], "power_flags": ["erin.magical_grounds"]}}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHH",
+		"HHVHHHHHHHHH",
 		"H==========H",
 		"H==========H",
 		"H==========H",

@@ -26,6 +26,7 @@
 		"stone_cliff": {"name": "Rock wall", "walk": false, "color": "#4a4a52", "cliff": {"sheet": "cliffs", "block": [3, 0]}},
 		"wood_floor": {"name": "Wooden floor", "walk": true, "color": "#a37b4c", "sprite": {"sheet": "lpc_inside", "cells": [[0, 4]]}},
 		"wood_wall": {"name": "Wooden wall", "walk": false, "color": "#5c4029", "sprite": {"sheet": "lpc_interior", "cells": [[0, 3]]}},
+		"wood_window": {"name": "Wall with a window", "walk": false, "color": "#5c4029", "sprite": {"sheet": "windows", "cells": [[0, 0]]}},
 		"door": {"name": "Door", "walk": true, "color": "#c49a5a", "sprite": {"sheet": "lpc_inside", "cells": [[0, 4]]}},
 		"snow_wall": {"name": "Wall of packed snow", "walk": false, "color": "#f4f8fb", "sprite": {"sheet": "lpc_terrains", "cells": [[19, 10]], "edges": [18, 7], "z": 7}},
 		"cave_floor": {"name": "Cave floor", "walk": true, "color": "#5b4d3f", "sprite": {"sheet": "lpc_terrains", "cells": [[16, 3], [16, 3], [15, 5], [16, 5]], "edges": [15, 0], "z": 2}},

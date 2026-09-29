@@ -21,9 +21,9 @@
 		{"id": "writing_table", "kind": "table", "at": [11, 7], "name": "Writing table", "actions": [], "solid": true},
 		{"id": "mages_hearth", "kind": "hearth", "at": [11, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHH",
+		"HHVHHHVHHHVHHH",
 		"H============H",
 		"H============H",
 		"H============H",

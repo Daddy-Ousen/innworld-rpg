@@ -33,9 +33,9 @@
 		{"id": "thief_lamp_west", "kind": "brazier", "at": [1, 6], "name": "Lamp", "actions": [], "solid": true, "warm": true},
 		{"id": "thief_lamp_east", "kind": "brazier", "at": [20, 6], "name": "Lamp", "actions": [], "solid": true, "warm": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHVHHHVHHHVHHHVHHH",
 		"H====================H",
 		"H====================H",
 		"H====================H",

@@ -23,9 +23,9 @@
 		{"id": "guild_table_east", "kind": "table", "at": [16, 5], "name": "Runners' table", "actions": [], "solid": true},
 		{"id": "guild_bench_west", "kind": "bench", "at": [4, 6], "name": "Bench", "actions": [], "solid": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHHHHHVHHHVHHHHH",
 		"H==================H",
 		"H==================H",
 		"H==================H",

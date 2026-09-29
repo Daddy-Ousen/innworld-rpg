@@ -18,9 +18,9 @@
 		{"id": "office_hearth", "kind": "hearth", "at": [8, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
 		{"id": "office_stairs_down", "kind": "stairs", "at": [8, 6], "name": "Stairs down", "actions": []}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHH",
+		"HHHHHHVHHHH",
 		"H=========H",
 		"H=========H",
 		"H=========H",

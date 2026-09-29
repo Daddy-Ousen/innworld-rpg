@@ -26,9 +26,9 @@
 		{"id": "side_table_west", "kind": "table", "at": [3, 8], "name": "Table", "actions": [], "solid": true},
 		{"id": "side_table_east", "kind": "table", "at": [14, 8], "name": "Table", "actions": [], "solid": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHH",
+		"HHVHHHVHHHVHHHHHHH",
 		"H================H",
 		"H================H",
 		"H================H",

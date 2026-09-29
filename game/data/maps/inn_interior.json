@@ -29,9 +29,9 @@
 			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}},
 		{"id": "stairs_up", "kind": "stairs", "at": [15, 14], "name": "Stairs up", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHHHHHH",
+		"HHHHHHVHHHVHHHVHHHVHHHHH",
 		"H===============H======H",
 		"H===============H======H",
 		"H===============H======H",
