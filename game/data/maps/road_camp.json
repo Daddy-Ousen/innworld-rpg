@@ -8,9 +8,9 @@
 	"camp": true,
 	"zones": {},
 	"exits": [
-		{"at": [16, 0, 2, 1], "to": "celum_gate", "arrive": [16, 18], "minutes": 600},
-		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600},
-		{"at": [31, 5, 1, 2], "to": "esthelm_ruins", "arrive": [1, 4], "minutes": 180}
+		{"at": [16, 0, 2, 1], "to": "celum_gate", "arrive": [16, 18], "minutes": 600, "sign": {"icon": "none", "text": "Road to Celum"}},
+		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600, "sign": {"icon": "none", "text": "Road to Liscor"}},
+		{"at": [31, 5, 1, 2], "to": "esthelm_ruins", "arrive": [1, 4], "minutes": 180, "sign": {"icon": "none", "text": "Side road to Esthelm"}}
 	],
 	"objects": [
 		{"id": "campfire", "kind": "campfire", "at": [20, 12], "name": "Campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
@@ -18,7 +18,8 @@
 		{"id": "camp_dead_tree", "kind": "dead_tree", "at": [10, 11], "name": "Dead tree", "actions": ["chop_wood"], "solid": true},
 		{"id": "camp_stream", "kind": "reeds", "at": [22, 7], "name": "Stream crossing", "actions": ["carry_water"]},
 		{"id": "camp_herbs", "kind": "herbs", "at": [9, 4], "name": "Herb patch", "actions": ["gather_herbs"]},
-		{"id": "camp_stones", "kind": "stones", "at": [12, 18], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "camp_stones", "kind": "stones", "at": [12, 18], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "camp_cart", "kind": "wagon", "at": [18, 13], "name": "Abandoned cart", "actions": [], "solid": true}
 	],
 	"legend": {".": "grass", ",": "tall_grass", ":": "dirt_road", "T": "tree", "^": "cliff", "O": "boulder", "R": "rock", "~": "water", "s": "shallows"},
 	"rows": [
