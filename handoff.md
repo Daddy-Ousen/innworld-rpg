@@ -1,6 +1,14 @@
 # Handoff
 
-## Just done (2026-09-29)
+## Just done (2026-09-29, M15.1)
+- M15.1 done on branch `feat/m15.1-player-day` (stacked on `feat/m15.0-font`; nothing pushed, ask before push / PR).
+  `Clock.player_day(canon_day, rules["clock"])` (arrival = Day 1). Used by HUD, character sheet, journal, morning
+  page, "Loaded" line, log day line (`main.gd _day_line`), save slot label (`SaveSlots.info["player_day"]`).
+  The debug console keeps calendar days. Full suite: 109 scripts, 1026 tests pass.
+- Tests that print a day use the real db: convert with `Clock.player_day(day, _db.rules["clock"])`.
+- Next: M15.2 (HUD log: `ui/hud.tscn`, `ui/hud.gd` `LOG_LINES`), then M15.3 (no XP numbers).
+
+## Earlier (2026-09-29)
 - The user played M14 and sent 8 problems (screenshots in `The Wandering Inn Books 1-17 Pirateaba/Temp/`, not in git).
 - Plan written: M15 (readability, lore), M16 (maps, art, cities), M17 (XCOM-style combat) in `docs/ROADMAP.md`;
   decisions and the user's AP rules in `docs/adr/0022-m15-m17-play-report.md`; DESIGN §1 updated.
@@ -15,8 +23,7 @@
    Options (`ui/text_settings.gd`, `Session.set_large_text`). Not pushed yet; ask the user before push / PR.
    Screenshot helper: `game/_scratch/shot.gd` (deleted before commit) + `--write-movie`; window size is ignored.
    Test runner: `scratchpad/run_targets.sh <script>...` (gone next session).
-3. M15.1 files: `ui/hud.gd`, `ui/journal.gd`, `ui/system_messages.gd`, `ui/character_sheet.gd`,
-   `ui/pause_menu.gd`, `world/main.gd` (all print `gs.clock.day()`).
+3. M15.1: done (see above).
 4. M15.2: `ui/hud.tscn` (Bottom panel, Log label, Hint label), `ui/hud.gd` (`LOG_LINES` = 6).
 5. M15.3: `world/main.gd:308` (XP line), `ui/character_sheet.gd:56-59`, `ui/system_messages.gd:41-42`,
    `ui/journal.gd:134`. Keep `ui/console_commands.gd` numbers.

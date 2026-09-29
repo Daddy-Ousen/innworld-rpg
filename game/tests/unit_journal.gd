@@ -43,7 +43,7 @@ func test_focus_name() -> void:
 func test_lines_show_the_day_the_focus_and_the_hints() -> void:
 	var gs := GameState.new_game(1, _db)
 	var text := "\n".join(Journal.lines(gs, _db))
-	assert_string_contains(text, "Day 8, 06:00.")
+	assert_string_contains(text, "Day 1, 06:00.")
 	assert_string_contains(text, "Focus: none")
 	assert_string_contains(text, SystemMessages.HINTS[0])
 
@@ -55,17 +55,19 @@ func test_lines_show_news_changes_and_drift() -> void:
 	assert_string_contains(text, "No news yet.")
 	assert_string_contains(text, "Nothing yet.")
 	assert_string_contains(text, "Drift: 0. The story runs as you know it.")
+	gs.clock.advance(1440)  # calendar day 9, the player's day 2
 	gs.world.add_news(1, "b1.old", Director.NEWS, "Too old to hear.")
-	gs.world.add_news(7, "b1.far", Director.RUMOR, "A far thing.")
-	gs.world.add_news(8, "b1.near", Director.NEWS, "A near thing.")
+	gs.world.add_news(8, "b1.far", Director.RUMOR, "A far thing.")
+	gs.world.add_news(9, "b1.near", Director.NEWS, "A near thing.")
 	assert_eq(Commands.kill_npc(gs, _db, "lism"), "")
 	gs.world.drift = 9.0
 	var lines := Journal.lines(gs, _db)
 	text = "
 ".join(lines)
 	assert_false(text.contains("Too old to hear."), "only the last 7 days")
-	assert_lt(lines.find("  Day 8: A near thing."), lines.find("  Day 7: Rumor: A far thing."), "newest first")
-	assert_string_contains(text, "Day 8: You killed Lism.")
+	assert_lt(lines.find("  Day 2: A near thing."), lines.find("  Day 1: Rumor: A far thing."),
+			"newest first, days counted from the arrival")
+	assert_string_contains(text, "Day 2: You killed Lism.")
 	assert_string_contains(text, "Drift: 9.00. " + Director.UNRELIABLE_LINE)
 
 

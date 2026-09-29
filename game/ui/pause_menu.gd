@@ -61,7 +61,8 @@ func save_to(slot: String) -> bool:
 
 func load_from(slot: String) -> bool:
 	var ok := Session.load_slot(slot)
-	message.emit("Loaded. Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]
+	message.emit("Loaded. Day %d, %s." % [Clock.player_day(Session.gs.clock.day(), Session.db.rules["clock"]),
+			Session.gs.clock.time_string()]
 			if ok else "That save cannot be loaded.")
 	close()
 	return ok

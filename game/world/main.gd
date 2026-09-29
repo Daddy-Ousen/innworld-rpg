@@ -66,7 +66,7 @@ func _ready() -> void:
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
 	console_layer.visible = false
-	hud.add_lines(["Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]])
+	hud.add_lines([_day_line()])
 	if not Session.db.is_valid():
 		hud.add_lines(["Data errors: see the debug console (`)."])
 	_redraw()
@@ -347,8 +347,14 @@ func _show_night(night: Dictionary) -> void:
 	dialog.open(SystemMessages.pages(night, Session.gs, Session.db), Session.gs, Session.db)
 
 
+## "Day 3, 06:00." with the day counted from the player's arrival (M15.1).
+func _day_line() -> String:
+	return "Day %d, %s." % [Clock.player_day(Session.gs.clock.day(), Session.db.rules["clock"]),
+			Session.gs.clock.time_string()]
+
+
 func _on_dialog_closed() -> void:
-	hud.add_lines(["Day %d, %s." % [Session.gs.clock.day(), Session.gs.clock.time_string()]])
+	hud.add_lines([_day_line()])
 	if Session.autosave() != OK:
 		hud.add_lines(["Autosave failed."])
 	Session.changed()

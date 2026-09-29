@@ -24,7 +24,7 @@ func refresh(gs: GameState, db: DataDb) -> void:
 		var loc := Movement.location_at(gs, db)
 		place = "%s · %s" % [db.maps.areas[gs.player.area]["name"],
 				db.canon.locations.get(loc, {}).get("name", loc)]
-	_status.text = "Day %d  %s    %s" % [gs.clock.day(), gs.clock.time_string(), place]
+	_status.text = "Day %d  %s    %s" % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string(), place]
 	var p := purse(gs, db)
 	if p != "":
 		_status.text += "    " + p

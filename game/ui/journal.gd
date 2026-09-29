@@ -107,7 +107,7 @@ static func focus_name(gs: GameState, db: DataDb) -> String:
 
 static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = [
-		"Day %d, %s." % [gs.clock.day(), gs.clock.time_string()],
+		"Day %d, %s." % [_pday(gs.clock.day(), db), gs.clock.time_string()],
 		"Focus: %s" % focus_name(gs, db),
 		"",
 		"Your mark on the story:",
@@ -124,7 +124,7 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	if news.is_empty():
 		out.append("  No news yet.")
 	for n: Dictionary in news:
-		out.append("  Day %d: %s%s" % [int(n["day"]),
+		out.append("  Day %d: %s%s" % [_pday(int(n["day"]), db),
 				"Rumor: " if n["kind"] == Director.RUMOR else "", n["text"]])
 	out.append("")
 	out.append("How to play:")
@@ -142,11 +142,16 @@ static func changes(gs: GameState, db: DataDb) -> Array[String]:
 	for h: Dictionary in gs.world.history:
 		if h["event"] == "player.kill":
 			var npc: String = h["roles"]["victim"]
-			out.append("Day %d: You killed %s." % [int(h["day"]),
+			out.append("Day %d: You killed %s." % [_pday(int(h["day"]), db),
 					db.canon.npcs.get(npc, {}).get("name", npc)])
 		elif h.get("by", "") == Director.BY_PLAYER:
-			out.append("Day %d: %s" % [int(h["day"]), _hook_text(db, h)])
+			out.append("Day %d: %s" % [_pday(int(h["day"]), db), _hook_text(db, h)])
 	return out
+
+
+## A calendar day as the player counts it (M15.1).
+static func _pday(canon_day: int, db: DataDb) -> int:
+	return Clock.player_day(canon_day, db.rules["clock"])
 
 
 ## The hook's news, else a plain line.

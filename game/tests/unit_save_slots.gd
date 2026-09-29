@@ -53,9 +53,10 @@ func test_info_and_label() -> void:
 	SaveSlots.save(gs, DIR, SaveSlots.AUTOSAVE)
 	var i := SaveSlots.info(DIR, SaveSlots.AUTOSAVE, _db)
 	assert_true(i["ok"])
-	assert_eq(i["day"], 8)
+	assert_eq(i["day"], 8, "the calendar day")
+	assert_eq(i["player_day"], 1, "counted from the arrival")
 	assert_eq(i["time"], "08:15")
-	assert_eq(SaveSlots.label(i), "Autosave — Day 8, 08:15, %s" % _db.maps.areas["liscor_gate"]["name"])
+	assert_eq(SaveSlots.label(i), "Autosave — Day 1, 08:15, %s" % _db.maps.areas["liscor_gate"]["name"])
 
 
 func test_broken_file_cannot_be_read() -> void:

@@ -74,7 +74,8 @@ func test_hud_shows_day_time_and_place() -> void:
 	var gs := GameState.new_game(1, real)
 	hud.refresh(gs, real)
 	var text: String = hud.get_node("%Status").text
-	assert_string_contains(text, "Day 8")
+	assert_string_contains(text, "Day 1")
+	assert_false(text.contains("Day 8"), "the player counts from the arrival, not the calendar")
 	assert_string_contains(text, "06:00")
 	assert_string_contains(text, "Liscor east gate")
 	for i in 8:

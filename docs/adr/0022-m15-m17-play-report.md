@@ -93,6 +93,15 @@ Code facts found:
 - The project has no stretch mode: a bigger window shows more world at 1:1, so 16 px text is small on a 1920x1080
   screen. Large text is the fix for that; a UI scale mode was not needed.
 
+## M15.1 Player day (2026-09-29)
+- `Clock.player_day(canon_day, rules["clock"])` = calendar day − (`start_minute` / 1440). The arrival is Day 1;
+  a toy game that starts on day 1 is unchanged. One static helper, no save change.
+- Changed screens: HUD status, character sheet, journal (header, news, changes), morning page, "Loaded" line,
+  the new-day line in the log, and the save slot label (`SaveSlots.info` gains `player_day`; `day` stays the
+  calendar day).
+- Unchanged on purpose: the debug console (`ui/console_commands.gd`), the director, windows, history, saves.
+  The console prints calendar days ("D11"), so a developer can match them to canon.
+
 ## Risks
 - M17 changes every fight test (stages, brawls, traps, helpers). M17.2 budgets a full port and a full-suite run.
 - Canon stages were tuned for the old turns (M14.8). M17.7 redoes the balance probes.

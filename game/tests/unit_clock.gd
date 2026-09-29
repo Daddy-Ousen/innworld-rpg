@@ -17,6 +17,16 @@ func test_start_is_day_one_at_six() -> void:
 	assert_eq(c.time_string(), "06:00")
 
 
+func test_player_day_counts_from_the_arrival() -> void:
+	assert_eq(Clock.player_day(1, RULES), 1, "a game that starts on day 1")
+	assert_eq(Clock.player_day(5, RULES), 5)
+	var late := RULES.duplicate()
+	late["start_minute"] = 10440  # calendar day 8 at 06:00
+	assert_eq(Clock.player_day(8, late), 1, "the arrival day is Day 1")
+	assert_eq(Clock.player_day(21, late), 14)
+	assert_eq(Clock.new(10440).day(), 8, "the clock keeps the calendar day")
+
+
 func test_advance_crosses_midnight() -> void:
 	var c := _clock()
 	c.advance(1200)

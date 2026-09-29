@@ -249,7 +249,7 @@ func test_main_scene_sleep_opens_the_dialog() -> void:
 	dialog.choose(SystemMessages.NEXT)
 	assert_false(main.is_busy())
 	assert_true(session.gs.progression.has_class("innkeeper"))
-	assert_string_contains(main.hud.get_node("%Log").text, "Day 9, 06:00.")
+	assert_string_contains(main.hud.get_node("%Log").text, "Day 2, 06:00.")
 
 
 func test_a_knock_out_page_replaces_the_collapse_page() -> void:

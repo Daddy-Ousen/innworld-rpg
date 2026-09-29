@@ -71,7 +71,7 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	var morning: Array[String] = []
 	if out.is_empty():
 		morning.append(SILENT_LINE)
-	morning.append("You wake on day %d at %s." % [gs.clock.day(), gs.clock.time_string()])
+	morning.append("You wake on day %d at %s." % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string()])
 	out.append(page(MORNING, "Morning", morning))
 	return out
 

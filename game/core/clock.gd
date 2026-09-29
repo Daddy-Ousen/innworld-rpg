@@ -21,6 +21,14 @@ func day() -> int:
 	return total_minutes / MINUTES_PER_DAY + 1
 
 
+## The day as the player counts it (M15.1): the arrival day is Day 1.
+## canon_day is a calendar day; the arrival day comes from rules "clock" start_minute.
+## Player screens use this; the director, windows and saves keep the calendar day.
+@warning_ignore("integer_division")
+static func player_day(canon_day: int, rules: Dictionary) -> int:
+	return canon_day - int(rules["start_minute"]) / MINUTES_PER_DAY
+
+
 ## Minute of the current calendar day (0–1439).
 func minute() -> int:
 	return total_minutes % MINUTES_PER_DAY
