@@ -102,6 +102,17 @@ Code facts found:
 - Unchanged on purpose: the debug console (`ui/console_commands.gd`), the director, windows, history, saves.
   The console prints calendar days ("D11"), so a developer can match them to canon.
 
+## M15.2 HUD log (2026-09-29)
+- The log strip (`Bottom` in `ui/hud.tscn`) is bottom left, anchor right 0.5 with an 8 px gap, panel `self_modulate`
+  alpha 0.55. `Hud.LOG_LINES` = 3. It is fully shown for `FADE_AFTER` (6 s) after a new line and fades over
+  `FADE_TIME` (1.5 s); `Hud.tick(delta)` does it (`_process` calls it), so tests can step time.
+- `Hud.history()` keeps the last `HISTORY_MAX` (500) lines for the whole game screen. It is presentation only, not
+  game state: a load or a new game screen starts an empty history.
+- New `ui/text_page.tscn` / `TextPage`: a read-only page with a title, opened and closed by its key or Esc,
+  PageUp/PageDown scroll. Two instances in `world/main.tscn`: `MessageLog` (L, newest first) and `Help` (H).
+- The key list moved from the HUD to `SystemMessages.KEYS` (the H page). The HUD keeps one line, "H: help", top right.
+- M15.3 still has to drop "Every action gives XP" and "matching actions give more XP" from the hints.
+
 ## Risks
 - M17 changes every fight test (stages, brawls, traps, helpers). M17.2 budgets a full port and a full-suite run.
 - Canon stages were tuned for the old turns (M14.8). M17.7 redoes the balance probes.

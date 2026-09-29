@@ -1,6 +1,14 @@
 # Handoff
 
-## Just done (2026-09-29, M15.1)
+## Just done (2026-09-29, M15.2)
+- M15.2 done on branch `feat/m15.2-hud-log` (stacked on `feat/m15.1-player-day`; nothing pushed). Log strip 3 lines,
+  bottom left, see-through, fades; `Hud.history()`; L = `MessageLog`, H = `Help` (`ui/text_page.*`);
+  keys in `SystemMessages.KEYS`. Targeted tests pass (`unit_hud_log` new, `unit_world_view`, `unit_play_loop`,
+  `unit_ui_theme`, `unit_system_messages`, `unit_journal`). No core change, so no full suite.
+- Next: M15.3 (no XP numbers): `world/main.gd` XP line, `ui/character_sheet.gd` class lines + "Total level",
+  `ui/system_messages.gd` HINTS 2 and 3, `ui/journal.gd` last line. Keep `ui/console_commands.gd` numbers.
+
+## M15.1 (2026-09-29)
 - M15.1 done on branch `feat/m15.1-player-day` (stacked on `feat/m15.0-font`; nothing pushed, ask before push / PR).
   `Clock.player_day(canon_day, rules["clock"])` (arrival = Day 1). Used by HUD, character sheet, journal, morning
   page, "Loaded" line, log day line (`main.gd _day_line`), save slot label (`SaveSlots.info["player_day"]`).

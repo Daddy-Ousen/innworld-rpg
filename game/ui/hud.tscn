@@ -40,29 +40,34 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.55, 0.4, 1)
 
 [node name="Bottom" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0.55)
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = -8.0
 offset_right = -8.0
 offset_bottom = -8.0
-grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="VBox" type="VBoxContainer" parent="Bottom"]
-layout_mode = 2
-
-[node name="Log" type="Label" parent="Bottom/VBox"]
+[node name="Log" type="Label" parent="Bottom"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
 
-[node name="Hint" type="Label" parent="Bottom/VBox"]
-layout_mode = 2
+[node name="Hint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 8.0
+offset_right = -8.0
+grow_horizontal = 0
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-autowrap_mode = 3
-text = "WASD / arrows: walk (into a monster: attack)    Space: wait    B: block    T: throw    X: drop    E: use / take    F: eat    I: bag    Z: sleep    C: character    J: journal    Esc: menu    `: console"
+horizontal_alignment = 2
+text = "H: help"

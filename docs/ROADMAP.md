@@ -199,7 +199,7 @@ Plan proposed 2026-09-29 from the user's play report (ADR 0022). One branch + PR
   "Large text" box in Options (16 / 32 px, `user://settings.cfg`, not game state). Download approved by the user
 - [x] M15.1 The player's day: every screen counts days from the player's arrival (arrival = Day 1). The canon
   day stays inside the engine (director, windows, saves). One helper reads `rules.clock.start_minute`; no save change
-- [ ] M15.2 HUD and log: the log shows at most 3 lines, bottom left, under half the width, see-through, and fades
+- [x] M15.2 HUD and log: the log shows at most 3 lines, bottom left, under half the width, see-through, and fades
   after a few seconds; L opens the full message history; the key list moves to a help page (H) with a one-line
   "H: help" hint
 - [ ] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows each

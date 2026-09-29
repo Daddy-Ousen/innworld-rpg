@@ -35,6 +35,25 @@ const SPARE := "spare"
 
 const SILENT_LINE := "The System is silent."
 
+## The key list: the help page (H, M15.2).
+const KEYS: Array[String] = [
+	"WASD / arrows: walk (into a monster: attack)",
+	"Space: wait",
+	"B: block",
+	"T: throw the held item",
+	"X: drop the held item",
+	"E: use or take what is next to you",
+	"F: eat",
+	"I: bag",
+	"Z: sleep",
+	"C: character",
+	"J: journal",
+	"L: message history",
+	"H: this help",
+	"Esc: menu (save, load, quit)",
+	"`: debug console",
+]
+
 ## How to play: on the welcome page and in the journal (M6.1).
 const HINTS: Array[String] = [
 	"Walk with WASD or the arrow keys. E uses what is next to you.",

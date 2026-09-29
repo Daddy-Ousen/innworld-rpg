@@ -6,7 +6,8 @@
 ## held item at the nearest monster, X drops it. After every command the
 ## combat text goes to the log; a knocked-out player gets the night at once
 ## (Commands.knock_out) and the System dialog. Esc opens the pause menu
-## (save, load, quit to title), J the journal, I the bag (M14.0). A new game opens with the
+## (save, load, quit to title), J the journal, I the bag (M14.0), L the message
+## history and H the key list (M15.2). A new game opens with the
 ## welcome page; the game autosaves each time the System dialog closes
 ## (each morning) and on quit.
 ## Presentation only (CLAUDE.md rule 1).
@@ -36,6 +37,8 @@ var switch_scene := true
 @onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
 @onready var journal: Journal = $MenuLayer/Journal
 @onready var bag: Bag = $MenuLayer/Bag
+@onready var message_log: TextPage = $MenuLayer/MessageLog
+@onready var help: TextPage = $MenuLayer/Help
 @onready var pause: PauseMenu = $MenuLayer/PauseMenu
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
 @onready var console_layer: CanvasLayer = $ConsoleLayer
@@ -87,7 +90,7 @@ func _redraw() -> void:
 ## the console has the keyboard.
 func is_busy() -> bool:
 	return console_layer.visible or menu.visible or sheet.visible or journal.visible \
-			or bag.visible or pause.visible or dialog.visible
+			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible
 
 
 func _input(event: InputEvent) -> void:
@@ -115,6 +118,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			journal.open(Session.gs, Session.db)
 		KEY_I:
 			bag.open(Session.gs, Session.db)
+		KEY_L:
+			message_log.open(_history_lines())
+		KEY_H:
+			help.open(SystemMessages.KEYS)
 		KEY_ESCAPE:
 			pause.open()
 		KEY_B:
@@ -345,6 +352,13 @@ func _show_night(night: Dictionary) -> void:
 	hud.add_lines([what])
 	Session.changed()
 	dialog.open(SystemMessages.pages(night, Session.gs, Session.db), Session.gs, Session.db)
+
+
+## The message history, newest first (the L page).
+func _history_lines() -> Array:
+	var lines: Array = hud.history()
+	lines.reverse()
+	return lines
 
 
 ## "Day 3, 06:00." with the day counted from the player's arrival (M15.1).
