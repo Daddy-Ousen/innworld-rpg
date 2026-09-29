@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-09-29, M16.6 complete: the other maps)
+- Branch `feat/m16.6-other-maps` (stacked on `feat/m16.5-celum`; nothing pushed, ask before push / PR). ADR `docs/adr/0026-m16-6-other-maps.md`
+  (canon table + results). 6 commits M16.6.0-M16.6.5 + docs. M16.0-M16.6 are all done: one PR for the whole M16 chain is next.
+- What changed: Celum gate towers + fee stand, Liscor gatehouses, inn goblin board (no stable/fence/well: canon has none), floodplains ford sign,
+  Esthelm 4 refugee shacks, ruins entrance ditch (`chasm` at x=9, x=22) + 2 Watch tents, road camp signs + cart, tile `wood_window`
+  (`tools/build_windows.py`, `game/assets/tiles/windows.png`) in 11 rooms, cave props `cobweb`/`bones`/`glow_mushrooms` (`tools/build_objects.py`).
+  New test `unit_other_maps` (8); `tools/tests/test_build_windows.py` (3). No core change, no save change.
+- Full suite (subagent): 118 scripts, 1101 tests. One failure: `sim_esthelm_siege.test_holding_the_barricade_changes_the_battle`, caused by
+  a shack near the siege player's spot (8,6). Shack 1 moved to (2-4,1-2); Esthelm-related scripts (12) pass. The rest of the suite was run before
+  that one map change (data only), so it was not rerun in full.
+- Waiting on the user: walk the changed maps in the game (`godot --path game`): both gates, inn hill (board), Esthelm, ruins entrance,
+  a room with windows, the depths/crypt. Then ask the user before pushing; one PR for M16.0-M16.6, then archive M16 in `docs/PROGRESS_ARCHIVE.md`.
+- Next: M17 (tactical combat), plan mode first.
+- Gotchas: keep props out of a stage map's fight lanes (see ADR 0026 lesson). The map patch helper (scratchpad `mp.py`) is gone next session;
+  map JSON is tab-indented CRLF, one object per line; `json.dumps` does not round-trip it, edit by lines. After `--import`, do NOT
+  `git checkout` every modified asset blindly: `git ls-files -m game/assets | xargs git checkout` also reverts a rebuilt `edits.png`.
+  Screenshot scene `game/_scratch` is deleted before commit (recipe: M16.1 notes below).
+
 ## Just done (2026-09-29, M16.5 complete: Celum districts)
 - Branch `feat/m16.5-celum` (stacked on `feat/m16.4-liscor`; nothing pushed, ask before push / PR). ADR `docs/adr/0025-m16-5-celum-districts.md`
   (canon table + results). One commit for M16.5.0-3.

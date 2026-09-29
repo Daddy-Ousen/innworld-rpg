@@ -234,7 +234,14 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
   - [x] M16.5.1 Room: Runners' Guild
   - [x] M16.5.2 Room: Frenzied Hare
   - [x] M16.5.3 Room: Stitchworks
-- [ ] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
+- [x] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
+  Sub-steps (user, 2026-09-29: Esthelm ruins only; plus gates, interior windows, cave decoration; ADR 0026):
+  - [x] M16.6.0 Inn hill goblin board, floodplains ford sign
+  - [x] M16.6.1 Gates: Celum towers and fee stand, Liscor gatehouses, signed exits
+  - [x] M16.6.2 Esthelm ruins: refugee shacks
+  - [x] M16.6.3 Ruins entrance ditch and Watch tents, road camp signs and cart
+  - [x] M16.6.4 Interior windows (`wood_window` tile) in 11 rooms
+  - [x] M16.6.5 Cave decoration: cobwebs, bones, glowing mushrooms
 **Done when:** every map passes the audit list; buildings look like buildings; every door and shop says what it
 is; Liscor and Celum each have at least 5 districts; NPC schedules and canon places still work
 (`sim_canon_book1` … `sim_canon_book5`, validator 0 errors); the user has walked the cities.
