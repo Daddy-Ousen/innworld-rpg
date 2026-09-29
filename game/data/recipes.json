@@ -1,0 +1,14 @@
+{
+	"schema_version": 1,
+	"note": "M14.1 recipes (ADR 0021). A cook action done at a station whose kind is in stations turns the inputs in the bag into the outputs. With no inputs (or the wrong station) the action is only practice: XP as before, no dish. The Book text names no amounts; every recipe here is a design guess.",
+	"recipes": {
+		"simple_meal": {"action": "cook_simple_meal", "inputs": {"vegetables": 1}, "outputs": {"simple_meal": 1},
+			"stations": ["stove", "campfire"], "confidence": "guess"},
+		"stew": {"action": "cook_stew", "inputs": {"meat": 1, "vegetables": 2}, "outputs": {"stew": 3},
+			"stations": ["stove"], "confidence": "guess"},
+		"pasta": {"action": "cook_pasta", "inputs": {"dry_pasta": 1, "vegetables": 1}, "outputs": {"pasta_dish": 2},
+			"stations": ["stove"], "confidence": "guess"},
+		"bread": {"action": "bake_bread", "inputs": {"flour": 2}, "outputs": {"bread": 4},
+			"stations": ["stove"], "confidence": "guess"}
+	}
+}

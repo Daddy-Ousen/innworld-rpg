@@ -41,8 +41,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 		for action_id: String in o["actions"]:
 			if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
 				continue
-			var i := _items.add_item("%s — %s (%d min)" % [o["name"], db.actions[action_id]["name"],
-					int(db.actions[action_id]["minutes"])])
+			var hint := "" if Session.gs == null else Cooking.hint(Session.gs, db, action_id,
+					String(Interact.object_of(db, Session.gs.player.area, o["id"]).get("kind", "")))
+			var i := _items.add_item("%s — %s (%d min%s)" % [o["name"], db.actions[action_id]["name"],
+					int(db.actions[action_id]["minutes"]), "" if hint == "" else "; " + hint])
 			_items.set_item_metadata(i, [o["id"], action_id])
 		if o["sleep"]:
 			var i := _items.add_item(("%s — Sleep (end the day)" % o["name"]) if int(o.get("price", 0)) == 0

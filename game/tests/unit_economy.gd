@@ -78,7 +78,7 @@ func test_trades_list_buys_and_only_goods_in_the_bag_to_sell() -> void:
 	var gs := _game_at("celum_square", "celum_stall")
 	var obj := Interact.object_of(_db, "celum_square", "celum_stall")
 	var kinds := Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["kind"] + t["good"])
-	assert_eq(kinds, ["buybread", "buyfirewood", "buywinter_clothes"])
+	assert_eq(kinds, ["buybread", "buyfirewood", "buywinter_clothes", "buyflour", "buyvegetables", "buymeat"])
 	Commands.give(gs, _db, 0, "herbs", 1)
 	kinds = Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["kind"] + t["good"])
 	assert_has(kinds, "sellherbs")

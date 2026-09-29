@@ -36,3 +36,22 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
   (`Combat.cannot_act`, now public).
 - New `ui/bag.tscn` on key **I**: purse, hand, fed line, one row per good. Enter eats / drinks / holds,
   X leaves one behind, P stows. F stays the quick eat menu. The bag opens again after each pick.
+
+## M14.1 Cooking recipes (2026-09-29)
+- New `data/recipes.json` (schema_version 1): recipe id → `action`, `inputs`, `outputs` (good → count),
+  `stations` (map object kinds) and `confidence`. `EconomyDb` loads and validates it (known action and goods,
+  counts > 0, outputs can be kept in the bag, at least one station). The Python validator checks canon only and
+  does not read `economy.json`, so it does not read `recipes.json` either; `DataDb` validates it on load.
+- New `core/cooking.gd`. After a done action (`Commands.perform` and `Commands.interact`, right after
+  `Economy.after_action`), a recipe for that action at a station of the right kind whose inputs are all in the bag
+  uses one batch of inputs and adds the outputs. Otherwise the action is only practice: XP is unchanged, no dish, and
+  a line says why (no station, or which ingredients are missing). An action with no recipe is untouched, so the
+  sim tests that cook with an empty bag still pass.
+- Four recipes, all guesses (the text names no amounts): simple meal (1 vegetables; stove or campfire), stew
+  (1 meat + 2 vegetables → 3 stew), pasta (1 dry pasta + 1 vegetables → 2 pasta dish), bread (2 flour → 4 bread).
+  Stew, pasta and bread need a stove. `commands.perform` has no object, so it never cooks a dish.
+- New goods: flour, vegetables, meat, dry pasta (ingredients: buy price, no sell price) and simple meal, stew,
+  pasta dish (dishes: `food`, a sell price, no buy price). The dish sell price is the base for M14.2 serving
+  income. Krshia's stall (Liscor) sells all four ingredients; the Celum stall sells flour, vegetables and meat.
+- The interact menu adds a hint to a cook action: "makes 3 stew" or "needs 1 meat, 2 vegetables".
+- Prices and yields are placeholders for the M14.8 balance pass.

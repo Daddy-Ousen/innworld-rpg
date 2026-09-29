@@ -19,6 +19,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 	var rec := Actions.perform(gs, db, action_id, opts)
 	Combat.heal_after_action(gs, db, rec)
 	Economy.after_action(gs, db, rec)
+	Cooking.after_action(gs, db, rec)
 	_after(gs, db)
 	return rec
 
@@ -156,6 +157,7 @@ static func interact(gs: GameState, db: DataDb, object_id: String, action_id: St
 	var r := Interact.perform(gs, db, object_id, action_id, opts)
 	Combat.heal_after_action(gs, db, r["record"])
 	Economy.after_action(gs, db, r["record"], object_id)
+	Cooking.after_action(gs, db, r["record"], object_id)
 	_after(gs, db)
 	return r
 
