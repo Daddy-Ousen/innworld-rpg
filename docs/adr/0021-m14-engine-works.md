@@ -205,3 +205,4 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
     HP, both together. The player still fell (39–74 turns). A knock-out leaves the canon (the safe result), so this is
     a design choice for the user, not a bug. `sim_goblin_raid` still tests the win with foes frozen.
 - Tests: `unit_stats` (+2), `sim_balance_progress`, `sim_balance_money`, `sim_balance_fights` (2).
+- User decision (2026-09-29): leave the Rock Crab and the raid as they are.
