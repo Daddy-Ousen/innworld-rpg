@@ -78,7 +78,7 @@
     "christmas": {"file": "music/cold_hands.ogg", "volume_db": -4.0}
   },
   "moods": {
-    "by_map": {"inn_interior": "inn", "inn_hill": "inn", "liscor_gate": "liscor", "liscor_market": "liscor", "liscor_plaza": "liscor", "liscor_guild_street": "liscor", "liscor_watch": "liscor", "liscor_homes": "liscor", "liscor_adventurers_guild": "liscor", "liscor_mages_guild": "liscor", "celum_gate": "celum", "celum_square": "celum", "celum_runners_guild": "celum", "celum_stitchworks": "celum", "celum_frenzied_hare": "inn_celum", "floodplains_south": "wilds", "road_camp": "wilds", "ruins_entrance": "wilds", "bee_cave": "dark", "dungeon_rift": "dark", "esthelm_ruins": "dark", "inn_upper_floor": "inn", "inn_watchtower": "inn", "liscor_depths": "dark", "liscor_crypt": "dark", "esthelm_creler_cave": "dark"},
+    "by_map": {"inn_interior": "inn", "inn_hill": "inn", "liscor_gate": "liscor", "liscor_market": "liscor", "liscor_plaza": "liscor", "liscor_guild_street": "liscor", "liscor_watch": "liscor", "liscor_homes": "liscor", "liscor_adventurers_guild": "liscor", "liscor_mages_guild": "liscor", "liscor_watch_barracks": "liscor", "liscor_watch_office": "liscor", "celum_gate": "celum", "celum_square": "celum", "celum_runners_guild": "celum", "celum_stitchworks": "celum", "celum_frenzied_hare": "inn_celum", "floodplains_south": "wilds", "road_camp": "wilds", "ruins_entrance": "wilds", "bee_cave": "dark", "dungeon_rift": "dark", "esthelm_ruins": "dark", "inn_upper_floor": "inn", "inn_watchtower": "inn", "liscor_depths": "dark", "liscor_crypt": "dark", "esthelm_creler_cave": "dark"},
     "by_location": {},
     "default": "wilds"
   },

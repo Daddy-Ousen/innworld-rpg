@@ -1,6 +1,6 @@
 # ADR 0024 — M16.4 Liscor districts
 
-Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) done; M16.4.3–M16.4.4 follow
+Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) and M16.4.3 (Watch House) done; M16.4.4 follows
 
 ## Context
 Liscor was two yard maps. ROADMAP M16.4 asks for 5–7 district maps joined by streets, streets that go on at the map
@@ -59,3 +59,13 @@ at the desk (hours 8-12 and 13-18, `liscor_adventurers_guild` (10, 3), beside th
 lunch at the market and the off-map night stay. Olesm stays off the map (he is Council, not Guild). Music mood `liscor` for
 both rooms, ambience `tavern` (crowd murmur) for the Adventurers' Guild. Tests: `unit_liscor_map` (7), `sim_liscor_rooms` (new,
 2: Selys at the desk at 11:00, away at 12:30); `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5` still pass.
+
+## M16.4.3 result (Watch House)
+`liscor_watch_barracks` (desk sergeant's counters near the door, four guards' tables, a ledger table, gear shelves, hearth,
+guards idle or walking) and `liscor_watch_office` (Zevara's office up the stairs: desk, report shelves, hearth). The stairs are
+an exit on the stairs cell (like the inn). The Watch street door (13,6) is an exit with the shield sign "Liscor Watch House".
+No cells are drawn (canon does not place them). Schedule additions (all guesses, in `npc_behaviour.json`): Zevara works in the
+office 9-18, Beilmark takes the desk 14-22 (his gate post stays 6-14), Klbkch writes the ledger 21-24 (after his inn visits),
+Relc eats at the guards' table 12-13. Gate posts and patrols are unchanged. A test lesson: a sim test that parks the player in
+a doorway (`inn_interior` (12, 14)) blocks NPCs leaving that room; park the player away from doors. Tests: `sim_liscor_rooms`
+(5), `unit_liscor_map` (rooms list), plus the usual `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5`.

@@ -6,7 +6,8 @@ extends GutTest
 ## The city maps (M16.4.1 streets; M16.4.2-4 rooms are added to ROOMS as they land).
 const STREETS := ["liscor_gate", "liscor_market", "liscor_plaza", "liscor_guild_street", "liscor_watch",
 		"liscor_homes"]
-const ROOMS: Array[String] = ["liscor_adventurers_guild", "liscor_mages_guild"]
+const ROOMS: Array[String] = ["liscor_adventurers_guild", "liscor_mages_guild", "liscor_watch_barracks",
+		"liscor_watch_office"]
 
 var _db: DataDb
 var _audio: AudioDb

@@ -7,12 +7,12 @@
 	"note": "Design map (M16.4). Canon: the Watch House (barracks) stands on a main street next to a Hive entrance (1.62); guards run down from the forty-foot walls (1.60). The drill yard is Celum's (3.15), so this map has none. The layout is a guess.",
 	"zones": {"liscor_watch_barracks": [[8, 7, 12, 2]]},
 	"exits": [
-		{"at": [31, 11, 1, 2], "to": "liscor_plaza", "arrive": [1, 11], "minutes": 2}
+		{"at": [31, 11, 1, 2], "to": "liscor_plaza", "arrive": [1, 11], "minutes": 2},
+		{"at": [13, 6], "to": "liscor_watch_barracks", "arrive": [12, 12], "minutes": 0, "sign": {"icon": "shield", "text": "Liscor Watch House"}}
 	],
 	"crowd": {"lanes": [{"path": [[5, 10], [29, 10]], "walkers": 3, "looks": ["race_drake", "liscor_guardsman", "race_gnoll"]}, {"path": [[5, 15], [29, 15]], "walkers": 3, "looks": ["liscor_guardsman", "race_drake", "race_drake"]}, {"path": [[22, 9]], "walkers": 1, "looks": ["race_drake"]}]},
 	"objects": [
 		{"id": "watch_home_a", "kind": "plaque", "at": [5, 6], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
-		{"id": "watch_barracks", "kind": "plaque", "at": [14, 6], "name": "Liscor Watch House", "actions": [], "sign": {"icon": "shield"}},
 		{"id": "watch_quarters", "kind": "plaque", "at": [26, 6], "name": "Watch quarters", "actions": [], "sign": {"icon": "shield"}},
 		{"id": "hive_entrance", "kind": "stairs", "at": [24, 9], "name": "Hive entrance (Antinium only)", "actions": [], "solid": true, "sign": {"icon": "closed", "text": "Hive entrance (Antinium only)"}},
 		{"id": "watch_brazier_west", "kind": "brazier", "at": [8, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true},

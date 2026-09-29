@@ -1,6 +1,10 @@
 # Handoff
 
-## Just done (2026-09-29, M16.4.0 - M16.4.2)
+## Just done (2026-09-29, M16.4.0 - M16.4.3)
+- M16.4.3 done: Watch House rooms + schedules for Zevara, Beilmark, Klbkch, Relc (ADR 0024). Only `homes_gnoll_tavern` and `gs_thief` plaques
+  remain to turn into doors (M16.4.4). Ilvriss (Wall Lord) is off-map 'staying at the Tailless Thief' (4.09 scene brings him out): he can
+  get a `work`/rest goal in the Tailless Thief room, guessed hours.
+- Sim tests that wait in a room: park the player away from doorways (an NPC cannot pass them).
 - M16.4.2 done: guild rooms + Selys at the desk (see ADR 0024). `sim_liscor_rooms.gd` grows with M16.4.3/4. Remaining door plaques on
   `liscor_watch` (`watch_barracks`) and `liscor_homes` (`homes_gnoll_tavern`); the Tailless Thief plaque `gs_thief` is on the guild street.
   Room generators: scratchpad `roomgen.py` + `gen_guilds.py` (gone next session; copy the JSON of a room instead).
