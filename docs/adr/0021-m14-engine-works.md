@@ -169,3 +169,15 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
   is a different voice from the inn). The title screen backdrop and title turned warm. HUD log 13 -> 16, hint 12 -> 14
   and it now wraps (a pixel font is blurry at odd small sizes).
 - Tests: `unit_ui_theme` (5). Screenshots checked: title, pause, bag, character, journal, use menu.
+
+## M14.7 Portraits
+
+- `world/portrait.gd` (`Portrait`): a face is an `AtlasTexture` over the front standing frame of a baked character
+  sheet, cropped to the head (`Rect2(16, 8, 32, 32)` inside the 64 px frame, drawn at 96 px with nearest filtering). No
+  new art and no download. A look with no sheet gives no face (null) and the menu hides the face.
+- Where it shows: the use menu (a face beside the list, for the selected row's NPC or patron; patrons use the
+  `race_<race>` look stored on the guest) and the System dialog (a fate warning shows its NPC; the Local News page shows
+  the first NPC whose death it tells, `SystemMessages.portrait_npc`).
+- Not done on purpose: the journal is one text label, so its news lines have no faces (the night's news page has
+  them). No core change and no save change: presentation only.
+- Tests: `unit_portrait` (11). Screenshots checked: use menu with Erin, fate warning with Klbkch.

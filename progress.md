@@ -27,8 +27,9 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   - [x] M14.3 Standing (save v16) — merged ([PR #70](https://github.com/Daddy-Ousen/innworld-rpg/pull/70)), tag `m14.3-done` on merge commit 8365ae8.
   - [x] M14.4 NPC schedules (data only) — merged ([PR #71](https://github.com/Daddy-Ousen/innworld-rpg/pull/71)), tag `m14.4-done` on merge commit 6c8bd55. 13 NPCs got schedules, looks and sheets.
   - [x] M14.5 Attack NPCs (save v17) — merged ([PR #72](https://github.com/Daddy-Ousen/innworld-rpg/pull/72)), tag `m14.5-done` on merge commit 5f0a5a3.
-  - [ ] M14.6 UI skin — branch `feat/m14.6-ui-skin`: Pixelify Sans font (user approved), `game/ui/theme.tres` as project theme, warm title, HUD text sizes. `unit_ui_theme` 5 tests pass; UI test scripts green. Committed on the branch; PR next; tick after merge.
-  - [ ] M14.7 Portraits · M14.8 Balance
+  - [x] M14.6 UI skin — merged ([PR #73](https://github.com/Daddy-Ousen/innworld-rpg/pull/73)), tag `m14.6-done` on merge commit 0f094ad.
+  - [ ] M14.7 Portraits — branch `feat/m14.7-portraits`: `world/portrait.gd` (head crop of the sheet), face in the use menu and System dialog (fate and news deaths). `unit_portrait` 11 tests pass; UI tests green. PR next; tick after merge.
+  - [ ] M14.8 Balance
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).

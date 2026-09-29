@@ -28,6 +28,7 @@ var current: Dictionary = {}
 
 @onready var _title: Label = %Title
 @onready var _text: Label = %Text
+@onready var _face: TextureRect = %Face
 @onready var _buttons: HBoxContainer = %Buttons
 
 
@@ -94,6 +95,7 @@ func _show(page: Dictionary) -> void:
 	Audio.play_cues([SoundCues.page_sound(Audio.db, page)])
 	_title.text = "[%s]" % page["title"]
 	_text.text = "\n".join(page["lines"])
+	Portrait.show_in(_face, Portrait.look_of_npc(_db, SystemMessages.portrait_npc(page)))
 	for b in _buttons.get_children():
 		_buttons.remove_child(b)
 		b.queue_free()

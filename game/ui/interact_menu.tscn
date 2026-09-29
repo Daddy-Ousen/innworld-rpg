@@ -23,7 +23,22 @@ layout_mode = 2
 layout_mode = 2
 text = "Use (Enter to pick, Esc to close)"
 
-[node name="Items" type="ItemList" parent="VBox"]
+[node name="Body" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Face" type="TextureRect" parent="VBox/Body"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_vertical = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Items" type="ItemList" parent="VBox/Body"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3

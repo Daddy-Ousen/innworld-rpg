@@ -1,21 +1,31 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.5 merged (PR #72), tag `m14.5-done` pushed (on 5f0a5a3).
-- M14.6 UI skin on branch `feat/m14.6-ui-skin`: font `game/assets/fonts/PixelifySans.ttf` (+ OFL text, CREDITS.md),
-  `game/ui/theme.tres` set as `gui/theme/custom` in `project.godot`, warm title screen, HUD log 16 / hint 14 (wraps),
-  `game/tests/unit_ui_theme.gd` (5 tests). ADR 0021 has the M14.6 section. ROADMAP M14.5 and M14.6 ticked.
-- Tests run (targeted, UI only): unit_ui_theme, unit_bag, unit_brawl, unit_console, unit_interact, unit_journal,
-  unit_system_messages, unit_world_view, unit_audio_settings, unit_art: all pass. No full suite (no core change).
-- Screenshots: `_scratch` shot scene = `world/main.tscn` child + `Input.parse_input_event` key presses (Esc, I, C, J, E).
+- M14.6 merged (PR #73), tag `m14.6-done` pushed (on 0f094ad).
+- M14.7 Portraits on branch `feat/m14.7-portraits`: `game/world/portrait.gd` (`Portrait`: head crop
+  `Rect2(16, 8, 32, 32)` of the front standing frame, `texture`, `look_of_npc`, `show_in`), a `Face` TextureRect in
+  `ui/interact_menu.tscn` and `ui/system_dialog.tscn`, `InteractMenu.look_of` (NPC look or patron look),
+  `SystemMessages.portrait_npc` (fate `npc`, else first news death), `game/tests/unit_portrait.gd` (11 tests).
+  ADR 0021 has the M14.7 section. ROADMAP M14.7 ticked.
+- Tests run (targeted, UI only): unit_portrait, unit_interact, unit_bag, unit_brawl, unit_canon_moments,
+  unit_system_messages, unit_world_view, unit_ui_theme, unit_art, unit_guests, unit_standing: all pass.
+  No full suite (no `game/core/` change).
+- Screenshots (use menu with Erin, fate page with Klbkch) looked right.
 
 ## Next steps
-1. Push `feat/m14.6-ui-skin`, open the PR. After the user merges: tag `m14.6-done`, tick progress, branch M14.7.
-2. M14.7 Portraits: `world/portrait.gd` (AtlasTexture from a look sheet, head crop), show in interact menu header,
-   `SystemDialog` pages (optional `npc` field), journal news, guest orders. Plan file: `.claude/plans/start-engine-works-plan-bright-patterson.md` in the user home.
-3. Full-suite tip (subagent, about 15 min), then clear import noise:
-   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
+1. Push `feat/m14.7-portraits`, open the PR. After the user merges: tag `m14.7-done`, tick progress, branch M14.8.
+2. M14.8 Balance pass (data + small rule): probe tests, HP per level, tuned XP, prices and fights. Plan file:
+   `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`. This one changes numbers that many
+   sim tests read: run the full suite (subagent, about 15 min) before the PR.
+3. After the full suite, clear import noise:
+   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles game/assets/fonts`
    `git ls-files -m game/assets/characters | xargs -r git checkout --`
+
+## M14.7 notes
+- Journal news stays text only (one Label). A face per news line would need a rebuilt journal.
+- `Import` rewrites `game/assets/fonts/PixelifySans.ttf.import` line endings: `git checkout` it before committing.
+- A menu test can feed `InteractMenu.open` hand-made option dicts (needs `id`, `name`, `npc`, `actions`, `sleep`,
+  `item`, `price`, `trades`, `ride`); `Session.gs` may be null.
 
 ## M14.6 notes
 - Theme covers Button, ItemList, PanelContainer, LineEdit, HSlider, Label, CheckBox, RichTextLabel. The System dialog
@@ -111,7 +121,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- Look at M14.6 in the game (`godot --path game`) and say if the colours or sizes need changes.
+- Look at M14.6 and M14.7 in the game (`godot --path game`) and say if colours, sizes or the face crop need changes.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Book 5 canon notes (M13.7)
