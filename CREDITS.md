@@ -484,3 +484,8 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   https://opengameart.org/content/free-crowd-cheering-sounds
 - `ambience/amb_bees.ogg` is cut from "Single Bee sound" (`bee.wav`) by IMadeIt (2 s, mono, cross-faded to loop).
   Licence: CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/). https://opengameart.org/content/single-bee-sound
+
+## Font (`game/assets/fonts/`, M14.6, ADR 0021)
+
+- `PixelifySans.ttf` is "Pixelify Sans" by Stefie Justprince. Licence: SIL Open Font License 1.1 (`OFL-PixelifySans.txt`).
+  https://github.com/google/fonts/tree/main/ofl/pixelifysans

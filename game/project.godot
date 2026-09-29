@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.7")
 Session="*res://ui/session.gd"
 Audio="*res://ui/audio.gd"
 
+[gui]
+
+theme/custom="res://ui/theme.tres"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")

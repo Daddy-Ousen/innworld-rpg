@@ -184,8 +184,8 @@ Plan accepted 2026-09-28 (ADR 0021). One branch + PR each. Inn play first, balan
 - [x] M14.2 Guests and serving: patrons at meal times, canon NPCs as guests, serve dishes for coin (save v15)
 - [x] M14.3 Relationships and reputation: night step 7 decay, town/faction reputation, prices and helpers read it (save v16)
 - [x] M14.4 Missing NPC schedules: canon NPCs who live on our maps get schedules and looks
-- [ ] M14.5 Attack NPCs: attack any NPC, a one-time fate warning for major NPCs, witnesses and reputation react
-- [ ] M14.6 UI skin: one theme and a free pixel font for every menu
+- [x] M14.5 Attack NPCs: attack any NPC, a one-time fate warning for major NPCs, witnesses and reputation react
+- [x] M14.6 UI skin: one theme and a free pixel font for every menu
 - [ ] M14.7 Portraits: NPC faces cut from the character sheets in talk, System pages and news
 - [ ] M14.8 Balance pass: probe tests, HP per level, tuned XP, prices and fights
 **Done when:** the inn earns coin from cooked food served to guests; relationships and reputation change over
