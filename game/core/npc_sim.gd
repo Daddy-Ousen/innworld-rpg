@@ -94,6 +94,7 @@ static func note_talk(gs: GameState, db: DataDb, npc: String) -> bool:
 		return false
 	n["talked_day"] = gs.clock.day()
 	gs.world.add_relationship(npc, PLAYER, int(db.rules["npc"]["talk_relationship"]))
+	Standing.on_talk(gs, db, npc)
 	return true
 
 

@@ -23,10 +23,11 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   warning; guests = patrons + canon NPCs; free pixel font (ask before the download).
   - [x] M14.0 Bag screen — merged ([PR #67](https://github.com/Daddy-Ousen/innworld-rpg/pull/67)), tag `m14.0-done` on merge commit 801e382.
   - [x] M14.1 Cooking recipes — merged ([PR #68](https://github.com/Daddy-Ousen/innworld-rpg/pull/68)), tag `m14.1-done` on merge commit 7c31db7.
-  - [ ] M14.2 Guests and serving (save v15) — branch `feat/m14.2-guests`: `core/inn_state.gd`, `core/guests.gd`,
-    `rules.inn`, table seats on `inn_interior`, `Commands.serve`, menu "Serve", patrons drawn in the view, night takings.
-    `unit_guests` (19 tests) and `sim_inn_service` green; Python 78 OK; validator 0 errors. Full suite: 102 scripts, 957 tests, all pass (after one `unit_npc_sim` fix). PR open; tick after merge.
-  - [ ] M14.3 Standing (v16) · M14.4 NPC schedules · M14.5 Attack NPCs ·
+  - [x] M14.2 Guests and serving (save v15) — merged ([PR #69](https://github.com/Daddy-Ousen/innworld-rpg/pull/69)), tag `m14.2-done` on merge commit 12c4ddd.
+  - [ ] M14.3 Standing (save v16) — branch `feat/m14.3-standing`: `core/standing.gd`, `rules.standing`,
+    `WorldState.reputation` + `contact`, night step 7 decay, greeting bands, price shift by town, friends fight,
+    inn guest bonus, character sheet lines. `unit_standing` (21 tests) green. Full suite: 103 scripts, 978 tests, all pass (after one `unit_npc_sim` fix); Python 78 OK; validator 0 errors. PR open; tick after merge.
+  - [ ] M14.4 NPC schedules · M14.5 Attack NPCs ·
     M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
 ## After M8
@@ -35,7 +36,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=15), `save_migrations` (1→…→15), `inn_state`, `guests`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=16), `save_migrations` (1→…→16), `inn_state`, `guests`, `standing`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.

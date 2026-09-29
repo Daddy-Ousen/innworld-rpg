@@ -49,14 +49,20 @@ static func format(db: DataDb, copper: int) -> String:
 
 ## The price of `good` at `shop` today: kind BUY (what the player pays) or
 ## SELL (what the shop pays). Haggled today: buy lower (at least 1), sell higher.
+## M14.3: then the town's reputation (Standing.price_shift) moves both the same way.
 static func price(gs: GameState, db: DataDb, shop: String, good: String, kind: String) -> int:
 	var base := int(db.economy.goods[good][kind])
-	if int(gs.economy.haggled.get(shop, -1)) != gs.clock.day():
-		return base
-	var share := float(rules(db).get("haggle_share", 0.0))
+	var haggled := int(gs.economy.haggled.get(shop, -1)) == gs.clock.day()
+	var price := base
+	if haggled:
+		var share := float(rules(db).get("haggle_share", 0.0))
+		price = maxi(floori(base * (1.0 - share)), 1) if kind == BUY else ceili(base * (1.0 + share))
+	var shift := Standing.price_shift(gs, db)
+	if shift == 0.0:
+		return price
 	if kind == BUY:
-		return maxi(floori(base * (1.0 - share)), 1)
-	return ceili(base * (1.0 + share))
+		return maxi(roundi(price * (1.0 - shift)), 1)
+	return maxi(roundi(price * (1.0 + shift)), 0)
 
 
 ## The trades at a shop object: [{"kind": BUY | SELL, "good", "name", "price"}],

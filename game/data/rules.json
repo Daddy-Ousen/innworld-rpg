@@ -206,5 +206,30 @@
 		"flee_line": "The guests flee the fight.",
 		"served_line": "You serve %s to %s. You are paid %s.",
 		"income_line": "The inn took in %s from your serving today."
+	},
+	"standing": {
+		"confidence": "guess",
+		"note": "M14.3 (ADR 0021). Relationships and reputation. Numbers are game balance, not canon. Reputation is +-cap; a town is the nearest settlement above a map's location, a faction is an NPC's canon faction.",
+		"cap": 100,
+		"decay_after_days": 7,
+		"relationship_decay": 1,
+		"reputation_decay_every": 3,
+		"talk_town": 1,
+		"talk_faction": 1,
+		"serve_town": 1,
+		"inn_town": "liscor",
+		"inn_share": 0.25,
+		"price_per_point": 0.004,
+		"price_max": 0.2,
+		"faction_div": 10,
+		"friend_fight": 10,
+		"bands": [
+			[-100, "hostile", "%s glares at you."],
+			[-3, "wary", "%s looks at you warily."],
+			[0, "", ""],
+			[3, "acquaintance", "%s nods at you."],
+			[6, "friend", "%s greets you warmly."],
+			[10, "close friend", "%s lights up when you come near."]
+		]
 	}
 }

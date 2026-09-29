@@ -31,6 +31,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			12: out = _migrate_12_to_13(out)
 			13: out = _migrate_13_to_14(out)
 			14: out = _migrate_14_to_15(out)
+			15: out = _migrate_15_to_16(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -148,4 +149,13 @@ static func _migrate_13_to_14(d: Dictionary) -> Dictionary:
 ## v15 (M14.2): the inn. No patrons, nothing earned yet, reputation not set.
 static func _migrate_14_to_15(d: Dictionary) -> Dictionary:
 	d["inn"] = {}
+	return d
+
+
+## v16 (M14.3): standing. No reputation yet; contact days start at the first night.
+static func _migrate_15_to_16(d: Dictionary) -> Dictionary:
+	var w: Dictionary = d.get("world", {})
+	w["reputation"] = {}
+	w["contact"] = {}
+	d["world"] = w
 	return d

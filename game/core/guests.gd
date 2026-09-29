@@ -217,6 +217,7 @@ static func serve(gs: GameState, db: DataDb, target: String, good: String) -> Di
 	gs.inn.income_today += pay
 	gs.inn.served_total += 1
 	add_reputation(gs, db, int(r["serve_reputation"]))
+	Standing.on_serve(gs, db)
 	var who := ""
 	if npc == "":
 		var g := gs.inn.guest(target.substr(GUEST.length()))
@@ -226,6 +227,7 @@ static func serve(gs: GameState, db: DataDb, target: String, good: String) -> Di
 	else:
 		gs.inn.served_npcs[npc] = slot_key(gs, db)
 		gs.world.add_relationship(npc, NpcSim.PLAYER, int(r["npc_relationship"]))
+		Standing.touch(gs, npc)
 		who = db.canon.npcs[npc]["name"]
 	gs.combat.lines.append(String(r["served_line"]) % [String(db.economy.goods[good]["name"]).to_lower(),
 			who, Economy.format(db, pay)])
@@ -297,7 +299,7 @@ static func _arrive(gs: GameState, db: DataDb, i: int) -> void:
 			bonus += int(r["flag_bonus"][f])
 	var row: Array = r["guest_curve"][0]
 	for c: Array in r["guest_curve"]:
-		if reputation(gs, db) >= int(c[0]):
+		if reputation(gs, db) + Standing.guest_bonus(gs, db) >= int(c[0]):
 			row = c
 	var free := _free_seats(gs, db)
 	var n := mini(rng.randi_range(int(row[1]), int(row[2])) + bonus, free.size())

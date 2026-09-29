@@ -4,7 +4,7 @@
 ## of the bare buy and sell actions (Interact.BUY / SELL + good), a wagon
 ## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
 ## (Interact.USE_GOOD + good). A guest lists the dishes you can serve them
-## (Interact.SERVE + good, M14.2). Enter or a double click picks one; Escape
+## (Interact.SERVE + good, M14.2). An NPC shows their standing band, e.g. "Erin (friend)" (M14.3). Enter or a double click picks one; Escape
 ## closes. Presentation only.
 class_name InteractMenu
 extends PanelContainer
@@ -23,44 +23,47 @@ func _ready() -> void:
 func open(options: Array[Dictionary], db: DataDb) -> bool:
 	_items.clear()
 	for o: Dictionary in options:
+		var label := String(o["name"])
+		if String(o.get("standing", "")) != "":
+			label += " (%s)" % o["standing"]
 		var trades: Array = o.get("trades", [])
 		for t: Dictionary in trades:
-			var i := _items.add_item("%s — %s %s (%s)" % [o["name"],
+			var i := _items.add_item("%s — %s %s (%s)" % [label,
 					"Buy" if t["kind"] == Economy.BUY else "Sell", t["name"], Economy.format(db, int(t["price"]))])
 			_items.set_item_metadata(i, [o["id"], (Interact.BUY if t["kind"] == Economy.BUY
 					else Interact.SELL) + String(t["good"])])
 		if not (o.get("ride", {}) as Dictionary).is_empty():
 			var r: Dictionary = o["ride"]
 			@warning_ignore("integer_division")
-			var i := _items.add_item("%s — Ride to %s (%s, %d h)" % [o["name"], db.maps.areas[r["to"]]["name"],
+			var i := _items.add_item("%s — Ride to %s (%s, %d h)" % [label, db.maps.areas[r["to"]]["name"],
 					Economy.format(db, int(r["price"])), int(r["minutes"]) / 60])
 			_items.set_item_metadata(i, [o["id"], Interact.RIDE])
 		if not (o.get("portal", {}) as Dictionary).is_empty():
-			var i := _items.add_item("%s — To %s (%d left today)" % [o["name"],
+			var i := _items.add_item("%s — To %s (%d left today)" % [label,
 					db.maps.areas[o["portal"]["to"]]["name"], Portal.trips_left(Session.gs, db)])
 			_items.set_item_metadata(i, [o["id"], Interact.PORTAL])
 		for c: Dictionary in o.get("serve", []):
-			var i := _items.add_item("%s — Serve %s (%s%s)" % [o["name"], String(c["name"]).to_lower(),
+			var i := _items.add_item("%s — Serve %s (%s%s)" % [label, String(c["name"]).to_lower(),
 					"ordered, " if c["ordered"] else "", Economy.format(db, int(c["pay"]))])
 			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(c["good"])])
 		if o.get("guest", false) and not (o["serve"] as Array).any(func(c: Dictionary) -> bool: return c["ordered"]):
 			var want := String(db.economy.goods[o["order"]]["name"]).to_lower()
-			var i := _items.add_item("%s — Wants %s (you have none)" % [o["name"], want])
+			var i := _items.add_item("%s — Wants %s (you have none)" % [label, want])
 			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(o["order"])])
 		for action_id: String in o["actions"]:
 			if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
 				continue
 			var hint := "" if Session.gs == null else Cooking.hint(Session.gs, db, action_id,
 					String(Interact.object_of(db, Session.gs.player.area, o["id"]).get("kind", "")))
-			var i := _items.add_item("%s — %s (%d min%s)" % [o["name"], db.actions[action_id]["name"],
+			var i := _items.add_item("%s — %s (%d min%s)" % [label, db.actions[action_id]["name"],
 					int(db.actions[action_id]["minutes"]), "" if hint == "" else "; " + hint])
 			_items.set_item_metadata(i, [o["id"], action_id])
 		if o["sleep"]:
-			var i := _items.add_item(("%s — Sleep (end the day)" % o["name"]) if int(o.get("price", 0)) == 0
-					else "%s — Rent a room and sleep (%s)" % [o["name"], Economy.format(db, int(o["price"]))])
+			var i := _items.add_item(("%s — Sleep (end the day)" % label) if int(o.get("price", 0)) == 0
+					else "%s — Rent a room and sleep (%s)" % [label, Economy.format(db, int(o["price"]))])
 			_items.set_item_metadata(i, [o["id"], Interact.SLEEP])
 		if o["item"] != "":
-			var i := _items.add_item("%s — Take %s" % [o["name"],
+			var i := _items.add_item("%s — Take %s" % [label,
 					db.combat.items.get(o["item"], {}).get("name", o["item"])])
 			_items.set_item_metadata(i, [o["id"], Interact.TAKE])
 	if _items.item_count == 0:

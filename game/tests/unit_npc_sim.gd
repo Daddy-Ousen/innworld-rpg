@@ -132,7 +132,7 @@ func test_talk_to_an_npc() -> void:
 			"objects first, then NPCs")
 	assert_eq(opts[1], {"id": "guard", "name": "Guard", "actions": ["chat"], "npc": true,
 		"sleep": false, "item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
-		"serve": [] as Array[Dictionary]})
+		"serve": [] as Array[Dictionary], "standing": ""})
 	var r := Commands.interact(gs, _db, "guard", "chat")
 	assert_eq(r["error"], "")
 	assert_eq(r["record"]["witnesses"], ["guard"])

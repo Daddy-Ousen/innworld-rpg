@@ -46,6 +46,7 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var stats := Stats.of(gs, db)
 	out.append("Stats: %s" % ", ".join(stats.keys().map(func(s: String) -> String:
 		return "%s %d" % [s.capitalize(), int(stats[s])])))
+	out.append_array(Standing.lines(gs, db))
 	out.append("")
 	out.append("Classes:")
 	if p.classes.is_empty():
