@@ -3,7 +3,12 @@
 class_name Hud
 extends Control
 
-const LOG_LINES := 6
+## The log strip shows this many lines; the full history (L) keeps HISTORY_MAX.
+const LOG_LINES := 3
+const HISTORY_MAX := 500
+## The strip is fully shown for FADE_AFTER seconds after a new line, then fades out over FADE_TIME.
+const FADE_AFTER := 6.0
+const FADE_TIME := 1.5
 ## Warn when this many awake minutes are left before a collapse.
 const WARN_BEFORE := 360
 ## HP at or below this share of max HP is shown in the warning colour.
@@ -11,7 +16,11 @@ const LOW_HP := 0.25
 const WARN_COLOR := Color(1, 0.55, 0.4, 1)
 
 var _log: Array[String] = []
+var _history: Array[String] = []
+## Seconds since the last new line.
+var _idle := 0.0
 
+@onready var _bottom: Control = $Bottom
 @onready var _status: Label = %Status
 @onready var _health: Label = %Health
 @onready var _warning: Label = %Warning
@@ -24,7 +33,7 @@ func refresh(gs: GameState, db: DataDb) -> void:
 		var loc := Movement.location_at(gs, db)
 		place = "%s · %s" % [db.maps.areas[gs.player.area]["name"],
 				db.canon.locations.get(loc, {}).get("name", loc)]
-	_status.text = "Day %d  %s    %s" % [gs.clock.day(), gs.clock.time_string(), place]
+	_status.text = "Day %d  %s    %s" % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string(), place]
 	var p := purse(gs, db)
 	if p != "":
 		_status.text += "    " + p
@@ -84,8 +93,35 @@ static func warning(gs: GameState, db: DataDb) -> String:
 
 
 func add_lines(lines: Array) -> void:
+	if lines.is_empty():
+		return
 	for line: Variant in lines:
 		_log.append(str(line))
+		_history.append(str(line))
 	if _log.size() > LOG_LINES:
 		_log = _log.slice(_log.size() - LOG_LINES)
+	if _history.size() > HISTORY_MAX:
+		_history = _history.slice(_history.size() - HISTORY_MAX)
 	_log_label.text = "\n".join(_log)
+	_idle = 0.0
+	_bottom.modulate.a = 1.0
+
+
+## Every line since the game screen opened, oldest first (the L page).
+func history() -> Array[String]:
+	return _history.duplicate()
+
+
+## 1.0 while the strip is fresh, 0.0 once it has faded.
+func log_alpha() -> float:
+	return _bottom.modulate.a
+
+
+func _process(delta: float) -> void:
+	tick(delta)
+
+
+## Fades the log strip after a few idle seconds. `_process` calls it; tests call it directly.
+func tick(delta: float) -> void:
+	_idle += delta
+	_bottom.modulate.a = clampf(1.0 - (_idle - FADE_AFTER) / FADE_TIME, 0.0, 1.0)

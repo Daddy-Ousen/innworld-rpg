@@ -1,5 +1,5 @@
 ## The Options panel (M12.1, ADR 0019): a volume slider per audio bus and
-## a mute box. Opened from the title menu and the pause menu. Each change
+## a mute box; a large text box (M15.0, Session.set_large_text). Opened from the title menu and the pause menu. Each change
 ## goes to Audio at once (it applies and saves user://settings.cfg).
 ## Esc or Back closes it. Presentation only.
 class_name OptionsMenu
@@ -18,6 +18,7 @@ var sliders := {}
 
 @onready var _rows: GridContainer = %Rows
 @onready var _mute: CheckBox = %Mute
+@onready var _large_text: CheckBox = %LargeText
 @onready var _back: Button = %Back
 
 
@@ -38,6 +39,7 @@ func _ready() -> void:
 		_rows.add_child(s)
 		sliders[bus] = s
 	_mute.toggled.connect(Audio.set_muted)
+	_large_text.toggled.connect(Session.set_large_text)
 	_back.pressed.connect(close)
 
 
@@ -46,6 +48,7 @@ func open() -> void:
 	for bus: String in sliders:
 		(sliders[bus] as HSlider).set_value_no_signal(Audio.settings.volume(bus))
 	_mute.set_pressed_no_signal(Audio.settings.muted)
+	_large_text.set_pressed_no_signal(Session.text.large)
 	show()
 	(sliders["Master"] as HSlider).grab_focus()
 

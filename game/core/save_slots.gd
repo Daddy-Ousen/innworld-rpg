@@ -47,11 +47,12 @@ static func delete(dir: String, slot: String) -> void:
 		DirAccess.remove_absolute(path(dir, slot))
 
 
-## {"slot", "exists", "ok", "day", "time", "minutes", "place", "modified"}.
+## {"slot", "exists", "ok", "day", "player_day", "time", "minutes", "place", "modified"}.
+## "day" is the calendar day; "player_day" counts from the arrival (M15.1).
 ## "ok" is false for a file that cannot be read.
 static func info(dir: String, slot: String, db: DataDb) -> Dictionary:
-	var out := {"slot": slot, "exists": exists(dir, slot), "ok": false, "day": 0, "time": "",
-		"minutes": 0, "place": "", "modified": 0}
+	var out := {"slot": slot, "exists": exists(dir, slot), "ok": false, "day": 0, "player_day": 0,
+		"time": "", "minutes": 0, "place": "", "modified": 0}
 	if not out["exists"]:
 		return out
 	out["modified"] = FileAccess.get_modified_time(path(dir, slot))
@@ -60,6 +61,7 @@ static func info(dir: String, slot: String, db: DataDb) -> Dictionary:
 		return out
 	out["ok"] = true
 	out["day"] = gs.clock.day()
+	out["player_day"] = Clock.player_day(gs.clock.day(), db.rules["clock"])
 	out["time"] = gs.clock.time_string()
 	out["minutes"] = gs.clock.total_minutes
 	out["place"] = String(db.maps.areas.get(gs.player.area, {}).get("name", gs.player.area))
@@ -73,7 +75,7 @@ static func label(i: Dictionary) -> String:
 		return "%s — empty" % name
 	if not i["ok"]:
 		return "%s — cannot be read" % name
-	return "%s — Day %d, %s, %s" % [name, int(i["day"]), i["time"], i["place"]]
+	return "%s — Day %d, %s, %s" % [name, int(i["player_day"]), i["time"], i["place"]]
 
 
 ## The slot to continue from: the newest readable save (file time, then

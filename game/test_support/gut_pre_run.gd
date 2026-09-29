@@ -11,6 +11,9 @@ func run() -> void:
 	var session := (Engine.get_main_loop() as SceneTree).root.get_node_or_null("Session")
 	if session != null:
 		session.save_dir = TEST_SAVE_DIR
+		session.text_settings_path = TEST_SETTINGS
+		DirAccess.remove_absolute(TEST_SETTINGS)
+		session.load_text_settings()
 	var audio := (Engine.get_main_loop() as SceneTree).root.get_node_or_null("Audio")
 	if audio != null:
 		DirAccess.remove_absolute(TEST_SETTINGS)

@@ -2,8 +2,8 @@
 ## days, what the player changed in the story and the drift (M6.4), and how
 ## to play.
 ## Picking a focus ("Become an [Innkeeper]") calls Commands.set_focus with
-## that class's main tags: matching actions give more XP (conviction,
-## DESIGN §3.2). Presentation only; `lines` and `focus_choices` are static
+## that class's main tags: matching actions count for more (conviction,
+## DESIGN §3.2). The screen never shows XP numbers (M15.3). Presentation only; `lines` and `focus_choices` are static
 ## and headless, so tests can check them.
 class_name Journal
 extends PanelContainer
@@ -107,7 +107,7 @@ static func focus_name(gs: GameState, db: DataDb) -> String:
 
 static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = [
-		"Day %d, %s." % [gs.clock.day(), gs.clock.time_string()],
+		"Day %d, %s." % [_pday(gs.clock.day(), db), gs.clock.time_string()],
 		"Focus: %s" % focus_name(gs, db),
 		"",
 		"Your mark on the story:",
@@ -124,14 +124,14 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	if news.is_empty():
 		out.append("  No news yet.")
 	for n: Dictionary in news:
-		out.append("  Day %d: %s%s" % [int(n["day"]),
+		out.append("  Day %d: %s%s" % [_pday(int(n["day"]), db),
 				"Rumor: " if n["kind"] == Director.RUMOR else "", n["text"]])
 	out.append("")
 	out.append("How to play:")
 	for h: String in SystemMessages.HINTS:
 		out.append("  " + h)
 	out.append("")
-	out.append("Choose a focus (Enter). Actions that match it give more XP.")
+	out.append("Choose a focus (Enter). Work that matches it brings that class closer.")
 	return out
 
 
@@ -142,11 +142,16 @@ static func changes(gs: GameState, db: DataDb) -> Array[String]:
 	for h: Dictionary in gs.world.history:
 		if h["event"] == "player.kill":
 			var npc: String = h["roles"]["victim"]
-			out.append("Day %d: You killed %s." % [int(h["day"]),
+			out.append("Day %d: You killed %s." % [_pday(int(h["day"]), db),
 					db.canon.npcs.get(npc, {}).get("name", npc)])
 		elif h.get("by", "") == Director.BY_PLAYER:
-			out.append("Day %d: %s" % [int(h["day"]), _hook_text(db, h)])
+			out.append("Day %d: %s" % [_pday(int(h["day"]), db), _hook_text(db, h)])
 	return out
+
+
+## A calendar day as the player counts it (M15.1).
+static func _pday(canon_day: int, db: DataDb) -> int:
+	return Clock.player_day(canon_day, db.rules["clock"])
 
 
 ## The hook's news, else a plain line.

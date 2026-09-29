@@ -1,14 +1,47 @@
 # Handoff
 
-## Just done (2026-09-29)
-- M14.8 merged (PR #75), tags `m14.8-done` and `m14-done` on a08c23a. M14 is archived in `docs/PROGRESS_ARCHIVE.md`.
-- User decision: leave the Rock Crab and the day-21 raid as they are (ADR 0021 M14.8). Raid options if it comes back:
-  allies in wave 1 + tougher Erin (data), and/or ally waves ignoring `rules.combat.stage.max_on_map` (core, `Stage.tick`).
-- `hp_per_level` = 3 in `rules.combat`; probes `sim_balance_*` print tables with `BALANCE_LOG=<file>`.
+## Just done (2026-09-29, M15.3)
+- M15.3 done on branch `feat/m15.3-no-xp` (stacked: font -> player day -> HUD log -> no XP; nothing pushed).
+  The M15 branches are one chain, so one PR from `feat/m15.3-no-xp` covers all four sub-milestones (ask the user
+  before push / PR). Full suite (subagent): 111 scripts, 1039 tests pass.
+- Next: the user plays M15 (`godot --path game`); then PR, merge, archive M15 in `docs/PROGRESS_ARCHIVE.md`, start M16.0
+  (art audit: screenshots of every map, list of bad tiles in the ADR, the user checks the list).
+
+## M15.2 (2026-09-29)
+- M15.2 done on branch `feat/m15.2-hud-log` (stacked on `feat/m15.1-player-day`; nothing pushed). Log strip 3 lines,
+  bottom left, see-through, fades; `Hud.history()`; L = `MessageLog`, H = `Help` (`ui/text_page.*`);
+  keys in `SystemMessages.KEYS`. Targeted tests pass (`unit_hud_log` new, `unit_world_view`, `unit_play_loop`,
+  `unit_ui_theme`, `unit_system_messages`, `unit_journal`). No core change, so no full suite.
+- Next: M15.3 (no XP numbers): `world/main.gd` XP line, `ui/character_sheet.gd` class lines + "Total level",
+  `ui/system_messages.gd` HINTS 2 and 3, `ui/journal.gd` last line. Keep `ui/console_commands.gd` numbers.
+
+## M15.1 (2026-09-29)
+- M15.1 done on branch `feat/m15.1-player-day` (stacked on `feat/m15.0-font`; nothing pushed, ask before push / PR).
+  `Clock.player_day(canon_day, rules["clock"])` (arrival = Day 1). Used by HUD, character sheet, journal, morning
+  page, "Loaded" line, log day line (`main.gd _day_line`), save slot label (`SaveSlots.info["player_day"]`).
+  The debug console keeps calendar days. Full suite: 109 scripts, 1026 tests pass.
+- Tests that print a day use the real db: convert with `Clock.player_day(day, _db.rules["clock"])`.
+- Next: M15.2 (HUD log: `ui/hud.tscn`, `ui/hud.gd` `LOG_LINES`), then M15.3 (no XP numbers).
+
+## Earlier (2026-09-29)
+- The user played M14 and sent 8 problems (screenshots in `The Wandering Inn Books 1-17 Pirateaba/Temp/`, not in git).
+- Plan written: M15 (readability, lore), M16 (maps, art, cities), M17 (XCOM-style combat) in `docs/ROADMAP.md`;
+  decisions and the user's AP rules in `docs/adr/0022-m15-m17-play-report.md`; DESIGN §1 updated.
+  Branch `docs/m15-m17-plan` (from main d75adfa). Docs only, no code.
+- Earlier: M14 merged (PR #75, tags `m14-done`), archived (PR #76). Rock Crab and day-21 raid stay as they are.
 
 ## Next steps
-1. The user plays M14 (`godot --path game`) and reports what feels wrong.
-2. Pick the next milestone with the user (see `docs/ROADMAP.md` "Later").
+1. Answered 2026-09-29: order M15 → M16 → M17 OK; extra AP uses the TOTAL level (secret: never shown, AP gains
+   silent; M15.3 removes "Total level" from the character sheet); level cost by total level + hidden cap 100
+   goes in M17.7. All in ADR 0022.
+2. M15.0 done on branch `feat/m15.0-font` (stacked on `docs/m15-m17-plan`): Pixel Operator, Large text box in
+   Options (`ui/text_settings.gd`, `Session.set_large_text`). Not pushed yet; ask the user before push / PR.
+   Screenshot helper: `game/_scratch/shot.gd` (deleted before commit) + `--write-movie`; window size is ignored.
+   Test runner: `scratchpad/run_targets.sh <script>...` (gone next session).
+3. M15.1: done (see above).
+4. M15.2: `ui/hud.tscn` (Bottom panel, Log label, Hint label), `ui/hud.gd` (`LOG_LINES` = 6).
+5. M15.3: `world/main.gd:308` (XP line), `ui/character_sheet.gd:56-59`, `ui/system_messages.gd:41-42`,
+   `ui/journal.gd:134`. Keep `ui/console_commands.gd` numbers.
 
 ## Probe notes (M14.8)
 - A test that skips days with `ToyCanon.sleep_through` piles up hunger (max HP x0.5): set `gs.economy.hunger = 0`.
@@ -18,7 +51,7 @@
 
 ## M14.7 notes
 - Journal news stays text only (one Label). A face per news line would need a rebuilt journal.
-- `Import` rewrites `game/assets/fonts/PixelifySans.ttf.import` line endings: `git checkout` it before committing.
+- `Import` may rewrite `game/assets/fonts/*.import` line endings: `git checkout` them before committing.
 - A menu test can feed `InteractMenu.open` hand-made option dicts (needs `id`, `name`, `npc`, `actions`, `sleep`,
   `item`, `price`, `trades`, `ride`); `Session.gs` may be null.
 
@@ -26,7 +59,7 @@
 - Theme covers Button, ItemList, PanelContainer, LineEdit, HSlider, Label, CheckBox, RichTextLabel. The System dialog
   keeps its own blue panel and `[Title]` headings stay blue on purpose (System voice).
 - Font `.import` is edited by hand: antialiasing=0, hinting=0, subpixel_positioning=0. A reimport keeps it.
-- Pixel font is blurry at odd small sizes: use 14 or 16.
+- Font (M15.0) is Pixel Operator on a 16 px grid: use 16 or 32 only (`unit_ui_theme` checks the scenes).
 
 ## M14.5 notes
 - Major NPC = a pending, non-mutate-target canon event names them in a role `prefer` or `requires.alive`

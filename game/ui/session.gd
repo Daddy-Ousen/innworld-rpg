@@ -17,11 +17,28 @@ var save_dir := SaveSlots.DEFAULT_DIR
 var fresh := false
 ## The start (rules.world.starts id) of the last new game; "" = the first.
 var start_id := ""
+## The player's text size (M15.0); tests point the path at a test file.
+var text: TextSettings
+var text_settings_path := TextSettings.PATH
 
 
 func _ready() -> void:
 	db = DataDb.load_dir()
 	gs = GameState.new_game(NEW_GAME_SEED, db)
+	load_text_settings()
+
+
+## Reads the text size from `text_settings_path` and applies it.
+func load_text_settings() -> void:
+	text = TextSettings.load_file(text_settings_path)
+	text.apply()
+
+
+## Large (32 px) or normal (16 px) text; applied and saved at once.
+func set_large_text(on: bool) -> void:
+	text.large = on
+	text.apply()
+	text.save(text_settings_path)
 
 
 func set_state(new_gs: GameState) -> void:

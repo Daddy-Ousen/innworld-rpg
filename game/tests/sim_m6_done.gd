@@ -200,7 +200,7 @@ func test_m6_done() -> void:
 	assert_eq(gs.world.status(CHIEFTAIN_EVENT), Director.CHANGED, "one canon event changed")
 	assert_gt(gs.world.drift, 0.0)
 	var hook_news: String = _db.canon.events[CHIEFTAIN_EVENT]["hooks"][0]["news"]
-	assert_has(Journal.changes(gs, _db), "Day %d: %s" % [FIRST_DAY + 1, hook_news], "the journal shows it")
+	assert_has(Journal.changes(gs, _db), "Day %d: %s" % [Clock.player_day(FIRST_DAY + 1, _db.rules["clock"]), hook_news], "the journal shows it")
 
 	# A class, and some levels.
 	assert_false(gs.progression.classes.is_empty(), "a class: offers %s" % [_offers])

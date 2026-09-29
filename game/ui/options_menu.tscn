@@ -42,6 +42,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Mute all sound"
 
+[node name="LargeText" type="CheckBox" parent="Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Large text"
+
 [node name="Back" type="Button" parent="Margin/VBox"]
 unique_name_in_owner = true
 layout_mode = 2

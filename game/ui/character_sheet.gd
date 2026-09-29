@@ -32,8 +32,8 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var p := gs.progression
 	var awake := gs.clock.awake_minutes
 	var out: Array[String] = [
-		"Day %d, %s. Awake %dh %02dm." % [gs.clock.day(), gs.clock.time_string(), awake / 60, awake % 60],
-		"Race: %s. Total level: %d." % [gs.race.capitalize(), p.total_level()],
+		"Day %d, %s. Awake %dh %02dm." % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string(), awake / 60, awake % 60],
+		"Race: %s." % gs.race.capitalize(),
 		Hud.health(gs, db),
 	]
 	if Economy.on(db):
@@ -52,11 +52,8 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	if p.classes.is_empty():
 		out.append("  None yet.")
 	for id: String in p.classes:
-		var level := p.level_of(id)
-		var need := Levels.xp_to_next(level, db.rules["levels"])
 		var note := "  (needs a breakthrough)" if Levels.is_blocked(p, id, db.rules["levels"]) else ""
-		out.append("  %s level %d   %.0f / %.0f XP%s" % [db.classes[id]["name"], level,
-				float(p.classes[id]["xp"]), need, note])
+		out.append("  %s level %d%s" % [db.classes[id]["name"], p.level_of(id), note])
 	out.append("")
 	out.append("Skills:")
 	if p.skills.is_empty():

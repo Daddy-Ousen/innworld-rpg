@@ -124,6 +124,7 @@ func test_the_journal_shows_the_news_and_the_change() -> void:
 	_beat(gs, "rock_crab")
 	ToyCanon.sleep_through(gs, _db, 11)
 	var text := "\n".join(Journal.lines(gs, _db))
-	assert_string_contains(text, "Day 11: " + _hook_news("b1.erin_screams_off_rock_crab"))
+	var shown := "Day %d: " % Clock.player_day(11, _db.rules["clock"])  # the player counts from the arrival
+	assert_string_contains(text, shown + _hook_news("b1.erin_screams_off_rock_crab"))
 	assert_string_contains(text, "Drift: 0.50. The story has started to change.")
-	assert_eq(Journal.changes(gs, _db), ["Day 11: " + _hook_news("b1.erin_screams_off_rock_crab")] as Array[String])
+	assert_eq(Journal.changes(gs, _db), [shown + _hook_news("b1.erin_screams_off_rock_crab")] as Array[String])

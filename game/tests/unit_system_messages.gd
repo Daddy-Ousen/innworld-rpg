@@ -177,11 +177,11 @@ func test_sheet_lists_classes_skills_and_offers() -> void:
 	_offer(gs, "warrior")
 	gs.progression.declined.append("pacifist")
 	text = "\n".join(CharacterSheet.lines(gs, _db))
-	assert_string_contains(text, "[X] level 2   10 / 200 XP")
+	assert_string_contains(text, "  [X] level 2\n")
 	assert_string_contains(text, "[S]   from [X] level 2")
 	assert_string_contains(text, "Open offers:")
 	assert_string_contains(text, "Declined:")
-	assert_string_contains(text, "Total level: 2")
+	assert_false(text.contains("Total level"), "the total level is a secret of the world (M15.3)")
 
 
 # --- Beds -------------------------------------------------------------------
@@ -249,7 +249,7 @@ func test_main_scene_sleep_opens_the_dialog() -> void:
 	dialog.choose(SystemMessages.NEXT)
 	assert_false(main.is_busy())
 	assert_true(session.gs.progression.has_class("innkeeper"))
-	assert_string_contains(main.hud.get_node("%Log").text, "Day 9, 06:00.")
+	assert_string_contains(main.hud.get_node("%Log").text, "Day 2, 06:00.")
 
 
 func test_a_knock_out_page_replaces_the_collapse_page() -> void:

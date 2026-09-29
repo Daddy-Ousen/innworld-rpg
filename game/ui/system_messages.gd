@@ -35,11 +35,30 @@ const SPARE := "spare"
 
 const SILENT_LINE := "The System is silent."
 
+## The key list: the help page (H, M15.2).
+const KEYS: Array[String] = [
+	"WASD / arrows: walk (into a monster: attack)",
+	"Space: wait",
+	"B: block",
+	"T: throw the held item",
+	"X: drop the held item",
+	"E: use or take what is next to you",
+	"F: eat",
+	"I: bag",
+	"Z: sleep",
+	"C: character",
+	"J: journal",
+	"L: message history",
+	"H: this help",
+	"Esc: menu (save, load, quit)",
+	"`: debug console",
+]
+
 ## How to play: on the welcome page and in the journal (M6.1).
 const HINTS: Array[String] = [
 	"Walk with WASD or the arrow keys. E uses what is next to you.",
-	"Every action gives XP. At night the System can offer you a class.",
-	"J opens the journal. Choose a focus there: matching actions give more XP.",
+	"What you do all day shapes you. At night the System can offer you a class.",
+	"J opens the journal. Choose a focus there: work that matches it brings that class closer.",
 	"Sleep in a bed (Z). C shows your character. Esc opens the menu (save, load).",
 	"The game saves itself each morning.",
 ]
@@ -71,7 +90,7 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	var morning: Array[String] = []
 	if out.is_empty():
 		morning.append(SILENT_LINE)
-	morning.append("You wake on day %d at %s." % [gs.clock.day(), gs.clock.time_string()])
+	morning.append("You wake on day %d at %s." % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string()])
 	out.append(page(MORNING, "Morning", morning))
 	return out
 
