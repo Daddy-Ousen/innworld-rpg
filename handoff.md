@@ -1,21 +1,21 @@
 # Handoff
 
-## Just done (2026-09-28/29)
-- M14 "Engine works" planned and accepted (ADR `docs/adr/0021-m14-engine-works.md`, ROADMAP M14 section,
-  plan file `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`). 9 sub-milestones.
-- M14.0 Bag screen on branch `feat/m14.0-bag` (not committed yet):
-  - `core/economy.gd`: `good_for_item`, `hold_good`, `stow`, `drop_good`; `economy_db.gd` validates the good
-    `item` field; `economy.json` new tool goods rolling_pin, horseshoe, stone.
-  - `core/combat.gd`: public `cannot_act`. `core/commands.gd`: `hold_good`, `stow`, `drop_good`.
-  - `core/interact.gd`: picks `HOLD_GOOD`, `DROP_GOOD`, `STOW`.
-  - `ui/bag.gd` + `ui/bag.tscn` (key I), wired in `world/main.gd` / `main.tscn`; HUD help text.
-  - `tests/unit_bag.gd` (11 tests). Targeted runs green.
+## Just done (2026-09-29)
+- M14.0 merged (PR #67), tag `m14.0-done` made locally on 801e382 (push it with the M14.1 branch).
+- M14.1 Cooking recipes on branch `feat/m14.1-cooking` (not committed yet):
+  - `game/data/recipes.json` (4 recipes), `game/core/cooking.gd` (`after_action`, `can_cook`, `cook`, `hint`).
+  - `core/economy_db.gd`: loads and validates recipes, `recipes_for(action)`. `core/commands.gd`: calls
+    `Cooking.after_action` after `Economy.after_action` in `perform` and `interact`.
+  - `data/economy.json`: goods flour, vegetables, meat, dry_pasta, simple_meal, stew, pasta_dish; Krshia and Celum
+    stalls sell ingredients. `ui/interact_menu.gd`: hint on cook actions.
+  - `tests/unit_cooking.gd` (12 tests, green), `unit_economy` celum stall list updated. ADR 0021 M14.1 section.
+  - Python validator not changed (it reads canon only, not economy.json).
 
 ## Next steps
-1. M14.0 full suite: 99 scripts, 925 tests, all pass (about 15 min). Run the full suite with Bash
-   run_in_background, not in a subagent: a subagent hands back before it ends and kills the run.
-2. M14.0 is committed and has a PR. After merge: tick ROADMAP M14.0 on main, tag `m14.0-done`.
-3. M14.1 Cooking recipes (see the plan file).
+1. M14.1 full suite green (100 scripts, 937 tests), committed, PR #68 open, tag `m14.0-done` pushed.
+   After the user merges: tick ROADMAP M14.1 on main, tag `m14.1-done`.
+2. M14.2 Guests and serving (save v15): see the plan file. Dish `sell` prices are the base for serving income.
+3. Full suite: run it with Bash run_in_background (not in a subagent), about 15 min.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must
