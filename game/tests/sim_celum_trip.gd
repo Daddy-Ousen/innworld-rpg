@@ -26,11 +26,13 @@ func _next_to(gs: GameState, object_id: String) -> void:
 func _play() -> GameState:
 	var gs := GameState.new_game(SEED, _db, "celum")
 	_to_area(gs, "celum_square")
+	_to_area(gs, "celum_main_street")
 	_to_area(gs, "celum_runners_guild")
 	_next_to(gs, "request_board")
 	for i in 5:
 		assert_eq(Commands.interact(gs, _db, "request_board", "deliver_parcel")["error"], "")
 	assert_between(gs.economy.coins, 15, 30)
+	_to_area(gs, "celum_main_street")
 	_to_area(gs, "celum_square")
 	_next_to(gs, "celum_stall")
 	assert_eq(Commands.buy(gs, _db, "celum_stall", "bread")["error"], "")

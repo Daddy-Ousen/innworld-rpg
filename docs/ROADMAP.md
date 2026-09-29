@@ -227,8 +227,13 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
   - [x] M16.4.2 Rooms: Adventurers' Guild, Mages' Guild
   - [x] M16.4.3 Room: Watch barracks
   - [x] M16.4.4 Rooms: Gnoll tavern, Tailless Thief
-- [ ] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
+- [x] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
   Frenzied Hare street, the Stitchworks street, homes)
+  Sub-steps (user, 2026-09-29: 4 new streets and 3 furnished rooms; ADR 0025):
+  - [x] M16.5.0 Streets: main street, Springbottom Street, Frenzied Hare street, poor quarter; square doors moved
+  - [x] M16.5.1 Room: Runners' Guild
+  - [x] M16.5.2 Room: Frenzied Hare
+  - [x] M16.5.3 Room: Stitchworks
 - [ ] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
 **Done when:** every map passes the audit list; buildings look like buildings; every door and shop says what it
 is; Liscor and Celum each have at least 5 districts; NPC schedules and canon places still work

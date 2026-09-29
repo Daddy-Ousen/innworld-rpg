@@ -159,7 +159,8 @@ func test_every_real_sign_has_art_and_the_real_marks_have_text() -> void:
 
 func test_every_enterable_house_door_has_a_sign() -> void:
 	var maps := MapDb.load_dir()
-	for id: String in ["celum_square", "inn_hill"]:
+	for id: String in ["celum_square", "celum_main_street", "celum_stitchworks_street", "celum_hare_street",
+			"celum_poor_quarter", "inn_hill"]:
 		for e: Dictionary in maps.areas[id]["exits"]:
 			var r := MapDb.rect_of(e["at"])
 			var edge := r.position.x == 0 or r.position.y == 0 or r.end.x == maps.size(id).x or r.end.y == maps.size(id).y

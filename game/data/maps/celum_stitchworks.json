@@ -8,11 +8,15 @@
 	"note": "Design map (M10.0, ADR 0017). Octavia's shop in Celum, where Erin sets the Celum end of the Albez door (3.30). The size, the layout and the door's place are guesses. The shop counter sells what the street door sells.",
 	"zones": {},
 	"exits": [
-		{"at": [5, 7, 1, 1], "to": "celum_square", "arrive": [2, 13], "minutes": 0}
+		{"at": [5, 7, 1, 1], "to": "celum_stitchworks_street", "arrive": [17, 6], "minutes": 0}
 	],
+	"crowd": {"lanes": [{"path": [[3, 4], [8, 4]], "walkers": 1, "looks": ["race_human"], "hours": [8, 20]}]},
 	"objects": [
 		{"id": "octavia_counter", "kind": "counter", "at": [3, 2], "name": "Octavia's counter", "actions": ["buy_supplies", "sell_goods"], "solid": true, "shop": "stitchworks"},
 		{"id": "potion_shelves", "kind": "shelves", "at": [1, 1], "name": "Shelves of potions and dyes", "actions": [], "solid": true},
+		{"id": "herb_shelves", "kind": "shelves", "at": [6, 1], "name": "Bundles of herbs", "actions": [], "solid": true},
+		{"id": "potion_wall", "kind": "shelves", "at": [8, 1], "name": "Wall of potions", "actions": [], "solid": true},
+		{"id": "mixing_desk", "kind": "table", "at": [8, 5], "name": "Mixing desk", "actions": [], "solid": true},
 		{"id": "albez_door_celum", "kind": "door", "at": [10, 3], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.anchor_at_stitchworks"],
 			"portal": {"to": "inn_interior", "pos": [3, 12], "power_flags": ["erin.magical_grounds"]}}

@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-09-29, M16.5 complete: Celum districts)
+- Branch `feat/m16.5-celum` (stacked on `feat/m16.4-liscor`; nothing pushed, ask before push / PR). ADR `docs/adr/0025-m16-5-celum-districts.md`
+  (canon table + results). One commit for M16.5.0-3.
+- Graph: `celum_gate` - `celum_square` (hub) - `celum_main_street` (N, Runners' Guild door) / `celum_stitchworks_street` (W, "Springbottom Street",
+  Stitchworks door + `stitchworks_door` shop plaque) / `celum_hare_street` (E, Hare door) - `celum_poor_quarter` (S of Hare street).
+  Rooms keep size, door cell and all old objects; furniture only added. Mage's / Adventurers' / Merchants' Guild are signed closed plaques.
+- Gotchas: `ToyMaps.walk_to_area` is ONE hop (tests walk square, street, room). A wide exit shifts `arrive` per cell: `arrive` must be free
+  floor for every cell of the exit rect. A `plaque` object needs a `sign` (icon `none` = empty sign, used for the shop plaque).
+- Waiting on the user: look at the 4 Celum streets and 3 rooms in the game (`godot --path game`): do the streets, signs and crowds look right?
+- Next: M16.6 the other maps (Esthelm, road camp, inn hill, ruins entrance...: new buildings, props, signs). Plan mode first. The FULL suite
+  (subagent) runs at M16.6's end, before its PR (M16.0-M16.5 changed no `game/core/` code).
+- Generators (scratchpad `gen_celum.py`, `patch_square.py`, `run_targets.sh`, `_scratch` screenshot scene) are gone next session; the JSON is the source.
+  Screenshot recipe: scene with a SubViewport + `WorldView` (see M16.1 notes); `_scratch` is deleted before commit.
+
 ## Just done (2026-09-29, M16.4 complete: M16.4.0 - M16.4.4)
 - M16.4.4 done: Tailless Thief + Gnoll tavern rooms, Krshia and Ilvriss evening goals. All door plaques are exits now. Next: M16.5 Celum districts
   (plan mode first; reuse `Crowd`, `SignArt`, house tiles; the same graph idea: gate, square, guild street, Frenzied Hare street, Stitchworks street, homes;

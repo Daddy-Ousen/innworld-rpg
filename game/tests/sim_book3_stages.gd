@@ -242,7 +242,7 @@ func test_sitting_with_ryoka_and_fals_changes_the_event() -> void:
 
 func test_corusdeer_soup_goes_on_sale_and_ryoka_leaves_celum() -> void:
 	var gs := _copy(76)
-	var obj := Interact.object_of(_db, "celum_square", "stitchworks_door")
+	var obj := Interact.object_of(_db, "celum_stitchworks_street", "stitchworks_door")
 	var goods := func() -> Array: return Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["good"])
 	assert_false(goods.call().has("corusdeer_soup"), "not before Erin makes it")
 	ToyCanon.sleep_through(gs, _db, 76)
