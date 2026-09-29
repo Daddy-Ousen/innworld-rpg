@@ -1,6 +1,6 @@
 # ADR 0023 — M16.0 art audit
 
-Date: 2026-09-29 · Status: list written; M16.1 and M16.2 done 2026-09-29 (results at the end)
+Date: 2026-09-29 · Status: list written; M16.1, M16.2 and M16.3 done 2026-09-29 (results at the end)
 
 ## Context
 M16 fixes maps and art (ADR 0022 items 3–6). M16.0 only looks and lists. No map, art or code changes.
@@ -135,3 +135,25 @@ door art) and the two object doors (24,3), (1,14) keep their old look; the yello
 M16.3 replaces these with signs and markers. Big roofs (Liscor market bands, Celum's north row) are plain repeats; M16.4
 and M16.5 rebuild those maps as districts with smaller houses.
 Tests: `unit_ground_art` (house pieces, groups, doors, ruins, winter, trees), `tools/tests/test_build_houses.py`.
+
+## M16.3 result (2026-09-29)
+Schema change (rule 11, approved with the M16.3 plan): optional field `sign` = `{"icon": <key of objects.json "signs">,
+"text"?: label}` on a map object and on a map exit. Not read by `game/core/`; `unit_sign_art` checks the shape.
+Art: `game/assets/objects/signs.png`, built by `tools/build_signs.py` (original pixel art: bracket, chains, board and a
+14 px icon; ten icons: bread, mug, bed, anvil, potion, badge, coin, home, closed, outhouse, plus one empty cell). The
+region table is `signs` in `game/data/objects.json`; `python tools/build_signs.py --check` compares it with the tool.
+
+| Audit item | What changed |
+|---|---|
+| 14 celum_square doors | The two guild doors, the Frenzied Hare door and the Stitchworks side door are signed exits (badge, mug, potion). The Rat's Tail object door has a mug sign; the market stall a coin sign. The Stitchworks object door (1,14) has no sign of its own: the side door (1,13) already names the shop. |
+| 15 room and gate exits | No yellow tint any more. `SignArt.marks` gives every unsigned exit a white arrow per cell that points to the nearest map edge, and a "To <map name>" label (first cell). An exit under an object (stairs) gets the label only. |
+| 16 market stalls | Krshia's stall (bread) and Lism's stall (coin) carry different signs and names. |
+| 17 doorless buildings | New object kind `plaque` (empty art; the sign is the object): "A private home" or "Closed" on the south wall of each house on `liscor_market` (7) and `celum_square` (2). |
+| Inn | The inn door on `inn_hill` has a mug sign "The Wandering Inn"; `outhouse_1` has an outhouse sign. |
+
+`SignArt` (`game/world/sign_art.gd`) is pure (headless): marks, where a sign hangs (wall to the right, then left, else
+above; a plaque is "here") and the label fade (full within 2 cells, gone at 4). `WorldView._add_mark` draws it: the sign
+is a y-sorted sprite, the arrow and the label live in the Marks layer, and `refresh` fades labels by the player's distance.
+Left for later: maps rebuilt in M16.4 / M16.5 will need their own signs and plaques; `esthelm_ruins` and the other
+outdoor maps have only arrows. Tests: `unit_sign_art` (7), `tools/tests/test_build_signs.py`; `unit_gated_exits` now
+counts marker nodes instead of yellow rects.

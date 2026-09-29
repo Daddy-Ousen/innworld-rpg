@@ -7,7 +7,7 @@
 	"note": "Design map. The inn on a hill is canon (1.00); the layout is a guess. M13.0: the builders' lumber and stone lie by the inn while the Antinium build (4.18-4.29); two outhouses stand after it (4.29).",
 	"zones": {},
 	"exits": [
-		{"at": [16, 11, 1, 1], "to": "inn_interior", "arrive": [12, 14], "minutes": 0},
+		{"at": [16, 11, 1, 1], "to": "inn_interior", "arrive": [12, 14], "minutes": 0, "sign": {"icon": "mug", "text": "The Wandering Inn"}},
 		{"at": [15, 23, 2, 1], "to": "floodplains_south", "arrive": [16, 1], "minutes": 20},
 		{"at": [31, 2, 1, 2], "to": "bee_cave", "arrive": [1, 11], "minutes": 45}
 	],
@@ -17,7 +17,7 @@
 		{"id": "old_horseshoe", "kind": "horseshoe", "at": [8, 15], "name": "Rusty horseshoe in the grass", "actions": [], "item": "horseshoe"},
 		{"id": "building_lumber", "kind": "woodpile", "at": [22, 6], "name": "Builders' lumber", "actions": ["repair_furniture"], "when_flags": ["wandering_inn.expansion_begun"], "unless_flags": ["wandering_inn.third_floor_built"]},
 		{"id": "building_stone", "kind": "stones", "at": [24, 7], "name": "Builders' stone", "actions": [], "when_flags": ["wandering_inn.expansion_begun"], "unless_flags": ["wandering_inn.third_floor_built"]},
-		{"id": "outhouse_1", "kind": "door", "at": [7, 9], "name": "Outhouse", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]},
+		{"id": "outhouse_1", "kind": "door", "at": [7, 9], "name": "Outhouse", "actions": [], "sign": {"icon": "outhouse"}, "when_flags": ["wandering_inn.third_floor_built"]},
 		{"id": "outhouse_2", "kind": "door", "at": [8, 9], "name": "Outhouse", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]}
 	],
 	"overlays": [

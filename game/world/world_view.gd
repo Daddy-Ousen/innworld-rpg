@@ -57,7 +57,11 @@ const ANIM_FPS := 6.0
 ## One step glide, the same as the held-key repeat in main.gd.
 const STEP_TIME := 0.14
 const OBJECT_COLOR := Color("#e8c547")
-const EXIT_COLOR := Color(1.0, 1.0, 0.7, 0.3)
+## M16.3: the way-out arrow (an exit with no sign), its outline and the size of its points.
+const ARROW_COLOR := Color(1.0, 1.0, 1.0, 0.75)
+const ARROW_EDGE := Color(0.08, 0.08, 0.08, 0.6)
+## A sign hangs this many px above the floor line of the wall cell it is drawn on.
+const SIGN_LIFT := 4
 const NOSE := 4 * U
 const NPC_COLOR := Color("#3b6fd1")
 ## Name and number font size: two times Pixel Operator's 16 px grid (M15.0).
@@ -122,6 +126,10 @@ var atlas: Dictionary = {}
 var sprites: Dictionary = {}
 ## Object kind → objects.json entry (see object_look).
 var object_art: Dictionary = {}
+## data/objects.json "signs" (M16.3): icon id -> region on the signs sheet.
+var sign_table: Dictionary = {}
+## Each sign / arrow label with its cell: {"label": Label, "cell": Vector2i}; faded by the player's distance.
+var _sign_labels: Array[Dictionary] = []
 ## The player's sprite (null = the red square).
 var look: CharacterSprite
 ## NPC id → name shown over its marker.
@@ -184,6 +192,7 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	_winter_flag = winter_flag
 	_winter = false
 	object_art = load_object_art()
+	sign_table = SignArt.load_table()
 	if audio == null:
 		audio = AudioDb.load_file()
 	if atmosphere == null:
@@ -236,6 +245,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	if new_area:
 		_show_area(gs.player.area)
 	atmosphere.set_time(gs.clock.minute(), winter)
+	_update_sign_labels(gs.player.pos())
 	_show_npcs(gs)
 	_show_guests(gs)
 	_show_monsters(gs)
@@ -561,9 +571,9 @@ func _show_area(id: String) -> void:
 	for child in marks.get_children():
 		marks.remove_child(child)
 		child.queue_free()
-	for e: Dictionary in _maps.exits_on(id):
-		var r := MapDb.rect_of(e["at"])
-		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
+	_sign_labels.clear()
+	for m: Dictionary in SignArt.marks(_maps, id):
+		_add_mark(m)
 	var light_sources: Array = []
 	for o: Dictionary in _maps.objects_on(id):
 		var cell := Vector2i(int(o["at"][0]), int(o["at"][1]))
@@ -589,6 +599,74 @@ func _show_area(id: String) -> void:
 	camera.limit_top = 0
 	camera.limit_right = size.x * TILE
 	camera.limit_bottom = size.y * TILE
+
+
+## One SignArt mark (M16.3): a hanging sign in the y-sorted Props layer, or a way-out arrow, and a
+## name label that shows when the player is near. The marker (in the Marks layer) holds the arrow and
+## the label and has the meta "mark" = the mark's kind. No sign art: a small square.
+func _add_mark(m: Dictionary) -> void:
+	var cell: Vector2i = m["cell"]
+	var marker := Node2D.new()
+	marker.set_meta("mark", String(m["kind"]))
+	marker.position = cell_center(cell)
+	var label_top := 10.0
+	if m["kind"] == "arrow":
+		var holder := Node2D.new()
+		holder.rotation = Vector2.DOWN.angle_to(Vector2(m["dir"]))
+		holder.add_child(_poly(PackedVector2Array([Vector2(-8, -6), Vector2(8, -6), Vector2(0, 6)]), ARROW_EDGE))
+		holder.add_child(_poly(PackedVector2Array([Vector2(-5, -4), Vector2(5, -4), Vector2(0, 3)]), ARROW_COLOR))
+		marker.add_child(holder)
+	elif m["kind"] == "sign":
+		var region := SignArt.icon_region(sign_table, String(m["icon"]))
+		var hang := cell
+		match String(m["place"]):
+			"right":
+				hang += Vector2i.RIGHT
+			"left":
+				hang += Vector2i.LEFT
+		var lift := float(SIGN_LIFT)
+		if m["place"] == "above":
+			lift = float(_object_height(String(m["id"]))) if m["source"] == "object" else float(TILE)
+		var at := cell_center(hang) - Vector2(0, lift)
+		if region.size == Vector2.ZERO:
+			_rect(at - Vector2(3, 3) * U, Vector2(6, 6) * U, OBJECT_COLOR)
+			marker.position = at
+		else:
+			var s := _region_sprite("signs", region)
+			s.position = at
+			props.add_child(s)
+			marker.position = at
+			label_top = region.size.y - TILE / 2.0 + 2.0  # just above the board
+	if String(m["text"]) != "":
+		_add_label(marker, String(m["text"]), label_top)
+		var label := marker.get_child(marker.get_child_count() - 1) as Label
+		label.modulate.a = 0.0
+		_sign_labels.append({"label": label, "cell": cell})
+	marks.add_child(marker)
+
+
+## The pixel height of the art of the object `id` on this area (32 when it has none).
+func _object_height(id: String) -> int:
+	for o: Dictionary in _maps.objects_on(area):
+		if o["id"] == id:
+			var art := object_look(o, object_art, _winter)
+			return int((art["region"] as Rect2).size.y) if not art.is_empty() else TILE
+	return TILE
+
+
+## A filled polygon node.
+func _poly(points: PackedVector2Array, color: Color) -> Polygon2D:
+	var p := Polygon2D.new()
+	p.polygon = points
+	p.color = color
+	return p
+
+
+## Fades each sign label by how far the player (at `at`) is from it.
+func _update_sign_labels(at: Vector2i) -> void:
+	for s: Dictionary in _sign_labels:
+		if is_instance_valid(s["label"]):
+			(s["label"] as Label).modulate.a = SignArt.label_alpha(SignArt.king_dist(at, s["cell"]))
 
 
 ## One marker per NPC in the area (named after the NPC id), with its

@@ -215,7 +215,7 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
   and mountains; water edges that work for thin water; a bridge / stepping-stones object for crossings; fix the maps
 - [x] M16.2 Buildings: a building block draws as a house: roof on top, front wall with windows and a door on the
   bottom row. Styles: Drake stone (Liscor), Human timber and brick (Celum), plain (villages)
-- [ ] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
+- [x] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
   badge) and its name when the player is near; doors you can enter get a marker; other doors say "Closed" or
   "A private home". New optional object field `sign`
 - [ ] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,

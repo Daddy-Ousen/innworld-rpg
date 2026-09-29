@@ -1,6 +1,23 @@
 # Handoff
 
-## Just done (2026-09-29, M16.2)
+## Just done (2026-09-29, M16.3)
+- M16.3 signs on branch `feat/m16.3-signs` (stacked on `feat/m16.2-buildings`; nothing pushed, ask before push / PR).
+  Result table in `docs/adr/0023-m16-art-audit.md` ("M16.3 result"). Passing: `unit_sign_art` (7), `unit_gated_exits`,
+  `unit_ground_art`, `unit_art`, `unit_world_view`, `unit_map_db`, `unit_sound_cues`, `unit_monster_art`, `unit_ambience`,
+  `sim_liscor_depths`, `sim_canon_book1..5`, `sim_walk_day`, Python 91, validator 0 errors. No core change, so no full suite (M16.6).
+- Waiting on the user: look at `celum_square`, `liscor_market`, `inn_hill` and a room door in the game
+  (`godot --path game`): do the signs, arrows, plaques and labels (they show within 2-4 cells) look right?
+- Design: object or exit field `sign` = `{icon, text?}`. Icons: `game/data/objects.json` key `signs` (built by
+  `tools/build_signs.py`; `--check` compares). `game/world/sign_art.gd` (`SignArt.marks`, `label_alpha`) is pure;
+  `WorldView._add_mark` draws (marker nodes in the Marks layer carry meta `mark` = sign / arrow / label; sign sprites go
+  in Props). Unsigned exits get an arrow to the nearest map edge and a "To <map name>" label. Kind `plaque` = empty art,
+  the sign is the object (place "here"). `EXIT_COLOR` is gone.
+- New M16.4/M16.5 maps: give each door an exit `sign` (or an object `sign`), and doorless houses a `plaque` object.
+  `unit_sign_art.test_every_enterable_house_door_has_a_sign` checks `celum_square` and `inn_hill` only; extend its list.
+- Next: M16.4 Liscor districts (plan mode first).
+- Screenshot scratch scene (`game/_scratch`, deleted): env OUT, ONLY, WINTER, POS ("x,y" = player cell, so labels show).
+
+## M16.2 (2026-09-29)
 - M16.2 buildings on branch `feat/m16.2-buildings` (stacked on `feat/m16.1-nature-art`; nothing pushed, ask before
   push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.2 result"). Passing: `unit_ground_art` (21),
   `unit_art`, `unit_world_view`, `unit_map_db`, `unit_gated_exits`, `unit_sound_cues`, `unit_monster_art`,
