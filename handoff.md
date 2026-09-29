@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-09-29, M16.4.0 + M16.4.1)
+- Branch `feat/m16.4-liscor` (stacked on `feat/m16.3-signs`; nothing pushed, ask before push / PR). ADR `docs/adr/0024-m16-4-liscor-districts.md`
+  has the canon table (chapter refs) and results. User answers: 6 street maps; interiors for guilds, Watch barracks, taverns.
+- M16.4.0 crowd: `game/world/crowd.gd` (pure), `WorldView._show_crowd/_move_crowd`, map field `crowd` (lanes of walkers, real time,
+  hours 6-22). M16.4.1 streets: `liscor_plaza`, `liscor_guild_street`, `liscor_watch`, `liscor_homes` + market west exit.
+  Generator (scratchpad `gen_liscor.py`, gone next session) wrote them; edit the JSON directly now.
+- Doors of enterable buildings are `stone_door` cells with a sign PLAQUE beside them (`gs_adventurers`, `gs_mages`, `gs_thief`,
+  `watch_barracks`, `homes_gnoll_tavern`). In M16.4.2-4: add the room map, an exit on the door cell with `sign`, delete that plaque,
+  add the room id to `ROOMS` in `unit_liscor_map.gd`, a mood in `audio.json` moods.by_map (and ambience if a tavern), and
+  crowd lanes only on cells free of solid objects (`unit_crowd` checks).
+- Canon notes for the rooms (ADR table): Adventurers' Guild = one hall, counter (Selys), job board, tables, stairs to a small
+  upper floor; Mages' Guild = front counter with a Drake clerk; Watch House = big ground room with tables and a desk near the door,
+  Zevara's office upstairs; Tailless Thief = Drake-only costly inn, counter with kegs, kitchen; Gnoll tavern = Gnoll staff and patrons.
+  Olesm is Council, NOT at the guild. Terbore, Tekshia, Peslas have no look sheet: no NPC.
+- NPC schedule edits (Selys at the guild 8-12 / 13-18; Watch off-hours in the barracks) can break `sim_npc_day`, `sim_walk_day`,
+  `sim_canon_fights`, `unit_console` (beilmark line): run them after each edit.
+- Scratch screenshot scene sources: scratchpad `scratchscene/` (copy to `game/_scratch/`, env OUT, ONLY, WINTER, POS; delete before commit).
+
 ## Just done (2026-09-29, M16.3)
 - M16.3 signs on branch `feat/m16.3-signs` (stacked on `feat/m16.2-buildings`; nothing pushed, ask before push / PR).
   Result table in `docs/adr/0023-m16-art-audit.md` ("M16.3 result"). Passing: `unit_sign_art` (7), `unit_gated_exits`,

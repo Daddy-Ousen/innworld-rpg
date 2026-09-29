@@ -1,0 +1,52 @@
+{
+	"schema_version": 1,
+	"id": "liscor_homes",
+	"name": "Liscor homes and taverns",
+	"location": "liscor",
+	"confidence": "guess",
+	"note": "Design map (M16.4). Canon: Selys lives in a tall-ceilinged Drake apartment (1.34) and Krshia in a padded Gnoll apartment (1.45); where they are is not stated. The Gnoll tavern has mostly Gnoll customers and staff (2.17); its street and name are not stated.",
+	"zones": {},
+	"exits": [
+		{"at": [15, 0, 2, 1], "to": "liscor_plaza", "arrive": [15, 22], "minutes": 2}
+	],
+	"crowd": {"lanes": [{"path": [[1, 11], [30, 11]], "walkers": 3, "looks": ["race_gnoll", "race_drake", "race_gnoll"]}, {"path": [[15, 1], [15, 22]], "walkers": 3, "looks": ["race_drake", "race_gnoll", "race_human"]}]},
+	"objects": [
+		{"id": "homes_selys", "kind": "plaque", "at": [4, 9], "name": "Selys's home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "homes_gnoll_tavern", "kind": "plaque", "at": [11, 9], "name": "Gnoll tavern", "actions": [], "sign": {"icon": "mug"}},
+		{"id": "homes_krshia", "kind": "plaque", "at": [20, 9], "name": "Krshia's home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "homes_home_a", "kind": "plaque", "at": [28, 9], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "homes_home_b", "kind": "plaque", "at": [3, 19], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "homes_home_c", "kind": "plaque", "at": [10, 19], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "homes_home_d", "kind": "plaque", "at": [20, 19], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "homes_home_e", "kind": "plaque", "at": [27, 19], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "homes_well", "kind": "well", "at": [12, 12], "name": "Well", "actions": ["carry_water"], "solid": true},
+		{"id": "homes_brazier", "kind": "brazier", "at": [22, 12], "name": "Brazier", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {",": "tall_grass", ".": "grass", "B": "building", "D": "stone_door", "_": "cobble", "b": "building_b"},
+	"rows": [
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"BBBBBBBBbbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBbbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBbbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBbbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBbbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBbbDbbbb__BBBBBBBBbbbbbbb",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"BBBBBBBbbbbbbbb__BBBBBBBbbbbbbbb",
+		"________________________________",
+		"..............____..............",
+		"...,,,,.......____....,,,,,,....",
+		"...,,,,.......____....,,,,,,...."
+	]
+}

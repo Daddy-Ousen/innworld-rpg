@@ -1,0 +1,52 @@
+{
+	"schema_version": 1,
+	"id": "liscor_guild_street",
+	"name": "Liscor guild street",
+	"location": "liscor",
+	"confidence": "guess",
+	"note": "Design map (M16.4). Canon: the Adventurers' Guild has a plain sign (1.63); the Mage's Guild has a crystal-ball-and-wand sign (1.11); the Tailless Thief is on the north side of town (2.09). Where the guilds stand and the Merchants' and Runners' Guilds are guesses (most cities have them; their places in Liscor are not stated).",
+	"zones": {},
+	"exits": [
+		{"at": [15, 23, 2, 1], "to": "liscor_plaza", "arrive": [15, 1], "minutes": 2}
+	],
+	"crowd": {"lanes": [{"path": [[1, 7], [30, 7]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_drake", "race_human"]}, {"path": [[1, 18], [30, 18]], "walkers": 3, "looks": ["race_gnoll", "race_drake", "race_human"]}, {"path": [[15, 10], [15, 22]], "walkers": 2, "looks": ["race_drake", "race_gnoll"]}]},
+	"objects": [
+		{"id": "gs_adventurers", "kind": "plaque", "at": [5, 5], "name": "Adventurers' Guild", "actions": [], "sign": {"icon": "sword"}},
+		{"id": "gs_mages", "kind": "plaque", "at": [13, 5], "name": "Mages' Guild", "actions": [], "sign": {"icon": "star"}},
+		{"id": "gs_thief", "kind": "plaque", "at": [22, 5], "name": "The Tailless Thief", "actions": [], "sign": {"icon": "mug"}},
+		{"id": "gs_runners", "kind": "plaque", "at": [29, 5], "name": "Runners' Guild", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "gs_merchants", "kind": "plaque", "at": [4, 15], "name": "Merchants' Guild", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "gs_home_a", "kind": "plaque", "at": [11, 15], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "gs_home_b", "kind": "plaque", "at": [20, 15], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "gs_home_c", "kind": "plaque", "at": [28, 15], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "gs_brazier_west", "kind": "brazier", "at": [8, 8], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "gs_brazier_east", "kind": "brazier", "at": [23, 8], "name": "Brazier", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {"B": "building", "D": "stone_door", "_": "cobble", "b": "building_b"},
+	"rows": [
+		"BBBBBBBBBBbbbbbbBBBBBBBBBBBBbbbb",
+		"BBBBBBBBBBbbbbbbBBBBBBBBBBBBbbbb",
+		"BBBBBBBBBBbbbbbbBBBBBBBBBBBBbbbb",
+		"BBBBBBBBBBbbbbbbBBBBBBBBBBBBbbbb",
+		"BBBBBBBBBBbbbbbbBBBBBBBBBBBBbbbb",
+		"BBBBDBBBBBbbDbbbBBBBBDBBBBBBbbbb",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"BBBBBBBBBbbbbbb__BBBBBBBBbbbbbbb",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________"
+	]
+}

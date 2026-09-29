@@ -50,6 +50,12 @@ class BuildSignsTest(unittest.TestCase):
     def test_objects_json_matches_the_sheet(self):
         self.assertEqual(bs.check(), [])
 
+    def test_the_plaque_kind_is_the_empty_cell(self):
+        import json
+
+        kinds = json.loads(bs.OBJECTS_JSON.read_text(encoding="utf-8"))["kinds"]
+        self.assertEqual(kinds["plaque"]["region"], bs.region(bs.NONE))
+
 
 if __name__ == "__main__":
     unittest.main()

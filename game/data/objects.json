@@ -40,7 +40,7 @@
 		"papers": {"sheet": "lpc_interior", "region": [288, 64, 32, 32]},
 		"tombstone": {"sheet": "lpc_atlas", "region": [448, 672, 32, 56]},
 		"grave_cross": {"sheet": "lpc_atlas", "region": [480, 672, 32, 56]},
-		"plaque": {"sheet": "signs", "region": [240, 0, 24, 28]}
+		"plaque": {"sheet": "signs", "region": [336, 0, 24, 28]}
 	},
 	"signs_note": "M16.3 (ADR 0023): hanging signs from game/assets/objects/signs.png, built by tools/build_signs.py (python tools/build_signs.py --check compares this table). A map object or exit with \"sign\": {\"icon\": <key of signs>, \"text\"?: label} draws that sign; the label shows when the player is near (default: the object's name, or the exit's destination name). Kind \"plaque\" is an empty cell: the sign is the whole object (a wall plate on a house with no door).",
 	"signs": {
@@ -54,6 +54,10 @@
 		"home": [168, 0, 24, 28],
 		"closed": [192, 0, 24, 28],
 		"outhouse": [216, 0, 24, 28],
-		"none": [240, 0, 24, 28]
+		"sword": [240, 0, 24, 28],
+		"star": [264, 0, 24, 28],
+		"shield": [288, 0, 24, 28],
+		"scroll": [312, 0, 24, 28],
+		"none": [336, 0, 24, 28]
 	}
 }
