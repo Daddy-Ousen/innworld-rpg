@@ -116,14 +116,14 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
 
 - Rule for who gets a schedule: a canon NPC who has a place on one of our maps (or a scene there), so the player
   can meet them. NPCs whose place has no map (a guild hall, a tavern, a bakery, a mansion) stay out.
-- Added (14): Liscor `tkrn`, `jeiss`, `dreshhi`, `culyss`, `gazi_pathseeker`; Celum `grev`, `hess`, `octavia`,
+- Added (13): Liscor `tkrn`, `jeiss`, `dreshhi`, `culyss`, `gazi_pathseeker`; Celum `grev`, `hess`, `octavia`,
   `agnes`, `maran`, `safry`, `eterell`; Esthelm `umbral`. Every entry is `"confidence": "guess"` for hours and spots.
 - Canon flags steer them: Gazi walks the market while `liscor.gazi_in_city` and guards the inn hill while
   `gazi.protects_the_inn` (1.37-1.54). Maran and Safry work at the inn while `*.works_at_the_inn` (days 103-105) and
   not at the Hare then. Eterell works only until `celum_runners_guild.new_guildmaster`. Umbral needs `esthelm.saved`.
 - Guards (`tkrn`, `jeiss`, `umbral`) and Gazi have `combat` blocks for M14.5. Tkrn and Jeiss visit the inn in the
   evening after `erin.met_liscor_watch`, so they can be canon guests (M14.2).
-- Looks: 13 new LPC sheets (`gazi_pathseeker` reuses the `gazi_of_reim` look). Grev uses a `teen` body: the tool
+- Looks: 13 new LPC sheets (`gazi_pathseeker` has the same parts as `gazi_of_reim`). Grev uses a `teen` body: the tool
   does not read LPC child hair (`hair/<name>/child/<colour>.png` is one file, not walk/ folders).
 - Left out on purpose:
   - No map: `terbore`, `tekshia` (Adventurers' Guild), `peslas` (Tailless Thief), `timbor_parithad`, `ulia_ovena`,

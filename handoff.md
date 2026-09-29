@@ -3,7 +3,7 @@
 ## Just done (2026-09-29)
 - M14.3 merged (PR #70), tag `m14.3-done` pushed (on 8365ae8). ROADMAP M14.3 ticked on the M14.4 branch.
 - M14.4 NPC schedules on branch `feat/m14.4-schedules` (data only; NOT yet committed):
-  - `game/data/npc_behaviour.json`: 13 new entries + `gazi_pathseeker`. `game/data/appearance.json`: 14 looks.
+  - `game/data/npc_behaviour.json`: 13 new entries. `game/data/appearance.json`: 13 looks.
   - 13 new sheets `game/assets/characters/<id>.png` + `.import` (untracked: add them). `CREDITS.md` changed by the
     sprite tool. ADR 0021 has the M14.4 section (who was left out and why).
   - Targeted tests all pass (list in progress.md). No full suite: data-only change.
