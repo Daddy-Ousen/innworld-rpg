@@ -12,8 +12,8 @@
   - Python validator not changed (it reads canon only, not economy.json).
 
 ## Next steps
-1. Read the full-suite result (`scratchpad/full.log`; summary + FAIL/Parse Error lines only). Expected: 100 scripts.
-   If green: commit (no Claude trailer), push branch + tag `m14.0-done`, open PR, tick ROADMAP M14.1 after merge.
+1. M14.1 full suite green (100 scripts, 937 tests), committed, PR #68 open, tag `m14.0-done` pushed.
+   After the user merges: tick ROADMAP M14.1 on main, tag `m14.1-done`.
 2. M14.2 Guests and serving (save v15): see the plan file. Dish `sell` prices are the base for serving income.
 3. Full suite: run it with Bash run_in_background (not in a subagent), about 15 min.
 

@@ -23,7 +23,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   warning; guests = patrons + canon NPCs; free pixel font (ask before the download).
   - [x] M14.0 Bag screen — merged ([PR #67](https://github.com/Daddy-Ousen/innworld-rpg/pull/67)), tag `m14.0-done` on merge commit 801e382.
   - [ ] M14.1 Cooking recipes — branch `feat/m14.1-cooking`: `data/recipes.json`, `core/cooking.gd`, new goods and shop
-    stock, menu hint, `unit_cooking` (12 tests) green. Full suite running; tick after merge.
+    stock, menu hint, `unit_cooking` (12 tests) green. Full suite: 100 scripts, 937 tests, all pass. PR [#68](https://github.com/Daddy-Ousen/innworld-rpg/pull/68) open; tick after merge.
   - [ ] M14.2 Guests (v15) · M14.3 Standing (v16) · M14.4 NPC schedules · M14.5 Attack NPCs ·
     M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
