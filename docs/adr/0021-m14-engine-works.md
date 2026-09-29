@@ -181,3 +181,27 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
 - Not done on purpose: the journal is one text label, so its news lines have no faces (the night's news page has
   them). No core change and no save change: presentation only.
 - Tests: `unit_portrait` (11). Screenshots checked: use menu with Erin, fate warning with Klbkch.
+
+## M14.8 Balance pass
+
+- Three probe tests print tables (set `BALANCE_LOG` to a file) and keep loose asserts. Same seeds every run.
+  - `sim_balance_progress`: 3 seeds, 22 days of the scripted inn day. First class by night 3; total level 5–6 on day 22
+    (matches the M6.5 note). XP and level cost were fine: not changed.
+  - `sim_balance_money`: 3 seeds, 14 days at the inn (cook, serve, sleep), ingredients charged at Krshia's prices, three
+    loaves a day. Takings 56 to 170 copper a day against about 35 spent: profit from day 1, week 2 takes about 2.5 x
+    its costs. Prices, recipes and the guest curve were fine: not changed.
+  - `sim_balance_fights`: real hit rules, nothing frozen. Duels on the Floodplains (fists) and the day-21 raid.
+- The one rule change: `rules.combat.hp_per_level` (optional, 0 if missing) adds HP per total class level in
+  `Stats.max_hp`. Before this HP stayed 20 for the whole game while enemies hit for 4–8. Tried 2, 3 and 4: at level 5 a
+  pack of three Goblin grunts was a coin-flip loss with 2, a hard win (9–18 HP left) with 3 and an easy win with 4.
+  Chosen: 3 (level 5 = 35 HP, level 20 = 80 HP). No save change: max HP is worked out, not stored; a hurt player keeps
+  their HP when a level comes.
+- Findings left open (not tuned, asked the user):
+  - A Rock Crab (30 HP, 4–7 damage) beats a fist-only player at level 5 on every seed. Canon: it is a thing to avoid,
+    and the player can flee, use the repel item or hold a weapon. Left as is.
+  - The day-21 raid is not winnable by one player with the real rules. Erin (24 HP) falls in three turns to eight
+    raiders; wave 2 (Klbkch and the Designated Worker) is held back while 12 or more Goblins stand on the map
+    (`rules.combat.stage.max_on_map`), and there are 17–18 by then. Tried in the probe only: allies in wave 1, Erin at 60
+    HP, both together. The player still fell (39–74 turns). A knock-out leaves the canon (the safe result), so this is
+    a design choice for the user, not a bug. `sim_goblin_raid` still tests the win with foes frozen.
+- Tests: `unit_stats` (+2), `sim_balance_progress`, `sim_balance_money`, `sim_balance_fights` (2).

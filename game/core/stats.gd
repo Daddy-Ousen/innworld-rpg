@@ -22,9 +22,11 @@ static func get_stat(gs: GameState, db: DataDb, stat: String) -> int:
 	return int(of(gs, db).get(stat, 0))
 
 
-## hp_base + hp_per_endurance × endurance, times the hunger share (M8.6:
+## hp_base + hp_per_endurance × endurance + hp_per_level × total class level
+## (M14.8; optional, 0 when missing), times the hunger share (M8.6:
 ## Economy.hp_mult), at least 1.
 static func max_hp(gs: GameState, db: DataDb) -> int:
 	var c: Dictionary = db.rules["combat"]
-	var full := int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance")
+	var full := int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance") \
+			+ int(c.get("hp_per_level", 0)) * gs.progression.total_level()
 	return maxi(roundi(full * Economy.hp_mult(gs, db)), 1)
