@@ -157,3 +157,15 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
   brawl event, done or changed), so they come from day 29.
 - Not done on purpose: bystanders do not flee, a hostile NPC does not follow the player to another map, and no
   console command (the console `kill` still kills at once, with no warning).
+
+## M14.6 UI skin
+
+- Font: Pixelify Sans (OFL 1.1, 79 KB, from github.com/google/fonts), approved by the user on 2026-09-29. Import
+  settings: no antialiasing, no hinting, no subpixel positioning (crisp pixels).
+- `game/ui/theme.tres` is the project theme (`gui/theme/custom`): font, warm brown panels with a tan border, buttons
+  (normal, hover, pressed, disabled, gold focus ring), ItemList, LineEdit, HSlider. Every menu picks it up with no
+  per-scene code.
+- Kept on purpose: the blue `[Title]` colour on System-voice headings and the System dialog's own blue panel (the System
+  is a different voice from the inn). The title screen backdrop and title turned warm. HUD log 13 -> 16, hint 12 -> 14
+  and it now wraps (a pixel font is blurry at odd small sizes).
+- Tests: `unit_ui_theme` (5). Screenshots checked: title, pause, bag, character, journal, use menu.

@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.07, 0.12, 1)
+color = Color(0.1, 0.065, 0.04, 1)
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -37,7 +37,7 @@ theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Center/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.8, 1, 1)
+theme_override_colors/font_color = Color(1, 0.82, 0.45, 1)
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 text = "Innworld RPG"

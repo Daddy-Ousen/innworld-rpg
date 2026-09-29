@@ -1,23 +1,27 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.4 merged (PR #71), tag `m14.4-done` pushed (on 6c8bd55). ROADMAP M14.4 ticked on the M14.5 branch.
-- M14.5 Attack NPCs on branch `feat/m14.5-attack-npcs` (NOT yet committed): `game/core/brawl.gd` (new),
-  `rules.brawl` in `game/data/rules.json`, save v17 (`hostile_day` on roster entries; `_migrate_16_to_17`),
-  `Commands.attack_npc`, `Interact.ATTACK` + red Attack row (`ui/interact_menu.gd`), `SystemMessages.fate_page` +
-  `SystemDialog` (STRIKE / SPARE, `struck` signal), `main.gd` `attack_npc`, `Combat.in_danger` also true for a hostile
-  NPC, `NpcSim` calls `Brawl.act` before `NpcReact`, audio page cue `fate`. ADR 0021 has the M14.5 section.
-- `game/tests/unit_brawl.gd`: 19 tests pass (incl. the game-screen flow). Validator 0 errors; Python 78 OK. Full suite
-  ran once: 4 failures, all fixed: `sim_inn_brawl` (M14.4's Tkrn and Jeiss killed the day-28 adventurers; their inn visits
-  now need `wandering_inn.adventurers_attacked_goblins`), `unit_game_state`, `unit_npc_sim` (new fields), plus a
-  freed-button lambda in `system_dialog.gd`. Reruns of the touched areas are green.
+- M14.5 merged (PR #72), tag `m14.5-done` pushed (on 5f0a5a3).
+- M14.6 UI skin on branch `feat/m14.6-ui-skin`: font `game/assets/fonts/PixelifySans.ttf` (+ OFL text, CREDITS.md),
+  `game/ui/theme.tres` set as `gui/theme/custom` in `project.godot`, warm title screen, HUD log 16 / hint 14 (wraps),
+  `game/tests/unit_ui_theme.gd` (5 tests). ADR 0021 has the M14.6 section. ROADMAP M14.5 and M14.6 ticked.
+- Tests run (targeted, UI only): unit_ui_theme, unit_bag, unit_brawl, unit_console, unit_interact, unit_journal,
+  unit_system_messages, unit_world_view, unit_audio_settings, unit_art: all pass. No full suite (no core change).
+- Screenshots: `_scratch` shot scene = `world/main.tscn` child + `Input.parse_input_event` key presses (Esc, I, C, J, E).
 
 ## Next steps
-1. Push `feat/m14.5-attack-npcs` and open the PR (the work is committed). After the user merges: tag `m14.5-done`, tick ROADMAP M14.5 on the M14.6 branch.
-4. M14.6 UI skin: ask the user before the pixel font download (name, source, size).
-5. Full-suite tip (subagent, about 15 min), then clear import noise:
+1. Push `feat/m14.6-ui-skin`, open the PR. After the user merges: tag `m14.6-done`, tick progress, branch M14.7.
+2. M14.7 Portraits: `world/portrait.gd` (AtlasTexture from a look sheet, head crop), show in interact menu header,
+   `SystemDialog` pages (optional `npc` field), journal news, guest orders. Plan file: `.claude/plans/start-engine-works-plan-bright-patterson.md` in the user home.
+3. Full-suite tip (subagent, about 15 min), then clear import noise:
    `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
    `git ls-files -m game/assets/characters | xargs -r git checkout --`
+
+## M14.6 notes
+- Theme covers Button, ItemList, PanelContainer, LineEdit, HSlider, Label, CheckBox, RichTextLabel. The System dialog
+  keeps its own blue panel and `[Title]` headings stay blue on purpose (System voice).
+- Font `.import` is edited by hand: antialiasing=0, hinting=0, subpixel_positioning=0. A reimport keeps it.
+- Pixel font is blurry at odd small sizes: use 14 or 16.
 
 ## M14.5 notes
 - Major NPC = a pending, non-mutate-target canon event names them in a role `prefer` or `requires.alive`
@@ -107,7 +111,7 @@
 - Without `MSYS_NO_PATHCONV=1`, Git Bash turns `/palette_definitions/` into `C:/Program Files/Git/...`.
 
 ## Waiting on the user
-- M14.6: approve the pixel font download (name, source, size) when we get there.
+- Look at M14.6 in the game (`godot --path game`) and say if the colours or sizes need changes.
 - Delete old remote branches `data/book4-*` (optional).
 
 ## Book 5 canon notes (M13.7)
