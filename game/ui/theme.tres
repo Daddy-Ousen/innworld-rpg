@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=14 format=3]
 
-[ext_resource type="FontFile" path="res://assets/fonts/PixelifySans.ttf" id="1_font"]
+[ext_resource type="FontFile" path="res://assets/fonts/PixelOperator.ttf" id="1_font"]
 
 [sub_resource type="StyleBoxFlat" id="panel"]
 bg_color = Color(0.15, 0.1, 0.07, 0.96)

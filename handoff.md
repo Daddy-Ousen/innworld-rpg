@@ -11,9 +11,10 @@
 1. Answered 2026-09-29: order M15 → M16 → M17 OK; extra AP uses the TOTAL level (secret: never shown, AP gains
    silent; M15.3 removes "Total level" from the character sheet); level cost by total level + hidden cap 100
    goes in M17.7. All in ADR 0022.
-2. M15.0: ask before downloading Pixel Operator (file, source, size). Then swap the theme font
-   (`game/ui/theme.tres` `default_font`), `CREDITS.md`, font `.import` flags (antialiasing=0, hinting=0,
-   subpixel_positioning=0).
+2. M15.0 done on branch `feat/m15.0-font` (stacked on `docs/m15-m17-plan`): Pixel Operator, Large text box in
+   Options (`ui/text_settings.gd`, `Session.set_large_text`). Not pushed yet; ask the user before push / PR.
+   Screenshot helper: `game/_scratch/shot.gd` (deleted before commit) + `--write-movie`; window size is ignored.
+   Test runner: `scratchpad/run_targets.sh <script>...` (gone next session).
 3. M15.1 files: `ui/hud.gd`, `ui/journal.gd`, `ui/system_messages.gd`, `ui/character_sheet.gd`,
    `ui/pause_menu.gd`, `world/main.gd` (all print `gs.clock.day()`).
 4. M15.2: `ui/hud.tscn` (Bottom panel, Log label, Hint label), `ui/hud.gd` (`LOG_LINES` = 6).
@@ -28,7 +29,7 @@
 
 ## M14.7 notes
 - Journal news stays text only (one Label). A face per news line would need a rebuilt journal.
-- `Import` rewrites `game/assets/fonts/PixelifySans.ttf.import` line endings: `git checkout` it before committing.
+- `Import` may rewrite `game/assets/fonts/*.import` line endings: `git checkout` them before committing.
 - A menu test can feed `InteractMenu.open` hand-made option dicts (needs `id`, `name`, `npc`, `actions`, `sleep`,
   `item`, `price`, `trades`, `ride`); `Session.gs` may be null.
 
@@ -36,7 +37,7 @@
 - Theme covers Button, ItemList, PanelContainer, LineEdit, HSlider, Label, CheckBox, RichTextLabel. The System dialog
   keeps its own blue panel and `[Title]` headings stay blue on purpose (System voice).
 - Font `.import` is edited by hand: antialiasing=0, hinting=0, subpixel_positioning=0. A reimport keeps it.
-- Pixel font is blurry at odd small sizes: use 14 or 16.
+- Font (M15.0) is Pixel Operator on a 16 px grid: use 16 or 32 only (`unit_ui_theme` checks the scenes).
 
 ## M14.5 notes
 - Major NPC = a pending, non-mutate-target canon event names them in a role `prefer` or `requires.alive`

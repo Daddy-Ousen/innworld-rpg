@@ -60,9 +60,10 @@ const OBJECT_COLOR := Color("#e8c547")
 const EXIT_COLOR := Color(1.0, 1.0, 0.7, 0.3)
 const NOSE := 4 * U
 const NPC_COLOR := Color("#3b6fd1")
-const NPC_NAME_SIZE := 10
-## Names are drawn this many times larger, then scaled down, so they stay
-## sharp under the camera zoom.
+## Name and number font size: two times Pixel Operator's 16 px grid (M15.0).
+## Names are drawn this many times larger than they show (about 11 px), then
+## scaled down, so they stay sharp under the camera zoom.
+const NAME_FONT_SIZE := 32
 const TEXT_SCALE := 3
 ## A hidden monster is drawn as this tile.
 const HIDDEN_TILE := "rock"
@@ -370,7 +371,7 @@ func _flash(node: Node2D) -> void:
 func _number(at: Vector2, amount: int, you: bool) -> void:
 	var label := Label.new()
 	label.text = "-%d" % amount
-	label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
+	label.add_theme_font_size_override("font_size", NAME_FONT_SIZE)
 	label.add_theme_color_override("font_color", HURT_YOU_COLOR if you else HURT_OTHER_COLOR)
 	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
 	label.add_theme_constant_override("outline_size", 8)
@@ -564,7 +565,7 @@ func _show_area(id: String) -> void:
 		_rect(at + Vector2(2, 2) * U, Vector2(TILE - 4 * U, TILE - 4 * U), OBJECT_COLOR)
 		var label := Label.new()
 		label.text = String(o["name"]).left(1)
-		label.add_theme_font_size_override("font_size", 10 * U)
+		label.add_theme_font_size_override("font_size", 16)
 		label.add_theme_color_override("font_color", Color.BLACK)
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marks.add_child(label)
@@ -858,7 +859,7 @@ func _square(marker: Node2D, half: float, color: Color) -> void:
 func _add_label(marker: Node2D, text: String, top: float = 5.0 * U) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_size_override("font_size", NPC_NAME_SIZE * TEXT_SCALE)
+	label.add_theme_font_size_override("font_size", NAME_FONT_SIZE)
 	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.8))
 	label.add_theme_constant_override("outline_size", 6)
 	label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR

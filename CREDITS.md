@@ -485,7 +485,9 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `ambience/amb_bees.ogg` is cut from "Single Bee sound" (`bee.wav`) by IMadeIt (2 s, mono, cross-faded to loop).
   Licence: CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/). https://opengameart.org/content/single-bee-sound
 
-## Font (`game/assets/fonts/`, M14.6, ADR 0021)
+## Font (`game/assets/fonts/`, M15.0, ADR 0022)
 
-- `PixelifySans.ttf` is "Pixelify Sans" by Stefie Justprince. Licence: SIL Open Font License 1.1 (`OFL-PixelifySans.txt`).
-  https://github.com/google/fonts/tree/main/ofl/pixelifysans
+- `PixelOperator.ttf` and `PixelOperator-Bold.ttf` are "Pixel Operator" by Jayvee Enaguas (HarvettFox96).
+  Licence: CC0 1.0 (`CC0-PixelOperator.txt`). https://www.dafont.com/pixel-operator.font,
+  source: https://notabug.org/HarvettFox96/ttf-pixeloperator
+- M14.6 used "Pixelify Sans" (OFL 1.1); M15.0 replaced it because it was hard to read.

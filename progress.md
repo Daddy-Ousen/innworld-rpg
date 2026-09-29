@@ -20,7 +20,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - [x] M13 — Book 5 (The Last Light). M13.0, M13.T, M13.1–M13.7 merged; tags `m13.0-done` … `m13.7-done` and `m13-done` on merge commit 17b6bab ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). Detail in the archive and ADR 0020.
 - [x] M14 — Engine works: bag, cooking, guests, standing, NPC schedules, attack NPCs, UI skin, portraits, balance. M14.0–M14.8 merged; tags `m14.0-done` … `m14.8-done` and `m14-done` on merge commit a08c23a ([PR #75](https://github.com/Daddy-Ousen/innworld-rpg/pull/75)). Detail in the archive and ADR 0021. The user still has to play it (`godot --path game`).
 
-- [ ] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). Planned 2026-09-29, ADR 0022. Not started.
+- [ ] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). Planned 2026-09-29, ADR 0022. M15.0 font done (branch `feat/m15.0-font`, not pushed); M15.1-M15.3 next.
 - [ ] M16 — Maps, art and cities (art audit, rocks/cliffs/water, real buildings, door signs, Liscor and Celum districts). Planned, not started.
 - [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). Planned, not started. User's AP rules in ADR 0022.
 

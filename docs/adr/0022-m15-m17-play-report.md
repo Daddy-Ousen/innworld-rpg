@@ -78,6 +78,21 @@ Code facts found:
 - Which Liscor and Celum districts are canon in Books 1–5 (M16.4 / M16.5 start with a place list from the
   canon data, checked by the user).
 
+## M15.0 Font (2026-09-29)
+- Pixel Operator by Jayvee Enaguas, CC0 1.0, `pixel_operator.zip` (104 KB) from dafont.com, download approved by
+  the user. Only `PixelOperator.ttf` and `PixelOperator-Bold.ttf` ship, with `CC0-PixelOperator.txt`. Pixelify Sans
+  and its OFL file are removed.
+- The font is drawn on a 16 px grid. Every size we set is a multiple of 16 (`unit_ui_theme` checks the HUD, System
+  dialog and title scenes): title 36 → 32, System dialog 18 → theme size, HUD hint 14 → theme size. World labels
+  (NPC names, damage numbers) draw at 32 and scale down by 3 (`WorldView.NAME_FONT_SIZE`); the object letter is 16.
+- Import flags stay as in M14.6: antialiasing 0, hinting 0, subpixel positioning 0.
+- Text size: `TextSettings` (`ui/text_settings.gd`) keeps `large_text` in the `display` section of
+  `user://settings.cfg` next to the volumes. `Session.set_large_text` sets the project theme's `default_font_size`
+  (16 or 32); controls with no size override follow at once. The Options panel has a "Large text" box. Tests use
+  the test settings file (`gut_pre_run`).
+- The project has no stretch mode: a bigger window shows more world at 1:1, so 16 px text is small on a 1920x1080
+  screen. Large text is the fix for that; a UI scale mode was not needed.
+
 ## Risks
 - M17 changes every fight test (stages, brawls, traps, helpers). M17.2 budgets a full port and a full-suite run.
 - Canon stages were tuned for the old turns (M14.8). M17.7 redoes the balance probes.
