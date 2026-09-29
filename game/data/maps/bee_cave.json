@@ -14,7 +14,9 @@
 		{"id": "bee_nest", "kind": "bee_nest", "at": [28, 11], "name": "Huge honeycomb nest", "actions": [], "solid": true},
 		{"id": "bee_comb_north", "kind": "honeycomb", "at": [25, 6], "name": "Honeycomb on the wall", "actions": [], "solid": true},
 		{"id": "bee_comb_south", "kind": "honeycomb", "at": [25, 16], "name": "Honeycomb on the wall", "actions": [], "solid": true},
-		{"id": "cave_loose_stones", "kind": "stones", "at": [8, 12], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "cave_loose_stones", "kind": "stones", "at": [8, 12], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "deco_cobweb_1", "kind": "cobweb", "at": [21, 4], "name": "Cobweb", "actions": []},
+		{"id": "deco_glow_mushrooms_2", "kind": "glow_mushrooms", "at": [19, 17], "name": "Glowing mushrooms", "actions": []}
 	],
 	"legend": {",": "tall_grass", ".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [

@@ -11,7 +11,11 @@
 		{"at": [0, 11, 1, 2], "to": "esthelm_ruins", "arrive": [30, 11], "minutes": 120}
 	],
 	"objects": [
-		{"id": "creler_cave_stones", "kind": "stones", "at": [9, 12], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "creler_cave_stones", "kind": "stones", "at": [9, 12], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "deco_cobweb_1", "kind": "cobweb", "at": [17, 5], "name": "Cobweb", "actions": []},
+		{"id": "deco_bones_2", "kind": "bones", "at": [14, 10], "name": "Old bones", "actions": []},
+		{"id": "deco_bones_3", "kind": "bones", "at": [22, 16], "name": "Old bones", "actions": []},
+		{"id": "deco_glow_mushrooms_4", "kind": "glow_mushrooms", "at": [14, 15], "name": "Glowing mushrooms", "actions": []}
 	],
 	"legend": {",": "tall_grass", ".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [

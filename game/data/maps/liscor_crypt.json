@@ -23,7 +23,13 @@
 		{"id": "goblin_fire", "kind": "campfire", "at": [28, 3], "name": "Goblin cookfire", "actions": [], "solid": true},
 		{"id": "goblin_bedroll_1", "kind": "bedroll", "at": [26, 7], "name": "Filthy bedroll", "actions": []},
 		{"id": "goblin_bedroll_2", "kind": "bedroll", "at": [29, 7], "name": "Filthy bedroll", "actions": []},
-		{"id": "crypt_loose_stones", "kind": "stones", "at": [6, 13], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "crypt_loose_stones", "kind": "stones", "at": [6, 13], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "deco_cobweb_1", "kind": "cobweb", "at": [11, 1], "name": "Cobweb", "actions": []},
+		{"id": "deco_cobweb_2", "kind": "cobweb", "at": [25, 1], "name": "Cobweb", "actions": []},
+		{"id": "deco_bones_3", "kind": "bones", "at": [4, 19], "name": "Old bones", "actions": []},
+		{"id": "deco_bones_4", "kind": "bones", "at": [3, 16], "name": "Old bones", "actions": []},
+		{"id": "deco_glow_mushrooms_5", "kind": "glow_mushrooms", "at": [3, 19], "name": "Glowing mushrooms", "actions": []},
+		{"id": "deco_glow_mushrooms_6", "kind": "glow_mushrooms", "at": [28, 13], "name": "Glowing mushrooms", "actions": []}
 	],
 	"legend": {".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [
