@@ -1,24 +1,31 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.2 merged (PR #69), tag `m14.2-done` pushed (on 12c4ddd). ROADMAP M14.2 ticked on the M14.3 branch.
-- M14.3 Standing on branch `feat/m14.3-standing` (committed, PR open; full suite 103 scripts, 978 tests, all pass):
-  - `game/core/standing.gd` (new), `rules.standing` in `game/data/rules.json`, `WorldState.reputation` + `contact`
-    (`world_state.gd`), save v16 (`game_state.gd`, `save_migrations.gd` 15 -> 16).
-  - Hooks: `night.gd` step 7 (`Standing.night`), `npc_sim.gd` `note_talk` (`Standing.on_talk`), `guests.gd` (serve:
-    `on_serve`, `touch`; curve: `guest_bonus`), `economy.gd` `price` (`price_shift`), `npc_react.gd` `is_fighter`
-    (`is_friend`), `interact.gd` (option "standing", greeting line), `data_db.gd` (`Standing.validate`),
-    `ui/interact_menu.gd` (band in the name), `ui/character_sheet.gd` (`Standing.lines`).
-  - Tests: `tests/unit_standing.gd` (21). Targeted: unit_guests, unit_night, unit_economy, unit_game_state,
-    unit_npc_react, unit_save_slots, unit_interact all pass. ADR 0021 M14.3 section written.
+- M14.3 merged (PR #70), tag `m14.3-done` pushed (on 8365ae8). ROADMAP M14.3 ticked on the M14.4 branch.
+- M14.4 NPC schedules on branch `feat/m14.4-schedules` (data only; NOT yet committed):
+  - `game/data/npc_behaviour.json`: 13 new entries. `game/data/appearance.json`: 13 looks.
+  - 13 new sheets `game/assets/characters/<id>.png` + `.import` (untracked: add them). `CREDITS.md` changed by the
+    sprite tool. ADR 0021 has the M14.4 section (who was left out and why).
+  - Targeted tests all pass (list in progress.md). No full suite: data-only change.
 
 ## Next steps
-1. M14.3 is committed and the PR is open. After the user merges: tag `m14.3-done`, tick ROADMAP M14.3 on the M14.4 branch.
-2. M14.4 Missing NPC schedules (data only): see the plan file. First re-check which Liscor NPCs lack a
-   `npc_behaviour` entry. Targeted tests only (`unit_art`, `unit_behaviour_db`, `sim_canon_book1..5`, validator).
-3. Full suite: run it in a subagent (about 15 min), then clear import noise:
+1. Commit M14.4 (`data(npcs): M14.4 ...`), push, open the PR. Check `git status` first: add the 13 png + import
+   files by name, never `git commit -am`. After the user merges: tag `m14.4-done`, tick ROADMAP M14.4 on the M14.5 branch.
+2. M14.5 Attack NPCs (core, maybe save v17): see the plan file
+   `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`. Use `combat` blocks (jeiss, tkrn,
+   gazi_pathseeker, umbral have them now) and `Standing.add_reputation` for witnesses. Full suite in a subagent.
+3. Full-suite tip (subagent, about 15 min), then clear import noise:
    `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
    `git ls-files -m game/assets/characters | xargs -r git checkout --`
+
+## M14.4 notes
+- Who gets a schedule: canon NPCs with a place on one of our maps. Left out (no map): terbore, tekshia, peslas,
+  timbor_parithad, ulia_ovena, theofore, termin, ressa, magnolia_reinhart, esthelm_florist. `princess_thief` is the
+  Book 1 placeholder for Lyonette: not linked (confirmed-links-only rule).
+- Grev is a `teen` body: the sprite tool cannot read LPC child hair (single `child/<colour>.png`, no walk/ folder).
+- The LPC clone is in this session's scratchpad (`.../4654847b-.../scratchpad/ulpc`; gone next session).
+- The test-run helper `scratchpad/run_targets.sh` (gone next session) ran one GUT script per Godot call and grepped
+  the summary. Monitor with an `until grep -q DONE` loop.
 
 ## M14.3 notes
 - Town = nearest `settlement` above a map's location (`Standing.town_of`): liscor, celum, esthelm. The inn area

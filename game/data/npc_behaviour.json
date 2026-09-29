@@ -444,6 +444,134 @@
 			"goals": [
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
+		},
+		"tkrn": {
+			"confidence": "guess",
+			"combat": {"hp": 40, "accuracy": 6, "evasion": 4, "armor": 2, "damage": [3, 6]},
+			"notes": "M14.4. Young Gnoll guardsman, Krshia's nephew; Krshia has him watch the east gate (1.46). Post and hours are guesses. He drinks at the inn in the evening once Erin has met the Watch.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[6, 16, 1]], "target": {"area": "liscor_gate", "pos": [29, 10]}},
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
+					"target": {"area": "inn_interior", "pos": [12, 10]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"jeiss": {
+			"confidence": "guess",
+			"combat": {"hp": 60, "accuracy": 8, "evasion": 5, "armor": 3, "damage": [5, 9]},
+			"notes": "M14.4. Senior Guardsman of Liscor, the best swordsman in the Watch (1.28A); the Watch holds Market Street on day 39 (1.62). He walks the market street by day (guess).",
+			"goals": [
+				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
+					"target": {"area": "liscor_market", "route": [[4, 10], [15, 10], [28, 10], [15, 10]]}},
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
+					"target": {"area": "inn_interior", "pos": [12, 12]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"dreshhi": {
+			"confidence": "guess",
+			"notes": "M14.4. Krshia's tribemate, a Gnoll [Butcher] (2.23). The Books give no stall place; he works next to hers by day (guess).",
+			"goals": [
+				{"goal": "trade", "base": 2, "hours": [[8, 17, 1]], "target": {"area": "liscor_market", "pos": [7, 7]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"culyss": {
+			"confidence": "guess",
+			"notes": "M14.4. Smooth-talking Drake, known around Liscor as a lady's man (Interlude - Mating Rituals). He strolls the market in the evening (guess).",
+			"goals": [
+				{"goal": "patrol", "base": 2, "hours": [[16, 22, 1]],
+					"target": {"area": "liscor_market", "route": [[12, 13], [18, 13], [18, 17], [12, 17]]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"gazi_pathseeker": {
+			"confidence": "guess",
+			"combat": {"hp": 120, "accuracy": 12, "evasion": 8, "armor": 5, "damage": [9, 15]},
+			"notes": "M14.4. Half-Gazer Named adventurer. In Liscor days 25-37 (liscor.gazi_in_city, 1.37 to 1.54): she walks the market by day; after 1.42 (gazi.protects_the_inn) she stands guard on the inn hill. Hours and spots are guesses. She leaves at 1.54 and is off the map after.",
+			"goals": [
+				{"goal": "guard_post", "base": 3, "hours": [[8, 20, 1]], "when_flags": ["gazi.protects_the_inn"],
+					"target": {"area": "inn_hill", "pos": [14, 12]}},
+				{"goal": "patrol", "base": 2, "hours": [[8, 20, 1]], "when_flags": ["liscor.gazi_in_city"],
+					"target": {"area": "liscor_market", "route": [[10, 11], [20, 11], [20, 18], [10, 18]]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"grev": {
+			"confidence": "guess",
+			"notes": "M14.4. Scruffy Celum street boy who leads newcomers to muggers (2.44) and picks pockets (3.15). He hangs about the square by day (guess).",
+			"goals": [
+				{"goal": "patrol", "base": 2, "hours": [[8, 20, 1]],
+					"target": {"area": "celum_square", "route": [[10, 16], [20, 16], [20, 11], [10, 11]]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"hess": {
+			"confidence": "guess",
+			"notes": "M14.4. Drake [Baker] of Celum, one of very few Drakes there (3.16). The Books give no bakery place; he sells at the square stall in the morning (guess).",
+			"goals": [
+				{"goal": "trade", "base": 2, "hours": [[6, 14, 1]], "target": {"area": "celum_square", "pos": [26, 13]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"octavia": {
+			"confidence": "guess",
+			"notes": "M14.4. [Alchemist] who runs Stitchworks in Celum (2.08). Shop hours are guesses; she is off the map at night.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 20, 1]], "target": {"area": "celum_stitchworks", "pos": [4, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"agnes": {
+			"confidence": "guess",
+			"notes": "M14.4. Innkeeper of the Frenzied Hare in Celum (2.47). She keeps the bar all day and sleeps off the map (guess).",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[6, 23, 1]], "target": {"area": "celum_frenzied_hare", "pos": [6, 3]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"maran": {
+			"confidence": "guess",
+			"notes": "M14.4. Barmaid of the Frenzied Hare (2.47). From day 103 to 105 she works at the Wandering Inn (maran.works_at_the_inn, 4.14 L); Erin fires her, and she goes to Timbor's inn in Celum (off the map). Hours and spots are guesses.",
+			"goals": [
+				{"goal": "work", "base": 3, "hours": [[9, 22, 1]], "when_flags": ["maran.works_at_the_inn"],
+					"target": {"area": "inn_interior", "pos": [12, 4]}},
+				{"goal": "work", "base": 2, "hours": [[10, 23, 1]],
+					"unless_flags": ["maran.works_at_the_inn", "maran.fired_from_the_inn"],
+					"target": {"area": "celum_frenzied_hare", "pos": [9, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"safry": {
+			"confidence": "guess",
+			"notes": "M14.4. Barmaid of the Frenzied Hare (2.47). From day 103 to 105 she works at the Wandering Inn (safry.works_at_the_inn, 4.14 L); Erin fires her, and she goes to Timbor's inn in Celum (off the map). Hours and spots are guesses.",
+			"goals": [
+				{"goal": "work", "base": 3, "hours": [[9, 22, 1]], "when_flags": ["safry.works_at_the_inn"],
+					"target": {"area": "inn_interior", "pos": [14, 4]}},
+				{"goal": "work", "base": 2, "hours": [[10, 23, 1]],
+					"unless_flags": ["safry.works_at_the_inn", "safry.fired_from_the_inn"],
+					"target": {"area": "celum_frenzied_hare", "pos": [13, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"eterell": {
+			"confidence": "guess",
+			"notes": "M14.4. Guildmaster of Celum's Runners' Guild until Magnolia forces him out on day 23 (1.33R, celum_runners_guild.new_guildmaster). Hours and spot are guesses; after that he is off the map.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 18, 1]], "unless_flags": ["celum_runners_guild.new_guildmaster"],
+					"target": {"area": "celum_runners_guild", "pos": [14, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"umbral": {
+			"confidence": "guess",
+			"combat": {"hp": 36, "accuracy": 6, "evasion": 4, "armor": 2, "damage": [3, 6]},
+			"notes": "M14.4. Former [Soldier] who runs the gate of Esthelm (3.32). He stands at the west gate by day once Esthelm is saved (esthelm.saved). The post and hours are guesses.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[6, 20, 1]], "when_flags": ["esthelm.saved"],
+					"target": {"area": "esthelm_ruins", "pos": [2, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "esthelm"}}
+			]
 		}
 	}
 }
