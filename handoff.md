@@ -1,6 +1,13 @@
 # Handoff
 
-## Just done (2026-09-29, M15.2)
+## Just done (2026-09-29, M15.3)
+- M15.3 done on branch `feat/m15.3-no-xp` (stacked: font -> player day -> HUD log -> no XP; nothing pushed).
+  The M15 branches are one chain, so one PR from `feat/m15.3-no-xp` covers all four sub-milestones (ask the user
+  before push / PR). Full suite (subagent): 111 scripts, 1039 tests pass.
+- Next: the user plays M15 (`godot --path game`); then PR, merge, archive M15 in `docs/PROGRESS_ARCHIVE.md`, start M16.0
+  (art audit: screenshots of every map, list of bad tiles in the ADR, the user checks the list).
+
+## M15.2 (2026-09-29)
 - M15.2 done on branch `feat/m15.2-hud-log` (stacked on `feat/m15.1-player-day`; nothing pushed). Log strip 3 lines,
   bottom left, see-through, fades; `Hud.history()`; L = `MessageLog`, H = `Help` (`ui/text_page.*`);
   keys in `SystemMessages.KEYS`. Targeted tests pass (`unit_hud_log` new, `unit_world_view`, `unit_play_loop`,

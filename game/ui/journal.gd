@@ -2,8 +2,8 @@
 ## days, what the player changed in the story and the drift (M6.4), and how
 ## to play.
 ## Picking a focus ("Become an [Innkeeper]") calls Commands.set_focus with
-## that class's main tags: matching actions give more XP (conviction,
-## DESIGN §3.2). Presentation only; `lines` and `focus_choices` are static
+## that class's main tags: matching actions count for more (conviction,
+## DESIGN §3.2). The screen never shows XP numbers (M15.3). Presentation only; `lines` and `focus_choices` are static
 ## and headless, so tests can check them.
 class_name Journal
 extends PanelContainer
@@ -131,7 +131,7 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	for h: String in SystemMessages.HINTS:
 		out.append("  " + h)
 	out.append("")
-	out.append("Choose a focus (Enter). Actions that match it give more XP.")
+	out.append("Choose a focus (Enter). Work that matches it brings that class closer.")
 	return out
 
 

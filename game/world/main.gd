@@ -312,7 +312,7 @@ func use(object_id: String, action_id: String) -> void:
 			sleep()
 			return
 	else:
-		hud.add_lines(["%s: %.1f XP." % [Session.db.actions[action_id]["name"], float(r["record"]["xp"])]])
+		hud.add_lines(["%s." % Session.db.actions[action_id]["name"]])
 	_finish()
 
 

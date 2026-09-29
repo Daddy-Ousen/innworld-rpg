@@ -57,8 +57,8 @@ const KEYS: Array[String] = [
 ## How to play: on the welcome page and in the journal (M6.1).
 const HINTS: Array[String] = [
 	"Walk with WASD or the arrow keys. E uses what is next to you.",
-	"Every action gives XP. At night the System can offer you a class.",
-	"J opens the journal. Choose a focus there: matching actions give more XP.",
+	"What you do all day shapes you. At night the System can offer you a class.",
+	"J opens the journal. Choose a focus there: work that matches it brings that class closer.",
 	"Sleep in a bed (Z). C shows your character. Esc opens the menu (save, load).",
 	"The game saves itself each morning.",
 ]

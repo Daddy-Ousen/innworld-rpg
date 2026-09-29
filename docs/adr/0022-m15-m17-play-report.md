@@ -113,6 +113,14 @@ Code facts found:
 - The key list moved from the HUD to `SystemMessages.KEYS` (the H page). The HUD keeps one line, "H: help", top right.
 - M15.3 still has to drop "Every action gives XP" and "matching actions give more XP" from the hints.
 
+## M15.3 No XP numbers (2026-09-29)
+- Gone from player screens: the action line ("Cook a stew." with no amount), the class lines on the character
+  sheet (now "[Cook] level 4", plus "(needs a breakthrough)" when blocked), the "Total level" line, and the words
+  "XP" in the welcome hints and the journal footer. The hints now say work that matches a focus "brings that class
+  closer". `unit_no_xp_shown` checks the sheet, journal, hints, help page, welcome page and action line.
+- Kept on purpose: the debug console (`do`, `use`, `status` print XP) and every core number. Levels stay visible.
+- The class XP still exists in the save (`progression.classes[id].xp`); only the display is gone.
+
 ## Risks
 - M17 changes every fight test (stages, brawls, traps, helpers). M17.2 budgets a full port and a full-suite run.
 - Canon stages were tuned for the old turns (M14.8). M17.7 redoes the balance probes.

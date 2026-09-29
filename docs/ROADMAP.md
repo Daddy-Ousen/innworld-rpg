@@ -202,7 +202,7 @@ Plan proposed 2026-09-29 from the user's play report (ADR 0022). One branch + PR
 - [x] M15.2 HUD and log: the log shows at most 3 lines, bottom left, under half the width, see-through, and fades
   after a few seconds; L opens the full message history; the key list moves to a help page (H) with a one-line
   "H: help" hint
-- [ ] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows each
+- [x] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows each
   class and its level only; the "Total level" line goes (the total level is a secret of the world). The debug console (`) keeps the numbers (developer tool)
 **Done when:** the new font is in every menu; no player screen shows "Day 8" at the start or any XP number; the
 log covers at most a strip at the bottom left; GUT tests for the changed UI pass; the user has checked it on screen.
