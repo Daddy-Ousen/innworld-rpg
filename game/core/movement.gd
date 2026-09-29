@@ -38,8 +38,8 @@ static func place_at_start(gs: GameState, start: Dictionary) -> void:
 ##  "fairy": id of the Frost Fairy in the way or "" (M8.W),
 ##  "trap": id of the found, armed trap in the way or "" (M13.T)}.
 ## refused: collapse is due, the player is knocked out, or there is no world.
-## blocked: a wall, water, a solid object, an NPC, a monster, a fairy, a
-## found trap or the map edge. The player still turns to face `dir`. While slowed by fairy
+## blocked: a wall, water, a solid object, an NPC, a seated patron (M14.2),
+## a monster, a fairy, a found trap or the map edge. The player still turns to face `dir`. While slowed by fairy
 ## snow (M8.W), a step costs double time.
 static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var out := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
@@ -57,7 +57,7 @@ static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	if gs.winter.area == p.area:
 		out["fairy"] = gs.winter.at(to)
 	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "" \
-			or out["fairy"] != "":
+			or out["fairy"] != "" or Guests.at(gs, p.area, to) != "":
 		out["blocked"] = true
 		return out
 	if Traps.blocks(gs, db, p.area, to):

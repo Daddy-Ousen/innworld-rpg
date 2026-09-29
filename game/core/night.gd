@@ -48,6 +48,8 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 			budget - offered.size()))
 	lines.append_array(progress)
 	lines.append_array(hunger)
+	# 2c. The inn (M14.2): the day's takings; the guests go home.
+	lines.append_array(Guests.night(gs, db))
 	for id in offered:
 		lines.append("Class offered: %s. Accept or decline." % db.classes[id]["name"])
 	# 5. World director: canon events up to the day before the wake day.

@@ -173,5 +173,38 @@
 			"hungry_line": "You went to bed hungry. Your max HP is down %d%% until you eat.",
 			"fed_line": "You eat at the inn after your work."
 		}
+	},
+	"inn": {
+		"confidence": "guess",
+		"note": "M14.2 (ADR 0021). Patrons at Erin's inn, served by the player. Numbers are game balance, not canon. Book 1: the inn opens in 1.05; it is half blown up in 2.10T and rebuilt in 2.11. Early guests are mostly Drakes and Gnolls from Liscor.",
+		"area": "inn_interior",
+		"location": "wandering_inn",
+		"start_reputation": 10,
+		"open_flags": ["wandering_inn.open"],
+		"closed_flags": ["wandering_inn.destroyed"],
+		"reopen_flags": ["wandering_inn.rebuilt"],
+		"meals": [
+			{"name": "breakfast", "hours": [7, 10]},
+			{"name": "lunch", "hours": [12, 14]},
+			{"name": "dinner", "hours": [18, 22]}
+		],
+		"guest_curve": [[0, 0, 2], [20, 1, 3], [40, 2, 4], [60, 2, 5], [80, 3, 6]],
+		"flag_bonus": {"wandering_inn.full_house": 1, "wandering_inn.adventurers_meet_here": 1},
+		"patron_races": {"drake": 5, "gnoll": 4, "human": 1},
+		"dishes": ["simple_meal", "stew", "pasta_dish", "bread"],
+		"patience_minutes": [45, 90],
+		"pay_factor": 2.0,
+		"other_dish_share": 0.5,
+		"serve_minutes": 5,
+		"eat_minutes": 30,
+		"serve_reputation": 1,
+		"leave_reputation": -2,
+		"npc_relationship": 1,
+		"guest_goals": ["eat", "visit_inn"],
+		"meal_line": "It is %s time. Guests are coming to the inn: %d.",
+		"left_line": "A %s gives up waiting and leaves. The inn's name suffers.",
+		"flee_line": "The guests flee the fight.",
+		"served_line": "You serve %s to %s. You are paid %s.",
+		"income_line": "The inn took in %s from your serving today."
 	}
 }

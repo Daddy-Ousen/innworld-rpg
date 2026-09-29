@@ -3,7 +3,8 @@
 ## an object with an item (Interact.TAKE). A shop lists its trades instead
 ## of the bare buy and sell actions (Interact.BUY / SELL + good), a wagon
 ## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
-## (Interact.USE_GOOD + good). Enter or a double click picks one; Escape
+## (Interact.USE_GOOD + good). A guest lists the dishes you can serve them
+## (Interact.SERVE + good, M14.2). Enter or a double click picks one; Escape
 ## closes. Presentation only.
 class_name InteractMenu
 extends PanelContainer
@@ -38,6 +39,14 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 			var i := _items.add_item("%s — To %s (%d left today)" % [o["name"],
 					db.maps.areas[o["portal"]["to"]]["name"], Portal.trips_left(Session.gs, db)])
 			_items.set_item_metadata(i, [o["id"], Interact.PORTAL])
+		for c: Dictionary in o.get("serve", []):
+			var i := _items.add_item("%s — Serve %s (%s%s)" % [o["name"], String(c["name"]).to_lower(),
+					"ordered, " if c["ordered"] else "", Economy.format(db, int(c["pay"]))])
+			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(c["good"])])
+		if o.get("guest", false) and not (o["serve"] as Array).any(func(c: Dictionary) -> bool: return c["ordered"]):
+			var want := String(db.economy.goods[o["order"]]["name"]).to_lower()
+			var i := _items.add_item("%s — Wants %s (you have none)" % [o["name"], want])
+			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(o["order"])])
 		for action_id: String in o["actions"]:
 			if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
 				continue

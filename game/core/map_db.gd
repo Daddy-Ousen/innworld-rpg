@@ -17,6 +17,7 @@
 ## in data/objects.json (drawn only; see WorldView.object_look). M13.0 (ADR
 ## 0020): an exit with "when_flags" / "unless_flags" (and an "id") is there
 ## only while the flags hold; a hidden exit is plain floor (exit_at skips it).
+## M14.2 (ADR 0021): a table may list "seats" ([[x, y], ...]) where patrons sit (Guests).
 class_name MapDb
 extends RefCounted
 
@@ -608,6 +609,26 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 		errors.append("%s: an object with flags must not be solid." % where)
 	if o.has("portal"):
 		_validate_portal(where, o["portal"], db)
+	if o.has("seats"):
+		_validate_seats(where, o, bounds)
+
+
+## Table seats (M14.2, Guests): [[x, y], ...], each a walkable tile next to
+## the object (also diagonally) that is no exit.
+func _validate_seats(where: String, o: Dictionary, bounds: Rect2i) -> void:
+	if not o["seats"] is Array or (o["seats"] as Array).is_empty():
+		errors.append("%s: seats must be a list of [x, y]." % where)
+		return
+	var area := where.get_slice("'", 1)
+	for s: Variant in o["seats"]:
+		if not _pos_ok(s) or not bounds.has_point(_vec(s)):
+			errors.append("%s: seat %s must be [x, y] inside the map." % [where, s])
+			continue
+		var d := _vec(s) - _vec(o["at"])
+		if maxi(absi(d.x), absi(d.y)) != 1:
+			errors.append("%s: seat %s must be next to the object." % [where, s])
+		elif not is_walkable(area, _vec(s)) or not raw_exit_at(area, _vec(s)).is_empty():
+			errors.append("%s: seat %s must be walkable and not an exit." % [where, s])
 
 
 ## A portal (M10.0): {"to": a known map, "pos": a walkable tile there,

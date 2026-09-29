@@ -280,6 +280,10 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id == Interact.STOW:
 		_command_error(Commands.stow(gs, db))
 		return
+	if action_id.begins_with(Interact.SERVE):
+		var s := Commands.serve(gs, db, object_id, action_id.substr(Interact.SERVE.length()))
+		_command_error(_action_sound_if_ok(s["error"], Guests.SERVE_ACTION))
+		return
 	if action_id == Interact.RIDE:
 		_command_error(_action_sound_if_ok(Commands.ride(gs, db, object_id), action_id))
 		return

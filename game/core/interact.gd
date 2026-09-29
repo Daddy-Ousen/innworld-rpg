@@ -14,6 +14,9 @@
 ## pays it); a shop object lists its "trades" (Economy.trades: the
 ## presentation calls Commands.buy / Commands.sell); an object with a
 ## "ride" offers it (Commands.ride).
+## M14.2: a canon NPC who is a guest, and each unserved patron next to the
+## player ("guest:<id>", "guest": true, "order"), list "serve": the dishes
+## the player can serve them (Guests.serve_choices).
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -32,6 +35,8 @@ const USE_GOOD := "use:"
 const HOLD_GOOD := "hold:"
 const DROP_GOOD := "drop_good:"
 const STOW := "stow"
+## M14.2: "serve:<good>" serves a dish to a guest (Commands.serve with the option id).
+const SERVE := "serve:"
 const RIDE := "ride"
 const PORTAL := "portal"
 
@@ -53,7 +58,13 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 	for id in NpcSim.near_player(gs):
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
-			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {}})
+			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
+			"serve": Guests.serve_choices(gs, db, id)})
+	for g in Guests.near(gs):
+		var gid := Guests.GUEST + String(g["id"])
+		out.append({"id": gid, "name": Guests.patron_name(g), "npc": false, "guest": true,
+			"order": g["order"], "actions": [], "sleep": false, "item": "", "price": 0,
+			"trades": [] as Array[Dictionary], "ride": {}, "serve": Guests.serve_choices(gs, db, gid)})
 	for id in Winter.near(gs):
 		var fr: Dictionary = Winter.rules(db)["fairies"]
 		out.append({"id": Winter.FAIRY + id, "name": fr["name"], "npc": false, "fairy": true,
@@ -97,6 +108,8 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	var zone := db.maps.zone_at(p.area, p.pos())
 	if zone != "":
 		context["zone"] = zone
+	if Guests.on(db) and context["location"] == Guests.rules(db)["location"]:
+		context["guests"] = Guests.count(gs, db)
 	var full := opts.duplicate()
 	if obj["npc"]:
 		context["npc"] = object_id

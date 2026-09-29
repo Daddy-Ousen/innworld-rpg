@@ -240,6 +240,20 @@ static func _shop_command(gs: GameState, db: DataDb, trade: Callable) -> Diction
 	return r
 
 
+## Serves `good` from the bag to the guest `target` next to the player
+## ("guest:<id>" for a patron, or a canon NPC id; M14.2, Guests.serve).
+## Returns {"record", "error"}. Refused while knocked out or with enemies near.
+static func serve(gs: GameState, db: DataDb, target: String, good: String) -> Dictionary:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why != "":
+		return {"record": {}, "error": why}
+	var r := Guests.serve(gs, db, target, good)
+	Combat.heal_after_action(gs, db, r["record"])
+	_after(gs, db)
+	return r
+
+
 ## Attacks the monster next to the player in `dir`. Returns
 ## {"error", "target", "hit", "damage", "killed"} (see Combat.player_attack).
 static func attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
@@ -308,3 +322,4 @@ static func _after(gs: GameState, db: DataDb) -> void:
 	NpcSim.sync(gs, db)
 	Winter.sync(gs, db)
 	Combat.settle_if_over(gs, db)
+	Guests.sync(gs, db)

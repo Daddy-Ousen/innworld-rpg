@@ -30,6 +30,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			11: out = _migrate_11_to_12(out)
 			12: out = _migrate_12_to_13(out)
 			13: out = _migrate_13_to_14(out)
+			14: out = _migrate_14_to_15(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -141,4 +142,10 @@ static func _migrate_13_to_14(d: Dictionary) -> Dictionary:
 	var c: Dictionary = d.get("combat", {})
 	c["traps"] = {}
 	d["combat"] = c
+	return d
+
+
+## v15 (M14.2): the inn. No patrons, nothing earned yet, reputation not set.
+static func _migrate_14_to_15(d: Dictionary) -> Dictionary:
+	d["inn"] = {}
 	return d
