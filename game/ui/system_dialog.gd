@@ -6,6 +6,8 @@ class_name SystemDialog
 extends PanelContainer
 
 signal closed
+## The player confirmed a fate warning (SystemMessages.STRIKE): attack this NPC now.
+signal struck(npc: String)
 
 const LABELS := {
 	SystemMessages.NEXT: "Continue",
@@ -13,6 +15,8 @@ const LABELS := {
 	SystemMessages.DECLINE: "Decline",
 	SystemMessages.YES: "Yes, decline",
 	SystemMessages.BACK: "Back",
+	SystemMessages.STRIKE: "Strike them down",
+	SystemMessages.SPARE: "Step back",
 }
 
 var _gs: GameState
@@ -50,6 +54,12 @@ func choose(choice: String) -> void:
 			_answer(Commands.decline_class(_gs, _db, current["class"]))
 		SystemMessages.BACK:
 			_show(_pages[_index])
+		SystemMessages.STRIKE:
+			var npc: String = current["npc"]
+			_dismiss()
+			struck.emit(npc)
+		SystemMessages.SPARE:
+			_dismiss()
 		_:
 			_advance()
 
@@ -58,6 +68,13 @@ func choose(choice: String) -> void:
 func _answer(lines: Array[String]) -> void:
 	_pages.insert(_index + 1, SystemMessages.result(lines))
 	_advance()
+
+
+## Closes a fate warning: no night follows, so `closed` does not fire.
+func _dismiss() -> void:
+	_pages.clear()
+	current = {}
+	hide()
 
 
 func _advance() -> void:
@@ -86,5 +103,18 @@ func _show(page: Dictionary) -> void:
 		b.pressed.connect(choose.bind(choice), CONNECT_DEFERRED)
 		_buttons.add_child(b)
 	show()
+	if page["kind"] == SystemMessages.FATE:  # the safe answer has the focus; the other waits a moment
+		var strike := _buttons.get_child(0) as Button
+		strike.disabled = float(page.get("delay", 0.0)) > 0.0
+		if is_inside_tree():
+			(_buttons.get_child(1) as Button).grab_focus()
+			if strike.disabled:
+				var id := strike.get_instance_id()  # the page may be gone when the timer ends
+				get_tree().create_timer(float(page["delay"])).timeout.connect(
+						func() -> void:
+							var b := instance_from_id(id) as Button
+							if b != null:
+								b.disabled = false)
+		return
 	if is_inside_tree():
 		(_buttons.get_child(0) as Button).grab_focus()

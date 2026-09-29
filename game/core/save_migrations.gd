@@ -32,6 +32,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			13: out = _migrate_13_to_14(out)
 			14: out = _migrate_14_to_15(out)
 			15: out = _migrate_15_to_16(out)
+			16: out = _migrate_16_to_17(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -158,4 +159,11 @@ static func _migrate_15_to_16(d: Dictionary) -> Dictionary:
 	w["reputation"] = {}
 	w["contact"] = {}
 	d["world"] = w
+	return d
+
+
+## v17 (M14.5): attacking NPCs. No NPC has been attacked (hostile_day 0).
+static func _migrate_16_to_17(d: Dictionary) -> Dictionary:
+	for n: Dictionary in (d.get("npcs", {}) as Dictionary).get("npcs", {}).values():
+		n["hostile_day"] = 0
 	return d

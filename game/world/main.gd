@@ -61,6 +61,7 @@ func _ready() -> void:
 	menu.chosen.connect(use)
 	bag.chosen.connect(use_from_bag)
 	dialog.closed.connect(_on_dialog_closed)
+	dialog.struck.connect(attack_npc.bind(true))
 	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
@@ -260,6 +261,9 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id == Interact.SLEEP:
 		sleep(object_id)
 		return
+	if action_id == Interact.ATTACK:
+		attack_npc(object_id)
+		return
 	if action_id.begins_with(Interact.BUY) or action_id.begins_with(Interact.SELL):
 		var buying := action_id.begins_with(Interact.BUY)
 		var good := action_id.substr((Interact.BUY if buying else Interact.SELL).length())
@@ -302,6 +306,20 @@ func use(object_id: String, action_id: String) -> void:
 			return
 	else:
 		hud.add_lines(["%s: %.1f XP." % [Session.db.actions[action_id]["name"], float(r["record"]["xp"])]])
+	_finish()
+
+
+## Attacks the NPC next to you (M14.5). A major NPC's first attack shows the fate warning
+## instead; its Strike answer comes back here with `confirmed`.
+func attack_npc(npc: String, confirmed: bool = false) -> void:
+	var r := Commands.attack_npc(Session.gs, Session.db, npc, confirmed)
+	if r["warn"]:
+		dialog.open([SystemMessages.fate_page(Session.db, npc)] as Array[Dictionary], Session.gs, Session.db)
+		return
+	if r["error"] != "":
+		_command_error(r["error"])
+		return
+	Audio.play_key("combat", "hit" if r["hit"] else "swing")
 	_finish()
 
 

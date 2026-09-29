@@ -46,7 +46,8 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 			continue
 		if not r.npcs.has(id):
 			r.npcs[id] = {"area": "", "x": 0, "y": 0, "facing": "s", "goal": "",
-				"route_i": 0, "carry": 0, "talked_day": 0, "hp": -1, "down": false}
+				"route_i": 0, "carry": 0, "talked_day": 0, "hp": -1, "down": false,
+					"hostile_day": 0}
 		var n: Dictionary = r.npcs[id]
 		if jump:
 			n["hp"] = -1  # a long gap (a night): healed and up again
@@ -70,6 +71,8 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 				_put(gs, db, n, here, gs.player.pos())
 			if scene_held.has(id):
 				n["carry"] = 0
+			elif Brawl.act(gs, db, id, n, maxi(dt, 0)):
+				pass  # hostile to the player (M14.5)
 			elif not (NpcReact.active(gs) and NpcReact.act(gs, db, id, n, maxi(dt, 0))):
 				_walk(gs, db, n, t, maxi(dt, 0))
 		else:

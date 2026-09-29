@@ -90,6 +90,16 @@ static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 	return err
 
 
+## The player attacks the NPC `npc` next to them (M14.5, Brawl.attack). Returns {"error",
+## "target", "warn", "hit", "damage", "killed"}; "warn" means the fate warning must be confirmed
+## first (nothing happened): send it again with `confirmed` true. Works with enemies near.
+static func attack_npc(gs: GameState, db: DataDb, npc: String, confirmed: bool = false) -> Dictionary:
+	Combat.begin_command(gs)
+	var r := Brawl.attack(gs, db, npc, confirmed)
+	_after(gs, db)
+	return r
+
+
 ## Sets a world flag (debug now; M4 interactions will call it). A false,
 ## 0 or null value clears the flag.
 static func set_flag(gs: GameState, key: String, value: Variant = true) -> void:

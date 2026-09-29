@@ -451,7 +451,7 @@
 			"notes": "M14.4. Young Gnoll guardsman, Krshia's nephew; Krshia has him watch the east gate (1.46). Post and hours are guesses. He drinks at the inn in the evening once Erin has met the Watch.",
 			"goals": [
 				{"goal": "guard_post", "base": 2, "hours": [[6, 16, 1]], "target": {"area": "liscor_gate", "pos": [29, 10]}},
-				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch", "wandering_inn.adventurers_attacked_goblins"],
 					"target": {"area": "inn_interior", "pos": [12, 10]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
@@ -463,7 +463,7 @@
 			"goals": [
 				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
 					"target": {"area": "liscor_market", "route": [[4, 10], [15, 10], [28, 10], [15, 10]]}},
-				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
+				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch", "wandering_inn.adventurers_attacked_goblins"],
 					"target": {"area": "inn_interior", "pos": [12, 12]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]

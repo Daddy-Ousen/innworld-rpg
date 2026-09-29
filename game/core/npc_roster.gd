@@ -3,13 +3,14 @@
 ##   {"area": map id, "@" + off-map place, or "" (nowhere yet), "x", "y", "facing": n/e/s/w,
 ##    "goal": goal name, "route_i": next patrol point, "carry": step seconds
 ##    not yet spent, "talked_day": last day the player talked with them (0 = never),
-##    "hp": hit points (-1 = full; M7.B), "down": knocked out in a fight}.
+##    "hp": hit points (-1 = full; M7.B), "down": knocked out in a fight,
+##    "hostile_day": the day the player attacked them (0 = never; M14.5, Brawl)}.
 ## `sec` is the world second the NPCs were last moved to (-1 = not placed
 ## yet: a new or migrated game). NpcSim changes this; nothing else does.
 class_name NpcRoster
 extends RefCounted
 
-const INT_FIELDS := ["x", "y", "route_i", "carry", "talked_day", "hp"]
+const INT_FIELDS := ["x", "y", "route_i", "carry", "talked_day", "hp", "hostile_day"]
 
 var sec: int = -1
 var npcs: Dictionary = {}

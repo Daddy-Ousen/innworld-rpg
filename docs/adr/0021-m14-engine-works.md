@@ -131,3 +131,29 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
   - `esthelm_florist`: a Horror, not a schedule NPC.
   - `princess_thief`: the Book 1 placeholder for Lyonette (2.23 names Lyonette). The data keep them apart until the
     text links them (see the "confirmed links only" rule).
+
+## M14.5 Attack NPCs (core, save v17)
+
+- `core/brawl.gd` (new) and `rules.brawl` (new block, agreed in the M14 plan). The use menu lists **Attack** last
+  on an NPC, in red. `Commands.attack_npc(gs, db, npc, confirmed)` is the one command.
+- **Major NPC** is derived, no schema change: a pending canon event (one that runs by itself, not a mutate target)
+  names them in a role's `prefer` list or in `requires.alive`. When the story no longer needs them, no warning.
+- **Fate warning**: the first attack on a major NPC returns `warn` and nothing happens (no time). The UI shows a
+  `fate` System page ("The Thread of Fate"). Its **Step back** button has the focus; **Strike them down** stays off
+  for `fate_delay` seconds. A confirmed attack sets `gs.flags["fate_warned.<npc>"]`, so the warning comes once
+  per NPC (and is saved).
+- **A blow** is one turn. The NPC has the hit points, evasion and armor of `NpcReact.stats`. The player's hit uses
+  the held item or fists like `Combat._strike` (item break included). At 0 HP the NPC is dead, not down:
+  `Director.player_kill`. No XP: attacking is not an action record.
+- **Hostile until the day ends**: the first blow of a day sets the roster field `hostile_day` (save v17; the
+  migration sets 0). A hostile NPC that is up walks to the player and hits them (`Brawl.act`, called by `NpcSim`
+  before `NpcReact`), one turn per `act_seconds`, a raised guard works as against a monster. While one is in the
+  player's area it counts as danger (`Combat.in_danger`): no talk, work or sleep, and patrons leave.
+- **Witnesses** are the NPCs in the area. First blow of the day: victim -5, witnesses -2 relationship, town -3,
+  the victim's faction -3 reputation (`Standing.add_reputation`). The kill: witnesses -5, town -5, faction -5 more.
+  A witness with the guard tag turns hostile for the day too.
+- The full suite showed that M14.4's `tkrn` and `jeiss` (guards, evening inn visits) broke `sim_inn_brawl`: they killed
+  the day-28 adventurers at once. Their inn visits now also need `wandering_inn.adventurers_attacked_goblins` (set by the
+  brawl event, done or changed), so they come from day 29.
+- Not done on purpose: bystanders do not flee, a hostile NPC does not follow the player to another map, and no
+  console command (the console `kill` still kills at once, with no warning).

@@ -231,5 +231,19 @@
 			[6, "friend", "%s greets you warmly."],
 			[10, "close friend", "%s lights up when you come near."]
 		]
+	},
+	"brawl": {
+		"confidence": "guess",
+		"note": "M14.5 (ADR 0021). The player attacks an NPC (Brawl). Numbers are game balance, not canon. A major NPC (a pending canon event still needs them) gets a one-time fate warning; fate_delay is the seconds the Strike button stays off. act_seconds: how often a hostile NPC acts. attack: the first blow of the day; kill: the death (victim, witness: relationship with the player; town, faction: reputation).",
+		"act_seconds": 6,
+		"fate_delay": 1.5,
+		"fate_title": "The Thread of Fate",
+		"fate_lines": [
+			"%s has a part in what comes next.",
+			"Strike them down and the story will bend around the gap.",
+			"The System will not stop you. Do you go on?"
+		],
+		"attack": {"victim": -5, "witness": -2, "town": -3, "faction": -3},
+		"kill": {"victim": 0, "witness": -5, "town": -5, "faction": -5}
 	}
 }

@@ -92,6 +92,7 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.combat.validate(db)
 	db.errors.append_array(Guests.validate(db))  # rules.inn names maps and goods (M14.2)
 	db.errors.append_array(Standing.validate(db))  # rules.standing (M14.3)
+	db.errors.append_array(Brawl.validate(db))  # rules.brawl (M14.5)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
 			+ db.combat.errors + db.economy.errors
 	for e in db.errors:

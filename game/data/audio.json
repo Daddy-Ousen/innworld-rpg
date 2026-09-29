@@ -214,6 +214,7 @@
     "news": "book",
     "rumors": "book",
     "drift": "offer",
+    "fate": "offer",
     "death": "sad_sting"
   },
   "ui": {
