@@ -202,8 +202,8 @@ Plan proposed 2026-09-29 from the user's play report (ADR 0022). One branch + PR
 - [ ] M15.2 HUD and log: the log shows at most 3 lines, bottom left, under half the width, see-through, and fades
   after a few seconds; L opens the full message history; the key list moves to a help page (H) with a one-line
   "H: help" hint
-- [ ] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows class
-  and level only. The debug console (`) keeps the numbers (developer tool)
+- [ ] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows each
+  class and its level only; the "Total level" line goes (the total level is a secret of the world). The debug console (`) keeps the numbers (developer tool)
 **Done when:** the new font is in every menu; no player screen shows "Day 8" at the start or any XP number; the
 log covers at most a strip at the bottom left; GUT tests for the changed UI pass; the user has checked it on screen.
 
@@ -237,7 +237,8 @@ Rules from the user (2026-09-29):
   classes and skills can raise that cap ([Runner]: 2 AP = 8 tiles). A normal attack = 2 AP. Skills cost 1–10 AP.
   Spells cost 1–10 AP plus 1–10 MP. Move, attack, move, attack is allowed while AP and the move cap last.
 - Extra AP: skills give permanent AP (for example a lesser stamina Skill +1, a greater one +2; names checked
-  against the Book text); +1 AP at level 10, 25, 50 and 75.
+  against the Book text); +1 AP when the TOTAL level (all classes added) reaches 10, 25, 50 and 75. The total
+  level is a secret: the player never sees it, and no message says why AP went up.
 - MP (mana) is kept between fights like HP and comes back slowly with time.
 - AP is stored in quarter points (integers), so the rolls stay deterministic.
 - [ ] M17.0 Spike + ADR: `rules.combat.tactical` numbers; three fights worked out on paper (Rock Crab, a goblin
@@ -258,7 +259,8 @@ Rules from the user (2026-09-29):
   targets (one foe, line, area). First spells from Books 1–5 only
 - [ ] M17.6 Cover and position: half and full cover from walls and solid objects, flanking; monsters use cover
 - [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
-  balance probes redone for the new rules, the day-21 raid checked again
+  balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level
+  (Ryoka's theory, 2.41) with a hidden cap of 100 total levels; `rules.levels` curve retuned (core change)
 **Done when:** every fight in the game (monsters, stages, brawls) runs in combat mode with AP; the player can use
 combat Skills and learned spells; MP and AP gains work; saves from v17 load; GUT (full suite), the Python tool
 tests and the validator pass; the user has played fights with the new screen.

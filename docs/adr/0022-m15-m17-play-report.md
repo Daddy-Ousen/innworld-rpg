@@ -56,9 +56,22 @@ Code facts found:
   `data/spells.json`, MP in the player state + save v19 (M17.5), cover values on tiles and objects (M17.6),
   enemy `abilities` (M17.7).
 
+## User answers (2026-09-29, second round)
+- **Order M15 → M16 → M17:** approved.
+- **Extra AP uses the TOTAL level** (all class levels added: 5 [Runner] + 5 [Warrior] = total level 10). +1 AP when
+  the total level reaches 10, 25, 50 and 75.
+- **The total level is a secret of the world.** The player never sees it, and no message says why AP went up.
+  The character sheet today prints "Total level: N" (`ui/character_sheet.gd:36`): M15.3 removes it. Per-class
+  levels stay visible.
+- Lore basis: Ryoka's level-cap theory (Book 2, 2.41, event `b2.ryoka_explains_the_level_cap_theory`, confirmed):
+  the cost of a level follows the total level, not the class level, and there is a cap near level 100 in total.
+  Junk side classes make the main class slower; consolidation eases it. The user's wiki excerpt agrees with 2.41.
+  Today `Levels.xp_to_next` uses the class level only.
+- **Level cost follows the total level, with a hidden cap of 100 total levels — but later, in M17.7** (the
+  balance pass), so the XP curve and the combat numbers are tuned once. A level-20 [Warrior] then pays the cost
+  of level 21 for [Digger] level 2. The curve (`rules.levels` base_xp, growth) needs a retune for it.
+
 ## Open points (ask at the start of the sub-milestone)
-- "Level 10, 25, 50, 75": the highest single class level, or the total of all class levels? Default: the highest
-  class level (levels in the books are per class).
 - MP regen speed and whether sleep refills it fully (M17.0 numbers).
 - Skill names for permanent AP: check the Book text; the user's names are examples. Invented names get
   `"confidence": "guess"`.

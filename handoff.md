@@ -8,8 +8,9 @@
 - Earlier: M14 merged (PR #75, tags `m14-done`), archived (PR #76). Rock Crab and day-21 raid stay as they are.
 
 ## Next steps
-1. The user approves the plan order (M15 → M16 → M17) and answers: AP at level 10/25/50/75 = highest class
-   level or total level? (default: highest class level).
+1. Answered 2026-09-29: order M15 → M16 → M17 OK; extra AP uses the TOTAL level (secret: never shown, AP gains
+   silent; M15.3 removes "Total level" from the character sheet); level cost by total level + hidden cap 100
+   goes in M17.7. All in ADR 0022.
 2. M15.0: ask before downloading Pixel Operator (file, source, size). Then swap the theme font
    (`game/ui/theme.tres` `default_font`), `CREDITS.md`, font `.import` flags (antialiasing=0, hinting=0,
    subpixel_positioning=0).
