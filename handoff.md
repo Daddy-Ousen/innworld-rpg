@@ -1,34 +1,18 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.7 merged (PR #74), tag `m14.7-done` pushed (on 290d4f2). Branch `feat/m14.8-balance` made from main.
-- M14.8 Balance on that branch (not committed yet at the time of writing):
-  - Core rule: `rules.combat.hp_per_level` = 3 (optional key, 0 when missing) in `game/core/stats.gd` `max_hp`.
-    Tried 2/3/4: 3 makes level 5 (35 HP) beat three Goblin grunts with 9-18 HP left. No save change.
-  - Probes (print tables when `BALANCE_LOG=<file>` is set): `game/tests/sim_balance_progress.gd`,
-    `sim_balance_money.gd`, `sim_balance_fights.gd`. XP, prices and recipes were fine: not changed.
-  - `unit_stats` +2 tests. ADR 0021 has the M14.8 section.
-  - Python 78 OK, validator 0 errors. Full suite: 109 scripts, 1019 tests; the one failure (`unit_console`
-    `test_console_scene_runs_a_command`) was a leak: `unit_brawl` leaves a hostile Erin in `Session.gs`, the console
-    scene reads it and refuses `do sweep_floor`. The console test now sets a fresh game. Other Session tests
-    (`unit_bag`, `unit_brawl`) still leave state behind.
-- Open for the user (ADR 0021 M14.8): (1) a Rock Crab beats a fist-only level-5 player on every seed; (2) the day-21
-  raid is not winnable by one player with the real rules (Erin falls in 3 turns; wave 2 with Klbkch waits while 12+
-  Goblins stand; the `max_on_map` gate). A knock-out keeps canon, so it is safe. Options: allies in wave 1, tougher Erin,
-  exempt ally waves from `max_on_map` (core change). Ask before changing.
+- M14.8 merged (PR #75), tags `m14.8-done` and `m14-done` on a08c23a. M14 is archived in `docs/PROGRESS_ARCHIVE.md`.
+- User decision: leave the Rock Crab and the day-21 raid as they are (ADR 0021 M14.8). Raid options if it comes back:
+  allies in wave 1 + tougher Erin (data), and/or ally waves ignoring `rules.combat.stage.max_on_map` (core, `Stage.tick`).
+- `hp_per_level` = 3 in `rules.combat`; probes `sim_balance_*` print tables with `BALANCE_LOG=<file>`.
 
 ## Next steps
-1. Clear import noise:
-   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles game/assets/fonts`
-   `git ls-files -m game/assets/characters | xargs -r git checkout --`
-2. Commit (`feat(core): M14.8 HP per level and balance probes`), push, open the PR. After the user merges: tag
-   `m14.8-done`, tick M14.8 in ROADMAP and progress, archive M14 into `docs/PROGRESS_ARCHIVE.md`, and tag `m14-done`.
-3. M14 "Done when" also asks the user to play it (`godot --path game`).
+1. The user plays M14 (`godot --path game`) and reports what feels wrong.
+2. Pick the next milestone with the user (see `docs/ROADMAP.md` "Later").
 
 ## Probe notes (M14.8)
-- Run one script: `bash <scratchpad>/run.sh <script>` (gone next session) or the console exe from "M13 notes" with
-  `-gselect=<script>`. `BALANCE_LOG=<file>` gets the tables.
 - A test that skips days with `ToyCanon.sleep_through` piles up hunger (max HP x0.5): set `gs.economy.hunger = 0`.
+- `unit_bag` and `unit_brawl` leave state in `Session.gs`; a test that reads `Session.gs` should set its own game.
 - The wave rule (`Stage.tick`): a wave waits while `here >= max_on_map` (12) and, if `here > 0`, until
   `after_seconds` has passed or `here <= left_at_most`. One player turn = 6 s.
 
