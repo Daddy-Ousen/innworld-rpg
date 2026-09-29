@@ -21,9 +21,10 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - [ ] M14 — Engine works (plan accepted 2026-09-28, ADR 0021; plan file `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`).
   User choices: all four areas (inn play, living world, UI skin + portraits, balance); attack NPCs with a fate
   warning; guests = patrons + canon NPCs; free pixel font (ask before the download).
-  - [ ] M14.0 Bag screen — branch `feat/m14.0-bag`: code + `unit_bag` done, targeted tests green (bag 11, economy 19,
-    play_loop 15, system_messages 17). Full suite: 99 scripts, 925 tests, all pass. PR open; tick after merge.
-  - [ ] M14.1 Cooking recipes · M14.2 Guests (v15) · M14.3 Standing (v16) · M14.4 NPC schedules · M14.5 Attack NPCs ·
+  - [x] M14.0 Bag screen — merged ([PR #67](https://github.com/Daddy-Ousen/innworld-rpg/pull/67)), tag `m14.0-done` on merge commit 801e382.
+  - [ ] M14.1 Cooking recipes — branch `feat/m14.1-cooking`: `data/recipes.json`, `core/cooking.gd`, new goods and shop
+    stock, menu hint, `unit_cooking` (12 tests) green. Full suite running; tick after merge.
+  - [ ] M14.2 Guests (v15) · M14.3 Standing (v16) · M14.4 NPC schedules · M14.5 Attack NPCs ·
     M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
 ## After M8
