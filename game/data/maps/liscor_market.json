@@ -9,6 +9,7 @@
 	"exits": [
 		{"at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10}
 	],
+	"crowd": {"lanes": [{"path": [[3, 10], [29, 10]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_human", "race_drake"]}, {"path": [[15, 4], [15, 12]], "walkers": 2, "looks": ["race_gnoll", "race_drake"]}, {"path": [[3, 19], [28, 19]], "walkers": 3, "looks": ["race_drake", "race_drake", "race_gnoll"]}, {"path": [[10, 8]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[20, 8]], "walkers": 1, "looks": ["race_drake"]}]},
 	"objects": [
 		{"id": "market_home_1", "kind": "plaque", "at": [4, 2], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
 		{"id": "market_home_2", "kind": "plaque", "at": [10, 2], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},

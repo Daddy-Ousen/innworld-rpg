@@ -130,6 +130,11 @@ var object_art: Dictionary = {}
 var sign_table: Dictionary = {}
 ## Each sign / arrow label with its cell: {"label": Label, "cell": Vector2i}; faded by the player's distance.
 var _sign_labels: Array[Dictionary] = []
+## The crowd (M16.4): one entry per walker, {"marker": Node2D, "sprite": CharacterSprite, "lane": Dictionary,
+## "i": int, "n": int, "step": int}; moved in `_process` by real time.
+var _crowd: Array[Dictionary] = []
+var _crowd_time := 0.0
+var _hour := 12
 ## The player's sprite (null = the red square).
 var look: CharacterSprite
 ## NPC id → name shown over its marker.
@@ -245,6 +250,8 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	if new_area:
 		_show_area(gs.player.area)
 	atmosphere.set_time(gs.clock.minute(), winter)
+	_hour = gs.clock.minute() / 60
+	_apply_crowd_hours()
 	_update_sign_labels(gs.player.pos())
 	_show_npcs(gs)
 	_show_guests(gs)
@@ -279,6 +286,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 
 
 func _process(delta: float) -> void:
+	_move_crowd(delta)
 	if _animated.is_empty() and fairies.get_child_count() == 0:
 		return
 	_anim_time += delta
@@ -574,6 +582,7 @@ func _show_area(id: String) -> void:
 	_sign_labels.clear()
 	for m: Dictionary in SignArt.marks(_maps, id):
 		_add_mark(m)
+	_show_crowd(id)
 	var light_sources: Array = []
 	for o: Dictionary in _maps.objects_on(id):
 		var cell := Vector2i(int(o["at"][0]), int(o["at"][1]))
@@ -643,6 +652,58 @@ func _add_mark(m: Dictionary) -> void:
 		label.modulate.a = 0.0
 		_sign_labels.append({"label": label, "cell": cell})
 	marks.add_child(marker)
+
+
+## The crowd of the area (M16.4, `Crowd`): a marker with a CharacterSprite per walker in the y-sorted
+## Props layer (so it clears with them). A look with no sheet gives no walker; nothing else is drawn.
+func _show_crowd(id: String) -> void:
+	_crowd.clear()
+	_crowd_time = 0.0
+	var data: Variant = _maps.areas[id].get("crowd", {})
+	if not data is Dictionary:
+		return
+	var budget := Crowd.MAX_WALKERS
+	for lane: Dictionary in (data as Dictionary).get("lanes", []):
+		var n := Crowd.count(lane, budget)
+		budget -= n
+		for i in n:
+			var sprite := CharacterSprite.make(Crowd.look_of(lane, i))
+			if sprite == null:
+				continue
+			var marker := Node2D.new()
+			marker.set_meta("crowd", true)
+			marker.add_child(sprite)
+			props.add_child(marker)
+			var w := Crowd.walker(lane, i, n, 0.0)
+			marker.position = cell_center(w["cell"])
+			sprite.pose(String(w["dir"]))
+			_crowd.append({"marker": marker, "sprite": sprite, "lane": lane, "i": i, "n": n, "step": int(w["step"])})
+	_apply_crowd_hours()
+
+
+## Shows each walker only within its lane's hours.
+func _apply_crowd_hours() -> void:
+	for w: Dictionary in _crowd:
+		(w["marker"] as Node2D).visible = Crowd.active(w["lane"], _hour)
+
+
+## Real-time crowd: a walker whose step changed jumps a cell and glides there (`CharacterSprite.walk`).
+func _move_crowd(delta: float) -> void:
+	if _crowd.is_empty():
+		return
+	_crowd_time += delta
+	for w: Dictionary in _crowd:
+		var now := Crowd.walker(w["lane"], w["i"], w["n"], _crowd_time)
+		if int(now["step"]) == int(w["step"]):
+			continue
+		w["step"] = int(now["step"])
+		var marker: Node2D = w["marker"]
+		var from := marker.position
+		marker.position = cell_center(now["cell"])
+		if marker.visible and from != marker.position and from.distance_to(marker.position) <= TILE * 1.5:
+			(w["sprite"] as CharacterSprite).walk(String(now["dir"]), from - marker.position, Crowd.STEP_SEC)
+		else:
+			(w["sprite"] as CharacterSprite).pose(String(now["dir"]))
 
 
 ## The pixel height of the art of the object `id` on this area (32 when it has none).
