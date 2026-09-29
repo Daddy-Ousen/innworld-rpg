@@ -63,7 +63,7 @@ func test_buy_needs_coins_then_puts_the_good_in_the_bag() -> void:
 
 
 func test_a_shop_only_trades_its_goods() -> void:
-	var gs := _game_at("celum_square", "stitchworks_door")
+	var gs := _game_at("celum_stitchworks_street", "stitchworks_door")
 	Commands.give(gs, _db, 100, "bread", 1)
 	assert_string_contains(Commands.buy(gs, _db, "stitchworks_door", "bread")["error"], "does not sell")
 	assert_string_contains(Commands.sell(gs, _db, "stitchworks_door", "bread")["error"], "does not buy")
@@ -213,9 +213,9 @@ func test_a_v10_save_loads_with_an_empty_purse_and_fed() -> void:
 
 
 func test_corusdeer_soup_is_on_sale_only_once_erin_makes_it() -> void:
-	var gs := _game_at("celum_square", "stitchworks_door")
+	var gs := _game_at("celum_stitchworks_street", "stitchworks_door")
 	Commands.give(gs, _db, 100)
-	var obj := Interact.object_of(_db, "celum_square", "stitchworks_door")
+	var obj := Interact.object_of(_db, "celum_stitchworks_street", "stitchworks_door")
 	var goods := func() -> Array: return Economy.trades(gs, _db, obj).map(func(t: Dictionary) -> String: return t["good"])
 	assert_false(goods.call().has("corusdeer_soup"))
 	assert_string_contains(Commands.buy(gs, _db, "stitchworks_door", "corusdeer_soup")["error"], "not for sale yet")

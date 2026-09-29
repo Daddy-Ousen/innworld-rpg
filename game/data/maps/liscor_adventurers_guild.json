@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"id": "liscor_adventurers_guild",
+	"name": "Liscor Adventurers' Guild",
+	"location": "liscor_adventurers_guild",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M16.4.2). Canon: a two-storey building; the ground floor is one big hall with a receptionist counter, tables and a big job board (1.11); a queue and a busy hall (1.56); bandages and supplies (1.21); a small upper floor with a few guest rooms (1.62, 1.63) is NOT drawn. Furniture places are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 13], "to": "liscor_guild_street", "arrive": [4, 6], "minutes": 0}
+	],
+	"crowd": {"lanes": [{"path": [[3, 3], [8, 3]], "walkers": 2, "looks": ["race_drake", "race_human"]}, {"path": [[10, 6], [10, 10]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[5, 7]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[9, 7]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[13, 6]], "walkers": 1, "looks": ["race_human"]}, {"path": [[14, 9]], "walkers": 1, "looks": ["race_gnoll"]}]},
+	"objects": [
+		{"id": "job_board", "kind": "notice_board", "at": [4, 1], "name": "Job board", "actions": [], "solid": true},
+		{"id": "guild_hearth", "kind": "hearth", "at": [10, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "reception_desk_a", "kind": "counter", "at": [11, 3], "name": "Reception desk", "actions": [], "solid": true},
+		{"id": "reception_desk_b", "kind": "counter", "at": [12, 3], "name": "Reception desk", "actions": [], "solid": true},
+		{"id": "supply_shelves_a", "kind": "shelves", "at": [17, 2], "name": "Supply shelves", "actions": [], "solid": true},
+		{"id": "supply_shelves_b", "kind": "shelves", "at": [18, 2], "name": "Supply shelves", "actions": [], "solid": true},
+		{"id": "guild_table_1", "kind": "table", "at": [4, 6], "name": "Table", "actions": [], "solid": true},
+		{"id": "guild_table_2", "kind": "table", "at": [8, 7], "name": "Table", "actions": [], "solid": true},
+		{"id": "guild_table_3", "kind": "table", "at": [14, 6], "name": "Table", "actions": [], "solid": true},
+		{"id": "guild_table_4", "kind": "table", "at": [15, 10], "name": "Table", "actions": [], "solid": true},
+		{"id": "guild_table_5", "kind": "table", "at": [5, 10], "name": "Table", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHVHHHVHHHHHHHVHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}

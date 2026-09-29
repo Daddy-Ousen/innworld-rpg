@@ -90,6 +90,7 @@ func test_banned_rags_does_not_visit_the_inn() -> void:
 func test_the_hare_door_room_and_bar() -> void:
 	var gs := GameState.new_game(SEED, _db, "celum")
 	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_square"), "into the square")
+	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_hare_street"), "into the Hare street")
 	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_frenzied_hare"), "into the Hare")
 	assert_eq(Movement.location_at(gs, _db), "frenzied_hare")
 	assert_true(_db.maps.is_indoor(gs.player.area), "indoor")
@@ -100,4 +101,5 @@ func test_the_hare_door_room_and_bar() -> void:
 	var coins := gs.economy.coins
 	assert_false(Commands.sleep(gs, _db, "hare_room").is_empty(), "rent the room")
 	assert_eq(gs.economy.coins, coins - 6, "the room costs 6c")
-	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_square"), "back out")
+	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_hare_street"), "back out")
+	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_square"), "back to the square")

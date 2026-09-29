@@ -1,0 +1,33 @@
+{
+	"schema_version": 1,
+	"id": "liscor_watch_office",
+	"name": "Zevara's office",
+	"location": "liscor_watch_barracks",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M16.4.3). Canon: the Watch Captain's office is upstairs in the Watch House (1.28); its contents are not stated, so this is a guess.",
+	"zones": {},
+	"exits": [
+		{"at": [8, 6], "to": "liscor_watch_barracks", "arrive": [21, 11], "minutes": 0}
+	],
+	"objects": [
+		{"id": "captain_desk_a", "kind": "counter", "at": [5, 3], "name": "Captain's desk", "actions": [], "solid": true},
+		{"id": "captain_desk_b", "kind": "counter", "at": [6, 3], "name": "Captain's desk", "actions": [], "solid": true},
+		{"id": "office_shelves_a", "kind": "shelves", "at": [2, 1], "name": "Report shelves", "actions": [], "solid": true},
+		{"id": "office_shelves_b", "kind": "shelves", "at": [3, 1], "name": "Report shelves", "actions": [], "solid": true},
+		{"id": "office_hearth", "kind": "hearth", "at": [8, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "office_stairs_down", "kind": "stairs", "at": [8, 6], "name": "Stairs down", "actions": []}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHHHHHVHHHH",
+		"H=========H",
+		"H=========H",
+		"H=========H",
+		"H=========H",
+		"H=========H",
+		"H=========H",
+		"H=========H",
+		"HHHHHHHHHHH"
+	]
+}

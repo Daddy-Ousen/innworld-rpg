@@ -44,6 +44,8 @@
 			"combat": {"hp": 80, "accuracy": 9, "evasion": 5, "armor": 3, "damage": [6, 11]},
 			"notes": "Day 9 dawn: Relc brings Goblin heads to the inn (b1.relc_brings_goblin_heads). Stays away from the inn after Erin throws him out, and again after he blames her for Klbkch (1.30).",
 			"goals": [
+				{"goal": "eat", "base": 3, "hours": [[12, 13, 1]],
+					"target": {"area": "liscor_watch_barracks", "pos": [5, 5]}},
 				{"goal": "visit_inn", "base": 5, "days": [9, 9], "hours": [[6, 7, 1]],
 					"target": {"area": "inn_hill", "pos": [16, 13]}},
 				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
@@ -58,6 +60,8 @@
 			"confidence": "guess",
 			"combat": {"hp": 80, "accuracy": 10, "evasion": 7, "armor": 2, "damage": [6, 10]},
 			"goals": [
+				{"goal": "work", "base": 2, "hours": [[21, 24, 1]],
+					"target": {"area": "liscor_watch_barracks", "pos": [17, 6]}},
 				{"goal": "patrol", "base": 2, "hours": [[8, 17, 1]],
 					"target": {"area": "liscor_gate", "route": [[6, 14], [20, 14], [20, 9], [6, 9]]}},
 				{"goal": "visit_inn", "base": 2, "hours": [[18, 21, 1]], "when_flags": ["erin.met_liscor_watch"],
@@ -67,8 +71,10 @@
 		},
 		"ilvriss": {
 			"confidence": "guess",
-			"notes": "M13.2. Wall Lord Ilvriss of Salazsar stays in Liscor (the Tailless Thief) and is off the map. A canon scene brings him into the street to confront Ryoka on day 101 (4.09). No combat block yet.",
+			"notes": "M13.2. Wall Lord Ilvriss of Salazsar stays in Liscor (the Tailless Thief) and is off the map by day. M16.4.4: from day 97 he eats at the Tailless Thief in the evening (guessed hours). A canon scene brings him into the street to confront Ryoka on day 101 (4.09). No combat block yet.",
 			"goals": [
+				{"goal": "eat", "base": 3, "days": [97, 999], "hours": [[20, 22, 1]],
+					"target": {"area": "liscor_tailless_thief", "pos": [11, 7]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -82,8 +88,10 @@
 		"zevara": {
 			"confidence": "guess",
 			"combat": {"hp": 50, "accuracy": 7, "evasion": 4, "armor": 2, "damage": [4, 8]},
-			"notes": "A short morning check at the east gate; otherwise in the Watch barracks. Combat block (M7.4): she holds the gate against the dead on day 39 (1.60 stage); her fire breath is not modelled.",
+			"notes": "A short morning check at the east gate; otherwise in her office in the Watch House (M16.4.3, hours 9-18 are a guess). Combat block (M7.4): she holds the gate against the dead on day 39 (1.60 stage); her fire breath is not modelled.",
 			"goals": [
+				{"goal": "work", "base": 2, "hours": [[9, 18, 1]],
+					"target": {"area": "liscor_watch_office", "pos": [5, 4]}},
 				{"goal": "guard_post", "base": 2, "hours": [[7, 8, 1]],
 					"target": {"area": "liscor_gate", "pos": [5, 9]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
@@ -92,6 +100,8 @@
 		"beilmark": {
 			"confidence": "guess",
 			"goals": [
+				{"goal": "work", "base": 2, "hours": [[14, 22, 1]],
+					"target": {"area": "liscor_watch_barracks", "pos": [10, 10]}},
 				{"goal": "guard_post", "base": 2, "hours": [[6, 14, 1]],
 					"target": {"area": "liscor_gate", "pos": [2, 13]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
@@ -109,6 +119,8 @@
 			"confidence": "guess",
 			"combat": {"hp": 40, "accuracy": 7, "evasion": 4, "armor": 1, "damage": [3, 7]},
 			"goals": [
+				{"goal": "eat", "base": 3, "hours": [[19, 21, 1]],
+					"target": {"area": "liscor_gnoll_tavern", "pos": [8, 7]}},
 				{"goal": "trade", "base": 2, "hours": [[7, 19, 1]],
 					"target": {"area": "liscor_market", "pos": [10, 5]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
@@ -124,8 +136,10 @@
 		},
 		"selys": {
 			"confidence": "guess",
-			"notes": "Works at the Adventurer's Guild (off-map); lunch in the market.",
+			"notes": "M16.4.2: works at the reception desk of the Adventurers' Guild (a room, guessed hours 8-12 and 13-18); lunch in the market; off the map at night.",
 			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 12, 1], [13, 18, 1]],
+					"target": {"area": "liscor_adventurers_guild", "pos": [10, 3]}},
 				{"goal": "eat", "base": 2, "hours": [[12, 13, 1]],
 					"target": {"area": "liscor_market", "pos": [14, 14]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}

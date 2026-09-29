@@ -1,0 +1,85 @@
+# ADR 0024 — M16.4 Liscor districts
+
+Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) and M16.4.3 (Watch House) and M16.4.4 (taverns) done: M16.4 complete
+
+## Context
+Liscor was two yard maps. ROADMAP M16.4 asks for 5–7 district maps joined by streets, streets that go on at the map
+edge, a crowd of passers-by (view only) and canon places from Books 1–5 with guesses marked. User answers (2026-09-29):
+6 street maps; interiors for the main rooms (guilds, Watch barracks, taverns).
+
+## Decisions
+- Keep the ids `liscor_gate` and `liscor_market` (canon events, schedules and about 25 tests use them). New maps join
+  through exits: `liscor_market` → `liscor_plaza` → `liscor_guild_street`, `liscor_watch`, `liscor_homes`.
+- Streets go on by running to the map edge: the edge stops the player, so no invisible wall is needed. Edges of the
+  plaza and Watch maps are roofs and walls; the plaza's four edges and the guild street and homes ends are open cobble.
+- Doors face south only (a house draws its south face), so buildings with doors sit on the north side of an east–west
+  street. Each map lists its houses in a generator script (scratchpad, not in git); the JSON is the source.
+- Crowd = view only (`crowd` map field, `game/world/crowd.gd`); walkers never enter `GameState`.
+
+## Schema change (rule 11, approved with the M16.4 plan)
+Optional map field `crowd`: `{"lanes": [{"path": [[x, y], ...], "walkers": n, "looks": ["race_drake", ...], "hours"?: [from, to]}]}`.
+Not read by `game/core/`. `unit_crowd` checks that every lane cell is walkable and free of solid objects, every look has a
+sheet, and a map shows at most `Crowd.MAX_WALKERS` (12) walkers.
+
+## Canon basis (research from the extracted chapters; paraphrased, chapter numbers as in the raw files)
+| Place | What the text says | Used as |
+|---|---|---|
+| Adventurers' Guild | two storeys, plain sign, one big hall with a counter, a job board, tables; stairs to a small upper floor (1.11, 1.62, 1.63) | room in M16.4.2 |
+| Mages' Guild | crystal-ball-and-wand sign (1.11); front counter with a Drake clerk, messages carried upstairs (3.38) | room in M16.4.2 |
+| Watch House | main street beside a Hive entrance (1.62); big ground room with tables, a desk near the door, stairs to Zevara's office (1.07, 1.15, 1.28) | room in M16.4.3 |
+| Tailless Thief | north side of town, the costly Drake inn, counter with kegs, kitchen, lamps (2.09) | door on the guild street, room in M16.4.4 |
+| Gnoll tavern | Gnoll customers and staff, one central table (2.17); street and name not stated | door on the homes street, room in M16.4.4 |
+| Plaza and park | open plaza with benches, trees, a pillared public building with the city sigil (1.11); round cobbled park with a wooden playground (2.41) | `liscor_plaza` (no playground art) |
+| Gates | east (1.11), north and south gates exist (1.60, 2.09); no west gate stated | not drawn: streets run to the edge |
+| Merchants' and Runners' Guilds | not placed in Liscor by the text; most cities have them (memory note) | signed and closed on the guild street |
+| Olesm | works for the Council, not at the Guild (1.25) | no schedule change |
+| Terbore, Tekshia | Guild regulars; no look sheet, so no NPC yet | stay unplaced |
+
+## M16.4.0 result (crowd)
+`Crowd` (pure): `cells`, `chain` (ping-pong), `walker(lane, i, n, t)` (cell, prev, dir, step), `active(lane, hour)`
+(default hours 6–22). `WorldView._show_crowd` / `_move_crowd` put a marker with a `CharacterSprite` per walker in the
+Props layer, moved by real time (one cell per 0.7 s, `CharacterSprite.walk` glide), hidden outside the lane's hours,
+no label. Applied to `liscor_market`. Tests: `unit_crowd` (9).
+
+## M16.4.1 result (streets)
+New maps: `liscor_plaza` (park, benches, notice board, Council Hall plaque), `liscor_guild_street` (Adventurers', Mages',
+Merchants', Runners' Guilds and the Tailless Thief as signed buildings), `liscor_watch` (Watch House, quarters, Hive
+entrance, city wall), `liscor_homes` (Selys's, Krshia's, the Gnoll tavern, homes). `liscor_market` gets a west exit to
+the plaza. Doors of the enterable buildings are `stone_door` cells with a sign plaque beside them until their rooms exist
+(M16.4.2–4 turn them into exits). New sign icons: sword, star, shield, scroll (`tools/build_signs.py`, `objects.json`
+`signs`; `plaque` now points at the moved empty cell). Music mood `liscor`, ambience `market` for all four maps.
+Tests: `unit_liscor_map` (reach, two-way exits, signed doors, moods).
+
+## M16.4.2 result (guild rooms)
+`liscor_adventurers_guild` (one hall: job board, hearth, two reception desk counters, supply shelves, five tables, six idle
+or walking adventurers) and `liscor_mages_guild` (front counter, price board, message shelves, writing table). The guild street
+doors (4,5) and (12,5) are now exits with `sign` (sword "Adventurers' Guild", star "Mages' Guild"); the two plaques are gone.
+The Adventurers' Guild upper floor (stairs, guest rooms) and the Mages' Guild clerk are not drawn. Selys gets a `work` goal
+at the desk (hours 8-12 and 13-18, `liscor_adventurers_guild` (10, 3), beside the counters so the player can talk to her);
+lunch at the market and the off-map night stay. Olesm stays off the map (he is Council, not Guild). Music mood `liscor` for
+both rooms, ambience `tavern` (crowd murmur) for the Adventurers' Guild. Tests: `unit_liscor_map` (7), `sim_liscor_rooms` (new,
+2: Selys at the desk at 11:00, away at 12:30); `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5` still pass.
+
+## M16.4.3 result (Watch House)
+`liscor_watch_barracks` (desk sergeant's counters near the door, four guards' tables, a ledger table, gear shelves, hearth,
+guards idle or walking) and `liscor_watch_office` (Zevara's office up the stairs: desk, report shelves, hearth). The stairs are
+an exit on the stairs cell (like the inn). The Watch street door (13,6) is an exit with the shield sign "Liscor Watch House".
+No cells are drawn (canon does not place them). Schedule additions (all guesses, in `npc_behaviour.json`): Zevara works in the
+office 9-18, Beilmark takes the desk 14-22 (his gate post stays 6-14), Klbkch writes the ledger 21-24 (after his inn visits),
+Relc eats at the guards' table 12-13. Gate posts and patrols are unchanged. A test lesson: a sim test that parks the player in
+a doorway (`inn_interior` (12, 14)) blocks NPCs leaving that room; park the player away from doors. Tests: `sim_liscor_rooms`
+(5), `unit_liscor_map` (rooms list), plus the usual `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5`.
+
+## M16.4.4 result (taverns)
+`liscor_tailless_thief` (bar counter and kegs, kitchen stove and counter, six tables, six Drake patrons, lamps; the private warded
+room is not drawn) and `liscor_gnoll_tavern` (bar, casks, a four-table central table as in 2.17, Gnoll and Drake patrons). Both
+street doors are exits with the mug sign; the last two door plaques are gone. Schedule additions (guesses): Krshia eats at the
+Gnoll tavern's central table 19-21; Ilvriss eats at the Tailless Thief 20-22 from day 97 (his off-map stay stays otherwise).
+Music mood `liscor`, ambience `tavern`. Tests: `unit_liscor_map` (8: all rooms reachable, two-way exits, schedule spots are free
+floor), `sim_liscor_rooms` (6: adds Krshia at 20:30).
+
+## M16.4 summary
+Liscor is now 6 street maps and 7 rooms (13 maps). Not done, on purpose: the Adventurers' Guild upper floor, the Mages' Guild
+clerk, the Tailless Thief private room, a Liscor west/north/south gate (streets run to the map edge instead), Terbore, Tekshia and
+Peslas (no look sheet, so no NPC), the park playground (no art). Merchants' and Runners' Guilds are signed and closed. The full
+suite runs once at M16.6 (M16.4 changed no `game/core/` code).

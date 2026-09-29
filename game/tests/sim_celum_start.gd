@@ -63,6 +63,7 @@ func test_a_morning_in_celum() -> void:
 	assert_eq(_where(gs, "wesle"), "celum_gate 15,2", "on guard at the gate")
 	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_square"), "into the square")
 	assert_eq(Movement.location_at(gs, _db), "celum")
+	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_main_street"), "into the main street")
 	assert_true(ToyMaps.walk_to_area(gs, _db, "celum_runners_guild"), "into the guild")
 	assert_eq(Movement.location_at(gs, _db), "celum_runners_guild")
 	assert_eq(Winter.status(gs, _db), "", "no winter on day 8")

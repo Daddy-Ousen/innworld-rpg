@@ -51,6 +51,10 @@ CLOTH_DARK = (56, 70, 98, 255)
 CLOTH_LIGHT = (122, 144, 180, 255)
 MAT = (150, 60, 50, 255)
 MAT_LIGHT = (196, 110, 80, 255)
+BONE = (226, 218, 194, 255)
+CAP = (96, 176, 214, 255)
+CAP_LIGHT = (196, 236, 250, 255)
+CAP_DARK = (56, 112, 156, 255)
 
 
 def sheet(rel: str) -> Image.Image:
@@ -184,16 +188,33 @@ def fruit_tree() -> Image.Image:
 
 
 def dead_tree() -> Image.Image:
-    """The big atlas tree with its leaves turned grey-brown."""
+    """A bare tree: no leaves, a forked trunk and branches drawn in the LPC wood colours.
+    The roots come from the big atlas tree (its trunk is the only non-leaf part)."""
+    img, d = canvas(96, 128)
+
+    def limb(pts: list[tuple[int, int]], width: int) -> None:
+        d.line(pts, fill=OUTLINE, width=width + 2, joint="curve")
+        d.line(pts, fill=WOOD, width=width, joint="curve")
+        d.line([(x - 1, y) for x, y in pts], fill=WOOD_LIGHT, width=max(1, width // 3), joint="curve")
+
+    limb([(48, 112), (47, 88), (46, 64), (48, 44)], 9)  # trunk
+    limb([(47, 84), (34, 70), (24, 50), (20, 36)], 5)  # left fork
+    limb([(24, 52), (12, 46)], 3)
+    limb([(30, 62), (30, 44), (34, 30)], 3)
+    limb([(47, 66), (62, 54), (72, 40), (76, 24)], 5)  # right fork
+    limb([(72, 42), (86, 38)], 3)
+    limb([(62, 54), (64, 36), (58, 22)], 3)
+    limb([(48, 46), (46, 28), (48, 12)], 4)  # crown
+    limb([(46, 32), (38, 20)], 2)
+    limb([(48, 26), (56, 14)], 2)
     src = crop("tiles/lpc_atlas.png", (928, 896, 96, 128))
     px = src.load()
-    for y in range(src.height):
+    for y in range(100, src.height):
         for x in range(src.width):
             r, g, b, a = px[x, y]
-            if a and g > r and g > b:  # leaves: grey-brown, darker
-                v = (r + g + b) // 3
-                px[x, y] = (v * 3 // 4 + 20, v * 3 // 4 + 8, v * 3 // 4, a)
-    return src
+            if a and not (g > r and g > b):  # trunk and roots, not leaves
+                img.putpixel((x, y), (r, g, b, a))
+    return img
 
 
 def bedroll() -> Image.Image:
@@ -258,6 +279,49 @@ def stone_doors() -> Image.Image:
 
 
 # name → (width, height, [frames]) in layout order. Never reorder: objects.json uses the regions.
+def cobweb() -> Image.Image:
+    """A web in a corner: threads fan out from the top-left corner, joined by sagging arcs."""
+    img, d = canvas(32, 32)
+    thread = (226, 226, 232, 220)
+    tips = [(31, 2), (29, 11), (23, 21), (14, 28), (3, 31)]
+    for tx, ty in tips:
+        d.line((0, 0, tx, ty), fill=thread)
+    for r in (9, 17, 25):
+        pts = [(round(tx * r / 31), round(ty * r / 31)) for tx, ty in tips]
+        for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+            mx, my = (ax + bx) // 2 - 1, (ay + by) // 2 - 1
+            d.line((ax, ay, mx, my), fill=thread)
+            d.line((mx, my, bx, by), fill=thread)
+    return img
+
+
+def bones() -> Image.Image:
+    """Two crossed bones and a small skull, on the floor."""
+    img, d = canvas(32, 20)
+    for a, b in [((3, 15), (22, 8)), ((4, 8), (24, 17))]:
+        d.line((*a, *b), fill=OUTLINE, width=4)
+        d.line((*a, *b), fill=BONE, width=2)
+        for x, y in (a, b):
+            d.ellipse((x - 2, y - 2, x + 2, y + 2), fill=BONE, outline=OUTLINE)
+    d.ellipse((17, 1, 29, 11), fill=BONE, outline=OUTLINE)
+    d.rectangle((20, 9, 26, 13), fill=BONE, outline=OUTLINE)
+    for x, y in [(21, 5), (21, 6), (25, 5), (25, 6)]:
+        d.point((x, y), fill=OUTLINE)
+    return img
+
+
+def glow_mushrooms() -> Image.Image:
+    """Three cave mushrooms with pale blue caps."""
+    img, d = canvas(32, 28)
+    for cx, top, w in [(9, 10, 8), (20, 4, 10), (26, 15, 6)]:
+        d.rectangle((cx - 1, top + 6, cx + 1, 26), fill=BONE, outline=OUTLINE)
+        d.pieslice((cx - w, top, cx + w, top + 14), 180, 360, fill=CAP, outline=OUTLINE)
+        d.point((cx - w // 2, top + 4), fill=CAP_LIGHT)
+        d.point((cx + w // 3, top + 3), fill=CAP_LIGHT)
+        d.line((cx - w + 1, top + 7, cx + w - 1, top + 7), fill=CAP_DARK)
+    return img
+
+
 EDITS: list[tuple[str, list]] = [
     ("wagon", [wagon]),
     ("chess_table", [chess_table]),
@@ -274,6 +338,9 @@ EDITS: list[tuple[str, list]] = [
     ("rope_anchor", [rope_anchor]),
     ("brazier", [lambda f=f: brazier(f) for f in range(4)]),
     ("stone_doors", [stone_doors]),
+    ("cobweb", [cobweb]),
+    ("bones", [bones]),
+    ("glow_mushrooms", [glow_mushrooms]),
 ]
 
 

@@ -7,20 +7,29 @@
 	"note": "Design map. Krshia's and Lism's stalls are canon (1.12-1.13); places and sizes are guesses.",
 	"zones": {"krshia_stall": [[8, 5, 5, 4]], "lism_stall": [[18, 5, 5, 4]]},
 	"exits": [
-		{"at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10}
+		{"at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10},
+		{"at": [0, 11, 1, 2], "to": "liscor_plaza", "arrive": [30, 11], "minutes": 2}
 	],
+	"crowd": {"lanes": [{"path": [[3, 10], [29, 10]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_human", "race_drake"]}, {"path": [[15, 4], [15, 12]], "walkers": 2, "looks": ["race_gnoll", "race_drake"]}, {"path": [[3, 19], [28, 19]], "walkers": 3, "looks": ["race_drake", "race_drake", "race_gnoll"]}, {"path": [[10, 8]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[20, 8]], "walkers": 1, "looks": ["race_drake"]}]},
 	"objects": [
-		{"id": "krshia_counter", "kind": "market_stall", "at": [10, 6], "name": "Krshia's stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "krshia_stall"},
-		{"id": "lism_counter", "kind": "market_stall", "at": [20, 6], "name": "Lism's stall", "actions": ["buy_supplies", "haggle"], "solid": true, "shop": "lism_stall"},
+		{"id": "market_home_1", "kind": "plaque", "at": [4, 2], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "market_home_2", "kind": "plaque", "at": [10, 2], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "market_home_3", "kind": "plaque", "at": [16, 2], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "market_home_4", "kind": "plaque", "at": [23, 2], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "market_home_5", "kind": "plaque", "at": [28, 2], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "market_home_6", "kind": "plaque", "at": [6, 16], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "market_home_7", "kind": "plaque", "at": [24, 17], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "krshia_counter", "kind": "market_stall", "at": [10, 6], "name": "Krshia's stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "krshia_stall", "sign": {"icon": "bread"}},
+		{"id": "lism_counter", "kind": "market_stall", "at": [20, 6], "name": "Lism's stall", "actions": ["buy_supplies", "haggle"], "solid": true, "shop": "lism_stall", "sign": {"icon": "coin"}},
 		{"id": "market_well", "kind": "well", "at": [15, 15], "name": "Well", "actions": ["carry_water"], "solid": true},
 		{"id": "brazier_west", "kind": "brazier", "at": [6, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "brazier_east", "kind": "brazier", "at": [26, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true}
 	],
-	"legend": {"#": "city_wall", "B": "building", "_": "cobble"},
+	"legend": {"#": "city_wall", "B": "building", "_": "cobble", "b": "building_b"},
 	"rows": [
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
 		"BB_____________________________#",
 		"BB_____________________________#",
 		"BB_____________________________#",
@@ -29,18 +38,18 @@
 		"BB_____________________________#",
 		"BB_____________________________#",
 		"BB_____________________________#",
-		"BB______________________________",
-		"BB______________________________",
+		"________________________________",
+		"________________________________",
 		"BB_____________________________#",
-		"BB___BBBB______________________#",
-		"BB___BBBB______________BBBB____#",
-		"BB___BBBB______________BBBB____#",
+		"BB___bbbb______________________#",
+		"BB___bbbb______________BBBB____#",
+		"BB___bbbb______________BBBB____#",
 		"BB_____________________BBBB____#",
 		"BB_____________________________#",
 		"BB_____________________________#",
 		"BB_____________________________#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#"
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#",
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#",
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#"
 	]
 }

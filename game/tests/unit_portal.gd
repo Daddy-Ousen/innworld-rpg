@@ -39,9 +39,9 @@ func test_the_door_data_loads() -> void:
 	assert_eq(_db.errors, [] as Array[String])
 	assert_true(_db.maps.areas.has("celum_stitchworks"), "Octavia's shop")
 	assert_true(_db.maps.is_indoor("celum_stitchworks"))
-	var exits: Array = _db.maps.areas["celum_square"]["exits"]
+	var exits: Array = _db.maps.areas["celum_stitchworks_street"]["exits"]
 	assert_eq(exits.filter(func(e: Dictionary) -> bool: return e["to"] == "celum_stitchworks").size(), 1,
-			"a door from the square")
+			"a door from the street")
 	assert_eq(Interact.object_of(_db, "inn_interior", INN_DOOR)["portal"]["to"], "celum_stitchworks")
 	assert_eq(int(_db.rules["portal"]["trips_per_day"]), 4)
 
@@ -107,9 +107,9 @@ func test_the_celum_end_needs_its_own_flag() -> void:
 
 func test_the_shop_door_leads_in_and_sells() -> void:
 	var gs := _game()
-	gs.player.place("celum_square", Vector2i(2, 13))
+	gs.player.place("celum_stitchworks_street", Vector2i(17, 6))
 	Commands.settle(gs, _db)
-	Commands.move(gs, _db, "w")
+	Commands.move(gs, _db, "n")
 	assert_eq(gs.player.area, "celum_stitchworks")
 	assert_eq(Commands.give(gs, _db, 100), "")
 	assert_true(ToyMaps.walk_next_to(gs, _db, "octavia_counter"))

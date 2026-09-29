@@ -188,3 +188,11 @@ session. Current work stays in `progress.md`.
   - [x] M14.6 UI skin — merged ([PR #73](https://github.com/Daddy-Ousen/innworld-rpg/pull/73)), tag `m14.6-done` on merge commit 0f094ad.
   - [x] M14.7 Portraits — merged ([PR #74](https://github.com/Daddy-Ousen/innworld-rpg/pull/74)), tag `m14.7-done` on merge commit 290d4f2.
   - [x] M14.8 Balance — merged ([PR #75](https://github.com/Daddy-Ousen/innworld-rpg/pull/75)), tags `m14.8-done` and `m14-done` on merge commit a08c23a: `rules.combat.hp_per_level` = 3 (`Stats.max_hp`), three probes `sim_balance_progress|money|fights`, ADR 0021 M14.8 section. Probes pass; full suite (109 scripts, 1019 tests) passes after one test fix (`unit_console` no longer reads a fight leaked into `Session` by `unit_brawl`). User decision 2026-09-29: leave the Rock Crab and the day-21 raid as they are (too hard for one player; a knock-out keeps canon).
+
+## Roadmap status (M15, archived 2026-09-29)
+- [x] M15 — Readability and lore fixes (plan 2026-09-29, ADR 0022). The four sub-milestones were one stacked branch chain and merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df).
+  - [x] M15.0 Font: Pixel Operator (CC0), 16 px grid, "Large text" option (`ui/text_settings.gd`, `user://settings.cfg`).
+  - [x] M15.1 The player's day: `Clock.player_day` (arrival = Day 1) on every screen; core and saves keep the canon day.
+  - [x] M15.2 HUD log: 3 lines, bottom left, fades; L = message history, H = help page (`ui/text_page.*`).
+  - [x] M15.3 No XP numbers and no total level on player screens; the debug console keeps the numbers.
+  - Full suite after M15.3: 111 scripts, 1039 tests pass; Python tool tests 77 pass.

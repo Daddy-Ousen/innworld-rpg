@@ -8,18 +8,24 @@
 	"note": "Design map. The guild has a receptionist (Stenei) and a request board (1.33R); the layout is a guess. Jobs come in M8.6.",
 	"zones": {},
 	"exits": [
-		{"at": [10, 11], "to": "celum_square", "arrive": [6, 4], "minutes": 0}
+		{"at": [10, 11], "to": "celum_main_street", "arrive": [7, 6], "minutes": 0}
 	],
+	"crowd": {"lanes": [{"path": [[5, 9], [15, 9]], "walkers": 1, "looks": ["race_human"], "hours": [7, 20]}, {"path": [[7, 6]], "walkers": 1, "looks": ["race_human"], "hours": [7, 20]}, {"path": [[17, 6]], "walkers": 1, "looks": ["race_human"], "hours": [7, 20]}]},
 	"objects": [
 		{"id": "guild_counter", "kind": "counter", "at": [10, 3], "name": "Reception counter", "actions": [], "solid": true},
 		{"id": "request_board", "kind": "notice_board", "at": [3, 1], "name": "Request board", "actions": ["deliver_parcel"], "solid": true},
 		{"id": "guild_hearth", "kind": "hearth", "at": [17, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
 		{"id": "guild_bench", "kind": "bench", "at": [15, 7], "name": "Bench", "actions": [], "solid": true},
-		{"id": "stretching_mat", "kind": "mat", "at": [4, 8], "name": "Stretching mat", "actions": ["sprint_training"]}
+		{"id": "stretching_mat", "kind": "mat", "at": [4, 8], "name": "Stretching mat", "actions": ["sprint_training"]},
+		{"id": "guild_potion_shelf", "kind": "shelves", "at": [6, 1], "name": "Potion and scroll shelf", "actions": [], "solid": true},
+		{"id": "guild_supply_shelf", "kind": "shelves", "at": [8, 1], "name": "Supply shelf", "actions": [], "solid": true},
+		{"id": "guild_table_west", "kind": "table", "at": [4, 5], "name": "Runners' table", "actions": [], "solid": true},
+		{"id": "guild_table_east", "kind": "table", "at": [16, 5], "name": "Runners' table", "actions": [], "solid": true},
+		{"id": "guild_bench_west", "kind": "bench", "at": [4, 6], "name": "Bench", "actions": [], "solid": true}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHHHHHVHHHVHHHHH",
 		"H==================H",
 		"H==================H",
 		"H==================H",

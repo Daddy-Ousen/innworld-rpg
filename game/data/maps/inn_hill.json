@@ -4,10 +4,10 @@
 	"name": "The hill with the inn",
 	"location": "wandering_inn",
 	"confidence": "guess",
-	"note": "Design map. The inn on a hill is canon (1.00); the layout is a guess. M13.0: the builders' lumber and stone lie by the inn while the Antinium build (4.18-4.29); two outhouses stand after it (4.29).",
+	"note": "Design map. The inn on a hill is canon (1.00); the layout is a guess. M13.0: the builders' lumber and stone lie by the inn while the Antinium build (4.18-4.29); two outhouses stand after it (4.29). M16.6: the No Killing Goblins board by the door is canon in 1.18; that it stands again at the rebuilt inn is a guess. The text has no stable, fence or well.",
 	"zones": {},
 	"exits": [
-		{"at": [16, 11, 1, 1], "to": "inn_interior", "arrive": [12, 14], "minutes": 0},
+		{"at": [16, 11, 1, 1], "to": "inn_interior", "arrive": [12, 14], "minutes": 0, "sign": {"icon": "mug", "text": "The Wandering Inn"}},
 		{"at": [15, 23, 2, 1], "to": "floodplains_south", "arrive": [16, 1], "minutes": 20},
 		{"at": [31, 2, 1, 2], "to": "bee_cave", "arrive": [1, 11], "minutes": 45}
 	],
@@ -17,19 +17,20 @@
 		{"id": "old_horseshoe", "kind": "horseshoe", "at": [8, 15], "name": "Rusty horseshoe in the grass", "actions": [], "item": "horseshoe"},
 		{"id": "building_lumber", "kind": "woodpile", "at": [22, 6], "name": "Builders' lumber", "actions": ["repair_furniture"], "when_flags": ["wandering_inn.expansion_begun"], "unless_flags": ["wandering_inn.third_floor_built"]},
 		{"id": "building_stone", "kind": "stones", "at": [24, 7], "name": "Builders' stone", "actions": [], "when_flags": ["wandering_inn.expansion_begun"], "unless_flags": ["wandering_inn.third_floor_built"]},
-		{"id": "outhouse_1", "kind": "door", "at": [7, 9], "name": "Outhouse", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]},
-		{"id": "outhouse_2", "kind": "door", "at": [8, 9], "name": "Outhouse", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]}
+		{"id": "outhouse_1", "kind": "door", "at": [7, 9], "name": "Outhouse", "actions": [], "sign": {"icon": "outhouse"}, "when_flags": ["wandering_inn.third_floor_built"]},
+		{"id": "outhouse_2", "kind": "door", "at": [8, 9], "name": "Outhouse", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]},
+		{"id": "inn_goblin_board", "kind": "plaque", "at": [14, 12], "name": "Board by the door", "actions": [], "sign": {"icon": "none", "text": "No Killing Goblins"}}
 	],
 	"overlays": [
 		{"id": "toren_snow_wall", "tile": "snow_wall", "when_flags": ["wandering_inn.snow_wall"],
 			"rects": [[10, 3, 16, 1], [10, 4, 1, 9], [25, 4, 1, 9], [10, 13, 5, 1], [17, 13, 9, 1]]}
 	],
-	"legend": {"+": "door", ",": "tall_grass", ".": "grass", ":": "dirt_road", "H": "wood_wall", "T": "tree", "^": "rock"},
+	"legend": {"+": "plain_door", ",": "tall_grass", ".": "grass", ":": "dirt_road", "H": "plain_house", "T": "tree", "^": "rock", "O": "boulder"},
 	"rows": [
 		"................................",
 		"......T.........................",
 		"................................",
-		"...,,,,.........................",
+		"...,,,,.................O.......",
 		"...,,,,.....................^...",
 		"...,,,,.....HHHHHHHHHH..........",
 		"............HHHHHHHHHH..........",
@@ -46,7 +47,7 @@
 		"....,,,,,,.....::.......,,,,,...",
 		"....,,,,,,.....::.......,,,,,...",
 		"....,,,,,,.....::...............",
-		"...............::...............",
+		"......O........::...............",
 		"...T...........::.........^.....",
 		"...............::...............",
 		"...............::..............."

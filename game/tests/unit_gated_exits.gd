@@ -99,7 +99,7 @@ func test_the_view_draws_only_open_exits() -> void:
 
 func _exit_marks(v: WorldView) -> int:
 	return v.marks.get_children().filter(func(c: Node) -> bool:
-		return c is ColorRect and (c as ColorRect).color == WorldView.EXIT_COLOR).size()
+		return c.has_meta("mark")).size()
 
 
 func test_validation_of_gated_exits() -> void:

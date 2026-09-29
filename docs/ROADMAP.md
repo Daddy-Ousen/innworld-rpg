@@ -209,21 +209,39 @@ log covers at most a strip at the bottom left; GUT tests for the changed UI pass
 
 ## M16 — Maps, art and cities
 Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change; maps and art are data.
-- [ ] M16.0 Art audit: a screenshot of every map; a list of every bad tile or prop (rocks, cliffs, thin water,
+- [x] M16.0 Art audit: a screenshot of every map; a list of every bad tile or prop (rocks, cliffs, thin water,
   flat building blocks) in the ADR. The user checks the list
-- [ ] M16.1 Nature art: boulder props (1x1, 2x2) that read as rocks; a cliff tile set (top and face) for rock walls
+- [x] M16.1 Nature art: boulder props (1x1, 2x2) that read as rocks; a cliff tile set (top and face) for rock walls
   and mountains; water edges that work for thin water; a bridge / stepping-stones object for crossings; fix the maps
-- [ ] M16.2 Buildings: a building block draws as a house: roof on top, front wall with windows and a door on the
+- [x] M16.2 Buildings: a building block draws as a house: roof on top, front wall with windows and a door on the
   bottom row. Styles: Drake stone (Liscor), Human timber and brick (Celum), plain (villages)
-- [ ] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
+- [x] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
   badge) and its name when the player is near; doors you can enter get a marker; other doors say "Closed" or
   "A private home". New optional object field `sign`
-- [ ] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,
+- [x] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,
   the Watch and the walls, homes, other gates), joined by streets. Map edges show roofs and streets that go on,
   but the player cannot walk there. A crowd of passers-by (view only). Canon places from Books 1–5; guesses marked
-- [ ] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
+  Sub-steps (user, 2026-09-29: 6 street maps and interiors for the main rooms):
+  - [x] M16.4.0 Crowd: view-only walkers (`crowd` map field, `game/world/crowd.gd`)
+  - [x] M16.4.1 Streets: plaza and park, guild street, Watch and walls, homes; market west exit
+  - [x] M16.4.2 Rooms: Adventurers' Guild, Mages' Guild
+  - [x] M16.4.3 Room: Watch barracks
+  - [x] M16.4.4 Rooms: Gnoll tavern, Tailless Thief
+- [x] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
   Frenzied Hare street, the Stitchworks street, homes)
-- [ ] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
+  Sub-steps (user, 2026-09-29: 4 new streets and 3 furnished rooms; ADR 0025):
+  - [x] M16.5.0 Streets: main street, Springbottom Street, Frenzied Hare street, poor quarter; square doors moved
+  - [x] M16.5.1 Room: Runners' Guild
+  - [x] M16.5.2 Room: Frenzied Hare
+  - [x] M16.5.3 Room: Stitchworks
+- [x] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
+  Sub-steps (user, 2026-09-29: Esthelm ruins only; plus gates, interior windows, cave decoration; ADR 0026):
+  - [x] M16.6.0 Inn hill goblin board, floodplains ford sign
+  - [x] M16.6.1 Gates: Celum towers and fee stand, Liscor gatehouses, signed exits
+  - [x] M16.6.2 Esthelm ruins: refugee shacks
+  - [x] M16.6.3 Ruins entrance ditch and Watch tents, road camp signs and cart
+  - [x] M16.6.4 Interior windows (`wood_window` tile) in 11 rooms
+  - [x] M16.6.5 Cave decoration: cobwebs, bones, glowing mushrooms
 **Done when:** every map passes the audit list; buildings look like buildings; every door and shop says what it
 is; Liscor and Celum each have at least 5 districts; NPC schedules and canon places still work
 (`sim_canon_book1` … `sim_canon_book5`, validator 0 errors); the user has walked the cities.

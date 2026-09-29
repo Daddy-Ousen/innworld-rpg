@@ -19,7 +19,14 @@
 		{"id": "library_shelf_3", "kind": "shelves", "at": [6, 10], "name": "Bookshelf", "actions": [], "solid": true},
 		{"id": "library_shelf_4", "kind": "shelves", "at": [8, 10], "name": "Bookshelf", "actions": [], "solid": true},
 		{"id": "library_papers", "kind": "papers", "at": [5, 15], "name": "Loose pages", "actions": ["read_book"]},
-		{"id": "depths_loose_stones", "kind": "stones", "at": [15, 17], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "depths_loose_stones", "kind": "stones", "at": [15, 17], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "deco_cobweb_1", "kind": "cobweb", "at": [1, 1], "name": "Cobweb", "actions": []},
+		{"id": "deco_cobweb_2", "kind": "cobweb", "at": [13, 1], "name": "Cobweb", "actions": []},
+		{"id": "deco_cobweb_3", "kind": "cobweb", "at": [26, 2], "name": "Cobweb", "actions": []},
+		{"id": "deco_bones_4", "kind": "bones", "at": [13, 14], "name": "Old bones", "actions": []},
+		{"id": "deco_bones_5", "kind": "bones", "at": [9, 17], "name": "Old bones", "actions": []},
+		{"id": "deco_glow_mushrooms_6", "kind": "glow_mushrooms", "at": [1, 18], "name": "Glowing mushrooms", "actions": []},
+		{"id": "deco_glow_mushrooms_7", "kind": "glow_mushrooms", "at": [29, 12], "name": "Glowing mushrooms", "actions": []}
 	],
 	"traps": [
 		{"id": "rune_hall_glyph_1", "at": [15, 3], "name": "A glowing rune", "damage": [3, 6], "hidden": true, "spot": 0.45, "disarm": 0.4, "once": false, "rearm_minutes": 30, "line": "A rune flares under your foot and a bolt of force hits you."},
@@ -32,7 +39,7 @@
 		{"id": "library_book_2", "at": [7, 11], "name": "A trapped book", "damage": [3, 6], "hidden": true, "spot": 0.5, "disarm": 0.6, "once": true, "line": "You kick a book. It bursts into flame and explodes."},
 		{"id": "acid_room_grate", "at": [28, 5], "name": "A floor grate", "damage": [4, 7], "hidden": true, "spot": 0.4, "disarm": 0.35, "once": false, "rearm_minutes": 30, "line": "The grate hisses. Acid sprays up at you."}
 	],
-	"legend": {".": "cave_floor", "^": "rock"},
+	"legend": {".": "cave_floor", "^": "stone_cliff", "R": "rock"},
 	"rows": [
 		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
 		"^......^^^^^^..........^^^^^^^^^",

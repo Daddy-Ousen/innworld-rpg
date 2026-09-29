@@ -57,7 +57,11 @@ const ANIM_FPS := 6.0
 ## One step glide, the same as the held-key repeat in main.gd.
 const STEP_TIME := 0.14
 const OBJECT_COLOR := Color("#e8c547")
-const EXIT_COLOR := Color(1.0, 1.0, 0.7, 0.3)
+## M16.3: the way-out arrow (an exit with no sign), its outline and the size of its points.
+const ARROW_COLOR := Color(1.0, 1.0, 1.0, 0.75)
+const ARROW_EDGE := Color(0.08, 0.08, 0.08, 0.6)
+## A sign hangs this many px above the floor line of the wall cell it is drawn on.
+const SIGN_LIFT := 4
 const NOSE := 4 * U
 const NPC_COLOR := Color("#3b6fd1")
 ## Name and number font size: two times Pixel Operator's 16 px grid (M15.0).
@@ -122,6 +126,15 @@ var atlas: Dictionary = {}
 var sprites: Dictionary = {}
 ## Object kind → objects.json entry (see object_look).
 var object_art: Dictionary = {}
+## data/objects.json "signs" (M16.3): icon id -> region on the signs sheet.
+var sign_table: Dictionary = {}
+## Each sign / arrow label with its cell: {"label": Label, "cell": Vector2i}; faded by the player's distance.
+var _sign_labels: Array[Dictionary] = []
+## The crowd (M16.4): one entry per walker, {"marker": Node2D, "sprite": CharacterSprite, "lane": Dictionary,
+## "i": int, "n": int, "step": int}; moved in `_process` by real time.
+var _crowd: Array[Dictionary] = []
+var _crowd_time := 0.0
+var _hour := 12
 ## The player's sprite (null = the red square).
 var look: CharacterSprite
 ## NPC id → name shown over its marker.
@@ -155,6 +168,9 @@ var _anim_time := 0.0
 var atmosphere: Atmosphere
 ## Holds the object loop players (M12.4), in map pixels.
 var loop_spots: Node2D
+## Tiles that mix several edge pieces (thin water, one-cell strips), over the Edges layer.
+var mixes: Node2D
+var _mix_cache := {}
 
 @onready var tiles: TileMapLayer = $Tiles
 @onready var edges: TileMapLayer = $Edges
@@ -181,12 +197,18 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	_winter_flag = winter_flag
 	_winter = false
 	object_art = load_object_art()
+	sign_table = SignArt.load_table()
 	if audio == null:
 		audio = AudioDb.load_file()
 	if atmosphere == null:
 		atmosphere = Atmosphere.new()
 		atmosphere.tile = TILE
 		add_child(atmosphere)
+	if mixes == null:
+		mixes = Node2D.new()
+		mixes.name = "EdgeMixes"
+		add_child(mixes)
+		move_child(mixes, edges.get_index() + 1)
 	if loop_spots == null:
 		loop_spots = Node2D.new()
 		loop_spots.name = "LoopSpots"
@@ -228,6 +250,9 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 	if new_area:
 		_show_area(gs.player.area)
 	atmosphere.set_time(gs.clock.minute(), winter)
+	_hour = gs.clock.minute() / 60
+	_apply_crowd_hours()
+	_update_sign_labels(gs.player.pos())
 	_show_npcs(gs)
 	_show_guests(gs)
 	_show_monsters(gs)
@@ -261,6 +286,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 
 
 func _process(delta: float) -> void:
+	_move_crowd(delta)
 	if _animated.is_empty() and fairies.get_child_count() == 0:
 		return
 	_anim_time += delta
@@ -524,6 +550,9 @@ func _show_area(id: String) -> void:
 	area = id
 	tiles.clear()
 	edges.clear()
+	for child in mixes.get_children():
+		mixes.remove_child(child)
+		child.queue_free()
 	_animated.clear()
 	monster_facing.clear()
 	_halves.clear()
@@ -544,13 +573,16 @@ func _show_area(id: String) -> void:
 				tiles.set_cell(cell, 0, atlas[t])
 			if art.has("over"):
 				_set_art(edges, cell, art["over"])
+			if art.has("mix"):
+				_add_mix(cell, art["mix"])
 			_add_prop(t, cell)
 	for child in marks.get_children():
 		marks.remove_child(child)
 		child.queue_free()
-	for e: Dictionary in _maps.exits_on(id):
-		var r := MapDb.rect_of(e["at"])
-		_rect(Vector2(r.position * TILE), Vector2(r.size * TILE), EXIT_COLOR)
+	_sign_labels.clear()
+	for m: Dictionary in SignArt.marks(_maps, id):
+		_add_mark(m)
+	_show_crowd(id)
 	var light_sources: Array = []
 	for o: Dictionary in _maps.objects_on(id):
 		var cell := Vector2i(int(o["at"][0]), int(o["at"][1]))
@@ -576,6 +608,126 @@ func _show_area(id: String) -> void:
 	camera.limit_top = 0
 	camera.limit_right = size.x * TILE
 	camera.limit_bottom = size.y * TILE
+
+
+## One SignArt mark (M16.3): a hanging sign in the y-sorted Props layer, or a way-out arrow, and a
+## name label that shows when the player is near. The marker (in the Marks layer) holds the arrow and
+## the label and has the meta "mark" = the mark's kind. No sign art: a small square.
+func _add_mark(m: Dictionary) -> void:
+	var cell: Vector2i = m["cell"]
+	var marker := Node2D.new()
+	marker.set_meta("mark", String(m["kind"]))
+	marker.position = cell_center(cell)
+	var label_top := 10.0
+	if m["kind"] == "arrow":
+		var holder := Node2D.new()
+		holder.rotation = Vector2.DOWN.angle_to(Vector2(m["dir"]))
+		holder.add_child(_poly(PackedVector2Array([Vector2(-8, -6), Vector2(8, -6), Vector2(0, 6)]), ARROW_EDGE))
+		holder.add_child(_poly(PackedVector2Array([Vector2(-5, -4), Vector2(5, -4), Vector2(0, 3)]), ARROW_COLOR))
+		marker.add_child(holder)
+	elif m["kind"] == "sign":
+		var region := SignArt.icon_region(sign_table, String(m["icon"]))
+		var hang := cell
+		match String(m["place"]):
+			"right":
+				hang += Vector2i.RIGHT
+			"left":
+				hang += Vector2i.LEFT
+		var lift := float(SIGN_LIFT)
+		if m["place"] == "above":
+			lift = float(_object_height(String(m["id"]))) if m["source"] == "object" else float(TILE)
+		var at := cell_center(hang) - Vector2(0, lift)
+		if region.size == Vector2.ZERO:
+			_rect(at - Vector2(3, 3) * U, Vector2(6, 6) * U, OBJECT_COLOR)
+			marker.position = at
+		else:
+			var s := _region_sprite("signs", region)
+			s.position = at
+			props.add_child(s)
+			marker.position = at
+			label_top = region.size.y - TILE / 2.0 + 2.0  # just above the board
+	if String(m["text"]) != "":
+		_add_label(marker, String(m["text"]), label_top)
+		var label := marker.get_child(marker.get_child_count() - 1) as Label
+		label.modulate.a = 0.0
+		_sign_labels.append({"label": label, "cell": cell})
+	marks.add_child(marker)
+
+
+## The crowd of the area (M16.4, `Crowd`): a marker with a CharacterSprite per walker in the y-sorted
+## Props layer (so it clears with them). A look with no sheet gives no walker; nothing else is drawn.
+func _show_crowd(id: String) -> void:
+	_crowd.clear()
+	_crowd_time = 0.0
+	var data: Variant = _maps.areas[id].get("crowd", {})
+	if not data is Dictionary:
+		return
+	var budget := Crowd.MAX_WALKERS
+	for lane: Dictionary in (data as Dictionary).get("lanes", []):
+		var n := Crowd.count(lane, budget)
+		budget -= n
+		for i in n:
+			var sprite := CharacterSprite.make(Crowd.look_of(lane, i))
+			if sprite == null:
+				continue
+			var marker := Node2D.new()
+			marker.set_meta("crowd", true)
+			marker.add_child(sprite)
+			props.add_child(marker)
+			var w := Crowd.walker(lane, i, n, 0.0)
+			marker.position = cell_center(w["cell"])
+			sprite.pose(String(w["dir"]))
+			_crowd.append({"marker": marker, "sprite": sprite, "lane": lane, "i": i, "n": n, "step": int(w["step"])})
+	_apply_crowd_hours()
+
+
+## Shows each walker only within its lane's hours.
+func _apply_crowd_hours() -> void:
+	for w: Dictionary in _crowd:
+		(w["marker"] as Node2D).visible = Crowd.active(w["lane"], _hour)
+
+
+## Real-time crowd: a walker whose step changed jumps a cell and glides there (`CharacterSprite.walk`).
+func _move_crowd(delta: float) -> void:
+	if _crowd.is_empty():
+		return
+	_crowd_time += delta
+	for w: Dictionary in _crowd:
+		var now := Crowd.walker(w["lane"], w["i"], w["n"], _crowd_time)
+		if int(now["step"]) == int(w["step"]):
+			continue
+		w["step"] = int(now["step"])
+		var marker: Node2D = w["marker"]
+		var from := marker.position
+		marker.position = cell_center(now["cell"])
+		if marker.visible and from != marker.position and from.distance_to(marker.position) <= TILE * 1.5:
+			(w["sprite"] as CharacterSprite).walk(String(now["dir"]), from - marker.position, Crowd.STEP_SEC)
+		else:
+			(w["sprite"] as CharacterSprite).pose(String(now["dir"]))
+
+
+## The pixel height of the art of the object `id` on this area (32 when it has none).
+func _object_height(id: String) -> int:
+	for o: Dictionary in _maps.objects_on(area):
+		if o["id"] == id:
+			var art := object_look(o, object_art, _winter)
+			return int((art["region"] as Rect2).size.y) if not art.is_empty() else TILE
+	return TILE
+
+
+## A filled polygon node.
+func _poly(points: PackedVector2Array, color: Color) -> Polygon2D:
+	var p := Polygon2D.new()
+	p.polygon = points
+	p.color = color
+	return p
+
+
+## Fades each sign label by how far the player (at `at`) is from it.
+func _update_sign_labels(at: Vector2i) -> void:
+	for s: Dictionary in _sign_labels:
+		if is_instance_valid(s["label"]):
+			(s["label"] as Label).modulate.a = SignArt.label_alpha(SignArt.king_dist(at, s["cell"]))
 
 
 ## One marker per NPC in the area (named after the NPC id), with its
@@ -944,6 +1096,24 @@ func _set_art(layer: TileMapLayer, cell: Vector2i, art: Array) -> bool:
 		atlas_src.create_tile(c)
 	layer.set_cell(cell, id, c)
 	return true
+
+
+## A cell whose ground needs several edge pieces at once (GroundArt.mix): a
+## sprite over the Edges layer. The mixed picture is made once per combination.
+func _add_mix(cell: Vector2i, mix: Dictionary) -> void:
+	var key := "%s|%s" % [mix["sheet"], mix["cells"]]
+	if not _mix_cache.has(key):
+		var path := sheet_path(String(mix["sheet"]))
+		if path == "":
+			return
+		var image: Image = (load(path) as Texture2D).get_image()
+		_mix_cache[key] = ImageTexture.create_from_image(
+				GroundArt.mix(image, mix["cells"], mix["fill"], TILE))
+	var sprite := Sprite2D.new()
+	sprite.texture = _mix_cache[key]
+	sprite.centered = false
+	sprite.position = Vector2(cell * TILE)
+	mixes.add_child(sprite)
 
 
 func _rect(pos: Vector2, size: Vector2, color: Color) -> void:

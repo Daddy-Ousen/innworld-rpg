@@ -23,9 +23,9 @@
 		{"id": "guest_bed_7", "kind": "bed", "at": [11, 9], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
 		{"id": "hall_broom", "kind": "broom", "at": [10, 6], "name": "Broom", "actions": ["sweep_floor"]}
 	],
-	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [
-		"HHHHHHHHHHHHHHHHHHHH",
+		"HHVHHHHHHHVHHHVHHHHH",
 		"H====H====H====H===H",
 		"H====H====H====H===H",
 		"H====H====H====H===H",

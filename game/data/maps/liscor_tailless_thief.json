@@ -1,0 +1,53 @@
+{
+	"schema_version": 1,
+	"id": "liscor_tailless_thief",
+	"name": "The Tailless Thief",
+	"location": "tailless_thief",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M16.4.4). Canon: the most famous and costly inn in Liscor, on the north side of town, run by Peslas; bright lamps, Drake barmaids, a counter with kegs, a kitchen, unbroken chairs; well-off Drakes only (2.09, 4.09); a private warded room (4.31) is NOT drawn. Furniture places are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [11, 13], "to": "liscor_guild_street", "arrive": [21, 6], "minutes": 0}
+	],
+	"crowd": {"lanes": [{"path": [[3, 5], [19, 5]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[5, 7]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[9, 7]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[13, 7]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[17, 7]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[7, 10]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[15, 10]], "walkers": 1, "looks": ["race_drake"]}]},
+	"objects": [
+		{"id": "thief_hearth", "kind": "hearth", "at": [11, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "thief_kegs_a", "kind": "shelves", "at": [3, 2], "name": "Kegs and bottles", "actions": [], "solid": true},
+		{"id": "thief_kegs_b", "kind": "shelves", "at": [4, 2], "name": "Kegs and bottles", "actions": [], "solid": true},
+		{"id": "thief_bar_1", "kind": "counter", "at": [3, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "thief_bar_2", "kind": "counter", "at": [4, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "thief_bar_3", "kind": "counter", "at": [5, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "thief_bar_4", "kind": "counter", "at": [6, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "thief_bar_5", "kind": "counter", "at": [7, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "thief_stove", "kind": "stove", "at": [17, 1], "name": "Kitchen stove", "actions": [], "solid": true, "warm": true},
+		{"id": "thief_kitchen_1", "kind": "counter", "at": [16, 3], "name": "Kitchen counter", "actions": [], "solid": true},
+		{"id": "thief_kitchen_2", "kind": "counter", "at": [17, 3], "name": "Kitchen counter", "actions": [], "solid": true},
+		{"id": "thief_kitchen_3", "kind": "counter", "at": [18, 3], "name": "Kitchen counter", "actions": [], "solid": true},
+		{"id": "thief_table_1", "kind": "table", "at": [4, 7], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_table_2", "kind": "table", "at": [8, 7], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_table_3", "kind": "table", "at": [12, 7], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_table_4", "kind": "table", "at": [16, 7], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_table_5", "kind": "table", "at": [6, 10], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_table_6", "kind": "table", "at": [14, 10], "name": "Table", "actions": [], "solid": true},
+		{"id": "thief_lamp_west", "kind": "brazier", "at": [1, 6], "name": "Lamp", "actions": [], "solid": true, "warm": true},
+		{"id": "thief_lamp_east", "kind": "brazier", "at": [20, 6], "name": "Lamp", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHVHHHVHHHVHHHVHHHVHHH",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"H====================H",
+		"HHHHHHHHHHH+HHHHHHHHHH"
+	]
+}

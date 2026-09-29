@@ -1,11 +1,132 @@
 # Handoff
 
-## Just done (2026-09-29, M15.3)
-- M15.3 done on branch `feat/m15.3-no-xp` (stacked: font -> player day -> HUD log -> no XP; nothing pushed).
-  The M15 branches are one chain, so one PR from `feat/m15.3-no-xp` covers all four sub-milestones (ask the user
-  before push / PR). Full suite (subagent): 111 scripts, 1039 tests pass.
-- Next: the user plays M15 (`godot --path game`); then PR, merge, archive M15 in `docs/PROGRESS_ARCHIVE.md`, start M16.0
-  (art audit: screenshots of every map, list of bad tiles in the ADR, the user checks the list).
+## Just done (2026-09-29, M16.6 complete: the other maps)
+- Branch `feat/m16.6-other-maps` (stacked on `feat/m16.5-celum`; nothing pushed, ask before push / PR). ADR `docs/adr/0026-m16-6-other-maps.md`
+  (canon table + results). 6 commits M16.6.0-M16.6.5 + docs. M16.0-M16.6 are all done: one PR for the whole M16 chain is next.
+- What changed: Celum gate towers + fee stand, Liscor gatehouses, inn goblin board (no stable/fence/well: canon has none), floodplains ford sign,
+  Esthelm 4 refugee shacks, ruins entrance ditch (`chasm` at x=9, x=22) + 2 Watch tents, road camp signs + cart, tile `wood_window`
+  (`tools/build_windows.py`, `game/assets/tiles/windows.png`) in 11 rooms, cave props `cobweb`/`bones`/`glow_mushrooms` (`tools/build_objects.py`).
+  New test `unit_other_maps` (8); `tools/tests/test_build_windows.py` (3). No core change, no save change.
+- Full suite (subagent): 118 scripts, 1101 tests. One failure: `sim_esthelm_siege.test_holding_the_barricade_changes_the_battle`, caused by
+  a shack near the siege player's spot (8,6). Shack 1 moved to (2-4,1-2); Esthelm-related scripts (12) pass. The rest of the suite was run before
+  that one map change (data only), so it was not rerun in full.
+- Waiting on the user: walk the changed maps in the game (`godot --path game`): both gates, inn hill (board), Esthelm, ruins entrance,
+  a room with windows, the depths/crypt. Then ask the user before pushing; one PR for M16.0-M16.6, then archive M16 in `docs/PROGRESS_ARCHIVE.md`.
+- Next: M17 (tactical combat), plan mode first.
+- Gotchas: keep props out of a stage map's fight lanes (see ADR 0026 lesson). The map patch helper (scratchpad `mp.py`) is gone next session;
+  map JSON is tab-indented CRLF, one object per line; `json.dumps` does not round-trip it, edit by lines. After `--import`, do NOT
+  `git checkout` every modified asset blindly: `git ls-files -m game/assets | xargs git checkout` also reverts a rebuilt `edits.png`.
+  Screenshot scene `game/_scratch` is deleted before commit (recipe: M16.1 notes below).
+
+## Just done (2026-09-29, M16.5 complete: Celum districts)
+- Branch `feat/m16.5-celum` (stacked on `feat/m16.4-liscor`; nothing pushed, ask before push / PR). ADR `docs/adr/0025-m16-5-celum-districts.md`
+  (canon table + results). One commit for M16.5.0-3.
+- Graph: `celum_gate` - `celum_square` (hub) - `celum_main_street` (N, Runners' Guild door) / `celum_stitchworks_street` (W, "Springbottom Street",
+  Stitchworks door + `stitchworks_door` shop plaque) / `celum_hare_street` (E, Hare door) - `celum_poor_quarter` (S of Hare street).
+  Rooms keep size, door cell and all old objects; furniture only added. Mage's / Adventurers' / Merchants' Guild are signed closed plaques.
+- Gotchas: `ToyMaps.walk_to_area` is ONE hop (tests walk square, street, room). A wide exit shifts `arrive` per cell: `arrive` must be free
+  floor for every cell of the exit rect. A `plaque` object needs a `sign` (icon `none` = empty sign, used for the shop plaque).
+- Waiting on the user: look at the 4 Celum streets and 3 rooms in the game (`godot --path game`): do the streets, signs and crowds look right?
+- Next: M16.6 the other maps (Esthelm, road camp, inn hill, ruins entrance...: new buildings, props, signs). Plan mode first. The FULL suite
+  (subagent) runs at M16.6's end, before its PR (M16.0-M16.5 changed no `game/core/` code).
+- Generators (scratchpad `gen_celum.py`, `patch_square.py`, `run_targets.sh`, `_scratch` screenshot scene) are gone next session; the JSON is the source.
+  Screenshot recipe: scene with a SubViewport + `WorldView` (see M16.1 notes); `_scratch` is deleted before commit.
+
+## Just done (2026-09-29, M16.4 complete: M16.4.0 - M16.4.4)
+- M16.4.4 done: Tailless Thief + Gnoll tavern rooms, Krshia and Ilvriss evening goals. All door plaques are exits now. Next: M16.5 Celum districts
+  (plan mode first; reuse `Crowd`, `SignArt`, house tiles; the same graph idea: gate, square, guild street, Frenzied Hare street, Stitchworks street, homes;
+  Celum `celum_*` ids and their tests must keep working; Celum houses are brick (`brick_house`, `brick_door`).
+- M16.4.3 done: Watch House rooms + schedules for Zevara, Beilmark, Klbkch, Relc (ADR 0024). Only `homes_gnoll_tavern` and `gs_thief` plaques
+  remain to turn into doors (M16.4.4). Ilvriss (Wall Lord) is off-map 'staying at the Tailless Thief' (4.09 scene brings him out): he can
+  get a `work`/rest goal in the Tailless Thief room, guessed hours.
+- Sim tests that wait in a room: park the player away from doorways (an NPC cannot pass them).
+- M16.4.2 done: guild rooms + Selys at the desk (see ADR 0024). `sim_liscor_rooms.gd` grows with M16.4.3/4. Remaining door plaques on
+  `liscor_watch` (`watch_barracks`) and `liscor_homes` (`homes_gnoll_tavern`); the Tailless Thief plaque `gs_thief` is on the guild street.
+  Room generators: scratchpad `roomgen.py` + `gen_guilds.py` (gone next session; copy the JSON of a room instead).
+- Branch `feat/m16.4-liscor` (stacked on `feat/m16.3-signs`; nothing pushed, ask before push / PR). ADR `docs/adr/0024-m16-4-liscor-districts.md`
+  has the canon table (chapter refs) and results. User answers: 6 street maps; interiors for guilds, Watch barracks, taverns.
+- M16.4.0 crowd: `game/world/crowd.gd` (pure), `WorldView._show_crowd/_move_crowd`, map field `crowd` (lanes of walkers, real time,
+  hours 6-22). M16.4.1 streets: `liscor_plaza`, `liscor_guild_street`, `liscor_watch`, `liscor_homes` + market west exit.
+  Generator (scratchpad `gen_liscor.py`, gone next session) wrote them; edit the JSON directly now.
+- Doors of enterable buildings are `stone_door` cells with a sign PLAQUE beside them (`gs_adventurers`, `gs_mages`, `gs_thief`,
+  `watch_barracks`, `homes_gnoll_tavern`). In M16.4.2-4: add the room map, an exit on the door cell with `sign`, delete that plaque,
+  add the room id to `ROOMS` in `unit_liscor_map.gd`, a mood in `audio.json` moods.by_map (and ambience if a tavern), and
+  crowd lanes only on cells free of solid objects (`unit_crowd` checks).
+- Canon notes for the rooms (ADR table): Adventurers' Guild = one hall, counter (Selys), job board, tables, stairs to a small
+  upper floor; Mages' Guild = front counter with a Drake clerk; Watch House = big ground room with tables and a desk near the door,
+  Zevara's office upstairs; Tailless Thief = Drake-only costly inn, counter with kegs, kitchen; Gnoll tavern = Gnoll staff and patrons.
+  Olesm is Council, NOT at the guild. Terbore, Tekshia, Peslas have no look sheet: no NPC.
+- NPC schedule edits (Selys at the guild 8-12 / 13-18; Watch off-hours in the barracks) can break `sim_npc_day`, `sim_walk_day`,
+  `sim_canon_fights`, `unit_console` (beilmark line): run them after each edit.
+- Scratch screenshot scene sources: scratchpad `scratchscene/` (copy to `game/_scratch/`, env OUT, ONLY, WINTER, POS; delete before commit).
+
+## Just done (2026-09-29, M16.3)
+- M16.3 signs on branch `feat/m16.3-signs` (stacked on `feat/m16.2-buildings`; nothing pushed, ask before push / PR).
+  Result table in `docs/adr/0023-m16-art-audit.md` ("M16.3 result"). Passing: `unit_sign_art` (7), `unit_gated_exits`,
+  `unit_ground_art`, `unit_art`, `unit_world_view`, `unit_map_db`, `unit_sound_cues`, `unit_monster_art`, `unit_ambience`,
+  `sim_liscor_depths`, `sim_canon_book1..5`, `sim_walk_day`, Python 91, validator 0 errors. No core change, so no full suite (M16.6).
+- Waiting on the user: look at `celum_square`, `liscor_market`, `inn_hill` and a room door in the game
+  (`godot --path game`): do the signs, arrows, plaques and labels (they show within 2-4 cells) look right?
+- Design: object or exit field `sign` = `{icon, text?}`. Icons: `game/data/objects.json` key `signs` (built by
+  `tools/build_signs.py`; `--check` compares). `game/world/sign_art.gd` (`SignArt.marks`, `label_alpha`) is pure;
+  `WorldView._add_mark` draws (marker nodes in the Marks layer carry meta `mark` = sign / arrow / label; sign sprites go
+  in Props). Unsigned exits get an arrow to the nearest map edge and a "To <map name>" label. Kind `plaque` = empty art,
+  the sign is the object (place "here"). `EXIT_COLOR` is gone.
+- New M16.4/M16.5 maps: give each door an exit `sign` (or an object `sign`), and doorless houses a `plaque` object.
+  `unit_sign_art.test_every_enterable_house_door_has_a_sign` checks `celum_square` and `inn_hill` only; extend its list.
+- Next: M16.4 Liscor districts (plan mode first).
+- Screenshot scratch scene (`game/_scratch`, deleted): env OUT, ONLY, WINTER, POS ("x,y" = player cell, so labels show).
+
+## M16.2 (2026-09-29)
+- M16.2 buildings on branch `feat/m16.2-buildings` (stacked on `feat/m16.1-nature-art`; nothing pushed, ask before
+  push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.2 result"). Passing: `unit_ground_art` (21),
+  `unit_art`, `unit_world_view`, `unit_map_db`, `unit_gated_exits`, `unit_sound_cues`, `unit_monster_art`,
+  `sim_liscor_depths`, `sim_canon_book1..5`, Python 86, validator 0 errors. No core change, so no full suite (M16.6).
+- Waiting on the user: look at `liscor_market`, `celum_square`, `inn_hill`, `esthelm_ruins` in the game
+  (`godot --path game`) and say if the houses look right (roof colours, window spacing, the plain inn).
+- Next: M16.3 doors and signs (plan mode first). The yellow exit tint (`EXIT_COLOR`, `world_view.gd` ~line 566) lies over
+  every door: replace it with a door marker. Object doors (`celum_square` (24,3), (1,14)) keep the old door art.
+  A side door (`celum_square` (1,13), tile `door`) has no art: a house draws only its south face.
+- Houses: tile field `house` (`{sheet, block, group, door, see_through}`); `GroundArt.house_look` / `house_piece`; sheet
+  `game/assets/tiles/houses.png` from `tools/build_houses.py` (blocks 0-3 summer stone/brick/plain/ruin, 4-7 snow roofs;
+  each block 5x4 cells: roof top, roof fill, upper wall + window + door top, lower wall + door). Map chars: `B`/`b` =
+  two houses of one style side by side (`building`/`building_b`, `brick_house`/`_b`, `plain_house`/`_b`), doors
+  `stone_door`, `brick_door`, `plain_door` (they join either group), `ruin_wall`. A wall along the map edge shows only roof.
+- A tree prop is 5 cells high: `unit_ground_art` fails if a tree stands within 4 cells below a house or city wall.
+- Screenshot recipe below still works (scene `game/_scratch/shot.tscn` + `shot.gd`, deleted before commit; env OUT,
+  ONLY, WINTER). Import noise: after `--import` run `git checkout -- game/assets/audio game/assets/fonts` and
+  `git ls-files -m game/assets | xargs -r git checkout --`.
+- Patching map rows: a Python helper that keeps tabs and CRLF (rows replaced line by line) was in the scratchpad (gone).
+  Edit tool output on `.gd` files with CRLF is fine; do not open them in Python without `rb`/`utf-8` (the `×` breaks).
+
+## M16.1 (2026-09-29)
+- M16.1 nature art on branch `feat/m16.1-nature-art` (stacked on `feat/m16.0-art-audit`; nothing pushed). Result table in
+  `docs/adr/0023-m16-art-audit.md` ("M16.1 result").
+- Answered 2026-09-29: audit list is complete; the inn building waited for M16.2 (ADR 0023 "User answers").
+- Waiting on the user: look at road camp, ruins entrance, bee cave, crypt, floodplains and say if the cliffs, boulders
+  and ford look right.
+- New code: `GroundArt.edge_pieces` / `mix` (several edge pieces per cell, drawn by `WorldView._add_mix` in the
+  `EdgeMixes` node), `GroundArt.cliff_look` / `cliff_piece` (tile field `cliff`), `tools/build_cliffs.py` (writes
+  `game/assets/tiles/cliffs.png`: earth, stone, snow_earth, snow_stone blocks, 3x4 cells each).
+- Map legend chars added: `R` = rock (isolated cliff cell), `O` = boulder. Cliff maps use `^` = `cliff` (outdoor) or
+  `stone_cliff` (caves).
+- Screenshot recipe (scratch scene, deleted): `game/_scratch/shot.tscn` + `shot.gd` (`extends Node`, `_ready` calls a
+  deferred coroutine). For each map id in `db.maps.areas`: a `SubViewport` sized `MapDb.size * WorldView.TILE`
+  (`UPDATE_ALWAYS`) holds a `WorldView` from `res://world/world_view.tscn`; `v.setup(db.maps, {}, db.combat.enemies, {}, "winter")`;
+  `gs = GameState.new(1)`; `gs.flags["winter"] = true` for winter; `gs.player.place(id, Vector2i(0,0))`;
+  `v.refresh(gs, db)`; hide `v.player` and `v.atmosphere`; camera zoom 1; wait 4 frames; `get_texture().get_image().save_png`.
+  Run with the console exe (not `--headless`, needs the renderer): `OUT=<dir> WINTER=1 ONLY=id1,id2 Godot..._console.exe --path game res://_scratch/shot.tscn`.
+- `godot --headless --import` may segfault (known) but still imports; then `git checkout -- game/assets/audio game/assets/fonts`
+  and the LF-rewritten `.import` files under `assets/tiles|objects|characters` (keep new untracked ones).
+- Tile facts: `rock` = one grey rock (atlas 26,25), `boulder` = atlas 27,26 (3x2), `shallows` shares the water ground
+  and adds stepping stones; `water`/`shallows` have `winter_sprite` (ice, terrains block 27,14).
+
+## M16.0 (2026-09-29)
+- M15 merged (PR #77, b93e2df) and archived. M16.0 audit is on branch `feat/m16.0-art-audit`
+  (`docs/adr/0023-m16-art-audit.md`, 25 problems mapped to M16.1-M16.6). Docs only.
+
+## M15 (2026-09-29, merged)
+- M15.0–M15.3 merged as one PR (#77) and archived in `docs/PROGRESS_ARCHIVE.md`.
 
 ## M15.2 (2026-09-29)
 - M15.2 done on branch `feat/m15.2-hud-log` (stacked on `feat/m15.1-player-day`; nothing pushed). Log strip 3 lines,
