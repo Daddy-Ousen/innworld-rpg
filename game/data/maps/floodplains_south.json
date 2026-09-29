@@ -20,7 +20,8 @@
 		{"id": "dead_tree", "kind": "dead_tree", "at": [6, 8], "name": "Dead tree", "actions": ["chop_wood"], "solid": true},
 		{"id": "razorbeak_nest", "kind": "nest", "at": [21, 16], "name": "Razorbeak nest", "actions": []},
 		{"id": "loose_stones_1", "kind": "stones", "at": [13, 9], "name": "Loose stones", "actions": [], "item": "stone"},
-		{"id": "loose_stones_2", "kind": "stones", "at": [18, 22], "name": "Loose stones", "actions": [], "item": "stone"}
+		{"id": "loose_stones_2", "kind": "stones", "at": [18, 22], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "stream_ford", "kind": "plaque", "at": [23, 17], "name": "Stepping stones", "actions": [], "sign": {"icon": "none", "text": "Ford"}}
 	],
 	"legend": {",": "tall_grass", ".": "grass", ":": "dirt_road", "T": "tree", "^": "rock", "O": "boulder", "s": "shallows", "~": "water"},
 	"rows": [
