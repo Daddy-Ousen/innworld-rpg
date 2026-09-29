@@ -1,21 +1,33 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.0 merged (PR #67), tag `m14.0-done` made locally on 801e382 (push it with the M14.1 branch).
-- M14.1 Cooking recipes on branch `feat/m14.1-cooking` (not committed yet):
-  - `game/data/recipes.json` (4 recipes), `game/core/cooking.gd` (`after_action`, `can_cook`, `cook`, `hint`).
-  - `core/economy_db.gd`: loads and validates recipes, `recipes_for(action)`. `core/commands.gd`: calls
-    `Cooking.after_action` after `Economy.after_action` in `perform` and `interact`.
-  - `data/economy.json`: goods flour, vegetables, meat, dry_pasta, simple_meal, stew, pasta_dish; Krshia and Celum
-    stalls sell ingredients. `ui/interact_menu.gd`: hint on cook actions.
-  - `tests/unit_cooking.gd` (12 tests, green), `unit_economy` celum stall list updated. ADR 0021 M14.1 section.
-  - Python validator not changed (it reads canon only, not economy.json).
+- M14.1 merged (PR #68), tag `m14.1-done` pushed (on 7c31db7). ROADMAP M14.1 ticked on the M14.2 branch.
+- M14.2 Guests and serving on branch `feat/m14.2-guests` (committed, PR open):
+  - `game/core/inn_state.gd` (GameState.inn, save v15), `game/core/guests.gd` (sync, serve, night, validate).
+  - `game_state.gd` SAVE_VERSION 15; `save_migrations.gd` 14 -> 15; `commands.gd` `serve` + `Guests.sync` at the end
+    of `_after`; `night.gd` step 2c; `movement.gd` seated patrons block a step; `interact.gd` guest options,
+    "serve" lists, `SERVE` pick, `guests` context at the inn; `map_db.gd` checks table `seats`; `data_db.gd` calls
+    `Guests.validate`.
+  - Data: `rules.json` `inn` block; `maps/inn_interior.json` five new tables, 12 seats.
+  - UI: `ui/interact_menu.gd` "Serve <dish>" rows, `world/main.gd` SERVE pick, `world/world_view.gd` `_show_guests`.
+  - Tests: `tests/unit_guests.gd` (19), `tests/sim_inn_service.gd` (a week: 36 served, 472c, reputation 46).
+  - ADR 0021 M14.2 section written.
 
 ## Next steps
-1. M14.1 full suite green (100 scripts, 937 tests), committed, PR #68 open, tag `m14.0-done` pushed.
-   After the user merges: tick ROADMAP M14.1 on main, tag `m14.1-done`.
-2. M14.2 Guests and serving (save v15): see the plan file. Dish `sell` prices are the base for serving income.
-3. Full suite: run it with Bash run_in_background (not in a subagent), about 15 min.
+1. M14.2 is committed and the PR is open (full suite: 102 scripts, 957 tests, all pass; Python 78 OK; validator 0).
+   After the user merges: tag `m14.2-done`, tick ROADMAP M14.2 on the M14.3 branch.
+2. M14.3 Relationships and reputation (save v16): see the plan file. `Guests.reputation` is the inn's own
+   reputation; M14.3 town reputation may feed `guest_curve` too.
+3. Full suite: run it with Bash run_in_background (about 15 min), then clear import noise:
+   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles` and
+   `git ls-files -m game/assets/characters | xargs -r git checkout --`.
+
+## M14.2 notes
+- Patron rolls use `Rng.new(seed ^ meal_key * 2654435761)`, not `gs.rng`: the main stream stays the same.
+- Patrons roll only at the first command in a meal while the player is in `inn_interior`. Tests that stand in the
+  inn at 7-10, 12-14 or 18-22 now get patrons; a patron on a seat blocks the player (not NPCs or monsters).
+- Cooking takes 45-120 min; cooking during a meal makes patrons give up (-2 each while the player is in the room).
+- `sim_inn_service` cooks between meals for that reason.
 
 ## M13 notes
 - `MapDb.exit_at` hides gated exits after `sync_flags`; before the first sync every exit shows. Validators must

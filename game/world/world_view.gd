@@ -228,6 +228,7 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 		_show_area(gs.player.area)
 	atmosphere.set_time(gs.clock.minute(), winter)
 	_show_npcs(gs)
+	_show_guests(gs)
 	_show_monsters(gs)
 	_show_fairies(gs)
 	_show_traps(gs)
@@ -609,6 +610,47 @@ func _show_npcs(gs: GameState) -> void:
 		if most > 0 and now >= 0:
 			_bar(marker, float(now) / most)
 		npcs.add_child(marker)
+
+
+## M14.2: one marker per patron in the area (named "guest_<id>"), facing its
+## table, "Drake patron (wants stew)" or "(eating)" above it. Drawn like an
+## NPC with the race look (CharacterSprite), or a square with no sheet.
+func _show_guests(gs: GameState) -> void:
+	for g in Guests.present(gs):
+		if g["area"] != area:
+			continue
+		var seat := Vector2i(int(g["seat"][0]), int(g["seat"][1]))
+		var marker := Node2D.new()
+		marker.name = "guest_" + String(g["id"])
+		marker.position = cell_center(seat)
+		var sprite := CharacterSprite.make(String(g["look"]))
+		if sprite != null:
+			sprite.pose(_facing_table(seat))
+			marker.add_child(sprite)
+		else:
+			var square := ColorRect.new()
+			square.position = Vector2(-5, -5) * U
+			square.size = Vector2(10, 10) * U
+			square.color = NPC_COLOR
+			square.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			marker.add_child(square)
+		var state := "eating" if int(g["paid"]) > 0 \
+				else "wants " + String(g["order"]).replace("_", " ")
+		_add_label(marker, "%s (%s)" % [Guests.patron_name(g), state],
+				CharacterSprite.HEAD if sprite != null else 5.0 * U)
+		npcs.add_child(marker)
+
+
+## The way from a seat to its table ("s" if none is found).
+func _facing_table(seat: Vector2i) -> String:
+	for o: Dictionary in _maps.objects_on(area):
+		for s: Array in o.get("seats", []):
+			if Vector2i(int(s[0]), int(s[1])) == seat:
+				var d := Vector2i(int(o["at"][0]), int(o["at"][1])) - seat
+				for dir: String in PlayerState.DIRS:
+					if PlayerState.DIRS[dir] == Vector2i(signi(d.x), signi(d.y)):
+						return dir
+	return "s"
 
 
 ## One marker per monster in the area (named after the monster id). With a

@@ -55,3 +55,33 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
   income. Krshia's stall (Liscor) sells all four ingredients; the Celum stall sells flour, vegetables and meat.
 - The interact menu adds a hint to a cook action: "makes 3 stew" or "needs 1 meat, 2 vegetables".
 - Prices and yields are placeholders for the M14.8 balance pass.
+
+## M14.2 Guests and serving (2026-09-29)
+- Save v15: `GameState.inn` (`core/inn_state.gd`): `reputation` (0..100, -1 = start value from rules), `guests`
+  (patrons), `income_today`, `guests_today`, `served_total`, `meal` (the last meal rolled), `served_npcs`,
+  `next_id`. Migration 14 → 15 adds an empty `inn`.
+- A patron is `{id, area, race, look, seat, order, arrive, until, paid}`. The plan named a `patience` field; we
+  keep one deadline (`until`) instead: out of patience when not served, done eating when served.
+- New `rules.inn` block (checked by `Guests.validate` on load): the inn area, meals (breakfast 7-10, lunch 12-14,
+  dinner 18-22), `guest_curve` by reputation, `flag_bonus`, patron races (Drake, Gnoll, Human; a guess), dishes,
+  patience, pay, reputation steps and the lines. All numbers are balance guesses for M14.8.
+- Open: after `wandering_inn.open` (1.05); closed after `wandering_inn.destroyed` (2.10T) until
+  `wandering_inn.rebuilt` (2.11).
+- Patrons are rolled once per meal, at the first command in the meal while the player is in the inn's common
+  room, never more than the free seats. They come over the first half of what is left of the meal. The roll uses its
+  own `Rng`, seeded from the game seed and the meal key, so the main random stream (and every older test) is unchanged.
+- Map objects may list `seats` (MapDb checks: next to the object, walkable, no exit). `inn_interior` has six tables
+  and twelve seats, put away from NPC spots and walking lanes. A seated patron blocks the player's step; NPCs and
+  monsters ignore patrons (a rare overlap is only visual).
+- Serve (`Commands.serve`, menu "Serve <dish>"): a dish from the bag to a guest next to the player. It is the
+  `serve_guests` action for 5 minutes (XP, inn work that feeds you). Pay = dish sell price x 2; the wrong dish pays
+  half; reputation +1. A patron nobody serves leaves when out of patience: reputation -2, but only if the player is
+  in the room (they were ignored). If the player is away, Erin copes and nothing is lost. A fight in the room sends
+  all patrons away with no loss.
+- Canon guests: an NPC in the room whose goal is `eat` or `visit_inn` is a guest (staff have `work`). They take any
+  dish at full pay, once per meal slot; their relationship with the player goes up by 1.
+- Cook actions at the inn get the context `guests` = patrons today + canon guests now (explicit context still wins).
+- Night step 2c: a morning line with the day's takings; all patrons leave; the day's counts reset.
+- The view draws patrons like NPCs (the `race_<race>` look, facing the table, "Drake patron (wants stew)").
+- `sim_inn_service`: a week of cooking between meals and serving at every meal earns coin and reputation. Cooking
+  during a meal lets patrons give up; that is intended.
