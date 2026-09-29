@@ -13,6 +13,11 @@
 ## top-left cell of a 3×4 cliff block (tools/build_cliffs.py). Cliff cells of one
 ## block form a wall mass; each cell draws the piece for its place in the mass
 ## (see `cliff_piece`) over the ground borrowed from a neighbour.
+## A tile may have "house": {"sheet", "block": [x, y], "group", "door", "see_through"}
+## (and "winter_house"): the top-left cell of a 5×4 house block (tools/build_houses.py).
+## Touching cells of one block and one group are one house; each cell draws the
+## piece for its place in the house (see `house_piece`). A "door" cell joins any
+## group of its block and draws the door; "see_through" cells (ruins) borrow ground.
 class_name GroundArt
 extends RefCounted
 
@@ -82,6 +87,49 @@ static func cliff_piece(same: Callable) -> Vector2i:
 	return Vector2i(col, row)
 
 
+## The house look of a tile def: {"sheet", "block": Vector2i, "group": int,
+## "door": bool, "see_through": bool, "key"}; {} = none. The key names the sheet and block.
+static func house_look(def: Dictionary, winter: bool) -> Dictionary:
+	var house: Variant = def.get("winter_house") if winter and def.has("winter_house") else def.get("house")
+	if not house is Dictionary or WorldView.sheet_path(String((house as Dictionary).get("sheet", ""))) == "":
+		return {}
+	var block: Array = house.get("block", [])
+	if block.size() != 2:
+		return {}
+	return {"sheet": String(house["sheet"]), "block": Vector2i(int(block[0]), int(block[1])),
+		"group": int(house.get("group", 0)), "door": bool(house.get("door", false)),
+		"see_through": bool(house.get("see_through", false)), "key": "%s|%s" % [house["sheet"], block]}
+
+
+## The piece (column 0-4, row 0-3 of the 5×4 block) for a cell of a house. `same(dir)`
+## says whether the neighbour there is in the same house (the map edge counts as the
+## house). Row 3 is the lower wall (nothing of the house below), row 2 the upper wall
+## (one cell below), row 0 the roof top (nothing above), else row 1 roof fill. Column
+## 0 / 2 = no house to the left / right. `x` picks windows (every other cell of an
+## upper wall). A door cell draws column 4; the upper wall above a door too. A `broken`
+## wall (a ruin) with nothing above its upper wall draws the roof-top row (a jagged top).
+static func house_piece(same: Callable, x: int, is_door: bool = false, door_below: bool = false,
+		broken: bool = false) -> Vector2i:
+	if not same.call(DOWN):
+		return Vector2i(4 if is_door else _house_col(same), 3)
+	if not same.call(DOWN * 2):
+		if door_below:
+			return Vector2i(4, 2)
+		var col := _house_col(same)
+		if broken and not same.call(UP):
+			return Vector2i(col, 0)
+		return Vector2i(3 if col == 1 and x % 2 == 0 else col, 2)
+	return Vector2i(_house_col(same), 0 if not same.call(UP) else 1)
+
+
+static func _house_col(same: Callable) -> int:
+	if not same.call(LEFT):
+		return 0
+	if not same.call(RIGHT):
+		return 2
+	return 1
+
+
 ## cell → {"base": [sheet, Vector2i]} plus "over": [sheet, Vector2i] where a
 ## soft edge is drawn. Cells with no art are left out (the colour square).
 static func plan(maps: MapDb, area: String, winter: bool) -> Dictionary:
@@ -102,7 +150,8 @@ static func plan(maps: MapDb, area: String, winter: bool) -> Dictionary:
 			if not (looks[cell] as Dictionary).is_empty():
 				continue
 			var def: Dictionary = maps.tiles.get(maps.tile_at(area, cell), {})
-			if WorldView.sprite_def(def, winter, "prop").is_empty() and cliff_look(def, winter).is_empty():
+			if WorldView.sprite_def(def, winter, "prop").is_empty() and cliff_look(def, winter).is_empty() \
+					and not bool(house_look(def, winter).get("see_through", false)):
 				continue
 			for d in AROUND:
 				var n: Dictionary = looks.get(cell + d, {})
@@ -149,6 +198,32 @@ static func plan(maps: MapDb, area: String, winter: bool) -> Dictionary:
 			var n: Vector2i = cell + d
 			return n.x < 0 or n.y < 0 or n.x >= size.x or n.y >= size.y 					or (cliffs.get(n, {}) as Dictionary).get("key", "") == cl["key"]
 		var art := [cl["sheet"], (cl["block"] as Vector2i) + cliff_piece(same)]
+		var entry: Dictionary = out.get(cell, {})
+		entry.erase("mix")
+		if entry.is_empty():
+			entry["base"] = art
+		else:
+			entry["over"] = art
+		out[cell] = entry
+	var houses := {}
+	for cell: Vector2i in looks:
+		var hl := house_look(maps.tiles.get(maps.tile_at(area, cell), {}), winter)
+		if not hl.is_empty():
+			houses[cell] = hl
+	for cell: Vector2i in houses:
+		var hl: Dictionary = houses[cell]
+		var neighbour := func(d: Vector2i) -> Dictionary:
+			return houses.get(cell + d, {})
+		var same := func(d: Vector2i) -> bool:
+			var n: Vector2i = cell + d
+			if n.x < 0 or n.y < 0 or n.x >= size.x or n.y >= size.y:
+				return true
+			var o: Dictionary = houses.get(n, {})
+			return not o.is_empty() and o["key"] == hl["key"] \
+					and (o["group"] == hl["group"] or o["door"] or hl["door"])
+		var below: Dictionary = neighbour.call(DOWN)
+		var art := [hl["sheet"], (hl["block"] as Vector2i) + house_piece(same, cell.x, hl["door"],
+				not below.is_empty() and below["door"] and below["key"] == hl["key"], hl["see_through"])]
 		var entry: Dictionary = out.get(cell, {})
 		entry.erase("mix")
 		if entry.is_empty():

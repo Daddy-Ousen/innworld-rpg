@@ -155,6 +155,104 @@ func test_cliff_winter_look_and_a_missing_sheet() -> void:
 	assert_eq(GroundArt.cliff_look({"walk": true}, false), {})
 
 
+func _house_maps(rows: Array, extra: Dictionary = {}) -> MapDb:
+	var tiles := _tiles()
+	var house := {"sheet": "houses", "block": [0, 0]}
+	tiles["home"] = {"name": "House", "walk": false, "color": "#775533", "house": house,
+		"winter_house": {"sheet": "houses", "block": [20, 0]}}
+	tiles["home_b"] = {"name": "House", "walk": false, "color": "#775533", "house": {"sheet": "houses", "block": [0, 0], "group": 1}}
+	tiles["home_door"] = {"name": "Door", "walk": true, "color": "#c49a5a", "house": {"sheet": "houses", "block": [0, 0], "door": true}}
+	tiles["ruin"] = {"name": "Ruin", "walk": false, "color": "#555555", "house": {"sheet": "houses", "block": [15, 0], "see_through": true}}
+	var a := ToyMaps.area("m", "toy_town", rows, {}, [], [])
+	a["legend"] = {"g": "grass", "h": "home", "b": "home_b", "d": "home_door", "r": "ruin"}
+	a["legend"].merge(extra, true)
+	return MapDb.from_dicts(tiles, {"m": a})
+
+
+func _piece(plan: Dictionary, x: int, y: int) -> Vector2i:
+	var entry: Dictionary = plan[Vector2i(x, y)]
+	return (entry["over"] if entry.has("over") else entry["base"])[1]
+
+
+func test_house_cells_draw_roof_upper_wall_and_lower_wall() -> void:
+	var plan := GroundArt.plan(_house_maps(["ggggg", "ghhhg", "ghhhg", "ghhhg", "ghhhg", "ggggg"]), "m", false)
+	assert_eq(_piece(plan, 1, 1), Vector2i(0, 0), "roof top, left end")
+	assert_eq(_piece(plan, 2, 1), Vector2i(1, 0), "roof top")
+	assert_eq(_piece(plan, 3, 1), Vector2i(2, 0), "roof top, right end")
+	assert_eq(_piece(plan, 2, 2), Vector2i(1, 1), "roof fill")
+	assert_eq(_piece(plan, 1, 2), Vector2i(0, 1), "roof fill, left end")
+	assert_eq(_piece(plan, 2, 3), Vector2i(3, 2), "upper wall with a window (even column)")
+	assert_eq(_piece(plan, 1, 3), Vector2i(0, 2), "upper wall, left end")
+	assert_eq(_piece(plan, 2, 4), Vector2i(1, 3), "lower wall")
+	assert_eq(_piece(plan, 3, 4), Vector2i(2, 3), "lower wall, right end")
+	assert_eq(plan[Vector2i(2, 4)]["base"][0], "houses")
+	assert_false(plan[Vector2i(2, 4)].has("over"), "a house is opaque: no ground under it")
+
+
+func test_a_small_house_and_a_map_edge_band() -> void:
+	var plan := GroundArt.plan(_house_maps(["hhh", "ggg"]), "m", false)
+	assert_eq(_piece(plan, 1, 0), Vector2i(1, 3), "one row of house: the lower wall")
+	assert_eq(_piece(plan, 0, 0), Vector2i(1, 3), "the map edge is house, so no left end")
+	plan = GroundArt.plan(_house_maps(["ggg", "hhh", "hhh"]), "m", false)
+	assert_eq(_piece(plan, 1, 1), Vector2i(1, 0), "roof top; the band goes on past the map edge")
+	assert_eq(_piece(plan, 1, 2), Vector2i(1, 1), "roof fill along the edge")
+	plan = GroundArt.plan(_house_maps(["gggggg", "ghhhhg", "ghhhhg", "gggggg"]), "m", false)
+	assert_eq(_piece(plan, 2, 1), Vector2i(3, 2), "two rows: upper wall with a window on an even column")
+	assert_eq(_piece(plan, 3, 1), Vector2i(1, 2), "no window on an odd column")
+	assert_eq(_piece(plan, 4, 1), Vector2i(2, 2), "right end")
+	assert_eq(_piece(plan, 2, 2), Vector2i(1, 3))
+
+
+func test_two_groups_side_by_side_are_two_houses() -> void:
+	var plan := GroundArt.plan(_house_maps(["gggggg", "ghhbbg", "ghhbbg", "ghhbbg", "gggggg"]), "m", false)
+	assert_eq(_piece(plan, 2, 1), Vector2i(2, 0), "the first house ends at its own right end")
+	assert_eq(_piece(plan, 3, 1), Vector2i(0, 0), "the second house starts with a left end")
+	var one := GroundArt.plan(_house_maps(["gggggg", "ghhhhg", "ghhhhg", "ghhhhg", "gggggg"]), "m", false)
+	assert_eq(_piece(one, 2, 1), Vector2i(1, 0), "one group: one long roof")
+
+
+func test_a_door_draws_the_door_and_the_wall_above_draws_its_top() -> void:
+	var plan := GroundArt.plan(_house_maps(["gggggg", "ghhhbg", "ghhbbg", "ghdbbg", "gggggg"]), "m", false)
+	assert_eq(_piece(plan, 2, 3), Vector2i(4, 3), "door")
+	assert_eq(_piece(plan, 2, 2), Vector2i(4, 2), "door top on the upper wall")
+	assert_eq(_piece(plan, 2, 1), Vector2i(1, 0), "roof above; a door joins its neighbours' house")
+	assert_eq(_piece(plan, 1, 3), Vector2i(0, 3), "wall next to the door")
+
+
+func test_ruins_borrow_ground_and_break_their_top() -> void:
+	var plan := GroundArt.plan(_house_maps(["ggg", "grg", "grg", "ggg"]), "m", false)
+	assert_eq(plan[Vector2i(1, 1)]["base"], [T, Vector2i(1, 10)], "grass shows through the broken top")
+	assert_eq(plan[Vector2i(1, 1)]["over"][0], "houses")
+	assert_eq(_piece(plan, 1, 1), Vector2i(15, 0), "two rows of ruin: the top is the broken row")
+	assert_eq(_piece(plan, 1, 2), Vector2i(15, 3))
+
+
+func test_house_winter_look_and_a_missing_sheet() -> void:
+	var maps := _house_maps(["ghg"])
+	assert_eq(GroundArt.house_look(maps.tiles["home"], true)["block"], Vector2i(20, 0))
+	assert_eq(GroundArt.house_look(maps.tiles["home"], false)["block"], Vector2i(0, 0))
+	assert_eq(GroundArt.house_look(maps.tiles["home_door"], false)["door"], true)
+	assert_eq(GroundArt.house_look(maps.tiles["home"], false)["key"], GroundArt.house_look(maps.tiles["home_b"], false)["key"])
+	var def: Dictionary = (maps.tiles["home"] as Dictionary).duplicate(true)
+	def["house"]["sheet"] = "no_such_sheet"
+	assert_eq(GroundArt.house_look(def, false), {}, "no sheet: the colour square")
+	assert_eq(GroundArt.house_look({"walk": true}, false), {})
+
+
+func test_no_tree_stands_in_front_of_a_house_or_a_wall() -> void:
+	var maps := MapDb.load_dir()
+	for area: String in maps.areas:
+		var size := maps.size(area)
+		for y in size.y:
+			for x in size.x:
+				if maps.tile_at(area, Vector2i(x, y)) != "tree":
+					continue
+				for k in range(1, 5):
+					var def: Dictionary = maps.tiles.get(maps.tile_at(area, Vector2i(x, y - k)), {})
+					assert_false(def.has("house") or maps.tile_at(area, Vector2i(x, y - k)) == "city_wall",
+						"%s: the tree at (%d, %d) hides the wall at (%d, %d)" % [area, x, y, x, y - k])
+
+
 func test_ground_with_no_z_keeps_hard_edges_and_props_borrow_ground() -> void:
 	var plan := GroundArt.plan(_maps(["wggg", "w^gx", "wggd"]), "m", false)
 	assert_false(plan[Vector2i(1, 0)].has("over"), "a wall (no z) is not lower ground")
@@ -253,6 +351,15 @@ func test_every_real_tile_and_map_object_has_art() -> void:
 					var size := (load(WorldView.sheet_path(look["sheet"])) as Texture2D).get_size() / WorldView.TILE
 					var b: Vector2i = look["block"]
 					assert_true(b.x + 3 <= int(size.x) and b.y + 4 <= int(size.y), "tile %s: %s block inside the sheet" % [id, key])
+				has_art = true
+		for key: String in ["house", "winter_house"]:
+			if def.has(key):
+				var look := GroundArt.house_look({"house": def[key]}, false)
+				assert_false(look.is_empty(), "tile %s: %s sheet exists" % [id, key])
+				if not look.is_empty():
+					var size := (load(WorldView.sheet_path(look["sheet"])) as Texture2D).get_size() / WorldView.TILE
+					var b: Vector2i = look["block"]
+					assert_true(b.x + 5 <= int(size.x) and b.y + 4 <= int(size.y), "tile %s: %s block inside the sheet" % [id, key])
 				has_art = true
 		assert_true(has_art, "tile %s has art" % id)
 	var kinds := WorldView.load_object_art()

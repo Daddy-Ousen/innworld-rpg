@@ -1,22 +1,38 @@
 # Handoff
 
-## Just done (2026-09-29, M16.1)
-- M16.1 nature art on branch `feat/m16.1-nature-art` (stacked on `feat/m16.0-art-audit`; nothing pushed, ask before
-  push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.1 result"). Targeted tests pass
-  (`unit_ground_art`, `unit_art`, `unit_world_view`, `unit_map_db`, `unit_sound_cues`, `unit_monster_art`,
-  `unit_gated_exits`, `unit_console`, `sim_liscor_depths`, `sim_canon_book5`), Python 81 OK, validator 0 errors.
-- Answered 2026-09-29: audit list is complete; the inn building waits for M16.2 (ADR 0023 "User answers").
-- Waiting on the user: look at the maps in the game (`godot --path game`; road camp, ruins entrance, bee cave, crypt,
-  floodplains) and say if the cliffs, boulders and ford look right.
-- Next: M16.2 buildings (plan mode first). Art in `lpc_house` (red brick wall block, grey stone wall, slate roof with
-  dormer, doors, windows; see its cells with `zoom.py`-style grid crops). `building` tile is still one flat brick cell.
+## Just done (2026-09-29, M16.2)
+- M16.2 buildings on branch `feat/m16.2-buildings` (stacked on `feat/m16.1-nature-art`; nothing pushed, ask before
+  push / PR). Result table in `docs/adr/0023-m16-art-audit.md` ("M16.2 result"). Passing: `unit_ground_art` (21),
+  `unit_art`, `unit_world_view`, `unit_map_db`, `unit_gated_exits`, `unit_sound_cues`, `unit_monster_art`,
+  `sim_liscor_depths`, `sim_canon_book1..5`, Python 86, validator 0 errors. No core change, so no full suite (M16.6).
+- Waiting on the user: look at `liscor_market`, `celum_square`, `inn_hill`, `esthelm_ruins` in the game
+  (`godot --path game`) and say if the houses look right (roof colours, window spacing, the plain inn).
+- Next: M16.3 doors and signs (plan mode first). The yellow exit tint (`EXIT_COLOR`, `world_view.gd` ~line 566) lies over
+  every door: replace it with a door marker. Object doors (`celum_square` (24,3), (1,14)) keep the old door art.
+  A side door (`celum_square` (1,13), tile `door`) has no art: a house draws only its south face.
+- Houses: tile field `house` (`{sheet, block, group, door, see_through}`); `GroundArt.house_look` / `house_piece`; sheet
+  `game/assets/tiles/houses.png` from `tools/build_houses.py` (blocks 0-3 summer stone/brick/plain/ruin, 4-7 snow roofs;
+  each block 5x4 cells: roof top, roof fill, upper wall + window + door top, lower wall + door). Map chars: `B`/`b` =
+  two houses of one style side by side (`building`/`building_b`, `brick_house`/`_b`, `plain_house`/`_b`), doors
+  `stone_door`, `brick_door`, `plain_door` (they join either group), `ruin_wall`. A wall along the map edge shows only roof.
+- A tree prop is 5 cells high: `unit_ground_art` fails if a tree stands within 4 cells below a house or city wall.
+- Screenshot recipe below still works (scene `game/_scratch/shot.tscn` + `shot.gd`, deleted before commit; env OUT,
+  ONLY, WINTER). Import noise: after `--import` run `git checkout -- game/assets/audio game/assets/fonts` and
+  `git ls-files -m game/assets | xargs -r git checkout --`.
+- Patching map rows: a Python helper that keeps tabs and CRLF (rows replaced line by line) was in the scratchpad (gone).
+  Edit tool output on `.gd` files with CRLF is fine; do not open them in Python without `rb`/`utf-8` (the `×` breaks).
+
+## M16.1 (2026-09-29)
+- M16.1 nature art on branch `feat/m16.1-nature-art` (stacked on `feat/m16.0-art-audit`; nothing pushed). Result table in
+  `docs/adr/0023-m16-art-audit.md` ("M16.1 result").
+- Answered 2026-09-29: audit list is complete; the inn building waited for M16.2 (ADR 0023 "User answers").
+- Waiting on the user: look at road camp, ruins entrance, bee cave, crypt, floodplains and say if the cliffs, boulders
+  and ford look right.
 - New code: `GroundArt.edge_pieces` / `mix` (several edge pieces per cell, drawn by `WorldView._add_mix` in the
   `EdgeMixes` node), `GroundArt.cliff_look` / `cliff_piece` (tile field `cliff`), `tools/build_cliffs.py` (writes
   `game/assets/tiles/cliffs.png`: earth, stone, snow_earth, snow_stone blocks, 3x4 cells each).
 - Map legend chars added: `R` = rock (isolated cliff cell), `O` = boulder. Cliff maps use `^` = `cliff` (outdoor) or
   `stone_cliff` (caves).
-- Screenshot tools live in the session scratchpad (gone next session): recipe below still works. Grid zoom of a sheet:
-  a 20-line PIL script (crop cells, 32 px grid, cell labels).
 - Screenshot recipe (scratch scene, deleted): `game/_scratch/shot.tscn` + `shot.gd` (`extends Node`, `_ready` calls a
   deferred coroutine). For each map id in `db.maps.areas`: a `SubViewport` sized `MapDb.size * WorldView.TILE`
   (`UPDATE_ALWAYS`) holds a `WorldView` from `res://world/world_view.tscn`; `v.setup(db.maps, {}, db.combat.enemies, {}, "winter")`;
@@ -26,8 +42,7 @@
 - `godot --headless --import` may segfault (known) but still imports; then `git checkout -- game/assets/audio game/assets/fonts`
   and the LF-rewritten `.import` files under `assets/tiles|objects|characters` (keep new untracked ones).
 - Tile facts: `rock` = one grey rock (atlas 26,25), `boulder` = atlas 27,26 (3x2), `shallows` shares the water ground
-  and adds stepping stones; `water`/`shallows` have `winter_sprite` (ice, terrains block 27,14); `building` =
-  `lpc_house` (1,1) still flat; inn = `wood_wall` cells.
+  and adds stepping stones; `water`/`shallows` have `winter_sprite` (ice, terrains block 27,14).
 
 ## M16.0 (2026-09-29)
 - M15 merged (PR #77, b93e2df) and archived. M16.0 audit is on branch `feat/m16.0-art-audit`

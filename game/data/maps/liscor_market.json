@@ -16,11 +16,11 @@
 		{"id": "brazier_west", "kind": "brazier", "at": [6, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "brazier_east", "kind": "brazier", "at": [26, 9], "name": "Brazier", "actions": [], "solid": true, "warm": true}
 	],
-	"legend": {"#": "city_wall", "B": "building", "_": "cobble"},
+	"legend": {"#": "city_wall", "B": "building", "_": "cobble", "b": "building_b"},
 	"rows": [
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
+		"BBBBBBBbbbbbbBBBBBBBbbbbbbBBBBB#",
 		"BB_____________________________#",
 		"BB_____________________________#",
 		"BB_____________________________#",
@@ -32,15 +32,15 @@
 		"BB______________________________",
 		"BB______________________________",
 		"BB_____________________________#",
-		"BB___BBBB______________________#",
-		"BB___BBBB______________BBBB____#",
-		"BB___BBBB______________BBBB____#",
+		"BB___bbbb______________________#",
+		"BB___bbbb______________BBBB____#",
+		"BB___bbbb______________BBBB____#",
 		"BB_____________________BBBB____#",
 		"BB_____________________________#",
 		"BB_____________________________#",
 		"BB_____________________________#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#",
-		"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#"
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#",
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#",
+		"BBBBBBbbbbbbBBBBBBBbbbbbbBBBBBB#"
 	]
 }

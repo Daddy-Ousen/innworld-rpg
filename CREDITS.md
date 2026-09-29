@@ -21,6 +21,9 @@ Our edits of CC-BY-SA art are CC-BY-SA too. See ADR 0018.
 - `lpc_house.png` (`house.png`) and `lpc_inside.png` (`inside.png`) from "Liberated Pixel Cup (LPC) Base Assets"
   by Lanea Zimmerman (Sharm) and others. Licence: CC-BY-SA 3.0 / GPL 3.0.
   https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- `houses.png` is made by `tools/build_houses.py` (our edit): walls, windows and doors of `lpc_house.png` copied and
+  recoloured, and roofs drawn from its slate shingle cell (stone, brick, plain, ruin; also under snow).
+  Licence of the edit: CC-BY-SA 3.0 (the same as the art it uses).
   Full credits: `game/assets/tiles/lpc_base_CREDITS.txt`.
 
 ## Map objects (`game/assets/objects/`)

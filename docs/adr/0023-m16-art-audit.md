@@ -1,6 +1,6 @@
 # ADR 0023 — M16.0 art audit
 
-Date: 2026-09-29 · Status: list written; M16.1 done 2026-09-29 (result at the end)
+Date: 2026-09-29 · Status: list written; M16.1 and M16.2 done 2026-09-29 (results at the end)
 
 ## Context
 M16 fixes maps and art (ADR 0022 items 3–6). M16.0 only looks and lists. No map, art or code changes.
@@ -113,3 +113,25 @@ inn building (item 12) stays in M16.2. Schema change (rule 11, approved with the
 Left for later: item 8 (trees on walls or roofs) waits for the M16.2 roofs; the winter pond is a plain
 rectangle (the ice block has no soft bank); a one-cell rock wall inside a cave draws a thin sliver (use `rock`).
 Tests: `unit_ground_art` (pieces, mix, cliff pieces, art check for `cliff`), `tools/tests/test_build_cliffs.py`.
+
+## M16.2 result (2026-09-29)
+Schema change (rule 11, approved with the M16.2 plan): tile field `house` / `winter_house` =
+`{sheet, block [x, y], group, door, see_through}` in `tiles.json`. Art: `game/assets/tiles/houses.png`, built by
+`tools/build_houses.py` (5x4-cell blocks: stone, brick, plain, ruin; blocks 0-3 summer, 4-7 with snow on the roofs).
+
+| Audit item | What changed |
+|---|---|
+| 10 flat slabs | Touching cells of one block and group are one house. `GroundArt.house_piece` picks the roof top, roof fill, upper wall (windows on every other cell) or lower wall from the cell's place in the house, and the left / right end. The map edge counts as house. A door tile draws the door (48 px: its top shows on the wall above). Tiles: `building` / `building_b` (Drake stone, Liscor), `brick_house` / `brick_house_b` + `brick_door` (Celum), `plain_house` / `plain_house_b` + `plain_door` (village and the inn), `ruin_wall`. The `_b` tiles start a new house next to a house of the same style. |
+| 11 ruins | `ruin_wall` is see-through (borrows ground) and its top row is broken; a two-row ruin shows the broken row on its upper wall. |
+| 12 inn | `inn_hill`: `H` is `plain_house`, the door `+` is `plain_door` (same cells, so the exit does not move). |
+| 8 trees | `celum_square` trees moved down onto the square; `celum_gate` trees moved off the wall. `unit_ground_art` fails if a tree stands within 4 cells below a house or city wall. |
+| 13 interior walls | Not done (low priority): moved to M16.6. |
+
+Maps changed: `liscor_market` (top and bottom bands split into houses, two small houses), `celum_square` (5 houses on the
+north side, `d` = `brick_door` at the two guild doors), `inn_hill`, `esthelm_ruins`, `celum_gate`.
+
+Left for later: doors on the side of a house (`celum_square` (1,13) stays a plain `door` tile: a side wall has no
+door art) and the two object doors (24,3), (1,14) keep their old look; the yellow exit tint still lies over every door.
+M16.3 replaces these with signs and markers. Big roofs (Liscor market bands, Celum's north row) are plain repeats; M16.4
+and M16.5 rebuild those maps as districts with smaller houses.
+Tests: `unit_ground_art` (house pieces, groups, doors, ruins, winter, trees), `tools/tests/test_build_houses.py`.
