@@ -85,3 +85,29 @@ Date: 2026-09-28 · Status: plan accepted by the user 2026-09-28 (sub-steps get 
 - The view draws patrons like NPCs (the `race_<race>` look, facing the table, "Drake patron (wants stew)").
 - `sim_inn_service`: a week of cooking between meals and serving at every meal earns coin and reputation. Cooking
   during a meal lets patrons give up; that is intended.
+
+## M14.3 Standing: relationships and reputation (2026-09-29)
+- Save v16: `WorldState.reputation` (town or faction id → int, never 0) and `WorldState.contact` (canon NPC id →
+  the last day the player had contact). Migration 15 → 16 adds both, empty. The plan named `reputation` only;
+  `contact` is new because a relationship must fade "without talk", and serving a guest is contact too.
+- New `core/standing.gd` and `rules.standing` (checked by `Standing.validate` on load; numbers are balance guesses
+  for M14.8). A db without `rules.standing` (toy dbs) behaves as before.
+- Keys: a **town** is the nearest `settlement` at or above a map's canon location (Liscor, Celum, Esthelm; the inn
+  and the Floodplains have none). A **faction** is an NPC's canon `faction`.
+- Gains: the first talk of the day with an NPC gives the map's town +1 and the NPC's faction +1
+  (`NpcSim.note_talk`); serving a patron gives Liscor +1 (the guests come from there). Reputation stays within +-100.
+- Night step 7 (`Standing.night`, after the off-screen sim): a relationship with the player that has had no contact
+  for more than 7 days moves 1 toward 0 per night (grudges too). A relationship with no contact record starts its
+  clock that night (old saves and event gifts do not fade at once). Every third day each reputation moves 1 toward 0.
+  Relationships between NPCs (canon events) never fade.
+- Readers, so it matters:
+  - **Regard** = relationship + faction reputation / 10. It picks the greeting band (stranger, acquaintance,
+    friend, close friend; wary, hostile below 0). The talk menu shows the band ("Krshia (friend)"); the first talk of
+    the day adds the band's greeting line.
+  - **Prices**: at a shop, the town's reputation x 0.004 (at most +-20%) lowers what the player pays and raises
+    what a shop pays (both round to whole copper; a good that a shop does not buy stays at 0).
+  - **Friends fight**: an NPC with regard 10 or more counts as a fighter in `NpcReact` (ally stats), so they help
+    against monsters near the player. Never dead: the director still decides who dies.
+  - **The inn**: a quarter of Liscor's reputation is added to the inn's own for the guest curve.
+- The character sheet lists the inn's reputation and each non-zero town or faction.
+- Open for M14.5: attacking an NPC will call `Standing.add_reputation` for witnesses' towns and factions.

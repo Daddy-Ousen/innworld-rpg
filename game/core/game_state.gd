@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 15
+const SAVE_VERSION := 16
 
 var save_version: int = SAVE_VERSION
 var rng: Rng

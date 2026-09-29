@@ -1,8 +1,8 @@
 ## NPCs near a fight (M6.5, ADR 0011). While a hostile monster is in the
 ## player's area (Combat.in_danger), the NPCs there react instead of
 ## following their goals:
-##   - a fighter (an NPC with a rules.npc.react.fight_tags tag, or an ally
-##     of the stage of a monster in the area) walks to the nearest hostile
+##   - a fighter (an NPC with a rules.npc.react.fight_tags tag, an ally
+##     of the stage of a monster in the area, or a friend of the player) walks to the nearest hostile
 ##     monster within help_radius (a stage ally: its stage's monsters at
 ##     any distance) and hits it when side by side;
 ##   - any other NPC within flee_radius of a hostile monster steps away from
@@ -51,9 +51,10 @@ static func act(gs: GameState, db: DataDb, id: String, n: Dictionary, dt: int) -
 	return true
 
 
-## True if NPC `id` fights: a fight tag, or an ally of a staged monster here.
+## True if NPC `id` fights: a fight tag, an ally of a staged monster here, or a
+## friend of the player (Standing.is_friend, M14.3).
 static func is_fighter(gs: GameState, db: DataDb, id: String) -> bool:
-	return has_fight_tag(db, id) or is_ally(gs, db, id)
+	return has_fight_tag(db, id) or is_ally(gs, db, id) or Standing.is_friend(gs, db, id)
 
 
 ## True if NPC `id` has a tag in rules.npc.react.fight_tags (a guard).

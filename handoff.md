@@ -1,26 +1,34 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.1 merged (PR #68), tag `m14.1-done` pushed (on 7c31db7). ROADMAP M14.1 ticked on the M14.2 branch.
-- M14.2 Guests and serving on branch `feat/m14.2-guests` (committed, PR open):
-  - `game/core/inn_state.gd` (GameState.inn, save v15), `game/core/guests.gd` (sync, serve, night, validate).
-  - `game_state.gd` SAVE_VERSION 15; `save_migrations.gd` 14 -> 15; `commands.gd` `serve` + `Guests.sync` at the end
-    of `_after`; `night.gd` step 2c; `movement.gd` seated patrons block a step; `interact.gd` guest options,
-    "serve" lists, `SERVE` pick, `guests` context at the inn; `map_db.gd` checks table `seats`; `data_db.gd` calls
-    `Guests.validate`.
-  - Data: `rules.json` `inn` block; `maps/inn_interior.json` five new tables, 12 seats.
-  - UI: `ui/interact_menu.gd` "Serve <dish>" rows, `world/main.gd` SERVE pick, `world/world_view.gd` `_show_guests`.
-  - Tests: `tests/unit_guests.gd` (19), `tests/sim_inn_service.gd` (a week: 36 served, 472c, reputation 46).
-  - ADR 0021 M14.2 section written.
+- M14.2 merged (PR #69), tag `m14.2-done` pushed (on 12c4ddd). ROADMAP M14.2 ticked on the M14.3 branch.
+- M14.3 Standing on branch `feat/m14.3-standing` (committed, PR open; full suite 103 scripts, 978 tests, all pass):
+  - `game/core/standing.gd` (new), `rules.standing` in `game/data/rules.json`, `WorldState.reputation` + `contact`
+    (`world_state.gd`), save v16 (`game_state.gd`, `save_migrations.gd` 15 -> 16).
+  - Hooks: `night.gd` step 7 (`Standing.night`), `npc_sim.gd` `note_talk` (`Standing.on_talk`), `guests.gd` (serve:
+    `on_serve`, `touch`; curve: `guest_bonus`), `economy.gd` `price` (`price_shift`), `npc_react.gd` `is_fighter`
+    (`is_friend`), `interact.gd` (option "standing", greeting line), `data_db.gd` (`Standing.validate`),
+    `ui/interact_menu.gd` (band in the name), `ui/character_sheet.gd` (`Standing.lines`).
+  - Tests: `tests/unit_standing.gd` (21). Targeted: unit_guests, unit_night, unit_economy, unit_game_state,
+    unit_npc_react, unit_save_slots, unit_interact all pass. ADR 0021 M14.3 section written.
 
 ## Next steps
-1. M14.2 is committed and the PR is open (full suite: 102 scripts, 957 tests, all pass; Python 78 OK; validator 0).
-   After the user merges: tag `m14.2-done`, tick ROADMAP M14.2 on the M14.3 branch.
-2. M14.3 Relationships and reputation (save v16): see the plan file. `Guests.reputation` is the inn's own
-   reputation; M14.3 town reputation may feed `guest_curve` too.
-3. Full suite: run it with Bash run_in_background (about 15 min), then clear import noise:
-   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles` and
-   `git ls-files -m game/assets/characters | xargs -r git checkout --`.
+1. M14.3 is committed and the PR is open. After the user merges: tag `m14.3-done`, tick ROADMAP M14.3 on the M14.4 branch.
+2. M14.4 Missing NPC schedules (data only): see the plan file. First re-check which Liscor NPCs lack a
+   `npc_behaviour` entry. Targeted tests only (`unit_art`, `unit_behaviour_db`, `sim_canon_book1..5`, validator).
+3. Full suite: run it in a subagent (about 15 min), then clear import noise:
+   `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
+   `git ls-files -m game/assets/characters | xargs -r git checkout --`
+
+## M14.3 notes
+- Town = nearest `settlement` above a map's location (`Standing.town_of`): liscor, celum, esthelm. The inn area
+  has no town. Faction = the NPC's canon `faction`.
+- A relationship fades only with the player ("player" key) and only after 7 days with no contact
+  (`WorldState.contact`). No contact record: the clock starts that night.
+- Shop prices use the town of the PLAYER's area, so a price read with the player elsewhere shows no shift.
+- Friends (regard >= 10) fight like `rules.npc.react.ally`. A test that talks to one NPC on 10 days will now see
+  them fight in a monster fight.
+- `Standing.add_reputation(gs, db, key, delta)` is the one writer; M14.5 uses it for witnesses.
 
 ## M14.2 notes
 - Patron rolls use `Rng.new(seed ^ meal_key * 2654435761)`, not `gs.rng`: the main stream stays the same.

@@ -1,5 +1,5 @@
 ## Night resolution pipeline (DESIGN §2). Fixed order; each step works on
-## GameState only. Step 7 (relationship decay) comes later.
+## GameState only. Step 7 is Standing.night (M14.3).
 class_name Night
 extends RefCounted
 
@@ -73,6 +73,8 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	var wake := gs.clock.total_minutes + gs.clock.sleep_length(db.rules["clock"], long_sleep)
 	NpcSim.advance_to(gs, db, wake * 60 + gs.player.sub_seconds)
 	Winter.night(gs, wake * 60 + gs.player.sub_seconds)
+	# 7. Standing (M14.3): quiet relationships and reputations drift toward 0.
+	Standing.night(gs, db)
 	# 8. Advance to the next day and keep the morning summary.
 	var days := gs.clock.sleep(db.rules["clock"], long_sleep)
 	gs.clock.last_sleep_collapsed = collapsed

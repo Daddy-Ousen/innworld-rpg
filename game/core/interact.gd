@@ -17,6 +17,8 @@
 ## M14.2: a canon NPC who is a guest, and each unserved patron next to the
 ## player ("guest:<id>", "guest": true, "order"), list "serve": the dishes
 ## the player can serve them (Guests.serve_choices).
+## M14.3: an NPC option has "standing", the greeting band's label (Standing.band; "" = a stranger);
+## the first talk of the day adds the band's greeting line to gs.combat.lines.
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -59,7 +61,7 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
 			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
-			"serve": Guests.serve_choices(gs, db, id)})
+			"serve": Guests.serve_choices(gs, db, id), "standing": Standing.band(gs, db, id)["label"]})
 	for g in Guests.near(gs):
 		var gid := Guests.GUEST + String(g["id"])
 		out.append({"id": gid, "name": Guests.patron_name(g), "npc": false, "guest": true,
@@ -125,8 +127,10 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	if rec.is_empty():
 		return _fail("You are too tired." if gs.clock.is_collapse_due(db.rules["clock"])
 				else "You cannot do that.")
-	if obj["npc"]:
-		NpcSim.note_talk(gs, db, object_id)
+	if obj["npc"] and NpcSim.note_talk(gs, db, object_id):
+		var greeting: String = Standing.band(gs, db, object_id)["line"]
+		if greeting != "":
+			gs.combat.lines.append(greeting % db.canon.npcs[object_id]["name"])
 	return {"record": rec, "error": ""}
 
 

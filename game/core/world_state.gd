@@ -10,6 +10,10 @@ const PENDING := "pending"
 var npcs: Dictionary = {}
 ## from npc → {to npc → int}.
 var relationships: Dictionary = {}
+## M14.3 (Standing): the player's reputation, town or faction id → int (never 0).
+var reputation: Dictionary = {}
+## M14.3: canon NPC id → the last day the player had contact with them.
+var contact: Dictionary = {}
 ## Event runtime state: id → {"status", "day", "roles", "latest"}. Missing = pending.
 ## status: pending | done | substituted | mutated | cancelled.
 var events: Dictionary = {}
@@ -74,6 +78,8 @@ func to_dict() -> Dictionary:
 	return {
 		"npcs": npcs.duplicate(true),
 		"relationships": relationships.duplicate(true),
+		"reputation": reputation.duplicate(),
+		"contact": contact.duplicate(),
 		"events": events.duplicate(true),
 		"history": history.duplicate(true),
 		"news": news.duplicate(true),
@@ -91,6 +97,10 @@ static func from_dict(d: Dictionary) -> WorldState:
 	for from: String in d.get("relationships", {}):
 		for to: String in d["relationships"][from]:
 			w.add_relationship(from, to, int(d["relationships"][from][to]))
+	for key: String in d.get("reputation", {}):
+		w.reputation[key] = int(d["reputation"][key])
+	for npc: String in d.get("contact", {}):
+		w.contact[npc] = int(d["contact"][npc])
 	for id: String in d.get("events", {}):
 		var e: Dictionary = (d["events"][id] as Dictionary).duplicate(true)
 		for k: String in ["day", "latest"]:
