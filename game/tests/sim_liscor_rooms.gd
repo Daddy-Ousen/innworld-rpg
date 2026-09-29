@@ -63,3 +63,9 @@ func test_klbkch_writes_the_ledger_late() -> void:
 	var gs := _new_game()
 	_wait_until(gs, 23 * 60 + 50)
 	_at(gs, "klbkch", "liscor_watch_barracks", Vector2i(17, 6))
+
+
+func test_krshia_eats_at_the_gnoll_tavern_in_the_evening() -> void:
+	var gs := _new_game()
+	_wait_until(gs, 20 * 60 + 30)
+	_at(gs, "krshia", "liscor_gnoll_tavern", Vector2i(8, 7))

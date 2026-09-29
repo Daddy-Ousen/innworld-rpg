@@ -1,6 +1,6 @@
 # ADR 0024 — M16.4 Liscor districts
 
-Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) and M16.4.3 (Watch House) done; M16.4.4 follows
+Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) and M16.4.3 (Watch House) and M16.4.4 (taverns) done: M16.4 complete
 
 ## Context
 Liscor was two yard maps. ROADMAP M16.4 asks for 5–7 district maps joined by streets, streets that go on at the map
@@ -69,3 +69,17 @@ office 9-18, Beilmark takes the desk 14-22 (his gate post stays 6-14), Klbkch wr
 Relc eats at the guards' table 12-13. Gate posts and patrols are unchanged. A test lesson: a sim test that parks the player in
 a doorway (`inn_interior` (12, 14)) blocks NPCs leaving that room; park the player away from doors. Tests: `sim_liscor_rooms`
 (5), `unit_liscor_map` (rooms list), plus the usual `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5`.
+
+## M16.4.4 result (taverns)
+`liscor_tailless_thief` (bar counter and kegs, kitchen stove and counter, six tables, six Drake patrons, lamps; the private warded
+room is not drawn) and `liscor_gnoll_tavern` (bar, casks, a four-table central table as in 2.17, Gnoll and Drake patrons). Both
+street doors are exits with the mug sign; the last two door plaques are gone. Schedule additions (guesses): Krshia eats at the
+Gnoll tavern's central table 19-21; Ilvriss eats at the Tailless Thief 20-22 from day 97 (his off-map stay stays otherwise).
+Music mood `liscor`, ambience `tavern`. Tests: `unit_liscor_map` (8: all rooms reachable, two-way exits, schedule spots are free
+floor), `sim_liscor_rooms` (6: adds Krshia at 20:30).
+
+## M16.4 summary
+Liscor is now 6 street maps and 7 rooms (13 maps). Not done, on purpose: the Adventurers' Guild upper floor, the Mages' Guild
+clerk, the Tailless Thief private room, a Liscor west/north/south gate (streets run to the map edge instead), Terbore, Tekshia and
+Peslas (no look sheet, so no NPC), the park playground (no art). Merchants' and Runners' Guilds are signed and closed. The full
+suite runs once at M16.6 (M16.4 changed no `game/core/` code).

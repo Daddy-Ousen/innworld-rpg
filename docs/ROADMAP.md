@@ -218,7 +218,7 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
 - [x] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
   badge) and its name when the player is near; doors you can enter get a marker; other doors say "Closed" or
   "A private home". New optional object field `sign`
-- [ ] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,
+- [x] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,
   the Watch and the walls, homes, other gates), joined by streets. Map edges show roofs and streets that go on,
   but the player cannot walk there. A crowd of passers-by (view only). Canon places from Books 1–5; guesses marked
   Sub-steps (user, 2026-09-29: 6 street maps and interiors for the main rooms):
@@ -226,7 +226,7 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
   - [x] M16.4.1 Streets: plaza and park, guild street, Watch and walls, homes; market west exit
   - [x] M16.4.2 Rooms: Adventurers' Guild, Mages' Guild
   - [x] M16.4.3 Room: Watch barracks
-  - [ ] M16.4.4 Rooms: Gnoll tavern, Tailless Thief
+  - [x] M16.4.4 Rooms: Gnoll tavern, Tailless Thief
 - [ ] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
   Frenzied Hare street, the Stitchworks street, homes)
 - [ ] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest

@@ -1,0 +1,44 @@
+{
+	"schema_version": 1,
+	"id": "liscor_gnoll_tavern",
+	"name": "The Gnoll tavern",
+	"location": "gnoll_tavern",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M16.4.4). Canon: mostly Gnoll customers, Gnoll staff and cooks, good food and drink, a central table where Krshia, Selys and Erin sit (2.17). The owner, the name and the street are not stated; the name here is a placeholder. Furniture places are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [9, 11], "to": "liscor_homes", "arrive": [10, 10], "minutes": 0}
+	],
+	"crowd": {"lanes": [{"path": [[3, 5], [14, 5]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[6, 6]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[11, 6]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[7, 8]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[10, 8]], "walkers": 1, "looks": ["race_gnoll"]}]},
+	"objects": [
+		{"id": "gnoll_hearth", "kind": "hearth", "at": [14, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "gnoll_casks_a", "kind": "shelves", "at": [7, 2], "name": "Casks", "actions": [], "solid": true},
+		{"id": "gnoll_casks_b", "kind": "shelves", "at": [8, 2], "name": "Casks", "actions": [], "solid": true},
+		{"id": "gnoll_bar_1", "kind": "counter", "at": [2, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "gnoll_bar_2", "kind": "counter", "at": [3, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "gnoll_bar_3", "kind": "counter", "at": [4, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "gnoll_bar_4", "kind": "counter", "at": [5, 3], "name": "Bar counter", "actions": [], "solid": true},
+		{"id": "central_table_1", "kind": "table", "at": [7, 6], "name": "Central table", "actions": [], "solid": true},
+		{"id": "central_table_2", "kind": "table", "at": [8, 6], "name": "Central table", "actions": [], "solid": true},
+		{"id": "central_table_3", "kind": "table", "at": [9, 6], "name": "Central table", "actions": [], "solid": true},
+		{"id": "central_table_4", "kind": "table", "at": [10, 6], "name": "Central table", "actions": [], "solid": true},
+		{"id": "side_table_west", "kind": "table", "at": [3, 8], "name": "Table", "actions": [], "solid": true},
+		{"id": "side_table_east", "kind": "table", "at": [14, 8], "name": "Table", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHHHHHH",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"H================H",
+		"HHHHHHHHH+HHHHHHHH"
+	]
+}

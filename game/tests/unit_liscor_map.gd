@@ -7,7 +7,7 @@ extends GutTest
 const STREETS := ["liscor_gate", "liscor_market", "liscor_plaza", "liscor_guild_street", "liscor_watch",
 		"liscor_homes"]
 const ROOMS: Array[String] = ["liscor_adventurers_guild", "liscor_mages_guild", "liscor_watch_barracks",
-		"liscor_watch_office"]
+		"liscor_watch_office", "liscor_tailless_thief", "liscor_gnoll_tavern"]
 
 var _db: DataDb
 var _audio: AudioDb
@@ -107,3 +107,16 @@ func test_selys_works_at_the_guild_desk() -> void:
 			var d := Vector2i(int(o["at"][0]), int(o["at"][1])) - at
 			next_to_desk = next_to_desk or maxi(absi(d.x), absi(d.y)) == 1
 	assert_true(next_to_desk, "Selys stands beside the reception desk, so the player can talk to her")
+
+
+func test_every_schedule_spot_in_the_city_is_free_floor() -> void:
+	var n := 0
+	for npc: String in _db.behaviour.npcs:
+		for g: Dictionary in _db.behaviour.npcs[npc]["goals"]:
+			var t: Dictionary = g.get("target", {})
+			if not t.has("pos") or not _city().has(t.get("area", "")):
+				continue
+			n += 1
+			var at := Vector2i(int(t["pos"][0]), int(t["pos"][1]))
+			assert_true(_db.maps.is_walkable(t["area"], at), "%s: %s %s is free floor" % [npc, t["area"], at])
+	assert_gt(n, 10, "the city holds scheduled spots")

@@ -9,11 +9,11 @@
 	"exits": [
 		{"at": [15, 23, 2, 1], "to": "liscor_plaza", "arrive": [15, 1], "minutes": 2},
 		{"at": [4, 5], "to": "liscor_adventurers_guild", "arrive": [10, 12], "minutes": 0, "sign": {"icon": "sword", "text": "Adventurers' Guild"}},
-		{"at": [12, 5], "to": "liscor_mages_guild", "arrive": [6, 9], "minutes": 0, "sign": {"icon": "star", "text": "Mages' Guild"}}
+		{"at": [12, 5], "to": "liscor_mages_guild", "arrive": [6, 9], "minutes": 0, "sign": {"icon": "star", "text": "Mages' Guild"}},
+		{"at": [21, 5], "to": "liscor_tailless_thief", "arrive": [11, 12], "minutes": 0, "sign": {"icon": "mug", "text": "The Tailless Thief"}}
 	],
 	"crowd": {"lanes": [{"path": [[1, 7], [30, 7]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_drake", "race_human"]}, {"path": [[1, 18], [30, 18]], "walkers": 3, "looks": ["race_gnoll", "race_drake", "race_human"]}, {"path": [[15, 10], [15, 22]], "walkers": 2, "looks": ["race_drake", "race_gnoll"]}]},
 	"objects": [
-		{"id": "gs_thief", "kind": "plaque", "at": [22, 5], "name": "The Tailless Thief", "actions": [], "sign": {"icon": "mug"}},
 		{"id": "gs_runners", "kind": "plaque", "at": [29, 5], "name": "Runners' Guild", "actions": [], "sign": {"icon": "closed"}},
 		{"id": "gs_merchants", "kind": "plaque", "at": [4, 15], "name": "Merchants' Guild", "actions": [], "sign": {"icon": "closed"}},
 		{"id": "gs_home_a", "kind": "plaque", "at": [11, 15], "name": "A private home", "actions": [], "sign": {"icon": "home"}},

@@ -1,6 +1,9 @@
 # Handoff
 
-## Just done (2026-09-29, M16.4.0 - M16.4.3)
+## Just done (2026-09-29, M16.4 complete: M16.4.0 - M16.4.4)
+- M16.4.4 done: Tailless Thief + Gnoll tavern rooms, Krshia and Ilvriss evening goals. All door plaques are exits now. Next: M16.5 Celum districts
+  (plan mode first; reuse `Crowd`, `SignArt`, house tiles; the same graph idea: gate, square, guild street, Frenzied Hare street, Stitchworks street, homes;
+  Celum `celum_*` ids and their tests must keep working; Celum houses are brick (`brick_house`, `brick_door`).
 - M16.4.3 done: Watch House rooms + schedules for Zevara, Beilmark, Klbkch, Relc (ADR 0024). Only `homes_gnoll_tavern` and `gs_thief` plaques
   remain to turn into doors (M16.4.4). Ilvriss (Wall Lord) is off-map 'staying at the Tailless Thief' (4.09 scene brings him out): he can
   get a `work`/rest goal in the Tailless Thief room, guessed hours.

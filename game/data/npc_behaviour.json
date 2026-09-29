@@ -71,8 +71,10 @@
 		},
 		"ilvriss": {
 			"confidence": "guess",
-			"notes": "M13.2. Wall Lord Ilvriss of Salazsar stays in Liscor (the Tailless Thief) and is off the map. A canon scene brings him into the street to confront Ryoka on day 101 (4.09). No combat block yet.",
+			"notes": "M13.2. Wall Lord Ilvriss of Salazsar stays in Liscor (the Tailless Thief) and is off the map by day. M16.4.4: from day 97 he eats at the Tailless Thief in the evening (guessed hours). A canon scene brings him into the street to confront Ryoka on day 101 (4.09). No combat block yet.",
 			"goals": [
+				{"goal": "eat", "base": 3, "days": [97, 999], "hours": [[20, 22, 1]],
+					"target": {"area": "liscor_tailless_thief", "pos": [11, 7]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
@@ -117,6 +119,8 @@
 			"confidence": "guess",
 			"combat": {"hp": 40, "accuracy": 7, "evasion": 4, "armor": 1, "damage": [3, 7]},
 			"goals": [
+				{"goal": "eat", "base": 3, "hours": [[19, 21, 1]],
+					"target": {"area": "liscor_gnoll_tavern", "pos": [8, 7]}},
 				{"goal": "trade", "base": 2, "hours": [[7, 19, 1]],
 					"target": {"area": "liscor_market", "pos": [10, 5]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
