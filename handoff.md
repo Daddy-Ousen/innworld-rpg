@@ -1,22 +1,33 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.3 merged (PR #70), tag `m14.3-done` pushed (on 8365ae8). ROADMAP M14.3 ticked on the M14.4 branch.
-- M14.4 NPC schedules on branch `feat/m14.4-schedules` (data only; NOT yet committed):
-  - `game/data/npc_behaviour.json`: 13 new entries. `game/data/appearance.json`: 13 looks.
-  - 13 new sheets `game/assets/characters/<id>.png` + `.import` (untracked: add them). `CREDITS.md` changed by the
-    sprite tool. ADR 0021 has the M14.4 section (who was left out and why).
-  - Targeted tests all pass (list in progress.md). No full suite: data-only change.
+- M14.4 merged (PR #71), tag `m14.4-done` pushed (on 6c8bd55). ROADMAP M14.4 ticked on the M14.5 branch.
+- M14.5 Attack NPCs on branch `feat/m14.5-attack-npcs` (NOT yet committed): `game/core/brawl.gd` (new),
+  `rules.brawl` in `game/data/rules.json`, save v17 (`hostile_day` on roster entries; `_migrate_16_to_17`),
+  `Commands.attack_npc`, `Interact.ATTACK` + red Attack row (`ui/interact_menu.gd`), `SystemMessages.fate_page` +
+  `SystemDialog` (STRIKE / SPARE, `struck` signal), `main.gd` `attack_npc`, `Combat.in_danger` also true for a hostile
+  NPC, `NpcSim` calls `Brawl.act` before `NpcReact`, audio page cue `fate`. ADR 0021 has the M14.5 section.
+- `game/tests/unit_brawl.gd`: 19 tests pass (incl. the game-screen flow). Validator 0 errors; Python 78 OK. Full suite
+  ran once: 4 failures, all fixed: `sim_inn_brawl` (M14.4's Tkrn and Jeiss killed the day-28 adventurers; their inn visits
+  now need `wandering_inn.adventurers_attacked_goblins`), `unit_game_state`, `unit_npc_sim` (new fields), plus a
+  freed-button lambda in `system_dialog.gd`. Reruns of the touched areas are green.
 
 ## Next steps
-1. Commit M14.4 (`data(npcs): M14.4 ...`), push, open the PR. Check `git status` first: add the 13 png + import
-   files by name, never `git commit -am`. After the user merges: tag `m14.4-done`, tick ROADMAP M14.4 on the M14.5 branch.
-2. M14.5 Attack NPCs (core, maybe save v17): see the plan file
-   `C:\Users\rhasa\.claude\plans\start-engine-works-plan-bright-patterson.md`. Use `combat` blocks (jeiss, tkrn,
-   gazi_pathseeker, umbral have them now) and `Standing.add_reputation` for witnesses. Full suite in a subagent.
-3. Full-suite tip (subagent, about 15 min), then clear import noise:
+1. Push `feat/m14.5-attack-npcs` and open the PR (the work is committed). After the user merges: tag `m14.5-done`, tick ROADMAP M14.5 on the M14.6 branch.
+4. M14.6 UI skin: ask the user before the pixel font download (name, source, size).
+5. Full-suite tip (subagent, about 15 min), then clear import noise:
    `git checkout -- game/assets/audio game/assets/objects game/assets/tiles`
    `git ls-files -m game/assets/characters | xargs -r git checkout --`
+
+## M14.5 notes
+- Major NPC = a pending, non-mutate-target canon event names them in a role `prefer` or `requires.alive`
+  (`Brawl.is_major`). Warned ids live in `gs.flags["fate_warned.<id>"]`.
+- Hostile lasts until the day number changes (`hostile_day == clock.day()`), not until sleep. A long gap heals
+  the NPC's hp (old `NpcSim` rule) but not the hostility.
+- A test that kills an NPC through `Commands.attack_npc` must keep the player up (`Combat.set_hp(gs, db, 9999)`
+  each turn): the hostile NPC hits back after every command.
+- `Combat.in_danger` is now also true for a hostile NPC: NPCs near it stand still (NpcReact) and patrons leave.
+- `Import` of the project segfaults sometimes (known); GUT runs fine after it anyway.
 
 ## M14.4 notes
 - Who gets a schedule: canon NPCs with a place on one of our maps. Left out (no map): terbore, tekshia, peslas,

@@ -19,6 +19,8 @@
 ## the player can serve them (Guests.serve_choices).
 ## M14.3: an NPC option has "standing", the greeting band's label (Standing.band; "" = a stranger);
 ## the first talk of the day adds the band's greeting line to gs.combat.lines.
+## M14.5: an NPC option has "attack": true; the menu's last row for them is ATTACK
+## (Commands.attack_npc, Brawl).
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -40,6 +42,7 @@ const STOW := "stow"
 ## M14.2: "serve:<good>" serves a dish to a guest (Commands.serve with the option id).
 const SERVE := "serve:"
 const RIDE := "ride"
+const ATTACK := "attack"
 const PORTAL := "portal"
 
 
@@ -61,7 +64,8 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		out.append({"id": id, "name": db.canon.npcs[id]["name"], "npc": true,
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
 			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
-			"serve": Guests.serve_choices(gs, db, id), "standing": Standing.band(gs, db, id)["label"]})
+			"serve": Guests.serve_choices(gs, db, id), "standing": Standing.band(gs, db, id)["label"],
+			"attack": Brawl.on(db)})
 	for g in Guests.near(gs):
 		var gid := Guests.GUEST + String(g["id"])
 		out.append({"id": gid, "name": Guests.patron_name(g), "npc": false, "guest": true,

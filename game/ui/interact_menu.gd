@@ -4,7 +4,8 @@
 ## of the bare buy and sell actions (Interact.BUY / SELL + good), a wagon
 ## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
 ## (Interact.USE_GOOD + good). A guest lists the dishes you can serve them
-## (Interact.SERVE + good, M14.2). An NPC shows their standing band, e.g. "Erin (friend)" (M14.3). Enter or a double click picks one; Escape
+## (Interact.SERVE + good, M14.2). An NPC shows their standing band, e.g. "Erin (friend)" (M14.3),
+## and an Attack row last, in red (Interact.ATTACK, M14.5). Enter or a double click picks one; Escape
 ## closes. Presentation only.
 class_name InteractMenu
 extends PanelContainer
@@ -66,6 +67,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 			var i := _items.add_item("%s — Take %s" % [label,
 					db.combat.items.get(o["item"], {}).get("name", o["item"])])
 			_items.set_item_metadata(i, [o["id"], Interact.TAKE])
+		if o.get("attack", false):  # the last row of an NPC, in red (M14.5)
+			var i := _items.add_item("%s — Attack" % label)
+			_items.set_item_metadata(i, [o["id"], Interact.ATTACK])
+			_items.set_item_custom_fg_color(i, Color(0.9, 0.35, 0.3))
 	if _items.item_count == 0:
 		return false
 	show()

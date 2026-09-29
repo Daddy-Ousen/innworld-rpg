@@ -25,12 +25,10 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   - [x] M14.1 Cooking recipes — merged ([PR #68](https://github.com/Daddy-Ousen/innworld-rpg/pull/68)), tag `m14.1-done` on merge commit 7c31db7.
   - [x] M14.2 Guests and serving (save v15) — merged ([PR #69](https://github.com/Daddy-Ousen/innworld-rpg/pull/69)), tag `m14.2-done` on merge commit 12c4ddd.
   - [x] M14.3 Standing (save v16) — merged ([PR #70](https://github.com/Daddy-Ousen/innworld-rpg/pull/70)), tag `m14.3-done` on merge commit 8365ae8.
-  - [ ] M14.4 NPC schedules (data only) — branch `feat/m14.4-schedules`: 13 NPCs get schedules and looks
-    (tkrn, jeiss, dreshhi, culyss, gazi_pathseeker, grev, hess, octavia, agnes, maran, safry, eterell, umbral;
-    13 new sheets). Targeted tests green (unit_art, unit_behaviour_db, unit_npc_sim, unit_guests, unit_standing,
-    unit_data_db, sim_canon_book1..5, sim_npc_day, sim_celum_*, sim_inn_service, sim_m6_done); Python 78 OK;
-    validator 0 errors. Not yet committed/PR'd; tick after merge.
-  - [ ] M14.5 Attack NPCs · M14.6 UI skin · M14.7 Portraits · M14.8 Balance
+  - [x] M14.4 NPC schedules (data only) — merged ([PR #71](https://github.com/Daddy-Ousen/innworld-rpg/pull/71)), tag `m14.4-done` on merge commit 6c8bd55. 13 NPCs got schedules, looks and sheets.
+  - [ ] M14.5 Attack NPCs (save v17) — branch `feat/m14.5-attack-npcs`: `core/brawl.gd`, `rules.brawl`, Attack row in the use menu, fate page
+    and dialog, hostile NPCs (`hostile_day`), witnesses and reputation (ADR 0021). `unit_brawl` 19 tests pass. Full suite run once (4 failures, all fixed; targeted reruns green, incl. sim_canon_book1..5). Committed on the branch; PR next; tick after merge.
+  - [ ] M14.6 UI skin · M14.7 Portraits · M14.8 Balance
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
@@ -38,7 +36,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=16), `save_migrations` (1→…→16), `inn_state`, `guests`, `standing`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=17), `save_migrations` (1→…→17), `inn_state`, `guests`, `standing`, `brawl`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.

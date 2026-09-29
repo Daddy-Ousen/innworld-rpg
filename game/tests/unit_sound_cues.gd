@@ -86,7 +86,8 @@ func test_action_keys_are_real_actions_or_use_menu_ids() -> void:
 func test_page_keys_are_real_page_kinds() -> void:
 	var kinds := [SystemMessages.COLLAPSE, SystemMessages.KNOCKOUT, SystemMessages.PROGRESS,
 		SystemMessages.NEWS, SystemMessages.RUMORS, SystemMessages.DRIFT, SystemMessages.OFFER,
-		SystemMessages.CONFIRM, SystemMessages.RESULT, SystemMessages.MORNING, SystemMessages.WELCOME]
+		SystemMessages.CONFIRM, SystemMessages.RESULT, SystemMessages.MORNING, SystemMessages.WELCOME,
+		SystemMessages.FATE]
 	for key: String in _audio.data["pages"]:
 		assert_true(kinds.has(key) or key == SoundCues.OPEN_PAGE or key == SoundCues.DEATH_PAGE, key)
 	for kind: String in kinds:

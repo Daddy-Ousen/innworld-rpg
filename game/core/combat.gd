@@ -49,9 +49,11 @@ static func is_down(gs: GameState) -> bool:
 	return gs.player.hp == 0
 
 
-## A fight is on and at least one monster is still hostile.
+## A fight is on and at least one monster is still hostile, or an NPC the player
+## attacked (M14.5, Brawl) is hostile in the area.
 static func in_danger(gs: GameState) -> bool:
-	return gs.combat.has_fight() and not gs.combat.in_state(CombatState.HOSTILE).is_empty()
+	return (gs.combat.has_fight() and not gs.combat.in_state(CombatState.HOSTILE).is_empty()) \
+			or Brawl.hostile_near(gs)
 
 
 ## Why a non-combat command (an action, a use, a sleep) is refused now, or "".

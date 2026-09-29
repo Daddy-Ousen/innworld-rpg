@@ -22,12 +22,15 @@ const CONFIRM := "confirm"
 const RESULT := "result"
 const MORNING := "morning"
 const WELCOME := "welcome"
+const FATE := "fate"
 
 const NEXT := "next"
 const ACCEPT := "accept"
 const DECLINE := "decline"
 const YES := "yes"
 const BACK := "back"
+const STRIKE := "strike"
+const SPARE := "spare"
 
 const SILENT_LINE := "The System is silent."
 
@@ -119,6 +122,16 @@ static func offer_pages(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		p["class"] = id
 		out.append(p)
 	return out
+
+
+## The fate warning (M14.5): shown before the first attack on a major NPC. It has "npc" and
+## "delay" (seconds the STRIKE choice stays off).
+static func fate_page(db: DataDb, npc: String) -> Dictionary:
+	var r := Brawl.rules(db)
+	var p := page(FATE, String(r["fate_title"]), Brawl.fate_lines(db, npc), [STRIKE, SPARE])
+	p["npc"] = npc
+	p["delay"] = float(r["fate_delay"])
+	return p
 
 
 ## The "are you sure?" page shown after Decline.
