@@ -196,3 +196,14 @@ session. Current work stays in `progress.md`.
   - [x] M15.2 HUD log: 3 lines, bottom left, fades; L = message history, H = help page (`ui/text_page.*`).
   - [x] M15.3 No XP numbers and no total level on player screens; the debug console keeps the numbers.
   - Full suite after M15.3: 111 scripts, 1039 tests pass; Python tool tests 77 pass.
+
+## Roadmap status (M16, archived 2026-09-29)
+- [x] M16 — Maps, art and cities (plan 2026-09-29, ADR 0023 audit, 0024 Liscor, 0025 Celum, 0026 other maps). Six sub-milestones on one stacked branch chain, merged as one PR ([PR #78](https://github.com/Daddy-Ousen/innworld-rpg/pull/78), merge commit 98a3b08). No `game/core/` change, no save change.
+  - [x] M16.0 Art audit: 25 problems mapped to M16.1-M16.6 (ADR 0023).
+  - [x] M16.1 Nature art: cliffs, rocks, boulders, ford; `GroundArt.edge_pieces` / `mix`, `tools/build_cliffs.py`.
+  - [x] M16.2 Buildings: house tiles (`tile.house`, `tools/build_houses.py`), stone / brick / plain / ruin styles, snow roofs.
+  - [x] M16.3 Doors and signs: object or exit field `sign`, `SignArt`, `tools/build_signs.py`, `plaque` objects; the yellow exit tint is gone.
+  - [x] M16.4 Liscor districts: 6 street maps, guild / Watch / tavern rooms, `Crowd` walkers (`world/crowd.gd`), NPC schedules moved to the rooms.
+  - [x] M16.5 Celum districts: gate, square, main street, Stitchworks street, Hare street, poor quarter; guild plaques.
+  - [x] M16.6 Other maps: gate towers and gatehouses, inn goblin board, Esthelm shacks, ruins ditch and Watch tents, road camp signs, `wood_window` tile in 11 rooms, cave cobwebs / bones / mushrooms.
+  - Full suite (subagent) at M16.6: 118 scripts, 1101 tests pass; Python tool tests 95 pass; validator 0 errors.

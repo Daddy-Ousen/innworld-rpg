@@ -1,6 +1,6 @@
 # Progress
 
-M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
+M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 `docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
 
 ## Context discipline (all sessions)
@@ -21,8 +21,8 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - [x] M14 — Engine works: bag, cooking, guests, standing, NPC schedules, attack NPCs, UI skin, portraits, balance. M14.0–M14.8 merged; tags `m14.0-done` … `m14.8-done` and `m14-done` on merge commit a08c23a ([PR #75](https://github.com/Daddy-Ousen/innworld-rpg/pull/75)). Detail in the archive and ADR 0021. The user still has to play it (`godot --path game`).
 
 - [x] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). M15.0–M15.3 merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df). Detail in the archive and ADR 0022.
-- [ ] M16 — Maps, art and cities (art audit, rocks/cliffs/water, real buildings, door signs, Liscor and Celum districts, other maps). Started 2026-09-29; ADR 0023 (audit, M16.0-M16.3), 0024 (Liscor), 0025 (Celum), 0026 (other maps). All sub-milestones M16.0-M16.6 are done on one stacked branch chain (`feat/m16.0-art-audit` ... `feat/m16.6-other-maps`; nothing pushed; ask before push / PR). M16.6 (branch `feat/m16.6-other-maps`, stacked on M16.5): Celum gate towers, Liscor gatehouses, inn goblin board, Esthelm shacks, ruins ditch and Watch tents, road camp signs, `wood_window` tile in 11 rooms, cave cobwebs/bones/mushrooms; `unit_other_maps` (8) and `tools/build_windows.py` are new. No core change. Waiting on the user: walk the maps in the game (`godot --path game`), then one PR for M16.0-M16.6 and the archive step. Next: M17 (plan mode first).
-- [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). Planned, not started. User's AP rules in ADR 0022.
+- [x] M16 — Maps, art and cities. M16.0-M16.6 merged as one PR ([PR #78](https://github.com/Daddy-Ousen/innworld-rpg/pull/78), merge commit 98a3b08). Detail in the archive and ADR 0023-0026. The user still has to walk the maps (`godot --path game`).
+- [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). Next: M17.0 spike + ADR, plan mode first. User's AP rules in ADR 0022 and `docs/ROADMAP.md`.
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
@@ -34,7 +34,7 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 118 GUT scripts, 1101 tests, all pass (M16.6 branch, full suite run once; the one failure, `sim_esthelm_siege`, was fixed and its related scripts rerun). Main after M14.8 had 109 scripts, 1019 tests. Python tool tests: 95 pass (`python -m unittest discover -s tools/tests`).
+- Tests: 118 GUT scripts, 1101 tests, all pass (main after M16). Main after M14.8 had 109 scripts, 1019 tests. Python tool tests: 95 pass (`python -m unittest discover -s tools/tests`).
 - Canon: Book 5 has days 97–111 (4.06 M – 4.17) and Geneva's 1.02 D – 1.06 D (days 77–90, off-map) on main; and 4.18 – 4.23 E (days 106–118); the M13.6 branch adds 4.24 – 4.27 H (days 110–113). 4.00 K – 4.06 K are history notes in ADR 0020.
 - Main after M13.T: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. Main after M13.1: 92 GUT scripts, 849 tests. Main after M13.2: 93 GUT scripts, 861 tests. Main after M13.3: 94 GUT scripts, 871 tests. Main after M13.4: 95 GUT scripts, 876 tests. Main after M13.5: 96 GUT scripts, 888 tests. Main after M13.6: 97 GUT scripts, 902 tests. M13.7 branch: 98 GUT scripts, 914 tests, all pass; Python 78 OK; validator 0 errors; 44 enemies. Maps now 20 (+ esthelm_creler_cave in M13.6), 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 43 (M13.6: creler_hatchling, creler_juvenile).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
