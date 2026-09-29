@@ -44,6 +44,25 @@ func test_stat_mod_skills_add_up() -> void:
 	assert_eq(Combat.hp(gs, _db), 26, "full HP follows the new max")
 
 
+func test_max_hp_grows_with_total_class_level() -> void:
+	_db.rules["combat"]["hp_per_level"] = 3
+	var gs := ToyCombat.new_game(_db)
+	assert_eq(Stats.max_hp(gs, _db), 20, "no class, no bonus")
+	gs.progression.classes["cook"] = {"level": 3}
+	gs.progression.classes["innkeeper"] = {"level": 2}
+	assert_eq(Stats.max_hp(gs, _db), 35, "20 + 3 × (3 + 2)")
+	assert_eq(Combat.hp(gs, _db), 35, "full HP follows the new max")
+	Combat.set_hp(gs, _db, 30)
+	gs.progression.classes["cook"]["level"] = 4
+	assert_eq(Combat.hp(gs, _db), 30, "a hurt player keeps their HP when a level comes")
+	assert_eq(Stats.max_hp(gs, _db), 38)
+
+
+func test_real_rules_give_hp_per_level() -> void:
+	var real := DataDb.load_dir()
+	assert_eq(int(real.rules["combat"]["hp_per_level"]), 3)
+
+
 func test_real_skills_use_known_stats() -> void:
 	var real := DataDb.load_dir()
 	var known := ["strength", "dexterity", "endurance", "perception", "speed", "presence", "intellect"]

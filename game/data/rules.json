@@ -51,6 +51,7 @@
 		"base_stats": {"default": {"strength": 3, "dexterity": 3, "endurance": 3, "perception": 3, "speed": 3}},
 		"hp_base": 11,
 		"hp_per_endurance": 3,
+		"hp_per_level": 3,
 		"unarmed": {"name": "Fists", "damage": [1, 2]},
 		"hit": {"base": 0.7, "per_point": 0.05, "min": 0.1, "max": 0.95, "throw_per_tile": 0.05},
 		"strength_div": 3,

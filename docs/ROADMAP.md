@@ -187,7 +187,7 @@ Plan accepted 2026-09-28 (ADR 0021). One branch + PR each. Inn play first, balan
 - [x] M14.5 Attack NPCs: attack any NPC, a one-time fate warning for major NPCs, witnesses and reputation react
 - [x] M14.6 UI skin: one theme and a free pixel font for every menu
 - [x] M14.7 Portraits: NPC faces cut from the character sheets in talk, System pages and news
-- [ ] M14.8 Balance pass: probe tests, HP per level, tuned XP, prices and fights
+- [x] M14.8 Balance pass: probe tests, HP per level, tuned XP, prices and fights
 **Done when:** the inn earns coin from cooked food served to guests; relationships and reputation change over
 time and change prices and help; the on-map canon NPCs have schedules; any NPC can be attacked with the fate
 warning; menus share one skin with portraits; the balance probes pass; GUT, the Python tool tests and the

@@ -118,6 +118,10 @@ func test_use_an_object() -> void:
 
 
 func test_console_scene_runs_a_command() -> void:
+	# The scene works on Session.gs: an earlier test may have left a fight in it (unit_brawl).
+	var session := get_node_or_null("/root/Session")
+	if session != null:
+		session.set_state(GameState.new_game(1, _db))
 	var scene: Control = add_child_autofree(load("res://ui/debug_console.tscn").instantiate())
 	var input: LineEdit = scene.get_node("%Input")
 	var output: RichTextLabel = scene.get_node("%Output")

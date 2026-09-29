@@ -28,8 +28,8 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
   - [x] M14.4 NPC schedules (data only) — merged ([PR #71](https://github.com/Daddy-Ousen/innworld-rpg/pull/71)), tag `m14.4-done` on merge commit 6c8bd55. 13 NPCs got schedules, looks and sheets.
   - [x] M14.5 Attack NPCs (save v17) — merged ([PR #72](https://github.com/Daddy-Ousen/innworld-rpg/pull/72)), tag `m14.5-done` on merge commit 5f0a5a3.
   - [x] M14.6 UI skin — merged ([PR #73](https://github.com/Daddy-Ousen/innworld-rpg/pull/73)), tag `m14.6-done` on merge commit 0f094ad.
-  - [ ] M14.7 Portraits — branch `feat/m14.7-portraits`: `world/portrait.gd` (head crop of the sheet), face in the use menu and System dialog (fate and news deaths). `unit_portrait` 11 tests pass; UI tests green. PR next; tick after merge.
-  - [ ] M14.8 Balance
+  - [x] M14.7 Portraits — merged ([PR #74](https://github.com/Daddy-Ousen/innworld-rpg/pull/74)), tag `m14.7-done` on merge commit 290d4f2.
+  - [ ] M14.8 Balance — branch `feat/m14.8-balance`: `rules.combat.hp_per_level` = 3 (`Stats.max_hp`), three probes `sim_balance_progress|money|fights`, ADR 0021 M14.8 section. Probes pass; full suite (109 scripts, 1019 tests) passes after one test fix (`unit_console` no longer reads a fight leaked into `Session` by `unit_brawl`). Open for the user: Rock Crab and the day-21 raid are too hard for one player (ADR 0021). Tick after merge.
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
