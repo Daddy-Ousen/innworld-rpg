@@ -20,8 +20,8 @@ M0–M13 detail (roadmap bullets, decisions, ADR 0001–0020) lives in
 - [x] M13 — Book 5 (The Last Light). M13.0, M13.T, M13.1–M13.7 merged; tags `m13.0-done` … `m13.7-done` and `m13-done` on merge commit 17b6bab ([PR #66](https://github.com/Daddy-Ousen/innworld-rpg/pull/66)). Detail in the archive and ADR 0020.
 - [x] M14 — Engine works: bag, cooking, guests, standing, NPC schedules, attack NPCs, UI skin, portraits, balance. M14.0–M14.8 merged; tags `m14.0-done` … `m14.8-done` and `m14-done` on merge commit a08c23a ([PR #75](https://github.com/Daddy-Ousen/innworld-rpg/pull/75)). Detail in the archive and ADR 0021. The user still has to play it (`godot --path game`).
 
-- [ ] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). Planned 2026-09-29, ADR 0022. M15.0 font done (branch `feat/m15.0-font`, not pushed); M15.1 player day done (branch `feat/m15.1-player-day`, stacked on M15.0, not pushed; full suite 109 scripts, 1026 tests pass); M15.2 HUD log done (branch `feat/m15.2-hud-log`); M15.3 no XP numbers done (branch `feat/m15.3-no-xp`). All three are stacked, none pushed; full suite 111 scripts, 1039 tests pass. M15 waits for the user to play it, then PR(s).
-- [ ] M16 — Maps, art and cities (art audit, rocks/cliffs/water, real buildings, door signs, Liscor and Celum districts). Planned, not started.
+- [x] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). M15.0–M15.3 merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df). Detail in the archive and ADR 0022.
+- [ ] M16 — Maps, art and cities (art audit, rocks/cliffs/water, real buildings, door signs, Liscor and Celum districts). Started 2026-09-29, ADR 0023. M16.0 art audit in progress (branch `feat/m16.0-art-audit`).
 - [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). Planned, not started. User's AP rules in ADR 0022.
 
 ## After M8

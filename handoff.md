@@ -1,11 +1,24 @@
 # Handoff
 
-## Just done (2026-09-29, M15.3)
-- M15.3 done on branch `feat/m15.3-no-xp` (stacked: font -> player day -> HUD log -> no XP; nothing pushed).
-  The M15 branches are one chain, so one PR from `feat/m15.3-no-xp` covers all four sub-milestones (ask the user
-  before push / PR). Full suite (subagent): 111 scripts, 1039 tests pass.
-- Next: the user plays M15 (`godot --path game`); then PR, merge, archive M15 in `docs/PROGRESS_ARCHIVE.md`, start M16.0
-  (art audit: screenshots of every map, list of bad tiles in the ADR, the user checks the list).
+## Just done (2026-09-29, M16.0)
+- M15 merged (PR #77, b93e2df) and archived. M16.0 art audit on branch `feat/m16.0-art-audit` (from main; not pushed):
+  `docs/adr/0023-m16-art-audit.md` lists 25 problems, each mapped to M16.1 (rocks, cliffs, water), M16.2 (buildings),
+  M16.3 (doors, signs), M16.4/5 (cities), M16.6 (other maps). Docs only; no code, so no tests run.
+- Waiting on the user: check the list (3 open questions at the end of the ADR: missing items, inn building scope,
+  art source). Then tick M16.0 in `docs/ROADMAP.md` and start M16.1 (plan mode first).
+- Screenshot recipe (scratch scene, deleted): `game/_scratch/shot.tscn` + `shot.gd` (`extends Node`, `_ready` calls a
+  deferred coroutine). For each map id in `db.maps.areas`: a `SubViewport` sized `MapDb.size * WorldView.TILE`
+  (`UPDATE_ALWAYS`) holds a `WorldView` from `res://world/world_view.tscn`; `v.setup(db.maps, {}, db.combat.enemies, {}, "winter")`;
+  `gs = GameState.new(1)`; `gs.flags["winter"] = true` for winter; `gs.player.place(id, Vector2i(0,0))`;
+  `v.refresh(gs, db)`; hide `v.player` and `v.atmosphere`; camera zoom 1; wait 4 frames; `get_texture().get_image().save_png`.
+  Run with the console exe (not `--headless`, needs the renderer): `OUT=<dir> WINTER=1 Godot..._console.exe --path game res://_scratch/shot.tscn`.
+  Whole run for 20 maps takes seconds.
+- Tile facts for M16.1/2: `rock` tile = 1x1 slab prop (`lpc_atlas` 28,26), used for both stones and cliffs; `building` =
+  `lpc_house` cell (1,1) repeated; inn = `wood_wall` cells; `water` (walk false) and `shallows` (walk true) have one
+  ground cell each with `edges` blocks (0,14) and (24,14).
+
+## M15 (2026-09-29, merged)
+- M15.0–M15.3 merged as one PR (#77) and archived in `docs/PROGRESS_ARCHIVE.md`.
 
 ## M15.2 (2026-09-29)
 - M15.2 done on branch `feat/m15.2-hud-log` (stacked on `feat/m15.1-player-day`; nothing pushed). Log strip 3 lines,
