@@ -193,5 +193,75 @@ time and change prices and help; the on-map canon NPCs have schedules; any NPC c
 warning; menus share one skin with portraits; the balance probes pass; GUT, the Python tool tests and the
 validator pass; the user has played it.
 
+## M15 — Readability and lore fixes
+Plan proposed 2026-09-29 from the user's play report (ADR 0022). One branch + PR each. Small and fast; do first.
+- [ ] M15.0 Font: Pixel Operator (CC0) replaces Pixelify Sans in the theme; sizes checked at 14/16; a text size
+  option (Normal / Large) in Options (`user://settings.cfg`, not game state). Ask the user before the download
+- [ ] M15.1 The player's day: every screen counts days from the player's arrival (arrival = Day 1). The canon
+  day stays inside the engine (director, windows, saves). One helper reads `rules.clock.start_minute`; no save change
+- [ ] M15.2 HUD and log: the log shows at most 3 lines, bottom left, under half the width, see-through, and fades
+  after a few seconds; L opens the full message history; the key list moves to a help page (H) with a one-line
+  "H: help" hint
+- [ ] M15.3 No XP numbers: the action line, character sheet, hints and journal show no XP. The sheet shows class
+  and level only. The debug console (`) keeps the numbers (developer tool)
+**Done when:** the new font is in every menu; no player screen shows "Day 8" at the start or any XP number; the
+log covers at most a strip at the bottom left; GUT tests for the changed UI pass; the user has checked it on screen.
+
+## M16 — Maps, art and cities
+Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change; maps and art are data.
+- [ ] M16.0 Art audit: a screenshot of every map; a list of every bad tile or prop (rocks, cliffs, thin water,
+  flat building blocks) in the ADR. The user checks the list
+- [ ] M16.1 Nature art: boulder props (1x1, 2x2) that read as rocks; a cliff tile set (top and face) for rock walls
+  and mountains; water edges that work for thin water; a bridge / stepping-stones object for crossings; fix the maps
+- [ ] M16.2 Buildings: a building block draws as a house: roof on top, front wall with windows and a door on the
+  bottom row. Styles: Drake stone (Liscor), Human timber and brick (Celum), plain (villages)
+- [ ] M16.3 Doors and signs: a door or shop shows what it is: a hanging sign icon (bread, anvil, potion, guild
+  badge) and its name when the player is near; doors you can enter get a marker; other doors say "Closed" or
+  "A private home". New optional object field `sign`
+- [ ] M16.4 Liscor districts: Liscor becomes 5–7 small district maps (east gate, market street, guild street,
+  the Watch and the walls, homes, other gates), joined by streets. Map edges show roofs and streets that go on,
+  but the player cannot walk there. A crowd of passers-by (view only). Canon places from Books 1–5; guesses marked
+- [ ] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the
+  Frenzied Hare street, the Stitchworks street, homes)
+- [ ] M16.6 The other maps: new buildings, props and signs on Esthelm, the road camp, the inn hill and the rest
+**Done when:** every map passes the audit list; buildings look like buildings; every door and shop says what it
+is; Liscor and Celum each have at least 5 districts; NPC schedules and canon places still work
+(`sim_canon_book1` … `sim_canon_book5`, validator 0 errors); the user has walked the cities.
+
+## M17 — Tactical combat (XCOM-style)
+Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Engine + save change. Replaces the M5 "one command =
+one turn" fights. Combat stays on the same map grid (DESIGN §1); a fight switches the map into combat mode.
+Rules from the user (2026-09-29):
+- Every fighter (player, NPC allies, helpers, each monster) acts in order of Agility (seeded roll on ties).
+- Base 6 AP per turn. One tile of movement = 0.25 AP. A turn may spend at most 1 AP on movement (4 tiles);
+  classes and skills can raise that cap ([Runner]: 2 AP = 8 tiles). A normal attack = 2 AP. Skills cost 1–10 AP.
+  Spells cost 1–10 AP plus 1–10 MP. Move, attack, move, attack is allowed while AP and the move cap last.
+- Extra AP: skills give permanent AP (for example a lesser stamina Skill +1, a greater one +2; names checked
+  against the Book text); +1 AP at level 10, 25, 50 and 75.
+- MP (mana) is kept between fights like HP and comes back slowly with time.
+- AP is stored in quarter points (integers), so the rolls stay deterministic.
+- [ ] M17.0 Spike + ADR: `rules.combat.tactical` numbers; three fights worked out on paper (Rock Crab, a goblin
+  pack, the day-21 raid); how a fight starts, who joins, what a round costs in world time (6 s). The user approves
+- [ ] M17.1 Core encounter: encounter state in `GameState` (turn order, round, AP left, movement used; save v18 +
+  migration), start / join / end, order by Agility, move with the cap, attack for 2 AP, end turn; monsters use
+  AP too. Headless tests
+- [ ] M17.2 Port the old fight parts: block, throw, improvised weapons, drop, flee, knock-out, fighting NPCs,
+  helpers, attack-an-NPC (brawl), traps, stage waves (join at the start of a round), fight records for the
+  System. Every sim fight test moved to the new rules (full suite)
+- [ ] M17.3 Combat screen: move range, path preview, hit chance before you act, AP pips, turn order bar with
+  portraits, end-turn button, mouse click to move and attack (keys still work), camera on the active fighter
+- [ ] M17.4 Skills in combat: new skill effects `combat_action` (an active Skill: AP cost, range, area, effect),
+  `ap_mod` (permanent AP), `move_ap_mod` (move cap); AP at levels 10/25/50/75; a Skill bar. Existing combat
+  Skills get their action where the Book text fits
+- [ ] M17.5 Mana and spells: MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,
+  `canon_ref`), learning a spell from a teacher or a spellbook (not from nothing), a [Mage] class path, spell
+  targets (one foe, line, area). First spells from Books 1–5 only
+- [ ] M17.6 Cover and position: half and full cover from walls and solid objects, flanking; monsters use cover
+- [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
+  balance probes redone for the new rules, the day-21 raid checked again
+**Done when:** every fight in the game (monsters, stages, brawls) runs in combat mode with AP; the player can use
+combat Skills and learned spells; MP and AP gains work; saves from v17 load; GUT (full suite), the Python tool
+tests and the validator pass; the user has played fights with the new screen.
+
 ## Later
 - optional LLM flavour layer

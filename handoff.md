@@ -1,14 +1,23 @@
 # Handoff
 
 ## Just done (2026-09-29)
-- M14.8 merged (PR #75), tags `m14.8-done` and `m14-done` on a08c23a. M14 is archived in `docs/PROGRESS_ARCHIVE.md`.
-- User decision: leave the Rock Crab and the day-21 raid as they are (ADR 0021 M14.8). Raid options if it comes back:
-  allies in wave 1 + tougher Erin (data), and/or ally waves ignoring `rules.combat.stage.max_on_map` (core, `Stage.tick`).
-- `hp_per_level` = 3 in `rules.combat`; probes `sim_balance_*` print tables with `BALANCE_LOG=<file>`.
+- The user played M14 and sent 8 problems (screenshots in `The Wandering Inn Books 1-17 Pirateaba/Temp/`, not in git).
+- Plan written: M15 (readability, lore), M16 (maps, art, cities), M17 (XCOM-style combat) in `docs/ROADMAP.md`;
+  decisions and the user's AP rules in `docs/adr/0022-m15-m17-play-report.md`; DESIGN §1 updated.
+  Branch `docs/m15-m17-plan` (from main d75adfa). Docs only, no code.
+- Earlier: M14 merged (PR #75, tags `m14-done`), archived (PR #76). Rock Crab and day-21 raid stay as they are.
 
 ## Next steps
-1. The user plays M14 (`godot --path game`) and reports what feels wrong.
-2. Pick the next milestone with the user (see `docs/ROADMAP.md` "Later").
+1. The user approves the plan order (M15 → M16 → M17) and answers: AP at level 10/25/50/75 = highest class
+   level or total level? (default: highest class level).
+2. M15.0: ask before downloading Pixel Operator (file, source, size). Then swap the theme font
+   (`game/ui/theme.tres` `default_font`), `CREDITS.md`, font `.import` flags (antialiasing=0, hinting=0,
+   subpixel_positioning=0).
+3. M15.1 files: `ui/hud.gd`, `ui/journal.gd`, `ui/system_messages.gd`, `ui/character_sheet.gd`,
+   `ui/pause_menu.gd`, `world/main.gd` (all print `gs.clock.day()`).
+4. M15.2: `ui/hud.tscn` (Bottom panel, Log label, Hint label), `ui/hud.gd` (`LOG_LINES` = 6).
+5. M15.3: `world/main.gd:308` (XP line), `ui/character_sheet.gd:56-59`, `ui/system_messages.gd:41-42`,
+   `ui/journal.gd:134`. Keep `ui/console_commands.gd` numbers.
 
 ## Probe notes (M14.8)
 - A test that skips days with `ToyCanon.sleep_through` piles up hunger (max HP x0.5): set `gs.economy.hunger = 0`.
