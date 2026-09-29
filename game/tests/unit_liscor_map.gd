@@ -6,7 +6,7 @@ extends GutTest
 ## The city maps (M16.4.1 streets; M16.4.2-4 rooms are added to ROOMS as they land).
 const STREETS := ["liscor_gate", "liscor_market", "liscor_plaza", "liscor_guild_street", "liscor_watch",
 		"liscor_homes"]
-const ROOMS: Array[String] = []
+const ROOMS: Array[String] = ["liscor_adventurers_guild", "liscor_mages_guild"]
 
 var _db: DataDb
 var _audio: AudioDb
@@ -90,3 +90,19 @@ func test_every_city_map_has_a_mood_and_an_ambience_bed() -> void:
 	for id: String in STREETS:
 		if id != "liscor_gate":
 			assert_eq(beds.get(id, ""), "market", "%s: crowd sounds" % id)
+
+
+func test_selys_works_at_the_guild_desk() -> void:
+	var goals: Array = _db.behaviour.npcs["selys"]["goals"]
+	var work := goals.filter(func(g: Dictionary) -> bool: return g["goal"] == "work")
+	assert_eq(work.size(), 1)
+	var target: Dictionary = work[0]["target"]
+	assert_eq(target["area"], "liscor_adventurers_guild")
+	var at := Vector2i(int(target["pos"][0]), int(target["pos"][1]))
+	assert_true(_db.maps.is_walkable("liscor_adventurers_guild", at), "the desk spot is free floor")
+	var next_to_desk := false
+	for o: Dictionary in _db.maps.areas["liscor_adventurers_guild"]["objects"]:
+		if o["kind"] == "counter":
+			var d := Vector2i(int(o["at"][0]), int(o["at"][1])) - at
+			next_to_desk = next_to_desk or maxi(absi(d.x), absi(d.y)) == 1
+	assert_true(next_to_desk, "Selys stands beside the reception desk, so the player can talk to her")

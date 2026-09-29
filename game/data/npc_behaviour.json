@@ -124,8 +124,10 @@
 		},
 		"selys": {
 			"confidence": "guess",
-			"notes": "Works at the Adventurer's Guild (off-map); lunch in the market.",
+			"notes": "M16.4.2: works at the reception desk of the Adventurers' Guild (a room, guessed hours 8-12 and 13-18); lunch in the market; off the map at night.",
 			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 12, 1], [13, 18, 1]],
+					"target": {"area": "liscor_adventurers_guild", "pos": [10, 3]}},
 				{"goal": "eat", "base": 2, "hours": [[12, 13, 1]],
 					"target": {"area": "liscor_market", "pos": [14, 14]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}

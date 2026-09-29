@@ -224,7 +224,7 @@ Plan proposed 2026-09-29 (ADR 0022). One branch + PR each. Core does not change;
   Sub-steps (user, 2026-09-29: 6 street maps and interiors for the main rooms):
   - [x] M16.4.0 Crowd: view-only walkers (`crowd` map field, `game/world/crowd.gd`)
   - [x] M16.4.1 Streets: plaza and park, guild street, Watch and walls, homes; market west exit
-  - [ ] M16.4.2 Rooms: Adventurers' Guild, Mages' Guild
+  - [x] M16.4.2 Rooms: Adventurers' Guild, Mages' Guild
   - [ ] M16.4.3 Room: Watch barracks
   - [ ] M16.4.4 Rooms: Gnoll tavern, Tailless Thief
 - [ ] M16.5 Celum districts: the same for Celum (gate, town square, guild street with the Runners' Guild, the

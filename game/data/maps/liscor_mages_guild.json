@@ -1,0 +1,38 @@
+{
+	"schema_version": 1,
+	"id": "liscor_mages_guild",
+	"name": "Liscor Mages' Guild",
+	"location": "liscor_mages_guild",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M16.4.2). Canon: a front counter with a bored Drake clerk, a price sign above their head, payment up front, messages carried upstairs (3.38); a crystal-ball-and-wand sign outside (1.11). The rest is a guess; the clerk and the upper floor are not drawn.",
+	"zones": {},
+	"exits": [
+		{"at": [6, 10], "to": "liscor_guild_street", "arrive": [12, 6], "minutes": 0}
+	],
+	"crowd": {"lanes": [{"path": [[7, 5]], "walkers": 1, "looks": ["race_drake"]}, {"path": [[2, 8], [10, 8]], "walkers": 1, "looks": ["race_gnoll"]}]},
+	"objects": [
+		{"id": "price_board", "kind": "notice_board", "at": [7, 1], "name": "Price board", "actions": [], "solid": true},
+		{"id": "message_shelves_a", "kind": "shelves", "at": [2, 2], "name": "Message shelves", "actions": [], "solid": true},
+		{"id": "message_shelves_b", "kind": "shelves", "at": [3, 2], "name": "Message shelves", "actions": [], "solid": true},
+		{"id": "clerk_counter_a", "kind": "counter", "at": [6, 3], "name": "Front counter", "actions": [], "solid": true},
+		{"id": "clerk_counter_b", "kind": "counter", "at": [7, 3], "name": "Front counter", "actions": [], "solid": true},
+		{"id": "clerk_counter_c", "kind": "counter", "at": [8, 3], "name": "Front counter", "actions": [], "solid": true},
+		{"id": "writing_table", "kind": "table", "at": [11, 7], "name": "Writing table", "actions": [], "solid": true},
+		{"id": "mages_hearth", "kind": "hearth", "at": [11, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall"},
+	"rows": [
+		"HHHHHHHHHHHHHH",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"H============H",
+		"HHHHHH+HHHHHHH"
+	]
+}

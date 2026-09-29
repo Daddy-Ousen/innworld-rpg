@@ -1,6 +1,9 @@
 # Handoff
 
-## Just done (2026-09-29, M16.4.0 + M16.4.1)
+## Just done (2026-09-29, M16.4.0 - M16.4.2)
+- M16.4.2 done: guild rooms + Selys at the desk (see ADR 0024). `sim_liscor_rooms.gd` grows with M16.4.3/4. Remaining door plaques on
+  `liscor_watch` (`watch_barracks`) and `liscor_homes` (`homes_gnoll_tavern`); the Tailless Thief plaque `gs_thief` is on the guild street.
+  Room generators: scratchpad `roomgen.py` + `gen_guilds.py` (gone next session; copy the JSON of a room instead).
 - Branch `feat/m16.4-liscor` (stacked on `feat/m16.3-signs`; nothing pushed, ask before push / PR). ADR `docs/adr/0024-m16-4-liscor-districts.md`
   has the canon table (chapter refs) and results. User answers: 6 street maps; interiors for guilds, Watch barracks, taverns.
 - M16.4.0 crowd: `game/world/crowd.gd` (pure), `WorldView._show_crowd/_move_crowd`, map field `crowd` (lanes of walkers, real time,

@@ -1,6 +1,6 @@
 # ADR 0024 — M16.4 Liscor districts
 
-Date: 2026-09-29 · Status: M16.4.0 (crowd) and M16.4.1 (streets) done; rooms follow (M16.4.2–M16.4.4)
+Date: 2026-09-29 · Status: M16.4.0 (crowd), M16.4.1 (streets) and M16.4.2 (guild rooms) done; M16.4.3–M16.4.4 follow
 
 ## Context
 Liscor was two yard maps. ROADMAP M16.4 asks for 5–7 district maps joined by streets, streets that go on at the map
@@ -49,3 +49,13 @@ the plaza. Doors of the enterable buildings are `stone_door` cells with a sign p
 (M16.4.2–4 turn them into exits). New sign icons: sword, star, shield, scroll (`tools/build_signs.py`, `objects.json`
 `signs`; `plaque` now points at the moved empty cell). Music mood `liscor`, ambience `market` for all four maps.
 Tests: `unit_liscor_map` (reach, two-way exits, signed doors, moods).
+
+## M16.4.2 result (guild rooms)
+`liscor_adventurers_guild` (one hall: job board, hearth, two reception desk counters, supply shelves, five tables, six idle
+or walking adventurers) and `liscor_mages_guild` (front counter, price board, message shelves, writing table). The guild street
+doors (4,5) and (12,5) are now exits with `sign` (sword "Adventurers' Guild", star "Mages' Guild"); the two plaques are gone.
+The Adventurers' Guild upper floor (stairs, guest rooms) and the Mages' Guild clerk are not drawn. Selys gets a `work` goal
+at the desk (hours 8-12 and 13-18, `liscor_adventurers_guild` (10, 3), beside the counters so the player can talk to her);
+lunch at the market and the off-map night stay. Olesm stays off the map (he is Council, not Guild). Music mood `liscor` for
+both rooms, ambience `tavern` (crowd murmur) for the Adventurers' Guild. Tests: `unit_liscor_map` (7), `sim_liscor_rooms` (new,
+2: Selys at the desk at 11:00, away at 12:30); `sim_npc_day`, `sim_walk_day`, `sim_canon_fights`, `sim_canon_book1..5` still pass.

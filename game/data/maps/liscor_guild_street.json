@@ -7,12 +7,12 @@
 	"note": "Design map (M16.4). Canon: the Adventurers' Guild has a plain sign (1.63); the Mage's Guild has a crystal-ball-and-wand sign (1.11); the Tailless Thief is on the north side of town (2.09). Where the guilds stand and the Merchants' and Runners' Guilds are guesses (most cities have them; their places in Liscor are not stated).",
 	"zones": {},
 	"exits": [
-		{"at": [15, 23, 2, 1], "to": "liscor_plaza", "arrive": [15, 1], "minutes": 2}
+		{"at": [15, 23, 2, 1], "to": "liscor_plaza", "arrive": [15, 1], "minutes": 2},
+		{"at": [4, 5], "to": "liscor_adventurers_guild", "arrive": [10, 12], "minutes": 0, "sign": {"icon": "sword", "text": "Adventurers' Guild"}},
+		{"at": [12, 5], "to": "liscor_mages_guild", "arrive": [6, 9], "minutes": 0, "sign": {"icon": "star", "text": "Mages' Guild"}}
 	],
 	"crowd": {"lanes": [{"path": [[1, 7], [30, 7]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_drake", "race_human"]}, {"path": [[1, 18], [30, 18]], "walkers": 3, "looks": ["race_gnoll", "race_drake", "race_human"]}, {"path": [[15, 10], [15, 22]], "walkers": 2, "looks": ["race_drake", "race_gnoll"]}]},
 	"objects": [
-		{"id": "gs_adventurers", "kind": "plaque", "at": [5, 5], "name": "Adventurers' Guild", "actions": [], "sign": {"icon": "sword"}},
-		{"id": "gs_mages", "kind": "plaque", "at": [13, 5], "name": "Mages' Guild", "actions": [], "sign": {"icon": "star"}},
 		{"id": "gs_thief", "kind": "plaque", "at": [22, 5], "name": "The Tailless Thief", "actions": [], "sign": {"icon": "mug"}},
 		{"id": "gs_runners", "kind": "plaque", "at": [29, 5], "name": "Runners' Guild", "actions": [], "sign": {"icon": "closed"}},
 		{"id": "gs_merchants", "kind": "plaque", "at": [4, 15], "name": "Merchants' Guild", "actions": [], "sign": {"icon": "closed"}},
