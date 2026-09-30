@@ -19,6 +19,11 @@
 ## at a round's end. A raised guard lasts until the player's next turn. The
 ## player's turn ends by itself when their AP pays for nothing (no step, no
 ## item use).
+##
+## M17.3 (the combat screen): `reach` and `plan_to` read what a click would do;
+## each command logs what every fighter did, in order, in CombatState.turns
+## ({"id", "path": cells stepped on, "strikes": [{"target", "hit", "damage",
+## "ranged"}], "lines", "line_from", "line_to"}), so the screen can replay the turns one by one.
 class_name Encounter
 extends RefCounted
 
@@ -124,6 +129,149 @@ static func pay(gs: GameState, cost_q: int, move: bool) -> void:
 	e["ap_q"] = int(e["ap_q"]) - cost_q
 	if move:
 		e["moved_q"] = int(e["moved_q"]) + cost_q
+
+
+## The tiles the player can walk to on this turn (M17.3): {cell: steps (n, e,
+## s, w)}, breadth-first in Pathfind.ORDER (so the same state gives the same
+## paths), within the AP left and the move cap left, over tiles
+## Movement.can_enter allows. An exit tile ends a path (the step onto it leaves
+## the map). {} when it is not the player's turn.
+@warning_ignore("integer_division")
+static func reach(gs: GameState, db: DataDb) -> Dictionary:
+	if not is_player_turn(gs):
+		return {}
+	var t := rules(db)
+	var e := gs.combat.encounter
+	var budget := mini(int(e["ap_q"]), int(t["move_cap_q"]) - int(e["moved_q"])) / int(t["move_cost_q"])
+	var area := gs.player.area
+	var start := gs.player.pos()
+	var came := {start: []}
+	var out := {}
+	var frontier: Array[Vector2i] = [start]
+	for _i in budget:
+		var next: Array[Vector2i] = []
+		for at in frontier:
+			if at != start and not db.maps.exit_at(area, at).is_empty():
+				continue
+			for dir: String in Pathfind.ORDER:
+				var to: Vector2i = at + (PlayerState.DIRS[dir] as Vector2i)
+				if came.has(to) or not Movement.can_enter(gs, db, area, to):
+					continue
+				var steps: Array = (came[at] as Array).duplicate()
+				steps.append(dir)
+				came[to] = steps
+				out[to] = steps
+				next.append(to)
+		frontier = next
+	return out
+
+
+## What a click on `cell` would do on the player's turn (M17.3):
+## {"steps": the walk, "attack": the direction of the blow after it, or "",
+## "target": the unit hit ("" = a plain walk; a monster id, or NPC + id for a
+## brawl foe)}. A tile in reach: walk there. A foe (a seen, not helping
+## monster, or an NPC fighting the player): walk to the free side of it with
+## the fewest steps (or stay, when next to it), then attack if the AP left pays
+## for it (else "attack" is ""). {} when the click does nothing.
+static func plan_to(gs: GameState, db: DataDb, cell: Vector2i) -> Dictionary:
+	var r := reach(gs, db)
+	if r.is_empty() and not is_player_turn(gs):
+		return {}
+	var area := gs.player.area
+	var target := _foe_at(gs, db, cell)
+	if target == "":
+		return {"steps": r[cell], "attack": "", "target": ""} if r.has(cell) else {}
+	var spots := {gs.player.pos(): []}
+	for at: Vector2i in r:
+		if db.maps.exit_at(area, at).is_empty():
+			spots[at] = r[at]
+	for at: Vector2i in spots:
+		for dir: String in Pathfind.ORDER:
+			if at + (PlayerState.DIRS[dir] as Vector2i) == cell:
+				var t := rules(db)
+				var steps: Array = spots[at]
+				var left := int(gs.combat.encounter["ap_q"]) - steps.size() * int(t["move_cost_q"])
+				return {"steps": steps, "attack": dir if left >= int(t["attack_cost_q"]) else "",
+					"target": target}
+	return {}
+
+
+## The foe the player could attack on `cell`: a hostile or fleeing monster
+## (not hidden, not a helper), or NPC + id for an NPC fighting the player
+## (Brawl). "" if none.
+static func _foe_at(gs: GameState, db: DataDb, cell: Vector2i) -> String:
+	var area := gs.player.area
+	var id := gs.combat.at(area, cell)
+	if id != "":
+		return id if [CombatState.HOSTILE, CombatState.FLEE].has(gs.combat.monsters[id]["state"]) else ""
+	var npc := gs.npcs.at(area, cell)
+	if npc != "" and Brawl.on(db) and Brawl.is_hostile(gs, gs.npcs.npcs[npc]):
+		return NPC + npc
+	return ""
+
+
+## Turn log (M17.3): opens fighter `id`'s entry in CombatState.turns.
+static func log_begin(gs: GameState, id: String) -> void:
+	gs.combat.turns.append({"id": id, "path": [], "strikes": [], "lines": [],
+		"_line0": gs.combat.lines.size()})
+
+
+## Notes a step onto `cell` in the open entry.
+static func log_step(gs: GameState, cell: Vector2i) -> void:
+	if not gs.combat.turns.is_empty():
+		(gs.combat.turns[-1]["path"] as Array).append(cell)
+
+
+## Notes a blow at `target` (a fighter id) in the open entry.
+static func log_strike(gs: GameState, target: String, damage: int, ranged: bool = false) -> void:
+	if not gs.combat.turns.is_empty():
+		(gs.combat.turns[-1]["strikes"] as Array).append(
+				{"target": target, "hit": damage > 0, "damage": damage, "ranged": ranged})
+
+
+## Closes the open entry: it keeps the combat lines written since log_begin
+## ("lines", and their place in CombatState.lines: "line_from", "line_to").
+## An entry with nothing in it is dropped.
+static func log_end(gs: GameState) -> void:
+	var c := gs.combat
+	if c.turns.is_empty() or not c.turns[-1].has("_line0"):
+		return
+	var t: Dictionary = c.turns[-1]
+	t["line_from"] = int(t["_line0"])
+	t["line_to"] = c.lines.size()
+	t["lines"] = c.lines.slice(int(t["_line0"]))
+	t.erase("_line0")
+	if (t["path"] as Array).is_empty() and (t["strikes"] as Array).is_empty() \
+			and (t["lines"] as Array).is_empty():
+		c.turns.pop_back()
+
+
+## HP of fighter `id` now (0 = gone or down), for the log's damage.
+static func hp_of(gs: GameState, db: DataDb, id: String) -> int:
+	if id == PLAYER:
+		return Combat.hp(gs, db)
+	if id.begins_with(NPC):
+		var npc := id.substr(NPC.length())
+		return Combat.npc_hp(gs, db, npc) if gs.npcs.npcs.has(npc) else 0
+	return int(gs.combat.monsters[id]["hp"]) if gs.combat.monsters.has(id) else 0
+
+
+## Runs `hit` (a blow at `target`) and logs its damage from the HP change.
+static func _logged_hit(gs: GameState, db: DataDb, target: String, hit: Callable,
+		ranged: bool = false) -> void:
+	var before := hp_of(gs, db, target)
+	hit.call()
+	log_strike(gs, target, maxi(before - hp_of(gs, db, target), 0), ranged)
+
+
+## The fighter id of a monster_target result.
+static func _target_id(target: Dictionary) -> String:
+	match target["kind"]:
+		Combat.PLAYER:
+			return PLAYER
+		Combat.NPC:
+			return NPC + String(target["id"])
+	return String(target["id"])
 
 
 ## The player ends their turn: everyone after them acts, rounds go on until
@@ -244,11 +392,13 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 			c.blocking = false  # a guard lasts until the player's next turn
 			return
 		if _is_fighter(gs, db, id):
+			log_begin(gs, id)
 			if id.begins_with(NPC):
 				_npc_turn(gs, db, id.substr(NPC.length()))
 			else:
 				_monster_turn(gs, db, id)
 			Combat.settle_if_over(gs, db)
+			log_end(gs)
 		if active(gs):
 			e["turn"] = int(e["turn"]) + 1
 	push_error("Encounter: too many turns in one go.")
@@ -286,8 +436,11 @@ static func _monster_turn(gs: GameState, db: DataDb, id: String) -> void:
 				var before := CombatState.pos_of(m)
 				MonsterSim._flee_turn(gs, db, id)
 				moved += step
-				if c.monsters.has(id) and CombatState.pos_of(m) == before:
+				if not c.monsters.has(id):
 					break
+				if CombatState.pos_of(m) == before:
+					break
+				log_step(gs, CombatState.pos_of(m))
 		CombatState.ALLY:
 			_ally_turn(gs, db, id, ap, cap, step, atk)
 		CombatState.HOSTILE:
@@ -318,18 +471,21 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 			if ap < atk:
 				break
 			m["chase"] = 0
-			Combat.monster_attack(gs, db, id, false, 0.0, target)
+			_logged_hit(gs, db, _target_id(target),
+					func() -> void: Combat.monster_attack(gs, db, id, false, 0.0, target))
 			ap -= atk
 			continue
 		if not threw and e.has("ranged") and ap >= atk \
 				and MonsterSim._dist(pos, at) <= int(e["ranged"]["range"]):
 			threw = true
 			if gs.rng.randf() < float(e["ranged"]["chance"]):
-				Combat.monster_attack(gs, db, id, true, 0.0, target)
+				_logged_hit(gs, db, _target_id(target),
+						func() -> void: Combat.monster_attack(gs, db, id, true, 0.0, target), true)
 				ap -= atk
 				continue
 		if moved + step > cap or ap < step or not MonsterSim._step_next_to(gs, db, id, at):
 			break
+		log_step(gs, CombatState.pos_of(m))
 		moved += step
 		ap -= step
 	if c.monsters.has(id) and not reached:
@@ -349,11 +505,12 @@ static func _ally_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: int,
 		if MonsterSim._next_to(CombatState.pos_of(c.monsters[id]), at):
 			if ap < atk:
 				return
-			Combat.helper_attack(gs, db, id, foe)
+			_logged_hit(gs, db, foe, func() -> void: Combat.helper_attack(gs, db, id, foe))
 			ap -= atk
 			continue
 		if moved + step > cap or ap < step or not MonsterSim._step_next_to(gs, db, id, at):
 			return
+		log_step(gs, CombatState.pos_of(c.monsters[id]))
 		moved += step
 		ap -= step
 
@@ -378,7 +535,7 @@ static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
 			if Brawl._dist(pos, gs.player.pos()) <= 1:
 				if ap < atk:
 					return
-				Brawl._hit_player(gs, db, npc)
+				_logged_hit(gs, db, PLAYER, func() -> void: Brawl._hit_player(gs, db, npc))
 				ap -= atk
 				continue
 		else:
@@ -388,7 +545,7 @@ static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
 			if NpcReact._manhattan(pos, CombatState.pos_of(gs.combat.monsters[foe])) == 1:
 				if ap < atk:
 					return
-				NpcReact._hit(gs, db, npc, foe)
+				_logged_hit(gs, db, foe, func() -> void: NpcReact._hit(gs, db, npc, foe))
 				ap -= atk
 				continue
 		if moved + step > cap or ap < step:
@@ -399,5 +556,6 @@ static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
 			NpcReact._fight_turn(gs, db, npc, n, NpcReact.target(gs, db, npc, n))
 		if NpcRoster.pos_of(n) == pos:
 			return
+		log_step(gs, NpcRoster.pos_of(n))
 		moved += step
 		ap -= step

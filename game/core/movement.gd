@@ -84,6 +84,19 @@ static func step(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> 
 	return out
 
 
+## True if the player could step onto `to` in `area` now (M17.3: the combat
+## screen's move range): as in step, a walkable tile with no NPC, monster,
+## Frost Fairy or guest on it, and no found, armed trap. A hidden trap does
+## not count (the screen must not give it away).
+static func can_enter(gs: GameState, db: DataDb, area: String, to: Vector2i) -> bool:
+	if not db.maps.is_walkable(area, to) or gs.npcs.at(area, to) != "" or gs.combat.at(area, to) != "" \
+			or Guests.at(gs, area, to) != "":
+		return false
+	if gs.winter.area == area and gs.winter.at(to) != "":
+		return false
+	return not Traps.blocks(gs, db, area, to)
+
+
 ## Zone id at the player's tile, or the map's canon location.
 static func location_at(gs: GameState, db: DataDb) -> String:
 	if not ensure_placed(gs, db):

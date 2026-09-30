@@ -32,6 +32,7 @@ const HELPER := "helper"
 ## lasts until the player's next turn (Encounter drops it).
 static func begin_command(gs: GameState) -> void:
 	gs.combat.lines.clear()
+	gs.combat.turns.clear()
 	if not Encounter.active(gs):
 		gs.combat.blocking = false
 
@@ -180,6 +181,21 @@ static func hit_chance(db: DataDb, accuracy: int, evasion: int, bonus: float = 0
 			float(h["min"]), float(h["max"]))
 
 
+## The player's chance to hit `unit` (a monster id, or Encounter.NPC + NPC id
+## for a brawl), with dexterity against its evasion; a throw loses
+## hit.throw_per_tile for each tile past the first (M17.3: the screen shows it
+## before you act). Reads only.
+static func player_hit_chance(gs: GameState, db: DataDb, unit: String, thrown: bool = false,
+		dist: int = 1) -> float:
+	var evasion := 0
+	if unit.begins_with(Encounter.NPC):
+		evasion = int(NpcReact.stats(db, unit.substr(Encounter.NPC.length()))["evasion"])
+	else:
+		evasion = int(db.combat.enemies[gs.combat.monsters[unit]["type"]]["evasion"])
+	var bonus := -float(db.rules["combat"]["hit"]["throw_per_tile"]) * (dist - 1) if thrown else 0.0
+	return hit_chance(db, Stats.get_stat(gs, db, "dexterity"), evasion, bonus)
+
+
 static func _roll(gs: GameState, r: Array) -> int:
 	return gs.rng.randi_range(int(r[0]), int(r[1]))
 
@@ -264,10 +280,8 @@ static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: i
 		f["attacks"] += 1
 		if not item.is_empty():
 			f["improvised"] += 1
-	var bonus := -float(rules["hit"]["throw_per_tile"]) * (dist - 1) if thrown else 0.0
-	var dex := Stats.get_stat(gs, db, "dexterity")
 	var out := {"error": "", "target": id, "hit": false, "damage": 0, "killed": false}
-	out["hit"] = gs.rng.randf() < hit_chance(db, dex, int(e["evasion"]), bonus)
+	out["hit"] = gs.rng.randf() < player_hit_chance(gs, db, id, thrown, dist)
 	var what := "The %s" % String(item["name"]).to_lower() if not item.is_empty() else "You"
 	if out["hit"]:
 		var weapon: Array = rules["unarmed"]["damage"]
