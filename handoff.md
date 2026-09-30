@@ -1,29 +1,27 @@
 # Handoff
 
-## Just done (2026-09-30, M17.7 enemy abilities and balance, cloud session)
-- M17.6 merged (PR #85). Branch `claude/kind-feynman-y4x1mm` restarted from main e54e2c5; M17.7 PR open (the user merges it). Plan: `docs/plans/m17.7.md`.
-  Detail: ADR 0027 "M17.7".
-- User answers: three fixed ability kinds but NO shell; cost by total level + cap 100 + gentler curve after 10; NPC Agility yes; flat HP x scale yes;
-  retreat-to-cover no; cornered foe fights no. Hidden XP (duress, event windows) is a new step M17.8 (roadmap has the rules the user chose).
-- Core: `Levels.cost` / `at_cap` (`rules.levels.late_from 10, late_growth 1.12, total_cap 100`); `Combat.hp_scale / scaled_hp / foe_max_hp /
-  scaled_enemies`; `MonsterAbilities` (`find`, `is_shooter`, `check`, `leap_spot`, `leap`); `Encounter.agility` reads NPC `combat.agility`;
-  `MonsterSim._beaten(db, ...)`. No save change.
-- Data: `hp_scale` 2.0; `abilities` on archer, shaman (shooter), Ghoul, Shield Spider (leap); `agility` on 24 NPC fighters. Toy dbs pin hp_scale 1.0.
-- Tests: new `unit_hp_scale` 7, `unit_monster_abilities` 9, `unit_npc_agility` 5. `FightBot.sink_on` / `sink` collects every line (a command that
-  ends the turn first hid a wave line in `sim_goblin_raid`). HP literals in unit tests follow the scale. NO full suite was run (user rule).
-- Balance seen (fists, 3 seeds): 1 Goblin wins 3/3 at levels 0 and 5; 2 Goblins level 5 3/3, level 0 1/3; 3 Goblins level 5 1/3, level 0 0/3; Razorbeak all;
-  Rock Crab 0/6; raid not winnable alone, 15-24 player turns. Player max HP 40 / 70 (level 0 / 5).
+## Just done (2026-09-30, M17.8 hidden XP, cloud session)
+- M17.7 merged (PR #86). Branch `claude/kind-feynman-y4x1mm` restarted from main ff7d757; the M17.8 PR is open (the user merges it).
+  Plan: `docs/plans/m17.8.md`. Detail: ADR 0027 "M17.8".
+- User answers: curve 1 point = 0.01 (x0.5 at 0% lost, x1.0 at 10%, cap x2.0); duress and window multiply; window data on the canon event; no save
+  version change ("I don't care about old saves"); other classes' duress later.
+- Core: `Xp.duress_mult`, `Xp.boost_mult`, `Xp.compute(..., duress, window)`; `Actions.perform` opts `duress` / `window` (default `XpWindow.mult`), both in the
+  record; `Combat.damage_player(from_foe)` writes `fight.peak` / `fight.low` (per mille, -1 = none), `Combat.fight_lost`, `end_fight` passes `duress` to every
+  record; traps pass `false`; `core/xp_window.gd` + `CanonDb.windows` + `_validate_xp_window` + `XpWindow.validate`; `tools/validate_data.py` `check_xp_window`.
+- Data: `rules.xp.duress` and `rules.xp.boosts`; `xp_window {boost 2, hours [18, 6]}` on `b1.skinner_leads_the_dead_into_liscor` (1.60) and `b1.rags_kills_skinner` (1.62).
+  Toy dbs drop `rules.xp.duress` (`ToyData.with_duress` adds it back).
+- Tests: new `unit_fight_duress` 10, `unit_xp_window` 12, `sim_balance_fighter` (probe); `unit_xp` 17; Python 97 OK; validator 0 errors. NO full suite (user rule).
+- **Finding:** `sim_balance_fighter` (two Goblin fights a day) gives level 5 on night 6-7; the inn worker (`sim_balance_progress`) night 14. The curve was not changed:
+  `base_xp` 52 (measured once, reverted) gives fighter night 7-9 and worker night 18, the same 2:1. The fix is XP sources for non-fighters, not the curve.
 - **User rule (2026-09-30, in CLAUDE.md "Test scope"): run only the minimum tests that touch the change; NO full suite unless the user asks.**
-- Open: every ability, Agility and level-cost number is a guess; the level curve is only a first setting (M17.8 changes the XP supply and re-checks it);
-  the user has not played fights with the leap, the NPC Agility order or the cover bars (`godot --path game`; no display in the cloud).
+- Open: every duress, boost and ability number is a guess; only the Skinner night has a window; clean wins pay half, which fights the cover rules of M17.6
+  (the floor is data); the user has not played any M17.6-M17.8 fight (`godot --path game`; no display in the cloud).
 
 ## Next
-1. The user merges the M17.7 PR; then tags `m17.7-done` and `m17-done` on the merge commit (tag pending: the cloud may not push tags). Also `m17.6-done`.
-2. M17.8 hidden XP (plan first, `docs/plans/m17.8.md`): a duress multiplier on XP in `Actions.perform` (one new factor next to risk and novelty);
-   fight part from the LOWEST HP fraction reached (x0.5 at none, x1.0 at 10%, +1 point per 1%, cap x2.0, foe damage only; needs a `hp_low` mark in
-   `CombatState.fight`, read by `Combat.end_fight`); event windows as data (`rules.xp.windows`: canon flag, start/end, tier x1.5 / x2 / x3; first: the
-   Skinner nights, x2 for all actions). Then re-check the level curve with `sim_balance_progress`. Other classes' duress: later.
-3. Then M18.P (Book 6 plan, ADR 0028), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
+1. The user merges the M17.8 PR; then tags `m17.6-done`, `m17.7-done`, `m17.8-done` and `m17-done` on the right merge commits (tag pending: the cloud may not push tags).
+2. Optional M17.9 (plan first, ask first): duress for non-fight actions so cooks, runners and healers close the gap (crowd size in a meal, winter cold, a badly hurt
+   patient, acting hungry), more windows for other big nights of Books 1-5 (two lines of data each). Or move on.
+3. M18.P (Book 6 plan, ADR 0028; needs the book text: add repo `Daddy-Ousen/innworld-canon-raw` to the session), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
 
 ## Gotchas (cloud)
 - Not yet run in a real cloud VM. Unknowns: whether the proxy lets `git clone` reach the private repo when only

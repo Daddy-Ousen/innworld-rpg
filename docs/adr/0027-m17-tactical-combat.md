@@ -355,3 +355,44 @@ No save change (no shell, so no flag to save).
   sim_winter, sim_celum_trip, sim_m5_done, sim_m6_done). Validator 0 errors.
 - **Open (for M17.8 and the user):** the XP supply and the level curve are tuned together in M17.8; every ability, Agility and cost number is a guess;
   the user should play a fight with a leaping Ghoul or Shield Spider and check the turn order with the new NPC Agility numbers.
+
+## M17.8 Hidden XP (2026-09-30, cloud session)
+User answers (2026-09-30): fight XP by HP lost on **your shape** (x0.5 at nothing lost, x1.0 at 10%, +0.01 per 1% more, cap x2.0; a knock-out is
+x1.9); duress and an XP window **multiply**; the window data lives **on the canon event**; **no save version change** ("I don't care about old
+saves: no one besides me played the game"; rule 8 of CLAUDE.md asks for a migration on a schema change, the user waived it for this field);
+other classes' duress (cooks, runners, healers) **later**. Plan: `docs/plans/m17.8.md`. The player never sees any of it: no number, no message.
+- **Formula:** `xp = base x intensity x risk x novelty x conviction x outcome x skill x duress x window`. `Xp.compute` takes the last two (default 1.0);
+  `Actions.perform` reads `opts.duress` (default 1.0) and `opts.window` (default `XpWindow.mult`), and the record keeps both. Old records lack the keys;
+  nothing reads them after the record is made.
+- **Duress (`rules.xp.duress`: floor 0.5, even_at 0.1, per_percent 0.01, cap 2.0; `Xp.duress_mult(lost)`):** `lost` is the share of max HP the player lost to
+  foes at the worst point of the fight. The fight record (`CombatState.fight`) keeps `peak` (highest HP before a foe's blow) and `low` (lowest after one), in per
+  mille, -1 = no foe hit yet. `Combat.damage_player(..., from_foe = true)` writes them; a trap passes `false` (cold, hunger and healing use `set_hp`, so
+  they never count). `lost = (peak - low) / 1000`: a fight started at 40% HP and ending at 10% is 30% lost, not 90%; healing never raises `low`.
+  `Combat.end_fight` computes it once and every record of that fight (attacks, blocks, throws, casts, flee, spare) carries it. A knock-out is x1.9 and its
+  `fail` outcome (x0.5) still applies. A tolerant read in `CombatState.from_dict` gives -1 for a save without the fields.
+- **Windows (`core/xp_window.gd`, `CanonDb.windows`):** canon event key `xp_window` `{"boost": whole >= 1, "hours"?: [from, to]}` (hours may wrap past
+  midnight). Open while the event is **pending** (events resolve in the night, so a slept-through night closes it: no double dipping), today is inside its
+  window with delays (`WorldState.latest`), and the hour is inside `hours`. All actions, anywhere. Two windows at once: the highest boost, no product.
+  `rules.xp.boosts` maps the tier to the multiplier (1 = 1.5, 2 = 2.0, 3 = 3.0); content never holds a raw multiplier. `CanonDb` and `tools/validate_data.py`
+  check the shape; `XpWindow.validate` checks the tier exists; a window on a mutate target is an error.
+  **Why the event and not a flag:** a probe showed `skinner.awake`, `skinner.hunts_the_inn` and `skinner.dead` are all false on the morning of day 39 and all true
+  on day 40 (the events resolve together in the night), so no flag can mark the Skinner evening. A pending event can.
+- **Data:** `b1.skinner_leads_the_dead_into_liscor` (1.60) and `b1.rags_kills_skinner` (1.62): boost 2, hours [18, 6]. So the Skinner night (day 39 from
+  18:00 until the night resolves, or until 06:00 on day 40) pays double for every action. Both events keep it open; a night slept on day 39 closes it.
+- **Toy dbs** drop `rules.xp.duress` (toy fights pay the plain XP); `ToyData.with_duress(db)` puts the shipped curve back.
+- **Pace probe (`sim_balance_fighter`, 3 seeds, 22 days, two Goblin fights a day, full HP before each; inn worker = `sim_balance_progress`):** first class on
+  night 1-3; total level 5 by night 6-7 (inn worker: night 14); level 9 by night 14-16, then it waits at the capstone (level 10 needs a breakthrough).
+  Without the duress factor the fighter is at level 4-5 on night 7, so the duress adds about one level in the first week (a bot at full HP that takes real
+  hits pays more than x1.0 on average). **The fighter levels about 2x faster than an inn worker. I did not change `rules.levels`:** a global cost rise would
+  slow the worker (already on target) to fix a gap that only more XP sources for non-fighters can close (the user deferred those).
+  Measured, not guessed: with `base_xp` 52 (run once, then reverted) the fighter has level 5 on night 7-9 (was 6-7) and the worker on night 18 (was 14).
+  The gap stays about 2 to 1, so a global cost change only slows everyone. The gap closes with more XP sources for non-fighters, not with the curve.
+- **Tests:** new `unit_fight_duress` 10, `unit_xp_window` 12, `sim_balance_fighter` 1; changed `unit_xp` +6 (17), Python `test_validate_data` +2 (97 pass),
+  `sim_skinner_night` (the gate fight pays window 2.0 and duress 0.5 with frozen foes). Run: unit_xp, unit_actions, unit_skill_system, unit_combat, unit_traps,
+  unit_brawl, unit_game_state, unit_console, unit_encounter, unit_combat_skills, unit_spells, unit_canon_db, unit_data_db, unit_director, and the sims
+  (sim_m5_done, sim_m6_done, sim_canon_book1-3, sim_balance_fights, sim_balance_progress, sim_balance_fighter, sim_skinner_night, sim_goblin_raid and the
+  other FightBot sims). Validator 0 errors, Python 97 OK. No full suite.
+- **Open (for the user):** (1) the fighter-vs-worker gap; other classes' duress (crowd size for cooks, cold for runners, patients for healers) is the planned fix
+  and is not built. (2) Clean wins pay half: the cover and position rules of M17.6 reward exactly that play, so a careful fighter levels more slowly. The
+  floor is data (`rules.xp.duress.floor`). (3) Only the Skinner night has a window; other big nights of Books 1-5 need the same two lines of data.
+  (4) The user cannot see any of this in the game; only the debug console's record shows the factors.
