@@ -277,7 +277,9 @@ Rules from the user (2026-09-29):
   Pisces, save v20): MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,
   `canon_ref`), learning a spell from a teacher or a spellbook (not from nothing), a [Mage] class path, spell
   targets (one foe, line, blast, around). First spells from Books 1–5 only
-- [ ] M17.6 Cover and position: half and full cover from walls and solid objects, flanking; monsters use cover
+- [x] M17.6 Cover and position (ADR 0027, 2026-09-30; cloud session; no save change): half and full cover from walls, trees, rocks and solid objects (data: tile and
+  object `cover`, `rules.combat.tactical.cover`), walls block sight for throws, shots and targeted spells, pincer +15, monsters: archers and
+  shamans take cover, melee monsters close the pincer; cover bars on the combat screen
 - [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
   balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level
   (Ryoka's theory, 2.41) with a hidden cap of 100 total levels; `rules.levels` curve retuned (core change)

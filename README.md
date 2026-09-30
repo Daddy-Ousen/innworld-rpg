@@ -27,7 +27,7 @@ Work in progress. Pixel art, music and sound are in. Books 1–5 are playable as
 | M11–M12 | Graphics, characters and animation; music, sound effects, ambience | Done |
 | M13 | Book 5 (The Last Light); the dungeon depths, traps | Done |
 | M14–M16 | Bag, cooking, guests, standing, UI skin, portraits; readability; maps, art and cities | Done |
-| M17 | Tactical combat (XCOM-style): AP, turn order, combat Skills, mana and spells (M17.0–M17.5 done); cover, enemy abilities (next) | In progress |
+| M17 | Tactical combat (XCOM-style): AP, turn order, combat Skills, mana and spells (M17.0–M17.6 done); enemy abilities and balance (next) | In progress |
 | Next | Book 6 (The General of Izril), Book 7 (The Rains of Liscor) | Planned |
 
 Canon data today: 766 events, 223 NPC records and 99 locations over Books 1–5.
