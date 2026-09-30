@@ -1,8 +1,8 @@
 # Handoff
 
 ## Just done (2026-09-30, M17.4 Skills in combat)
-- Branch `feat/m17.4-skills` (from main d470158), 4 commits: core, data + unit_combat_skills, ui + unit_skill_bar,
-  docs. NOT pushed. Ask the user before push / PR. Plan: `C:/Users/rhasa/.claude/plans/vast-foraging-rabbit.md`.
+- Merged as PR #82 (merge commit 79490a6), tag `m17.4-done` pushed. This note lives on branch
+  `feat/m17.5-spells` (from main 79490a6; not pushed). Plan: `C:/Users/rhasa/.claude/plans/vast-foraging-rabbit.md`.
   Detail: ADR 0027 "M17.4".
 - User answers: cooldown in rounds; the [Runner] CLASS gives the move cap (classes.json `combat.move_ap_mod_q`);
   kinds strike / area / self; NPC allies use Skills now (monsters in M17.7).
@@ -20,7 +20,7 @@
 - Debug: console `skill <id>` (`Commands.grant_skill`, class "" level 0; the character sheet lists it without a
   class) and `useskill <id> [monster]`. Test in `unit_console`.
 - Next: the user plays a fight with a Skill (`godot --path game`, then ` for the console, `skill power_strike`);
-  push + PR when the user says so; then M17.5 (mana and spells, plan mode first). Line and blast shapes were
+  then M17.5 (mana and spells, plan mode first) on `feat/m17.5-spells`. Line and blast shapes were
   left for M17.5 spells.
 - Gotchas: a sure hit still rolls `randf` (keeps the random stream). The Bash safety check failed now and then
   this session; Edit / Grep still worked. `--import` segfaulted once but imported.

@@ -30,7 +30,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     turn), move range, click path + hit chance, mouse walk and attack in fights, replay of the others' turns
     with the camera on each fighter (`CombatState.turns`, not saved). Full suite 122 scripts, 1159 tests, all
     pass; validator 0 errors; Python 95 OK. Merged as [PR #81](https://github.com/Daddy-Ousen/innworld-rpg/pull/81) (merge commit d470158, tag `m17.3-done`).
-  - [x] M17.4 Skills in combat (branch `feat/m17.4-skills`, 2026-09-30, not pushed): `core/combat_skills.gd`,
+  - [x] M17.4 Skills in combat (merged as [PR #82](https://github.com/Daddy-Ousen/innworld-rpg/pull/82), merge commit 79490a6, tag `m17.4-done`, 2026-09-30): `core/combat_skills.gd`,
     `combat_action` (strike / area / self, cooldown in rounds), `ap_mod`, [Runner] class move cap, NPC ally
     Skills (Erin, Relc, Toren, gated by canon events), Skill bar (keys 1-9), save v19. Full suite 124 scripts,
     1185 tests, all pass; validator 0 errors; Python 95 OK. Detail: ADR 0027 "M17.4".
