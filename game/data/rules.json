@@ -12,6 +12,9 @@
 		"intensity_max": 3.0,
 		"risk_scale": 3.0,
 		"outcome_mult": {"success": 1.0, "partial": 0.75, "fail": 0.5},
+		"duress": {"floor": 0.5, "even_at": 0.1, "per_percent": 0.01, "cap": 2.0,
+			"note": "M17.8 (hidden; the player never sees it). Fight XP by the most HP the player lost to foes: x0.5 at nothing lost, x1.0 at 10% lost, then +0.01 for each 1% more (100% lost = x1.9), at most x2.0. First setting, all design guesses. boosts: the multiplier of an xp_window tier on a canon event (big events pay more XP; same hidden rule)."},
+		"boosts": {"1": 1.5, "2": 2.0, "3": 3.0},
 		"novelty": {"window_days": 7, "half_life_days": 2.0, "k": 0.35, "floor": 0.1, "first_time_bonus": 1.5},
 		"conviction": {"match_mult": 1.25}
 	},
