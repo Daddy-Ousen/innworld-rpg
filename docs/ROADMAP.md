@@ -267,7 +267,7 @@ Rules from the user (2026-09-29):
 - [x] M17.2 Port the old fight parts (ADR 0027, 2026-09-30; combat mode on; FightBot test helper): block, throw, improvised weapons, drop, flee, knock-out, fighting NPCs,
   helpers, attack-an-NPC (brawl), traps, stage waves (join at the start of a round), fight records for the
   System. Every sim fight test moved to the new rules (full suite)
-- [ ] M17.3 Combat screen: move range, path preview, hit chance before you act, AP pips, turn order bar with
+- [x] M17.3 Combat screen (ADR 0027, 2026-09-30; turn log + replay, mouse in fights only): move range, path preview, hit chance before you act, AP pips, turn order bar with
   portraits, end-turn button, mouse click to move and attack (keys still work), camera on the active fighter
 - [ ] M17.4 Skills in combat: new skill effects `combat_action` (an active Skill: AP cost, range, area, effect),
   `ap_mod` (permanent AP), `move_ap_mod` (move cap); AP at levels 10/25/50/75; a Skill bar. Existing combat
