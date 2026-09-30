@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1 and M17.2 done
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.4 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -183,3 +183,37 @@ walks up to it and hits it if the AP left pays; the mouse works in fights only (
   off headless (`main.replay_turns`), so the sims that drive the main scene see each end state at once.
 - **Tests:** `unit_combat_preview` (15: reach, plan, hit chance, turn log), `unit_combat_screen` (11: the bar,
   the overlay, clicks, End turn, replay skip and end, on the real data at `ruins_entrance`).
+
+## M17.4 Skills in combat (2026-09-30)
+User answers (2026-09-30): a Skill has a **cooldown in rounds**; the **[Runner] class** raises the move cap (not
+a Skill); action kinds **strike, area, self** (no guard kind); **NPC allies use Skills now** (monsters in M17.7).
+Schema changes approved with the plan.
+- **Data:** skill effects `ap_mod` `{"value_q"}` (AP per turn for good) and `combat_action` `{"kind", "ap_q",
+  "cooldown", ...}`. strike: one foe side by side; `hits`, `hit_bonus`, `damage_mult`, `damage_bonus`;
+  `thrown` (throws the held item, its range and damage); `sure_hit`. area: `shape: "around"` (the 8 tiles
+  around). self: `heal` (share of max HP), `move_q` (more move cap this turn). A skill with a combat action may
+  have no pool (NPC only). Class field `combat.move_ap_mod_q`. NPC `combat.skills`: `[{"id", "after_event"?,
+  "until_event"?}]`, so an NPC has a Skill only after (or until) the canon event that gives (or changes) it.
+- **Core:** `core/combat_skills.gd` (`why_not`, `targets`, `use`, `tick`, `npc_pick`, `npc_use`);
+  `Commands.use_skill`; `Encounter.player_ap` adds `ap_mod`, the move cap comes from `CombatSkills.move_cap_q`;
+  `Combat._strike` / `NpcReact._hit` take the mods (the hit roll is made even for a sure hit, so the random
+  stream does not change); a new round ticks the cooldowns; a turn does not end by itself while a ready self
+  Skill can be paid. Only monsters are Skill targets. Save v19: the encounter gets `cool` ({fighter: {skill:
+  rounds}}) and `move_bonus_q`.
+- **Cooldown:** `cooldown` N set on use; each round's start takes one off; ready at 0. So cooldown 1 = once a
+  round, cooldown 2 = every other round.
+- **Canon (Book 1–5 search):** only Skill names that are in the Book. [Power Strike] (1.56; was a +1 STR stat)
+  is now a x2 blow; new [Lesser Stamina] (+1 AP; Lyonette 2.42, Geneva 1.01D), [Unerring Throw] (1.14, a sure
+  throw), [Quick Strike] (4.22E, a 1 AP blow), [Triple Thrust] (Relc 1.51, rare), [Whirlwind Cleave] (1.58H,
+  name only: guess), [Fast Sprint] (1.55R), [Quick Recovery] (Erin 1.63, name only: guess); NPC only
+  [Mirage Cut] (Toren 2.24T) and [Minotaur Punch] (Erin 2.26, replaces her [Power Strike]). NPC allies with
+  Skills: Erin, Relc, Toren (Klbkch has none in the text). No "greater stamina" name was found, so no +2 AP
+  Skill yet. Lore flag, not fixed: the game's [Tavern Brawling] is [Bar Fighting] in the Book (1.14). Most
+  other old combat Skill names ([Iron Guard], [Battle Focus], [Hold the Line], [Rally], ...) are not in the
+  Book 1–5 text; they stay as passive Skills.
+- **Screen:** a Skill row in the combat bar (`ui/skill_bar.gd`, built in code; keys 1-9; key, name, AP, the
+  rounds left). A self or area Skill, or a strike with one foe in reach, fires at once; with more foes the
+  strike is armed, gold frames mark its foes (`CombatOverlay.marks`), the hover shows its hit chance, and a
+  click or a direction key uses it. Esc, a right click or the same key again lets it go.
+- **Tests:** `unit_combat_skills` (21, toy arena and real data: AP, Runner cap, every kind, cooldowns,
+  refusals, seeds, save v19, bad data, Erin's canon gating, Relc uses [Triple Thrust]), `unit_skill_bar` (5).
