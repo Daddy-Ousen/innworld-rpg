@@ -280,7 +280,7 @@ Rules from the user (2026-09-29):
 - [x] M17.6 Cover and position (ADR 0027, 2026-09-30; cloud session; no save change): half and full cover from walls, trees, rocks and solid objects (data: tile and
   object `cover`, `rules.combat.tactical.cover`), walls block sight for throws, shots and targeted spells, pincer +15, monsters: archers and
   shamans take cover, melee monsters close the pincer; cover bars on the combat screen
-- [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
+- [x] M17.7 Enemy abilities and balance (ADR 0027, 2026-09-30; cloud; no shell by the user; no save change; hidden XP moved to M17.8): monster moves in data (archers, Shield Spider leap, Ghoul leap),
   balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level
   (Ryoka's theory, 2.41) with a hidden cap of 100 total levels; `rules.levels` curve retuned (core change)
 - [ ] M17.8 Hidden XP (user, 2026-09-30; after M17.7; the player never sees it): a **duress** multiplier on XP, capped at x2.0. Fights: x0.5 when the

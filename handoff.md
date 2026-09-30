@@ -1,28 +1,28 @@
 # Handoff
 
-## Just done (2026-09-30, M17.6 cover and position, cloud session)
-- Branch `claude/kind-feynman-y4x1mm`, PR open (the user merges it). Plan: `docs/plans/m17.6.md`. Detail: ADR 0027 "M17.6".
-- User answers: walls block sight; half -15 / full -30 points; pincer +15; shooters take cover, melee monsters close the pincer.
-- Core: new `core/cover.gd` (`level`, `line`, `sight`, `against`, `side_at`, `pincered`, `details`, `hit_bonus`, `sides`, `note`);
-  `MapDb.solid_at` + validation; `Combat.position_bonus` (the one hook) + `NO_SIGHT`; `MonsterSim.is_shooter`, `cover_spot`,
-  `_pincer_goals`; `Encounter._hostile_turn` (shooters); `Spells` (sight, `_chance(from)`). No save change.
-- Data: `tiles.json` `cover` on walls/houses/cliffs (wall), tree/boulder (full), rock (half); `rules.combat.tactical.cover`
-  (`half .15, full .30, flank .15, sight, hold_rounds 6, kinds`).
-- UI: `CombatOverlay.covers` / `show_covers` (bars), `world/main.gd` (`_with_note`, label notes, no throw hint without sight),
-  one help line.
-- Tests: new `unit_cover` 14, `unit_cover_attacks` 9, `unit_cover_position` 10, `unit_cover_ui` 4. Old sims changed seed because the pincer
-  moves the dice: `sim_big_battle` seed 4, `sim_inn_brawl` (run out of the door) seed 5. Full suite run once: 132 scripts, all pass.
-- **User rule (2026-09-30, now in CLAUDE.md "Test scope"): run only the minimum tests that touch the change; NO full suite unless
-  the user asks.**
-- Open: all cover numbers are guesses. `is_shooter` (ranged top damage >= melee top damage) is a stand-in for M17.7 enemy
-  `abilities`: the first draft made the Goblin Chieftain hide behind a table and broke `sim_m6_done`. A fleeing foe can be boxed in
-  a corner by idle NPC allies and the fight then does not end for a bot that never hits fleeing foes. Melee monsters do not seek
-  cover from the player's throws and spells; no retreat to cover.
-- The user should look at the cover bars: `godot --path game`, stand next to a tree on the floodplains, fight a goblin (no display in the cloud).
+## Just done (2026-09-30, M17.7 enemy abilities and balance, cloud session)
+- M17.6 merged (PR #85). Branch `claude/kind-feynman-y4x1mm` restarted from main e54e2c5; M17.7 PR open (the user merges it). Plan: `docs/plans/m17.7.md`.
+  Detail: ADR 0027 "M17.7".
+- User answers: three fixed ability kinds but NO shell; cost by total level + cap 100 + gentler curve after 10; NPC Agility yes; flat HP x scale yes;
+  retreat-to-cover no; cornered foe fights no. Hidden XP (duress, event windows) is a new step M17.8 (roadmap has the rules the user chose).
+- Core: `Levels.cost` / `at_cap` (`rules.levels.late_from 10, late_growth 1.12, total_cap 100`); `Combat.hp_scale / scaled_hp / foe_max_hp /
+  scaled_enemies`; `MonsterAbilities` (`find`, `is_shooter`, `check`, `leap_spot`, `leap`); `Encounter.agility` reads NPC `combat.agility`;
+  `MonsterSim._beaten(db, ...)`. No save change.
+- Data: `hp_scale` 2.0; `abilities` on archer, shaman (shooter), Ghoul, Shield Spider (leap); `agility` on 24 NPC fighters. Toy dbs pin hp_scale 1.0.
+- Tests: new `unit_hp_scale` 7, `unit_monster_abilities` 9, `unit_npc_agility` 5. `FightBot.sink_on` / `sink` collects every line (a command that
+  ends the turn first hid a wave line in `sim_goblin_raid`). HP literals in unit tests follow the scale. NO full suite was run (user rule).
+- Balance seen (fists, 3 seeds): 1 Goblin wins 3/3 at levels 0 and 5; 2 Goblins level 5 3/3, level 0 1/3; 3 Goblins level 5 1/3, level 0 0/3; Razorbeak all;
+  Rock Crab 0/6; raid not winnable alone, 15-24 player turns. Player max HP 40 / 70 (level 0 / 5).
+- **User rule (2026-09-30, in CLAUDE.md "Test scope"): run only the minimum tests that touch the change; NO full suite unless the user asks.**
+- Open: every ability, Agility and level-cost number is a guess; the level curve is only a first setting (M17.8 changes the XP supply and re-checks it);
+  the user has not played fights with the leap, the NPC Agility order or the cover bars (`godot --path game`; no display in the cloud).
 
 ## Next
-1. The user merges the M17.6 PR; then tag `m17.6-done` on the merge commit (tag pending: the cloud may not push tags).
-2. Cloud session 2: M17.7 enemy abilities and balance (`docs/CLOUD.md` task queue; minimum tests only).
+1. The user merges the M17.7 PR; then tags `m17.7-done` and `m17-done` on the merge commit (tag pending: the cloud may not push tags). Also `m17.6-done`.
+2. M17.8 hidden XP (plan first, `docs/plans/m17.8.md`): a duress multiplier on XP in `Actions.perform` (one new factor next to risk and novelty);
+   fight part from the LOWEST HP fraction reached (x0.5 at none, x1.0 at 10%, +1 point per 1%, cap x2.0, foe damage only; needs a `hp_low` mark in
+   `CombatState.fight`, read by `Combat.end_fight`); event windows as data (`rules.xp.windows`: canon flag, start/end, tier x1.5 / x2 / x3; first: the
+   Skinner nights, x2 for all actions). Then re-check the level curve with `sim_balance_progress`. Other classes' duress: later.
 3. Then M18.P (Book 6 plan, ADR 0028), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
 
 ## Gotchas (cloud)

@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.6 done
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.7 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -314,3 +314,44 @@ All optional, so old data stays valid. **No save change** (cover comes from the 
   (real hazard for a player who ignores fleeing foes; they still count as fighters); the `is_shooter` rule; melee monsters do not
   seek cover from the player's throws and spells; no retreat to cover; the user should look at the cover bars
   (`godot --path game`, walk next to a tree on the floodplains, then fight a goblin).
+
+## M17.7 Enemy abilities and balance (2026-09-30, cloud session)
+User answers (2026-09-30): abilities are **three fixed kinds with numbers in data**, but **no shell** (only `shooter` and `leap` are built);
+**cost by total level with a hidden cap 100 and a gentler curve after level 10**; **NPC own Agility** and **flat HP numbers x hp_scale** yes,
+shooters retreating to cover and a cornered foe that fights no. The hidden XP idea (duress) is **M17.8**. Plan: `docs/plans/m17.7.md`.
+No save change (no shell, so no flag to save).
+- **Level cost:** `Levels.cost(p, rules)` = `xp_to_next(total level)`; every class pays the total-level price (one class: unchanged; Ryoka's
+  theory, 2.41). `rules.levels`: `late_from` 10, `late_growth` 1.12 (above level 10 each level costs 12% more instead of 25%), `total_cap` 100.
+  At the cap `level_up` stops (XP stays), `is_blocked` is false and `ClassSystem.can_offer` refuses. Nothing shows it. Cumulative XP to total
+  level 20 falls from about 10,900 to about 6,300. `xp_to_next` stays the pure curve (`unit_levels` numbers). The console `status` line shows
+  the total-level price. The cap is only a first setting until M17.8 changes the XP supply.
+- **hp_scale = 2.0** (`rules.combat.tactical`). `Combat.hp_scale`, `scaled_hp`, `foe_max_hp`, `scaled_enemies` (for the view). Read by:
+  `Stats.max_hp` (before the hunger share), `Combat.add_monster`, the escape check, `MonsterSim._beaten` (flee ratio; new `db` argument),
+  `NpcReact.stats` (NPC HP; damage, armor, accuracy unchanged), bandage, potions, cold and fairy snow (`Winter._hurt`), traps (`Traps._spring`),
+  the HUD bars and the console monster list. Damage, armor and accuracy do not scale: each side needs twice as many blows. Toy dbs pin 1.0.
+- **`core/monster_abilities.gd` (`MonsterAbilities`):** optional `abilities` on an enemy (`CombatDb` checks them). `shooter` replaces the derived
+  rule of M17.6 (archer, shaman). `leap` {`name`, `range` >= 2, `ap_q` 1-40, `cooldown` rounds}: in `Encounter._hostile_turn`, a monster not
+  side by side with its target, with the AP and the leap ready, jumps to the nearest free tile beside the target within `range` and sight (the
+  move cap does not apply), then hits with the AP left. The cooldown uses `encounter.cool` (key `ability:leap`). Ghoul: range 4, 2 AP, cooldown 3
+  (1.58 H "leaps and claws"). Shield Spider: "Pounce" range 3, 1 AP, cooldown 2 (4.08 T; the roadmap's leap). All numbers are guesses.
+  **No shell:** the Rock Crab has no ability; it keeps armor 4 and its scare rule.
+- **NPC Agility:** optional `agility` in the `combat` block of `npc_behaviour.json` (`BehaviourDb.check_fight_stats` >= 1); `Encounter.agility`
+  reads it, else `initiative.npc_default` (3). 24 numbers, all guesses: Klbkch 7; Relc, Gazi, Ryoka 6; Zevara, Krshia, Ksmvr, Halrac 5;
+  Rags, Ylawes, Yvlon, Typhenous, Tkrn, Jeiss, Umbral 4; Erin, Pisces, Ceria, Lyonette, Bird, Revi, Designated Worker 3; Zel, Toren 2.
+- **Probe (`sim_balance_fights`, seeds 1-3, fists, hp_scale 2.0):** 1 Goblin: level 0 wins 3/3, level 5 wins 3/3 (at scale 1: 2/3 and 3/3). 2 Goblins:
+  level 0 wins 1/3, level 5 wins 3/3. 3 Goblins: level 0 wins 0/3, level 5 wins 1/3. Razorbeak: every level wins. Rock Crab: 0/6. Raid: still not
+  winnable by one player, and it lasts 15-24 player turns (M17.2: 3). Player max HP: 40 at level 0, 70 at level 5. **Deviation from the plan:**
+  the target "2-3 Goblins: level 5 wins on 2 of 3 seeds" holds for 2 Goblins only; 3 Goblins stay a hard fight. I did not tune enemy stats
+  further (all guesses). The sim now asserts what holds.
+- **Test changes:** `FightBot.sink` / `sink_on` collect every line of a command that ends the turn first (`sim_goblin_raid` lost a wave line to
+  that, not to a game fault); HP literals in `unit_world_view`, `unit_console`, `unit_economy`, `unit_battle`, `sim_winter` follow the scale.
+- **Tests run (no full suite, by the user's rule):** new `unit_hp_scale` 7, `unit_monster_abilities` 9, `unit_npc_agility` 5; changed `unit_levels`
+  15, `unit_tactical_rules`; and the scripts that touch the code or read HP on the real data: unit_class_system, unit_night, unit_stats, unit_combat,
+  unit_combat_db, unit_combat_skills, unit_monster_sim, unit_encounter, unit_cover_position, unit_spells, unit_brawl, unit_npc_react, unit_traps,
+  unit_winter, unit_economy, unit_console, unit_world_view, unit_battle, unit_game_state, unit_rest, unit_system_messages, unit_travel, and the
+  fight sims (sim_balance_fights, sim_balance_progress, sim_big_battle, sim_book3_finale, sim_book3_stages, sim_book4_christmas,
+  sim_book4_relief_home, sim_book5_creler_nest, sim_book5_last_light, sim_book5_rift_undead, sim_canon_fights, sim_combat, sim_esthelm_siege,
+  sim_gazi_attack, sim_goblin_battle, sim_goblin_raid, sim_inn_brawl, sim_inn_third_floor, sim_liscor_depths, sim_player_hooks, sim_skinner_night,
+  sim_winter, sim_celum_trip, sim_m5_done, sim_m6_done). Validator 0 errors.
+- **Open (for M17.8 and the user):** the XP supply and the level curve are tuned together in M17.8; every ability, Agility and cost number is a guess;
+  the user should play a fight with a leaping Ghoul or Shield Spider and check the turn order with the new NPC Agility numbers.
