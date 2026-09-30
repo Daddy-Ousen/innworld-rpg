@@ -1,6 +1,33 @@
 # Handoff
 
-## Just done (2026-09-30, M17.4 Skills in combat)
+## Just done (2026-09-30, M17.5 Mana and spells)
+- Branch `feat/m17.5-spells` (from main 79490a6; NOT pushed, no PR yet: ask the user). 5 commits: core MP (save v20),
+  spell data and learning, casting and NPC casters, UI, docs. Plan: `C:/Users/rhasa/.claude/plans/encapsulated-orbiting-lollipop.md`.
+  Detail: ADR 0027 "M17.5".
+- User answers: max MP = Intellect + total level; teacher talk option + spellbook good; NPC casters now; line stops at
+  walls, foes only.
+- Core: `core/mana.gd` (`current/set_mp/spend/tick/refill`), `core/spells.gd` (learning, `cells`, `why_not`, `use`, NPC
+  `npc_pick/npc_use`), `core/spell_db.gd` (`data/spells.json`), `Stats.max_mp`, `PlayerState.mp/mp_minutes`,
+  `Progression.spells`, `Commands.cast/learn_spell/grant_spell`, `Movement._spend_seconds(gs, db, s)`,
+  `CombatSkills.start_cooldown` (public now), cooldown key `spell:<id>`, fight record `cast_spell`.
+- Data: 4 spells (ice_spike, flashfire, frozen_wind, fireball), `spellbook_fireball` good (no shop sells it: `give 0 spellbook_fireball`),
+  [Mage] class + [Mana Sense] / [Steady Casting], action `study_spell` / `cast_spell`, tag `magic`, rules `tactical.mp`
+  (`base 0, per_intellect 2, per_level 1`), base stat `intellect: 3`, Ceria and Pisces `combat.mp` / `combat.spells`.
+- UI: spells in `ui/skill_bar.gd` (id `spell:<id>`, node name with `_`), MP label in `ui/combat_bar.gd`, HUD line, sheet "Spells:",
+  `world/main.gd` (`pick_spell`, `cast_spell`, `_show_spell_plan`), `CombatOverlay.preview/burst`, teacher "Learn" rows in
+  `ui/interact_menu.gd`, "Read" for spellbooks in the bag, console `spell <id>` / `cast <id> [x y]`.
+- Tests: new `unit_mana` 17, `unit_spell_learning` 16, `unit_spells` 31, `unit_spell_ui` 13. Full suite (subagent): 128 scripts, 1339 tests, all pass (a single full run crashed once in unit_winter, a Godot crash; every script passes alone, so run the suite script by script). Validator 0 errors, Python 95 OK.
+- Open lore flags: every spell number and teacher is a guess; check the Book for who could teach the player; a spellbook
+  source (shop or loot) is missing; [Light] / [Flare] / [Water Spray] are Ryoka's and were left out.
+- Next: the user plays a fight with a spell (`godot --path game`, then ` for the console: `spell ice_spike`, `spell fireball`,
+  `give 0 spellbook_fireball`, `spawn goblin_grunt`, keys 1-9). Then M17.6 (cover and position, plan mode first).
+- Gotchas: a multi-line Python patch must use the file's exact tab count (a wrong count fails the assert, nothing is written);
+  the working copy has mixed line endings (`git ls-files --eol`), so patch with a helper that detects CRLF. New `class_name`
+  scripts need one `--import`; it makes `.uid` files for new scripts (commit them). `-gselect=unit_combat` matches five
+  scripts (substring) and Godot may hang at exit after them.
+- Test runner: scratchpad `run_targets.sh [-t secs] <script>...` (gone next session).
+
+## Earlier (2026-09-30, M17.4 Skills in combat)
 - Merged as PR #82 (merge commit 79490a6), tag `m17.4-done` pushed. This note lives on branch
   `feat/m17.5-spells` (from main 79490a6; not pushed). Plan: `C:/Users/rhasa/.claude/plans/vast-foraging-rabbit.md`.
   Detail: ADR 0027 "M17.4".

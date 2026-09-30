@@ -91,7 +91,7 @@ static func join(gs: GameState, id: String) -> void:
 	var c := gs.combat
 	if not c.has_fight():
 		c.fight = {"start": gs.clock.total_minutes, "foes": {}, "attacks": 0, "improvised": 0,
-			"blocks": 0, "throws": 0, "kills": 0, "routed": 0}
+			"blocks": 0, "throws": 0, "kills": 0, "routed": 0, "casts": 0}
 	c.fight["foes"][id] = c.monsters[id]["type"]
 
 
