@@ -29,7 +29,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] M17.3 combat screen (branch `feat/m17.3-screen`, 2026-09-30): combat bar (turn order faces, AP pips, End
     turn), move range, click path + hit chance, mouse walk and attack in fights, replay of the others' turns
     with the camera on each fighter (`CombatState.turns`, not saved). Full suite 122 scripts, 1159 tests, all
-    pass; validator 0 errors; Python 95 OK. Not pushed yet: ask the user before push / PR.
+    pass; validator 0 errors; Python 95 OK. Merged as [PR #81](https://github.com/Daddy-Ousen/innworld-rpg/pull/81) (merge commit d470158, tag `m17.3-done`).
   - [ ] M17.4 Skills in combat (plan mode first).
 
 ## After M8
