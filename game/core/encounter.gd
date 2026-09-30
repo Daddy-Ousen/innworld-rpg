@@ -472,6 +472,9 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 		return
 	var moved := 0
 	var threw := false
+	var sheltered := false
+	# M17.6: a shooter seeks and holds cover only for its first hold_rounds rounds of the chase
+	var hold := MonsterSim.is_shooter(e) and int(m["chase"]) < int(Cover.rules(db).get("hold_rounds", 0))
 	var reached := false
 	while c.monsters.has(id) and m["state"] == CombatState.HOSTILE and not Combat.is_down(gs):
 		var target := Combat.monster_target(gs, db, id)
@@ -488,14 +491,29 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 					func() -> void: Combat.monster_attack(gs, db, id, false, 0.0, target))
 			ap -= atk
 			continue
+		if hold and not sheltered and not threw and ap >= atk:
+			# M17.6: a shooter first goes to a tile with cover, keeping the AP for a shot
+			sheltered = true
+			var spot := MonsterSim.cover_spot(gs, db, id, at, mini(cap - moved, ap - atk) / step,
+					int(e["ranged"]["range"]))
+			while not spot.is_empty() and pos != spot["cell"] and MonsterSim._step_to(gs, db, id, {spot["cell"]: true}):
+				pos = CombatState.pos_of(m)
+				log_step(gs, pos)
+				moved += step
+				ap -= step
 		if not threw and e.has("ranged") and ap >= atk \
 				and MonsterSim._dist(pos, at) <= int(e["ranged"]["range"]) \
 				and Cover.sight(db, m["area"], pos, at):
 			threw = true
-			if gs.rng.randf() < float(e["ranged"]["chance"]):
+			var covered := Cover.rank(Cover.against(db, m["area"], pos, at)) > 0
+			var shot := gs.rng.randf() < float(e["ranged"]["chance"])
+			if shot:
 				_logged_hit(gs, db, _target_id(target),
 						func() -> void: Combat.monster_attack(gs, db, id, true, 0.0, target), true)
 				ap -= atk
+			if covered and hold:
+				break  # M17.6: it holds its cover and shoots again next round
+			if shot:
 				continue
 		if moved + step > cap or ap < step or not MonsterSim._step_next_to(gs, db, id, at):
 			break

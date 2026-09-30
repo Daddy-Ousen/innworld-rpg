@@ -326,6 +326,8 @@ func _validate_cover_rules(c: Variant) -> void:
 	for k: String in ["half", "full", "flank"]:
 		if not c.has(k) or not (c[k] is float or c[k] is int) or float(c[k]) < 0.0 or float(c[k]) > 1.0:
 			errors.append("rules cover: '%s' must be a number from 0 to 1." % k)
+	if c.has("hold_rounds") and (not (c["hold_rounds"] is float or c["hold_rounds"] is int) or int(c["hold_rounds"]) < 0):
+		errors.append("rules cover: hold_rounds must be a whole number of 0 or more.")
 	if c.has("sight") and not c["sight"] is bool:
 		errors.append("rules cover: sight must be true or false.")
 	var kinds: Variant = c.get("kinds", {})
