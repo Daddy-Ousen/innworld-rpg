@@ -101,11 +101,18 @@ func test_everyday_fights_are_winnable_at_level_five() -> void:
 				lines.append("duel %d x %s, level %d, seed %d: won %s, hp %d/%d, turns %d" % [c[1], c[0],
 						level, s, r["won"], r["hp"], r["max_hp"], r["turns"]])
 				wins += 1 if r["won"] else 0
-			# One Goblin or one Razorbeak is an everyday fight. M17.2 (combat mode, 3 hits a
-			# side per round): a pack of 2-3 Goblins is logged only; at level 5 it won 1-2 of 3
-			# seeds. M17.7 retunes (hp_scale, balance probes) and asserts packs again.
-			if level == LEVEL and c[1] == 1 and c[0] != "rock_crab":
+			# M17.7 (hp_scale 2.0, ADR 0027), seeds 1-3, fists: one Goblin or Razorbeak is an everyday
+			# fight at level 5; two Goblins are still winnable there; three are a hard fight (1 of 3
+			# seeds) that a level-0 worker loses (canon: Erin runs); the Rock Crab beats fists at
+			# every level (canon: do not fight it with fists).
+			if level == LEVEL and c[0] != "rock_crab" and c[1] <= 2:
 				assert_eq(wins, SEEDS.size(), "level %d beats %d x %s on every seed" % [level, c[1], c[0]])
+			if level == LEVEL and c[0] == "goblin_grunt" and c[1] == 3:
+				assert_gte(wins, 1, "level %d can win against 3 Goblins on some seed" % level)
+			if level == 0 and c[0] == "goblin_grunt" and c[1] == 3:
+				assert_eq(wins, 0, "level 0 loses to 3 Goblins")
+			if c[0] == "rock_crab":
+				assert_eq(wins, 0, "fists never beat the Rock Crab (level %d)" % level)
 	_write(lines, false)
 
 

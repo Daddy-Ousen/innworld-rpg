@@ -11,10 +11,24 @@ extends RefCounted
 ## Dictionary with "error"). See the class note. Returns the last result.
 static func act(gs: GameState, db: DataDb, cmd: Callable) -> Variant:
 	var r: Variant = cmd.call()
+	_note(gs)
 	if Encounter.active(gs) and Encounter.TURN_REFUSALS.has(error_of(r)):
 		Commands.end_turn(gs, db)
+		_note(gs)
 		r = cmd.call()
+		_note(gs)
 	return r
+
+
+## M17.7: every command clears the combat lines, and act() may send two; a test that
+## must see each line (a wave's text) sets `sink_on` and reads `sink`.
+static var sink_on := false
+static var sink: Array[String] = []
+
+
+static func _note(gs: GameState) -> void:
+	if sink_on:
+		sink.append_array(gs.combat.lines)
 
 
 ## Lets `seconds` of world time pass: one wait, or in a fight, ended turns

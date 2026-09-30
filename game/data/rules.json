@@ -99,7 +99,7 @@
 			"initiative": {"stat": "speed", "monster_default": 3, "npc_default": 3, "ties": "rng", "by_act_seconds": {"4": 5, "6": 3, "8": 2}},
 			"monster": {"move_cap_q": 4},
 			"mp": {"regen_minutes": 10, "sleep_refill": 1.0, "base": 0, "per_intellect": 2, "per_level": 1},
-			"hp_scale": 1.0,
+			"hp_scale": 2.0,
 			"cover": {
 				"note": "M17.6 (ADR 0027). Points taken off a ranged hit chance by cover on the tile next to the target (half, full; a wall counts as full when the shooter still sees the target). flank = points ADDED when the target has fighters of the attacker's side on two opposite tiles. sight: walls block throws, shots and targeted spells. kinds: the cover level of a solid object by its kind (a map object may set its own cover). hold_rounds: a shooter (a monster whose ranged blow hurts at least as much as its melee one: the Goblin Lord archer and shaman) seeks cover, and stays in it after a shot, only while its chase count is below this; then it closes in. All numbers are design guesses; melee ignores cover.",
 				"half": 0.15,

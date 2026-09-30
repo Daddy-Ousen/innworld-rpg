@@ -74,7 +74,7 @@ func test_react_stats_have_hit_points() -> void:
 	assert_eq(int(NpcReact.stats(_db, "guard")["hp"]), 20, "a guard uses the fighter defaults")
 	assert_eq(int(NpcReact.stats(_db, "farmer")["hp"]), 12, "anyone else the ally defaults")
 	var real := DataDb.load_dir()
-	assert_eq(int(NpcReact.stats(real, "klbkch")["hp"]), 80, "own combat block")
+	assert_eq(int(NpcReact.stats(real, "klbkch")["hp"]), Combat.scaled_hp(real, 80), "own combat block, x hp_scale (M17.7)")
 
 
 func test_a_monster_goes_for_the_nearest_fighting_npc() -> void:

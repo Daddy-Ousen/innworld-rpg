@@ -42,5 +42,5 @@ func test_combat_mode_is_on() -> void:
 	assert_eq(_t["enabled"], true, "M17.2 ported the old fights and turned it on")
 
 
-func test_hp_scale_is_set_in_m17_7() -> void:
-	assert_eq(float(_t["hp_scale"]), 1.0, "step 6 of M17.7 sets it; the toy dbs keep 1.0")
+func test_hp_scale_is_two_since_m17_7() -> void:
+	assert_eq(float(_t["hp_scale"]), 2.0, "paper fights (ADR 0027): about 7 rounds a fight; toy dbs pin 1.0")

@@ -181,7 +181,8 @@ func test_combat_commands() -> void:
 		c.gs.combat.spawn_last[s["id"]] = c.gs.clock.total_minutes
 	assert_string_contains(_text(c.execute("look")), "Loose stones (loose_stones_1): take")
 	assert_string_contains(_text(c.execute("use loose_stones_1 take")), "You take the stone.")
-	assert_string_contains(_text(c.execute("status")), "HP 20/20 · Held: Stone")
+	var most := Stats.max_hp(c.gs, _db)
+	assert_string_contains(_text(c.execute("status")), "HP %d/%d · Held: Stone" % [most, most])
 	assert_string_contains(_text(c.execute("monsters")), "There are no monsters here.")
 	assert_string_contains(_text(c.execute("throw")), "There is nothing to throw at.")
 	assert_string_contains(_text(c.execute("spawn dragon")), "Unknown enemy")
