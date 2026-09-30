@@ -34,6 +34,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			15: out = _migrate_15_to_16(out)
 			16: out = _migrate_16_to_17(out)
 			17: out = _migrate_17_to_18(out)
+			18: out = _migrate_18_to_19(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -175,4 +176,17 @@ static func _migrate_17_to_18(d: Dictionary) -> Dictionary:
 	var c: Dictionary = d.get("combat", {})
 	c["encounter"] = {}
 	d["combat"] = c
+	return d
+
+
+## v19 (M17.4): Skills in combat. A running encounter gets no cooldowns and no
+## extra move for this turn.
+static func _migrate_18_to_19(d: Dictionary) -> Dictionary:
+	var c: Dictionary = d.get("combat", {})
+	var e: Dictionary = c.get("encounter", {})
+	if not e.is_empty():
+		e["cool"] = {}
+		e["move_bonus_q"] = 0
+		c["encounter"] = e
+		d["combat"] = c
 	return d

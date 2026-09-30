@@ -185,15 +185,16 @@ static func hit_chance(db: DataDb, accuracy: int, evasion: int, bonus: float = 0
 ## for a brawl), with dexterity against its evasion; a throw loses
 ## hit.throw_per_tile for each tile past the first (M17.3: the screen shows it
 ## before you act). Reads only.
+## M17.4: `extra` is a Skill's hit_bonus.
 static func player_hit_chance(gs: GameState, db: DataDb, unit: String, thrown: bool = false,
-		dist: int = 1) -> float:
+		dist: int = 1, extra: float = 0.0) -> float:
 	var evasion := 0
 	if unit.begins_with(Encounter.NPC):
 		evasion = int(NpcReact.stats(db, unit.substr(Encounter.NPC.length()))["evasion"])
 	else:
 		evasion = int(db.combat.enemies[gs.combat.monsters[unit]["type"]]["evasion"])
 	var bonus := -float(db.rules["combat"]["hit"]["throw_per_tile"]) * (dist - 1) if thrown else 0.0
-	return hit_chance(db, Stats.get_stat(gs, db, "dexterity"), evasion, bonus)
+	return hit_chance(db, Stats.get_stat(gs, db, "dexterity"), evasion, bonus + extra)
 
 
 static func _roll(gs: GameState, r: Array) -> int:
@@ -238,8 +239,9 @@ static func player_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 
 
 ## The player throws the held item at monster `id` (within the item's
-## throw_range, counted in king moves). The item is gone either way.
-static func throw_at(gs: GameState, db: DataDb, id: String) -> Dictionary:
+## throw_range, counted in king moves). The item is gone either way. `mods`:
+## a Skill's (CombatSkills.mods).
+static func throw_at(gs: GameState, db: DataDb, id: String, mods: Dictionary = {}) -> Dictionary:
 	var out := {"error": _cannot_act(gs, db), "target": id, "hit": false, "damage": 0, "killed": false}
 	if out["error"] != "":
 		return out
@@ -258,11 +260,26 @@ static func throw_at(gs: GameState, db: DataDb, id: String) -> Dictionary:
 		out["error"] = "Too far to throw."
 		return out
 	Movement.spend_turn(gs, db)
-	return _strike(gs, db, id, true, dist)
+	return _strike(gs, db, id, true, dist, mods)
+
+
+## M17.4: a melee blow at monster `id` (a Skill's; side by side is checked by
+## CombatSkills.why_not) with `mods` (CombatSkills.mods).
+static func strike_at(gs: GameState, db: DataDb, id: String, mods: Dictionary = {}) -> Dictionary:
+	var out := {"error": _cannot_act(gs, db), "target": id, "hit": false, "damage": 0, "killed": false}
+	if out["error"] != "":
+		return out
+	var d: Vector2i = CombatState.pos_of(gs.combat.monsters[id]) - gs.player.pos()
+	for dir: String in PlayerState.DIRS:
+		if PlayerState.DIRS[dir] == d:
+			gs.player.facing = dir
+	Movement.spend_turn(gs, db)
+	return _strike(gs, db, id, false, 1, mods)
 
 
 ## One attack by the player. Attacking wakes a hidden or calm monster.
-static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: int) -> Dictionary:
+static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: int,
+		mods: Dictionary = {}) -> Dictionary:
 	var c := gs.combat
 	var rules: Dictionary = db.rules["combat"]
 	var m: Dictionary = c.monsters[id]
@@ -281,14 +298,17 @@ static func _strike(gs: GameState, db: DataDb, id: String, thrown: bool, dist: i
 		if not item.is_empty():
 			f["improvised"] += 1
 	var out := {"error": "", "target": id, "hit": false, "damage": 0, "killed": false}
-	out["hit"] = gs.rng.randf() < player_hit_chance(gs, db, id, thrown, dist)
+	var roll := gs.rng.randf()  # rolled even for a sure hit, so the stream stays the same
+	out["hit"] = bool(mods.get("sure_hit", false)) \
+			or roll < player_hit_chance(gs, db, id, thrown, dist, float(mods.get("hit_bonus", 0.0)))
 	var what := "The %s" % String(item["name"]).to_lower() if not item.is_empty() else "You"
 	if out["hit"]:
 		var weapon: Array = rules["unarmed"]["damage"]
 		if not item.is_empty():
 			weapon = item["throw"] if thrown else item["melee"]
 		@warning_ignore("integer_division")
-		var dmg := _roll(gs, weapon) + Stats.get_stat(gs, db, "strength") / int(rules["strength_div"]) \
+		var raw := _roll(gs, weapon) + Stats.get_stat(gs, db, "strength") / int(rules["strength_div"])
+		var dmg := roundi(raw * float(mods.get("damage_mult", 1.0))) + int(mods.get("damage_bonus", 0)) \
 				- int(e["armor"])
 		out["damage"] = maxi(dmg, int(rules["min_damage"]))
 		c.lines.append("%s %s the %s for %d." % [what, "hits" if what != "You" else "hit", who, out["damage"]])

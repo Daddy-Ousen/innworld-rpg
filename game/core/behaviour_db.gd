@@ -156,6 +156,7 @@ func _validate_npc(id: String, n: Variant, db: DataDb) -> void:
 		errors.append("%s: confidence must be one of %s." % [where, DataDb.CONFIDENCE])
 	if (n as Dictionary).has("combat"):
 		errors.append_array(check_fight_stats(where + " combat", n["combat"]))
+		_validate_skills(where + " combat skills", n["combat"], db)
 	var goals: Variant = n.get("goals", [])
 	if not goals is Array or (goals as Array).is_empty():
 		errors.append("%s: needs at least one goal." % where)
@@ -166,6 +167,24 @@ func _validate_npc(id: String, n: Variant, db: DataDb) -> void:
 			errors.append("%s goal %d: must be an object." % [where, i])
 			continue
 		_validate_goal("%s goal %d" % [where, i], g, db)
+
+
+## M17.4: combat "skills" [{"id", "after_event"?, "until_event"?}]: combat
+## Skills (CombatSkills) and canon event ids.
+func _validate_skills(where: String, fight: Variant, db: DataDb) -> void:
+	if not fight is Dictionary or not (fight as Dictionary).has("skills"):
+		return
+	var list: Variant = fight["skills"]
+	if not list is Array:
+		errors.append("%s: must be a list." % where)
+		return
+	for s: Variant in list:
+		if not s is Dictionary or CombatSkills.action_of(db, String(s.get("id", ""))).is_empty():
+			errors.append("%s: '%s' is not a combat Skill." % [where, s])
+			continue
+		for key: String in ["after_event", "until_event"]:
+			if s.has(key) and not db.canon.events.has(String(s[key])):
+				errors.append("%s: unknown %s '%s'." % [where, key, s[key]])
 
 
 func _validate_goal(where: String, g: Dictionary, db: DataDb) -> void:
