@@ -309,6 +309,8 @@ static func maybe_end_turn(gs: GameState, db: DataDb) -> bool:
 		if a["kind"] == CombatSkills.SELF and ap >= int(a["ap_q"]) \
 				and CombatSkills.rounds_left(gs, PLAYER, id) == 0:
 			return false
+	if not Spells.castable(gs, db).is_empty():  # M17.5: a spell AP and MP can pay for
+		return false
 	gs.combat.lines.append(TURN_OVER)
 	end_player_turn(gs, db)
 	return true
@@ -553,6 +555,10 @@ static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
 			var foe := NpcReact.target(gs, db, npc, n)
 			if foe == "":
 				return
+			var spell := Spells.npc_pick(gs, db, npc, ap, foe)  # M17.5: a caster casts from afar
+			if spell != "":
+				ap -= Spells.npc_use(gs, db, npc, spell, foe)
+				continue
 			if NpcReact._manhattan(pos, CombatState.pos_of(gs.combat.monsters[foe])) == 1:
 				var skill := CombatSkills.npc_pick(gs, db, npc, ap)  # M17.4
 				if skill != "":

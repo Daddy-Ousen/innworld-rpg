@@ -89,7 +89,7 @@ static func tick(gs: GameState) -> void:
 	gs.combat.encounter["cool"] = cool
 
 
-static func _start_cooldown(gs: GameState, fighter: String, id: String, a: Dictionary) -> void:
+static func start_cooldown(gs: GameState, fighter: String, id: String, a: Dictionary) -> void:
 	var rounds := int(a.get("cooldown", 0))
 	if rounds <= 0:
 		return
@@ -195,7 +195,7 @@ static func use(gs: GameState, db: DataDb, id: String, target: String = "") -> D
 	var a := action_of(db, id)
 	var out := {"error": "", "skill": id, "strikes": [], "healed": 0, "move_q": 0}
 	gs.combat.lines.append("You use %s." % String(db.skills[id]["name"]))
-	_start_cooldown(gs, Encounter.PLAYER, id, a)
+	start_cooldown(gs, Encounter.PLAYER, id, a)
 	var m := mods(a)
 	match String(a["kind"]):
 		STRIKE:
@@ -261,7 +261,7 @@ static func npc_pick(gs: GameState, db: DataDb, npc: String, ap: int) -> String:
 static func npc_use(gs: GameState, db: DataDb, npc: String, id: String, foe: String) -> int:
 	var a := action_of(db, id)
 	gs.combat.lines.append("%s uses %s." % [Combat.npc_name(db, npc), String(db.skills[id]["name"])])
-	_start_cooldown(gs, Encounter.NPC + npc, id, a)
+	start_cooldown(gs, Encounter.NPC + npc, id, a)
 	var m := mods(a)
 	var hit := func(t: String) -> void:
 		Encounter._logged_hit(gs, db, t, func() -> void: NpcReact._hit(gs, db, npc, t, m))

@@ -35,7 +35,7 @@ const HOME := "home"
 const ALLY := "ally"
 const STATES := [HIDDEN, IDLE, HOSTILE, FLEE, HOME, ALLY]
 const MONSTER_INTS := ["x", "y", "hp", "home_x", "home_y", "carry", "chase", "scared", "pack"]
-const FIGHT_INTS := ["start", "attacks", "improvised", "blocks", "throws", "kills", "routed"]
+const FIGHT_INTS := ["start", "attacks", "improvised", "blocks", "throws", "kills", "routed", "casts"]
 
 var next_id: int = 1
 ## World second the monsters were last moved to (-1 = never).

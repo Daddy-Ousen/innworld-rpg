@@ -516,6 +516,7 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 		["attack_melee", int(f["improvised"]), improvised],
 		["block_attack", int(f["blocks"]), base],
 		["throw_object", int(f["throws"]), improvised],
+		["cast_spell", int(f.get("casts", 0)), base],
 	]
 	for part: Array in parts:
 		if int(part[1]) <= 0:

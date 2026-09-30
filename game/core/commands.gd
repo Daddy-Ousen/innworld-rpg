@@ -458,6 +458,23 @@ static func use_skill(gs: GameState, db: DataDb, skill_id: String, target: Strin
 	return _encounter_act_q(gs, db, cost, false, act, empty)
 
 
+## M17.5: casts the player's spell `spell_id` at tile `aim` for its ap_q AP and mp MP.
+## `aim` is the foe (one), the centre (blast), the side to shoot toward (line); ignored
+## for "around". Only in a fight, on the player's turn. Returns Spells.use's result, or
+## {"error"}.
+static func cast(gs: GameState, db: DataDb, spell_id: String, aim: Vector2i) -> Dictionary:
+	Combat.begin_command(gs)
+	var empty := {"error": "", "spell": spell_id, "strikes": [], "cells": []}
+	var why := Spells.why_not(gs, db, spell_id, aim)
+	if why != "":
+		gs.combat.lines.append(why)
+		empty["error"] = why
+		return empty
+	var cost := int(Spells.spell(db, spell_id)["ap_q"])
+	var act := func() -> Dictionary: return Spells.use(gs, db, spell_id, aim)
+	return _encounter_act_q(gs, db, cost, true, act, empty)
+
+
 ## Raises the guard for one turn. Returns "" or an error text.
 static func block(gs: GameState, db: DataDb) -> String:
 	Combat.begin_command(gs)
