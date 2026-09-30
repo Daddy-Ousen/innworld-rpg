@@ -94,6 +94,29 @@ static func grant_skill(gs: GameState, db: DataDb, skill_id: String) -> String:
 	return ""
 
 
+## Debug (M17.5): teaches the player spell `spell_id` at once (no teacher, no time).
+## Returns "" or an error text.
+static func grant_spell(gs: GameState, db: DataDb, spell_id: String) -> String:
+	if not db.spells.has(spell_id):
+		return "Unknown spell '%s'." % spell_id
+	if Spells.knows(gs, spell_id):
+		return Spells.KNOWN % Spells.name_of(db, spell_id)
+	Spells.learn(gs, db, spell_id)
+	return ""
+
+
+## Learns spell `spell_id` from the teacher `npc` next to the player (M17.5,
+## Spells.learn_from_teacher; it takes study time). Refused while knocked out or with
+## enemies near. Returns "" or an error text.
+static func learn_spell(gs: GameState, db: DataDb, npc: String, spell_id: String) -> String:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why == "":
+		why = Spells.learn_from_teacher(gs, db, npc, spell_id)
+	_after(gs, db)
+	return why
+
+
 ## The player kills a canon NPC. Returns "" or an error text.
 static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 	var err := Director.player_kill(gs, db, npc)

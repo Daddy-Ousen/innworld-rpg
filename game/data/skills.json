@@ -411,6 +411,22 @@
 			"effects": [{"type": "stat_mod", "stat": "intellect", "value": 2}],
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess"}
 		},
+		"mana_sense": {
+			"name": "[Mana Sense]",
+			"rarity": "common",
+			"pools": [{"class": "mage", "min_level": 1, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"magic": 1.0, "study": 0.5},
+			"effects": [{"type": "stat_mod", "stat": "intellect", "value": 1}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess", "note": "M17.5: a passive Intellect Skill so [Mage] has Skills to find. The name and the +1 are design guesses."}
+		},
+		"steady_casting": {
+			"name": "[Steady Casting]",
+			"rarity": "uncommon",
+			"pools": [{"class": "mage", "min_level": 5, "max_level": 30, "weight": 1.0}],
+			"tag_affinity": {"magic": 1.0},
+			"effects": [{"type": "stat_mod", "stat": "intellect", "value": 2}],
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "guess", "note": "M17.5: a passive Intellect Skill so [Mage] has Skills to find. The name and the +2 are design guesses."}
+		},
 		"speed_reading": {
 			"name": "[Speed Reading]",
 			"rarity": "common",

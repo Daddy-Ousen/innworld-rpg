@@ -1,0 +1,26 @@
+{
+	"schema_version": 1,
+	"note": "M17.5 (ADR 0027). Spells cost AP (ap_q, quarter points) and MP. The spell NAMES and who uses them are from the Books (canon_ref); every number (AP, MP, range, damage) and every teacher is a design guess. Damage = roll(damage) + Intellect / intellect_div - armor. Only the player, Ceria and Pisces cast in M17.5.",
+	"spells": {
+		"ice_spike": {
+			"name": "[Ice Spike]", "shape": "one", "ap_q": 8, "mp": 2, "range": 6, "damage": [4, 7], "hit": "roll", "cooldown": 0,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "minutes": 120},
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "likely", "note": "Ceria's best spell (3.07H; also 2.13, 2.23). That she would teach it to the player is a design guess; her lesson to Ryoka is 1.45."}
+		},
+		"flashfire": {
+			"name": "[Flashfire]", "shape": "around", "ap_q": 12, "mp": 3, "damage": [3, 6], "hit": "auto", "cooldown": 1,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "minutes": 180},
+			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "likely", "note": "Ceria burns webs away with it (1.54), and casts it in 1.58H. A burst around the caster and the teacher are design guesses."}
+		},
+		"frozen_wind": {
+			"name": "[Frozen Wind]", "shape": "line", "ap_q": 12, "mp": 3, "length": 5, "damage": [3, 5], "hit": "auto", "cooldown": 1,
+			"learn": {"teacher": "pisces", "after_event": "b1.pisces_tests_erin_and_rags", "minutes": 180},
+			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "Pisces kills a swarm of flies with [Frozen Wind] (1.22); Ceria also uses it (3.07H). A straight line and the teacher are design guesses."}
+		},
+		"fireball": {
+			"name": "[Fireball]", "shape": "blast", "ap_q": 16, "mp": 5, "range": 6, "radius": 1, "damage": [5, 9], "hit": "roll", "cooldown": 2,
+			"learn": {"book": "spellbook_fireball", "minutes": 240},
+			"canon_ref": {"book": 1, "chapter": "1.47R", "confidence": "likely", "note": "Ceria learned [Fireball] at Level 18 as an [Elementalist] (1.47R) and casts it in 1.58H. A spellbook that teaches it is a design guess (spellbooks exist: 2.23, 3.07H); no shop sells it yet."}
+		}
+	}
+}

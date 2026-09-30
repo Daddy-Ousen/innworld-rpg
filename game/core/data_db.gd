@@ -71,6 +71,8 @@ var behaviour: BehaviourDb = BehaviourDb.new()
 var combat: CombatDb = CombatDb.new()
 ## Goods, shops, yields and jobs (data/economy.json, M8.6). Empty in toy dbs.
 var economy: EconomyDb = EconomyDb.new()
+## Spells (data/spells.json, M17.5). Empty in toy dbs.
+var spells: SpellDb = SpellDb.new()
 var errors: Array[String] = []
 
 
@@ -91,6 +93,8 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.combat = CombatDb.load_dir(dir)
 	db.economy = EconomyDb.load_dir(dir)
 	db.economy.validate(db)
+	db.spells = SpellDb.load_dir(dir)
+	db.spells.validate(db)  # spells name canon teachers, events and books
 	db.maps.validate(db)  # map objects name combat items and shops
 	db.behaviour = BehaviourDb.load_dir(dir)
 	db.behaviour.validate(db)
@@ -99,7 +103,7 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.errors.append_array(Standing.validate(db))  # rules.standing (M14.3)
 	db.errors.append_array(Brawl.validate(db))  # rules.brawl (M14.5)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
-			+ db.combat.errors + db.economy.errors
+			+ db.combat.errors + db.economy.errors + db.spells.errors
 	for e in db.errors:
 		push_error(e)
 	return db
@@ -308,8 +312,8 @@ func _validate_class(id: String, c: Dictionary) -> void:
 		if int(cons.get("level_cost", -1)) < 0:
 			errors.append("%s consolidation: level_cost must be >= 0." % where)
 	var fight: Variant = c.get("combat", {})
-	if not fight is Dictionary or int((fight as Dictionary).get("move_ap_mod_q", 0)) < 0:
-		errors.append("%s: combat must be {\"move_ap_mod_q\": q >= 0}." % where)
+	if not fight is Dictionary or int((fight as Dictionary).get("move_ap_mod_q", 0)) < 0 			or int((fight as Dictionary).get("mp_bonus", 0)) < 0:
+		errors.append("%s: combat must be {\"move_ap_mod_q\": q >= 0, \"mp_bonus\": MP >= 0}." % where)
 	_check_canon_ref(where, c["canon_ref"])
 
 

@@ -3,7 +3,8 @@
 ##          "sell" (copper a shop pays; 0 = no shop buys it), "canon_ref"?, and at
 ##          most one use: "food": true (eat it: fed today), "heal": HP (drink it),
 ##          "wear_flag": flag (worn at once when bought, sets the flag),
-##          "eat_now": true (a meal eaten where it is bought)}. M9.2: a food or
+##          "eat_now": true (a meal eaten where it is bought), "teaches": spell id
+##          (M17.5: read it once to learn the spell, Spells.read_book)}. M9.2: a food or
 ##          eat_now good may add "warm_minutes" (no cold for that long after
 ##          eating); any good may add "from_flag" (shops sell it only once
 ##          that flag is set). M14.0: a good with no use may add "item": an
@@ -20,7 +21,7 @@ extends RefCounted
 
 const SCHEMA_VERSION := 1
 const GOOD_FIELDS := ["name", "confidence", "buy", "sell"]
-const USES := ["food", "heal", "wear_flag", "eat_now"]
+const USES := ["food", "heal", "wear_flag", "eat_now", "teaches"]
 const RECIPE_FIELDS := ["action", "inputs", "outputs", "stations", "confidence"]
 
 var goods: Dictionary = {}
@@ -166,6 +167,8 @@ func _validate_good(id: String, g: Dictionary) -> void:
 		errors.append("%s: prices must be >= 0." % where)
 	if USES.filter(func(u: String) -> bool: return g.has(u)).size() > 1:
 		errors.append("%s: at most one of %s." % [where, USES])
+	if g.has("teaches") and String(g["teaches"]).is_empty():
+		errors.append("%s: teaches must be a spell id." % where)
 	if g.has("heal") and int(g["heal"]) <= 0:
 		errors.append("%s: heal must be > 0." % where)
 	if g.has("warm_minutes"):

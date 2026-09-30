@@ -78,6 +78,8 @@
 			"tags": {"social.persuasion": 1.0}},
 		"read_book": {"name": "Read a book", "minutes": 60, "base_xp": 5, "risk": 0.0,
 			"tags": {"study.reading": 1.0}},
+		"study_spell": {"name": "Study a spell", "minutes": 120, "base_xp": 10, "risk": 0.0,
+			"tags": {"magic": 1.0, "study": 0.5}},
 		"sneak": {"name": "Sneak past someone", "minutes": 15, "base_xp": 6, "risk": 0.3,
 			"tags": {"stealth": 1.0}},
 		"bandage_wound": {"name": "Bandage a wound", "minutes": 20, "base_xp": 6, "risk": 0.0,
