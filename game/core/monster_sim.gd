@@ -296,7 +296,7 @@ static func _hostile_checks(gs: GameState, db: DataDb, id: String) -> bool:
 	var m: Dictionary = c.monsters[id]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var you := gs.player.pos()
-	if _beaten(c, m, e):
+	if _beaten(db, c, m, e):
 		m["state"] = CombatState.FLEE
 		if c.has_fight():
 			c.fight["routed"] += 1
@@ -439,8 +439,8 @@ static func _nearest_hostile(gs: GameState, id: String) -> String:
 
 
 ## Hurt below flee_below, or half its pack is dead or running.
-static func _beaten(c: CombatState, m: Dictionary, e: Dictionary) -> bool:
-	if float(m["hp"]) < float(e["flee_below"]) * float(e["hp"]):
+static func _beaten(db: DataDb, c: CombatState, m: Dictionary, e: Dictionary) -> bool:
+	if float(m["hp"]) < float(e["flee_below"]) * float(Combat.foe_max_hp(db, e)):
 		return true
 	var pack := int(m.get("pack", 1))
 	if e["behaviour"] != "pack" or pack < 2:

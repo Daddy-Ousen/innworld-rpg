@@ -71,10 +71,15 @@ static func has_fight_tag(db: DataDb, id: String) -> bool:
 ## (a fight tag) or .ally.
 static func stats(db: DataDb, id: String) -> Dictionary:
 	var own := db.behaviour.combat_of(id)
-	if not own.is_empty():
-		return own
-	var react: Dictionary = db.rules["npc"]["react"]
-	return react["fighter"] if has_fight_tag(db, id) else react["ally"]
+	var s: Dictionary = own
+	if own.is_empty():
+		var react: Dictionary = db.rules["npc"]["react"]
+		s = react["fighter"] if has_fight_tag(db, id) else react["ally"]
+	if Combat.hp_scale(db) == 1.0:
+		return s
+	var out := s.duplicate()
+	out["hp"] = Combat.scaled_hp(db, int(s["hp"]))  # M17.7: hp_scale
+	return out
 
 
 ## True if NPC `id` is an ally of the stage of a monster in the player's area.

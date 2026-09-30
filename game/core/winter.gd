@@ -124,6 +124,7 @@ static func warm_for(gs: GameState, minutes: int) -> void:
 
 ## Takes up to `amount` HP, never below the cold floor. Returns the HP lost.
 static func _hurt(gs: GameState, db: DataDb, amount: int) -> int:
+	amount = Combat.scaled_hp(db, amount)  # M17.7: hp_scale
 	var hp := Combat.hp(gs, db)
 	var floor_hp := int(rules(db)["cold"]["floor_hp"])
 	var left := maxi(hp - amount, mini(floor_hp, hp))
