@@ -21,6 +21,7 @@ const HELP := [
 	"                                     use <object> take: hold its item)",
 	"  attack <n|s|e|w>                   attack the monster next to you (go does too)",
 	"  block                              raise your guard for one turn",
+	"  end                                end your turn (combat mode)",
 	"  throw [monster]                    throw the held item (default: the nearest monster)",
 	"  drop                               put the held item down",
 	"  monsters                           the monsters here (debug)",
@@ -122,6 +123,8 @@ func execute(line: String) -> Array[String]:
 				out = _combat(Commands.attack(gs, db, (args[0] as String).to_lower().left(1))["error"])
 		"block":
 			out = _combat(Commands.block(gs, db))
+		"end":
+			out = _combat(Commands.end_turn(gs, db))
 		"throw":
 			out = _throw(args)
 		"drop":

@@ -44,7 +44,9 @@ static func run(gs: GameState, db: DataDb, now: int, entered: bool) -> void:
 	var dt := 0 if entered or c.sec < 0 else maxi(now - c.sec, 0)
 	_spot(gs, db)
 	if dt > 0:
-		if dt > int(rules["jump_seconds"]) and not Combat.in_danger(gs):
+		if Encounter.active(gs):
+			_drop_carry(c)  # M17.1: in combat mode, monsters act in the rounds
+		elif dt > int(rules["jump_seconds"]) and not Combat.in_danger(gs):
 			_drop_carry(c)
 		else:
 			_turns(gs, db, dt)
@@ -267,18 +269,7 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String) -> void:
 	var m: Dictionary = c.monsters[id]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var pos := CombatState.pos_of(m)
-	var you := gs.player.pos()
-	if _beaten(c, m, e):
-		m["state"] = CombatState.FLEE
-		if c.has_fight():
-			c.fight["routed"] += 1
-		c.lines.append("The %s runs away." % Combat.name_of(db, m))
-		return
-	var leash := _dist(pos, you)
-	if e["behaviour"] == "territorial":
-		leash = _dist(Vector2i(int(m["home_x"]), int(m["home_y"])), you)
-	if leash > int(e["lose_radius"]) or int(m["chase"]) >= _chase_limit(gs, db, e):
-		_give_up(gs, db, id)
+	if _hostile_checks(gs, db, id):
 		return
 	var target := Combat.monster_target(gs, db, id)
 	if target.is_empty():
@@ -294,6 +285,29 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String) -> void:
 		Combat.monster_attack(gs, db, id, true, 0.0, target)
 		return
 	_step_next_to(gs, db, id, at)
+
+
+## The start of a hostile turn (also Encounter's, M17.1): a beaten monster
+## runs away; one past its leash or chase limit gives up. True if the turn
+## is over.
+static func _hostile_checks(gs: GameState, db: DataDb, id: String) -> bool:
+	var c := gs.combat
+	var m: Dictionary = c.monsters[id]
+	var e: Dictionary = db.combat.enemies[m["type"]]
+	var you := gs.player.pos()
+	if _beaten(c, m, e):
+		m["state"] = CombatState.FLEE
+		if c.has_fight():
+			c.fight["routed"] += 1
+		c.lines.append("The %s runs away." % Combat.name_of(db, m))
+		return true
+	var leash := _dist(CombatState.pos_of(m), you)
+	if e["behaviour"] == "territorial":
+		leash = _dist(Vector2i(int(m["home_x"]), int(m["home_y"])), you)
+	if leash > int(e["lose_radius"]) or int(m["chase"]) >= _chase_limit(gs, db, e):
+		_give_up(gs, db, id)
+		return true
+	return false
 
 
 ## One step towards a free tile side by side with `at`. Returns false if
@@ -313,6 +327,21 @@ static func _step_next_to(gs: GameState, db: DataDb, id: String, at: Vector2i) -
 static func _ally_turn(gs: GameState, db: DataDb, id: String) -> void:
 	var c := gs.combat
 	var pos := CombatState.pos_of(c.monsters[id])
+	var foe := _nearest_hostile(gs, id)
+	if foe == "":
+		return
+	var at := CombatState.pos_of(c.monsters[foe])
+	if _next_to(pos, at):
+		Combat.helper_attack(gs, db, id, foe)
+	else:
+		_step_next_to(gs, db, id, at)
+
+
+## The hostile monster nearest to helper `id` in its area (king moves, ties
+## to the lower id), or "".
+static func _nearest_hostile(gs: GameState, id: String) -> String:
+	var c := gs.combat
+	var pos := CombatState.pos_of(c.monsters[id])
 	var foe := ""
 	var foe_d := 0
 	for fid in c.in_state(CombatState.HOSTILE):
@@ -323,13 +352,7 @@ static func _ally_turn(gs: GameState, db: DataDb, id: String) -> void:
 		if foe == "" or d < foe_d:
 			foe = fid
 			foe_d = d
-	if foe == "":
-		return
-	var at := CombatState.pos_of(c.monsters[foe])
-	if _next_to(pos, at):
-		Combat.helper_attack(gs, db, id, foe)
-	else:
-		_step_next_to(gs, db, id, at)
+	return foe
 
 
 ## Hurt below flee_below, or half its pack is dead or running.

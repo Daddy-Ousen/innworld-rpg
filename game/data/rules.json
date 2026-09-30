@@ -83,7 +83,24 @@
 			"esthelm_creler_cave": {"area": "esthelm_ruins", "pos": [5, 11]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
-		"spare_tags": ["goblin"]
+		"spare_tags": ["goblin"],
+		"tactical": {
+			"enabled": false,
+			"note": "M17.0 (ADR 0027). XCOM-style rounds, the user's AP rules (ADR 0022). AP in quarter points (q): 6 AP = 24 q, one tile = 1 q. Nothing reads this before M17.1. hp_scale is set in M17.7 (paper fights suggest 2.0).",
+			"ap_base_q": 24,
+			"move_cost_q": 1,
+			"move_cap_q": 4,
+			"attack_cost_q": 8,
+			"block_cost_q": 8,
+			"throw_cost_q": 8,
+			"item_cost_q": 4,
+			"ap_total_levels": [10, 25, 50, 75],
+			"round_seconds": 6,
+			"initiative": {"stat": "speed", "monster_default": 3, "ties": "rng", "by_act_seconds": {"4": 5, "6": 3, "8": 2}},
+			"monster": {"move_cap_q": 4},
+			"mp": {"regen_minutes": 10, "sleep_refill": 1.0},
+			"hp_scale": 1.0
+		}
 	},
 	"portal": {
 		"note": "M10.0 (ADR 0017). The Albez door. Before Erin's [Magical Grounds] (Level 30, 3.33) it has almost no mana, so its power_flags keep it shut to the player. After that the book gives about 16-30 people a day for everyone; the player's share is a design number. A trip is instant in the text; one minute here so it is a travel action.",

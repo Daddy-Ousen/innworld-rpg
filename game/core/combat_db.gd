@@ -249,6 +249,8 @@ func _validate_enemy(id: String, e: Dictionary, item_tags: Dictionary) -> void:
 			errors.append("%s scared_by: no item has the tag '%s'." % [where, tag])
 	if not scared.is_empty() and int(e.get("scare_turns", 0)) < 1:
 		errors.append("%s: scared_by needs scare_turns >= 1." % where)
+	if e.has("agility") and int(e["agility"]) < 1:
+		errors.append("%s: agility must be >= 1." % where)
 	if e.has("ranged"):
 		var r: Dictionary = e["ranged"]
 		if not _has_fields(where + " ranged", r, ["range", "damage", "chance"]):

@@ -199,7 +199,8 @@ static func _cannot_act(gs: GameState, db: DataDb) -> String:
 
 ## The player attacks the monster next to them in `dir` (n, s, e, w), with
 ## the held item or fists. Returns {"error", "target", "hit", "damage", "killed"}.
-static func player_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
+## `spend`: false in combat mode (M17.1), where the attack costs AP, not time.
+static func player_attack(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> Dictionary:
 	var out := {"error": _cannot_act(gs, db), "target": "", "hit": false, "damage": 0, "killed": false}
 	if out["error"] != "":
 		return out
@@ -214,7 +215,8 @@ static func player_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	if gs.combat.monsters[target]["state"] == CombatState.ALLY:
 		out["error"] = REFUSED_HELPER % String(db.combat.enemies[gs.combat.monsters[target]["type"]]["name"])
 		return out
-	Movement.spend_turn(gs, db)
+	if spend:
+		Movement.spend_turn(gs, db)
 	return _strike(gs, db, target, false, 1)
 
 
@@ -459,6 +461,7 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 		return out
 	var f: Dictionary = c.fight
 	c.fight = {}
+	c.encounter = {}
 	var danger := 0.0
 	var enemy := ""
 	var foe_ids: Array = (f["foes"] as Dictionary).keys()
@@ -545,6 +548,7 @@ static func sync(gs: GameState, db: DataDb) -> void:
 		if c.has_fight():
 			end_fight(gs, db, FLED)
 		c.monsters.clear()
+		c.encounter = {}
 		c.area = gs.player.area
 	MonsterSim.run(gs, db, now, entered)
 	settle_if_over(gs, db)
@@ -581,6 +585,7 @@ static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool,
 	var rules: Dictionary = db.rules["combat"]
 	c.monsters.clear()
 	c.fight = {}
+	c.encounter = {}
 	c.stage_run = {}
 	c.blocking = false
 	var share := float(rules["night_heal"]["sleep"]) * rest_share
