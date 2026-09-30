@@ -1,6 +1,16 @@
 # Handoff
 
-## Just done (2026-09-29, M16 merged and archived)
+## Just done (2026-09-30, M17.0 spike)
+- Branch `feat/m17.0-spike` (stacked on `docs/archive-m16`, neither pushed). Ask the user before push / PR.
+- User answers: Agility = `speed` stat; keep AP rules, raise HP ~x2 in M17.7; MP 1 per 10 min, sleep refills;
+  a fight covers the whole map, late arrivals join next round. All in `docs/adr/0027-m17-tactical-combat.md`.
+- `game/data/rules.json` `combat.tactical` (nothing reads it yet). Test `game/tests/unit_tactical_rules.gd`.
+- Paper fights: scratchpad `paper_fights.py` (gone next session). Results table in ADR 0027.
+- Tests run: unit_tactical_rules 5/5, unit_combat_db 14/14, unit_stats 6/6, validator 0 errors, Python 95 OK.
+- Next: user approves ADR 0027, then M17.1 (plan in ADR 0027 "M17.1 plan"; save v18; full suite in a subagent).
+- JSON numbers load as floats in GDScript: compare arrays after `map(int)`.
+
+## Earlier (2026-09-29, M16 merged and archived)
 - M16 (M16.0-M16.6) merged as PR #78 (main 98a3b08). M16 archived in `docs/PROGRESS_ARCHIVE.md`; `progress.md` marks M16 done.
   Branch `docs/archive-m16` holds this docs step (not pushed; ask before push / PR).
 - Still waiting on the user: walk the changed maps in the game (`godot --path game`).

@@ -259,7 +259,7 @@ Rules from the user (2026-09-29):
   level is a secret: the player never sees it, and no message says why AP went up.
 - MP (mana) is kept between fights like HP and comes back slowly with time.
 - AP is stored in quarter points (integers), so the rolls stay deterministic.
-- [ ] M17.0 Spike + ADR: `rules.combat.tactical` numbers; three fights worked out on paper (Rock Crab, a goblin
+- [x] M17.0 Spike + ADR (ADR 0027, 2026-09-30): `rules.combat.tactical` numbers; three fights worked out on paper (Rock Crab, a goblin
   pack, the day-21 raid); how a fight starts, who joins, what a round costs in world time (6 s). The user approves
 - [ ] M17.1 Core encounter: encounter state in `GameState` (turn order, round, AP left, movement used; save v18 +
   migration), start / join / end, order by Agility, move with the cap, attack for 2 AP, end turn; monsters use

@@ -12,7 +12,7 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
 
 ## 1. Presentation and combat
 - 2D top-down, 16×16 or 32×32 tiles, a lot of text. Portraits optional.
-- Combat is **turn-based on the same map grid**, not a separate battle screen. Less UI, and combat reuses movement and interaction code. From M17 (ADR 0022) a fight switches the map into an XCOM-style combat mode: turn order by Agility, action points (AP) for moving, attacks, Skills and spells, MP for spells.
+- Combat is **turn-based on the same map grid**, not a separate battle screen. Less UI, and combat reuses movement and interaction code. From M17 (ADR 0022) a fight switches the map into an XCOM-style combat mode: turn order by Agility, action points (AP) for moving, attacks, Skills and spells, MP for spells. Numbers and encounter rules: ADR 0027.
 - The player never sees XP numbers (ADR 0022, M15.3). Classes, levels and Skills are shown; XP is not. People in the world feel a level-up at night; they do not see a counter.
 - Combat is one activity among many. A non-fighter must be able to progress.
 - **No permadeath / no roguelite runs.** The game is a persistent alternate history. Death = game over with a save reload, or a "rescued" outcome for some fights.

@@ -22,7 +22,9 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 - [x] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). M15.0–M15.3 merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df). Detail in the archive and ADR 0022.
 - [x] M16 — Maps, art and cities. M16.0-M16.6 merged as one PR ([PR #78](https://github.com/Daddy-Ousen/innworld-rpg/pull/78), merge commit 98a3b08). Detail in the archive and ADR 0023-0026. The user still has to walk the maps (`godot --path game`).
-- [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). Next: M17.0 spike + ADR, plan mode first. User's AP rules in ADR 0022 and `docs/ROADMAP.md`.
+- [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). User's AP rules in ADR 0022 and `docs/ROADMAP.md`.
+  - [x] M17.0 spike + ADR 0027 (branch `feat/m17.0-spike`, 2026-09-30): `rules.combat.tactical`, `unit_tactical_rules` (5 pass), paper fights. Waits for the user's approval of ADR 0027.
+  - [ ] M17.1 core encounter (save v18). Plan in ADR 0027 "M17.1 plan".
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
