@@ -10,6 +10,14 @@
 ## history and H the key list (M15.2). A new game opens with the
 ## welcome page; the game autosaves each time the System dialog closes
 ## (each morning) and on quit.
+## M17.3 (ADR 0027), in a fight: the CombatBar shows the turn order, AP and
+## End turn; on the player's turn the map shows the move range and, under the
+## mouse, the path and hit chance of a click (Encounter.plan_to). A left click
+## walks there (a step per STEP_REPEAT) and hits a foe at the end; a right
+## click stops the walk. When others acted in a command, the view replays
+## their turns (the log lines come with each turn); any key or click skips
+## the replay. Replays are off headless (`replay_turns`), so the sims that
+## drive this scene see each command's end state at once.
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
@@ -30,9 +38,25 @@ var _bumped := ""
 var _attack_dir := ""
 ## Tests set this false: quit to title then only autosaves.
 var switch_scene := true
+## M17.3: replay the others' turns after a command (off headless; tests may
+## turn it on).
+var replay_turns := DisplayServer.get_name() != "headless"
+## A click's walk still to go (M17.3): steps, then the blow ("" = none) at
+## `_walk_target`.
+var _walk: Array[String] = []
+var _walk_attack := ""
+var _walk_target := ""
+## The cell under the mouse (M17.3).
+var _hover := Vector2i(-1, -1)
+## A replay's log lines: one list per turn-log entry, then the rest.
+var _replay_lines: Array = []
+var _replay_tail: Array = []
+## The next redraw follows a replay (WorldView.refresh `replayed`).
+var _replayed := false
 
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
+@onready var bar: CombatBar = $HudLayer/CombatBar
 @onready var menu: InteractMenu = $MenuLayer/InteractMenu
 @onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
 @onready var journal: Journal = $MenuLayer/Journal
@@ -65,6 +89,9 @@ func _ready() -> void:
 	bag.chosen.connect(use_from_bag)
 	dialog.closed.connect(_on_dialog_closed)
 	dialog.struck.connect(attack_npc.bind(true))
+	bar.end_turn.connect(end_turn)
+	view.replay_step.connect(_on_replay_step)
+	view.replay_done.connect(_on_replay_done)
 	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
@@ -80,8 +107,13 @@ func _ready() -> void:
 
 
 func _redraw() -> void:
-	view.refresh(Session.gs, Session.db)
+	if view.is_replaying():
+		return  # the redraw comes when the replay ends
+	view.refresh(Session.gs, Session.db, _replayed)
+	_replayed = false
 	hud.refresh(Session.gs, Session.db)
+	bar.refresh(Session.gs, Session.db)
+	_update_overlay()
 	Audio.music(MusicPick.track(Session.gs, Session.db, Audio.db))
 	Audio.ambience(AmbiencePick.bed(Session.gs, Session.db, Audio.db))
 
@@ -90,7 +122,8 @@ func _redraw() -> void:
 ## the console has the keyboard.
 func is_busy() -> bool:
 	return console_layer.visible or menu.visible or sheet.visible or journal.visible \
-			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible
+			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible \
+			or view.is_replaying()
 
 
 func _input(event: InputEvent) -> void:
@@ -103,6 +136,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if view.is_replaying() and (event is InputEventKey or event is InputEventMouseButton) \
+			and event.is_pressed() and not event.is_echo():
+		skip_replay()
+		get_viewport().set_input_as_handled()
+		return
+	if event is InputEventMouse:
+		_mouse(event)
+		return
 	if is_busy() or not event is InputEventKey or not event.pressed or event.echo:
 		return
 	match event.physical_keycode:
@@ -139,6 +180,11 @@ func _process(delta: float) -> void:
 	_cooldown = maxf(_cooldown - delta, 0.0)
 	if is_busy():
 		return
+	if _walking():
+		if _cooldown == 0.0:
+			_walk_next()
+			_cooldown = STEP_REPEAT
+		return
 	var dir := _held_direction()
 	if dir != _attack_dir:
 		_attack_dir = ""
@@ -160,6 +206,7 @@ func _held_direction() -> String:
 ## One step in `dir` (n, s, e, w), or WAIT for one step of time. A step
 ## into a monster attacks it (or springs a hidden one).
 func step(dir: String) -> void:
+	skip_replay()
 	var gs := Session.gs
 	var db := Session.db
 	var was_indoor := db.maps.is_indoor(gs.player.area)
@@ -185,11 +232,13 @@ func step(dir: String) -> void:
 
 ## Raises the guard for one turn (B).
 func block() -> void:
+	skip_replay()
 	_command_error(_sound_if_ok(Commands.block(Session.gs, Session.db), "block"))
 
 
 ## Throws the held item at the nearest monster you can see (T).
 func throw() -> void:
+	skip_replay()
 	if Session.gs.player.held == "":
 		hud.add_lines(["You hold nothing to throw."])
 		return
@@ -202,6 +251,7 @@ func throw() -> void:
 
 ## Puts the held item down (X).
 func drop() -> void:
+	skip_replay()
 	_command_error(_sound_if_ok(Commands.drop(Session.gs, Session.db), "drop"))
 
 
@@ -233,9 +283,19 @@ func _command_error(err: String) -> void:
 
 ## After every command: the combat text goes to the log; a knocked-out
 ## player loses the day at once (Commands.knock_out); then redraw.
+## M17.3: when others acted, their turns replay first (see _start_replay).
 func _finish() -> void:
 	var gs := Session.gs
+	if replay_turns and _others_acted(gs):
+		_start_replay(gs)
+		return
 	hud.add_lines(gs.combat.lines)
+	_settle()
+
+
+## The end of a command (after its replay): a knock-out, else a redraw.
+func _settle() -> void:
+	var gs := Session.gs
 	if Combat.is_down(gs):
 		_show_night(Commands.knock_out(gs, Session.db))
 		return
@@ -263,6 +323,7 @@ func use_from_bag(action_id: String) -> void:
 
 
 func use(object_id: String, action_id: String) -> void:
+	skip_replay()
 	var gs := Session.gs
 	var db := Session.db
 	if action_id == Interact.SLEEP:
@@ -319,6 +380,7 @@ func use(object_id: String, action_id: String) -> void:
 ## Attacks the NPC next to you (M14.5). A major NPC's first attack shows the fate warning
 ## instead; its Strike answer comes back here with `confirmed`.
 func attack_npc(npc: String, confirmed: bool = false) -> void:
+	skip_replay()
 	var r := Commands.attack_npc(Session.gs, Session.db, npc, confirmed)
 	if r["warn"]:
 		dialog.open([SystemMessages.fate_page(Session.db, npc)] as Array[Dictionary], Session.gs, Session.db)
@@ -334,6 +396,8 @@ func attack_npc(npc: String, confirmed: bool = false) -> void:
 ## knock-out if they are down) and shows the night in the System dialog.
 ## `bed`: the bed picked in the use menu ("" = where you stand, Z).
 func sleep(bed: String = "") -> void:
+	skip_replay()
+	_cancel_walk()
 	var night := Commands.sleep(Session.gs, Session.db, bed)
 	if night.is_empty():  # refused: enemies near, outdoors, or no coins for the room
 		hud.add_lines(Session.gs.combat.lines)
@@ -341,6 +405,185 @@ func sleep(bed: String = "") -> void:
 		return
 	Audio.play_cues([SoundCues.action_cue(Audio.db, Interact.SLEEP)])
 	_show_night(night)
+
+
+## Ends the player's turn (the End turn button; Space does it through step).
+func end_turn() -> void:
+	skip_replay()
+	_cancel_walk()
+	_command_error(Commands.end_turn(Session.gs, Session.db))
+
+
+## True if a fighter other than the player acted in the last command.
+static func _others_acted(gs: GameState) -> bool:
+	for t: Dictionary in gs.combat.turns:
+		if t["id"] != Encounter.PLAYER:
+			return true
+	return false
+
+
+## Replays the command's turn log; each entry's log lines (with any lines
+## written between entries) go to the HUD as it starts, the rest at the end.
+func _start_replay(gs: GameState) -> void:
+	_cancel_walk()
+	view.overlay.clear()
+	var lines := gs.combat.lines
+	_replay_lines = []
+	var at := 0
+	for t: Dictionary in gs.combat.turns:
+		var to := maxi(int(t.get("line_to", at)), at)
+		_replay_lines.append(lines.slice(at, to))
+		at = to
+	_replay_tail = lines.slice(at)
+	view.replay(gs.combat.turns.duplicate(true))
+
+
+func _on_replay_step(index: int) -> void:
+	if index < _replay_lines.size():
+		hud.add_lines(_replay_lines[index])
+		_replay_lines[index] = []
+	var turns := Session.gs.combat.turns
+	if index < turns.size():
+		bar.show_acting(String(turns[index]["id"]))
+
+
+func _on_replay_done() -> void:
+	_close_replay()
+
+
+## Ends a running replay at once (a key, a click or a command).
+func skip_replay() -> void:
+	if not view.is_replaying():
+		return
+	view.skip_replay()
+	_close_replay()
+
+
+func _close_replay() -> void:
+	for chunk: Array in _replay_lines:
+		hud.add_lines(chunk)
+	hud.add_lines(_replay_tail)
+	_replay_lines = []
+	_replay_tail = []
+	_replayed = true
+	_settle()
+
+
+## Mouse in a fight (M17.3): the hover preview, a left click walks or
+## attacks, a right click stops a walk.
+func _mouse(event: InputEventMouse) -> void:
+	if is_busy() or not Encounter.is_player_turn(Session.gs):
+		return
+	var cell := view.cell_at(view.get_global_mouse_position())
+	if event is InputEventMouseMotion:
+		hover(cell)
+	elif event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			click(cell)
+			get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			_cancel_walk()
+			get_viewport().set_input_as_handled()
+
+
+## The mouse is over `cell`: show what a click there would do.
+func hover(cell: Vector2i) -> void:
+	_hover = cell
+	_show_plan()
+
+
+## A click on `cell` in a fight: walk the plan's steps, then its blow.
+func click(cell: Vector2i) -> void:
+	skip_replay()
+	var gs := Session.gs
+	if not Encounter.is_player_turn(gs):
+		return
+	var plan := Encounter.plan_to(gs, Session.db, cell)
+	if plan.is_empty():
+		return
+	_walk.assign(plan["steps"])
+	_walk_attack = String(plan["attack"])
+	_walk_target = String(plan["target"])
+	if _walk_target != "" and _walk_attack == "" and _walk.is_empty():
+		hud.add_lines([Encounter.NO_AP])
+		return
+	_walk_next()
+	_cooldown = STEP_REPEAT
+
+
+func _walking() -> bool:
+	return not _walk.is_empty() or _walk_attack != ""
+
+
+func _cancel_walk() -> void:
+	_walk.clear()
+	_walk_attack = ""
+	_walk_target = ""
+
+
+## One step of a click's walk, or its blow at the end. The walk stops when a
+## step does not move the player (someone in the way, no AP) or the turn ends.
+func _walk_next() -> void:
+	var gs := Session.gs
+	if not Encounter.is_player_turn(gs):
+		_cancel_walk()
+		return
+	if not _walk.is_empty():
+		var at := gs.player.pos()
+		var area := gs.player.area
+		step(_walk.pop_front())
+		if gs.player.pos() == at or gs.player.area != area:
+			_cancel_walk()
+		return
+	var dir := _walk_attack
+	var target := _walk_target
+	_cancel_walk()
+	if target.begins_with(Encounter.NPC):
+		attack_npc(target.substr(Encounter.NPC.length()))
+	elif dir != "":
+		step(dir)  # a step into the foe hits it
+
+
+## The move range on the player's turn (exits in yellow), and the hover plan.
+func _update_overlay() -> void:
+	var gs := Session.gs
+	if not Encounter.is_player_turn(gs):
+		view.overlay.clear()
+		return
+	var reach := Encounter.reach(gs, Session.db)
+	var exits := {}
+	for cell: Vector2i in reach:
+		if not Session.db.maps.exit_at(gs.player.area, cell).is_empty():
+			exits[cell] = true
+	view.overlay.show_reach(reach, exits)
+	_show_plan()
+
+
+## The path and hit chance of a click on the hovered cell.
+func _show_plan() -> void:
+	var gs := Session.gs
+	var db := Session.db
+	var plan := Encounter.plan_to(gs, db, _hover) if Encounter.is_player_turn(gs) else {}
+	if plan.is_empty():
+		view.overlay.clear_plan()
+		return
+	var cells: Array[Vector2i] = []
+	var at := gs.player.pos()
+	for dir: String in plan["steps"]:
+		at += PlayerState.DIRS[dir]
+		cells.append(at)
+	var target := String(plan["target"])
+	if target == "":
+		view.overlay.show_plan(cells, false)
+		return
+	var text := "%d%%" % roundi(Combat.player_hit_chance(gs, db, target) * 100.0) \
+			if plan["attack"] != "" else Encounter.NO_AP
+	var held: Dictionary = db.combat.items.get(gs.player.held, {})
+	if not held.is_empty() and target == Combat.nearest_foe(gs):
+		var dist := AnimDiff.king(gs.player.pos(), _hover)
+		if dist <= int(held["throw_range"]):
+			text += "  T: %d%%" % roundi(Combat.player_hit_chance(gs, db, target, true, dist) * 100.0)
+	view.overlay.show_plan(cells, true, _hover, text)
 
 
 func _show_night(night: Dictionary) -> void:

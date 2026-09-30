@@ -157,3 +157,29 @@ default Agility for now (own numbers in M17.7, no schema change); no new UI in M
 - **Balance seen (for M17.7):** at level 5, 2-3 Goblins won 1-2 of 3 seeds (was 3 of 3); `sim_balance_fights`
   asserts single foes only until M17.7. Two thieves knock out an idle player before the 30 s Santa wave. Allies
   with a turn before the player's first can fell a foe (raid, Creler nest tests count joined foes).
+
+## M17.3 Combat screen (2026-09-30)
+User answers (2026-09-30): the camera replays each fighter's turn (not only the player's); a click on a far foe
+walks up to it and hits it if the AP left pays; the mouse works in fights only (keys everywhere, as before).
+- **Core helpers (read only):** `Movement.can_enter` (the step test without moving; a hidden trap does not
+  count, so the screen never gives one away). `Encounter.reach` = breadth-first tiles in `Pathfind.ORDER` within
+  min(AP left, move cap left); an exit tile ends a path (a step onto it flees). `Encounter.plan_to(cell)` =
+  what a click does: walk, or walk to the free side of a foe with the fewest steps and hit it
+  (`"attack"` is "" when the AP left is short). `Combat.player_hit_chance` is the one formula for the screen
+  and `_strike` (same numbers, same rolls).
+- **Turn log:** `CombatState.turns` lists what each fighter did in the last command, in order: `{"id", "path",
+  "strikes": [{"target", "hit", "damage", "ranged"}], "lines", "line_from", "line_to"}`. Damage comes from the
+  target's HP change around each blow, so the hit code did not change. It is **not saved** (not in `to_dict`,
+  no save version change): it is animation data for one command. `Combat.begin_command` clears it. The
+  player's own action is logged first (closed before `Commands._after`), so entries never nest.
+- **Screen:** `ui/combat_bar.tscn` (bottom right: round, faces in turn order framed by side, gold for the one
+  acting, AP pips by quarters, move left, End turn; monsters show their whole front frame, since a crab has no
+  head to crop). `world/combat_overlay.gd` (move range in blue, exits in yellow, the click path as dots, a red
+  frame and the hit chance under the foe; "T: n%" when the held item can be thrown at it).
+- **Replay:** after a command in which others acted, `WorldView.replay` walks each fighter along its path,
+  swings at its targets (flash, number, sounds), with the camera on it (`top_level` while it plays); the HUD
+  gets each entry's lines as it starts. Then the redraw runs with `replayed`, so AnimDiff plays only falls and
+  gone monsters. Any key or click skips the rest; a command sent during a replay skips it first. Replays are
+  off headless (`main.replay_turns`), so the sims that drive the main scene see each end state at once.
+- **Tests:** `unit_combat_preview` (15: reach, plan, hit chance, turn log), `unit_combat_screen` (11: the bar,
+  the overlay, clicks, End turn, replay skip and end, on the real data at `ruins_entrance`).

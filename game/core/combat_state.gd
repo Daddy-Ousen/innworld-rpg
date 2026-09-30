@@ -20,6 +20,9 @@
 ##          "disarmed", "sprung"} (see Traps); only traps that changed. Unlike
 ##          monsters, traps keep their state when the player leaves.
 ##   encounter (M17.1, save v18): {} or the combat-mode rounds (see Encounter).
+##   turns (M17.3): what each fighter did in the last command, in order, for
+##          the screen's replay (see Encounter.log_begin). Not saved: like an
+##          animation, nothing needs it after a load.
 ## Combat, MonsterSim, Traps and Encounter change this; nothing else does.
 class_name CombatState
 extends RefCounted
@@ -51,6 +54,7 @@ var fight: Dictionary = {}
 var stage_run: Dictionary = {}
 var traps: Dictionary = {}
 var encounter: Dictionary = {}
+var turns: Array[Dictionary] = []
 
 
 func has_fight() -> bool:

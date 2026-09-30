@@ -1,6 +1,25 @@
 # Handoff
 
-## Just done (2026-09-30, M17.2 port the old fight parts)
+## Just done (2026-09-30, M17.3 combat screen)
+- PR #80 merged (07f19a3); tag `m17.2-done` set and pushed. Branch `feat/m17.3-screen` from main, 3 commits
+  (core, ui, docs). NOT pushed: ask the user before push / PR. After the merge: tag `m17.3-done`.
+  Plan: `C:/Users/rhasa/.claude/plans/eventual-enchanting-teacup.md`. Detail: ADR 0027 "M17.3" section.
+- User answers: the camera replays each fighter's turn; a click on a far foe walks up and hits; mouse in fights only.
+- Core: `Movement.can_enter`, `Encounter.reach` / `plan_to` / `log_*` / `hp_of`, `Combat.player_hit_chance`,
+  `CombatState.turns` (transient, NOT saved, no save version change), `Commands._encounter_act(prefix)`.
+- UI: `ui/combat_bar.gd/.tscn` (in main.tscn HudLayer), `world/combat_overlay.gd` (node in world_view.tscn),
+  `WorldView.replay / skip_replay / cell_at / refresh(replayed)`, `main.gd` (mouse, click walk, replay,
+  `replay_turns` off headless, `end_turn`), help page lines in `SystemMessages.KEYS`.
+- Tests: new `unit_combat_preview` (15), `unit_combat_screen` (11, real data on `ruins_entrance`). Full suite
+  (subagent): 122 scripts, 1159 tests, all pass, no parse errors. Validator 0 errors, Python 95 OK.
+- Screenshot for the user: `The Wandering Inn Books 1-17 Pirateaba/Temp/m17.3_fight.png` (gitignored).
+- Next: the user plays a fight (`godot --path game`), then push + PR; then M17.4 (Skills in combat, plan mode first).
+- Gotchas: a replay only runs when a display exists; a main-scene test that wants it sets `main.replay_turns = true`.
+  A non-headless Godot run rewrites every asset `.import`: `git ls-files -m game/assets | xargs -r git checkout --`.
+  Main-scene tests leave GUT "orphans" (warnings only; old tests do the same).
+- Test runner: scratchpad `run_targets.sh [-t secs] <script>...` (gone next session).
+
+## Earlier (2026-09-30, M17.2 port the old fight parts)
 - Tags `m17.0-done` (a24db19) and `m17.1-done` (a175d2a) set and pushed. Branch `feat/m17.2-port` pushed as
   PR #80 (https://github.com/Daddy-Ousen/innworld-rpg/pull/80). After the merge: tag `m17.2-done` on the merge commit. Plan: `C:/Users/rhasa/.claude/plans/agile-shimmying-duckling.md`.
 - User answers: auto end turn when AP pays for nothing; one NPC Agility default (3) until M17.7; no new UI.

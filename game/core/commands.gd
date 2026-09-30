@@ -98,7 +98,7 @@ static func attack_npc(gs: GameState, db: DataDb, npc: String, confirmed: bool =
 	if Encounter.active(gs):
 		var hit := func() -> Dictionary: return Brawl.attack(gs, db, npc, confirmed)
 		return _encounter_act(gs, db, "attack_cost_q", hit,
-				{"target": npc, "warn": false, "hit": false, "damage": 0, "killed": false})
+				{"target": npc, "warn": false, "hit": false, "damage": 0, "killed": false}, Encounter.NPC)
 	var r := Brawl.attack(gs, db, npc, confirmed)
 	_after(gs, db)
 	return r
@@ -179,6 +179,7 @@ static func _encounter_move(gs: GameState, db: DataDb, dir: String) -> Dictionar
 		r["error"] = why
 		gs.combat.lines.append(why)
 		return r
+	Encounter.log_begin(gs, Encounter.PLAYER)
 	r.merge(Movement.step(gs, db, dir, false), true)
 	if r["fairy"] != "":
 		# M17.2: a swat is a swing (attack AP); free, a fairy in the way stalls the turn
@@ -188,11 +189,15 @@ static func _encounter_move(gs: GameState, db: DataDb, dir: String) -> Dictionar
 			r["refused"] = true
 			r["error"] = why
 			gs.combat.lines.append(why)
+			Encounter.log_end(gs)
 			return r
 		Encounter.pay(gs, atk, false)
 	elif r["moved"]:
 		Encounter.pay(gs, cost, true)
+		if r["exit_to"] == "":
+			Encounter.log_step(gs, gs.player.pos())
 	_after_step(gs, db, dir, r)
+	Encounter.log_end(gs)
 	_after(gs, db)
 	if r["moved"] or r["fairy"] != "":
 		_auto_end(gs, db)
@@ -211,8 +216,10 @@ static func _encounter_attack(gs: GameState, db: DataDb, dir: String) -> Diction
 ## nothing happens, the result is `empty` with that "error" (also in the log).
 ## Paid only when `act` worked (no "error", no fate "warn"); then the turn
 ## ends by itself if the AP left pays for nothing (Encounter.maybe_end_turn).
+## M17.3: a blow (a result with "target" and "damage") goes into the turn log
+## as the player's; `prefix` makes the target a fighter id (Encounter.NPC).
 static func _encounter_act(gs: GameState, db: DataDb, cost_key: String, act: Callable,
-		empty: Dictionary) -> Dictionary:
+		empty: Dictionary, prefix: String = "") -> Dictionary:
 	var cost := int(Encounter.rules(db)[cost_key])
 	var why := Encounter.check(gs, db, cost, false)
 	if why != "":
@@ -220,10 +227,15 @@ static func _encounter_act(gs: GameState, db: DataDb, cost_key: String, act: Cal
 		var out := empty.duplicate()
 		out["error"] = why
 		return out
+	Encounter.log_begin(gs, Encounter.PLAYER)
 	var r: Dictionary = act.call()
 	var paid: bool = r["error"] == "" and not r.get("warn", false)
 	if paid:
 		Encounter.pay(gs, cost, false)
+		if String(r.get("target", "")) != "" and r.has("damage"):
+			Encounter.log_strike(gs, prefix + String(r["target"]), int(r["damage"]),
+					cost_key == "throw_cost_q")
+	Encounter.log_end(gs)
 	_after(gs, db)
 	if paid:
 		_auto_end(gs, db)

@@ -36,6 +36,12 @@
 ## sends them to the Audio autoload, so the view needs no audio nodes.
 ## M13.T: a found trap is a small diamond on its tile (red while armed,
 ## grey once spent or disarmed); hidden traps are not drawn.
+## M17.3 (ADR 0027): a CombatOverlay child draws the move range, a click's
+## path and the hit chance. `replay` plays a command's turn log
+## (CombatState.turns) one fighter at a time: the camera goes to the fighter,
+## its marker walks its path and swings at each foe it struck (a flash and a
+## number on a hit). main.gd then refreshes with `replayed`, so only falls
+## and gone monsters play. `skip_replay` ends it at once.
 ## Presentation only: reads GameState, never changes it (CLAUDE.md rule 1).
 class_name WorldView
 extends Node2D
@@ -45,6 +51,10 @@ signal sounds(cues: Array[String])
 ## A new map: the object loops on it (AmbiencePick.loops_on, M12.4). The
 ## Audio autoload places their players under `loop_spots`.
 signal area_loops(loops: Array)
+## A replay reached entry `index` of the turn log (main.gd shows its lines).
+signal replay_step(index: int)
+## A replay ended by itself (not by skip_replay).
+signal replay_done
 
 const TILE := 32
 ## Old 16 px sizes are scaled by this.
@@ -117,6 +127,11 @@ const FOOT_RING := Vector2(11, 4)
 const FOOT_RING_Y := 11.0
 const FOOT_RING_POINTS := 16
 const FOOT_RING_ALPHA := 0.7
+## Replay (M17.3): the camera's move to the next fighter, the pause after a
+## fighter's turn, and a blow.
+const CAMERA_TIME := 0.25
+const REPLAY_PAUSE := 0.2
+const BLOW_TIME := 0.3
 
 ## Map id on screen now ("" = none).
 var area := ""
@@ -185,6 +200,12 @@ var _mix_cache := {}
 @onready var body: ColorRect = $Player/Body
 @onready var nose: ColorRect = $Player/Nose
 @onready var camera: Camera2D = $Player/Camera
+@onready var overlay: CombatOverlay = $CombatOverlay
+
+var _replaying := false
+## Bumped by skip_replay, so a replay still waiting on a timer stops.
+var _replay_run := 0
+var _cam_tween: Tween
 
 
 func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
@@ -231,7 +252,9 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 ## Redraws the map if the player changed area, then moves the marker and
 ## plays what changed since the last refresh. `db` (optional) gives the
 ## player's max HP, for a damage number when they were at full HP.
-func refresh(gs: GameState, db: DataDb = null) -> void:
+## `replayed` (M17.3): the command's turns were just replayed, so only the
+## falls and gone monsters of AnimDiff still play.
+func refresh(gs: GameState, db: DataDb = null, replayed: bool = false) -> void:
 	if _maps == null or not gs.player.is_placed():
 		return
 	_maps.sync_flags(gs.flags)  # the overlays are a cache shared by every game on this db
@@ -278,6 +301,9 @@ func refresh(gs: GameState, db: DataDb = null) -> void:
 		camera.reset_smoothing()
 	var snap := AnimDiff.snapshot(gs, Stats.max_hp(gs, db) if db != null else 0)
 	var changes: Array = [] if new_area else AnimDiff.events(_last, snap)
+	if replayed:
+		changes = changes.filter(func(e: Dictionary) -> bool:
+			return e["type"] == AnimDiff.FALL or e["type"] == AnimDiff.GONE)
 	_last = snap
 	play(changes)
 	cues.append_array(SoundCues.from_events(audio, changes, snap["units"]))
@@ -331,6 +357,129 @@ func play(changes: Array) -> void:
 					_lunge(node, e["dir"])
 
 
+## The map cell under a point in world space (M17.3: the mouse).
+func cell_at(global: Vector2) -> Vector2i:
+	return Vector2i((to_local(global) / TILE).floor())
+
+
+func is_replaying() -> bool:
+	return _replaying
+
+
+## The marker id (AnimDiff) of an Encounter fighter id.
+static func unit_of(fighter: String) -> String:
+	if fighter == Encounter.PLAYER:
+		return AnimDiff.PLAYER
+	if fighter.begins_with(Encounter.NPC):
+		return fighter.substr(Encounter.NPC.length())
+	return fighter
+
+
+## Plays the turn log `turns` (CombatState.turns) on the markers drawn now
+## (M17.3). Emits replay_step(i) as each entry starts and replay_done at the
+## end. The camera leaves the player for the replay and comes back after it.
+func replay(turns: Array) -> void:
+	_replay_run += 1
+	var run := _replay_run
+	_replaying = true
+	var from := camera.global_position
+	camera.top_level = true
+	camera.global_position = from
+	for i in turns.size():
+		var t: Dictionary = turns[i]
+		replay_step.emit(i)
+		var id := unit_of(String(t["id"]))
+		var node := _unit_node(id)
+		if node == null:
+			continue
+		await _pan(node.position).finished
+		if run != _replay_run:
+			return
+		overlay.mark_active(cell_at(node.global_position))
+		var cell := cell_at(node.global_position)
+		for to: Vector2i in t["path"]:
+			var dir := AnimDiff.dir_of(to - cell)
+			var old := node.position
+			node.position = cell_center(to)
+			_glide(node, id, old - node.position, dir)
+			if _is_monster(id):
+				monster_facing[id] = dir
+			cell = to
+			overlay.mark_active(cell)
+			_pan(node.position)
+			await get_tree().create_timer(STEP_TIME).timeout
+			if run != _replay_run:
+				return
+		for s: Dictionary in t["strikes"]:
+			var hit := _unit_node(unit_of(String(s["target"])))
+			if hit == null:
+				continue
+			var dir := AnimDiff.dir_of(cell_at(hit.global_position) - cell)
+			_blow_sounds(id, unit_of(String(s["target"])), s)
+			if not bool(s.get("ranged", false)):
+				var swinging := _sprite_of(node)
+				if swinging != null:
+					swinging.attack(dir)
+				else:
+					_lunge(node, dir)
+			if _is_monster(id):
+				monster_facing[id] = dir
+			if bool(s["hit"]):
+				_flash(hit)
+				_number(hit.position, int(s["damage"]), hit == player)
+			await get_tree().create_timer(BLOW_TIME).timeout
+			if run != _replay_run:
+				return
+		await get_tree().create_timer(REPLAY_PAUSE).timeout
+		if run != _replay_run:
+			return
+	_end_replay()
+	replay_done.emit()
+
+
+## The sounds of one blow in a replay: a swing (not for a throw), then the
+## hit and the voice of a hurt monster.
+func _blow_sounds(by: String, target: String, s: Dictionary) -> void:
+	if audio == null:
+		return
+	var events: Array = []
+	if not bool(s.get("ranged", false)):
+		events.append({"type": AnimDiff.SWING, "id": by, "dir": "s"})
+	if bool(s["hit"]):
+		events.append({"type": AnimDiff.HIT, "id": target, "amount": int(s["damage"])})
+	var cues := SoundCues.from_events(audio, events, _last.get("units", {}))
+	if not cues.is_empty():
+		sounds.emit(cues)
+
+
+## Ends a replay at once (a key or a click during it). No replay_done.
+func skip_replay() -> void:
+	if not _replaying:
+		return
+	_replay_run += 1
+	_end_replay()
+
+
+func _end_replay() -> void:
+	_replaying = false
+	if _cam_tween != null and _cam_tween.is_valid():
+		_cam_tween.kill()
+	overlay.clear_active()
+	camera.top_level = false
+	camera.position = Vector2.ZERO
+	camera.reset_smoothing()
+
+
+## Moves the camera to `at` (map space). Returns the tween (await its
+## `finished`); a newer pan stops an older one.
+func _pan(at: Vector2) -> Tween:
+	if _cam_tween != null and _cam_tween.is_valid():
+		_cam_tween.kill()
+	_cam_tween = camera.create_tween()
+	_cam_tween.tween_property(camera, "global_position", to_global(at), CAMERA_TIME)
+	return _cam_tween
+
+
 ## The marker of a unit: the player, an NPC or a monster (null = none).
 func _unit_node(id: String) -> Node2D:
 	if id == AnimDiff.PLAYER:
@@ -365,7 +514,7 @@ func _glide(node: Node2D, id: String, from: Vector2, dir: String) -> void:
 			s.half = int(_halves.get(id, 0))
 			s.walk(dir, from, STEP_TIME)
 			_halves[id] = s.half
-		elif c is Control or c is Node2D:
+		elif (c is Control or c is Node2D) and not c is Camera2D:
 			if t == null:
 				t = node.create_tween().set_parallel(true)
 			var base: Vector2 = c.position
