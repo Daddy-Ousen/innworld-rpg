@@ -12,7 +12,10 @@
 ##   fight: {} when there is none, else {"start": clock minute,
 ##          "foes": {monster id: type} (everyone who took part), "attacks",
 ##          "improvised" (attacks with a held item), "blocks", "throws",
-##          "kills", "routed"}. Combat.end_fight turns it into action records.
+##          "kills", "routed", "casts", "peak", "low"}. Combat.end_fight turns it into action
+##          records. "peak" / "low" (M17.8, per mille of max HP, -1 = no foe hit yet): the
+##          highest HP before a foe's blow and the lowest after one; their gap is the
+##          fight's XP duress (Combat.fight_lost). Hidden; no save version change (tolerant read).
 ##   lines: combat text from the last command (the UI shows it).
 ##   stage_run: {} or the staged fight in progress (M7.B): {"event": event id,
 ##              "start": world second it began, "next": index of its next wave}.
@@ -124,6 +127,9 @@ static func from_dict(d: Dictionary) -> CombatState:
 	if not f.is_empty():
 		for k: String in FIGHT_INTS:
 			f[k] = int(f.get(k, 0))
+		# M17.8: HP marks in per mille; -1 = no foe hit yet (a save made before has none)
+		f["peak"] = int(f.get("peak", -1))
+		f["low"] = int(f.get("low", -1))
 	c.fight = f
 	var run: Dictionary = (d.get("stage_run", {}) as Dictionary).duplicate()
 	if not run.is_empty():
