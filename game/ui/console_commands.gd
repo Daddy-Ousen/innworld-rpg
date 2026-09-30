@@ -42,6 +42,8 @@ const HELP := [
 	"  focus <tag ...> / focus clear      journal focus (conviction bonus)",
 	"  pools                              hidden class pools (debug)",
 	"  breakthrough <class>               allow the next capstone level (debug)",
+	"  skill <id>                         give yourself a Skill (debug, e.g. power_strike)",
+	"  useskill <id> [monster]            use a combat Skill in a fight (keys 1-9 in the game)",
 	"  kill <npc>                         kill a canon NPC (debug)",
 	"  flag <key> [value] / flag <key> off   set or clear a world flag (debug)",
 	"  history                            what happened to canon events (debug)",
@@ -154,6 +156,16 @@ func execute(line: String) -> Array[String]:
 			if out.is_empty():
 				var ok := Commands.grant_breakthrough(gs, args[0])
 				out.append("Breakthrough granted." if ok else "You do not have the class '%s'." % args[0])
+		"skill":
+			out = _need_arg(args, "skill <id>")
+			if out.is_empty():
+				var err := Commands.grant_skill(gs, db, args[0])
+				out.append(err if err != "" else "You have %s." % String(db.skills[args[0]]["name"]))
+		"useskill":
+			out = _need_arg(args, "useskill <id> [monster]")
+			if out.is_empty():
+				out = _combat(String(Commands.use_skill(gs, db, args[0],
+						args[1] if args.size() > 1 else "")["error"]))
 		"kill":
 			out = _need_arg(args, "kill <npc>")
 			if out.is_empty():

@@ -293,11 +293,12 @@
 			"rarity": "uncommon",
 			"pools": [
 				{"class": "warrior", "min_level": 4, "max_level": 15, "weight": 1.0},
-				{"class": "guardsman", "min_level": 4, "max_level": 15, "weight": 1.0}
+				{"class": "guardsman", "min_level": 4, "max_level": 15, "weight": 1.0},
+				{"class": "innkeeper", "min_level": 10, "max_level": 20, "weight": 0.5}
 			],
 			"tag_affinity": {"combat.melee": 1.0},
-			"effects": [{"type": "stat_mod", "stat": "strength", "value": 1}],
-			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 12, "cooldown": 2, "damage_mult": 2.0}],
+			"canon_ref": {"book": 1, "chapter": "1.56", "confidence": "likely", "note": "M17.4: Erin learns it in 1.56 and Toren has it in 2.24T; one very strong blow. The AP, cooldown and x2 damage are design numbers."}
 		},
 		"iron_guard": {
 			"name": "[Iron Guard]",
@@ -460,6 +461,85 @@
 			"tag_affinity": {"cooking": 1.0},
 			"effects": [],
 			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "guess", "note": "The name is confirmed; the effect (food kept fresh) is a guess from a cut apple left to see. Not modelled."}
+		},
+		"lesser_stamina": {
+			"name": "[Lesser Stamina]",
+			"rarity": "common",
+			"pools": [
+				{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "server", "min_level": 1, "max_level": 9, "weight": 1.0},
+				{"class": "laborer", "min_level": 1, "max_level": 9, "weight": 1.0}
+			],
+			"tag_affinity": {"labor": 0.6, "combat": 0.6},
+			"effects": [{"type": "ap_mod", "value_q": 4}],
+			"canon_ref": {"book": 2, "chapter": "2.42", "confidence": "confirmed", "note": "M17.4: Lyonette gets it as a [Barmaid] (2.42), Geneva has it (1.01D), a [Warrior] gets it at level 1. It keeps you going longer; +1 AP per turn is the user's rule (ADR 0022)."}
+		},
+		"unerring_throw": {
+			"name": "[Unerring Throw]",
+			"rarity": "uncommon",
+			"pools": [{"class": "innkeeper", "min_level": 5, "max_level": 15, "weight": 1.0}],
+			"tag_affinity": {"combat.thrown": 1.0},
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 8, "cooldown": 1, "thrown": true, "sure_hit": true}],
+			"canon_ref": {"book": 1, "chapter": "1.14", "confidence": "confirmed", "note": "M17.4: Erin gets it at [Innkeeper] level 9; what she throws hits where she aims. A throw of the held item that never misses; AP and cooldown are design numbers."}
+		},
+		"quick_strike": {
+			"name": "[Quick Strike]",
+			"rarity": "common",
+			"pools": [{"class": "warrior", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 4, "cooldown": 1}],
+			"canon_ref": {"book": 5, "chapter": "4.22E", "confidence": "likely", "note": "M17.4: Durene uses it; a basic fast attack. A plain blow for 1 AP instead of 2, once a round."}
+		},
+		"triple_thrust": {
+			"name": "[Triple Thrust]",
+			"rarity": "rare",
+			"pools": [
+				{"class": "warrior", "min_level": 10, "max_level": 20, "weight": 0.5},
+				{"class": "guardsman", "min_level": 10, "max_level": 20, "weight": 0.5}
+			],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 16, "cooldown": 3, "hits": 3}],
+			"canon_ref": {"book": 1, "chapter": "1.51", "confidence": "likely", "note": "M17.4: Relc's rare [Spearmaster] Skill: three thrusts in one attack. Three blows for 4 AP; numbers are design."}
+		},
+		"whirlwind_cleave": {
+			"name": "[Whirlwind Cleave]",
+			"rarity": "rare",
+			"pools": [{"class": "warrior", "min_level": 10, "max_level": 20, "weight": 0.5}],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "combat_action", "kind": "area", "shape": "around", "ap_q": 16, "cooldown": 3}],
+			"canon_ref": {"book": 1, "chapter": "1.58H", "confidence": "guess", "note": "M17.4: only the name is in the text (a fighter's Skill in 1.58H). A spinning cut at every foe around you is a guess from the name."}
+		},
+		"mirage_cut": {
+			"name": "[Mirage Cut]",
+			"rarity": "rare",
+			"pools": [],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 12, "cooldown": 2, "hit_bonus": 0.3}],
+			"canon_ref": {"book": 2, "chapter": "2.24T", "confidence": "likely", "note": "M17.4: Toren's blurred cut that is hard to see or block. NPC only (no pool)."}
+		},
+		"minotaur_punch": {
+			"name": "[Minotaur Punch]",
+			"rarity": "rare",
+			"pools": [],
+			"tag_affinity": {"combat.melee": 1.0},
+			"effects": [{"type": "combat_action", "kind": "strike", "ap_q": 12, "cooldown": 3, "damage_mult": 3.0}],
+			"canon_ref": {"book": 2, "chapter": "2.26", "confidence": "confirmed", "note": "M17.4: Erin's [Power Strike] changes into it in 2.26. NPC only (no pool): the change of a Skill is not modelled for the player."}
+		},
+		"fast_sprint": {
+			"name": "[Fast Sprint]",
+			"rarity": "common",
+			"pools": [{"class": "runner", "min_level": 1, "max_level": 9, "weight": 1.0}],
+			"tag_affinity": {"running": 1.0},
+			"effects": [{"type": "combat_action", "kind": "self", "ap_q": 2, "cooldown": 3, "move_q": 4}],
+			"canon_ref": {"book": 1, "chapter": "1.55R", "confidence": "likely", "note": "M17.4: [Runners] use it in a race for a burst of speed. +1 AP of movement this turn for 0.5 AP."}
+		},
+		"quick_recovery": {
+			"name": "[Quick Recovery]",
+			"rarity": "uncommon",
+			"pools": [{"class": "innkeeper", "min_level": 15, "max_level": 25, "weight": 1.0}],
+			"tag_affinity": {"combat": 0.5},
+			"effects": [{"type": "combat_action", "kind": "self", "ap_q": 8, "cooldown": 5, "heal": 0.25}],
+			"canon_ref": {"book": 1, "chapter": "1.63", "confidence": "guess", "note": "M17.4: Erin gets it at [Innkeeper] level 18; only the name is in the text. A quarter of max HP back in a fight is a guess."}
 		}
 	}
 }

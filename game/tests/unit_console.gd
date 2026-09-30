@@ -39,6 +39,18 @@ func test_do_parses_repeat_options_and_context() -> void:
 	assert_eq(c.gs.clock.total_minutes, _start() + 2 * 90)
 
 
+func test_skill_gives_a_skill_and_useskill_needs_a_fight() -> void:
+	var c := ConsoleCommands.new(_db)
+	assert_eq(_text(c.execute("skill fast_sprint")), "You have [Fast Sprint].")
+	assert_true(c.gs.progression.has_skill("fast_sprint"))
+	assert_string_contains(_text(c.execute("skill fast_sprint")), "already have")
+	assert_string_contains(_text(c.execute("skill fly")), "Unknown skill")
+	assert_string_contains(_text(c.execute("status")), "[Fast Sprint]")
+	assert_string_contains(_text(c.execute("useskill fast_sprint")), CombatSkills.NOT_IN_FIGHT)
+	assert_string_contains(_text(CharacterSheet.lines(c.gs, _db)), "  [Fast Sprint]",
+			"the sheet shows a debug Skill (no class)")
+
+
 func test_do_unknown_action() -> void:
 	var c := ConsoleCommands.new(_db)
 	assert_string_contains(_text(c.execute("do fly")), "Unknown action")

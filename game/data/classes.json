@@ -109,6 +109,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["running", "travel"]},
 			"consolidation": null,
+			"combat": {"move_ap_mod_q": 4, "note": "M17.4: the user's rule (ADR 0022): a [Runner] may spend 2 AP (8 tiles) on moving in a turn, not 1."},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
 		},
 		"warrior": {

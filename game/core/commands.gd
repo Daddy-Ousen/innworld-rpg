@@ -83,6 +83,17 @@ static func grant_breakthrough(gs: GameState, class_id: String) -> bool:
 	return ClassSystem.grant_breakthrough(gs, class_id)
 
 
+## Debug (M17.4): gives the player skill `skill_id` (no class, today). Returns
+## "" or an error text.
+static func grant_skill(gs: GameState, db: DataDb, skill_id: String) -> String:
+	if not db.skills.has(skill_id):
+		return "Unknown skill '%s'." % skill_id
+	if gs.progression.has_skill(skill_id):
+		return "You already have %s." % String(db.skills[skill_id]["name"])
+	gs.progression.skills.append({"id": skill_id, "class": "", "level": 0, "day": gs.clock.day()})
+	return ""
+
+
 ## The player kills a canon NPC. Returns "" or an error text.
 static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 	var err := Director.player_kill(gs, db, npc)
@@ -220,7 +231,14 @@ static func _encounter_attack(gs: GameState, db: DataDb, dir: String) -> Diction
 ## as the player's; `prefix` makes the target a fighter id (Encounter.NPC).
 static func _encounter_act(gs: GameState, db: DataDb, cost_key: String, act: Callable,
 		empty: Dictionary, prefix: String = "") -> Dictionary:
-	var cost := int(Encounter.rules(db)[cost_key])
+	return _encounter_act_q(gs, db, int(Encounter.rules(db)[cost_key]), cost_key == "throw_cost_q",
+			act, empty, prefix)
+
+
+## _encounter_act for `cost` q (M17.4: a Skill's ap_q). `ranged`: the logged
+## blow is a throw.
+static func _encounter_act_q(gs: GameState, db: DataDb, cost: int, ranged: bool, act: Callable,
+		empty: Dictionary, prefix: String = "") -> Dictionary:
 	var why := Encounter.check(gs, db, cost, false)
 	if why != "":
 		gs.combat.lines.append(why)
@@ -233,8 +251,7 @@ static func _encounter_act(gs: GameState, db: DataDb, cost_key: String, act: Cal
 	if paid:
 		Encounter.pay(gs, cost, false)
 		if String(r.get("target", "")) != "" and r.has("damage"):
-			Encounter.log_strike(gs, prefix + String(r["target"]), int(r["damage"]),
-					cost_key == "throw_cost_q")
+			Encounter.log_strike(gs, prefix + String(r["target"]), int(r["damage"]), ranged)
 	Encounter.log_end(gs)
 	_after(gs, db)
 	if paid:
@@ -400,6 +417,22 @@ static func attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var r := Combat.player_attack(gs, db, dir)
 	_after(gs, db)
 	return r
+
+
+## M17.4: uses the player's combat Skill `skill_id` on monster `target` (a
+## strike's foe; "" for area and self Skills) for its ap_q. Only in a fight,
+## on the player's turn. Returns CombatSkills.use's result, or {"error"}.
+static func use_skill(gs: GameState, db: DataDb, skill_id: String, target: String = "") -> Dictionary:
+	Combat.begin_command(gs)
+	var empty := {"error": "", "skill": skill_id, "strikes": [], "healed": 0, "move_q": 0}
+	var why := CombatSkills.why_not(gs, db, skill_id, target)
+	if why != "":
+		gs.combat.lines.append(why)
+		empty["error"] = why
+		return empty
+	var cost := int(CombatSkills.action_of(db, skill_id)["ap_q"])
+	var act := func() -> Dictionary: return CombatSkills.use(gs, db, skill_id, target)
+	return _encounter_act_q(gs, db, cost, false, act, empty)
 
 
 ## Raises the guard for one turn. Returns "" or an error text.

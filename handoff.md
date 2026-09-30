@@ -1,8 +1,35 @@
 # Handoff
 
-## Just done (2026-09-30, M17.3 combat screen)
+## Just done (2026-09-30, M17.4 Skills in combat)
+- Branch `feat/m17.4-skills` (from main d470158), 4 commits: core, data + unit_combat_skills, ui + unit_skill_bar,
+  docs. NOT pushed. Ask the user before push / PR. Plan: `C:/Users/rhasa/.claude/plans/vast-foraging-rabbit.md`.
+  Detail: ADR 0027 "M17.4".
+- User answers: cooldown in rounds; the [Runner] CLASS gives the move cap (classes.json `combat.move_ap_mod_q`);
+  kinds strike / area / self; NPC allies use Skills now (monsters in M17.7).
+- Core: `core/combat_skills.gd`; `Commands.use_skill` (via `_encounter_act_q`, cost in q); `Combat.strike_at`,
+  `throw_at(mods)`, `_strike(mods)`, `player_hit_chance(extra)`; `NpcReact._hit(mods)`; `Encounter` reads
+  `CombatSkills.ap_bonus_q` / `move_cap_q`, ticks cooldowns at a round's start, NPC fighters try `npc_pick`
+  first. Save v19 (`cool`, `move_bonus_q` in the encounter). DataDb checks `ap_mod`, `combat_action`, class
+  `combat`; BehaviourDb checks NPC `combat.skills` (skill ids and canon event ids).
+- Data: 9 new skills + [Power Strike] turned into an action; [Runner] `move_ap_mod_q: 4`; Erin / Relc / Toren
+  `combat.skills` with `after_event` / `until_event`.
+- UI: `ui/skill_bar.gd` (row in the combat bar, built in code), keys 1-9 in `world/main.gd` (`pick_skill`,
+  `use_skill`, `disarm`, `armed_skill`), `CombatOverlay.marks` (gold frames), help line in `SystemMessages.KEYS`.
+- Tests: full suite (subagent) 124 scripts, 1185 tests, all pass, no parse errors. Validator 0 errors, Python 95 OK.
+- Open lore flag: [Tavern Brawling] is [Bar Fighting] in the Book (1.14); no "greater stamina" name found.
+- Debug: console `skill <id>` (`Commands.grant_skill`, class "" level 0; the character sheet lists it without a
+  class) and `useskill <id> [monster]`. Test in `unit_console`.
+- Next: the user plays a fight with a Skill (`godot --path game`, then ` for the console, `skill power_strike`);
+  push + PR when the user says so; then M17.5 (mana and spells, plan mode first). Line and blast shapes were
+  left for M17.5 spells.
+- Gotchas: a sure hit still rolls `randf` (keeps the random stream). The Bash safety check failed now and then
+  this session; Edit / Grep still worked. `--import` segfaulted once but imported.
+- Test runner: scratchpad `run_targets.sh [-t secs] <script>...` (gone next session).
+
+## Earlier (2026-09-30, M17.3 combat screen)
 - PR #80 merged (07f19a3); tag `m17.2-done` set and pushed. Branch `feat/m17.3-screen` from main, 3 commits
-  (core, ui, docs). NOT pushed: ask the user before push / PR. After the merge: tag `m17.3-done`.
+  (core, ui, docs). Merged as PR #81 (d470158), tag `m17.3-done` pushed. This note lives on branch
+  `feat/m17.4-skills` (from main d470158; not pushed).
   Plan: `C:/Users/rhasa/.claude/plans/eventual-enchanting-teacup.md`. Detail: ADR 0027 "M17.3" section.
 - User answers: the camera replays each fighter's turn; a click on a far foe walks up and hits; mouse in fights only.
 - Core: `Movement.can_enter`, `Encounter.reach` / `plan_to` / `log_*` / `hp_of`, `Combat.player_hit_chance`,
@@ -13,7 +40,7 @@
 - Tests: new `unit_combat_preview` (15), `unit_combat_screen` (11, real data on `ruins_entrance`). Full suite
   (subagent): 122 scripts, 1159 tests, all pass, no parse errors. Validator 0 errors, Python 95 OK.
 - Screenshot for the user: `The Wandering Inn Books 1-17 Pirateaba/Temp/m17.3_fight.png` (gitignored).
-- Next: the user plays a fight (`godot --path game`), then push + PR; then M17.4 (Skills in combat, plan mode first).
+- Next: the user plays a fight (`godot --path game`); M17.4 (Skills in combat, plan mode first) on `feat/m17.4-skills`.
 - Gotchas: a replay only runs when a display exists; a main-scene test that wants it sets `main.replay_turns = true`.
   A non-headless Godot run rewrites every asset `.import`: `git ls-files -m game/assets | xargs -r git checkout --`.
   Main-scene tests leave GUT "orphans" (warnings only; old tests do the same).

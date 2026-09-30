@@ -18,6 +18,11 @@
 ## their turns (the log lines come with each turn); any key or click skips
 ## the replay. Replays are off headless (`replay_turns`), so the sims that
 ## drive this scene see each command's end state at once.
+## M17.4: keys 1-9 (or the Skill bar's buttons) use a combat Skill. A self or
+## area Skill, or a strike with one foe in reach, fires at once; else the
+## strike is armed: gold frames show its foes, and a click on one (or a
+## direction key towards it) uses it. Esc, a right click or the same key again
+## lets it go.
 ## Presentation only (CLAUDE.md rule 1).
 extends Node
 
@@ -53,6 +58,8 @@ var _replay_lines: Array = []
 var _replay_tail: Array = []
 ## The next redraw follows a replay (WorldView.refresh `replayed`).
 var _replayed := false
+## The strike Skill waiting for its target (M17.4; "" = none).
+var _armed := ""
 
 @onready var view: WorldView = $WorldView
 @onready var hud: Hud = $HudLayer/HUD
@@ -90,6 +97,7 @@ func _ready() -> void:
 	dialog.closed.connect(_on_dialog_closed)
 	dialog.struck.connect(attack_npc.bind(true))
 	bar.end_turn.connect(end_turn)
+	bar.skill.connect(pick_skill)
 	view.replay_step.connect(_on_replay_step)
 	view.replay_done.connect(_on_replay_done)
 	journal.focus_changed.connect(Session.changed)
@@ -145,6 +153,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		_mouse(event)
 		return
 	if is_busy() or not event is InputEventKey or not event.pressed or event.echo:
+		return
+	var code: int = event.physical_keycode
+	if code >= KEY_1 and code <= KEY_9:
+		var ids := bar.skills().ids()
+		if code - KEY_1 < ids.size():
+			pick_skill(ids[code - KEY_1])
+		get_viewport().set_input_as_handled()
+		return
+	if code == KEY_ESCAPE and _armed != "":
+		disarm()
+		get_viewport().set_input_as_handled()
 		return
 	match event.physical_keycode:
 		KEY_E:
@@ -209,6 +228,14 @@ func step(dir: String) -> void:
 	skip_replay()
 	var gs := Session.gs
 	var db := Session.db
+	if _armed != "" and dir != WAIT:
+		_attack_dir = dir  # the key must be let go before it acts again
+		var foe := gs.combat.at(gs.player.area, gs.player.pos() + (PlayerState.DIRS[dir] as Vector2i))
+		if CombatSkills.targets(gs, db, _armed).has(foe):
+			use_skill(_armed, foe)
+		else:
+			hud.add_lines([CombatSkills.NO_FOE])
+		return
 	var was_indoor := db.maps.is_indoor(gs.player.area)
 	var r := {"refused": Commands.wait(gs, db, int(db.rules["world"]["step_seconds"])) < 0,
 			"exit_to": "", "npc": ""} if dir == WAIT else Commands.move(gs, db, dir)
@@ -247,6 +274,58 @@ func throw() -> void:
 		hud.add_lines(["There is nothing to throw at."])
 		return
 	_command_error(_sound_if_ok(Commands.throw(Session.gs, Session.db, target)["error"], "throw"))
+
+
+## Picks combat Skill `id` (a key 1-9 or its button, M17.4): a self or area
+## Skill, or a strike with one foe in reach, is used at once; a strike with
+## more foes is armed (picking it again lets it go).
+func pick_skill(id: String) -> void:
+	skip_replay()
+	var gs := Session.gs
+	var db := Session.db
+	var a := CombatSkills.action_of(db, id)
+	if a.is_empty() or not Encounter.is_player_turn(gs):
+		return
+	if _armed == id:
+		disarm()
+		return
+	if a["kind"] != CombatSkills.STRIKE:
+		use_skill(id)
+		return
+	var foes := CombatSkills.targets(gs, db, id)
+	if foes.is_empty():
+		var why := CombatSkills.why_not(gs, db, id, Combat.nearest_foe(gs))
+		hud.add_lines([why if why != "" else CombatSkills.NO_FOE])
+		return
+	if foes.size() == 1:
+		use_skill(id, foes[0])
+		return
+	_cancel_walk()
+	_armed = id
+	bar.skills().set_armed(id)
+	_update_overlay()
+
+
+## Lets the armed Skill go.
+func disarm() -> void:
+	_armed = ""
+	bar.skills().set_armed("")
+	_update_overlay()
+
+
+func armed_skill() -> String:
+	return _armed
+
+
+## Uses combat Skill `id` on monster `target` ("" for area and self Skills).
+func use_skill(id: String, target: String = "") -> void:
+	skip_replay()
+	_cancel_walk()
+	_armed = ""
+	bar.skills().set_armed("")
+	var thrown := bool(CombatSkills.action_of(Session.db, id).get("thrown", false))
+	var r := Commands.use_skill(Session.gs, Session.db, id, target)
+	_command_error(_sound_if_ok(String(r["error"]), "throw" if thrown else "swing"))
 
 
 ## Puts the held item down (X).
@@ -483,6 +562,8 @@ func _mouse(event: InputEventMouse) -> void:
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_cancel_walk()
+			if _armed != "":
+				disarm()
 			get_viewport().set_input_as_handled()
 
 
@@ -497,6 +578,13 @@ func click(cell: Vector2i) -> void:
 	skip_replay()
 	var gs := Session.gs
 	if not Encounter.is_player_turn(gs):
+		return
+	if _armed != "":
+		var foe := gs.combat.at(gs.player.area, cell)
+		if CombatSkills.targets(gs, Session.db, _armed).has(foe):
+			use_skill(_armed, foe)
+		else:
+			disarm()
 		return
 	var plan := Encounter.plan_to(gs, Session.db, cell)
 	if plan.is_empty():
@@ -549,7 +637,18 @@ func _update_overlay() -> void:
 	var gs := Session.gs
 	if not Encounter.is_player_turn(gs):
 		view.overlay.clear()
+		if _armed != "":
+			_armed = ""
+			bar.skills().set_armed("")
 		return
+	var marks: Array[Vector2i] = []
+	if _armed != "":
+		for foe in CombatSkills.targets(gs, Session.db, _armed):
+			marks.append(CombatState.pos_of(gs.combat.monsters[foe]))
+		if marks.is_empty():  # nothing left to hit (the foe fell, AP ran out)
+			_armed = ""
+			bar.skills().set_armed("")
+	view.overlay.show_marks(marks)
 	var reach := Encounter.reach(gs, Session.db)
 	var exits := {}
 	for cell: Vector2i in reach:
@@ -563,6 +662,14 @@ func _update_overlay() -> void:
 func _show_plan() -> void:
 	var gs := Session.gs
 	var db := Session.db
+	if _armed != "":  # M17.4: the armed Skill's hit chance on the foe under the mouse
+		var foe := gs.combat.at(gs.player.area, _hover)
+		if CombatSkills.targets(gs, db, _armed).has(foe):
+			view.overlay.show_plan([] as Array[Vector2i], true, _hover,
+					"%d%%" % roundi(CombatSkills.hit_chance(gs, db, _armed, foe) * 100.0))
+		else:
+			view.overlay.clear_plan()
+		return
 	var plan := Encounter.plan_to(gs, db, _hover) if Encounter.is_player_turn(gs) else {}
 	if plan.is_empty():
 		view.overlay.clear_plan()

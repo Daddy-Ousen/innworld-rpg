@@ -73,7 +73,8 @@ static func sync(gs: GameState, db: DataDb) -> void:
 		return
 	if enabled(db) and not Combat.is_down(gs) \
 			and ((c.has_fight() and _has_hostile(gs)) or Brawl.hostile_near(gs)):
-		c.encounter = {"round": 0, "order": [], "tie": {}, "turn": 0, "ap_q": 0, "moved_q": 0}
+		c.encounter = {"round": 0, "order": [], "tie": {}, "turn": 0, "ap_q": 0, "moved_q": 0,
+			"cool": {}, "move_bonus_q": 0}
 		_new_round(gs, db)
 		_run_until_player(gs, db)
 
@@ -84,10 +85,11 @@ static func _over(gs: GameState) -> bool:
 
 
 ## The player's AP for a turn: ap_base_q, plus one AP for each of
-## ap_total_levels the total class level has reached (silent; ADR 0022).
+## ap_total_levels the total class level has reached (silent; ADR 0022),
+## plus the ap_mod Skills (M17.4).
 static func player_ap(gs: GameState, db: DataDb) -> int:
 	var t := rules(db)
-	var ap := int(t["ap_base_q"])
+	var ap := int(t["ap_base_q"]) + CombatSkills.ap_bonus_q(gs, db)
 	var total := gs.progression.total_level()
 	for lv: Variant in t.get("ap_total_levels", []):
 		if total >= int(lv):
@@ -117,7 +119,7 @@ static func check(gs: GameState, db: DataDb, cost_q: int, move: bool) -> String:
 	if not is_player_turn(gs):
 		return NOT_YOUR_TURN
 	var e := gs.combat.encounter
-	if move and int(e["moved_q"]) + cost_q > int(rules(db)["move_cap_q"]):
+	if move and int(e["moved_q"]) + cost_q > CombatSkills.move_cap_q(gs, db):
 		return NO_MOVE
 	if int(e["ap_q"]) < cost_q:
 		return NO_AP
@@ -142,7 +144,8 @@ static func reach(gs: GameState, db: DataDb) -> Dictionary:
 		return {}
 	var t := rules(db)
 	var e := gs.combat.encounter
-	var budget := mini(int(e["ap_q"]), int(t["move_cap_q"]) - int(e["moved_q"])) / int(t["move_cost_q"])
+	var budget := mini(int(e["ap_q"]), CombatSkills.move_cap_q(gs, db) - int(e["moved_q"])) \
+			/ int(t["move_cost_q"])
 	var area := gs.player.area
 	var start := gs.player.pos()
 	var came := {start: []}
@@ -298,8 +301,14 @@ static func maybe_end_turn(gs: GameState, db: DataDb) -> bool:
 	var e := gs.combat.encounter
 	var ap := int(e["ap_q"])
 	var step := int(t["move_cost_q"])
-	if (ap >= step and int(e["moved_q"]) + step <= int(t["move_cap_q"])) or ap >= int(t["item_cost_q"]):
+	if (ap >= step and int(e["moved_q"]) + step <= CombatSkills.move_cap_q(gs, db)) \
+			or ap >= int(t["item_cost_q"]):
 		return false
+	for id in CombatSkills.actions(gs, db):  # M17.4: a ready self Skill it can pay for
+		var a := CombatSkills.action_of(db, id)
+		if a["kind"] == CombatSkills.SELF and ap >= int(a["ap_q"]) \
+				and CombatSkills.rounds_left(gs, PLAYER, id) == 0:
+			return false
 	gs.combat.lines.append(TURN_OVER)
 	end_player_turn(gs, db)
 	return true
@@ -343,6 +352,7 @@ static func npc_fights(gs: GameState, db: DataDb, npc: String, held: Variant = n
 static func _new_round(gs: GameState, db: DataDb) -> void:
 	var e := gs.combat.encounter
 	e["round"] = int(e["round"]) + 1
+	CombatSkills.tick(gs)
 	var ids: Array[String] = [PLAYER]
 	for id in gs.combat.ids():
 		if _is_fighter(gs, db, id):
@@ -389,6 +399,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 		if id == PLAYER:
 			e["ap_q"] = player_ap(gs, db)
 			e["moved_q"] = 0
+			e["move_bonus_q"] = 0
 			c.blocking = false  # a guard lasts until the player's next turn
 			return
 		if _is_fighter(gs, db, id):
@@ -543,6 +554,10 @@ static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
 			if foe == "":
 				return
 			if NpcReact._manhattan(pos, CombatState.pos_of(gs.combat.monsters[foe])) == 1:
+				var skill := CombatSkills.npc_pick(gs, db, npc, ap)  # M17.4
+				if skill != "":
+					ap -= CombatSkills.npc_use(gs, db, npc, skill, foe)
+					continue
 				if ap < atk:
 					return
 				_logged_hit(gs, db, foe, func() -> void: NpcReact._hit(gs, db, npc, foe))

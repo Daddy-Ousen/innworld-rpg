@@ -49,7 +49,12 @@ const EFFECT_FIELDS := {
 	"stat_mod": ["stat", "value"],
 	"action_unlock": ["action"],
 	"passive_trigger": ["trigger", "special"],
+	"ap_mod": ["value_q"],
+	"combat_action": ["kind", "ap_q", "cooldown"],
 }
+## combat_action kinds and area shapes (M17.4, CombatSkills).
+const ACTION_KINDS := ["strike", "area", "self"]
+const AREA_SHAPES := ["around"]
 
 var tags: Dictionary = {}
 var actions: Dictionary = {}
@@ -302,6 +307,9 @@ func _validate_class(id: String, c: Dictionary) -> void:
 		_check_class_ids(where + " consolidation", from, id)
 		if int(cons.get("level_cost", -1)) < 0:
 			errors.append("%s consolidation: level_cost must be >= 0." % where)
+	var fight: Variant = c.get("combat", {})
+	if not fight is Dictionary or int((fight as Dictionary).get("move_ap_mod_q", 0)) < 0:
+		errors.append("%s: combat must be {\"move_ap_mod_q\": q >= 0}." % where)
 	_check_canon_ref(where, c["canon_ref"])
 
 
@@ -312,8 +320,10 @@ func _validate_skill(id: String, s: Dictionary) -> void:
 	if not RARITIES.has(s["rarity"]):
 		errors.append("%s: rarity must be one of %s." % [where, RARITIES])
 	var pools: Array = s["pools"]
-	if pools.is_empty():
-		errors.append("%s: needs at least one pool." % where)
+	var npc_only := (s["effects"] as Array).any(func(e: Dictionary) -> bool:
+		return e.get("type", "") == "combat_action")
+	if pools.is_empty() and not npc_only:
+		errors.append("%s: needs at least one pool (only a combat Skill may have none)." % where)
 	for p: Dictionary in pools:
 		if not classes.has(p.get("class", "")):
 			errors.append("%s pool: unknown class '%s'." % [where, p.get("class", "")])
@@ -338,7 +348,29 @@ func _validate_skill(id: String, s: Dictionary) -> void:
 			"action_unlock":
 				if not actions.has(e["action"]):
 					errors.append("%s action_unlock: unknown action '%s'." % [where, e["action"]])
+			"ap_mod":
+				if int(e["value_q"]) <= 0:
+					errors.append("%s ap_mod: value_q must be > 0." % where)
+			"combat_action":
+				_check_action(where + " combat_action", e)
 	_check_canon_ref(where, s["canon_ref"])
+
+
+## M17.4: a combat_action effect (CombatSkills). AP 1–10 (4–40 q).
+func _check_action(where: String, e: Dictionary) -> void:
+	var kind: String = e["kind"]
+	if not ACTION_KINDS.has(kind):
+		errors.append("%s: kind must be one of %s." % [where, ACTION_KINDS])
+	if int(e["ap_q"]) < 1 or int(e["ap_q"]) > 40:
+		errors.append("%s: ap_q must be 1-40 (up to 10 AP)." % where)
+	if int(e["cooldown"]) < 0:
+		errors.append("%s: cooldown must be >= 0." % where)
+	if int(e.get("hits", 1)) < 1 or float(e.get("damage_mult", 1.0)) <= 0.0:
+		errors.append("%s: hits must be >= 1 and damage_mult > 0." % where)
+	if kind == "area" and not AREA_SHAPES.has(e.get("shape", "")):
+		errors.append("%s: area shape must be one of %s." % [where, AREA_SHAPES])
+	if kind == "self" and float(e.get("heal", 0.0)) <= 0.0 and int(e.get("move_q", 0)) <= 0:
+		errors.append("%s: a self Skill needs heal or move_q." % where)
 
 
 func _has_fields(where: String, d: Dictionary, fields: Array) -> bool:

@@ -269,7 +269,8 @@ Rules from the user (2026-09-29):
   System. Every sim fight test moved to the new rules (full suite)
 - [x] M17.3 Combat screen (ADR 0027, 2026-09-30; turn log + replay, mouse in fights only): move range, path preview, hit chance before you act, AP pips, turn order bar with
   portraits, end-turn button, mouse click to move and attack (keys still work), camera on the active fighter
-- [ ] M17.4 Skills in combat: new skill effects `combat_action` (an active Skill: AP cost, range, area, effect),
+- [x] M17.4 Skills in combat (ADR 0027, 2026-09-30; cooldowns in rounds, [Runner] class moves 2 AP, strike /
+  area / self, NPC allies Erin, Relc, Toren use Skills; save v19): new skill effects `combat_action` (an active Skill: AP cost, range, area, effect),
   `ap_mod` (permanent AP), `move_ap_mod` (move cap); AP at levels 10/25/50/75; a Skill bar. Existing combat
   Skills get their action where the Book text fits
 - [ ] M17.5 Mana and spells: MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,

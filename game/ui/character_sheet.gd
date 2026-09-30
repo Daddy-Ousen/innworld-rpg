@@ -59,6 +59,9 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	if p.skills.is_empty():
 		out.append("  None yet.")
 	for s: Dictionary in p.skills:
+		if not db.classes.has(s["class"]):  # given by the debug console (M17.4)
+			out.append("  %s" % db.skills[s["id"]]["name"])
+			continue
 		out.append("  %s   from %s level %d" % [db.skills[s["id"]]["name"],
 				db.classes[s["class"]]["name"], int(s["level"])])
 	out.append("")

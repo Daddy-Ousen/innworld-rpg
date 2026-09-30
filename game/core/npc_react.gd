@@ -147,18 +147,21 @@ static func _fight_turn(gs: GameState, db: DataDb, id: String, n: Dictionary, mi
 
 ## One hit roll with the NPC's fight stats (see stats) against the
 ## monster's evasion and armor.
-static func _hit(gs: GameState, db: DataDb, id: String, mid: String) -> void:
+static func _hit(gs: GameState, db: DataDb, id: String, mid: String, mods: Dictionary = {}) -> void:
 	var s := stats(db, id)
 	var m: Dictionary = gs.combat.monsters[mid]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var who := String(db.canon.npcs.get(id, {}).get("name", id))
 	var foe := Combat.name_of(db, m)
 	Combat.join(gs, mid)
-	if gs.rng.randf() >= Combat.hit_chance(db, int(s["accuracy"]), int(e["evasion"])):
+	var roll := gs.rng.randf()
+	if not bool(mods.get("sure_hit", false)) and roll >= Combat.hit_chance(db, int(s["accuracy"]),
+			int(e["evasion"]), float(mods.get("hit_bonus", 0.0))):
 		gs.combat.lines.append("%s misses the %s." % [who, foe])
 		return
-	var dmg := maxi(gs.rng.randi_range(int(s["damage"][0]), int(s["damage"][1])) - int(e["armor"]),
-			int(db.rules["combat"]["min_damage"]))
+	var raw := gs.rng.randi_range(int(s["damage"][0]), int(s["damage"][1]))
+	var dmg := maxi(roundi(raw * float(mods.get("damage_mult", 1.0))) + int(mods.get("damage_bonus", 0))
+			- int(e["armor"]), int(db.rules["combat"]["min_damage"]))
 	gs.combat.lines.append("%s hits the %s for %d." % [who, foe, dmg])
 	Combat.damage_monster(gs, db, mid, dmg)
 
