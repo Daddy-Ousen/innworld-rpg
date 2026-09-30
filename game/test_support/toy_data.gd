@@ -14,6 +14,7 @@ static func db() -> DataDb:
 	rules.erase("economy")  # no hunger, sleep anywhere in toy worlds (M8.6)
 	# M17.2: toy fights run in world time (the M5 parts); ToyCombat.tactical turns combat mode on
 	rules["combat"]["tactical"]["enabled"] = false
+	rules["combat"]["tactical"]["hp_scale"] = 1.0  # M17.7: toy fights keep their small HP numbers
 	var tags := {"cooking": "", "cooking.stew": "", "combat": "", "hospitality": ""}
 	var actions := {
 		"cook": {"name": "Cook", "minutes": 60, "base_xp": 10, "risk": 0.0, "tags": {"cooking.stew": 1.0}},

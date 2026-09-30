@@ -29,7 +29,7 @@ static func max_hp(gs: GameState, db: DataDb) -> int:
 	var c: Dictionary = db.rules["combat"]
 	var full := int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance") \
 			+ int(c.get("hp_per_level", 0)) * gs.progression.total_level()
-	return maxi(roundi(full * Economy.hp_mult(gs, db)), 1)
+	return maxi(roundi(Combat.scaled_hp(db, full) * Economy.hp_mult(gs, db)), 1)
 
 
 ## Most MP (M17.5): tactical.mp base + per_intellect × Intellect + per_level ×

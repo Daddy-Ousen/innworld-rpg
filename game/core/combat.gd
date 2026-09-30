@@ -39,6 +39,34 @@ static func begin_command(gs: GameState) -> void:
 
 
 ## Current hit points.
+## M17.7 (ADR 0027): rules.combat.tactical.hp_scale multiplies every fighter's
+## maximum HP (player, monsters, NPCs) and the flat HP numbers outside fights
+## (bandage, potions, cold, fairy snow, traps), so fights last longer and those
+## keep their weight. Damage, armor and accuracy do not scale.
+static func hp_scale(db: DataDb) -> float:
+	return float(db.rules["combat"].get("tactical", {}).get("hp_scale", 1.0))
+
+
+## `base` HP times hp_scale, at least 1.
+static func scaled_hp(db: DataDb, base: int) -> int:
+	return maxi(roundi(base * hp_scale(db)), 1)
+
+
+## The most HP of an enemy type `e` (its data hp x hp_scale).
+static func foe_max_hp(db: DataDb, e: Dictionary) -> int:
+	return scaled_hp(db, int(e["hp"]))
+
+
+## The enemy dictionaries with hp scaled, for screens that read `e["hp"]` as the maximum.
+static func scaled_enemies(db: DataDb) -> Dictionary:
+	var out := {}
+	for type: String in db.combat.enemies:
+		var e: Dictionary = (db.combat.enemies[type] as Dictionary).duplicate()
+		e["hp"] = foe_max_hp(db, e)
+		out[type] = e
+	return out
+
+
 static func hp(gs: GameState, db: DataDb) -> int:
 	var most := Stats.max_hp(gs, db)
 	return most if gs.player.hp < 0 else mini(gs.player.hp, most)
@@ -79,7 +107,7 @@ static func add_monster(gs: GameState, db: DataDb, type: String, pos: Vector2i,
 	var id := "m%d" % c.next_id
 	c.next_id += 1
 	c.monsters[id] = {"type": type, "spawn": spawn, "group": group if group != "" else id,
-		"area": gs.player.area, "x": pos.x, "y": pos.y, "hp": int(db.combat.enemies[type]["hp"]),
+		"area": gs.player.area, "x": pos.x, "y": pos.y, "hp": foe_max_hp(db, db.combat.enemies[type]),
 		"state": state, "home_x": pos.x, "home_y": pos.y, "carry": 0, "chase": 0, "scared": 0,
 		"rolled_spot": false, "pack": 1, "stage": ""}
 	if state == CombatState.HOSTILE:
@@ -484,7 +512,7 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 	var m: Dictionary = c.monsters[id]
 	m["hp"] = int(m["hp"]) - amount
 	var e: Dictionary = db.combat.enemies.get(m["type"], {})
-	if e.has("escape") and float(m["hp"]) < float(e["escape"]["below"]) * float(e["hp"]):
+	if e.has("escape") and float(m["hp"]) < float(e["escape"]["below"]) * float(foe_max_hp(db, e)):
 		c.lines.append(e["escape"]["line"])
 		var fled: bool = m["state"] != CombatState.ALLY
 		c.monsters.erase(id)
@@ -694,9 +722,10 @@ static func take(gs: GameState, db: DataDb, object_id: String) -> String:
 static func heal_after_action(gs: GameState, db: DataDb, rec: Dictionary) -> void:
 	if rec.is_empty():
 		return
-	var amount := int(db.rules["combat"]["heal_actions"].get(rec["action_id"], 0))
-	if amount <= 0:
+	var base := int(db.rules["combat"]["heal_actions"].get(rec["action_id"], 0))
+	if base <= 0:
 		return
+	var amount := scaled_hp(db, base)
 	var before := hp(gs, db)
 	set_hp(gs, db, before + amount)
 	if hp(gs, db) > before:

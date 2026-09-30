@@ -86,7 +86,7 @@ func _ready() -> void:
 	for id in Session.db.behaviour.ids():
 		max_hp[id] = int(NpcReact.stats(Session.db, id)["hp"])
 	view.audio = Audio.db
-	view.setup(Session.db.maps, names, Session.db.combat.enemies, max_hp,
+	view.setup(Session.db.maps, names, Combat.scaled_enemies(Session.db), max_hp,
 			String(Winter.rules(Session.db).get("flag", "")), races)
 	view.sounds.connect(Audio.play_cues)
 	view.area_loops.connect(func(loops: Array) -> void:

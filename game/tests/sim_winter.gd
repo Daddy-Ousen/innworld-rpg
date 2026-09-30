@@ -85,12 +85,12 @@ func test_winter_comes_with_a_warning_and_the_cold_bites() -> void:
 	Commands.settle(gs, _db)
 	var full := Combat.hp(gs, _db)
 	Commands.wait(gs, _db, 60 * 60)
-	assert_eq(Combat.hp(gs, _db), full - 2, "two bites in an hour at the gate")
+	assert_eq(Combat.hp(gs, _db), full - 2 * Combat.scaled_hp(_db, 1), "two bites in an hour at the gate")
 	gs.player.place("liscor_market", Vector2i(6, 10))  # beside the west brazier
 	Commands.wait(gs, _db, 6)
 	assert_eq(Winter.status(gs, _db), "warm")
 	Commands.wait(gs, _db, 60 * 60)
-	assert_eq(Combat.hp(gs, _db), full - 2, "warm by the brazier")
+	assert_eq(Combat.hp(gs, _db), full - 2 * Combat.scaled_hp(_db, 1), "warm by the brazier")
 
 
 func test_torens_snow_wall_rings_the_inn_from_day_44() -> void:

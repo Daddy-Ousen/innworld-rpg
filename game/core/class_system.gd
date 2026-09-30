@@ -36,7 +36,7 @@ static func feed(gs: GameState, db: DataDb, record: Dictionary) -> void:
 ## race allowed.
 static func can_offer(gs: GameState, db: DataDb, id: String) -> bool:
 	var p := gs.progression
-	if p.has_class(id) or p.declined.has(id) or p.has_offer(id):
+	if p.has_class(id) or p.declined.has(id) or p.has_offer(id) or Levels.at_cap(p, db.rules.get("levels", {})):
 		return false
 	var c: Dictionary = db.classes[id]
 	var prereqs: Dictionary = c["prereqs"]

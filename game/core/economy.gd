@@ -176,7 +176,7 @@ static func use_good(gs: GameState, db: DataDb, good: String) -> String:
 			_eat(gs, db, good)
 		"heal":
 			var before := Combat.hp(gs, db)
-			Combat.set_hp(gs, db, before + int(db.economy.goods[good]["heal"]))
+			Combat.set_hp(gs, db, before + Combat.scaled_hp(db, int(db.economy.goods[good]["heal"])))
 			gs.combat.lines.append("You drink the %s. (+%d HP)" % [name, Combat.hp(gs, db) - before])
 		"teaches":
 			var err := Spells.read_book(gs, db, good)

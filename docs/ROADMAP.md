@@ -280,9 +280,14 @@ Rules from the user (2026-09-29):
 - [x] M17.6 Cover and position (ADR 0027, 2026-09-30; cloud session; no save change): half and full cover from walls, trees, rocks and solid objects (data: tile and
   object `cover`, `rules.combat.tactical.cover`), walls block sight for throws, shots and targeted spells, pincer +15, monsters: archers and
   shamans take cover, melee monsters close the pincer; cover bars on the combat screen
-- [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
+- [x] M17.7 Enemy abilities and balance (ADR 0027, 2026-09-30; cloud; no shell by the user; no save change; hidden XP moved to M17.8): monster moves in data (archers, Shield Spider leap, Ghoul leap),
   balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level
   (Ryoka's theory, 2.41) with a hidden cap of 100 total levels; `rules.levels` curve retuned (core change)
+- [ ] M17.8 Hidden XP (user, 2026-09-30; after M17.7; the player never sees it): a **duress** multiplier on XP, capped at x2.0. Fights: x0.5 when the
+  player lost no HP, x1.0 at 10% lost, then +1 point per 1% more, on the lowest HP reached in the fight, foe damage only. **Event windows** in data:
+  a canon flag, start and end, a tier x1.5 / x2 / x3, never shown (first: the Skinner nights at the end of Book 1, x2 for all actions). Other classes
+  (cooks, runners, healers: duress from crowd, cold, hurt patients, own hunger) get their own sources in a later step, so fighters lead for a while.
+  Then the level curve and the pace probes are checked again
 **Done when:** every fight in the game (monsters, stages, brawls) runs in combat mode with AP; the player can use
 combat Skills and learned spells; MP and AP gains work; saves from v17 load; the GUT tests that touch it, the Python tool
 tests and the validator pass; the user has played fights with the new screen.

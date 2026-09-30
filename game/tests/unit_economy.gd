@@ -151,7 +151,7 @@ func test_a_potion_heals() -> void:
 	Combat.set_hp(gs, _db, 5)
 	Commands.give(gs, _db, 0, "healing_potion", 1)
 	assert_eq(Commands.use_good(gs, _db, "healing_potion"), "")
-	assert_eq(Combat.hp(gs, _db), 15)
+	assert_eq(Combat.hp(gs, _db), 5 + Combat.scaled_hp(_db, 10), "a potion heals 10 x hp_scale (M17.7)")
 
 
 func test_each_hungry_night_lowers_max_hp_down_to_the_floor() -> void:

@@ -94,6 +94,8 @@ static func check_fight_stats(where: String, s: Variant) -> Array[String]:
 			out.append("%s: needs a number '%s'." % [where, k])
 	if out.is_empty() and (int(s["hp"]) <= 0 or int(s["armor"]) < 0):
 		out.append("%s: hp must be > 0 and armor >= 0." % where)
+	if (s as Dictionary).has("agility") and (not (s["agility"] is int or s["agility"] is float) or int(s["agility"]) < 1):
+		out.append("%s: agility must be a number >= 1." % where)
 	var d: Variant = s.get("damage", null)
 	if not d is Array or (d as Array).size() != 2 or int(d[0]) < 0 or int(d[0]) > int(d[1]):
 		out.append("%s: damage must be [a, b] with 0 <= a <= b." % where)

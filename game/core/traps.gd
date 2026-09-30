@@ -176,6 +176,7 @@ static func _spring(gs: GameState, db: DataDb, area: String, t: Dictionary) -> D
 	if bool(t["once"]) or t.has("rearm_minutes"):
 		_mark(gs, area, t, "spent", true)
 		_mark(gs, area, t, "sprung", gs.clock.total_minutes)
+	dmg = Combat.scaled_hp(db, dmg)  # M17.7: hp_scale
 	Combat.damage_player(gs, db, dmg)
 	return {"id": t["id"], "name": t["name"], "damage": dmg}
 

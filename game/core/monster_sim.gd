@@ -296,7 +296,7 @@ static func _hostile_checks(gs: GameState, db: DataDb, id: String) -> bool:
 	var m: Dictionary = c.monsters[id]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var you := gs.player.pos()
-	if _beaten(c, m, e):
+	if _beaten(db, c, m, e):
 		m["state"] = CombatState.FLEE
 		if c.has_fight():
 			c.fight["routed"] += 1
@@ -356,12 +356,10 @@ static func _pincer_goals(gs: GameState, db: DataDb, id: String, at: Vector2i, g
 	return out if not out.is_empty() else goals
 
 
-## M17.6: true for a monster whose ranged blow hurts at least as much as its melee one
-## (the Goblin Lord's archers and shamans). A brute with a thrown rock (the Goblin
-## Chieftain) is not one: it does not seek cover. M17.7 may replace this with an
-## explicit ability in the enemy data.
+## M17.6 / M17.7: true for a monster with the "shooter" ability (MonsterAbilities): it seeks
+## cover and holds it. A brute with a thrown rock (the Goblin Chieftain) has none.
 static func is_shooter(e: Dictionary) -> bool:
-	return e.has("ranged") and int(e["ranged"]["damage"][1]) >= int(e["damage"][1])
+	return MonsterAbilities.is_shooter(e)
 
 
 ## M17.6: a tile for a shooter to fire from: within `budget` steps, no tile beside
@@ -439,8 +437,8 @@ static func _nearest_hostile(gs: GameState, id: String) -> String:
 
 
 ## Hurt below flee_below, or half its pack is dead or running.
-static func _beaten(c: CombatState, m: Dictionary, e: Dictionary) -> bool:
-	if float(m["hp"]) < float(e["flee_below"]) * float(e["hp"]):
+static func _beaten(db: DataDb, c: CombatState, m: Dictionary, e: Dictionary) -> bool:
+	if float(m["hp"]) < float(e["flee_below"]) * float(Combat.foe_max_hp(db, e)):
 		return true
 	var pack := int(m.get("pack", 1))
 	if e["behaviour"] != "pack" or pack < 2:

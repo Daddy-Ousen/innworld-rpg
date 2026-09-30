@@ -276,6 +276,7 @@ func _validate_enemy(id: String, e: Dictionary, item_tags: Dictionary) -> void:
 			errors.append("%s escape: below must be > 0." % where)
 		if not x["line"] is String or (x["line"] as String).is_empty():
 			errors.append("%s escape: line must be a non-empty string." % where)
+	errors.append_array(MonsterAbilities.check(where, e))
 	if e.has("look") and (not e["look"] is String or not enemies.has(e["look"]) or e["look"] == id):
 		errors.append("%s: look must be the id of another enemy." % where)
 

@@ -110,6 +110,8 @@ func test_winning_the_raid_with_erin_changes_it_but_klbkch_still_dies() -> void:
 	var lines: Array[String] = []
 	var klbkch_came := false
 	var most_foes := 0
+	FightBot.sink = []
+	FightBot.sink_on = true  # M17.7: a command that ends the turn first would hide a wave's line
 	for i in 3000:
 		if not gs.combat.has_fight():
 			break
@@ -118,6 +120,8 @@ func test_winning_the_raid_with_erin_changes_it_but_klbkch_still_dies() -> void:
 		most_foes = maxi(most_foes, gs.combat.in_state(CombatState.HOSTILE).size())
 		if gs.npcs.npcs.has("klbkch") and gs.npcs.npcs["klbkch"]["area"] == "inn_interior":
 			klbkch_came = true
+	FightBot.sink_on = false
+	lines.append_array(FightBot.sink)
 	assert_false(gs.combat.has_fight(), "all 40 beaten")
 	assert_true(gs.combat.stage_run.is_empty())
 	assert_true(klbkch_came, "Klbkch came with wave 2")

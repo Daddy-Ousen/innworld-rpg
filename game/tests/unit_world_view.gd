@@ -242,7 +242,8 @@ func test_monster_markers_show_name_and_hp_and_hide_crabs() -> void:
 func test_hud_shows_hp_and_the_held_item() -> void:
 	var real := DataDb.load_dir()
 	var gs := GameState.new_game(1, real)
-	assert_eq(Hud.health(gs, real), "HP 20/20 · Held: nothing")
+	var most := Stats.max_hp(gs, real)  # 20 x hp_scale since M17.7
+	assert_eq(Hud.health(gs, real), "HP %d/%d · Held: nothing" % [most, most])
 	assert_false(Hud.is_low(gs, real))
 	var hud: Hud = add_child_autofree(load("res://ui/hud.tscn").instantiate())
 	hud.refresh(gs, real)
@@ -250,12 +251,12 @@ func test_hud_shows_hp_and_the_held_item() -> void:
 	assert_false(label.has_theme_color_override("font_color"))
 	gs.player.held = "chair"
 	Combat.set_hp(gs, real, 5)
-	assert_eq(Hud.health(gs, real), "HP 5/20 · Held: Chair")
-	assert_true(Hud.is_low(gs, real), "5 of 20 is 25%")
+	assert_eq(Hud.health(gs, real), "HP 5/%d · Held: Chair" % most)
+	assert_true(Hud.is_low(gs, real), "5 is a low share")
 	hud.refresh(gs, real)
-	assert_eq(label.text, "HP 5/20 · Held: Chair")
+	assert_eq(label.text, "HP 5/%d · Held: Chair" % most)
 	assert_eq(label.get_theme_color("font_color"), Hud.WARN_COLOR)
-	Combat.set_hp(gs, real, 6)
+	Combat.set_hp(gs, real, roundi(most * 0.3))  # 6 of 20 before hp_scale
 	assert_false(Hud.is_low(gs, real))
 
 
@@ -417,4 +418,5 @@ func test_hud_counts_the_foes_left_in_a_staged_fight() -> void:
 	var total := 0
 	for w: Dictionary in waves:
 		total += (w.get("foes", []) as Array).size()
-	assert_eq(Hud.health(gs, real), "HP 20/20 · Held: nothing · Foes left: %d" % total)
+	var most := Stats.max_hp(gs, real)
+	assert_eq(Hud.health(gs, real), "HP %d/%d · Held: nothing · Foes left: %d" % [most, most, total])

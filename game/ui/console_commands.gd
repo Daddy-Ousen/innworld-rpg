@@ -467,7 +467,7 @@ func _monsters() -> Array[String]:
 	for id in gs.combat.ids():
 		var m: Dictionary = gs.combat.monsters[id]
 		var e: Dictionary = db.combat.enemies[m["type"]]
-		out.append("  %-4s %-10s %2d/%-2d %-8s %s %d,%d  %s" % [id, e["name"], int(m["hp"]), int(e["hp"]),
+		out.append("  %-4s %-10s %2d/%-2d %-8s %s %d,%d  %s" % [id, e["name"], int(m["hp"]), Combat.foe_max_hp(db, e),
 				m["state"], m["area"], int(m["x"]), int(m["y"]), m["spawn"] if m["spawn"] != "" else "debug"])
 	if out.is_empty():
 		out.append("There are no monsters here.")
@@ -511,7 +511,7 @@ func _status() -> Array[String]:
 		out.append("No class. Level 0.")
 	for id: String in p.classes:
 		var level := p.level_of(id)
-		var need := Levels.xp_to_next(level, db.rules["levels"])
+		var need := Levels.cost(p, db.rules["levels"])
 		var note := "  (needs a breakthrough)" if Levels.is_blocked(p, id, db.rules["levels"]) else ""
 		out.append("%s level %d  %.0f/%.0f XP%s" % [db.classes[id]["name"], level,
 				float(p.classes[id]["xp"]), need, note])
