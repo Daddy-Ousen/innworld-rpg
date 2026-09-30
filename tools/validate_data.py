@@ -179,7 +179,7 @@ def check_location(r: Report, where: str, loc, book: int, chapters) -> None:
 def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     req = {"tier", "window", "location", "roles", "requires", "depends_on", "on_fail", "effects",
            "status", "canon_ref", "summary"}
-    opt = {"delay_limit", "rumor", "news", "hooks", "stage"}
+    opt = {"delay_limit", "rumor", "news", "hooks", "stage", "xp_window"}
     if not _keys(r, where, ev, req, opt):
         return
     if ev["tier"] not in TIERS:
@@ -248,6 +248,22 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
         check_hooks(r, where, ev["hooks"], ev.get("window"))
     if "stage" in ev:
         check_stage(r, f"{where}.stage", ev["stage"])
+    if "xp_window" in ev:
+        check_xp_window(r, f"{where}.xp_window", ev["xp_window"])
+
+
+def check_xp_window(r: Report, where: str, w) -> None:
+    """A hidden XP boost while the event is pending (M17.8, ADR 0027). The game checks the
+    boost tier against rules.xp.boosts."""
+    if not _keys(r, where, w, {"boost"}, {"hours"}):
+        return
+    if not (_int(w["boost"]) and w["boost"] >= 1):
+        r.err(f"{where}.boost", "must be a whole number >= 1 (a tier of rules.xp.boosts)")
+    if "hours" in w:
+        h = w["hours"]
+        if not (isinstance(h, list) and len(h) == 2 and all(_int(x) for x in h)
+                and 0 <= h[0] <= 24 and 0 <= h[1] <= 24 and h[0] != h[1]):
+            r.err(f"{where}.hours", "must be [from, to] whole hours with 0 <= from != to <= 24")
 
 
 def check_stage(r: Report, where: str, st) -> None:

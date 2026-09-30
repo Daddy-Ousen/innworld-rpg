@@ -41,7 +41,7 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 ##   allow_collapsed: bool (log it even when a collapse is due: the records
 ##   of a fight that ends the day, Combat.end_fight),
 ##   duress: float (M17.8: the fight's duress factor, default 1.0),
-##   window: float (M17.8: the XP window factor, default 1.0).
+##   window: float (M17.8: overrides the XP window factor; default XpWindow.mult).
 ## Returns the record, or {} if the action is refused (unknown, or collapse due).
 static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictionary = {}) -> Dictionary:
 	if not db.actions.has(action_id):
@@ -65,7 +65,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 	var conviction := Xp.conviction_mult(tags, gs.focus_tags, xp_rules)
 	var skill_m := Xp.skill_mult(tags, SkillSystem.xp_effects(gs.progression, db))
 	var duress := float(opts.get("duress", 1.0))  # M17.8: set by Combat.end_fight for a fight's records
-	var window := float(opts.get("window", 1.0))
+	var window := float(opts.get("window", XpWindow.mult(gs, db)))  # hidden XP window (M17.8)
 	var xp := Xp.compute(float(def["base_xp"]), intensity, Xp.risk_mult(risk, xp_rules),
 			novelty, conviction, Xp.outcome_mult(outcome, xp_rules), skill_m, duress, window)
 

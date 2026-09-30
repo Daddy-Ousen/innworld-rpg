@@ -23,6 +23,8 @@ var alt_only: Dictionary = {}
 ## Events with a `stage` (a canon fight or scene on the map, M6.5, M8.2), in
 ## run order.
 var stages: Array[String] = []
+## Events with an `xp_window` (hidden XP boost, M17.8; see XpWindow), in run order.
+var windows: Array[String] = []
 var errors: Array[String] = []
 
 
@@ -128,6 +130,28 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 		_validate_hook(where, hook, hook_ids)
 	if ev.has("stage"):
 		_validate_stage(where, ev["stage"])
+	if ev.has("xp_window"):
+		_validate_xp_window(where, ev["xp_window"])
+
+
+## An XP window (M17.8): {"boost": whole number >= 1, "hours"?: [from, to]} (whole hours 0-24,
+## from != to). The boost tier must exist in rules.xp.boosts (XpWindow.validate).
+func _validate_xp_window(where: String, w: Variant) -> void:
+	var ww := where + " xp_window"
+	if not w is Dictionary:
+		errors.append("%s: must be an object." % ww)
+		return
+	for k: String in (w as Dictionary).keys():
+		if k != "boost" and k != "hours":
+			errors.append("%s: unknown key '%s'." % [ww, k])
+	var b: Variant = w.get("boost", null)
+	if not (b is int or b is float) or int(b) < 1 or float(b) != float(int(b)):
+		errors.append("%s: boost must be a whole number >= 1." % ww)
+	if w.has("hours"):
+		var h: Variant = w["hours"]
+		if not h is Array or (h as Array).size() != 2 or int(h[0]) == int(h[1]) \
+				or int(h[0]) < 0 or int(h[0]) > 24 or int(h[1]) < 0 or int(h[1]) > 24:
+			errors.append("%s: hours must be [from, to], whole hours 0 to 24, from != to." % ww)
 
 
 ## A canon stage on the map (M6.5, ADR 0011; scenes M8.2): {"area",
@@ -291,6 +315,10 @@ func _build_order() -> void:
 	for id in order:
 		if events[id].has("stage"):
 			stages.append(id)
+		if events[id].has("xp_window"):
+			windows.append(id)
+			if alt_only.has(id):
+				errors.append("event '%s': an xp_window on a mutate target never opens." % id)
 
 
 func _before(a: String, b: String) -> bool:
