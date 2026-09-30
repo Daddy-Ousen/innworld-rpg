@@ -12,6 +12,9 @@ var pools: Dictionary = {}
 var classes: Dictionary = {}
 ## Held skills, in the order gained: {"id", "class", "level", "day"}.
 var skills: Array[Dictionary] = []
+## Known spell ids (M17.5, data/spells.json), in the order learned. A spell is
+## learned from a teacher or a spellbook (Spells.learn), never granted by a class.
+var spells: Array[String] = []
 ## Declined class ids. Never offered again.
 var declined: Array[String] = []
 ## Class ids the player lost (history only; a lost class can come back).
@@ -46,6 +49,10 @@ func has_skill(id: String) -> bool:
 	return skills.any(func(s: Dictionary) -> bool: return s["id"] == id)
 
 
+func has_spell(id: String) -> bool:
+	return spells.has(id)
+
+
 func has_offer(class_id: String) -> bool:
 	return offer_index(class_id) != -1
 
@@ -62,6 +69,7 @@ func to_dict() -> Dictionary:
 		"pools": pools.duplicate(),
 		"classes": classes.duplicate(true),
 		"skills": skills.duplicate(true),
+		"spells": spells.duplicate(),
 		"declined": declined.duplicate(),
 		"lost": lost.duplicate(),
 		"offers": offers.duplicate(true),
@@ -84,6 +92,7 @@ static func from_dict(d: Dictionary) -> Progression:
 		}
 	for s: Dictionary in d.get("skills", []):
 		p.skills.append({"id": s["id"], "class": s["class"], "level": int(s["level"]), "day": int(s["day"])})
+	p.spells.assign(d.get("spells", []))
 	p.declined.assign(d.get("declined", []))
 	p.lost.assign(d.get("lost", []))
 	for o: Dictionary in d.get("offers", []):

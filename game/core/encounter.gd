@@ -420,7 +420,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 ## going home) get their one ordinary turn, so an idle one can still notice
 ## the player and join.
 static func _end_round(gs: GameState, db: DataDb) -> void:
-	Movement._spend_seconds(gs, int(rules(db)["round_seconds"]))
+	Movement._spend_seconds(gs, db, int(rules(db)["round_seconds"]))
 	for id in gs.combat.ids():
 		if gs.combat.monsters.has(id) and not _is_fighter(gs, db, id) \
 				and gs.combat.monsters[id]["area"] == gs.player.area:

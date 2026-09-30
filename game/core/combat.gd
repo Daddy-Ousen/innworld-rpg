@@ -630,6 +630,12 @@ static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool,
 		share = float(rules["night_heal"]["collapse"])
 	var target := maxi(ceili(Stats.max_hp(gs, db) * share), 1)
 	set_hp(gs, db, maxi(hp(gs, db), target))
+	var mp_share := float(Mana.rules(db).get("sleep_refill", 1.0)) * rest_share
+	if knocked_out:
+		mp_share = float(rules["knockout"]["wake_hp_frac"])
+	elif collapsed:
+		mp_share = float(rules["night_heal"]["collapse"])
+	Mana.refill(gs, db, mp_share)
 	if knocked_out:
 		var w: Dictionary = rules["knockout"]["wake"].get(gs.player.area, {})
 		if not w.is_empty() and db.maps.areas.has(w["area"]):

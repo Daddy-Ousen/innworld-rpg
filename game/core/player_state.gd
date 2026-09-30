@@ -16,6 +16,11 @@ var sub_seconds: int = 0
 ## Hit points (M5). -1 = full (the max comes from Stats, so it is not
 ## stored); 0 = knocked out. Combat.set_hp keeps this rule.
 var hp: int = -1
+## Mana (M17.5, ADR 0027). Same rule as hp: -1 = full (the max comes from
+## Stats.max_mp), 0 = empty; Mana.set_mp keeps it. `mp_minutes` = awake minutes
+## toward the next MP (Mana.tick), 0 when full.
+var mp: int = -1
+var mp_minutes: int = 0
 ## The improvised item the player holds (data/items.json id), or "".
 var held: String = ""
 ## M10.0 (ADR 0017): the day of the last trip through a magic door (-1 =
@@ -40,7 +45,8 @@ func place(to_area: String, at: Vector2i) -> void:
 
 func to_dict() -> Dictionary:
 	return {"area": area, "x": x, "y": y, "facing": facing, "sub_seconds": sub_seconds,
-		"hp": hp, "held": held, "portal_day": portal_day, "portal_trips": portal_trips}
+		"hp": hp, "mp": mp, "mp_minutes": mp_minutes, "held": held, "portal_day": portal_day,
+		"portal_trips": portal_trips}
 
 
 ## Accepts {} (a migrated v3 save): a player who is not placed yet.
@@ -52,6 +58,8 @@ static func from_dict(d: Dictionary) -> PlayerState:
 	p.facing = d.get("facing", "s")
 	p.sub_seconds = int(d.get("sub_seconds", 0))
 	p.hp = int(d.get("hp", -1))
+	p.mp = int(d.get("mp", -1))
+	p.mp_minutes = int(d.get("mp_minutes", 0))
 	p.held = d.get("held", "")
 	p.portal_day = int(d.get("portal_day", -1))
 	p.portal_trips = int(d.get("portal_trips", 0))

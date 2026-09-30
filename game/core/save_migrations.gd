@@ -35,6 +35,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			16: out = _migrate_16_to_17(out)
 			17: out = _migrate_17_to_18(out)
 			18: out = _migrate_18_to_19(out)
+			19: out = _migrate_19_to_20(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -187,6 +188,25 @@ static func _migrate_18_to_19(d: Dictionary) -> Dictionary:
 	if not e.is_empty():
 		e["cool"] = {}
 		e["move_bonus_q"] = 0
+		c["encounter"] = e
+		d["combat"] = c
+	return d
+
+
+## v20 (M17.5): mana and spells. The player has full MP, no spells, and a
+## running encounter has no NPC mana yet.
+static func _migrate_19_to_20(d: Dictionary) -> Dictionary:
+	var p: Dictionary = d.get("player", {})
+	p["mp"] = -1
+	p["mp_minutes"] = 0
+	d["player"] = p
+	var pr: Dictionary = d.get("progression", {})
+	pr["spells"] = []
+	d["progression"] = pr
+	var c: Dictionary = d.get("combat", {})
+	var e: Dictionary = c.get("encounter", {})
+	if not e.is_empty():
+		e["npc_mp"] = {}
 		c["encounter"] = e
 		d["combat"] = c
 	return d

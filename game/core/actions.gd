@@ -82,6 +82,8 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		"xp": xp,
 	}
 	gs.action_log.add(record)
-	gs.clock.advance(maxi(int(opts.get("minutes", def["minutes"])), 0))
+	var minutes := maxi(int(opts.get("minutes", def["minutes"])), 0)
+	gs.clock.advance(minutes)
+	Mana.tick(gs, db, minutes)
 	gs.action_log.prune(gs.clock.total_minutes, int(xp_rules["novelty"]["window_days"]))
 	return record
