@@ -1,7 +1,28 @@
 # Handoff
 
-## Just done (2026-09-30, M17.1 core encounter)
-- Branch `feat/m17.1-encounter`, stacked on `feat/m17.0-spike` on `docs/archive-m16`. None pushed; ask first.
+## Just done (2026-09-30, M17.2 port the old fight parts)
+- Tags `m17.0-done` (a24db19) and `m17.1-done` (a175d2a) set and pushed. Branch `feat/m17.2-port` from main
+  (not pushed; ask before push / PR). Plan: `C:/Users/rhasa/.claude/plans/agile-shimmying-duckling.md`.
+- User answers: auto end turn when AP pays for nothing; one NPC Agility default (3) until M17.7; no new UI.
+- Combat mode is ON in `rules.json`. Detail: ADR 0027 "M17.2" section.
+- Core: `encounter.gd` (NPC fighters `"npc:<id>"`, `_npc_turn`, brawl starts an encounter, `_over`,
+  `maybe_end_turn`, guard drops at the player's turn, optional `monster.ap_q`), `commands.gd`
+  (`_encounter_act` / `_encounter_do`: AP for block, throw, take, drop, bag, attack_npc, fairy swat; wait -1
+  when knocked out), `movement.gd` (`spend_turn` no-op in a fight), `combat.gd` (guard kept in a fight,
+  `player_attack` without `spend`), `npc_sim.gd` (NPC fighters skip world-time acts).
+- Tests: new `test_support/fight_bot.gd` (`FightBot.act/move/attack/throw/block/attack_npc/wait_seconds`);
+  `ToyData` turns combat mode off for toy dbs; `ToyCombat.freeze` sets `monster.ap_q` 0; `ToyMaps.walk_to`
+  uses FightBot. 20 real-data sims use FightBot for fight commands. `unit_encounter` 25, `unit_winter` +1.
+- Balance seen (for M17.7): level 5 vs 2-3 Goblins now wins 1-2 of 3 seeds; `sim_balance_fights` asserts
+  single foes only.
+- Full suite (subagent): 120 scripts, 1133 tests, all pass, no parse errors. Validator 0 errors, Python 95 OK.
+- Next: commit (feat(core) + test + data + docs), ask the user about push / PR, then M17.3 (combat screen,
+  plan mode first). The user should try a fight in the game: Space ends the turn.
+- Test runner: scratchpad `run_targets.sh [-t secs] <script>...` (gone next session): one script per Godot
+  run with a time limit, one summary line each. Much safer than the full suite when a sim may hang.
+
+## Earlier (2026-09-30, M17.1 core encounter)
+- Merged to main as PR #79 (a175d2a), with the M16 archive and M17.0. Tagged in M17.2.
 - ADR 0027 approved by the user; M17.1 notes at its end. Save v18.
 - New `game/core/encounter.gd`; changed `combat.gd` (`player_attack(spend)`, encounter cleared in `end_fight`,
   `night`, area change), `combat_state.gd` (`encounter`), `monster_sim.gd` (`_hostile_checks`,
@@ -189,6 +210,11 @@
   Grep, Write and Edit still worked, so chapter reading and data prep went on by hand.
 
 ## Gotchas
+- M17.2 combat mode: a fight wait (`Commands.wait`) is ONE round (6 s), whatever seconds you pass; use
+  `FightBot.wait_seconds` for "N seconds later" waves. A command refused for AP / move cap / turn changes
+  nothing: loops must end the turn (`FightBot`). Frozen tests: `ToyCombat.freeze` (monster AP 0).
+- M17.2: monsters and NPC allies may act before the player's first turn (Agility order), so a count of
+  foes right after a stage starts can be one short; count `gs.combat.fight["foes"]` instead.
 - Commits and PRs: author Daddy-Ousen only. NO `Co-Authored-By: Claude` trailer, no Claude footer.
 - **Never use `sed -i` in Git Bash on repo files** - it strips CRLF. All working-copy text files are CRLF (autocrlf=true). Patch with Python on bytes (keep CRLF) or with the Edit tool. Do NOT normalise whole folders.
 - `Commands.wait(gs, db, seconds)` takes SECONDS. The clock does pass midnight while awake, but the director only runs on sleep (`Commands.sleep(gs, db, Rest.ANYWHERE)`). Wake time is 6:00, so a stage before 6 is only reachable by staying up.
