@@ -307,6 +307,24 @@ class ValidateTest(unittest.TestCase):
         self.ev()["effects"]["relationship"] = [{"from": "alice", "to": "player", "delta": 2}]
         self.assertError(self.fx.run(), "unknown npc 'player'")
 
+    # --- M17.8 xp windows
+
+    def test_an_xp_window_passes(self):
+        self.ev()["xp_window"] = {"boost": 2, "hours": [18, 6]}
+        self.assertEqual(self.fx.run().errors, [])
+        self.ev()["xp_window"] = {"boost": 1}
+        self.assertEqual(self.fx.run().errors, [])
+
+    def test_xp_window_shape_errors(self):
+        self.ev()["xp_window"] = {"boost": 0, "hours": [5, 5]}
+        rep = self.fx.run()
+        self.assertError(rep, "xp_window.boost")
+        self.assertError(rep, "xp_window.hours")
+        self.ev()["xp_window"] = {"hours": [18, 6], "extra": 1}
+        rep = self.fx.run()
+        self.assertError(rep, "boost")
+        self.assertError(rep, "extra")
+
     # --- M6.5 stages
 
     def stage(self, **over):

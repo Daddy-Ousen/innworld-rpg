@@ -4,6 +4,14 @@ class_name ToyData
 extends RefCounted
 
 
+## M17.8: puts the shipped duress curve and boost tiers back into a toy db's XP rules.
+static func with_duress(d: DataDb) -> DataDb:
+	var real: Dictionary = DataDb.load_dir().rules["xp"]
+	d.rules["xp"]["duress"] = (real["duress"] as Dictionary).duplicate(true)
+	d.rules["xp"]["boosts"] = (real["boosts"] as Dictionary).duplicate(true)
+	return d
+
+
 static func db() -> DataDb:
 	var rules: Dictionary = DataDb.load_dir().rules.duplicate(true)
 	rules["clock"]["start_minute"] = 360  # toy games start on day 1
@@ -15,6 +23,7 @@ static func db() -> DataDb:
 	# M17.2: toy fights run in world time (the M5 parts); ToyCombat.tactical turns combat mode on
 	rules["combat"]["tactical"]["enabled"] = false
 	rules["combat"]["tactical"]["hp_scale"] = 1.0  # M17.7: toy fights keep their small HP numbers
+	rules["xp"].erase("duress")  # M17.8: toy fights pay the plain XP; ToyData.with_duress adds it back
 	var tags := {"cooking": "", "cooking.stew": "", "combat": "", "hospitality": ""}
 	var actions := {
 		"cook": {"name": "Cook", "minutes": 60, "base_xp": 10, "risk": 0.0, "tags": {"cooking.stew": 1.0}},

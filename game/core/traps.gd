@@ -177,7 +177,7 @@ static func _spring(gs: GameState, db: DataDb, area: String, t: Dictionary) -> D
 		_mark(gs, area, t, "spent", true)
 		_mark(gs, area, t, "sprung", gs.clock.total_minutes)
 	dmg = Combat.scaled_hp(db, dmg)  # M17.7: hp_scale
-	Combat.damage_player(gs, db, dmg)
+	Combat.damage_player(gs, db, dmg, false)  # M17.8: a trap is not a foe: no duress
 	return {"id": t["id"], "name": t["name"], "damage": dmg}
 
 

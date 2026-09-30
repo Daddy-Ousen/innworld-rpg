@@ -23,6 +23,7 @@
 				"relationship": [{"from": "zevara", "to": "ksmvr", "delta": -2}, {"from": "selys", "to": "pisces", "delta": 1}]
 			},
 			"news": "At sunset a horde of undead from the ruins broke into Liscor through open gates. The Watch fought street by street; the Antinium sent only a handful of Soldiers.",
+			"xp_window": {"boost": 2, "hours": [18, 6]},
 			"stage": {
 				"area": "liscor_gate",
 				"hours": [

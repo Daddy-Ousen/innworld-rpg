@@ -150,6 +150,8 @@ func test_holding_the_gate_wins_the_watchs_thanks() -> void:
 	assert_eq(melee[0]["outcome"], "success")
 	assert_eq(melee[0]["context"]["enemy"], "crypt_lord")
 	assert_eq(melee[0]["context"]["location"], "liscor_east_gate")
+	assert_eq(float(melee[0]["window"]), 2.0, "M17.8: the Skinner night pays double XP (hidden)")
+	assert_eq(float(melee[0]["duress"]), 0.5, "frozen foes never hit: a fight with no HP lost pays half")
 
 	ToyCanon.sleep_through(gs, _db, 39)
 	assert_eq(gs.world.status(GATE_EVENT), Director.CHANGED)

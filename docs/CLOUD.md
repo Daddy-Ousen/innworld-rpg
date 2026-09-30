@@ -58,7 +58,7 @@ Each prompt is ready to paste.
 1. **M17.6 Cover and position**
    > Do M17.6 (cover and position) from docs/ROADMAP.md. Follow CLAUDE.md. Plan first and write the plan
    > to docs/plans/m17.6.md. Ask me the open choices, then build, test, update the docs, and open a PR.
-2. **M17.7 Enemy abilities and balance** (last M17 step)
+2. **M17.7 Enemy abilities and balance**, then **M17.8 Hidden XP** (both done; last M17 steps)
    > Do M17.7 from docs/ROADMAP.md. Follow CLAUDE.md. Plan first (docs/plans/m17.7.md), ask me the open
    > choices, then build, run only the tests that touch the change, update the docs, and open a PR.
 3. **M18.P Book 6 plan**

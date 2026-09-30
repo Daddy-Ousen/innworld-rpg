@@ -120,7 +120,7 @@ static func join(gs: GameState, id: String) -> void:
 	var c := gs.combat
 	if not c.has_fight():
 		c.fight = {"start": gs.clock.total_minutes, "foes": {}, "attacks": 0, "improvised": 0,
-			"blocks": 0, "throws": 0, "kills": 0, "routed": 0, "casts": 0}
+			"blocks": 0, "throws": 0, "kills": 0, "routed": 0, "casts": 0, "peak": -1, "low": -1}
 	c.fight["foes"][id] = c.monsters[id]["type"]
 
 
@@ -495,12 +495,30 @@ static func helper_attack(gs: GameState, db: DataDb, id: String, foe: String) ->
 	return damage_monster(gs, db, foe, dmg)
 
 
-static func damage_player(gs: GameState, db: DataDb, amount: int) -> void:
+## `from_foe` (M17.8): a blow of a monster or a hostile NPC counts toward the fight's duress
+## (fight "peak" / "low"); a trap passes false.
+static func damage_player(gs: GameState, db: DataDb, amount: int, from_foe: bool = true) -> void:
 	if amount <= 0 or is_down(gs):
 		return
-	set_hp(gs, db, hp(gs, db) - amount)
+	var before := hp(gs, db)
+	set_hp(gs, db, before - amount)
+	if from_foe and gs.combat.has_fight():
+		var most := maxi(Stats.max_hp(gs, db), 1)
+		var f: Dictionary = gs.combat.fight
+		f["peak"] = maxi(int(f.get("peak", -1)), before * 1000 / most)
+		var after := hp(gs, db) * 1000 / most
+		f["low"] = after if int(f.get("low", -1)) < 0 else mini(int(f["low"]), after)
 	if is_down(gs):
 		gs.combat.lines.append(KNOCKED_OUT_LINE)
+
+
+## M17.8: the share (0-1) of max HP the player lost to foes at the worst point of fight `f`:
+## the highest HP before a foe's blow minus the lowest HP after one. 0 when no foe hit them.
+static func fight_lost(f: Dictionary) -> float:
+	var low := int(f.get("low", -1))
+	if low < 0:
+		return 0.0
+	return maxf(float(int(f.get("peak", low)) - low) / 1000.0, 0.0)
 
 
 ## Returns true if the monster died (it is removed; a foe counts as a kill,
@@ -557,6 +575,7 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 			danger = d
 			enemy = type
 	var xp_rules: Dictionary = db.rules["combat"]["xp"]
+	var duress := Xp.duress_mult(fight_lost(f), db.rules["xp"])  # M17.8: hidden
 	var killed := int(f["kills"]) > 0
 	var base := {"enemy": enemy, "location": Movement.location_at(gs, db), "killed": killed}
 	var improvised := base.merged({"weapon": "improvised"})
@@ -572,13 +591,13 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 			continue
 		var intensity := minf(float(part[1]) / float(xp_rules["count_per_intensity"]),
 				float(xp_rules["max_intensity"]))
-		out.append_array(_record(gs, db, part[0], intensity, danger, OUTCOMES[cause], part[2]))
+		out.append_array(_record(gs, db, part[0], intensity, danger, OUTCOMES[cause], part[2], duress))
 	if cause == FLED:
-		out.append_array(_record(gs, db, "flee_danger", 1.0, danger, "success", base))
+		out.append_array(_record(gs, db, "flee_danger", 1.0, danger, "success", base, duress))
 		c.lines.append("You got away.")
 	elif cause == WON:
 		if not killed and int(f["routed"]) > 0 and _spares(db, (f["foes"] as Dictionary).values()):
-			out.append_array(_record(gs, db, "spare_foe", 1.0, danger, "success", base))
+			out.append_array(_record(gs, db, "spare_foe", 1.0, danger, "success", base, duress))
 			c.lines.append("You let them go.")
 		c.lines.append("The fight is over.")
 	after_fight(gs)
@@ -610,12 +629,12 @@ static func _spares(db: DataDb, types: Array) -> bool:
 
 
 static func _record(gs: GameState, db: DataDb, action_id: String, intensity: float, risk: float,
-		outcome: String, context: Dictionary) -> Array[Dictionary]:
+		outcome: String, context: Dictionary, duress: float = 1.0) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	if not db.actions.has(action_id):
 		return out
 	var rec := Actions.perform(gs, db, action_id, {"minutes": 0, "intensity": intensity, "risk": risk,
-		"outcome": outcome, "context": context.duplicate(), "allow_collapsed": true})
+		"outcome": outcome, "context": context.duplicate(), "allow_collapsed": true, "duress": duress})
 	if not rec.is_empty():
 		out.append(rec)
 	return out

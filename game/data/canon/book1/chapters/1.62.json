@@ -68,6 +68,7 @@
 				"relationship": [{"from": "erin_solstice", "to": "rags", "delta": 2}, {"from": "rags", "to": "erin_solstice", "delta": 1}]
 			},
 			"news": "Below the inn on the hill, Goblins killed the thing that led the dead: a red worm hiding in a hide of stolen skin. Their small chieftain burned it with a spell.",
+			"xp_window": {"boost": 2, "hours": [18, 6]},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

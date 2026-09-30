@@ -1,6 +1,6 @@
 ## XP formula (DESIGN §3.2, ADR 0002):
 ## xp = base × intensity × risk_mult × novelty_mult × conviction_mult × outcome_mult
-##      × skill_mult (ADR 0003)
+##      × skill_mult (ADR 0003) × duress × window (M17.8, hidden: the player never sees them)
 ## All functions take the "xp" section of data/rules.json.
 class_name Xp
 extends RefCounted
@@ -55,6 +55,29 @@ static func skill_mult(tags: Dictionary, effects: Array) -> float:
 	return m
 
 
+## M17.8: how hard a fight was for the player. `lost` is the share (0-1) of max HP lost at the
+## lowest point, to foes only. rules.xp.duress: `floor` at nothing lost, rising in a straight line
+## to 1.0 at `even_at` lost, then `per_percent` more for each 1% lost, at most `cap`. No "duress"
+## block (toy dbs): 1.0.
+static func duress_mult(lost: float, rules: Dictionary) -> float:
+	var d: Dictionary = rules.get("duress", {})
+	if d.is_empty():
+		return 1.0
+	var floor_m := float(d["floor"])
+	var even := float(d["even_at"])
+	var share := clampf(lost, 0.0, 1.0)
+	if share < even:
+		return lerpf(floor_m, 1.0, share / even) if even > 0.0 else 1.0
+	return minf(1.0 + float(d["per_percent"]) * (share - even) * 100.0, float(d["cap"]))
+
+
+## M17.8: the multiplier of an XP window's boost tier (rules.xp.boosts {"1": 1.5, ...}); 1.0 for
+## no window (boost 0) or an unknown tier.
+static func boost_mult(boost: int, rules: Dictionary) -> float:
+	return float((rules.get("boosts", {}) as Dictionary).get(str(boost), 1.0))
+
+
 static func compute(base: float, intensity: float, risk_m: float, novelty_m: float,
-		conviction_m: float, outcome_m: float, skill_m: float = 1.0) -> float:
-	return base * intensity * risk_m * novelty_m * conviction_m * outcome_m * skill_m
+		conviction_m: float, outcome_m: float, skill_m: float = 1.0, duress_m: float = 1.0,
+		window_m: float = 1.0) -> float:
+	return base * intensity * risk_m * novelty_m * conviction_m * outcome_m * skill_m * duress_m * window_m
