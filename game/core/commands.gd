@@ -94,6 +94,29 @@ static func grant_skill(gs: GameState, db: DataDb, skill_id: String) -> String:
 	return ""
 
 
+## Debug (M17.5): teaches the player spell `spell_id` at once (no teacher, no time).
+## Returns "" or an error text.
+static func grant_spell(gs: GameState, db: DataDb, spell_id: String) -> String:
+	if not db.spells.has(spell_id):
+		return "Unknown spell '%s'." % spell_id
+	if Spells.knows(gs, spell_id):
+		return Spells.KNOWN % Spells.name_of(db, spell_id)
+	Spells.learn(gs, db, spell_id)
+	return ""
+
+
+## Learns spell `spell_id` from the teacher `npc` next to the player (M17.5,
+## Spells.learn_from_teacher; it takes study time). Refused while knocked out or with
+## enemies near. Returns "" or an error text.
+static func learn_spell(gs: GameState, db: DataDb, npc: String, spell_id: String) -> String:
+	Combat.begin_command(gs)
+	var why := Combat.refusal(gs)
+	if why == "":
+		why = Spells.learn_from_teacher(gs, db, npc, spell_id)
+	_after(gs, db)
+	return why
+
+
 ## The player kills a canon NPC. Returns "" or an error text.
 static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 	var err := Director.player_kill(gs, db, npc)
@@ -433,6 +456,23 @@ static func use_skill(gs: GameState, db: DataDb, skill_id: String, target: Strin
 	var cost := int(CombatSkills.action_of(db, skill_id)["ap_q"])
 	var act := func() -> Dictionary: return CombatSkills.use(gs, db, skill_id, target)
 	return _encounter_act_q(gs, db, cost, false, act, empty)
+
+
+## M17.5: casts the player's spell `spell_id` at tile `aim` for its ap_q AP and mp MP.
+## `aim` is the foe (one), the centre (blast), the side to shoot toward (line); ignored
+## for "around". Only in a fight, on the player's turn. Returns Spells.use's result, or
+## {"error"}.
+static func cast(gs: GameState, db: DataDb, spell_id: String, aim: Vector2i) -> Dictionary:
+	Combat.begin_command(gs)
+	var empty := {"error": "", "spell": spell_id, "strikes": [], "cells": []}
+	var why := Spells.why_not(gs, db, spell_id, aim)
+	if why != "":
+		gs.combat.lines.append(why)
+		empty["error"] = why
+		return empty
+	var cost := int(Spells.spell(db, spell_id)["ap_q"])
+	var act := func() -> Dictionary: return Spells.use(gs, db, spell_id, aim)
+	return _encounter_act_q(gs, db, cost, true, act, empty)
 
 
 ## Raises the guard for one turn. Returns "" or an error text.

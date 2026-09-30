@@ -230,6 +230,9 @@ func step(dir: String) -> void:
 	var db := Session.db
 	if _armed != "" and dir != WAIT:
 		_attack_dir = dir  # the key must be let go before it acts again
+		if _armed_spell() != "":  # M17.5: toward that side (a line shoots that way)
+			cast_spell(_armed_spell(), Spells.aim_for_dir(gs, db, _armed_spell(), PlayerState.DIRS[dir]))
+			return
 		var foe := gs.combat.at(gs.player.area, gs.player.pos() + (PlayerState.DIRS[dir] as Vector2i))
 		if CombatSkills.targets(gs, db, _armed).has(foe):
 			use_skill(_armed, foe)
@@ -281,6 +284,9 @@ func throw() -> void:
 ## more foes is armed (picking it again lets it go).
 func pick_skill(id: String) -> void:
 	skip_replay()
+	if id.begins_with(Spells.KEY):  # M17.5: a spell in the same bar
+		pick_spell(id.substr(Spells.KEY.length()))
+		return
 	var gs := Session.gs
 	var db := Session.db
 	var a := CombatSkills.action_of(db, id)
@@ -304,6 +310,57 @@ func pick_skill(id: String) -> void:
 	_armed = id
 	bar.skills().set_armed(id)
 	_update_overlay()
+
+
+## Picks spell `sid` (a key 1-9 or its button, M17.5): an "around" spell, or a "one"
+## spell with one foe in range, is cast at once; the others are armed and wait for a
+## click (a tile), or a direction key (picking it again lets it go).
+func pick_spell(sid: String) -> void:
+	skip_replay()
+	var gs := Session.gs
+	var db := Session.db
+	if not Spells.knows(gs, sid) or not Encounter.is_player_turn(gs):
+		return
+	if _armed == Spells.KEY + sid:
+		disarm()
+		return
+	var why := Spells.resource_error(gs, db, sid)
+	if why != "":
+		hud.add_lines([why])
+		return
+	match String(Spells.spell(db, sid)["shape"]):
+		"around":
+			cast_spell(sid, gs.player.pos())
+			return
+		"one":
+			var foes := Spells.one_targets(gs, db, sid)
+			if foes.is_empty():
+				hud.add_lines([Spells.NO_FOE])
+				return
+			if foes.size() == 1:
+				cast_spell(sid, CombatState.pos_of(gs.combat.monsters[foes[0]]))
+				return
+	_cancel_walk()
+	_armed = Spells.KEY + sid
+	bar.skills().set_armed(_armed)
+	_update_overlay()
+
+
+## The armed spell's id, or "" (nothing armed, or a Skill).
+func _armed_spell() -> String:
+	return _armed.substr(Spells.KEY.length()) if _armed.begins_with(Spells.KEY) else ""
+
+
+## Casts spell `sid` at tile `aim`. A cast that works lets the spell go; a refused one
+## keeps it armed so the player can pick another tile.
+func cast_spell(sid: String, aim: Vector2i) -> void:
+	skip_replay()
+	_cancel_walk()
+	var r := Commands.cast(Session.gs, Session.db, sid, aim)
+	if r["error"] == "":
+		_armed = ""
+		bar.skills().set_armed("")
+	_command_error(_sound_if_ok(String(r["error"]), "throw"))
 
 
 ## Lets the armed Skill go.
@@ -416,6 +473,9 @@ func use(object_id: String, action_id: String) -> void:
 		var good := action_id.substr((Interact.BUY if buying else Interact.SELL).length())
 		var r := Commands.buy(gs, db, object_id, good) if buying else Commands.sell(gs, db, object_id, good)
 		_command_error(_action_sound_if_ok(r["error"], action_id))
+		return
+	if action_id.begins_with(Interact.LEARN):  # M17.5: a teacher's lesson
+		_command_error(Commands.learn_spell(gs, db, object_id, action_id.substr(Interact.LEARN.length())))
 		return
 	if action_id.begins_with(Interact.USE_GOOD):
 		_command_error(_action_sound_if_ok(
@@ -580,6 +640,9 @@ func click(cell: Vector2i) -> void:
 	if not Encounter.is_player_turn(gs):
 		return
 	if _armed != "":
+		if _armed_spell() != "":
+			cast_spell(_armed_spell(), cell)
+			return
 		var foe := gs.combat.at(gs.player.area, cell)
 		if CombatSkills.targets(gs, Session.db, _armed).has(foe):
 			use_skill(_armed, foe)
@@ -642,7 +705,18 @@ func _update_overlay() -> void:
 			bar.skills().set_armed("")
 		return
 	var marks: Array[Vector2i] = []
-	if _armed != "":
+	if _armed_spell() != "":  # M17.5: gold frames for a "one" spell; the others preview on hover
+		var sid := _armed_spell()
+		if Spells.resource_error(gs, Session.db, sid) != "":  # AP or MP ran out
+			_armed = ""
+			bar.skills().set_armed("")
+		elif String(Spells.spell(Session.db, sid)["shape"]) == "one":
+			for foe in Spells.one_targets(gs, Session.db, sid):
+				marks.append(CombatState.pos_of(gs.combat.monsters[foe]))
+			if marks.is_empty():
+				_armed = ""
+				bar.skills().set_armed("")
+	elif _armed != "":
 		for foe in CombatSkills.targets(gs, Session.db, _armed):
 			marks.append(CombatState.pos_of(gs.combat.monsters[foe]))
 		if marks.is_empty():  # nothing left to hit (the foe fell, AP ran out)
@@ -658,10 +732,36 @@ func _update_overlay() -> void:
 	_show_plan()
 
 
+## M17.5: the tiles the armed spell would hit if cast at the hovered tile (orange), and
+## over the first foe in them the hit chance (one foe) or the number of foes.
+func _show_spell_plan(sid: String) -> void:
+	var gs := Session.gs
+	var db := Session.db
+	var s := Spells.spell(db, sid)
+	var here := gs.player.pos()
+	var shape := String(s["shape"])
+	if shape in ["one", "blast"] and Combat._dist(here, _hover) > int(s["range"]):
+		view.overlay.clear_plan()
+		return
+	var tiles := Spells.cells(gs, db, sid, _hover, here)
+	view.overlay.show_preview(tiles)
+	var foes := Spells.foes_in(gs, tiles)
+	if foes.is_empty():
+		view.overlay.clear_plan()
+		return
+	var at := CombatState.pos_of(gs.combat.monsters[foes[0]])
+	var text := "%d%%" % roundi(Spells.hit_chance(gs, db, sid, foes[0]) * 100.0) if shape == "one" 			else "%d foe%s" % [foes.size(), "" if foes.size() == 1 else "s"]
+	view.overlay.show_plan([] as Array[Vector2i], true, at, text)
+
+
 ## The path and hit chance of a click on the hovered cell.
 func _show_plan() -> void:
 	var gs := Session.gs
 	var db := Session.db
+	view.overlay.show_preview([] as Array[Vector2i])
+	if _armed_spell() != "":
+		_show_spell_plan(_armed_spell())
+		return
 	if _armed != "":  # M17.4: the armed Skill's hit chance on the foe under the mouse
 		var foe := gs.combat.at(gs.player.area, _hover)
 		if CombatSkills.targets(gs, db, _armed).has(foe):

@@ -64,6 +64,12 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 			continue
 		out.append("  %s   from %s level %d" % [db.skills[s["id"]]["name"],
 				db.classes[s["class"]]["name"], int(s["level"])])
+	if not p.spells.is_empty():
+		out.append("")
+		out.append("Spells:")
+		for id in Spells.known(gs, db):
+			var s := Spells.spell(db, id)
+			out.append("  %s   %s AP, %d MP" % [s["name"], CombatBar._ap_string(int(s["ap_q"])), int(s["mp"])])
 	out.append("")
 	out.append("Focus: %s" % Journal.focus_name(gs, db))
 	if not p.offers.is_empty():

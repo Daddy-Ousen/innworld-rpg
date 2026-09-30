@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.4 done
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.5 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -217,3 +217,55 @@ Schema changes approved with the plan.
   click or a direction key uses it. Esc, a right click or the same key again lets it go.
 - **Tests:** `unit_combat_skills` (21, toy arena and real data: AP, Runner cap, every kind, cooldowns,
   refusals, seeds, save v19, bad data, Erin's canon gating, Relc uses [Triple Thrust]), `unit_skill_bar` (5).
+
+## M17.5 Mana and spells (2026-09-30)
+User answers (2026-09-30): max MP = **Intellect and total level**; learning = a **teacher's talk option and a spellbook
+good**, the [Mage] class offered once you know a spell; **NPC casters (Ceria, Pisces) cast now**; a line stops at a
+wall and spells hit **foes only** (never allies, helpers or NPCs). Schema changes approved with the plan.
+- **MP:** `PlayerState.mp` (-1 = full, like hp) and `mp_minutes` (awake minutes toward the next MP). `Stats.max_mp` =
+  `tactical.mp.base` (0) + `per_intellect` (2) x Intellect + `per_level` (1) x total class level + each class's
+  `combat.mp_bonus` x its level; hunger does not touch it. A new base stat `intellect: 3` in
+  `rules.combat.base_stats` (was only a Skill stat). A new player has 6 MP. `core/mana.gd`: `current`, `set_mp`, `spend`,
+  `tick` (1 MP per `regen_minutes` = 10, called from `Movement._spend_seconds` and `Actions.perform`, so fight rounds
+  regen too), `refill`. A night refills `sleep_refill` x `Rest.share`; a collapse refills half and a knock-out a quarter
+  (the same shares as HP). `Movement._spend_seconds` now takes `db`.
+- **Save v20:** `player.mp`, `player.mp_minutes`, `progression.spells`, and `encounter.npc_mp` ({} when an encounter runs).
+- **Data:** `data/spells.json` (`SpellDb`, checked in `DataDb.load_dir`): `name`, `shape` (`one` range; `line` length;
+  `blast` range and radius; `around`), `ap_q` 1-40, `mp` 1-10, `damage` [a, b], `hit` (`auto` or `roll`), `cooldown`,
+  optional `intellect_div` (3), `learn` {`teacher`, `after_event`, `minutes`, `book`}, `canon_ref`. Names and who uses them are
+  canon; **every number and every teacher is a design guess** (noted in each `canon_ref`). First spells: [Ice Spike] (one,
+  Ceria teaches), [Flashfire] (around, Ceria), [Frozen Wind] (line, Pisces), [Fireball] (blast, spellbook only). Left out:
+  [Light], [Flare], [Water Spray] (Ryoka's cantrips: her class-less magic stays hers, and they are not combat spells),
+  [Barrier of Air], [Illumination], [Ice Wall].
+- **Damage:** `roll(damage) + Intellect / intellect_div - armor`, at least `min_damage`. A `roll` spell hits like a blow with
+  Intellect as accuracy against the foe's evasion (NPCs use their `accuracy`); the hit roll is made for an `auto` spell too, so
+  the random stream never changes. Line: up to `length` tiles from the caster toward the aim (the side with the larger gap),
+  stopping at the first unwalkable tile. Blast: the square of `radius` round the aim tile. There is no line of sight for `one`
+  and `blast` yet (M17.6 may add it with cover).
+- **Cast:** `Commands.cast(spell, aim_tile)` -> `Spells.why_not` -> `_encounter_act_q` (AP paid on success; MP is paid inside
+  `Spells.use`). The cooldown table key is `spell:<id>` (never meets a Skill id); `CombatSkills.start_cooldown` is now public.
+  Each foe hit is one ranged blow in the turn log; the entry also gets `cells` (the replay lights those tiles).
+  `Encounter.maybe_end_turn` keeps the turn open while a ready spell can be paid. A fight's casts become one action record
+  `cast_spell` (tag `magic`) in `Combat.end_fight`.
+- **Learning:** `Spells.learn_from_teacher` (Commands.learn_spell): the NPC must be next to the player, the spell's `teacher`, its
+  `after_event` done, the spell unknown. It costs `learn.minutes` as the action `study_spell` (tags `magic`, `study`), which
+  feeds the hidden [Mage] pool. A spellbook is a good with `"teaches": <spell>` (`EconomyDb.USES`): Enter in the bag reads it
+  once (`Economy.use_good` -> `Spells.read_book`), the book is used up, a refused book is kept. Learning sets the flag
+  `player.knows_spell`, the [Mage] prerequisite. No shop sells `spellbook_fireball` yet (no canon shop source; debug `give`).
+  `Interact.options` gives an NPC a `teach` list; the use menu shows "Learn [Spell] (2 h)" rows.
+- **[Mage]:** `classes.json` (prereq flag `player.knows_spell`, tags `magic` 1.0 and `study` 0.3, threshold 30, `combat.mp_bonus`
+  1) with two passive guess Skills ([Mana Sense], [Steady Casting]: +1 / +2 Intellect) so the class has Skills to find.
+- **NPC casters:** npc_behaviour `combat` gets `mp` and `spells` [{`id`, `after_event`?, `until_event`?}] (`BehaviourDb` checks
+  them). Ceria: [Fireball] after 1.47R's captains' plan, [Flashfire] after 1.54's Gazi hunt, [Ice Spike] after 2.23's
+  reforming of the Horns; 12 MP. Pisces: [Frozen Wind] after 1.22's flies; 8 MP. An NPC's MP is full when it first casts in a
+  fight and lives in `encounter.npc_mp`; it does not come back inside a fight and is not kept after it. `_npc_turn` casts
+  before it tries a Skill or a blow, from afar (one / blast in range, around next to a foe, line toward a foe). Other NPCs
+  keep to Skills and blows (own numbers in M17.7).
+- **Screen:** spells share the Skill bar after the Skills (nine keys in all; text "2 [Ice Spike] 2 AP 2 MP"); "MP a/b" beside the
+  AP; the HUD line shows MP once a spell is known; the sheet lists "Spells:". An `around` spell, or a `one` spell with one foe in
+  range, is cast at once; otherwise it is armed: `one` shows gold frames, `line` and `blast` show orange tiles under the mouse and the
+  foe count, a click or a direction key casts, Esc, a right click or the same key lets it go, a refused click keeps it armed.
+  Console: `spell <id>`, `cast <id> [x y]`.
+- **Tests:** `unit_mana` (17), `unit_spell_learning` (16), `unit_spells` (31: toy arena and real data, Ceria casts), `unit_spell_ui` (13).
+- **Open lore flags:** every teacher and number is a guess; Book text for the spell teachers should be checked in M17.7 or later
+  (Pisces and Ceria as teachers of the player, spellbooks for sale, [Light] as a combat flash).

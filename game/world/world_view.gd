@@ -410,6 +410,10 @@ func replay(turns: Array) -> void:
 			await get_tree().create_timer(STEP_TIME).timeout
 			if run != _replay_run:
 				return
+		if t.has("cells"):  # M17.5: the tiles of a spell light up while it hits
+			var burst: Array[Vector2i] = []
+			burst.assign(t["cells"])
+			overlay.show_burst(burst)
 		for s: Dictionary in t["strikes"]:
 			var hit := _unit_node(unit_of(String(s["target"])))
 			if hit == null:
@@ -430,6 +434,8 @@ func replay(turns: Array) -> void:
 			await get_tree().create_timer(BLOW_TIME).timeout
 			if run != _replay_run:
 				return
+		if t.has("cells"):
+			overlay.show_burst([] as Array[Vector2i])
 		await get_tree().create_timer(REPLAY_PAUSE).timeout
 		if run != _replay_run:
 			return
@@ -465,6 +471,7 @@ func _end_replay() -> void:
 	if _cam_tween != null and _cam_tween.is_valid():
 		_cam_tween.kill()
 	overlay.clear_active()
+	overlay.show_burst([] as Array[Vector2i])
 	camera.top_level = false
 	camera.position = Vector2.ZERO
 	camera.reset_smoothing()

@@ -91,7 +91,7 @@ static func join(gs: GameState, id: String) -> void:
 	var c := gs.combat
 	if not c.has_fight():
 		c.fight = {"start": gs.clock.total_minutes, "foes": {}, "attacks": 0, "improvised": 0,
-			"blocks": 0, "throws": 0, "kills": 0, "routed": 0}
+			"blocks": 0, "throws": 0, "kills": 0, "routed": 0, "casts": 0}
 	c.fight["foes"][id] = c.monsters[id]["type"]
 
 
@@ -516,6 +516,7 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 		["attack_melee", int(f["improvised"]), improvised],
 		["block_attack", int(f["blocks"]), base],
 		["throw_object", int(f["throws"]), improvised],
+		["cast_spell", int(f.get("casts", 0)), base],
 	]
 	for part: Array in parts:
 		if int(part[1]) <= 0:
@@ -630,6 +631,12 @@ static func night(gs: GameState, db: DataDb, collapsed: bool, knocked_out: bool,
 		share = float(rules["night_heal"]["collapse"])
 	var target := maxi(ceili(Stats.max_hp(gs, db) * share), 1)
 	set_hp(gs, db, maxi(hp(gs, db), target))
+	var mp_share := float(Mana.rules(db).get("sleep_refill", 1.0)) * rest_share
+	if knocked_out:
+		mp_share = float(rules["knockout"]["wake_hp_frac"])
+	elif collapsed:
+		mp_share = float(rules["night_heal"]["collapse"])
+	Mana.refill(gs, db, mp_share)
 	if knocked_out:
 		var w: Dictionary = rules["knockout"]["wake"].get(gs.player.area, {})
 		if not w.is_empty() and db.maps.areas.has(w["area"]):

@@ -30,3 +30,14 @@ static func max_hp(gs: GameState, db: DataDb) -> int:
 	var full := int(c["hp_base"]) + int(c["hp_per_endurance"]) * get_stat(gs, db, "endurance") \
 			+ int(c.get("hp_per_level", 0)) * gs.progression.total_level()
 	return maxi(roundi(full * Economy.hp_mult(gs, db)), 1)
+
+
+## Most MP (M17.5): tactical.mp base + per_intellect × Intellect + per_level ×
+## total class level, plus the class `combat.mp_bonus` of each class held.
+## Hunger does not touch it. 0 when the rules have no `mp` block.
+static func max_mp(gs: GameState, db: DataDb) -> int:
+	var m: Dictionary = db.rules["combat"].get("tactical", {}).get("mp", {})
+	var full := int(m.get("base", 0)) + int(m.get("per_intellect", 0)) * get_stat(gs, db, "intellect") 			+ int(m.get("per_level", 0)) * gs.progression.total_level()
+	for id: String in gs.progression.classes:
+		full += int(db.classes.get(id, {}).get("combat", {}).get("mp_bonus", 0)) 				* gs.progression.level_of(id)
+	return maxi(full, 0)

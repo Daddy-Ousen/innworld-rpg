@@ -21,6 +21,8 @@
 ## the first talk of the day adds the band's greeting line to gs.combat.lines.
 ## M14.5: an NPC option has "attack": true; the menu's last row for them is ATTACK
 ## (Commands.attack_npc, Brawl).
+## M17.5: an NPC option has "teach": the spell ids this NPC will teach the player now
+## (Spells.teachable); the menu's rows LEARN (Commands.learn_spell).
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -44,6 +46,8 @@ const SERVE := "serve:"
 const RIDE := "ride"
 const ATTACK := "attack"
 const PORTAL := "portal"
+## M17.5: "learn:<spell>" learns a spell from the NPC of the row (Commands.learn_spell).
+const LEARN := "learn:"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
@@ -65,7 +69,7 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 			"actions": (db.rules["npc"]["talk_actions"] as Array).duplicate(), "sleep": false,
 			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
 			"serve": Guests.serve_choices(gs, db, id), "standing": Standing.band(gs, db, id)["label"],
-			"attack": Brawl.on(db)})
+			"attack": Brawl.on(db), "teach": Spells.teachable(gs, db, id)})
 	for g in Guests.near(gs):
 		var gid := Guests.GUEST + String(g["id"])
 		out.append({"id": gid, "name": Guests.patron_name(g), "npc": false, "guest": true,

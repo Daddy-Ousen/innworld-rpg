@@ -75,6 +75,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 			var i := _items.add_item("%s — Take %s" % [label,
 					db.combat.items.get(o["item"], {}).get("name", o["item"])])
 			_items.set_item_metadata(i, [o["id"], Interact.TAKE])
+		for sid: String in o.get("teach", []):  # M17.5: a teacher's spells
+			var i := _items.add_item("%s — Learn %s (%s)" % [label, Spells.name_of(db, sid),
+					_hours(int(Spells.spell(db, sid).get("learn", {}).get("minutes", 60)))])
+			_items.set_item_metadata(i, [o["id"], Interact.LEARN + sid])
 		if o.get("attack", false):  # the last row of an NPC, in red (M14.5)
 			var i := _items.add_item("%s — Attack" % label)
 			_items.set_item_metadata(i, [o["id"], Interact.ATTACK])
@@ -89,6 +93,12 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 	_show_face(0)
 	_items.grab_focus()
 	return true
+
+
+## "2 h" or "90 min".
+static func _hours(minutes: int) -> String:
+	@warning_ignore("integer_division")
+	return "%d h" % (minutes / 60) if minutes % 60 == 0 else "%d min" % minutes
 
 
 ## The look (sheet id) of an Interact option's object: an NPC's own or race look, a patron's look,
@@ -108,17 +118,17 @@ func _show_face(index: int) -> void:
 	Portrait.show_in(_face, _looks[index] if index < _looks.size() else "")
 
 
-## The bag: one entry per good you can eat or drink. Returns false if none.
+## The bag: one entry per good you can eat, drink or read. Returns false if none.
 func open_bag(gs: GameState, db: DataDb) -> bool:
 	_items.clear()
 	_looks.clear()
 	_show_face(0)
 	for g in gs.economy.goods():
 		var use := db.economy.use_of(g)
-		if use not in ["food", "heal"]:
+		if use not in ["food", "heal", "teaches"]:
 			continue
 		var i := _items.add_item("%s — %s (%d left)" % [db.economy.goods[g]["name"],
-				"Eat" if use == "food" else "Drink", gs.economy.count(g)])
+				{"food": "Eat", "heal": "Drink", "teaches": "Read"}[use], gs.economy.count(g)])
 		_items.set_item_metadata(i, ["bag", Interact.USE_GOOD + g])
 	if _items.item_count == 0:
 		return false

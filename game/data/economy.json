@@ -10,6 +10,8 @@
 		"hot_meal": {"name": "Hot meal", "confidence": "guess", "buy": 5, "sell": 0, "eat_now": true},
 		"healing_potion": {"name": "Healing potion", "confidence": "guess", "buy": 30, "sell": 0, "heal": 10,
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "likely", "note": "Octavia is an [Alchemist] who sells potions at Stitchworks. This potion and its price are a guess."}},
+		"spellbook_fireball": {"name": "Spellbook: [Fireball]", "confidence": "guess", "buy": 0, "sell": 0, "teaches": "fireball",
+			"canon_ref": {"book": 2, "chapter": "2.23", "confidence": "guess", "note": "Spellbooks exist (2.23 has 23 lost ones; 3.07H a vault). This one, and that it teaches [Fireball], is a design guess. No shop sells it yet."}},
 		"winter_clothes": {"name": "Winter clothes", "confidence": "guess", "buy": 60, "sell": 0,
 			"wear_flag": "player.warm_clothes"},
 		"corusdeer_soup": {"name": "Corusdeer soup", "confidence": "guess", "buy": 8, "sell": 0, "food": true,

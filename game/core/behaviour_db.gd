@@ -157,6 +157,7 @@ func _validate_npc(id: String, n: Variant, db: DataDb) -> void:
 	if (n as Dictionary).has("combat"):
 		errors.append_array(check_fight_stats(where + " combat", n["combat"]))
 		_validate_skills(where + " combat skills", n["combat"], db)
+		_validate_spells(where + " combat spells", n["combat"], db)
 	var goals: Variant = n.get("goals", [])
 	if not goals is Array or (goals as Array).is_empty():
 		errors.append("%s: needs at least one goal." % where)
@@ -181,6 +182,26 @@ func _validate_skills(where: String, fight: Variant, db: DataDb) -> void:
 	for s: Variant in list:
 		if not s is Dictionary or CombatSkills.action_of(db, String(s.get("id", ""))).is_empty():
 			errors.append("%s: '%s' is not a combat Skill." % [where, s])
+			continue
+		for key: String in ["after_event", "until_event"]:
+			if s.has(key) and not db.canon.events.has(String(s[key])):
+				errors.append("%s: unknown %s '%s'." % [where, key, s[key]])
+
+
+## M17.5: combat "spells" [{"id", "after_event"?, "until_event"?}] (spell ids in
+## data/spells.json, canon event ids) need "mp" >= 1, the NPC's mana in a fight.
+func _validate_spells(where: String, fight: Variant, db: DataDb) -> void:
+	if not fight is Dictionary or not (fight as Dictionary).has("spells"):
+		return
+	var list: Variant = fight["spells"]
+	if not list is Array or (list as Array).is_empty():
+		errors.append("%s: must be a non-empty list." % where)
+		return
+	if int(fight.get("mp", 0)) < 1:
+		errors.append("%s: an NPC with spells needs mp >= 1." % where)
+	for s: Variant in list:
+		if not s is Dictionary or not db.spells.has(String(s.get("id", ""))):
+			errors.append("%s: '%s' is not a spell." % [where, s])
 			continue
 		for key: String in ["after_event", "until_event"]:
 			if s.has(key) and not db.canon.events.has(String(s[key])):

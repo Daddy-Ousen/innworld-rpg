@@ -199,6 +199,18 @@
 			"loss": {"neglect_days": 60, "neglect_tags": ["hospitality", "cooking"]},
 			"consolidation": null,
 			"canon_ref": {"book": 4, "chapter": "3.33", "confidence": "confirmed", "note": "Erin's class at [Innkeeper] Level 30. The prereqs, threshold and weights are design guesses (mostly so that a player cannot reach it before Erin's Level 30)."}
+		},
+		"mage": {
+			"name": "[Mage]",
+			"tag_weights": {"magic": 1.0, "study": 0.3},
+			"offer_threshold": 30,
+			"prereqs": {"classes": [], "flags": ["player.knows_spell"]},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["magic"]},
+			"consolidation": null,
+			"combat": {"mp_bonus": 1, "note": "M17.5: each [Mage] level adds this much max MP."},
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Pisces is a [Mage] (book 1 cast list). The prereq (knowing a spell), threshold, weights and MP bonus are design guesses."}
 		}
 	}
 }

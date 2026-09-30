@@ -74,7 +74,7 @@ static func step(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> 
 			return out
 		out["minutes"] = gs.clock.total_minutes - before
 	elif spend:
-		out["minutes"] = _spend_seconds(gs, Winter.step_seconds(gs, int(db.rules["world"]["step_seconds"])))
+		out["minutes"] = _spend_seconds(gs, db, Winter.step_seconds(gs, int(db.rules["world"]["step_seconds"])))
 	if e.is_empty():
 		p.place(p.area, to)
 	else:
@@ -111,7 +111,7 @@ static func location_at(gs: GameState, db: DataDb) -> String:
 static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
 	if seconds < 0 or gs.clock.is_collapse_due(db.rules["clock"]) or gs.player.hp == 0:
 		return -1
-	return _spend_seconds(gs, seconds)
+	return _spend_seconds(gs, db, seconds)
 
 
 ## Spends one turn (a step's time) standing where you are: combat
@@ -124,16 +124,17 @@ static func spend_turn(gs: GameState, db: DataDb) -> int:
 
 
 static func _spend_step(gs: GameState, db: DataDb) -> int:
-	return _spend_seconds(gs, int(db.rules["world"]["step_seconds"]))
+	return _spend_seconds(gs, db, int(db.rules["world"]["step_seconds"]))
 
 
-static func _spend_seconds(gs: GameState, seconds: int) -> int:
+static func _spend_seconds(gs: GameState, db: DataDb, seconds: int) -> int:
 	var p := gs.player
 	p.sub_seconds += seconds
 	@warning_ignore("integer_division")
 	var minutes := p.sub_seconds / 60
 	p.sub_seconds %= 60
 	gs.clock.advance(minutes)
+	Mana.tick(gs, db, minutes)
 	return minutes
 
 

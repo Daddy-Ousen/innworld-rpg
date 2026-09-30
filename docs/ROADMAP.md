@@ -273,9 +273,10 @@ Rules from the user (2026-09-29):
   area / self, NPC allies Erin, Relc, Toren use Skills; save v19): new skill effects `combat_action` (an active Skill: AP cost, range, area, effect),
   `ap_mod` (permanent AP), `move_ap_mod` (move cap); AP at levels 10/25/50/75; a Skill bar. Existing combat
   Skills get their action where the Book text fits
-- [ ] M17.5 Mana and spells: MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,
+- [x] M17.5 Mana and spells (ADR 0027, 2026-09-30; Intellect + total level, teacher or spellbook, NPC casters Ceria and
+  Pisces, save v20): MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,
   `canon_ref`), learning a spell from a teacher or a spellbook (not from nothing), a [Mage] class path, spell
-  targets (one foe, line, area). First spells from Books 1–5 only
+  targets (one foe, line, blast, around). First spells from Books 1–5 only
 - [ ] M17.6 Cover and position: half and full cover from walls and solid objects, flanking; monsters use cover
 - [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
   balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level

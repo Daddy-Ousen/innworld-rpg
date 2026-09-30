@@ -167,7 +167,7 @@
 		},
 		"pisces": {
 			"confidence": "guess",
-			"combat": {"hp": 24, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [4, 7]},
+			"combat": {"hp": 24, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [4, 7], "mp": 8, "spells": [{"id": "frozen_wind", "after_event": "b1.pisces_saves_erin_from_flies"}]},
 			"notes": "Hunted by the Watch after day 7 (b1.pisces_arrest_and_escape): hides in the wilds, out on the Floodplains at night. Combat block (M7.4): his neck-snapping spells at the gate on day 39 (1.60 stage), as plain damage. M9.1: gone with the Horns to Albez from day 72 (horns_of_hammerad.gone_to_albez, 3.02H), so no more nights on the Floodplains. M9.4: evenings at the Frenzied Hare with the Horns while they are in Celum (horns_of_hammerad.in_celum, 3.24-3.25); 3.24 clears gone_to_albez, so in_celum and left_celum keep him off the Floodplains too. M13.2: from day 101 he eats with the Horns in the inn's common room (horns_of_hammerad.lodge_in_the_inn_basement); hours and seat are guesses.",
 			"goals": [
 				{"goal": "forage", "base": 2, "hours": [[20, 5, 1]], "when_flags": ["liscor.hunting_pisces"],
@@ -269,7 +269,7 @@
 		"ceria_springwalker": {
 			"confidence": "guess",
 			"notes": "The Horns of Hammerad lodge upstairs at the inn from night 35 (1.49): breakfast and evenings in the common room, days in Liscor and at the ruins. Before that they are elsewhere (off the map). No dinner on day 39: they are in the ruins (1.57H-1.59H); after that night they are gone. M9.4: in Celum (horns_of_hammerad.in_celum, 3.24-3.25) the Horns eat at the Frenzied Hare in the evening; hours and seats are guesses. M13.2: from day 101 the Horns sleep in the inn's basement (4.11, horns_of_hammerad.lodge_in_the_inn_basement) and eat in the common room; hours and seats are guesses.",
-			"combat": {"hp": 26, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [3, 7]},
+			"combat": {"hp": 26, "accuracy": 7, "evasion": 4, "armor": 0, "damage": [3, 7], "mp": 12, "spells": [{"id": "fireball", "after_event": "b1.captains_plan_the_ruins_raid"}, {"id": "flashfire", "after_event": "b1.gazi_hunts_for_ryoka"}, {"id": "ice_spike", "after_event": "b2.ceria_reveals_earthers_reforms_horns"}]},
 			"goals": [
 				{"goal": "eat", "base": 2, "hours": [[6, 9, 1]], "when_flags": ["horns_of_hammerad.stay_at_inn"],
 					"target": {"area": "inn_interior", "pos": [3, 8]}},
