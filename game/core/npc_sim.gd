@@ -71,6 +71,8 @@ static func advance_to(gs: GameState, db: DataDb, to_sec: int) -> void:
 				_put(gs, db, n, here, gs.player.pos())
 			if scene_held.has(id):
 				n["carry"] = 0
+			elif Encounter.active(gs) and Encounter.npc_fights(gs, db, id, scene_held):
+				n["carry"] = 0  # takes its turns in the fight (M17.2)
 			elif Brawl.act(gs, db, id, n, maxi(dt, 0)):
 				pass  # hostile to the player (M14.5)
 			elif not (NpcReact.active(gs) and NpcReact.act(gs, db, id, n, maxi(dt, 0))):
