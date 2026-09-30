@@ -511,7 +511,7 @@ func _status() -> Array[String]:
 		out.append("No class. Level 0.")
 	for id: String in p.classes:
 		var level := p.level_of(id)
-		var need := Levels.xp_to_next(level, db.rules["levels"])
+		var need := Levels.cost(p, db.rules["levels"])
 		var note := "  (needs a breakthrough)" if Levels.is_blocked(p, id, db.rules["levels"]) else ""
 		out.append("%s level %d  %.0f/%.0f XP%s" % [db.classes[id]["name"], level,
 				float(p.classes[id]["xp"]), need, note])
