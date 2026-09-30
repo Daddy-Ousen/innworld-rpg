@@ -10,7 +10,7 @@
 	"npcs": {
 		"erin_solstice": {
 			"confidence": "guess",
-			"combat": {"hp": 24, "accuracy": 4, "evasion": 4, "armor": 0, "damage": [1, 3]},
+			"combat": {"hp": 24, "accuracy": 4, "evasion": 4, "armor": 0, "damage": [1, 3], "skills": [{"id": "power_strike", "after_event": "b1.calruz_trains_erin", "until_event": "b2.battle_at_the_wandering_inn"}, {"id": "minotaur_punch", "after_event": "b2.battle_at_the_wandering_inn"}]},
 			"notes": "Day 8: Erin walks to Liscor for supplies (b1.erin_walks_to_liscor, b1.lism_overcharges_erin). Otherwise she runs the inn and forages blue fruit. M8.7: Toren drags her north on day 70 (erin.stranded_north, erin.left_liscor, off the map); from day 71 (erin.in_celum) she cooks, serves and sleeps at the Frenzied Hare in Celum and visits Stitchworks after lunch. Hours in Celum are guesses. M10.3: home at the inn on day 91 (3.32); from day 92 she is at Esthelm (erin.at_esthelm, off the map) with the relief convoy (3.34).",
 			"goals": [
 				{"goal": "trade", "base": 5, "days": [8, 8], "hours": [[11, 13, 1]],
@@ -41,7 +41,7 @@
 		},
 		"relc": {
 			"confidence": "guess",
-			"combat": {"hp": 80, "accuracy": 9, "evasion": 5, "armor": 3, "damage": [6, 11]},
+			"combat": {"hp": 80, "accuracy": 9, "evasion": 5, "armor": 3, "damage": [6, 11], "skills": [{"id": "triple_thrust"}]},
 			"notes": "Day 9 dawn: Relc brings Goblin heads to the inn (b1.relc_brings_goblin_heads). Stays away from the inn after Erin throws him out, and again after he blames her for Klbkch (1.30).",
 			"goals": [
 				{"goal": "eat", "base": 3, "hours": [[12, 13, 1]],
@@ -227,7 +227,7 @@
 		"toren": {
 			"confidence": "guess",
 			"notes": "Pisces's skeleton (1.41). Once it exists it never leaves the inn: it cleans, carries water and fruit, and guards Erin. Before day 27 it is not made yet (off the map). M8.7: on day 70 it drags Erin north and leaves her (toren.left_erin); from then on it is off the map. M13.0: once it is in Liscor's dungeon and the new section is found (4.08 T), it walks the rune hall of the trapped rooms (the route is a guess).",
-			"combat": {"hp": 8, "accuracy": 3, "evasion": 2, "armor": 0, "damage": [1, 2]},
+			"combat": {"hp": 8, "accuracy": 3, "evasion": 2, "armor": 0, "damage": [1, 2], "skills": [{"id": "mirage_cut", "after_event": "b2.toren_kills_corusdeer_and_snow_golem"}, {"id": "power_strike", "after_event": "b2.toren_kills_corusdeer_and_snow_golem"}]},
 			"goals": [
 				{"goal": "work", "base": 3, "when_flags": ["wandering_inn.has_skeleton"], "unless_flags": ["toren.left_erin"], "target": {"area": "inn_interior", "pos": [14, 4]}},
 				{"goal": "patrol", "base": 3, "when_flags": ["toren.in_liscor_dungeon", "liscor_dungeon.new_section_found"], "target": {"area": "liscor_depths", "route": [[14, 2], [21, 2], [21, 6], [14, 6]]}},
