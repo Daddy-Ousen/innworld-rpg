@@ -1,7 +1,37 @@
 # Handoff
 
-## Just done (2026-09-30, M17.5 Mana and spells)
-- Branch `feat/m17.5-spells` (from main 79490a6; NOT pushed, no PR yet: ask the user). 5 commits: core MP (save v20),
+## Just done (2026-09-30, cloud setup; the user travels for a few days)
+- M17.5 is merged ([PR #83](https://github.com/Daddy-Ousen/innworld-rpg/pull/83), 68f5f38). Tag `m17.5-done` pushed.
+- Branch `chore/cloud-setup` makes the repo work in Claude Code cloud sessions. Detail: `docs/CLOUD.md`,
+  `CLAUDE.md` "Cloud sessions", `progress.md` "Cloud setup".
+  - `.claude/settings.json`: SessionStart hook -> `tools/cloud/setup.sh` (exits at once unless
+    `CLAUDE_CODE_REMOTE=true` or `--force`). Also a small permission allow list.
+  - `tools/cloud/install_godot.sh`: Godot 4.7.2 Linux, official URL then the backup release
+    `tools-godot-4.7.2` on this repo (the cloud GitHub proxy may 403 other repos' release assets). SHA-512 checked.
+  - `tools/run_tests.sh`: one Godot run per script. Uses `-gselect=<name>.gd` (exact file).
+    `-gtest=` does NOT work here: `.gutconfig.json` still adds every script in res://tests.
+  - Private repo `Daddy-Ousen/innworld-canon-raw`: Book 6 + Book 7 extracted text only. `setup.sh` clones it
+    to `~/innworld-canon-raw` (or finds `../innworld-canon-raw`) and symlinks `book*/` into `canon/raw/`.
+- User answers: book text in a private repo; Godot backup release OK; cloud agent asks and waits for choices.
+
+## Next
+1. The user: GitHub App access to `innworld-canon-raw` (see `docs/CLOUD.md` "One-time setup"), merge the cloud PR.
+2. Cloud session 1: M17.6 cover and position (plan in `docs/plans/m17.6.md`, ask, build, PR).
+3. Then M17.7, then M18.P (Book 6 plan, ADR 0028), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
+   Prompts: `docs/CLOUD.md` "Task queue".
+
+## Gotchas (cloud)
+- Not yet run in a real cloud VM. Unknowns: whether the proxy lets `git clone` reach the private repo when only
+  `innworld-rpg` is attached (fallback: attach both repos and run `setup.sh --force` by hand; with two repos
+  the hook does not run), and whether tag pushes are allowed (else write "tag pending" in progress.md).
+- A cloud session can push only its own working branch: one sub-milestone per session, one PR.
+- No display in the cloud: "the user plays" checks wait. Plans live in `docs/plans/`, not `~/.claude/plans/`.
+- Books 1–5 text is not in the cloud.
+- A fresh `--import` takes about 100 s. `setup.sh` reverts `.import` files the import rewrites.
+- On Windows `python3` is the Store alias (fails); use `python` locally. Linux uses `python3`.
+
+## Earlier (2026-09-30, M17.5 Mana and spells)
+- Branch `feat/m17.5-spells` (from main 79490a6). Merged as PR #83 (68f5f38), tag `m17.5-done`. 5 commits: core MP (save v20),
   spell data and learning, casting and NPC casters, UI, docs. Plan: `C:/Users/rhasa/.claude/plans/encapsulated-orbiting-lollipop.md`.
   Detail: ADR 0027 "M17.5".
 - User answers: max MP = Intellect + total level; teacher talk option + spellbook good; NPC casters now; line stops at

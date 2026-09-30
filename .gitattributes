@@ -1,0 +1,2 @@
+# Shell scripts run on Linux in cloud sessions: keep LF.
+*.sh text eol=lf

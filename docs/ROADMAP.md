@@ -285,5 +285,24 @@ Rules from the user (2026-09-29):
 combat Skills and learned spells; MP and AP gains work; saves from v17 load; GUT (full suite), the Python tool
 tests and the validator pass; the user has played fights with the new screen.
 
+## M18 — Book 6 (The General of Izril)
+Not planned yet. Work may run in cloud sessions (`docs/CLOUD.md`); the book text is in `canon/raw/book6/` there.
+26 chapters, about 280,000 words: 4.32 G, 1.02 C – 1.05 C (Tom in Rhir), 4.33 – 4.47 (letters E, O, B, G, L, M),
+Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
+- [ ] M18.P Plan + ADR 0028: read the book in subagents, list new places, NPCs, enemies and engine needs, split
+  the chapters into canon batches, ask the user the open choices (M13 style). The user approves before M18.0
+- [ ] M18.0 – M18.n: world work first (if any), then one canon batch per branch + PR
+**Done when:** all Book 6 canon is event data and `sim_canon_book6` runs to the last Book 6 day with drift 0;
+each batch has a hook or stage; GUT (full suite), the Python tool tests and the validator pass.
+
+## M19 — Book 7 (The Rains of Liscor)
+Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in cloud sessions.
+22 chapters, about 286,000 words: 5.00 – 5.08 (with 5.06 M), Interlude – Flos, 5.09 E – 5.11 E, 5.12 – 5.15,
+5.16 S – 5.18 S, 5.19 G, 5.20 G.
+- [ ] M19.P Plan + ADR 0029 (as M18.P). The user approves before M19.0
+- [ ] M19.0 – M19.n: world work, then canon batches
+**Done when:** all Book 7 canon is event data and `sim_canon_book7` runs to the last Book 7 day with drift 0;
+each batch has a hook or stage; GUT (full suite), the Python tool tests and the validator pass.
+
 ## Later
 - optional LLM flavour layer
