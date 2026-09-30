@@ -356,12 +356,10 @@ static func _pincer_goals(gs: GameState, db: DataDb, id: String, at: Vector2i, g
 	return out if not out.is_empty() else goals
 
 
-## M17.6: true for a monster whose ranged blow hurts at least as much as its melee one
-## (the Goblin Lord's archers and shamans). A brute with a thrown rock (the Goblin
-## Chieftain) is not one: it does not seek cover. M17.7 may replace this with an
-## explicit ability in the enemy data.
+## M17.6 / M17.7: true for a monster with the "shooter" ability (MonsterAbilities): it seeks
+## cover and holds it. A brute with a thrown rock (the Goblin Chieftain) has none.
 static func is_shooter(e: Dictionary) -> bool:
-	return e.has("ranged") and int(e["ranged"]["damage"][1]) >= int(e["damage"][1])
+	return MonsterAbilities.is_shooter(e)
 
 
 ## M17.6: a tile for a shooter to fire from: within `budget` steps, no tile beside

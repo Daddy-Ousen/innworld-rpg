@@ -19,8 +19,9 @@ func before_each() -> void:
 	_db.rules["combat"]["hp_base"] = 500
 	_db.combat.enemies["goblin"]["lose_radius"] = 99
 	_db.combat.enemies["goblin"]["chase_turns"] = 99
-	# a shooter: its stone (3) hurts more than its blow (2)
+	# a shooter (the ability, M17.7)
 	_db.combat.enemies["goblin"]["ranged"] = {"range": 6, "damage": [3, 3], "chance": 1.0}
+	_db.combat.enemies["goblin"]["abilities"] = [{"kind": "shooter"}]
 
 
 func _game(at: Vector2i) -> GameState:
@@ -71,7 +72,7 @@ func test_a_shooter_walks_to_cover_shoots_and_holds_it() -> void:
 
 
 func test_a_brute_with_a_thrown_rock_does_not_seek_cover() -> void:
-	_db.combat.enemies["goblin"]["ranged"]["damage"] = [1, 1]  # weaker than its blow: not a shooter
+	_db.combat.enemies["goblin"].erase("abilities")  # a ranged entry alone does not make a shooter
 	assert_false(MonsterSim.is_shooter(_db.combat.enemies["goblin"]))
 	var gs := _game(Vector2i(5, 1))
 	var g := ToyCombat.spawn(gs, _db, "goblin", Vector2i(12, 1))

@@ -99,13 +99,14 @@ static func player_ap(gs: GameState, db: DataDb) -> int:
 
 ## Turn order value: the player's initiative stat; a monster's "agility", or
 ## initiative.by_act_seconds for its act_seconds, or initiative.monster_default;
-## an NPC's initiative.npc_default (M17.2; own numbers come in M17.7).
+## an NPC's own "agility" in its npc_behaviour combat block (M17.7), else initiative.npc_default.
 static func agility(gs: GameState, db: DataDb, id: String) -> int:
 	var ini: Dictionary = rules(db)["initiative"]
 	if id == PLAYER:
 		return Stats.get_stat(gs, db, String(ini["stat"]))
 	if id.begins_with(NPC):
-		return int(ini.get("npc_default", ini["monster_default"]))
+		var own: Dictionary = db.behaviour.combat_of(id.substr(NPC.length()))
+		return int(own.get("agility", ini.get("npc_default", ini["monster_default"])))
 	var e: Dictionary = db.combat.enemies[gs.combat.monsters[id]["type"]]
 	if e.has("agility"):
 		return int(e["agility"])
@@ -473,6 +474,8 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 	var moved := 0
 	var threw := false
 	var sheltered := false
+	var leaped := false
+	var leap := MonsterAbilities.find(e, MonsterAbilities.LEAP)  # M17.7
 	# M17.6: a shooter seeks and holds cover only for its first hold_rounds rounds of the chase
 	var hold := MonsterSim.is_shooter(e) and int(m["chase"]) < int(Cover.rules(db).get("hold_rounds", 0))
 	var reached := false
@@ -491,6 +494,14 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 					func() -> void: Combat.monster_attack(gs, db, id, false, 0.0, target))
 			ap -= atk
 			continue
+		if not leap.is_empty() and not leaped and ap >= int(leap["ap_q"]) and MonsterAbilities.leap_ready(gs, id):
+			var jump := MonsterAbilities.leap_spot(gs, db, id, at, leap)
+			if not jump.is_empty():
+				leaped = true
+				MonsterAbilities.leap(gs, db, id, jump["cell"], leap)
+				log_step(gs, jump["cell"])
+				ap -= int(leap["ap_q"])
+				continue
 		if hold and not sheltered and not threw and ap >= atk:
 			# M17.6: a shooter first goes to a tile with cover, keeping the AP for a shot
 			sheltered = true
