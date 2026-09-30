@@ -281,6 +281,7 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String) -> void:
 		return
 	m["chase"] = int(m["chase"]) + 1
 	if e.has("ranged") and _dist(pos, at) <= int(e["ranged"]["range"]) \
+			and Cover.sight(db, m["area"], pos, at) \
 			and gs.rng.randf() < float(e["ranged"]["chance"]):
 		Combat.monster_attack(gs, db, id, true, 0.0, target)
 		return

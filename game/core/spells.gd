@@ -217,6 +217,8 @@ static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> Str
 		"one", "blast":
 			if Combat._dist(here, aim) > int(s["range"]):
 				return TOO_FAR
+			if not Cover.sight(db, gs.player.area, here, aim):
+				return Combat.NO_SIGHT
 			if none:
 				return NO_FOE
 		"line":
@@ -235,7 +237,9 @@ static func one_targets(gs: GameState, db: DataDb, id: String) -> Array[String]:
 	var out: Array[String] = []
 	var range_ := int(spell(db, id).get("range", 0))
 	for foe in gs.combat.ids():
-		if CombatSkills._is_foe(gs, foe) 				and Combat._dist(gs.player.pos(), CombatState.pos_of(gs.combat.monsters[foe])) <= range_:
+		var at := CombatState.pos_of(gs.combat.monsters[foe])
+		if CombatSkills._is_foe(gs, foe) and Combat._dist(gs.player.pos(), at) <= range_ \
+				and Cover.sight(db, gs.player.area, gs.player.pos(), at):
 			out.append(foe)
 	return out
 
@@ -259,12 +263,15 @@ static func aim_for_dir(gs: GameState, db: DataDb, id: String, dir: Vector2i) ->
 static func hit_chance(gs: GameState, db: DataDb, id: String, unit: String) -> float:
 	if String(spell(db, id)["hit"]) == "auto":
 		return 1.0
-	return _chance(gs, db, Stats.get_stat(gs, db, INTELLECT), unit)
+	return _chance(gs, db, Stats.get_stat(gs, db, INTELLECT), unit, gs.player.pos())
 
 
-static func _chance(gs: GameState, db: DataDb, accuracy: int, unit: String) -> float:
-	var evasion := int(db.combat.enemies[gs.combat.monsters[unit]["type"]]["evasion"])
-	return Combat.hit_chance(db, accuracy, evasion)
+## The chance of a rolled spell hit from `from` (M17.6: cover and the pincer count).
+static func _chance(gs: GameState, db: DataDb, accuracy: int, unit: String, from: Vector2i) -> float:
+	var m: Dictionary = gs.combat.monsters[unit]
+	var evasion := int(db.combat.enemies[m["type"]]["evasion"])
+	return Combat.hit_chance(db, accuracy, evasion,
+			Combat.position_bonus(gs, db, from, CombatState.pos_of(m), true, Cover.FRIEND))
 
 
 ## The player casts spell `id` at `aim` (why_not must be ""): MP is paid here, the
@@ -306,7 +313,8 @@ static func _hit_monster(gs: GameState, db: DataDb, id: String, spell_id: String
 			m["state"] = CombatState.HOSTILE
 		Combat.join(gs, id)
 	var roll := gs.rng.randf()
-	var hit := String(s["hit"]) == "auto" or roll < _chance(gs, db, accuracy, id)
+	var from := gs.player.pos() if npc == "" else NpcRoster.pos_of(gs.npcs.npcs[npc])
+	var hit := String(s["hit"]) == "auto" or roll < _chance(gs, db, accuracy, id, from)
 	if not hit:
 		c.lines.append("%s %s misses the %s." % [by, name_of(db, spell_id), who])
 		return
@@ -376,7 +384,7 @@ static func npc_pick(gs: GameState, db: DataDb, npc: String, ap: int, foe: Strin
 		var reach := true
 		match String(s["shape"]):
 			"one", "blast":
-				reach = Combat._dist(from, at) <= int(s["range"])
+				reach = Combat._dist(from, at) <= int(s["range"]) and Cover.sight(db, gs.player.area, from, at)
 			_:
 				reach = not foes_in(gs, cells(gs, db, id, at, from)).is_empty()
 		if reach:

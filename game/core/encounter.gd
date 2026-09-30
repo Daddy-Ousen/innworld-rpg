@@ -489,7 +489,8 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 			ap -= atk
 			continue
 		if not threw and e.has("ranged") and ap >= atk \
-				and MonsterSim._dist(pos, at) <= int(e["ranged"]["range"]):
+				and MonsterSim._dist(pos, at) <= int(e["ranged"]["range"]) \
+				and Cover.sight(db, m["area"], pos, at):
 			threw = true
 			if gs.rng.randf() < float(e["ranged"]["chance"]):
 				_logged_hit(gs, db, _target_id(target),

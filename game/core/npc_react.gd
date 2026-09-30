@@ -155,8 +155,10 @@ static func _hit(gs: GameState, db: DataDb, id: String, mid: String, mods: Dicti
 	var foe := Combat.name_of(db, m)
 	Combat.join(gs, mid)
 	var roll := gs.rng.randf()
+	var pos_bonus := Combat.position_bonus(gs, db, NpcRoster.pos_of(gs.npcs.npcs[id]),
+			CombatState.pos_of(m), false, Cover.FRIEND)
 	if not bool(mods.get("sure_hit", false)) and roll >= Combat.hit_chance(db, int(s["accuracy"]),
-			int(e["evasion"]), float(mods.get("hit_bonus", 0.0))):
+			int(e["evasion"]), float(mods.get("hit_bonus", 0.0)) + pos_bonus):
 		gs.combat.lines.append("%s misses the %s." % [who, foe])
 		return
 	var raw := gs.rng.randi_range(int(s["damage"][0]), int(s["damage"][1]))

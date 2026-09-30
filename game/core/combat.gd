@@ -21,6 +21,7 @@ const REFUSED_DOWN := "You are knocked out."
 const REFUSED_TIRED := "You are too tired."
 const KNOCKED_OUT_LINE := "You are knocked out."
 const REFUSED_HELPER := "The %s fights on your side."
+const NO_SIGHT := "You cannot see it from here."
 ## monster_target kinds.
 const PLAYER := "player"
 const NPC := "npc"
@@ -189,12 +190,25 @@ static func hit_chance(db: DataDb, accuracy: int, evasion: int, bonus: float = 0
 static func player_hit_chance(gs: GameState, db: DataDb, unit: String, thrown: bool = false,
 		dist: int = 1, extra: float = 0.0) -> float:
 	var evasion := 0
+	var at: Vector2i
 	if unit.begins_with(Encounter.NPC):
-		evasion = int(NpcReact.stats(db, unit.substr(Encounter.NPC.length()))["evasion"])
+		var npc := unit.substr(Encounter.NPC.length())
+		evasion = int(NpcReact.stats(db, npc)["evasion"])
+		at = NpcRoster.pos_of(gs.npcs.npcs[npc])
 	else:
 		evasion = int(db.combat.enemies[gs.combat.monsters[unit]["type"]]["evasion"])
+		at = CombatState.pos_of(gs.combat.monsters[unit])
 	var bonus := -float(db.rules["combat"]["hit"]["throw_per_tile"]) * (dist - 1) if thrown else 0.0
+	bonus += position_bonus(gs, db, gs.player.pos(), at, thrown, Cover.FRIEND)
 	return hit_chance(db, Stats.get_stat(gs, db, "dexterity"), evasion, bonus + extra)
+
+
+## M17.6: what cover and the pincer add to a hit chance (Cover.details) for an
+## attack by `side` (Cover.FRIEND / Cover.FOE) from `from` on the fighter at
+## `target`, in the player's area (where every fight is). `ranged`: cover counts.
+static func position_bonus(gs: GameState, db: DataDb, from: Vector2i, target: Vector2i,
+		ranged: bool, side: String) -> float:
+	return Cover.hit_bonus(gs, db, gs.player.area, from, target, ranged, side)
 
 
 static func _roll(gs: GameState, r: Array) -> int:
@@ -258,6 +272,9 @@ static func throw_at(gs: GameState, db: DataDb, id: String, mods: Dictionary = {
 	var dist := _dist(gs.player.pos(), CombatState.pos_of(c.monsters[id]))
 	if dist > int(db.combat.items[gs.player.held]["throw_range"]):
 		out["error"] = "Too far to throw."
+		return out
+	if not Cover.sight(db, gs.player.area, gs.player.pos(), CombatState.pos_of(c.monsters[id])):
+		out["error"] = NO_SIGHT
 		return out
 	Movement.spend_turn(gs, db)
 	return _strike(gs, db, id, true, dist, mods)
@@ -374,6 +391,7 @@ static func monster_attack(gs: GameState, db: DataDb, id: String, ranged: bool =
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var who := name_of(db, m)
 	join(gs, id)
+	bonus += position_bonus(gs, db, CombatState.pos_of(m), gs.player.pos(), ranged, Cover.FOE)
 	if c.blocking:
 		bonus -= float(rules["block"]["hit_malus"])
 		c.fight["blocks"] += 1
@@ -412,7 +430,8 @@ static func _attack_other(gs: GameState, db: DataDb, id: String, ranged: bool,
 		stats = db.combat.enemies[c.monsters[tid]["type"]]
 		victim = "the " + name_of(db, c.monsters[tid])
 	var out := {"hit": false, "damage": 0}
-	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]), int(stats["evasion"]))
+	var bonus := position_bonus(gs, db, CombatState.pos_of(c.monsters[id]), target["pos"], ranged, Cover.FOE)
+	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]), int(stats["evasion"]), bonus)
 	var how := "throws a stone at" if ranged else "attacks"
 	if not out["hit"]:
 		c.lines.append("The %s %s %s and misses." % [who, how, victim])
@@ -438,7 +457,9 @@ static func helper_attack(gs: GameState, db: DataDb, id: String, foe: String) ->
 	var who := name_of(db, c.monsters[id])
 	var what := name_of(db, c.monsters[foe])
 	join(gs, foe)
-	if gs.rng.randf() >= hit_chance(db, int(e["accuracy"]), int(f["evasion"])):
+	var pos_bonus := position_bonus(gs, db, CombatState.pos_of(c.monsters[id]),
+			CombatState.pos_of(c.monsters[foe]), false, Cover.FRIEND)
+	if gs.rng.randf() >= hit_chance(db, int(e["accuracy"]), int(f["evasion"]), pos_bonus):
 		c.lines.append("The %s misses the %s." % [who, what])
 		return false
 	var dmg := maxi(_roll(gs, e["damage"]) - int(f["armor"]), int(db.rules["combat"]["min_damage"]))
