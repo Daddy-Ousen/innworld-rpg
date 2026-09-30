@@ -44,6 +44,8 @@ const HELP := [
 	"  breakthrough <class>               allow the next capstone level (debug)",
 	"  skill <id>                         give yourself a Skill (debug, e.g. power_strike)",
 	"  useskill <id> [monster]            use a combat Skill in a fight (keys 1-9 in the game)",
+	"  spell <id>                         learn a spell at once (debug, e.g. ice_spike)",
+	"  cast <id> [x y]                    cast a spell in a fight (default: at the nearest foe)",
 	"  kill <npc>                         kill a canon NPC (debug)",
 	"  flag <key> [value] / flag <key> off   set or clear a world flag (debug)",
 	"  history                            what happened to canon events (debug)",
@@ -166,6 +168,21 @@ func execute(line: String) -> Array[String]:
 			if out.is_empty():
 				out = _combat(String(Commands.use_skill(gs, db, args[0],
 						args[1] if args.size() > 1 else "")["error"]))
+		"spell":
+			out = _need_arg(args, "spell <id>")
+			if out.is_empty():
+				var err := Commands.grant_spell(gs, db, args[0])
+				out.append(err if err != "" else "You know %s." % Spells.name_of(db, args[0]))
+		"cast":
+			out = _need_arg(args, "cast <id> [x y]")
+			if out.is_empty():
+				var aim := gs.player.pos()
+				var foe := Combat.nearest_foe(gs)
+				if args.size() > 2:
+					aim = Vector2i(int(args[1]), int(args[2]))
+				elif foe != "":
+					aim = CombatState.pos_of(gs.combat.monsters[foe])
+				out = _combat(String(Commands.cast(gs, db, args[0], aim)["error"]))
 		"kill":
 			out = _need_arg(args, "kill <npc>")
 			if out.is_empty():
@@ -501,6 +518,9 @@ func _status() -> Array[String]:
 	if not p.skills.is_empty():
 		out.append("Skills: " + ", ".join(p.skills.map(func(s: Dictionary) -> String:
 			return db.skills[s["id"]]["name"])))
+	if not p.spells.is_empty():
+		out.append("Spells: " + ", ".join(Spells.known(gs, db).map(func(id: String) -> String:
+			return Spells.name_of(db, id))))
 	for o: Dictionary in p.offers:
 		out.append("Offer: %s (%s). accept %s / decline %s" % [
 			db.classes[o["class"]]["name"], o["kind"], o["class"], o["class"]])

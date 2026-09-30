@@ -4,7 +4,8 @@
 ## fighter whose turn it is in gold, the player's AP as pips (each pip is one
 ## AP, filled by quarters), the tiles left to move, and the End turn button.
 ## M17.4: a row of Skill buttons under it (SkillBar; `skill` is emitted with the
-## id of the one pressed).
+## id of the one pressed). M17.5: spells are in that row too ("spell:<id>"), and
+## the player's MP shows beside the AP once they know a spell.
 ## Hidden when there is no fight. Presentation only (CLAUDE.md rule 1).
 class_name CombatBar
 extends PanelContainer
@@ -20,6 +21,7 @@ const FACE_BACK := Color(0.1, 0.1, 0.12, 0.9)
 
 var _round: Label
 var _ap: Label
+var _mp: Label
 var _move: Label
 var _pips: ApPips
 var _button: Button
@@ -71,6 +73,9 @@ func _ready() -> void:
 	top.add_child(_round)
 	_ap = Label.new()
 	top.add_child(_ap)
+	_mp = Label.new()  # M17.5: shown once the player knows a spell
+	_mp.visible = false
+	top.add_child(_mp)
 	_pips = ApPips.new()
 	_pips.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(_pips)
@@ -100,6 +105,8 @@ func refresh(gs: GameState, db: DataDb) -> void:
 	_round.text = "Round %d" % int(e["round"])
 	var ap := int(e["ap_q"]) if mine else 0
 	_ap.text = "AP %s" % _ap_string(ap)
+	_mp.visible = not gs.progression.spells.is_empty()
+	_mp.text = "MP %d/%d" % [Mana.current(gs, db), Stats.max_mp(gs, db)]
 	_pips.set_ap(ap, Encounter.player_ap(gs, db))
 	@warning_ignore("integer_division")
 	var steps := mini(ap, CombatSkills.move_cap_q(gs, db) - int(e["moved_q"])) / int(t["move_cost_q"]) \
@@ -132,6 +139,10 @@ func active_id() -> String:
 
 func ap_text() -> String:
 	return _ap.text
+
+
+func mp_text() -> String:
+	return _mp.text if _mp.visible else ""
 
 
 func move_text() -> String:

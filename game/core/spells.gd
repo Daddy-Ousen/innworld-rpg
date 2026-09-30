@@ -185,8 +185,9 @@ static func ready(gs: GameState, fighter: String, id: String) -> bool:
 	return CombatSkills.rounds_left(gs, fighter, KEY + id) == 0
 
 
-## Why the player cannot cast spell `id` at `aim` (a tile) now; "" = they can.
-static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> String:
+## Why the player cannot cast spell `id` at all now, whatever the aim (fight, known,
+## their turn, cooldown, AP, MP, up and awake); "" = they may pick a target.
+static func resource_error(gs: GameState, db: DataDb, id: String) -> String:
 	if not Encounter.active(gs):
 		return NOT_IN_FIGHT
 	if not db.spells.has(id) or not knows(gs, id):
@@ -201,6 +202,15 @@ static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> Str
 		return Encounter.NO_AP
 	if Mana.current(gs, db) < int(s["mp"]):
 		return NO_MP
+	return Combat.cannot_act(gs, db)
+
+
+## Why the player cannot cast spell `id` at `aim` (a tile) now; "" = they can.
+static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> String:
+	var why := resource_error(gs, db, id)
+	if why != "":
+		return why
+	var s := spell(db, id)
 	var here := gs.player.pos()
 	var none := foes_in(gs, cells(gs, db, id, aim, here)).is_empty()
 	match String(s["shape"]):
@@ -217,7 +227,31 @@ static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> Str
 		"around":
 			if none:
 				return NO_FOE_NEAR
-	return Combat.cannot_act(gs, db)
+	return ""
+
+
+## The foes a "one" spell could hit now: in range, seen, not helpers (for the screen).
+static func one_targets(gs: GameState, db: DataDb, id: String) -> Array[String]:
+	var out: Array[String] = []
+	var range_ := int(spell(db, id).get("range", 0))
+	for foe in gs.combat.ids():
+		if CombatSkills._is_foe(gs, foe) 				and Combat._dist(gs.player.pos(), CombatState.pos_of(gs.combat.monsters[foe])) <= range_:
+			out.append(foe)
+	return out
+
+
+## The tile to aim at for a key press toward `dir` (a unit step): the first foe along
+## that side within range for a "one" or "blast" spell, else the neighbour tile
+## (a "line" spell shoots that way; "around" ignores the aim).
+static func aim_for_dir(gs: GameState, db: DataDb, id: String, dir: Vector2i) -> Vector2i:
+	var here := gs.player.pos()
+	var s := spell(db, id)
+	if ["one", "blast"].has(String(s["shape"])):
+		for k in range(1, int(s["range"]) + 1):
+			var at := here + dir * k
+			if not foes_in(gs, [at] as Array[Vector2i]).is_empty():
+				return at
+	return here + dir
 
 
 ## The player's chance to hit foe `unit` with spell `id`: 1.0 for an "auto" spell,

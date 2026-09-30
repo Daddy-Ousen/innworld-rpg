@@ -3,6 +3,8 @@
 ## the path a click would walk, a red frame on the foe it would hit with the
 ## hit chance over it, and a ring under the fighter whose turn is shown.
 ## M17.4: gold frames on the foes an armed Skill can hit.
+## M17.5: orange tiles for what an armed spell would hit (preview), and the tiles a
+## cast spell just hit, while its replay plays (burst).
 ## Draws only; WorldView owns it and main.gd feeds it.
 ## Presentation only: never changes GameState (CLAUDE.md rule 1).
 class_name CombatOverlay
@@ -15,6 +17,9 @@ const PATH := Color(1.0, 1.0, 1.0, 0.85)
 const TARGET := Color("#e03a3a")
 const ACTIVE := Color(1.0, 0.95, 0.5, 0.9)
 const SKILL := Color("#f0c850")
+const SPELL := Color(1.0, 0.55, 0.15, 0.30)
+const SPELL_EDGE := Color(1.0, 0.7, 0.3, 0.8)
+const BURST := Color(1.0, 0.75, 0.25, 0.55)
 const DOT := 3.0
 const FRAME := 2.0
 
@@ -32,6 +37,10 @@ var active := Vector2i.ZERO
 var has_active := false
 ## The cells of the foes an armed Skill can hit (M17.4).
 var marks: Array[Vector2i] = []
+## The tiles an armed spell would hit at the hovered tile, and the tiles of a spell
+## being replayed (M17.5).
+var preview: Array[Vector2i] = []
+var burst: Array[Vector2i] = []
 
 var _label: Label
 
@@ -80,6 +89,16 @@ func show_marks(cells: Array[Vector2i]) -> void:
 	queue_redraw()
 
 
+func show_preview(cells: Array[Vector2i]) -> void:
+	preview = cells
+	queue_redraw()
+
+
+func show_burst(cells: Array[Vector2i]) -> void:
+	burst = cells
+	queue_redraw()
+
+
 func mark_active(cell: Vector2i) -> void:
 	active = cell
 	has_active = true
@@ -97,6 +116,8 @@ func clear() -> void:
 	exits = {}
 	has_active = false
 	marks = []
+	preview = []
+	burst = []
 	clear_plan()
 
 
@@ -110,6 +131,12 @@ func _draw() -> void:
 		var r := Rect2(Vector2(cell) * t + Vector2.ONE, Vector2(t - 2, t - 2))
 		draw_rect(r, EXIT if exits.has(cell) else REACH)
 		draw_rect(r, REACH_EDGE, false, 1.0)
+	for cell in preview:
+		var r := Rect2(Vector2(cell) * t + Vector2.ONE, Vector2(t - 2, t - 2))
+		draw_rect(r, SPELL)
+		draw_rect(r, SPELL_EDGE, false, 1.0)
+	for cell in burst:
+		draw_rect(Rect2(Vector2(cell) * t + Vector2.ONE, Vector2(t - 2, t - 2)), BURST)
 	for cell in path:
 		draw_circle(WorldView.cell_center(cell), DOT, PATH)
 	for cell in marks:

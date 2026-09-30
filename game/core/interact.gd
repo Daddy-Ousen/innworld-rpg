@@ -46,6 +46,8 @@ const SERVE := "serve:"
 const RIDE := "ride"
 const ATTACK := "attack"
 const PORTAL := "portal"
+## M17.5: "learn:<spell>" learns a spell from the NPC of the row (Commands.learn_spell).
+const LEARN := "learn:"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the

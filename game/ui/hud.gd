@@ -46,7 +46,8 @@ func refresh(gs: GameState, db: DataDb) -> void:
 	_warning.visible = _warning.text != ""
 
 
-## "HP 14/20 · Held: Chair" (or "Held: nothing"); in a staged fight
+## "HP 14/20 · Held: Chair" (or "Held: nothing"); once the player knows a spell
+## "HP 14/20 · MP 4/6 · Held: ..." (M17.5); in a staged fight
 ## (M7.B) also " · Foes left: 23" (on the map and in the waves to come);
 ## in winter (M8.W) " · Cold" outdoors away from a fire, and " · Slowed"
 ## under fairy snow.
@@ -54,7 +55,8 @@ static func health(gs: GameState, db: DataDb) -> String:
 	var held := "nothing"
 	if gs.player.held != "":
 		held = String(db.combat.items.get(gs.player.held, {}).get("name", gs.player.held))
-	var out := "HP %d/%d · Held: %s" % [Combat.hp(gs, db), Stats.max_hp(gs, db), held]
+	var mana := " · MP %d/%d" % [Mana.current(gs, db), Stats.max_mp(gs, db)] if not gs.progression.spells.is_empty() else ""
+	var out := "HP %d/%d%s · Held: %s" % [Combat.hp(gs, db), Stats.max_hp(gs, db), mana, held]
 	var left := Stage.foes_left(gs, db)
 	if left >= 0:
 		out += " · Foes left: %d" % left

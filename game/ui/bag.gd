@@ -98,6 +98,9 @@ static func rows(gs: GameState, db: DataDb) -> Array[Dictionary]:
 			"heal":
 				verb = "Drink"
 				use = Interact.USE_GOOD + g
+			"teaches":  # M17.5: a spellbook
+				verb = "Read"
+				use = Interact.USE_GOOD + g
 			_:
 				if good.has("item"):
 					verb = "Hold"
