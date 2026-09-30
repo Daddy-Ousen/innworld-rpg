@@ -29,7 +29,7 @@ func _beat(gs: GameState, type: String) -> void:
 	for i in 100:
 		if not gs.combat.monsters.has(id):
 			break
-		Commands.move(gs, _db, "e")
+		FightBot.move(gs, _db, "e")
 	assert_false(gs.combat.monsters.has(id), "the %s is dead" % type)
 	assert_false(gs.combat.has_fight(), "the fight is over")
 	var won := gs.action_log.records.filter(func(r: Dictionary) -> bool:

@@ -106,7 +106,7 @@ func test_torens_snow_wall_rings_the_inn_from_day_44() -> void:
 	assert_false(_db.maps.is_walkable("inn_hill", Vector2i(10, 8)))
 	assert_eq(_db.maps.tile_at("inn_hill", Vector2i(12, 13)), "snow_wall")
 	for dir: String in ["n", "n", "n", "n"]:
-		Commands.move(gs, _db, dir)
+		FightBot.move(gs, _db, dir)
 		if gs.player.area == "inn_interior":
 			break
 	assert_eq(gs.player.area, "inn_interior", "the road through the gap reaches the door")

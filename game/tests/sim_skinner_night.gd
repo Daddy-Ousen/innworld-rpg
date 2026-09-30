@@ -55,7 +55,7 @@ func _step_toward_a_foe(gs: GameState) -> void:
 		var at := CombatState.pos_of(m)
 		var d := at - gs.player.pos()
 		if absi(d.x) + absi(d.y) == 1:
-			Commands.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+			FightBot.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 			return
 		var path := Pathfind.path(_db.maps, area, gs.player.pos(), Pathfind.around(at), MonsterSim.taken(gs, ""))
 		if path["found"] and not (path["steps"] as Array).is_empty() \
@@ -64,7 +64,7 @@ func _step_toward_a_foe(gs: GameState) -> void:
 	if best.is_empty():
 		Commands.wait(gs, _db, 6)
 	else:
-		Commands.move(gs, _db, best[0])
+		FightBot.move(gs, _db, best[0])
 
 
 func _fight_to_the_end(gs: GameState) -> void:
@@ -207,7 +207,7 @@ func test_a_knock_out_on_the_hill_keeps_the_canon() -> void:
 	for i in 200:
 		if Combat.is_down(gs) or not gs.combat.has_fight():
 			break
-		Commands.block(gs, _db)
+		FightBot.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
 	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 39)

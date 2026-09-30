@@ -30,6 +30,7 @@ func test_round_and_initiative() -> void:
 	assert_eq(_t["initiative"]["stat"], "speed", "Agility is the speed stat")
 	assert_eq(_t["initiative"]["ties"], "rng")
 	assert_eq(int(_t["monster"]["move_cap_q"]), 4)
+	assert_eq(int(_t["initiative"]["npc_default"]), 3, "all NPCs until M17.7")
 
 
 func test_mana_regen_and_sleep() -> void:
@@ -37,8 +38,8 @@ func test_mana_regen_and_sleep() -> void:
 	assert_eq(float(_t["mp"]["sleep_refill"]), 1.0, "a full sleep refills MP")
 
 
-func test_combat_mode_waits_for_m17_2() -> void:
-	assert_eq(_t["enabled"], false, "M17.2 ports the old fights, then turns it on")
+func test_combat_mode_is_on() -> void:
+	assert_eq(_t["enabled"], true, "M17.2 ported the old fights and turned it on")
 
 
 func test_hp_scale_waits_for_m17_7() -> void:

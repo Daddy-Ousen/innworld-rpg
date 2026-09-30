@@ -58,8 +58,20 @@ func _note() -> void:
 
 
 func _step(dir: String) -> void:
-	_main.step(dir)
+	_press(func() -> void: _main.step(dir))
+
+
+## Sends one key's command, then notes. M17.2 combat mode: if it was refused
+## for AP, the move cap or the turn, presses Space (end turn) and tries again.
+func _press(key: Callable) -> void:
+	key.call()
 	_note()
+	if Encounter.active(_gs()) and _gs().combat.lines.any(func(l: String) -> bool:
+			return Encounter.TURN_REFUSALS.has(l)):
+		_main.step(_main.WAIT)
+		_note()
+		key.call()
+		_note()
 
 
 func _obj(id: String) -> Vector2i:
@@ -162,8 +174,7 @@ func _scare_a_crab() -> String:
 		_step(_main.WAIT)
 	if not Combat.in_danger(gs) or not gs.combat.monsters.has(crab):
 		return "the crab did not come out"
-	_main.throw()
-	_note()
+	_press(_main.throw)
 	if not _lines.has("The Rock Crab panics and backs away."):
 		return "the crab was not scared"
 	_wait_out_fight()
@@ -188,8 +199,7 @@ func _flee_the_razorbeak() -> String:
 			_step(dir)
 			hit = true
 			break
-		_main.block()
-		_note()
+		_press(_main.block)
 	if not hit or _of_type("razorbeak") == "":
 		return "no swing at the Razorbeak"
 	var fled := _count("flee_danger")
@@ -214,6 +224,11 @@ func _fight_goblins(save: bool = false) -> String:
 	for i in 5 * 60:
 		if Combat.in_danger(gs) or gs.clock.minute() >= 12 * 60:
 			break
+		var gob := _of_type("goblin_grunt")
+		if gob != "":  # M17.2: they may stay by the trees; go to them
+			_walk(_near(CombatState.pos_of(gs.combat.monsters[gob]), 3))
+			if Combat.in_danger(gs):
+				break
 		Commands.wait(gs, _db, 60)
 		_note()
 	if not Combat.in_danger(gs) or _of_type("goblin_grunt") == "":
@@ -227,8 +242,7 @@ func _fight_goblins(save: bool = false) -> String:
 		if dir != "" and int(gs.combat.fight["blocks"]) > 0:
 			_step(dir)
 		else:
-			_main.block()
-			_note()
+			_press(_main.block)
 	return "" if _down() or not gs.combat.has_fight() else "the Goblin fight did not end"
 
 

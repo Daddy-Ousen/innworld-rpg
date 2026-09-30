@@ -75,12 +75,12 @@ func _fight_turn(gs: GameState, db: DataDb) -> void:
 	var at := CombatState.pos_of(gs.combat.monsters[id])
 	var d := at - gs.player.pos()
 	if absi(d.x) + absi(d.y) == 1:
-		Commands.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+		FightBot.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 		return
 	var sides := {at + Vector2i(1, 0): true, at + Vector2i(-1, 0): true, at + Vector2i(0, 1): true, at + Vector2i(0, -1): true}
 	var path := Pathfind.path(db.maps, gs.player.area, gs.player.pos(), sides, MonsterSim.taken(gs, ""))
 	if path["found"] and not (path["steps"] as Array).is_empty():
-		Commands.move(gs, db, path["steps"][0])
+		FightBot.move(gs, db, path["steps"][0])
 	else:
 		Commands.wait(gs, db, 6)
 
@@ -155,14 +155,16 @@ func test_no_santa_fight_the_day_before() -> void:
 
 
 func test_the_thieves_run_into_relc_and_klbkch() -> void:
-	var gs := _copy(94)
-	_wait_for(gs, _db, SANTA, "liscor_market", MARKET_SPOT)
+	var db := DataDb.load_dir()
+	ToyCombat.freeze(db)  # M17.2: two thieves on AP knock an idle player out before the Santas come
+	var gs := _copy(94, db)
+	_wait_for(gs, db, SANTA, "liscor_market", MARKET_SPOT)
 	var h: int = gs.clock.minute() / 60
 	assert_true(h >= 18 and h < 22, "evening")
 	var foes := gs.combat.ids().filter(func(id: String) -> bool: return gs.combat.monsters[id].get("stage", "") == SANTA)
 	assert_eq(foes.size(), 2)
 	assert_eq(gs.combat.monsters[foes[0]]["type"], "liscor_house_thief")
-	Commands.wait(gs, _db, 36)  # the Santas come 30 seconds later
+	FightBot.wait_seconds(gs, db, 36)  # the Santas come 30 seconds later
 	assert_eq(_area_of(gs, "relc"), "liscor_market")
 	assert_eq(_area_of(gs, "klbkch"), "liscor_market")
 
