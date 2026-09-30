@@ -7,7 +7,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - Redirect GUT / validator runs to a file (scratchpad). Read only the pass/fail summary line and any FAIL/Error/Parse Error lines — never the full run.
 - Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent. Only its short summary should land in the main session's context, not raw book text or raw test logs.
 - Don't re-read a file right after Edit/Write — the tool already confirms the change.
-- Test scope (user, 2026-09-28): data-only sub-milestones run targeted tests only; the full suite runs only for `game/core/` code, save/schema changes, and at a milestone's end. Detail in `CLAUDE.md` "Test scope".
+- Test scope (user, 2026-09-30): run the absolute minimum tests per task; no full suite unless the user asks. Detail in `CLAUDE.md` "Test scope".
 - See `handoff.md` "Gotchas" for the GUT-exits-0-on-parse-error trap and other run-output pitfalls.
 
 ## Roadmap status
@@ -40,7 +40,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     casters Ceria and Pisces, spells in the Skill bar with aiming, save v20. Full suite: 128 scripts, 1339 tests, all pass (run script by script); validator 0 errors; Python 95 OK. Detail: ADR 0027 "M17.5".
 
   - [ ] M17.6 Cover and position (next; first cloud task, see `docs/CLOUD.md`).
-  - [ ] M17.7 Enemy abilities and balance (last M17 step; full suite before its PR).
+  - [ ] M17.7 Enemy abilities and balance (last M17 step).
   - [ ] The user plays fights with Skills and spells (`godot --path game`). Needs the user at home.
 - [ ] M18 — Book 6 (The General of Izril). Not planned: M18.P first (ADR 0028). Text in the private repo.
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
