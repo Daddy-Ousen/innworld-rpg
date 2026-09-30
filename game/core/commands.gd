@@ -95,6 +95,10 @@ static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 ## first (nothing happened): send it again with `confirmed` true. Works with enemies near.
 static func attack_npc(gs: GameState, db: DataDb, npc: String, confirmed: bool = false) -> Dictionary:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		var hit := func() -> Dictionary: return Brawl.attack(gs, db, npc, confirmed)
+		return _encounter_act(gs, db, "attack_cost_q", hit,
+				{"target": npc, "warn": false, "hit": false, "damage": 0, "killed": false})
 	var r := Brawl.attack(gs, db, npc, confirmed)
 	_after(gs, db)
 	return r
@@ -130,6 +134,9 @@ static func give(gs: GameState, db: DataDb, coins: int, good: String = "", count
 ## M17.1 combat mode (Encounter): a step costs AP and counts against the move
 ## cap, and takes no time; walking into a seen monster is an attack for AP.
 ## When AP or the cap says no, nothing happens and the result has "error".
+## M17.2: block, throw, take, drop, the bag and attack_npc cost AP too
+## (rules.combat.tactical), and the turn ends by itself when the AP left pays
+## for nothing.
 static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
@@ -173,37 +180,77 @@ static func _encounter_move(gs: GameState, db: DataDb, dir: String) -> Dictionar
 		gs.combat.lines.append(why)
 		return r
 	r.merge(Movement.step(gs, db, dir, false), true)
-	if r["moved"]:
+	if r["fairy"] != "":
+		# M17.2: a swat is a swing (attack AP); free, a fairy in the way stalls the turn
+		var atk := int(Encounter.rules(db)["attack_cost_q"])
+		why = Encounter.check(gs, db, atk, false)
+		if why != "":
+			r["refused"] = true
+			r["error"] = why
+			gs.combat.lines.append(why)
+			return r
+		Encounter.pay(gs, atk, false)
+	elif r["moved"]:
 		Encounter.pay(gs, cost, true)
 	_after_step(gs, db, dir, r)
 	_after(gs, db)
+	if r["moved"] or r["fairy"] != "":
+		_auto_end(gs, db)
 	return r
 
 
 ## Combat mode: an attack for attack_cost_q (see attack).
 static func _encounter_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
-	var cost := int(Encounter.rules(db)["attack_cost_q"])
+	var hit := func() -> Dictionary: return Combat.player_attack(gs, db, dir)
+	return _encounter_act(gs, db, "attack_cost_q", hit,
+			{"target": "", "hit": false, "damage": 0, "killed": false})
+
+
+## Combat mode (M17.2): `act` (returns a result with "error") for the AP of
+## rules.combat.tactical[`cost_key`]. Not the player's turn, or too little AP:
+## nothing happens, the result is `empty` with that "error" (also in the log).
+## Paid only when `act` worked (no "error", no fate "warn"); then the turn
+## ends by itself if the AP left pays for nothing (Encounter.maybe_end_turn).
+static func _encounter_act(gs: GameState, db: DataDb, cost_key: String, act: Callable,
+		empty: Dictionary) -> Dictionary:
+	var cost := int(Encounter.rules(db)[cost_key])
 	var why := Encounter.check(gs, db, cost, false)
-	var r := {"error": why, "target": "", "hit": false, "damage": 0, "killed": false}
 	if why != "":
 		gs.combat.lines.append(why)
-		return r
-	r = Combat.player_attack(gs, db, dir, false)
-	if r["error"] == "":
+		var out := empty.duplicate()
+		out["error"] = why
+		return out
+	var r: Dictionary = act.call()
+	var paid: bool = r["error"] == "" and not r.get("warn", false)
+	if paid:
 		Encounter.pay(gs, cost, false)
 	_after(gs, db)
+	if paid:
+		_auto_end(gs, db)
 	return r
 
 
+## Combat mode: an action that returns "" or an error text (see _encounter_act).
+static func _encounter_do(gs: GameState, db: DataDb, cost_key: String, act: Callable) -> String:
+	var wrap := func() -> Dictionary: return {"error": act.call()}
+	return String(_encounter_act(gs, db, cost_key, wrap, {})["error"])
+
+
+static func _auto_end(gs: GameState, db: DataDb) -> void:
+	if Encounter.maybe_end_turn(gs, db):
+		_after(gs, db)
+
+
 ## Stands still for `seconds`. Returns the minutes the clock moved, or -1
-## if refused (see Movement.wait). In combat mode (M17.1) it ends the turn.
+## if refused (see Movement.wait). In combat mode (M17.1) it ends the turn;
+## -1 if there is no turn to end (knocked out).
 static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
 		var before := gs.clock.total_minutes
-		Encounter.end_player_turn(gs, db)
+		var why := Encounter.end_player_turn(gs, db)
 		_after(gs, db)
-		return gs.clock.total_minutes - before
+		return -1 if why != "" else gs.clock.total_minutes - before
 	var minutes := Movement.wait(gs, db, seconds)
 	_after(gs, db)
 	return minutes
@@ -274,6 +321,11 @@ static func drop_good(gs: GameState, db: DataDb, good: String) -> String:
 
 static func _bag_command(gs: GameState, db: DataDb, act: Callable) -> String:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		var checked := func() -> String:
+			var err := Combat.cannot_act(gs, db)
+			return err if err != "" else String(act.call())
+		return _encounter_do(gs, db, "item_cost_q", checked)
 	var why := Combat.cannot_act(gs, db)
 	if why == "":
 		why = act.call()
@@ -342,7 +394,7 @@ static func attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 static func block(gs: GameState, db: DataDb) -> String:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
-		return Encounter.NOT_YET  # M17.2
+		return _encounter_do(gs, db, "block_cost_q", func() -> String: return Combat.block(gs, db))
 	var err := Combat.block(gs, db)
 	_after(gs, db)
 	return err
@@ -353,7 +405,9 @@ static func block(gs: GameState, db: DataDb) -> String:
 static func throw(gs: GameState, db: DataDb, target_id: String) -> Dictionary:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
-		return {"error": Encounter.NOT_YET, "target": target_id, "hit": false, "damage": 0, "killed": false}
+		var hit := func() -> Dictionary: return Combat.throw_at(gs, db, target_id)
+		return _encounter_act(gs, db, "throw_cost_q", hit,
+				{"target": target_id, "hit": false, "damage": 0, "killed": false})
 	var r := Combat.throw_at(gs, db, target_id)
 	_after(gs, db)
 	return r
@@ -364,7 +418,7 @@ static func throw(gs: GameState, db: DataDb, target_id: String) -> Dictionary:
 static func take(gs: GameState, db: DataDb, object_id: String) -> String:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
-		return Encounter.NOT_YET
+		return _encounter_do(gs, db, "item_cost_q", func() -> String: return Combat.take(gs, db, object_id))
 	var err := Combat.take(gs, db, object_id)
 	_after(gs, db)
 	return err
@@ -374,7 +428,7 @@ static func take(gs: GameState, db: DataDb, object_id: String) -> String:
 static func drop(gs: GameState, db: DataDb) -> String:
 	Combat.begin_command(gs)
 	if Encounter.active(gs):
-		return Encounter.NOT_YET
+		return _encounter_do(gs, db, "item_cost_q", func() -> String: return Combat.drop(gs, db))
 	var err := Combat.drop(gs, db)
 	_after(gs, db)
 	return err

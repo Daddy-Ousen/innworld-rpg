@@ -111,12 +111,12 @@ func _fight_turn(gs: GameState, db: DataDb, event: String) -> void:
 	var at := CombatState.pos_of(gs.combat.monsters[foes[0]])
 	var d := at - gs.player.pos()
 	if absi(d.x) + absi(d.y) == 1:
-		Commands.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+		FightBot.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 		return
 	var sides := {at + Vector2i(1, 0): true, at + Vector2i(-1, 0): true, at + Vector2i(0, 1): true, at + Vector2i(0, -1): true}
 	var path := Pathfind.path(db.maps, gs.player.area, gs.player.pos(), sides, MonsterSim.taken(gs, ""))
 	if path["found"] and not (path["steps"] as Array).is_empty():
-		Commands.move(gs, db, path["steps"][0])
+		FightBot.move(gs, db, path["steps"][0])
 	else:
 		Commands.wait(gs, db, 6)
 
@@ -186,7 +186,7 @@ func test_regrika_attacks_on_the_night_of_day_112() -> void:
 	_wait_for(gs, _db, FIGHT, "inn_interior", INN_SPOT)
 	assert_true(_hour(gs) >= 20, "night")
 	assert_eq(_stage_foes(gs, FIGHT).size(), 1)
-	Commands.wait(gs, _db, 36)
+	FightBot.wait_seconds(gs, _db, 36)
 	for npc: String in ["halrac", "revi", "typhenous"]:
 		assert_eq(_area_of(gs, npc), "inn_interior", npc)
 

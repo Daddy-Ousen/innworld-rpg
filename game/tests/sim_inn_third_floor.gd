@@ -32,7 +32,7 @@ func _ids_on(area: String) -> Array:
 
 func test_the_stairs_are_plain_floor_before_the_build() -> void:
 	var gs := _at_the_stairs()
-	assert_true(Commands.move(gs, _db, "s")["moved"])
+	assert_true(FightBot.move(gs, _db, "s")["moved"])
 	assert_eq(gs.player.area, "inn_interior")
 	assert_eq(gs.player.pos(), BELOW_STAIRS + Vector2i.DOWN)
 	assert_false(_ids_on("inn_interior").has("stairs_up"), "no stairs drawn")
@@ -41,7 +41,7 @@ func test_the_stairs_are_plain_floor_before_the_build() -> void:
 func test_the_stairs_lead_up_after_the_build() -> void:
 	var gs := _at_the_stairs([BEGUN, BUILT])
 	assert_true(_ids_on("inn_interior").has("stairs_up"))
-	Commands.move(gs, _db, "s")
+	FightBot.move(gs, _db, "s")
 	assert_eq(gs.player.area, "inn_upper_floor")
 	assert_eq(gs.player.pos(), Vector2i(17, 6))
 	assert_true(ToyMaps.walk_to_area(gs, _db, "inn_watchtower"), "the ladder to the tower")
@@ -86,7 +86,7 @@ func test_bird_keeps_watch_on_the_tower() -> void:
 
 func test_a_save_upstairs_loads_upstairs() -> void:
 	var gs := _at_the_stairs([BEGUN, BUILT])
-	Commands.move(gs, _db, "s")
+	FightBot.move(gs, _db, "s")
 	assert_eq(gs.player.area, "inn_upper_floor")
 	var back := GameState.from_json(gs.to_json())
 	Commands.settle(back, _db)

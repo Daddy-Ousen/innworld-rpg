@@ -56,11 +56,11 @@ func _step_toward_gazi(gs: GameState) -> void:
 	var at := CombatState.pos_of(gs.combat.monsters[id])
 	var d := at - gs.player.pos()
 	if absi(d.x) + absi(d.y) == 1:
-		Commands.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+		FightBot.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 		return
 	var path := Pathfind.path(_db.maps, gs.player.area, gs.player.pos(), Pathfind.around(at), MonsterSim.taken(gs, ""))
 	if path["found"] and not (path["steps"] as Array).is_empty():
-		Commands.move(gs, _db, path["steps"][0])
+		FightBot.move(gs, _db, path["steps"][0])
 	else:
 		Commands.wait(gs, _db, 6)
 
@@ -177,7 +177,7 @@ func test_a_knock_out_keeps_the_canon() -> void:
 	for i in 300:
 		if Combat.is_down(gs) or not gs.combat.has_fight():
 			break
-		Commands.block(gs, _db)
+		FightBot.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
 	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 42)

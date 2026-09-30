@@ -130,7 +130,7 @@ static func walk_to(gs: GameState, d: DataDb, goals: Dictionary, max_steps: int 
 			if Commands.wait(gs, d, int(d.rules["world"]["step_seconds"])) < 0:
 				return false
 			continue
-		var r := Commands.move(gs, d, found["steps"][0])
+		var r := FightBot.move(gs, d, found["steps"][0])  # in a fight: ends the turn at the move cap
 		if r["refused"]:
 			return false
 		if r["exit_to"] != "":

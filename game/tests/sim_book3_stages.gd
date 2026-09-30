@@ -93,11 +93,11 @@ func _fight_turn(gs: GameState, db: DataDb) -> void:
 	var at := CombatState.pos_of(gs.combat.monsters[id])
 	var d := at - gs.player.pos()
 	if absi(d.x) + absi(d.y) == 1:
-		Commands.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+		FightBot.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 		return
 	var path := Pathfind.path(db.maps, gs.player.area, gs.player.pos(), Pathfind.around(at), MonsterSim.taken(gs, ""))
 	if path["found"] and not (path["steps"] as Array).is_empty():
-		Commands.move(gs, db, path["steps"][0])
+		FightBot.move(gs, db, path["steps"][0])
 	else:
 		Commands.wait(gs, db, 6)
 

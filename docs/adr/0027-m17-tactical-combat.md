@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1 done
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1 and M17.2 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -124,4 +124,36 @@ What it shows:
   `Commands.end_turn`, and `Commands.wait` ends the turn. `block`, `throw`, `take`, `drop` say
   "Not in combat mode yet." (M17.2). Debug console: `end`.
 - Optional enemy field `agility` (>= 1, checked by `CombatDb`); none set yet, defaults come from `act_seconds`.
-- NPC fighters (brawl, react) still act in world time, once per round's 6 s (M17.2).
+- NPC fighters (brawl, react) still act in world time, once per round's 6 s (until M17.2).
+
+## M17.2 Port the old fight parts (2026-09-30)
+User answers (2026-09-30): the turn ends by itself when the AP left pays for nothing; all NPCs share one
+default Agility for now (own numbers in M17.7, no schema change); no new UI in M17.2 (M17.3 is the screen).
+- **On:** `rules.combat.tactical.enabled` is `true`. Toy dbs (`ToyData`) set it `false`, so the M5 unit tests
+  keep testing the world-time parts; `ToyCombat.tactical(d)` turns it on.
+- **Time:** `Movement.spend_turn` spends nothing while an encounter runs, so block, throw, take, drop, the bag,
+  a brawl blow and a fairy swat take no world time in a fight; a round spends `round_seconds` at its end.
+  `Combat.player_attack` lost its M17.1 `spend` flag.
+- **AP costs** (`Commands._encounter_act`): block `block_cost_q`, throw `throw_cost_q`, take / drop / hold /
+  stow / drop a good `item_cost_q`, attack an NPC and swat a Frost Fairy `attack_cost_q`. A refused or failed
+  action costs nothing. A fate warning costs nothing.
+- **Auto end:** after a paid action, if the AP left is below one step (or the move cap is used) and below
+  `item_cost_q`, the turn ends ("Your turn is over."). `Commands.wait` in a fight returns -1 when there is no
+  turn to end (knocked out).
+- **Guard:** a raised guard lasts until the player's next turn (`Combat.begin_command` keeps it in a fight;
+  the encounter drops it when the player's turn starts).
+- **NPCs in the order:** `"npc:<id>"` for an NPC in the player's area who is up, alive, not held by a scene
+  stage, and Brawl-hostile or an `NpcReact` fighter with a foe in reach. Agility `initiative.npc_default` (3).
+  Their turn: steps (monster move cap) and hits while AP lasts (`NpcReact._hit` / `Brawl._hit_player`).
+  `NpcSim` skips them in world time; bystanders still step away at a round's end.
+- **Brawl:** a Brawl-hostile NPC starts an encounter too; it is over when no fight is on and no hostile NPC
+  is near (`Encounter._over`).
+- **Optional `tactical.monster.ap_q`:** monster AP per turn (default `ap_base_q`); 0 = monsters skip their
+  turns. Not in `rules.json`; `ToyCombat.freeze` sets 0 so "frozen" tests keep working in combat mode.
+- **Tests:** helper `test_support/fight_bot.gd` (`FightBot`): a command refused for AP, the move cap or the
+  turn ends the turn and runs once more; `wait_seconds` lets real seconds pass (a fight wait is one round).
+  `ToyMaps.walk_to` and the main-scene sims (`sim_m5_done`, `sim_m6_done`) press Space the same way.
+  `sim_big_battle` runs in combat mode.
+- **Balance seen (for M17.7):** at level 5, 2-3 Goblins won 1-2 of 3 seeds (was 3 of 3); `sim_balance_fights`
+  asserts single foes only until M17.7. Two thieves knock out an idle player before the 30 s Santa wave. Allies
+  with a turn before the player's first can fell a foe (raid, Creler nest tests count joined foes).

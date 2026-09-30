@@ -28,12 +28,12 @@ func _at_the_rift(flags: Array = []) -> GameState:
 
 func test_the_ropes_are_hidden_until_the_new_section_is_found() -> void:
 	var gs := _at_the_rift()
-	assert_true(Commands.move(gs, _db, "e")["moved"])
+	assert_true(FightBot.move(gs, _db, "e")["moved"])
 	assert_eq(gs.player.area, "dungeon_rift", "no ropes yet")
 	gs.flags[FOUND] = true
-	Commands.move(gs, _db, "w")
+	FightBot.move(gs, _db, "w")
 	var before := gs.clock.total_minutes
-	Commands.move(gs, _db, "e")
+	FightBot.move(gs, _db, "e")
 	assert_eq(gs.player.area, "liscor_depths")
 	assert_eq(gs.player.pos(), Vector2i(3, 2))
 	assert_eq(gs.clock.total_minutes - before, 10, "a 10-minute climb")
@@ -105,12 +105,12 @@ func test_the_trapped_rooms_have_traps() -> void:
 	var gs := _at_the_rift([FOUND])
 	gs.player.place("liscor_depths", Vector2i(14, 3))
 	Commands.settle(gs, _db)
-	var r := Commands.move(gs, _db, "e")
+	var r := FightBot.move(gs, _db, "e")
 	assert_eq(r["sprung"].get("id", ""), "rune_hall_glyph_1")
 	assert_true(Combat.hp(gs, _db) < Stats.max_hp(gs, _db))
 	gs.player.place("liscor_depths", Vector2i(17, 9))
 	Commands.settle(gs, _db)
-	r = Commands.move(gs, _db, "s")
+	r = FightBot.move(gs, _db, "s")
 	assert_eq(r["sprung"].get("drop_to", ""), "liscor_crypt")
 	assert_eq(gs.player.area, "liscor_crypt")
 	var found := false

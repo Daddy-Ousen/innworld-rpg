@@ -38,9 +38,12 @@ func _records(gs: GameState, action_id: String) -> Array[Dictionary]:
 	return out
 
 
-## One command of a simple fighter: hit a hostile monster next to you,
-## else throw the held item at the nearest one in range, else raise your
+## One command of a simple fighter: throw the held item at the nearest
+## hostile monster in range, else hit one next to you, else raise your
 ## guard. Returns false when the fight is over (a knock-out ends it).
+## M17.2: through FightBot, which ends the turn when the AP runs out. The
+## throw comes first now: a pack walks 4 tiles and hits in one turn, so it is
+## side by side before the player's first turn.
 func _bot_turn(gs: GameState) -> bool:
 	if Combat.is_down(gs):
 		Commands.knock_out(gs, _db)
@@ -48,18 +51,18 @@ func _bot_turn(gs: GameState) -> bool:
 	if not gs.combat.has_fight():
 		return false
 	var you := gs.player.pos()
-	for dir: String in PlayerState.DIRS:
-		var id := gs.combat.at(gs.player.area, you + (PlayerState.DIRS[dir] as Vector2i))
-		if id != "" and gs.combat.monsters[id]["state"] == CombatState.HOSTILE:
-			Commands.attack(gs, _db, dir)
-			return true
 	if gs.player.held != "":
 		for id in gs.combat.in_state(CombatState.HOSTILE):
 			if Combat._dist(you, CombatState.pos_of(gs.combat.monsters[id])) \
 					<= int(_db.combat.items[gs.player.held]["throw_range"]):
-				Commands.throw(gs, _db, id)
+				FightBot.throw(gs, _db, id)
 				return true
-	Commands.block(gs, _db)
+	for dir: String in PlayerState.DIRS:
+		var id := gs.combat.at(gs.player.area, you + (PlayerState.DIRS[dir] as Vector2i))
+		if id != "" and gs.combat.monsters[id]["state"] == CombatState.HOSTILE:
+			FightBot.attack(gs, _db, dir)
+			return true
+	FightBot.block(gs, _db)
 	return true
 
 
@@ -149,13 +152,13 @@ func test_a_seed_core_sends_a_rock_crab_running() -> void:
 	assert_eq(Commands.take(gs, _db, "blue_fruit_tree_1"), "")
 	assert_eq(gs.player.held, "seed_core")
 	var crab := Combat.add_monster(gs, _db, "rock_crab", Vector2i(7, 19), CombatState.HIDDEN)
-	assert_true(Commands.move(gs, _db, "e")["moved"])
+	assert_true(FightBot.move(gs, _db, "e")["moved"])
 	for i in 6:
 		if Combat.in_danger(gs):
 			break
 		Commands.wait(gs, _db, 6)
 	assert_true(Combat.in_danger(gs), "the crab came out")
-	assert_eq(Commands.throw(gs, _db, crab)["error"], "")
+	assert_eq(FightBot.throw(gs, _db, crab)["error"], "")
 	assert_eq(gs.combat.monsters[crab]["state"], CombatState.FLEE)
 	assert_has(gs.combat.lines, "The Rock Crab panics and backs away.")
 	for i in 60:

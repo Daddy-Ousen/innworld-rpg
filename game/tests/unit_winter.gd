@@ -205,6 +205,21 @@ func test_a_swat_misses_and_the_snow_slows_you() -> void:
 	assert_eq(gs.winter.slowed, slow - 1)
 
 
+func test_in_combat_mode_a_swat_costs_an_attacks_ap() -> void:
+	ToyCombat.tactical(_db)
+	var gs := _game()
+	_db.rules["winter"]["fairies"]["act_seconds"] = 100000
+	ToyCombat.spawn(gs, _db, "crab", Vector2i(8, 1))
+	Commands.wait(gs, _db, 0)
+	assert_true(Encounter.is_player_turn(gs))
+	_fairy_next_to(gs)
+	var before := NpcSim.world_sec(gs)
+	var r := Commands.move(gs, _db, "e")
+	assert_ne(r["fairy"], "")
+	assert_eq(int(gs.combat.encounter["ap_q"]), 16, "M17.2: a swat is a swing, 2 AP")
+	assert_eq(NpcSim.world_sec(gs), before, "no time on your turn")
+
+
 func test_iron_keeps_fairies_away() -> void:
 	var gs := _game()
 	gs.player.held = "horseshoe"

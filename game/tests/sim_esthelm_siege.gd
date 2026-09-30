@@ -84,7 +84,7 @@ func _step_toward_a_foe(gs: GameState, db: DataDb) -> void:
 		var at := CombatState.pos_of(m)
 		var d := at - gs.player.pos()
 		if absi(d.x) + absi(d.y) == 1:
-			Commands.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+			FightBot.attack(gs, db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 			return
 		var path := Pathfind.path(db.maps, area, gs.player.pos(), Pathfind.around(at), MonsterSim.taken(gs, ""))
 		if path["found"] and not (path["steps"] as Array).is_empty() \
@@ -93,7 +93,7 @@ func _step_toward_a_foe(gs: GameState, db: DataDb) -> void:
 	if best.is_empty():
 		Commands.wait(gs, db, 6)
 	else:
-		Commands.move(gs, db, best[0])
+		FightBot.move(gs, db, best[0])
 
 
 func test_the_ruins_and_the_stages_are_loaded() -> void:

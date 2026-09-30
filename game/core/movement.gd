@@ -102,8 +102,11 @@ static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
 
 
 ## Spends one turn (a step's time) standing where you are: combat
-## commands. Returns the whole minutes the clock moved.
+## commands. Returns the whole minutes the clock moved. In combat mode
+## (M17.2, Encounter) it spends nothing: the round's time passes at its end.
 static func spend_turn(gs: GameState, db: DataDb) -> int:
+	if Encounter.active(gs):
+		return 0
 	return _spend_step(gs, db)
 
 

@@ -9,22 +9,29 @@
 ## the next round (the order is rebuilt at each round's start).
 ##
 ## State (CombatState.encounter; {} = none): {"round", "order": [fighter ids,
-## "player" or monster ids], "tie": {id: roll}, "turn": index into order,
-## "ap_q", "moved_q" (the player's, on their turn)}. Monsters take their whole
-## turn at once, so their AP is never stored.
+## "player", monster ids or "npc:<id>"], "tie": {id: roll}, "turn": index into
+## order, "ap_q", "moved_q" (the player's, on their turn)}. Monsters and NPCs
+## take their whole turn at once, so their AP is never stored.
 ##
-## Off unless rules.combat.tactical.enabled (M17.2 turns it on). NPCs still act
-## in world time (once per round's seconds) until M17.2.
+## M17.2: on in the real data. A brawl (an NPC the player hit, Brawl) starts
+## one too. NPC fighters (Brawl-hostile NPCs, and NpcReact fighters with a foe
+## in reach) get turns like monsters; bystanders still step away in world time
+## at a round's end. A raised guard lasts until the player's next turn. The
+## player's turn ends by itself when their AP pays for nothing (no step, no
+## item use).
 class_name Encounter
 extends RefCounted
 
 const PLAYER := "player"
+const NPC := "npc:"
 const Q_PER_AP := 4
 const NO_AP := "Not enough AP."
 const NO_MOVE := "You cannot move further this turn."
 const NOT_YOUR_TURN := "It is not your turn."
-const NOT_YET := "Not in combat mode yet."
 const NO_TURN := "There is no turn to end."
+const TURN_OVER := "Your turn is over."
+## Refusals that ending the turn would fix (a test bot ends the turn on these).
+const TURN_REFUSALS := [NO_AP, NO_MOVE, NOT_YOUR_TURN]
 ## Monster states that take part in the rounds.
 const FIGHTERS := [CombatState.HOSTILE, CombatState.FLEE, CombatState.ALLY]
 const MAX_STEPS := 10000
@@ -51,18 +58,24 @@ static func is_player_turn(gs: GameState) -> bool:
 
 
 ## Commands._after calls this last: starts an encounter when combat mode is
-## on and a hostile monster is on the player's map; drops one whose fight is
-## over (won, fled, knocked out).
+## on and a hostile monster or a hostile NPC (Brawl) is on the player's map;
+## drops one whose fight is over (won, fled, knocked out).
 static func sync(gs: GameState, db: DataDb) -> void:
 	var c := gs.combat
 	if active(gs):
-		if not c.has_fight():
+		if _over(gs):
 			c.encounter = {}
 		return
-	if enabled(db) and c.has_fight() and not Combat.is_down(gs) and _has_hostile(gs):
+	if enabled(db) and not Combat.is_down(gs) \
+			and ((c.has_fight() and _has_hostile(gs)) or Brawl.hostile_near(gs)):
 		c.encounter = {"round": 0, "order": [], "tie": {}, "turn": 0, "ap_q": 0, "moved_q": 0}
 		_new_round(gs, db)
 		_run_until_player(gs, db)
+
+
+## No fight is on and no hostile NPC is near.
+static func _over(gs: GameState) -> bool:
+	return not gs.combat.has_fight() and not Brawl.hostile_near(gs)
 
 
 ## The player's AP for a turn: ap_base_q, plus one AP for each of
@@ -78,11 +91,14 @@ static func player_ap(gs: GameState, db: DataDb) -> int:
 
 
 ## Turn order value: the player's initiative stat; a monster's "agility", or
-## initiative.by_act_seconds for its act_seconds, or initiative.monster_default.
+## initiative.by_act_seconds for its act_seconds, or initiative.monster_default;
+## an NPC's initiative.npc_default (M17.2; own numbers come in M17.7).
 static func agility(gs: GameState, db: DataDb, id: String) -> int:
 	var ini: Dictionary = rules(db)["initiative"]
 	if id == PLAYER:
 		return Stats.get_stat(gs, db, String(ini["stat"]))
+	if id.begins_with(NPC):
+		return int(ini.get("npc_default", ini["monster_default"]))
 	var e: Dictionary = db.combat.enemies[gs.combat.monsters[id]["type"]]
 	if e.has("agility"):
 		return int(e["agility"])
@@ -124,6 +140,23 @@ static func end_player_turn(gs: GameState, db: DataDb) -> String:
 	return ""
 
 
+## After a paid action: if the player's AP left pays for nothing (no step
+## within the move cap, no item use), their turn ends ("Your turn is over.").
+## Returns true if it ended.
+static func maybe_end_turn(gs: GameState, db: DataDb) -> bool:
+	if not is_player_turn(gs):
+		return false
+	var t := rules(db)
+	var e := gs.combat.encounter
+	var ap := int(e["ap_q"])
+	var step := int(t["move_cost_q"])
+	if (ap >= step and int(e["moved_q"]) + step <= int(t["move_cap_q"])) or ap >= int(t["item_cost_q"]):
+		return false
+	gs.combat.lines.append(TURN_OVER)
+	end_player_turn(gs, db)
+	return true
+
+
 static func _has_hostile(gs: GameState) -> bool:
 	for id in gs.combat.in_state(CombatState.HOSTILE):
 		if gs.combat.monsters[id]["area"] == gs.player.area:
@@ -131,22 +164,45 @@ static func _has_hostile(gs: GameState) -> bool:
 	return false
 
 
-static func _is_fighter(gs: GameState, id: String) -> bool:
+static func _is_fighter(gs: GameState, db: DataDb, id: String) -> bool:
 	if id == PLAYER:
 		return true
+	if id.begins_with(NPC):
+		return npc_fights(gs, db, id.substr(NPC.length()))
 	var m: Dictionary = gs.combat.monsters.get(id, {})
 	return not m.is_empty() and m["area"] == gs.player.area and FIGHTERS.has(m["state"])
 
 
+## True if NPC `npc` takes turns in the fight: alive, up, in the player's
+## area, not held by a scene, and hostile to the player (Brawl) or a fighter
+## with a foe in reach (NpcReact.target). `held`: Stage.scene_npcs_here, if
+## the caller has it.
+static func npc_fights(gs: GameState, db: DataDb, npc: String, held: Variant = null) -> bool:
+	var n: Dictionary = gs.npcs.npcs.get(npc, {})
+	if n.is_empty() or n["area"] != gs.player.area or bool(n.get("down", false)) \
+			or not gs.world.is_alive(db.canon, npc):
+		return false
+	if ((held if held != null else Stage.scene_npcs_here(gs, db)) as Dictionary).has(npc):
+		return false
+	if Brawl.on(db) and Brawl.is_hostile(gs, n):
+		return true
+	return NpcReact.is_fighter(gs, db, npc) and NpcReact.target(gs, db, npc, n) != ""
+
+
 ## Builds the round's order from who is on the map now. New fighters roll
-## their tie now (in id order), so the order is the same on every replay.
+## their tie now (monsters in id order, then NPCs in id order), so the order
+## is the same on every replay.
 static func _new_round(gs: GameState, db: DataDb) -> void:
 	var e := gs.combat.encounter
 	e["round"] = int(e["round"]) + 1
 	var ids: Array[String] = [PLAYER]
 	for id in gs.combat.ids():
-		if _is_fighter(gs, id):
+		if _is_fighter(gs, db, id):
 			ids.append(id)
+	var held := Stage.scene_npcs_here(gs, db)
+	for npc in gs.npcs.in_area(gs.player.area):
+		if npc_fights(gs, db, npc, held):
+			ids.append(NPC + npc)
 	var tie: Dictionary = e["tie"]
 	var kept := {}
 	var agi := {}
@@ -167,7 +223,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 	for _i in MAX_STEPS:
 		if not active(gs):
 			return
-		if not c.has_fight():
+		if _over(gs):
 			c.encounter = {}
 			return
 		if Combat.is_down(gs):
@@ -176,7 +232,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 		var order: Array = e["order"]
 		if int(e["turn"]) >= order.size():
 			_end_round(gs, db)
-			if not active(gs) or not c.has_fight():
+			if not active(gs) or _over(gs):
 				c.encounter = {}
 				return
 			_new_round(gs, db)
@@ -185,9 +241,13 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 		if id == PLAYER:
 			e["ap_q"] = player_ap(gs, db)
 			e["moved_q"] = 0
+			c.blocking = false  # a guard lasts until the player's next turn
 			return
-		if _is_fighter(gs, id):
-			_monster_turn(gs, db, id)
+		if _is_fighter(gs, db, id):
+			if id.begins_with(NPC):
+				_npc_turn(gs, db, id.substr(NPC.length()))
+			else:
+				_monster_turn(gs, db, id)
 			Combat.settle_if_over(gs, db)
 		if active(gs):
 			e["turn"] = int(e["turn"]) + 1
@@ -201,16 +261,19 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 static func _end_round(gs: GameState, db: DataDb) -> void:
 	Movement._spend_seconds(gs, int(rules(db)["round_seconds"]))
 	for id in gs.combat.ids():
-		if gs.combat.monsters.has(id) and not _is_fighter(gs, id) \
+		if gs.combat.monsters.has(id) and not _is_fighter(gs, db, id) \
 				and gs.combat.monsters[id]["area"] == gs.player.area:
 			MonsterSim._turn(gs, db, id)
 	Commands._after(gs, db)
 
 
-## One monster's whole turn on AP (monster.move_cap_q for moving).
+## One monster's whole turn on AP (monster.move_cap_q for moving; monster.ap_q
+## if set, else ap_base_q; 0 = monsters skip their turns).
 static func _monster_turn(gs: GameState, db: DataDb, id: String) -> void:
 	var t := rules(db)
-	var ap := int(t["ap_base_q"])
+	var ap := int(t["monster"].get("ap_q", t["ap_base_q"]))
+	if ap <= 0:
+		return
 	var cap := int(t["monster"]["move_cap_q"])
 	var step := int(t["move_cost_q"])
 	var atk := int(t["attack_cost_q"])
@@ -290,6 +353,51 @@ static func _ally_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: int,
 			ap -= atk
 			continue
 		if moved + step > cap or ap < step or not MonsterSim._step_next_to(gs, db, id, at):
+			return
+		moved += step
+		ap -= step
+
+
+## One NPC fighter's whole turn on AP (monster.move_cap_q for moving): a
+## hostile NPC (Brawl) steps to the player and hits them; an NpcReact fighter
+## steps to its foe and hits it, while AP lasts.
+static func _npc_turn(gs: GameState, db: DataDb, npc: String) -> void:
+	var t := rules(db)
+	var ap := int(t["ap_base_q"])
+	var cap := int(t["monster"]["move_cap_q"])
+	var step := int(t["move_cost_q"])
+	var atk := int(t["attack_cost_q"])
+	var n: Dictionary = gs.npcs.npcs[npc]
+	var moved := 0
+	var angry := Brawl.on(db) and Brawl.is_hostile(gs, n)
+	for _i in MAX_STEPS:
+		if Combat.is_down(gs) or bool(n.get("down", false)):
+			return
+		var pos := NpcRoster.pos_of(n)
+		if angry:
+			if Brawl._dist(pos, gs.player.pos()) <= 1:
+				if ap < atk:
+					return
+				Brawl._hit_player(gs, db, npc)
+				ap -= atk
+				continue
+		else:
+			var foe := NpcReact.target(gs, db, npc, n)
+			if foe == "":
+				return
+			if NpcReact._manhattan(pos, CombatState.pos_of(gs.combat.monsters[foe])) == 1:
+				if ap < atk:
+					return
+				NpcReact._hit(gs, db, npc, foe)
+				ap -= atk
+				continue
+		if moved + step > cap or ap < step:
+			return
+		if angry:
+			Brawl._step_towards_player(gs, db, n)
+		else:
+			NpcReact._fight_turn(gs, db, npc, n, NpcReact.target(gs, db, npc, n))
+		if NpcRoster.pos_of(n) == pos:
 			return
 		moved += step
 		ap -= step

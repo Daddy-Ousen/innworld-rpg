@@ -103,10 +103,12 @@ static func always_hit(d: DataDb) -> void:
 	d.rules["combat"]["hit"]["max"] = 1.0
 
 
-## Monsters never get a turn (the M5.1 core tests drive them by hand).
+## Monsters never get a turn (the M5.1 core tests drive them by hand). In
+## combat mode (M17.2) they skip their turns (rules.combat.tactical.monster.ap_q 0).
 static func freeze(d: DataDb) -> void:
 	for e: Dictionary in d.combat.enemies.values():
 		e["act_seconds"] = 1000000
+	d.rules["combat"]["tactical"]["monster"]["ap_q"] = 0
 
 
 ## Combat mode on (M17.1, ADR 0027): rules.combat.tactical from the real

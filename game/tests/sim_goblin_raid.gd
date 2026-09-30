@@ -54,7 +54,7 @@ func _step_toward_a_raider(gs: GameState) -> void:
 		var at := CombatState.pos_of(m)
 		var d := at - gs.player.pos()
 		if absi(d.x) + absi(d.y) == 1:
-			Commands.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
+			FightBot.attack(gs, _db, "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n")
 			return
 		var path := Pathfind.path(_db.maps, "inn_interior", gs.player.pos(), Pathfind.around(at),
 				MonsterSim.taken(gs, ""))
@@ -64,7 +64,7 @@ func _step_toward_a_raider(gs: GameState) -> void:
 	if best.is_empty():
 		Commands.wait(gs, _db, 6)
 	else:
-		Commands.move(gs, _db, best[0])
+		FightBot.move(gs, _db, best[0])
 
 
 func _records(gs: GameState, action_id: String) -> Array[Dictionary]:
@@ -102,9 +102,10 @@ func test_winning_the_raid_with_erin_changes_it_but_klbkch_still_dies() -> void:
 	ToyCombat.freeze(_db)
 	ToyCombat.always_hit(_db)
 	var gs := _game_on_day(21)
-	var raiders := _raid_arrives(gs)
-	assert_eq(raiders.size(), 8)
-	assert_eq(Stage.foes_left(gs, _db), 40)
+	_raid_arrives(gs)
+	# M17.2: Erin may take her turn before the player's first one and fell a raider.
+	assert_eq((gs.combat.fight["foes"] as Dictionary).size(), 8, "eight raiders came in")
+	assert_eq(Stage.foes_left(gs, _db) + int(gs.combat.fight["kills"]), 40)
 	assert_eq(gs.npcs.npcs["erin_solstice"]["area"], "inn_interior", "Erin is home")
 	var lines: Array[String] = []
 	var klbkch_came := false
@@ -158,7 +159,7 @@ func test_losing_the_raid_leaves_the_canon() -> void:
 	for i in 200:
 		if Combat.is_down(gs):
 			break
-		Commands.block(gs, _db)
+		FightBot.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
 	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 21)

@@ -28,10 +28,12 @@ const HELPER := "helper"
 
 
 ## Every command starts here: last command's combat text goes, and a
-## raised guard drops (block lasts one turn).
+## raised guard drops (block lasts one turn). In combat mode (M17.2) the guard
+## lasts until the player's next turn (Encounter drops it).
 static func begin_command(gs: GameState) -> void:
 	gs.combat.lines.clear()
-	gs.combat.blocking = false
+	if not Encounter.active(gs):
+		gs.combat.blocking = false
 
 
 ## Current hit points.
@@ -199,8 +201,8 @@ static func _cannot_act(gs: GameState, db: DataDb) -> String:
 
 ## The player attacks the monster next to them in `dir` (n, s, e, w), with
 ## the held item or fists. Returns {"error", "target", "hit", "damage", "killed"}.
-## `spend`: false in combat mode (M17.1), where the attack costs AP, not time.
-static func player_attack(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> Dictionary:
+## In combat mode it takes no time (Movement.spend_turn); it costs AP.
+static func player_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	var out := {"error": _cannot_act(gs, db), "target": "", "hit": false, "damage": 0, "killed": false}
 	if out["error"] != "":
 		return out
@@ -215,8 +217,7 @@ static func player_attack(gs: GameState, db: DataDb, dir: String, spend: bool = 
 	if gs.combat.monsters[target]["state"] == CombatState.ALLY:
 		out["error"] = REFUSED_HELPER % String(db.combat.enemies[gs.combat.monsters[target]["type"]]["name"])
 		return out
-	if spend:
-		Movement.spend_turn(gs, db)
+	Movement.spend_turn(gs, db)
 	return _strike(gs, db, target, false, 1)
 
 

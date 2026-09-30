@@ -264,7 +264,7 @@ Rules from the user (2026-09-29):
 - [x] M17.1 Core encounter (ADR 0027, 2026-09-30; combat mode off until M17.2): encounter state in `GameState` (turn order, round, AP left, movement used; save v18 +
   migration), start / join / end, order by Agility, move with the cap, attack for 2 AP, end turn; monsters use
   AP too. Headless tests
-- [ ] M17.2 Port the old fight parts: block, throw, improvised weapons, drop, flee, knock-out, fighting NPCs,
+- [x] M17.2 Port the old fight parts (ADR 0027, 2026-09-30; combat mode on; FightBot test helper): block, throw, improvised weapons, drop, flee, knock-out, fighting NPCs,
   helpers, attack-an-NPC (brawl), traps, stage waves (join at the start of a round), fight records for the
   System. Every sim fight test moved to the new rules (full suite)
 - [ ] M17.3 Combat screen: move range, path preview, hit chance before you act, AP pips, turn order bar with

@@ -3,6 +3,7 @@ extends GutTest
 ## 4 waves against the player, 3 NPC allies pulled in from other areas and
 ## 3 helpers. Checks that it plays out the same with the same seed and
 ## stays fast (time per command, printed).
+## M17.2: in combat mode (rounds, AP); a wait ends the turn, so a command can be a whole round.
 
 const EV := "e.big"
 ## Generous: a command here takes a few ms on a normal PC.
@@ -38,6 +39,7 @@ func before_each() -> void:
 	_db.combat = CombatDb.from_dicts(enemies, ToyCombat.items())
 	_db.combat.validate(_db)
 	_db.rules["combat"]["hp_base"] = 5000  # the player outlasts the battle
+	ToyCombat.tactical(_db)
 
 
 func _goblins(n: int) -> Array:
@@ -52,7 +54,7 @@ func _turn(gs: GameState) -> void:
 	for dir: String in ["n", "e", "s", "w"]:
 		var id := gs.combat.at("arena", gs.player.pos() + (PlayerState.DIRS[dir] as Vector2i))
 		if id != "" and gs.combat.monsters[id]["state"] == CombatState.HOSTILE:
-			Commands.attack(gs, _db, dir)
+			FightBot.attack(gs, _db, dir)
 			return
 	Commands.wait(gs, _db, 6)
 

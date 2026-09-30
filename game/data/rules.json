@@ -85,8 +85,8 @@
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"],
 		"tactical": {
-			"enabled": false,
-			"note": "M17.0 (ADR 0027). XCOM-style rounds, the user's AP rules (ADR 0022). AP in quarter points (q): 6 AP = 24 q, one tile = 1 q. Nothing reads this before M17.1. hp_scale is set in M17.7 (paper fights suggest 2.0).",
+			"enabled": true,
+			"note": "M17.0 (ADR 0027). XCOM-style rounds, the user's AP rules (ADR 0022). AP in quarter points (q): 6 AP = 24 q, one tile = 1 q. M17.1 reads it (core/encounter.gd); M17.2 turns it on and adds initiative.npc_default (all NPCs, own numbers in M17.7). hp_scale is set in M17.7 (paper fights suggest 2.0).",
 			"ap_base_q": 24,
 			"move_cost_q": 1,
 			"move_cap_q": 4,
@@ -96,7 +96,7 @@
 			"item_cost_q": 4,
 			"ap_total_levels": [10, 25, 50, 75],
 			"round_seconds": 6,
-			"initiative": {"stat": "speed", "monster_default": 3, "ties": "rng", "by_act_seconds": {"4": 5, "6": 3, "8": 2}},
+			"initiative": {"stat": "speed", "monster_default": 3, "npc_default": 3, "ties": "rng", "by_act_seconds": {"4": 5, "6": 3, "8": 2}},
 			"monster": {"move_cap_q": 4},
 			"mp": {"regen_minutes": 10, "sleep_refill": 1.0},
 			"hp_scale": 1.0

@@ -76,9 +76,9 @@ func test_beating_the_chieftain_with_erin_changes_the_story() -> void:
 		if path["found"] and (path["steps"] as Array).is_empty():
 			var d := at - gs.player.pos()
 			var dir := "e" if d.x > 0 else "w" if d.x < 0 else "s" if d.y > 0 else "n"
-			Commands.attack(gs, _db, dir)
+			FightBot.attack(gs, _db, dir)
 		elif path["found"]:
-			Commands.move(gs, _db, path["steps"][0])
+			FightBot.move(gs, _db, path["steps"][0])
 		else:
 			Commands.wait(gs, _db, 6)
 		lines.append_array(gs.combat.lines)
@@ -125,7 +125,7 @@ func test_losing_to_the_chieftain_leaves_the_canon() -> void:
 	for i in 200:
 		if Combat.is_down(gs):
 			break
-		Commands.block(gs, _db)
+		FightBot.block(gs, _db)
 	assert_true(Combat.is_down(gs), "knocked out")
 	Commands.sleep(gs, _db, Rest.ANYWHERE)
 	ToyCanon.sleep_through(gs, _db, 9)
@@ -173,7 +173,7 @@ func test_goblins_you_let_go_still_come_to_eat() -> void:
 	Commands.settle(gs, _db)
 	var gob := Combat.add_monster(gs, _db, "goblin_grunt", Vector2i(5, 1))
 	gs.combat.monsters[gob]["hp"] = 5
-	Commands.attack(gs, _db, "n")
+	FightBot.attack(gs, _db, "n")
 	for i in 20:
 		if not gs.combat.has_fight():
 			break

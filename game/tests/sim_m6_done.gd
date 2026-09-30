@@ -51,8 +51,20 @@ func _gs() -> GameState:
 
 
 func _step(dir: String) -> void:
-	_main.step(dir)
+	_press(func() -> void: _main.step(dir))
+
+
+## Sends one key's command, then notes its text. M17.2 combat mode: if it was
+## refused for AP, the move cap or the turn, presses Space (end turn) and tries again.
+func _press(key: Callable) -> void:
+	key.call()
 	_lines.append_array(_gs().combat.lines)
+	if Encounter.active(_gs()) and _gs().combat.lines.any(func(l: String) -> bool:
+			return Encounter.TURN_REFUSALS.has(l)):
+		_main.step(_main.WAIT)
+		_lines.append_array(_gs().combat.lines)
+		key.call()
+		_lines.append_array(_gs().combat.lines)
 
 
 func _obj(id: String) -> Vector2i:
@@ -100,8 +112,7 @@ func _fight(save: bool) -> String:
 		var dir := _hostile_dir()
 		if dir != "":
 			if Combat.hp(gs, _db) <= LOW_HP:
-				_main.block()
-				_lines.append_array(gs.combat.lines)
+				_press(_main.block)
 			else:
 				_step(dir)
 			continue
