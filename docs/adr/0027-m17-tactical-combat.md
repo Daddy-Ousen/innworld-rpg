@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: M17.0 spike done; waits for the user's approval before M17.1
+Date: 2026-09-30 · Status: approved by the user 2026-09-30
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
