@@ -1,8 +1,8 @@
 # Handoff
 
 ## Just done (2026-09-30, M17.2 port the old fight parts)
-- Tags `m17.0-done` (a24db19) and `m17.1-done` (a175d2a) set and pushed. Branch `feat/m17.2-port` from main
-  (not pushed; ask before push / PR). Plan: `C:/Users/rhasa/.claude/plans/agile-shimmying-duckling.md`.
+- Tags `m17.0-done` (a24db19) and `m17.1-done` (a175d2a) set and pushed. Branch `feat/m17.2-port` pushed as
+  PR #80 (https://github.com/Daddy-Ousen/innworld-rpg/pull/80). After the merge: tag `m17.2-done` on the merge commit. Plan: `C:/Users/rhasa/.claude/plans/agile-shimmying-duckling.md`.
 - User answers: auto end turn when AP pays for nothing; one NPC Agility default (3) until M17.7; no new UI.
 - Combat mode is ON in `rules.json`. Detail: ADR 0027 "M17.2" section.
 - Core: `encounter.gd` (NPC fighters `"npc:<id>"`, `_npc_turn`, brawl starts an encounter, `_over`,
@@ -16,7 +16,7 @@
 - Balance seen (for M17.7): level 5 vs 2-3 Goblins now wins 1-2 of 3 seeds; `sim_balance_fights` asserts
   single foes only.
 - Full suite (subagent): 120 scripts, 1133 tests, all pass, no parse errors. Validator 0 errors, Python 95 OK.
-- Next: commit (feat(core) + test + data + docs), ask the user about push / PR, then M17.3 (combat screen,
+- Next: the user merges PR #80, then M17.3 (combat screen,
   plan mode first). The user should try a fight in the game: Space ends the turn.
 - Test runner: scratchpad `run_targets.sh [-t secs] <script>...` (gone next session): one script per Godot
   run with a time limit, one summary line each. Much safer than the full suite when a sim may hang.

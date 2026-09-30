@@ -25,7 +25,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). User's AP rules in ADR 0022 and `docs/ROADMAP.md`.
   - [x] M17.0 spike + ADR 0027 (branch `feat/m17.0-spike`, 2026-09-30): `rules.combat.tactical`, `unit_tactical_rules` (5 pass), paper fights. ADR 0027 approved 2026-09-30.
   - [x] M17.1 core encounter (M16 archive + M17.0 + M17.1 merged as [PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79), merge commit a175d2a, 2026-09-30): `core/encounter.gd`, save v18, `unit_encounter` (21 pass). Combat mode is off in the real data (`rules.combat.tactical.enabled`) until M17.2.
-  - [x] M17.2 port the old fight parts (branch `feat/m17.2-port`, 2026-09-30): block/throw/take/drop/bag/brawl/fairy swat on AP, auto end turn, guard to next turn, NPC fighters and brawls in the turn order, combat mode ON. Full suite 120 scripts, 1133 tests, all pass; validator 0 errors; Python 95 OK. Not pushed yet.
+  - [x] M17.2 port the old fight parts (branch `feat/m17.2-port`, 2026-09-30): block/throw/take/drop/bag/brawl/fairy swat on AP, auto end turn, guard to next turn, NPC fighters and brawls in the turn order, combat mode ON. Full suite 120 scripts, 1133 tests, all pass; validator 0 errors; Python 95 OK. [PR #80](https://github.com/Daddy-Ousen/innworld-rpg/pull/80) open, waiting for the user to merge.
   - [ ] M17.3 combat screen (plan mode first).
 
 ## After M8
