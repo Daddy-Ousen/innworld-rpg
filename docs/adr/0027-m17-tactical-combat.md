@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.5 done
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1–M17.6 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -269,3 +269,48 @@ wall and spells hit **foes only** (never allies, helpers or NPCs). Schema change
 - **Tests:** `unit_mana` (17), `unit_spell_learning` (16), `unit_spells` (31: toy arena and real data, Ceria casts), `unit_spell_ui` (13).
 - **Open lore flags:** every teacher and number is a guess; Book text for the spell teachers should be checked in M17.7 or later
   (Pisces and Ceria as teachers of the player, spellbooks for sale, [Light] as a combat flash).
+
+## M17.6 Cover and position (2026-09-30, cloud session)
+User answers (2026-09-30): **walls block sight** (throws, shots and `one` / `blast` spells); **half cover -15, full cover -30 points**;
+**pincer +15 points**; **shooters take cover and melee monsters close the pincer** (no retreat to cover: M17.7). Plan:
+`docs/plans/m17.6.md`. Schema (approved in ADR 0022): tile field `cover`, map object field `cover`, `rules.combat.tactical.cover`.
+All optional, so old data stays valid. **No save change** (cover comes from the map and the fighters' places).
+- **Levels:** `none`, `half`, `full`, `wall`. `data/tiles.json`: walls, houses, cliffs (`city_wall`, `building*`, `brick_house*`,
+  `plain_house*`, `ruin_wall`, `wood_wall`, `wood_window`, `snow_wall`, `cliff`, `stone_cliff`) are `wall`; `tree`, `boulder` `full`;
+  `rock` `half`. A **solid object** has its own `cover`, else `rules.combat.tactical.cover.kinds[kind]` (tables, counters, beds,
+  benches, stoves, braziers, stalls, wells, graves: `half`; shelves, wagon, trees: `full`; `stone_doors`: `wall`; campfire and stairs:
+  none). The higher of tile and object counts. `MapDb.validate` checks all of it (`solid_at` is the new accessor).
+- **`core/cover.gd` (`Cover`):** `level`, `line` (Bresenham, same tiles both ways), `sight` (a `wall` strictly between blocks it;
+  `cover.sight: false` turns it off), `against(target, from)` (the tiles beside the target on the side(s) that face the shooter: the
+  larger gap; both on a tie; the best level counts), `side_at` (FRIEND = player, helpers, NPCs fighting for them; FOE = hostile
+  monsters and NPCs hostile to the player; fleeing monsters count for nobody), `pincered` (two fighters of a side on opposite tiles),
+  `details` / `hit_bonus`, `sides` and `note` for the screen.
+- **Effects:** cover lowers a **ranged** hit chance (throws, foe stones, spells with `hit: roll`). **Melee ignores cover** (an
+  adjacent attacker has no barrier between). A spell with `hit: auto` ignores cover but still needs sight. A shot from where the
+  target has no cover on the facing sides is the flank: it gets the full chance. The **pincer** adds +15 points to any attack from
+  that side (player, helper, NPC fighter, monster, brawler; melee and ranged). `Combat.position_bonus` is the one hook, called from
+  `player_hit_chance`, `monster_attack`, `_attack_other`, `helper_attack`, `NpcReact._hit`, `Brawl.attack` / `_hit_player` and
+  `Spells._chance`. The roll is still made once, so the random stream is unchanged; only the threshold moves.
+- **Sight:** `Combat.throw_at` and the thrown strike Skill refuse with "You cannot see it from here." (`Combat.NO_SIGHT`);
+  `Spells.why_not` (one / blast), `one_targets` and `npc_pick` need sight; a foe's stone needs sight (`Encounter._hostile_turn`,
+  `MonsterSim._hostile_turn`). `line` spells still stop at the first unwalkable tile; `around` and melee need none. A blast's
+  explosion tiles are not checked for sight once its aim tile is seen.
+- **Monsters:** `MonsterSim.is_shooter(enemy)`: the ranged blow's top damage is at least the melee blow's (the Goblin Lord archer
+  and shaman; NOT the grunt, chieftain or crypt lord). A shooter, while its chase count is below `cover.hold_rounds` (6), first
+  walks (`MonsterSim.cover_spot`: within the move cap, keeping 2 AP for the shot, in range, in sight, not beside the target,
+  strictly better cover; best cover, then fewest steps, then lowest y, x) and shoots; if it stands in cover it then **holds**
+  instead of walking on. `MonsterSim._pincer_goals`: of the free tiles beside the target, those opposite a fighter of the
+  monster's side win a tie with the nearest one. **Why the shooter rule:** a first draft gave every monster with a `ranged` entry
+  this behaviour; the Goblin Chieftain then hid behind a table in the inn and Erin killed him first, so `sim_m6_done` no longer
+  showed the changed canon event. The rule is data-derived and M17.7 (enemy `abilities`) may make it an explicit flag.
+- **Screen:** bars on the edges of the tiles you can walk to (and your own) that have cover beside them (short gold = half, full
+  blue = full or wall); the hit-chance label gets "(half cover)", "(full cover)", "(pincer)"; a throw hint is hidden and a spell
+  aim shows nothing where a wall blocks sight; one help line. No display in the cloud: the tests check overlay state only.
+- **Tests:** `unit_cover` (14), `unit_cover_attacks` (9), `unit_cover_position` (10, incl. real archer near a tree), `unit_cover_ui`
+  (4). Dice moved in two old sims (the pincer changes thresholds): `sim_big_battle` now seed 4 (7 leaves one routed goblin boxed
+  in by idle NPC allies, and its bot never hits a fleeing goblin), `sim_inn_brawl` (run out of the door) seed 5 (a passive
+  player already lost it on seeds 2, 6 and 8).
+- **Open (for M17.7 and the user):** all cover numbers are guesses; a foe that flees into a corner can be boxed in by idle NPC allies
+  (real hazard for a player who ignores fleeing foes; they still count as fighters); the `is_shooter` rule; melee monsters do not
+  seek cover from the player's throws and spells; no retreat to cover; the user should look at the cover bars
+  (`godot --path game`, walk next to a tree on the floodplains, then fight a goblin).

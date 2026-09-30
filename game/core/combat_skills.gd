@@ -145,6 +145,8 @@ static func why_not(gs: GameState, db: DataDb, id: String, target: String = "") 
 					return "You hold nothing to throw."
 				if dist > int(db.combat.items[gs.player.held]["throw_range"]):
 					return "Too far to throw."
+				if not Cover.sight(db, gs.player.area, gs.player.pos(), CombatState.pos_of(gs.combat.monsters[target])):
+					return Combat.NO_SIGHT
 			elif MonsterSim._manhattan(gs.player.pos(), CombatState.pos_of(gs.combat.monsters[target])) != 1:
 				return NO_FOE
 		AREA:

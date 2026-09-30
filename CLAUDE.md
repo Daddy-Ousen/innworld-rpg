@@ -98,8 +98,8 @@ Canon batches and full test runs blow up context fast. To keep quality without t
   import, git identity, and the book text. Its `[setup]` lines show at the start. If one says FAILED, run
   `bash tools/cloud/setup.sh --force` and read only the tail of `/tmp/innworld-setup.log`.
 - **Shell is Linux bash.** Ignore the PowerShell forms. Tests: `bash tools/run_tests.sh <script>...` or
-  `bash tools/run_tests.sh --all` (full suite, one Godot run per script; run it in a subagent and return only
-  the TOTAL line and FAIL lines). Python is `python3`.
+  `bash tools/run_tests.sh --all` (full suite, one Godot run per script; only when the user asks: see "Test scope").
+  Python is `python3`.
 - **Book text:** only `canon/raw/book6/` and `canon/raw/book7/` exist (linked from the PRIVATE repo
   `Daddy-Ousen/innworld-canon-raw`; `canon/raw/` is gitignored). Never copy that text into this public repo,
   a PR, an issue or a commit message. Books 1–5 text is NOT in the cloud: use the canon JSON and flag questions.
@@ -110,15 +110,16 @@ Canon batches and full test runs blow up context fast. To keep quality without t
 - **Plans** go in `docs/plans/<milestone>.md` (committed), not in `~/.claude/plans/` (lost when the VM ends).
 - The task queue for the cloud is in `docs/CLOUD.md` ("Task queue").
 
-## Test scope (agreed 2026-09-28)
-The full suite is slow (about 100 scripts, 900+ tests). Do not run it after every sub-milestone.
-- **Data-only change** (canon batch, maps, NPCs, enemies, audio data): run only
+## Test scope (agreed 2026-09-28; changed by the user 2026-09-30)
+Run the absolute minimum tests per task. **Do not run the full suite** (about 130 scripts, 1300+ tests), not for core
+changes, not for a save or schema change, not at the end of a milestone. Run it only when the user asks for it.
+- Run only what the change touches:
   - the new or changed test scripts,
-  - `sim_canon_book<N>` for the current book,
-  - the unit tests that check the kind of data you touched (a new enemy: `unit_combat_db`, `unit_monster_art`, `unit_sound_cues`; see `handoff.md` for others),
-  - the validator and the Python tool tests (`python -m unittest discover -s tools/tests`).
-  One script: `godot --headless --path game -s addons/gut/gut_cmdln.gd -gdir=res://tests -gselect=<script name> -gexit`.
-- **Full suite** (in a subagent) only when:
-  - code changes in `game/core/`, or the save format or a JSON schema changes,
-  - the last sub-milestone of a milestone, before its PR,
-  - a targeted run fails in a way that may touch other areas.
+  - the existing scripts for the code or data you touched (for example a core file's own `unit_<name>`, the sims that use it),
+  - for canon work, `sim_canon_book<N>` for the current book,
+  - for data, the unit tests that check that kind of data (a new enemy: `unit_combat_db`, `unit_monster_art`, `unit_sound_cues`; see `handoff.md` for others),
+  - the validator and the Python tool tests (`python -m unittest discover -s tools/tests`) only when data, schemas or tools changed.
+  One script: `godot --headless --path game -s addons/gut/gut_cmdln.gd -gdir=res://tests -gselect=<script name> -gexit`
+  (cloud: `bash tools/run_tests.sh <script>...`).
+- If a targeted run fails in a way that may touch other areas, run the few extra scripts you suspect, not the suite.
+- In the PR text, list the scripts you ran and say the full suite was not run.

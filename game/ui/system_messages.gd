@@ -40,6 +40,7 @@ const KEYS: Array[String] = [
 	"WASD / arrows: walk (into a monster: attack)",
 	"Space: wait (in a fight: end your turn)",
 	"In a fight: click a blue tile to walk, a foe to attack",
+	"Cover: a bar on a tile's edge means cover beside it (gold half, blue full). It lowers ranged hits from that side; walls block throws and spells",
 	"1-9: use a Skill or spell in a fight (then click a gold foe, or a tile; Esc: cancel)",
 	"B: block",
 	"T: throw the held item",

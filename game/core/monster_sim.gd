@@ -281,6 +281,7 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String) -> void:
 		return
 	m["chase"] = int(m["chase"]) + 1
 	if e.has("ranged") and _dist(pos, at) <= int(e["ranged"]["range"]) \
+			and Cover.sight(db, m["area"], pos, at) \
 			and gs.rng.randf() < float(e["ranged"]["chance"]):
 		Combat.monster_attack(gs, db, id, true, 0.0, target)
 		return
@@ -319,7 +320,89 @@ static func _step_next_to(gs: GameState, db: DataDb, id: String, at: Vector2i) -
 		var g := at + off
 		if db.maps.is_walkable(gs.player.area, g) and not taken.has(g):
 			goals[g] = true
+	if goals.size() > 1:
+		goals = _pincer_goals(gs, db, id, at, goals, taken)
 	return not goals.is_empty() and _step_to(gs, db, id, goals)
+
+
+## M17.6: of the free tiles beside `at`, those that close a pincer (the tile
+## opposite holds a fighter of this monster's side) win a tie: they are kept
+## only if they are as near as the nearest free tile. `goals` otherwise.
+static func _pincer_goals(gs: GameState, db: DataDb, id: String, at: Vector2i, goals: Dictionary,
+		taken: Dictionary) -> Dictionary:
+	var m: Dictionary = gs.combat.monsters[id]
+	var area: String = m["area"]
+	var pos := CombatState.pos_of(m)
+	var side := Cover.side_at(gs, db, area, pos)
+	if side == "":
+		return goals
+	var flank := {}
+	for g: Vector2i in goals:
+		if Cover.side_at(gs, db, area, at + (at - g)) == side:
+			flank[g] = true
+	if flank.is_empty() or flank.size() == goals.size():
+		return goals
+	var nearest := -1
+	var lens := {}
+	for g: Vector2i in goals:
+		var found := Pathfind.path(db.maps, area, pos, {g: true}, taken)
+		if found["found"]:
+			lens[g] = (found["steps"] as Array).size()
+			nearest = lens[g] if nearest < 0 else mini(nearest, lens[g])
+	var out := {}
+	for g: Vector2i in flank:
+		if lens.get(g, -1) == nearest:
+			out[g] = true
+	return out if not out.is_empty() else goals
+
+
+## M17.6: true for a monster whose ranged blow hurts at least as much as its melee one
+## (the Goblin Lord's archers and shamans). A brute with a thrown rock (the Goblin
+## Chieftain) is not one: it does not seek cover. M17.7 may replace this with an
+## explicit ability in the enemy data.
+static func is_shooter(e: Dictionary) -> bool:
+	return e.has("ranged") and int(e["ranged"]["damage"][1]) >= int(e["damage"][1])
+
+
+## M17.6: a tile for a shooter to fire from: within `budget` steps, no tile beside
+## the target, within `range_` of `at`, in sight of it, and with better cover
+## against `at` than the shooter's own tile. Best cover first, then fewer steps,
+## then the lower y and x. {"cell", "steps"} or {}.
+static func cover_spot(gs: GameState, db: DataDb, id: String, at: Vector2i, budget: int,
+		range_: int) -> Dictionary:
+	var m: Dictionary = gs.combat.monsters[id]
+	var area: String = m["area"]
+	var pos := CombatState.pos_of(m)
+	var have := Cover.rank(Cover.against(db, area, pos, at))
+	var taken := _taken(gs, id)
+	var seen := {pos: 0}
+	var frontier: Array[Vector2i] = [pos]
+	var best := {}
+	var best_rank := have
+	for depth in range(1, budget + 1):
+		var next: Array[Vector2i] = []
+		for from in frontier:
+			for off: Vector2i in ORTHO:
+				var to := from + off
+				if seen.has(to) or taken.has(to) or not db.maps.is_walkable(area, to) \
+						or not db.maps.exit_at(area, to).is_empty():
+					continue
+				seen[to] = depth
+				next.append(to)
+				var r := Cover.rank(Cover.against(db, area, to, at))
+				if r <= have or r < best_rank:
+					continue
+				if _manhattan(to, at) <= 1 or _dist(to, at) > range_ or not Cover.sight(db, area, to, at):
+					continue
+				var better := best.is_empty() or r > best_rank
+				if not better and depth == best["steps"]:
+					var c: Vector2i = best["cell"]
+					better = to.y < c.y or (to.y == c.y and to.x < c.x)
+				if better:
+					best = {"cell": to, "steps": depth}
+					best_rank = r
+		frontier = next
+	return best
 
 
 ## A helper's turn (M7.B): hit the nearest hostile monster in the area

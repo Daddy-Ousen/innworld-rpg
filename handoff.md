@@ -1,24 +1,29 @@
 # Handoff
 
-## Just done (2026-09-30, cloud setup; the user travels for a few days)
-- M17.5 is merged ([PR #83](https://github.com/Daddy-Ousen/innworld-rpg/pull/83), 68f5f38). Tag `m17.5-done` pushed.
-- Branch `chore/cloud-setup` makes the repo work in Claude Code cloud sessions. Detail: `docs/CLOUD.md`,
-  `CLAUDE.md` "Cloud sessions", `progress.md` "Cloud setup".
-  - `.claude/settings.json`: SessionStart hook -> `tools/cloud/setup.sh` (exits at once unless
-    `CLAUDE_CODE_REMOTE=true` or `--force`). Also a small permission allow list.
-  - `tools/cloud/install_godot.sh`: Godot 4.7.2 Linux, official URL then the backup release
-    `tools-godot-4.7.2` on this repo (the cloud GitHub proxy may 403 other repos' release assets). SHA-512 checked.
-  - `tools/run_tests.sh`: one Godot run per script. Uses `-gselect=<name>.gd` (exact file).
-    `-gtest=` does NOT work here: `.gutconfig.json` still adds every script in res://tests.
-  - Private repo `Daddy-Ousen/innworld-canon-raw`: Book 6 + Book 7 extracted text only. `setup.sh` clones it
-    to `~/innworld-canon-raw` (or finds `../innworld-canon-raw`) and symlinks `book*/` into `canon/raw/`.
-- User answers: book text in a private repo; Godot backup release OK; cloud agent asks and waits for choices.
+## Just done (2026-09-30, M17.6 cover and position, cloud session)
+- Branch `claude/kind-feynman-y4x1mm`, PR open (the user merges it). Plan: `docs/plans/m17.6.md`. Detail: ADR 0027 "M17.6".
+- User answers: walls block sight; half -15 / full -30 points; pincer +15; shooters take cover, melee monsters close the pincer.
+- Core: new `core/cover.gd` (`level`, `line`, `sight`, `against`, `side_at`, `pincered`, `details`, `hit_bonus`, `sides`, `note`);
+  `MapDb.solid_at` + validation; `Combat.position_bonus` (the one hook) + `NO_SIGHT`; `MonsterSim.is_shooter`, `cover_spot`,
+  `_pincer_goals`; `Encounter._hostile_turn` (shooters); `Spells` (sight, `_chance(from)`). No save change.
+- Data: `tiles.json` `cover` on walls/houses/cliffs (wall), tree/boulder (full), rock (half); `rules.combat.tactical.cover`
+  (`half .15, full .30, flank .15, sight, hold_rounds 6, kinds`).
+- UI: `CombatOverlay.covers` / `show_covers` (bars), `world/main.gd` (`_with_note`, label notes, no throw hint without sight),
+  one help line.
+- Tests: new `unit_cover` 14, `unit_cover_attacks` 9, `unit_cover_position` 10, `unit_cover_ui` 4. Old sims changed seed because the pincer
+  moves the dice: `sim_big_battle` seed 4, `sim_inn_brawl` (run out of the door) seed 5. Full suite run once: 132 scripts, all pass.
+- **User rule (2026-09-30, now in CLAUDE.md "Test scope"): run only the minimum tests that touch the change; NO full suite unless
+  the user asks.**
+- Open: all cover numbers are guesses. `is_shooter` (ranged top damage >= melee top damage) is a stand-in for M17.7 enemy
+  `abilities`: the first draft made the Goblin Chieftain hide behind a table and broke `sim_m6_done`. A fleeing foe can be boxed in
+  a corner by idle NPC allies and the fight then does not end for a bot that never hits fleeing foes. Melee monsters do not seek
+  cover from the player's throws and spells; no retreat to cover.
+- The user should look at the cover bars: `godot --path game`, stand next to a tree on the floodplains, fight a goblin (no display in the cloud).
 
 ## Next
-1. The user: GitHub App access to `innworld-canon-raw` (see `docs/CLOUD.md` "One-time setup"), merge the cloud PR.
-2. Cloud session 1: M17.6 cover and position (plan in `docs/plans/m17.6.md`, ask, build, PR).
-3. Then M17.7, then M18.P (Book 6 plan, ADR 0028), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
-   Prompts: `docs/CLOUD.md` "Task queue".
+1. The user merges the M17.6 PR; then tag `m17.6-done` on the merge commit (tag pending: the cloud may not push tags).
+2. Cloud session 2: M17.7 enemy abilities and balance (`docs/CLOUD.md` task queue; minimum tests only).
+3. Then M18.P (Book 6 plan, ADR 0028), M18 batches, M19.P (Book 7, ADR 0029), M19 batches.
 
 ## Gotchas (cloud)
 - Not yet run in a real cloud VM. Unknowns: whether the proxy lets `git clone` reach the private repo when only

@@ -91,7 +91,8 @@ static func attack(gs: GameState, db: DataDb, npc: String, confirmed: bool = fal
 	var what := "The %s" % String(item["name"]).to_lower() if not item.is_empty() else "You"
 	var c := gs.combat
 	var cr: Dictionary = db.rules["combat"]
-	out["hit"] = gs.rng.randf() < Combat.hit_chance(db, Stats.get_stat(gs, db, "dexterity"), int(s["evasion"]))
+	var pos_bonus := Combat.position_bonus(gs, db, gs.player.pos(), NpcRoster.pos_of(n), false, Cover.FRIEND)
+	out["hit"] = gs.rng.randf() < Combat.hit_chance(db, Stats.get_stat(gs, db, "dexterity"), int(s["evasion"]), pos_bonus)
 	if not out["hit"]:
 		c.lines.append("%s %s %s." % [what, "misses" if what != "You" else "miss", name])
 		return out
@@ -180,6 +181,7 @@ static func _hit_player(gs: GameState, db: DataDb, id: String) -> void:
 	var s := NpcReact.stats(db, id)
 	var who := Combat.npc_name(db, id)
 	var bonus := -float(cr["block"]["hit_malus"]) if c.blocking else 0.0
+	bonus += Combat.position_bonus(gs, db, NpcRoster.pos_of(gs.npcs.npcs[id]), gs.player.pos(), false, Cover.FOE)
 	if gs.rng.randf() >= Combat.hit_chance(db, int(s["accuracy"]), Stats.get_stat(gs, db, "dexterity"), bonus):
 		c.lines.append("%s swings at you and misses." % who)
 		return

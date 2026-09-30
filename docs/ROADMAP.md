@@ -277,12 +277,14 @@ Rules from the user (2026-09-29):
   Pisces, save v20): MP stat and regen (save), `data/spells.json` (AP, MP, range, shape, effect,
   `canon_ref`), learning a spell from a teacher or a spellbook (not from nothing), a [Mage] class path, spell
   targets (one foe, line, blast, around). First spells from Books 1–5 only
-- [ ] M17.6 Cover and position: half and full cover from walls and solid objects, flanking; monsters use cover
+- [x] M17.6 Cover and position (ADR 0027, 2026-09-30; cloud session; no save change): half and full cover from walls, trees, rocks and solid objects (data: tile and
+  object `cover`, `rules.combat.tactical.cover`), walls block sight for throws, shots and targeted spells, pincer +15, monsters: archers and
+  shamans take cover, melee monsters close the pincer; cover bars on the combat screen
 - [ ] M17.7 Enemy abilities and balance: monster moves in data (Rock Crab shell, archers, Shield Spider leap),
   balance probes redone for the new rules, the day-21 raid checked again. Level cost follows the TOTAL level
   (Ryoka's theory, 2.41) with a hidden cap of 100 total levels; `rules.levels` curve retuned (core change)
 **Done when:** every fight in the game (monsters, stages, brawls) runs in combat mode with AP; the player can use
-combat Skills and learned spells; MP and AP gains work; saves from v17 load; GUT (full suite), the Python tool
+combat Skills and learned spells; MP and AP gains work; saves from v17 load; the GUT tests that touch it, the Python tool
 tests and the validator pass; the user has played fights with the new screen.
 
 ## M18 — Book 6 (The General of Izril)
@@ -293,7 +295,7 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
   the chapters into canon batches, ask the user the open choices (M13 style). The user approves before M18.0
 - [ ] M18.0 – M18.n: world work first (if any), then one canon batch per branch + PR
 **Done when:** all Book 6 canon is event data and `sim_canon_book6` runs to the last Book 6 day with drift 0;
-each batch has a hook or stage; GUT (full suite), the Python tool tests and the validator pass.
+each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
 ## M19 — Book 7 (The Rains of Liscor)
 Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in cloud sessions.
@@ -302,7 +304,7 @@ Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in clo
 - [ ] M19.P Plan + ADR 0029 (as M18.P). The user approves before M19.0
 - [ ] M19.0 – M19.n: world work, then canon batches
 **Done when:** all Book 7 canon is event data and `sim_canon_book7` runs to the last Book 7 day with drift 0;
-each batch has a hook or stage; GUT (full suite), the Python tool tests and the validator pass.
+each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
 ## Later
 - optional LLM flavour layer

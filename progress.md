@@ -7,7 +7,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - Redirect GUT / validator runs to a file (scratchpad). Read only the pass/fail summary line and any FAIL/Error/Parse Error lines — never the full run.
 - Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent. Only its short summary should land in the main session's context, not raw book text or raw test logs.
 - Don't re-read a file right after Edit/Write — the tool already confirms the change.
-- Test scope (user, 2026-09-28): data-only sub-milestones run targeted tests only; the full suite runs only for `game/core/` code, save/schema changes, and at a milestone's end. Detail in `CLAUDE.md` "Test scope".
+- Test scope (user, 2026-09-30): run the absolute minimum tests per task; no full suite unless the user asks. Detail in `CLAUDE.md` "Test scope".
 - See `handoff.md` "Gotchas" for the GUT-exits-0-on-parse-error trap and other run-output pitfalls.
 
 ## Roadmap status
@@ -39,8 +39,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     teacher "Learn" rows and spellbook goods, [Mage] class, cast on AP + MP (one / line / blast / around, foes only), NPC
     casters Ceria and Pisces, spells in the Skill bar with aiming, save v20. Full suite: 128 scripts, 1339 tests, all pass (run script by script); validator 0 errors; Python 95 OK. Detail: ADR 0027 "M17.5".
 
-  - [ ] M17.6 Cover and position (next; first cloud task, see `docs/CLOUD.md`).
-  - [ ] M17.7 Enemy abilities and balance (last M17 step; full suite before its PR).
+  - [x] M17.6 Cover and position (branch `claude/kind-feynman-y4x1mm`, 2026-09-30, first cloud task): `core/cover.gd`, tile and
+    object `cover`, `rules.combat.tactical.cover`, walls block sight, half -15 / full -30, pincer +15, archers and shamans
+    take cover, melee monsters close the pincer, cover bars on the screen. No save change. Full suite (run once, before the
+    "no full suite" rule): 132 scripts, 1300 tests as the runner counts them, all pass; validator 0 errors; Python 95 OK.
+    Detail: ADR 0027 "M17.6". PR waits for the user to merge. Tag pending: `m17.6-done` on the merge commit.
+  - [ ] M17.7 Enemy abilities and balance (last M17 step).
   - [ ] The user plays fights with Skills and spells (`godot --path game`). Needs the user at home.
 - [ ] M18 — Book 6 (The General of Izril). Not planned: M18.P first (ADR 0028). Text in the private repo.
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
@@ -63,7 +67,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
-- Core: `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=20), `save_migrations` (1→…→20), `encounter` (M17.1–M17.2), `combat_skills` (M17.4), `mana`, `spells`, `spell_db` (M17.5), `inn_state`, `guests`, `standing`, `brawl`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
+- Core: `cover` (M17.6), `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=20), `save_migrations` (1→…→20), `encounter` (M17.1–M17.2), `combat_skills` (M17.4), `mana`, `spells`, `spell_db` (M17.5), `inn_state`, `guests`, `standing`, `brawl`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.

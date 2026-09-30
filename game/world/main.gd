@@ -729,6 +729,14 @@ func _update_overlay() -> void:
 		if not Session.db.maps.exit_at(gs.player.area, cell).is_empty():
 			exits[cell] = true
 	view.overlay.show_reach(reach, exits)
+	var covers := {}  # M17.6: bars on the tile edges that have cover beside them
+	var stand: Array = reach.keys()
+	stand.append(gs.player.pos())
+	for cell: Vector2i in stand:
+		var sides := Cover.sides(Session.db, gs.player.area, cell)
+		if not sides.is_empty():
+			covers[cell] = sides
+	view.overlay.show_covers(covers)
 	_show_plan()
 
 
@@ -740,7 +748,8 @@ func _show_spell_plan(sid: String) -> void:
 	var s := Spells.spell(db, sid)
 	var here := gs.player.pos()
 	var shape := String(s["shape"])
-	if shape in ["one", "blast"] and Combat._dist(here, _hover) > int(s["range"]):
+	if shape in ["one", "blast"] and (Combat._dist(here, _hover) > int(s["range"])
+			or not Cover.sight(db, gs.player.area, here, _hover)):  # M17.6: no sight through a wall
 		view.overlay.clear_plan()
 		return
 	var tiles := Spells.cells(gs, db, sid, _hover, here)
@@ -750,7 +759,9 @@ func _show_spell_plan(sid: String) -> void:
 		view.overlay.clear_plan()
 		return
 	var at := CombatState.pos_of(gs.combat.monsters[foes[0]])
-	var text := "%d%%" % roundi(Spells.hit_chance(gs, db, sid, foes[0]) * 100.0) if shape == "one" 			else "%d foe%s" % [foes.size(), "" if foes.size() == 1 else "s"]
+	var text := _with_note("%d%%" % roundi(Spells.hit_chance(gs, db, sid, foes[0]) * 100.0),
+			Cover.note(gs, db, gs.player.area, here, at, String(s["hit"]) != "auto", Cover.FRIEND)) if shape == "one" \
+			else "%d foe%s" % [foes.size(), "" if foes.size() == 1 else "s"]
 	view.overlay.show_plan([] as Array[Vector2i], true, at, text)
 
 
@@ -783,14 +794,21 @@ func _show_plan() -> void:
 	if target == "":
 		view.overlay.show_plan(cells, false)
 		return
-	var text := "%d%%" % roundi(Combat.player_hit_chance(gs, db, target) * 100.0) \
+	var text := _with_note("%d%%" % roundi(Combat.player_hit_chance(gs, db, target) * 100.0),
+			Cover.note(gs, db, gs.player.area, at, _hover, false, Cover.FRIEND)) \
 			if plan["attack"] != "" else Encounter.NO_AP
 	var held: Dictionary = db.combat.items.get(gs.player.held, {})
 	if not held.is_empty() and target == Combat.nearest_foe(gs):
 		var dist := AnimDiff.king(gs.player.pos(), _hover)
-		if dist <= int(held["throw_range"]):
-			text += "  T: %d%%" % roundi(Combat.player_hit_chance(gs, db, target, true, dist) * 100.0)
+		var note := Cover.note(gs, db, gs.player.area, gs.player.pos(), _hover, true, Cover.FRIEND)
+		if dist <= int(held["throw_range"]) and note != "no sight":  # M17.6: a wall blocks a throw
+			text += "  " + _with_note("T: %d%%" % roundi(Combat.player_hit_chance(gs, db, target, true, dist) * 100.0), note)
 	view.overlay.show_plan(cells, true, _hover, text)
+
+
+## "45%" + "half cover" -> "45% (half cover)" (M17.6).
+func _with_note(text: String, note: String) -> String:
+	return text if note == "" else "%s (%s)" % [text, note]
 
 
 func _show_night(night: Dictionary) -> void:
