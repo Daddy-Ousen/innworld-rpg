@@ -2,6 +2,7 @@
 ## player can walk to this turn (exit tiles, where a step flees, in yellow),
 ## the path a click would walk, a red frame on the foe it would hit with the
 ## hit chance over it, and a ring under the fighter whose turn is shown.
+## M17.4: gold frames on the foes an armed Skill can hit.
 ## Draws only; WorldView owns it and main.gd feeds it.
 ## Presentation only: never changes GameState (CLAUDE.md rule 1).
 class_name CombatOverlay
@@ -13,6 +14,7 @@ const EXIT := Color(1.0, 0.85, 0.3, 0.35)
 const PATH := Color(1.0, 1.0, 1.0, 0.85)
 const TARGET := Color("#e03a3a")
 const ACTIVE := Color(1.0, 0.95, 0.5, 0.9)
+const SKILL := Color("#f0c850")
 const DOT := 3.0
 const FRAME := 2.0
 
@@ -28,6 +30,8 @@ var text := ""
 ## The fighter whose turn the screen shows (has_active false = none).
 var active := Vector2i.ZERO
 var has_active := false
+## The cells of the foes an armed Skill can hit (M17.4).
+var marks: Array[Vector2i] = []
 
 var _label: Label
 
@@ -71,6 +75,11 @@ func clear_plan() -> void:
 	show_plan([] as Array[Vector2i], false)
 
 
+func show_marks(cells: Array[Vector2i]) -> void:
+	marks = cells
+	queue_redraw()
+
+
 func mark_active(cell: Vector2i) -> void:
 	active = cell
 	has_active = true
@@ -87,6 +96,7 @@ func clear() -> void:
 	reach = {}
 	exits = {}
 	has_active = false
+	marks = []
 	clear_plan()
 
 
@@ -102,6 +112,8 @@ func _draw() -> void:
 		draw_rect(r, REACH_EDGE, false, 1.0)
 	for cell in path:
 		draw_circle(WorldView.cell_center(cell), DOT, PATH)
+	for cell in marks:
+		draw_rect(Rect2(Vector2(cell) * t + Vector2.ONE * 2.0, Vector2(t - 4, t - 4)), SKILL, false, FRAME)
 	if has_target:
 		draw_rect(Rect2(Vector2(target) * t, Vector2(t, t)), TARGET, false, FRAME)
 	if has_active:

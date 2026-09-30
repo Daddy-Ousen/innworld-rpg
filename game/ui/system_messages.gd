@@ -40,6 +40,7 @@ const KEYS: Array[String] = [
 	"WASD / arrows: walk (into a monster: attack)",
 	"Space: wait (in a fight: end your turn)",
 	"In a fight: click a blue tile to walk, a foe to attack",
+	"1-9: use a Skill in a fight (then click a gold foe; Esc: cancel)",
 	"B: block",
 	"T: throw the held item",
 	"X: drop the held item",

@@ -3,11 +3,14 @@
 ## framed by side (blue: you and your side, red: foes, yellow: fleeing), the
 ## fighter whose turn it is in gold, the player's AP as pips (each pip is one
 ## AP, filled by quarters), the tiles left to move, and the End turn button.
+## M17.4: a row of Skill buttons under it (SkillBar; `skill` is emitted with the
+## id of the one pressed).
 ## Hidden when there is no fight. Presentation only (CLAUDE.md rule 1).
 class_name CombatBar
 extends PanelContainer
 
 signal end_turn
+signal skill(skill_id: String)
 
 const FACE := Vector2(64, 64)
 const FRAME := 2
@@ -21,6 +24,7 @@ var _move: Label
 var _pips: ApPips
 var _button: Button
 var _faces: HBoxContainer
+var _skills: SkillBar
 var _ids: Array[String] = []
 var _active := ""
 
@@ -80,6 +84,9 @@ func _ready() -> void:
 	_faces = HBoxContainer.new()
 	_faces.add_theme_constant_override("separation", 4)
 	box.add_child(_faces)
+	_skills = SkillBar.new()
+	_skills.picked.connect(func(id: String) -> void: skill.emit(id))
+	box.add_child(_skills)
 	visible = false
 
 
@@ -95,9 +102,11 @@ func refresh(gs: GameState, db: DataDb) -> void:
 	_ap.text = "AP %s" % _ap_string(ap)
 	_pips.set_ap(ap, Encounter.player_ap(gs, db))
 	@warning_ignore("integer_division")
-	var steps := mini(ap, int(t["move_cap_q"]) - int(e["moved_q"])) / int(t["move_cost_q"]) if mine else 0
+	var steps := mini(ap, CombatSkills.move_cap_q(gs, db) - int(e["moved_q"])) / int(t["move_cost_q"]) \
+			if mine else 0
 	_move.text = "Move %d" % steps
 	_button.disabled = not mine
+	_skills.refresh(gs, db)
 	var order: Array = e["order"]
 	var turn := int(e["turn"])
 	_active = String(order[turn]) if turn < order.size() else ""
@@ -131,6 +140,10 @@ func move_text() -> String:
 
 func button() -> Button:
 	return _button
+
+
+func skills() -> SkillBar:
+	return _skills
 
 
 ## "4.5" for 18 q, "6" for 24 q.
