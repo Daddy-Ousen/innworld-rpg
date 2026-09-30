@@ -38,7 +38,8 @@ const SILENT_LINE := "The System is silent."
 ## The key list: the help page (H, M15.2).
 const KEYS: Array[String] = [
 	"WASD / arrows: walk (into a monster: attack)",
-	"Space: wait",
+	"Space: wait (in a fight: end your turn)",
+	"In a fight: click a blue tile to walk, a foe to attack",
 	"B: block",
 	"T: throw the held item",
 	"X: drop the held item",

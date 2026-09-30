@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://world/world_view.tscn" id="2_view"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://ui/pause_menu.tscn" id="9_pause"]
 [ext_resource type="PackedScene" path="res://ui/bag.tscn" id="10_bag"]
 [ext_resource type="PackedScene" path="res://ui/text_page.tscn" id="11_page"]
+[ext_resource type="PackedScene" path="res://ui/combat_bar.tscn" id="12_bar"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -20,6 +21,8 @@ script = ExtResource("1_main")
 [node name="HudLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="HudLayer" instance=ExtResource("3_hud")]
+
+[node name="CombatBar" parent="HudLayer" instance=ExtResource("12_bar")]
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 layer = 2
