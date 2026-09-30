@@ -20,6 +20,8 @@ const SKILL := Color("#f0c850")
 const SPELL := Color(1.0, 0.55, 0.15, 0.30)
 const SPELL_EDGE := Color(1.0, 0.7, 0.3, 0.8)
 const BURST := Color(1.0, 0.75, 0.25, 0.55)
+const COVER_HALF := Color(0.95, 0.8, 0.3, 0.95)
+const COVER_FULL := Color(0.4, 0.75, 1.0, 0.95)
 const DOT := 3.0
 const FRAME := 2.0
 
@@ -41,6 +43,8 @@ var marks: Array[Vector2i] = []
 ## being replayed (M17.5).
 var preview: Array[Vector2i] = []
 var burst: Array[Vector2i] = []
+## M17.6: cover beside the tiles you can stand on: {cell: {unit step: level}}.
+var covers: Dictionary = {}
 
 var _label: Label
 
@@ -84,6 +88,11 @@ func clear_plan() -> void:
 	show_plan([] as Array[Vector2i], false)
 
 
+func show_covers(cells: Dictionary) -> void:
+	covers = cells
+	queue_redraw()
+
+
 func show_marks(cells: Array[Vector2i]) -> void:
 	marks = cells
 	queue_redraw()
@@ -118,6 +127,7 @@ func clear() -> void:
 	marks = []
 	preview = []
 	burst = []
+	covers = {}
 	clear_plan()
 
 
@@ -137,6 +147,9 @@ func _draw() -> void:
 		draw_rect(r, SPELL_EDGE, false, 1.0)
 	for cell in burst:
 		draw_rect(Rect2(Vector2(cell) * t + Vector2.ONE, Vector2(t - 2, t - 2)), BURST)
+	for cell: Vector2i in covers:
+		for side: Vector2i in covers[cell]:
+			_draw_cover(cell, side, String(covers[cell][side]) == Cover.HALF)
 	for cell in path:
 		draw_circle(WorldView.cell_center(cell), DOT, PATH)
 	for cell in marks:
@@ -146,3 +159,12 @@ func _draw() -> void:
 	if has_active:
 		var c := WorldView.cell_center(active) + Vector2(0, t / 2.0 - 5.0)
 		draw_arc(c, t / 2.5, 0.0, TAU, 24, ACTIVE, FRAME)
+
+
+## A bar on the edge of `cell` that faces its cover: short and gold for half cover, the
+## whole edge and blue for full cover (M17.6).
+func _draw_cover(cell: Vector2i, side: Vector2i, half: bool) -> void:
+	var t := float(WorldView.TILE)
+	var centre := WorldView.cell_center(cell) + Vector2(side) * (t / 2.0 - 2.0)
+	var along := Vector2(side.y, side.x).abs() * (t * (0.25 if half else 0.5) - 2.0)
+	draw_line(centre - along, centre + along, COVER_HALF if half else COVER_FULL, 3.0 if not half else 2.0)

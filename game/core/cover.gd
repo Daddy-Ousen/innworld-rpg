@@ -168,3 +168,29 @@ static func hit_bonus(gs: GameState, db: DataDb, area: String, from: Vector2i, t
 ## The screen's word for a level: "" for none, else "half cover" / "full cover".
 static func word(l: String) -> String:
 	return "" if l == NONE else ("half cover" if l == HALF else "full cover")
+
+
+## The sides of tile `at` that have cover next to them: {Vector2i step: level}
+## (the four unit steps; none-level sides are left out). For the screen's marks.
+static func sides(db: DataDb, area: String, at: Vector2i) -> Dictionary:
+	var out := {}
+	for d: Vector2i in [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]:
+		var l := level(db, area, at + d)
+		if l != NONE:
+			out[d] = l
+	return out
+
+
+## A short note for the screen on an attack by `side` from `from` on `target`:
+## "" or e.g. "half cover", "pincer", "no sight" (joined with ", ").
+static func note(gs: GameState, db: DataDb, area: String, from: Vector2i, target: Vector2i,
+		ranged: bool, side: String) -> String:
+	var parts: Array[String] = []
+	if ranged and not sight(db, area, from, target):
+		return "no sight"
+	var d := details(gs, db, area, from, target, ranged, side)
+	if d["cover"] != NONE:
+		parts.append(word(d["cover"]))
+	if d["flank"]:
+		parts.append("pincer")
+	return ", ".join(parts)
