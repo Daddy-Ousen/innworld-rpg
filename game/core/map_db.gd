@@ -93,6 +93,11 @@ static func from_dicts(tile_map: Dictionary, area_map: Dictionary) -> MapDb:
 	return db
 
 
+## The solid object on `at` in `area` (M17.6: cover comes from it), or {}.
+func solid_at(area: String, at: Vector2i) -> Dictionary:
+	return _solid.get(area, {}).get(at, {})
+
+
 func is_indoor(area: String) -> bool:
 	return bool(_indoor.get(area, false))
 
@@ -309,7 +314,27 @@ func validate(db: DataDb) -> Array[String]:
 	for id: String in areas:
 		_validate_map(id, areas[id], db)
 	_validate_starts(db.rules.get("world", {}).get("starts", null))
+	_validate_cover_rules(db.rules.get("combat", {}).get("tactical", {}).get("cover", {}))
 	return errors
+
+
+## rules.combat.tactical.cover (M17.6): half, full, flank in 0..1, sight a bool,
+## kinds {object kind: cover level}. An empty block (toy dbs) is fine.
+func _validate_cover_rules(c: Variant) -> void:
+	if not c is Dictionary or (c as Dictionary).is_empty():
+		return
+	for k: String in ["half", "full", "flank"]:
+		if not c.has(k) or not (c[k] is float or c[k] is int) or float(c[k]) < 0.0 or float(c[k]) > 1.0:
+			errors.append("rules cover: '%s' must be a number from 0 to 1." % k)
+	if c.has("sight") and not c["sight"] is bool:
+		errors.append("rules cover: sight must be true or false.")
+	var kinds: Variant = c.get("kinds", {})
+	if not kinds is Dictionary:
+		errors.append("rules cover: kinds must be an object.")
+		return
+	for kind: String in kinds:
+		if not Cover.LEVELS.has(kinds[kind]):
+			errors.append("rules cover: kind '%s' has an unknown level." % kind)
 
 
 ## rules.world.starts (M8.5): a non-empty list of {"id", "name", "area",
@@ -348,6 +373,8 @@ func _validate_tile(id: String, t: Dictionary) -> void:
 			errors.append("tile '%s': missing '%s'." % [id, f])
 	if t.has("walk") and not t["walk"] is bool:
 		errors.append("tile '%s': walk must be true or false." % id)
+	if t.has("cover") and not Cover.LEVELS.has(t["cover"]):
+		errors.append("tile '%s': cover must be one of %s." % [id, Cover.LEVELS])
 	if t.has("color") and not Color.html_is_valid(str(t["color"])):
 		errors.append("tile '%s': color must be a #rrggbb colour." % id)
 	if t.has("winter_color") and not Color.html_is_valid(str(t["winter_color"])):
@@ -581,6 +608,8 @@ func _validate_object(where: String, o: Dictionary, bounds: Rect2i, seen: Dictio
 		errors.append("%s: 'at' must be [x, y] inside the map." % where)
 	if o.has("kind") and not o["kind"] is String:
 		errors.append("%s: kind must be a string (data/objects.json)." % where)
+	if o.has("cover") and (not Cover.LEVELS.has(o["cover"]) or not o.get("solid", false)):
+		errors.append("%s: cover must be one of %s and needs \"solid\": true." % [where, Cover.LEVELS])
 	if o.has("sleep") and not o["sleep"] is bool:
 		errors.append("%s: sleep must be true or false." % where)
 	if o.has("warm") and not o["warm"] is bool:
