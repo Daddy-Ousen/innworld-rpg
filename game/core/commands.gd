@@ -83,6 +83,17 @@ static func grant_breakthrough(gs: GameState, class_id: String) -> bool:
 	return ClassSystem.grant_breakthrough(gs, class_id)
 
 
+## Debug (M17.4): gives the player skill `skill_id` (no class, today). Returns
+## "" or an error text.
+static func grant_skill(gs: GameState, db: DataDb, skill_id: String) -> String:
+	if not db.skills.has(skill_id):
+		return "Unknown skill '%s'." % skill_id
+	if gs.progression.has_skill(skill_id):
+		return "You already have %s." % String(db.skills[skill_id]["name"])
+	gs.progression.skills.append({"id": skill_id, "class": "", "level": 0, "day": gs.clock.day()})
+	return ""
+
+
 ## The player kills a canon NPC. Returns "" or an error text.
 static func kill_npc(gs: GameState, db: DataDb, npc: String) -> String:
 	var err := Director.player_kill(gs, db, npc)
