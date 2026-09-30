@@ -1,6 +1,20 @@
 # Handoff
 
-## Just done (2026-09-30, M17.0 spike)
+## Just done (2026-09-30, M17.1 core encounter)
+- Branch `feat/m17.1-encounter`, stacked on `feat/m17.0-spike` on `docs/archive-m16`. None pushed; ask first.
+- ADR 0027 approved by the user; M17.1 notes at its end. Save v18.
+- New `game/core/encounter.gd`; changed `combat.gd` (`player_attack(spend)`, encounter cleared in `end_fight`,
+  `night`, area change), `combat_state.gd` (`encounter`), `monster_sim.gd` (`_hostile_checks`,
+  `_nearest_hostile`, carry dropped in combat mode), `movement.gd` (`step(spend)`), `commands.gd`
+  (`_encounter_move`, `_encounter_attack`, `end_turn`, wait = end turn, `_after` ends with `Encounter.sync`),
+  `save_migrations.gd` 17→18, `combat_db.gd` (`agility`), console `end`.
+- Combat mode is OFF in `rules.json` (`combat.tactical.enabled: false`). `ToyCombat.tactical(d)` turns it on.
+- Tests: `unit_encounter` 21/21, `unit_tactical_rules` 6/6, unit_combat/monster_sim/stage/combat_db/traps/brawl pass.
+- Next: M17.2 (plan mode first): block/throw/take/drop on AP, brawl and react NPCs and stage allies in the
+  order, flee, knock-out, fight records; port the 44 fight test files; set `enabled: true`; full suite.
+- Test runner: scratchpad `run_targets.sh <script>...` (gone next session).
+
+## Earlier (2026-09-30, M17.0 spike)
 - Branch `feat/m17.0-spike` (stacked on `docs/archive-m16`, neither pushed). Ask the user before push / PR.
 - User answers: Agility = `speed` stat; keep AP rules, raise HP ~x2 in M17.7; MP 1 per 10 min, sleep refills;
   a fight covers the whole map, late arrivals join next round. All in `docs/adr/0027-m17-tactical-combat.md`.

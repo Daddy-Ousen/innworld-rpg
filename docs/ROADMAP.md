@@ -261,7 +261,7 @@ Rules from the user (2026-09-29):
 - AP is stored in quarter points (integers), so the rolls stay deterministic.
 - [x] M17.0 Spike + ADR (ADR 0027, 2026-09-30): `rules.combat.tactical` numbers; three fights worked out on paper (Rock Crab, a goblin
   pack, the day-21 raid); how a fight starts, who joins, what a round costs in world time (6 s). The user approves
-- [ ] M17.1 Core encounter: encounter state in `GameState` (turn order, round, AP left, movement used; save v18 +
+- [x] M17.1 Core encounter (ADR 0027, 2026-09-30; combat mode off until M17.2): encounter state in `GameState` (turn order, round, AP left, movement used; save v18 +
   migration), start / join / end, order by Agility, move with the cap, attack for 2 AP, end turn; monsters use
   AP too. Headless tests
 - [ ] M17.2 Port the old fight parts: block, throw, improvised weapons, drop, flee, knock-out, fighting NPCs,

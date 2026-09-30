@@ -109,6 +109,12 @@ static func freeze(d: DataDb) -> void:
 		e["act_seconds"] = 1000000
 
 
+## Combat mode on (M17.1, ADR 0027): rules.combat.tactical from the real
+## rules with the switch on.
+static func tactical(d: DataDb) -> void:
+	d.rules["combat"]["tactical"]["enabled"] = true
+
+
 ## Every attack misses.
 static func never_hit(d: DataDb) -> void:
 	d.rules["combat"]["hit"]["min"] = 0.0

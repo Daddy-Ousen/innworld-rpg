@@ -19,7 +19,8 @@
 ##   traps (M13.T, save v14): "<area>/<trap id>" → {"found", "spent",
 ##          "disarmed", "sprung"} (see Traps); only traps that changed. Unlike
 ##          monsters, traps keep their state when the player leaves.
-## Combat, MonsterSim and Traps change this; nothing else does.
+##   encounter (M17.1, save v18): {} or the combat-mode rounds (see Encounter).
+## Combat, MonsterSim, Traps and Encounter change this; nothing else does.
 class_name CombatState
 extends RefCounted
 
@@ -49,6 +50,7 @@ var monsters: Dictionary = {}
 var fight: Dictionary = {}
 var stage_run: Dictionary = {}
 var traps: Dictionary = {}
+var encounter: Dictionary = {}
 
 
 func has_fight() -> bool:
@@ -92,7 +94,7 @@ func to_dict() -> Dictionary:
 	return {"next_id": next_id, "sec": sec, "area": area, "checked": checked,
 		"spawn_last": spawn_last.duplicate(), "blocking": blocking, "lines": lines.duplicate(),
 		"monsters": list, "fight": fight.duplicate(true), "stage_run": stage_run.duplicate(),
-		"traps": traps.duplicate(true)}
+		"traps": traps.duplicate(true), "encounter": encounter.duplicate(true)}
 
 
 ## Accepts {} (a migrated v5 save): no monsters, no fight.
@@ -132,4 +134,16 @@ static func from_dict(d: Dictionary) -> CombatState:
 		if s.has("sprung"):
 			s["sprung"] = int(s["sprung"])
 		c.traps[k] = s
+	var e: Dictionary = (d.get("encounter", {}) as Dictionary).duplicate(true)
+	if not e.is_empty():
+		for k: String in ["round", "turn", "ap_q", "moved_q"]:
+			e[k] = int(e.get(k, 0))
+		var order: Array[String] = []
+		order.assign(e.get("order", []))
+		e["order"] = order
+		var tie := {}
+		for k: String in e.get("tie", {}):
+			tie[k] = float(e["tie"][k])
+		e["tie"] = tie
+	c.encounter = e
 	return c

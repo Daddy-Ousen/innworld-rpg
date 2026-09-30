@@ -33,6 +33,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			14: out = _migrate_14_to_15(out)
 			15: out = _migrate_15_to_16(out)
 			16: out = _migrate_16_to_17(out)
+			17: out = _migrate_17_to_18(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -166,4 +167,12 @@ static func _migrate_15_to_16(d: Dictionary) -> Dictionary:
 static func _migrate_16_to_17(d: Dictionary) -> Dictionary:
 	for n: Dictionary in (d.get("npcs", {}) as Dictionary).get("npcs", {}).values():
 		n["hostile_day"] = 0
+	return d
+
+
+## v18 (M17.1): combat mode. No encounter is running.
+static func _migrate_17_to_18(d: Dictionary) -> Dictionary:
+	var c: Dictionary = d.get("combat", {})
+	c["encounter"] = {}
+	d["combat"] = c
 	return d

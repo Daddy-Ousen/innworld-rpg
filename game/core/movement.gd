@@ -41,7 +41,9 @@ static func place_at_start(gs: GameState, start: Dictionary) -> void:
 ## blocked: a wall, water, a solid object, an NPC, a seated patron (M14.2),
 ## a monster, a fairy, a found trap or the map edge. The player still turns to face `dir`. While slowed by fairy
 ## snow (M8.W), a step costs double time.
-static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
+## `spend`: false in combat mode (M17.1): a step costs AP, not time (a trip
+## through a travel exit still takes its minutes).
+static func step(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> Dictionary:
 	var out := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
 		"npc": "", "monster": "", "fairy": "", "trap": ""}
 	db.maps.sync_flags(gs.flags)
@@ -71,7 +73,7 @@ static func step(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 			out["refused"] = true
 			return out
 		out["minutes"] = gs.clock.total_minutes - before
-	else:
+	elif spend:
 		out["minutes"] = _spend_seconds(gs, Winter.step_seconds(gs, int(db.rules["world"]["step_seconds"])))
 	if e.is_empty():
 		p.place(p.area, to)

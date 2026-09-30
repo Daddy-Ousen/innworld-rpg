@@ -127,9 +127,20 @@ static func give(gs: GameState, db: DataDb, coins: int, good: String = "", count
 ## M13.T: a step (not through an exit) onto an armed trap springs it: the
 ## result has "sprung" (see Traps.on_step; {} if none). Walking into a found
 ## trap says so.
+## M17.1 combat mode (Encounter): a step costs AP and counts against the move
+## cap, and takes no time; walking into a seen monster is an attack for AP.
+## When AP or the cap says no, nothing happens and the result has "error".
 static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return _encounter_move(gs, db, dir)
 	var r := Movement.step(gs, db, dir)
+	_after_step(gs, db, dir, r)
+	_after(gs, db)
+	return r
+
+
+static func _after_step(gs: GameState, db: DataDb, dir: String, r: Dictionary) -> void:
 	if r["fairy"] != "":
 		Winter.swat(gs, db, r["fairy"])
 	elif r["monster"] != "":
@@ -142,17 +153,69 @@ static func move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 				% Traps.trap_of(gs, db, gs.player.area, r["trap"])["name"])
 	elif r["moved"] and r["exit_to"] == "":
 		r["sprung"] = Traps.on_step(gs, db)
+
+
+static func _encounter_move(gs: GameState, db: DataDb, dir: String) -> Dictionary:
+	var r := {"moved": false, "blocked": false, "refused": false, "exit_to": "", "minutes": 0,
+		"npc": "", "monster": "", "fairy": "", "trap": "", "error": ""}
+	if PlayerState.DIRS.has(dir):
+		var foe := gs.combat.at(gs.player.area, gs.player.pos() + (PlayerState.DIRS[dir] as Vector2i))
+		if foe != "" and gs.combat.monsters[foe]["state"] != CombatState.HIDDEN:
+			r["blocked"] = true
+			r["monster"] = foe
+			r["attack"] = _encounter_attack(gs, db, dir)
+			return r
+	var cost := int(Encounter.rules(db)["move_cost_q"])
+	var why := Encounter.check(gs, db, cost, true)
+	if why != "":
+		r["refused"] = true
+		r["error"] = why
+		gs.combat.lines.append(why)
+		return r
+	r.merge(Movement.step(gs, db, dir, false), true)
+	if r["moved"]:
+		Encounter.pay(gs, cost, true)
+	_after_step(gs, db, dir, r)
+	_after(gs, db)
+	return r
+
+
+## Combat mode: an attack for attack_cost_q (see attack).
+static func _encounter_attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
+	var cost := int(Encounter.rules(db)["attack_cost_q"])
+	var why := Encounter.check(gs, db, cost, false)
+	var r := {"error": why, "target": "", "hit": false, "damage": 0, "killed": false}
+	if why != "":
+		gs.combat.lines.append(why)
+		return r
+	r = Combat.player_attack(gs, db, dir, false)
+	if r["error"] == "":
+		Encounter.pay(gs, cost, false)
 	_after(gs, db)
 	return r
 
 
 ## Stands still for `seconds`. Returns the minutes the clock moved, or -1
-## if refused (see Movement.wait).
+## if refused (see Movement.wait). In combat mode (M17.1) it ends the turn.
 static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		var before := gs.clock.total_minutes
+		Encounter.end_player_turn(gs, db)
+		_after(gs, db)
+		return gs.clock.total_minutes - before
 	var minutes := Movement.wait(gs, db, seconds)
 	_after(gs, db)
 	return minutes
+
+
+## Combat mode (M17.1): ends the player's turn; the others act and the next
+## round starts. Returns "" or why not.
+static func end_turn(gs: GameState, db: DataDb) -> String:
+	Combat.begin_command(gs)
+	var why := Encounter.end_player_turn(gs, db)
+	_after(gs, db)
+	return why
 
 
 ## Uses a nearby map object or talks to a nearby NPC. Returns
@@ -268,6 +331,8 @@ static func serve(gs: GameState, db: DataDb, target: String, good: String) -> Di
 ## {"error", "target", "hit", "damage", "killed"} (see Combat.player_attack).
 static func attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return _encounter_attack(gs, db, dir)
 	var r := Combat.player_attack(gs, db, dir)
 	_after(gs, db)
 	return r
@@ -276,6 +341,8 @@ static func attack(gs: GameState, db: DataDb, dir: String) -> Dictionary:
 ## Raises the guard for one turn. Returns "" or an error text.
 static func block(gs: GameState, db: DataDb) -> String:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return Encounter.NOT_YET  # M17.2
 	var err := Combat.block(gs, db)
 	_after(gs, db)
 	return err
@@ -285,6 +352,8 @@ static func block(gs: GameState, db: DataDb) -> String:
 ## {"error", "target", "hit", "damage", "killed"} (see Combat.throw_at).
 static func throw(gs: GameState, db: DataDb, target_id: String) -> Dictionary:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return {"error": Encounter.NOT_YET, "target": target_id, "hit": false, "damage": 0, "killed": false}
 	var r := Combat.throw_at(gs, db, target_id)
 	_after(gs, db)
 	return r
@@ -294,6 +363,8 @@ static func throw(gs: GameState, db: DataDb, target_id: String) -> Dictionary:
 ## put down first. Works with enemies near. Returns "" or an error text.
 static func take(gs: GameState, db: DataDb, object_id: String) -> String:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return Encounter.NOT_YET
 	var err := Combat.take(gs, db, object_id)
 	_after(gs, db)
 	return err
@@ -302,6 +373,8 @@ static func take(gs: GameState, db: DataDb, object_id: String) -> String:
 ## Puts the held item down. Returns "" or an error text.
 static func drop(gs: GameState, db: DataDb) -> String:
 	Combat.begin_command(gs)
+	if Encounter.active(gs):
+		return Encounter.NOT_YET
 	var err := Combat.drop(gs, db)
 	_after(gs, db)
 	return err
@@ -333,3 +406,4 @@ static func _after(gs: GameState, db: DataDb) -> void:
 	Winter.sync(gs, db)
 	Combat.settle_if_over(gs, db)
 	Guests.sync(gs, db)
+	Encounter.sync(gs, db)

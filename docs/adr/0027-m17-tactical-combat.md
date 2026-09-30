@@ -1,6 +1,6 @@
 # ADR 0027 — M17 tactical combat (XCOM-style)
 
-Date: 2026-09-30 · Status: approved by the user 2026-09-30
+Date: 2026-09-30 · Status: approved by the user 2026-09-30; M17.1 done
 
 ## Context
 M17 replaces the M5 fights (ADR 0010) with rounds, action points (AP) and turn order. The user's AP rules are in
@@ -39,7 +39,8 @@ Hit = `0.7 + 0.05 × (accuracy − evasion)`, clamp 0.1–0.95; damage = weapon 
 
 - **Quarter points:** AP is stored as integers (6 AP = 24 q), so costs never round and replays stay exact.
 - AP does **not** carry over to the next round. Unspent move cap is lost too.
-- A move is one king step (a diagonal costs the same), as `Pathfind` walks today.
+- A move is one side step (n, s, e, w), as the player and `Pathfind` walk today; melee reach is side by side.
+  (M17.1 fix: the first draft said king steps, but the game has no diagonal moves.)
 
 ### Encounter life
 - **Start:** a monster turns hostile on the player's map, a brawl starts (`Brawl.attack`), or a fight stage runs.
@@ -104,3 +105,23 @@ What it shows:
 - `core/stats.gd`: `agility()` reads `speed`. `data/enemies.json`: optional `agility` (default from `act_seconds`).
 - Tests: `unit_encounter.gd` (order, ties, AP, move cap, join at round start, end), `unit_save_migrations` 17→18.
   Full suite in a subagent (core + save change).
+
+## M17.1 Core encounter (2026-09-30)
+- New `core/encounter.gd` (`Encounter`). State in `gs.combat.encounter` (save v18, `_migrate_17_to_18` adds `{}`):
+  `round`, `order`, `tie` (seeded roll per fighter), `turn`, `ap_q`, `moved_q`. Monsters take their whole turn at
+  once, so only the player's AP is stored.
+- **Switch:** `rules.combat.tactical.enabled` is `false` in the real data until M17.2 has ported the old fight
+  tests. `ToyCombat.tactical(d)` turns it on in tests. With it off nothing changes.
+- The order is rebuilt at every round's start from who is on the map, so a late arrival (spawn, stage wave, an
+  idle monster that notices the player) joins the next round. No "pending" list is needed.
+- A round's end spends `round_seconds` once, gives monsters outside the fight (idle, hidden, going home) one
+  ordinary `MonsterSim._turn`, then runs `Commands._after` (NPCs, spawns, stage waves move on). In combat mode
+  `MonsterSim.run` drops monster `carry` instead of giving world-time turns.
+- Monster turn on AP: flee / give-up checks once (`MonsterSim._hostile_checks`), then at most one ranged roll
+  from afar, steps up to the cap, and melee hits while AP lasts. `chase` grows once per round without reaching
+  the target. Helpers use `MonsterSim._nearest_hostile`. A fleeing monster takes up to 4 flee steps.
+- Player: `Commands.move` (1 q, cap 4 q; walking into a seen monster = attack), `Commands.attack` (8 q),
+  `Commands.end_turn`, and `Commands.wait` ends the turn. `block`, `throw`, `take`, `drop` say
+  "Not in combat mode yet." (M17.2). Debug console: `end`.
+- Optional enemy field `agility` (>= 1, checked by `CombatDb`); none set yet, defaults come from `act_seconds`.
+- NPC fighters (brawl, react) still act in world time, once per round's 6 s (M17.2).
