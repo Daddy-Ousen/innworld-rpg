@@ -1,104 +1,133 @@
 # Innworld RPG
 
-A fan-made, non-commercial RPG set in *The Wandering Inn* by pirateaba.
-You play an unnamed Earther. The Great Ritual pulls you into the world at the start of Book 1.
+**A free, fan-made RPG set in *The Wandering Inn* by pirateaba.**
+
+You are an unnamed Earther. The Great Ritual pulls you into Innworld at the start of Book 1.
+The story of the books goes on around you, day by day. What you do with your days is up to you.
 
 > The books define how the world begins. The player decides what happens next.
 
-This repo holds no book text. The books and the world belong to pirateaba.
+[**Download v0.1.0-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha) · Windows and Linux · free
 
-## What the game is
-- **You level by living.** Every action gives XP to hidden class pools. At night the System can offer you a class. A declined class never comes back.
-- **Nights move the world.** Sleep ends the day: levels, skills, class offers, canon events, then the next morning.
-- **Canon is the default, not a rail.** If you do nothing, Book 1 happens as written. Your actions can change, delay or stop canon events, and the world reacts.
-- **Simulation first.** A headless simulation with a top-down 2D view on top. Combat is turn-based on the same map grid.
+*Non-commercial fan work. The books and the world belong to pirateaba. This repo holds no book text.*
 
-## Status
-Work in progress. Pixel art, music and sound are in. Books 1–6 are playable as canon data.
-First alpha build: **v0.1.0-alpha** (see [Download](#download)).
+---
 
-| Milestone | What | State |
-|---|---|---|
-| M0–M3 | Setup, sim core (classes, skills, levels), canon pipeline, world director | Done |
-| M4–M6 | 2D world, NPC schedules, System dialog, combat, save slots, journal, player hooks | Done |
-| M7 | Rest of Book 1 as canon data; big battles | Done |
-| M8 | Book 2 (Fae and Fare) + Celum; economy, hunger, travel, winter | Done |
-| M9 | Book 3 (Flowers of Esthelm) | Done |
-| M10 | Book 4 (Winter Solstice) | Done |
-| M11–M12 | Graphics, characters and animation; music, sound effects, ambience | Done |
-| M13 | Book 5 (The Last Light); the dungeon depths, traps | Done |
-| M14–M16 | Bag, cooking, guests, standing, UI skin, portraits; readability; maps, art and cities | Done |
-| M17 | Tactical combat (XCOM-style): AP, turn order, combat Skills, mana and spells | Done |
-| M18 | Book 6 (The General of Izril) | Done |
-| Next | Book 7 (The Rains of Liscor) | Planned |
+## What kind of game is it?
 
-Canon data today: 898 events, 261 NPC records and 103 locations over Books 1–6.
+- **You level by living.** Cook, fight, run, trade, talk. Every action feeds hidden class pools.
+  At night the System can offer you a class. Say no, and that offer never comes back.
+- **Nights move the world.** When you sleep, the day ends. You gain levels and Skills, and the canon events of the night happen.
+- **Canon is the default, not a rail.** Do nothing, and the books happen as written.
+  Step in, and you can change, delay or stop events. The world reacts to what you did.
+- **Fights are tactical.** Turn-based on the map grid, XCOM-style: action points, cover, combat Skills, mana and spells.
+- **A real place to live in.** Liscor, Celum, the Floodplains, the inn on the hill, the dungeon below.
+  NPCs keep their own schedules. You can work at the inn, cook, take guests, go hungry, and get through the winter.
+
+## What is in the alpha
+
+| | |
+|---|---|
+| Story | Books 1–6 as canon data: 898 events, 261 characters, 103 places |
+| World | 38 maps, day and night, winter snow, NPC schedules |
+| Systems | Classes, levels, Skills, spells, tactical combat, traps, cooking, money, hunger, travel |
+| Art and sound | Pixel art, character animation, music, sound effects, ambience |
+| Saves | 3 slots, plus an autosave each morning |
+
+This is an **alpha**. Expect bugs and rough edges. Saves from this build may not load in a later build.
 
 | Book | Chapters | Events |
 |---|---|---|
-| 1 The Wandering Inn | 1.00–1.63 | 151 |
+| 1 The Wandering Inn | 1.00 – 1.63 | 151 |
 | 2 Fae and Fare | Interlude – The Call to 2.48 | 207 |
-| 3 Flowers of Esthelm | 3.00–3.25 | 157 |
-| 4 Winter Solstice | 3.26–3.40 | 111 |
-| 5 The Last Light | 4.00 K–4.31 | 140 |
-| 6 The General of Izril | 4.32 G–4.49 | 132 |
+| 3 Flowers of Esthelm | 3.00 – 3.25 | 157 |
+| 4 Winter Solstice | 3.26 – 3.40 | 111 |
+| 5 The Last Light | 4.00 K – 4.31 | 140 |
+| 6 The General of Izril | 4.32 G – 4.49 | 132 |
 
-Details: [docs/ROADMAP.md](docs/ROADMAP.md) and [progress.md](progress.md).
+Next: Book 7 (The Rains of Liscor). See the [roadmap](docs/ROADMAP.md).
 
-## Download
-Ready-made builds for Windows and Linux are on the
-[Releases page](https://github.com/Daddy-Ousen/innworld-rpg/releases). Unzip and run `InnworldRPG.exe`
-(Windows) or `InnworldRPG.x86_64` (Linux). You need a keyboard. Each zip has a `README.txt` with the keys.
+## Play it
 
-Make the release zips yourself (Windows, needs the Godot 4.7.2 export templates):
-```powershell
-$env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
-powershell -ExecutionPolicy Bypass -File tools/release.ps1   # zips land in export/
-```
-Details: [ADR 0029](docs/adr/0029-release-builds.md).
+1. Go to the [Releases page](https://github.com/Daddy-Ousen/innworld-rpg/releases).
+2. Download the zip for your system.
+3. Unzip it and start the game:
+   - **Windows:** double-click `InnworldRPG.exe`.
+     Windows SmartScreen can warn you, because the file has no signature. Click **More info**, then **Run anyway**.
+   - **Linux:** run `chmod +x InnworldRPG.x86_64`, then `./InnworldRPG.x86_64`.
 
-## Play from source
-Needs [Godot 4.7](https://godotengine.org/) on your PATH (or use the full path to the Godot exe).
+You need a keyboard. There are no touch controls yet. You can start outside the east gate of Liscor or in Celum.
+
+### Keys
+
+| Key | Action |
+|---|---|
+| WASD / arrows | Walk (walk into a foe to attack) |
+| E | Use or take what is next to you (talk, work, trade) |
+| Space | Wait (in a fight: end your turn) |
+| Mouse (in a fight) | Click a blue tile to walk, a foe to attack |
+| 1–9 (in a fight) | Use a Skill or spell, then click a target (Esc: cancel) |
+| B / T / X | Block / throw / drop your held item |
+| F / I | Eat / bag |
+| Z | Sleep in a bed (the night moves the world) |
+| C / J / L | Character sheet / journal / message history |
+| H | Help (all keys) |
+| Esc | Menu (save, load, options, quit) |
+
+### Bugs and ideas
+
+[Open an issue](https://github.com/Daddy-Ousen/innworld-rpg/issues). Give the version from the title screen.
+
+---
+
+## For developers
+
+### Run from source
+
+Needs [Godot 4.7](https://godotengine.org/) on your PATH (or the full path to the Godot exe).
 
 ```powershell
 godot --headless --path game --import   # once, after a fresh clone
 godot --path game
 ```
 
-You can start outside the east gate of Liscor or in Celum.
+### Run the tests
 
-| Key | Action |
-|---|---|
-| WASD / arrows | Walk (walk into a foe to attack) |
-| Mouse (in a fight) | Click a blue tile to walk, a foe to attack |
-| 1–9 (in a fight) | Use a Skill or spell, then click a target (Esc: cancel) |
-| Space | Wait (in a fight: end your turn) |
-| E | Use or take what is next to you (talk, work, trade) |
-| B / T / X | Block / throw / drop your held item |
-| F / I | Eat / bag |
-| Z | Sleep (in a bed) |
-| C / J / L | Character sheet / journal / message history |
-| H | Help |
-| Esc | Menu (save, load, quit) |
-| `` ` `` (backquote) | Debug console |
+From the repo root, in PowerShell or Git Bash:
 
-The game saves itself each morning. There are 3 save slots.
-
-## Run the tests
-PowerShell or Git Bash, from the repo root:
 ```powershell
-bash tools/run_tests.sh unit_rng unit_spells      # some scripts (one Godot run each)
-bash tools/run_tests.sh --all                     # the full suite (slow)
-python -m unittest discover -s tools/tests
-python tools/validate_data.py game/data/canon/book5
+bash tools/run_tests.sh unit_rng unit_spells      # some GUT scripts (one Godot run each)
+bash tools/run_tests.sh --all                     # the full GUT suite (slow)
+python -m unittest discover -s tools/tests        # Python tool tests
+python tools/validate_data.py game/data/canon --all
 ```
-GUT: 128 scripts, about 1,340 tests. Python: 95 tests.
 
-## Work on it with Claude Code in the cloud
-The repo is set up for Claude Code cloud sessions (claude.ai/code or the Claude app).
-A session start hook installs Godot and imports the project. See [docs/CLOUD.md](docs/CLOUD.md).
+GUT: 147 scripts, about 1,400 tests. Python: 102 tests.
 
-## Layout
+### Build the release zips
+
+Windows, with the Godot 4.7.2 export templates installed:
+
+```powershell
+$env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
+powershell -ExecutionPolicy Bypass -File tools/release.ps1   # zips land in export/
+```
+
+Details: [ADR 0029](docs/adr/0029-release-builds.md).
+
+### How it is built
+
+- **Headless core.** All game rules live in `game/core/` with no nodes and no scenes. The view only reads state and sends commands.
+- **One game state.** Everything is in one `GameState` object. It saves to versioned JSON with migrations.
+- **Deterministic.** All randomness goes through one seeded RNG. The same seed and the same commands give the same game.
+- **Content is data.** Classes, Skills, spells, enemies, maps, NPCs and canon events are JSON in `game/data/`.
+  A new book adds data, not engine code.
+- **Canon events are nodes,** not scripts. Each has roles, preconditions, fallbacks and effects, so the player can change them.
+
+Read more: [design](docs/DESIGN.md) · [roadmap](docs/ROADMAP.md) · [decisions (ADRs)](docs/adr/) · [progress](progress.md)
+
+### Layout
+
 ```
 docs/          design, roadmap, decisions (ADRs in docs/adr/), cloud guide
 game/          Godot project
@@ -107,15 +136,25 @@ game/          Godot project
     canon/     Books 1–6: events, NPCs and locations (JSON)
   world/ ui/   scenes and presentation
   tests/       GUT tests
-tools/         Python: epub extraction, art builders, data validator (not shipped)
+tools/         Python: epub extraction, art and sound builders, data validator (not shipped)
+  release/     release smoke test and player readme
   cloud/       cloud session setup (Godot install, import)
 ```
 
+### Work on it with Claude Code
+
+The repo is set up for Claude Code, local or in the cloud (claude.ai/code or the Claude app).
+A session start hook installs Godot and imports the project. Rules for AI agents are in [CLAUDE.md](CLAUDE.md).
+The cloud guide is [docs/CLOUD.md](docs/CLOUD.md).
+
 ## Canon and copyright
+
 - The canon source is the ebooks (Book 1 is the rewrite), not the web serial.
 - Canon events are short summaries in our own words, with chapter references. No book text is in git.
 - Guesses are marked `"confidence": "guess"` in the data.
+- The game is free and non-commercial. *The Wandering Inn* and its world belong to pirateaba.
 
-## Stack
-Godot 4.7, GDScript, GUT 9.7. Python 3.12+ for tools. Credits: [CREDITS.md](CREDITS.md).
-Design: [docs/DESIGN.md](docs/DESIGN.md) · Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md) · Rules for AI agents: [CLAUDE.md](CLAUDE.md)
+## Credits
+
+Built with Godot 4.7, GDScript and GUT 9.7. Tools in Python 3.12+.
+Art comes from the Liberated Pixel Cup (LPC) packs; music and sounds come from free packs. Authors and licenses: [CREDITS.md](CREDITS.md).

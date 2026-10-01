@@ -86,6 +86,9 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] Merged ([PR #97](https://github.com/Daddy-Ousen/innworld-rpg/pull/97), merge commit 548f0f5). Tag `v0.1.0-alpha` pushed.
     Pre-release published 2026-10-01: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha (two zips).
   - [ ] Android: skipped (user, 2026-10-01). Needs touch controls first (roadmap "Releases").
+- [x] README rewrite for players first, developers second (branch `docs/readme-rewrite`, 2026-10-01, local). Counts checked:
+  898 events, 261 NPCs, 103 places, 38 maps, 147 GUT scripts (~1,419 tests), 102 Python tests. PR waits for the user.
+- [ ] Web (browser) build: possible, not started. Waits for the user's choice (see `handoff.md` "Web build").
 
 ## Cloud setup
 - Done; detail in the archive. Book text in a cloud session: attach `Daddy-Ousen/innworld-canon-raw` (add_repo), clone it

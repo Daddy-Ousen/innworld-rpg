@@ -15,6 +15,22 @@
 - Published: PR #97 merged (548f0f5), tag `v0.1.0-alpha`, GitHub pre-release with both zips
   (https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha).
 
+- README rewritten (branch `docs/readme-rewrite`): players first (pitch, what is in the alpha, download, keys),
+  then developers (source, tests, release, architecture, layout). No screenshots yet (none in the repo).
+
+## Web build (asked 2026-10-01, not started)
+- Possible. Findings: no shaders, no threads, no `OS.execute`; saves use `user://` (IndexedDB in a browser);
+  `DirAccess` on `res://` already works from a pck (desktop smoke test). Godot 4.7 web export uses the Compatibility
+  renderer by itself and has a no-threads template, so GitHub Pages or itch.io can host it (no special headers).
+- Missing: the Web export templates (`web_nothreads_release.zip`) are not installed; only Windows + Linux files are.
+  They come from the 4.7.2 export templates (.tpz, about 1 GB download): ask the user before downloading.
+- Work: a "Web" preset in `game/export_presets.cfg`, a web step in `tools/release.ps1`, a GitHub Pages workflow or an
+  itch.io upload, check fonts/audio/startup time in Chrome and Firefox, a "Play in browser" link in the README. ADR needed.
+- Own subdomain (user asked 2026-10-01): yes, the web build is static files. Needs HTTPS, `.wasm` served as
+  `application/wasm`, gzip/brotli on. Watch per-file limits: the `.pck` may be 50+ MB (GitHub Pages 100 MB per
+  file is fine; Cloudflare Pages caps files at 25 MiB). Suggested: GitHub Pages + a CNAME like `play.<domain>`.
+- Risks: download size (~60–90 MB first load), the browser grabs Esc (fullscreen), save data is lost if the user clears site data.
+
 ## Next
 1. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
    commit, `gh release create v<version> --prerelease --verify-tag` with the two zips from `export/`.
