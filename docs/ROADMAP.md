@@ -303,8 +303,10 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
   book, chapter order and place in the file; Books 1 – 5 order unchanged, `unit_event_order`); the Book 3 and Book 5
   Laken events moved to his journal day + 45 (days 46 – 91 and 100 – 115); `sim_canon_book3` and `sim_canon_book5`
   fixed. No save change (ADR 0028 "M18.0")
-- [ ] M18.1 World: Wirclaw's village, the crypt ossuary, the inn basement; the Eater Goat (`leap`); looks for the
-  Redfang five, Wirclaw, Falene, Dawil, Purple Smile; NPC records with no events yet
+- [x] M18.1 World (2026-10-01, cloud): Wirclaw's village, the inn basement, the Ruins hall and the ossuary (the text
+  puts the ossuary in the Ruins of Liscor, so it is two maps there, with a one-way chute and a corridor to
+  `liscor_crypt`); the Eater Goat (`leap`, drawn art); looks for the Redfang five, Wirclaw, Falene, Dawil,
+  `race_dwarf`, Purple Smile; 38 Book 6 NPC records with no events yet. No save change (ADR 0028 "M18.1")
 - [ ] M18.2 Canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir (off-map)
 - [ ] M18.3 Canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
   move into the inn
