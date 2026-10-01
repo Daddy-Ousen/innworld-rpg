@@ -332,7 +332,8 @@ each batch has a hook or stage; the GUT tests that touch it, the Python tool tes
 ## Releases
 - [x] v0.1.0-alpha (ADR 0029, published 2026-10-01): export presets (Windows, Linux), `tools/release.ps1` with a smoke test, version on the title
   screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
-- [ ] Web build (ADR 0031): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow, itch.io upload by the user
+- [ ] v0.1.1-alpha with the web build (ADR 0031): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow,
+  itch.io upload by the user
 - [ ] Touch controls (on-screen pad, menu buttons), then an Android build
 
 ## Later

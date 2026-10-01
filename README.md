@@ -8,7 +8,7 @@ The story of the books goes on around you, day by day. What you do with your day
 > The books define how the world begins. The player decides what happens next.
 
 [**Play in your browser**](https://daddy-ousen.github.io/innworld-rpg/) ·
-[**Download v0.1.0-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha) (Windows, Linux) · free
+[**Download v0.1.1-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.1-alpha) (Windows, Linux) · free
 
 *Non-commercial fan work. The books and the world belong to pirateaba. This repo holds no book text.*
 
