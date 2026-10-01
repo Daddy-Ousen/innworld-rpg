@@ -34,9 +34,16 @@ func _ready() -> void:
 	%Quit.pressed.connect(func() -> void: get_tree().quit())
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
+	%Version.text = version_text()
 	Audio.music(Audio.db.state_track("title"))
 	Audio.ambience("")
 	refresh()
+
+
+## The build version (project setting application/config/version), for bug reports.
+static func version_text() -> String:
+	var v := String(ProjectSettings.get_setting("application/config/version", ""))
+	return "" if v == "" else "v" + v
 
 
 ## Continue and Load are off while there is no save.
