@@ -1,23 +1,24 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.2 canon (plan `docs/plans/m18.2.md`, notes in ADR 0028 "M18.2"). Branch `claude/sleepy-feynman-txet0j` from
-  main 440a0dd (PR #90 merged). User answers: scene stage + hook for the march, no `xp_window`, Rags's raid as news only.
-  - `book6/chapters/`: `4.32G` (order 1), `1.02C` – `1.05C` (orders 2 – 5); 17 events. `.gitkeep` deleted.
-  - March: scene stage `inn_hill` 22 – 24 h with Erin and Bird; hook = talk to them (`keep_watch` leaves no
-    location context, so it cannot be a hook).
-  - Tom: off-map T1 events in `paranfer` (new location). Xersia and the Fool die. `tom.lost_the_hero_class` is set on
-    day 119 and cleared on day 121.
-  - Tests: new `sim_canon_book6` (LAST_DAY grows each batch) and `sim_book6_goblin_march`. All pass. Full suite not run.
+- M18.3 canon (plan `docs/plans/m18.3.md`, notes in ADR 0028 "M18.3"). Branch `claude/sleepy-feynman-txet0j` from main f5cc08b
+  (PR #91 merged). User answers: night wave fight stage at Wirclaw's village, both hooks (fight, talk to the Redfang), no `xp_window`.
+  - `book6/chapters/`: `4.33` (order 6, 9 events), `4.34` (order 7, 5 events). Day 115; the goats' ambush on the army is day 114.
+  - Fight stage `b6.eater_goats_attack_wirclaws_village` (12 goats in 3 groups; Redfang five, Erin, Wirclaw, Bird as allies).
+    Bugear is NOT placed: the event kills him. Scene stage `b6.erin_bows_to_the_redfang_and_feeds_them` in `inn_interior`.
+  - `npc_behaviour.json`: Wirclaw and the five Redfang (basement from flag `redfang.lodge_in_the_inn_basement`, day 116 on).
+  - Bugear tag spear -> sword (`book3/npcs.json`).
+  - Tests: new `sim_book6_eater_goats` (7); `sim_canon_book6` grew. All pass. Full suite not run.
 
 ## Next
-1. The user merges the M18.2 PR.
-2. M18.3 canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
-   move into the inn. Ask the stage, hook and `xp_window` choices first. Chapter files get `"order"` 6 and 7. Raise
-   `LAST_DAY` in `sim_canon_book6`. 4.33 clears `lyonette.sheltering_in_celum`, `mrsha.sheltering_in_celum` and
-   `wandering_inn.boarded_up_for_the_goblin_lord`. Needs a stage at `wirclaw_village` and the Redfang five's basement schedules.
-3. Flags for later batches (ADR 0028 "M18.1"): Bugear's weapon (M18.3), Greydath name (M18.5), Purple Smile
-   [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7). M18.4 sets `liscor_ruins.hidden_chute_found`.
+1. The user merges the M18.3 PR.
+2. M18.4 canon 4.35 E – 4.38 B (days 116 – 127): Laken (his Day 72 – 82 = days 117 – 127), Olesm (Raskghar, Niers' ring, the crypt
+   chute, the rat contract), the Esthelm night wave stage, Zel leaves through the door. Ask stage, hook and `xp_window` choices
+   first. Chapter files get `"order"` 8 on. Raise `LAST_DAY` in `sim_canon_book6` (now 121; M18.4 goes to day 127). M18.4 sets
+   `liscor_ruins.hidden_chute_found`.
+3. Flags for later batches (ADR 0028 "M18.1"): Greydath name (M18.5), Purple Smile [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7).
+   Open from M18.3: Halfseekers (jelaqua, moore, seborn), Zevara, Relc, Lyonette have no combat behaviour entries for stages;
+   Jelaqua's new body (`jelaqua.needs_a_new_body`) is for a later batch.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").

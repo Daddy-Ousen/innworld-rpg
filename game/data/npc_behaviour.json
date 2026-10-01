@@ -586,6 +586,75 @@
 					"target": {"area": "esthelm_ruins", "pos": [2, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "esthelm"}}
 			]
+		},
+		"badarrow": {
+			"confidence": "guess",
+			"notes": "M18.3. A Redfang Hobgoblin archer (4.33 - 4.34); the combat block is a design number for a Silver-rank archer. Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"combat": {"agility": 5, "hp": 34, "accuracy": 9, "evasion": 5, "armor": 1, "damage": [4, 8]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [6, 2]}},
+				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [7, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"headscratcher": {
+			"confidence": "guess",
+			"notes": "M18.3. A Redfang Hobgoblin swordsman (4.33 - 4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"combat": {"agility": 4, "hp": 44, "accuracy": 8, "evasion": 4, "armor": 3, "damage": [5, 9]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [8, 2]}},
+				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [9, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"numbtongue": {
+			"confidence": "guess",
+			"notes": "M18.3. A Redfang Hobgoblin who reads (4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"combat": {"agility": 4, "hp": 40, "accuracy": 8, "evasion": 4, "armor": 3, "damage": [4, 8]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [10, 2]}},
+				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [11, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"rabbiteater": {
+			"confidence": "guess",
+			"notes": "M18.3. A Redfang Hobgoblin (4.33 - 4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"combat": {"agility": 4, "hp": 42, "accuracy": 8, "evasion": 4, "armor": 3, "damage": [5, 9]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [6, 6]}},
+				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [7, 5]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"shorthilt": {
+			"confidence": "guess",
+			"notes": "M18.3. A Redfang Hobgoblin (4.33 - 4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"combat": {"agility": 4, "hp": 40, "accuracy": 8, "evasion": 4, "armor": 2, "damage": [4, 8]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [8, 6]}},
+				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
+					"target": {"area": "inn_basement", "pos": [9, 5]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "wilds"}}
+			]
+		},
+		"wirclaw": {
+			"confidence": "guess",
+			"notes": "M18.3. The Gnoll [Farmer] of Wirclaw's village (4.33). He works by the milk pails by day and sleeps in a house; the combat block is a design number for a farmer with a hunting bow. Positions and hours are guesses.",
+			"combat": {"agility": 3, "hp": 32, "accuracy": 7, "evasion": 3, "armor": 1, "damage": [3, 7]},
+			"goals": [
+				{"goal": "sleep", "base": 3, "hours": [[21, 6, 1]], "target": {"area": "wirclaw_village", "pos": [9, 8]}},
+				{"goal": "work", "base": 2, "hours": [[6, 21, 1]], "target": {"area": "wirclaw_village", "pos": [17, 10]}}
+			]
 		}
 	}
 }

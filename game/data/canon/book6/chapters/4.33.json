@@ -1,0 +1,493 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.33",
+	"order": 6,
+	"events": {
+		"b6.eater_goats_ambush_the_goblin_army": {
+			"tier": 1,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"six": {
+					"prefer": [
+						"rabbiteater",
+						"bugear",
+						"numbtongue",
+						"shorthilt",
+						"badarrow",
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"eater_goats.ambushed_the_goblin_army",
+					"redfang.survivors_hid_from_the_goats"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "The same night as the march (4.32 G). Told by the Redfang the next day; the night is a guess."
+			},
+			"summary": "That night a herd of more than a hundred Eater Goats falls on the Goblin Lord's army. Over thirty escape south. Six Redfang Goblins, hiding behind rocks, are left alone and unseen."
+		},
+		"b6.redfang_survivors_follow_the_goats_south": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"six": {
+					"prefer": [
+						"rabbiteater",
+						"bugear",
+						"numbtongue",
+						"shorthilt",
+						"badarrow",
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"eater_goats.ambushed_the_goblin_army"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.survivors_became_hobgoblins",
+					"redfang.survivors_lost_without_a_chieftain",
+					"redfang.survivors_follow_the_eater_goats"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Daytime after the march. The Hob growth started about a week earlier (their own words)."
+			},
+			"summary": "In the morning the six Redfang walk south behind the goats, their faces painted red so the goats do not bite. All six have grown into Hobgoblins since Grunter died. They are hungry and lost, and the only road they have is to Liscor."
+		},
+		"b6.lyonette_wakes_in_the_quiet_inn": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"waitress": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.back_at_the_inn",
+					"mrsha.back_at_the_inn",
+					"mrsha.silent_after_brunkr",
+					"drassi.came_to_work_alone"
+				],
+				"clear_flags": [
+					"lyonette.sheltering_in_celum",
+					"mrsha.sheltering_in_celum",
+					"wandering_inn.boarded_up_for_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Clears the Celum shelter flags and the boarded-up state (set in 4.31)."
+			},
+			"summary": "The morning after the Goblin Lord passed, Lyonette wakes in a quiet inn. Brunkr is dead. Mrsha lies by the patched wall and will not speak until Lyonette coaxes her to eat. Drassi comes to work; Ishkr stays home in mourning."
+		},
+		"b6.erin_tests_the_inn_window": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.knows_the_inn_walls_are_strong",
+					"erin.feels_too_weak"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "[Reinforced Structure] was set in 4.31 (erin.inn_reinforced_structure)."
+			},
+			"summary": "Erin hits the window with a hammer and a [Minotaur Punch] and only cracks it. [Reinforced Structure] saved the inn from the arrows, but a level-twenty fighter could break in. She wants more power and protection."
+		},
+		"b6.horns_take_a_shield_spider_job": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.took_a_shield_spider_job"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "The Horns of Hammerad leave the inn early with quiet goodbyes for a Bronze-rank job: a Shield Spider nest in Liscor's sewers."
+		},
+		"b6.halfseekers_need_a_new_body": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mariner": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"jelaqua.needs_a_new_body",
+					"erin.offered_to_ask_klbkch_for_a_body"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "Jelaqua's stitched, rotting scalp and torn body will not last past a month or two. Drakes and Gnolls dislike body use, so she will ask in Celum. Bird says Antinium bodies are strong. She doubts it. Erin offers to ask Klbkch."
+		},
+		"b6.zel_pays_for_the_inn_wall": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.paid_for_the_inn_wall",
+					"walled_cities.plan_another_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "Zel leaves for the Liscor council, which speaks to other cities by [Message] and plans a new army with the Walled Cities. He leaves gold for the broken wall and furniture, and Erin cannot refuse it."
+		},
+		"b6.erin_buys_milk_from_wirclaw": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wirclaw_village",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"farmer": {
+					"prefer": [
+						"wirclaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.knows_wirclaw",
+					"wirclaw.will_buy_inn_honey"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses."
+			},
+			"summary": "The inn is out of milk. Erin walks to Wirclaw's village and buys milk from the Gnoll [Farmer], and offers to sell him honey."
+		},
+		"b6.bird_loses_an_archery_duel_to_badarrow": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hunter": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall": {
+					"prefer": [
+						"headscratcher",
+						"bugear",
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bow": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.survivors_follow_the_eater_goats"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.lost_the_duel_with_badarrow",
+					"bird.wounded_by_badarrow",
+					"badarrow.won_the_archery_duel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Badarrow's [Farshot Mastery] came from sniping the Shaman at Esthelm; no skill number is given."
+			},
+			"summary": "From the tower Bird sees Hobgoblins and goats, and decides the sign does not cover Hobgoblins. His shot starts a duel with Badarrow, whose friends block arrows with shields. Bird wounds two, then is hit and falls onto the roof. Lyonette heals him."
+		}
+	},
+	"system": []
+}

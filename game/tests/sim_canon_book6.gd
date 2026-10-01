@@ -6,7 +6,7 @@ extends GutTest
 
 ## First day with Book 6 canon (4.32 G: the Goblin Lord's army passes Liscor, a guess).
 const FIRST_DAY := 114
-## Last day with Book 6 canon so far (M18.2: 1.05 C, the Fool's death in Paranfer).
+## Last day with Book 6 canon so far (M18.2: 1.05 C, the Fool's death in Paranfer; M18.3 is on day 115).
 const LAST_DAY := 121
 
 var _db: DataDb
@@ -78,6 +78,14 @@ func test_book6_runs_as_canon() -> void:
 			"blighted_king.stabbed_but_lives", "tom.promised_to_protect_erille", "tom.regained_the_hero_class"]:
 		assert_true(gs.flags.has(f), f)
 	assert_false(gs.flags.has("tom.lost_the_hero_class"), "Tom has his [Hero] class again")
+	# M18.3: the goats, Bugear's death, the Redfang five in the inn.
+	for f: String in ["eater_goats.ambushed_the_goblin_army", "redfang.survivors_became_hobgoblins", "bird.lost_the_duel_with_badarrow",
+			"wirclaw_village.eater_goats_killed", "redfang.lost_bugear", "erin.bowed_to_the_goblins", "redfang.lodge_in_the_inn_basement",
+			"zevara.stood_down_on_zels_order", "zel.moved_out_of_the_inn", "lyonette.back_at_the_inn"]:
+		assert_true(gs.flags.has(f), f)
+	assert_false(gs.world.is_alive(_db.canon, "bugear"), "killed by the Eater Goats (4.34)")
+	for npc: String in ["headscratcher", "badarrow", "shorthilt", "rabbiteater", "numbtongue", "wirclaw", "bird"]:
+		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 	# No player was near the inn, so no hook ran.
 	assert_false(gs.flags.has("wandering_inn.earther_watched_the_goblin_army_pass"))
 	assert_false(gs.world.is_alive(_db.canon, "xersia"), "thrown into the sky (1.04 C)")
@@ -102,11 +110,14 @@ func test_chapter_order_runs_the_book_in_order() -> void:
 	var seq := gs.world.history.filter(func(h: Dictionary) -> bool: return _b6(h["event"])) \
 			.map(func(h: Dictionary) -> String: return h["event"])
 	var want := ["b6.rags_chooses_to_hunt_the_undercrawlers", "b6.rags_finds_the_undercrawlers_hanged",
-			"b6.rags_sacks_a_human_town", "b6.pyrite_throws_the_goblins_into_the_lake"]
+			"b6.rags_sacks_a_human_town", "b6.pyrite_throws_the_goblins_into_the_lake", "b6.lyonette_wakes_in_the_quiet_inn"]
 	var at := -1
 	for id: String in want:
 		var i := seq.find(id)
 		assert_gt(i, at, id)
 		at = i
+	assert_lt(seq.find("b6.eater_goats_attack_wirclaws_village"), seq.find("b6.erin_bows_to_the_redfang_and_feeds_them"))
+	assert_lt(seq.find("b6.halfseekers_brawl_with_the_redfang"), seq.find("b6.zevara_backs_down_on_zels_order"))
+	assert_lt(seq.find("b6.zevara_backs_down_on_zels_order"), seq.find("b6.redfang_sleep_in_the_inn_basement"))
 	assert_lt(seq.find("b6.the_blighted_king_presents_the_earthers"), seq.find("b6.demon_assassins_hit_the_palace"))
 	assert_lt(seq.find("b6.demons_teleport_into_the_palace"), seq.find("b6.the_fool_dies_in_toms_arms"))
