@@ -330,7 +330,7 @@ Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in clo
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
 ## Releases
-- [ ] v0.1.0-alpha (ADR 0029): export presets (Windows, Linux), `tools/release.ps1` with a smoke test, version on the title
+- [x] v0.1.0-alpha (ADR 0029, published 2026-10-01): export presets (Windows, Linux), `tools/release.ps1` with a smoke test, version on the title
   screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
 - [ ] Touch controls (on-screen pad, menu buttons), then an Android build
 

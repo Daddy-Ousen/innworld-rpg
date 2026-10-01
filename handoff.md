@@ -12,16 +12,18 @@
   - Tests: `unit_play_loop` (16 pass). Full suite not run.
   - The M19 plan ADR is now 0030 (0029 is the release ADR).
 
+- Published: PR #97 merged (548f0f5), tag `v0.1.0-alpha`, GitHub pre-release with both zips
+  (https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha).
+
 ## Next
-1. The user merges the release PR. Then: `git tag v0.1.0-alpha <merge commit>`, push the tag, and
-   `gh release create v0.1.0-alpha --prerelease` with the two zips (rebuild with `tools/release.ps1` if `export/` is gone).
+1. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
+   commit, `gh release create v<version> --prerelease --verify-tag` with the two zips from `export/`.
 2. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
 3. Later: touch controls, then an Android build (roadmap "Releases").
 4. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
    the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
-- Merge the release PR; approve the release notes.
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps (`godot --path game`).
 
 ## Gotchas (release)
