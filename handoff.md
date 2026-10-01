@@ -7,14 +7,20 @@
   the ADR holds what matters (day map, deaths, stated levels, conflicts with our data).
 - User answers: (1) chapter order number `order` (engine step M18.0, a schema change the user approved); (2) new maps: Wirclaw's village,
   crypt ossuary, inn basement (no sewers); (3) the Goblin Lord's attack on Esthelm (about day 117, night) is a wave stage, details `guess`;
-  (4) Laken's journal Day 72 – 82 squeezed into days 118 – 119, order kept.
+  (4) first "squeeze Laken's Day 72 – 82 into days 118 – 119", then CHANGED: game day = Laken's journal day + 45 in every book.
+  The user asked about tying his first snow (his Day 20) to Liscor's winter (day 42 = +22): that breaks Book 4 (he meets Ryoka in
+  Invrisil on day 93, after his Day 46 and before his Day 55) and Book 6/7 (his Day 82 = the day Zel leaves Liscor; his Day 85 =
+  the night Zel dies). +45 fits both. Book 6 Liscor days moved about 8 days later (Zel leaves on 127, dies on 130).
+  Detail and the anchor table: ADR 0028 "Laken's calendar".
 - No code changed. No tests run (docs only).
 
 ## Next
 1. The user merges the M18.P PR (that approves ADR 0028).
-2. M18.0 event order (engine): `CanonDb` reads the optional chapter key `order`; same-day order = depends_on, earliest, book number, then
-   chapter order + place in file (else id). Tests: new `unit_event_order`, `unit_canon_db`, `sim_canon_book5` (order unchanged), Python
-   validator tests. Then M18.1 world (maps, Eater Goat, looks), M18.2 – M18.7 canon batches.
+2. M18.0 canon timing (engine + data, user choice): (a) `CanonDb` reads the optional chapter key `order`; same-day order = depends_on,
+   earliest, book number, then chapter order + place in file (else id). (b) Move the merged Laken events to journal day + 45: Book 3
+   (Day 1 – 46 → days 46 – 91; now in the Book 2 and Book 4 sim ranges) and Book 5 (Day 55 – 70 → days 100 – 115); Book 4 (93 – 94) stays.
+   Tests: new `unit_event_order`, `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`, `sim_book4_christmas`, `sim_book4_homecoming`,
+   `sim_book4_relief_home`, Python validator tests. Then M18.1 world (maps, Eater Goat, looks), M18.2 – M18.7 canon batches.
 3. Each canon batch asks its stage, hook and `xp_window` choices first, and needs the Book 6 text (attach `innworld-canon-raw`, see Gotchas).
 
 ## Waiting on the user

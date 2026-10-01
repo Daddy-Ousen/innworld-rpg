@@ -28,8 +28,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] M18 — Book 6 (The General of Izril). Plan: ADR 0028, steps M18.0 – M18.7 in `docs/ROADMAP.md`. Text in the private repo.
   - [x] M18.P plan (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): six reading agents (summaries only), ADR 0028, roadmap steps.
     User answers: chapter `order` number (M18.0 engine step), maps Wirclaw's village + crypt ossuary + inn basement, Esthelm attack as a
-    night wave stage, Laken's Day 72 – 82 squeezed into days 118 – 119. PR waits for the user to merge (merging = plan approved).
-  - [ ] M18.0 event order (next).
+    night wave stage. Laken's calendar (changed the same day): game day = his journal day + 45 in every book, no squeeze; tying his
+    first snow to Liscor's winter (day 42) breaks Book 4 and Zel's death (ADR 0028 "Laken's calendar"). Book 6 Liscor days move to
+    115 – 130 (Zel dies on 130). PR waits for the user to merge (merging = plan approved).
+  - [ ] M18.0 canon timing (next): chapter `order` key + move the Book 3 and Book 5 Laken events to day + 45.
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
 
 ## Cloud setup
