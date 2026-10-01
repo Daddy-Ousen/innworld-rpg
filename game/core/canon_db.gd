@@ -9,12 +9,18 @@ const SCHEMA_VERSION := 1
 ## Hook results (besides "mutate:<id>").
 const HOOK_CANCEL := "cancel"
 const HOOK_CHANGE := "change"
+const NO_RANK := [0, 0, 0]
 
 var npcs: Dictionary = {}
 var locations: Dictionary = {}
 var events: Dictionary = {}
-## Event ids in run order: dependencies first, then window.earliest, then id.
+## Event ids in run order: dependencies first, then window.earliest, then
+## `rank`, then id (M18.0).
 var order: Array[String] = []
+## Event id → [book, chapter order, place in its chapter file], from the loader
+## (M18.0). A chapter file with no "order" gives [book, 0, 0], so the id breaks
+## the tie. Missing (toy dbs) → NO_RANK.
+var rank: Dictionary = {}
 ## Event id → ids of the events that list it in depends_on (in run order).
 var dependents: Dictionary = {}
 ## Events that are a mutate target (of on_fail or a hook). They only run in
@@ -35,18 +41,19 @@ static func load_root(root: String = "res://data/canon") -> CanonDb:
 	var n := {}
 	var l := {}
 	var e := {}
+	var r := {}
 	if DirAccess.dir_exists_absolute(root):
 		var books := Array(DirAccess.get_directories_at(root))
 		books.sort()
 		for book: String in books:
-			_load_book(root.path_join(book), n, l, e, load_errors)
-	var db := from_dicts(n, l, e)
+			_load_book(root.path_join(book), n, l, e, r, load_errors)
+	var db := from_dicts(n, l, e, r)
 	db.errors = load_errors + db.errors
 	return db
 
 
 static func _load_book(dir: String, n: Dictionary, l: Dictionary, e: Dictionary,
-		errs: Array[String]) -> void:
+		r: Dictionary, errs: Array[String]) -> void:
 	_merge(n, _read_json(dir.path_join("npcs.json"), errs).get("npcs", {}), "npc", dir, errs)
 	_merge(l, _read_json(dir.path_join("locations.json"), errs).get("locations", {}),
 			"location", dir, errs)
@@ -55,7 +62,22 @@ static func _load_book(dir: String, n: Dictionary, l: Dictionary, e: Dictionary,
 	files.sort()
 	for f: String in files:
 		var path := dir.path_join("chapters").path_join(f)
-		_merge(e, _read_json(path, errs).get("events", {}), "event", path, errs)
+		var doc := _read_json(path, errs)
+		var chapter_events: Dictionary = doc.get("events", {})
+		_merge(e, chapter_events, "event", path, errs)
+		var book := _whole(doc.get("book", 0))
+		var chapter := _whole(doc.get("order", 0))
+		if doc.has("order") and chapter < 1:
+			errs.append("%s: order must be a whole number >= 1." % path)
+		var place := 0
+		for id: String in chapter_events:
+			place += 1
+			r[id] = [book, chapter, place if chapter > 0 else 0]
+
+
+## A JSON number as an int; anything else → 0.
+static func _whole(v: Variant) -> int:
+	return int(v) if v is int or v is float else 0
 
 
 static func _merge(into: Dictionary, from: Dictionary, kind: String, where: String,
@@ -80,12 +102,15 @@ static func _read_json(path: String, errs: Array[String]) -> Dictionary:
 	return d
 
 
-## Builds a canon db from dictionaries (toy tests) and checks it.
-static func from_dicts(npc_map: Dictionary, location_map: Dictionary, event_map: Dictionary) -> CanonDb:
+## Builds a canon db from dictionaries (toy tests) and checks it. `rank_map`:
+## event id → [book, chapter order, place] (see `rank`); toy tests may leave it out.
+static func from_dicts(npc_map: Dictionary, location_map: Dictionary, event_map: Dictionary,
+		rank_map: Dictionary = {}) -> CanonDb:
 	var db := CanonDb.new()
 	db.npcs = npc_map
 	db.locations = location_map
 	db.events = event_map
+	db.rank = rank_map
 	for id: String in event_map:
 		db._validate_event(id, event_map[id])
 	db._build_order()
@@ -283,7 +308,8 @@ func _check_npcs(where: String, ids: Array) -> void:
 
 
 ## Topological order (Kahn). Among ready events: lowest window.earliest,
-## then id. A cycle is an error; its events go last, sorted by id.
+## then `rank` (book, chapter order, place in the file), then id. A cycle is
+## an error; its events go last, sorted by id.
 func _build_order() -> void:
 	var waiting := {}
 	for id: String in events:
@@ -324,4 +350,8 @@ func _build_order() -> void:
 func _before(a: String, b: String) -> bool:
 	var ea := int(events[a]["window"]["earliest"])
 	var eb := int(events[b]["window"]["earliest"])
-	return ea < eb if ea != eb else a < b
+	if ea != eb:
+		return ea < eb
+	var ra: Array = rank.get(a, NO_RANK)
+	var rb: Array = rank.get(b, NO_RANK)
+	return ra < rb if ra != rb else a < b

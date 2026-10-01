@@ -11,6 +11,10 @@ Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
     <dir>/npcs.json                {"schema_version": 1, "npcs": {id: npc}}
     <dir>/locations.json           {"schema_version": 1, "locations": {id: location}}
     <dir>/chapters/<chapter>.json  {"schema_version": 1, "book": N, "chapter": "1.00", "events": {id: event}, "system": [...]}
+                                   optional "order": the chapter's place in the book (whole number >= 1, unique in
+                                   the book; M18.0, ADR 0028). Same-day events then follow the chapter order and
+                                   their place in the file, not the id. A book that mixes files with and without
+                                   it gets a warning.
 
 --raw points at the extractor output (index.json + chapter text). It is optional.
 When present, chapter ids must exist in index.json, and summaries must not copy
@@ -627,6 +631,8 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     # --- chapter files
     events: dict[str, tuple[str, dict]] = {}
     system_refs: list[tuple[str, str]] = []
+    orders: dict[int, str] = {}
+    unordered: list[str] = []
     ch_dir = d / "chapters"
     files = sorted(ch_dir.glob("*.json")) if ch_dir.is_dir() else []
     if not files:
@@ -634,10 +640,18 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     for f in files:
         doc = _load(r, f)
         fn = f"chapters/{f.name}"
-        if doc is None or not _keys(r, fn, doc, {"schema_version", "book", "chapter", "events", "system"}):
+        if doc is None or not _keys(r, fn, doc, {"schema_version", "book", "chapter", "events", "system"}, {"order"}):
             continue
         if doc["schema_version"] != SCHEMA_VERSION:
             r.err(f"{fn}.schema_version", f"must be {SCHEMA_VERSION}")
+        if "order" not in doc:
+            unordered.append(fn)
+        elif not _int(doc["order"]) or doc["order"] < 1:
+            r.err(f"{fn}.order", "must be a whole number >= 1")
+        elif int(doc["order"]) in orders:
+            r.err(f"{fn}.order", f"chapter order {int(doc['order'])} is also in {orders[int(doc['order'])]}")
+        else:
+            orders[int(doc["order"])] = fn
         if doc["book"] != book:
             r.err(f"{fn}.book", f"must be {book}")
         ch = doc["chapter"]
@@ -667,6 +681,9 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                     system_refs.append((f"{fn}:system[{i}].who", s["who"]))
         else:
             r.err(f"{fn}.system", "must be a list")
+    if orders and unordered:
+        r.warn("chapters", f"{len(unordered)} chapter file(s) have no 'order' and {len(orders)} do; "
+               "same-day events of the files without it run first, by id")
 
     # --- cross references
     def need_npc(where: str, nid: str) -> None:

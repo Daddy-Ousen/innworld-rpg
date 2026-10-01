@@ -1,14 +1,16 @@
 extends GutTest
 ## Real Book 3 canon (game/data/canon/book3). With no player input, every
-## b3. event in days FIRST_DAY–LAST_DAY happens as written: no drift. The
+## b3. event up to LAST_DAY (Laken's thread: up to LAKEN_LAST_DAY) happens as written: no drift. The
 ## game is slept to day FIRST_DAY - 1 once (before_all); each test starts
 ## from a copy of that save.
 
-## First day with Book 3 canon (Laken's placeholder thread starts on day 71).
+## First day of Book 3 in Liscor and Celum. Laken's thread starts earlier (his
+## Day 1 = day 46, ADR 0028); those events resolve while before_all sleeps.
 const FIRST_DAY := 71
-## Last day with extracted Book 3 canon (M9.1: 3.00 E – 3.05 L, 1.00 D, 1.01 D;
-## M9.2: 3.06 L – 3.14; M9.3: 3.15 – 3.20 T; M9.4: 3.21 L – 3.25, the end of Book 3).
+## Last day of Book 3 in Liscor and Celum (3.25; the state at the end of Book 3 is checked there).
 const LAST_DAY := 87
+## Last day of Laken's Book 3 thread (3.14: he sets out for Invrisil on his Day 46 = day 91).
+const LAKEN_LAST_DAY := 91
 
 var _db: DataDb
 var _base_json := ""
@@ -92,7 +94,7 @@ func test_book3_runs_as_canon() -> void:
 			"yvlon.armor_fused_to_arms", "erin.makes_corusdeer_soup", "ryoka.banned_from_runners_guild",
 			"ryoka.gone_to_magnolia", "magnolia.allied_with_ryoka", "magnolia.gone_to_first_landing",
 			"liscor_hive.soldiers_died_for_heaven", "pawn.cares_for_the_soldiers", "pawn.allowed_to_pray",
-			"riverfarm.buried_by_avalanche", "laken.rules_riverfarm", "laken.left_for_invrisil",
+			"riverfarm.buried_by_avalanche", "laken.rules_riverfarm",
 			"ryoka.friends_with_ivolethe", "ryoka.magic_stalled", "persua.beaten_by_ryoka", "persua.swore_to_kill_ryoka",
 			"celum_runners_guild.buried_in_snow", "ryoka.asked_to_leave_celum", "ryoka.learning_to_run_like_the_wind",
 			"liscor.goblin_army_passed", "wandering_inn.reopened_by_lyonette", "pawn.will_tell_klbkch_of_his_class",
@@ -134,13 +136,20 @@ func test_book3_runs_as_canon() -> void:
 		assert_eq(_where(gs, npc).get_slice(" ", 0), "inn_interior", npc + " is at the inn")
 	for npc: String in ["ryoka_griffin", "ceria_springwalker", "pisces", "ksmvr", "yvlon_byres", "erin_solstice"]:
 		assert_eq(_where(gs, npc), "off map", npc)
+	# Laken's thread runs on past Book 3's end in Liscor (his Day + 45, ADR 0028).
+	assert_false(gs.flags.has("laken.left_for_invrisil"), "not yet on day 87")
+	ToyCanon.sleep_through(gs, _db, LAKEN_LAST_DAY)
+	for id: String in ["b3.laken_rules_riverfarm_and_plans_for_invrisil", "b3.laken_sets_out_for_invrisil"]:
+		assert_eq(gs.world.status(id), Director.DONE, id)
+	assert_true(gs.flags.has("laken.left_for_invrisil"))
+	assert_eq(gs.world.drift, 0.0)
 
 
 func test_remote_threads_do_not_need_liscor_or_celum() -> void:
 	var gs := _fresh()
 	for npc: String in ["erin_solstice", "ryoka_griffin", "lyonette", "ceria_springwalker"]:
 		assert_eq(Commands.kill_npc(gs, _db, npc), "", npc)
-	ToyCanon.sleep_through(gs, _db, LAST_DAY)
+	ToyCanon.sleep_through(gs, _db, LAKEN_LAST_DAY)
 	for id: String in ["b3.laken_makes_durene_a_paladin", "b3.baleros_hears_of_the_last_light",
 			"b3.laken_sets_out_for_invrisil", "b3.niers_broods_over_the_silent_chessboard",
 			"b3.venitra_and_ijvani_lose_their_way"]:

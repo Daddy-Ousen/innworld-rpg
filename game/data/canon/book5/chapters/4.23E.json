@@ -6,8 +6,8 @@
 		"b5.zzx_laken_claims_his_land_with_markers": {
 			"tier": 2,
 			"window": {
-				"earliest": 117,
-				"latest": 117,
+				"earliest": 114,
+				"latest": 114,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -63,15 +63,15 @@
 				"book": 5,
 				"chapter": "4.23E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 69 = game day 117: his days 55-70 squeezed into 111-118 (user choice). Seven markers were made; six planted."
+				"note": "Laken's Day 69 = game day 114 (his Day + 45, ADR 0028). Seven markers were made; six planted."
 			},
 			"summary": "Riders plant Jelov's markers in a ring four miles out. At the sixth, Laken's senses fill the ring. He counts over sixty Goblins and two Hobs coming."
 		},
 		"b5.zzy_riverfarm_breaks_the_goblin_attack": {
 			"tier": 1,
 			"window": {
-				"earliest": 117,
-				"latest": 117,
+				"earliest": 114,
+				"latest": 115,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -151,15 +151,15 @@
 				"book": 5,
 				"chapter": "4.23E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 69-70 = game day 117 (night): his days 55-70 squeezed into 111-118 (user choice). Of those Laken raised, only Gamel lives. Yesel loses a leg. The Goblins are a local band, never tied to the Goblin Lord."
+				"note": "Laken's Day 69-70 = game day 114 (night) (his Day + 45, ADR 0028). Of those Laken raised, only Gamel lives. Yesel loses a leg. The Goblins are a local band, never tied to the Goblin Lord."
 			},
 			"summary": "At midnight about forty Goblins hit the village while the Riders break a flanking band. Laken's command keeps the dying fighting; Wiskeria's Mossbear kills the Shaman and Durene the Hob. No Goblin escapes, but 31 villagers die."
 		},
 		"b5.zzz_wiskeria_becomes_lakens_general": {
 			"tier": 2,
 			"window": {
-				"earliest": 117,
-				"latest": 117,
+				"earliest": 114,
+				"latest": 114,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -208,15 +208,15 @@
 				"book": 5,
 				"chapter": "4.23E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 69 = game day 117 (night): his days 55-70 squeezed into 111-118 (user choice). A '[Witch General]' is only floated."
+				"note": "Laken's Day 69 = game day 114 (night) (his Day + 45, ADR 0028). A '[Witch General]' is only floated."
 			},
 			"summary": "After the battle Prost talks of the bond between ruler and people. Laken offers Wiskeria the post of [General] and she takes it."
 		},
 		"b5.zzza_riverfarm_buries_its_dead": {
 			"tier": 2,
 			"window": {
-				"earliest": 118,
-				"latest": 118,
+				"earliest": 115,
+				"latest": 115,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -273,7 +273,7 @@
 				"book": 5,
 				"chapter": "4.23E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 70 = game day 118: his days 55-70 squeezed into 111-118 (user choice). The informant is not named; do not link."
+				"note": "Laken's Day 70 = game day 115 (his Day + 45, ADR 0028). The informant is not named; do not link."
 			},
 			"summary": "Riverfarm buries its dead. Laken tells Durene his tricks came from an informant he met in Invrisil. A City Runner brings letters from Lady Rie, two [Merchants] and a [Lord]."
 		}

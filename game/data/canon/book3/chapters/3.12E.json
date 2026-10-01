@@ -5,7 +5,7 @@
 	"events": {
 		"b3.laken_claims_riverfarm_and_finds_the_buried": {
 			"tier": 2,
-			"window": {"earliest": 78, "latest": 78, "confidence": "guess"},
+			"window": {"earliest": 86, "latest": 86, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {
 				"emperor": {"prefer": ["laken_godart"], "fallback_tags": []},
@@ -25,12 +25,12 @@
 				]
 			},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.12E", "confidence": "confirmed", "note": "Laken's Day 41. Placeholder day. The dead are not counted; the living outnumber them. The village head Till and Gamel's father, the [Blacksmith], die (no NPCs). Gamel says a little over a hundred lived there; 3.00E said about sixty. Flagged."},
+			"canon_ref": {"book": 3, "chapter": "3.12E", "confidence": "confirmed", "note": "Laken's Day 41. Game day = his Day + 45 (ADR 0028). The dead are not counted; the living outnumber them. The village head Till and Gamel's father, the [Blacksmith], die (no NPCs). Gamel says a little over a hundred lived there; 3.00E said about sixty. Flagged."},
 			"summary": "The villagers fight over Durene's one shovel. The head's widow gives Laken the village, but only when he shouts his claim as Emperor can he sense the buried. His command silences everyone; he points the diggers to the living and teaches chest compressions, and some who had stopped breathing wake."
 		},
 		"b3.riverfarm_wakes_under_the_blessing_of_the_hearth": {
 			"tier": 2,
-			"window": {"earliest": 79, "latest": 79, "confidence": "guess"},
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.rules_riverfarm"], "not_flags": []},
@@ -38,7 +38,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["riverfarm.blessing_of_the_hearth", "durene.levelled_in_the_rescue", "riverfarm.calls_laken_emperor"]},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.12E", "confidence": "confirmed", "note": "The night of his Day 41 into Day 42. Placeholder day. Prost first calls him Emperor. The phone's battery is nearly spent."},
+			"canon_ref": {"book": 3, "chapter": "3.12E", "confidence": "confirmed", "note": "The night of his Day 41 into Day 42. Game day = his Day 42 + 45 (ADR 0028). Prost first calls him Emperor. The phone's battery is nearly spent."},
 			"summary": "Laken finds cellars, blankets and a sword under the snow, and lights the night with his phone's torch and a French and a German song. He sleeps as a Level 9 [Emperor] with an Empire Skill; the villagers crammed in the barn wake rested, their cuts healed. Durene has gained five levels."
 		}
 	},
