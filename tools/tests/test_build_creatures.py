@@ -74,13 +74,17 @@ class BuildCreaturesTest(unittest.TestCase):
 
     def test_drawn_creatures_need_no_art_files(self):
         with tempfile.TemporaryDirectory() as tmp:
-            for name in ("rock_crab", "snowman"):
+            for name in ("rock_crab", "snowman", "goat"):
                 out = bc.build_creature({"creature": name}, Path(tmp))
                 self.assertTrue(_opaque(out, (0, 2 * 64, 64, 3 * 64)), name)
                 self.assertTrue(_opaque(out, (0, bs.ATTACK_Y, 128, bs.ATTACK_Y + 128)), name)
         crab_s, crab_e = bc.crab_frame("s"), bc.crab_frame("e")
         self.assertNotEqual(crab_s.tobytes(), crab_e.tobytes(), "the facings differ")
         self.assertNotEqual(bc.crab_frame("s", 0, 4).tobytes(), crab_s.tobytes(), "the attack reaches out")
+        goat_s, goat_w = bc.goat_frame("s"), bc.goat_frame("w")
+        self.assertNotEqual(goat_s.tobytes(), goat_w.tobytes(), "the goat's facings differ")
+        self.assertNotEqual(bc.goat_frame("w", 0, 5).tobytes(), goat_w.tobytes(), "the goat's head lunges")
+        self.assertNotEqual(bc.goat_frame("w", 1).tobytes(), goat_w.tobytes(), "the goat's legs move")
 
     def test_errors_for_unknown_creature_fall_and_missing_file(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -108,7 +112,7 @@ class BuildCreaturesTest(unittest.TestCase):
     def test_real_creature_looks_build(self):
         data = json.loads(bs.DEFAULT_APPEARANCE.read_text(encoding="utf-8"))
         creatures = {k: v for k, v in data["looks"].items() if bc.is_creature(v)}
-        self.assertEqual(len(creatures), 11)  # M13.6: creler_hatchling, creler_juvenile; M13.0: crypt_worm, giant_leech, shield_spider
+        self.assertEqual(len(creatures), 12)  # M18.1: eater_goat; M13.6: creler_hatchling, creler_juvenile; M13.0: crypt_worm, giant_leech, shield_spider
         for look in creatures.values():
             self.assertEqual(bc.build_creature(look).size, (bs.SHEET_W, bs.SHEET_H))
 

@@ -19,7 +19,8 @@ appearance.json:
     base   the body part, default "body" (a skeleton look uses "body_skeleton")
     parts  drawn in LPC zPos order, whatever order they are listed in. A part can also be
            one of our edits (EDITS: innworld_extra_arms, innworld_antennae,
-           innworld_mandibles), drawn from the look's body and heads_* part
+           innworld_mandibles), drawn from the look's body and heads_* part; an edit may
+           have "paint": "#rrggbb" (M18.1: the edit is drawn in that colour)
 The id is an NPC id, an enemy type, "player", or "race_<race>" (the look of an
 NPC with no own look). The game draws game/assets/characters/<id>.png for it,
 and a square when there is none.
@@ -299,7 +300,7 @@ def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
     body = head = None
     for i, p in enumerate(parts):
         if p["part"] in EDITS:
-            edits.append(p["part"])
+            edits.append(p)
             continue
         part = part_layers(ulpc, p, look)
         has_custom = any(layer["custom"] == kind for layer in part)
@@ -311,11 +312,15 @@ def build_look(ulpc: Ulpc, look: dict) -> tuple[Image.Image, list[str]]:
                 body = img
             if p["part"].startswith("heads_") and head is None:
                 head = img
-    for name in edits:
+    for p in edits:
+        name = p["part"]
         z, make = EDITS[name]
         if body is None or head is None:
             raise BuildError(f"edit '{name}' needs a body and a heads_* part")
-        layers.append((z, len(parts), make(body, head)))
+        img = make(body, head)
+        if "paint" in p:
+            img = paint(img, p["paint"])
+        layers.append((z, len(parts), img))
     layers.sort(key=lambda t: (t[0], t[1]))
     sheet = Image.new("RGBA", (SHEET_W, SHEET_H), (0, 0, 0, 0))
     for _, _, img in layers:
@@ -345,6 +350,24 @@ def bbox(img: Image.Image, x0: int, y0: int) -> tuple[int, int, int, int] | None
     """Opaque box (left, top, right, bottom; inclusive) of the frame at x0, y0."""
     b = img.crop((x0, y0, x0 + FRAME, y0 + FRAME)).getchannel("A").getbbox()
     return None if b is None else (b[0], b[1], b[2] - 1, b[3] - 1)
+
+
+def paint(img: Image.Image, hex_colour: str) -> Image.Image:
+    """An edit in paint (M18.1, Purple Smile): every opaque pixel takes `hex_colour`,
+    kept as dark or light as it was (the rim stays darker than the core)."""
+    h = hex_colour[1:] if hex_colour.startswith("#") else ""
+    if len(h) != 6 or any(c not in "0123456789abcdefABCDEF" for c in h):
+        raise BuildError(f"paint '{hex_colour}' must be #rrggbb")
+    rgb = tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    out = img.copy()
+    px = out.load()
+    for y in range(out.height):
+        for x in range(out.width):
+            r, g, b, a = px[x, y]
+            if a:
+                k = 0.45 + 0.55 * (r + g + b) / 765
+                px[x, y] = tuple(min(255, round(c * k)) for c in rgb) + (a,)
+    return out
 
 
 def shades(img: Image.Image, box: tuple[int, int, int, int]) -> tuple[tuple, tuple]:

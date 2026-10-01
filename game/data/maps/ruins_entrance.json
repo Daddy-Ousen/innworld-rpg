@@ -7,7 +7,8 @@
 	"note": "Design map (M8.1). The stone doors in a hillside (1.23A), and after the siege a palisade, a ditch and twenty guards at the entrance (2.02), are canon; the layout and the three-hour walk from the Floodplains are guesses. M16.6: the ditch beside the palisade (the text says a ditch, not where) and the two Watch tents are guesses. The stage of b2.gazi_attacks_outside_the_ruins happens here on day 42.",
 	"zones": {},
 	"exits": [
-		{"at": [0, 11, 1, 2], "to": "floodplains_south", "arrive": [30, 11], "minutes": 180}
+		{"at": [0, 11, 1, 2], "to": "floodplains_south", "arrive": [30, 11], "minutes": 180},
+		{"id": "ruins_doors", "at": [16, 3], "to": "liscor_ruins_hall", "arrive": [15, 16], "minutes": 0, "when_flags": ["ruins.vault_found_looted"]}
 	],
 	"objects": [
 		{"id": "ruins_doors", "kind": "stone_doors", "at": [15, 3], "name": "Great stone doors", "actions": [], "solid": true},

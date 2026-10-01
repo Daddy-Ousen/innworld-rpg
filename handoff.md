@@ -1,35 +1,43 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.0 canon timing (plan `docs/plans/m18.0.md`, notes in ADR 0028 "M18.0"). Branch `claude/kind-feynman-y4x1mm`
-  restarted from main fd3601f after PR #88 merged.
-  - Engine: `CanonDb.rank[id] = [book, order, place]` from the loader. Same-day events sort by book, then the
-    chapter key `order` and the event's place in the file, then id. A file with no `order` gets place 0, so its
-    events keep the id tie-break. `from_dicts(..., rank_map = {})`: toy dbs keep the old rule.
-  - Validator: `order` optional, whole number >= 1, unique in a book; a book that mixes files with and without it
-    gets a warning.
-  - Data: Laken's Book 3 events on days 46 – 91, Book 5 events on days 100 – 115 (his Day + 45). Window = note range
-    + 45. Ids unchanged. A probe showed each fires on its first window day, drift 0 to day 115.
-  - Tests: `sim_canon_book3` runs to day 87 for the Book 3 end state, then on to `LAKEN_LAST_DAY` (91);
-    `sim_canon_book5` `LAST_DAY` 118 → 115.
-- Tests run (all pass): `unit_event_order` (new, 8), `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`,
-  `sim_book4_christmas`, `sim_book4_homecoming`, `sim_book4_relief_home`, Python tool tests (100), validator `--all`.
-  Full suite not run (user rule).
+- M18.1 world (plan `docs/plans/m18.1.md`, notes in ADR 0028 "M18.1"). Branch `claude/nice-albattani-wj8hw6` from
+  main 5d0930e (PR #89 merged). User answers: ossuary = two maps in the Ruins; goat drawn in code; basement opens
+  with the inn build; records for everyone with a role.
+  - Maps: `wirclaw_village` (30 min west of `inn_hill`), `inn_basement` (trapdoor `inn_interior` [14, 11], gated by
+    `wandering_inn.expansion_begun`), `liscor_ruins_hall` (from the `ruins_entrance` doors once
+    `ruins.vault_found_looted`; illusion wall overlay until `liscor_ruins.hidden_chute_found`; hexagon = one-way
+    chute exit `hidden_chute`), `liscor_ruins_ossuary` (corridor trap `corridor_tile`, exit to `liscor_crypt`;
+    `liscor_crypt` exit `ossuary_corridor` back, same flag). Moods, ambience, wake spots.
+  - `eater_goat` enemy (leap, no spawns), drawn goat art; looks: Redfang five, `wirclaw`, `falene_skystrall`,
+    `dawil`, `race_dwarf`, `purple_smile` (new `"paint"` option on sprite edits).
+  - `data/canon/book6/`: `npcs.json` (38), `locations.json` (`wirclaw_village`), `chapters/.gitkeep`. The validator
+    warns (no error) on a book with no chapter files.
+- Tests run (all pass): `sim_book6_world` (new, 9), `unit_combat_db`, `unit_monster_art`, `unit_art`,
+  `unit_gated_exits`, `sim_liscor_depths`, `sim_inn_third_floor`, `unit_canon_db`, `unit_map_db`, `sim_inn_brawl`,
+  `sim_inn_service`, `unit_ambience`, `unit_crowd`, `unit_ground_art`, `unit_guests`, `unit_music_pick`,
+  `unit_other_maps`, `unit_sound_cues`, `unit_world_view`; Python tool tests (102); validator `--all`. Full suite
+  not run (user rule).
 
 ## Next
-1. The user merges the M18.0 PR.
-2. M18.1 world: Wirclaw's village, the crypt ossuary (under `liscor_crypt`, behind an illusion door and a chute,
-   gated by a 4.37 O flag), the inn basement (trapdoor in `inn_interior`); each with an `audio.json` mood and a
-   knock-out wake spot; the Eater Goat (`leap`, new creature art); looks for the Redfang five, Wirclaw, Falene,
-   Dawil, Purple Smile; NPC records with no events. Ask the user the open choices first (ADR 0028 "Plan").
-3. From M18.2 on, every Book 6 chapter file gets `"order"` (its place in the book: 4.32 G = 1, 1.02 C = 2, …; ADR 0028
-   "Context" lists the order). Event ids stay readable (`b6.bugear_dies`); no `zz` prefixes.
+1. The user merges the M18.1 PR ([PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90)).
+2. M18.2 canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir
+   (off-map). Ask the stage, hook and `xp_window` choices first. Chapter files get `"order"` (4.32 G = 1,
+   1.02 C = 2, … ADR 0028 "Context"); delete `book6/chapters/.gitkeep` when the first chapter file lands.
+3. Flags for later batches (ADR 0028 "M18.1"): Bugear's weapon (M18.3), Greydath name (M18.5), Purple Smile
+   [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7). M18.3 needs a stage at `wirclaw_village` (goats over the
+   wall, Redfang outside) and the Redfang five's basement schedules; M18.4 sets `liscor_ruins.hidden_chute_found`.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps (`godot --path game`).
 
 ## Gotchas (cloud)
+- Character sheets in the cloud: sparse-clone the LPC generator into the scratchpad (about 240 MB, 1 – 2 min):
+  `git clone --depth 1 --filter=blob:none --sparse <ULPC url> ulpc`, then `git -C ulpc sparse-checkout set --no-cone
+  /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/ '/spritesheets/**/walk.png' ... '/spritesheets/weapon/'
+  '/spritesheets/shield/'` (the list in "How to rebuild art"). No `MSYS_NO_PATHCONV` on Linux.
+- `unit_map_db.test_real_exits_lead_back` has a `ONE_WAY` list (the Ruins chute). A new one-way exit goes there.
 - The SessionStart hook works in a real cloud VM, but it cannot clone the private book repo. Fix: attach
   `Daddy-Ousen/innworld-canon-raw` (add_repo), `git clone --depth 1` it to `/home/user/innworld-canon-raw`, then
   `mkdir -p canon/raw; ln -s /home/user/innworld-canon-raw/book6 canon/raw/book6` (same for book7). `canon/raw/` is gitignored.

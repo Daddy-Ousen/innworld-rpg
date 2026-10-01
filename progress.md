@@ -36,7 +36,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     Book 3 events on days 46 – 91 and Book 5 events on days 100 – 115 (his Day + 45). Tests run: `unit_event_order` (new),
     `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`, `sim_book4_christmas`, `sim_book4_homecoming`,
     `sim_book4_relief_home`, Python tool tests (100), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [ ] M18.1 world (next): Wirclaw's village, the crypt ossuary, the inn basement; the Eater Goat; looks; NPC records.
+  - [x] M18.0 merged ([PR #89](https://github.com/Daddy-Ousen/innworld-rpg/pull/89), merge commit 5d0930e).
+  - [x] M18.1 world (branch `claude/nice-albattani-wj8hw6`, 2026-10-01, cloud): maps `wirclaw_village`, `inn_basement`
+    (trapdoor opens with `wandering_inn.expansion_begun`), `liscor_ruins_hall` and `liscor_ruins_ossuary` (the text puts
+    the ossuary in the Ruins of Liscor: illusion wall until `liscor_ruins.hidden_chute_found`, one-way chute, corridor
+    with a trap to `liscor_crypt`); the Eater Goat (`leap`, drawn art); 10 looks; 38 Book 6 NPC records, no events.
+    Tests run: `sim_book6_world` (new) and 18 scripts the change touches, Python tool tests (102), validator. All pass.
+    Full suite not run. [PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90) waits for the user to merge.
+  - [ ] M18.2 canon 4.32 G, 1.02 C – 1.05 C (next).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
 
 ## Cloud setup
@@ -49,11 +56,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 ## Completed (current engine state)
 - Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87; Laken's thread days 46–91) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data. Book 5 (4.00 K – 4.31 + 1.02 D – 1.06 D, days 97–114, Laken 100–115; 4.00 K – 4.06 K are history notes in ADR 0020) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
+- Canon Book 6 (M18.1): NPC records and one location only; no events yet.
 - Core: `xp_window` (M17.8), `monster_abilities` (M17.7), `cover` (M17.6), `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=20), `save_migrations` (1→…→20), `encounter` (M17.1–M17.2), `combat_skills` (M17.4), `mana`, `spells`, `spell_db` (M17.5), `inn_state`, `guests`, `standing`, `brawl`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
-- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: about 133 GUT scripts (last full suite at M17.6, all pass); M17.7 – M18.0 ran only the scripts they touch (user rule). Runner: `bash tools/run_tests.sh <script>... | --all`. Python tool tests: 100 pass (`python -m unittest discover -s tools/tests`).
+- Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift, and from M18.1 wirclaw_village, inn_basement, liscor_ruins_hall, liscor_ruins_ossuary), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
+- Tests: about 133 GUT scripts (last full suite at M17.6, all pass); M17.7 – M18.1 ran only the scripts they touch (user rule). Runner: `bash tools/run_tests.sh <script>... | --all`. Python tool tests: 102 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
 ## Blockers

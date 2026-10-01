@@ -83,7 +83,11 @@
 			"inn_watchtower": {"area": "inn_interior", "pos": [20, 13]},
 			"liscor_depths": {"area": "inn_interior", "pos": [20, 13]},
 			"liscor_crypt": {"area": "inn_interior", "pos": [20, 13]},
-			"esthelm_creler_cave": {"area": "esthelm_ruins", "pos": [5, 11]}
+			"esthelm_creler_cave": {"area": "esthelm_ruins", "pos": [5, 11]},
+			"wirclaw_village": {"area": "inn_interior", "pos": [20, 13]},
+			"inn_basement": {"area": "inn_interior", "pos": [20, 13]},
+			"liscor_ruins_hall": {"area": "liscor_gate", "pos": [3, 12]},
+			"liscor_ruins_ossuary": {"area": "liscor_gate", "pos": [3, 12]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"],

@@ -198,6 +198,26 @@ class BuildSpritesTest(unittest.TestCase):
         credits = self.credits.read_text(encoding="utf-8")
         self.assertNotIn("innworld", credits, "edits are not LPC parts")
 
+    def test_an_edit_can_be_painted(self):
+        # M18.1: Purple Smile's mandibles carry his painted smile.
+        img = Image.new("RGBA", (2, 1), (0, 0, 0, 0))
+        img.putpixel((0, 0), (200, 200, 200, 255))
+        out = bs.paint(img, "#8000c0")
+        r, g, b, a = out.getpixel((0, 0))
+        self.assertEqual(a, 255)
+        self.assertGreater(b, r)
+        self.assertEqual(g, 0, "the paint's hue, not the old grey")
+        self.assertEqual(out.getpixel((1, 0)), (0, 0, 0, 0), "clear pixels stay clear")
+        with self.assertRaises(bs.BuildError):
+            bs.paint(img, "purple")
+        ant = {"body": "male", "skin": "light", "base": "body_person", "parts": [{"part": "heads_round"}]}
+        plain = dict(ant, parts=ant["parts"] + [{"part": "innworld_mandibles"}])
+        painted = dict(ant, parts=ant["parts"] + [{"part": "innworld_mandibles", "paint": "#8000c0"}])
+        self.assertEqual(self._build({"plain": plain, "painted": painted}), [])
+        a = Image.open(self.out / "plain.png").convert("RGBA")
+        b = Image.open(self.out / "painted.png").convert("RGBA")
+        self.assertNotEqual(a.tobytes(), b.tobytes())
+
     def test_attack_kind_follows_the_weapon(self):
         u = bs.Ulpc(self.ulpc)
         self.assertEqual(bs.attack_kind(u, {"parts": []}), "slash")

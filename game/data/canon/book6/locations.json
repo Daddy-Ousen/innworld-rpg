@@ -1,0 +1,26 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"wirclaw_village": {
+			"name": "Wirclaw's village",
+			"kind": "settlement",
+			"parent": "floodplains_of_liscor",
+			"tags": [
+				"village",
+				"farm",
+				"gnoll",
+				"drake",
+				"walled",
+				"liscor"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "likely",
+				"note": "Not named in the text. On a big hill near Liscor, seen from the inn's tower; no direction or distance. Map wirclaw_village (M18.1)."
+			},
+			"summary": "A small walled farming village of Gnolls and Drakes on a hill near Liscor: two farms, a few houses, a barn, cows and goats."
+		}
+	}
+}

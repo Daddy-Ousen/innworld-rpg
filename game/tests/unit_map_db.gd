@@ -33,11 +33,18 @@ func test_real_map_items_and_the_razorbeak_nest() -> void:
 	assert_eq(_real.maps.zone_at("floodplains_south", Vector2i(21, 16)), "razorbeak_nests")
 
 
+## Every exit has a way back, except the known one-way drops. M18.1: the hidden
+## chute in the Ruins drops you into the ossuary (4.37 O); its way out is the
+## corridor down to the crypt level.
+const ONE_WAY := {"liscor_ruins_hall/hidden_chute": "liscor_crypt"}
+
+
 func test_real_exits_lead_back() -> void:
 	for id: String in _real.maps.areas:
 		for e: Dictionary in _real.maps.areas[id]["exits"]:
+			var key := "%s/%s" % [id, e.get("id", "")]
 			var back: Array = _real.maps.areas[e["to"]]["exits"].filter(
-					func(b: Dictionary) -> bool: return b["to"] == id)
+					func(b: Dictionary) -> bool: return b["to"] == ONE_WAY.get(key, id))
 			assert_false(back.is_empty(), "%s → %s has a way back" % [id, e["to"]])
 
 

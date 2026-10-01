@@ -1,0 +1,953 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"goblin_lord": {
+			"name": "The Goblin Lord",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"goblin_lord",
+				"necromancer",
+				"north_izril"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "Leads the army that marches north past Liscor (4.32 G). A Hob of ordinary Human size in black robes, black eyes with white pupils; rides a huge Shield Spider (4.46). He takes the name Reiss from the dying Zel (4.49): flag goblin_lord.named_reiss. Class name and level not given."
+			},
+			"summary": "The Goblin Lord whose black-armoured army crosses Izril. Not a big warrior, but a caster with a black blade Skill and loyal lieutenants. The world blames him for Zel Shivertail's death."
+		},
+		"snapjaw": {
+			"name": "Snapjaw",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"lieutenant",
+				"cavalry"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "confirmed",
+				"note": "A former Chieftain (4.46). A short female Hob with a big head and two rows of steel-fused teeth, crimson eyes, steel armour; rides horses (4.48). Survives Book 6."
+			},
+			"summary": "One of the Goblin Lord's lieutenants, who bites through armour with metal teeth. She leads his riders at Invrisil and lives through Zel's last fight."
+		},
+		"eater_of_spears": {
+			"name": "Eater of Spears",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"lieutenant",
+				"giant"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "confirmed",
+				"note": "A former Chieftain (4.46). A huge Hob about seven feet tall with skin that breaks lances (4.48). Badly hurt by Zel and a War Golem in 4.49; his fate is not stated."
+			},
+			"summary": "The Goblin Lord's giant lieutenant, who takes lances on his chest and wrestles a War Golem to save his Lord. Zel and the golems leave him torn open."
+		},
+		"eggsnatcher": {
+			"name": "Eggsnatcher",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"lieutenant",
+				"beastmaster",
+				"spider"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Beastmaster]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "confirmed",
+				"note": "A former Chieftain (4.46) who commands a horde of spiders and rides a giant Shield Spider (4.48). No death shown; alive is a guess."
+			},
+			"summary": "The Goblin Lord's [Beastmaster] lieutenant, who rides a giant Shield Spider. At Invrisil he traps the Human cavalry and duels Reynold's carriage."
+		},
+		"noface": {
+			"name": "Noface",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"lieutenant",
+				"mage",
+				"fire"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "confirmed",
+				"note": "Seen as a Goblin with no face in 4.46, named in 4.48. A former Chieftain who casts fire. Zel kills him in 4.48."
+			},
+			"summary": "A faceless Goblin lieutenant who throws fire for the Goblin Lord. Zel kills him at Invrisil and shows his head to the Goblins."
+		},
+		"illbreath": {
+			"name": "Illbreath",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"lieutenant",
+				"poison"
+			],
+			"faction": "goblin_lord_army",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Named in 4.48. He swallowed a poison-making artifact and breathes poison. Zel tears his head off in 4.48."
+			},
+			"summary": "A Hob lieutenant of the Goblin Lord whose breath is poison. He falls to Zel Shivertail at Invrisil."
+		},
+		"wirclaw": {
+			"name": "Wirclaw",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"farmer",
+				"liscor",
+				"archer"
+			],
+			"faction": null,
+			"home": "wirclaw_village",
+			"classes": [
+				{
+					"name": "[Farmer]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.33",
+				"confidence": "confirmed",
+				"note": "Dirty-blonde fur, a Fischer Cow bite scar, a good bow (4.33, 4.34). Krshia buys his milk. His small son is not named."
+			},
+			"summary": "A strong Gnoll [Farmer] near Liscor who sells milk from his cows, Fischer Cows and goats. He holds his walled village against the Eater Goats with Erin."
+		},
+		"maviss": {
+			"name": "Maviss",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"guild",
+				"liscor"
+			],
+			"faction": "liscor_adventurers_guild",
+			"home": "liscor_adventurers_guild",
+			"classes": [
+				{
+					"name": "[Receptionist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "Light pinkish-red scales (4.36 O)."
+			},
+			"summary": "A Drake [Receptionist] at Liscor's Adventurers' Guild who deals with Olesm and the teams going into the dungeon."
+		},
+		"purple_smile": {
+			"name": "Purple Smile",
+			"race": "Antinium",
+			"tags": [
+				"antinium",
+				"soldier",
+				"painted",
+				"individual"
+			],
+			"faction": "liscor_hive",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "A painted Soldier: a purple ring round both eyes and a smile drawn across his mandibles (4.40 L). Leads the surface patrols; Pawn makes him a [Sergeant] at the end of 4.42 L (set by that event, not here)."
+			},
+			"summary": "A relaxed, painted Antinium Soldier who leans on walls and fights like a chess Knight, flanking instead of charging. He becomes one of Pawn's [Sergeants]."
+		},
+		"twin_stripes": {
+			"name": "Twin Stripes",
+			"race": "Antinium",
+			"tags": [
+				"antinium",
+				"soldier",
+				"painted",
+				"individual"
+			],
+			"faction": "liscor_hive",
+			"home": "liscor_hive",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "A pink stripe on each side of his face (4.40 L). Turns Aberration, is chained, and is calmed by Pawn's [Benediction of Hope] (4.42 L)."
+			},
+			"summary": "A painted Soldier who goes Aberration and attacks Yellow Splatters. Chained in a cell, he is brought back by Pawn's prayer."
+		},
+		"falene_skystrall": {
+			"name": "Falene Skystrall",
+			"race": "Half-Elf",
+			"tags": [
+				"half_elf",
+				"mage",
+				"adventurer",
+				"gold_rank",
+				"terandria"
+			],
+			"faction": "silver_swords",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Battlemage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "Arrives in 4.43, named in 4.45. Light red hair, a staff; looks late twenties but is far older. A generalist [Mage] who recently took the [Battlemage] path; left Wistram about 30 years ago. From Terandria is a guess."
+			},
+			"summary": "The Silver Swords' Half-Elf mage, polite, proud and old-fashioned. She looks down on Ceria and Pisces."
+		},
+		"dawil": {
+			"name": "Dawil",
+			"race": "Dwarf",
+			"tags": [
+				"dwarf",
+				"warrior",
+				"adventurer",
+				"gold_rank",
+				"terandria",
+				"hammer"
+			],
+			"faction": "silver_swords",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "Of the Ironbreaker clan, part Human; a few inches over five feet, thick beard, dark brown hair, full plate and a hammer (4.43, 4.45). About ten years older than Ylawes. Class not named; from Terandria is a guess."
+			},
+			"summary": "The Silver Swords' loud, hungry Dwarf with a hammer, who lectures on smithing he hates. He spots that Erin's coin is mithril."
+		},
+		"geram_redfist": {
+			"name": "Geram Redfist",
+			"race": "Human",
+			"tags": [
+				"human",
+				"guard",
+				"brawler",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "likely",
+				"note": "Lady Rie's captain of the guard: bald, a former [Street Brawler], fights with gauntlets (4.35 E). Race not stated (Human is a guess); home follows Rie's."
+			},
+			"summary": "Lady Rie's tough, bald captain of the guard, who fights with his fists."
+		},
+		"nesor": {
+			"name": "Nesor",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mage",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "likely",
+				"note": "Rie's [Mage]; he did not finish at Wistram (4.35 E). Race not stated (Human is a guess)."
+			},
+			"summary": "Lady Rie's young [Mage], who failed at Wistram and now serves her household."
+		},
+		"nalthal": {
+			"name": "Nalthal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"druid",
+				"gardener",
+				"house_reinhart"
+			],
+			"faction": "house_reinhart",
+			"home": "reinhart_estate",
+			"classes": [
+				{
+					"name": "[Gardener]",
+					"level": null
+				},
+				{
+					"name": "[Druid]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.44M",
+				"confidence": "likely",
+				"note": "Full name Nalthaliarstrelous. Called an old man (Human is a guess). His garden maze hides two War Golems and the Heartflame Breastplate (4.44 M)."
+			},
+			"summary": "Magnolia's rude, smelly [Gardener], who is really a [Druid]. His maze at the Reinhart estate hides her War Golems."
+		},
+		"bekia": {
+			"name": "Bekia",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"maid",
+				"house_reinhart"
+			],
+			"faction": "house_reinhart",
+			"home": "reinhart_estate",
+			"classes": [
+				{
+					"name": "[Maid]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "Seen in 4.38 B and 4.44 M."
+			},
+			"summary": "A Gnoll [Maid] who has served in Magnolia Reinhart's household for years."
+		},
+		"sir_evimore": {
+			"name": "Sir Evimore",
+			"race": "Human",
+			"tags": [
+				"human",
+				"knight",
+				"rose_knight",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Knight]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "A Knight of the Petal under Lady Bethal. The Goblin Lord kills him with three [Deathbolts] while Goblins hold him down (4.48)."
+			},
+			"summary": "One of Lady Bethal's Rose Knights, killed by the Goblin Lord's death magic at Invrisil."
+		},
+		"welca_caveis": {
+			"name": "Welca Caveis",
+			"race": "Human",
+			"tags": [
+				"human",
+				"knight",
+				"rose_knight",
+				"trainee"
+			],
+			"faction": null,
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "A Rose Knight in training. Pyrite holds her under the lake but she lives (4.39 G). Race not stated (Human is a guess)."
+			},
+			"summary": "A young Rose Knight in training who nearly drowns in Pyrite's grip when Rags drives off Bethal's knights."
+		},
+		"gershal": {
+			"name": "Gershal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"officer",
+				"vaunt",
+				"north_izril"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lieutenant]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "From Vaunt, a cheese town (4.47). First officer to pledge to Zel; holds the line in 4.48 and carries Salvia away in 4.49."
+			},
+			"summary": "A [Lieutenant] from Vaunt, the first to follow Zel Shivertail against the Goblin Lord. He survives Invrisil."
+		},
+		"salvia": {
+			"name": "Salvia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"officer",
+				"cavalry",
+				"north_izril"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Captain]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "A cavalry [Captain] from Nonelmar with [Scatter Gallop] (4.47). Her mount dies in 4.49 and Gershal carries her off; alive is a guess."
+			},
+			"summary": "The cavalry [Captain] from Nonelmar who rides with Zel at Invrisil."
+		},
+		"hethon_veltras": {
+			"name": "Hethon Veltras",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"child",
+				"house_veltras"
+			],
+			"faction": "house_veltras",
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "Tyrion's older son, quiet; seen in the frame of the Pt. 5 history reading."
+			},
+			"summary": "Tyrion Veltras's quiet older son, who listens before he speaks."
+		},
+		"sammial_veltras": {
+			"name": "Sammial Veltras",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"child",
+				"house_veltras"
+			],
+			"faction": "house_veltras",
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "Tyrion's younger son, about 9 or 10, sickly; wants to be called Sammy (Pt. 5 frame)."
+			},
+			"summary": "Tyrion Veltras's sickly, lively younger son, who hears the Antinium Wars read aloud."
+		},
+		"ullim": {
+			"name": "Ullim",
+			"race": "Human",
+			"tags": [
+				"human",
+				"servant",
+				"house_veltras"
+			],
+			"faction": "house_veltras",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Majordomo]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "His family has served House Veltras for six generations; he reads the history book to the boys (Pt. 5 frame)."
+			},
+			"summary": "The Veltras [Majordomo], who reads Krsysl's history aloud to Tyrion's sons."
+		},
+		"blighted_king": {
+			"name": "The Blighted King",
+			"race": "Human",
+			"tags": [
+				"human",
+				"king",
+				"rhir",
+				"warrior"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[King]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "Not named. Old; his sword is Blightbane; his steward slows his ageing. The Fool stabs him in 1.05 C and he lives. The Fool says his summoning cost ten thousand unborn."
+			},
+			"summary": "The ruler of the Blighted Kingdom who summoned Tom's group. Ruthless for his war on the Demons."
+		},
+		"blighted_queen": {
+			"name": "The Blighted Queen",
+			"race": "Human",
+			"tags": [
+				"human",
+				"queen",
+				"rhir",
+				"warrior"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Queen]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "likely",
+				"note": "Not named. Very tall, about thirty, a black obsidian mace; a famed warrior before her marriage. Race not stated (Human is a guess)."
+			},
+			"summary": "The Blighted King's warrior Queen, mother of Princess Erille."
+		},
+		"erille": {
+			"name": "Princess Erille",
+			"race": "Human",
+			"tags": [
+				"human",
+				"princess",
+				"rhir",
+				"child"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Princess]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.03C",
+				"confidence": "confirmed",
+				"note": "A young girl, daughter of the current Queen. Tom saves her from two Demon assassins (1.03 C)."
+			},
+			"summary": "The Blighted King's young daughter, whom Tom saves from Demon assassins."
+		},
+		"isodore": {
+			"name": "Princess Isodore",
+			"race": "Human",
+			"tags": [
+				"human",
+				"princess",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Princess]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.04C",
+				"confidence": "likely",
+				"note": "About sixteen, daughter of the previous Queen, a dark-metal circlet. Six Demons wait at her door; she lives. First chapter is a guess (1.03 C – 1.05 C)."
+			},
+			"summary": "The Blighted King's older daughter, who lives through the night of the Demon attack."
+		},
+		"nereshal": {
+			"name": "Nereshal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mage",
+				"chronomancer",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "likely",
+				"note": "The King's steward; a [Chronomancer] who slows the King's ageing. Short, grey robes lined with silver, scarred arms. The Fool turns his own lightning on him (1.05 C); alive is a guess."
+			},
+			"summary": "The Blighted King's steward and time mage, struck down by his own lightning when the Fool betrays the court."
+		},
+		"the_fool": {
+			"name": "The Fool",
+			"race": "Human",
+			"tags": [
+				"human",
+				"jester",
+				"rhir",
+				"traitor"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Fool]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "The court jester for over ten years, a small man in loud colours (race a guess). Copies objects, juggles spells, keeps a trick space. Let the Demons in. Tom burns him with his own fireball (1.05 C)."
+			},
+			"summary": "The Blighted King's jester, secretly a traitor in love with a Demon mage. Tom kills him with a fireball from the Fool's own trick space."
+		},
+		"xersia": {
+			"name": "Lady Xersia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"rhir",
+				"spear",
+				"named_adventurer"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Marchioness]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "likely",
+				"note": "Called the Scorpion; a former Named Adventurer with a spear. The Demon mage teleports her into the sky and she falls to her death (1.05 C). First chapter is a guess."
+			},
+			"summary": "A spear-fighting [Marchioness] of Rhir, once a Named Adventurer, killed by a Demon mage's teleport."
+		},
+		"cirille_bitterclaw": {
+			"name": "Cirille Bitterclaw",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"oldblood",
+				"commander",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Commander]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "likely",
+				"note": "An Oldblood Drake with black scales and small useless wings; commands a Drake company serving in Rhir. Seen again at the court in 4.47. First chapter is a guess."
+			},
+			"summary": "The Drake [Commander] of a company serving the Blighted King."
+		},
+		"kirust": {
+			"name": "Captain Kirust",
+			"race": "Human",
+			"tags": [
+				"human",
+				"officer",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Captain]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "likely",
+				"note": "Dark skin, a scar on his temple; saw Tom's massacre at the village of Rastfad. First chapter is a guess."
+			},
+			"summary": "A [Captain] of the Blighted Kingdom who saw what Tom did at Rastfad."
+		},
+		"yebior": {
+			"name": "Lord Yebior",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "guess",
+				"note": "Big, bearded, a scimitar. Alive is a guess; first chapter is a guess."
+			},
+			"summary": "A big, bearded [Lord] at the Blighted King's court."
+		},
+		"keith": {
+			"name": "Keith",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Blacksmith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "One of about twenty Earthers left of the sixty-odd summoned (1.02 C). Was an engineering student."
+			},
+			"summary": "An Earther in Richard's group in Rhir, now a [Blacksmith]."
+		},
+		"chole": {
+			"name": "Chole",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [
+				{
+					"name": "[Nurse]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "One of about twenty Earthers left of the sixty-odd summoned (1.02 C)."
+			},
+			"summary": "An Earther in Richard's group in Rhir who works as a [Nurse]."
+		},
+		"eddy": {
+			"name": "Eddy",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "One of about twenty Earthers left of the sixty-odd summoned (1.02 C). Talks a lot and knows games."
+			},
+			"summary": "A talkative Earther in Richard's group in Rhir."
+		},
+		"vincent": {
+			"name": "Vincent",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "One of about twenty Earthers left of the sixty-odd summoned (1.02 C)."
+			},
+			"summary": "An Earther in Richard's group in Rhir."
+		},
+		"cynthia": {
+			"name": "Cynthia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"rhir"
+			],
+			"faction": null,
+			"home": "blighted_kingdom",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "One of about twenty Earthers left of the sixty-odd summoned (1.02 C). Terrified of Tom."
+			},
+			"summary": "An Earther in Richard's group in Rhir who is afraid of Tom."
+		}
+	}
+}

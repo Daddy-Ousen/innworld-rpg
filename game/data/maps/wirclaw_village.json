@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"id": "wirclaw_village",
+	"name": "Wirclaw's village",
+	"location": "wirclaw_village",
+	"confidence": "guess",
+	"note": "Design map (M18.1, ADR 0028). The Gnoll [Farmer] Wirclaw's farming village on a big hill near Liscor (4.33, 4.34). In the text: a pair of farms and a few houses, a wall about ten feet high, thick barred gates, a watch post on the wall, Wirclaw's barn, his cows, Fischer Cows and goats; Gnolls and Drakes live there; Bird sees the hill from the inn's tower. Guesses: the name of the map, the direction and the 30-minute walk from the inn hill, the wall's wood, the layout and the animal pen. The Eater Goat stage of 4.34 happens here (M18.3).",
+	"zones": {},
+	"exits": [
+		{"at": [31, 11, 1, 2], "to": "inn_hill", "arrive": [1, 11], "minutes": 30}
+	],
+	"objects": [
+		{"id": "village_watch_post", "kind": "plaque", "at": [24, 9], "name": "Watch post on the wall", "actions": [], "sign": {"icon": "shield", "text": "Watch post"}},
+		{"id": "village_gate_bar", "kind": "woodpile", "at": [24, 14], "name": "The gate's heavy bar", "actions": [], "solid": true},
+		{"id": "milk_pails", "kind": "basin", "at": [17, 9], "name": "Milk pails", "actions": [], "solid": true},
+		{"id": "barn_hay", "kind": "woodpile", "at": [22, 9], "name": "Hay bales", "actions": [], "solid": true},
+		{"id": "pen_trough", "kind": "basin", "at": [21, 17], "name": "Water trough", "actions": [], "solid": true},
+		{"id": "village_bench", "kind": "bench", "at": [11, 12], "name": "Bench", "actions": []},
+		{"id": "village_well", "kind": "well", "at": [11, 10], "name": "Well", "actions": [], "solid": true}
+	],
+	"legend": {".": "grass", ",": "tall_grass", ":": "dirt_road", "T": "tree", "O": "boulder", "H": "wood_wall", "+": "door", "P": "plain_house", "p": "plain_house_b", "d": "plain_door"},
+	"rows": [
+		"................................",
+		"................................",
+		"..,,........................,...",
+		"....,.HHHHHHHHHHHHHHHHHHHH......",
+		"......H..................H...T..",
+		"......H.PPP..PPP..pppppp.H......",
+		".T....H.PPP..PPP..pppppp.H......",
+		"......H.PdP..PdP..pppppp.H......",
+		"......H...........ppddpp.H......",
+		"......H..................H......",
+		"......H..................H......",
+		"......H.......:::::::::::+::::::",
+		"......H.......:::::::::::+::::::",
+		"......H..................H......",
+		"......H.PdP.......HH+HHH.H......",
+		"......H.PPP..PdP..H,,,,H.H......",
+		"......H.PPP..PPP..H,,,,H.H......",
+		".T....H......PPP..H,,,,H.H......",
+		"......H...........HHHHHH.H......",
+		"..,...H..................H..T...",
+		"...,..HHHHHHHHHHHHHHHHHHHH......",
+		".............................,..",
+		"....O.......T...................",
+		"................................"
+	]
+}
