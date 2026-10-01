@@ -1,0 +1,414 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.37O",
+	"order": 10,
+	"events": {
+		"b6.pisces_shows_olesm_his_bone_horror": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces",
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.built_a_scythe_crawler",
+					"pisces.level_30_secret",
+					"pisces.has_greater_bone_shaping"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.37O",
+				"confidence": "confirmed",
+				"note": "Olesm finds the construct disgusting but good for the sewers."
+			},
+			"summary": "Outside the gates Pisces shows Olesm a Scythe Crawler, a four-legged bone construct with scythe arms. He admits he reached Level 30 in secret and took greater bone-shaping."
+		},
+		"b6.olesm_approves_the_rat_contract": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm",
+					"pisces"
+				],
+				"flags": [
+					"selys.refused_piscess_rat_plan"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.approved_the_rat_contract",
+					"pisces.hunts_sewer_rats",
+					"liscor.rat_contract_10_gold_1_copper_per_10_rats"
+				],
+				"relationship": [
+					{
+						"from": "olesm",
+						"to": "pisces",
+						"delta": 1
+					},
+					{
+						"from": "pisces",
+						"to": "olesm",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.37O",
+				"confidence": "confirmed",
+				"note": "No sewer map or rat enemy exists, so the contract is a flag only (ADR 0028)."
+			},
+			"summary": "Olesm signs off Pisces' sewer plan under his own authority: ten gold to start, one copper for every ten rats killed, and Selys counts the tails. The two make peace."
+		},
+		"b6.olesm_and_pisces_find_the_hidden_chute": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm",
+					"pisces"
+				],
+				"flags": [
+					"olesm.asked_for_the_crypt_report",
+					"olesm.has_niers_ring_of_sight"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_ruins.hidden_chute_found",
+					"raskghar.ossuary_found",
+					"calruz.may_have_fallen_down_the_chute"
+				]
+			},
+			"stage": {
+				"area": "liscor_ruins_hall",
+				"hours": [
+					13,
+					17
+				],
+				"kind": "scene",
+				"when_flags": [
+					"ruins.vault_found_looted"
+				],
+				"npcs": [
+					{
+						"npc": "olesm",
+						"pos": [
+							17,
+							7
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							19,
+							8
+						]
+					}
+				],
+				"line": "Olesm squints through a brass ring at a blank wall and goes very still. Pisces sends a little spider of bone to the stone and watches the floor open under it.",
+				"note": "M18.4: a scene. Hours are guesses (afternoon). The illusion wall stays until the night's event sets the flag."
+			},
+			"hooks": [
+				{
+					"id": "player_helped_search_the_crypt",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"liscor_dungeon"
+								],
+								"npc": [
+									"olesm",
+									"pisces"
+								]
+							}
+						},
+						{
+							"action": [
+								"search_for_traps"
+							],
+							"context": {
+								"location": [
+									"liscor_dungeon"
+								]
+							}
+						}
+					],
+					"days": [
+						126,
+						126
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor_dungeon.earther_helped_search_the_crypt"
+						],
+						"relationship": [
+							{
+								"from": "olesm",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "pisces",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "A Human went into the old crypt with Olesm and Pisces and helped them find a door that only a ring could see."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.37O",
+				"confidence": "confirmed",
+				"note": "Nobody goes down. A Raskghar skeleton with a broken-haft battleaxe lies at the far door; no Minotaur skull is seen."
+			},
+			"summary": "In the crypt the body count shows no Minotaur and no axe of Calruz. Olesm sees an illusion door that opens on a hexagon room. Pisces drops a Shield Spider down the chute and sees a hall of Raskghar bones."
+		},
+		"b6.pisces_tells_the_inn_calruz_may_be_alive": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [
+					"calruz.may_have_fallen_down_the_chute"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"calruz.news_told_to_the_inn",
+					"horns_of_hammerad.hear_calruz_may_be_alive",
+					"mrsha.stole_piscess_wand"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.37O",
+				"confidence": "confirmed",
+				"note": "Ilvriss, Zevara, the Council and Krshia are not told. Pisces hides his Level 30 and his old past."
+			},
+			"summary": "At the inn the Horns and Halfseekers recover from the cockroach cave. Pisces keeps his secrets but says Calruz is probably alive below. Ceria likes his rat plan, and Mrsha steals his wand."
+		},
+		"b6.olesm_reaches_level_28_and_answers_ylawes": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.level_28_tactician",
+					"olesm.has_rallying_presence",
+					"ylawes_byres.knows_yvlon_is_in_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.37O",
+				"confidence": "confirmed",
+				"note": "Ilvriss says next day that Olesm reached Level 28 yesterday (4.38 B)."
+			},
+			"summary": "At his desk Olesm signs small requests. One is from Ylawes Byres, who asks whether Yvlon is in Liscor, and Olesm says yes and mentions the door. Dozing off, he gains [Tactician] Level 28 and [Rallying Presence]."
+		}
+	},
+	"system": [
+		{
+			"who": "olesm",
+			"kind": "level",
+			"name": "[Tactician]",
+			"level": 28,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "olesm",
+			"kind": "skill",
+			"name": "[Rallying Presence]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "pisces",
+			"kind": "level",
+			"name": "[Necromancer]",
+			"level": 30,
+			"confidence": "likely",
+			"note": "Kept secret; the class name is not stated here."
+		}
+	]
+}

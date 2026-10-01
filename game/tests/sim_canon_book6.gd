@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 6 canon (4.32 G: the Goblin Lord's army passes Liscor, a guess).
 const FIRST_DAY := 114
-## Last day with Book 6 canon so far (M18.2: 1.05 C, the Fool's death in Paranfer; M18.3 is on day 115).
-const LAST_DAY := 121
+## Last day with Book 6 canon so far (M18.4: 4.35 E – 4.38 B, Zel leaves Liscor and Rie's estate is relieved).
+const LAST_DAY := 127
 
 var _db: DataDb
 var _base_json := ""
@@ -45,11 +45,11 @@ func _sleep_to_last_day(gs: GameState) -> void:
 func test_book6_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b6_events().size(), 16)
+	assert_gte(_b6_events().size(), 58)
 	for npc: String in ["goblin_lord", "the_fool", "xersia", "erille", "isodore", "nereshal", "cirille_bitterclaw", "kirust",
 			"blighted_king", "blighted_queen", "keith", "chole", "eddy", "vincent", "cynthia"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
-	for loc: String in ["wirclaw_village", "paranfer"]:
+	for loc: String in ["wirclaw_village", "paranfer", "rie_estate", "neunham"]:
 		assert_true(_db.canon.locations.has(loc), loc)
 	assert_eq(_db.canon.locations["paranfer"]["parent"], "rhir")
 
@@ -66,7 +66,9 @@ func test_book6_runs_as_canon() -> void:
 	assert_eq(gs.world.drift, 0.0)
 	var rumors := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.RUMOR and _b6(n["event"])) \
 			.map(func(n: Dictionary) -> String: return n["event"])
-	assert_eq(rumors, ["b6.rags_sacks_a_human_town"])
+	rumors.sort()
+	assert_eq(rumors, ["b6.goblin_lord_hits_esthelm_in_passing", "b6.goblins_burn_a_village_near_riverfarm",
+			"b6.laken_relieves_rie_estate", "b6.rags_sacks_a_human_town"])
 	# M18.2: the march, the mountain, Rags's raid, Tom's weeks in Paranfer.
 	for f: String in ["goblin_lord_army.passed_liscor", "wandering_inn.survived_goblin_arrows",
 			"liscor.watched_the_goblin_army_pass", "garen.refuses_to_kneel_to_the_goblin_lord",
@@ -85,6 +87,19 @@ func test_book6_runs_as_canon() -> void:
 		assert_true(gs.flags.has(f), f)
 	assert_false(gs.world.is_alive(_db.canon, "bugear"), "killed by the Eater Goats (4.34)")
 	for npc: String in ["headscratcher", "badarrow", "shorthilt", "rabbiteater", "numbtongue", "wirclaw", "bird"]:
+		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
+	# M18.4: Laken's days, the Raskghar, the ring and the chute, Esthelm, Zel's leaving, Magnolia.
+	for f: String in ["riverfarm.beat_a_goblin_ambush", "riverfarm.builds_trebuchets", "trottvisk.protected_by_laken",
+			"riverfarm.mutual_defence_plan", "laken.relieved_rie_estate", "rie.kneels_to_laken", "laken.has_imperial_levy",
+			"ilvriss.drinks_daily_at_the_tailless_thief", "raskghar.named_by_krshia", "raskghar.cannot_level",
+			"olesm.has_niers_ring_of_sight", "olesm.approved_the_rat_contract", "pisces.level_30_secret",
+			"liscor_ruins.hidden_chute_found", "calruz.may_have_fallen_down_the_chute", "calruz.news_told_to_the_inn",
+			"olesm.level_28_tactician", "esthelm.walls_held", "liscor.hears_the_esthelm_report", "zel.left_liscor",
+			"zel.met_magnolia", "zel.allied_with_magnolia", "magnolia.learns_of_laken_godart", "rie.evacuating_her_estate",
+			"reynold.wounded_by_the_goblin_vanguard", "bethal.hunts_the_neunham_raiders"]:
+		assert_true(gs.flags.has(f), f)
+	assert_false(gs.flags.has("liscor_dungeon.earther_helped_search_the_crypt"), "no player was in the crypt")
+	for npc: String in ["laken_godart", "rie", "zel_shivertail", "magnolia_reinhart", "reynold", "olesm", "pisces", "ilvriss", "krshia"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 	# No player was near the inn, so no hook ran.
 	assert_false(gs.flags.has("wandering_inn.earther_watched_the_goblin_army_pass"))
@@ -121,3 +136,22 @@ func test_chapter_order_runs_the_book_in_order() -> void:
 	assert_lt(seq.find("b6.zevara_backs_down_on_zels_order"), seq.find("b6.redfang_sleep_in_the_inn_basement"))
 	assert_lt(seq.find("b6.the_blighted_king_presents_the_earthers"), seq.find("b6.demon_assassins_hit_the_palace"))
 	assert_lt(seq.find("b6.demons_teleport_into_the_palace"), seq.find("b6.the_fool_dies_in_toms_arms"))
+
+
+func test_zel_goes_off_the_map_after_he_leaves() -> void:
+	var gs := _fresh()
+	_sleep_to_last_day(gs)
+	assert_true(gs.flags.has("zel.left_liscor"))
+	var zel: Dictionary = gs.npcs.npcs["zel_shivertail"]
+	assert_eq(String(zel["area"]), "@celum", "Zel is off the map with Magnolia")
+
+
+func test_esthelm_is_news_only() -> void:
+	var ev: Dictionary = _db.canon.events["b6.goblin_lord_hits_esthelm_in_passing"]
+	assert_false(ev.has("stage"), "the text gives only a report (user answer, M18.4)")
+	assert_false(ev.has("xp_window"))
+	assert_eq(ev["tier"], 1)
+
+
+func test_raskghar_has_its_name() -> void:
+	assert_eq(_db.combat.enemies["not_gnoll"]["name"], "Raskghar")

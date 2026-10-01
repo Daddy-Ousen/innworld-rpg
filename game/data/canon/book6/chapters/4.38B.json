@@ -1,0 +1,493 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.38B",
+	"order": 11,
+	"events": {
+		"b6.goblin_lord_hits_esthelm_in_passing": {
+			"tier": 1,
+			"window": {
+				"earliest": 125,
+				"latest": 125,
+				"confidence": "guess"
+			},
+			"location": "esthelm",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"esthelm.attacked_by_the_goblin_lord",
+					"esthelm.walls_held",
+					"esthelm.a_quarter_dead_and_half_wounded"
+				]
+			},
+			"rumor": "Esthelm's walls held against waves of Goblins. A quarter of the town is dead and over half are hurt.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "The text gives the report only (4.38 B). The night is a guess; the report reaches Liscor on day 127."
+			},
+			"summary": "As the Goblin Lord's host marches north, part of it hits Esthelm's walls in several waves and is thrown back. The Antinium repaired the walls, and nearly every citizen has a combat class."
+		},
+		"b6.ilvriss_and_zel_agree_to_spread_the_word": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss",
+					"zel_shivertail"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.admits_he_loved_periss",
+					"zel.and_ilvriss_spread_word_quietly"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "Zel will not live under one roof with the Goblins, so he left the inn."
+			},
+			"summary": "Hungover Ilvriss tells Zel he loved Periss and would have married her. They treat Az'kerash as the enemy, note that Regrika Blackpaw has no birth record, and agree to spread the word quietly to keep Ryoka safe."
+		},
+		"b6.the_esthelm_report_reaches_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [
+					"esthelm.walls_held"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.hears_the_esthelm_report",
+					"zel.announces_he_is_leaving"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed"
+			},
+			"summary": "Olesm brings the Esthelm report about a day and a half after the Goblin Lord passed. Reinforcements will take a week or more, so Zel announces he is leaving."
+		},
+		"b6.zel_leaves_liscor_through_the_door": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zel_shivertail"
+				],
+				"flags": [
+					"zel.announces_he_is_leaving"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.left_liscor",
+					"zel.took_the_door_to_celum",
+					"zel.goes_north_to_meet_magnolia"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "Ilvriss warns that Drake generals are not meant to leave the city; Zel replies that he knows."
+			},
+			"summary": "Zel says he had a letter and will go to Celum, then north to meet someone he will not name. He accepts the risk of the Human war act, runs from Ilvriss, Olesm and Zevara, and uses the door to Celum."
+		},
+		"b6.magnolia_hears_of_esthelm_and_laken": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"butler": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"bekia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spy": {
+					"prefer": [
+						"sacra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"magnolia_reinhart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.sends_gold_to_esthelm",
+					"magnolia.learns_of_laken_godart",
+					"bethal.hunts_the_neunham_raiders",
+					"neunham.raided_by_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "The Rose Knights gather at Neunham. Magnolia raises Esthelm with Liscor's Council that day."
+			},
+			"summary": "Magnolia drives north with Reynold and drops Bethal and Thomast near Neunham, where Goblins hanged villagers. She orders gold for Esthelm, then Sacra's news reaches her: an [Emperor] named Laken holds Riverfarm."
+		},
+		"b6.magnolia_confronts_rie": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "rie_estate",
+			"roles": {
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"geram_redfist"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"butler": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"magnolia_reinhart",
+					"rie"
+				],
+				"flags": [
+					"magnolia.learns_of_laken_godart"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rie.evacuating_her_estate",
+					"magnolia.angry_at_laken",
+					"magnolia.sends_reynold_for_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed"
+			},
+			"summary": "Magnolia freezes the crowd outside Rie's wrecked estate and talks with Rie for an hour. Rie is packing to flee, says she would be dead without Laken Godart, and Magnolia leaves angry and sends Reynold south."
+		},
+		"b6.reynold_charges_the_goblin_vanguard": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "road_to_invrisil",
+			"roles": {
+				"butler": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"reynold"
+				],
+				"flags": [
+					"magnolia.sends_reynold_for_zel"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reynold.wounded_by_the_goblin_vanguard",
+					"magnolia_carriage.damaged",
+					"goblin_lord_army.north_of_celum"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "Tens of thousands of Goblins. The text gives only the few refugees Reynold saved."
+			},
+			"summary": "Driving south alone, Reynold finds the Goblin Lord's advance force slaughtering refugees and charges it in the carriage to buy them time. Arrows and blades wound him, and a shadow-magic Goblin hits the carriage."
+		},
+		"b6.zel_meets_magnolia": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"butler": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zel_shivertail",
+					"magnolia_reinhart"
+				],
+				"flags": [
+					"zel.left_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.met_magnolia",
+					"zel.allied_with_magnolia",
+					"magnolia.sets_the_goblin_lord_az_kerash_antinium_order",
+					"reynold.fainted_on_arrival"
+				],
+				"relationship": [
+					{
+						"from": "zel_shivertail",
+						"to": "magnolia_reinhart",
+						"delta": 1
+					},
+					{
+						"from": "magnolia_reinhart",
+						"to": "zel_shivertail",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "Zel dreams of old Sserys, who said a very young Magnolia wanted peace."
+			},
+			"summary": "Near dusk Zel boards the bloody carriage at Celum's gate in a red cloak. That night he and Magnolia shake hands. She sets the order of the enemies: the Goblin Lord first, then Az'kerash, then the Antinium."
+		}
+	},
+	"system": [
+		{
+			"who": "reynold",
+			"kind": "skill",
+			"name": "[Burst Speed]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

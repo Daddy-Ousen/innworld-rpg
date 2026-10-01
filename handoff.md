@@ -1,24 +1,21 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.3 canon (plan `docs/plans/m18.3.md`, notes in ADR 0028 "M18.3"). Branch `claude/sleepy-feynman-txet0j` from main f5cc08b
-  (PR #91 merged). User answers: night wave fight stage at Wirclaw's village, both hooks (fight, talk to the Redfang), no `xp_window`.
-  - `book6/chapters/`: `4.33` (order 6, 9 events), `4.34` (order 7, 5 events). Day 115; the goats' ambush on the army is day 114.
-  - Fight stage `b6.eater_goats_attack_wirclaws_village` (12 goats in 3 groups; Redfang five, Erin, Wirclaw, Bird as allies).
-    Bugear is NOT placed: the event kills him. Scene stage `b6.erin_bows_to_the_redfang_and_feeds_them` in `inn_interior`.
-  - `npc_behaviour.json`: Wirclaw and the five Redfang (basement from flag `redfang.lodge_in_the_inn_basement`, day 116 on).
-  - Bugear tag spear -> sword (`book3/npcs.json`).
-  - Tests: new `sim_book6_eater_goats` (7); `sim_canon_book6` grew. All pass. Full suite not run.
+- M18.4 canon (plan `docs/plans/m18.4.md`, notes in ADR 0028 "M18.4"). Branch `claude/sleepy-feynman-txet0j` from main 6120ef3
+  (PR #92 merged). User answers: Esthelm news only, crypt search hook, no `xp_window`.
+  - `book6/chapters/`: `4.35E` (order 8), `4.36O` (9), `4.37O` (10), `4.38B` (11); 28 events, days 117 – 127. 4.36 O and 4.37 O are one day (126).
+  - Crypt search: scene stage `liscor_ruins_hall` 13 – 17 h with Olesm and Pisces; hook = talk to them. Sets `liscor_ruins.hidden_chute_found`.
+  - Zel: `zel.left_liscor` on day 127 puts him off-map at Celum (new goal in `npc_behaviour.json`). `not_gnoll` shows as "Raskghar".
+  - New locations `rie_estate`, `neunham`. Tests: new `sim_book6_crypt_search`; `sim_canon_book6` LAST_DAY 127; `sim_canon_book5`
+    fixed (M18.3 cleared two flags on its last day). Full suite not run.
 
 ## Next
-1. The user merges the M18.3 PR.
-2. M18.4 canon 4.35 E – 4.38 B (days 116 – 127): Laken (his Day 72 – 82 = days 117 – 127), Olesm (Raskghar, Niers' ring, the crypt
-   chute, the rat contract), the Esthelm night wave stage, Zel leaves through the door. Ask stage, hook and `xp_window` choices
-   first. Chapter files get `"order"` 8 on. Raise `LAST_DAY` in `sim_canon_book6` (now 121; M18.4 goes to day 127). M18.4 sets
-   `liscor_ruins.hidden_chute_found`.
+1. The user merges the M18.4 PR.
+2. M18.5 canon 4.39 G – 4.42 L (days 127 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party. Ask stage, hook and
+   `xp_window` choices first. Chapter files get `"order"` 12 on. Raise `LAST_DAY` in `sim_canon_book6` (now 127).
 3. Flags for later batches (ADR 0028 "M18.1"): Greydath name (M18.5), Purple Smile [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7).
-   Open from M18.3: Halfseekers (jelaqua, moore, seborn), Zevara, Relc, Lyonette have no combat behaviour entries for stages;
-   Jelaqua's new body (`jelaqua.needs_a_new_body`) is for a later batch.
+   Open from M18.3: Halfseekers, Zevara, Relc, Lyonette have no combat behaviour entries for stages; Jelaqua's new body is for a later batch.
+   Run `sim_canon_book5` after any Book 6 change that clears a Book 5 flag.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
