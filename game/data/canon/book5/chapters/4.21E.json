@@ -6,8 +6,8 @@
 		"b5.zzq_windrest_joins_the_unseen_empire": {
 			"tier": 2,
 			"window": {
-				"earliest": 114,
-				"latest": 114,
+				"earliest": 106,
+				"latest": 106,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -78,15 +78,15 @@
 				"book": 5,
 				"chapter": "4.21E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 61 = game day 114: his days 55-70 squeezed into 111-118 (user choice). Beniar reports another village burned."
+				"note": "Laken's Day 61 = game day 106 (his Day + 45, ADR 0028). Beniar reports another village burned."
 			},
 			"summary": "The people of Windrest arrive and Riverfarm doubles. Laken promises to protect them if they obey. Jelov starts carving marker poles with an eye in a pyramid. Laken reaches Level 10."
 		},
 		"b5.zzr_laken_raises_a_militia": {
 			"tier": 2,
 			"window": {
-				"earliest": 115,
-				"latest": 115,
+				"earliest": 107,
+				"latest": 108,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -151,15 +151,15 @@
 				"book": 5,
 				"chapter": "4.21E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 62-63 = game day 115: his days 55-70 squeezed into 111-118 (user choice). The intruder is not named here."
+				"note": "Laken's Day 62-63 = game days 107-108 (his Day + 45, ADR 0028). The intruder is not named here."
 			},
 			"summary": "Laken senses rat nests under the village and Frostwing makes her first flight. After a looted caravan he orders a militia; Beniar drills the villagers and Durene. Someone slips into his cottage unseen."
 		},
 		"b5.zzs_laken_half_tames_the_mossbear": {
 			"tier": 2,
 			"window": {
-				"earliest": 115,
-				"latest": 115,
+				"earliest": 110,
+				"latest": 110,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -208,15 +208,15 @@
 				"book": 5,
 				"chapter": "4.21E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 65 = game day 115: his days 55-70 squeezed into 111-118 (user choice)."
+				"note": "Laken's Day 65 = game day 110 (his Day + 45, ADR 0028)."
 			},
 			"summary": "Laken and Durene feed the Mossbear in its cave and he half tames it. Durene finds a neat patch of fur cut from its neck. Laken calls rats out of the ground and most obey."
 		},
 		"b5.zzt_goblins_kill_fabiel_and_poison_beniar": {
 			"tier": 2,
 			"window": {
-				"earliest": 115,
-				"latest": 115,
+				"earliest": 111,
+				"latest": 111,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -275,7 +275,7 @@
 				"book": 5,
 				"chapter": "4.21E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 66 = game day 115 (night): his days 55-70 squeezed into 111-118 (user choice). Fabiel's body is never found (4.22 E)."
+				"note": "Laken's Day 66 = game day 111 (night) (his Day + 45, ADR 0028). Fabiel's body is never found (4.22 E)."
 			},
 			"summary": "Just after midnight Beniar rides in with a poisoned Goblin arrow in his stomach. Five Goblins killed Fabiel in an ambush. Wiskeria's paste beats the poison. Goblin horns sound near the village."
 		}

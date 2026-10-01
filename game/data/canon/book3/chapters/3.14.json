@@ -53,7 +53,7 @@
 		},
 		"b3.laken_rules_riverfarm_and_plans_for_invrisil": {
 			"tier": 2,
-			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}, "villager": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.rules_riverfarm"], "not_flags": []},
@@ -64,12 +64,12 @@
 				"relationship": [{"from": "prost", "to": "laken_godart", "delta": 1}]
 			},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 45. Placeholder day. Gamel camps outside the cottage to serve him. Foxes gnaw a frozen cow, so Laken has the dead animals stored in the barn and traps set."},
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 45. Game day = his Day + 45 (ADR 0028). Gamel camps outside the cottage to serve him. Foxes gnaw a frozen cow, so Laken has the dead animals stored in the barn and traps set."},
 			"summary": "Riverfarm hails Laken as Emperor; no one throws stones at Durene now. With the animals dead and monsters a threat, he tells the elders he has hundreds of gold coins and will buy food and hire guards in Invrisil. When they fear he will not return, he gives his word as Emperor, and Prost backs him."
 		},
 		"b3.laken_sets_out_for_invrisil": {
 			"tier": 2,
-			"window": {"earliest": 80, "latest": 80, "confidence": "guess"},
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "villager": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}, "eaglet": {"prefer": ["frostwing"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.plans_to_go_to_invrisil"], "not_flags": []},
@@ -77,7 +77,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.left_for_invrisil", "durene.left_riverfarm", "gamel.travels_with_laken"]},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 46. Placeholder day. The villagers cleared the road overnight. None of the three has been to Invrisil. The arrival is later canon."},
+			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 46. Game day = his Day + 45 (ADR 0028). The villagers cleared the road overnight. None of the three has been to Invrisil. The arrival is later canon."},
 			"summary": "At dawn Durene pulls a wagon with Laken, Frostwing in her nest, a fortune in gold and supplies, while young Gamel walks beside them to talk to guards. The village cheers them off down the cleared road. Durene frets about how a city will treat a half-Troll."
 		}
 	},

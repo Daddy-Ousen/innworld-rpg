@@ -6,8 +6,8 @@
 		"b5.zzm_laken_comes_home_to_riverfarm": {
 			"tier": 2,
 			"window": {
-				"earliest": 111,
-				"latest": 111,
+				"earliest": 100,
+				"latest": 100,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -86,15 +86,15 @@
 				"book": 5,
 				"chapter": "4.20E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 55 = game day 111: his days 55-70 squeezed into 111-118 (user choice). 4.19 shows him on the road."
+				"note": "Laken's Day 55 = game day 100 (his Day + 45, ADR 0028). 4.19 (day 109 here) cuts to him on the road; the cut has no date, so it does not bind."
 			},
 			"summary": "Laken's convoy reaches Riverfarm with the Windfrozen Riders and the Celestial Trackers. The village cheers the Unseen Empire, and the adventurers learn he is an [Emperor]."
 		},
 		"b5.zzn_laken_makes_prost_his_steward": {
 			"tier": 2,
 			"window": {
-				"earliest": 112,
-				"latest": 112,
+				"earliest": 101,
+				"latest": 102,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -145,15 +145,15 @@
 				"book": 5,
 				"chapter": "4.20E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 56-57 = game day 112: his days 55-70 squeezed into 111-118 (user choice)."
+				"note": "Laken's Day 56-57 = game days 101-102 (his Day + 45, ADR 0028)."
 			},
 			"summary": "Laken plans a new village with Prost and names him his [Steward]. His land sense stops at the village edge. Wiskeria admits she already sent word of his class to Invrisil."
 		},
 		"b5.zzo_a_mossbear_raids_riverfarm": {
 			"tier": 2,
 			"window": {
-				"earliest": 113,
-				"latest": 113,
+				"earliest": 104,
+				"latest": 104,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -203,15 +203,15 @@
 				"book": 5,
 				"chapter": "4.20E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 59 = game day 113: his days 55-70 squeezed into 111-118 (user choice)."
+				"note": "Laken's Day 59 = game day 104 (his Day + 45, ADR 0028)."
 			},
 			"summary": "A Mossbear raids the village. Durene fights it bare-handed and is clawed. Laken's command and his glare drive it off, and he stops Beniar from chasing it."
 		},
 		"b5.zzp_laken_takes_in_windrest": {
 			"tier": 2,
 			"window": {
-				"earliest": 113,
-				"latest": 113,
+				"earliest": 105,
+				"latest": 105,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -261,7 +261,7 @@
 				"book": 5,
 				"chapter": "4.20E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 60 = game day 113: his days 55-70 squeezed into 111-118 (user choice). Helm says a Great Chieftain has risen near Invrisil for the Goblin Lord."
+				"note": "Laken's Day 60 = game day 105 (his Day + 45, ADR 0028). Helm says a Great Chieftain has risen near Invrisil for the Goblin Lord."
 			},
 			"summary": "Helm brings word that Goblins burned Windrest, killed a dozen people and took two young women. Over Prost's worry, Laken takes in the whole village."
 		}

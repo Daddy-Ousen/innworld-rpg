@@ -6,8 +6,8 @@
 		"b5.zzu_durene_kills_a_goblin_assassin": {
 			"tier": 2,
 			"window": {
-				"earliest": 116,
-				"latest": 116,
+				"earliest": 112,
+				"latest": 112,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -63,15 +63,15 @@
 				"book": 5,
 				"chapter": "4.22E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 67 = game day 116: his days 55-70 squeezed into 111-118 (user choice)."
+				"note": "Laken's Day 67 = game day 112 (his Day + 45, ADR 0028)."
 			},
 			"summary": "Goblins scout the village. At night Laken senses one behind Prost's house and Durene kills it. Fire arrows burn a barn wall and a roof."
 		},
 		"b5.zzv_rehanna_challenges_laken": {
 			"tier": 2,
 			"window": {
-				"earliest": 116,
-				"latest": 116,
+				"earliest": 113,
+				"latest": 113,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -120,15 +120,15 @@
 				"book": 5,
 				"chapter": "4.22E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 68 = game day 116: his days 55-70 squeezed into 111-118 (user choice). Her name is given with a hedge."
+				"note": "Laken's Day 68 = game day 113 (his Day + 45, ADR 0028). Her name is given with a hedge."
 			},
 			"summary": "Rehanna of Windrest challenges Laken in public. One word from him puts her on her knees. Prost finds someone gave her the adventurers' drink and egged her on."
 		},
 		"b5.zzw_odveig_is_unmasked_as_sacra": {
 			"tier": 2,
 			"window": {
-				"earliest": 116,
-				"latest": 116,
+				"earliest": 113,
+				"latest": 113,
 				"confidence": "guess"
 			},
 			"location": "riverfarm",
@@ -187,7 +187,7 @@
 				"book": 5,
 				"chapter": "4.22E",
 				"confidence": "confirmed",
-				"note": "Laken's Day 68 = game day 116 (night): his days 55-70 squeezed into 111-118 (user choice). Sacra says spying is not her class; her real class is unknown."
+				"note": "Laken's Day 68 = game day 113 (night) (his Day + 45, ADR 0028). Sacra says spying is not her class; her real class is unknown."
 			},
 			"summary": "Laken wrongly blames Wiskeria for the fur in her pouch. Odveig steps in, knocks out Durene and Wiskeria, names herself Sacra, passes on Magnolia's regards and rides off. Wiskeria now leads the Trackers."
 		}

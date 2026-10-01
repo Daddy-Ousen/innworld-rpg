@@ -6,8 +6,9 @@ extends GutTest
 
 ## First day with Book 5 canon (4.06 M: Magnolia's gathering, a guess).
 const FIRST_DAY := 97
-## Last day with extracted Book 5 canon (M13.5: 4.23 E, Riverfarm buries its dead, day 118).
-const LAST_DAY := 118
+## Last day with Book 5 canon (4.23 E, Riverfarm buries its dead: Laken's Day 70 = day 115,
+## ADR 0028; Liscor's last day is 114).
+const LAST_DAY := 115
 
 var _db: DataDb
 var _base_json := ""

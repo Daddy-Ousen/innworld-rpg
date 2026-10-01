@@ -5,7 +5,7 @@
 	"events": {
 		"b3.laken_arrives_and_meets_durene": {
 			"tier": 2,
-			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"window": {"earliest": 46, "latest": 47, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmer": {"prefer": ["durene"], "fallback_tags": []}},
 			"requires": {"alive": ["laken_godart", "durene"], "flags": [], "not_flags": []},
@@ -17,13 +17,13 @@
 				"book": 3,
 				"chapter": "3.00E",
 				"confidence": "confirmed",
-				"note": "Laken's diary Day 1-2. Placeholder day: his count is his own and this thread is not synced to Erin's calendar (like Tom on Rhir, 1.00C). It is about 22 A.F. by Durene's reckoning."
+				"note": "Laken's diary Day 1-2. Game day = his Day + 45 (ADR 0028: tied to his meeting with Ryoka in Invrisil, day 93, and to Zel's death, day 130). It is about 22 A.F. by Durene's reckoning."
 			},
 			"summary": "Laken Godart, a blind Earther, takes one step in a San Francisco mall and finds himself in a forest near Riverfarm. He hears a big girl crying, shares his quiche with her, and Durene lets him sleep in her cottage while she sleeps outside."
 		},
 		"b3.laken_tells_off_the_village_children": {
 			"tier": 2,
-			"window": {"earliest": 71, "latest": 71, "confidence": "guess"},
+			"window": {"earliest": 47, "latest": 48, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmer": {"prefer": ["durene"], "fallback_tags": []}},
 			"requires": {"alive": ["laken_godart", "durene"], "flags": ["laken.lives_with_durene"], "not_flags": []},
@@ -31,12 +31,12 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.defends_durene", "riverfarm.children_bully_durene"]},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 2-3. Placeholder day, not synced to Erin's calendar."},
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 2-3. Game day = his Day + 45 (ADR 0028)."},
 			"summary": "Laken teaches Durene to cook potatoes and to fish. When six village children come to jeer at her as a freak and pelt her with mud, he raises his cup to them, tells them to get lost, and then teaches her some good insults."
 		},
 		"b3.laken_charms_riverfarm": {
 			"tier": 2,
-			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"window": {"earliest": 50, "latest": 53, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}, "wife": {"prefer": ["yesel"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["durene"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.lives_with_durene"], "not_flags": []},
@@ -44,12 +44,12 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.welcome_in_riverfarm", "laken.met_prost_and_yesel"]},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 5-8. Placeholder day. Durene has one Skill, [Enhanced Strength], and can lift a wagon."},
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 5-8. Game day = his Day + 45 (ADR 0028). Durene has one Skill, [Enhanced Strength], and can lift a wagon."},
 			"summary": "After Durene lifts Prost's broken wagon, Laken talks her into taking him to the village. Prost and the others take to the blind traveller, and Yesel sends him home with a basket, but they all keep a wall between themselves and Durene."
 		},
 		"b3.laken_declares_himself_emperor": {
 			"tier": 2,
-			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"window": {"earliest": 56, "latest": 57, "confidence": "guess"},
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "witness": {"prefer": ["durene"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.lives_with_durene"], "not_flags": []},
@@ -57,7 +57,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.emperor", "laken.protector_of_durenes_house"]},
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 11-12. Placeholder day. His model is Joshua Norton, the self-made Emperor of the United States."},
+			"canon_ref": {"book": 3, "chapter": "3.00E", "confidence": "confirmed", "note": "Laken's Day 11-12. Game day = his Day + 45 (ADR 0028). His model is Joshua Norton, the self-made Emperor of the United States."},
 			"summary": "Wanting a class, Laken tells Durene of Emperor Norton and, half in jest, proclaims himself Emperor of the Unseen and protector of her house. That night the System grants him the [Emperor] class. Durene panics; Laken is thrilled."
 		}
 	},
