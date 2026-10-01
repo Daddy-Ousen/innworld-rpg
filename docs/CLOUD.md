@@ -40,8 +40,10 @@ You see `[setup] ...` lines at the start of the session. All lines must say ok, 
 5. When it opens a PR, check it and merge it on GitHub (the GitHub app works).
 6. Merge BEFORE you start the next session. The next session starts from `main`.
 
-If the setup line says `book text: NOT FOUND`, the private repo access (step 1) is missing. Fix it, then
-start a new session. Only the book tasks need the text.
+If the setup line says `book text: NOT FOUND`, you do not need a new session. The session proxy lets the hook
+reach only the repos attached to the session. Claude attaches `innworld-canon-raw` itself (add_repo), clones it
+to `/home/user/innworld-canon-raw` and links `canon/raw/book6` and `book7` (seen on 2026-10-01). If the attach
+fails, step 1 is missing. Only the book tasks need the text.
 
 If it still says NOT FOUND: start the session with BOTH repos (`innworld-rpg` and `innworld-canon-raw`).
 With two repos the hook does not run, so begin your prompt with:
