@@ -186,6 +186,28 @@ class ValidateTest(unittest.TestCase):
         self.ev()["canon_ref"]["chapter"] = "9.01"
         self.assertError(self.fx.run(), "must match the file's chapter")
 
+    def test_chapter_order_passes(self):
+        self.fx.data["chapters/9.00.json"]["order"] = 1
+        self.fx.data["chapters/9.01.json"]["order"] = 2.0  # Godot writes whole floats
+        rep = self.fx.run()
+        self.assertEqual(rep.errors, [])
+        self.assertEqual(rep.warnings, [])
+
+    def test_chapter_order_errors(self):
+        for bad in (0, -1, 1.5, "1", True, None):
+            with self.subTest(order=bad):
+                self.fx.data["chapters/9.00.json"]["order"] = bad
+                self.fx.data["chapters/9.01.json"]["order"] = 2
+                self.assertError(self.fx.run(), "chapters/9.00.json.order: must be a whole number >= 1")
+        self.fx.data["chapters/9.00.json"]["order"] = 2
+        self.assertError(self.fx.run(), "chapter order 2 is also in chapters/9.00.json")
+
+    def test_mixed_chapter_order_warns(self):
+        self.fx.data["chapters/9.01.json"]["order"] = 2
+        rep = self.fx.run()
+        self.assertEqual(rep.errors, [])
+        self.assertTrue(any("have no 'order'" in w for w in rep.warnings), rep.warnings)
+
     def test_chapter_ids_allow_two_pov_letters(self):
         for ch in ("1.00", "3.27M", "4.06KM", "interlude_winter_solstice"):
             self.assertTrue(vd.RE_CHAPTER.match(ch), ch)
