@@ -137,8 +137,6 @@ func test_book6_records_and_looks() -> void:
 		assert_true(c.npcs.has(id), id)
 	assert_eq(c.npcs["wirclaw"]["home"], "wirclaw_village")
 	assert_true(c.locations.has("wirclaw_village"))
-	for id: String in c.events:
-		assert_false(id.begins_with("b6."), "no Book 6 events yet (M18.2 on)")
 	for id: String in ["headscratcher", "numbtongue", "badarrow", "shorthilt", "rabbiteater", "wirclaw",
 			"falene_skystrall", "dawil", "purple_smile"]:
 		assert_eq(CharacterSprite.look_for(id, String(c.npcs[id]["race"])), id, "own look for %s" % id)
