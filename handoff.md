@@ -1,20 +1,20 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.4 canon (plan `docs/plans/m18.4.md`, notes in ADR 0028 "M18.4"). Branch `claude/sleepy-feynman-txet0j` from main 6120ef3
-  (PR #92 merged). User answers: Esthelm news only, crypt search hook, no `xp_window`.
-  - `book6/chapters/`: `4.35E` (order 8), `4.36O` (9), `4.37O` (10), `4.38B` (11); 28 events, days 117 – 127. 4.36 O and 4.37 O are one day (126).
-  - Crypt search: scene stage `liscor_ruins_hall` 13 – 17 h with Olesm and Pisces; hook = talk to them. Sets `liscor_ruins.hidden_chute_found`.
-  - Zel: `zel.left_liscor` on day 127 puts him off-map at Celum (new goal in `npc_behaviour.json`). `not_gnoll` shows as "Raskghar".
-  - New locations `rie_estate`, `neunham`. Tests: new `sim_book6_crypt_search`; `sim_canon_book6` LAST_DAY 127; `sim_canon_book5`
-    fixed (M18.3 cleared two flags on its last day). Full suite not run.
+- M18.5 canon (plan `docs/plans/m18.5.md`, notes in ADR 0028 "M18.5"). Branch `claude/sleepy-feynman-txet0j` from main 9b5c983
+  (PR #93 merged). User answers: Rose Knights news only, party = scene stage with talk hook, Hive events only, no `xp_window`.
+  - `book6/chapters/`: `4.39G` (order 12), `4.40L` (13), `4.41L` (14), `4.42L` (15); 20 events, days 126 – 129 (day numbers are guesses).
+  - The party: scene stage `inn_interior` 16 – 23 h on day 128, twelve NPCs; hook = talk to a guest. New `npc_behaviour` entries: `yellow_splatters`, `purple_smile`.
+  - Greydath is the flag `greybeard.is_greydath_of_blades` (no merge). Purple Smile: flag `purple_smile.is_sergeant` (day 129).
+  - Tests: new `sim_book6_goblin_party`; `sim_canon_book6` LAST_DAY 129 + 3 tests. Full suite not run.
 
 ## Next
-1. The user merges the M18.4 PR.
-2. M18.5 canon 4.39 G – 4.42 L (days 127 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party. Ask stage, hook and
-   `xp_window` choices first. Chapter files get `"order"` 12 on. Raise `LAST_DAY` in `sim_canon_book6` (now 127).
-3. Flags for later batches (ADR 0028 "M18.1"): Greydath name (M18.5), Purple Smile [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7).
-   Open from M18.3: Halfseekers, Zevara, Relc, Lyonette have no combat behaviour entries for stages; Jelaqua's new body is for a later batch.
+1. The user merges the M18.5 PR.
+2. M18.6 canon 4.43 – 4.47 (days 128 – 129 in the roadmap; 4.43 starts after the party, so check its day cues): Ilvriss and the Pallass
+   anchor, Krshia's royal favour, the Silver Swords, Erin Level 33, Zel and Magnolia, the Goblin Lord's victory, Zel's speech,
+   Liscor's council. Ask stage, hook and `xp_window` choices first. Chapter files get `"order"` 16 on. Raise `LAST_DAY` in `sim_canon_book6` (now 129).
+3. Flags for later batches: `goblin_lord.named_reiss` (M18.7). Open: Halfseekers, Zevara, Relc, Lyonette have no combat behaviour
+   entries for stages; Jelaqua's new body is for a later batch; Yellow Splatters has no own look (uses the generic Soldier art).
    Run `sim_canon_book5` after any Book 6 change that clears a Book 5 flag.
 
 ## Waiting on the user
