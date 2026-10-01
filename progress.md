@@ -23,7 +23,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). M15.0–M15.3 merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df). Detail in the archive and ADR 0022.
 - [x] M16 — Maps, art and cities. M16.0-M16.6 merged as one PR ([PR #78](https://github.com/Daddy-Ousen/innworld-rpg/pull/78), merge commit 98a3b08). Detail in the archive and ADR 0023-0026. The user still has to walk the maps (`godot --path game`).
 - [x] M17 — Tactical combat, XCOM-style. M17.0–M17.8 merged ([PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79) … [PR #87](https://github.com/Daddy-Ousen/innworld-rpg/pull/87), last merge commit a7a5e37). Detail in the archive and ADR 0027.
-  Tags pending (the cloud refuses tag pushes): `m17.6-done` on e54e2c5, `m17.7-done` on ff7d757, `m17.8-done` and `m17-done` on a7a5e37 (commands in the archive).
+  Tags `m17.0-done` … `m17.8-done` and `m17-done` are on GitHub (checked 2026-10-01).
   - [ ] The user plays fights with Skills, spells and cover (`godot --path game`). Needs the user at home.
 - [ ] M18 — Book 6 (The General of Izril). Plan: ADR 0028, steps M18.0 – M18.7 in `docs/ROADMAP.md`. Text in the private repo.
   - [x] M18.P plan (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): six reading agents (summaries only), ADR 0028, roadmap steps.
@@ -76,7 +76,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     with Erin. Chosen records and the 4.31 scroll flag fixed. Tests run: `sim_book6_zel_dies` (new, 7), `sim_canon_book6`, `sim_canon_book5`, the
     touched Book 6 sims, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102),
     validator. All pass. Full suite not run. PR waits for the user to merge. After the merge M18 is done except the user's play check.
-- [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
+- [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
+
+## Releases (ADR 0029)
+- [ ] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
+  left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
+  `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows
+  exe opens and closes clean. Tests run: `unit_play_loop` (16 pass). Full suite not run.
+  - [ ] The user merges the PR. Then tag `v0.1.0-alpha` on the merge commit and publish the GitHub pre-release with the two zips.
+  - [ ] Android: skipped (user, 2026-10-01). Needs touch controls first (roadmap "Releases").
 
 ## Cloud setup
 - Done; detail in the archive. Book text in a cloud session: attach `Daddy-Ousen/innworld-canon-raw` (add_repo), clone it

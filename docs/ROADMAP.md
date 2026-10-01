@@ -324,10 +324,15 @@ each batch has a hook or stage; the GUT tests that touch it, the Python tool tes
 Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in cloud sessions.
 22 chapters, about 286,000 words: 5.00 – 5.08 (with 5.06 M), Interlude – Flos, 5.09 E – 5.11 E, 5.12 – 5.15,
 5.16 S – 5.18 S, 5.19 G, 5.20 G.
-- [ ] M19.P Plan + ADR 0029 (as M18.P). The user approves before M19.0
+- [ ] M19.P Plan + ADR 0030 (as M18.P). The user approves before M19.0
 - [ ] M19.0 – M19.n: world work, then canon batches
 **Done when:** all Book 7 canon is event data and `sim_canon_book7` runs to the last Book 7 day with drift 0;
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
+
+## Releases
+- [ ] v0.1.0-alpha (ADR 0029): export presets (Windows, Linux), `tools/release.ps1` with a smoke test, version on the title
+  screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
+- [ ] Touch controls (on-screen pad, menu buttons), then an Android build
 
 ## Later
 - optional LLM flavour layer

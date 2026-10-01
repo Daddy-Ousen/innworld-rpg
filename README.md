@@ -14,7 +14,8 @@ This repo holds no book text. The books and the world belong to pirateaba.
 - **Simulation first.** A headless simulation with a top-down 2D view on top. Combat is turn-based on the same map grid.
 
 ## Status
-Work in progress. Pixel art, music and sound are in. Books 1–5 are playable as canon data.
+Work in progress. Pixel art, music and sound are in. Books 1–6 are playable as canon data.
+First alpha build: **v0.1.0-alpha** (see [Download](#download)).
 
 | Milestone | What | State |
 |---|---|---|
@@ -27,10 +28,11 @@ Work in progress. Pixel art, music and sound are in. Books 1–5 are playable as
 | M11–M12 | Graphics, characters and animation; music, sound effects, ambience | Done |
 | M13 | Book 5 (The Last Light); the dungeon depths, traps | Done |
 | M14–M16 | Bag, cooking, guests, standing, UI skin, portraits; readability; maps, art and cities | Done |
-| M17 | Tactical combat (XCOM-style): AP, turn order, combat Skills, mana and spells (M17.0–M17.8 done) | In progress |
-| Next | Book 6 (The General of Izril), Book 7 (The Rains of Liscor) | Planned |
+| M17 | Tactical combat (XCOM-style): AP, turn order, combat Skills, mana and spells | Done |
+| M18 | Book 6 (The General of Izril) | Done |
+| Next | Book 7 (The Rains of Liscor) | Planned |
 
-Canon data today: 766 events, 223 NPC records and 99 locations over Books 1–5.
+Canon data today: 898 events, 261 NPC records and 103 locations over Books 1–6.
 
 | Book | Chapters | Events |
 |---|---|---|
@@ -39,10 +41,23 @@ Canon data today: 766 events, 223 NPC records and 99 locations over Books 1–5.
 | 3 Flowers of Esthelm | 3.00–3.25 | 157 |
 | 4 Winter Solstice | 3.26–3.40 | 111 |
 | 5 The Last Light | 4.00 K–4.31 | 140 |
+| 6 The General of Izril | 4.32 G–4.49 | 132 |
 
 Details: [docs/ROADMAP.md](docs/ROADMAP.md) and [progress.md](progress.md).
 
-## Play
+## Download
+Ready-made builds for Windows and Linux are on the
+[Releases page](https://github.com/Daddy-Ousen/innworld-rpg/releases). Unzip and run `InnworldRPG.exe`
+(Windows) or `InnworldRPG.x86_64` (Linux). You need a keyboard. Each zip has a `README.txt` with the keys.
+
+Make the release zips yourself (Windows, needs the Godot 4.7.2 export templates):
+```powershell
+$env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
+powershell -ExecutionPolicy Bypass -File tools/release.ps1   # zips land in export/
+```
+Details: [ADR 0029](docs/adr/0029-release-builds.md).
+
+## Play from source
 Needs [Godot 4.7](https://godotengine.org/) on your PATH (or use the full path to the Godot exe).
 
 ```powershell
@@ -89,7 +104,7 @@ docs/          design, roadmap, decisions (ADRs in docs/adr/), cloud guide
 game/          Godot project
   core/        headless simulation (no nodes, no scenes)
   data/        classes, skills, spells, actions, enemies, maps (JSON)
-    canon/     Books 1–5: events, NPCs and locations (JSON)
+    canon/     Books 1–6: events, NPCs and locations (JSON)
   world/ ui/   scenes and presentation
   tests/       GUT tests
 tools/         Python: epub extraction, art builders, data validator (not shipped)
