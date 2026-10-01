@@ -1,0 +1,59 @@
+# Build the release zips (Windows + Linux) into export/. See docs/adr/0029-release-builds.md.
+#
+#   $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
+#   powershell -ExecutionPolicy Bypass -File tools/release.ps1
+#
+# Needs the Godot 4.7.2 export templates (Editor > Manage Export Templates).
+# Use the *console* exe: the WinGet "godot" link returns before Godot is done.
+# The version comes from game/project.godot (application/config/version).
+
+param([string]$Godot = $env:GODOT)
+
+# Godot writes notes to stderr: do not let them stop the script. Checks throw below.
+$ErrorActionPreference = 'Continue'
+$root = Split-Path -Parent $PSScriptRoot
+if (-not $Godot) { $Godot = (Get-Command godot -ErrorAction Stop).Source }
+
+$m = Select-String -Path "$root/game/project.godot" -Pattern '^config/version="(.+)"'
+if (-not $m) { throw 'No config/version in game/project.godot' }
+$version = $m.Matches[0].Groups[1].Value
+Write-Host "Innworld RPG v$version"
+
+$out = "$root/export"
+$builds = @(
+    @{ Preset = 'Windows Desktop'; Dir = 'windows'; File = 'InnworldRPG.exe' },
+    @{ Preset = 'Linux'; Dir = 'linux'; File = 'InnworldRPG.x86_64' }
+)
+
+foreach ($b in $builds) {
+    $name = "InnworldRPG-v$version-$($b.Dir)"
+    $dir = "$out/$name"
+    if (Test-Path $dir) { Remove-Item -Recurse -Force $dir }
+    New-Item -ItemType Directory -Force $dir | Out-Null
+    $bin = "$dir/$($b.File)"
+
+    Write-Host "Export $($b.Preset)..."
+    & $Godot --headless --path "$root/game" --export-release $b.Preset $bin *> "$out/export_$($b.Dir).log"
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $bin)) { throw "Export failed: see export/export_$($b.Dir).log" }
+
+    Write-Host "Smoke test $($b.Preset)..."
+    $smoke = & $Godot --headless --main-pack $bin -s "$root/tools/release/smoke.gd" 2>&1 | Select-String 'SMOKE'
+    $smoke | ForEach-Object { Write-Host "  $_" }
+    if ($LASTEXITCODE -ne 0) { throw "Smoke test failed for $($b.Preset)" }
+
+    $readme = (Get-Content -Raw "$root/tools/release/README-PLAYERS.txt").Replace('{VERSION}', "v$version")
+    Set-Content -Path "$dir/README.txt" -Value $readme -NoNewline
+    Copy-Item "$root/CREDITS.md" $dir
+    New-Item -ItemType Directory -Force "$dir/licenses" | Out-Null
+    Get-ChildItem -Recurse -Filter *.txt "$root/game/assets" | Copy-Item -Destination "$dir/licenses"
+
+    $zip = "$out/$name.zip"
+    if (Test-Path $zip) { Remove-Item -Force $zip }
+    # tar.exe (Windows 10+) writes '/' in zip paths; Compress-Archive in PowerShell 5 writes backslashes.
+    tar.exe -a -c -f $zip -C $out $name
+    if ($LASTEXITCODE -ne 0) { throw "Zip failed: $zip" }
+    Write-Host "Made $zip"
+}
+
+Write-Host 'Done. If git now shows .import files as changed and you did not change art:'
+Write-Host '  git checkout -- game/assets'

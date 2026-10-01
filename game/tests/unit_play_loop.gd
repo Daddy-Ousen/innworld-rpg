@@ -44,6 +44,13 @@ func test_title_without_saves_offers_only_a_new_game() -> void:
 	assert_false(t.get_node("%NewGame").disabled)
 
 
+func test_title_shows_the_build_version() -> void:
+	var t := _title()
+	var v := String(ProjectSettings.get_setting("application/config/version"))
+	assert_ne(v, "", "project.godot has a version")
+	assert_eq(t.get_node("%Version").text, "v" + v)
+
+
 func test_title_new_game_starts_fresh_with_the_seed() -> void:
 	var t := _title()
 	t.new_game_seed = 42

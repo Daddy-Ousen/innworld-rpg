@@ -1,23 +1,34 @@
 # Handoff
 
-## Just done (2026-10-01, cloud session)
-- M18.7 canon (plan `docs/plans/m18.7.md`, notes in ADR 0028 "M18.7"). Branch `claude/sleepy-feynman-txet0j` from main 639fd45 (PR #95 merged).
-  User answers: one scene stage (the mourning, day 130), one talk hook with Erin, no `xp_window`.
-  - `book6/chapters/`: `interlude_the_antinium_wars_pt_3/4/5` (orders 21 – 23, day 129), `4.48` (24), `4.49` (25); 31 events, days 129 – 130.
-  - Zel dies in `b6.zel_names_the_goblin_lord_reiss_and_dies` (flag `goblin_lord.named_reiss`; public belief and truth are two flags).
-  - Stage `b6.liscor_mourns_zel` (scene, `inn_interior`). Hook: talk to Erin (`wandering_inn.earther_shared_the_grief_with_erin`).
-  - Fixes: `book5/npcs.json` Oom, Bea, Kerash; flag `azkerash.lost_some_teleport_scrolls` (was `lost_his_...`) in 4.31.
-  - Tests: new `sim_book6_zel_dies` (7); `sim_canon_book6` (LAST_DAY 130). Full suite not run.
+## Just done (2026-10-01, local session)
+- First release v0.1.0-alpha (ADR 0029). Branch `release/v0.1.0` from main 6a9e8b8.
+  User answers: v0.1.0-alpha, GitHub pre-release, Windows + Linux. Android skipped (no touch controls).
+  - `game/export_presets.cfg`: presets "Windows Desktop" and "Linux"; `include_filter="*.json"` (data is plain JSON);
+    tests, test_support, GUT and `_scratch` left out; pck embedded.
+  - `project.godot` `config/version="0.1.0-alpha"`; title screen label `%Version` (`TitleMenu.version_text()`).
+  - `tools/release.ps1` (export, smoke test, zip with `tar.exe`), `tools/release/smoke.gd`, `tools/release/README-PLAYERS.txt`.
+  - Built: `export/InnworldRPG-v0.1.0-alpha-windows.zip` and `-linux.zip` (gitignored). Smoke: 898 events, 38 maps, 0 problems.
+  - Export templates 4.7.2 (Windows + Linux files only) are in `%APPDATA%\Godot\export_templates\4.7.2.stable`.
+  - Tests: `unit_play_loop` (16 pass). Full suite not run.
+  - The M19 plan ADR is now 0030 (0029 is the release ADR).
 
 ## Next
-1. The user merges the M18.7 PR. Then M18 is done except the user's play check.
-2. M19 — Book 7: M19.P plan first (ADR 0029). Ask the user to approve the plan before M19.0.
-3. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
+1. The user merges the release PR. Then: `git tag v0.1.0-alpha <merge commit>`, push the tag, and
+   `gh release create v0.1.0-alpha --prerelease` with the two zips (rebuild with `tools/release.ps1` if `export/` is gone).
+2. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
+3. Later: touch controls, then an Android build (roadmap "Releases").
+4. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
    the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
-- Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
+- Merge the release PR; approve the release notes.
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps (`godot --path game`).
+
+## Gotchas (release)
+- Every export and `--import` rewrites many `.import` files (line ends). Run `git checkout -- game/assets` after.
+- A release template ignores `-s`. Smoke-test a build with the editor console exe: `--headless --main-pack <exe> -s <script>`.
+- The local class cache can be stale after cloud merges ("Identifier X not declared"): run `--import` once.
+- Two untracked test `.uid` files came from cloud merges (`sim_book6_silver_swords`, `sim_book6_zel_dies`); committed on this branch.
 
 ## Gotchas (cloud)
 - Chapter ids for non-numbered chapters follow the raw `index.json` id (for example `interlude_the_antinium_wars_pt_3`); the file name must match.

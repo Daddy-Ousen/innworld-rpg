@@ -70,6 +70,6 @@ Each prompt is ready to paste.
 4. **M18.0 … M18.7 Book 6 steps** (one session per step, as `docs/ROADMAP.md` lists them; M18.0 is next)
    > Do the next open M18 step in docs/ROADMAP.md. Follow CLAUDE.md and ADR 0028. Ask me the stage and hook
    > choices first. Then build, test, update the docs, and open a PR.
-5. **M19.P Book 7 plan**, then **M19.0 … M19.n** (same prompts, with Book 7, ADR 0029, canon/raw/book7)
+5. **M19.P Book 7 plan**, then **M19.0 … M19.n** (same prompts, with Book 7, ADR 0030, canon/raw/book7)
 
 To continue after a break, paste: "Read progress.md and handoff.md. Go on with the next open task."
