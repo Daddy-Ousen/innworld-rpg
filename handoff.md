@@ -1,32 +1,23 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.1 world (plan `docs/plans/m18.1.md`, notes in ADR 0028 "M18.1"). Branch `claude/nice-albattani-wj8hw6` from
-  main 5d0930e (PR #89 merged). User answers: ossuary = two maps in the Ruins; goat drawn in code; basement opens
-  with the inn build; records for everyone with a role.
-  - Maps: `wirclaw_village` (30 min west of `inn_hill`), `inn_basement` (trapdoor `inn_interior` [14, 11], gated by
-    `wandering_inn.expansion_begun`), `liscor_ruins_hall` (from the `ruins_entrance` doors once
-    `ruins.vault_found_looted`; illusion wall overlay until `liscor_ruins.hidden_chute_found`; hexagon = one-way
-    chute exit `hidden_chute`), `liscor_ruins_ossuary` (corridor trap `corridor_tile`, exit to `liscor_crypt`;
-    `liscor_crypt` exit `ossuary_corridor` back, same flag). Moods, ambience, wake spots.
-  - `eater_goat` enemy (leap, no spawns), drawn goat art; looks: Redfang five, `wirclaw`, `falene_skystrall`,
-    `dawil`, `race_dwarf`, `purple_smile` (new `"paint"` option on sprite edits).
-  - `data/canon/book6/`: `npcs.json` (38), `locations.json` (`wirclaw_village`), `chapters/.gitkeep`. The validator
-    warns (no error) on a book with no chapter files.
-- Tests run (all pass): `sim_book6_world` (new, 9), `unit_combat_db`, `unit_monster_art`, `unit_art`,
-  `unit_gated_exits`, `sim_liscor_depths`, `sim_inn_third_floor`, `unit_canon_db`, `unit_map_db`, `sim_inn_brawl`,
-  `sim_inn_service`, `unit_ambience`, `unit_crowd`, `unit_ground_art`, `unit_guests`, `unit_music_pick`,
-  `unit_other_maps`, `unit_sound_cues`, `unit_world_view`; Python tool tests (102); validator `--all`. Full suite
-  not run (user rule).
+- M18.2 canon (plan `docs/plans/m18.2.md`, notes in ADR 0028 "M18.2"). Branch `claude/sleepy-feynman-txet0j` from
+  main 440a0dd (PR #90 merged). User answers: scene stage + hook for the march, no `xp_window`, Rags's raid as news only.
+  - `book6/chapters/`: `4.32G` (order 1), `1.02C` – `1.05C` (orders 2 – 5); 17 events. `.gitkeep` deleted.
+  - March: scene stage `inn_hill` 22 – 24 h with Erin and Bird; hook = talk to them (`keep_watch` leaves no
+    location context, so it cannot be a hook).
+  - Tom: off-map T1 events in `paranfer` (new location). Xersia and the Fool die. `tom.lost_the_hero_class` is set on
+    day 119 and cleared on day 121.
+  - Tests: new `sim_canon_book6` (LAST_DAY grows each batch) and `sim_book6_goblin_march`. All pass. Full suite not run.
 
 ## Next
-1. The user merges the M18.1 PR ([PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90)).
-2. M18.2 canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir
-   (off-map). Ask the stage, hook and `xp_window` choices first. Chapter files get `"order"` (4.32 G = 1,
-   1.02 C = 2, … ADR 0028 "Context"); delete `book6/chapters/.gitkeep` when the first chapter file lands.
+1. The user merges the M18.2 PR.
+2. M18.3 canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
+   move into the inn. Ask the stage, hook and `xp_window` choices first. Chapter files get `"order"` 6 and 7. Raise
+   `LAST_DAY` in `sim_canon_book6`. 4.33 clears `lyonette.sheltering_in_celum`, `mrsha.sheltering_in_celum` and
+   `wandering_inn.boarded_up_for_the_goblin_lord`. Needs a stage at `wirclaw_village` and the Redfang five's basement schedules.
 3. Flags for later batches (ADR 0028 "M18.1"): Bugear's weapon (M18.3), Greydath name (M18.5), Purple Smile
-   [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7). M18.3 needs a stage at `wirclaw_village` (goats over the
-   wall, Redfang outside) and the Redfang five's basement schedules; M18.4 sets `liscor_ruins.hidden_chute_found`.
+   [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7). M18.4 sets `liscor_ruins.hidden_chute_found`.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
