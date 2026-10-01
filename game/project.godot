@@ -17,6 +17,11 @@ config/features=PackedStringArray("4.7")
 Session="*res://ui/session.gd"
 Audio="*res://ui/audio.gd"
 
+[display]
+
+window/stretch/mode.web="canvas_items"
+window/stretch/aspect.web="expand"
+
 [gui]
 
 theme/custom="res://ui/theme.tres"

@@ -32,6 +32,9 @@ func _ready() -> void:
 	%OptionsButton.pressed.connect(open_options)
 	options.closed.connect(close_options)
 	%Quit.pressed.connect(func() -> void: get_tree().quit())
+	if not shows_quit(OS.has_feature("web")):
+		_menu.erase(%Quit)
+		%Quit.hide()
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
 	%Version.text = version_text()
@@ -44,6 +47,11 @@ func _ready() -> void:
 static func version_text() -> String:
 	var v := String(ProjectSettings.get_setting("application/config/version", ""))
 	return "" if v == "" else "v" + v
+
+
+## Quit shows only outside a browser (ADR 0031): a web page cannot close itself.
+static func shows_quit(web: bool) -> bool:
+	return not web
 
 
 ## Continue and Load are off while there is no save.
