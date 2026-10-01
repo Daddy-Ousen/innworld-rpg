@@ -1,0 +1,611 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.43",
+	"order": 16,
+	"events": {
+		"b6.the_morning_after_the_goblin_party": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordsman": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.stays_at_the_inn_with_the_goblins",
+					"mrsha.steals_piscess_wand_again",
+					"ceria.bitten_at_the_goblin_party",
+					"halfseekers.hungover_from_firebreath_whiskey"
+				],
+				"relationship": [
+					{
+						"from": "yvlon_byres",
+						"to": "ksmvr",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "The morning after the party (day 129 is a guess: the text says the next day). Pisces gets the wand back from Lyonette."
+			},
+			"summary": "Lyonette asks Mrsha if she wants to go to Liscor. Mrsha stays, calmer around the Goblins. The Halfseekers are hungover from Firebreath Whiskey, Ceria has Goblin bites, Yvlon beats Ksmvr in a spar, and Mrsha steals Pisces' wand again."
+		},
+		"b6.krshia_returns_to_her_market_stall": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "krshia_stall",
+			"roles": {
+				"stallkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"krshia.back_at_the_market_stall",
+					"krshia.will_not_visit_the_inn_yet",
+					"erin.orders_a_big_supply_from_krshia"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "krshia",
+						"delta": 1
+					}
+				]
+			},
+			"news": "Krshia has opened a small stall at the edge of the market again, and Erin ordered a big supply from her.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "Her absence dates from Brunkr's death. The order is six gold of sugar, eggs, meat, kegs and bowls, ready the next day."
+			},
+			"summary": "Krshia is back at a small stall at the edge of the market after weeks away. She will not visit the inn yet, the memory of the Goblin King is too strong. She takes Erin's big supply order and asks Lyonette to come to her flat."
+		},
+		"b6.ilvriss_freezes_the_street_and_orders_the_anchor": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"door.range_about_invrisil",
+					"door.far_link_needs_an_anchor",
+					"door.far_link_moves_one_person_a_day",
+					"hawk.sent_with_the_pallass_anchor",
+					"ilvriss.froze_the_street_with_a_command_skill"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "erin_solstice",
+						"delta": -1
+					}
+				]
+			},
+			"news": "Wall Lord Ilvriss froze a Liscor street for a moment with a Skill when Erin mocked him. He wants the door linked to Pallass.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "The text gives the door's new limits (range, anchor, one person a day, mana stones speed the recharge but not the range). Hawk needs three or four days. Olesm is frozen for over a minute."
+			},
+			"summary": "Drunk Ilvriss demands a door link to Pallass. Erin explains the limits: range about Invrisil, an anchor first, one person a day. He orders Hawk to carry an anchor, and freezes the street for two seconds with a Skill when Erin mocks him."
+		},
+		"b6.lyonette_gives_krshia_a_royal_favour": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"stallkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.gave_krshia_a_royal_favour",
+					"krshia.forgives_lyonette",
+					"krshia.knows_lyonette_is_a_princess",
+					"krshia.vows_to_hunt_regrika_blackpaw"
+				],
+				"relationship": [
+					{
+						"from": "krshia",
+						"to": "lyonette",
+						"delta": 3
+					}
+				]
+			},
+			"news": "Krshia and Lyonette made peace. Krshia is rebuilding her business.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "Krshia feels no change yet. No class is named for her; do not show Lyonette's rank. Krshia vows that Regrika Blackpaw will be hunted."
+			},
+			"summary": "Krshia thanks Lyonette for making Brunkr a [Knight], and says she knew Lyonette is a [Princess]. Lyonette can appoint one business by royal favour. Krshia is close to giving up on rebuilding, accepts, and forgives Lyonette fully. Lyonette says the blessing and touches her brow."
+		},
+		"b6.ilvriss_mourns_periss_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"halfseeker": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.mourns_periss_at_the_inn",
+					"ilvriss.apologised_to_the_inn",
+					"ilvriss.ate_erins_cake",
+					"erin.promised_to_get_ilvriss_to_pallass",
+					"jelaqua.halassia_remembered",
+					"goblins.first_sugar"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "erin_solstice",
+						"delta": 3
+					},
+					{
+						"from": "ilvriss",
+						"to": "jelaqua",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "Ilvriss needs a few days to prepare, since a Wall Lord in Pallass means politics. The Goblins taste sugar for the first time."
+			},
+			"summary": "Erin cuts Ilvriss off and gives him warm milk. He tells her about Periss, takes the blame for Regrika's escape, eats soufflés and cake, and thanks the Halfseekers for burying Halassia, a Scorchling. Erin promises to get him to Pallass."
+		},
+		"b6.the_silver_swords_arrive_into_a_cake_fight": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": []
+				},
+				"sister": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dwarf": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [
+					"redfang.lodge_in_the_inn_basement"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.ylawes_arrived",
+					"silver_swords.arrived_at_the_inn",
+					"yvlon.reunited_with_ylawes",
+					"erin.stopped_ylawes_with_a_cake"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "ylawes_byres",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					16,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							9
+						]
+					},
+					{
+						"npc": "ylawes_byres",
+						"pos": [
+							12,
+							12
+						]
+					},
+					{
+						"npc": "yvlon_byres",
+						"pos": [
+							10,
+							12
+						]
+					},
+					{
+						"npc": "falene_skystrall",
+						"pos": [
+							6,
+							12
+						]
+					},
+					{
+						"npc": "dawil",
+						"pos": [
+							4,
+							12
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							3,
+							8
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							3,
+							6
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							9,
+							4
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							7,
+							4
+						]
+					},
+					{
+						"npc": "ksmvr",
+						"pos": [
+							3,
+							12
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							10,
+							8
+						]
+					}
+				],
+				"line": "Weapons are half-drawn in the common room of the Wandering Inn. A cake is on the floor, a Dwarf is laughing, and a Wall Lord watches with a mug in his hand.",
+				"note": "M18.6: a scene. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_stood_among_the_silver_swords",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"ylawes_byres",
+									"yvlon_byres",
+									"falene_skystrall",
+									"dawil",
+									"ceria_springwalker"
+								]
+							}
+						}
+					],
+					"days": [
+						129,
+						129
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_talked_to_the_silver_swords"
+						],
+						"relationship": [
+							{
+								"from": "dawil",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "yvlon_byres",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn spoke with the Silver Swords while Ylawes and the Goblins glared at each other."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.43",
+				"confidence": "confirmed",
+				"note": "M18.6: a scene stage with the Silver Swords, Ilvriss, the Halfseekers and the Redfang five. Hours 16 to 23 are a guess (sunset arrival, late night end). Ilvriss asks if the inn is always like this."
+			},
+			"summary": "At sunset Ylawes Byres arrives with a Half-Elf [Mage] and a Dwarf in full plate. Yvlon drops her plate. Ylawes sees the Halfseekers and the Redfang Goblins and everyone draws weapons. Erin hits Ylawes with a cake, Dawil laughs, and Falene points at the sign that forbids killing Goblins."
+		}
+	},
+	"system": []
+}
