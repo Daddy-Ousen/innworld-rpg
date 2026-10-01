@@ -308,7 +308,7 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
   `liscor_crypt`); the Eater Goat (`leap`, drawn art); looks for the Redfang five, Wirclaw, Falene, Dawil,
   `race_dwarf`, Purple Smile; 38 Book 6 NPC records with no events yet. No save change (ADR 0028 "M18.1")
 - [x] M18.2 Canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir (off-map)
-- [ ] M18.3 Canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
+- [x] M18.3 Canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
   move into the inn
 - [ ] M18.4 Canon 4.35 E – 4.38 B (days 116 – 127): Laken (Day 72 – 82 = days 117 – 127), Olesm (Raskghar, Niers' ring, the crypt chute,
   the rat contract), the Esthelm wave stage, Zel leaves through the door

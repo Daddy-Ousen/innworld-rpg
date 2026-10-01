@@ -280,13 +280,13 @@
 		"bugear": {
 			"name": "Bugear",
 			"race": "Goblin",
-			"tags": ["goblin", "red_fang_tribe", "warrior", "spear", "shield"],
+			"tags": ["goblin", "red_fang_tribe", "warrior", "sword", "shield"],
 			"faction": "red_fang_tribe",
 			"home": "red_fang_territory",
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "One of the thirteen Redfang warriors Garen sent after Erin. A band nickname; the Redfang have no Shaman to give names. Survives Esthelm (3.20T)."},
+			"canon_ref": {"book": 3, "chapter": "3.17T", "confidence": "confirmed", "note": "One of the thirteen Redfang warriors Garen sent after Erin. A band nickname; the Redfang have no Shaman to give names. Survives Esthelm (3.20T). M18.3: Book 6 (4.33 - 4.34) shows him with a sword and shield, so the tag is sword; he dies to the Eater Goats at Wirclaw's village."},
 			"summary": "A Redfang spear-and-shield Goblin named for the mites nesting in his ear, which the Florist washes out. Loyal to Garen at first. A Skill saves him from Ylawes' blow, and he pins Toren's sword arm in the last battle."
 		},
 		"rocksoup": {

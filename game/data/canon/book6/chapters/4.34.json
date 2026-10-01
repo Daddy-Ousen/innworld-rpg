@@ -1,0 +1,693 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.34",
+	"order": 7,
+	"events": {
+		"b6.eater_goats_attack_wirclaws_village": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wirclaw_village",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"farmer": {
+					"prefer": [
+						"wirclaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordsman": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fighter": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shield": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"front": {
+					"prefer": [
+						"bugear"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wirclaw_village.eater_goats_killed",
+					"redfang.lost_bugear",
+					"redfang.survivors_met_erin"
+				],
+				"kill": [
+					"bugear"
+				]
+			},
+			"stage": {
+				"area": "wirclaw_village",
+				"hours": [
+					12,
+					17
+				],
+				"kind": "fight",
+				"foes": [
+					{
+						"enemy": "eater_goat",
+						"pos": [
+							10,
+							22
+						]
+					},
+					{
+						"enemy": "eater_goat",
+						"pos": [
+							13,
+							22
+						]
+					},
+					{
+						"enemy": "eater_goat",
+						"pos": [
+							16,
+							21
+						]
+					},
+					{
+						"enemy": "eater_goat",
+						"pos": [
+							19,
+							22
+						]
+					}
+				],
+				"line": "Scrawny black goats pour over the hill toward Wirclaw's village, bleating and fearless.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							14,
+							23
+						],
+						"allies": [
+							"badarrow",
+							"headscratcher",
+							"shorthilt",
+							"rabbiteater",
+							"numbtongue"
+						],
+						"line": "Five painted Hobgoblins run in front of the herd with their weapons out."
+					},
+					{
+						"after_seconds": 0,
+						"from": [
+							23,
+							12
+						],
+						"allies": [
+							"erin_solstice",
+							"wirclaw"
+						],
+						"line": "Erin runs to the wall. Wirclaw bars the gate and takes his bow."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 2,
+						"from": [
+							11,
+							22
+						],
+						"foes": [
+							"eater_goat",
+							"eater_goat",
+							"eater_goat",
+							"eater_goat"
+						],
+						"line": "The goats stack on each other's backs and leap for the top of the wall."
+					},
+					{
+						"after_seconds": 140,
+						"left_at_most": 2,
+						"from": [
+							18,
+							22
+						],
+						"foes": [
+							"eater_goat",
+							"eater_goat",
+							"eater_goat",
+							"eater_goat"
+						],
+						"line": "A last knot of goats charges out of the grass."
+					},
+					{
+						"after_seconds": 90,
+						"from": [
+							28,
+							20
+						],
+						"allies": [
+							"bird"
+						],
+						"line": "Bird, healed, stands on the hill and puts an arrow on the string."
+					}
+				],
+				"note": "M18.3: a fight. Twelve goats stand in for about thirty. Bugear is not placed: the text has him die buying time (his death is the event's effect). Hours are guesses (daytime, after the milk errand)."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_the_eater_goats",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"eater_goat"
+								]
+							}
+						}
+					],
+					"days": [
+						115,
+						115
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wirclaw_village.earther_fought_the_eater_goats"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "wirclaw",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "headscratcher",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "badarrow",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "numbtongue",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "When the Eater Goats came for Wirclaw's village, a Human from the Wandering Inn fought beside Erin and the Redfang Hobgoblins. Bugear still fell."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.34",
+				"confidence": "confirmed",
+				"note": "Bugear is the only Redfang who dies. His weapon in this chapter is a sword and a shield: no spear (see book3 record)."
+			},
+			"summary": "The goats stack to clear Wirclaw's wall. The Hobgoblins hold a line. A goat tears out Bugear's throat and he charges the herd in silence to buy time, and dies. Erin leads the rest away, and bottles and arrows finish them."
+		},
+		"b6.erin_bows_to_the_redfang_and_feeds_them": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fourth": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"reader": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.bowed_to_the_goblins",
+					"redfang.fed_at_the_inn",
+					"redfang.in_the_inn",
+					"redfang.seek_rags",
+					"mrsha.angry_at_erin_over_the_goblins",
+					"lyonette.wary_of_the_goblins"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "headscratcher",
+						"delta": 2
+					},
+					{
+						"from": "erin_solstice",
+						"to": "numbtongue",
+						"delta": 2
+					},
+					{
+						"from": "erin_solstice",
+						"to": "badarrow",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					16,
+					20
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							12,
+							6
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							12,
+							10
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							10,
+							12
+						]
+					}
+				],
+				"line": "Five painted Hobgoblins sit in the Wandering Inn's common room over plates of spaghetti, meatloaf and pizza, and say little.",
+				"note": "M18.3: a scene. Hours are guesses (late afternoon, after the fight)."
+			},
+			"hooks": [
+				{
+					"id": "player_ate_with_the_redfang",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"headscratcher",
+									"shorthilt",
+									"badarrow",
+									"rabbiteater",
+									"numbtongue"
+								]
+							}
+						}
+					],
+					"days": [
+						115,
+						115
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_sat_with_the_redfang"
+						],
+						"relationship": [
+							{
+								"from": "headscratcher",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "numbtongue",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "rabbiteater",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn sat down with the five Hobgoblins Erin was feeding, and talked to them."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.34",
+				"confidence": "confirmed",
+				"note": "Erin learns their names later the same evening."
+			},
+			"summary": "Erin bows to the Redfang over Bugear's head, the first time a Human has done so. She heals them with a pile of potions and feeds them. Numbtongue reads the plate signs. They know Rags but not where she is, and they are not with the Goblin Lord. Mrsha, upstairs, is angry at Erin. Lyonette is upset."
+		},
+		"b6.halfseekers_brawl_with_the_redfang": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mariner": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher",
+						"badarrow",
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.in_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.fought_the_redfang_in_the_inn",
+					"jelaqua.asked_after_garen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.34",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "A Goblin walks to the outhouse and meets Jelaqua at the door, who says Garen, and the Goblin says Redfang. Moore throws him, and the Halfseekers beat the Hobgoblins down. Nobody dies. Drakes in the common room run for the Watch."
+		},
+		"b6.zevara_backs_down_on_zels_order": {
+			"tier": 2,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [
+					"halfseekers.fought_the_redfang_in_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zevara.stood_down_on_zels_order",
+					"liscor.knows_goblins_live_in_the_inn",
+					"zel.moved_out_of_the_inn"
+				],
+				"clear_flags": [
+					"zel.at_wandering_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.34",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "The Watch storms the inn with Relc. Erin stands in front of the Goblins and points to her sign. Zevara means to kill or drive them out. Zel arrives and orders her to stand down, for reasons he keeps to himself. He will not sleep under the same roof as Goblins and moves out before night."
+		},
+		"b6.redfang_sleep_in_the_inn_basement": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"headscratcher",
+						"shorthilt",
+						"badarrow",
+						"rabbiteater",
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"waitress": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"zevara.stood_down_on_zels_order"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.lodge_in_the_inn_basement",
+					"wandering_inn.goblin_sign_replanted",
+					"wandering_inn.empty_of_guests"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.34",
+				"confidence": "confirmed",
+				"note": "Day and hour are guesses; the text gives none."
+			},
+			"summary": "Erin learns their names, asks them to stay and shakes Headscratcher's hand. They sleep in the basement. Erin replants the 'no killing Goblins' sign. Both cities now know, and the inn has no customers."
+		}
+	},
+	"system": []
+}
