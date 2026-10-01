@@ -1498,9 +1498,9 @@
 				"book": 5,
 				"chapter": "4.30",
 				"confidence": "confirmed",
-				"note": "4.28: she and Kerash killed Periss' soldiers. A spellcaster among the Chosen."
+				"note": "4.28: she and Kerash killed Periss' soldiers. M18.7 (4.49): her power is a plague touch that healing potions make worse."
 			},
-			"summary": "One of Az'kerash's Chosen: a rotting undead woman and a spellcaster. She scries Ryoka running for the High Passes."
+			"summary": "One of Az'kerash's Chosen: a rotting undead woman whose touch carries a plague. She scries Ryoka running for the High Passes."
 		},
 		"kerash": {
 			"name": "Kerash",
@@ -1520,9 +1520,9 @@
 				"book": 5,
 				"chapter": "4.30",
 				"confidence": "confirmed",
-				"note": "An undead Gnoll as tall as Venitra, with an axe. 4.28: he and Bea killed Periss' soldiers."
+				"note": "An undead Gnoll as tall as Venitra, with an axe (4.28; he uses a magic sword in 4.49). 4.28: he and Bea killed Periss' soldiers."
 			},
-			"summary": "One of Az'kerash's Chosen: a giant undead Gnoll with an axe. After Venitra fails, the Necromancer gives him his authority."
+			"summary": "One of Az'kerash's Chosen: a giant undead Gnoll, with an axe in Book 5 and a magic sword in 4.49. After Venitra fails, the Necromancer gives him his authority."
 		},
 		"oom": {
 			"name": "Oom",
@@ -1540,9 +1540,9 @@
 				"book": 5,
 				"chapter": "4.30",
 				"confidence": "confirmed",
-				"note": "One of the two eldest Chosen with Ijvani (4.28). Race under the coat is not stated."
+				"note": "One of the two eldest Chosen with Ijvani (4.28). M18.7 (4.49): Oom is a sentient Acid Slime in a coat with a fist-sized mana-stone core."
 			},
-			"summary": "One of Az'kerash's eldest Chosen: dark and faceless in a long coat and hat, made to kill warriors like Zel Shivertail."
+			"summary": "One of Az'kerash's eldest Chosen: dark and faceless in a long coat and hat, made to kill warriors like Zel Shivertail. An Acid Slime with a mana-stone core; Zel destroys him (4.49)."
 		}
 	}
 }

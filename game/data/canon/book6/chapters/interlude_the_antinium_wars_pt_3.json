@@ -1,0 +1,154 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "interlude_the_antinium_wars_pt_3",
+	"order": 21,
+	"events": {
+		"b6.klbkch_reads_the_war_history_to_the_hive": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"reader": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"guest": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"klbkch.read_the_war_history_to_the_free_antinium",
+					"erin.allowed_in_the_hive",
+					"history.second_antinium_war_known"
+				],
+				"relationship": [
+					{
+						"from": "klbkch",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_3",
+				"confidence": "confirmed",
+				"note": "A bedtime-story night in the Painted Soldiers' barracks (Belgrade, Anand, Garry, Pawn, Bird listen). Night day is a guess; the frames of Pt. 3 – 5 are one evening."
+			},
+			"summary": "Klbkch reads a Drake's history of the Second Antinium War to the Free Antinium, with popcorn, and adds his own memory of the first battle. Erin joins them and then reads them a children's book. History notes only: the war was in 13 – 14 A.F. and the Goblin King Velan came to Izril."
+		},
+		"b6.pisces_reads_the_war_history_in_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"reader": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"listener": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.read_the_war_history_aloud"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_3",
+				"confidence": "confirmed",
+				"note": "Erin is away at the Hive; Mrsha, Lyonette, the Halfseekers and five Redfang listen. Pisces' claim about Dragon bones in the Walled Cities is his drama, not a stated fact."
+			},
+			"summary": "While Erin is away, Pisces reads the history book aloud in the common room. Ceria, Ksmvr, Yvlon, Mrsha, Lyonette and the Redfang five listen."
+		},
+		"b6.bethal_stays_with_thomast_before_the_battle": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"wife": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": []
+				},
+				"husband": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bethal.stays_with_thomast_in_the_camp",
+					"thomast.sends_bethal_away_from_the_fight"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_3",
+				"confidence": "confirmed",
+				"note": "She declines Magnolia's hospitality. Thomast wrote to the author years ago. Bethal's mother and father died in the Sacrifice of Roses."
+			},
+			"summary": "Lady Bethal reads the history of the Sacrifice of Roses in her husband's tent outside Invrisil, the night before the battle. Thomast tries to send her back from the fight."
+		}
+	},
+	"system": []
+}

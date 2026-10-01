@@ -1,0 +1,907 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.49",
+	"order": 25,
+	"events": {
+		"b6.zel_takes_the_carriage_into_the_goblin_army": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"driver": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.dropped_onto_the_goblin_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "About two hours into the battle. Zel casts [Rapid Maneuvering], [Hold the Line] and [Vanguard of Steel] and the Human line holds almost without loss for a short time. Osthia warns him of the trap and is clubbed."
+			},
+			"summary": "Zel leaves Thomast the left flank, strengthens the Human line with three Skills and drops from the flying carriage into the Goblin army. He fights alone toward the Goblin Lord."
+		},
+		"b6.zel_cripples_the_goblin_lords_spider_and_wounds_him": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.wounded_by_zel",
+					"eater_of_spears.badly_wounded_by_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "Magnolia points Zel at the Goblin Lord with a voice trick and holds Snapjaw's legs for three seconds. Zel's Antimagic Slash opens the Goblin Lord's stomach. Eater of Spears survives, his chest torn open."
+			},
+			"summary": "Zel rips open Eater of Spears, cripples the Goblin Lord's Shield Spider and tears open the Goblin Lord's stomach. He is about to finish him."
+		},
+		"b6.a_dome_of_bone_closes_over_zel": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"invrisil.bone_dome_over_zel_and_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "More than a hundred Human mages cannot crack it."
+			},
+			"summary": "A dome of bone rises and closes over Zel and the Goblin Lord. Magnolia guesses it is the Necromancer's work."
+		},
+		"b6.the_chosen_teleport_into_the_dome": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"bone_knight": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				},
+				"plague": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": []
+				},
+				"slime": {
+					"prefer": [
+						"oom"
+					],
+					"fallback_tags": []
+				},
+				"gnoll": {
+					"prefer": [
+						"kerash"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.chosen_sent_to_kill_zel",
+					"azkerash.did_not_tell_the_goblin_lord_of_the_trap",
+					"zel.did_not_name_ryoka_under_the_truth_spell"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "Az'kerash speaks through them and calls them his children. Zel guesses they are his answer to Zel's weaknesses. Az'kerash asks whether Magnolia told Zel he lived; Zel resists the truth spell and does not name Ryoka."
+			},
+			"summary": "Venitra, Ijvani, Bea, Oom and Kerash teleport into the dome. Az'kerash speaks through them and admits the Goblin Lord is the trap's bait and knows nothing of it."
+		},
+		"b6.magnolia_fires_the_old_tube_artifact": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.fired_the_tube_artifact",
+					"magnolia.hurt_her_ears"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "The command word is in the text; it is not recorded here. The beam cracks the dome for a short time, then it reseals."
+			},
+			"summary": "Magnolia fires the old tube artifact from her grandfather. The beam cracks the dome open for a moment and deafens her. One War Golem is crushed in the gap; the other gets in."
+		},
+		"b6.oom_is_destroyed_inside_the_dome": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"slime": {
+					"prefer": [
+						"oom"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.the_chosen_teleport_into_the_dome"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"oom.destroyed_by_zel",
+					"oom.was_an_acid_slime_with_a_mana_stone_core",
+					"magnolia.lost_both_war_golems"
+				],
+				"kill": [
+					"oom"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "Oom is a sentient Acid Slime in a coat. Zel crushes his fist-sized mana-stone core in his hand after the Golem's beam weakens him. Bea touches Zel twice with a plague that healing potions make worse."
+			},
+			"summary": "Inside the dome the surviving War Golem fires its beam at Zel and Oom. Zel crushes Oom's mana-stone core. Kerash kills the Golem, and Bea's plague touch begins to spread through Zel."
+		},
+		"b6.zel_breaks_the_chosen_and_azkerash_comes": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"plague": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bone_knight": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"gnoll": {
+					"prefer": [
+						"kerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.oom_is_destroyed_inside_the_dome"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.came_to_invrisil_by_scroll",
+					"azkerash.cut_by_zel",
+					"azkerash.lost_a_greater_teleport_scroll_count_to_four",
+					"bea.torn_apart_by_zel",
+					"ijvani.crushed_by_zel",
+					"chosen.fled_by_scroll"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "A diamond shard takes Zel's left eye. Az'kerash comes by Scroll of Greater Teleport; Zel cuts his throat and he flees. The scroll count (eleven, then four) is the Goblin Lord's thought and may be wrong. Ijvani leaves by Lesser Teleport."
+			},
+			"summary": "Zel tears Bea apart, crushes Ijvani and cracks Kerash's skull. Az'kerash arrives in person with a Scroll of Greater Teleport and strikes Zel from behind; Zel cuts the Necromancer's throat. The Necromancer and the Chosen flee."
+		},
+		"b6.zel_names_the_goblin_lord_reiss_and_dies": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.zel_breaks_the_chosen_and_azkerash_comes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.dead_at_invrisil",
+					"goblin_lord.named_reiss",
+					"goblin_lord.swore_to_kill_the_necromancer",
+					"world.believes_the_goblin_lord_killed_zel",
+					"azkerash.and_the_chosen_killed_zel"
+				],
+				"kill": [
+					"zel_shivertail"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "Zel lets the Goblin Lord live and asks if he did a good job. He gives him the Drake name Reiss, which Sserys wanted for a son. He dies mid-sentence of poison, plague, burns, a lost eye and Az'kerash's Deathblasts. The truth and the public belief are two flags."
+			},
+			"summary": "Zel Shivertail lets the Goblin Lord go, tells him to take the name Reiss if he wants it, and dies. The Goblin Lord swears to kill the Necromancer."
+		},
+		"b6.reiss_orders_zels_body_untouched_and_withdraws": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"lieutenant": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.zel_names_the_goblin_lord_reiss_and_dies"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.ordered_zels_body_untouched",
+					"goblin_army.withdrew_from_invrisil"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "The Humans see the Goblin Lord standing over Zel and believe he killed him."
+			},
+			"summary": "When the dome falls, the Humans see the Goblin Lord standing over Zel. He orders the body left alone and the army pulls back."
+		},
+		"b6.magnolia_offers_a_bounty_on_the_necromancer": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.zel_names_the_goblin_lord_reiss_and_dies"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.offered_a_bounty_on_the_necromancer",
+					"magnolia.weeps_for_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "A hundred thousand gold, then a million or artifacts, to any Assassins' Guild."
+			},
+			"summary": "Magnolia weeps and offers every Assassins' Guild a vast reward for the Necromancer's death."
+		},
+		"b6.azkerash_tells_his_chosen_the_next_will_be_better": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"bea": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.zel_names_the_goblin_lord_reiss_and_dies"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.down_to_four_chosen",
+					"azkerash.removed_zel_shivertail"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "He says he removed one of his greatest foes and the next Chosen will be better."
+			},
+			"summary": "At his castle Az'kerash tells the four surviving Chosen he has removed one of his greatest foes, and that the next generation will be better."
+		},
+		"b6.liscor_mourns_zel": {
+			"tier": 2,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.zel_names_the_goblin_lord_reiss_and_dies"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.mourns_zel",
+					"erin.wept_for_zel",
+					"mrsha.howled_for_zel",
+					"klbkch.left_the_inn_without_weeping"
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					10,
+					22
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							9
+						]
+					},
+					{
+						"npc": "klbkch",
+						"pos": [
+							6,
+							12
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							3,
+							8
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							3,
+							6
+						]
+					},
+					{
+						"npc": "ksmvr",
+						"pos": [
+							3,
+							12
+						]
+					},
+					{
+						"npc": "yvlon_byres",
+						"pos": [
+							10,
+							12
+						]
+					},
+					{
+						"npc": "ylawes_byres",
+						"pos": [
+							12,
+							12
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							9,
+							4
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							7,
+							4
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							10,
+							8
+						]
+					}
+				],
+				"line": "The common room is silent. Erin sits at the counter, weeping, and outside the horns of Liscor are blowing.",
+				"note": "M18.7: a scene. Hours are guesses (news reaches Liscor in the day)."
+			},
+			"hooks": [
+				{
+					"id": "player_shared_the_grief_with_erin",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"erin_solstice"
+								]
+							}
+						}
+					],
+					"days": [
+						130,
+						130
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_shared_the_grief_with_erin"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn sat with Erin on the night Zel Shivertail died."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "Horns blow in Liscor, Drakes and Gnolls weep in the streets. Klbkch sees Erin at the counter, Lyonette slumped and Mrsha on the roof, and leaves for the Hive."
+			},
+			"summary": "News of Zel's death reaches Liscor. Horns sound and the city weeps. In the inn Erin cries at the counter, Lyonette sits slumped and Mrsha howls on the roof. Klbkch watches and leaves."
+		},
+		"b6.klbkch_speaks_to_the_grand_queen_through_the_mirror": {
+			"tier": 2,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"queen": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.liscor_mourns_zel"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"antinium.grand_queen_mirror_open",
+					"grand_queen.says_the_antinium_will_rise",
+					"klbkch.answered_the_grand_queen_perhaps"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "confirmed",
+				"note": "A Courier brought a black-glass mirror to the Hive that morning; it links the Free Antinium Queen's room to the Grand Queen's, with Xrn nearby. She says 'Good', and that the Goblins move again, Humans stir for war and the Drakes have lost their shield. Klbkch says only 'Perhaps'."
+			},
+			"summary": "In the Hive Klbkch uses a mirror from the Grand Queen to tell her Zel is dead. She says the Antinium will rise; he answers only 'Perhaps'."
+		}
+	},
+	"system": []
+}
