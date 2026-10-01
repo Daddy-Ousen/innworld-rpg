@@ -299,9 +299,10 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
 - [x] M18.P Plan + ADR 0028 (2026-10-01, cloud): six reading agents, summaries only. Liscor days 115 – 130; far battles
   are news; Zel dies on day 130. User answers: chapter order number, three new maps, Esthelm as a wave stage, and
   Laken's calendar = his journal day + 45 in every book (no squeeze). The user approves the plan by merging its PR
-- [ ] M18.0 Canon timing (engine + data): optional chapter key `order` (same-day events follow chapter order and place
-  in the file; Books 1 – 5 order unchanged); move the Book 3 and Book 5 Laken events to his journal day + 45 and fix
-  the canon sims they cross. No save change
+- [x] M18.0 Canon timing (engine + data, 2026-10-01, cloud): optional chapter key `order` (same-day events follow
+  book, chapter order and place in the file; Books 1 – 5 order unchanged, `unit_event_order`); the Book 3 and Book 5
+  Laken events moved to his journal day + 45 (days 46 – 91 and 100 – 115); `sim_canon_book3` and `sim_canon_book5`
+  fixed. No save change (ADR 0028 "M18.0")
 - [ ] M18.1 World: Wirclaw's village, the crypt ossuary, the inn basement; the Eater Goat (`leap`); looks for the
   Redfang five, Wirclaw, Falene, Dawil, Purple Smile; NPC records with no events yet
 - [ ] M18.2 Canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir (off-map)

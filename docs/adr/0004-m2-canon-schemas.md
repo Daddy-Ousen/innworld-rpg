@@ -18,6 +18,8 @@ locations.json           {"schema_version": 1, "locations": {id: location}}
 chapters/<chapter>.json  {"schema_version": 1, "book": 1, "chapter": "1.00", "events": {id: event}, "system": [...]}
 ```
 - One chapter file per chapter: an agent reads one chapter and writes one file. Easy to review.
+- M18.0 (ADR 0028): a chapter file may add `"order"` (its place in the book, a whole number >= 1, unique in the
+  book). Events on the same day then run in book order, then chapter order and their place in the file, not by id.
 - NPCs and locations are one registry per book (they recur across chapters). `canon_ref` = first appearance.
 - Same conventions as ADR 0002: `schema_version: 1`, maps keyed by id, snake_case ids, `[Brackets]` in display names.
 

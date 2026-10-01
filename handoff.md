@@ -1,27 +1,29 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M17 closed out: detail moved to `docs/PROGRESS_ARCHIVE.md`; pending M17 tags listed there (the cloud proxy refuses tag pushes).
-- M18.P Book 6 plan: `docs/adr/0028-m18-book6.md` and the M18.0 – M18.7 steps in `docs/ROADMAP.md`. Six reading agents read every
-  Book 6 chapter and returned summaries only; no book text is in the repo. Their reports were in the session scratchpad (gone next session);
-  the ADR holds what matters (day map, deaths, stated levels, conflicts with our data).
-- User answers: (1) chapter order number `order` (engine step M18.0, a schema change the user approved); (2) new maps: Wirclaw's village,
-  crypt ossuary, inn basement (no sewers); (3) the Goblin Lord's attack on Esthelm (about day 117, night) is a wave stage, details `guess`;
-  (4) first "squeeze Laken's Day 72 – 82 into days 118 – 119", then CHANGED: game day = Laken's journal day + 45 in every book.
-  The user asked about tying his first snow (his Day 20) to Liscor's winter (day 42 = +22): that breaks Book 4 (he meets Ryoka in
-  Invrisil on day 93, after his Day 46 and before his Day 55) and Book 6/7 (his Day 82 = the day Zel leaves Liscor; his Day 85 =
-  the night Zel dies). +45 fits both. Book 6 Liscor days moved about 8 days later (Zel leaves on 127, dies on 130).
-  Detail and the anchor table: ADR 0028 "Laken's calendar".
-- No code changed. No tests run (docs only).
+- M18.0 canon timing (plan `docs/plans/m18.0.md`, notes in ADR 0028 "M18.0"). Branch `claude/kind-feynman-y4x1mm`
+  restarted from main fd3601f after PR #88 merged.
+  - Engine: `CanonDb.rank[id] = [book, order, place]` from the loader. Same-day events sort by book, then the
+    chapter key `order` and the event's place in the file, then id. A file with no `order` gets place 0, so its
+    events keep the id tie-break. `from_dicts(..., rank_map = {})`: toy dbs keep the old rule.
+  - Validator: `order` optional, whole number >= 1, unique in a book; a book that mixes files with and without it
+    gets a warning.
+  - Data: Laken's Book 3 events on days 46 – 91, Book 5 events on days 100 – 115 (his Day + 45). Window = note range
+    + 45. Ids unchanged. A probe showed each fires on its first window day, drift 0 to day 115.
+  - Tests: `sim_canon_book3` runs to day 87 for the Book 3 end state, then on to `LAKEN_LAST_DAY` (91);
+    `sim_canon_book5` `LAST_DAY` 118 → 115.
+- Tests run (all pass): `unit_event_order` (new, 8), `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`,
+  `sim_book4_christmas`, `sim_book4_homecoming`, `sim_book4_relief_home`, Python tool tests (100), validator `--all`.
+  Full suite not run (user rule).
 
 ## Next
-1. The user merges the M18.P PR (that approves ADR 0028).
-2. M18.0 canon timing (engine + data, user choice): (a) `CanonDb` reads the optional chapter key `order`; same-day order = depends_on,
-   earliest, book number, then chapter order + place in file (else id). (b) Move the merged Laken events to journal day + 45: Book 3
-   (Day 1 – 46 → days 46 – 91; now in the Book 2 and Book 4 sim ranges) and Book 5 (Day 55 – 70 → days 100 – 115); Book 4 (93 – 94) stays.
-   Tests: new `unit_event_order`, `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`, `sim_book4_christmas`, `sim_book4_homecoming`,
-   `sim_book4_relief_home`, Python validator tests. Then M18.1 world (maps, Eater Goat, looks), M18.2 – M18.7 canon batches.
-3. Each canon batch asks its stage, hook and `xp_window` choices first, and needs the Book 6 text (attach `innworld-canon-raw`, see Gotchas).
+1. The user merges the M18.0 PR.
+2. M18.1 world: Wirclaw's village, the crypt ossuary (under `liscor_crypt`, behind an illusion door and a chute,
+   gated by a 4.37 O flag), the inn basement (trapdoor in `inn_interior`); each with an `audio.json` mood and a
+   knock-out wake spot; the Eater Goat (`leap`, new creature art); looks for the Redfang five, Wirclaw, Falene,
+   Dawil, Purple Smile; NPC records with no events. Ask the user the open choices first (ADR 0028 "Plan").
+3. From M18.2 on, every Book 6 chapter file gets `"order"` (its place in the book: 4.32 G = 1, 1.02 C = 2, …; ADR 0028
+   "Context" lists the order). Event ids stay readable (`b6.bugear_dies`); no `zz` prefixes.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
@@ -59,9 +61,12 @@
 - Validator: `python tools/validate_data.py game/data/canon --all` (the folder with book<N> in it, not a book folder).
 - Toy dbs erase `rules.economy`; real-db tests have hunger on.
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
-- Book 3 "E" chapters are Laken, not Erin. Laken, Geneva, Niers (3.22L) and Venitra use placeholder days.
+- Book 3 "E" chapters are Laken, not Erin. Laken's days: game day = his journal day + 45 in every book (ADR 0028).
+  Geneva, Niers (3.22L) and Venitra use placeholder days.
 - Save is v14 (M13.T traps; v13 = M10.0 portal trips). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
-- Same-day canon order: chain with `depends_on`. Siblings that share one dependency run in id order, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
+- Same-day canon order: Book 6+ chapter files carry `"order"`; events then run in chapter order and file order
+  (M18.0). Books 1 – 5 still run in id order. Use `depends_on` only for a real dependency (a cancel spreads).
+  Siblings that share one dependency run in that order too, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
 
 - Octavia matters to Book 3: killing her before day 87 cancels 3.25's goodbye and the wagon leaving, which cascades. Kill tests for her must run after day 87.
 - Scene stages: `Stage.place_npc` skips an NPC who is already in the stage area, so that NPC stays at their own post (M10.3: Lyonette, Mrsha in the inn). Only NPCs brought in from elsewhere take the stage tile. Hooks that need an NPC next to the player must name NPCs that really are placed.
