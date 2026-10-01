@@ -1,0 +1,306 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "1.03C",
+	"order": 3,
+	"events": {
+		"b6.the_blighted_king_presents_the_earthers": {
+			"tier": 1,
+			"window": {
+				"earliest": 119,
+				"latest": 119,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"richard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"emily"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom",
+					"blighted_king"
+				],
+				"flags": [
+					"blighted_king.wants_to_meet_tom"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"blighted_king.appraised_the_earthers",
+					"the_fool.befriended_tom",
+					"tom.performed_for_the_court",
+					"earthers.hide_the_iphone_link",
+					"earthers.distrust_the_court"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.03C",
+				"confidence": "confirmed",
+				"note": "The King says two Earthers reached Level 30 in three months. Over sixty were summoned; fewer than a third remain."
+			},
+			"summary": "The Blighted King offers the Earthers food and shelter in return for holding back the Demons. He makes Tom perform, and Tom juggles. The court jester, the Fool, upstages him and wins the crowd. That night the Fool shares wine with Tom, and Tom likes him. Richard has a secret iPhone link."
+		},
+		"b6.erille_hides_from_her_guards_in_the_courtyard": {
+			"tier": 1,
+			"window": {
+				"earliest": 120,
+				"latest": 120,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"princess": {
+					"prefer": [
+						"erille"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sister": {
+					"prefer": [
+						"isodore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom",
+					"erille"
+				],
+				"flags": [
+					"the_fool.befriended_tom"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erille.slipped_her_guards",
+					"rhir.troops_sent_to_the_fourth_wall",
+					"the_fool.speaks_to_a_hidden_scroll"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.03C",
+				"confidence": "confirmed",
+				"note": "Erille wears rings that block scrying. The Fool's scroll is, in 1.05 C, his link to the Demons."
+			},
+			"summary": "Princess Erille hides from her guards and asks Tom for backflips. The Fool, in plain clothes, whispers to a magic scroll. He tells Tom that all troops but the guard went to the Fourth Wall in secret. Isodore takes Erille away and eyes Tom with suspicion."
+		},
+		"b6.second_banquet_tom_flees_the_praise": {
+			"tier": 1,
+			"window": {
+				"earliest": 120,
+				"latest": 120,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"kirust"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"richard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spear": {
+					"prefer": [
+						"xersia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom"
+				],
+				"flags": [
+					"blighted_king.appraised_the_earthers"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tom.snapped_at_kirust",
+					"richard.duelled_lady_xersia",
+					"earthers.fear_tom"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.03C",
+				"confidence": "confirmed",
+				"note": "Chole sees Tom's knives and runs; the group assumes the worst."
+			},
+			"summary": "At the second banquet Richard duels the old spear fighter Lady Xersia. Captain Kirust praises Tom and wants him honoured as a hero. Tom snaps, lifts Kirust by the collar, shouts that he is no hero, and runs. His fellow Earthers now think him unstable."
+		},
+		"b6.demon_assassins_hit_the_palace": {
+			"tier": 1,
+			"window": {
+				"earliest": 120,
+				"latest": 120,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"princess": {
+					"prefer": [
+						"erille"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sister": {
+					"prefer": [
+						"isodore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom",
+					"erille"
+				],
+				"flags": [
+					"tom.snapped_at_kirust"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tom.saved_princess_erille",
+					"tom.killed_two_demon_assassins",
+					"the_fool.cut_open_by_a_demon",
+					"palace.eight_demon_assassins_came"
+				],
+				"relationship": [
+					{
+						"from": "erille",
+						"to": "tom",
+						"delta": 2
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.03C",
+				"confidence": "confirmed",
+				"note": "Eight Demons in all (counted in 1.04 C). A palace guard dies; he gets no record."
+			},
+			"summary": "That night Tom finds the Fool cut open in a dark corridor and a Demon unlocking Erille's door. He kills two Demon assassins, taking terrible wounds. Six more Demons go for Isodore's room and stop when the alarm sounds. Erille pours a healing potion over him as he passes out."
+		}
+	},
+	"system": [
+		{
+			"who": "richard",
+			"kind": "class",
+			"name": "[Knight]",
+			"level": 30,
+			"confidence": "likely",
+			"note": "The King says two Earthers reached Level 30; Richard and Emily are named as the two."
+		},
+		{
+			"who": "emily",
+			"kind": "class",
+			"name": "[Mage]",
+			"level": 30,
+			"confidence": "likely",
+			"note": "Water magic; named with Richard as one of the Level 30 pair."
+		}
+	]
+}
