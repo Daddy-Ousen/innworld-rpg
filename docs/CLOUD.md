@@ -40,8 +40,10 @@ You see `[setup] ...` lines at the start of the session. All lines must say ok, 
 5. When it opens a PR, check it and merge it on GitHub (the GitHub app works).
 6. Merge BEFORE you start the next session. The next session starts from `main`.
 
-If the setup line says `book text: NOT FOUND`, the private repo access (step 1) is missing. Fix it, then
-start a new session. Only the book tasks need the text.
+If the setup line says `book text: NOT FOUND`, you do not need a new session. The session proxy lets the hook
+reach only the repos attached to the session. Claude attaches `innworld-canon-raw` itself (add_repo), clones it
+to `/home/user/innworld-canon-raw` and links `canon/raw/book6` and `book7` (seen on 2026-10-01). If the attach
+fails, step 1 is missing. Only the book tasks need the text.
 
 If it still says NOT FOUND: start the session with BOTH repos (`innworld-rpg` and `innworld-canon-raw`).
 With two repos the hook does not run, so begin your prompt with:
@@ -61,11 +63,11 @@ Each prompt is ready to paste.
 2. **M17.7 Enemy abilities and balance**, then **M17.8 Hidden XP** (both done; last M17 steps)
    > Do M17.7 from docs/ROADMAP.md. Follow CLAUDE.md. Plan first (docs/plans/m17.7.md), ask me the open
    > choices, then build, run only the tests that touch the change, update the docs, and open a PR.
-3. **M18.P Book 6 plan**
+3. **M18.P Book 6 plan** (done 2026-10-01, ADR 0028)
    > Do M18.P: plan Book 6 (The General of Izril) like ADR 0020 did for Book 5. Read the chapters in
    > canon/raw/book6 with subagents (summaries only). Write ADR 0028 and the M18 steps in docs/ROADMAP.md.
    > Ask me the open choices. Open a PR with the plan only.
-4. **M18.0 … M18.n Book 6 steps** (one session per step, as the approved plan lists them)
+4. **M18.0 … M18.7 Book 6 steps** (one session per step, as `docs/ROADMAP.md` lists them; M18.0 is next)
    > Do the next open M18 step in docs/ROADMAP.md. Follow CLAUDE.md and ADR 0028. Ask me the stage and hook
    > choices first. Then build, test, update the docs, and open a PR.
 5. **M19.P Book 7 plan**, then **M19.0 … M19.n** (same prompts, with Book 7, ADR 0029, canon/raw/book7)

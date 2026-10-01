@@ -22,66 +22,33 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 - [x] M15 — Readability and lore fixes (font, player day, small HUD log, no XP numbers). M15.0–M15.3 merged as one PR ([PR #77](https://github.com/Daddy-Ousen/innworld-rpg/pull/77), merge commit b93e2df). Detail in the archive and ADR 0022.
 - [x] M16 — Maps, art and cities. M16.0-M16.6 merged as one PR ([PR #78](https://github.com/Daddy-Ousen/innworld-rpg/pull/78), merge commit 98a3b08). Detail in the archive and ADR 0023-0026. The user still has to walk the maps (`godot --path game`).
-- [ ] M17 — Tactical combat, XCOM-style (AP, turn order by Agility, combat Skills, MP and spells, cover). User's AP rules in ADR 0022 and `docs/ROADMAP.md`.
-  - [x] M17.0 spike + ADR 0027 (branch `feat/m17.0-spike`, 2026-09-30): `rules.combat.tactical`, `unit_tactical_rules` (5 pass), paper fights. ADR 0027 approved 2026-09-30.
-  - [x] M17.1 core encounter (M16 archive + M17.0 + M17.1 merged as [PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79), merge commit a175d2a, 2026-09-30): `core/encounter.gd`, save v18, `unit_encounter` (21 pass). Combat mode is off in the real data (`rules.combat.tactical.enabled`) until M17.2.
-  - [x] M17.2 port the old fight parts (branch `feat/m17.2-port`, 2026-09-30): block/throw/take/drop/bag/brawl/fairy swat on AP, auto end turn, guard to next turn, NPC fighters and brawls in the turn order, combat mode ON. Full suite 120 scripts, 1133 tests, all pass; validator 0 errors; Python 95 OK. [PR #80](https://github.com/Daddy-Ousen/innworld-rpg/pull/80) merged (merge commit 07f19a3, tag `m17.2-done`).
-  - [x] M17.3 combat screen (branch `feat/m17.3-screen`, 2026-09-30): combat bar (turn order faces, AP pips, End
-    turn), move range, click path + hit chance, mouse walk and attack in fights, replay of the others' turns
-    with the camera on each fighter (`CombatState.turns`, not saved). Full suite 122 scripts, 1159 tests, all
-    pass; validator 0 errors; Python 95 OK. Merged as [PR #81](https://github.com/Daddy-Ousen/innworld-rpg/pull/81) (merge commit d470158, tag `m17.3-done`).
-  - [x] M17.4 Skills in combat (merged as [PR #82](https://github.com/Daddy-Ousen/innworld-rpg/pull/82), merge commit 79490a6, tag `m17.4-done`, 2026-09-30): `core/combat_skills.gd`,
-    `combat_action` (strike / area / self, cooldown in rounds), `ap_mod`, [Runner] class move cap, NPC ally
-    Skills (Erin, Relc, Toren, gated by canon events), Skill bar (keys 1-9), save v19. Full suite 124 scripts,
-    1185 tests, all pass; validator 0 errors; Python 95 OK. Detail: ADR 0027 "M17.4".
-  - [x] M17.5 Mana and spells (merged as [PR #83](https://github.com/Daddy-Ousen/innworld-rpg/pull/83), merge commit 68f5f38, tag `m17.5-done`, 2026-09-30): `core/mana.gd`, `core/spells.gd`, `core/spell_db.gd`,
-    `data/spells.json` (4 spells, all numbers guesses), MP = Intellect + total level (+ [Mage]), regen 1 per 10 min,
-    teacher "Learn" rows and spellbook goods, [Mage] class, cast on AP + MP (one / line / blast / around, foes only), NPC
-    casters Ceria and Pisces, spells in the Skill bar with aiming, save v20. Full suite: 128 scripts, 1339 tests, all pass (run script by script); validator 0 errors; Python 95 OK. Detail: ADR 0027 "M17.5".
-
-  - [x] M17.6 Cover and position (branch `claude/kind-feynman-y4x1mm`, 2026-09-30, first cloud task): `core/cover.gd`, tile and
-    object `cover`, `rules.combat.tactical.cover`, walls block sight, half -15 / full -30, pincer +15, archers and shamans
-    take cover, melee monsters close the pincer, cover bars on the screen. No save change. Full suite (run once, before the
-    "no full suite" rule): 132 scripts, 1300 tests as the runner counts them, all pass; validator 0 errors; Python 95 OK.
-    Detail: ADR 0027 "M17.6". PR waits for the user to merge. Tag pending: `m17.6-done` on the merge commit.
-  - [x] M17.7 Enemy abilities and balance (branch `claude/kind-feynman-y4x1mm`, 2026-09-30, cloud): cost by total level + hidden cap 100 +
-    gentler curve after level 10; `hp_scale` 2.0; `core/monster_abilities.gd` (`shooter`, `leap`; no shell, user); NPC Agility (24 numbers);
-    balance probe redone (2 Goblins winnable at level 5, 3 a hard fight). No save change. Only the tests that touch the change were run (user rule);
-    list in ADR 0027 "M17.7". PR waits for the user to merge. Tag pending: `m17.7-done` and `m17-done` on the merge commit.
-  - [x] M17.8 Hidden XP (branch `claude/kind-feynman-y4x1mm`, 2026-09-30, cloud): `Xp.duress_mult` (x0.5 at no HP lost, x1.0 at 10%, +0.01 per 1%, cap x2.0) on
-    the worst HP drop in a fight (foe damage only; `fight.peak` / `fight.low`, no save version change by the user's choice); `core/xp_window.gd` (`xp_window`
-    on a canon event, tiers x1.5 / x2 / x3; the Skinner night 18:00-06:00 is x2); the two multiply. Pace probe `sim_balance_fighter`: fighters level about
-    2x faster than the inn worker; the curve was NOT changed (ADR 0027 "M17.8"). Only the tests that touch the change were run. PR waits for the user to merge.
-    Tag pending: `m17.8-done` and `m17-done` on the merge commit (also `m17.6-done`, `m17.7-done`).
-  - [ ] The user plays fights with Skills and spells (`godot --path game`). Needs the user at home.
-- [ ] M18 — Book 6 (The General of Izril). Not planned: M18.P first (ADR 0028). Text in the private repo.
+- [x] M17 — Tactical combat, XCOM-style. M17.0–M17.8 merged ([PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79) … [PR #87](https://github.com/Daddy-Ousen/innworld-rpg/pull/87), last merge commit a7a5e37). Detail in the archive and ADR 0027.
+  Tags pending (the cloud refuses tag pushes): `m17.6-done` on e54e2c5, `m17.7-done` on ff7d757, `m17.8-done` and `m17-done` on a7a5e37 (commands in the archive).
+  - [ ] The user plays fights with Skills, spells and cover (`godot --path game`). Needs the user at home.
+- [ ] M18 — Book 6 (The General of Izril). Plan: ADR 0028, steps M18.0 – M18.7 in `docs/ROADMAP.md`. Text in the private repo.
+  - [x] M18.P plan (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): six reading agents (summaries only), ADR 0028, roadmap steps.
+    User answers: chapter `order` number (M18.0 engine step), maps Wirclaw's village + crypt ossuary + inn basement, Esthelm attack as a
+    night wave stage. Laken's calendar (changed the same day): game day = his journal day + 45 in every book, no squeeze; tying his
+    first snow to Liscor's winter (day 42) breaks Book 4 and Zel's death (ADR 0028 "Laken's calendar"). Book 6 Liscor days move to
+    115 – 130 (Zel dies on 130). PR waits for the user to merge (merging = plan approved).
+  - [ ] M18.0 canon timing (next): chapter `order` key + move the Book 3 and Book 5 Laken events to day + 45.
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
 
-## Cloud setup (2026-09-30, branch `chore/cloud-setup`)
-- [x] Private repo `Daddy-Ousen/innworld-canon-raw` (PRIVATE): extracted text of Book 6 (26 chapters) and Book 7
-  (22 chapters) only. Books 1–5 text is local only.
-- [x] Release `tools-godot-4.7.2` on this repo: the unchanged official Godot 4.7.2 Linux zip (MIT), backup download.
-- [x] `.claude/settings.json` SessionStart hook -> `tools/cloud/setup.sh` (Godot, Pillow, book text link, git
-  identity, import); `tools/cloud/install_godot.sh`; `tools/run_tests.sh` (one Godot run per script, `-gselect=<name>.gd`).
-  Tested on a fresh clone (Windows Git Bash): setup 104 s, 4 scripts 72/72 pass, git stays clean. Not yet run in a real
-  cloud VM: the first cloud session checks the `[setup]` lines.
-- [x] `CLAUDE.md`: user rules, lore memory, "Cloud sessions" section. `docs/CLOUD.md`: user guide + task queue.
-  README brought up to M17. Roadmap: M18 and M19 stubs.
-- [ ] User: give the Claude GitHub App access to `innworld-canon-raw` (`docs/CLOUD.md`, one-time setup).
+## Cloud setup
+- Done; detail in the archive. Book text in a cloud session: attach `Daddy-Ousen/innworld-canon-raw` (add_repo), clone it
+  to `/home/user/innworld-canon-raw`, then link `canon/raw/book6` and `canon/raw/book7` to it (or run `bash tools/cloud/setup.sh --force`).
 
 ## After M8
 - [x] Ryoka never gains a level (user, 2026-09-26): merged ([PR #35](https://github.com/Daddy-Ousen/innworld-rpg/pull/35)).
 
 ## Completed (current engine state)
-- Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data.
+- Canon: Book 1 (1.00–1.63, days 1–41), Book 2 (Interlude – The Call to 2.48, days 41–71) are complete event data. Book 3 (3.00E–3.25 + 1.00D/1.01D, days 71–87) is complete event data. Book 4 (3.26G–Interlude – Winter Solstice, days 85–96) is complete event data. Book 5 (4.00 K – 4.31 + 1.02 D – 1.06 D, days 97–114; 4.00 K – 4.06 K are history notes in ADR 0020) is complete event data.
 - Godot 4.7.2 project in `game/`, GUT 9.7.1 in `game/addons/gut`.
 - Core: `xp_window` (M17.8), `monster_abilities` (M17.7), `cover` (M17.6), `economy`, `economy_state`, `economy_db`, `rest` (M8.6), `portal` (M10.0), `stage` (waves, M7.B), `npc_react`, `save_slots`, `rng`, `game_state` (SAVE_VERSION=20), `save_migrations` (1→…→20), `encounter` (M17.1–M17.2), `combat_skills` (M17.4), `mana`, `spells`, `spell_db` (M17.5), `inn_state`, `guests`, `standing`, `brawl`, `cooking`, `traps`, `combat_db`, `stats`, `combat_state`, `combat`, `monster_sim`, `save_codec`, `behaviour_db`, `utility_ai`, `npc_roster`, `npc_sim`, `map_db`, `player_state`, `movement`, `interact`, `pathfind`, `canon_db`, `world_state`, `director`, `clock`, `tags`, `data_db`, `action_log`, `xp`, `actions`, `progression`, `levels`, `skill_system`, `class_system`, `night`, `commands`.
 - Audio (M12.0-M12.5): `world/music_pick.gd`, `world/ambience_pick.gd`, autoload `Audio` (`ui/audio.gd`), `ui/audio_db.gd`, `ui/audio_settings.gd`, `ui/options_menu.tscn`, `data/audio.json`, `world/sound_cues.gd`, `game/default_bus_layout.tres`, `game/assets/audio/`.
 - UI: `ui/title_menu.tscn` (main scene), `ui/pause_menu.tscn`, `ui/slot_list.tscn`, `ui/journal.tscn`, `ui/session.gd` (autoload), `ui/hud.tscn` (HP line), `ui/interact_menu.tscn`, `ui/system_messages.gd`, `ui/system_dialog.tscn`, `ui/character_sheet.tscn`, `ui/console_commands.gd`, `ui/debug_console.tscn` (also the overlay). World: `world/main.tscn` (main scene), `world/world_view.tscn`.
 - Data: `tiles.json`, `maps/` (liscor_gate, liscor_market, floodplains_south, inn_hill, inn_interior, ruins_entrance, celum_gate, celum_square, celum_runners_guild, road_camp, celum_frenzied_hare, esthelm_ruins, bee_cave, celum_stitchworks, dungeon_rift), `npc_behaviour.json`, `enemies.json`, `items.json`, `economy.json`; rules `npc`, `combat`, `winter`, `economy`, `portal`.
-- Tests: 128 GUT scripts, 1339 tests, all pass (main after M17.5). Runner: `bash tools/run_tests.sh <script>... | --all`. 124 scripts, 1185 tests (M17.4). 122 scripts, 1159 tests (M17.3 branch). 120 scripts, 1133 tests after M17.2. 118 scripts, 1101 tests on main after M16. Main after M14.8 had 109 scripts, 1019 tests. Python tool tests: 95 pass (`python -m unittest discover -s tools/tests`).
-- Canon: Book 5 has days 97–111 (4.06 M – 4.17) and Geneva's 1.02 D – 1.06 D (days 77–90, off-map) on main; and 4.18 – 4.23 E (days 106–118); the M13.6 branch adds 4.24 – 4.27 H (days 110–113). 4.00 K – 4.06 K are history notes in ADR 0020.
-- Main after M13.T: 90 GUT scripts, 836 tests; save v14; `core/traps.gd`. Main after M13.1: 92 GUT scripts, 849 tests. Main after M13.2: 93 GUT scripts, 861 tests. Main after M13.3: 94 GUT scripts, 871 tests. Main after M13.4: 95 GUT scripts, 876 tests. Main after M13.5: 96 GUT scripts, 888 tests. Main after M13.6: 97 GUT scripts, 902 tests. M13.7 branch: 98 GUT scripts, 914 tests, all pass; Python 78 OK; validator 0 errors; 44 enemies. Maps now 20 (+ esthelm_creler_cave in M13.6), 19 (+ inn_upper_floor, inn_watchtower, liscor_depths, liscor_crypt). Enemies 43 (M13.6: creler_hatchling, creler_juvenile).
+- Tests: about 132 GUT scripts (last full suite at M17.6, all pass); M17.7 and M17.8 ran only the scripts they touch (user rule). Runner: `bash tools/run_tests.sh <script>... | --all`. Python tool tests: 97 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
 ## Blockers
@@ -89,6 +56,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 ## Balance note
 - M6.5: levels cost less (base_xp 40, growth 1.25). A hard inn worker: first class on night 1–3, level 5 by about day 18–21 (`sim_m6_done`: [Cook] level 6 by day 22). Canon Erin is level 9 by day 9; the player is not meant to match her.
+- M17.7: cost by total level, hidden cap 100, gentler curve after level 10. M17.8: fighters (two Goblin fights a day) reach level 5 on night 6–7, the inn worker on night 14. The curve was not changed; the planned fix is XP sources for non-fighters (optional M17.9).
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.

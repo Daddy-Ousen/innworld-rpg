@@ -293,12 +293,27 @@ combat Skills and learned spells; MP and AP gains work; saves from v17 load; the
 tests and the validator pass; the user has played fights with the new screen.
 
 ## M18 — Book 6 (The General of Izril)
-Not planned yet. Work may run in cloud sessions (`docs/CLOUD.md`); the book text is in `canon/raw/book6/` there.
+Planned 2026-10-01 (ADR 0028). Work runs in cloud sessions (`docs/CLOUD.md`); the book text is in `canon/raw/book6/` there.
 26 chapters, about 280,000 words: 4.32 G, 1.02 C – 1.05 C (Tom in Rhir), 4.33 – 4.47 (letters E, O, B, G, L, M),
 Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
-- [ ] M18.P Plan + ADR 0028: read the book in subagents, list new places, NPCs, enemies and engine needs, split
-  the chapters into canon batches, ask the user the open choices (M13 style). The user approves before M18.0
-- [ ] M18.0 – M18.n: world work first (if any), then one canon batch per branch + PR
+- [x] M18.P Plan + ADR 0028 (2026-10-01, cloud): six reading agents, summaries only. Liscor days 115 – 130; far battles
+  are news; Zel dies on day 130. User answers: chapter order number, three new maps, Esthelm as a wave stage, and
+  Laken's calendar = his journal day + 45 in every book (no squeeze). The user approves the plan by merging its PR
+- [ ] M18.0 Canon timing (engine + data): optional chapter key `order` (same-day events follow chapter order and place
+  in the file; Books 1 – 5 order unchanged); move the Book 3 and Book 5 Laken events to his journal day + 45 and fix
+  the canon sims they cross. No save change
+- [ ] M18.1 World: Wirclaw's village, the crypt ossuary, the inn basement; the Eater Goat (`leap`); looks for the
+  Redfang five, Wirclaw, Falene, Dawil, Purple Smile; NPC records with no events yet
+- [ ] M18.2 Canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir (off-map)
+- [ ] M18.3 Canon 4.33 – 4.34 (day 115): Bird's duel, the Eater Goats at Wirclaw's village, Bugear dies, the Redfang five
+  move into the inn
+- [ ] M18.4 Canon 4.35 E – 4.38 B (days 116 – 127): Laken (Day 72 – 82 = days 117 – 127), Olesm (Raskghar, Niers' ring, the crypt chute,
+  the rat contract), the Esthelm wave stage, Zel leaves through the door
+- [ ] M18.5 Canon 4.39 G – 4.42 L (days 127 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party
+- [ ] M18.6 Canon 4.43 – 4.47 (days 128 – 129): Ilvriss and the Pallass anchor, the Silver Swords, Erin Level 33,
+  the Goblin Lord's victory, Zel's speech, Liscor's council
+- [ ] M18.7 Canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 128 – 130): history notes, the battle of Invrisil (news),
+  Zel's death, Liscor mourns, the Chosen data fixes
 **Done when:** all Book 6 canon is event data and `sim_canon_book6` runs to the last Book 6 day with drift 0;
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
