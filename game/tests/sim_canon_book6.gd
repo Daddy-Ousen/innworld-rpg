@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 6 canon (4.32 G: the Goblin Lord's army passes Liscor, a guess).
 const FIRST_DAY := 114
-## Last day with Book 6 canon so far (M18.4: 4.35 E – 4.38 B, Zel leaves Liscor and Rie's estate is relieved).
-const LAST_DAY := 127
+## Last day with Book 6 canon so far (M18.5: 4.39 G – 4.42 L, the Goblin party and Pawn's blessing).
+const LAST_DAY := 129
 
 var _db: DataDb
 var _base_json := ""
@@ -45,7 +45,7 @@ func _sleep_to_last_day(gs: GameState) -> void:
 func test_book6_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b6_events().size(), 58)
+	assert_gte(_b6_events().size(), 78)
 	for npc: String in ["goblin_lord", "the_fool", "xersia", "erille", "isodore", "nereshal", "cirille_bitterclaw", "kirust",
 			"blighted_king", "blighted_queen", "keith", "chole", "eddy", "vincent", "cynthia"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
@@ -67,8 +67,9 @@ func test_book6_runs_as_canon() -> void:
 	var rumors := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.RUMOR and _b6(n["event"])) \
 			.map(func(n: Dictionary) -> String: return n["event"])
 	rumors.sort()
-	assert_eq(rumors, ["b6.goblin_lord_hits_esthelm_in_passing", "b6.goblins_burn_a_village_near_riverfarm",
-			"b6.laken_relieves_rie_estate", "b6.rags_sacks_a_human_town"])
+	assert_eq(rumors, ["b6.garen_burns_the_empty_estate_and_a_northern_town", "b6.goblin_lord_hits_esthelm_in_passing",
+			"b6.goblins_burn_a_village_near_riverfarm", "b6.laken_relieves_rie_estate", "b6.rags_sacks_a_human_town",
+			"b6.rose_knights_hit_the_flooded_waters_camp", "b6.the_rose_knights_lose_to_the_tree_trap_fort"])
 	# M18.2: the march, the mountain, Rags's raid, Tom's weeks in Paranfer.
 	for f: String in ["goblin_lord_army.passed_liscor", "wandering_inn.survived_goblin_arrows",
 			"liscor.watched_the_goblin_army_pass", "garen.refuses_to_kneel_to_the_goblin_lord",
@@ -101,7 +102,18 @@ func test_book6_runs_as_canon() -> void:
 	assert_false(gs.flags.has("liscor_dungeon.earther_helped_search_the_crypt"), "no player was in the crypt")
 	for npc: String in ["laken_godart", "rie", "zel_shivertail", "magnolia_reinhart", "reynold", "olesm", "pisces", "ilvriss", "krshia"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
+	# M18.5: the Rose Knights, Greydath, the inn's bad days and the party, the Hive's kill zone.
+	for f: String in ["flooded_waters.fought_the_rose_knights", "greybeard.is_greydath_of_blades", "flooded_waters.built_the_tree_fort",
+			"rose_knights.retreat_from_the_lake", "garen.forbids_more_raids", "rie_estate.burned_by_garen", "erin.knows_house_walchais",
+			"hive.painted_soldiers_hold_the_dungeon_front", "hive.soldiers_chose_yellow_splatters_over_pawn", "twin_stripes.turned_aberration",
+			"hive.crypt_lords_killed_without_loss", "wandering_inn.antinium_brawl_at_lunch", "mrsha.stabbed_at_badarrow_with_a_wand",
+			"wandering_inn.goblin_party_held", "mrsha.hates_goblins_but_no_longer_expects_attack", "hive.kill_zone_built_at_the_dungeon_front",
+			"twin_stripes.cured_by_pawn", "purple_smile.is_sergeant"]:
+		assert_true(gs.flags.has(f), f)
+	for npc: String in ["greybeard", "bethal", "thomast", "yellow_splatters", "purple_smile", "twin_stripes", "belgrade", "anand", "pawn", "mrsha"]:
+		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 	# No player was near the inn, so no hook ran.
+	assert_false(gs.flags.has("wandering_inn.earther_joined_the_goblin_party"))
 	assert_false(gs.flags.has("wandering_inn.earther_watched_the_goblin_army_pass"))
 	assert_false(gs.world.is_alive(_db.canon, "xersia"), "thrown into the sky (1.04 C)")
 	assert_false(gs.world.is_alive(_db.canon, "the_fool"), "burned by Tom (1.05 C)")
@@ -151,6 +163,28 @@ func test_esthelm_is_news_only() -> void:
 	assert_false(ev.has("stage"), "the text gives only a report (user answer, M18.4)")
 	assert_false(ev.has("xp_window"))
 	assert_eq(ev["tier"], 1)
+
+
+func test_the_rose_knights_are_news_only() -> void:
+	for id: String in ["b6.rose_knights_hit_the_flooded_waters_camp", "b6.the_rose_knights_lose_to_the_tree_trap_fort"]:
+		assert_false(_db.canon.events[id].has("stage"), id)
+		assert_false(_db.canon.events[id].has("xp_window"), id)
+
+
+func test_greydath_is_a_flag_not_a_merge() -> void:
+	assert_true(_db.canon.npcs.has("greybeard"))
+	assert_false(_db.canon.npcs.has("greydath"))
+	var gs := _fresh()
+	_sleep_to_last_day(gs)
+	assert_true(gs.flags.has("greybeard.is_greydath_of_blades"))
+
+
+func test_the_party_is_the_only_new_stage() -> void:
+	var staged: Array[String] = []
+	for id: String in _b6_events():
+		if _db.canon.events[id].has("stage") and int(_db.canon.events[id]["window"]["earliest"]) >= 127:
+			staged.append(id)
+	assert_eq(staged, ["b6.the_goblin_party_at_the_inn"])
 
 
 func test_raskghar_has_its_name() -> void:

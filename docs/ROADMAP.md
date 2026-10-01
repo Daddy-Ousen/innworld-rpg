@@ -312,7 +312,7 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
   move into the inn
 - [x] M18.4 Canon 4.35 E – 4.38 B (days 116 – 127): Laken (Day 72 – 82 = days 117 – 127), Olesm (Raskghar, Niers' ring, the crypt chute,
   the rat contract), the Esthelm wave stage, Zel leaves through the door
-- [ ] M18.5 Canon 4.39 G – 4.42 L (days 127 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party
+- [x] M18.5 Canon 4.39 G – 4.42 L (days 126 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party (scene stage in the inn; Rose Knights and Hive as events)
 - [ ] M18.6 Canon 4.43 – 4.47 (days 128 – 129): Ilvriss and the Pallass anchor, the Silver Swords, Erin Level 33,
   the Goblin Lord's victory, Zel's speech, Liscor's council
 - [ ] M18.7 Canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 128 – 130): history notes, the battle of Invrisil (news),

@@ -1,0 +1,391 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.40L",
+	"order": 13,
+	"events": {
+		"b6.painted_soldiers_hold_the_tunnels_by_the_dungeon": {
+			"tier": 1,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.painted_soldiers_hold_the_dungeon_front",
+					"yellow_splatters.fights_daily_for_two_weeks",
+					"hive.soldiers_level_slower_than_before"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "Klbkch is away from command. The Soldiers see the Painted as heroes."
+			},
+			"summary": "Yellow Splatters leads about forty Painted Soldiers against enchanted armour suits, then takes Tunnel E4J from acid maggots and a Face-Eater Moth. One Soldier dies; his mark joins the wall of the fallen."
+		},
+		"b6.belgrade_and_anand_quarrel_over_the_defence": {
+			"tier": 1,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second_strategist": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"belgrade.holds_the_tunnels_by_the_dungeon",
+					"anand.wants_to_pull_back_and_ambush",
+					"yellow_splatters.doubts_pawn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "Anand puts the monsters' fighting range at about four thousand paces."
+			},
+			"summary": "Belgrade wants fixed holds; Anand wants ambushes and a pull-back, since monsters start fighting each other far from the dungeon. Belgrade orders the near tunnels held. Pawn lends twenty Painted Soldiers."
+		},
+		"b6.yellow_splatters_defies_pawn_after_the_goblin_breakfast": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"patrol_lead": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"twin": {
+					"prefer": [
+						"twin_stripes"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"yellow_splatters.refused_the_goblins_food",
+					"purple_smile.kept_the_spilled_food",
+					"hive.soldiers_chose_yellow_splatters_over_pawn",
+					"yellow_splatters.pushed_pawn_aside"
+				],
+				"relationship": [
+					{
+						"from": "yellow_splatters",
+						"to": "pawn",
+						"delta": -2
+					},
+					{
+						"from": "erin_solstice",
+						"to": "yellow_splatters",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "Purple Smile scoops the spilled food back into his own bowl."
+			},
+			"summary": "Pawn sends a surface patrol under Purple Smile to Erin's inn. Yellow Splatters attacks the five Goblins on reflex, then upends his bowl. Back in the Hive he pushes Pawn aside, and the Soldiers side with him."
+		},
+		"b6.mrsha_hisses_at_the_goblins_and_erin_bakes": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"barmaid": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"speaker": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.lodge_in_the_inn_basement"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.stays_upstairs_away_from_the_goblins",
+					"numbtongue.says_goblins_can_speak",
+					"erin.fears_zevara_will_move_on_the_goblins",
+					"wandering_inn.empty_of_guests"
+				],
+				"relationship": [
+					{
+						"from": "mrsha",
+						"to": "numbtongue",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed",
+				"note": "Drassi says she has been at the inn two days. The Goblins eat less each day."
+			},
+			"summary": "Headscratcher politely asks for leftovers. Numbtongue says Goblins can talk and hear. Mrsha, wand in hand, hisses and flees upstairs. Erin bakes forty loaves and fears Zevara and the Halfseekers will go after the Goblins."
+		},
+		"b6.twin_stripes_becomes_an_aberration": {
+			"tier": 1,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"soldier": {
+					"prefer": [
+						"twin_stripes"
+					],
+					"fallback_tags": []
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watcher": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"twin_stripes"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"twin_stripes.turned_aberration",
+					"twin_stripes.chained_in_the_hive"
+				],
+				"relationship": [
+					{
+						"from": "yellow_splatters",
+						"to": "pawn",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.40L",
+				"confidence": "confirmed"
+			},
+			"summary": "At night, after four hours holding the dungeon entrance, Twin Stripes suddenly turns into an Aberration. He attacks Yellow Splatters, and the Soldiers chain him in a cell they have to build. Pawn and Klbkch run in."
+		}
+	},
+	"system": [
+		{
+			"who": "yellow_splatters",
+			"kind": "class",
+			"name": "[Sergeant]",
+			"level": 12,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "yellow_splatters",
+			"kind": "skill",
+			"name": "[Tough Carapace]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "yellow_splatters",
+			"kind": "skill",
+			"name": "[Power Strike]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

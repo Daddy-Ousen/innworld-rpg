@@ -1,0 +1,681 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.42L",
+	"order": 15,
+	"events": {
+		"b6.erin_stops_the_fight_and_talks_to_mrsha": {
+			"tier": 2,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"barmaid": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.froze_the_inn_and_took_charge",
+					"mrsha.promised_not_to_hurt_the_goblins",
+					"erin.told_mrsha_goblins_are_not_all_alike",
+					"mrsha.still_hates_the_goblins"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "badarrow",
+						"delta": 2
+					},
+					{
+						"from": "mrsha",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed",
+				"note": "Drassi gives Badarrow a healing potion. Erin names Rags as a friend."
+			},
+			"summary": "Erin orders everyone to sit and sends Lyonette up. She apologises to Badarrow. Upstairs she tells Mrsha that hating Goblins is not wrong but all Goblins differ. Mrsha agrees not to hurt them and comes down to sit with Moore and Jelaqua."
+		},
+		"b6.the_goblin_party_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guitarist": {
+					"prefer": [
+						"ishkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"drummer": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"singer": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fourth": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"barmaid": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordsman": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.lodge_in_the_inn_basement"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.goblin_party_held",
+					"goblins.first_drinks_at_the_inn",
+					"numbtongue.sings",
+					"ishkr.plays_guitar_for_erin",
+					"yellow_splatters.anger_breaks",
+					"erin.taught_pop_songs_to_the_inn"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "numbtongue",
+						"delta": 2
+					},
+					{
+						"from": "erin_solstice",
+						"to": "headscratcher",
+						"delta": 1
+					},
+					{
+						"from": "yellow_splatters",
+						"to": "erin_solstice",
+						"delta": 2
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					16,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "ishkr",
+						"pos": [
+							6,
+							8
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							10,
+							8
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "drassi",
+						"pos": [
+							4,
+							6
+						]
+					},
+					{
+						"npc": "ksmvr",
+						"pos": [
+							3,
+							12
+						]
+					},
+					{
+						"npc": "yellow_splatters",
+						"pos": [
+							14,
+							12
+						]
+					},
+					{
+						"npc": "purple_smile",
+						"pos": [
+							7,
+							10
+						]
+					}
+				],
+				"line": "Music, clapping and Goblin voices fill the common room of the Wandering Inn. Antinium, Goblins and Humans share the floor.",
+				"note": "M18.5: a scene. Hours are guesses (afternoon, after the lunch fight, until about midnight)."
+			},
+			"hooks": [
+				{
+					"id": "player_joined_the_goblin_party",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"erin_solstice",
+									"ishkr",
+									"numbtongue",
+									"headscratcher",
+									"badarrow",
+									"shorthilt",
+									"rabbiteater",
+									"ksmvr",
+									"yellow_splatters",
+									"purple_smile"
+								]
+							}
+						}
+					],
+					"days": [
+						128,
+						128
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_joined_the_goblin_party"
+						],
+						"relationship": [
+							{
+								"from": "numbtongue",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "headscratcher",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ishkr",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn joined Erin's party with the Goblins and Antinium, and sang along."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed",
+				"note": "Bird and Octavia join from the roof and the workshop. Guards outside grumble at the music. Hours are guesses."
+			},
+			"summary": "Ishkr plays the guitar Erin cannot, Numbtongue drums on a table and Headscratcher sings the songs Erin teaches. Everyone dances: Erin, Purple Smile, Ksmvr, Jelaqua. The Goblins get their first drink. Yellow Splatters' anger breaks."
+		},
+		"b6.mrsha_stops_expecting_an_attack": {
+			"tier": 2,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halfseeker": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.hates_goblins_but_no_longer_expects_attack",
+					"mrsha.has_moores_flower_bud",
+					"apista.survived_the_party_in_a_mug"
+				],
+				"relationship": [
+					{
+						"from": "mrsha",
+						"to": "moore",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed",
+				"note": "Apista hid in a mug through the whole party."
+			},
+			"summary": "That night Mrsha still does not forgive the Goblins, but she stops waiting for an attack. It is harder to hate them when they cry. A Selphid and Moore were kind, and Moore gave her a flower bud. She sleeps."
+		},
+		"b6.yellow_splatters_picks_purple_smile_for_sergeant": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"yellow_splatters.knows_the_antinium_need_erin_and_the_sky",
+					"yellow_splatters.thinks_purple_smile_would_make_a_sergeant",
+					"yellow_splatters.read_pawns_picture_book"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed"
+			},
+			"summary": "Back in the barracks Yellow Splatters decides the Antinium need Erin and the sky more than training. He thinks Purple Smile would make a good Sergeant. He reads Pawn's wordless picture book all night."
+		},
+		"b6.belgrade_builds_the_kill_zone": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"worker": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": []
+				},
+				"second_worker": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prognugator": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"belgrade"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.kill_zone_built_at_the_dungeon_front",
+					"belgrade.has_trap_and_fortification_skills",
+					"klbkch.will_report_the_kill_zone_to_the_queen",
+					"anand.expects_belgrade_to_reach_strategist_first"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed",
+				"note": "Belgrade reaches Level 20 and gains two construction skills. He and Anand hug and feel nothing warm."
+			},
+			"summary": "The front goes quiet. Belgrade, Anand and Pawn build a kill zone: trap tunnels, pits, collapses, funnel rooms and Workers with bows. Belgrade expects 86 percent fewer casualties. Klbkch is impressed and will report to the Queen."
+		},
+		"b6.pawn_blesses_twin_stripes_and_names_purple_smile_sergeant": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"twin": {
+					"prefer": [
+						"twin_stripes"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"twin_stripes.cured_by_pawn",
+					"pawn.has_benediction_of_hope",
+					"purple_smile.is_sergeant",
+					"yellow_splatters.freed_twin_stripes"
+				],
+				"relationship": [
+					{
+						"from": "yellow_splatters",
+						"to": "pawn",
+						"delta": 3
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.42L",
+				"confidence": "confirmed",
+				"note": "The text shows no level-up screen; Purple Smile's level is not given. The skill gives three uses a day."
+			},
+			"summary": "Pawn uses a new skill, [Benediction of Hope], on Twin Stripes, Purple Smile and Yellow Splatters. Twin Stripes becomes himself again, and Yellow Splatters frees him. Pawn names Purple Smile a [Sergeant]."
+		}
+	},
+	"system": [
+		{
+			"who": "belgrade",
+			"kind": "level",
+			"name": "[Tactician]",
+			"level": 20,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "belgrade",
+			"kind": "skill",
+			"name": "[Simple Trap Construction]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "belgrade",
+			"kind": "skill",
+			"name": "[Basic Fortification Construction]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "pawn",
+			"kind": "skill",
+			"name": "[Benediction of Hope]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "purple_smile",
+			"kind": "class",
+			"name": "[Sergeant]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

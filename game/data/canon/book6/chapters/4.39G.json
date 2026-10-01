@@ -1,0 +1,393 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.39G",
+	"order": 12,
+	"events": {
+		"b6.rose_knights_hit_the_flooded_waters_camp": {
+			"tier": 1,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"husband": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"elder": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.fought_the_rose_knights",
+					"flooded_waters.lost_hobs_and_goblins_to_rose_knights",
+					"pyrite.shot_by_rose_knights",
+					"thomast.cut_down_by_greybeard",
+					"flooded_waters.pike_wall_failed_against_armour"
+				]
+			},
+			"rumor": "Knights of the Petal fought a Goblin tribe by the northern lakes. The knights withdrew with their champion cut down.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "Magnolia sent Bethal to settle the Goblins. Dates are guesses; the Goblins' losses are told in rough numbers only."
+			},
+			"summary": "Lady Bethal Walchais and Sir Thomast bring forty Rose Knights to Rags's lake camp. Enchanted armour breaks the pike wall and many Goblins die. Pyrite is shot twice but lives. Greybeard cuts Thomast down, and the knights pull back."
+		},
+		"b6.greybeard_reveals_he_is_greydath_of_blades": {
+			"tier": 1,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"elder": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"listener": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"greybeard"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"greybeard.is_greydath_of_blades",
+					"greydath.judged_rags_not_yet_a_lord",
+					"greydath.leaves_to_see_the_goblin_lord",
+					"flooded_waters.knows_greydath_is_alive"
+				],
+				"relationship": [
+					{
+						"from": "greybeard",
+						"to": "rags",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "Keep the id greybeard; the name Greydath is a flag, not a merge. Do not merge him with any other entity."
+			},
+			"summary": "After the fight Greybeard stops playing the senile old Hob. He is Greydath of Blades, Velan the Kind's old Goblin Lord. He tests Rags, finds her too small and young, and leaves to look at the Goblin Lord in the south."
+		},
+		"b6.garen_and_tremborag_quarrel_over_the_failed_raid": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "tremborags_mountain",
+			"roles": {
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"raider": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"laken.relieved_rie_estate"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.forbids_more_raids",
+					"tremborag.orders_rie_taken_or_every_town_burned",
+					"redfang.lost_hobs_at_rie_estate"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "Follows Laken's relief of the estate (4.35 E, day 127). Both chieftains say the other Lords refused the Goblin Lord, and would refuse him too."
+			},
+			"summary": "Garen storms into the feast hall: over twenty Hobs and a Shaman died at Lady Rie's estate. He forbids more raids. Tremborag shouts him down; they almost fight. Tremborag orders Rie taken, or every town in the Emperor's land burned."
+		},
+		"b6.garen_burns_the_empty_estate_and_a_northern_town": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "rie_estate",
+			"roles": {
+				"raider": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.garen_and_tremborag_quarrel_over_the_failed_raid"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rie_estate.burned_by_garen",
+					"garen.sacked_a_northern_mine_town",
+					"humans.begin_to_counterattack_the_goblins"
+				]
+			},
+			"rumor": "A Goblin war band burned an empty noble estate and sacked a northern mining town.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "The estate was emptied after Magnolia's talk with Rie (4.38 B)."
+			},
+			"summary": "Garen marches on the estate with a large force and finds it empty. He burns it, then sacks a mining town far to the north for its gold. Humans start to strike back at the Goblins."
+		},
+		"b6.the_rose_knights_lose_to_the_tree_trap_fort": {
+			"tier": 1,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"husband": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.built_the_tree_fort",
+					"flooded_waters.toppled_trees_on_the_rose_knights",
+					"rose_knights.retreat_from_the_lake",
+					"bethal.hides_the_old_goblin_from_magnolia",
+					"thomast.suspects_greydath"
+				]
+			},
+			"rumor": "The Rose Knights lost two knights to a Goblin fort of felled trees and went home.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "Thomast says the old Goblin reminds him of Greydath of Blades; Bethal laughs it off. The Goblins hear the report."
+			},
+			"summary": "The Goblins raise a wooden fort in one day. A knight mage breaches it, and the knights charge into a field of pre-cut trees that the Goblins topple on them. Two knights are pinned. Bethal, bored, calls a retreat and does not warn Magnolia about the old Goblin."
+		},
+		"b6.lyonette_tells_erin_about_house_walchais": {
+			"tier": 2,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.lodge_in_the_inn_basement"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.knows_house_walchais",
+					"lyonette.explained_house_walchais"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.39G",
+				"confidence": "confirmed",
+				"note": "Mrsha has Pisces' wand from now on. The Goblins sleep in the basement."
+			},
+			"summary": "On a quiet day Erin asks Lyonette about House Walchais. It is a large Izril house, not one of the Five Families, and the Lady has her own order of knights. Erin only meant Welch's juice. Mrsha chews Pisces' wand and sneezes."
+		}
+	},
+	"system": [
+		{
+			"who": "pyrite",
+			"kind": "skill",
+			"name": "[Power Strike]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "thomast",
+			"kind": "skill",
+			"name": "[Double Cut]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "bethal",
+			"kind": "skill",
+			"name": "[Tranquil Skies]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}
