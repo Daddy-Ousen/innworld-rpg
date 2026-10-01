@@ -3,7 +3,7 @@
 ## Just done (2026-10-01, cloud session)
 - M18.3 canon (plan `docs/plans/m18.3.md`, notes in ADR 0028 "M18.3"). Branch `claude/sleepy-feynman-txet0j` from main f5cc08b
   (PR #91 merged). User answers: night wave fight stage at Wirclaw's village, both hooks (fight, talk to the Redfang), no `xp_window`.
-  - `book6/chapters/`: `4.33` (order 6, 8 events), `4.34` (order 7, 6 events). Day 115; the goats' ambush on the army is day 114.
+  - `book6/chapters/`: `4.33` (order 6, 9 events), `4.34` (order 7, 5 events). Day 115; the goats' ambush on the army is day 114.
   - Fight stage `b6.eater_goats_attack_wirclaws_village` (12 goats in 3 groups; Redfang five, Erin, Wirclaw, Bird as allies).
     Bugear is NOT placed: the event kills him. Scene stage `b6.erin_bows_to_the_redfang_and_feeds_them` in `inn_interior`.
   - `npc_behaviour.json`: Wirclaw and the five Redfang (basement from flag `redfang.lodge_in_the_inn_basement`, day 116 on).
