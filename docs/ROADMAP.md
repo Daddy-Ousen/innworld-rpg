@@ -315,8 +315,8 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
 - [x] M18.5 Canon 4.39 G – 4.42 L (days 126 – 129): Greydath, the Hive front, Mrsha and the Goblins, the party (scene stage in the inn; Rose Knights and Hive as events)
 - [x] M18.6 Canon 4.43 – 4.47 (days 128 – 129): Ilvriss and the Pallass anchor, the Silver Swords (scene stage at the inn), Erin Level 33,
   the Goblin Lord's victory, Zel's speech, Liscor's council
-- [ ] M18.7 Canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 128 – 130): history notes, the battle of Invrisil (news),
-  Zel's death, Liscor mourns, the Chosen data fixes
+- [x] M18.7 Canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 129 – 130): history notes, the battle of Invrisil (news),
+  Zel's death (day 130), Liscor mourns (scene stage in the inn, talk hook with Erin), the Chosen data fixes
 **Done when:** all Book 6 canon is event data and `sim_canon_book6` runs to the last Book 6 day with drift 0;
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 

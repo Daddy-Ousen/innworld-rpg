@@ -1,29 +1,27 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.6 canon (plan `docs/plans/m18.6.md`, notes in ADR 0028 "M18.6"). Branch `claude/sleepy-feynman-txet0j` from main c1f3904 (PR #94 merged).
-  User answers: one scene stage at the inn (day 129), no `xp_window`, Zel's speech as news plus an Ilvriss hook.
-  - `book6/chapters/`: `4.43` (order 16), `4.44M` (17), `4.45` (18), `4.46` (19), `4.47` (20); 23 events, days 128 – 129 (day numbers are guesses).
-  - Stage `b6.the_silver_swords_arrive_into_a_cake_fight`: scene, `inn_interior`, 16 – 23 h, 18 NPCs. Hook: talk to a Silver Sword or Ceria.
-    Council hook: talk to Ilvriss at the inn on day 129 (`b6.liscor_council_hears_zels_speech`).
-  - 4.44 M is day 128 (roadmap said 129). Door limits, Heartflame Breastplate and the two War Golems are flags only.
-  - New `npc_behaviour` entries: `falene_skystrall`, `dawil`, `jelaqua`, `moore`.
-  - Tests: new `sim_book6_silver_swords`; `sim_canon_book6` (rumour list, stage list, 2 tests). Full suite not run.
+- M18.7 canon (plan `docs/plans/m18.7.md`, notes in ADR 0028 "M18.7"). Branch `claude/sleepy-feynman-txet0j` from main 639fd45 (PR #95 merged).
+  User answers: one scene stage (the mourning, day 130), one talk hook with Erin, no `xp_window`.
+  - `book6/chapters/`: `interlude_the_antinium_wars_pt_3/4/5` (orders 21 – 23, day 129), `4.48` (24), `4.49` (25); 31 events, days 129 – 130.
+  - Zel dies in `b6.zel_names_the_goblin_lord_reiss_and_dies` (flag `goblin_lord.named_reiss`; public belief and truth are two flags).
+  - Stage `b6.liscor_mourns_zel` (scene, `inn_interior`). Hook: talk to Erin (`wandering_inn.earther_shared_the_grief_with_erin`).
+  - Fixes: `book5/npcs.json` Oom, Bea, Kerash; flag `azkerash.lost_some_teleport_scrolls` (was `lost_his_...`) in 4.31.
+  - Tests: new `sim_book6_zel_dies` (7); `sim_canon_book6` (LAST_DAY 130). Full suite not run.
 
 ## Next
-1. The user merges the M18.6 PR.
-2. M18.7 canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 128 – 130): history notes (frames only), the battle of Invrisil (news), Zel's death
-   (day 130; he names the Goblin Lord "Reiss": flag `goblin_lord.named_reiss`), Liscor mourns, the Chosen record fixes (ADR 0028 conflicts 3 and 4),
-   soften the 4.31 `azkerash.lost_his_teleport_scrolls` note. Ask stage, hook and `xp_window` choices first. Chapter orders 21 on
-   (Pt. 3 – 5 = 21 – 23, 4.48 = 24, 4.49 = 25; The Depthless Doctor has no events). Raise `LAST_DAY` in `sim_canon_book6` to 130.
+1. The user merges the M18.7 PR. Then M18 is done except the user's play check.
+2. M19 — Book 7: M19.P plan first (ADR 0029). Ask the user to approve the plan before M19.0.
 3. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
-   the 4.26 M golem count (three, text shows two) waits for a local check. Run `sim_canon_book5` after any Book 6 change that clears a Book 5 flag.
+   the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps (`godot --path game`).
 
 ## Gotchas (cloud)
+- Chapter ids for non-numbered chapters follow the raw `index.json` id (for example `interlude_the_antinium_wars_pt_3`); the file name must match.
+- A dead NPC is removed from `gs.npcs.npcs`: tests that read an NPC after its death use `gs.world.is_alive`.
 - Character sheets in the cloud: sparse-clone the LPC generator into the scratchpad (about 240 MB, 1 – 2 min):
   `git clone --depth 1 --filter=blob:none --sparse <ULPC url> ulpc`, then `git -C ulpc sparse-checkout set --no-cone
   /CREDITS.csv /LICENSE /palette_definitions/ /sheet_definitions/ '/spritesheets/**/walk.png' ... '/spritesheets/weapon/'
