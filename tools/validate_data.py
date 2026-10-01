@@ -635,8 +635,8 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
     unordered: list[str] = []
     ch_dir = d / "chapters"
     files = sorted(ch_dir.glob("*.json")) if ch_dir.is_dir() else []
-    if not files:
-        r.err(str(ch_dir), "no chapter files")
+    if not files:  # M18.1: a book may get its records (and maps) before its events
+        r.warn(str(ch_dir), "no chapter files yet (records only)")
     for f in files:
         doc = _load(r, f)
         fn = f"chapters/{f.name}"

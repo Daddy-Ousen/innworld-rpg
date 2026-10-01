@@ -202,6 +202,14 @@ class ValidateTest(unittest.TestCase):
         self.fx.data["chapters/9.00.json"]["order"] = 2
         self.assertError(self.fx.run(), "chapter order 2 is also in chapters/9.00.json")
 
+    def test_a_book_with_records_and_no_chapters_warns(self):
+        # M18.1: Book 6 gets its NPC records and maps one step before its events.
+        del self.fx.data["chapters/9.00.json"]
+        del self.fx.data["chapters/9.01.json"]
+        rep = self.fx.run()
+        self.assertEqual(rep.errors, [])
+        self.assertTrue(any("no chapter files yet" in w for w in rep.warnings), rep.warnings)
+
     def test_mixed_chapter_order_warns(self):
         self.fx.data["chapters/9.01.json"]["order"] = 2
         rep = self.fx.run()
