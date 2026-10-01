@@ -7,7 +7,8 @@ The story of the books goes on around you, day by day. What you do with your day
 
 > The books define how the world begins. The player decides what happens next.
 
-[**Download v0.1.0-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha) · Windows and Linux · free
+[**Play in your browser**](https://daddy-ousen.github.io/innworld-rpg/) ·
+[**Download v0.1.0-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha) (Windows, Linux) · free
 
 *Non-commercial fan work. The books and the world belong to pirateaba. This repo holds no book text.*
 
@@ -48,6 +49,15 @@ This is an **alpha**. Expect bugs and rough edges. Saves from this build may not
 Next: Book 7 (The Rains of Liscor). See the [roadmap](docs/ROADMAP.md).
 
 ## Play it
+
+### In your browser
+
+Open **https://daddy-ousen.github.io/innworld-rpg/** on a computer with a keyboard.
+The first load is about 100 MB, so give it a moment. Click once into the game to start the sound.
+Your saves stay in this browser. If you clear the site data of your browser, the saves are gone.
+For the best play, use the download below.
+
+### Download
 
 1. Go to the [Releases page](https://github.com/Daddy-Ousen/innworld-rpg/releases).
 2. Download the zip for your system.
@@ -106,7 +116,8 @@ GUT: 147 scripts, about 1,400 tests. Python: 102 tests.
 
 ### Build the release zips
 
-Windows, with the Godot 4.7.2 export templates installed:
+Windows, with the Godot 4.7.2 export templates installed. This makes the Windows, Linux and Web zips.
+A published GitHub release with the Web zip also updates the browser version ([ADR 0031](docs/adr/0031-web-build.md)).
 
 ```powershell
 $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
