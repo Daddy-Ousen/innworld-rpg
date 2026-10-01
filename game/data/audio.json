@@ -199,7 +199,8 @@
     "not_gnoll": {"hurt": "human_hurt"},
     "creler_hatchling": {"hurt": "bug_hurt"},
     "creler_juvenile": {"hurt": "bug_hurt", "gone": "big_roar"},
-    "regrika_blackpaw": {"hurt": "human_hurt"}
+    "regrika_blackpaw": {"hurt": "human_hurt"},
+    "eater_goat": {"hurt": "ghoul_hurt"}
   },
   "pages": {
     "open": "chime",

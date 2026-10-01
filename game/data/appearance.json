@@ -2639,6 +2639,292 @@
 			],
 			"confidence": "likely",
 			"note": "Same look as gazi_of_reim (the Half-Gazer, 1.36); the schedule NPC needs an own look id (M14.4)."
+		},
+		"eater_goat": {
+			"creature": "goat",
+			"confidence": "likely",
+			"note": "Scrawny, black-and-brown fur, slightly curved horns, bar pupils, bloody teeth, normal goat size (4.33, 4.34). Drawn by tools/build_creatures.py (no goat in the art sources)."
+		},
+		"headscratcher": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				},
+				{
+					"part": "shield_round",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Redfang Hob with crimson eyes, a short sword cut down from his old one and a small buckler (4.33, 4.43). All six became Hobs about a week before 4.33, nearly twice as tall and thin, scarred, in old armour now too small; from 4.34 Erin has them wear pants. Their red war paint (4.33) is not drawn; the cloth colours are guesses."
+		},
+		"numbtongue": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "iron"
+				},
+				{
+					"part": "shield_round",
+					"color": "black"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Redfang Hob with two swords and a shield (4.34); one sword is drawn. All six became Hobs about a week before 4.33, nearly twice as tall and thin, scarred, in old armour now too small; from 4.34 Erin has them wear pants. Their red war paint (4.33) is not drawn; the cloth colours are guesses."
+		},
+		"badarrow": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "weapon_ranged_bow_normal",
+					"color": "dark"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "The Redfang Hob archer: green skin, long nails, crimson eyes, a bow, a dagger and a short sword (4.34, 4.42 L); the bow is drawn. All six became Hobs about a week before 4.33, nearly twice as tall and thin, scarred, in old armour now too small; from 4.34 Erin has them wear pants. Their red war paint (4.33) is not drawn; the cloth colours are guesses."
+		},
+		"shorthilt": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_clothes_vest_open",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				},
+				{
+					"part": "shield_round",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Redfang Hob with a well-worn steel sword and a small buckler (4.43). All six became Hobs about a week before 4.33, nearly twice as tall and thin, scarred, in old armour now too small; from 4.34 Erin has them wear pants. Their red war paint (4.33) is not drawn; the cloth colours are guesses."
+		},
+		"rabbiteater": {
+			"body": "male",
+			"skin": "green",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "A Redfang Hob whose ears twitch; he carries Grunter's axe (4.34). All six became Hobs about a week before 4.33, nearly twice as tall and thin, scarred, in old armour now too small; from 4.34 Erin has them wear pants. Their red war paint (4.33) is not drawn; the cloth colours are guesses."
+		},
+		"wirclaw": {
+			"body": "male",
+			"skin": "fur_gold",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_gold"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_ranged_bow_normal",
+					"color": "dark"
+				}
+			],
+			"confidence": "likely",
+			"note": "A strong Gnoll [Farmer] with dirty-blonde fur (drawn gold) and a good bow (4.33, 4.34). The Fischer Cow bite scar is not drawn; the clothes are a guess."
+		},
+		"falene_skystrall": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "head_ears_elven"
+				},
+				{
+					"part": "hair_long",
+					"color": "ginger"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "sky"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "likely",
+			"note": "Half-Elf [Battlemage] of the Silver Swords: light red hair, unearthly features, a staff, looks late twenties (4.45). Her robes are a guess (white and blue for the team's silver)."
+		},
+		"dawil": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "beards_beard",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "steel"
+				},
+				{
+					"part": "arms_armour",
+					"color": "steel"
+				},
+				{
+					"part": "legs_armour",
+					"color": "steel"
+				},
+				{
+					"part": "feet_armour",
+					"color": "steel"
+				},
+				{
+					"part": "weapon_blunt_mace",
+					"color": "mace"
+				}
+			],
+			"confidence": "likely",
+			"note": "A stocky Dwarf of the Silver Swords, a few inches over five feet, thick beard, dark brown hair, full plate and a hammer (4.43, 4.45). The hammer is drawn as a mace; the short size is not drawn."
+		},
+		"race_dwarf": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "chestnut"
+				},
+				{
+					"part": "beards_beard",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Any Dwarf with no own look (M18.1): a full beard; the short size is not drawn."
+		},
+		"purple_smile": {
+			"body": "male",
+			"skin": "all.lpcr.black",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles",
+					"paint": "#8a3cc8"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "A painted Soldier: four arms, spade hands, a purple ring round both eyes and a smile drawn across his mandibles (4.40 L, 4.41 L). The mandibles are drawn purple; the eye rings are not drawn. Otherwise the antinium_soldier look."
 		}
 	}
 }

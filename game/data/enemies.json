@@ -229,7 +229,13 @@
 			"tags": ["gnoll", "named_adventurer", "undead"], "color": "#1f1b18", "danger": 1.0, "behaviour": "pack",
 			"hp": 90, "armor": 6, "accuracy": 9, "evasion": 3, "damage": [3, 7], "act_seconds": 6,
 			"aggro_radius": 12, "lose_radius": 99, "chase_turns": 99, "flee_below": 0.0, "scared_by": [],
-			"escape": {"below": 0.75, "line": "Regrika stops laughing. She shoves Erin aside, opens the magic door to Celum and walks through. It swings shut behind her."}}
+			"escape": {"below": 0.75, "line": "Regrika stops laughing. She shoves Erin aside, opens the magic door to Celum and walks through. It swings shut behind her."}},
+		"eater_goat": {"name": "Eater Goat", "confidence": "guess",
+			"abilities": [{"kind": "leap", "name": "Leap", "range": 3, "ap_q": 4, "cooldown": 2}],
+			"canon_ref": {"book": 6, "chapter": "4.34", "confidence": "confirmed", "note": "High Passes monsters that came south in herds (4.32 G). Scrawny, black-and-brown, very fast, dodge arrows, leap and stack to clear a wall, bite and hold on, eat anything, fear nothing (4.34). One can kill an average Hob; a herd is a Gold-rank job. M18.1: the stats are guesses; no spawns (the 4.34 stage brings them, M18.3)."},
+			"tags": ["goat", "beast"], "color": "#3b2a1e", "danger": 0.9, "behaviour": "pack",
+			"hp": 22, "armor": 1, "accuracy": 6, "evasion": 6, "damage": [3, 6], "act_seconds": 5,
+			"aggro_radius": 10, "lose_radius": 14, "chase_turns": 20, "flee_below": 0.0, "scared_by": []}
 	},
 	"spawns": [
 		{"id": "crab_valley", "area": "floodplains_south", "enemy": "rock_crab", "confidence": "guess",

@@ -82,6 +82,9 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-combat-armor-for-women
   - http://opengameart.org/content/lpc-clothing-updates
   - Notes: original by wulax, adapted to female by makrohn, recolors by bigbeargames; adapted to v3 bases and further recolors by bluecarrot16, climb/emote by JaidynReiman
+- `beards/beard/basic` by JaidynReiman, Carlo Enrico Victoria (Nemisys). Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-white-beard
+  - Notes: Original by Nemisys, repositioning by JaidynReiman.
 - `beards/mustache/basic` by JaidynReiman, Carlo Enrico Victoria (Nemisys). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-brunet-mustache
   - Notes: Original by Nemisys, repositioning by JaidynReiman.
@@ -394,6 +397,9 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-2-characters
   - https://opengameart.org/content/lpc-gentleman
   - https://opengameart.org/content/lpc-pirates
+- `weapon/blunt/mace` by Johannes Sjölund (wulax), bluecarrot16. Licence: OGA-BY 3.0 / CC-BY-SA 3.0.
+  - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+  - https://opengameart.org/content/lpc-extended-weapon-animations
 - `weapon/blunt/waraxe` by Benjamin K. Smith (BenCreating), bluecarrot16, Sander Frenken (castelonia). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-weapons
 - `weapon/magic/simple` by bluecarrot16, Dr. Jamgo. Licence: CC0.
