@@ -1,0 +1,37 @@
+{
+	"schema_version": 1,
+	"id": "inn_basement",
+	"name": "The inn's basement",
+	"location": "wandering_inn",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M18.1, ADR 0028). The basement under the common room, reached by a trapdoor ('cellar door', 4.34). The Horns slept here before Book 6 (Ceria, 4.34); from 4.34 the Redfang Goblins sleep here and hide food (4.41 L). The text gives no size, no contents and no builder. Guesses: the size, the earth walls, the bedrolls and shelves, and that it opens with the Antinium build (wandering_inn.expansion_begun, 4.18; user choice).",
+	"zones": {},
+	"exits": [
+		{"at": [2, 1], "to": "inn_interior", "arrive": [14, 10], "minutes": 0}
+	],
+	"objects": [
+		{"id": "basement_ladder", "kind": "ladder", "at": [2, 1], "name": "Ladder up to the trapdoor", "actions": []},
+		{"id": "basement_bedroll_1", "kind": "bedroll", "at": [6, 2], "name": "Bedroll", "actions": []},
+		{"id": "basement_bedroll_2", "kind": "bedroll", "at": [8, 2], "name": "Bedroll", "actions": []},
+		{"id": "basement_bedroll_3", "kind": "bedroll", "at": [10, 2], "name": "Bedroll", "actions": []},
+		{"id": "basement_bedroll_4", "kind": "bedroll", "at": [6, 6], "name": "Bedroll", "actions": []},
+		{"id": "basement_bedroll_5", "kind": "bedroll", "at": [8, 6], "name": "Bedroll", "actions": []},
+		{"id": "basement_bedroll_6", "kind": "bedroll", "at": [10, 6], "name": "Bedroll", "actions": []},
+		{"id": "basement_shelves", "kind": "shelves", "at": [14, 4], "name": "Store shelves", "actions": [], "solid": true},
+		{"id": "basement_woodpile", "kind": "woodpile", "at": [14, 7], "name": "Firewood", "actions": [], "solid": true}
+	],
+	"legend": {".": "cave_floor", "^": "stone_cliff"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^..............^",
+		"^^^^^^^^^^^^^^^^"
+	]
+}

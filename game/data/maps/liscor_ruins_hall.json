@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"id": "liscor_ruins_hall",
+	"name": "The Ruins of Liscor",
+	"location": "liscor_dungeon",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map (M18.1, ADR 0028). Inside the stone doors of the Ruins (Skinner's crypt): excavated rooms with temple carvings (4.37 O). Skinner's treasure room was found looted (2.02); opposite its stone double doors Olesm's ring shows a doorway that feels like solid stone to everyone else (4.37 O). Behind it a small round room with a hexagon on the floor: stepping on it drops you down a long chute (the floor closes again). The overlay keeps the doorway a wall until liscor_ruins.hidden_chute_found (set by the 4.37 O event, M18.4). The chute is one way. Guesses: the layout, the pillars, the place of the vault and the gate flag ruins.vault_found_looted (2.02). The ramp down to the second level (4.37 O) is not drawn.",
+	"zones": {},
+	"exits": [
+		{"at": [15, 17, 2, 1], "to": "ruins_entrance", "arrive": [16, 4], "minutes": 0},
+		{"id": "hidden_chute", "at": [25, 7], "to": "liscor_ruins_ossuary", "arrive": [8, 4], "minutes": 1}
+	],
+	"objects": [
+		{"id": "skinner_vault_doors", "kind": "stone_doors", "at": [10, 7], "name": "Stone double doors of the looted vault", "actions": [], "solid": true},
+		{"id": "vault_chest_broken", "kind": "shelves", "at": [5, 6], "name": "Broken treasure racks", "actions": [], "solid": true},
+		{"id": "hexagon", "kind": "mat", "at": [25, 7], "name": "A hexagon drawn on the floor", "actions": []},
+		{"id": "hall_bones_1", "kind": "bones", "at": [14, 3], "name": "Old bones", "actions": []},
+		{"id": "hall_bones_2", "kind": "bones", "at": [18, 12], "name": "Old bones", "actions": []},
+		{"id": "hall_cobweb_1", "kind": "cobweb", "at": [11, 2], "name": "Cobweb", "actions": []},
+		{"id": "hall_cobweb_2", "kind": "cobweb", "at": [20, 2], "name": "Cobweb", "actions": []},
+		{"id": "hall_tomb_1", "kind": "tombstone", "at": [14, 6], "name": "Carved grave slab", "actions": [], "solid": true},
+		{"id": "hall_tomb_2", "kind": "tombstone", "at": [17, 6], "name": "Carved grave slab", "actions": [], "solid": true}
+	],
+	"overlays": [
+		{"id": "illusion_wall", "tile": "stone_cliff", "when_flags": [], "unless_flags": ["liscor_ruins.hidden_chute_found"], "rects": [[21, 7, 1, 1]]}
+	],
+	"legend": {".": "cave_floor", "^": "stone_cliff", "R": "rock"},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^.R......R.^^^^^^^^^^^",
+		"^^^^......^..........^^^...^^^^^",
+		"^^^^......^..........^^.....^^^^",
+		"^^^^........................^^^^",
+		"^^^^.................^^.....^^^^",
+		"^^^^......^.R......R.^^^...^^^^^",
+		"^^^^......^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^.R......R.^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^..........^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^..^^^^^^^^^^^^^^^",
+		"^^^^^^^^^^^^^^^..^^^^^^^^^^^^^^^"
+	]
+}
