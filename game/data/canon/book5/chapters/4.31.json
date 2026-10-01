@@ -101,7 +101,7 @@
 			"effects": {
 				"set_flags": [
 					"azkerash.castle_burned_by_teriarch",
-					"azkerash.lost_his_teleport_scrolls",
+					"azkerash.lost_some_teleport_scrolls",
 					"ryoka.under_teriarchs_protection",
 					"azkerash.accord_with_teriarch_over_ryoka"
 				],
@@ -116,7 +116,7 @@
 				"confidence": "confirmed",
 				"note": "Kerash is sent for what is left of Venitra. Teriarch puts no geas on Ryoka."
 			},
-			"summary": "Teriarch's fire comes through a [Message] spell and burns a wing of the Necromancer's castle and his teleport scrolls. Ryoka is under his protection, he says. Az'kerash agrees to leave her and her friends alone."
+			"summary": "Teriarch's fire comes through a [Message] spell and burns a wing of the Necromancer's castle and some of his teleport scrolls. Ryoka is under his protection, he says. Az'kerash agrees to leave her and her friends alone."
 		},
 		"b5.zzzzz_liscor_burns_brunkr_and_ulrien": {
 			"tier": 2,

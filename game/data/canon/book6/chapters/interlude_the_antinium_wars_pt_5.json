@@ -1,0 +1,265 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "interlude_the_antinium_wars_pt_5",
+	"order": 23,
+	"events": {
+		"b6.klbkch_and_erin_finish_the_war_history": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"reader": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"guest": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b6.klbkch_reads_the_war_history_to_the_hive"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"history.zel_killed_the_necromancer_in_the_war",
+					"klbkch.and_zel_fought_at_the_end_of_the_war",
+					"history.peace_of_liscor_made_the_hive"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "History notes only: Zel tears the Necromancer in two; Klbkch and Zel fight each other; the Peace of Liscor; Velan dies to Elia Arcsinger's arrow, Kingslayer; Wrymvr and Tallis die."
+			},
+			"summary": "Klbkch and Erin hear the last part of the history: the Necromancer's death at Zel's hands, the fight between Zel and Klbkch, the Peace of Liscor and Velan's end by an arrow."
+		},
+		"b6.tyrion_rages_at_the_veltras_estate": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				},
+				"son": {
+					"prefer": [
+						"hethon_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"young_son": {
+					"prefer": [
+						"sammial_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"majordomo": {
+					"prefer": [
+						"ullim"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.has_a_secret_plan_needing_the_goblin_lords_army",
+					"tyrion.furious_that_magnolia_allied_with_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "He says only that he hopes the Goblin Lord's army stays strong enough 'for my plan'. The plan is not stated. Sammial wants to be called Sammy."
+			},
+			"summary": "Lord Tyrion listens to the history in his estate and rages that Magnolia allied with Zel. He hopes the Goblin Lord's army stays strong enough for his own plan, which he does not explain."
+		},
+		"b6.goblins_read_the_war_history_with_osthia": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"lieutenant": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblins.read_the_war_history",
+					"osthia.still_a_captive_of_the_goblin_lord",
+					"goblin_lord.weeps_for_the_dead_goblin_king"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "The Goblins raided cities and libraries for the book. The Goblin Lord does not read it, but weeps. Neither frame names him; he is Reiss only from 4.49."
+			},
+			"summary": "In the Goblin Lord's tent the Goblin lieutenants read the history of the war that killed their old King, while the Drake captive Osthia watches. The Goblin Lord does not read; he weeps."
+		},
+		"b6.olesm_is_furious_at_the_war_history": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.read_the_war_history"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "confirmed",
+				"note": "Olesm is angry at how the book skips over the arrow that killed the Goblin King."
+			},
+			"summary": "Olesm reads the history in his office and is angry about how the book explains the Goblin King's death."
+		},
+		"b6.zel_and_magnolia_read_the_war_history_in_the_camp": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.expects_the_goblin_lord_the_day_after_tomorrow",
+					"magnolia.made_zel_read_the_war_history"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_5",
+				"confidence": "likely",
+				"note": "Zel's tent. He says the Goblin Lord arrives in two days, or tomorrow if he marches hard, and he means to force a day battle. 'Day after tomorrow' vs 'night before the battle' in Pt. 3 is a small clash in the text; both are on day 129."
+			},
+			"summary": "Magnolia makes Zel read the history again in his tent outside Invrisil. They talk about the coming battle; Zel means to force a day fight."
+		}
+	},
+	"system": []
+}

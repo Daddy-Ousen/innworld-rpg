@@ -6,8 +6,8 @@ extends GutTest
 
 ## First day with Book 6 canon (4.32 G: the Goblin Lord's army passes Liscor, a guess).
 const FIRST_DAY := 114
-## Last day with Book 6 canon so far (M18.6: 4.43 – 4.47, the Silver Swords, Zel's speech; M18.5 ended on 129 too).
-const LAST_DAY := 129
+## Last day with Book 6 canon so far (M18.7: Antinium Wars Pt. 3 – 5, 4.48, 4.49; Zel dies on 130).
+const LAST_DAY := 130
 
 var _db: DataDb
 var _base_json := ""
@@ -45,7 +45,7 @@ func _sleep_to_last_day(gs: GameState) -> void:
 func test_book6_loads() -> void:
 	assert_eq(_db.canon.errors, [] as Array[String])
 	assert_eq(_db.errors, [] as Array[String])
-	assert_gte(_b6_events().size(), 78)
+	assert_gte(_b6_events().size(), 110)
 	for npc: String in ["goblin_lord", "the_fool", "xersia", "erille", "isodore", "nereshal", "cirille_bitterclaw", "kirust",
 			"blighted_king", "blighted_queen", "keith", "chole", "eddy", "vincent", "cynthia"]:
 		assert_true(_db.canon.npcs.has(npc), npc)
@@ -102,7 +102,7 @@ func test_book6_runs_as_canon() -> void:
 			"reynold.wounded_by_the_goblin_vanguard", "bethal.hunts_the_neunham_raiders"]:
 		assert_true(gs.flags.has(f), f)
 	assert_false(gs.flags.has("liscor_dungeon.earther_helped_search_the_crypt"), "no player was in the crypt")
-	for npc: String in ["laken_godart", "rie", "zel_shivertail", "magnolia_reinhart", "reynold", "olesm", "pisces", "ilvriss", "krshia"]:
+	for npc: String in ["laken_godart", "rie", "magnolia_reinhart", "reynold", "olesm", "pisces", "ilvriss", "krshia"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
 	# M18.5: the Rose Knights, Greydath, the inn's bad days and the party, the Hive's kill zone.
 	for f: String in ["flooded_waters.fought_the_rose_knights", "greybeard.is_greydath_of_blades", "flooded_waters.built_the_tree_fort",
@@ -154,10 +154,17 @@ func test_chapter_order_runs_the_book_in_order() -> void:
 
 func test_zel_goes_off_the_map_after_he_leaves() -> void:
 	var gs := _fresh()
-	_sleep_to_last_day(gs)
+	while gs.world.last_day < 129:
+		Commands.sleep(gs, _db, Rest.ANYWHERE)
 	assert_true(gs.flags.has("zel.left_liscor"))
 	var zel: Dictionary = gs.npcs.npcs["zel_shivertail"]
 	assert_eq(String(zel["area"]), "@celum", "Zel is off the map with Magnolia")
+
+
+func test_zel_dies_on_day_130() -> void:
+	var gs := _fresh()
+	_sleep_to_last_day(gs)
+	assert_false(gs.world.is_alive(_db.canon, "zel_shivertail"))
 
 
 func test_esthelm_is_news_only() -> void:
@@ -186,7 +193,7 @@ func test_the_party_and_the_arrival_are_the_new_stages() -> void:
 	for id: String in _b6_events():
 		if _db.canon.events[id].has("stage") and int(_db.canon.events[id]["window"]["earliest"]) >= 127:
 			staged.append(id)
-	assert_eq(staged, ["b6.the_goblin_party_at_the_inn", "b6.the_silver_swords_arrive_into_a_cake_fight"])
+	assert_eq(staged, ["b6.the_goblin_party_at_the_inn", "b6.the_silver_swords_arrive_into_a_cake_fight", "b6.liscor_mourns_zel"])
 
 
 func test_raskghar_has_its_name() -> void:

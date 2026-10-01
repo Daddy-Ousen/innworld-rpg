@@ -1,0 +1,95 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "interlude_the_antinium_wars_pt_4",
+	"order": 22,
+	"events": {
+		"b6.niers_and_foliana_read_the_war_history": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"niers.read_the_war_history",
+					"niers.refused_to_face_velan_in_the_war"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_4",
+				"confidence": "confirmed",
+				"note": "Place is not given. Niers reads a small Fraerling copy with Foliana. History: Niers refused to face Velan; Foliana was bribed across the sea with a muffin."
+			},
+			"summary": "Niers Astoragon and Foliana read the war book in his quarters. It says he met the Goblin King's army on the Plains of Saltes and would not fight it."
+		},
+		"b6.selys_and_tekshia_read_about_the_siege_of_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"granddaughter": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"guildmaster": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"selys.learned_how_her_parents_died_at_liscors_wall",
+					"tekshia.read_the_war_history_with_selys"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "interlude_the_antinium_wars_pt_4",
+				"confidence": "confirmed",
+				"note": "Tekshia tells Selys that her father died to a Ram's Charge on the wall and her mother to a wraith. History: Zel held Liscor three months; Tallis Stormbreaker destroyed Xrn's armies."
+			},
+			"summary": "Selys and her grandmother Tekshia read the chapter on the Siege of Liscor. Tekshia tells her how her parents died on the wall. The history says the Antinium broke the siege at the last moment."
+		}
+	},
+	"system": []
+}

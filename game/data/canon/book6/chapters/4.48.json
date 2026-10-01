@@ -1,0 +1,456 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.48",
+	"order": 24,
+	"events": {
+		"b6.zel_and_magnolia_plan_the_battle_of_invrisil": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"sister": {
+					"prefer": [
+						"sacra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wife": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.wears_magnolias_anti_magic_rings",
+					"zel.holds_the_secret_weapons_until_the_goblin_lord_shows",
+					"magnolia.keeps_the_tube_artifact_in_reserve",
+					"invrisil.battle_begun"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Forty thousand Humans and allies, about six thousand of them cavalry, face an army almost twice as large with tens of thousands of undead. Tyrion drew troops away and no other city sent its garrison. Day 130 is the battle (a guess from 4.47)."
+			},
+			"summary": "Magnolia and Zel set the battle plan at her post behind the line. Zel changes it: the secret weapons wait until the Goblin Lord is in the open, and the old tube artifact stays in reserve. He wears her rings against teleport, curses and mind magic."
+		},
+		"b6.the_battle_of_invrisil_opens": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lieutenant": {
+					"prefer": [
+						"gershal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"salvia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"invrisil.front_line_holds_at_first"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Zel faces the Goblin chant with folded arms. Over a hundred Hobs charge the low-level ranks; Zel's Skills hold the shield wall and he saves Gershal."
+			},
+			"summary": "The armies meet outside Invrisil. Zel stands in front until the Goblin chant fades, then holds the shield wall against a charge of Hobs and saves Lieutenant Gershal. Captain Salvia's riders raid the Goblin flank."
+		},
+		"b6.the_goblin_lord_sends_the_undead_and_deathbolt": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"sir_evimore"
+					],
+					"fallback_tags": []
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.casts_deathbolt_at_invrisil",
+					"az_kerash.supplied_exploding_undead",
+					"invrisil.undead_hold_the_left"
+				],
+				"kill": [
+					"sir_evimore"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "[Deathbolt] kills anyone below about level 20 at once. Osthia is chained near the Goblin Lord and notes the exploding undead are Az'kerash's work. Sir Evimore dies to three bolts while held down (the text says a second Rose Knight dies too; unnamed)."
+			},
+			"summary": "The Goblin Lord sends in Ghouls, zombies and Crypt Lords, and exploding undead from the Necromancer. He casts [Deathbolt] again and again. Sir Evimore of the Rose Knights, another knight and a block of archers die."
+		},
+		"b6.zel_kills_illbreath_and_noface": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"poisoner": {
+					"prefer": [
+						"illbreath"
+					],
+					"fallback_tags": []
+				},
+				"caster": {
+					"prefer": [
+						"noface"
+					],
+					"fallback_tags": []
+				},
+				"rider": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.lost_illbreath_and_noface",
+					"snapjaw.survived_zels_throw",
+					"goblin_army.fears_zel"
+				],
+				"kill": [
+					"illbreath",
+					"noface"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Zel tears off Illbreath's head and kills Noface. Snapjaw's bite does him little harm and he throws her. The Goblins fear him and will not engage."
+			},
+			"summary": "The Goblin Lord's lieutenants break through the line. Zel kills Illbreath and Noface, throws Snapjaw aside and leaves the rest of the army afraid to face him."
+		},
+		"b6.reynold_rescues_the_cavalry_in_the_pink_carriage": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"driver": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"salvia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reynold.crashed_the_carriage_at_the_front",
+					"invrisil.cavalry_saved_by_the_carriage"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Most of the cavalry are untrained in [Scatter Gallop] and hundreds die. The carriage can fly (a Skill, [Flying Wheels]). Reynold takes a [Deathbolt] and Zel gives him a potion."
+			},
+			"summary": "The Goblin Lord's riders and hidden archers surround the Human cavalry and hundreds die. Magnolia sends Reynold in the pink carriage; he rams through the Goblins and saves the rest, then crashes at the front."
+		},
+		"b6.war_golems_charge_the_goblin_lord": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.sent_the_war_golems_at_the_goblin_lord",
+					"goblin_lord.escaped_the_war_golems"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Two 12-foot War Golems, immune to [Deathbolt]. Eater of Spears and a swarm of Hobs stop them just short."
+			},
+			"summary": "When the Goblin Lord rides at the carriage with over a thousand Hobs, Magnolia releases her two War Golems. They nearly reach him, but Eater of Spears and the Hobs hold them and he gets away."
+		},
+		"b6.zel_asks_for_the_carriage_and_a_plan_to_end_the_battle": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"driver": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.plans_to_kill_the_goblin_lord_himself",
+					"thomast.holds_the_left_flank"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "Zel says the battle is a draw and that he is tired. Reynold sets him down at Thomast's position first."
+			},
+			"summary": "Zel tells Magnolia the battle is a draw and asks to borrow Reynold and the carriage for a dangerous plan to kill the Goblin Lord. They drop him with Thomast first."
+		},
+		"b6.goblins_hit_magnolias_post": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.nearly_used_the_tube_artifact"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.48",
+				"confidence": "confirmed",
+				"note": "She stops the arrows with [Deft Hand], then [Polite Deflection] on the charge; Bethal uses [Tranquil Skies]. Salvia's riders arrive."
+			},
+			"summary": "Goblin archers and riders attack Magnolia's post. She, Bethal, her maids and butlers turn them back, and she meets the Goblin Lord's stare across the field."
+		}
+	},
+	"system": []
+}
