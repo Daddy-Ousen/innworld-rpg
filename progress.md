@@ -42,7 +42,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     the ossuary in the Ruins of Liscor: illusion wall until `liscor_ruins.hidden_chute_found`, one-way chute, corridor
     with a trap to `liscor_crypt`); the Eater Goat (`leap`, drawn art); 10 looks; 38 Book 6 NPC records, no events.
     Tests run: `sim_book6_world` (new) and 18 scripts the change touches, Python tool tests (102), validator. All pass.
-    Full suite not run. PR waits for the user to merge.
+    Full suite not run. [PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90) waits for the user to merge.
   - [ ] M18.2 canon 4.32 G, 1.02 C – 1.05 C (next).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
 
