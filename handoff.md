@@ -26,6 +26,9 @@
   They come from the 4.7.2 export templates (.tpz, about 1 GB download): ask the user before downloading.
 - Work: a "Web" preset in `game/export_presets.cfg`, a web step in `tools/release.ps1`, a GitHub Pages workflow or an
   itch.io upload, check fonts/audio/startup time in Chrome and Firefox, a "Play in browser" link in the README. ADR needed.
+- Own subdomain (user asked 2026-10-01): yes, the web build is static files. Needs HTTPS, `.wasm` served as
+  `application/wasm`, gzip/brotli on. Watch per-file limits: the `.pck` may be 50+ MB (GitHub Pages 100 MB per
+  file is fine; Cloudflare Pages caps files at 25 MiB). Suggested: GitHub Pages + a CNAME like `play.<domain>`.
 - Risks: download size (~60–90 MB first load), the browser grabs Esc (fullscreen), save data is lost if the user clears site data.
 
 ## Next
