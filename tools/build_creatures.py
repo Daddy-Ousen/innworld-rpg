@@ -8,7 +8,7 @@ A creature look has a "creature" key instead of LPC body parts:
     look = {"creature": "golem", "ramp": ["#1d2a33", ..., "#ffffff"], "hue": 0, "sat": 1.0,
             "val": 1.0, "die": "melt", "confidence": ..., "note": ...}
     creature  a source in CREATURES (the art files in tools/art/creatures/, or "rock_crab"
-              and "snowman", which this tool draws itself)
+              "snowman" and "goat", which this tool draws itself)
     ramp      optional: colours dark → light; every pixel takes the ramp colour at its
               brightness (the darkest pixel of the source = the first colour)
     hue       optional: turn the hue by this many degrees; sat and val scale the
@@ -73,6 +73,7 @@ CREATURES: dict[str, dict] = {
     },
     "rock_crab": {"drawn": "rock_crab"},
     "snowman": {"drawn": "snowman"},
+    "goat": {"drawn": "goat"},
 }
 
 
@@ -384,7 +385,104 @@ def draw_snowman() -> dict[str, dict[str, list[Image.Image]]]:
     return {"walk": walk, "attack": attack}
 
 
-DRAWN = {"rock_crab": draw_rock_crab, "snowman": draw_snowman}
+# --- the Eater Goat: a scrawny black-and-brown goat with curved horns and a bloody
+# mouth (4.34). Drawn here: no goat in the art sources (M18.1).
+
+GOAT_OUTLINE = (20, 14, 10, 255)
+GOAT_BLACK = (38, 30, 26, 255)
+GOAT_BROWN = (104, 68, 40, 255)
+GOAT_LIGHT = (138, 96, 60, 255)
+GOAT_HORN = (176, 160, 124, 255)
+GOAT_HORN_DARK = (112, 98, 72, 255)
+GOAT_EYE = (196, 160, 84, 255)
+GOAT_BLOOD = (140, 24, 24, 255)
+GOAT_TOOTH = (226, 214, 188, 255)
+
+
+def _goat_leg(d: ImageDraw.ImageDraw, x: int, top: int, swing: int) -> None:
+    """A thin leg from `top` down to the ground (y 60), its hoof moved by `swing`."""
+    d.line((x, top, x + swing, 59), fill=GOAT_OUTLINE, width=3)
+    d.line((x, top, x + swing, 58), fill=GOAT_BLACK, width=1)
+
+
+def _goat_horns(d: ImageDraw.ImageDraw, x: int, y: int, back: int) -> None:
+    """A slightly curved horn from x, y sweeping back (`back` = -1 left, 1 right)."""
+    pts = [(x, y), (x + back * 2, y - 4), (x + back * 5, y - 6), (x + back * 8, y - 5)]
+    d.line(pts, fill=GOAT_HORN_DARK, width=3)
+    d.line(pts[:3], fill=GOAT_HORN, width=1)
+
+
+def goat_frame(facing: str, phase: int = 0, reach: int = 0) -> Image.Image:
+    """One 64 px frame. `phase` moves the legs; `reach` thrusts the head and opens the
+    bloody mouth (attack)."""
+    img = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    cx, cy = 32, 41
+    swing = (-2, 2)[phase % 2]
+    if facing in ("w", "e"):
+        s = -1 if facing == "w" else 1
+        # far legs, body, near legs
+        _goat_leg(d, cx - s * 8, cy + 4, -swing)
+        _goat_leg(d, cx + s * 9, cy + 4, swing)
+        d.ellipse((cx - 14, cy - 7, cx + 14, cy + 7), fill=GOAT_OUTLINE)
+        d.ellipse((cx - 13, cy - 6, cx + 13, cy + 6), fill=GOAT_BLACK)
+        d.ellipse((cx - 10, cy - 6, cx + 6, cy + 3), fill=GOAT_BROWN)   # brown patches
+        d.ellipse((cx - 7, cy - 5, cx + 1, cy - 1), fill=GOAT_LIGHT)
+        d.line((cx - s * 13, cy - 4, cx - s * 16, cy - 8), fill=GOAT_OUTLINE, width=2)  # tail
+        _goat_leg(d, cx - s * 10, cy + 4, swing)
+        _goat_leg(d, cx + s * 7, cy + 4, -swing)
+        # neck and head, thrust forward on attack
+        hx, hy = cx + s * (16 + reach), cy - 12 + reach // 2
+        d.line((cx + s * 10, cy - 3, hx - s * 2, hy + 2), fill=GOAT_OUTLINE, width=6)
+        d.line((cx + s * 10, cy - 3, hx - s * 2, hy + 2), fill=GOAT_BLACK, width=4)
+        d.ellipse((hx - 5, hy - 4, hx + 5, hy + 4), fill=GOAT_OUTLINE)
+        d.ellipse((hx - 4, hy - 3, hx + 4, hy + 3), fill=GOAT_BROWN)
+        d.polygon([(hx + s * 3, hy - 1), (hx + s * 8, hy + 2), (hx + s * 3, hy + 4)], fill=GOAT_BROWN,
+                  outline=GOAT_OUTLINE)  # muzzle
+        d.line((hx - s * 1, hy + 4, hx - s * 1, hy + 7), fill=GOAT_BLACK, width=2)  # beard
+        d.point((hx + s * 1, hy - 1), fill=GOAT_EYE)
+        if reach:
+            d.line((hx + s * 4, hy + 3, hx + s * 8, hy + 3), fill=GOAT_BLOOD, width=2)
+            d.point((hx + s * 6, hy + 2), fill=GOAT_TOOTH)
+        _goat_horns(d, hx - s * 1, hy - 3, -s)
+    elif facing == "s":
+        _goat_leg(d, cx - 6, cy + 2, swing // 2)
+        _goat_leg(d, cx + 6, cy + 2, -swing // 2)
+        d.ellipse((cx - 11, cy - 8, cx + 11, cy + 7), fill=GOAT_OUTLINE)
+        d.ellipse((cx - 10, cy - 7, cx + 10, cy + 6), fill=GOAT_BLACK)
+        d.ellipse((cx - 6, cy - 6, cx + 6, cy + 2), fill=GOAT_BROWN)
+        hy = cy - 10 + reach
+        d.ellipse((cx - 6, hy - 6, cx + 6, hy + 7), fill=GOAT_OUTLINE)
+        d.ellipse((cx - 5, hy - 5, cx + 5, hy + 6), fill=GOAT_BROWN)
+        d.ellipse((cx - 3, hy + 1, cx + 3, hy + 6), fill=GOAT_LIGHT)
+        for ex in (cx - 3, cx + 2):  # bar pupils
+            d.rectangle((ex, hy - 2, ex + 1, hy - 1), fill=GOAT_EYE)
+            d.point((ex, hy - 2), fill=GOAT_OUTLINE)
+        d.line((cx - 2, hy + 5, cx + 2, hy + 5), fill=GOAT_BLOOD if reach else GOAT_OUTLINE, width=1 + (reach > 0))
+        _goat_horns(d, cx - 3, hy - 5, -1)
+        _goat_horns(d, cx + 3, hy - 5, 1)
+    else:  # back: the rump and tail, the horns over the head
+        _goat_leg(d, cx - 6, cy + 2, swing // 2)
+        _goat_leg(d, cx + 6, cy + 2, -swing // 2)
+        hy = cy - 11 - reach // 2
+        d.ellipse((cx - 5, hy - 4, cx + 5, hy + 5), fill=GOAT_OUTLINE)
+        d.ellipse((cx - 4, hy - 3, cx + 4, hy + 4), fill=GOAT_BLACK)
+        _goat_horns(d, cx - 3, hy - 3, -1)
+        _goat_horns(d, cx + 3, hy - 3, 1)
+        d.ellipse((cx - 11, cy - 8, cx + 11, cy + 7), fill=GOAT_OUTLINE)
+        d.ellipse((cx - 10, cy - 7, cx + 10, cy + 6), fill=GOAT_BLACK)
+        d.ellipse((cx - 7, cy - 6, cx + 5, cy + 1), fill=GOAT_BROWN)
+        d.line((cx, cy - 6, cx, cy - 10), fill=GOAT_OUTLINE, width=2)  # tail
+    return img
+
+
+def draw_goat() -> dict[str, dict[str, list[Image.Image]]]:
+    walk = {d: [goat_frame(d, p) for p in (0, 1, 0, 1)] for d in DIRS}
+    attack = {d: [goat_frame(d, 0, r) for r in (0, 2, 5, 6, 3, 0)] for d in DIRS}
+    return {"walk": walk, "attack": attack}
+
+
+DRAWN = {"rock_crab": draw_rock_crab, "snowman": draw_snowman, "goat": draw_goat}
 
 
 # --- build
