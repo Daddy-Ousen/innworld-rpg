@@ -79,11 +79,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)
-- [ ] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
+- [x] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
   left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
   `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows
   exe opens and closes clean. Tests run: `unit_play_loop` (16 pass). Full suite not run.
-  - [ ] The user merges the PR. Then tag `v0.1.0-alpha` on the merge commit and publish the GitHub pre-release with the two zips.
+  - [x] Merged ([PR #97](https://github.com/Daddy-Ousen/innworld-rpg/pull/97), merge commit 548f0f5). Tag `v0.1.0-alpha` pushed.
+    Pre-release published 2026-10-01: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha (two zips).
   - [ ] Android: skipped (user, 2026-10-01). Needs touch controls first (roadmap "Releases").
 
 ## Cloud setup
