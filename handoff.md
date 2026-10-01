@@ -1,21 +1,23 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- M18.5 canon (plan `docs/plans/m18.5.md`, notes in ADR 0028 "M18.5"). Branch `claude/sleepy-feynman-txet0j` from main 9b5c983
-  (PR #93 merged). User answers: Rose Knights news only, party = scene stage with talk hook, Hive events only, no `xp_window`.
-  - `book6/chapters/`: `4.39G` (order 12), `4.40L` (13), `4.41L` (14), `4.42L` (15); 20 events, days 126 – 129 (day numbers are guesses).
-  - The party: scene stage `inn_interior` 16 – 23 h on day 128, twelve NPCs; hook = talk to a guest. New `npc_behaviour` entries: `yellow_splatters`, `purple_smile`.
-  - Greydath is the flag `greybeard.is_greydath_of_blades` (no merge). Purple Smile: flag `purple_smile.is_sergeant` (day 129).
-  - Tests: new `sim_book6_goblin_party`; `sim_canon_book6` LAST_DAY 129 + 3 tests. Full suite not run.
+- M18.6 canon (plan `docs/plans/m18.6.md`, notes in ADR 0028 "M18.6"). Branch `claude/sleepy-feynman-txet0j` from main c1f3904 (PR #94 merged).
+  User answers: one scene stage at the inn (day 129), no `xp_window`, Zel's speech as news plus an Ilvriss hook.
+  - `book6/chapters/`: `4.43` (order 16), `4.44M` (17), `4.45` (18), `4.46` (19), `4.47` (20); 23 events, days 128 – 129 (day numbers are guesses).
+  - Stage `b6.the_silver_swords_arrive_into_a_cake_fight`: scene, `inn_interior`, 16 – 23 h, 18 NPCs. Hook: talk to a Silver Sword or Ceria.
+    Council hook: talk to Ilvriss at the inn on day 129 (`b6.liscor_council_hears_zels_speech`).
+  - 4.44 M is day 128 (roadmap said 129). Door limits, Heartflame Breastplate and the two War Golems are flags only.
+  - New `npc_behaviour` entries: `falene_skystrall`, `dawil`, `jelaqua`, `moore`.
+  - Tests: new `sim_book6_silver_swords`; `sim_canon_book6` (rumour list, stage list, 2 tests). Full suite not run.
 
 ## Next
-1. The user merges the M18.5 PR.
-2. M18.6 canon 4.43 – 4.47 (days 128 – 129 in the roadmap; 4.43 starts after the party, so check its day cues): Ilvriss and the Pallass
-   anchor, Krshia's royal favour, the Silver Swords, Erin Level 33, Zel and Magnolia, the Goblin Lord's victory, Zel's speech,
-   Liscor's council. Ask stage, hook and `xp_window` choices first. Chapter files get `"order"` 16 on. Raise `LAST_DAY` in `sim_canon_book6` (now 129).
-3. Flags for later batches: `goblin_lord.named_reiss` (M18.7). Open: Halfseekers, Zevara, Relc, Lyonette have no combat behaviour
-   entries for stages; Jelaqua's new body is for a later batch; Yellow Splatters has no own look (uses the generic Soldier art).
-   Run `sim_canon_book5` after any Book 6 change that clears a Book 5 flag.
+1. The user merges the M18.6 PR.
+2. M18.7 canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (days 128 – 130): history notes (frames only), the battle of Invrisil (news), Zel's death
+   (day 130; he names the Goblin Lord "Reiss": flag `goblin_lord.named_reiss`), Liscor mourns, the Chosen record fixes (ADR 0028 conflicts 3 and 4),
+   soften the 4.31 `azkerash.lost_his_teleport_scrolls` note. Ask stage, hook and `xp_window` choices first. Chapter orders 21 on
+   (Pt. 3 – 5 = 21 – 23, 4.48 = 24, 4.49 = 25; The Depthless Doctor has no events). Raise `LAST_DAY` in `sim_canon_book6` to 130.
+3. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
+   the 4.26 M golem count (three, text shows two) waits for a local check. Run `sim_canon_book5` after any Book 6 change that clears a Book 5 flag.
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").
