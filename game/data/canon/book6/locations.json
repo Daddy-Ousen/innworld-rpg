@@ -41,6 +41,43 @@
 				"note": "The capital of the Blighted Kingdom: six outer walls, a seventh being built, sky bridges, mage-lit at night. No map."
 			},
 			"summary": "The walled capital of the Blighted Kingdom in Rhir, with sky bridges and a palace where the Earthers are housed. Off-map: Tom's events happen here."
+		},
+		"rie_estate": {
+			"name": "Rie's estate",
+			"kind": "building",
+			"parent": "invrisil",
+			"tags": [
+				"estate",
+				"noble",
+				"north_izril",
+				"besieged"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "likely",
+				"note": "A mansion near a small town in the Invrisil area. The exact place is not named. No map."
+			},
+			"summary": "The walled manor of Lady Rie Valerund near Invrisil, besieged by Goblins on Laken's Day 82 and relieved by his levy. Off-map."
+		},
+		"neunham": {
+			"name": "Neunham",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"village",
+				"north_izril",
+				"goblin_raided"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.38B",
+				"confidence": "confirmed",
+				"note": "About two hours past Magnolia's villa. Goblins smashed its gates and hanged villagers the day before; the Rose Knights gather here."
+			},
+			"summary": "A village in north Izril raided by Goblins the day before Zel leaves Liscor. Bethal's Rose Knights gather here. Off-map."
 		}
 	}
 }

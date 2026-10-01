@@ -147,7 +147,7 @@ func test_book5_runs_as_canon() -> void:
 			"erin.inn_reinforced_structure", "erin.asked_ryoka_to_stay_away", "griffon_hunt.left_the_wandering_inn",
 			"zel.knows_the_necromancer_lives", "ilvriss.knows_the_necromancer_killed_periss",
 			"ivolethe.banished_by_the_faerie_king", "liscor.hears_the_goblin_lords_drums", "ryoka.ran_north_alone",
-			"izril.spring", "lyonette.sheltering_in_celum", "mrsha.sheltering_in_celum", "azkerash.turns_to_the_goblins",
+			"izril.spring", "azkerash.turns_to_the_goblins",
 			"kerash.holds_the_necromancers_authority"]:
 		assert_true(gs.flags.has(f), f)
 	# Safry and Maran are gone; Pawn's Soldiers went back to the front; the armies no longer stand; the trip is made.
@@ -159,7 +159,9 @@ func test_book5_runs_as_canon() -> void:
 			"venitra.disguised_as_regrika_blackpaw", "ijvani.disguised_as_imenet", "liscor.hosts_regrika_blackpaw",
 			"ryoka.under_word_of_death", "ivolethe.melting_as_winter_ends", "ivolethe.disguised_as_ryoka",
 			"azkerash.readied_his_chosen_for_liscor", "ryoka.home_at_the_wandering_inn", "izril.winter",
-			"frost_fairies.abroad", "winter.thaw_is_coming"]:
+			"frost_fairies.abroad", "winter.thaw_is_coming",
+			# M18.3: 4.33 (Book 6, day 115) brings Lyonette and Mrsha home, so the sim's last day no longer has these.
+			"lyonette.sheltering_in_celum", "mrsha.sheltering_in_celum"]:
 		assert_false(gs.flags.has(f), f)
 	for npc: String in ["garusa_weatherfur", "thrissiam_blackwing"]:
 		assert_false(gs.world.is_alive(_db.canon, npc), npc + " dies below the High Pass (4.16)")

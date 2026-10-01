@@ -1,0 +1,555 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.35E",
+	"order": 8,
+	"events": {
+		"b6.riverfarm_beats_a_goblin_ambush_on_a_caravan": {
+			"tier": 1,
+			"window": {
+				"earliest": 117,
+				"latest": 117,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.beat_a_goblin_ambush",
+					"laken.guards_the_trottvisk_road",
+					"riverfarm.plans_a_paved_street"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 72 = day 117 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken senses thirty Goblins fall on a Trader caravan on the road to Trottvisk. His sixty riders and foot, led by Beniar, Durene and Wiskeria, win with no losses of their own and the caravan goes on."
+		},
+		"b6.laken_rides_the_mossbear_and_builds_a_trebuchet": {
+			"tier": 1,
+			"window": {
+				"earliest": 118,
+				"latest": 118,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"carver": {
+					"prefer": [
+						"jelov"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"carpenter": {
+					"prefer": [
+						"helm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"girl": {
+					"prefer": [
+						"tessia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.rides_the_mossbear_as_a_throne",
+					"riverfarm.builds_trebuchets",
+					"riverfarm.villagers_became_tinkerers",
+					"tessia.has_detect_flaw"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 73 = day 118 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken rides the Mossbear as a moving throne. Riverfarm builds a trebuchet from Ryoka's designs. Three villagers become [Tinkerers] and Tessia gains [Detect Flaw]. Frostwing lands on his armguard."
+		},
+		"b6.trottvisk_sends_gifts_and_a_messenger": {
+			"tier": 1,
+			"window": {
+				"earliest": 119,
+				"latest": 119,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.offers_trottvisk_protection",
+					"trottvisk.sent_gifts_to_laken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 74 = day 119 (his Day + 45, ADR 0028)."
+			},
+			"summary": "A messenger from Trottvisk brings gifts. Laken offers the town protection from the Goblins. Wiskeria talks of recruits, titles and spreading the word about the Unseen Empire."
+		},
+		"b6.goblins_burn_a_village_near_riverfarm": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblins.burned_a_village_near_riverfarm",
+					"laken.orders_more_markers"
+				]
+			},
+			"rumor": "A village north of Invrisil burned in the night. The Goblins took or killed everyone left alive.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 76 = day 121 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Goblins burn a village far out from Riverfarm and kill or take the survivors. Laken orders more totem markers set out to widen his sense of the land."
+		},
+		"b6.trottvisk_delegation_swears_to_laken": {
+			"tier": 1,
+			"window": {
+				"earliest": 122,
+				"latest": 122,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"carver": {
+					"prefer": [
+						"jelov"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"trottvisk.protected_by_laken",
+					"laken.trades_miniature_totems"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 77 = day 122 (his Day + 45, ADR 0028)."
+			},
+			"summary": "A Trottvisk delegation comes to Riverfarm. Laken visits Jelov first for miniature totems to trade, then the talks go well and Trottvisk becomes a friendly partner under his protection."
+		},
+		"b6.laken_and_wiskeria_plan_a_mutual_defence": {
+			"tier": 1,
+			"window": {
+				"earliest": 123,
+				"latest": 123,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"durene": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.mutual_defence_plan",
+					"laken.has_eighty_warriors",
+					"durene.level_14_paladin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 78 = day 123 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Two more delegations come, and Batte asks for protection from too far away. Wiskeria proposes a plan of mutual defence between the towns and messengers ride out that night. Durene is a Level 14 [Paladin]."
+		},
+		"b6.invrisil_gifts_reach_laken": {
+			"tier": 1,
+			"window": {
+				"earliest": 124,
+				"latest": 124,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"invrisil_merchants_guild.friendly_to_laken",
+					"rie.sent_laken_child_medicines"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 79 = day 124 (his Day + 45, ADR 0028)."
+			},
+			"summary": "A City Runner brings Laken eight gifts from Invrisil: potions, oils and an Armorskin potion from the Merchant's Guild, and from Lady Rie medicines and milk for the village children."
+		},
+		"b6.laken_hears_of_a_goblin_chieftain_in_the_east": {
+			"tier": 1,
+			"window": {
+				"earliest": 125,
+				"latest": 125,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.hears_of_a_goblin_chieftain_in_the_east",
+					"riverfarm.trebuchet_arm_broke"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 80 = day 125 (his Day + 45, ADR 0028). The Goblin Lord's army is also moving north."
+			},
+			"summary": "A trebuchet arm breaks and a falling tree makes up for it. Another town is attacked and holds at heavy cost. Rumour names a Great Chieftain at a mountain far east, and Laken senses something moving north."
+		},
+		"b6.laken_relieves_rie_estate": {
+			"tier": 1,
+			"window": {
+				"earliest": 127,
+				"latest": 127,
+				"confidence": "guess"
+			},
+			"location": "rie_estate",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"geram_redfist"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"nesor"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart",
+					"rie"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.relieved_rie_estate",
+					"rie.kneels_to_laken",
+					"rie.owes_laken_her_life",
+					"laken.has_imperial_levy",
+					"durene.wounded_at_rie_estate",
+					"mossbear.wounded_at_rie_estate"
+				],
+				"relationship": [
+					{
+						"from": "rie",
+						"to": "laken_godart",
+						"delta": 2
+					}
+				]
+			},
+			"rumor": "A mad young man calling himself an Emperor broke a Goblin siege at a noble's estate near Invrisil with a levy of four hundred.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.35E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 82 = day 127 (his Day + 45, ADR 0028). Same day as Zel's leaving (4.38 B)."
+			},
+			"summary": "Over two hundred Goblins with twenty-six Hobs besiege Lady Rie's estate. Laken's Darksky Riders and a levy of four hundred arrive and win. Beniar kills the Goblin [Shaman]. Rie kneels with her staff, in his debt."
+		}
+	},
+	"system": [
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Emperor]",
+			"level": 19,
+			"confidence": "confirmed",
+			"note": "Day 82."
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Imperial Levy]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "laken_godart",
+			"kind": "skill",
+			"name": "[Empire: Darksky Riders]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "laken_godart",
+			"kind": "level",
+			"name": "[Beast Tamer]",
+			"level": 9,
+			"confidence": "confirmed",
+			"note": "[Lesser Bond: Mossbear]."
+		},
+		{
+			"who": "durene",
+			"kind": "level",
+			"name": "[Paladin]",
+			"level": 14,
+			"confidence": "confirmed"
+		}
+	]
+}

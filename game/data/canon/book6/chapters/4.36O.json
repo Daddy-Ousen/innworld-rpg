@@ -1,0 +1,302 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.36O",
+	"order": 9,
+	"events": {
+		"b6.ilvriss_holds_court_at_the_tailless_thief": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "tailless_thief",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"peslas"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss",
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.drinks_daily_at_the_tailless_thief",
+					"olesm.keeps_ilvriss_happy"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "olesm",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "Ilvriss stays because Goblin armies make the road to Salazsar unsafe. He speaks fondly of Periss."
+			},
+			"summary": "Ilvriss drinks every morning at the Tailless Thief with his retinue and calls Olesm a prodigy. Olesm has orders to keep the Wall Lord happy, so he pours his drink on the floor and hates it."
+		},
+		"b6.krshia_tells_olesm_of_the_raskghar": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"gnoll": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia",
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"raskghar.named_by_krshia",
+					"raskghar.cannot_level",
+					"olesm.keeps_krshia_company"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "Krshia thinks they are about as strong as a Silver adventurer, ambushers best in the dark maze."
+			},
+			"summary": "Krshia, grieving at home, tells Olesm of the Raskghar: Gnolls who went mad underground in the age of Dragons, gave up levels and were hunted to near death. Gold teams now meet them with the Goblins in the dungeon."
+		},
+		"b6.selys_turns_away_piscess_rat_plan": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"clerk": {
+					"prefer": [
+						"maviss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces",
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"selys.refused_piscess_rat_plan",
+					"olesm.asked_for_the_crypt_report",
+					"guild.files_a_raskghar_report"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "Pisces says the Horns spent their last job clearing a cave of ten thousand cockroaches."
+			},
+			"summary": "Selys turns away Pisces, who offers an undead construct to kill the giant rats in the sewers. Olesm tells her the name Raskghar and asks the Guild for its file on the crypt fight and the Skinner attack."
+		},
+		"b6.niers_sends_olesm_a_letter_and_a_ring": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": []
+				},
+				"wizard": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm",
+					"hawk"
+				],
+				"flags": [
+					"niers.read_olesms_newsletter"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.has_niers_ring_of_sight",
+					"niers.sent_olesm_a_chess_puzzle"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "The ring zooms when turned and sees through illusions (4.37 O)."
+			},
+			"summary": "Hawk brings Olesm a thick letter from Niers Astoragon: praise for his chess newsletter, a puzzle, a question about Go, and a brass ring that works as a Ring of Sight. Olesm and Pisces cheer in the street."
+		},
+		"b6.erins_hobgoblin_guests_hate_pants": {
+			"tier": 2,
+			"window": {
+				"earliest": 126,
+				"latest": 126,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [
+					"redfang.in_the_inn"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.refuse_to_wear_pants",
+					"mrsha.throws_things_at_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.36O",
+				"confidence": "confirmed",
+				"note": "Mrsha hit Badarrow with a pot."
+			},
+			"summary": "Erin has a problem: her Hobgoblin guests hate pants, and Mrsha throws pots at them. Selys takes Erin to look for a tailor."
+		}
+	},
+	"system": []
+}

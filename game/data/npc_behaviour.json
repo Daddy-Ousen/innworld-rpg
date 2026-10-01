@@ -400,6 +400,7 @@
 			"notes": "M9.4. Zel Shivertail, the Tidebreaker, reaches Liscor with Wall Lord Ilvriss (3.23L). The city inns are full, so he takes a room at the Wandering Inn (zel.at_wandering_inn): breakfast and evenings in the common room, days in the city (off the map). The room, the seat and the hours are guesses. The combat block is a design number for a famous Drake [General].",
 			"combat": {"agility": 2, "hp": 90, "accuracy": 10, "evasion": 5, "armor": 5, "damage": [6, 12]},
 			"goals": [
+				{"goal": "off_map", "base": 6, "when_flags": ["zel.left_liscor"], "target": {"off_map": "celum"}},
 				{"goal": "sleep", "base": 3, "hours": [[22, 7, 1]], "when_flags": ["zel.at_wandering_inn"],
 					"target": {"area": "inn_interior", "pos": [19, 4]}},
 				{"goal": "eat", "base": 2, "hours": [[7, 9, 1], [18, 22, 1]], "when_flags": ["zel.at_wandering_inn"],
