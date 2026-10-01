@@ -1,0 +1,49 @@
+# Publish the browser build to GitHub Pages (ADR 0031).
+# It does not build the game: tools/release.ps1 builds InnworldRPG-v<version>-web.zip locally, and the zip is
+# uploaded to the GitHub release. This workflow takes that zip from the release and publishes it.
+name: Web build to GitHub Pages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag with a *-web.zip file (empty = the newest release)
+        required: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Get the web zip from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          if [ -z "$TAG" ]; then
+            TAG=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 1 --json tagName -q '.[0].tagName')
+          fi
+          echo "Release: $TAG"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern '*-web.zip' --output web.zip
+          mkdir site
+          unzip -q web.zip -d site
+          test -f site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

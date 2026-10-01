@@ -1,4 +1,5 @@
-# Build the release zips (Windows + Linux) into export/. See docs/adr/0029-release-builds.md.
+# Build the release zips (Windows, Linux, Web) into export/. See docs/adr/0029-release-builds.md
+# and docs/adr/0031-web-build.md.
 #
 #   $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
 #   powershell -ExecutionPolicy Bypass -File tools/release.ps1
@@ -21,8 +22,10 @@ Write-Host "Innworld RPG v$version"
 
 $out = "$root/export"
 $builds = @(
-    @{ Preset = 'Windows Desktop'; Dir = 'windows'; File = 'InnworldRPG.exe' },
-    @{ Preset = 'Linux'; Dir = 'linux'; File = 'InnworldRPG.x86_64' }
+    @{ Preset = 'Windows Desktop'; Dir = 'windows'; File = 'InnworldRPG.exe'; Pack = 'InnworldRPG.exe' },
+    @{ Preset = 'Linux'; Dir = 'linux'; File = 'InnworldRPG.x86_64'; Pack = 'InnworldRPG.x86_64' },
+    # Web: index.html at the zip root (itch.io and GitHub Pages need it there); the data is index.pck.
+    @{ Preset = 'Web'; Dir = 'web'; File = 'index.html'; Pack = 'index.pck'; Web = $true }
 )
 
 foreach ($b in $builds) {
@@ -37,12 +40,14 @@ foreach ($b in $builds) {
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path $bin)) { throw "Export failed: see export/export_$($b.Dir).log" }
 
     Write-Host "Smoke test $($b.Preset)..."
-    $smoke = & $Godot --headless --main-pack $bin -s "$root/tools/release/smoke.gd" 2>&1 | Select-String 'SMOKE'
+    $smoke = & $Godot --headless --main-pack "$dir/$($b.Pack)" -s "$root/tools/release/smoke.gd" 2>&1 | Select-String 'SMOKE'
     $smoke | ForEach-Object { Write-Host "  $_" }
     if ($LASTEXITCODE -ne 0) { throw "Smoke test failed for $($b.Preset)" }
 
-    $readme = (Get-Content -Raw "$root/tools/release/README-PLAYERS.txt").Replace('{VERSION}', "v$version")
-    Set-Content -Path "$dir/README.txt" -Value $readme -NoNewline
+    if (-not $b.Web) {
+        $readme = (Get-Content -Raw "$root/tools/release/README-PLAYERS.txt").Replace('{VERSION}', "v$version")
+        Set-Content -Path "$dir/README.txt" -Value $readme -NoNewline
+    }
     Copy-Item "$root/CREDITS.md" $dir
     New-Item -ItemType Directory -Force "$dir/licenses" | Out-Null
     Get-ChildItem -Recurse -Filter *.txt "$root/game/assets" | Copy-Item -Destination "$dir/licenses"
@@ -50,7 +55,7 @@ foreach ($b in $builds) {
     $zip = "$out/$name.zip"
     if (Test-Path $zip) { Remove-Item -Force $zip }
     # tar.exe (Windows 10+) writes '/' in zip paths; Compress-Archive in PowerShell 5 writes backslashes.
-    tar.exe -a -c -f $zip -C $out $name
+    if ($b.Web) { $items = (Get-ChildItem $dir).Name; tar.exe -a -c -f $zip -C $dir @items } else { tar.exe -a -c -f $zip -C $out $name }
     if ($LASTEXITCODE -ne 0) { throw "Zip failed: $zip" }
     Write-Host "Made $zip"
 }

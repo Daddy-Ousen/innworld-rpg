@@ -88,7 +88,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [ ] Android: skipped (user, 2026-10-01). Needs touch controls first (roadmap "Releases").
 - [x] README rewrite for players first, developers second (branch `docs/readme-rewrite`, 2026-10-01, local). Counts checked:
   898 events, 261 NPCs, 103 places, 38 maps, 147 GUT scripts (~1,419 tests), 102 Python tests. PR waits for the user.
-- [ ] Web (browser) build: possible, not started. Waits for the user's choice (see `handoff.md` "Web build").
+- [ ] Web build (ADR 0031; user, 2026-10-01: itch.io + GitHub Pages, GitHub URL first, own subdomain later).
+  - [x] Branch `feat/web-build` (from `docs/readme-rewrite`): "Web" preset, web zip in `tools/release.ps1`, web-only
+    stretch in `project.godot`, Quit hidden in a browser, `.github/workflows/pages.yml`, README "Play in your browser".
+    All three zips built and smoke-tested (898 events, 38 maps, 0 problems). Checked in Chrome: play, save, reload, night 0.3 s.
+    Tests run: `unit_play_loop` (17 pass). Full suite not run. PR waits for the user.
+  - [ ] Merge, then a release with the web zip (user picks: new v0.1.1-alpha or add to v0.1.0-alpha).
+  - [ ] Turn on GitHub Pages (Settings → Pages → Source "GitHub Actions"), run the workflow, open the page.
+  - [ ] itch.io: the user makes the page and uploads the web zip (steps in `handoff.md`).
+  - [ ] Later: own subdomain (CNAME + Settings → Pages → Custom domain).
 
 ## Cloud setup
 - Done; detail in the archive. Book text in a cloud session: attach `Daddy-Ousen/innworld-canon-raw` (add_repo), clone it

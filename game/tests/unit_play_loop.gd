@@ -51,6 +51,12 @@ func test_title_shows_the_build_version() -> void:
 	assert_eq(t.get_node("%Version").text, "v" + v)
 
 
+func test_title_hides_quit_only_in_a_browser() -> void:
+	assert_true(TitleMenu.shows_quit(false))
+	assert_false(TitleMenu.shows_quit(true))
+	assert_true(_title().get_node("%Quit").visible, "desktop and tests keep Quit")
+
+
 func test_title_new_game_starts_fresh_with_the_seed() -> void:
 	var t := _title()
 	t.new_game_seed = 42

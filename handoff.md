@@ -1,39 +1,31 @@
 # Handoff
 
 ## Just done (2026-10-01, local session)
-- First release v0.1.0-alpha (ADR 0029). Branch `release/v0.1.0` from main 6a9e8b8.
-  User answers: v0.1.0-alpha, GitHub pre-release, Windows + Linux. Android skipped (no touch controls).
-  - `game/export_presets.cfg`: presets "Windows Desktop" and "Linux"; `include_filter="*.json"` (data is plain JSON);
-    tests, test_support, GUT and `_scratch` left out; pck embedded.
-  - `project.godot` `config/version="0.1.0-alpha"`; title screen label `%Version` (`TitleMenu.version_text()`).
-  - `tools/release.ps1` (export, smoke test, zip with `tar.exe`), `tools/release/smoke.gd`, `tools/release/README-PLAYERS.txt`.
-  - Built: `export/InnworldRPG-v0.1.0-alpha-windows.zip` and `-linux.zip` (gitignored). Smoke: 898 events, 38 maps, 0 problems.
-  - Export templates 4.7.2 (Windows + Linux files only) are in `%APPDATA%\Godot\export_templates\4.7.2.stable`.
-  - Tests: `unit_play_loop` (16 pass). Full suite not run.
-  - The M19 plan ADR is now 0030 (0029 is the release ADR).
+- README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
+  players first, then developers. No screenshots yet (none in the repo).
+- Web build (ADR 0031) on branch `feat/web-build`: built, smoke-tested and played in Chrome. PR open. Detail below.
+- Earlier the same day: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
+  The M19 plan ADR is 0030.
 
-- Published: PR #97 merged (548f0f5), tag `v0.1.0-alpha`, GitHub pre-release with both zips
-  (https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha).
-
-- README rewritten (branch `docs/readme-rewrite`): players first (pitch, what is in the alpha, download, keys),
-  then developers (source, tests, release, architecture, layout). No screenshots yet (none in the repo).
-
-## Web build (asked 2026-10-01, not started)
-- Possible. Findings: no shaders, no threads, no `OS.execute`; saves use `user://` (IndexedDB in a browser);
-  `DirAccess` on `res://` already works from a pck (desktop smoke test). Godot 4.7 web export uses the Compatibility
-  renderer by itself and has a no-threads template, so GitHub Pages or itch.io can host it (no special headers).
-- Missing: the Web export templates (`web_nothreads_release.zip`) are not installed; only Windows + Linux files are.
-  They come from the 4.7.2 export templates (.tpz, about 1 GB download): ask the user before downloading.
-- Work: a "Web" preset in `game/export_presets.cfg`, a web step in `tools/release.ps1`, a GitHub Pages workflow or an
-  itch.io upload, check fonts/audio/startup time in Chrome and Firefox, a "Play in browser" link in the README. ADR needed.
-- Own subdomain (user asked 2026-10-01): yes, the web build is static files. Needs HTTPS, `.wasm` served as
-  `application/wasm`, gzip/brotli on. Watch per-file limits: the `.pck` may be 50+ MB (GitHub Pages 100 MB per
-  file is fine; Cloudflare Pages caps files at 25 MiB). Suggested: GitHub Pages + a CNAME like `play.<domain>`.
-- Risks: download size (~60–90 MB first load), the browser grabs Esc (fullscreen), save data is lost if the user clears site data.
+## Web build (ADR 0031) — built and tested, PR open
+- Branch `feat/web-build` (from `docs/readme-rewrite`, so it holds the README PR #99 commits too).
+- All export templates 4.7.2 are now installed in `%APPDATA%\Godot\export_templates\4.7.2.stable` (all platforms).
+- `tools/release.ps1` makes `export/InnworldRPG-v<version>-web.zip` (index.html at the zip root, 70 MB).
+- `.github/workflows/pages.yml`: on a published release (or by hand with a tag) it downloads the `*-web.zip`
+  from the release and publishes it to Pages. It does not build. Pages must be set to "GitHub Actions" once.
+- itch.io steps for the user: itch.io → Upload new project → Kind of project "HTML" → upload the web zip →
+  tick "This file will be played in the browser" → Viewport 1152 x 648, tick "Fullscreen button" →
+  Classification "Games", pricing "No payments" (non-commercial) → Save → set Visibility "Public".
+- Own subdomain later: DNS CNAME `play.<domain>` → `daddy-ousen.github.io`; Settings → Pages → Custom domain;
+  Enforce HTTPS. Nothing in the repo changes.
+- Gotchas: the web build only scales with the `.web` stretch settings in `project.godot`. Browser saves are per site.
+  `git checkout -- game/assets` before an export makes Godot reimport and can crash the export (known segfault):
+  run `--import` once (twice if it crashes) before `tools/release.ps1`. The in-app browser `type` action does not
+  reach Godot's input; Playwright `keyboard.type` works (open the console with `Backquote`, `sleep *` sleeps anywhere).
 
 ## Next
 1. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
-   commit, `gh release create v<version> --prerelease --verify-tag` with the two zips from `export/`.
+   commit, `gh release create v<version> --prerelease --verify-tag` with the three zips from `export/` (the web zip also goes to Pages; upload it to itch.io by hand).
 2. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
 3. Later: touch controls, then an Android build (roadmap "Releases").
 4. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
