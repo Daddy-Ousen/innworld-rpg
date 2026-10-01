@@ -1,0 +1,177 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.46",
+	"order": 19,
+	"events": {
+		"b6.osthia_walks_the_goblin_camp": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.captive_in_the_goblin_camp",
+					"goblin_lord.keeps_six_books",
+					"goblin_lord.seeks_the_antinium_wars_book",
+					"goblin_lord.has_no_order_against_invrisil_yet"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "confirmed",
+				"note": "The text gives no day; 128 is a guess. The camp holds tens of thousands, with undead kept apart."
+			},
+			"summary": "Osthia Blackwing, bound and wing-pinned, is the Goblin camp's only prisoner and may roam. She wants to warn the world that the Necromancer made him. The Goblin Lord names Invrisil as the next city, says he has no order to attack it, and keeps six books."
+		},
+		"b6.greybeard_joins_the_goblin_lords_escort": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"greybeard.joins_the_goblin_lords_escort",
+					"goblin_lord.admits_he_has_a_master",
+					"greybeard.hides_his_name_in_the_goblin_camp",
+					"osthia.keeps_greybeards_secret"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "likely",
+				"note": "4.39 G already set greybeard.is_greydath_of_blades. This is his disguise among the Goblins; the Goblin Lord calls him very suspicious but on their side."
+			},
+			"summary": "An old grey-bearded Hob begs refuge and plays the fool. The Goblin Lord admits he has a master. After the battle Greybeard drops the act, calls him a slave, and threatens to cut off Osthia's tail if she tells."
+		},
+		"b6.goblin_lord_breaks_a_human_army_at_a_river_city": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spear": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.broke_a_human_army_at_a_river_city",
+					"goblin_lord.copied_human_tactics",
+					"goblin_lord.plans_three_battles",
+					"goblin_lord.plans_to_go_round_invrisil",
+					"osthia.fears_the_goblin_lord"
+				]
+			},
+			"rumor": "A Goblin force of about eight thousand broke a Human army of about five thousand at a river city. Its Commander died in a duel with the Goblin Lord.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.46",
+				"confidence": "likely",
+				"note": "The [Commander] and the [Mage] he kills are unnamed and get no records. His plan, in his words: three battles, rebels, Humans, and defending a home in the mountains. He says the Drakes will not come north."
+			},
+			"summary": "About eight thousand Goblins meet a Human army of about five thousand at a river city. The Goblin Lord copies Human tactics, breaks them in ten minutes and kills their [Commander] in a duel. The routed soldiers are raised as undead."
+		}
+	},
+	"system": []
+}

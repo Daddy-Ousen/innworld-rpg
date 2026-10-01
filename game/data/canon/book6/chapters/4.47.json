@@ -1,0 +1,390 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.47",
+	"order": 20,
+	"events": {
+		"b6.the_officers_gather_outside_invrisil": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lieutenant": {
+					"prefer": [
+						"gershal"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"salvia"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gershal.doubts_the_mixed_army",
+					"salvia.has_orders_to_keep_a_way_out"
+				],
+				"relationship": [
+					{
+						"from": "gershal",
+						"to": "salvia",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "Gershal's company arrived that morning, Salvia's the day before."
+			},
+			"summary": "At the camp outside Invrisil Lieutenant Gershal of Vaunt and Captain Salvia of Nonelmar drink together and doubt that a patchwork army can beat the Goblin Lord. A rider calls the officers to the centre: Magnolia is here."
+		},
+		"b6.zel_speaks_to_magnolias_army": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"aide": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lieutenant": {
+					"prefer": [
+						"gershal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"salvia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.speech_at_invrisil",
+					"zel.commands_magnolias_army",
+					"magnolia.recorded_the_speech",
+					"magnolia.sells_the_speech",
+					"gershal.pledges_to_zel",
+					"salvia.pledges_to_zel",
+					"world.hears_zel_commands_the_human_army"
+				],
+				"relationship": [
+					{
+						"from": "gershal",
+						"to": "zel_shivertail",
+						"delta": 2
+					},
+					{
+						"from": "salvia",
+						"to": "zel_shivertail",
+						"delta": 2
+					},
+					{
+						"from": "reynold",
+						"to": "zel_shivertail",
+						"delta": 1
+					}
+				]
+			},
+			"rumor": "A Drake General stood up before Magnolia Reinhart's army outside Invrisil. Word is it was Zel Shivertail.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "Zel says two days ago he was in a small inn outside Liscor, so the speech is on day 129. News spreads by [Message], bird and runner within the hour."
+			},
+			"summary": "Magnolia announces a Drake [General]. Zel names himself, cites the wars and the Necromancer, and says he will defend the continent. He uses no Skill. Gershal and Salvia speak for him and the crowd chants. A crystal records it; Magnolia plans to sell copies."
+		},
+		"b6.liscor_council_hears_zels_speech": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"watch": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.council_emergency_meeting",
+					"ilvriss.contacts_the_walled_cities",
+					"ilvriss.asks_liscor_not_to_denounce_zel",
+					"salazsar.split_on_zel"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "zel_shivertail",
+						"delta": 1
+					}
+				]
+			},
+			"news": "Liscor's council met in an emergency. Wall Lord Ilvriss asked that Zel not be called a traitor.",
+			"hooks": [
+				{
+					"id": "player_spoke_with_ilvriss_about_zel",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn",
+									"liscor"
+								],
+								"npc": [
+									"ilvriss"
+								]
+							}
+						}
+					],
+					"days": [
+						129,
+						129
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_spoke_with_ilvriss_about_zel"
+						],
+						"relationship": [
+							{
+								"from": "ilvriss",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn spoke with Wall Lord Ilvriss about Zel's speech, and Ilvriss kept Liscor's council calm."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "Wall Lord Menoss and Wall Lady Rizzia speak for Salazsar; they are minor and get no records. Ilvriss asks that Liscor not denounce Zel."
+			},
+			"summary": "Olesm calls an emergency council. Zevara falls off her chair. Ilvriss calls the Salazsar Wall Lords on a scrying orb; they call Zel a traitor, then want him back. He says to treat it as the best Drake General having gone Human."
+		},
+		"b6.the_world_reacts_to_zels_speech": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"titan": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"world.reacts_to_zels_speech",
+					"tyrion.enraged_at_zel_and_magnolia",
+					"azkerash.sees_an_opportunity",
+					"terandria.debates_an_embargo",
+					"niers_astoragon.hears_zels_speech"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "confirmed",
+				"note": "A montage; the reactions of Klbkch and the Queen are silence. Magnolia keeps sending Teriarch [Message]s and he answers not yet. Do not merge Teriarch with any other dragon record."
+			},
+			"summary": "The world hears the speech: Drake commanders brawl at the Rhir court, Niers replays it, nobles talk of embargo, Teriarch listens. Az'kerash sees an opportunity. Tyrion rages, Laken is puzzled, Erin rubs her ears."
+		},
+		"b6.azkerash_orders_the_goblin_lord_to_attack_invrisil": {
+			"tier": 1,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.ordered_to_attack_invrisil",
+					"goblin_lord.targets_zel",
+					"osthia.warns_the_goblin_lord_he_cannot_win",
+					"azkerash.pushes_the_goblin_lord_to_invrisil"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.47",
+				"confidence": "likely",
+				"note": "This replaces the plan to go round Invrisil in 4.46. The Goblin Lord is not named Reiss until 4.49."
+			},
+			"summary": "Forced by his master, the Goblin Lord orders the army to attack Invrisil and kill Zel. Osthia warns him he cannot win. He says he is ordered, or he dies. Far apart, Zel and the Goblin Lord each feel the other across the distance, and both think of death."
+		}
+	},
+	"system": []
+}

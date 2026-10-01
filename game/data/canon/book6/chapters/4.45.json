@@ -1,0 +1,310 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.45",
+	"order": 18,
+	"events": {
+		"b6.ylawes_and_yvlon_argue_and_the_swords_stay": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": []
+				},
+				"sister": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"yvlon.refuses_to_go_home",
+					"ylawes.stays_to_search_for_calruz",
+					"silver_swords.joined_the_calruz_search",
+					"ylawes.will_not_sleep_under_goblins",
+					"silver_swords.lodging_in_celum",
+					"ylawes.byres_backed_tyrion",
+					"magnolia.army_has_no_commander"
+				],
+				"relationship": [
+					{
+						"from": "ylawes_byres",
+						"to": "yvlon_byres",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.45",
+				"confidence": "confirmed",
+				"note": "House Byres is a minor silver House in decline. Ylawes crossed the north detouring round the Goblin Lord's host and fought one of his raiding parties; he met a skeleton in Esthelm."
+			},
+			"summary": "Ylawes wants to take Yvlon home; she refuses. House Byres sent most of its levy to Tyrion, and Magnolia's army has no commander. At midnight the Silver Swords agree to help search for Calruz. Ylawes will not sleep under one roof with Goblins and lodges in Celum."
+		},
+		"b6.dawil_names_erins_coin_mithril": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"dwarf": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"swordsman": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halfseeker": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.coin_is_mithril",
+					"dawil.is_of_the_ironbreaker_clan",
+					"dawil.befriends_ksmvr"
+				],
+				"relationship": [
+					{
+						"from": "dawil",
+						"to": "ksmvr",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.45",
+				"confidence": "confirmed",
+				"note": "Erin plans to scrape and polish the coin. Jelaqua asks for gear and gets nothing."
+			},
+			"summary": "Dawil talks with Ksmvr about Ashfire Bees. He says he is of the Ironbreaker clan, a pure Dwarf with a little Human blood. Erin shows him her pale coin; it is pure mithril, an old collector's piece. He rants that mithril is overrated and alloys matter, and says he is no [Blacksmith]."
+		},
+		"b6.falene_meets_ceria_and_pisces": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": []
+				},
+				"halfelf": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"falene.senses_the_magic_door",
+					"falene.looks_down_on_ceria_and_pisces"
+				],
+				"relationship": [
+					{
+						"from": "falene_skystrall",
+						"to": "ceria_springwalker",
+						"delta": -1
+					},
+					{
+						"from": "ylawes_byres",
+						"to": "pisces",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.45",
+				"confidence": "confirmed",
+				"note": "Falene is about eighty years old and left Wistram about thirty years ago."
+			},
+			"summary": "Falene, a polite old-fashioned [Mage] who recently took the [Battlemage] path, senses the magic door and learns of it from Ceria. Pisces and Ceria say they both graduated from Wistram. Falene says the standards have fallen. Ceria is bitter about the Calruz news."
+		},
+		"b6.ilvriss_dreams_of_periss": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.dreamed_of_periss",
+					"ilvriss.vows_to_watch_the_inn_and_izril",
+					"ilvriss.vows_to_hunt_the_necromancer"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.45",
+				"confidence": "confirmed",
+				"note": "As with Halrac, the dream is nectar magic. Periss says the key is what Zel knows and why he vanished."
+			},
+			"summary": "Erin spikes Ilvriss's ale with faerie-flower nectar. He dreams of Periss at the Salazsar map table; she tells him to stand up and watch Izril and the inn. He wakes, drinks a toast to war and sleeps on the floor."
+		},
+		"b6.erin_reaches_level_33": {
+			"tier": 2,
+			"window": {
+				"earliest": 129,
+				"latest": 129,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.level_33_magical_innkeeper"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.45",
+				"confidence": "confirmed",
+				"note": "The only level-up in the chapter. The cost ties to her total level; she is no player."
+			},
+			"summary": "Erin goes to bed and levels to [Magical Innkeeper] 33. No new Skill is named. She wakes briefly, remembers the spiked drink, and sleeps again."
+		}
+	},
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 33,
+			"confidence": "confirmed"
+		}
+	]
+}

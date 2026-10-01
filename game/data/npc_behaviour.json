@@ -438,6 +438,38 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"falene_skystrall": {
+			"confidence": "guess",
+			"notes": "M18.6. The Silver Swords' Half-Elf [Battlemage]; off the map in Liscor. The arrival stage (4.43, day 129) brings her to the inn.",
+			"combat": {"agility": 4, "hp": 30, "accuracy": 8, "evasion": 4, "armor": 0, "damage": [4, 8], "mp": 16},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"dawil": {
+			"confidence": "guess",
+			"notes": "M18.6. The Silver Swords' Dwarf in full plate; off the map in Liscor. The arrival stage (4.43, day 129) brings him to the inn.",
+			"combat": {"agility": 3, "hp": 66, "accuracy": 8, "evasion": 3, "armor": 6, "damage": [5, 10]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"jelaqua": {
+			"confidence": "guess",
+			"notes": "M18.6. The Halfseekers' Selphid [Swashbuckler]; off the map in Liscor. The arrival stage (4.43, day 129) brings her to the inn.",
+			"combat": {"agility": 5, "hp": 44, "accuracy": 8, "evasion": 6, "armor": 2, "damage": [4, 8]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"moore": {
+			"confidence": "guess",
+			"notes": "M18.6. The Halfseekers' Drowned Man, a [Priest of the Sea]; off the map in Liscor. The arrival stage (4.43, day 129) brings him to the inn.",
+			"combat": {"agility": 3, "hp": 50, "accuracy": 6, "evasion": 3, "armor": 2, "damage": [4, 8]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
 		"halrac": {
 			"confidence": "guess",
 			"notes": "M13.5. Griffon Hunt's archer; off the map in Liscor. Canon stages bring him to the inn hill on day 108 (he teaches Bird the bow, 4.18) and to the Floodplains fight on day 109 (4.19). The combat block is a design number for a Gold-rank archer.",

@@ -1,0 +1,259 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.44M",
+	"order": 17,
+	"events": {
+		"b6.zel_demands_the_levy_reports": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"reynold"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.commands_the_levy_in_all_but_name",
+					"magnolia.levy_about_forty_thousand",
+					"zel.wants_half_again_more_troops",
+					"reynold.healed_and_serves_as_zels_aide"
+				],
+				"relationship": [
+					{
+						"from": "zel_shivertail",
+						"to": "reynold",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.44M",
+				"confidence": "likely",
+				"note": "The text gives no day. The night after Zel arrived (127) is the likely one; Reynold is healed, so 128. The roadmap said 129. This is a guess."
+			},
+			"summary": "At Magnolia's estate Zel shouts for the levy's levels and officers: about forty thousand soldiers, an untrained patchwork. He wants half again as many. Reynold, healed, offers to tabulate the reports and says he was a cavalry [Lieutenant]."
+		},
+		"b6.magnolia_says_why_azkerash_lived": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.admits_she_let_azkerash_live",
+					"magnolia.tried_to_hire_an_assassin_for_azkerash",
+					"magnolia.refuses_to_back_tyrion",
+					"zel.drinks_milk_with_ashfire_bee_honey"
+				],
+				"relationship": [
+					{
+						"from": "zel_shivertail",
+						"to": "magnolia_reinhart",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.44M",
+				"confidence": "confirmed",
+				"note": "Her first pick, the Three-Color Stalker, answered letter sixteen with a months-old rotten muffin. Do not merge the Stalker with another record."
+			},
+			"summary": "Magnolia tells Zel why Az'kerash lived: she thought him a Drake and Antinium problem, expected the others to unite, and meant to have him killed once. Of six candidates only two could be hired quietly, and both refused. She refuses to back Tyrion Veltras."
+		},
+		"b6.magnolia_pitches_a_world_coalition": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.pitched_a_world_coalition",
+					"zel.refuses_a_full_alliance_for_now",
+					"zel.will_meet_the_titan_first",
+					"magnolia.revealed_aegis_of_grace",
+					"magnolia.wants_niers_astoragon",
+					"zel.refuses_to_move_against_laken"
+				],
+				"relationship": [
+					{
+						"from": "magnolia_reinhart",
+						"to": "zel_shivertail",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.44M",
+				"confidence": "confirmed",
+				"note": "She names her best Skill, [Aegis of Grace], which wards any settlement tied to her. She asks him to deal with Laken and he refuses. Tablets from the Earthers are her bait. 4.38 B already set zel.allied_with_magnolia; this chapter makes it a working deal, not a full alliance."
+			},
+			"summary": "Magnolia asks for a true alliance and names Niers as a second leader, for a coalition that ends the Antinium threat and forces peace. Zel will not commit. The deal: he helps with the Goblin Lord, she helps with the Necromancer."
+		},
+		"b6.magnolia_gives_zel_the_heartflame_breastplate_and_two_war_golems": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.shelters_theofore",
+					"nalthal.hedges_ate_two_assassins",
+					"zel.wears_the_heartflame_breastplate",
+					"magnolia.lends_zel_two_war_golems"
+				],
+				"relationship": [
+					{
+						"from": "zel_shivertail",
+						"to": "magnolia_reinhart",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.44M",
+				"confidence": "confirmed",
+				"note": "The text shows exactly two War Golems. The 4.26 M data still has three; that is flagged in ADR 0028, not changed here."
+			},
+			"summary": "Magnolia shows Zel her guest Theofore and the garden maze led by the [Druid] Nalthal. She gives him two War Golems and the Heartflame Breastplate, a lost Drake treasure, and he puts it on. A Reinhart force already waits at the meeting place."
+		}
+	},
+	"system": []
+}

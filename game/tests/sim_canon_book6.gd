@@ -6,7 +6,7 @@ extends GutTest
 
 ## First day with Book 6 canon (4.32 G: the Goblin Lord's army passes Liscor, a guess).
 const FIRST_DAY := 114
-## Last day with Book 6 canon so far (M18.5: 4.39 G – 4.42 L, the Goblin party and Pawn's blessing).
+## Last day with Book 6 canon so far (M18.6: 4.43 – 4.47, the Silver Swords, Zel's speech; M18.5 ended on 129 too).
 const LAST_DAY := 129
 
 var _db: DataDb
@@ -67,9 +67,11 @@ func test_book6_runs_as_canon() -> void:
 	var rumors := gs.world.news.filter(func(n: Dictionary) -> bool: return n["kind"] == Director.RUMOR and _b6(n["event"])) \
 			.map(func(n: Dictionary) -> String: return n["event"])
 	rumors.sort()
-	assert_eq(rumors, ["b6.garen_burns_the_empty_estate_and_a_northern_town", "b6.goblin_lord_hits_esthelm_in_passing",
-			"b6.goblins_burn_a_village_near_riverfarm", "b6.laken_relieves_rie_estate", "b6.rags_sacks_a_human_town",
-			"b6.rose_knights_hit_the_flooded_waters_camp", "b6.the_rose_knights_lose_to_the_tree_trap_fort"])
+	assert_eq(rumors, ["b6.garen_burns_the_empty_estate_and_a_northern_town",
+			"b6.goblin_lord_breaks_a_human_army_at_a_river_city", "b6.goblin_lord_hits_esthelm_in_passing",
+			"b6.goblins_burn_a_village_near_riverfarm",
+			"b6.laken_relieves_rie_estate", "b6.rags_sacks_a_human_town", "b6.rose_knights_hit_the_flooded_waters_camp",
+			"b6.the_rose_knights_lose_to_the_tree_trap_fort", "b6.zel_speaks_to_magnolias_army"])
 	# M18.2: the march, the mountain, Rags's raid, Tom's weeks in Paranfer.
 	for f: String in ["goblin_lord_army.passed_liscor", "wandering_inn.survived_goblin_arrows",
 			"liscor.watched_the_goblin_army_pass", "garen.refuses_to_kneel_to_the_goblin_lord",
@@ -179,13 +181,30 @@ func test_greydath_is_a_flag_not_a_merge() -> void:
 	assert_true(gs.flags.has("greybeard.is_greydath_of_blades"))
 
 
-func test_the_party_is_the_only_new_stage() -> void:
+func test_the_party_and_the_arrival_are_the_new_stages() -> void:
 	var staged: Array[String] = []
 	for id: String in _b6_events():
 		if _db.canon.events[id].has("stage") and int(_db.canon.events[id]["window"]["earliest"]) >= 127:
 			staged.append(id)
-	assert_eq(staged, ["b6.the_goblin_party_at_the_inn"])
+	assert_eq(staged, ["b6.the_goblin_party_at_the_inn", "b6.the_silver_swords_arrive_into_a_cake_fight"])
 
 
 func test_raskghar_has_its_name() -> void:
 	assert_eq(_db.combat.enemies["not_gnoll"]["name"], "Raskghar")
+
+
+func test_erin_reaches_level_33_and_zel_speaks() -> void:
+	var gs := _fresh()
+	_sleep_to_last_day(gs)
+	for f: String in ["erin.level_33_magical_innkeeper", "zel.speech_at_invrisil", "zel.wears_the_heartflame_breastplate",
+			"goblin_lord.ordered_to_attack_invrisil", "ilvriss.dreamed_of_periss"]:
+		assert_true(gs.flags.has(f), f)
+
+
+func test_chapter_order_4_43_to_4_47() -> void:
+	var order := {}
+	for id: String in _b6_events():
+		order[id] = _db.canon.rank[id]
+	for ch: Array in [["4.43", 16], ["4.44M", 17], ["4.45", 18], ["4.46", 19], ["4.47", 20]]:
+		var d: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/canon/book6/chapters/%s.json" % ch[0]))
+		assert_eq(int(d["order"]), ch[1], ch[0])
