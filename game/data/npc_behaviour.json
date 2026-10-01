@@ -422,6 +422,22 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"yellow_splatters": {
+			"confidence": "guess",
+			"notes": "M18.5. A Painted Soldier and [Sergeant] (Level 12 in 4.40 L); off the map in the Hive. The party stage (4.42 L, day 128) brings him to the inn.",
+			"combat": {"agility": 4, "hp": 52, "accuracy": 7, "evasion": 4, "armor": 4, "damage": [5, 9]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"purple_smile": {
+			"confidence": "guess",
+			"notes": "M18.5. A Painted Soldier with purple rings round his eyes; a [Sergeant] from day 129 (4.42 L). Off the map in the Hive. The party stage (4.42 L, day 128) brings him to the inn.",
+			"combat": {"agility": 5, "hp": 48, "accuracy": 7, "evasion": 6, "armor": 4, "damage": [4, 8]},
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
 		"halrac": {
 			"confidence": "guess",
 			"notes": "M13.5. Griffon Hunt's archer; off the map in Liscor. Canon stages bring him to the inn hill on day 108 (he teaches Bird the bow, 4.18) and to the Floodplains fight on day 109 (4.19). The combat block is a design number for a Gold-rank archer.",

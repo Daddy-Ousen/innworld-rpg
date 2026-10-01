@@ -1,0 +1,275 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.41L",
+	"order": 14,
+	"events": {
+		"b6.anand_and_purple_smile_kill_two_crypt_lords": {
+			"tier": 1,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"tactician": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": []
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.crypt_lords_killed_without_loss",
+					"purple_smile.praised_by_anand",
+					"anand.doubts_chess_gives_strategist_levels",
+					"hive.stone_walls_going_up_in_the_tunnels"
+				],
+				"relationship": [
+					{
+						"from": "yellow_splatters",
+						"to": "purple_smile",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.41L",
+				"confidence": "confirmed",
+				"note": "Pawn has suggested Purple Smile as Sergeant. Workers tear down tunnel walls to build stone fortifications."
+			},
+			"summary": "Purple Smile baits two Crypt Lords into a flank; Anand arrives and both die with no Antinium lost. Anand praises Purple Smile and says he fights like him. Yellow Splatters seethes. Anand doubts that chess gives Strategist levels."
+		},
+		"b6.broken_porcelain_at_the_basement_door": {
+			"tier": 2,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"barmaid": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"redfang.lodge_in_the_inn_basement"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.laid_a_trap_for_the_goblins",
+					"erin.hurt_her_foot_on_porcelain",
+					"lyonette.punished_mrsha",
+					"erin.bought_a_guitar",
+					"goblins.hide_food_to_leave_soon"
+				],
+				"relationship": [
+					{
+						"from": "mrsha",
+						"to": "lyonette",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.41L",
+				"confidence": "confirmed",
+				"note": "The trap was almost certainly Mrsha's. Lyonette learns the Goblins can sense her fear."
+			},
+			"summary": "Someone strews broken porcelain at the basement door, and Erin steps on it. Lyonette heals her foot, scolds Mrsha badly, and they make up. Erin has bought a guitar she cannot play. The Goblins are hiding food, so they plan to leave."
+		},
+		"b6.yellow_splatters_attacks_purple_smile_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 128,
+				"latest": 128,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"patrol_lead": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swordsman": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"gnoll": {
+					"prefer": [
+						"ishkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.antinium_brawl_at_lunch",
+					"mrsha.stabbed_at_badarrow_with_a_wand",
+					"badarrow.left_ear_cut",
+					"ishkr.back_at_the_inn",
+					"lyonette.spanked_mrsha"
+				],
+				"relationship": [
+					{
+						"from": "yellow_splatters",
+						"to": "purple_smile",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.41L",
+				"confidence": "confirmed",
+				"note": "Ishkr returns after Brunkr's death. The Horns are muddy from wolf hunting; the Halfseekers have skipped dinner for days."
+			},
+			"summary": "At lunch three groups sit in tense silence. Yellow Splatters sees Ishkr feed Purple Smile and attacks him. Mrsha leaps onto the Goblins' table and stabs a wand at Badarrow's ear. Lyonette spanks her and breaks down. Ksmvr halts the Soldiers with a sword."
+		}
+	},
+	"system": [
+		{
+			"who": "anand",
+			"kind": "skill",
+			"name": "[Decisive Blows]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "anand",
+			"kind": "skill",
+			"name": "[Evasive Tactics]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}
