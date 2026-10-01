@@ -1,10 +1,21 @@
 # Handoff
 
 ## Just done (2026-10-01, cloud session)
-- (filled in at the end of the M18.P session)
+- M17 closed out: detail moved to `docs/PROGRESS_ARCHIVE.md`; pending M17 tags listed there (the cloud proxy refuses tag pushes).
+- M18.P Book 6 plan: `docs/adr/0028-m18-book6.md` and the M18.0 – M18.7 steps in `docs/ROADMAP.md`. Six reading agents read every
+  Book 6 chapter and returned summaries only; no book text is in the repo. Their reports were in the session scratchpad (gone next session);
+  the ADR holds what matters (day map, deaths, stated levels, conflicts with our data).
+- User answers: (1) chapter order number `order` (engine step M18.0, a schema change the user approved); (2) new maps: Wirclaw's village,
+  crypt ossuary, inn basement (no sewers); (3) the Goblin Lord's attack on Esthelm (about day 117, night) is a wave stage, details `guess`;
+  (4) Laken's journal Day 72 – 82 squeezed into days 118 – 119, order kept.
+- No code changed. No tests run (docs only).
 
 ## Next
-- (filled in at the end of the M18.P session)
+1. The user merges the M18.P PR (that approves ADR 0028).
+2. M18.0 event order (engine): `CanonDb` reads the optional chapter key `order`; same-day order = depends_on, earliest, book number, then
+   chapter order + place in file (else id). Tests: new `unit_event_order`, `unit_canon_db`, `sim_canon_book5` (order unchanged), Python
+   validator tests. Then M18.1 world (maps, Eater Goat, looks), M18.2 – M18.7 canon batches.
+3. Each canon batch asks its stage, hook and `xp_window` choices first, and needs the Book 6 text (attach `innworld-canon-raw`, see Gotchas).
 
 ## Waiting on the user
 - Push the pending M17 tags from a local session (commands in `docs/PROGRESS_ARCHIVE.md`, "M17").

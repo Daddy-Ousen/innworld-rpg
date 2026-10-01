@@ -25,7 +25,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] M17 — Tactical combat, XCOM-style. M17.0–M17.8 merged ([PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79) … [PR #87](https://github.com/Daddy-Ousen/innworld-rpg/pull/87), last merge commit a7a5e37). Detail in the archive and ADR 0027.
   Tags pending (the cloud refuses tag pushes): `m17.6-done` on e54e2c5, `m17.7-done` on ff7d757, `m17.8-done` and `m17-done` on a7a5e37 (commands in the archive).
   - [ ] The user plays fights with Skills, spells and cover (`godot --path game`). Needs the user at home.
-- [ ] M18 — Book 6 (The General of Izril). Not planned: M18.P first (ADR 0028). Text in the private repo.
+- [ ] M18 — Book 6 (The General of Izril). Plan: ADR 0028, steps M18.0 – M18.7 in `docs/ROADMAP.md`. Text in the private repo.
+  - [x] M18.P plan (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): six reading agents (summaries only), ADR 0028, roadmap steps.
+    User answers: chapter `order` number (M18.0 engine step), maps Wirclaw's village + crypt ossuary + inn basement, Esthelm attack as a
+    night wave stage, Laken's Day 72 – 82 squeezed into days 118 – 119. PR waits for the user to merge (merging = plan approved).
+  - [ ] M18.0 event order (next).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0029). Text in the private repo.
 
 ## Cloud setup
