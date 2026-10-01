@@ -22,7 +22,8 @@
 ## Next
 1. The user merges the M18.1 PR ([PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90)).
 2. M18.2 canon 4.32 G, 1.02 C – 1.05 C (days 114 – 121): the army passes the inn by night; Rags; Tom in Rhir
-   (off-map). Ask the stage, hook and `xp_window` choices first. Chapter files get `"order"` (4.32 G = 1,
+   (off-map). The stage, hook and `xp_window` choices are already answered: see `docs/plans/m18.2.md` (news only,
+   one hook "warn Liscor", no xp window). Build it in a NEW session after PR #90 merges (one sub-milestone per session). Chapter files get `"order"` (4.32 G = 1,
    1.02 C = 2, … ADR 0028 "Context"); delete `book6/chapters/.gitkeep` when the first chapter file lands.
 3. Flags for later batches (ADR 0028 "M18.1"): Bugear's weapon (M18.3), Greydath name (M18.5), Purple Smile
    [Sergeant] (M18.5), `goblin_lord.named_reiss` (M18.7). M18.3 needs a stage at `wirclaw_village` (goats over the
