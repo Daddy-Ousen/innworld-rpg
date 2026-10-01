@@ -21,6 +21,26 @@
 				"note": "Not named in the text. On a big hill near Liscor, seen from the inn's tower; no direction or distance. Map wirclaw_village (M18.1)."
 			},
 			"summary": "A small walled farming village of Gnolls and Drakes on a hill near Liscor: two farms, a few houses, a barn, cows and goats."
+		},
+		"paranfer": {
+			"name": "Paranfer",
+			"kind": "settlement",
+			"parent": "rhir",
+			"tags": [
+				"city",
+				"capital",
+				"far",
+				"rhir",
+				"demons"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "The capital of the Blighted Kingdom: six outer walls, a seventh being built, sky bridges, mage-lit at night. No map."
+			},
+			"summary": "The walled capital of the Blighted Kingdom in Rhir, with sky bridges and a palace where the Earthers are housed. Off-map: Tom's events happen here."
 		}
 	}
 }

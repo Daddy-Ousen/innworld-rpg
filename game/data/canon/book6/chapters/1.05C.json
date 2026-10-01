@@ -1,0 +1,232 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "1.05C",
+	"order": 5,
+	"events": {
+		"b6.clown_tom_unmasks_the_fool": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"erille"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom",
+					"the_fool"
+				],
+				"flags": [
+					"demons.teleported_into_paranfer"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tom.taken_over_by_the_clown_voice",
+					"the_fool.betrayed_the_court",
+					"the_fool.made_a_fake_ward_stone",
+					"palace.dark_under_heart_of_darkness"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.05C",
+				"confidence": "confirmed"
+			},
+			"summary": "The laughing Tom takes over Tom's body and works out the truth: the Fool marked the courtyard, made a fake ward stone with his copy Skill and tried to snatch the princesses. The Fool is caught fleeing with Erille. Nereshal darkens the palace, and Tom asks for knives."
+		},
+		"b6.tom_breaks_the_fearless_and_kills_the_archer": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom"
+				],
+				"flags": [
+					"the_fool.betrayed_the_court"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"demons.fearless_driven_from_the_palace",
+					"tom.killed_the_demon_archer",
+					"demon_mage.escaped_paranfer",
+					"paranfer.thousands_dead_in_the_raid"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.05C",
+				"confidence": "confirmed",
+				"note": "The Fool survives the fall from the tower. The Demon mage is his love; she has no record yet."
+			},
+			"summary": "Tom kills Fearless in the dark halls and returns bloody. He drags the Fool up a tower and the Demon mage who loves the Fool begs for him. Tom jumps. Nereshal teleports Tom onto the Demon archer, who dies. The mage escapes. Hundreds died in the palace and thousands in the city."
+		},
+		"b6.the_fool_dies_in_toms_arms": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"jester": {
+					"prefer": [
+						"the_fool"
+					],
+					"fallback_tags": []
+				},
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"erille"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"escort": {
+					"prefer": [
+						"cirille_bitterclaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom",
+					"the_fool"
+				],
+				"flags": [
+					"demon_mage.escaped_paranfer"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"blighted_king.stabbed_but_lives",
+					"rhir.ritual_of_unborn_children_known_to_tom",
+					"tom.promised_to_protect_erille",
+					"tom.regained_the_hero_class"
+				],
+				"clear_flags": [
+					"tom.lost_the_hero_class"
+				],
+				"kill": [
+					"the_fool"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.05C",
+				"confidence": "confirmed",
+				"note": "The King plans a bigger ritual, a hundred thousand, then a million. Only the King, the Fool, the court women and Tom know."
+			},
+			"summary": "The Fool stabs the King, who lives, and says the summoning of the Earthers cost ten thousand unborn children. Tom burns him with his own fireball, and the Fool dies in his arms, asking him to take Erille away. Tom gains levels as [Clown] and [Hero], and the voice goes quiet."
+		}
+	},
+	"system": [
+		{
+			"who": "tom",
+			"kind": "class",
+			"name": "[Clown]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "A level gain at the end; the number is not stated."
+		},
+		{
+			"who": "tom",
+			"kind": "class",
+			"name": "[Hero]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Regained; the number is not stated."
+		}
+	]
+}

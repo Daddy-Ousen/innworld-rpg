@@ -1,0 +1,144 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "1.02C",
+	"order": 2,
+	"events": {
+		"b6.tom_rides_into_paranfer": {
+			"tier": 1,
+			"window": {
+				"earliest": 119,
+				"latest": 119,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"richard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"escort": {
+					"prefer": [
+						"cirille_bitterclaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tom.in_paranfer",
+					"tom.swore_off_clowning",
+					"tom.lost_the_hero_class",
+					"paranfer.fearless_demon_caged_on_show",
+					"cirille.escorts_the_earthers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "Months after 1.00 C and 1.01 C. Tom is Level 28 [Clown]. Over two thirds of the group are dead. Dates are guesses (119 to 121)."
+			},
+			"summary": "Tom and the Earthers ride through cheering crowds into Paranfer, the capital of Rhir. A Drake company under Cirille Bitterclaw escorts them. Tom keeps the group's money and swears off clowning. A caged Demon shock trooper is on show, and a voice laughs in his head."
+		},
+		"b6.the_drakes_tell_of_the_goblin_lords_victories": {
+			"tier": 1,
+			"window": {
+				"earliest": 119,
+				"latest": 119,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"escort": {
+					"prefer": [
+						"cirille_bitterclaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom"
+				],
+				"flags": [
+					"tom.in_paranfer"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rhir.drakes_tell_of_the_goblin_lords_victories",
+					"nereshal.slows_the_kings_aging",
+					"tom.broke_down_at_the_first_banquet",
+					"blighted_king.wants_to_meet_tom"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.02C",
+				"confidence": "confirmed",
+				"note": "The text says Zel Shivertail's warnings about the undead came too late."
+			},
+			"summary": "At the first banquet Drake officers tell of the Goblin Lord. He has killed two Drake and Gnoll Generals and over twenty thousand soldiers with undead, and the Walled Cities will not agree. Tom spirals as the voice laughs. The Blighted King rises and stares at him."
+		}
+	},
+	"system": [
+		{
+			"who": "tom",
+			"kind": "class",
+			"name": "[Clown]",
+			"level": 28,
+			"confidence": "confirmed",
+			"note": "Retired in his own words; four levels since the night of the slaughter."
+		}
+	]
+}

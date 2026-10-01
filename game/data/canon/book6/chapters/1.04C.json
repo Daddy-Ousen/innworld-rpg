@@ -1,0 +1,140 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "1.04C",
+	"order": 4,
+	"events": {
+		"b6.the_court_thanks_tom_and_the_nobles_talk": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": []
+				},
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"marchioness": {
+					"prefer": [
+						"xersia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tom"
+				],
+				"flags": [
+					"tom.saved_princess_erille"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"blighted_king.owes_tom_a_reward",
+					"tom.sat_with_the_nobles",
+					"nobles.suspect_the_assassins_were_a_feint"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.04C",
+				"confidence": "confirmed",
+				"note": "Xersia is a former Named Adventurer ('the Scorpion'), now a Marchioness. Tom steals Nereshal's dagger by Skill."
+			},
+			"summary": "Tom wakes in a rich new room. The court thanks him, and the King says a reward will be set tonight. At a garden lunch the nobles talk of artifacts, scarce Assassins and red clothes for lost children. Richard tells Tom he has earned the room."
+		},
+		"b6.demons_teleport_into_the_palace": {
+			"tier": 1,
+			"window": {
+				"earliest": 121,
+				"latest": 121,
+				"confidence": "guess"
+			},
+			"location": "paranfer",
+			"roles": {
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": []
+				},
+				"spear": {
+					"prefer": [
+						"xersia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"clown": {
+					"prefer": [
+						"tom"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"blighted_king.owes_tom_a_reward"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"demons.teleported_into_paranfer",
+					"palace.ward_stone_failed",
+					"tom.dressed_as_a_clown_without_knowing"
+				],
+				"kill": [
+					"xersia"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "1.04C",
+				"confidence": "confirmed",
+				"note": "Two Human champions and a Selphid also fall; they are not named."
+			},
+			"summary": "At the third banquet Tom wears a full clown costume without knowing how. A soldier bursts in: hundreds of Demons have teleported into the courtyard. The anti-teleport ward has failed. A Demon mage throws Lady Xersia high into the sky, and she dies in the fall."
+		}
+	},
+	"system": []
+}

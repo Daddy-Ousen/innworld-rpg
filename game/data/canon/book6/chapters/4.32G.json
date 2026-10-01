@@ -1,0 +1,450 @@
+{
+	"schema_version": 1,
+	"book": 6,
+	"chapter": "4.32G",
+	"order": 1,
+	"events": {
+		"b6.goblin_lord_army_marches_past_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord_army.passed_liscor",
+					"wandering_inn.survived_goblin_arrows",
+					"liscor.watched_the_goblin_army_pass"
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					22,
+					24
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							16,
+							13
+						]
+					},
+					{
+						"npc": "bird",
+						"pos": [
+							14,
+							13
+						]
+					}
+				],
+				"line": "Far out on the plain a black river of Goblins moves north under torchlight. Cheers carry up the hill. Arrows hiss at the inn and fall off its walls and glass.",
+				"note": "M18.2: a scene. Hours are guesses (late night). Nobody fights: the army has orders and walks past."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_the_goblin_army_pass",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"erin_solstice",
+									"bird"
+								]
+							}
+						}
+					],
+					"days": [
+						114,
+						114
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_the_goblin_army_pass"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human stood out on the hill with Erin and Bird, and talked quietly with them as the whole Goblin army walked by in the dark."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "The march is the night before Rags's Day A. Our night number (114) is a guess; the text gives none."
+			},
+			"summary": "In the dead of night the Goblin Lord's black-armoured host marches north past Liscor. The Goblins cheer and loose arrows at the walls, then at the inn on its hill. The fire arrows do not catch. Liscor's walls stay silent, and the army walks on."
+		},
+		"b6.garen_will_not_kneel_to_the_goblin_lord": {
+			"tier": 1,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "tremborags_mountain",
+			"roles": {
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.refuses_to_kneel_to_the_goblin_lord",
+					"tremborag.feels_the_goblin_lord_coming"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "Same night as the march; fatal duels set Garen's rank in the mountain."
+			},
+			"summary": "Deep in Tremborag's mountain Garen Redfang prowls the halls with his red sword, angry at the Great Chieftain and at Rags for leaving. Both feel the Goblin Lord coming. Garen will never kneel to him. He waits for war."
+		},
+		"b6.rags_chooses_to_hunt_the_undercrawlers": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"raider": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"elder": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"pyrite"
+				],
+				"flags": [
+					"goblin_lord_army.passed_liscor"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.seeks_the_undercrawlers",
+					"rags.forbids_killing_civilians",
+					"flooded_waters.marches_southeast"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "Day A. The camp is by a lake near small towns; the text gives no place name."
+			},
+			"summary": "At the camp by the lake Rags hears her council. She sends the tribe to find the Undercrawlers, who dig, because she wants them for traps and pits. Redscar wants to go home and fight. Rags forbids killing Humans. The thousands pack up in minutes."
+		},
+		"b6.rags_finds_the_undercrawlers_hanged": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"pyrite"
+				],
+				"flags": [
+					"rags.seeks_the_undercrawlers"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.undercrawlers_massacred",
+					"rags.burned_the_undercrawlers_tree"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "Who did it is not proved; the tribe thinks adventurers from a nearby Human town."
+			},
+			"summary": "The Goblins find the Undercrawler tribe dead on a hillside, hanged from an old tree with a message carved in the bark. One child is still alive. Rags gives him a healing potion, but he dies in a few minutes. Rags burns the tree and the dead."
+		},
+		"b6.rags_sacks_a_human_town": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"raider": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"pyrite"
+				],
+				"flags": [
+					"flooded_waters.undercrawlers_massacred"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.sacked_a_human_town",
+					"rags.hanged_the_towns_defenders",
+					"pyrite.wounded_at_the_town",
+					"flooded_waters.looted_a_human_town"
+				]
+			},
+			"rumor": "A walled Human town in the north fell to Goblins in a single day. Its guards and adventurers were hanged from the roofs. The townsfolk were let go.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "Town and day are not named. The hanging copies what was done to the Undercrawlers."
+			},
+			"summary": "Rags leads the tribe against a walled Human town. A ram breaks the gate in three hits, and the Goblins kill the guards and adventurers. Pyrite is cut badly by a Silver-rank fighter. The townsfolk are held and left alive, but Rags has the dead hanged. The Goblins loot the town."
+		},
+		"b6.pyrite_throws_the_goblins_into_the_lake": {
+			"tier": 1,
+			"window": {
+				"earliest": 115,
+				"latest": 115,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"second": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"pyrite"
+				],
+				"flags": [
+					"rags.sacked_a_human_town"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.played_in_the_lake",
+					"pyrite.hopes_rags_becomes_a_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.32G",
+				"confidence": "confirmed",
+				"note": "His hope for Rags is in his private thoughts and poems (night into Day B)."
+			},
+			"summary": "That evening the camp is silent. To cheer the tribe up, Pyrite throws a young Goblin into the lake. Soon twenty Hobs are throwing Goblins for fun, and Pyrite throws Rags. Awake all night, he hopes she might one day be a Goblin Lord, and that peace could be possible."
+		}
+	},
+	"system": []
+}
