@@ -79,7 +79,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] itch.io page kit (2026-10-02, branch `docs/itch-page`): `docs/ITCH.md` (tagline, description, settings, tags,
   Comments on). Cover 630 × 500 (two choices) and 6 screenshots in `export/itch/` (local, gitignored), made from the
   real game. Checked by eye.
-  - [ ] The user makes the itch.io page and uploads the web zip and the images.
+  - [x] The user made the itch.io page: https://rhasasn229.itch.io/innworld-rpg (public, browser play, comments on).
+  - [x] README links the itch.io page (top links and "In your browser").
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)

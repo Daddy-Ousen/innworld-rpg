@@ -11,7 +11,9 @@
   add `--resolution 1600x1100` for the big cover shots, then DELETE `game/_capture.gd` (it would ship in the build).
   It sets state directly (place, flags, a fake class offer): fine for pictures, never for game code.
 - Gotcha: the inn is full of guests only around calendar day 37 at 18:00 (Ceria, Calruz, Pawn, Toren ...).
-- Next for the user: make the itch.io page with `docs/ITCH.md`; set Visibility Public after a check.
+- The itch.io page is live: https://rhasasn229.itch.io/innworld-rpg (checked 2026-10-02: public, Run game, comments on).
+  README links it. Next release: upload the new web zip on itch.io by hand too.
+- Wrote Discord and r/WanderingInn intro posts for the user (in chat only, not in the repo).
 
 ## Earlier (2026-10-01, local session)
 - README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
