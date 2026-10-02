@@ -96,8 +96,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] GitHub Pages on, source "GitHub Actions" (user, 2026-10-02).
   - [x] v0.1.1-alpha (user, 2026-10-02) on branch `release/v0.1.1`: version bump, README download link. Three zips built and
     smoke-tested (898 events, 38 maps, 0 problems). Tests run: `unit_play_loop` (17 pass). Full suite not run.
-  - [ ] Merge `release/v0.1.1`, tag `v0.1.1-alpha` on the merge commit, publish the pre-release with three zips,
-    check the Pages workflow run and the page.
+  - [x] Merged ([PR #101](https://github.com/Daddy-Ousen/innworld-rpg/pull/101), merge commit 429583e). Tag `v0.1.1-alpha` pushed.
+    Pre-release published 2026-10-02 with three zips: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.1-alpha
+  - [x] Live: https://daddy-ousen.github.io/innworld-rpg/ (title screen v0.1.1-alpha, no errors; wasm served gzip, 10 MB).
+    The release-event run failed: the `github-pages` environment allows only `main`, not tags. Deployed by hand with
+    `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (success).
+  - [ ] Permanent fix for the tag rule: waits for the user's choice (see `handoff.md`).
   - [ ] itch.io: the user makes the page and uploads the web zip (steps in `handoff.md`).
   - [ ] Later: own subdomain (CNAME + Settings → Pages → Custom domain).
 

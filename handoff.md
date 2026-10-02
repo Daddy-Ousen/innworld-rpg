@@ -4,8 +4,13 @@
 - README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
   players first, then developers. No screenshots yet (none in the repo).
 - Web build (ADR 0031) on branch `feat/web-build`: built, smoke-tested and played in Chrome. PR open. Detail below.
-- 2026-10-02: PRs #99 and #100 merged; the user turned on Pages ("GitHub Actions"). Release v0.1.1-alpha built on
-  branch `release/v0.1.1` (version bump + README link; zips in `export/`, smoke OK). Next: merge, tag, publish.
+- 2026-10-02: PRs #99, #100, #101 merged; Pages on ("GitHub Actions"). v0.1.1-alpha tagged on 429583e and published
+  with three zips. The browser game is live: https://daddy-ousen.github.io/innworld-rpg/
+  - The release-event Pages run FAILED: environment `github-pages` only allows the `main` branch, not tags.
+    Deployed by hand: `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (works every time).
+  - Open: permanent fix. Option A: add a tag rule `v*` to Settings → Environments → github-pages → Deployment
+    branches and tags (repo setting, needs the user's yes). Option B: keep the manual run after each release.
+  - itch.io upload: the user does it with `export/InnworldRPG-v0.1.1-alpha-web.zip`.
 - Earlier on 2026-10-01: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
   The M19 plan ADR is 0030.
 
