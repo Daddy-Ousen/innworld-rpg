@@ -7,6 +7,7 @@ The story of the books goes on around you, day by day. What you do with your day
 
 > The books define how the world begins. The player decides what happens next.
 
+[**Play on itch.io**](https://rhasasn229.itch.io/innworld-rpg) ·
 [**Play in your browser**](https://daddy-ousen.github.io/innworld-rpg/) ·
 [**Download v0.1.1-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.1-alpha) (Windows, Linux) · free
 
@@ -52,7 +53,8 @@ Next: Book 7 (The Rains of Liscor). See the [roadmap](docs/ROADMAP.md).
 
 ### In your browser
 
-Open **https://daddy-ousen.github.io/innworld-rpg/** on a computer with a keyboard.
+Open the game on **[itch.io](https://rhasasn229.itch.io/innworld-rpg)** and press **Run game**,
+or open **https://daddy-ousen.github.io/innworld-rpg/**. Both run the same build. Use a computer with a keyboard.
 The first load is about 100 MB, so give it a moment. Click once into the game to start the sound.
 Your saves stay in this browser. If you clear the site data of your browser, the saves are gone.
 For the best play, use the download below.

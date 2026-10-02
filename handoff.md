@@ -1,6 +1,21 @@
 # Handoff
 
-## Just done (2026-10-01, local session)
+## Just done (2026-10-02, local session): itch.io page kit
+- Branch `docs/itch-page` (from main 79cc31a): `docs/ITCH.md` holds the tagline, the description, the page settings,
+  the tags and the community choice (Comments).
+- Local only (`export/` is gitignored): `export/itch/cover_inn.png`, `cover_winter.png` (630 × 500),
+  `screenshot_1_inn.png` … `screenshot_6_liscor_gate.png` (1152 × 648), `description.html` (copy-paste version),
+  `capture_shots.gd` (the screenshot script).
+- Screenshot script: copy `export/itch/capture_shots.gd` to `game/_capture.gd`, run windowed (not headless):
+  `godot --path game -s res://_capture.gd -- <out dir> [inn fight offer market winter cover_summer cover_snow ...]`,
+  add `--resolution 1600x1100` for the big cover shots, then DELETE `game/_capture.gd` (it would ship in the build).
+  It sets state directly (place, flags, a fake class offer): fine for pictures, never for game code.
+- Gotcha: the inn is full of guests only around calendar day 37 at 18:00 (Ceria, Calruz, Pawn, Toren ...).
+- The itch.io page is live: https://rhasasn229.itch.io/innworld-rpg (checked 2026-10-02: public, Run game, comments on).
+  README links it. Next release: upload the new web zip on itch.io by hand too.
+- Wrote Discord and r/WanderingInn intro posts for the user (in chat only, not in the repo).
+
+## Earlier (2026-10-01, local session)
 - README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
   players first, then developers. No screenshots yet (none in the repo).
 - Web build (ADR 0031) on branch `feat/web-build`: built, smoke-tested and played in Chrome. PR open. Detail below.

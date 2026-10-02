@@ -76,6 +76,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     with Erin. Chosen records and the 4.31 scroll flag fixed. Tests run: `sim_book6_zel_dies` (new, 7), `sim_canon_book6`, `sim_canon_book5`, the
     touched Book 6 sims, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102),
     validator. All pass. Full suite not run. PR waits for the user to merge. After the merge M18 is done except the user's play check.
+- [x] itch.io page kit (2026-10-02, branch `docs/itch-page`): `docs/ITCH.md` (tagline, description, settings, tags,
+  Comments on). Cover 630 × 500 (two choices) and 6 screenshots in `export/itch/` (local, gitignored), made from the
+  real game. Checked by eye.
+  - [x] The user made the itch.io page: https://rhasasn229.itch.io/innworld-rpg (public, browser play, comments on).
+  - [x] README links the itch.io page (top links and "In your browser").
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)
