@@ -4,7 +4,9 @@
 - README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
   players first, then developers. No screenshots yet (none in the repo).
 - Web build (ADR 0031) on branch `feat/web-build`: built, smoke-tested and played in Chrome. PR open. Detail below.
-- Earlier the same day: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
+- 2026-10-02: PRs #99 and #100 merged; the user turned on Pages ("GitHub Actions"). Release v0.1.1-alpha built on
+  branch `release/v0.1.1` (version bump + README link; zips in `export/`, smoke OK). Next: merge, tag, publish.
+- Earlier on 2026-10-01: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
   The M19 plan ADR is 0030.
 
 ## Web build (ADR 0031) — built and tested, PR open
