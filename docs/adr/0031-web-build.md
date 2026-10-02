@@ -30,7 +30,8 @@ Date: 2026-10-01 · Status: accepted (the user asked for a browser version on it
 - Repo setting (once, by the user or with their yes): Settings → Pages → Source "GitHub Actions".
 - The `github-pages` environment allows only `main` by default, so the run that a release (a tag) starts is rejected.
   Either add a tag rule `v*` to the environment, or run the workflow from `main` with the tag:
-  `gh workflow run pages.yml --ref main -f tag=v<version>` (v0.1.1-alpha was deployed this way).
+  `gh workflow run pages.yml --ref main -f tag=v<version>` (v0.1.1-alpha was deployed this way first).
+  Done 2026-10-02 (user's choice): the environment has the tag rule `v*`; releases now deploy by themselves.
 - An own subdomain later: a DNS CNAME record `play.<domain>` → `daddy-ousen.github.io`, then the domain in
   Settings → Pages → Custom domain, with "Enforce HTTPS". The workflow does not change.
 - Browser saves live in the browser's site data. Clearing it deletes the saves. itch.io and Pages are two sites, so

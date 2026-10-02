@@ -101,7 +101,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] Live: https://daddy-ousen.github.io/innworld-rpg/ (title screen v0.1.1-alpha, no errors; wasm served gzip, 10 MB).
     The release-event run failed: the `github-pages` environment allows only `main`, not tags. Deployed by hand with
     `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (success).
-  - [ ] Permanent fix for the tag rule: waits for the user's choice (see `handoff.md`).
+  - [x] Tag rule `v*` added to the `github-pages` environment (user, 2026-10-02). The re-run of the release-event run
+    succeeded, so a published release now deploys by itself.
   - [ ] itch.io: the user makes the page and uploads the web zip (steps in `handoff.md`).
   - [ ] Later: own subdomain (CNAME + Settings → Pages → Custom domain).
 

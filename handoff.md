@@ -8,8 +8,8 @@
   with three zips. The browser game is live: https://daddy-ousen.github.io/innworld-rpg/
   - The release-event Pages run FAILED: environment `github-pages` only allows the `main` branch, not tags.
     Deployed by hand: `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (works every time).
-  - Open: permanent fix. Option A: add a tag rule `v*` to Settings → Environments → github-pages → Deployment
-    branches and tags (repo setting, needs the user's yes). Option B: keep the manual run after each release.
+  - Fixed (user chose it): tag rule `v*` on the `github-pages` environment. The release-event run now succeeds.
+    The manual run still works if a deploy ever needs a redo.
   - itch.io upload: the user does it with `export/InnworldRPG-v0.1.1-alpha-web.zip`.
 - Earlier on 2026-10-01: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
   The M19 plan ADR is 0030.
