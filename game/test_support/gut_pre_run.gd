@@ -16,6 +16,8 @@ func run() -> void:
 		session.load_text_settings()
 		session.touch_settings_path = TEST_SETTINGS
 		session.load_touch_settings()
+		session.ui_scale_path = TEST_SETTINGS
+		session.load_ui_scale()
 	var audio := (Engine.get_main_loop() as SceneTree).root.get_node_or_null("Audio")
 	if audio != null:
 		DirAccess.remove_absolute(TEST_SETTINGS)

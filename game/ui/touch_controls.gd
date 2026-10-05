@@ -5,6 +5,8 @@
 ## Each button sends the input action of its key (project.godot [input]) as
 ## an InputEventAction, so the game reads a tap and a key the same way. A held
 ## pad button is a held key. The game screen calls sync() every frame.
+## M20.3: under a UI scale factor the controls keep their size on the screen
+## (user, 2026-10-05): they sit in a box scaled by 1 / factor (set_factor).
 ## Presentation only.
 class_name TouchControls
 extends Control
@@ -15,7 +17,7 @@ const SIZE := 64.0
 const WIDE := 104.0
 const GAP := 6.0
 const MARGIN := 12.0
-## Room the pad takes from the left edge: the HUD log moves right of it.
+## Room the pad takes from the left edge at factor 1: the HUD log moves right of it.
 const PAD_WIDTH := MARGIN + SIZE * 3 + GAP * 2 + MARGIN
 ## Pad cells, row by row: a direction action or WAIT ("" = empty cell).
 const PAD := [
@@ -43,6 +45,9 @@ var cancel: Button
 var buttons := {}
 ## Actions a button holds down now.
 var _held := {}
+## The UI scale factor (M20.3) and the box that undoes it.
+var factor := 1.0
+var _box: Control
 
 
 ## An arrow drawn as a triangle, so the pad does not depend on font glyphs.
@@ -61,6 +66,12 @@ class Arrow extends Button:
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	modulate.a = 0.8
+	_box = Control.new()
+	_box.name = "Box"
+	_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_box)
+	resized.connect(_layout_box)
+	_layout_box()
 	_build_pad()
 	_build_column()
 	_build_more()
@@ -86,6 +97,22 @@ func sync(shown: bool, panel_open: bool, blocked: bool, can_cancel: bool) -> voi
 		release_all()
 
 
+## The UI scale factor (M20.3): the controls keep their size on the screen.
+func set_factor(f: float) -> void:
+	factor = maxf(f, 0.1)
+	_layout_box()
+
+
+## Room the pad takes from the left edge, in this layer's pixels.
+func pad_width() -> float:
+	return PAD_WIDTH / factor
+
+
+func _layout_box() -> void:
+	_box.scale = Vector2.ONE / factor
+	_box.size = size * factor
+
+
 ## Lets go of every held button (the pad hid while a finger was on it).
 func release_all() -> void:
 	for action: StringName in _held.keys():
@@ -108,7 +135,7 @@ func _build_pad() -> void:
 	pad.columns = 3
 	pad.add_theme_constant_override("h_separation", int(GAP))
 	pad.add_theme_constant_override("v_separation", int(GAP))
-	add_child(pad)
+	_box.add_child(pad)
 	pad.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 	pad.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	pad.offset_left = MARGIN
@@ -175,7 +202,7 @@ func _build_more() -> void:
 ## Anchors `c` to the middle of the right edge, `right` px in.
 func _place_right(c: Control, right: float) -> void:
 	if c.get_parent() == null:
-		add_child(c)
+		_box.add_child(c)
 	c.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
 	c.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	c.grow_vertical = Control.GROW_DIRECTION_BOTH

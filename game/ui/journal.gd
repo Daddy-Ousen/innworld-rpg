@@ -18,6 +18,11 @@ const NEWS_DAYS := 7
 var _gs: GameState
 var _db: DataDb
 
+## The panel's size (the .tscn offsets) when the view has room (M20.3).
+const DESIGN_SIZE := Vector2(600, 600)
+## The focus list's height (journal.tscn), at most FOCUS_SHARE of a small view.
+const FOCUS_HEIGHT := 170.0
+const FOCUS_SHARE := 0.3
 @onready var _text: Label = %Text
 @onready var _focus: ItemList = %Focus
 @onready var _scroll: ScrollContainer = %Scroll
@@ -25,6 +30,7 @@ var _db: DataDb
 
 func _ready() -> void:
 	hide()
+	UiScale.keep_fit(self, DESIGN_SIZE, _fit_focus)  # M20.3: cut to a small view
 	_focus.item_activated.connect(choose)
 	TouchControls.activate_on_tap(_focus)
 
@@ -179,3 +185,8 @@ static func _same(a: Array, b: Array) -> bool:
 		if not b.has(x):
 			return false
 	return true
+
+
+## On a small view the focus list takes less height, so the text keeps room.
+func _fit_focus() -> void:
+	_focus.custom_minimum_size.y = minf(FOCUS_HEIGHT, get_viewport_rect().size.y * FOCUS_SHARE)

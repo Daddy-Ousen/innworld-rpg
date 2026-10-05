@@ -18,6 +18,7 @@ func before_each() -> void:
 func after_each() -> void:
 	_session.set_touch_mode(TouchSettings.AUTO)
 	_session.touch_seen = false
+	_session.apply_ui_scale()  # M20.3: a faked touch makes Auto see a (tiny) phone
 	for action: StringName in [&"move_e", &"wait", &"journal", &"back"]:
 		Input.action_release(action)
 

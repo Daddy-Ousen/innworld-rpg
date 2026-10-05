@@ -4,11 +4,14 @@
 class_name CharacterSheet
 extends PanelContainer
 
+## The panel's size (the .tscn offsets) when the view has room (M20.3).
+const DESIGN_SIZE := Vector2(560, 400)
 @onready var _text: Label = %Text
 
 
 func _ready() -> void:
 	hide()
+	UiScale.keep_fit(self, DESIGN_SIZE)  # M20.3: cut to a small view
 
 
 func open(gs: GameState, db: DataDb) -> void:

@@ -8,6 +8,8 @@ extends Node
 signal state_changed
 ## The touch controls' mode changed, or the first touch was seen (M20.1).
 signal touch_changed
+## The UI scale factor changed (M20.3): the option, a resize or the first touch.
+signal ui_scale_changed
 
 const NEW_GAME_SEED := 1
 
@@ -27,6 +29,9 @@ var touch: TouchSettings
 var touch_settings_path := TouchSettings.PATH
 ## True after the first screen touch in this run (Auto then shows the controls).
 var touch_seen := false
+## The size of menus, text and the HUD (M20.3); tests point the path at a test file.
+var ui_scale: UiScale
+var ui_scale_path := UiScale.PATH
 
 
 func _ready() -> void:
@@ -34,6 +39,8 @@ func _ready() -> void:
 	gs = GameState.new_game(NEW_GAME_SEED, db)
 	load_text_settings()
 	load_touch_settings()
+	load_ui_scale()
+	get_window().size_changed.connect(apply_ui_scale)  # a phone turns, a browser resizes
 
 
 ## Reads the text size from `text_settings_path` and applies it.
@@ -55,6 +62,34 @@ func load_touch_settings() -> void:
 	touch_changed.emit()
 
 
+## Reads the UI scale from `ui_scale_path` and applies it.
+func load_ui_scale() -> void:
+	ui_scale = UiScale.load_file(ui_scale_path)
+	apply_ui_scale()
+
+
+## Auto, 1, 1.5 or 2 (UiScale.MODES); applied and saved at once.
+func set_ui_scale_mode(mode: String) -> void:
+	ui_scale.set_mode(mode)
+	ui_scale.save(ui_scale_path)
+	apply_ui_scale()
+
+
+## The factor for this window and screen.
+func ui_factor() -> float:
+	var size := DisplayServer.window_get_size()
+	return ui_scale.factor(float(mini(size.x, size.y)), float(DisplayServer.screen_get_dpi()),
+			touch_seen or DisplayServer.is_touchscreen_available())
+
+
+## Sets the root window's content scale; tells the game screen when it changed.
+func apply_ui_scale() -> void:
+	var f := ui_factor()
+	if not is_equal_approx(get_window().content_scale_factor, f):
+		get_window().content_scale_factor = f
+		ui_scale_changed.emit()
+
+
 ## Auto, On or Off (TouchSettings); saved at once.
 func set_touch_mode(mode: String) -> void:
 	touch.set_mode(mode)
@@ -71,6 +106,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and not touch_seen:
 		touch_seen = true
 		touch_changed.emit()
+		apply_ui_scale()  # Auto may now see a phone
 
 
 func set_state(new_gs: GameState) -> void:
