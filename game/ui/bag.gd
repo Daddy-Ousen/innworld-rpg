@@ -10,12 +10,15 @@ extends PanelContainer
 
 signal chosen(action_id: String)
 
+## The panel's size (the .tscn offsets) when the view has room (M20.3).
+const DESIGN_SIZE := Vector2(480, 360)
 @onready var _header: Label = %Header
 @onready var _items: ItemList = %Items
 
 
 func _ready() -> void:
 	hide()
+	UiScale.keep_fit(self, DESIGN_SIZE)  # M20.3: cut to a small view
 	_items.item_activated.connect(_on_activated)
 	TouchControls.activate_on_tap(_items)
 	%LeaveOne.pressed.connect(leave_one)  # M20.1: X and P as buttons (touch, mouse)

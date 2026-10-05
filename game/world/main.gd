@@ -114,6 +114,8 @@ func _ready() -> void:
 	pause.quit_requested.connect(quit_to_title)
 	touch.cancel_pressed.connect(cancel)
 	Session.touch_changed.connect(_sync_touch)
+	Session.ui_scale_changed.connect(_apply_ui_scale)
+	_apply_ui_scale()
 	console_layer.visible = false
 	hud.add_lines([_day_line()])
 	if not Session.db.is_valid():
@@ -146,6 +148,14 @@ func is_busy() -> bool:
 			or view.is_replaying()
 
 
+## The UI scale factor changed (M20.3): the map and the touch pad keep their
+## size on the screen (user, 2026-10-05).
+func _apply_ui_scale() -> void:
+	var f := get_window().content_scale_factor
+	view.camera.zoom = Vector2.ONE * UiScale.camera_zoom(f)
+	touch.set_factor(f)
+
+
 ## Shows the touch controls that fit now (M20.1) and makes room for the pad
 ## in the HUD.
 func _sync_touch() -> void:
@@ -154,7 +164,7 @@ func _sync_touch() -> void:
 			or pause.visible or message_log.visible or help.visible
 	touch.sync(shown, panel_open, dialog.visible or console_layer.visible,
 			_armed != "" or _walking())
-	hud.make_room_left(TouchControls.PAD_WIDTH if shown else 0.0)
+	hud.make_room_left(touch.pad_width() if shown else 0.0)
 
 
 func _input(event: InputEvent) -> void:

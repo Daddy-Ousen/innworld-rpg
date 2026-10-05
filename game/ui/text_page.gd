@@ -6,6 +6,8 @@ extends PanelContainer
 @export var title := "Page"
 @export var toggle_action: StringName = &"help"
 
+## The panel's size (the .tscn offsets) when the view has room (M20.3).
+const DESIGN_SIZE := Vector2(560, 400)
 @onready var _title: Label = %Title
 @onready var _text: Label = %Text
 @onready var _scroll: ScrollContainer = %Scroll
@@ -13,6 +15,7 @@ extends PanelContainer
 
 func _ready() -> void:
 	hide()
+	UiScale.keep_fit(self, DESIGN_SIZE)  # M20.3: cut to a small view
 
 
 func open(lines: Array) -> void:
