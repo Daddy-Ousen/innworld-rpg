@@ -396,3 +396,35 @@ other classes' duress (cooks, runners, healers) **later**. Plan: `docs/plans/m17
   and is not built. (2) Clean wins pay half: the cover and position rules of M17.6 reward exactly that play, so a careful fighter levels more slowly. The
   floor is data (`rules.xp.duress.floor`). (3) Only the Skinner night has a window; other big nights of Books 1-5 need the same two lines of data.
   (4) The user cannot see any of this in the game; only the debug console's record shows the factors.
+
+## M17.9 Work duress for non-fighters (2026-10-05, cloud session)
+Plan: `docs/plans/m17.9.md`. User answers: work duress in data (this approves the optional `duress` key in
+`actions.json`, CLAUDE.md rule 11), a target of level 5 by night 9 – 10 for a busy inn worker, and two sources:
+crowd and cold. More XP windows for big nights stay open.
+- **Rule.** An action may list `duress` entries `{"key", "from", "to", "max"}`. The context value gives x1.0 at
+  `from` or less and rises in a straight line to `max` at `to` or more. Entries multiply; the result is capped at
+  `rules.xp.duress.cap` (2.0). There is no floor below x1.0: an empty inn pays the plain XP of M17.8. The record
+  keeps the factor in `duress` (as for fights). No save change.
+- **Where.** `Xp.work_duress(def, context, rules)`; `Actions.perform` uses it when the caller gives no `duress`.
+  `Combat.end_fight` still gives its own, so fight XP is unchanged. The work duress reads the action's context plus
+  `cold` = 1.0 when `Winter.status` is "cold"; the record keeps the context as given (hooks see no new key).
+  `DataDb` checks the shape at load (key, from, to, max; to > from; max >= 1.0).
+- **Data (first setting, design guesses).** Crowd `guests` 2 -> 12, up to x2.0: cook_simple_meal, cook_stew,
+  cook_pasta, bake_bread, serve_guests, wash_dishes. Cold 0 -> 1, up to x1.5: travel, sprint_training,
+  deliver_parcel, carry_water, chop_wood, forage_fruit, gather_herbs, keep_watch. Talking, cleaning rooms and
+  sweeping get no crowd entry: a crowd does not make them much harder.
+- **Pace.** `sim_balance_progress` now gives the inn context to all indoor inn work, as `Interact.perform` does in
+  the game. The busy worker (guests 2 + day, at most 20) reaches level 5 on night 10 on all three seeds (was 14)
+  and level 8 by night 22 (was 6). The fighter table is byte for byte the same (level 5 on night 6 – 7, level 9
+  by night 22). The probe now asserts level 5 by night 8 – 10.
+- **Cold is a trade, not a gift.** The cold still hurts (winter clothes only slow it), so x1.5 pays for a real cost.
+  Hunger was rejected as a source: it would reward starving.
+- **Also fixed.** `sim_winter` was red on main since M18.2: the 4.32 G march stage put Bird on a snow wall tile.
+  Bird now stands in the gap next to Erin.
+- **Tests run:** `unit_work_duress` (new, 8), `sim_balance_progress`, `sim_balance_fighter`, `unit_xp`, `unit_actions`,
+  `unit_data_db`, `unit_winter`, `sim_winter`, `unit_fight_duress`, `unit_guests`, `sim_skinner_night`, `sim_30_days`,
+  `sim_m6_done`, `sim_player_hooks`, `unit_action_log`, `unit_console`, `unit_cooking`, `unit_game_state`,
+  `unit_no_xp_shown`, `unit_xp_window`, `sim_book6_goblin_march`, `sim_canon_book6`; validator (Book 6) 0 errors;
+  Python 102 OK. No full suite.
+- **Open.** Healers (no mechanic to treat others yet); XP windows for the other big nights of Books 1 – 6; the user
+  plays an inn day to feel the pace.

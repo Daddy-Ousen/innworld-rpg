@@ -15,22 +15,26 @@ func before_all() -> void:
 	_db = DataDb.load_dir()
 
 
+## Inn work gets the inn context, as Interact.perform gives it in the game (M17.9: the crowd
+## raises the XP of cooking, serving and dishes).
 func _play_day(gs: GameState, day: int) -> void:
 	var inn := {"guests": mini(2 + day, 20), "location": "wandering_inn"}
 	var plan: Array = [
 		["cook_stew", {"context": inn}], ["serve_guests", {"context": inn}],
-		["clean_room", {"context": inn}], ["sweep_floor", {}], ["wash_dishes", {}],
+		["clean_room", {"context": inn}], ["sweep_floor", {"context": inn}], ["wash_dishes", {"context": inn}],
 		["talk_with_guest", {"context": inn}], ["carry_water", {}],
 	]
-	plan.append_array([["bake_bread", {}], ["chop_wood", {}]] if day % 2 == 0 else [["cook_pasta", {"context": inn}]])
+	plan.append_array([["bake_bread", {"context": inn}], ["chop_wood", {}]] if day % 2 == 0 else [["cook_pasta", {"context": inn}]])
 	for step: Array in plan:
 		Commands.perform(gs, _db, step[0], step[1])
 
 
-## Plays DAYS days. Returns {"first_class_night": int, "rows": Array[String], "gs": GameState}.
+## Plays DAYS days. Returns {"first_class_night": int, "level5_night": int, "rows": Array[String],
+## "gs": GameState}.
 func _run(seed_: int) -> Dictionary:
 	var gs := GameState.new_game(seed_, _db)
 	var first := -1
+	var level5 := -1
 	var rows: Array[String] = []
 	for day in range(1, DAYS + 1):
 		_play_day(gs, day)
@@ -42,9 +46,11 @@ func _run(seed_: int) -> Dictionary:
 				Commands.decline_class(gs, _db, id)
 		if first < 0 and not gs.progression.classes.is_empty():
 			first = day
+		if level5 < 0 and gs.progression.total_level() >= 5:
+			level5 = day
 		rows.append("seed %d night %2d  total level %2d  max hp %3d  classes %s" % [seed_, day,
 				gs.progression.total_level(), Stats.max_hp(gs, _db), _classes(gs)])
-	return {"first_class_night": first, "rows": rows, "gs": gs}
+	return {"first_class_night": first, "level5_night": level5, "rows": rows, "gs": gs}
 
 
 func _classes(gs: GameState) -> String:
@@ -63,6 +69,8 @@ func test_levels_come_at_a_fair_pace_on_every_seed() -> void:
 		assert_gte(int(r["first_class_night"]), 1, "seed %d gets a class" % s)
 		assert_lte(int(r["first_class_night"]), 3, "seed %d: first class by night 3" % s)
 		assert_gte(gs.progression.total_level(), 5, "seed %d: level 5 by day 22" % s)
+		assert_lte(int(r["level5_night"]), 10, "seed %d: M17.9 target, level 5 by night 9 - 10" % s)
+		assert_gte(int(r["level5_night"]), 8, "seed %d: the fighter (night 6 - 7) keeps a lead" % s)
 		assert_lte(gs.progression.total_level(), 14, "seed %d: not a runaway" % s)
 	var path := OS.get_environment("BALANCE_LOG")
 	if path != "":
