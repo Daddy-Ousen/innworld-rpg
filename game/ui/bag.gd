@@ -50,18 +50,17 @@ func _on_activated(index: int) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible or not event is InputEventKey or not event.pressed or event.echo:
+	if not visible:
 		return
-	match (event as InputEventKey).physical_keycode:
-		KEY_ESCAPE, KEY_I:
-			close()
-		KEY_X, KEY_DELETE:
-			if selected_good() != "":
-				chosen.emit(Interact.DROP_GOOD + selected_good())
-		KEY_P:
-			chosen.emit(Interact.STOW)
-		_:
-			return
+	if event.is_action_pressed(&"back") or event.is_action_pressed(&"bag"):
+		close()
+	elif event.is_action_pressed(&"drop"):
+		if selected_good() != "":
+			chosen.emit(Interact.DROP_GOOD + selected_good())
+	elif event.is_action_pressed(&"stow"):
+		chosen.emit(Interact.STOW)
+	else:
+		return
 	get_viewport().set_input_as_handled()
 
 

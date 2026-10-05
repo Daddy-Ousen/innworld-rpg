@@ -59,14 +59,14 @@ func choose(index: int) -> String:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible or not event is InputEventKey or not event.pressed:
+	if not visible:
 		return
-	var key: Key = (event as InputEventKey).physical_keycode
-	if key in [KEY_PAGEUP, KEY_PAGEDOWN]:
+	var down := event.is_action_pressed(&"page_down", true)
+	if down or event.is_action_pressed(&"page_up", true):
 		var page := int(_scroll.size.y * 0.8)
-		_scroll.scroll_vertical += page if key == KEY_PAGEDOWN else -page
+		_scroll.scroll_vertical += page if down else -page
 		get_viewport().set_input_as_handled()
-	elif not event.echo and key in [KEY_ESCAPE, KEY_J]:
+	elif event.is_action_pressed(&"back") or event.is_action_pressed(&"journal"):
 		close()
 		get_viewport().set_input_as_handled()
 

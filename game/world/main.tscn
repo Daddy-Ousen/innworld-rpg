@@ -37,11 +37,11 @@ layer = 2
 
 [node name="MessageLog" parent="MenuLayer" instance=ExtResource("11_page")]
 title = "Messages, newest first"
-toggle_key = 76
+toggle_action = &"log"
 
 [node name="Help" parent="MenuLayer" instance=ExtResource("11_page")]
 title = "Help"
-toggle_key = 72
+toggle_action = &"help"
 
 [node name="PauseMenu" parent="MenuLayer" instance=ExtResource("9_pause")]
 

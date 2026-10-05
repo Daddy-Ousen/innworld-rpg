@@ -61,7 +61,6 @@ func close() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and event is InputEventKey and event.pressed and not event.echo \
-			and event.physical_keycode == KEY_ESCAPE:
+	if visible and event.is_action_pressed(&"back"):
 		close()
 		get_viewport().set_input_as_handled()

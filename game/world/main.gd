@@ -30,10 +30,15 @@ extends Node
 const STEP_REPEAT := 0.14
 const TITLE_SCENE := "res://ui/title_menu.tscn"
 const WAIT := "wait"
-const MOVE_KEYS := {
-	"n": [KEY_W, KEY_UP], "s": [KEY_S, KEY_DOWN], "e": [KEY_D, KEY_RIGHT], "w": [KEY_A, KEY_LEFT],
-	WAIT: [KEY_SPACE],
+## Held input actions (project.godot [input], M20.0): direction -> action.
+const MOVE_ACTIONS := {
+	"n": &"move_n", "s": &"move_s", "e": &"move_e", "w": &"move_w", WAIT: &"wait",
 }
+## Skill bar slots: action -> slot (keys 1-9).
+const SKILL_ACTIONS: Array[StringName] = [
+	&"skill_1", &"skill_2", &"skill_3", &"skill_4", &"skill_5", &"skill_6", &"skill_7", &"skill_8",
+	&"skill_9",
+]
 
 var _cooldown := 0.0
 ## The NPC the player last bumped into (say it once, not every repeat).
@@ -137,61 +142,59 @@ func is_busy() -> bool:
 func _input(event: InputEvent) -> void:
 	# Backtick before the console's LineEdit sees it. Not while the System
 	# dialog waits for an answer.
-	if event is InputEventKey and event.pressed and not event.echo \
-			and event.physical_keycode == KEY_QUOTELEFT and not dialog.visible:
+	if event.is_action_pressed(&"console") and not dialog.visible:
 		toggle_console()
 		get_viewport().set_input_as_handled()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if view.is_replaying() and (event is InputEventKey or event is InputEventMouseButton) \
-			and event.is_pressed() and not event.is_echo():
+	if view.is_replaying() and (event is InputEventKey or event is InputEventAction \
+			or event is InputEventMouseButton) and event.is_pressed() and not event.is_echo():
 		skip_replay()
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouse:
 		_mouse(event)
 		return
-	if is_busy() or not event is InputEventKey or not event.pressed or event.echo:
+	if is_busy() or not event.is_pressed() or event.is_echo():
 		return
-	var code: int = event.physical_keycode
-	if code >= KEY_1 and code <= KEY_9:
-		var ids := bar.skills().ids()
-		if code - KEY_1 < ids.size():
-			pick_skill(ids[code - KEY_1])
-		get_viewport().set_input_as_handled()
-		return
-	if code == KEY_ESCAPE and _armed != "":
+	for i in SKILL_ACTIONS.size():
+		if event.is_action_pressed(SKILL_ACTIONS[i]):
+			var ids := bar.skills().ids()
+			if i < ids.size():
+				pick_skill(ids[i])
+			get_viewport().set_input_as_handled()
+			return
+	if event.is_action_pressed(&"back") and _armed != "":
 		disarm()
 		get_viewport().set_input_as_handled()
 		return
-	match event.physical_keycode:
-		KEY_E:
-			open_use_menu()
-		KEY_Z:
-			sleep()
-		KEY_F:
-			open_bag()
-		KEY_C:
-			sheet.open(Session.gs, Session.db)
-		KEY_J:
-			journal.open(Session.gs, Session.db)
-		KEY_I:
-			bag.open(Session.gs, Session.db)
-		KEY_L:
-			message_log.open(_history_lines())
-		KEY_H:
-			help.open(SystemMessages.KEYS)
-		KEY_ESCAPE:
-			pause.open()
-		KEY_B:
-			block()
-		KEY_T:
-			throw()
-		KEY_X:
-			drop()
-		_:
-			return
+	if event.is_action_pressed(&"use"):
+		open_use_menu()
+	elif event.is_action_pressed(&"sleep"):
+		sleep()
+	elif event.is_action_pressed(&"eat"):
+		open_bag()
+	elif event.is_action_pressed(&"sheet"):
+		sheet.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"journal"):
+		journal.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"bag"):
+		bag.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"log"):
+		message_log.open(_history_lines())
+	elif event.is_action_pressed(&"help"):
+		help.open(SystemMessages.KEYS)
+	elif event.is_action_pressed(&"back"):
+		pause.open()
+	elif event.is_action_pressed(&"block"):
+		block()
+	elif event.is_action_pressed(&"throw"):
+		throw()
+	elif event.is_action_pressed(&"drop"):
+		drop()
+	else:
+		return
 	get_viewport().set_input_as_handled()
 
 
@@ -215,10 +218,9 @@ func _process(delta: float) -> void:
 
 
 func _held_direction() -> String:
-	for dir: String in MOVE_KEYS:
-		for key: Key in MOVE_KEYS[dir]:
-			if Input.is_physical_key_pressed(key):
-				return dir
+	for dir: String in MOVE_ACTIONS:
+		if Input.is_action_pressed(MOVE_ACTIONS[dir]):
+			return dir
 	return ""
 
 
