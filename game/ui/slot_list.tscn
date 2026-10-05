@@ -36,3 +36,9 @@ text = "Load which save?"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Back"

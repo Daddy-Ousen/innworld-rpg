@@ -20,6 +20,8 @@ var mode := LOAD
 func _ready() -> void:
 	hide()
 	_items.item_activated.connect(_on_activated)
+	TouchControls.activate_on_tap(_items)
+	%Back.pressed.connect(_cancel)
 
 
 ## [{"slot", "text", "disabled"}] for a mode. Static, so tests can check it.
@@ -63,6 +65,11 @@ func _on_activated(index: int) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed(&"back"):
-		close()
-		cancelled.emit()
+		_cancel()
 		get_viewport().set_input_as_handled()
+
+
+## Esc or Back: closes the list without a pick.
+func _cancel() -> void:
+	close()
+	cancelled.emit()

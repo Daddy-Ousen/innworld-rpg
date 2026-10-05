@@ -45,3 +45,18 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 text = "Enter: use   X: leave one behind   P: put the held item in the bag"
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="LeaveOne" type="Button" parent="Margin/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Leave one behind"
+
+[node name="Stow" type="Button" parent="Margin/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Put the held item in the bag"

@@ -26,6 +26,7 @@ var _db: DataDb
 func _ready() -> void:
 	hide()
 	_focus.item_activated.connect(choose)
+	TouchControls.activate_on_tap(_focus)
 
 
 func open(gs: GameState, db: DataDb) -> void:

@@ -30,6 +30,7 @@ extends Node
 const STEP_REPEAT := 0.14
 const TITLE_SCENE := "res://ui/title_menu.tscn"
 const WAIT := "wait"
+const NO_CELL := Vector2i(-1, -1)
 ## Held input actions (project.godot [input], M20.0): direction -> action.
 const MOVE_ACTIONS := {
 	"n": &"move_n", "s": &"move_s", "e": &"move_e", "w": &"move_w", WAIT: &"wait",
@@ -57,7 +58,9 @@ var _walk: Array[String] = []
 var _walk_attack := ""
 var _walk_target := ""
 ## The cell under the mouse (M17.3).
-var _hover := Vector2i(-1, -1)
+var _hover := NO_CELL
+## The cell of the last touch tap that showed a plan (M20.1).
+var _tapped := NO_CELL
 ## A replay's log lines: one list per turn-log entry, then the rest.
 var _replay_lines: Array = []
 var _replay_tail: Array = []
@@ -77,6 +80,7 @@ var _armed := ""
 @onready var help: TextPage = $MenuLayer/Help
 @onready var pause: PauseMenu = $MenuLayer/PauseMenu
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
+@onready var touch: TouchControls = $TouchLayer/TouchControls
 @onready var console_layer: CanvasLayer = $ConsoleLayer
 @onready var console_input: LineEdit = $ConsoleLayer/DebugConsole.get_node("%Input")
 
@@ -108,6 +112,8 @@ func _ready() -> void:
 	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
+	touch.cancel_pressed.connect(cancel)
+	Session.touch_changed.connect(_sync_touch)
 	console_layer.visible = false
 	hud.add_lines([_day_line()])
 	if not Session.db.is_valid():
@@ -122,6 +128,7 @@ func _ready() -> void:
 func _redraw() -> void:
 	if view.is_replaying():
 		return  # the redraw comes when the replay ends
+	_tapped = NO_CELL  # a new state: the next tap shows its plan first
 	view.refresh(Session.gs, Session.db, _replayed)
 	_replayed = false
 	hud.refresh(Session.gs, Session.db)
@@ -137,6 +144,17 @@ func is_busy() -> bool:
 	return console_layer.visible or menu.visible or sheet.visible or journal.visible \
 			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible \
 			or view.is_replaying()
+
+
+## Shows the touch controls that fit now (M20.1) and makes room for the pad
+## in the HUD.
+func _sync_touch() -> void:
+	var shown := Session.touch_shown()
+	var panel_open := menu.visible or sheet.visible or journal.visible or bag.visible \
+			or pause.visible or message_log.visible or help.visible
+	touch.sync(shown, panel_open, dialog.visible or console_layer.visible,
+			_armed != "" or _walking())
+	hud.make_room_left(TouchControls.PAD_WIDTH if shown else 0.0)
 
 
 func _input(event: InputEvent) -> void:
@@ -199,6 +217,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	_sync_touch()
 	_cooldown = maxf(_cooldown - delta, 0.0)
 	if is_busy():
 		return
@@ -615,18 +634,39 @@ func _close_replay() -> void:
 func _mouse(event: InputEventMouse) -> void:
 	if is_busy() or not Encounter.is_player_turn(Session.gs):
 		return
-	var cell := view.cell_at(view.get_global_mouse_position())
+	# The event's own position: a touch moves no mouse pointer.
+	var cell := view.cell_at(view.get_canvas_transform().affine_inverse() * event.position)
 	if event is InputEventMouseMotion:
 		hover(cell)
 	elif event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			click(cell)
+			if event.device == InputEvent.DEVICE_ID_EMULATION:
+				tap(cell)
+			else:
+				click(cell)
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			_cancel_walk()
-			if _armed != "":
-				disarm()
+			cancel()
 			get_viewport().set_input_as_handled()
+
+
+## A tap on `cell` in a fight (M20.1): a touch has no hover, so the first tap
+## shows the plan (path, hit chance) and a second tap on the same cell acts.
+func tap(cell: Vector2i) -> void:
+	if _tapped == cell:
+		_tapped = NO_CELL
+		click(cell)
+	else:
+		_tapped = cell
+		hover(cell)
+
+
+## Stops a click's walk and disarms a Skill (a right click, or Cancel on touch).
+func cancel() -> void:
+	_tapped = NO_CELL
+	_cancel_walk()
+	if _armed != "":
+		disarm()
 
 
 ## The mouse is over `cell`: show what a click there would do.

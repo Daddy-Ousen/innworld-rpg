@@ -17,6 +17,9 @@ signal chosen(action_id: String)
 func _ready() -> void:
 	hide()
 	_items.item_activated.connect(_on_activated)
+	TouchControls.activate_on_tap(_items)
+	%LeaveOne.pressed.connect(leave_one)  # M20.1: X and P as buttons (touch, mouse)
+	%Stow.pressed.connect(stow)
 
 
 func open(gs: GameState, db: DataDb) -> void:
@@ -38,6 +41,17 @@ func close() -> void:
 
 
 ## The good picked in the list, or "".
+## Leaves one of the selected good behind (X).
+func leave_one() -> void:
+	if selected_good() != "":
+		chosen.emit(Interact.DROP_GOOD + selected_good())
+
+
+## Puts the held item in the bag (P).
+func stow() -> void:
+	chosen.emit(Interact.STOW)
+
+
 func selected_good() -> String:
 	var sel := _items.get_selected_items()
 	return "" if sel.is_empty() else String(_items.get_item_metadata(sel[0])["good"])
@@ -55,10 +69,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"back") or event.is_action_pressed(&"bag"):
 		close()
 	elif event.is_action_pressed(&"drop"):
-		if selected_good() != "":
-			chosen.emit(Interact.DROP_GOOD + selected_good())
+		leave_one()
 	elif event.is_action_pressed(&"stow"):
-		chosen.emit(Interact.STOW)
+		stow()
 	else:
 		return
 	get_viewport().set_input_as_handled()

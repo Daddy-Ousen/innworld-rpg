@@ -23,6 +23,7 @@ var _looks: Array[String] = []
 func _ready() -> void:
 	hide()
 	_items.item_activated.connect(_on_activated)
+	TouchControls.activate_on_tap(_items)
 	_items.item_selected.connect(_show_face)
 
 
