@@ -71,6 +71,22 @@ static func duress_mult(lost: float, rules: Dictionary) -> float:
 	return minf(1.0 + float(d["per_percent"]) * (share - even) * 100.0, float(d["cap"]))
 
 
+## M17.9: how hard a working action was (hidden, like a fight's duress). The action's optional
+## `duress` list holds entries {"key", "from", "to", "max"}: the context value `key` gives x1.0 at
+## `from` or less, rising in a straight line to `max` at `to` or more. A missing key counts as 1.0.
+## Entries multiply; the result is capped at rules.duress.cap (2.0). No floor below 1.0: an easy
+## day pays the plain XP. `context` is the action's context (Actions.perform adds "cold").
+static func work_duress(def: Dictionary, context: Dictionary, rules: Dictionary) -> float:
+	var m := 1.0
+	for e: Dictionary in def.get("duress", []):
+		var key: String = e["key"]
+		if not context.has(key):
+			continue
+		var t := clampf(inverse_lerp(float(e["from"]), float(e["to"]), float(context[key])), 0.0, 1.0)
+		m *= lerpf(1.0, float(e["max"]), t)
+	return minf(m, float((rules.get("duress", {}) as Dictionary).get("cap", 2.0)))
+
+
 ## M17.8: the multiplier of an XP window's boost tier (rules.xp.boosts {"1": 1.5, ...}); 1.0 for
 ## no window (boost 0) or an unknown tier.
 static func boost_mult(boost: int, rules: Dictionary) -> float:

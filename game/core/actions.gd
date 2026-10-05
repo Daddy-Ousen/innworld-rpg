@@ -33,6 +33,16 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 	return float(v) <= float(rule["max"])
 
 
+## M17.9: the context the work duress reads: the action's context plus "cold" (1.0 when the
+## player is in the winter cold, Winter.status). The record keeps the context as given.
+static func _duress_context(gs: GameState, db: DataDb, context: Dictionary) -> Dictionary:
+	if Winter.status(gs, db) != "cold":
+		return context
+	var c := context.duplicate()
+	c["cold"] = 1.0
+	return c
+
+
 ## Does `action_id` now. The record keeps the context (M6.4: canon event
 ## hooks match on it, e.g. the enemy of a fight). Options (all optional):
 ##   intensity: float, risk: float (overrides the action's base risk),
@@ -40,7 +50,8 @@ static func _rule_applies(rule: Dictionary, context: Dictionary) -> bool:
 ##   minutes: int (overrides the action's minutes, e.g. travel between maps),
 ##   allow_collapsed: bool (log it even when a collapse is due: the records
 ##   of a fight that ends the day, Combat.end_fight),
-##   duress: float (M17.8: the fight's duress factor, default 1.0),
+##   duress: float (M17.8: the fight's duress factor; without it, M17.9 work duress
+##     from the action's `duress` list, Xp.work_duress),
 ##   window: float (M17.8: overrides the XP window factor; default XpWindow.mult).
 ## Returns the record, or {} if the action is refused (unknown, or collapse due).
 static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictionary = {}) -> Dictionary:
@@ -64,7 +75,8 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 	var novelty := Xp.novelty_mult(gs.action_log, action_id, now, xp_rules)
 	var conviction := Xp.conviction_mult(tags, gs.focus_tags, xp_rules)
 	var skill_m := Xp.skill_mult(tags, SkillSystem.xp_effects(gs.progression, db))
-	var duress := float(opts.get("duress", 1.0))  # M17.8: set by Combat.end_fight for a fight's records
+	var duress := float(opts["duress"]) if opts.has("duress") \
+			else Xp.work_duress(def, _duress_context(gs, db, opts.get("context", {})), xp_rules)
 	var window := float(opts.get("window", XpWindow.mult(gs, db)))  # hidden XP window (M17.8)
 	var xp := Xp.compute(float(def["base_xp"]), intensity, Xp.risk_mult(risk, xp_rules),
 			novelty, conviction, Xp.outcome_mult(outcome, xp_rules), skill_m, duress, window)

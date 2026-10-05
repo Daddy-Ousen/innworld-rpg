@@ -279,6 +279,20 @@ func _validate_action(id: String, a: Dictionary) -> void:
 		if not rule.has("add_tags") and not rule.has("add_risk"):
 			errors.append("%s: needs add_tags or add_risk." % where)
 		_check_tag_map(where, rule.get("add_tags", {}))
+	for e: Variant in a.get("duress", []):
+		_validate_work_duress(id, e)
+
+
+## M17.9: one entry of an action's `duress` list (Xp.work_duress).
+func _validate_work_duress(id: String, e: Variant) -> void:
+	var where := "action '%s' duress" % id
+	if not e is Dictionary or not (e as Dictionary).has_all(["key", "from", "to", "max"]):
+		errors.append("%s: each entry needs key, from, to and max." % where)
+		return
+	if float(e["to"]) <= float(e["from"]):
+		errors.append("%s '%s': to must be more than from." % [where, e["key"]])
+	if float(e["max"]) < 1.0:
+		errors.append("%s '%s': max must be 1.0 or more (work duress never lowers XP)." % [where, e["key"]])
 
 
 func _validate_class(id: String, c: Dictionary) -> void:
