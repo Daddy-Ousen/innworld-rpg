@@ -347,7 +347,9 @@ in a fight a tap shows the plan and a second tap acts, M20.0 + M20.1 in one PR.
   fight tap = plan then act, Bag buttons for X and P, a Back button on the Load list. No save change
 - [ ] The user plays it on a phone (the browser build after the next release) and on a PC with a touch screen
 - [ ] M20.2 Android build (local session: Android SDK, JDK and a keystore on the user's PC); landscape only
-- [ ] Later: a UI scale for phones (menu buttons and text are small on a phone screen; Large text helps now)
+- [x] M20.3 UI scale (ADR 0033, 2026-10-05, cloud): Options "Menu size" Auto / 100% / 150% / 200%; Auto is 200%
+  on a touch screen under 5 in; the map and the touch pad keep their size; the Journal, Character sheet, Bag and
+  text pages fit a small view. No save change
 **Done when:** the whole game (title, walking, menus, fights, the System dialog) can be played with touch only;
 the keys work as before; the GUT tests that touch it pass; the user has played it on a phone.
 

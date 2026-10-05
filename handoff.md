@@ -1,34 +1,29 @@
 # Handoff
 
-## Just done (2026-10-05, cloud session): M20.0 + M20.1 touch controls
-- Branch `claude/whats-next-xpoe4w`. Plan `docs/plans/m20.md`, ADR 0032, roadmap "M20".
-- M20.0: all keys are input actions in `game/project.godot` `[input]`. `world/main.gd` and the panels read
-  `event.is_action_pressed(&"...")` / `Input.is_action_pressed`. No raw `KEY_` checks are left in those scripts
-  (`unit_input_actions` checks it). Only `ui/debug_console.gd` still reads Up/Down keys (LineEdit history).
-- M20.1: `ui/touch_controls.gd` (TouchLayer in `world/main.tscn`), `ui/touch_settings.gd`, `Session.touch*`,
-  Options row "Touch controls", `TouchControls.activate_on_tap` on the four ItemLists, Bag buttons (X, P), Load
-  list Back button, fight tap = plan then act (`main.tap`), `main.cancel` (right click and Cancel).
-- Also: `sim_player_hooks` hook count 48 → 56 (the 8 Book 6 hooks; it was red on main since M18).
-- Tests run (all pass, 200): `unit_touch_controls`, `unit_input_actions`, `unit_play_loop`, `unit_hud_log`, `unit_bag`,
-  `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_world_view`, `unit_journal`, `unit_console`,
-  `unit_cover_ui`, `unit_audio_settings`, `unit_ui_theme`, `unit_system_messages`, `unit_no_xp_shown`, `unit_standing`,
-  `sim_player_hooks`. Full suite not run.
+## Just done (2026-10-05, cloud session): M20.3 UI scale
+- PR #105 (M20.0 + M20.1) is merged (cd27adf). This branch `claude/whats-next-xpoe4w` now holds M20.3 and the
+  CLAUDE.md rule "No screen, but renders work". The branch got a merge commit of two copies of that rule commit
+  (a force push was refused); the diff to main is clean.
+- `ui/ui_scale.gd` (`UiScale`), `Session.ui_scale*` / `apply_ui_scale`, Options row "Menu size" (`%UiScale`),
+  `main._apply_ui_scale` (camera zoom 2 / factor, `touch.set_factor`), `TouchControls` box scaled by 1 / factor
+  (`pad_width()`), `UiScale.keep_fit` in the Journal, Character sheet, Bag and TextPage. ADR 0033.
+- Tests run (all pass, 202): see `progress.md`. Full suite not run.
+- Earlier today: M20.0 + M20.1 touch controls (ADR 0032).
 
 ## Next
-1. The user merges the M20 PR, then plays with touch: Options → Touch controls → On on a PC (mouse clicks act as
+1. The user merges the M20.3 PR, then plays with touch: Options → Touch controls → On on a PC (mouse clicks act as
    taps on the buttons; fight taps still act at once with a mouse), and on a phone after the next release.
 2. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
    commit, `gh release create v<version> --prerelease --verify-tag` with the three zips from `export/` (the web zip also
    goes to Pages; upload it to itch.io by hand). The README "Touch (next release)" heading then loses "(next release)".
 3. M20.2 Android build (local: Android SDK, JDK 17, debug/release keystore, Godot Android export settings). Landscape
    only; add `window/stretch/mode.mobile` / `aspect.mobile` like the `.web` ones.
-4. Later: a UI scale for phones (menu buttons about 24 px tall, text 16 px: about 3 mm on a phone).
 5. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
 6. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
    the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
-- Merge the M20 PR (branch `claude/whats-next-xpoe4w`).
+- Merge the M20.3 PR (branch `claude/whats-next-xpoe4w`).
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps; play Book 6 (`godot --path game`).
 - Play with touch controls (PC with touch screen, phone).
 
@@ -44,6 +39,12 @@
   before loading scenes (autoloads), then
   `xvfb-run -a -s "-screen 0 1280x720x24" godot --path game --audio-driver Dummy --rendering-driver opengl3 --resolution 1152x648 -s res://_shot.gd -- <out dir>`
   and save `root.get_texture().get_image()` after `RenderingServer.frame_post_draw`. Delete the script after.
+- Phone renders: `-screen 0 2400x1080x24 --resolution 2400x1080`, and in the script set the web stretch by hand
+  (`root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS`, aspect EXPAND, size 1152 × 648): `.web`
+  overrides do not apply under Xvfb. Set the scale with `Session.set_ui_scale_mode`, not `content_scale_factor`
+  (Session re-applies its own factor on a resize). Point `ui_scale_path` / `touch_settings_path` at the out dir.
+- UI scale (M20.3): a faked screen touch in a test makes Auto pick 200 % (the headless window is tiny). Reset with
+  `Session.apply_ui_scale()` after `touch_seen = false`.
 
 ## Web build notes (ADR 0031, merged)
 - Branch `feat/web-build` (from `docs/readme-rewrite`, so it holds the README PR #99 commits too).

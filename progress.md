@@ -91,7 +91,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_world_view`, `unit_journal`, `unit_console`, `unit_cover_ui`,
     `unit_audio_settings`, `unit_ui_theme`, `unit_system_messages`, `unit_no_xp_shown`, `unit_standing`, `sim_player_hooks`.
     All pass (200). Full suite not run. PR waits for the user to merge.
-  - [ ] The user plays with touch on a phone (browser build after the next release) and on a touch-screen PC.
+  - [x] Merged ([PR #105](https://github.com/Daddy-Ousen/innworld-rpg/pull/105), merge commit cd27adf).
+  - [x] M20.3 UI scale (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0033, plan `docs/plans/m20.3.md`). User answers:
+    the map and the touch pad keep their size. Checked on Xvfb renders (phone 2400 × 1080 at 100 % / 200 %, desktop at 150 %).
+    Also: CLAUDE.md "No screen, but renders work". Tests run: `unit_ui_scale` (new, 8), `unit_touch_controls`, `unit_input_actions`,
+    `unit_audio_settings`, `unit_ui_theme`, `unit_journal`, `unit_bag`, `unit_world_view`, `unit_play_loop`, `unit_hud_log`,
+    `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_console`, `unit_cover_ui`, `unit_system_messages`, `unit_standing`,
+    `unit_no_xp_shown`. All pass (202). Full suite not run. PR waits for the user to merge.
+  - [ ] The user plays with touch and Menu size on a phone (browser build after the next release) and on a touch-screen PC.
   - [ ] M20.2 Android build (local session).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 

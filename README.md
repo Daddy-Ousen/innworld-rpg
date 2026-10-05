@@ -96,6 +96,8 @@ On a touch screen the game shows on-screen controls. **Options → Touch control
 - On the right: **Use**, **Bag**, **More** (eat, sleep, character, journal, log, help, block, throw, drop) and **Menu**.
 - **Back** closes a panel. One tap picks an item in a list. Drag a page to scroll it.
 - In a fight: tap a tile to see the path and hit chance, then tap it again to act. **Cancel** stops a walk or a Skill.
+- **Options → Menu size** makes menus and text bigger (Auto, 100%, 150%, 200%). Auto picks 200% on a phone.
+  The map and the touch pad keep their size.
 
 ### Bugs and ideas
 
