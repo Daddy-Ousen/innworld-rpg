@@ -81,7 +81,7 @@
   `mkdir -p canon/raw; ln -s /home/user/innworld-canon-raw/book6 canon/raw/book6` (same for book7). `canon/raw/` is gitignored.
 - Tag pushes are refused (HTTP 403). Write "tag pending: <tag> on <commit>" in progress.md; the user pushes tags locally.
 - A cloud session can push only its own working branch: one sub-milestone per session, one PR.
-- No display in the cloud: "the user plays" checks wait (renders under Xvfb do work, see "Touch notes"). Plans live in `docs/plans/`, not `~/.claude/plans/`.
+- No screen in the cloud: "the user plays" checks wait. Renders under Xvfb work (CLAUDE.md, "Touch notes"). Plans live in `docs/plans/`, not `~/.claude/plans/`.
 - Books 1–5 text is not in the cloud.
 - A fresh `--import` takes about 100 s. `setup.sh` reverts `.import` files the import rewrites.
 - On Windows `python3` is the Store alias (fails); use `python` locally. Linux uses `python3`.
