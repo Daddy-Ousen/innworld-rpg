@@ -1,31 +1,24 @@
 # Handoff
 
-## Just done (2026-10-05, cloud session): M20.3 UI scale
-- PR #105 (M20.0 + M20.1) is merged (cd27adf). This branch `claude/whats-next-xpoe4w` now holds M20.3 and the
-  CLAUDE.md rule "No screen, but renders work". The branch got a merge commit of two copies of that rule commit
-  (a force push was refused); the diff to main is clean.
-- `ui/ui_scale.gd` (`UiScale`), `Session.ui_scale*` / `apply_ui_scale`, Options row "Menu size" (`%UiScale`),
-  `main._apply_ui_scale` (camera zoom 2 / factor, `touch.set_factor`), `TouchControls` box scaled by 1 / factor
-  (`pad_width()`), `UiScale.keep_fit` in the Journal, Character sheet, Bag and TextPage. ADR 0033.
-- Tests run (all pass, 202): see `progress.md`. Full suite not run.
-- Earlier today: M20.0 + M20.1 touch controls (ADR 0032).
+## Just done (2026-10-05, cloud session): status check
+- PR #106 (M20.3 UI scale) is merged (6a79b46). Branch `claude/whats-next-xpoe4w` was fast-forwarded to `origin/main`.
+- No code changed. `progress.md` records the merge.
+- The book text is NOT linked in this session (`canon/raw/` is missing). For M19.P: attach
+  `Daddy-Ousen/innworld-canon-raw` (add_repo), then `bash tools/cloud/setup.sh --force`.
 
-## Next
-1. The user merges the M20.3 PR, then plays with touch: Options → Touch controls → On on a PC (mouse clicks act as
-   taps on the buttons; fight taps still act at once with a mouse), and on a phone after the next release.
-2. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
-   commit, `gh release create v<version> --prerelease --verify-tag` with the three zips from `export/` (the web zip also
-   goes to Pages; upload it to itch.io by hand). The README "Touch (next release)" heading then loses "(next release)".
-3. M20.2 Android build (local: Android SDK, JDK 17, debug/release keystore, Godot Android export settings). Landscape
-   only; add `window/stretch/mode.mobile` / `aspect.mobile` like the `.web` ones.
-5. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
-6. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
-   the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
+## Next (the user picks one)
+1. M19.P Book 7 plan (cloud). ADR 0030, steps in `docs/ROADMAP.md`. Read `canon/raw/book7` with subagents (summaries only).
+2. Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch + Menu size in
+   the browser build so the phone play check can happen. README "Touch (next release)" loses "(next release)".
+3. M20.2 Android build (local: Android SDK, JDK 17, keystore). Landscape only; `window/stretch/mode.mobile` / `aspect.mobile`.
+4. Optional M17.9: XP sources for non-fighters (balance note in `progress.md`). Not in `docs/ROADMAP.md` yet.
+- Open data gaps: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body; the 4.26 M golem
+  count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
-- Merge the M20.3 PR (branch `claude/whats-next-xpoe4w`).
+- Pick the next task (above).
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps; play Book 6 (`godot --path game`).
-- Play with touch controls (PC with touch screen, phone).
+- Play with touch controls and Menu size (PC with touch screen; phone after the next release).
 
 ## Touch notes (M20)
 - A touch button sends `InputEventAction` press/release with `Input.parse_input_event` (buffered: tests call

@@ -98,6 +98,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `unit_audio_settings`, `unit_ui_theme`, `unit_journal`, `unit_bag`, `unit_world_view`, `unit_play_loop`, `unit_hud_log`,
     `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_console`, `unit_cover_ui`, `unit_system_messages`, `unit_standing`,
     `unit_no_xp_shown`. All pass (202). Full suite not run. PR waits for the user to merge.
+  - [x] Merged ([PR #106](https://github.com/Daddy-Ousen/innworld-rpg/pull/106), merge commit 6a79b46).
   - [ ] The user plays with touch and Menu size on a phone (browser build after the next release) and on a touch-screen PC.
   - [ ] M20.2 Android build (local session).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
