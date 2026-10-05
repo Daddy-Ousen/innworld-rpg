@@ -76,11 +76,23 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     with Erin. Chosen records and the 4.31 scroll flag fixed. Tests run: `sim_book6_zel_dies` (new, 7), `sim_canon_book6`, `sim_canon_book5`, the
     touched Book 6 sims, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102),
     validator. All pass. Full suite not run. PR waits for the user to merge. After the merge M18 is done except the user's play check.
+  - [x] M18.7 merged ([PR #96](https://github.com/Daddy-Ousen/innworld-rpg/pull/96), merge commit 6a9e8b8).
+  - [ ] The user plays Book 6 (`godot --path game`).
 - [x] itch.io page kit (2026-10-02, branch `docs/itch-page`): `docs/ITCH.md` (tagline, description, settings, tags,
   Comments on). Cover 630 × 500 (two choices) and 6 screenshots in `export/itch/` (local, gitignored), made from the
   real game. Checked by eye.
   - [x] The user made the itch.io page: https://rhasasn229.itch.io/innworld-rpg (public, browser play, comments on).
   - [x] README links the itch.io page (top links and "In your browser").
+- [ ] M20 — Touch controls (ADR 0032, plan `docs/plans/m20.md`). User answers 2026-10-05: InputMap actions, 4-way D-pad,
+  fight tap = plan then act, M20.0 + M20.1 in one PR.
+  - [x] M20.0 input actions + M20.1 touch layer (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud). Checked on Xvfb renders
+    (walk, More, panel + Back, fight + Cancel, bag). Also fixed `sim_player_hooks` (stale hook count 48 → 56, red on main since M18).
+    Tests run: `unit_touch_controls` (new, 15), `unit_input_actions` (new, 6), `unit_play_loop`, `unit_hud_log`, `unit_bag`,
+    `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_world_view`, `unit_journal`, `unit_console`, `unit_cover_ui`,
+    `unit_audio_settings`, `unit_ui_theme`, `unit_system_messages`, `unit_no_xp_shown`, `unit_standing`, `sim_player_hooks`.
+    All pass (200). Full suite not run. PR waits for the user to merge.
+  - [ ] The user plays with touch on a phone (browser build after the next release) and on a touch-screen PC.
+  - [ ] M20.2 Android build (local session).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)
@@ -108,7 +120,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (success).
   - [x] Tag rule `v*` added to the `github-pages` environment (user, 2026-10-02). The re-run of the release-event run
     succeeded, so a published release now deploys by itself.
-  - [ ] itch.io: the user makes the page and uploads the web zip (steps in `handoff.md`).
+  - [x] itch.io: the page is live with the web zip (user, 2026-10-02).
   - [ ] Later: own subdomain (CNAME + Settings → Pages → Custom domain).
 
 ## Cloud setup

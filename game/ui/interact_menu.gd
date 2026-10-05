@@ -23,6 +23,7 @@ var _looks: Array[String] = []
 func _ready() -> void:
 	hide()
 	_items.item_activated.connect(_on_activated)
+	TouchControls.activate_on_tap(_items)
 	_items.item_selected.connect(_show_face)
 
 
@@ -145,7 +146,7 @@ func _on_activated(index: int) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+	if visible and event.is_action_pressed(&"back"):
 		close()
 		get_viewport().set_input_as_handled()
 

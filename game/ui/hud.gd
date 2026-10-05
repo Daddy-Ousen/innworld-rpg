@@ -15,6 +15,8 @@ const WARN_BEFORE := 360
 const LOW_HP := 0.25
 const WARN_COLOR := Color(1, 0.55, 0.4, 1)
 
+## The log panel's left edge (hud.tscn "Bottom" offset_left).
+const LOG_LEFT := 8.0
 var _log: Array[String] = []
 var _history: Array[String] = []
 ## Seconds since the last new line.
@@ -92,6 +94,12 @@ static func warning(gs: GameState, db: DataDb) -> String:
 	if left <= WARN_BEFORE:
 		return "You are very tired. You will collapse in %dh %02dm." % [left / 60, left % 60]
 	return ""
+
+
+## Moves the log `px` right of its place (the touch pad's room, M20.1).
+func make_room_left(px: float) -> void:
+	if _bottom.offset_left != LOG_LEFT + px:  # called each frame: no relayout when unchanged
+		_bottom.offset_left = LOG_LEFT + px
 
 
 func add_lines(lines: Array) -> void:

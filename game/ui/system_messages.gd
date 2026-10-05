@@ -55,6 +55,9 @@ const KEYS: Array[String] = [
 	"H: this help",
 	"Esc: menu (save, load, quit)",
 	"`: debug console",
+	"Touch screen: the pad walks (Wait in the middle); Use, Bag, More and Menu are on the right; Back closes a panel",
+	"Touch, in a fight: tap a tile to see the plan, tap it again to act; Cancel stops a walk or a Skill",
+	"Options: Touch controls Auto (on a touch screen), On or Off",
 ]
 
 ## How to play: on the welcome page and in the journal (M6.1).

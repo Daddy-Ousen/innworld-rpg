@@ -6,6 +6,8 @@
 extends Node
 
 signal state_changed
+## The touch controls' mode changed, or the first touch was seen (M20.1).
+signal touch_changed
 
 const NEW_GAME_SEED := 1
 
@@ -20,12 +22,18 @@ var start_id := ""
 ## The player's text size (M15.0); tests point the path at a test file.
 var text: TextSettings
 var text_settings_path := TextSettings.PATH
+## When the touch controls show (M20.1); tests point the path at a test file.
+var touch: TouchSettings
+var touch_settings_path := TouchSettings.PATH
+## True after the first screen touch in this run (Auto then shows the controls).
+var touch_seen := false
 
 
 func _ready() -> void:
 	db = DataDb.load_dir()
 	gs = GameState.new_game(NEW_GAME_SEED, db)
 	load_text_settings()
+	load_touch_settings()
 
 
 ## Reads the text size from `text_settings_path` and applies it.
@@ -39,6 +47,30 @@ func set_large_text(on: bool) -> void:
 	text.large = on
 	text.apply()
 	text.save(text_settings_path)
+
+
+## Reads the touch controls' mode from `touch_settings_path`.
+func load_touch_settings() -> void:
+	touch = TouchSettings.load_file(touch_settings_path)
+	touch_changed.emit()
+
+
+## Auto, On or Off (TouchSettings); saved at once.
+func set_touch_mode(mode: String) -> void:
+	touch.set_mode(mode)
+	touch.save(touch_settings_path)
+	touch_changed.emit()
+
+
+## True when the touch controls show: On, or Auto on a touch screen.
+func touch_shown() -> bool:
+	return touch.shows(touch_seen or DisplayServer.is_touchscreen_available())
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch and not touch_seen:
+		touch_seen = true
+		touch_changed.emit()
 
 
 func set_state(new_gs: GameState) -> void:

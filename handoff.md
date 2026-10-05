@@ -1,35 +1,51 @@
 # Handoff
 
-## Just done (2026-10-02, local session): itch.io page kit
-- Branch `docs/itch-page` (from main 79cc31a): `docs/ITCH.md` holds the tagline, the description, the page settings,
-  the tags and the community choice (Comments).
-- Local only (`export/` is gitignored): `export/itch/cover_inn.png`, `cover_winter.png` (630 × 500),
-  `screenshot_1_inn.png` … `screenshot_6_liscor_gate.png` (1152 × 648), `description.html` (copy-paste version),
-  `capture_shots.gd` (the screenshot script).
-- Screenshot script: copy `export/itch/capture_shots.gd` to `game/_capture.gd`, run windowed (not headless):
-  `godot --path game -s res://_capture.gd -- <out dir> [inn fight offer market winter cover_summer cover_snow ...]`,
-  add `--resolution 1600x1100` for the big cover shots, then DELETE `game/_capture.gd` (it would ship in the build).
-  It sets state directly (place, flags, a fake class offer): fine for pictures, never for game code.
-- Gotcha: the inn is full of guests only around calendar day 37 at 18:00 (Ceria, Calruz, Pawn, Toren ...).
-- The itch.io page is live: https://rhasasn229.itch.io/innworld-rpg (checked 2026-10-02: public, Run game, comments on).
-  README links it. Next release: upload the new web zip on itch.io by hand too.
-- Wrote Discord and r/WanderingInn intro posts for the user (in chat only, not in the repo).
+## Just done (2026-10-05, cloud session): M20.0 + M20.1 touch controls
+- Branch `claude/whats-next-xpoe4w`. Plan `docs/plans/m20.md`, ADR 0032, roadmap "M20".
+- M20.0: all keys are input actions in `game/project.godot` `[input]`. `world/main.gd` and the panels read
+  `event.is_action_pressed(&"...")` / `Input.is_action_pressed`. No raw `KEY_` checks are left in those scripts
+  (`unit_input_actions` checks it). Only `ui/debug_console.gd` still reads Up/Down keys (LineEdit history).
+- M20.1: `ui/touch_controls.gd` (TouchLayer in `world/main.tscn`), `ui/touch_settings.gd`, `Session.touch*`,
+  Options row "Touch controls", `TouchControls.activate_on_tap` on the four ItemLists, Bag buttons (X, P), Load
+  list Back button, fight tap = plan then act (`main.tap`), `main.cancel` (right click and Cancel).
+- Also: `sim_player_hooks` hook count 48 → 56 (the 8 Book 6 hooks; it was red on main since M18).
+- Tests run (all pass, 200): `unit_touch_controls`, `unit_input_actions`, `unit_play_loop`, `unit_hud_log`, `unit_bag`,
+  `unit_combat_screen`, `unit_skill_bar`, `unit_spell_ui`, `unit_world_view`, `unit_journal`, `unit_console`,
+  `unit_cover_ui`, `unit_audio_settings`, `unit_ui_theme`, `unit_system_messages`, `unit_no_xp_shown`, `unit_standing`,
+  `sim_player_hooks`. Full suite not run.
 
-## Earlier (2026-10-01, local session)
-- README rewritten ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99), branch `docs/readme-rewrite`):
-  players first, then developers. No screenshots yet (none in the repo).
-- Web build (ADR 0031) on branch `feat/web-build`: built, smoke-tested and played in Chrome. PR open. Detail below.
-- 2026-10-02: PRs #99, #100, #101 merged; Pages on ("GitHub Actions"). v0.1.1-alpha tagged on 429583e and published
-  with three zips. The browser game is live: https://daddy-ousen.github.io/innworld-rpg/
-  - The release-event Pages run FAILED: environment `github-pages` only allows the `main` branch, not tags.
-    Deployed by hand: `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (works every time).
-  - Fixed (user chose it): tag rule `v*` on the `github-pages` environment. The release-event run now succeeds.
-    The manual run still works if a deploy ever needs a redo.
-  - itch.io upload: the user does it with `export/InnworldRPG-v0.1.1-alpha-web.zip`.
-- Earlier on 2026-10-01: v0.1.0-alpha published (ADR 0029, PR #97, tag `v0.1.0-alpha`, Windows + Linux zips).
-  The M19 plan ADR is 0030.
+## Next
+1. The user merges the M20 PR, then plays with touch: Options → Touch controls → On on a PC (mouse clicks act as
+   taps on the buttons; fight taps still act at once with a mouse), and on a phone after the next release.
+2. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
+   commit, `gh release create v<version> --prerelease --verify-tag` with the three zips from `export/` (the web zip also
+   goes to Pages; upload it to itch.io by hand). The README "Touch (next release)" heading then loses "(next release)".
+3. M20.2 Android build (local: Android SDK, JDK 17, debug/release keystore, Godot Android export settings). Landscape
+   only; add `window/stretch/mode.mobile` / `aspect.mobile` like the `.web` ones.
+4. Later: a UI scale for phones (menu buttons about 24 px tall, text 16 px: about 3 mm on a phone).
+5. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
+6. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
+   the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
-## Web build (ADR 0031) — built and tested, PR open
+## Waiting on the user
+- Merge the M20 PR (branch `claude/whats-next-xpoe4w`).
+- Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps; play Book 6 (`godot --path game`).
+- Play with touch controls (PC with touch screen, phone).
+
+## Touch notes (M20)
+- A touch button sends `InputEventAction` press/release with `Input.parse_input_event` (buffered: tests call
+  `Input.flush_buffered_events()`). Use parse_input_event for both press and release, never `Input.action_release`
+  for one side only: a buffered press after a direct release leaves the action stuck down.
+- `TouchControls.sync` runs every frame from `main._process`. When the pad hides it calls `release_all()`.
+- A tap is an emulated mouse click with `device == InputEvent.DEVICE_ID_EMULATION`; the fight cell comes from
+  `event.position` through `view.get_canvas_transform()`, not from the mouse pointer.
+- Headless test windows are tiny (64 px): layout asserts about screen fit fail there. Check layout on a render.
+- Renders in the cloud work (Mesa + Xvfb): write a throwaway `extends SceneTree` script, `await process_frame` once
+  before loading scenes (autoloads), then
+  `xvfb-run -a -s "-screen 0 1280x720x24" godot --path game --audio-driver Dummy --rendering-driver opengl3 --resolution 1152x648 -s res://_shot.gd -- <out dir>`
+  and save `root.get_texture().get_image()` after `RenderingServer.frame_post_draw`. Delete the script after.
+
+## Web build notes (ADR 0031, merged)
 - Branch `feat/web-build` (from `docs/readme-rewrite`, so it holds the README PR #99 commits too).
 - All export templates 4.7.2 are now installed in `%APPDATA%\Godot\export_templates\4.7.2.stable` (all platforms).
 - `tools/release.ps1` makes `export/InnworldRPG-v<version>-web.zip` (index.html at the zip root, 70 MB).
@@ -45,16 +61,6 @@
   run `--import` once (twice if it crashes) before `tools/release.ps1`. The in-app browser `type` action does not
   reach Godot's input; Playwright `keyboard.type` works (open the console with `Backquote`, `sleep *` sleeps anywhere).
 
-## Next
-1. Next release: bump `config/version` in `game/project.godot`, run `tools/release.ps1`, merge, tag on the merge
-   commit, `gh release create v<version> --prerelease --verify-tag` with the three zips from `export/` (the web zip also goes to Pages; upload it to itch.io by hand).
-2. M19 — Book 7: M19.P plan first (ADR 0030). Ask the user to approve the plan before M19.0.
-3. Later: touch controls, then an Android build (roadmap "Releases").
-4. Open: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body is for a later batch;
-   the 4.26 M golem count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
-
-## Waiting on the user
-- Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps (`godot --path game`).
 
 ## Gotchas (release)
 - Every export and `--import` rewrites many `.import` files (line ends). Run `git checkout -- game/assets` after.
@@ -75,7 +81,7 @@
   `mkdir -p canon/raw; ln -s /home/user/innworld-canon-raw/book6 canon/raw/book6` (same for book7). `canon/raw/` is gitignored.
 - Tag pushes are refused (HTTP 403). Write "tag pending: <tag> on <commit>" in progress.md; the user pushes tags locally.
 - A cloud session can push only its own working branch: one sub-milestone per session, one PR.
-- No display in the cloud: "the user plays" checks wait. Plans live in `docs/plans/`, not `~/.claude/plans/`.
+- No display in the cloud: "the user plays" checks wait (renders under Xvfb do work, see "Touch notes"). Plans live in `docs/plans/`, not `~/.claude/plans/`.
 - Books 1–5 text is not in the cloud.
 - A fresh `--import` takes about 100 s. `setup.sh` reverts `.import` files the import rewrites.
 - On Windows `python3` is the Store alias (fails); use `python` locally. Linux uses `python3`.

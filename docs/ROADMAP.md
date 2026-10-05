@@ -334,7 +334,22 @@ each batch has a hook or stage; the GUT tests that touch it, the Python tool tes
   screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
 - [x] v0.1.1-alpha with the web build (ADR 0031, published 2026-10-02, https://daddy-ousen.github.io/innworld-rpg/): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow,
   itch.io upload by the user
-- [ ] Touch controls (on-screen pad, menu buttons), then an Android build
+- [ ] Touch controls (on-screen pad, menu buttons), then an Android build: M20 below
+
+## M20 — Touch controls (ADR 0032)
+Planned 2026-10-05 (cloud, `docs/plans/m20.md`). User answers: InputMap actions (not fake key events), a 4-way D-pad,
+in a fight a tap shows the plan and a second tap acts, M20.0 + M20.1 in one PR.
+- [x] M20.0 Input actions (2026-10-05, cloud): every command is a named action in `project.godot` `[input]` with
+  today's keys; `world/main.gd` and the panels read actions, not key codes. No behaviour change (Delete now also
+  drops the held item outside the bag). No save change
+- [x] M20.1 Touch layer (2026-10-05, cloud): `ui/touch_controls.gd` (pad, Use / Bag / More / Menu, More grid, Back,
+  Cancel), option Touch controls Auto / On / Off (`user://settings.cfg`, not `GameState`), one tap picks a list item,
+  fight tap = plan then act, Bag buttons for X and P, a Back button on the Load list. No save change
+- [ ] The user plays it on a phone (the browser build after the next release) and on a PC with a touch screen
+- [ ] M20.2 Android build (local session: Android SDK, JDK and a keystore on the user's PC); landscape only
+- [ ] Later: a UI scale for phones (menu buttons and text are small on a phone screen; Large text helps now)
+**Done when:** the whole game (title, walking, menus, fights, the System dialog) can be played with touch only;
+the keys work as before; the GUT tests that touch it pass; the user has played it on a phone.
 
 ## Later
 - optional LLM flavour layer

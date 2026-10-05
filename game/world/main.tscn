@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://world/world_view.tscn" id="2_view"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://ui/bag.tscn" id="10_bag"]
 [ext_resource type="PackedScene" path="res://ui/text_page.tscn" id="11_page"]
 [ext_resource type="PackedScene" path="res://ui/combat_bar.tscn" id="12_bar"]
+[ext_resource type="Script" path="res://ui/touch_controls.gd" id="13_touch"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -37,13 +38,26 @@ layer = 2
 
 [node name="MessageLog" parent="MenuLayer" instance=ExtResource("11_page")]
 title = "Messages, newest first"
-toggle_key = 76
+toggle_action = &"log"
 
 [node name="Help" parent="MenuLayer" instance=ExtResource("11_page")]
 title = "Help"
-toggle_key = 72
+toggle_action = &"help"
 
 [node name="PauseMenu" parent="MenuLayer" instance=ExtResource("9_pause")]
+
+[node name="TouchLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TouchControls" type="Control" parent="TouchLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_touch")
 
 [node name="SystemLayer" type="CanvasLayer" parent="."]
 layer = 4

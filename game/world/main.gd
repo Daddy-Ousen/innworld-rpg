@@ -30,10 +30,16 @@ extends Node
 const STEP_REPEAT := 0.14
 const TITLE_SCENE := "res://ui/title_menu.tscn"
 const WAIT := "wait"
-const MOVE_KEYS := {
-	"n": [KEY_W, KEY_UP], "s": [KEY_S, KEY_DOWN], "e": [KEY_D, KEY_RIGHT], "w": [KEY_A, KEY_LEFT],
-	WAIT: [KEY_SPACE],
+const NO_CELL := Vector2i(-1, -1)
+## Held input actions (project.godot [input], M20.0): direction -> action.
+const MOVE_ACTIONS := {
+	"n": &"move_n", "s": &"move_s", "e": &"move_e", "w": &"move_w", WAIT: &"wait",
 }
+## Skill bar slots: action -> slot (keys 1-9).
+const SKILL_ACTIONS: Array[StringName] = [
+	&"skill_1", &"skill_2", &"skill_3", &"skill_4", &"skill_5", &"skill_6", &"skill_7", &"skill_8",
+	&"skill_9",
+]
 
 var _cooldown := 0.0
 ## The NPC the player last bumped into (say it once, not every repeat).
@@ -52,7 +58,9 @@ var _walk: Array[String] = []
 var _walk_attack := ""
 var _walk_target := ""
 ## The cell under the mouse (M17.3).
-var _hover := Vector2i(-1, -1)
+var _hover := NO_CELL
+## The cell of the last touch tap that showed a plan (M20.1).
+var _tapped := NO_CELL
 ## A replay's log lines: one list per turn-log entry, then the rest.
 var _replay_lines: Array = []
 var _replay_tail: Array = []
@@ -72,6 +80,7 @@ var _armed := ""
 @onready var help: TextPage = $MenuLayer/Help
 @onready var pause: PauseMenu = $MenuLayer/PauseMenu
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
+@onready var touch: TouchControls = $TouchLayer/TouchControls
 @onready var console_layer: CanvasLayer = $ConsoleLayer
 @onready var console_input: LineEdit = $ConsoleLayer/DebugConsole.get_node("%Input")
 
@@ -103,6 +112,8 @@ func _ready() -> void:
 	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
+	touch.cancel_pressed.connect(cancel)
+	Session.touch_changed.connect(_sync_touch)
 	console_layer.visible = false
 	hud.add_lines([_day_line()])
 	if not Session.db.is_valid():
@@ -117,6 +128,7 @@ func _ready() -> void:
 func _redraw() -> void:
 	if view.is_replaying():
 		return  # the redraw comes when the replay ends
+	_tapped = NO_CELL  # a new state: the next tap shows its plan first
 	view.refresh(Session.gs, Session.db, _replayed)
 	_replayed = false
 	hud.refresh(Session.gs, Session.db)
@@ -134,68 +146,78 @@ func is_busy() -> bool:
 			or view.is_replaying()
 
 
+## Shows the touch controls that fit now (M20.1) and makes room for the pad
+## in the HUD.
+func _sync_touch() -> void:
+	var shown := Session.touch_shown()
+	var panel_open := menu.visible or sheet.visible or journal.visible or bag.visible \
+			or pause.visible or message_log.visible or help.visible
+	touch.sync(shown, panel_open, dialog.visible or console_layer.visible,
+			_armed != "" or _walking())
+	hud.make_room_left(TouchControls.PAD_WIDTH if shown else 0.0)
+
+
 func _input(event: InputEvent) -> void:
 	# Backtick before the console's LineEdit sees it. Not while the System
 	# dialog waits for an answer.
-	if event is InputEventKey and event.pressed and not event.echo \
-			and event.physical_keycode == KEY_QUOTELEFT and not dialog.visible:
+	if event.is_action_pressed(&"console") and not dialog.visible:
 		toggle_console()
 		get_viewport().set_input_as_handled()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if view.is_replaying() and (event is InputEventKey or event is InputEventMouseButton) \
-			and event.is_pressed() and not event.is_echo():
+	if view.is_replaying() and (event is InputEventKey or event is InputEventAction \
+			or event is InputEventMouseButton) and event.is_pressed() and not event.is_echo():
 		skip_replay()
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventMouse:
 		_mouse(event)
 		return
-	if is_busy() or not event is InputEventKey or not event.pressed or event.echo:
+	if is_busy() or not event.is_pressed() or event.is_echo():
 		return
-	var code: int = event.physical_keycode
-	if code >= KEY_1 and code <= KEY_9:
-		var ids := bar.skills().ids()
-		if code - KEY_1 < ids.size():
-			pick_skill(ids[code - KEY_1])
-		get_viewport().set_input_as_handled()
-		return
-	if code == KEY_ESCAPE and _armed != "":
+	for i in SKILL_ACTIONS.size():
+		if event.is_action_pressed(SKILL_ACTIONS[i]):
+			var ids := bar.skills().ids()
+			if i < ids.size():
+				pick_skill(ids[i])
+			get_viewport().set_input_as_handled()
+			return
+	if event.is_action_pressed(&"back") and _armed != "":
 		disarm()
 		get_viewport().set_input_as_handled()
 		return
-	match event.physical_keycode:
-		KEY_E:
-			open_use_menu()
-		KEY_Z:
-			sleep()
-		KEY_F:
-			open_bag()
-		KEY_C:
-			sheet.open(Session.gs, Session.db)
-		KEY_J:
-			journal.open(Session.gs, Session.db)
-		KEY_I:
-			bag.open(Session.gs, Session.db)
-		KEY_L:
-			message_log.open(_history_lines())
-		KEY_H:
-			help.open(SystemMessages.KEYS)
-		KEY_ESCAPE:
-			pause.open()
-		KEY_B:
-			block()
-		KEY_T:
-			throw()
-		KEY_X:
-			drop()
-		_:
-			return
+	if event.is_action_pressed(&"use"):
+		open_use_menu()
+	elif event.is_action_pressed(&"sleep"):
+		sleep()
+	elif event.is_action_pressed(&"eat"):
+		open_bag()
+	elif event.is_action_pressed(&"sheet"):
+		sheet.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"journal"):
+		journal.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"bag"):
+		bag.open(Session.gs, Session.db)
+	elif event.is_action_pressed(&"log"):
+		message_log.open(_history_lines())
+	elif event.is_action_pressed(&"help"):
+		help.open(SystemMessages.KEYS)
+	elif event.is_action_pressed(&"back"):
+		pause.open()
+	elif event.is_action_pressed(&"block"):
+		block()
+	elif event.is_action_pressed(&"throw"):
+		throw()
+	elif event.is_action_pressed(&"drop"):
+		drop()
+	else:
+		return
 	get_viewport().set_input_as_handled()
 
 
 func _process(delta: float) -> void:
+	_sync_touch()
 	_cooldown = maxf(_cooldown - delta, 0.0)
 	if is_busy():
 		return
@@ -215,10 +237,9 @@ func _process(delta: float) -> void:
 
 
 func _held_direction() -> String:
-	for dir: String in MOVE_KEYS:
-		for key: Key in MOVE_KEYS[dir]:
-			if Input.is_physical_key_pressed(key):
-				return dir
+	for dir: String in MOVE_ACTIONS:
+		if Input.is_action_pressed(MOVE_ACTIONS[dir]):
+			return dir
 	return ""
 
 
@@ -613,18 +634,39 @@ func _close_replay() -> void:
 func _mouse(event: InputEventMouse) -> void:
 	if is_busy() or not Encounter.is_player_turn(Session.gs):
 		return
-	var cell := view.cell_at(view.get_global_mouse_position())
+	# The event's own position: a touch moves no mouse pointer.
+	var cell := view.cell_at(view.get_canvas_transform().affine_inverse() * event.position)
 	if event is InputEventMouseMotion:
 		hover(cell)
 	elif event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			click(cell)
+			if event.device == InputEvent.DEVICE_ID_EMULATION:
+				tap(cell)
+			else:
+				click(cell)
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			_cancel_walk()
-			if _armed != "":
-				disarm()
+			cancel()
 			get_viewport().set_input_as_handled()
+
+
+## A tap on `cell` in a fight (M20.1): a touch has no hover, so the first tap
+## shows the plan (path, hit chance) and a second tap on the same cell acts.
+func tap(cell: Vector2i) -> void:
+	if _tapped == cell:
+		_tapped = NO_CELL
+		click(cell)
+	else:
+		_tapped = cell
+		hover(cell)
+
+
+## Stops a click's walk and disarms a Skill (a right click, or Cancel on touch).
+func cancel() -> void:
+	_tapped = NO_CELL
+	_cancel_walk()
+	if _armed != "":
+		disarm()
 
 
 ## The mouse is over `cell`: show what a click there would do.
