@@ -68,7 +68,8 @@ For the best play, use the download below.
      Windows SmartScreen can warn you, because the file has no signature. Click **More info**, then **Run anyway**.
    - **Linux:** run `chmod +x InnworldRPG.x86_64`, then `./InnworldRPG.x86_64`.
 
-You need a keyboard. There are no touch controls yet. You can start outside the east gate of Liscor or in Celum.
+v0.1.1 needs a keyboard. Touch controls (an on-screen pad and buttons) come with the next release; see "Touch" below.
+You can start outside the east gate of Liscor or in Celum.
 
 ### Keys
 
@@ -85,6 +86,16 @@ You need a keyboard. There are no touch controls yet. You can start outside the 
 | C / J / L | Character sheet / journal / message history |
 | H | Help (all keys) |
 | Esc | Menu (save, load, options, quit) |
+
+
+### Touch (next release)
+
+On a touch screen the game shows on-screen controls. **Options → Touch controls** sets Auto (on a touch screen), On or Off.
+
+- The pad (bottom left) walks. Hold an arrow to keep walking. **Wait** is in the middle.
+- On the right: **Use**, **Bag**, **More** (eat, sleep, character, journal, log, help, block, throw, drop) and **Menu**.
+- **Back** closes a panel. One tap picks an item in a list. Drag a page to scroll it.
+- In a fight: tap a tile to see the path and hit chance, then tap it again to act. **Cancel** stops a walk or a Skill.
 
 ### Bugs and ideas
 
