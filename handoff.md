@@ -1,24 +1,35 @@
 # Handoff
 
-## Just done (2026-10-05, cloud session): status check
-- PR #106 (M20.3 UI scale) is merged (6a79b46). Branch `claude/whats-next-xpoe4w` was fast-forwarded to `origin/main`.
-- No code changed. `progress.md` records the merge.
-- The book text is NOT linked in this session (`canon/raw/` is missing). For M19.P: attach
-  `Daddy-Ousen/innworld-canon-raw` (add_repo), then `bash tools/cloud/setup.sh --force`.
+## Just done (2026-10-05, cloud session): M17.9 work duress
+- Branch `claude/whats-next-xpoe4w` (from main after PR #106). ADR 0027 "M17.9", plan `docs/plans/m17.9.md`.
+- `Xp.work_duress`, `Actions._duress_context` (adds `cold` from `Winter.status`), `DataDb._validate_work_duress`,
+  `duress` lists on 14 actions in `actions.json` (6 crowd, 8 cold). `sim_balance_progress` gives inn context to
+  indoor inn work and asserts level 5 by night 8 – 10. Result: night 10 on all seeds (was 14); fighter unchanged.
+- Also fixed `sim_winter` (red on main since M18.2): Bird moved from (14, 13) to (15, 13) on `inn_hill` in 4.32 G.
+- Tests run (all pass): see ADR 0027 "M17.9". Full suite not run.
 
 ## Next (the user picks one)
-1. M19.P Book 7 plan (cloud). ADR 0030, steps in `docs/ROADMAP.md`. Read `canon/raw/book7` with subagents (summaries only).
-2. Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch + Menu size in
-   the browser build so the phone play check can happen. README "Touch (next release)" loses "(next release)".
-3. M20.2 Android build (local: Android SDK, JDK 17, keystore). Landscape only; `window/stretch/mode.mobile` / `aspect.mobile`.
-4. Optional M17.9: XP sources for non-fighters (balance note in `progress.md`). Not in `docs/ROADMAP.md` yet.
+1. Merge the M17.9 PR.
+2. M19.P Book 7 plan (cloud). ADR 0030. The book text is NOT linked in this session: attach
+   `Daddy-Ousen/innworld-canon-raw` (add_repo), then `bash tools/cloud/setup.sh --force`.
+3. Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch, Menu size
+   and the new pace in the browser build. README "Touch (next release)" loses "(next release)".
+4. M20.2 Android build (local: Android SDK, JDK 17, keystore). Landscape only; `window/stretch/mode.mobile` / `aspect.mobile`.
+- Later (M17.9 open): XP windows for the other big nights of Books 1 – 6 (data only); healer duress needs a "treat
+  others" mechanic first.
 - Open data gaps: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body; the 4.26 M golem
   count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
 
 ## Waiting on the user
-- Pick the next task (above).
+- Merge the M17.9 PR, then pick the next task (above).
+- Play a busy inn day and a winter walk to feel the new pace.
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps; play Book 6 (`godot --path game`).
 - Play with touch controls and Menu size (PC with touch screen; phone after the next release).
+
+## Gotchas (XP)
+- Work duress (M17.9) is computed only when the caller passes no `opts.duress`. A test that wants plain XP from a
+  crowd action passes `{"duress": 1.0}`. `sim_balance_*` tables: run with `BALANCE_LOG=<file>`.
+- A stage unit on `inn_hill` must not stand on the snow wall rects (`sim_winter` checks every stage).
 
 ## Touch notes (M20)
 - A touch button sends `InputEventAction` press/release with `Input.parse_input_event` (buffered: tests call

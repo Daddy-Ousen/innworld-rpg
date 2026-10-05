@@ -101,6 +101,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] Merged ([PR #106](https://github.com/Daddy-Ousen/innworld-rpg/pull/106), merge commit 6a79b46).
   - [ ] The user plays with touch and Menu size on a phone (browser build after the next release) and on a touch-screen PC.
   - [ ] M20.2 Android build (local session).
+- [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
+  User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.
+  Also fixed `sim_winter` (red on main since M18.2: Bird on a snow wall tile in the 4.32 G stage). Tests run: see ADR 0027 "M17.9".
+  All pass. Full suite not run. PR waits for the user to merge.
+  - [ ] The user plays a busy inn day and a winter walk to feel the pace (`godot --path game`).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)
@@ -154,7 +159,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 ## Balance note
 - M6.5: levels cost less (base_xp 40, growth 1.25). A hard inn worker: first class on night 1–3, level 5 by about day 18–21 (`sim_m6_done`: [Cook] level 6 by day 22). Canon Erin is level 9 by day 9; the player is not meant to match her.
-- M17.7: cost by total level, hidden cap 100, gentler curve after level 10. M17.8: fighters (two Goblin fights a day) reach level 5 on night 6–7, the inn worker on night 14. The curve was not changed; the planned fix is XP sources for non-fighters (optional M17.9).
+- M17.7: cost by total level, hidden cap 100, gentler curve after level 10. M17.8: fighters (two Goblin fights a day) reach level 5 on night 6–7, the inn worker on night 14. The curve was not changed. M17.9: work duress (crowd, cold) brings the busy inn worker to level 5 on night 10.
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.

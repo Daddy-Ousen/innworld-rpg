@@ -288,6 +288,9 @@ Rules from the user (2026-09-29):
   `xp_window` on the canon event (pending + day window + hours), a tier x1.5 / x2 / x3, never shown (first: the Skinner nights at the end of Book 1, x2 for all actions). Other classes
   (cooks, runners, healers: duress from crowd, cold, hurt patients, own hunger) get their own sources in a later step, so fighters lead for a while.
   The pace probe (`sim_balance_fighter`) found fighters level about 2x faster than the inn worker; the curve was NOT changed (see ADR 0027 "M17.8")
+- [x] M17.9 Work duress (ADR 0027 "M17.9", 2026-10-05; cloud; no save change; hidden): an optional `duress` list on an action in
+  `actions.json`; the crowd raises cooking, serving and dishes (up to x2.0), the winter cold raises outdoor work (up to x1.5). Never below
+  x1.0. The busy inn worker reaches level 5 on night 10 (was 14); fighters are unchanged (night 6 – 7)
 **Done when:** every fight in the game (monsters, stages, brawls) runs in combat mode with AP; the player can use
 combat Skills and learned spells; MP and AP gains work; saves from v17 load; the GUT tests that touch it, the Python tool
 tests and the validator pass; the user has played fights with the new screen.
