@@ -61,6 +61,7 @@
 			},
 			"news": "Esthelm's survivors held their barricades against the Goblin Lord's vanguard until the Gold-rank Silver Swords and a score of Silver-rank adventurers struck the Goblins from behind.",
 			"rumor": "Defenders of Esthelm swear a small band of Goblins fought the Goblin army, and that their Hob killed its commander with a broken arm.",
+			"xp_window": {"boost": 3, "hours": [8, 18]},
 			"stage": {
 				"area": "esthelm_ruins",
 				"hours": [8, 18],

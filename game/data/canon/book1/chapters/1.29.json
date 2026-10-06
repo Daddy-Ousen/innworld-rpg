@@ -44,6 +44,7 @@
 				]
 			},
 			"news": "About forty Goblins attacked the inn on the hill at midday. Senior Guardsman Klbkch died defending the Human there. The Antinium Soldiers came up into the streets.",
+			"xp_window": {"boost": 2, "hours": [12, 14]},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [12, 14],

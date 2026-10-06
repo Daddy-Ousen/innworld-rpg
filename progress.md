@@ -106,6 +106,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   Also fixed `sim_winter` (red on main since M18.2: Bird on a snow wall tile in the 4.32 G stage). Tests run: see ADR 0027 "M17.9".
   All pass. Full suite not run. Merged ([PR #107](https://github.com/Daddy-Ousen/innworld-rpg/pull/107), merge commit 01d1863).
   - [ ] The user plays a busy inn day and a winter walk to feel the pace (`godot --path game`).
+- [x] XP windows for Books 1 – 5 (branch `data/xp-windows-books1-6`, 2026-10-06, local). User chose the table: 9 events got `xp_window` on the stage hours.
+  Tier 3 (x3): 3.20T Esthelm. Tier 2 (x2): 1.29, 2.26, 4.19, 4.29. Tier 1 (x1.5): 1.42, 2.05, 3.21L, 4.27H. Book 6 stays without windows (user, M18 batches).
+  Tests run: `unit_xp_window`, `sim_canon_book1` – `sim_canon_book6`, `sim_skinner_night`, `sim_book6_eater_goats`, validator (0 errors), Python tool tests (102). All pass. Full suite not run.
+
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)

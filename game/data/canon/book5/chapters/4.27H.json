@@ -319,6 +319,7 @@
 					"horns_of_hammerad.haul_with_skeleton_bears"
 				]
 			},
+			"xp_window": {"boost": 1, "hours": [13, 23]},
 			"stage": {
 				"area": "esthelm_creler_cave",
 				"hours": [

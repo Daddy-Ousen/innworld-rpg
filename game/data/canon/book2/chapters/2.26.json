@@ -49,6 +49,7 @@
 				"relationship": [{"from": "krshia", "to": "erin_solstice", "delta": 2}, {"from": "relc", "to": "erin_solstice", "delta": 1}]
 			},
 			"news": "A brawl broke out at the Wandering Inn: Silverfang Gnolls, the Watch and Griffon Hunt traded blows before the Halfseekers stepped in. Klbkch arrested everyone; Krshia hauled off her kinsman Brunkr.",
+			"xp_window": {"boost": 2, "hours": [17, 22]},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [17, 22],

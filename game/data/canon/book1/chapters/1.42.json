@@ -50,6 +50,7 @@
 				]
 			},
 			"news": "Three Human adventurers wrecked the inn on the hill trying to kill the Goblins eating there. Gazi of Reim sent them running.",
+			"xp_window": {"boost": 1, "hours": [19, 21]},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [19, 21],

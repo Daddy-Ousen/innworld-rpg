@@ -441,6 +441,7 @@
 					"ulrien"
 				]
 			},
+			"xp_window": {"boost": 2, "hours": [20, 24]},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [
