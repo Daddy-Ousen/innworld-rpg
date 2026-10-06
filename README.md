@@ -9,7 +9,7 @@ The story of the books goes on around you, day by day. What you do with your day
 
 [**Play on itch.io**](https://rhasasn229.itch.io/innworld-rpg) ·
 [**Play in your browser**](https://daddy-ousen.github.io/innworld-rpg/) ·
-[**Download v0.1.1-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.1-alpha) (Windows, Linux) · free
+[**Download v0.1.2-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.2-alpha) (Windows, Linux) · free
 
 *Non-commercial fan work. The books and the world belong to pirateaba. This repo holds no book text.*
 
@@ -68,7 +68,7 @@ For the best play, use the download below.
      Windows SmartScreen can warn you, because the file has no signature. Click **More info**, then **Run anyway**.
    - **Linux:** run `chmod +x InnworldRPG.x86_64`, then `./InnworldRPG.x86_64`.
 
-v0.1.1 needs a keyboard. Touch controls (an on-screen pad and buttons) come with the next release; see "Touch" below.
+v0.1.2 has touch controls (an on-screen pad and buttons); see "Touch" below. A keyboard works too.
 You can start outside the east gate of Liscor or in Celum.
 
 ### Keys
@@ -88,7 +88,7 @@ You can start outside the east gate of Liscor or in Celum.
 | Esc | Menu (save, load, options, quit) |
 
 
-### Touch (next release)
+### Touch
 
 On a touch screen the game shows on-screen controls. **Options → Touch controls** sets Auto (on a touch screen), On or Off.
 
