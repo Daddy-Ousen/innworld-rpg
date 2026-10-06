@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-06, local): XP windows for Books 1 – 5
+- Branch `data/xp-windows-books1-6`. Data only: `xp_window` on 9 fight events (tiers in `progress.md`). Hours = the stage hours. Book 6 has none on purpose (user choice in M18.3).
+- Next: the user merges the PR. "Later" item in Next is now done. Waiting list unchanged.
+
 ## Just done (2026-10-05, cloud session): M17.9 work duress
 - Branch `claude/whats-next-xpoe4w` (from main after PR #106). ADR 0027 "M17.9", plan `docs/plans/m17.9.md`.
 - `Xp.work_duress`, `Actions._duress_context` (adds `cold` from `Winter.status`), `DataDb._validate_work_duress`,

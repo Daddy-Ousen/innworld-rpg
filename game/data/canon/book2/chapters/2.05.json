@@ -29,6 +29,7 @@
 			},
 			"news": "Gazi of Reim stabbed Watch Captain Zevara outside the Ruins and cut down guards and Gnolls to take two Humans. The innkeeper Erin Solstice put out her great eye, and she fled through a portal.",
 			"rumor": "Runners say one of the King of Destruction's Seven came to Liscor for two Humans and left through a portal, missing an eye.",
+			"xp_window": {"boost": 1, "hours": [13, 17]},
 			"stage": {
 				"area": "ruins_entrance",
 				"hours": [13, 17],

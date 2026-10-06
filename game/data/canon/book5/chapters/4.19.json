@@ -203,6 +203,7 @@
 					"liscor_dungeon.rift_party_presumed_dead"
 				]
 			},
+			"xp_window": {"boost": 2, "hours": [15, 19]},
 			"stage": {
 				"area": "floodplains_south",
 				"hours": [
