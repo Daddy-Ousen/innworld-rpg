@@ -111,7 +111,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 ## Releases (ADR 0029)
 - [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
   smoke-tested (898 events, 38 maps, 0 problems). Tests run: smoke only. Full suite not run. PR waits for the user to merge.
-  - [ ] After the merge: tag `v0.1.2-alpha`, `gh release create` with the three zips, upload the web zip to itch.io.
+  - [x] Merged ([PR #108](https://github.com/Daddy-Ousen/innworld-rpg/pull/108), merge commit e9ad2e2). Tag `v0.1.2-alpha` pushed. Pre-release published 2026-10-06 with three zips: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.2-alpha. Pages deploy run succeeded.
+  - [ ] The user uploads `export/InnworldRPG-v0.1.2-alpha-web.zip` to itch.io.
 - [x] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
   left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
   `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows
