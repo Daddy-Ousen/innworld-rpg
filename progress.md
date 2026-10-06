@@ -104,11 +104,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
   User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.
   Also fixed `sim_winter` (red on main since M18.2: Bird on a snow wall tile in the 4.32 G stage). Tests run: see ADR 0027 "M17.9".
-  All pass. Full suite not run. PR waits for the user to merge.
+  All pass. Full suite not run. Merged ([PR #107](https://github.com/Daddy-Ousen/innworld-rpg/pull/107), merge commit 01d1863).
   - [ ] The user plays a busy inn day and a winter walk to feel the pace (`godot --path game`).
 - [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
 
 ## Releases (ADR 0029)
+- [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
+  smoke-tested (898 events, 38 maps, 0 problems). Tests run: smoke only. Full suite not run. PR waits for the user to merge.
+  - [ ] After the merge: tag `v0.1.2-alpha`, `gh release create` with the three zips, upload the web zip to itch.io.
 - [x] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
   left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
   `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows

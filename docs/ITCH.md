@@ -48,7 +48,7 @@ around you, day by day. What you do with your days is up to you.
 - **A real place to live in.** Liscor, Celum, the Floodplains, the inn on the hill, the dungeon below.
   NPCs keep their own schedules. Work at the inn, cook, take guests, go hungry, and get through the winter.
 
-### What is in the alpha (v0.1.1)
+### What is in the alpha (v0.1.2)
 
 - Books 1–6 as canon data: 898 events, 261 characters, 103 places
 - 38 maps, day and night, winter snow, NPC schedules
@@ -105,7 +105,7 @@ Give the version from the title screen.
 | Kind of project | HTML |
 | Release status | In development |
 | Pricing | No payments |
-| Uploads | `InnworldRPG-v0.1.1-alpha-web.zip`, tick "This file will be played in the browser" |
+| Uploads | `InnworldRPG-v0.1.2-alpha-web.zip`, tick "This file will be played in the browser" |
 | Embed options | 1152 × 648, Fullscreen button on, Mobile friendly off, Automatically start on page load off |
 | Genre | Role Playing |
 | Tags (10 at most) | rpg, pixel-art, fangame, turn-based, tactical, litrpg, fantasy, singleplayer, godot, life-simulation |
