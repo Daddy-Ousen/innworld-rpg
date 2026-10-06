@@ -8,14 +8,14 @@
 - Also fixed `sim_winter` (red on main since M18.2): Bird moved from (14, 13) to (15, 13) on `inn_hill` in 4.32 G.
 - Tests run (all pass): see ADR 0027 "M17.9". Full suite not run.
 
-## Release v0.1.2-alpha in progress (2026-10-06)
-- Branch `release/v0.1.2` pushed, PR open. Zips are in `export/` (windows, linux, web). After the user merges: pull main, `git tag v0.1.2-alpha`, `git push origin v0.1.2-alpha`, `gh release create v0.1.2-alpha --prerelease` with the three zips (a published release deploys Pages by itself), then the user uploads the web zip to itch.io.
+## Just done (2026-10-06): v0.1.2-alpha released
+- Merged, tagged, GitHub pre-release live with 3 zips, Pages redeployed. Waiting: the user uploads the web zip to itch.io.
 
 ## Next (the user picks one)
 (Checked 2026-10-06: PR #107 is merged. `main` = `origin/main` = 01d1863. No open PRs. No local changes.)
 1. M19.P Book 7 plan (cloud). ADR 0030. The book text is NOT linked in this session: attach
    `Daddy-Ousen/innworld-canon-raw` (add_repo), then `bash tools/cloud/setup.sh --force`.
-2. Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch, Menu size
+2. (Done 2026-10-06) Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch, Menu size
    and the new pace in the browser build. README "Touch (next release)" loses "(next release)".
 3. M20.2 Android build (local: Android SDK, JDK 17, keystore). Landscape only; `window/stretch/mode.mobile` / `aspect.mobile`.
 - Later (M17.9 open): XP windows for the other big nights of Books 1 – 6 (data only); healer duress needs a "treat
