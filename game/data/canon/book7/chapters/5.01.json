@@ -1,0 +1,440 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.01",
+	"order": 31,
+	"events": {
+		"b7.erin_and_ilvriss_step_into_pallass": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_door_alley",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.stuck_in_pallass",
+					"ilvriss.in_pallass"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "The door allows one person a day over the far link; the rest is a mishap."
+			},
+			"summary": "Erin and Ilvriss walk through the door to Pallass by mistake, and Hawk follows. The door is spent for the day, so they are stuck there."
+		},
+		"b7.pallass_military_parade": {
+			"tier": 1,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"officer": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.vengeance_parade_held"
+				]
+			},
+			"news": "Pallass held a parade for Zel Shivertail with an empty coffin, and the crowd cried for vengeance.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "The parade is seen in the street; it is not a stage."
+			},
+			"summary": "Pallass holds a military parade with an empty coffin for Zel. The Drakes cry out for vengeance on the Goblins and blame Humans."
+		},
+		"b7.pallass_watch_arrests_the_intruders": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"swashbuckler": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"officer": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.wounded_pallass_guards",
+					"relc.arrested_in_pallass",
+					"jelaqua.hit_by_arrows_in_pallass"
+				],
+				"relationship": [
+					{
+						"from": "venim",
+						"to": "ilvriss",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "No deaths. Seborn is also arrested in the text; he has no stage role in this batch."
+			},
+			"summary": "In a street by the parade, the Pallass Watch fights the people from the door. Jelaqua is hit by two arrows. Relc and Jelaqua are arrested. Ilvriss cuts down guards and claims his Wall Lord rights. Nobody dies."
+		},
+		"b7.pallass_raid_on_the_inn_fails": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hobgoblin": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.watchmen_held_in_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "When the two watchmen go home is not stated."
+			},
+			"summary": "Venim's raiders come through the door into the inn. Then the door goes dead. Two Watch members give up to the Redfang five."
+		},
+		"b7.zevara_learns_of_the_pallass_door": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"guard_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zevara.knows_the_door_reaches_pallass"
+				]
+			},
+			"news": "Watch Captain Zevara knows now that the inn's door opens into Pallass.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Off the map."
+			},
+			"summary": "Zevara learns that the inn's door reaches Pallass and that Pallass soldiers came through it."
+		},
+		"b7.erin_meets_venim_and_nelliam": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"officer": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"scholar": {
+					"prefer": [
+						"nelliam_hailwing"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venim.met_erin_in_pallass"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "nelliam_hailwing",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Nelliam is Erin's guide in the text."
+			},
+			"summary": "Venim tells Erin that Ilvriss will be fined and that she must stay. Nelliam shows her the levels, lifts and walls of the city."
+		},
+		"b7.errif_moves_to_seize_the_door": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_door_alley",
+			"roles": {
+				"assembly": {
+					"prefer": [
+						"errif_jealwind"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.assembly_plans_to_seize_the_door"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "errif_jealwind",
+						"delta": -2
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Seborn is sent back as well; he has no record in this batch."
+			},
+			"summary": "The Assembly of Crafts sends Ilvriss, Relc and the others back through the door at spear-point. Errif plans to march a battalion through to take it."
+		},
+		"b7.erin_cuts_the_link_to_pallass": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_door_alley",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"priest": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.link_cut_by_erin",
+					"erin.insulted_errif"
+				],
+				"clear_flags": [
+					"pallass.door_end_set_in_the_alley"
+				]
+			},
+			"news": "Erin Solstice cut the door's link to Pallass after the Assembly tried to take it.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Erin insults Errif Jealwind."
+			},
+			"summary": "Erin drains the door's mana by hopping through it again and again, and throws chairs at the soldiers. Moore pulls the stone from the inn side. The link to Pallass is cut."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,281 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.02",
+	"order": 32,
+	"events": {
+		"b7.reiss_marches_past_invrisil": {
+			"tier": 1,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_lord.turned_from_invrisil",
+					"magnolia.defends_invrisil"
+				]
+			},
+			"news": "The Goblin Lord's army turned away from Invrisil and marches on.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.02",
+				"confidence": "confirmed",
+				"note": "The Goblin Lord is Reiss (goblin_lord.named_reiss). There is no separate record."
+			},
+			"summary": "The Goblin Lord rides a Shield Spider and orders his army to turn left. It goes round Invrisil and does not attack the city."
+		},
+		"b7.khal_and_riefel_meet_takhatres": {
+			"tier": 1,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "chandrar",
+			"roles": {
+				"general": {
+					"prefer": [
+						"khal"
+					],
+					"fallback_tags": []
+				},
+				"king": {
+					"prefer": [
+						"takhatres"
+					],
+					"fallback_tags": []
+				},
+				"emir": {
+					"prefer": [
+						"riefel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"chandrar.riefel_failed_to_kill_takhatres"
+				]
+			},
+			"news": "An assassin posing as an emir failed to kill King Takhatres of Chandrar.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.02",
+				"confidence": "confirmed",
+				"note": "The text implies Riefel dies; no death record is made (user, M19.2)."
+			},
+			"summary": "In Chandrar, Khal and Emir Riefel come before King Takhatres. Riefel's attempt on the king fails."
+		},
+		"b7.zevara_brings_venim_to_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guard_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"officer": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"venim.met_erin",
+					"pallass.watch_captains_back_erin",
+					"salazsar.threatens_war_if_pallass_takes_door",
+					"pallass.embargo_of_liscor_begun",
+					"izril.rains"
+				],
+				"relationship": [
+					{
+						"from": "venim",
+						"to": "erin_solstice",
+						"delta": 1
+					},
+					{
+						"from": "zevara",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					20,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							9
+						]
+					},
+					{
+						"npc": "zevara",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "venim",
+						"pos": [
+							11,
+							6
+						]
+					}
+				],
+				"line": "Zevara and a Drake in bright yellow armour sit at a table in the inn. Zevara has told the others that they were never here.",
+				"note": "M19.2: a scene. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_overheard_zevara_and_venim",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"zevara",
+									"venim"
+								]
+							}
+						}
+					],
+					"days": [
+						134,
+						134
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_overheard_the_pallass_deal"
+						],
+						"relationship": [
+							{
+								"from": "zevara",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn saw Zevara and a Pallass Watch Captain meet in secret."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.02",
+				"confidence": "confirmed",
+				"note": "Rain starts in the evening, as in the text (the ADR said afternoon). The flags land at the night, so the rain shows on day 135."
+			},
+			"summary": "Zevara brings Venim to the inn in the evening. The Watch Captains of Pallass will back Erin against the Assembly. The deal is secret. It starts to rain as they talk."
+		}
+	},
+	"system": []
+}

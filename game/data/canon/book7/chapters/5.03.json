@@ -1,0 +1,349 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.03",
+	"order": 33,
+	"events": {
+		"b7.erin_signs_the_pallass_lease": {
+			"tier": 2,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guard_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.pallass_lease_filed",
+					"erin.low_on_coin",
+					"pallass.message_expected_in_2_3_days"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "The lease is filed that night."
+			},
+			"summary": "Erin signs a lease with Pallass for the door and pays eighteen gold. The Watch Captains add four. She has about a week of coin left. Pallass will answer in two or three days."
+		},
+		"b7.erin_tells_the_redfang_they_are_guests": {
+			"tier": 2,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hobgoblin": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.told_they_are_guests"
+				],
+				"relationship": [
+					{
+						"from": "headscratcher",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "The text moves them to the third floor next day (flag redfang.lodge_on_the_third_floor). That move waits for a later batch: it needs behaviour entries."
+			},
+			"summary": "Erin tells the Redfang in the basement that they are guests and not prisoners."
+		},
+		"b7.bird_leaves_the_tower_door_open": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "inn_watchtower",
+			"roles": {
+				"antinium": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.rain_got_in"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "Small event."
+			},
+			"summary": "Bird leaves the tower door open, and rain gets into the third floor."
+		},
+		"b7.erin_visits_the_hive_for_help": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"queen": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.helps_erins_money_plan"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "The plan itself is not described yet; this is a hint flag only."
+			},
+			"summary": "Erin goes to the Hive and asks the Antinium for help with her plan for money. Anand and Belgrade agree to help."
+		},
+		"b7.klbkch_seals_the_hive": {
+			"tier": 1,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.flood_prep_begun"
+				]
+			},
+			"news": "The Hive is sealing itself against the spring flood.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "News only."
+			},
+			"summary": "Klbkch has the Hive made ready for the flood."
+		},
+		"b7.zevara_has_the_walls_checked": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"guard_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.walls_have_cracks"
+				]
+			},
+			"news": "Zevara ordered the city walls checked for cracks before the flood.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "Klbkch also checks the walls."
+			},
+			"summary": "Zevara has the city walls checked before the flood. Relc finds cracks."
+		},
+		"b7.selys_explains_the_rains": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.learns_of_the_spring_flood",
+					"liscor.closes_for_the_rains"
+				]
+			},
+			"news": "Selys told Erin that Liscor closes for the rains and the spring flood.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.03",
+				"confidence": "confirmed",
+				"note": "The paperwork is not described yet; hint only."
+			},
+			"summary": "Selys tells Erin about the spring flood. Liscor shuts its gates for the rains. Erin asks Selys for paperwork for her plan."
+		}
+	},
+	"system": []
+}

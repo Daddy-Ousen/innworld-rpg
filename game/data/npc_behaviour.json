@@ -508,6 +508,14 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"venim": {
+			"confidence": "guess",
+			"combat": {"agility": 5, "hp": 50, "accuracy": 7, "evasion": 4, "armor": 3, "damage": [4, 8]},
+			"notes": "M19.2. Pallass Watch Captain in bright yellow armour (5.01 - 5.03); off the map in Pallass. The lease stage (5.02, day 134) brings him to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
 		"tkrn": {
 			"confidence": "guess",
 			"combat": {"agility": 4, "hp": 40, "accuracy": 6, "evasion": 4, "armor": 2, "damage": [3, 6]},
