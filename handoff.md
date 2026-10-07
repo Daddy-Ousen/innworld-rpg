@@ -1,37 +1,25 @@
 # Handoff
 
-## Just done (2026-10-06, local): XP windows for Books 1 – 5
-- Branch `data/xp-windows-books1-6`. Data only: `xp_window` on 9 fight events (tiers in `progress.md`). Hours = the stage hours. Book 6 has none on purpose (user choice in M18.3).
-- Next: the user merges the PR. "Later" item in Next is now done. Waiting list unchanged.
-
-## Just done (2026-10-05, cloud session): M17.9 work duress
-- Branch `claude/whats-next-xpoe4w` (from main after PR #106). ADR 0027 "M17.9", plan `docs/plans/m17.9.md`.
-- `Xp.work_duress`, `Actions._duress_context` (adds `cold` from `Winter.status`), `DataDb._validate_work_duress`,
-  `duress` lists on 14 actions in `actions.json` (6 crowd, 8 cold). `sim_balance_progress` gives inn context to
-  indoor inn work and asserts level 5 by night 8 – 10. Result: night 10 on all seeds (was 14); fighter unchanged.
-- Also fixed `sim_winter` (red on main since M18.2): Bird moved from (14, 13) to (15, 13) on `inn_hill` in 4.32 G.
-- Tests run (all pass): see ADR 0027 "M17.9". Full suite not run.
-
-## Just done (2026-10-06): v0.1.2-alpha released
-- Merged, tagged, GitHub pre-release live with 3 zips, Pages redeployed. Waiting: the user uploads the web zip to itch.io.
+## Just done (2026-10-07, local): M19.P Book 7 plan
+- Branch `docs/m19-plan` (from main 01f1adb). Files: `docs/adr/0030-m19-book7.md` (new), `docs/ROADMAP.md` (M19 steps),
+  `docs/CLOUD.md` (queue), `progress.md`, `handoff.md`. Docs only; no tests run.
+- Book 7 text cut locally: `python tools/extract_epub.py "The Wandering Inn Books 1-17 Pirateaba/Book 7 - The Wandering Inn - The Rains of Liscor.epub" canon/raw/book7`
+  (gitignored). Chapter summaries from the seven reading agents sit in this session's scratchpad (`m19p/`): gone next
+  session. ADR 0030 holds the facts the batches need; batches re-read their chapters with agents.
+- User answers: rain + flood, door with several links + Pallass map, moth wave stage with `xp_window` x3, dive = events only.
 
 ## Next (the user picks one)
-(Checked 2026-10-06: PR #107 is merged. `main` = `origin/main` = 01d1863. No open PRs. No local changes.)
-1. M19.P Book 7 plan (cloud). ADR 0030. The book text is NOT linked in this session: attach
-   `Daddy-Ousen/innworld-canon-raw` (add_repo), then `bash tools/cloud/setup.sh --force`.
-2. (Done 2026-10-06) Release v0.1.2-alpha (local: `tools/release.ps1`, tag, `gh release create`, itch.io upload). Puts touch, Menu size
-   and the new pace in the browser build. README "Touch (next release)" loses "(next release)".
-3. M20.2 Android build (local: Android SDK, JDK 17, keystore). Landscape only; `window/stretch/mode.mobile` / `aspect.mobile`.
-- Later (M17.9 open): XP windows for the other big nights of Books 1 – 6 (data only); healer duress needs a "treat
-  others" mechanic first.
+1. The user merges the M19.P PR (merging = plan approved).
+2. M19.0 Engine: door links + the rains (local or cloud). Ask the open M19.0 choice first: a small `rain` work duress (yes/no).
+3. M20.2 Android build (local: Android SDK, JDK 17, keystore).
 - Open data gaps: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body; the 4.26 M golem
-  count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him).
+  count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him; 5.09 E covers it: M19.5).
 
 ## Waiting on the user
-- Pick the next task (above).
+- Merge the M19.P PR.
 - Play a busy inn day and a winter walk to feel the new pace.
 - Play fights with Skills, spells and cover; look at M14.6 / M14.7 colours and M16 maps; play Book 6 (`godot --path game`).
-- Play with touch controls and Menu size (PC with touch screen; phone after the next release).
+- Play with touch controls and Menu size (PC with touch screen; phone with the v0.1.2 browser build).
 
 ## Gotchas (XP)
 - Work duress (M17.9) is computed only when the caller passes no `opts.duress`. A test that wants plain XP from a

@@ -324,11 +324,23 @@ Interlude – The Antinium Wars (Pt. 3 – 5), 4.48, 4.49, The Depthless Doctor.
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
 ## M19 — Book 7 (The Rains of Liscor)
-Not planned yet. Same flow as M18; the book text is in `canon/raw/book7/` in cloud sessions.
-22 chapters, about 286,000 words: 5.00 – 5.08 (with 5.06 M), Interlude – Flos, 5.09 E – 5.11 E, 5.12 – 5.15,
-5.16 S – 5.18 S, 5.19 G, 5.20 G.
-- [ ] M19.P Plan + ADR 0030 (as M18.P). The user approves before M19.0
-- [ ] M19.0 – M19.n: world work, then canon batches
+Planned 2026-10-07 (ADR 0030). Same flow as M18; the book text is in `canon/raw/book7/` (local: cut from the epub;
+cloud: the private repo). 22 chapters, about 286,000 words: 5.00 – 5.08 (with 5.06 M), Interlude – Flos, 5.09 E – 5.11 E,
+5.12 – 5.15, 5.16 S – 5.18 S, 5.19 G, 5.20 G.
+- [x] M19.P Plan + ADR 0030 (2026-10-07, local): seven reading agents, summaries only. Days 133 – about 143; far threads are
+  news. User answers: rain and flood (the door is the way to Liscor), a door with several links plus a small Pallass map,
+  the moth attack as a wave stage with an XP window x3, the dungeon dive as events only. The user approves the plan by merging its PR
+- [ ] M19.0 Engine: door links (`portal.links`, pick the stone; schema change approved in ADR 0030) and the rains (season
+  flag, rain on screen and in the sound, flood overlays that block walking). No save change expected
+- [ ] M19.1 World: Pallass door map, the door's Liscor wall end, flood overlays, the [Grand Theatre] and the smashed
+  watchtower, the Face-Eater Moth and the moth swarm, looks, Book 7 NPC records
+- [ ] M19.2 Canon 5.00 – 5.03 (days 133 – 135): the Pallass crisis, the embargo, the lease, the rains begin
+- [ ] M19.3 Canon 5.04 – 5.06 M (days 135 – 136): Octavia and the Players, [Grand Theatre], Toren, Vuliel Drae, Mrsha
+- [ ] M19.4 Canon 5.07, 5.08, Interlude – Flos (day 137): the moth wave stage (`xp_window` x3), the aftermath, Flos notes
+- [ ] M19.5 Canon 5.09 E – 5.11 E (days 130 – 142): Laken, the banquet and the fae (off-map)
+- [ ] M19.6 Canon 5.12 – 5.15 (days 138 – 140): the flood, the door in the west wall, Embria, the parade, the dive (events)
+- [ ] M19.7 Canon 5.16 S – 5.18 S (days 140 – 143): the will, Zel's funeral, Selys in Pallass, the Heartflame lease
+- [ ] M19.8 Canon 5.19 G, 5.20 G (days 141 – 143): Rags, Garen and Tremborag, the road battle (off-map)
 **Done when:** all Book 7 canon is event data and `sim_canon_book7` runs to the last Book 7 day with drift 0;
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.
 
