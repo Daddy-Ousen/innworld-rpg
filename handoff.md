@@ -1,12 +1,12 @@
 # Handoff
 
-## Just done (2026-10-07, local): M19.3 canon 5.04 – 5.06 M (branch `feat/m19.3-canon-5-04`)
-- `game/data/canon/book7/chapters/5.04.json`, `5.05.json`, `5.06M.json` (orders 34 – 36): 19 events. 5.04 is day 135, 5.05 and 5.06 M are day 136.
-- One scene stage: `b7.players_of_celum_perform_at_the_inn` (day 135, 19 – 23 h, `inn_interior`), hook on Wesle. Erin gets `wandering_inn.grand_theatre` that night (overlay from M19.1).
-- Records fixed in `book1/npcs.json` and `book2/npcs.json`: Toren, Wesle, Halrac, Mrsha. Revi (Stitch-Woman) is not done yet.
-- Gotchas for M19.4+: Redfang security armbands and the Bronze-team flag are set; Emme, Esbell and Kilkran have no behaviour entry (not on the stage).
-  The swarm in 5.05 is flag only. Moths come on day 137 (M19.4, wave stage, `xp_window` x3).
-- Next: M19.4 canon 5.07, 5.08, Interlude – Flos (ask the wave and hook choices first). User merges the M19.3 PR first.
+## Just done (2026-10-07, local): M19.4 canon 5.07, 5.08, Interlude - Flos (branch `feat/m19.4-canon-5-07`)
+- `game/data/canon/book7/chapters/5.07.json`, `5.08.json`, `interlude_flos.json` (orders 37 - 39): 28 events, days 137 - 138.
+- Moth fight stage `b7.face_eater_moths_attack_the_inn_and_liscor` (inn_hill, 7 waves, `xp_window` x3, fight hook). Scene `b7.the_inn_after_the_moths` (talk hook).
+- Door: day 137 sets `albez_door.anchor_at_pallass` and `pallass.embargo_lifted`. Flags set: windows_broken, watchtower_smashed, jelaqua.body_broken, izril.rains.
+- Test: `sim_book7_moths` (new, 6). Detail: ADR 0030 "M19.4 as built".
+- Gotchas for M19.5+: wave `from` must not be an exit tile. Bird's broken bow, Numbtongue's arm are flags only. Seborn, Olesm, Selys, Octavia have no combat entry. Flos threads are off-map.
+- Next: M19.5 canon 5.09 E - 5.11 E (Laken, banquet, fae; off-map). User merges the M19.4 PR first.
 
 ## Before that (2026-10-07, local): M19.0 engine (door links + the rains)
 - Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".

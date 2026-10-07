@@ -1,0 +1,862 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.08",
+	"order": 38,
+	"events": {
+		"b7.the_world_watches_the_moth_battle_through_scrying": {
+			"tier": 1,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"general": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archmage": {
+					"prefer": [
+						"feor"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.world_watched_the_moths",
+					"wistram.scrying_relay_of_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Wistram offers a scrying link and the Drake cities join a group Message call. Magnolia, Tyrion's tent, Niers and Flos in Chandrar all watch. Terandrian nobles bet on the outcome.",
+			"news": "The world watched the battle at Liscor through Wistram's scrying."
+		},
+		"b7.pallass_commentators_and_venim_hold_back": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "pallass",
+			"roles": {
+				"watch_captain": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"commentator": {
+					"prefer": [
+						"sir_relz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commentator_2": {
+					"prefer": [
+						"noass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venim"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.held_soldiers_back_from_the_moths"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Sir Relz and Noass narrate the fight to a Pallass crowd. Venim keeps his soldiers at the door for over ten minutes because the Assembly has not given an order.",
+			"news": "Pallass soldiers waited at the door while Liscor fought. The Assembly gave no order."
+		},
+		"b7.griffon_hunt_kill_the_first_giant_moth": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"healer": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"griffon_hunt.killed_a_giant_moth"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "On Liscor's wall Griffon Hunt kills the first giant moth. Halrac's arrows do the work. Typhenous and Revi are drained and Revi is sick.",
+			"news": "Griffon Hunt killed the first giant moth on Liscor's wall."
+		},
+		"b7.the_wall_holds_zevara_olesm_relc_ilvriss": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spearmaster": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.watch_held_against_the_moths"
+				],
+				"relationship": [
+					{
+						"from": "zevara",
+						"to": "olesm",
+						"delta": 1
+					},
+					{
+						"from": "ilvriss",
+						"to": "zevara",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The barrier flickers and fails in places. Zevara breathes fire. Olesm fires command scrolls. Relc fights on. Ilvriss rallies the Drakes with a Skill. Krshia and the Gnolls shoot from the roofs. The Watch fights in the streets.",
+			"news": "Liscor's Watch held the walls against the moths with Ilvriss, Olesm and the Gnolls."
+		},
+		"b7.the_antinium_and_painted_soldiers_fight_in_the_open": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"swordsman": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"worker": {
+					"prefer": [
+						"belgrade"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"anand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hive.painted_soldiers_seen_by_the_world",
+					"liscor.antinium_fought_the_moths"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "After six or seven hours the Painted Soldiers come out of the Hive. The world sees them fight. Anand's group tactics kill many moths. Klbkch fights in the street.",
+			"news": "The Antinium fought in the open at Liscor. The world saw the Painted Soldiers."
+		},
+		"b7.jelaqua_is_dropped_by_a_giant_moth": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"swashbuckler": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"seborn": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"jelaqua"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"jelaqua.body_cannot_be_saved",
+					"moore.stabbed_and_healed"
+				],
+				"relationship": [
+					{
+						"from": "seborn",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A giant moth grabs Jelaqua and drops her. Her old body breaks and part of the face is torn off. She can only talk and twitch. Seborn says it cannot be mended. Moore is stabbed through the leg and heals with potions.",
+			"news": "Jelaqua's body was broken by a moth. She can only talk. Moore was hurt too."
+		},
+		"b7.pisces_falene_and_moore_call_down_a_great_rain": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.hailed_as_a_hero",
+					"izril.rains",
+					"liscor.moths_driven_back"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "pisces",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pisces, Falene and Moore link a climate spell and draw on the inn's mana. A great rain washes the moths from the sky. They crawl back into the rift and many drown.",
+			"news": "Pisces and Falene called down a storm that drove the Face-Eater Moths back into the rift."
+		},
+		"b7.pallass_soldiers_cross_and_cut_down_fleeing_moths": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"watch_captain": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venim"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.shamed_by_the_walled_cities",
+					"pallass.soldiers_crossed_the_door"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "venim",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At the end a Pallass company finally crosses the door and kills four fleeing moths with lightning, potions, arrows and spears. Two escape into the rift. The five other Walled Cities shame Pallass.",
+			"news": "Pallass soldiers came through the door too late. The other Walled Cities shamed Pallass."
+		},
+		"b7.tekshia_declares_the_dungeon_gold_rank": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"veteran": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tekshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_dungeon.gold_rank"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Tekshia Shivertail watches from the wall. When the fight ends she declares Liscor's dungeon a Gold-rank threat.",
+			"news": "Tekshia Shivertail named Liscor's dungeon a Gold-rank threat."
+		},
+		"b7.erin_stomps_the_last_moth_and_surveys_the_wreck": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.owes_octavia_for_potions",
+					"erin.inn_survived_the_moths"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "octavia",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "In the rain Erin stomps the last small moth. Every window is broken, Bird's tower is smashed and his bow is gone. Erin owes Octavia thousands of gold for potions. She says her Skill kept the inn standing.",
+			"news": "The Wandering Inn stands, but every window is broken and Bird's watchtower is smashed."
+		},
+		"b7.the_inn_after_the_moths": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swashbuckler": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.wounded_rest_after_the_moths",
+					"numbtongue.arm_wound_from_a_moth"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "likely",
+				"note": "Added scene: the text ends in the rain. The wounded are named in 5.08."
+			},
+			"summary": "That night the inn is full of the wounded and the tired. Bird sits with his broken bow. Numbtongue has a round bite gone from his arm. Jelaqua cannot move. Pisces is toasted as the hero.",
+			"news": "At the Wandering Inn the wounded rested after the moths. Bird, Numbtongue and Jelaqua were hurt.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					20,
+					24
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "bird",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							12,
+							6
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							10,
+							12
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "ylawes_byres",
+						"pos": [
+							12,
+							10
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							13,
+							6
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							13,
+							10
+						]
+					}
+				],
+				"line": "The common room is full of tired people. Water drips through the empty window frames, and nobody speaks loudly.",
+				"note": "M19.4: a scene after the fight. Hours are guesses (the night of the moths)."
+			},
+			"hooks": [
+				{
+					"id": "player_sat_with_the_wounded_after_the_moths",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"jelaqua",
+									"bird",
+									"moore",
+									"numbtongue"
+								]
+							}
+						}
+					],
+					"days": [
+						137,
+						137
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_sat_with_the_wounded"
+						],
+						"relationship": [
+							{
+								"from": "jelaqua",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "moore",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn sat with Jelaqua, Bird and the others after the moth battle."
+				}
+			]
+		}
+	},
+	"system": []
+}
