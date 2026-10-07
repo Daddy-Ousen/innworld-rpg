@@ -1,5 +1,12 @@
 # Handoff
 
+## Just done (2026-10-07, local): wiki class tree, step 1 (branch `feat/class-tree-wiki`)
+- Added 6 classes to `game/data/classes.json` and 7 Skills to `game/data/skills.json`. See `progress.md` for the list and tests.
+- Every class needs at least one Skill pool (`unit_data_db` checks it). Advancements use `prereqs.classes`; consolidation needs 2+ `from` classes.
+- Next: step 2 in `progress.md` (new tags, actions, map objects, audio cues, then Rider/Gardener/Beast Tamer/Priest line and the two hybrids).
+- Gotcha: the wiki fetch gave a partial list. Re-read https://wiki.wanderinginn.com/Classes before step 2. The wiki follows the web serial: flag conflicts with the ebook.
+
+## Before that (M19.4)
 ## Just done (2026-10-07, local): M19.4 canon 5.07, 5.08, Interlude - Flos (branch `feat/m19.4-canon-5-07`)
 - `game/data/canon/book7/chapters/5.07.json`, `5.08.json`, `interlude_flos.json` (orders 37 - 39): 28 events, days 137 - 138.
 - Moth fight stage `b7.face_eater_moths_attack_the_inn_and_liscor` (inn_hill, 7 waves, `xp_window` x3, fight hook). Scene `b7.the_inn_after_the_moths` (talk hook).

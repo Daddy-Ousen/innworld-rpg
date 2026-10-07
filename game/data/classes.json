@@ -211,6 +211,72 @@
 			"consolidation": null,
 			"combat": {"mp_bonus": 1, "note": "M17.5: each [Mage] level adds this much max MP."},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Pisces is a [Mage] (book 1 cast list). The prereq (knowing a spell), threshold, weights and MP bonus are design guesses."}
+		},
+		"veteran_warrior": {
+			"name": "[Veteran Warrior]",
+			"tag_weights": {"combat": 1.0, "vigilance": 0.3, "combat.block": 0.3},
+			"offer_threshold": 200,
+			"prereqs": {"classes": ["warrior"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["combat"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Warrior]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"exemplar_warrior": {
+			"name": "[Exemplar Warrior]",
+			"tag_weights": {"combat": 1.0, "vigilance": 0.3, "combat.block": 0.4, "teaching": 0.2},
+			"offer_threshold": 450,
+			"prereqs": {"classes": ["veteran_warrior"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["combat"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Veteran Warrior]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"scout": {
+			"name": "[Scout]",
+			"tag_weights": {"stealth": 1.0, "vigilance": 0.5, "travel": 0.3},
+			"offer_threshold": 50,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["stealth", "vigilance"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"veteran_scout": {
+			"name": "[Veteran Scout]",
+			"tag_weights": {"stealth": 1.0, "vigilance": 0.5, "travel": 0.4},
+			"offer_threshold": 200,
+			"prereqs": {"classes": ["scout"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["stealth", "vigilance"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Scout]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"elementalist": {
+			"name": "[Elementalist]",
+			"tag_weights": {"magic": 1.0, "study": 0.3},
+			"offer_threshold": 150,
+			"prereqs": {"classes": ["mage"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["magic"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Mage]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"cryomancer": {
+			"name": "[Cryomancer]",
+			"tag_weights": {"magic": 1.0, "study": 0.3},
+			"offer_threshold": 400,
+			"prereqs": {"classes": ["elementalist"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["magic"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Elementalist]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
 		}
 	}
 }
