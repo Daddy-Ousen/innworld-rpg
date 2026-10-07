@@ -1,12 +1,12 @@
 # Handoff
 
-## Just done (2026-10-07, local): M19.2 canon 5.00 – 5.03 (branch `feat/m19.2-canon-5-00`)
-- `game/data/canon/book7/chapters/5.00.json` – `5.03.json` (orders 30 – 33): 23 events, days 133 – 135. Stages: lunch (`b7.erin_cheers_up_with_relc`,
-  day 133, 11 – 14 h) and the deal (`b7.zevara_brings_venim_to_the_inn`, day 134, 20 – 23 h, sets `izril.rains`). Scenes in `inn_interior`, one hook each.
-- The Pallass scenes are events only: no `albez_door.anchor_at_pallass` (user said no Pallass walk). Riefel has no death record.
-- Gotchas for M19.3+: `off_map` in a behaviour goal must be a name in `entries` (liscor, wilds, celum, esthelm). The Redfang move to the third floor
-  (`redfang.lodge_on_the_third_floor`) is not done: it needs behaviour goals. Seborn has no behaviour entry. Flags set by an event show the next day.
-- Next: M19.3 canon 5.04 – 5.06 M (ask stage and hook choices first). User merges the M19.2 PR first.
+## Just done (2026-10-07, local): M19.3 canon 5.04 – 5.06 M (branch `feat/m19.3-canon-5-04`)
+- `game/data/canon/book7/chapters/5.04.json`, `5.05.json`, `5.06M.json` (orders 34 – 36): 19 events. 5.04 is day 135, 5.05 and 5.06 M are day 136.
+- One scene stage: `b7.players_of_celum_perform_at_the_inn` (day 135, 19 – 23 h, `inn_interior`), hook on Wesle. Erin gets `wandering_inn.grand_theatre` that night (overlay from M19.1).
+- Records fixed in `book1/npcs.json` and `book2/npcs.json`: Toren, Wesle, Halrac, Mrsha. Revi (Stitch-Woman) is not done yet.
+- Gotchas for M19.4+: Redfang security armbands and the Bronze-team flag are set; Emme, Esbell and Kilkran have no behaviour entry (not on the stage).
+  The swarm in 5.05 is flag only. Moths come on day 137 (M19.4, wave stage, `xp_window` x3).
+- Next: M19.4 canon 5.07, 5.08, Interlude – Flos (ask the wave and hook choices first). User merges the M19.3 PR first.
 
 ## Before that (2026-10-07, local): M19.0 engine (door links + the rains)
 - Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".

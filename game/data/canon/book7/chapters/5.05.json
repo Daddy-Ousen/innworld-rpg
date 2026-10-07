@@ -1,0 +1,367 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.05",
+	"order": 35,
+	"events": {
+		"b7.toren_waits_below_the_water_wall": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"skeleton": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"toren"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"toren.has_a_dungeon_inn",
+					"toren.stuck_below_the_rain_barrier"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "confirmed",
+				"note": "Toren's classes in Book 7: [Skeleton Knight] 24, [Barmaid] 2, [Leader] 4, [Tactician] 5, [Sword Dancer] 3."
+			},
+			"summary": "Toren is stuck below: rain stops at a water wall above the chasm and his body burns more mana than he can take in. He and his masked self fight over the mask. She keeps a small inn in a round room with a fountain. When armour patrols pass, he hides in pieces."
+		},
+		"b7.griffon_hunt_clears_a_bagrhaven_nest": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"griffon_hunt.found_cursed_jewellery",
+					"griffon_hunt.sends_loot_to_invrisil"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "confirmed",
+				"note": "Ulrien died weeks ago, to the Named Adventurer Regrika Blackpaw."
+			},
+			"summary": "Halrac, Revi and Typhenous kill a Bagrhaven nest. They take a hoard of jewellery that is likely cursed and plan to send it to an [Enchanter] in Invrisil."
+		},
+		"b7.halrac_admits_griffon_hunt_failed_ulrien": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halrac.admits_the_team_failed_ulrien",
+					"halrac.looked_at_the_inn_and_did_not_go_in"
+				],
+				"relationship": [
+					{
+						"from": "halrac",
+						"to": "revi",
+						"delta": 1
+					},
+					{
+						"from": "halrac",
+						"to": "typhenous",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "confirmed",
+				"note": "Griffon Hunt starts to thaw."
+			},
+			"summary": "The team climbs out of the chasm and crosses the rain-soaked Floodplains. Halrac tells them to quit and they refuse. He says for the first time that they failed Ulrien. He looks toward the inn on the hill but does not go there."
+		},
+		"b7.sewer_slime_attacks_a_liscor_street": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"summoner": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.sewer_slime_killed",
+					"liscor.sewers_are_overflowing"
+				]
+			},
+			"news": "A Sewer Slime came out of the sewers in Liscor. Griffon Hunt killed it.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "confirmed",
+				"note": "Its mana core is cracked and nearly worthless."
+			},
+			"summary": "A Sewer Slime climbs out of the flooding sewers. Halrac kills it with a lightning arrow. Revi scolds the Bronze teams who stood by. Typhenous and Revi push the sludge back down."
+		},
+		"b7.vuliel_drae_asks_griffon_hunt_about_the_dungeon": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"blade": {
+					"prefer": [
+						"pekona"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rogue": {
+					"prefer": [
+						"insill"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"vuliel_drae.dives_the_dungeon",
+					"dungeon.will_be_gold_rank_or_higher"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "confirmed",
+				"note": "Members in the text: Anith, Dasha, Insill, Larr and Pekona."
+			},
+			"summary": "The Silver team Vuliel Drae asks Griffon Hunt about the dungeon. Halrac will not help and says it will be rated Gold or higher. Insill says the whole area will flood soon. They go down anyway."
+		},
+		"b7.vuliel_drae_meets_masked_toren": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"skeleton": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"blade": {
+					"prefer": [
+						"pekona"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"toren"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"toren.guides_vuliel_drae",
+					"toren.has_an_enchanted_longsword",
+					"dungeon.egg_swarm_released"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.05",
+				"confidence": "likely",
+				"note": "What the eggs are is not said in the chapter; confidence guess."
+			},
+			"summary": "Masked Toren kills a group of Raskghar archers and meets Vuliel Drae. They give her a cheap enchanted longsword. She cannot speak and uses signs. Anith thinks she is a [Doomseeker]. In an unexplored corridor she crushes eight eggs and a swarm comes. The party hides in a narrow room."
+		}
+	},
+	"system": [
+		{
+			"who": "toren",
+			"kind": "class",
+			"name": "[Skeleton Knight]",
+			"level": 24,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "toren",
+			"kind": "class",
+			"name": "[Sword Dancer]",
+			"level": 3,
+			"confidence": "confirmed"
+		}
+	]
+}

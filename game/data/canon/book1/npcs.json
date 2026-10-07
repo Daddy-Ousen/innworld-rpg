@@ -235,10 +235,10 @@
 			"tags": ["human", "guard", "gate_guard"],
 			"faction": "celum_watch",
 			"home": "celum",
-			"classes": [{"name": "[Guardsman]", "level": null}],
+			"classes": [{"name": "[Guardsman]", "level": null}, {"name": "[Actor]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed"},
+			"canon_ref": {"book": 1, "chapter": "1.19R", "confidence": "confirmed", "note": "M19.3 (5.04): by Book 7 he is Wesle Salkis, an [Actor] who leads the Players of Celum."},
 			"summary": "Young, sleepy gate guard of Celum with a thin try at a mustache, cheap leather armour and a sword. Takes Ryoka's Goblin warning seriously and asks her to guide the Watch."
 		},
 		"garia_strongheart": {
@@ -487,7 +487,7 @@
 			"tags": ["undead", "skeleton", "warrior", "servant", "levels"],
 			"faction": null,
 			"home": "wandering_inn",
-			"classes": [{"name": "[Skeleton Warrior]", "level": 3}],
+			"classes": [{"name": "[Skeleton Knight]", "level": 24}, {"name": "[Barmaid]", "level": 2}, {"name": "[Leader]", "level": 4}, {"name": "[Tactician]", "level": 5}, {"name": "[Sword Dancer]", "level": 3}],
 			"alive_at_start": true,
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.41", "confidence": "confirmed", "note": "Made by Pisces on day 27 (guess); alive_at_start only means it is not dead in the data. Erin names it Toren in 1.46: the word for the chess rook in another language. Level 3 by 1.53. 1.63: Level 11 after the night of Skinner (the class is not named; a '[Tactician] part' of him is mentioned)."},
