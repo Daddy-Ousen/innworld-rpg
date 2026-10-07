@@ -1,0 +1,537 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.04",
+	"order": 34,
+	"events": {
+		"b7.erin_and_octavia_make_match_boxes": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "stitchworks",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"octavia.makes_fire_matches",
+					"octavia.sells_through_krshia",
+					"octavia.has_door_link_to_the_inn"
+				],
+				"relationship": [
+					{
+						"from": "octavia",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"news": "Octavia of Celum now makes fire-match boxes and sends her potions to Liscor through the Wandering Inn.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Sales split and match recipe are as the text gives them."
+			},
+			"summary": "Erin visits Octavia in Celum by the door. Octavia makes fire-match boxes from ground Corusdeer horn and Fire Beetle shell. She will sell potions in Liscor through Krshia, by leaving crates at the inn for a Street Runner. Erin takes two copper per gold of Octavia's sales each week, and free matches."
+		},
+		"b7.erin_asks_the_players_of_celum_to_play": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"actor": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": []
+				},
+				"actress": {
+					"prefer": [
+						"jasi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"players_of_celum.agree_to_play_at_the_inn",
+					"wesle.leads_the_players_of_celum"
+				],
+				"relationship": [
+					{
+						"from": "wesle",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"news": "The Players of Celum will perform at the Wandering Inn.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Wesle is the old gate guard of Celum (Book 1), now an [Actor] (ADR 0030 record fix)."
+			},
+			"summary": "Erin finds the Players of Celum outside the Runners' Guild. Wesle Salkis, the Players' lead [Actor], has a crowd round him. Erin asks them to perform at her inn, not to give her money. They agree."
+		},
+		"b7.players_of_celum_perform_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"actor": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": []
+				},
+				"actress": {
+					"prefer": [
+						"jasi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"audience": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"players_of_celum.perform_nightly_at_the_inn",
+					"redfang.work_as_inn_security",
+					"wandering_inn.hosts_plays"
+				]
+			},
+			"news": "The Players of Celum played at the Wandering Inn. Antinium stood and cheered for minutes.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					19,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							10
+						]
+					},
+					{
+						"npc": "wesle",
+						"pos": [
+							4,
+							6
+						]
+					},
+					{
+						"npc": "jasi",
+						"pos": [
+							6,
+							6
+						]
+					},
+					{
+						"npc": "grev",
+						"pos": [
+							5,
+							7
+						]
+					},
+					{
+						"npc": "octavia",
+						"pos": [
+							10,
+							9
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							11,
+							12
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							13,
+							12
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							3,
+							12
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							7,
+							12
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							14,
+							12
+						]
+					},
+					{
+						"npc": "bird",
+						"pos": [
+							11,
+							10
+						]
+					}
+				],
+				"line": "The Players of Celum act a snow-golem play at one end of the common room. Five Goblins in armbands marked Security watch the door. Octavia sits in the front row.",
+				"note": "M19.3: a scene. Hours are guesses. Antinium fill the benches off-map in the text; only the named NPCs stand here."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_the_players_perform",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"wesle"
+								]
+							}
+						}
+					],
+					"days": [
+						135,
+						135
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_the_players_perform"
+						],
+						"relationship": [
+							{
+								"from": "wesle",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn spoke with Wesle of the Players of Celum on the night they first played there."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "The play is a snow-golem story in the text. Show is free for now."
+			},
+			"summary": "The Players of Celum act their first play at the inn, with the Antinium in the benches and Octavia in front. Erin hires the five Redfang Goblins as inn security, with armbands. The Antinium give the play a long standing ovation."
+		},
+		"b7.zevara_and_olesm_weigh_the_hobs": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"guard_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.watch_reads_celum_news_of_the_hobs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "likely",
+				"note": "Zevara has resigned in the text; the record is not changed here (guess, flagged)."
+			},
+			"summary": "Zevara and Olesm talk over the news from Celum. Zevara calls Erin insane. Olesm thinks public feeling will make Pallass accept the Hobs."
+		},
+		"b7.selys_files_the_redfang_goblins_as_a_team": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"guildmistress": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.bronze_team_application_filed"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Team and members as in the text."
+			},
+			"summary": "Late at night Selys files an application for an authorised Bronze-rank team called the Redfang Goblins: Headscratcher, Badarrow, Rabbiteater, Numbtongue and Shorthilt. Tekshia shouts at her."
+		},
+		"b7.erin_gains_the_grand_theatre": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.grand_theatre",
+					"erin.has_inn_grand_theatre"
+				]
+			},
+			"news": "The common room of the Wandering Inn grew much larger overnight.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Level and Skill as the text gives them. The overlay is from M19.1."
+			},
+			"summary": "That night Erin gains [Inn: Grand Theatre] and her [Magical Innkeeper] reaches level 34. The common room grows two or three times larger and gains a stage. Jelaqua complains through the floor."
+		},
+		"b7.toren_puts_on_the_mask": {
+			"tier": 2,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"skeleton": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"toren"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"toren.second_self_wears_the_mask"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Toren has two selves in Book 7 (ADR 0030 record fix)."
+			},
+			"summary": "Deep in the Dungeon of Liscor the skeleton Toren sits under an invisible barrier. He puts on a mask. The masked self takes the sword, and it is her turn."
+		}
+	},
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 34,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "erin_solstice",
+			"kind": "skill",
+			"name": "[Inn: Grand Theatre]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

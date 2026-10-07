@@ -1,0 +1,419 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.06M",
+	"order": 36,
+	"events": {
+		"b7.mrsha_has_lessons_with_krshia": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				},
+				"teacher": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.has_lessons_with_krshia"
+				]
+			},
+			"news": "Krshia says the rains will last two months and Liscor will need boats.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Krshia's prediction as in the text."
+			},
+			"summary": "Mrsha walks through the rain to Krshia's flat for coin and counting lessons. Krshia wins prime cuts at a meat auction against Lism and tells the inn to stock up: rain all month and the next, then floods and boats."
+		},
+		"b7.mrsha_learns_grow_grass": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "krshia_home",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.learned_grow_grass",
+					"silverfang.spellbook_for_the_meeting_of_tribes_found"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Gnolls are believed unable to learn mage magic."
+			},
+			"summary": "While Krshia is out, Mrsha opens a hidden chest under the bedroom floor. In it is a huge spellbook, the Silverfang tribe's planned gift for the Meeting of the Tribes. She reads a page and learns [Grow Grass]. She locks everything again."
+		},
+		"b7.halfseekers_plan_a_dungeon_rampart": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.plan_a_dungeon_rampart"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "The Halfseekers dig all day with hired diggers."
+			},
+			"summary": "On a day off the Halfseekers plan to make the city raise the dungeon entrance and build a rampart. Erin suggests hiring diggers from Celum and, through Krshia, Gnolls. Octavia delivers a crate for Krshia."
+		},
+		"b7.octavias_crate_sets_the_inn_floor_alight": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.floor_scorched"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Nobody is hurt."
+			},
+			"summary": "Octavia's potion crate breaks and a magic fire starts in the common room. Water makes it worse. Erin, Octavia and Lyonette smother it with beans. The floorboards in front of the kitchen are black."
+		},
+		"b7.mrsha_fights_crelers_in_the_beaver_cave": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.tamed_a_healing_slime",
+					"crelers.killed_in_the_beaver_cave",
+					"mrsha.keeps_a_creler_egg"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Apista is wounded but lives."
+			},
+			"summary": "Mrsha and Apista go into the hills. She heals a poisoned Fortress Beaver with a healing slime. In a cave Crelers eat dead beavers. She joins Shield Spiders and beavers against them, casts [Grow Grass] and passes out. The Crelers die. She keeps one egg and leaves the slime with the beavers."
+		},
+		"b7.mrsha_becomes_a_druid": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.is_a_druid"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Her classes are a secret in the text."
+			},
+			"summary": "That night Mrsha's [Mage] class folds into [Druid]. Her [Beast Tamer] and [Gardener] are gone. She gains [Wild Growth], and [Wild Affinity] becomes [Peace of the Wild]."
+		},
+		"b7.jelaqua_sees_the_creler_egg_at_dinner": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				},
+				"leader": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.creler_egg_destroyed",
+					"halfseekers.fear_creler_infestation"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "No scene stage (user, M19.3)."
+			},
+			"summary": "Mrsha smells awful at dinner. Jelaqua sees the Creler egg and flips the table. Seborn stomps it. Mrsha runs; Erin, Lyonette and the Halfseekers chase her."
+		},
+		"b7.bird_shoots_a_razorbeak_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 136,
+				"latest": 136,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.eight_razorbeak_kills_in_an_hour"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.06M",
+				"confidence": "confirmed",
+				"note": "Bird waits for more birds."
+			},
+			"summary": "A Razorbeak dives at Mrsha on the hill and Bird shoots it. It is her eighth kill in an hour."
+		}
+	},
+	"system": [
+		{
+			"who": "mrsha",
+			"kind": "class",
+			"name": "[Druid]",
+			"level": 2,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "mrsha",
+			"kind": "skill",
+			"name": "[Wild Growth]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "mrsha",
+			"kind": "skill",
+			"name": "[Peace of the Wild]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}
