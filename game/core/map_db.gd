@@ -13,7 +13,7 @@
 ## 0017): an object with "when_flags" / "unless_flags" is on the map only
 ## while the flags hold (sync_flags; a hidden object is not listed by
 ## objects_near and must not be solid), and "portal" ({"to", "pos",
-## "power_flags"}) makes it a magic door (Portal). M11.1: "kind" names its art
+## "power_flags"} or {"links": [...]}) makes it a magic door (Portal). M11.1: "kind" names its art
 ## in data/objects.json (drawn only; see WorldView.object_look). M13.0 (ADR
 ## 0020): an exit with "when_flags" / "unless_flags" (and an "id") is there
 ## only while the flags hold; a hidden exit is plain floor (exit_at skips it).
@@ -663,21 +663,57 @@ func _validate_seats(where: String, o: Dictionary, bounds: Rect2i) -> void:
 
 
 ## A portal (M10.0): {"to": a known map, "pos": a walkable tile there,
-## "power_flags": a list of flags}; needs rules.portal and the action 'travel'.
+## "power_flags": a list of flags}; or (M19.0) {"links": [link, ...]} where a
+## link is {"id": unique, no ":", "to", "pos", "name"?, "power_flags"?,
+## "when_flags"?, "unless_flags"?, "hours"?: [from, to]}. Needs rules.portal
+## and the action 'travel'.
 func _validate_portal(where: String, p: Variant, db: DataDb) -> void:
-	if not p is Dictionary or not ["to", "pos", "power_flags"].all(
-			func(f: String) -> bool: return (p as Dictionary).has(f)):
-		errors.append("%s: portal must be {to, pos, power_flags}." % where)
-		return
-	if not areas.has(p["to"]):
-		errors.append("%s: portal to unknown map '%s'." % [where, p["to"]])
-	elif not _pos_ok(p["pos"]) or not in_bounds(p["to"], _vec(p["pos"])) 			or not is_walkable(p["to"], _vec(p["pos"])):
-		errors.append("%s: portal pos must be a walkable tile of '%s'." % [where, p["to"]])
-	var flags: Variant = p["power_flags"]
-	if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
-		errors.append("%s: power_flags must be a list of strings." % where)
 	if not db.rules.has("portal") or not db.actions.has("travel"):
 		errors.append("%s: a portal needs rules.portal and the action 'travel'." % where)
+	if p is Dictionary and (p as Dictionary).has("links"):
+		var links: Variant = p["links"]
+		if (p as Dictionary).has("to") or (p as Dictionary).has("pos") or not links is Array 				or (links as Array).is_empty():
+			errors.append("%s: portal links must be a non-empty list and replace to / pos." % where)
+			return
+		var seen := {}
+		for l: Variant in links:
+			_validate_portal_link(where, l, seen, true)
+		return
+	if not p is Dictionary or not ["to", "pos", "power_flags"].all(
+			func(f: String) -> bool: return (p as Dictionary).has(f)):
+		errors.append("%s: portal must be {to, pos, power_flags} or {links}." % where)
+		return
+	_validate_portal_link(where, p, {}, false)
+
+
+## One far end of a door (see _validate_portal).
+func _validate_portal_link(where: String, l: Variant, seen: Dictionary, needs_id: bool) -> void:
+	if not l is Dictionary or not ["to", "pos"].all(func(f: String) -> bool: return (l as Dictionary).has(f)):
+		errors.append("%s: a portal link must be {id, to, pos}." % where)
+		return
+	if needs_id:
+		var id: Variant = l.get("id", null)
+		if not id is String or (id as String) == "" or (id as String).contains(":"):
+			errors.append("%s: a portal link needs an id without ':'." % where)
+		elif seen.has(id):
+			errors.append("%s: duplicate portal link id '%s'." % [where, id])
+		else:
+			seen[id] = true
+	if not areas.has(l["to"]):
+		errors.append("%s: portal to unknown map '%s'." % [where, l["to"]])
+	elif not _pos_ok(l["pos"]) or not in_bounds(l["to"], _vec(l["pos"])) 			or not is_walkable(l["to"], _vec(l["pos"])):
+		errors.append("%s: portal pos must be a walkable tile of '%s'." % [where, l["to"]])
+	var flags: Variant = l.get("power_flags", [])
+	if not flags is Array or not (flags as Array).all(func(f: Variant) -> bool: return f is String):
+		errors.append("%s: power_flags must be a list of strings." % where)
+	_check_flag_lists(where, l)
+	if l.has("name") and not l["name"] is String:
+		errors.append("%s: a portal link name must be a string." % where)
+	if l.has("hours"):
+		var h: Variant = l["hours"]
+		if not h is Array or (h as Array).size() != 2 or not (h as Array).all(
+				func(x: Variant) -> bool: return (x is int or x is float) and int(x) >= 0 and int(x) <= 24):
+			errors.append("%s: portal hours must be [from, to] in whole hours 0 - 24." % where)
 
 
 ## A ride: {"to": a known map, "pos": a walkable tile there, "minutes" >= 1

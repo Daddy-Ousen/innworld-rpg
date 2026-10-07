@@ -1,19 +1,22 @@
 # Handoff
 
-## Just done (2026-10-07, local): M19.P Book 7 plan
-- Branch `docs/m19-plan` (from main 01f1adb). Files: `docs/adr/0030-m19-book7.md` (new), `docs/ROADMAP.md` (M19 steps),
-  `docs/CLOUD.md` (queue), `progress.md`, `handoff.md`. Docs only; no tests run.
-- Book 7 text cut locally: `python tools/extract_epub.py "The Wandering Inn Books 1-17 Pirateaba/Book 7 - The Wandering Inn - The Rains of Liscor.epub" canon/raw/book7`
-  (gitignored). Chapter summaries from the seven reading agents sit in this session's scratchpad (`m19p/`): gone next
-  session. ADR 0030 holds the facts the batches need; batches re-read their chapters with agents.
-- User answers: rain + flood, door with several links + Pallass map, moth wave stage with `xp_window` x3, dive = events only.
+## Just done (2026-10-07, local): M19.0 engine (door links + the rains)
+- Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".
+- Door: `portal.links` (`core/portal.gd`, `Interact.portal_action`, menu one line per open link, console `portal <object> [link]`,
+  `rules.portal.shut_line`). Old single form still works. Rains: `core/rains.gd`, `rules.rains` (flags `izril.rains`, `izril.flood`),
+  `Atmosphere.rain`, `WorldView.setup(..., rain_flag)`, bed variant `rain` -> cue `amb_rain` (`tools/build_rain.py` + ffmpeg).
+- The flood is overlays (tile `water`, `when_flags: ["izril.flood"]`): M19.1 draws them. No save change.
+- Not checked by eye: the rain look. The user runs `flag izril.rains` in the console and walks outside.
+- Tests run: `unit_portal_links`, `unit_rains` (new) + 16 touched scripts, Python tool tests (105), validator. All pass. Full suite not run.
 
 ## Next (the user picks one)
-1. The user merges the M19.P PR (merging = plan approved).
-2. M19.0 Engine: door links + the rains (local or cloud). Ask the open M19.0 choice first: a small `rain` work duress (yes/no).
+1. The user merges the M19.0 PR.
+2. M19.1 World: Pallass door map, door end in Liscor's west wall, flood overlays, [Grand Theatre], moth enemy, Book 7 NPC records (local or cloud).
 3. M20.2 Android build (local: Android SDK, JDK 17, keystore).
 - Open data gaps: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body; the 4.26 M golem
   count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him; 5.09 E covers it: M19.5).
+- M19.1 note: a door link `pos` must be a walkable tile on the far map; the flood rects must not cover the door, the inn hill,
+  an exit or an object, and a player or NPC standing on a tile that floods is not moved (check the spots when you draw the rects).
 
 ## Waiting on the user
 - Merge the M19.P PR.

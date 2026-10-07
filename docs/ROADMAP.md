@@ -330,7 +330,7 @@ cloud: the private repo). 22 chapters, about 286,000 words: 5.00 – 5.08 (with 
 - [x] M19.P Plan + ADR 0030 (2026-10-07, local): seven reading agents, summaries only. Days 133 – about 143; far threads are
   news. User answers: rain and flood (the door is the way to Liscor), a door with several links plus a small Pallass map,
   the moth attack as a wave stage with an XP window x3, the dungeon dive as events only. The user approves the plan by merging its PR
-- [ ] M19.0 Engine: door links (`portal.links`, pick the stone; schema change approved in ADR 0030) and the rains (season
+- [x] M19.0 Engine: door links (`portal.links`, pick the stone; schema change approved in ADR 0030) and the rains (season
   flag, rain on screen and in the sound, flood overlays that block walking). No save change expected
 - [ ] M19.1 World: Pallass door map, the door's Liscor wall end, flood overlays, the [Grand Theatre] and the smashed
   watchtower, the Face-Eater Moth and the moth swarm, looks, Book 7 NPC records

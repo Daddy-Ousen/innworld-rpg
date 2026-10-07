@@ -5,6 +5,8 @@
 ## - The bed: the map's place from data/audio.json `ambience` (`by_map`,
 ##   else `indoor` / `outdoor`), then the place's variant for the time and
 ##   season, with the same fallback as the music (MusicPick.pick_variant).
+## - Rain (M19.0): while it rains, a place that has a "rain" variant plays it
+##   instead (outdoor places; a cave or a room keeps its own bed).
 ## - Object loops: an object kind with "sound" in data/objects.json
 ##   ({"cue", "radius" in cells, default DEFAULT_RADIUS}) plays that cue
 ##   around the object; it fades out with distance.
@@ -18,11 +20,15 @@ const DEFAULT_RADIUS := 5.0
 static func bed(gs: GameState, db: DataDb, audio: AudioDb) -> String:
 	var area := gs.player.area
 	return bed_for(audio, audio.ambience_place(area, db.maps.is_indoor(area)),
-			Atmosphere.darkness(gs.clock.minute()) >= MusicPick.NIGHT_FROM, Winter.on(gs, db))
+			Atmosphere.darkness(gs.clock.minute()) >= MusicPick.NIGHT_FROM, Winter.on(gs, db),
+			Rains.on(gs, db))
 
 
-static func bed_for(audio: AudioDb, place: String, night: bool, winter: bool) -> String:
-	return MusicPick.pick_variant(audio.ambience_beds(place), night, winter)
+static func bed_for(audio: AudioDb, place: String, night: bool, winter: bool, rain: bool = false) -> String:
+	var beds := audio.ambience_beds(place)
+	if rain and String(beds.get("rain", "")) != "":
+		return String(beds["rain"])
+	return MusicPick.pick_variant(beds, night, winter)
 
 
 ## The loop of an object kind's art ({"cue": String, "radius": cells};

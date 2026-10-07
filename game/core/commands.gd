@@ -398,11 +398,11 @@ static func ride(gs: GameState, db: DataDb, object_id: String) -> String:
 
 ## Steps through the nearby magic door `object_id` (M10.0, Portal). Returns
 ## "" or why not. Refused while knocked out or with enemies near.
-static func portal(gs: GameState, db: DataDb, object_id: String) -> String:
+static func portal(gs: GameState, db: DataDb, object_id: String, link_id: String = "") -> String:
 	Combat.begin_command(gs)
 	var why := Combat.refusal(gs)
 	if why == "":
-		why = Portal.use(gs, db, object_id)
+		why = Portal.use(gs, db, object_id, link_id)
 	_after(gs, db)
 	return why
 

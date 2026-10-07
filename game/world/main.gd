@@ -96,7 +96,8 @@ func _ready() -> void:
 		max_hp[id] = int(NpcReact.stats(Session.db, id)["hp"])
 	view.audio = Audio.db
 	view.setup(Session.db.maps, names, Combat.scaled_enemies(Session.db), max_hp,
-			String(Winter.rules(Session.db).get("flag", "")), races)
+			String(Winter.rules(Session.db).get("flag", "")), races,
+			String(Rains.rules(Session.db).get("season_flag", "")))
 	view.sounds.connect(Audio.play_cues)
 	view.area_loops.connect(func(loops: Array) -> void:
 		Audio.place_loops(view.loop_spots, loops, WorldView.TILE))
@@ -529,8 +530,9 @@ func use(object_id: String, action_id: String) -> void:
 	if action_id == Interact.RIDE:
 		_command_error(_action_sound_if_ok(Commands.ride(gs, db, object_id), action_id))
 		return
-	if action_id == Interact.PORTAL:
-		_command_error(_action_sound_if_ok(Commands.portal(gs, db, object_id), action_id))
+	if Interact.is_portal_action(action_id):
+		_command_error(_action_sound_if_ok(
+				Commands.portal(gs, db, object_id, Interact.portal_link_of(action_id)), Interact.PORTAL))
 		return
 	if action_id == Interact.TAKE:
 		_command_error(_action_sound_if_ok(Commands.take(Session.gs, Session.db, object_id), action_id))

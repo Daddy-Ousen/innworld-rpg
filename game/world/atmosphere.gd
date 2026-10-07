@@ -9,6 +9,8 @@
 ##   always glows a little. A flickering light wobbles by a fixed wave (no
 ##   randomness; the phase comes from its cell).
 ## - Snow: in winter, outdoors, flakes fall over the camera's view.
+## - Rain (M19.0): while the rains fall, outdoors, streaks fall over the view
+##   (faster and steeper than snow; Rains).
 ## Presentation only: reads what the view gives it, never changes GameState.
 class_name Atmosphere
 extends Node2D
@@ -35,16 +37,21 @@ const FLICKER_SPEED := 7.0
 const SNOW_AMOUNT := 320
 const SNOW_LIFE := 9.0
 const SNOW_SPEED := Vector2(14, 60)
+const RAIN_AMOUNT := 420
+const RAIN_LIFE := 1.1
+const RAIN_SPEED := Vector2(90, 420)
 
 var tile := 32
 var indoor := false
 var winter := false
+var raining := false
 var minute := 720
 ## 0 by day, 1 at full night (see darkness).
 var dark := 0.0
 
 var tint: CanvasModulate
 var snow: CPUParticles2D
+var rain: CPUParticles2D
 var lights: Node2D
 var _time := 0.0
 static var _light_texture: Texture2D
@@ -60,6 +67,8 @@ func _init() -> void:
 	add_child(lights)
 	snow = _make_snow()
 	add_child(snow)
+	rain = _make_rain()
+	add_child(rain)
 
 
 ## The sky colour at a minute of the day (0–1439).
@@ -121,10 +130,11 @@ func show_area(is_indoor: bool, sources: Array) -> void:
 	_apply()
 
 
-## The time of day and the season. Called on every refresh.
-func set_time(at: int, is_winter: bool) -> void:
+## The time of day and the weather. Called on every refresh.
+func set_time(at: int, is_winter: bool, is_raining: bool = false) -> void:
 	minute = at
 	winter = is_winter
+	raining = is_raining
 	_apply()
 
 
@@ -138,6 +148,8 @@ func _apply() -> void:
 	tint.color = room_tint(minute) if indoor else sky_tint(minute)
 	snow.emitting = winter and not indoor
 	snow.visible = snow.emitting
+	rain.emitting = raining and not indoor
+	rain.visible = rain.emitting
 	_set_energy()
 
 
@@ -156,12 +168,13 @@ func _process(delta: float) -> void:
 	_time += delta
 	if lights.get_child_count() > 0:
 		_set_energy()
-	if snow.emitting:
+	if snow.emitting or rain.emitting:
 		var cam := get_viewport().get_camera_2d() if get_viewport() != null else null
 		if cam != null:
 			var view := get_viewport_rect().size / cam.zoom
-			snow.global_position = cam.get_screen_center_position() - Vector2(0, view.y / 2.0 + tile)
-			snow.emission_rect_extents = Vector2(view.x / 2.0 + tile * 2, tile)
+			for p: CPUParticles2D in [snow, rain]:
+				p.global_position = cam.get_screen_center_position() - Vector2(0, view.y / 2.0 + tile)
+				p.emission_rect_extents = Vector2(view.x / 2.0 + tile * 2, tile)
 
 
 func _make_snow() -> CPUParticles2D:
@@ -185,6 +198,31 @@ func _make_snow() -> CPUParticles2D:
 	s.visible = false
 	s.z_index = 50
 	return s
+
+
+func _make_rain() -> CPUParticles2D:
+	var r := CPUParticles2D.new()
+	r.name = "Rain"
+	r.amount = RAIN_AMOUNT
+	r.lifetime = RAIN_LIFE
+	r.preprocess = RAIN_LIFE
+	r.local_coords = false
+	r.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
+	r.emission_rect_extents = Vector2(640, 32)
+	var img := Image.create(2, 10, false, Image.FORMAT_RGBA8)
+	img.fill(Color.WHITE)
+	r.texture = ImageTexture.create_from_image(img)
+	r.particle_flag_align_y = true
+	r.direction = RAIN_SPEED.normalized()
+	r.spread = 4.0
+	r.gravity = Vector2.ZERO
+	r.initial_velocity_min = RAIN_SPEED.length() * 0.9
+	r.initial_velocity_max = RAIN_SPEED.length() * 1.1
+	r.color = Color(0.72, 0.8, 0.95, 0.55)
+	r.emitting = false
+	r.visible = false
+	r.z_index = 50
+	return r
 
 
 ## One soft round light shape, shared by every light.

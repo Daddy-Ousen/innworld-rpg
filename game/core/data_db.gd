@@ -34,6 +34,8 @@ const ECONOMY_HUNGER_FIELDS := ["step", "floor", "inn_location", "inn_npc", "inn
 	"hungry_line", "fed_line"]
 ## rules.portal (M10.0, optional).
 const PORTAL_FIELDS := ["trips_per_day", "minutes", "line", "dry_line", "spent_line"]
+## rules.rains (M19.0, optional): the flags of the rains season and the flood.
+const RAINS_FIELDS := ["season_flag", "flood_flag"]
 ## rules.traps (M13.T, optional).
 const TRAP_FIELDS := ["search_action", "search_name", "disarm_action", "search_radius",
 	"spot_per_point", "disarm_per_point", "sprung_line", "found_line", "none_line",
@@ -162,8 +164,26 @@ func _validate_rules() -> void:
 		_validate_economy(rules["economy"])
 	if rules.has("portal"):  # optional (M10.0): only maps with a portal need it
 		_validate_portal(rules["portal"])
+	if rules.has("rains"):  # optional (M19.0): toy dbs have no rains
+		_validate_rains(rules["rains"])
 	if rules.has("traps"):  # optional (M13.T): only maps with traps need it
 		_validate_traps(rules["traps"])
+
+
+## rules.rains (M19.0): see Rains.
+func _validate_rains(r: Variant) -> void:
+	if not r is Dictionary:
+		errors.append("rules.rains: must be an object.")
+		return
+	for field: String in RAINS_FIELDS:
+		if not (r as Dictionary).has(field):
+			errors.append("rules.rains: missing '%s'." % field)
+			return
+		if not r[field] is String or (r[field] as String) == "":
+			errors.append("rules.rains: %s must be a non-empty flag name." % field)
+			return
+	if r["season_flag"] == r["flood_flag"]:
+		errors.append("rules.rains: season_flag and flood_flag must differ.")
 
 
 ## rules.traps (M13.T): see Traps. MapDb checks its actions on maps with traps.
@@ -191,6 +211,8 @@ func _validate_portal(p: Variant) -> void:
 			return
 	if int(p["trips_per_day"]) < 0 or int(p["minutes"]) < 1:
 		errors.append("rules.portal: trips_per_day must be >= 0 and minutes >= 1.")
+	if p.has("shut_line") and not p["shut_line"] is String:
+		errors.append("rules.portal: shut_line must be a string.")
 
 
 ## rules.winter (M8.W): see Winter.
