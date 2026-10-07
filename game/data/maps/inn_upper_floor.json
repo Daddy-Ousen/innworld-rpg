@@ -9,11 +9,11 @@
 	"zones": {},
 	"exits": [
 		{"at": [18, 6], "to": "inn_interior", "arrive": [15, 13], "minutes": 0},
-		{"at": [1, 5], "to": "inn_watchtower", "arrive": [4, 6], "minutes": 0}
+		{"id": "tower_ladder_exit", "at": [1, 5], "to": "inn_watchtower", "arrive": [4, 6], "minutes": 0, "unless_flags": ["wandering_inn.watchtower_smashed"]}
 	],
 	"objects": [
 		{"id": "stairs_down", "kind": "stairs", "at": [18, 6], "name": "Stairs down", "actions": []},
-		{"id": "tower_ladder", "kind": "ladder", "at": [1, 5], "name": "Ladder to the tower", "actions": []},
+		{"id": "tower_ladder", "kind": "ladder", "at": [1, 5], "name": "Ladder to the tower", "actions": [], "unless_flags": ["wandering_inn.watchtower_smashed"]},
 		{"id": "guest_bed_1", "kind": "bed", "at": [1, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
 		{"id": "guest_bed_2", "kind": "bed", "at": [6, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},
 		{"id": "guest_bed_3", "kind": "bed", "at": [11, 1], "name": "Guest bed", "actions": ["clean_room"], "solid": true, "sleep": true, "price": 8},

@@ -332,7 +332,7 @@ cloud: the private repo). 22 chapters, about 286,000 words: 5.00 – 5.08 (with 
   the moth attack as a wave stage with an XP window x3, the dungeon dive as events only. The user approves the plan by merging its PR
 - [x] M19.0 Engine: door links (`portal.links`, pick the stone; schema change approved in ADR 0030) and the rains (season
   flag, rain on screen and in the sound, flood overlays that block walking). No save change expected
-- [ ] M19.1 World: Pallass door map, the door's Liscor wall end, flood overlays, the [Grand Theatre] and the smashed
+- [x] M19.1 World (2026-10-07, local): Pallass door map, the door's Liscor wall end, flood overlays, the [Grand Theatre] and the smashed
   watchtower, the Face-Eater Moth and the moth swarm, looks, Book 7 NPC records
 - [ ] M19.2 Canon 5.00 – 5.03 (days 133 – 135): the Pallass crisis, the embargo, the lease, the rains begin
 - [ ] M19.3 Canon 5.04 – 5.06 M (days 135 – 136): Octavia and the Players, [Grand Theatre], Toren, Vuliel Drae, Mrsha

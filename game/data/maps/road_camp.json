@@ -9,7 +9,7 @@
 	"zones": {},
 	"exits": [
 		{"at": [16, 0, 2, 1], "to": "celum_gate", "arrive": [16, 18], "minutes": 600, "sign": {"icon": "none", "text": "Road to Celum"}},
-		{"at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600, "sign": {"icon": "none", "text": "Road to Liscor"}},
+		{"id": "south_road", "at": [16, 23, 2, 1], "to": "liscor_gate", "arrive": [16, 1], "minutes": 600, "sign": {"icon": "none", "text": "Road to Liscor"}, "unless_flags": ["izril.flood"]},
 		{"at": [31, 5, 1, 2], "to": "esthelm_ruins", "arrive": [1, 4], "minutes": 180, "sign": {"icon": "none", "text": "Side road to Esthelm"}}
 	],
 	"objects": [

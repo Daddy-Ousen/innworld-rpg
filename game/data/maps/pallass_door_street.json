@@ -1,0 +1,83 @@
+{
+	"schema_version": 1,
+	"id": "pallass_door_street",
+	"name": "A Pallass alley and street",
+	"location": "pallass",
+	"confidence": "guess",
+	"note": "Design map (M19.1, ADR 0030). The far end of the Albez door in Pallass: the door link opens in an alley and the Watch guards it (5.00, 5.01). The text gives no street plan; the alley, the street and the post are guesses. No exits: the city is not open to the player.",
+	"zones": {},
+	"exits": [],
+	"objects": [
+		{
+			"id": "albez_door_pallass",
+			"kind": "door",
+			"at": [
+				5,
+				1
+			],
+			"name": "Magic door",
+			"actions": [],
+			"when_flags": [
+				"albez_door.anchor_at_pallass"
+			],
+			"portal": {
+				"to": "inn_interior",
+				"pos": [
+					3,
+					12
+				],
+				"power_flags": [
+					"erin.magical_grounds"
+				]
+			}
+		},
+		{
+			"id": "pallass_watch_post",
+			"kind": "plaque",
+			"at": [
+				20,
+				8
+			],
+			"name": "Pallass Watch post",
+			"actions": [],
+			"sign": {
+				"icon": "shield",
+				"text": "Pallass Watch"
+			}
+		},
+		{
+			"id": "pallass_door_forms",
+			"kind": "plaque",
+			"at": [
+				8,
+				8
+			],
+			"name": "Door forms",
+			"actions": [],
+			"sign": {
+				"icon": "scroll",
+				"text": "Door forms"
+			}
+		}
+	],
+	"legend": {
+		"#": "city_wall",
+		"_": "cobble",
+		"B": "building",
+		"b": "building_b"
+	},
+	"rows": [
+		"bbbbbbbbbbbbbbbbbbbbbbbb",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB__BBBBBBBBBBBBBBBBB",
+		"BBBBB_________________##",
+		"BBBBB_________________##",
+		"BBBBB_________________##",
+		"BBBBBBBBBBBBBBBBBBBBBBBB",
+		"BBBBBBBBBBBBBBBBBBBBBBBB"
+	]
+}

@@ -2645,6 +2645,16 @@
 			"confidence": "likely",
 			"note": "Scrawny, black-and-brown fur, slightly curved horns, bar pupils, bloody teeth, normal goat size (4.33, 4.34). Drawn by tools/build_creatures.py (no goat in the art sources)."
 		},
+		"face_eater_moth": {
+			"creature": "moth",
+			"ramp": ["#2b2419", "#6b5d46", "#a89c84", "#e4dcc8"],
+			"confidence": "guess",
+			"note": "A giant moth from the rift (5.07). The LPC bee at double size, grey-brown. Wings, face and mouth are not drawn."},
+		"moth_swarm": {
+			"creature": "bee",
+			"ramp": ["#352e22", "#7a6c52", "#b9ad94", "#efe8d6"],
+			"confidence": "guess",
+			"note": "A swarm of smaller moths (5.07). The LPC bee recoloured pale; one marker stands for the cloud."},
 		"headscratcher": {
 			"body": "male",
 			"skin": "green",

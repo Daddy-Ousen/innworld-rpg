@@ -1,0 +1,858 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"embria_grasstongue": {
+			"name": "Embria Grasstongue",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"officer",
+				"commander",
+				"soldier",
+				"liscor",
+				"relc_family"
+			],
+			"faction": "liscor_army",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Commander]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Wing Commander of Liscor's 4th Company, Relc's daughter (5.13). Young red-scaled Drake woman in officer's armour with a spear. Clashes with Zevara over the Antinium and distrusts the Goblins. Her mother died a hero (Relc)."
+			},
+			"summary": "A hard, proud young Wing Commander who brings the 4th Company back to Liscor. She loves her father but cannot forgive him for leaving the army, and she distrusts the Antinium and the Redfang five."
+		},
+		"venim": {
+			"name": "Venim",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"officer",
+				"watch",
+				"pallass"
+			],
+			"faction": "pallass_watch",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Watch Captain]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Watch Captain of Pallass (5.01). Wears bright yellow armour, like a giant dandelion (5.02). One of three Pallass Watch Captains who work with Zevara on the door lease (5.02 - 5.03). Hunts Selys's kidnappers (5.18 S)."
+			},
+			"summary": "A cautious, fair Pallass Watch Captain. He follows the Senators' orders in the alley fight, then helps Zevara and Erin find a deal over the door and later hunts Selys's kidnappers."
+		},
+		"errif_jealwind": {
+			"name": "Errif Jealwind",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"merchant",
+				"senator",
+				"pallass",
+				"politician"
+			],
+			"faction": "pallass_assembly",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Merchant]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "Head of the Merchants' Guild in Pallass and a Head Speaker of the Assembly of Crafts (5.01). Plump Gnoll with a skullcap. Tries to seize Erin's door for 'security'; Erin cuts the link on him."
+			},
+			"summary": "A smooth, greedy Pallass Gnoll Senator. He sees Erin's door as a prize and treats her as a foolish Human until she cuts the link."
+		},
+		"nelliam_hailwing": {
+			"name": "Nelliam Hailwing",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"greeter",
+				"young",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Greeter]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "confirmed",
+				"note": "A teenage-looking Pallass [Greeter] who guides Erin on a tour of the city (5.01) just before the trouble starts."
+			},
+			"summary": "A friendly young Drake guide in Pallass. He shows Erin the parade and the streets until the Watch pulls her back to her door."
+		},
+		"ocelos": {
+			"name": "Ocelos",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"officer",
+				"soldier",
+				"wall_lord_staff"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "likely",
+				"note": "Officer in Ilvriss's party at Erin's inn (5.13). Tells Ilvriss and Erin about Relc, the 'Gecko of Liscor', and Embria. Rank and city not stated."
+			},
+			"summary": "A Drake officer with a good memory for army history. He briefs Ilvriss and Erin on Relc's past."
+		},
+		"fleiss": {
+			"name": "Fleiss",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"guildmaster",
+				"official"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Guildmaster]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "likely",
+				"note": "A heavyset Guildmaster who welcomes Selys back after the kidnapping and presses her about the inheritance (5.18 S). Which guild and city is not stated."
+			},
+			"summary": "A fussy Guildmaster who cares more about the Heartflame inheritance than about Selys."
+		},
+		"xalia": {
+			"name": "Xalia",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"shivertail_family",
+				"angry"
+			],
+			"faction": "shivertail_family",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Zel's sister-in-law (wife of one of his brothers). Screams at Selys through the scrying orb at the will reading over the Heartflame armour (5.17 S)."
+			},
+			"summary": "A furious relative who wants the Heartflame Breastplate for the family and attacks Selys over the will."
+		},
+		"wuvisa": {
+			"name": "Wuvisa",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"friend",
+				"liscor",
+				"young"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "A friend of Selys who argues with Drassi about the Goblins at the gathering after the kidnapping (5.18 S)."
+			},
+			"summary": "One of Selys's Drake friends. She dislikes Goblins and Drassi's cheer."
+		},
+		"sserys": {
+			"name": "General Sserys",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"general",
+				"historic",
+				"dead"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[General]",
+					"level": null
+				}
+			],
+			"alive_at_start": false,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "likely",
+				"note": "A famous Drake general from history. His name is on a coffin in Liscor's graveyard; the Heartflame armour is tested beside it (5.18 S). 'Drakes do not run' is his phrase. Old Book 6 notes name him as the one who wanted the name Reiss for a son."
+			},
+			"summary": "A Drake hero from old wars. His coffin and his famous saying matter to the armour's riddle."
+		},
+		"khal": {
+			"name": "Brigadier General Khal",
+			"race": "Human",
+			"tags": [
+				"human",
+				"officer",
+				"general",
+				"chandrar",
+				"empire_of_sands"
+			],
+			"faction": "empire_of_sands",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.02",
+				"confidence": "likely",
+				"note": "A tanned Brigadier General of the Empire of Sands. Commands eight thousand men against Garuda raiders under a young noble (5.02). Race is inferred from the setting."
+			},
+			"summary": "A seasoned officer stuck under a foolish noble commander as the Garuda attack. Off-map."
+		},
+		"riefel": {
+			"name": "Emir Riefel",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"emir",
+				"chandrar",
+				"empire_of_sands"
+			],
+			"faction": "empire_of_sands",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.02",
+				"confidence": "likely",
+				"note": "A young noble Emir who outranks Khal. Lighter-skinned, wears cloth not armour, carries a flashy magic scimitar (5.02)."
+			},
+			"summary": "A vain young Emir who leads the Empire of Sands force badly. Off-map."
+		},
+		"nawalishifra_tannousin": {
+			"name": "Nawalishifra Tannousin",
+			"race": "Human",
+			"tags": [
+				"human",
+				"merchant",
+				"chandrar",
+				"smith_clan"
+			],
+			"faction": "tannousin_clan",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Merchant]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "A Chandrar merchant of the Tannousin clan of Naq-Alrama smiths. Sells ingots with her brother Allaif at Jerios Bazaar (Interlude - Flos)."
+			},
+			"summary": "A sharp, honest merchant who guards her clan's name and scolds her brother."
+		},
+		"allaif": {
+			"name": "Allaif",
+			"race": "Human",
+			"tags": [
+				"human",
+				"merchant",
+				"chandrar",
+				"smith_clan"
+			],
+			"faction": "tannousin_clan",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "guess",
+				"note": "Nawalishifra's brother; he sells the clan's ingots to a [Slaver]-merchant on bad terms (Interlude - Flos). That he shares the Tannousin name is a guess."
+			},
+			"summary": "A silver-tongued, careless brother who makes a poor deal for the clan."
+		},
+		"emme": {
+			"name": "Emme",
+			"race": "Human",
+			"tags": [
+				"human",
+				"actor",
+				"celum",
+				"players_of_celum",
+				"dwarf_blood"
+			],
+			"faction": "players_of_celum",
+			"home": "celum",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Stage manager of the Players of Celum, small and part Dwarf (5.04). Usually gets small or odd parts such as costume pieces; a snow-golem play gives her a lead."
+			},
+			"summary": "The Players' stage manager. She loves the stage, even in small or odd roles."
+		},
+		"esbell": {
+			"name": "Esbell",
+			"race": "Human",
+			"tags": [
+				"human",
+				"actor",
+				"celum",
+				"players_of_celum"
+			],
+			"faction": "players_of_celum",
+			"home": "celum",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "A nervous Player of Celum who is afraid to perform before the Antinium (5.04). Wesle tells her they are an audience like any other."
+			},
+			"summary": "A young Player of Celum who fears the Antinium audience."
+		},
+		"pralcem": {
+			"name": "Pralcem",
+			"race": "Human",
+			"tags": [
+				"human",
+				"actor",
+				"celum",
+				"players_of_celum"
+			],
+			"faction": "players_of_celum",
+			"home": "celum",
+			"classes": [
+				{
+					"name": "[Actor]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "likely",
+				"note": "A Player who plays Macduff in the troupe's plays, as a fan notes in 5.04."
+			},
+			"summary": "An established actor in the Players' troupe."
+		},
+		"tilwa_petroms": {
+			"name": "Tilwa Petroms",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"invrisil",
+				"schemer"
+			],
+			"faction": null,
+			"home": "invrisil",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "A Lord of Invrisil known as a schemer. Writes to Laken to acknowledge him as an Emperor and asks him to meet in Invrisil (5.09 E)."
+			},
+			"summary": "A scheming Invrisil noble who sees a rising Emperor and wants a meeting."
+		},
+		"filk": {
+			"name": "Filk",
+			"race": "Human",
+			"tags": [
+				"human",
+				"headman",
+				"gec",
+				"farmer",
+				"laken_lands"
+			],
+			"faction": null,
+			"home": "gec",
+			"classes": [
+				{
+					"name": "[Headman]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Headman of the town of Gec in Laken's lands. Brings gifts and thanks to Laken and asks how safe the town is from the Goblins (5.09 E)."
+			},
+			"summary": "A small-town headman who brings gifts to the Emperor who guards his town."
+		},
+		"rael_veniford": {
+			"name": "Rael Veniford",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"young",
+				"veniford"
+			],
+			"faction": "house_veniford",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Young Lord of Veniford. Rides to Riverfarm with his aunt and friends, sneers at the small town, and is teased by the other young nobles (5.11 E). Point of view of the ride."
+			},
+			"summary": "A proud, spoiled young noble who goes to meet the new Emperor with his aunt and friends."
+		},
+		"bevia_veniford": {
+			"name": "Bevia Veniford",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"elder",
+				"veniford"
+			],
+			"faction": "house_veniford",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Matriarch of House Veniford and Rael's aunt (5.11 E). Outlived two husbands and both Antinium Wars; stern, sharp and widely feared."
+			},
+			"summary": "The iron aunt who keeps Rael in line and judges the new Emperor with a cold eye."
+		},
+		"andres_of_lelk": {
+			"name": "Lord Andres of Lelk",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"young",
+				"lelk"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "A young noble who rides to Riverfarm with Rael. Has the richest lands of the six friends (5.10 E, 5.11 E)."
+			},
+			"summary": "A wealthy young Lord and Rael's riding companion."
+		},
+		"pattin_of_vaunt": {
+			"name": "Lord Pattin of Vaunt",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"young",
+				"vaunt"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Young heir of a small city; poorest of the six friends. Worn riding clothes and a sad mare; knows the history of the Antinium Wars (5.11 E)."
+			},
+			"summary": "A poor but thoughtful young noble in Rael's circle."
+		},
+		"cimeca_tellis": {
+			"name": "Lady Cimeca of Tellis",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"young",
+				"house_tellis"
+			],
+			"faction": "house_tellis",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "A young Lady of House Tellis with large holdings; rides with Rael's circle (5.10 E, 5.11 E)."
+			},
+			"summary": "A well-off young noble who joins the banquet ride."
+		},
+		"haviet_meliope": {
+			"name": "Haviet Meliope",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"young",
+				"meliope"
+			],
+			"faction": "house_meliope",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "A young noblewoman with emerald earrings; she and Rael dislike each other (5.11 E). Has the Skill [Long Ear]."
+			},
+			"summary": "A young Lady who trades barbs with Rael and listens in on everyone."
+		},
+		"oswalt": {
+			"name": "Lord Oswalt",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"young"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "likely",
+				"note": "A young noble in Rael's party who once cheated on Ellia Cantras; laughs at Rael's embarrassments (5.11 E). Home not stated."
+			},
+			"summary": "A careless young Lord with a poor name among the ladies."
+		},
+		"ellia_cantras": {
+			"name": "Ellia Cantras",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"young",
+				"cantras"
+			],
+			"faction": "house_cantras",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Third daughter of House Cantras (bees, peach orchards, a few mages). Glares at Oswalt (5.11 E)."
+			},
+			"summary": "A young Lady who wants nothing to do with Oswalt."
+		},
+		"tourant": {
+			"name": "Lord Tourant",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"izril"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "likely",
+				"note": "A noble of Izril who presses Laken for a talk at the banquet among the fae (5.11 E)."
+			},
+			"summary": "One of many nobles who swarm the Emperor at Magnolia's gathering."
+		},
+		"kerrig_louis": {
+			"name": "Sir Kerrig Louis",
+			"race": "Human",
+			"tags": [
+				"human",
+				"knight",
+				"knight_of_the_petal",
+				"captive",
+				"north_izril"
+			],
+			"faction": "knights_of_the_petal",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Knight]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Older Knight of the Petal, captured by Rags's tribe and stripped of arms and armour (5.19 G, 5.20 G). He watches Rags, names her officers and sees the road battle from the wagons."
+			},
+			"summary": "A calm, observant Knight prisoner. He sees Rags's tribe up close and judges it fairly."
+		},
+		"quietstab": {
+			"name": "Quietstab",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"lieutenant",
+				"raid_leader",
+				"mountain_city"
+			],
+			"faction": "rags_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "A nickname. A seasoned Hob raid leader from Tremborag's tribe who speaks for the Mountain City Goblins among Rags's officers (5.19 G, 5.20 G). Votes to exile the Goblins who hurt a prisoner."
+			},
+			"summary": "A hard older Hob officer. He represents Tremborag's Goblins in Rags's tribe."
+		},
+		"rockfall_chieftain": {
+			"name": "The Rockfall Chieftain",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"lieutenant",
+				"chieftain",
+				"female"
+			],
+			"faction": "rags_tribe",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Chieftain]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "A female Hob who led a fairly strong tribe, the Rockfall, before joining Rags (5.19 G). One of her chief officers. No personal name given."
+			},
+			"summary": "A tough female Hob and former Chieftain. She now follows Rags."
+		},
+		"yitton_byres": {
+			"name": "Yitton Byres",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"byres",
+				"father"
+			],
+			"faction": "house_byres",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Head of House Byres, father of Ylawes and Yvlon (5.08, 5.15). Grey-brown hair and a short beard; wears chainmail, no rings. Meets Tyrion in the rain at the war camp (5.15)."
+			},
+			"summary": "A proud, poor Lord who comes to Tyrion's camp. His children are the Silver Swords and the Horns of Hammerad."
+		},
+		"sir_relz": {
+			"name": "Sir Relz",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"commentator",
+				"scrying",
+				"walled_city"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "A Drake scrying commentator who narrates the moth battle for the world with Noass (5.08)."
+			},
+			"summary": "A chatty Drake commentator for the scrying broadcast."
+		},
+		"noass": {
+			"name": "Noass",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"commentator",
+				"scrying",
+				"walled_city"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "confirmed",
+				"note": "The second Drake commentator of the moth battle scrying (5.08). Names Seborn as the Halfseekers' [Rogue]."
+			},
+			"summary": "A Drake commentator who explains the fight to a watching world."
+		}
+	}
+}

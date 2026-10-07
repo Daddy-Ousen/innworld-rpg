@@ -1,6 +1,15 @@
 # Handoff
 
-## Just done (2026-10-07, local): M19.0 engine (door links + the rains)
+## Just done (2026-10-07, local): M19.1 world (branch `feat/m19.1-world`)
+- Door `albez_door` has links celum / pallass (flag `albez_door.anchor_at_pallass`) / liscor (`albez_door.anchor_at_liscor_wall`). New map
+  `pallass_door_street`. Flood overlays (flag `izril.flood`) on floodplains_south, liscor_gate, dungeon_rift, inn_hill rows 16+. Gated exits:
+  liscor_market east_gate, road_camp south_road, ruins_entrance west_road. Flags `wandering_inn.grand_theatre`, `wandering_inn.watchtower_smashed`.
+  Enemies `face_eater_moth`, `moth_swarm` (no spawns). `canon/book7/` has npcs + locations (33 / 14) and an empty `chapters/` (.gitkeep).
+- Gotchas for M19.2+: NPC goals on flooded tiles (e.g. Rags goal [6,18] on inn_hill) and NPC routes over the 3 gated exits need a decision in M19.6.
+  `sim_winter` now checks only the `toren_snow_wall` overlay. A `--import` crash can leave new PNGs with no `.import`: run it again.
+- Next: M19.2 canon 5.00 – 5.03 (ask stage and hook choices first). User merges the M19.1 PR first.
+
+## Before that (2026-10-07, local): M19.0 engine (door links + the rains)
 - Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".
 - Door: `portal.links` (`core/portal.gd`, `Interact.portal_action`, menu one line per open link, console `portal <object> [link]`,
   `rules.portal.shut_line`). Old single form still works. Rains: `core/rains.gd`, `rules.rains` (flags `izril.rains`, `izril.flood`),
@@ -11,7 +20,7 @@
 
 ## Next (the user picks one)
 1. The user merges the M19.0 PR.
-2. M19.1 World: Pallass door map, door end in Liscor's west wall, flood overlays, [Grand Theatre], moth enemy, Book 7 NPC records (local or cloud).
+2. M19.2 Canon 5.00 – 5.03 (local or cloud).
 3. M20.2 Android build (local: Android SDK, JDK 17, keystore).
 - Open data gaps: Seborn, Zevara, Relc and Lyonette have no combat entries for stages; Jelaqua's new body; the 4.26 M golem
   count (three, text shows two) waits for a local check; Laken's Day 85 (day 130) has no event (4.49 omits him; 5.09 E covers it: M19.5).

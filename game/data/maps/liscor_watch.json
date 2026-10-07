@@ -12,6 +12,9 @@
 	],
 	"crowd": {"lanes": [{"path": [[5, 10], [29, 10]], "walkers": 3, "looks": ["race_drake", "liscor_guardsman", "race_gnoll"]}, {"path": [[5, 15], [29, 15]], "walkers": 3, "looks": ["liscor_guardsman", "race_drake", "race_drake"]}, {"path": [[22, 9]], "walkers": 1, "looks": ["race_drake"]}]},
 	"objects": [
+		{"id": "albez_door_liscor", "kind": "door", "at": [4, 12], "name": "Magic door", "actions": [],
+			"when_flags": ["albez_door.anchor_at_liscor_wall"],
+			"portal": {"to": "inn_interior", "pos": [3, 12], "power_flags": ["erin.magical_grounds"]}},
 		{"id": "watch_home_a", "kind": "plaque", "at": [5, 6], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
 		{"id": "watch_quarters", "kind": "plaque", "at": [26, 6], "name": "Watch quarters", "actions": [], "sign": {"icon": "shield"}},
 		{"id": "hive_entrance", "kind": "stairs", "at": [24, 9], "name": "Hive entrance (Antinium only)", "actions": [], "solid": true, "sign": {"icon": "closed", "text": "Hive entrance (Antinium only)"}},

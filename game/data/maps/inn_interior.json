@@ -27,9 +27,17 @@
 		{"id": "inn_counter", "kind": "counter", "at": [13, 2], "name": "Inn counter", "actions": ["buy_supplies"], "solid": true, "shop": "wandering_inn"},
 		{"id": "albez_door", "kind": "door", "at": [2, 12], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.at_wandering_inn"],
-			"portal": {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}},
+			"portal": {"links": [
+				{"id": "celum", "to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]},
+				{"id": "pallass", "to": "pallass_door_street", "pos": [5, 2], "power_flags": ["erin.magical_grounds"], "when_flags": ["albez_door.anchor_at_pallass"]},
+				{"id": "liscor", "to": "liscor_watch", "pos": [5, 12], "power_flags": ["erin.magical_grounds"], "when_flags": ["albez_door.anchor_at_liscor_wall"]}]}},
+		{"id": "theatre_stage", "kind": "plaque", "at": [20, 6], "name": "The stage", "actions": [], "when_flags": ["wandering_inn.grand_theatre"], "sign": {"icon": "none", "text": "Stage"}},
 		{"id": "stairs_up", "kind": "stairs", "at": [15, 14], "name": "Stairs up", "actions": [], "when_flags": ["wandering_inn.third_floor_built"]},
 		{"id": "trapdoor", "kind": "ladder", "at": [14, 11], "name": "Trapdoor to the basement", "actions": [], "when_flags": ["wandering_inn.expansion_begun"]}
+	],
+	"overlays": [
+		{"id": "grand_theatre", "tile": "wood_floor", "when_flags": ["wandering_inn.grand_theatre"],
+			"rects": [[16, 1, 1, 3], [16, 5, 1, 4], [16, 10, 1, 2], [16, 13, 1, 2]]}
 	],
 	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
 	"rows": [

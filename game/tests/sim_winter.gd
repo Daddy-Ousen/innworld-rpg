@@ -43,6 +43,8 @@ func test_winter_data_is_sound() -> void:
 	# The snow wall covers no tile an NPC, a spawn home or a stage needs.
 	var wall := {}
 	for o: Dictionary in _db.maps.areas["inn_hill"]["overlays"]:
+		if o["id"] != "toren_snow_wall":
+			continue  # M19.1: the flood overlay is Book 7's (rows 16 and up), checked there
 		for r: Array in o["rects"]:
 			var rect := MapDb.rect_of(r)
 			for y in range(rect.position.y, rect.end.y):

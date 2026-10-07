@@ -61,6 +61,12 @@ CREATURES: dict[str, dict] = {
         "walk": ("bee.png", 32, 32, LPC_ROWS, [0, 1, 2, 3]),
         "attack": ("bee.png", 32, 32, LPC_ROWS, [3, 4, 4, 5]),
     },
+    # the Face-Eater Moth (5.07): the bee frames at double size (M19.1); the swarm uses "bee" itself.
+    "moth": {
+        "scale": 2,
+        "walk": ("bee.png", 32, 32, LPC_ROWS, [0, 1, 2, 3]),
+        "attack": ("bee.png", 32, 32, LPC_ROWS, [3, 4, 4, 5]),
+    },
     "big_worm": {
         "walk": ("big_worm.png", 64, 64, LPC_ROWS, [0, 1, 2, 3]),
         "attack": ("big_worm.png", 64, 64, LPC_ROWS, [3, 4, 4, 5]),
