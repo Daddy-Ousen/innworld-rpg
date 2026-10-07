@@ -1,10 +1,12 @@
 # Handoff
 
-## Just done (2026-10-07, local): wiki class tree, step 1 (branch `feat/class-tree-wiki`)
-- Added 6 classes to `game/data/classes.json` and 7 Skills to `game/data/skills.json`. See `progress.md` for the list and tests.
-- Every class needs at least one Skill pool (`unit_data_db` checks it). Advancements use `prereqs.classes`; consolidation needs 2+ `from` classes.
-- Next: step 2 in `progress.md` (new tags, actions, map objects, audio cues, then Rider/Gardener/Beast Tamer/Priest line and the two hybrids).
-- Gotcha: the wiki fetch gave a partial list. Re-read https://wiki.wanderinginn.com/Classes before step 2. The wiki follows the web serial: flag conflicts with the ebook.
+## Just done (2026-10-07, local): wiki class tree, step 2 (branch `feat/class-tree-wiki`)
+- Added 4 tags, 4 actions (with sounds), 4 map objects, 8 classes (2 consolidations), 8 Skills. See `progress.md`.
+- Test: `unit_class_tree_step2`. Objects: `inn_hill` `garden_bed`, `celum_gate` `hitching_post` + `stable_yard`, `celum_square` `wayside_shrine`.
+- Next: the user merges the PR, then picks: M19.5 canon 5.09 E, M20.2 Android, or more wiki classes.
+- Gotchas: a map object must not stand under an overlay rect (`toren_snow_wall` on inn_hill, `flood` on liscor_gate; `unit_data_db` checks it).
+  `liscor_gate` is almost all flood overlay. No new object art: kinds `herbs`, `nest`, `horseshoe`, `plaque` are reused.
+  The wiki lines are simplified (Priest side branches skipped). Wiki follows the web serial: not checked against the ebook.
 
 ## Before that (M19.4)
 ## Just done (2026-10-07, local): M19.4 canon 5.07, 5.08, Interlude - Flos (branch `feat/m19.4-canon-5-07`)

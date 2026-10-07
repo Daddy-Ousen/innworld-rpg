@@ -20,7 +20,8 @@
 		{"id": "celum_well", "kind": "well", "at": [16, 12], "name": "Well", "actions": ["carry_water"], "solid": true},
 		{"id": "celum_stall", "kind": "market_stall", "at": [26, 14], "name": "Market stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "celum_stall", "sign": {"icon": "coin"}},
 		{"id": "celum_brazier_west", "kind": "brazier", "at": [10, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
-		{"id": "celum_brazier_east", "kind": "brazier", "at": [22, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true}
+		{"id": "celum_brazier_east", "kind": "brazier", "at": [22, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "wayside_shrine", "kind": "plaque", "at": [8, 13], "name": "Wayside shrine", "actions": ["pray"], "sign": {"icon": "none", "text": "Shrine"}}
 	],
 	"legend": {"#": "city_wall", "B": "brick_house", "T": "tree", "_": "cobble", "b": "brick_house_b"},
 	"rows": [
