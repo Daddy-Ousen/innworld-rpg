@@ -93,6 +93,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     (warrior+rider, cost 2) and `druid` (gardener+beast_tamer+mage, cost 3); 8 passive Skills. Tests run: `unit_class_tree_step2` (new, 4),
     `unit_data_db`, `unit_tags`, `unit_actions`, `unit_audio_data`, `unit_sound_cues`, `unit_map_db`, `unit_ground_art`, `unit_class_system`,
     `unit_skill_system`, `unit_world_view`, `sim_winter`, validator, Python tool tests (105). All pass. Full suite not run.
+  - [x] Consolidation rework (2026-10-08, user request): automatic at night, no offer or choice; a source class must be level 10
+    (`rules.offers.consolidation_min_level`); message "Your classes have consolidated: ...". `ClassSystem.make_offers` lost its `kind` argument;
+    `consolidate_ready` is new. An old save with a pending consolidation offer still works. Tests run: `unit_class_system`, `unit_class_tree_step2`,
+    `unit_night`, `unit_system_messages`, `unit_journal`, `unit_game_state`, `unit_data_db`, `sim_decline`, `sim_canon_book3`, `sim_esthelm_siege`. All pass.
   - [ ] The user plays: do the new objects feel right? Later steps could add NPC users of these classes.
   - Skipped on purpose: Erin/NPC-unique classes (Rocksoup Cook, Wandering Innkeeper, Goblinfriend Innkeeper), Skeleton, Bandit, Necromancer lines.
 - [ ] M20 — Touch controls (ADR 0032, plan `docs/plans/m20.md`). User answers 2026-10-05: InputMap actions, 4-way D-pad,

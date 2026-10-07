@@ -63,18 +63,15 @@ static func readiness(gs: GameState, db: DataDb, id: String) -> float:
 	return float(gs.progression.pools.get(id, 0.0)) / float(db.classes[id]["offer_threshold"])
 
 
-## Makes up to `budget` offers of one kind. Best-filled pools first; ties
-## keep data order. Consolidation classes also need all their `from` classes.
-## Returns the class ids offered.
-static func make_offers(gs: GameState, db: DataDb, kind: String, budget: int) -> Array[String]:
+## Makes up to `budget` offers of new classes. Best-filled pools first; ties
+## keep data order. Consolidation classes are never offered (see
+## `consolidate_ready`). Returns the class ids offered.
+static func make_offers(gs: GameState, db: DataDb, budget: int) -> Array[String]:
 	var ready: Array[Dictionary] = []
 	var index := 0
 	for id: String in db.classes:
 		index += 1
-		var cons: Variant = db.classes[id]["consolidation"]
-		if (kind == KIND_CONSOLIDATION) != (cons != null):
-			continue
-		if cons != null and not (cons["from"] as Array).all(gs.progression.has_class):
+		if db.classes[id]["consolidation"] != null:
 			continue
 		var r := readiness(gs, db, id)
 		if r >= 1.0 and can_offer(gs, db, id):
@@ -85,9 +82,39 @@ static func make_offers(gs: GameState, db: DataDb, kind: String, budget: int) ->
 		return a["index"] < b["index"])
 	var offered: Array[String] = []
 	for entry: Dictionary in ready.slice(0, maxi(budget, 0)):
-		gs.progression.offers.append({"class": entry["id"], "kind": kind, "day": gs.clock.day()})
+		gs.progression.offers.append({"class": entry["id"], "kind": KIND_NEW, "day": gs.clock.day()})
 		offered.append(entry["id"])
 	return offered
+
+
+## Lowest level that at least one `from` class must have before a consolidation
+## can happen (rules.offers.consolidation_min_level).
+static func consolidation_min_level(db: DataDb) -> int:
+	return int(db.rules["offers"].get("consolidation_min_level", 10))
+
+
+## True if the player holds every `from` class, one of them is at the minimum
+## level, the pool is full and nothing else stops the class.
+static func can_consolidate(gs: GameState, db: DataDb, id: String) -> bool:
+	var cons: Variant = db.classes[id]["consolidation"]
+	if cons == null or not (cons["from"] as Array).all(gs.progression.has_class):
+		return false
+	var best := 0
+	for old: String in cons["from"]:
+		best = maxi(best, gs.progression.level_of(old))
+	if best < consolidation_min_level(db):
+		return false
+	return readiness(gs, db, id) >= 1.0 and can_offer(gs, db, id)
+
+
+## Consolidates every class that can (no offer, no choice). Data order.
+## Returns System messages.
+static func consolidate_ready(gs: GameState, db: DataDb) -> Array[String]:
+	var lines: Array[String] = []
+	for id: String in db.classes:
+		if can_consolidate(gs, db, id):
+			lines.append_array(_consolidate(gs, db, id))
+	return lines
 
 
 ## Command: accept an open offer. Returns System messages.
@@ -98,19 +125,33 @@ static func accept(gs: GameState, db: DataDb, id: String) -> Array[String]:
 		return _msg("There is no offer for '%s'." % id)
 	var offer: Dictionary = p.offers[i]
 	p.offers.remove_at(i)
-	var c: Dictionary = db.classes[id]
-	var level := 1
-	var lines: Array[String] = []
 	if offer["kind"] == KIND_CONSOLIDATION:
-		var from_best := 0
-		for old: String in c["consolidation"]["from"]:
-			from_best = maxi(from_best, p.level_of(old))
-			p.classes.erase(old)
-			p.breakthroughs.erase(old)
-			lines.append("%s is gone." % db.classes[old]["name"])
-		level = maxi(1, from_best - int(c["consolidation"]["level_cost"]))
+		return _consolidate(gs, db, id)
+	return _gain(gs, db, id, 1, [])
+
+
+## Replaces the `from` classes with `id` at once.
+static func _consolidate(gs: GameState, db: DataDb, id: String) -> Array[String]:
+	var p := gs.progression
+	var c: Dictionary = db.classes[id]
+	var from_best := 0
+	var names: Array[String] = []
+	var lines: Array[String] = []
+	for old: String in c["consolidation"]["from"]:
+		from_best = maxi(from_best, p.level_of(old))
+		p.classes.erase(old)
+		p.breakthroughs.erase(old)
+		names.append(db.classes[old]["name"])
+		lines.append("%s is gone." % db.classes[old]["name"])
+	lines.push_front("Your classes have consolidated: %s became %s." % [" and ".join(names), c["name"]])
+	return _gain(gs, db, id, maxi(1, from_best - int(c["consolidation"]["level_cost"])), lines)
+
+
+static func _gain(gs: GameState, db: DataDb, id: String, level: int, lines: Array[String]) -> Array[String]:
+	var p := gs.progression
+	var c: Dictionary = db.classes[id]
 	p.classes[id] = {"level": level, "xp": 0.0, "last_active_day": gs.clock.day()}
-	lines.push_front("Class gained: %s, level %d." % [c["name"], level])
+	lines.insert(1 if lines.size() > 0 else 0, "Class gained: %s, level %d." % [c["name"], level])
 	# Offers that the new class excludes are withdrawn (not blacklisted).
 	for o: Dictionary in p.offers.duplicate():
 		if not can_offer_ignoring_offer(gs, db, o["class"]):

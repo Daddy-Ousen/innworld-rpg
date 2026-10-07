@@ -3,6 +3,7 @@
 ## Just done (2026-10-07, local): wiki class tree, step 2 (branch `feat/class-tree-wiki`)
 - Added 4 tags, 4 actions (with sounds), 4 map objects, 8 classes (2 consolidations), 8 Skills. See `progress.md`.
 - Test: `unit_class_tree_step2`. Objects: `inn_hill` `garden_bed`, `celum_gate` `hitching_post` + `stable_yard`, `celum_square` `wayside_shrine`.
+- Consolidation is now automatic at night and needs a source class at level 10 (`ClassSystem.consolidate_ready`, `rules.offers.consolidation_min_level`).
 - Next: the user merges the PR, then picks: M19.5 canon 5.09 E, M20.2 Android, or more wiki classes.
 - Gotchas: a map object must not stand under an overlay rect (`toren_snow_wall` on inn_hill, `flood` on liscor_gate; `unit_data_db` checks it).
   `liscor_gate` is almost all flood overlay. No new object art: kinds `herbs`, `nest`, `horseshoe`, `plaque` are reused.

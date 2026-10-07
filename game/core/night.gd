@@ -41,11 +41,10 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 			gs.clock.wake_day(db.rules["clock"], long_sleep_hunger) > gs.clock.day())
 	# 3. Class offers.
 	var budget := int(db.rules["offers"]["max_per_night"])
-	var offered := ClassSystem.make_offers(gs, db, ClassSystem.KIND_NEW, budget)
+	var offered := ClassSystem.make_offers(gs, db, budget)
 	# 4. Class loss and consolidation.
 	progress.append_array(ClassSystem.check_loss(gs, db, gs.clock.day()))
-	offered.append_array(ClassSystem.make_offers(gs, db, ClassSystem.KIND_CONSOLIDATION,
-			budget - offered.size()))
+	progress.append_array(ClassSystem.consolidate_ready(gs, db))
 	lines.append_array(progress)
 	lines.append_array(hunger)
 	# 2c. The inn (M14.2): the day's takings; the guests go home.
