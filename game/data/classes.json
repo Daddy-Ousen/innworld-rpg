@@ -277,6 +277,94 @@
 			"loss": {"neglect_days": 40, "neglect_tags": ["magic"]},
 			"consolidation": null,
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Elementalist]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"rider": {
+			"name": "[Rider]",
+			"tag_weights": {"riding": 1.0, "animals": 0.3, "travel": 0.3},
+			"offer_threshold": 50,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["riding"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Base class. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"gardener": {
+			"name": "[Gardener]",
+			"tag_weights": {"gardening": 1.0, "foraging.herbs": 0.3},
+			"offer_threshold": 50,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["gardening"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Base class. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"beast_tamer": {
+			"name": "[Beast Tamer]",
+			"tag_weights": {"animals": 1.0, "vigilance": 0.2},
+			"offer_threshold": 65,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["animals"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Base class. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"acolyte": {
+			"name": "[Acolyte]",
+			"tag_weights": {"faith": 1.0, "social.empathy": 0.3},
+			"offer_threshold": 50,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["faith"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Base class of the priest line. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"priest": {
+			"name": "[Priest]",
+			"tag_weights": {"faith": 1.0, "social.empathy": 0.4, "medicine": 0.2},
+			"offer_threshold": 200,
+			"prereqs": {"classes": ["acolyte"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["faith"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Acolyte]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"bishop": {
+			"name": "[Bishop]",
+			"tag_weights": {"faith": 1.0, "social.empathy": 0.4, "teaching": 0.3},
+			"offer_threshold": 450,
+			"prereqs": {"classes": ["priest"], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["faith"]},
+			"consolidation": null,
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Priest]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"dragoon": {
+			"name": "[Dragoon]",
+			"tag_weights": {"combat": 1.0, "riding": 0.8, "animals": 0.2},
+			"offer_threshold": 300,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["combat", "riding"]},
+			"consolidation": {"from": ["warrior", "rider"], "level_cost": 2},
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Consolidation of [Warrior] + [Rider]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
+		},
+		"druid": {
+			"name": "[Druid]",
+			"tag_weights": {"gardening": 1.0, "animals": 0.8, "magic": 0.5},
+			"offer_threshold": 400,
+			"prereqs": {"classes": [], "flags": []},
+			"excludes": [],
+			"race_limits": null,
+			"loss": {"neglect_days": 40, "neglect_tags": ["gardening", "animals", "magic"]},
+			"consolidation": {"from": ["gardener", "beast_tamer", "mage"], "level_cost": 3},
+			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Consolidation of [Gardener] + [Beast Tamer] + [Mage]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
 		}
 	}
 }

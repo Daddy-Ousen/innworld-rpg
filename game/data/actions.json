@@ -105,6 +105,15 @@
 		"search_for_traps": {"name": "Search for traps", "minutes": 10, "base_xp": 5, "risk": 0.2,
 			"tags": {"vigilance.traps": 1.0}},
 		"disarm_trap": {"name": "Disarm the trap", "minutes": 15, "base_xp": 8, "risk": 0.5,
-			"tags": {"crafting.traps": 1.0}}
+			"tags": {"crafting.traps": 1.0}},
+		"ride_horse": {"name": "Ride a horse", "minutes": 90, "base_xp": 8, "risk": 0.1,
+			"tags": {"riding": 1.0, "travel": 0.2}},
+		"tend_animals": {"name": "Tend the animals", "minutes": 60, "base_xp": 7, "risk": 0.1,
+			"tags": {"animals": 1.0, "labor": 0.2}},
+		"tend_garden": {"name": "Tend the garden", "minutes": 90, "base_xp": 7, "risk": 0.0,
+			"duress": [{"key": "cold", "from": 0, "to": 1, "max": 1.5}],
+			"tags": {"gardening": 1.0, "foraging.herbs": 0.2}},
+		"pray": {"name": "Pray", "minutes": 30, "base_xp": 5, "risk": 0.0,
+			"tags": {"faith": 1.0, "social.empathy": 0.2}}
 	}
 }

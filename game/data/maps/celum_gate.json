@@ -15,7 +15,9 @@
 		{"id": "celum_milestone", "kind": "milestone", "at": [19, 8], "name": "Road stone", "actions": ["sprint_training"], "solid": true},
 		{"id": "celum_fallen_branch", "kind": "branch", "at": [8, 14], "name": "Fallen branch", "actions": ["weapon_practice", "throw_object"], "context": {"weapon": "improvised"}},
 		{"id": "celum_wagon", "kind": "wagon", "at": [18, 5], "name": "Wagon to Liscor", "actions": [], "solid": true, "ride": {"to": "liscor_gate", "pos": [17, 9], "minutes": 480, "price": 40}},
-		{"id": "celum_fee_stand", "kind": "plaque", "at": [14, 4], "name": "Gate fee stand", "actions": [], "sign": {"icon": "coin", "text": "Gate fee"}}
+		{"id": "celum_fee_stand", "kind": "plaque", "at": [14, 4], "name": "Gate fee stand", "actions": [], "sign": {"icon": "coin", "text": "Gate fee"}},
+		{"id": "hitching_post", "kind": "horseshoe", "at": [10, 10], "name": "Hitching post", "actions": ["ride_horse"]},
+		{"id": "stable_yard", "kind": "nest", "at": [12, 15], "name": "Stable yard", "actions": ["tend_animals"]}
 	],
 	"legend": {"#": "city_wall", ",": "tall_grass", ".": "grass", ":": "dirt_road", "B": "building", "T": "tree", "^": "rock", "_": "cobble", "b": "building_b"},
 	"rows": [

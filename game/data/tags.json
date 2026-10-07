@@ -45,6 +45,10 @@
 		"medicine": "Treating hurt people.",
 		"medicine.first_aid": "Quick care for wounds.",
 		"vigilance": "Watching for danger.",
-		"vigilance.traps": "Looking for traps (M13.T)."
+		"vigilance.traps": "Looking for traps (M13.T).",
+		"riding": "Riding a mount.",
+		"animals": "Caring for and handling animals.",
+		"gardening": "Growing plants.",
+		"faith": "Prayer and worship."
 	}
 }
