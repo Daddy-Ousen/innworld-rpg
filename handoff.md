@@ -1,13 +1,12 @@
 # Handoff
 
-## Just done (2026-10-07, local): M19.1 world (branch `feat/m19.1-world`)
-- Door `albez_door` has links celum / pallass (flag `albez_door.anchor_at_pallass`) / liscor (`albez_door.anchor_at_liscor_wall`). New map
-  `pallass_door_street`. Flood overlays (flag `izril.flood`) on floodplains_south, liscor_gate, dungeon_rift, inn_hill rows 16+. Gated exits:
-  liscor_market east_gate, road_camp south_road, ruins_entrance west_road. Flags `wandering_inn.grand_theatre`, `wandering_inn.watchtower_smashed`.
-  Enemies `face_eater_moth`, `moth_swarm` (no spawns). `canon/book7/` has npcs + locations (33 / 14) and an empty `chapters/` (.gitkeep).
-- Gotchas for M19.2+: NPC goals on flooded tiles (e.g. Rags goal [6,18] on inn_hill) and NPC routes over the 3 gated exits need a decision in M19.6.
-  `sim_winter` now checks only the `toren_snow_wall` overlay. A `--import` crash can leave new PNGs with no `.import`: run it again.
-- Next: M19.2 canon 5.00 – 5.03 (ask stage and hook choices first). User merges the M19.1 PR first.
+## Just done (2026-10-07, local): M19.2 canon 5.00 – 5.03 (branch `feat/m19.2-canon-5-00`)
+- `game/data/canon/book7/chapters/5.00.json` – `5.03.json` (orders 30 – 33): 23 events, days 133 – 135. Stages: lunch (`b7.erin_cheers_up_with_relc`,
+  day 133, 11 – 14 h) and the deal (`b7.zevara_brings_venim_to_the_inn`, day 134, 20 – 23 h, sets `izril.rains`). Scenes in `inn_interior`, one hook each.
+- The Pallass scenes are events only: no `albez_door.anchor_at_pallass` (user said no Pallass walk). Riefel has no death record.
+- Gotchas for M19.3+: `off_map` in a behaviour goal must be a name in `entries` (liscor, wilds, celum, esthelm). The Redfang move to the third floor
+  (`redfang.lodge_on_the_third_floor`) is not done: it needs behaviour goals. Seborn has no behaviour entry. Flags set by an event show the next day.
+- Next: M19.3 canon 5.04 – 5.06 M (ask stage and hook choices first). User merges the M19.2 PR first.
 
 ## Before that (2026-10-07, local): M19.0 engine (door links + the rains)
 - Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".

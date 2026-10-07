@@ -1,0 +1,406 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.00",
+	"order": 30,
+	"events": {
+		"b7.izril_mourns_zel": {
+			"tier": 1,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.mourns_zel",
+					"drakes.blame_humans_for_zel"
+				]
+			},
+			"news": "Izril is in mourning for Zel Shivertail. Drakes rage at Humans and call for the Goblin Lord's death.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "The text gives three days since Invrisil. Zel died on day 130, so this is day 133."
+			},
+			"summary": "Three days after Invrisil, Izril is quiet with grief. There were riots first, then silence. Drakes blame Humans and shout for the Goblin Lord's head."
+		},
+		"b7.relc_defends_erin_in_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"soldier": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"relc.eats_at_the_inn",
+					"relc.swears_to_hunt_the_goblin_lord"
+				],
+				"relationship": [
+					{
+						"from": "relc",
+						"to": "erin_solstice",
+						"delta": 2
+					}
+				]
+			},
+			"news": "Relc head-butted a Drake who threw mud at Erin Solstice in the street.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "Relc does not blame the inn Goblins."
+			},
+			"summary": "A young Drake throws mud at Erin in a Liscor street. Relc head-butts him, then asks Erin for lunch. He says the inn's Goblins are not the ones who did it."
+		},
+		"b7.erin_cheers_up_with_relc": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"soldier": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.invented_milkshakes",
+					"mrsha.eats_again"
+				],
+				"relationship": [
+					{
+						"from": "relc",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					11,
+					14
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							8
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							9
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							10,
+							8
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							9,
+							4
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							7,
+							4
+						]
+					},
+					{
+						"npc": "bird",
+						"pos": [
+							11,
+							10
+						]
+					}
+				],
+				"line": "Relc eats pork belly at the long table and Erin tries a milkshake. Ilvriss watches from a corner, and Mrsha is eating again.",
+				"note": "M19.2: a scene. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_ate_with_relc_and_mrsha",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"relc",
+									"mrsha",
+									"ilvriss",
+									"lyonette"
+								]
+							}
+						}
+					],
+					"days": [
+						133,
+						133
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_ate_with_relc_after_zel"
+						],
+						"relationship": [
+							{
+								"from": "relc",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "mrsha",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human sat with Relc and Mrsha at the Wandering Inn on the day Mrsha ate again."
+				}
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "The milkshakes are Erin's new drink. Mrsha eats again. Stage hours are guesses."
+			},
+			"summary": "Erin and Relc eat pork belly and drink milkshakes at the inn. Mrsha eats again for the first time since Zel died."
+		},
+		"b7.ilvriss_buys_the_mayonnaise_secret": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ilvriss.pays_for_mayonnaise_secret",
+					"erin.sells_mayonnaise_to_ilvriss"
+				],
+				"relationship": [
+					{
+						"from": "ilvriss",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "The price is not important for the game."
+			},
+			"summary": "Ilvriss pays Erin for the secret of mayonnaise. She sells it to him."
+		},
+		"b7.hawk_opens_the_door_in_pallass": {
+			"tier": 2,
+			"window": {
+				"earliest": 133,
+				"latest": 133,
+				"confidence": "guess"
+			},
+			"location": "pallass_door_alley",
+			"roles": {
+				"courier": {
+					"prefer": [
+						"hawk"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"hawk.in_pallass",
+					"pallass.door_end_set_in_the_alley"
+				]
+			},
+			"news": "Hawk the Courier set the door's far end in a Pallass alley.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "No door link flag is set here on purpose: the player does not walk into Pallass in this batch (user, M19.2)."
+			},
+			"summary": "Hawk reaches Pallass with the anchor stone and sets the far end of the door in an alley."
+		}
+	},
+	"system": []
+}
