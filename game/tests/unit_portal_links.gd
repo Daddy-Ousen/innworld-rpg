@@ -50,7 +50,9 @@ func _ids(links: Array[Dictionary]) -> Array:
 
 
 func test_the_old_single_form_is_one_link() -> void:
-	var links := Portal.links_of(_saved)
+	# M19.1: the real door has links now; the old form is written out here.
+	var old_form := {"to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]}
+	var links := Portal.links_of(old_form)
 	assert_eq(links.size(), 1)
 	assert_eq(links[0]["id"], "")
 	assert_eq(links[0]["to"], "celum_stitchworks")

@@ -7,7 +7,7 @@
 	"note": "Design map. Krshia's and Lism's stalls are canon (1.12-1.13); places and sizes are guesses.",
 	"zones": {"krshia_stall": [[8, 5, 5, 4]], "lism_stall": [[18, 5, 5, 4]]},
 	"exits": [
-		{"at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10},
+		{"id": "east_gate", "at": [31, 11, 1, 2], "to": "liscor_gate", "arrive": [2, 11], "minutes": 10, "unless_flags": ["izril.flood"]},
 		{"at": [0, 11, 1, 2], "to": "liscor_plaza", "arrive": [30, 11], "minutes": 2}
 	],
 	"crowd": {"lanes": [{"path": [[3, 10], [29, 10]], "walkers": 4, "looks": ["race_drake", "race_gnoll", "race_human", "race_drake"]}, {"path": [[15, 4], [15, 12]], "walkers": 2, "looks": ["race_gnoll", "race_drake"]}, {"path": [[3, 19], [28, 19]], "walkers": 3, "looks": ["race_drake", "race_drake", "race_gnoll"]}, {"path": [[10, 8]], "walkers": 1, "looks": ["race_gnoll"]}, {"path": [[20, 8]], "walkers": 1, "looks": ["race_drake"]}]},

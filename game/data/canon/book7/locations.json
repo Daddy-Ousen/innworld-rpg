@@ -1,0 +1,270 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"pallass_door_alley": {
+			"name": "Pallass door alley",
+			"kind": "landmark",
+			"parent": "pallass",
+			"tags": [
+				"alley",
+				"door_link",
+				"pallass",
+				"walled_city"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.00",
+				"confidence": "confirmed",
+				"note": "Where Hawk set the door's far end in Pallass (5.00, 5.01). A stone alley off a street; the sky there is bright and blue. The Pallass Watch under Venim holds it (5.02). Map pallass_door_street (M19.1)."
+			},
+			"summary": "A stone alley in Pallass where the Wandering Inn door opens. The Watch guards it."
+		},
+		"pallass_streets": {
+			"name": "Pallass streets",
+			"kind": "district",
+			"parent": "pallass",
+			"tags": [
+				"city_streets",
+				"pallass",
+				"walled_city",
+				"crowded"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Streets of Pallass: the military parade and the tour with Nelliam (5.01), and the street where Selys is snatched (5.17 S). Stone buildings."
+			},
+			"summary": "The stone streets of Pallass. Parades, guides and trouble on the road to the door."
+		},
+		"pallass_assembly_of_crafts": {
+			"name": "Assembly of Crafts",
+			"kind": "building",
+			"parent": "pallass",
+			"tags": [
+				"government",
+				"pallass",
+				"walled_city",
+				"assembly"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.01",
+				"confidence": "guess",
+				"note": "The ruling body of Pallass, which orders the door seizure and later the lease (5.01, 5.02). Its seat is not described; that it is a building is a guess."
+			},
+			"summary": "The governing hall of Pallass, where the Senators and Head Speakers meet."
+		},
+		"grand_theatre": {
+			"name": "The Grand Theatre",
+			"kind": "building",
+			"parent": "wandering_inn",
+			"tags": [
+				"inn",
+				"theatre",
+				"skill",
+				"stage",
+				"common_room"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.04",
+				"confidence": "confirmed",
+				"note": "Erin's [Grand Theatre] Skill (Level 34) makes the common room two to three times larger, with the Players' stage at one end (5.04). Used as a hall for plays, the moth dead and meetings (5.08, 5.12, 5.13)."
+			},
+			"summary": "Erin's common room grown huge, with a stage and room for a crowd."
+		},
+		"inn_watchtower": {
+			"name": "Bird's watchtower",
+			"kind": "landmark",
+			"parent": "wandering_inn",
+			"tags": [
+				"inn",
+				"tower",
+				"watch",
+				"destroyed"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Bird's post atop the inn; stairs from the third floor lead up. The moths smash it to splinters (5.07, 5.08, 5.12). The inn's windows are broken too."
+			},
+			"summary": "The tower on top of the inn where Bird keeps watch. It is wrecked in the moth attack."
+		},
+		"liscor_west_wall_door": {
+			"name": "Liscor's west wall door",
+			"kind": "landmark",
+			"parent": "liscor_walls",
+			"tags": [
+				"door",
+				"wall",
+				"liscor",
+				"flood_route"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "After the moths, Erin's door opens in Liscor's western wall: a plain door that does not belong there (5.12). It is the way to the inn once the floodplains fill."
+			},
+			"summary": "A plain door in Liscor's west wall that leads to Erin's inn."
+		},
+		"liscor_graveyard": {
+			"name": "Liscor graveyard",
+			"kind": "landmark",
+			"parent": "liscor",
+			"tags": [
+				"graveyard",
+				"liscor",
+				"night",
+				"watch_post"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "A watched corner of Liscor with coffins, kept so the dead cannot rise. Zel's ashes are buried here at night (5.18 S). The coffin of General Sserys is here."
+			},
+			"summary": "The Watch-guarded graveyard of Liscor."
+		},
+		"embria_camp": {
+			"name": "Embria's camp",
+			"kind": "landmark",
+			"parent": "floodplains_of_liscor",
+			"tags": [
+				"camp",
+				"military",
+				"flood",
+				"drake"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "likely",
+				"note": "The 4th Company's camp on a hill outside Liscor, cut off by the flood. They strike camp before dawn and wade to the city (5.13). Exact position not given."
+			},
+			"summary": "A Drake army camp on a hill in the flooded plains."
+		},
+		"tyrion_war_camp": {
+			"name": "Tyrion's war camp",
+			"kind": "landmark",
+			"parent": "north_izril",
+			"tags": [
+				"camp",
+				"military",
+				"house_veltras",
+				"rain"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "likely",
+				"note": "Lord Tyrion's war camp, set up weeks ago against the Goblin Lord (5.15). Yitton Byres comes there. Position not given."
+			},
+			"summary": "A rain-soaked war camp of House Veltras."
+		},
+		"dwarfhalls_rest": {
+			"name": "Dwarfhalls Rest",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"mountain",
+				"goblin_stronghold",
+				"dwarf_ruins",
+				"tremborag"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Former Dwarf home turned Goblin bastion: the largest tribe in the north, ruled by the Great Goblin Chieftain Tremborag. It refused the Goblin Lord's summons (5.19 G)."
+			},
+			"summary": "A mountain fortress of old Dwarves, now the home of Tremborag's tribe."
+		},
+		"salazsar": {
+			"name": "Salazsar",
+			"kind": "settlement",
+			"parent": null,
+			"tags": [
+				"walled_city",
+				"drake",
+				"izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "likely",
+				"note": "A Walled City whose Lord of the Wall reports the giant moths to the scrying council (5.08). Barely detailed."
+			},
+			"summary": "A Drake Walled City on Izril. Off-map."
+		},
+		"oteslia": {
+			"name": "Oteslia",
+			"kind": "settlement",
+			"parent": null,
+			"tags": [
+				"walled_city",
+				"drake",
+				"izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.08",
+				"confidence": "likely",
+				"note": "A Walled City in the scrying council about the moths (5.08). Home of General Ironscales, who once held the Heartflame Breastplate (5.17 S)."
+			},
+			"summary": "A Drake Walled City on Izril. Off-map."
+		},
+		"jerios_bazaar": {
+			"name": "Jerios Bazaar",
+			"kind": "settlement",
+			"parent": "chandrar",
+			"tags": [
+				"bazaar",
+				"market",
+				"chandrar",
+				"flos"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "A large market town that Flos visits to buy a sword (Interlude - Flos). Smiths and merchants sell steel of the Naq-Alrama clans."
+			},
+			"summary": "A busy Chandrar bazaar of smiths. Off-map."
+		},
+		"gec": {
+			"name": "Gec",
+			"kind": "settlement",
+			"parent": "riverfarm",
+			"tags": [
+				"town",
+				"village",
+				"laken_lands",
+				"farm"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "A small, poor town in Laken's lands whose headman Filk thanks him for his guards (5.09 E). Off-map."
+			},
+			"summary": "A small town near Riverfarm. Off-map."
+		}
+	}
+}
