@@ -131,7 +131,13 @@
 		"minutes": 1,
 		"line": "You step through the door and come out in %s.",
 		"dry_line": "The door opens onto a blank wall. It has no mana to spare.",
-		"spent_line": "The door opens onto a blank wall. It has carried enough people for today."
+		"spent_line": "The door opens onto a blank wall. It has carried enough people for today.",
+		"shut_line": "That end of the door is shut. Nobody on the far side is ready for you."
+	},
+	"rains": {
+		"note": "M19.0 (ADR 0030). Book 7: the spring rains of Izril, about two months. season_flag: rain falls outdoors (look and sound). flood_flag: the Floodplains are under water; the water itself is map overlays that hold on this flag (M8.W form), so no code walks the flood. Events set and clear both flags.",
+		"season_flag": "izril.rains",
+		"flood_flag": "izril.flood"
 	},
 	"traps": {
 		"note": "M13.T (ADR 0020). The trapped rooms of Liscor's dungeon (4.08 T, 4.19). The chances and damage are design numbers. A search takes 10 minutes and checks every hidden trap within search_radius tiles.",

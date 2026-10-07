@@ -49,9 +49,10 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 					Economy.format(db, int(r["price"])), int(r["minutes"]) / 60])
 			_items.set_item_metadata(i, [o["id"], Interact.RIDE])
 		if not (o.get("portal", {}) as Dictionary).is_empty():
-			var i := _items.add_item("%s — To %s (%d left today)" % [label,
-					db.maps.areas[o["portal"]["to"]]["name"], Portal.trips_left(Session.gs, db)])
-			_items.set_item_metadata(i, [o["id"], Interact.PORTAL])
+			for l: Dictionary in Portal.open_links(Session.gs, o["portal"]):
+				var i := _items.add_item("%s — To %s (%d left today)" % [label,
+						Portal.link_name(db, l), Portal.trips_left(Session.gs, db)])
+				_items.set_item_metadata(i, [o["id"], Interact.portal_action(l)])
 		for c: Dictionary in o.get("serve", []):
 			var i := _items.add_item("%s — Serve %s (%s%s)" % [label, String(c["name"]).to_lower(),
 					"ordered, " if c["ordered"] else "", Economy.format(db, int(c["pay"]))])

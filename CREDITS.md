@@ -495,6 +495,8 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   https://opengameart.org/content/free-crowd-cheering-sounds
 - `ambience/amb_bees.ogg` is cut from "Single Bee sound" (`bee.wav`) by IMadeIt (2 s, mono, cross-faded to loop).
   Licence: CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/). https://opengameart.org/content/single-bee-sound
+- `ambience/amb_rain.ogg` (M19.0) is made by `tools/build_rain.py` (synthesised noise, 12 s, mono, cross-faded to
+  loop; converted with ffmpeg). Our own work; no third-party source.
 
 ## Font (`game/assets/fonts/`, M15.0, ADR 0022)
 

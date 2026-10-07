@@ -35,7 +35,7 @@ const HELP := [
 	"  buy <object> <good> / sell <object> <good>   trade at a nearby shop",
 	"  eat <good>                         eat or drink a good from the bag",
 	"  ride <object>                      take a nearby paid ride (a wagon)",
-	"  portal <object>                    step through a nearby magic door",
+	"  portal <object> [link]             step through a nearby magic door (a door with links: name one)",
 	"  give <copper> [good] [n]           add coins and goods (debug)",
 	"  status                             day, time, classes, skills, offers",
 	"  accept <class> / decline <class>   answer a class offer",
@@ -99,9 +99,9 @@ func execute(line: String) -> Array[String]:
 				out = _combat(Commands.ride(gs, db, args[0]))
 				out.append_array(_where())
 		"portal":
-			out = _need_arg(args, "portal <object>")
+			out = _need_arg(args, "portal <object> [link]")
 			if out.is_empty():
-				out = _combat(Commands.portal(gs, db, args[0]))
+				out = _combat(Commands.portal(gs, db, args[0], "" if args.size() < 2 else args[1]))
 				out.append_array(_where())
 		"give":
 			out = _need_arg(args, "give <copper> [good] [n]")
@@ -326,7 +326,9 @@ func _look() -> Array[String]:
 		if not (o.get("ride", {}) as Dictionary).is_empty():
 			actions.append("ride to %s %s" % [o["ride"]["to"], Economy.format(db, int(o["ride"]["price"]))])
 		if not (o.get("portal", {}) as Dictionary).is_empty():
-			actions.append("portal to %s (%d left today)" % [o["portal"]["to"], Portal.trips_left(gs, db)])
+			for l: Dictionary in Portal.open_links(gs, o["portal"]):
+				actions.append("portal%s to %s (%d left today)" % [
+						"" if l["id"] == "" else " " + String(l["id"]), l["to"], Portal.trips_left(gs, db)])
 		out.append("  %s (%s): %s" % [o["name"], o["id"], ", ".join(actions)])
 	if options.is_empty():
 		out.append("  Nothing to use here.")

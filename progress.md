@@ -118,6 +118,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     the way to Liscor), door with several links + small Pallass map (portal schema change approved), moth attack = wave stage
     with `xp_window` x3, dungeon dive = events only. Days 133 – about 143. No code, no tests run. PR waits for the user to merge.
 
+  - [x] M19.0 engine (branch `feat/m19.0-door-links-rains`, 2026-10-07, local): door `links` (pick the stone; flags, hours, power per
+    link; one shared trip count), `rules.rains` (season and flood flags), rain on screen and in the sound (`amb_rain.ogg` made by
+    `tools/build_rain.py`). User answers: no rain duress; rain sound by tool. No save change. Detail: ADR 0030 "M19.0 as built".
+    Tests run: `unit_portal_links` (new), `unit_rains` (new), 16 touched scripts, Python tool tests (105), validator. All pass.
+    Full suite not run. PR waits for the user to merge.
+  - [ ] The user looks at the rain (`flag izril.rains` in the console, then walk outside) and hears it.
+
 ## Releases (ADR 0029)
 - [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
   smoke-tested (898 events, 38 maps, 0 problems). Tests run: smoke only. Full suite not run. PR waits for the user to merge.

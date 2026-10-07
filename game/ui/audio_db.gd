@@ -14,6 +14,8 @@ const BUSES := ["Music", "Ambience", "SFX", "UI"]
 ## Sections that map a key to a sound cue.
 const CUE_MAPS := ["footsteps", "actions", "combat", "pages", "ui"]
 const MOOD_VARIANTS := ["day", "night", "winter_day", "winter_night"]
+## An area bed may also have a "rain" variant (M19.0, AmbiencePick).
+const BED_VARIANTS := ["day", "night", "winter_day", "winter_night", "rain"]
 ## The footstep key for snow-covered ground.
 const WINTER_STEP := "winter"
 
@@ -187,8 +189,8 @@ func _validate_ambience(errs: Array[String], sounds: Dictionary) -> void:
 			errs.append("ambience.beds.%s must be an object" % place)
 			continue
 		for variant: String in beds[place]:
-			if not MOOD_VARIANTS.has(variant):
-				errs.append("ambience.beds.%s.%s: variant must be one of %s" % [place, variant, MOOD_VARIANTS])
+			if not BED_VARIANTS.has(variant):
+				errs.append("ambience.beds.%s.%s: variant must be one of %s" % [place, variant, BED_VARIANTS])
 			_check_ref(errs, "ambience.beds.%s.%s" % [place, variant], beds[place][variant], sounds, "sound")
 	var by_map: Variant = a.get("by_map", {})
 	if not by_map is Dictionary:

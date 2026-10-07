@@ -175,6 +175,8 @@ var audio: AudioDb
 ## the tiles are drawn in winter colours now.
 var _winter_flag := ""
 var _winter := false
+## The world flag that makes it rain ("" = never; M19.0, Rains).
+var _rain_flag := ""
 var _overlay_key := ""
 ## Animated object sprites on the map now, and the animation clock.
 var _animated: Array[Sprite2D] = []
@@ -209,13 +211,15 @@ var _cam_tween: Tween
 
 
 func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
-		max_hp: Dictionary = {}, winter_flag: String = "", races: Dictionary = {}) -> void:
+		max_hp: Dictionary = {}, winter_flag: String = "", races: Dictionary = {},
+		rain_flag: String = "") -> void:
 	_maps = maps
 	npc_names = names
 	npc_races = races
 	enemies = enemy_defs
 	npc_max_hp = max_hp
 	_winter_flag = winter_flag
+	_rain_flag = rain_flag
 	_winter = false
 	object_art = load_object_art()
 	sign_table = SignArt.load_table()
@@ -272,7 +276,7 @@ func refresh(gs: GameState, db: DataDb = null, replayed: bool = false) -> void:
 	var new_area := gs.player.area != area
 	if new_area:
 		_show_area(gs.player.area)
-	atmosphere.set_time(gs.clock.minute(), winter)
+	atmosphere.set_time(gs.clock.minute(), winter, _rain_flag != "" and gs.flags.has(_rain_flag))
 	_hour = gs.clock.minute() / 60
 	_apply_crowd_hours()
 	_update_sign_labels(gs.player.pos())

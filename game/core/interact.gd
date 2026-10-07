@@ -46,6 +46,8 @@ const SERVE := "serve:"
 const RIDE := "ride"
 const ATTACK := "attack"
 const PORTAL := "portal"
+## M19.0: a door with several links offers "portal:<link id>" per open link.
+const PORTAL_LINK := "portal:"
 ## M17.5: "learn:<spell>" learns a spell from the NPC of the row (Commands.learn_spell).
 const LEARN := "learn:"
 
@@ -82,6 +84,21 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 			"trades": [] as Array[Dictionary], "ride": {}})
 	out.append_array(Traps.options(gs, db))
 	return out
+
+
+## The menu id of a door link: PORTAL for the old single form, else "portal:<id>".
+static func portal_action(link: Dictionary) -> String:
+	return PORTAL if String(link["id"]) == "" else PORTAL_LINK + String(link["id"])
+
+
+## True for a door pick: PORTAL or "portal:<link id>".
+static func is_portal_action(action_id: String) -> bool:
+	return action_id == PORTAL or action_id.begins_with(PORTAL_LINK)
+
+
+## The link id of a door pick ("" = the first open link).
+static func portal_link_of(action_id: String) -> String:
+	return action_id.substr(PORTAL_LINK.length()) if action_id.begins_with(PORTAL_LINK) else ""
 
 
 ## True if the player stands on or next to `object_id` and can sleep there.
