@@ -110,13 +110,19 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   Tier 3 (x3): 3.20T Esthelm. Tier 2 (x2): 1.29, 2.26, 4.19, 4.29. Tier 1 (x1.5): 1.42, 2.05, 3.21L, 4.27H. Book 6 stays without windows (user, M18 batches).
   Tests run: `unit_xp_window`, `sim_canon_book1` – `sim_canon_book6`, `sim_skinner_night`, `sim_book6_eater_goats`, validator (0 errors), Python tool tests (102). All pass. Full suite not run.
 
-- [ ] M19 — Book 7 (The Rains of Liscor). Not planned: M19.P first (ADR 0030). Text in the private repo.
+  Merged ([PR #110](https://github.com/Daddy-Ousen/innworld-rpg/pull/110), merge commit 01f1adb).
+
+- [ ] M19 — Book 7 (The Rains of Liscor). Plan: ADR 0030, steps M19.0 – M19.8 in `docs/ROADMAP.md`.
+  - [x] M19.P plan (branch `docs/m19-plan`, 2026-10-07, local): Book 7 cut from the epub to `canon/raw/book7/` (gitignored);
+    seven reading agents (summaries only); ADR 0030, roadmap steps, `docs/CLOUD.md` queue. User answers: rain + flood (door is
+    the way to Liscor), door with several links + small Pallass map (portal schema change approved), moth attack = wave stage
+    with `xp_window` x3, dungeon dive = events only. Days 133 – about 143. No code, no tests run. PR waits for the user to merge.
 
 ## Releases (ADR 0029)
 - [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
   smoke-tested (898 events, 38 maps, 0 problems). Tests run: smoke only. Full suite not run. PR waits for the user to merge.
   - [x] Merged ([PR #108](https://github.com/Daddy-Ousen/innworld-rpg/pull/108), merge commit e9ad2e2). Tag `v0.1.2-alpha` pushed. Pre-release published 2026-10-06 with three zips: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.2-alpha. Pages deploy run succeeded.
-  - [ ] The user uploads `export/InnworldRPG-v0.1.2-alpha-web.zip` to itch.io.
+  - [x] The user uploaded the v0.1.2 web zip to itch.io (said 2026-10-07).
 - [x] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
   left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
   `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows
