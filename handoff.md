@@ -6,14 +6,14 @@
 - Next: step 2 in `progress.md` (new tags, actions, map objects, audio cues, then Rider/Gardener/Beast Tamer/Priest line and the two hybrids).
 - Gotcha: the wiki fetch gave a partial list. Re-read https://wiki.wanderinginn.com/Classes before step 2. The wiki follows the web serial: flag conflicts with the ebook.
 
-## Before that
-## Just done (2026-10-07, local): M19.2 canon 5.00 – 5.03 (branch `feat/m19.2-canon-5-00`)
-- `game/data/canon/book7/chapters/5.00.json` – `5.03.json` (orders 30 – 33): 23 events, days 133 – 135. Stages: lunch (`b7.erin_cheers_up_with_relc`,
-  day 133, 11 – 14 h) and the deal (`b7.zevara_brings_venim_to_the_inn`, day 134, 20 – 23 h, sets `izril.rains`). Scenes in `inn_interior`, one hook each.
-- The Pallass scenes are events only: no `albez_door.anchor_at_pallass` (user said no Pallass walk). Riefel has no death record.
-- Gotchas for M19.3+: `off_map` in a behaviour goal must be a name in `entries` (liscor, wilds, celum, esthelm). The Redfang move to the third floor
-  (`redfang.lodge_on_the_third_floor`) is not done: it needs behaviour goals. Seborn has no behaviour entry. Flags set by an event show the next day.
-- Next: M19.3 canon 5.04 – 5.06 M (ask stage and hook choices first). User merges the M19.2 PR first.
+## Before that (M19.4)
+## Just done (2026-10-07, local): M19.4 canon 5.07, 5.08, Interlude - Flos (branch `feat/m19.4-canon-5-07`)
+- `game/data/canon/book7/chapters/5.07.json`, `5.08.json`, `interlude_flos.json` (orders 37 - 39): 28 events, days 137 - 138.
+- Moth fight stage `b7.face_eater_moths_attack_the_inn_and_liscor` (inn_hill, 7 waves, `xp_window` x3, fight hook). Scene `b7.the_inn_after_the_moths` (talk hook).
+- Door: day 137 sets `albez_door.anchor_at_pallass` and `pallass.embargo_lifted`. Flags set: windows_broken, watchtower_smashed, jelaqua.body_broken, izril.rains.
+- Test: `sim_book7_moths` (new, 6). Detail: ADR 0030 "M19.4 as built".
+- Gotchas for M19.5+: wave `from` must not be an exit tile. Bird's broken bow, Numbtongue's arm are flags only. Seborn, Olesm, Selys, Octavia have no combat entry. Flos threads are off-map.
+- Next: M19.5 canon 5.09 E - 5.11 E (Laken, banquet, fae; off-map). User merges the M19.4 PR first.
 
 ## Before that (2026-10-07, local): M19.0 engine (door links + the rains)
 - Branch `feat/m19.0-door-links-rains` (from main 663e702; the M19.P plan PR #111 is merged). Detail: ADR 0030 "M19.0 as built".

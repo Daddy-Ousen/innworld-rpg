@@ -1,0 +1,276 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "interlude_flos",
+	"order": 39,
+	"events": {
+		"b7.flos_watches_the_moth_battle_from_the_desert": {
+			"tier": 1,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "chandrar",
+			"roles": {
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chamberlain": {
+					"prefer": [
+						"gazi_pathseeker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"seducer": {
+					"prefer": [
+						"mars"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"trey"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"teresa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flos.watched_the_liscor_battle",
+					"gazi.eye_damaged_by_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "Off-map notes (the Book 5 rule for Flos)."
+			},
+			"summary": "Late that night Flos's small camp, three days from Reim, watches the battle at Liscor in Gazi's scrying orb. Mars tries to charm Flos and fails. Gazi's eye is damaged from her fight with Erin.",
+			"news": "Flos watched the battle at Liscor from a desert camp. Mars tried to charm him and failed."
+		},
+		"b7.gazi_trains_trey_and_flos_names_his_losses": {
+			"tier": 1,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "chandrar",
+			"roles": {
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chamberlain": {
+					"prefer": [
+						"gazi_pathseeker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"trey"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"teresa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"regent": {
+					"prefer": [
+						"orthenon"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flos.travels_to_the_jerios_bazaar",
+					"trey.trained_by_gazi",
+					"hellios.surrendered_to_flos"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "Off-map notes. Teres is `teresa` in our records."
+			},
+			"summary": "Gazi trains Trey in magic. Teres is a level 18 [Warrior] and will become a [Swordswoman] with Orthenon's help. Hellios has surrendered and its royal family are held captive. Flos's Seven are scattered or dead.",
+			"news": "Flos is on the road to the Jerios Bazaar. Gazi trains Trey, and Orthenon trains Teres."
+		},
+		"b7.nawalishifra_is_sold_by_her_brother_and_kills_him": {
+			"tier": 1,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "jerios_bazaar",
+			"roles": {
+				"smith": {
+					"prefer": [
+						"nawalishifra_tannousin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"brother": {
+					"prefer": [
+						"allaif"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chamberlain": {
+					"prefer": [
+						"gazi_pathseeker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"trey"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"nawalishifra.swore_to_forge_a_blade",
+					"allaif.killed_by_his_sister"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "Off-map notes. Allaif's death is by event flag only (no kill effect: Chandrar is off-map)."
+			},
+			"summary": "At the bazaar a [Blacksmith] of Clan Tannousin sells steel ingots. Her brother sells her to a slaver. She kills him. Gazi and Trey step in. She swears to forge a blade, and Gazi thinks she is at least level 30.",
+			"news": "At the Jerios Bazaar a smith killed the brother who sold her. She swore to forge a great blade."
+		},
+		"b7.flos_speaks_to_the_whole_world": {
+			"tier": 1,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "jerios_bazaar",
+			"roles": {
+				"king": {
+					"prefer": [
+						"flos_reimarch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chamberlain": {
+					"prefer": [
+						"gazi_pathseeker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"smith": {
+					"prefer": [
+						"nawalishifra_tannousin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flos.broadcast_to_the_world",
+					"flos.demands_amerys_from_wistram"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "interlude_flos",
+				"confidence": "confirmed",
+				"note": "Off-map notes."
+			},
+			"summary": "Flos drops his disguise at a scrying stall and speaks to the world. He says he is back, names the Emperor of Sands as his foe and demands Amerys from Wistram. He will not make war on friends. The smith faints.",
+			"news": "Flos spoke to the world through a scrying stall. He demanded Amerys from Wistram and named the Emperor of Sands his foe."
+		}
+	},
+	"system": []
+}

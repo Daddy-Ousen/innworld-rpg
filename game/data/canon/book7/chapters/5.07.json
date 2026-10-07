@@ -1,0 +1,851 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.07",
+	"order": 37,
+	"events": {
+		"b7.redfang_spar_and_erin_serves_wine": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"second": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fourth": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"reader": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"swashbuckler": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.serves_wine",
+					"redfang.spar_on_the_inn_hill"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The rain stops at dawn. The five Hobgoblins spar on the hill and Jelaqua watches, her body failing. At breakfast Erin serves wine for the first time, from Liscor and Celum stock. Falene cannot follow Erin's names for it.",
+			"news": "The rain stopped at dawn. The Wandering Inn now sells wine, and the Hobgoblins spar on the hill every morning."
+		},
+		"b7.silver_swords_come_to_the_inn_for_yvlon": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dwarf": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ylawes_byres"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"silver_swords.at_the_inn_for_yvlon"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Ylawes, Falene and Dawil walk from Liscor to the inn and ask for Yvlon. Falene has written to Wistram about the Horns. Erin says the Horns are still on a contract and Yvlon should be back today.",
+			"news": "The Silver Swords came to the Wandering Inn to find Yvlon Byres."
+		},
+		"b7.pallass_opens_the_door_and_lifts_the_embargo": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"watch_captain": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.embargo_lifted",
+					"albez_door.anchor_at_pallass",
+					"liscor.door_request_forms"
+				],
+				"clear_flags": [
+					"pallass.embargo_of_liscor_begun"
+				],
+				"relationship": [
+					{
+						"from": "zevara",
+						"to": "erin_solstice",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Zevara and Venim are in the text. The door link stays open after day 137 (user, M19.4): the text shows Erin slamming it in the fight, then Pallass sends soldiers."
+			},
+			"summary": "Zevara tells Erin that Pallass is ready to open its door and the Assembly of Crafts has ended every sanction on Liscor. Ilvriss pushed for it through Salazsar. Visitors need a request form and a Message check. Erin opens the door.",
+			"news": "Pallass lifted its embargo on Liscor and opened the door at the Wandering Inn. Visitors need a form."
+		},
+		"b7.pallass_crowd_mocks_liscor_at_the_door": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "pallass",
+			"roles": {
+				"watch_captain": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venim"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.refuses_dungeon_aid",
+					"pallass.crowd_mocked_liscor"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "venim",
+						"delta": -1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Venim has put the door in a Pallass side street. A crowd jeers at Liscor and no one wants to cross. Venim says sorry. Zevara is crushed and Erin is angry. Pallass will not send help against the dungeon.",
+			"news": "Pallass jeered at Liscor through the new door. Pallass will not help with the dungeon."
+		},
+		"b7.horns_return_on_a_wagon_pulled_by_bear_skeletons": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": []
+				},
+				"ant": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yvlon_byres"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.back_at_the_inn",
+					"ylawes_byres.met_yvlon_again"
+				],
+				"relationship": [
+					{
+						"from": "ylawes_byres",
+						"to": "yvlon_byres",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Just after midday the Horns of Hammerad come back, muddy and starving, on a wagon pulled by undead bears. They were gone about five days. Ylawes greets his sister. Mrsha eats waffles.",
+			"news": "The Horns of Hammerad are back at the Wandering Inn after five days away."
+		},
+		"b7.erin_shows_her_grand_theatre_to_the_guests": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.grand_theatre_shown"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Erin's Skill came two days before (5.04, flag grand_theatre)."
+			},
+			"summary": "Erin claps and the common room triples in size. A stage rises and the new part has no windows. Falene drops her cup and Rabbiteater faints. Erin's danger sense twinges.",
+			"news": "Erin showed off her new Skill. The inn's common room is now three times bigger, with a stage."
+		},
+		"b7.zevara_and_olesm_feel_danger_and_the_first_moth_rises": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spearmaster": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.moth_alarm"
+				],
+				"relationship": [
+					{
+						"from": "zevara",
+						"to": "olesm",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Zevara and Olesm both feel danger. Zevara posts guards and sends Runners for the off-duty Watch. A moth rises from the rift behind a hill, then a second. Zevara orders the Antinium called.",
+			"news": "A giant moth rose out of the rift near Liscor. Liscor called out the Watch and the Antinium."
+		},
+		"b7.face_eater_moths_attack_the_inn_and_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"swashbuckler": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"druid": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dwarf": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.face_eater_moths_attacked",
+					"wandering_inn.windows_broken",
+					"wandering_inn.watchtower_smashed",
+					"jelaqua.body_broken",
+					"bird.bow_broken",
+					"wandering_inn.fought_the_moths",
+					"lyonette.sent_to_celum_from_the_moths"
+				],
+				"relationship": [
+					{
+						"from": "erin_solstice",
+						"to": "jelaqua",
+						"delta": 1
+					},
+					{
+						"from": "erin_solstice",
+						"to": "ylawes_byres",
+						"delta": 1
+					},
+					{
+						"from": "erin_solstice",
+						"to": "bird",
+						"delta": 1
+					}
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.07",
+				"confidence": "confirmed",
+				"note": "Moth waves are a guess: the text gives five giants, then a sixth, and tens of thousands of small ones."
+			},
+			"summary": "Five giant Face-Eater Moths climb out of the rift with their swarm. A sentry on Liscor's wall shoots first and the swarm turns on the town and the inn. Erin sends Lyonette, Mrsha and Drassi through the door and fights on the hill.",
+			"news": "Face-Eater Moths came out of the rift near Liscor and attacked the town and the Wandering Inn.",
+			"xp_window": {
+				"boost": 3,
+				"hours": [
+					13,
+					19
+				]
+			},
+			"stage": {
+				"area": "inn_hill",
+				"hours": [
+					13,
+					20
+				],
+				"kind": "fight",
+				"foes": [
+					{
+						"enemy": "moth_swarm",
+						"pos": [
+							22,
+							2
+						]
+					},
+					{
+						"enemy": "moth_swarm",
+						"pos": [
+							25,
+							2
+						]
+					},
+					{
+						"enemy": "moth_swarm",
+						"pos": [
+							28,
+							2
+						]
+					},
+					{
+						"enemy": "moth_swarm",
+						"pos": [
+							30,
+							2
+						]
+					}
+				],
+				"line": "A pale cloud of moths pours over the hill from the rift and the whole sky chitters like laughing.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							16,
+							12
+						],
+						"allies": [
+							"erin_solstice",
+							"jelaqua",
+							"moore",
+							"headscratcher",
+							"badarrow",
+							"shorthilt",
+							"numbtongue",
+							"rabbiteater"
+						],
+						"line": "Erin runs out with a frying pan. The Halfseekers and the five Hobgoblins follow her out of the door."
+					},
+					{
+						"after_seconds": 30,
+						"left_at_most": 3,
+						"from": [
+							30,
+							3
+						],
+						"foes": [
+							"moth_swarm",
+							"moth_swarm",
+							"moth_swarm"
+						],
+						"line": "A second cloud rolls in. Small moths crawl on the broken sky like grey ash."
+					},
+					{
+						"after_seconds": 60,
+						"left_at_most": 4,
+						"from": [
+							30,
+							3
+						],
+						"foes": [
+							"face_eater_moth",
+							"face_eater_moth"
+						],
+						"allies": [
+							"ylawes_byres",
+							"falene_skystrall",
+							"dawil"
+						],
+						"line": "Two house-sized moths settle on the hill, mouths like razors. The Silver Swords run to meet them."
+					},
+					{
+						"after_seconds": 100,
+						"left_at_most": 4,
+						"from": [
+							16,
+							12
+						],
+						"allies": [
+							"ceria_springwalker",
+							"pisces",
+							"yvlon_byres",
+							"ksmvr"
+						],
+						"line": "The Horns of Hammerad grab their gear. Pisces raises the bones of three bears."
+					},
+					{
+						"after_seconds": 130,
+						"left_at_most": 3,
+						"from": [
+							30,
+							3
+						],
+						"foes": [
+							"face_eater_moth",
+							"moth_swarm",
+							"moth_swarm",
+							"moth_swarm"
+						],
+						"allies": [
+							"bird"
+						],
+						"line": "Another giant drops onto the hill with a swarm. Bird shoots from the broken tower."
+					},
+					{
+						"after_seconds": 170,
+						"left_at_most": 3,
+						"from": [
+							30,
+							3
+						],
+						"foes": [
+							"face_eater_moth",
+							"face_eater_moth",
+							"moth_swarm",
+							"moth_swarm"
+						],
+						"line": "Thirty men of the Celum Watch tumble out of the door with Octavia's potions as two more giants circle."
+					},
+					{
+						"after_seconds": 230,
+						"from": [
+							30,
+							3
+						],
+						"foes": [
+							"face_eater_moth",
+							"moth_swarm",
+							"moth_swarm"
+						],
+						"line": "A sixth mother rises from the rift. The swarm does not seem to end."
+					}
+				],
+				"note": "M19.4: a fight. About 19 foes stand in for tens of thousands. The text ends it with Pisces's downpour (the next event). Hours are guesses (after midday until evening). Jelaqua's broken body is the effect of this event."
+			},
+			"hooks": [
+				{
+					"id": "player_fought_the_face_eater_moths",
+					"did": [
+						{
+							"action": [
+								"attack_melee",
+								"throw_object",
+								"block_attack"
+							],
+							"outcome": [
+								"success"
+							],
+							"context": {
+								"enemy": [
+									"face_eater_moth",
+									"moth_swarm"
+								]
+							}
+						}
+					],
+					"days": [
+						137,
+						137
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_fought_the_moths"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "jelaqua",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ylawes_byres",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human from the Wandering Inn fought the Face-Eater Moths beside Erin and the Halfseekers."
+				}
+			]
+		}
+	},
+	"system": []
+}
