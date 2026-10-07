@@ -1,5 +1,12 @@
 # Handoff
 
+## Just done (2026-10-07, local): wiki class tree, step 1 (branch `feat/class-tree-wiki`)
+- Added 6 classes to `game/data/classes.json` and 7 Skills to `game/data/skills.json`. See `progress.md` for the list and tests.
+- Every class needs at least one Skill pool (`unit_data_db` checks it). Advancements use `prereqs.classes`; consolidation needs 2+ `from` classes.
+- Next: step 2 in `progress.md` (new tags, actions, map objects, audio cues, then Rider/Gardener/Beast Tamer/Priest line and the two hybrids).
+- Gotcha: the wiki fetch gave a partial list. Re-read https://wiki.wanderinginn.com/Classes before step 2. The wiki follows the web serial: flag conflicts with the ebook.
+
+## Before that
 ## Just done (2026-10-07, local): M19.2 canon 5.00 – 5.03 (branch `feat/m19.2-canon-5-00`)
 - `game/data/canon/book7/chapters/5.00.json` – `5.03.json` (orders 30 – 33): 23 events, days 133 – 135. Stages: lunch (`b7.erin_cheers_up_with_relc`,
   day 133, 11 – 14 h) and the deal (`b7.zevara_brings_venim_to_the_inn`, day 134, 20 – 23 h, sets `izril.rains`). Scenes in `inn_interior`, one hook each.

@@ -83,6 +83,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   real game. Checked by eye.
   - [x] The user made the itch.io page: https://rhasasn229.itch.io/innworld-rpg (public, browser play, comments on).
   - [x] README links the itch.io page (top links and "In your browser").
+- [ ] Class tree from the wiki (branch `feat/class-tree-wiki`, 2026-10-07, local). Step 1 done: 6 advancement classes on today's tags
+  (`veteran_warrior`, `exemplar_warrior`, `scout`, `veteran_scout`, `elementalist`, `cryomancer`) + 7 passive Skills. Advancements use
+  `prereqs.classes` (no schema change; the base class stays). Tests run: `unit_data_db`, `unit_class_system`, `unit_skill_system`,
+  `unit_levels`, `unit_journal`, `unit_system_messages`, `sim_decline`, validator, Python tool tests (105). All pass. Full suite not run.
+  - [ ] Step 2: new tags (`riding`, `animals`, `gardening`, `faith`) + actions + map objects + audio cues, then classes `rider`, `gardener`,
+    `beast_tamer`, `acolyte`, `priest`, `bishop` and consolidations `dragoon` (warrior+rider), `druid` (gardener+beast_tamer+mage). Not started.
+  - Skipped on purpose: Erin/NPC-unique classes (Rocksoup Cook, Wandering Innkeeper, Goblinfriend Innkeeper), Skeleton, Bandit, Necromancer lines.
 - [ ] M20 — Touch controls (ADR 0032, plan `docs/plans/m20.md`). User answers 2026-10-05: InputMap actions, 4-way D-pad,
   fight tap = plan then act, M20.0 + M20.1 in one PR.
   - [x] M20.0 input actions + M20.1 touch layer (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud). Checked on Xvfb renders
