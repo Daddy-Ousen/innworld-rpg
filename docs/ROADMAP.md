@@ -339,7 +339,7 @@ cloud: the private repo). 22 chapters, about 286,000 words: 5.00 – 5.08 (with 
 - [x] M19.4 Canon 5.07, 5.08, Interlude – Flos (day 137): the moth wave stage (`xp_window` x3), the aftermath, Flos notes
 - [x] M19.5 Canon 5.09 E – 5.11 E (days 130 – 142): Laken, the banquet and the fae (off-map)
 - [x] M19.6 Canon 5.12 – 5.15 (days 137 – 140, 2026-10-08, local): the flood, the door in the west wall, Embria, the parade, the dive (events); three inn scene stages
-- [ ] M19.7 Canon 5.16 S – 5.18 S (days 140 – 143): the will, Zel's funeral, Selys in Pallass, the Heartflame lease
+- [x] M19.7 Canon 5.16 S – 5.18 S (days 140 – 143, 2026-10-08, local): the will, Zel's funeral (plaza stage), Selys in Pallass, the Heartflame lease (inn stage)
 - [ ] M19.8 Canon 5.19 G, 5.20 G (days 141 – 143): Rags, Garen and Tremborag, the road battle (off-map)
 **Done when:** all Book 7 canon is event data and `sim_canon_book7` runs to the last Book 7 day with drift 0;
 each batch has a hook or stage; the GUT tests that touch it, the Python tool tests and the validator pass.

@@ -1,0 +1,764 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.16S",
+	"order": 47,
+	"events": {
+		"b7.selys_remembers_zels_last_visit": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": []
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Selys thinks back to the last time her uncle Zel came to see her, years ago. They talked quietly and he said little about the war.",
+			"news": "Selys thinks back to the last time Zel Shivertail visited."
+		},
+		"b7.hobs_report_the_face_collector": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"typhenous": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ylawes_byres": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"revi": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.reported_face_collector"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Hobs tell the five teams about a monster below Liscor that collects heads. A bald, bearded head they saw matches an adventurer who went missing.",
+			"news": "The Hobs tell the adventurers of a head-collecting monster below Liscor."
+		},
+		"b7.treasure_argument_over_the_artifacts": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"revi": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ylawes_byres": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"moore": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dasha": {
+					"prefer": [
+						"dasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"anith": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.artifacts_are_goblin_property"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The teams argue over who owns the treasure the Hobs carried out of the dungeon. Moore ends the quarrel with a plain question about who counts as a monster.",
+			"news": "Adventurers quarrel over who owns the Goblins' dungeon treasure."
+		},
+		"b7.zevara_asks_for_the_door_for_zel": {
+			"tier": 1,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mrsha": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.door_reserved_for_zels_body"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Zevara asks Erin to keep the door open for General Shivertail's body. It reaches Celum the next day. Mrsha howls upstairs.",
+			"news": "Liscor asks to use Erin's door to bring General Shivertail home."
+		},
+		"b7.tekshia_approves_pisces_sewer_undead": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tekshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.pisces_sewer_undead_approved",
+					"redfang.bronze_team_refused"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Tekshia refuses Pisces's plan for a bone creature in the sewers. Selys says Zevara will overrule her, so Tekshia gives way and orders Selys to watch it. She also turns down the Goblin team's papers and sets the reading of the will.",
+			"news": "The Guildmistress lets Pisces send a bone creature into the sewers, with Selys watching."
+		},
+		"b7.drake_wills_lesson_at_breakfast": {
+			"tier": 2,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mrsha": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.learned_why_drakes_value_wills"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At breakfast Selys explains why Drakes write wills. Erin tries to take a fry from Olesm's plate and fails.",
+			"news": "Drakes have wills. Erin learns why."
+		},
+		"b7.zels_casket_opened_in_city_hall": {
+			"tier": 1,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.body_in_liscor",
+					"heartflame.armour_found_on_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Zel's casket is opened at midday. The body is badly torn. Tekshia names the Heartflame Breastplate on it and wants a strike force sent to the Walled Cities.",
+			"news": "General Shivertail's body is home. He wore the Heartflame Breastplate."
+		},
+		"b7.zel_will_read_by_scrying_orb": {
+			"tier": 1,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"xalia": {
+					"prefer": [
+						"xalia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.will_read",
+					"zel.will_line_hidden"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The family watches the body through a scrying orb while a mage reads the will. One request is struck out by a relative and kept secret.",
+			"news": "General Shivertail's will is read. One line is kept secret."
+		},
+		"b7.zel_leaves_his_gear_to_selys": {
+			"tier": 1,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"xalia": {
+					"prefer": [
+						"xalia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.selys_inherits"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The will gives Zel's gear, with the armour on his body, to his niece Selys. Xalia screams at her. Zevara says the law is clear.",
+			"news": "General Shivertail leaves his armour to his niece Selys."
+		},
+		"b7.ilvriss_confirms_the_law": {
+			"tier": 2,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.claim_secure_by_osthia_law"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Ilvriss, Zevara and Tekshia agree that the claim holds under the law for goods lost in war.",
+			"news": "Wall Lord Ilvriss says the Heartflame claim is legal."
+		},
+		"b7.selys_becomes_an_heiress": {
+			"tier": 2,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "selys_home",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": []
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "That night Selys sleeps and gains the [Heiress] class."
+		}
+	},
+	"system": [
+		{
+			"who": "selys",
+			"kind": "level",
+			"name": "[Heiress]",
+			"level": 4,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "selys",
+			"kind": "skill",
+			"name": "[Increased Income]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "selys",
+			"kind": "skill",
+			"name": "[Lingering Presence]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

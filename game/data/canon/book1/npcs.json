@@ -127,7 +127,7 @@
 			"tags": ["drake", "receptionist", "guild_staff", "friendly", "gossip"],
 			"faction": "liscor_adventurers_guild",
 			"home": "liscor",
-			"classes": [{"name": "[Warrior]", "level": null}, {"name": "[Hunter]", "level": null}],
+			"classes": [{"name": "[Warrior]", "level": null}, {"name": "[Hunter]", "level": null}, {"name": "[Receptionist]", "level": null}, {"name": "[Heiress]", "level": null}],
 			"alive_at_start": true,
 			"status": "reviewed",
 			"canon_ref": {"book": 1, "chapter": "1.11", "confidence": "confirmed", "note": "1.21: has [Fast Stitching] and sews Erin washable pads. Full name Selys Shivertail (1.62). 1.62: a Level 1 [Soldier] with [Swift Strike], trained as a girl by her grandmother and her uncle Zel; 1.63: after the battle she is a [Warrior] and gained levels in [Hunter]."},
