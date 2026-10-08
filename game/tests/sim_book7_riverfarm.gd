@@ -67,13 +67,11 @@ func test_the_data_is_loaded() -> void:
 	assert_eq((ev["hooks"] as Array).size(), 2)
 
 
-func test_the_road_to_riverfarm_is_shut_until_its_flag() -> void:
-	var at := Vector2i(0, 10)
-	assert_eq(_db.maps.exit_at("celum_gate", at), {}, "no exit while the flag is off")
-	_db.maps.sync_flags({"world.road_to_riverfarm": true})
-	assert_eq(_db.maps.exit_at("celum_gate", at).get("to", ""), "riverfarm")
-	_db.maps.sync_flags({})
-	assert_eq(_db.maps.exit_at("riverfarm", Vector2i(0, 11)).get("to", ""), "celum_gate")
+func test_riverfarm_is_not_linked_to_celum() -> void:
+	# Riverfarm lies south-west of Invrisil, not on the Celum road (docs/WORLD_WIREFRAME.md, section 4).
+	assert_eq(_db.maps.areas["riverfarm"]["exits"], [], "no exits until an Invrisil map exists")
+	for ex: Dictionary in _db.maps.areas["celum_gate"]["exits"]:
+		assert_ne(ex.get("to", ""), "riverfarm", "celum_gate must not lead to riverfarm")
 
 
 func test_laken_thread_events_set_their_flags() -> void:
