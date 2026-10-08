@@ -6,56 +6,44 @@
   <!-- LEFT: world -->
   <g>
     <rect x="20" y="70" width="640" height="810" fill="none" stroke="#999"/>
-    <text x="30" y="92" font-weight="bold" fill="#222">WORLD (north is up)</text>
+    <text x="30" y="92" font-weight="bold" fill="#222">WORLD (north is up; follows the wiki's SynMap, shapes simplified)</text>
+    <path d="M520 100 L650 100 L650 140 Z" fill="none" stroke="#a33" stroke-dasharray="6 4"/>
+    <text x="650" y="162" text-anchor="end" fill="#a33" font-size="11">Edge of the World (NE corner)</text>
 
-    <!-- Edge of the world -->
-    <path d="M30 100 L330 100" stroke="#a33" stroke-dasharray="6 4"/>
-    <text x="40" y="118" fill="#a33">Edge of the World: west and north of Rhir (wiki)</text>
+    <ellipse cx="400" cy="205" rx="150" ry="60" fill="#cfd8b5" stroke="#667"/>
+    <text x="400" y="203" text-anchor="middle" font-weight="bold">TERANDRIA</text>
+    <text x="400" y="221" text-anchor="middle" fill="#444">north (NNE) of Izril</text>
 
-    <!-- Terandria -->
-    <ellipse cx="400" cy="215" rx="190" ry="70" fill="#cfd8b5" stroke="#667"/>
-    <text x="400" y="212" text-anchor="middle" font-weight="bold">TERANDRIA</text>
-    <text x="400" y="230" text-anchor="middle" fill="#444">north of Izril; arctic far north</text>
+    <ellipse cx="105" cy="400" rx="85" ry="170" fill="#b8d4c8" stroke="#667"/>
+    <text x="105" y="396" text-anchor="middle" font-weight="bold">BALEROS</text>
+    <text x="105" y="414" text-anchor="middle" fill="#444">far west of Izril</text>
 
-    <!-- Rhir -->
-    <ellipse cx="150" cy="260" rx="85" ry="55" fill="#d9b8b8" stroke="#667"/>
-    <text x="150" y="257" text-anchor="middle" font-weight="bold">RHIR</text>
-    <text x="150" y="274" text-anchor="middle" fill="#444">NW of Izril</text>
-    <text x="150" y="325" text-anchor="middle" fill="#a33" font-size="11">(Ryoka's chess set said NE: unreliable)</text>
+    <path d="M250 335 L330 320 L385 345 L390 430 L420 470 L430 540 L385 610 L335 635 L285 600 L262 520 L292 470 L268 410 Z" fill="#e8d9a8" stroke="#667"/>
+    <text x="340" y="455" text-anchor="middle" font-weight="bold" font-size="16">IZRIL</text>
+    <text x="340" y="473" text-anchor="middle" fill="#444" font-size="11">Humans north,</text>
+    <text x="340" y="487" text-anchor="middle" fill="#444" font-size="11">Drakes and Gnolls south</text>
+    <line x1="290" y1="500" x2="395" y2="500" stroke="#7a6a50" stroke-width="5" stroke-dasharray="10 4"/>
+    <text x="270" y="520" text-anchor="end" fill="#7a6a50" font-size="11">High Passes</text>
 
-    <!-- Izril -->
-    <path d="M330 345 L480 345 L505 440 L480 520 L470 585 L520 635 L440 665 L350 600 L350 520 L320 430 Z" fill="#e8d9a8" stroke="#667"/>
-    <text x="410" y="470" text-anchor="middle" font-weight="bold" font-size="16">IZRIL</text>
-    <text x="410" y="488" text-anchor="middle" fill="#444">3rd largest, ~8,000 mi N-S</text>
-    <text x="410" y="506" text-anchor="middle" fill="#444">Humans north, Drakes/Gnolls south</text>
-    <line x1="332" y1="552" x2="472" y2="552" stroke="#7a6a50" stroke-width="5" stroke-dasharray="10 4"/>
-    <text x="470" y="570" text-anchor="end" fill="#7a6a50" font-size="11">High Passes (dashed bar)</text>
+    <ellipse cx="480" cy="385" rx="26" ry="20" fill="#fff" stroke="#36a" stroke-dasharray="4 3"/>
+    <text x="480" y="382" text-anchor="middle" fill="#36a" font-size="11">Wistram</text>
+    <text x="480" y="414" text-anchor="middle" fill="#a33" font-size="11">(map: east of Izril; text hints</text>
+    <text x="480" y="427" text-anchor="middle" fill="#a33" font-size="11">on the Izril-Baleros route)</text>
 
-    <!-- Baleros -->
-    <ellipse cx="130" cy="560" rx="105" ry="115" fill="#b8d4c8" stroke="#667"/>
-    <text x="130" y="556" text-anchor="middle" font-weight="bold">BALEROS</text>
-    <text x="130" y="574" text-anchor="middle" fill="#444">west / SW of Izril</text>
+    <ellipse cx="585" cy="440" rx="50" ry="65" fill="#d9b8b8" stroke="#667"/>
+    <text x="585" y="438" text-anchor="middle" font-weight="bold">RHIR</text>
+    <text x="585" y="455" text-anchor="middle" fill="#444" font-size="11">far east</text>
 
-    <!-- Wistram -->
-    <circle cx="255" cy="520" r="14" fill="#fff" stroke="#36a" stroke-dasharray="4 3"/>
-    <text x="255" y="498" text-anchor="middle" fill="#36a">Wistram (isle)</text>
-    <text x="255" y="548" text-anchor="middle" fill="#36a" font-size="11">near the middle of all</text>
-    <text x="255" y="561" text-anchor="middle" fill="#36a" font-size="11">sea routes (guess)</text>
+    <ellipse cx="560" cy="250" rx="45" ry="20" fill="#ddd" stroke="#667" stroke-dasharray="4 3"/>
+    <text x="560" y="254" text-anchor="middle" fill="#444" font-size="11">Drath (NE)</text>
 
-    <!-- Chandrar -->
-    <ellipse cx="410" cy="775" rx="190" ry="70" fill="#e6c79a" stroke="#667"/>
-    <text x="410" y="772" text-anchor="middle" font-weight="bold">CHANDRAR</text>
-    <text x="410" y="790" text-anchor="middle" fill="#444">southernmost, desert, largest</text>
+    <ellipse cx="330" cy="760" rx="215" ry="75" fill="#e6c79a" stroke="#667"/>
+    <text x="330" y="757" text-anchor="middle" font-weight="bold">CHANDRAR</text>
+    <text x="330" y="775" text-anchor="middle" fill="#444">south; desert; biggest</text>
 
-    <!-- Minos -->
-    <ellipse cx="620" cy="790" rx="32" ry="20" fill="#dcc" stroke="#667" stroke-dasharray="4 3"/>
-    <text x="620" y="822" text-anchor="middle" fill="#444" font-size="11">Isles of Minos (east of Chandrar)</text>
-
-    <!-- Drath -->
-    <ellipse cx="60" cy="400" rx="26" ry="22" fill="#ddd" stroke="#a33" stroke-dasharray="4 3"/>
-    <text x="90" y="438" text-anchor="middle" fill="#a33" font-size="11">Drath? (article: west)</text>
-    <ellipse cx="600" cy="480" rx="28" ry="22" fill="#ddd" stroke="#a33" stroke-dasharray="4 3"/>
-    <text x="600" y="518" text-anchor="middle" fill="#a33" font-size="11">Drath? (Map page: east)</text>
+    <ellipse cx="590" cy="670" rx="35" ry="20" fill="#dcc" stroke="#667" stroke-dasharray="4 3"/>
+    <text x="590" y="705" text-anchor="middle" fill="#444" font-size="11">Isles of Minos</text>
+    <text x="590" y="718" text-anchor="middle" fill="#444" font-size="11">(east of Chandrar)</text>
   </g>
 
   <!-- RIGHT: Izril corridor -->
@@ -117,9 +105,9 @@
     <text x="1070" y="654">Hectval (just past Blood Fields)</text>
     <text x="1070" y="668" fill="#444" font-size="11">Drisshia, Luldem, Sasil also south</text>
 
-    <circle cx="1030" cy="787" r="8" fill="#82b" stroke="#222" stroke-dasharray="3 2"/>
-    <text x="1042" y="791" font-weight="bold">Pallass (~400 S, x unknown)</text>
-    <text x="1042" y="805" fill="#82b" font-size="11">Book 7: 400 mi south of the inn</text>
+    <circle cx="1000" cy="787" r="8" fill="#82b" stroke="#222" stroke-dasharray="3 2"/>
+    <text x="1012" y="791" font-weight="bold">Pallass (~400 S, a bit west)</text>
+    <text x="1012" y="805" fill="#82b" font-size="11">Book 7: 400 mi S of the inn</text>
 
     <circle cx="1030" cy="850" r="4" fill="#666"/>
     <text x="1040" y="854" font-size="11">Comoller (160 S of Pallass)</text>
@@ -127,8 +115,8 @@
     <!-- off chart arrows -->
     <text x="1030" y="114" text-anchor="middle" fill="#444">^ Reizmelt: 600-800 N of Liscor (estimate); Laiss 30 mi S of it</text>
     <text x="1030" y="130" text-anchor="middle" fill="#444">^ First Landing: ~4,000 N (northernmost city)</text>
-    <text x="1370" y="705" text-anchor="end" fill="#444" font-size="11">Fissival: far SE coast (off chart)</text>
-    <text x="1370" y="720" text-anchor="end" fill="#444" font-size="11">Manus: nearest Walled City to Antinium lands</text>
-    <text x="1370" y="735" text-anchor="end" fill="#444" font-size="11">Zeres, Salazsar: side not stated</text>
+    <text x="1370" y="705" text-anchor="end" fill="#444" font-size="11">Fissival: far EAST coast (off chart)</text>
+    <text x="1370" y="720" text-anchor="end" fill="#444" font-size="11">Manus: SW of Pallass, by Antinium lands</text>
+    <text x="1370" y="735" text-anchor="end" fill="#444" font-size="11">Salazsar: SE; Oteslia: S; Zeres: far S tip</text>
   </g>
 </svg>
