@@ -4,7 +4,7 @@ extends GutTest
 ## (docs/WORLD_WIREFRAME.md: Riverfarm is entered from the Invrisil gate's west side).
 
 const CHAIN: Array[String] = ["celum_square", "celum_main_street", "celum_north_gate", "road_to_invrisil",
-		"invrisil_gate", "invrisil_square"]
+		"invrisil_gate", "invrisil_square", "invrisil_main_street"]
 
 var _db: DataDb
 
@@ -58,7 +58,8 @@ func test_riverfarm_joins_the_invrisil_gate_on_the_west_side() -> void:
 
 
 func test_each_arrival_reaches_every_exit_on_its_map() -> void:
-	var maps: Array[String] = ["celum_north_gate", "road_to_invrisil", "invrisil_gate", "invrisil_square", "riverfarm"]
+	var maps: Array[String] = ["celum_north_gate", "road_to_invrisil", "invrisil_gate", "invrisil_square", "riverfarm",
+			"invrisil_main_street", "invrisil_runners_guild", "invrisil_crag_pig", "invrisil_merchants_guild"]
 	for id in maps:
 		for e: Dictionary in _db.maps.areas[id]["exits"]:
 			var at := Vector2i(int(e["at"][0]), int(e["at"][1]))
@@ -80,3 +81,24 @@ func test_the_long_roads_ask_before_you_go() -> void:
 			["invrisil_gate", "riverfarm"]]:
 		assert_true(TravelPrompt.is_long(int(_exit_to(pair[0], pair[1])["minutes"])), "%s" % [pair])
 	assert_true(_db.maps.is_camp("road_to_invrisil"))
+
+
+func test_invrisil_street_joins_the_three_buildings() -> void:
+	for id: String in ["invrisil_runners_guild", "invrisil_crag_pig", "invrisil_merchants_guild"]:
+		assert_false(_exit_to("invrisil_main_street", id).is_empty(), id)
+		assert_false(_exit_to(id, "invrisil_main_street").is_empty(), id)
+		assert_true(_db.maps.is_indoor(id), id)
+
+
+func test_invrisil_shops_exist_and_the_guild_board_works() -> void:
+	for id: String in ["invrisil_square", "invrisil_crag_pig", "invrisil_merchants_guild"]:
+		var n := 0
+		for o: Dictionary in _db.maps.areas[id]["objects"]:
+			if o.has("shop"):
+				n += 1
+				assert_true(_db.economy.shops.has(o["shop"]), "%s: shop %s" % [id, o["shop"]])
+		assert_eq(n, 1, id)
+	var board := false
+	for o: Dictionary in _db.maps.areas["invrisil_runners_guild"]["objects"]:
+		board = board or "deliver_parcel" in o["actions"]
+	assert_true(board, "the Runners' Guild has a parcel board")

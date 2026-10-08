@@ -1,0 +1,52 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_main_street",
+	"name": "Invrisil main street",
+	"location": "invrisil",
+	"confidence": "guess",
+	"note": "Design map. Canon: Invrisil has a Runners' Guild and an inn, the Crag Pig (3.40), a Merchants' Guild with a truth stone (3.37) and Hedault's warded house (3.36). The street and every position are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [7, 5], "to": "invrisil_runners_guild", "arrive": [10, 10], "minutes": 0, "sign": {"icon": "badge", "text": "Runners' Guild"}},
+		{"at": [21, 5], "to": "invrisil_crag_pig", "arrive": [10, 10], "minutes": 0, "sign": {"icon": "mug", "text": "The Crag Pig"}},
+		{"at": [27, 5], "to": "invrisil_merchants_guild", "arrive": [10, 10], "minutes": 0, "sign": {"icon": "coin", "text": "Merchants' Guild"}},
+		{"at": [16, 23, 2, 1], "to": "invrisil_square", "arrive": [16, 1], "minutes": 2}
+	],
+	"objects": [
+		{"id": "is_home_a", "kind": "plaque", "at": [2, 5], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "is_hedault", "kind": "plaque", "at": [12, 5], "name": "A warded stone house", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "is_home_b", "kind": "plaque", "at": [29, 5], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "is_home_c", "kind": "plaque", "at": [3, 15], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "is_closed", "kind": "plaque", "at": [11, 15], "name": "Closed", "actions": [], "sign": {"icon": "closed"}},
+		{"id": "is_home_d", "kind": "plaque", "at": [22, 15], "name": "A private home", "actions": [], "sign": {"icon": "home"}},
+		{"id": "is_brazier_west", "kind": "brazier", "at": [10, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "is_brazier_east", "kind": "brazier", "at": [23, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true}
+	],
+	"legend": {"B": "brick_house", "b": "brick_house_b", "d": "brick_door", "_": "cobble"},
+	"rows": [
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbdbbBBBBBb__bbBdBBBbbdbbBB",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBBb__bbBBBBBbbbbbBB",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________",
+		"________________________________"
+	]
+}

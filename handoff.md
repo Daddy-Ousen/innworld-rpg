@@ -1,5 +1,10 @@
 # Handoff
 
+## Just done (2026-10-08, local): Invrisil city (branch `feat/invrisil-city`, from main after PR 132)
+- New maps `invrisil_main_street`, `invrisil_runners_guild`, `invrisil_crag_pig`, `invrisil_merchants_guild`; square got a north exit and a stall; shops in `economy.json`; moods in `audio.json`. Test: `unit_north_road` (7).
+- No NPCs, no events. Hedault's house is a closed plaque (canon `hedault_house`, enchanter, 3.36). Next ideas: Magnolia's estate map (outside the city), Invrisil Runners jobs, staff NPCs, then release keystore + icon check (needs the user).
+- Gotcha: a tree hides a wall 4 rows above it (`unit_ground_art`). Map data is plain JSON; patch `economy.json` / `audio.json` as text (CRLF).
+
 ## Just done (2026-10-08, local): north road (branch `feat/invrisil-road`)
 - New maps `celum_north_gate`, `road_to_invrisil` (camp), `invrisil_gate`, `invrisil_square`; exits added to `celum_main_street` (top, x 15-16) and `riverfarm` (east edge to the Invrisil gate west edge). Audio moods in `audio.json`. Test: `unit_north_road`.
 - Invrisil has only a gate and a square (no shops, no NPCs, no canon moved). Next ideas: Invrisil shops/Runners' Guild, Magnolia's mansion, put Laken/Riverfarm travel to use, then release keystore + icon.

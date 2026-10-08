@@ -1,0 +1,37 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_crag_pig",
+	"name": "The Crag Pig",
+	"location": "crag_pig",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. The Crag Pig, an inn in Invrisil (3.40). The layout, the room price and the menu are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "invrisil_main_street", "arrive": [21, 6], "minutes": 0}
+	],
+	"objects": [
+		{"id": "pig_bar", "kind": "counter", "at": [5, 2], "name": "Bar", "actions": ["buy_supplies", "wash_dishes"], "solid": true, "shop": "crag_pig"},
+		{"id": "pig_stove", "kind": "stove", "at": [17, 1], "name": "Kitchen stove", "actions": ["cook_simple_meal", "cook_stew"], "solid": true, "warm": true},
+		{"id": "pig_table_west", "kind": "table", "at": [6, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
+		{"id": "pig_table_east", "kind": "table", "at": [12, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
+		{"id": "pig_room", "kind": "bed", "at": [17, 9], "name": "Rented bed", "actions": [], "solid": true, "sleep": true, "price": 10},
+		{"id": "pig_hearth", "kind": "hearth", "at": [2, 1], "name": "Common-room fire", "actions": [], "solid": true, "warm": true},
+		{"id": "pig_bench", "kind": "bench", "at": [1, 7], "name": "Bench", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHHHHHVHHHVHHHVHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}

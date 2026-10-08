@@ -1,0 +1,38 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_runners_guild",
+	"name": "Invrisil Runners' Guild",
+	"location": "invrisil_runners_guild",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. The Runners' Guild of Invrisil (3.40). Same plan as Celum's guild; the layout is a guess.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "invrisil_main_street", "arrive": [7, 6], "minutes": 0}
+	],
+	"objects": [
+		{"id": "guild_counter", "kind": "counter", "at": [10, 3], "name": "Reception counter", "actions": [], "solid": true},
+		{"id": "request_board", "kind": "notice_board", "at": [3, 1], "name": "Request board", "actions": ["deliver_parcel"], "solid": true},
+		{"id": "guild_hearth", "kind": "hearth", "at": [17, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "guild_bench", "kind": "bench", "at": [15, 7], "name": "Bench", "actions": [], "solid": true},
+		{"id": "stretching_mat", "kind": "mat", "at": [4, 8], "name": "Stretching mat", "actions": ["sprint_training"]},
+		{"id": "guild_supply_shelf", "kind": "shelves", "at": [8, 1], "name": "Supply shelf", "actions": [], "solid": true},
+		{"id": "guild_table_west", "kind": "table", "at": [4, 5], "name": "Runners' table", "actions": [], "solid": true},
+		{"id": "guild_table_east", "kind": "table", "at": [16, 5], "name": "Runners' table", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHVHHHHHHHVHHHVHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}
