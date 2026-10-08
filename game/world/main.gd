@@ -49,6 +49,10 @@ var _bumped := ""
 var _attack_dir := ""
 ## Tests set this false: quit to title then only autosaves.
 var switch_scene := true
+
+## A long road (TravelPrompt.LONG_MINUTES) asks first and plays a short walk
+## (user, 2026-10-08). Off headless-only: sims that drive this scene step at once.
+var confirm_travel := DisplayServer.get_name() != "headless"
 ## M17.3: replay the others' turns after a command (off headless; tests may
 ## turn it on).
 var replay_turns := DisplayServer.get_name() != "headless"
@@ -82,6 +86,8 @@ var _armed := ""
 @onready var dialog: SystemDialog = $SystemLayer/SystemDialog
 @onready var touch: TouchControls = $TouchLayer/TouchControls
 @onready var console_layer: CanvasLayer = $ConsoleLayer
+var travel: TravelPrompt
+var _travel_dir := ""
 @onready var console_input: LineEdit = $ConsoleLayer/DebugConsole.get_node("%Input")
 
 
@@ -106,6 +112,10 @@ func _ready() -> void:
 	bag.chosen.connect(use_from_bag)
 	dialog.closed.connect(_on_dialog_closed)
 	dialog.struck.connect(attack_npc.bind(true))
+	travel = TravelPrompt.new()
+	$SystemLayer.add_child(travel)
+	travel.cancelled.connect(_on_travel_cancelled)
+	travel.arrived.connect(_on_travel_arrived)
 	bar.end_turn.connect(end_turn)
 	bar.skill.connect(pick_skill)
 	view.replay_step.connect(_on_replay_step)
@@ -145,7 +155,7 @@ func _redraw() -> void:
 ## the console has the keyboard.
 func is_busy() -> bool:
 	return console_layer.visible or menu.visible or sheet.visible or journal.visible \
-			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible \
+			or bag.visible or pause.visible or dialog.visible or message_log.visible or help.visible 			or travel.visible \
 			or view.is_replaying()
 
 
@@ -271,6 +281,8 @@ func step(dir: String) -> void:
 		else:
 			hud.add_lines([CombatSkills.NO_FOE])
 		return
+	if dir != WAIT and _ask_travel(dir):
+		return
 	var was_indoor := db.maps.is_indoor(gs.player.area)
 	var r := {"refused": Commands.wait(gs, db, int(db.rules["world"]["step_seconds"])) < 0,
 			"exit_to": "", "npc": ""} if dir == WAIT else Commands.move(gs, db, dir)
@@ -290,6 +302,38 @@ func step(dir: String) -> void:
 		if r.has("attack") and r["attack"]["error"] != "":
 			hud.add_lines([r["attack"]["error"]])
 	_finish()
+
+
+## A step onto a long road (10 h between Celum, the camp and Liscor) opens the
+## TravelPrompt instead and returns true; the step is made after the walk.
+func _ask_travel(dir: String) -> bool:
+	if not confirm_travel or not PlayerState.DIRS.has(dir):
+		return false
+	var gs := Session.gs
+	var db := Session.db
+	var e := db.maps.exit_at(gs.player.area, gs.player.pos() + (PlayerState.DIRS[dir] as Vector2i))
+	if e.is_empty() or not TravelPrompt.is_long(int(e["minutes"])):
+		return false
+	_travel_dir = dir
+	_attack_dir = dir  # the key must be let go before it acts again
+	_cancel_walk()
+	travel.ask(String(db.maps.areas[gs.player.area]["name"]), String(db.maps.areas[e["to"]]["name"]),
+			int(e["minutes"]))
+	return true
+
+
+func _on_travel_cancelled() -> void:
+	_travel_dir = ""
+
+
+## The walk is over and the screen is covered: make the step.
+func _on_travel_arrived() -> void:
+	var dir := _travel_dir
+	_travel_dir = ""
+	var was := confirm_travel
+	confirm_travel = false
+	step(dir)
+	confirm_travel = was
 
 
 ## Raises the guard for one turn (B).
