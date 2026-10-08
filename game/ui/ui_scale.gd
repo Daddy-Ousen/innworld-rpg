@@ -15,6 +15,11 @@ const AUTO := "auto"
 ## Modes in Options order: Auto, then fixed factors.
 const MODES: Array[String] = [AUTO, "1", "1.5", "2"]
 const BIG := 2.0
+## Auto on a phone or tablet OS (Android, iOS, or a browser on them): a bit
+## bigger than BIG, whatever the reported dpi says (user, 2026-10-08).
+const MOBILE := 2.5
+## Alpha of panel, button and list boxes on mobile: the map shows through.
+const MOBILE_ALPHA := 0.78
 const PHONE_INCHES := 5.0
 ## The world camera's zoom at factor 1 (world_view.tscn).
 const CAMERA_ZOOM := 2.0
@@ -46,8 +51,10 @@ func set_mode(m: String) -> void:
 
 ## The factor for this mode. `short_px`: the short side of the window in
 ## pixels; `dpi`: the screen's dots per inch; `touch`: a touch screen.
-func factor(short_px: float, dpi: float, touch: bool) -> float:
-	return auto_factor(short_px, dpi, touch) if mode == AUTO else float(mode)
+func factor(short_px: float, dpi: float, touch: bool, mobile := false) -> float:
+	if mode != AUTO:
+		return float(mode)
+	return MOBILE if mobile else auto_factor(short_px, dpi, touch)
 
 
 ## BIG on a touch screen whose short side is under PHONE_INCHES, else 1.
@@ -57,6 +64,31 @@ static func auto_factor(short_px: float, dpi: float, touch: bool) -> float:
 	if not touch or dpi <= 0.0:
 		return 1.0
 	return BIG if short_px / dpi < PHONE_INCHES else 1.0
+
+
+## True on a phone or tablet OS, in the app or in a browser on it.
+static func is_mobile_os() -> bool:
+	return OS.has_feature("mobile") or OS.has_feature("web_android") or OS.has_feature("web_ios")
+
+
+## Sets the alpha of every flat box in `theme` that has a fill: `alpha` x its
+## first (opaque) alpha, or the first alpha again when `alpha` is 1. Remembers the
+## first alpha in the box's metadata, so it can be called again and again.
+static func set_box_alpha(theme: Theme, alpha: float) -> void:
+	if theme == null:
+		return
+	var seen := {}
+	for type_name in theme.get_stylebox_type_list():
+		for style_name in theme.get_stylebox_list(type_name):
+			var box := theme.get_stylebox(style_name, type_name) as StyleBoxFlat
+			if box == null or not box.draw_center or seen.has(box):
+				continue
+			seen[box] = true
+			if not box.has_meta("base_alpha"):
+				box.set_meta("base_alpha", box.bg_color.a)
+			var c := box.bg_color
+			c.a = float(box.get_meta("base_alpha")) * alpha
+			box.bg_color = c
 
 
 ## The world camera's zoom at `f`: the map keeps its size on the screen.

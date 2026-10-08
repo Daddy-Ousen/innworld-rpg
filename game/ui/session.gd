@@ -84,6 +84,8 @@ func ui_factor() -> float:
 
 ## Sets the root window's content scale; tells the game screen when it changed.
 func apply_ui_scale() -> void:
+	UiScale.set_box_alpha(ThemeDB.get_project_theme(),
+			UiScale.MOBILE_ALPHA if UiScale.is_mobile_os() else 1.0)
 	var f := ui_factor()
 	if not is_equal_approx(get_window().content_scale_factor, f):
 		get_window().content_scale_factor = f
