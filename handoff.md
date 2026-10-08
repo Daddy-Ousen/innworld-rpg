@@ -1,5 +1,13 @@
 # Handoff
 
+## Just done (2026-10-08, local): M19.6 canon 5.12 – 5.15 (branch `feat/m19.6-canon-5-12`)
+- `game/data/canon/book7/chapters/5.12.json` – `5.15.json` (orders 43 – 46): 44 events, days 137 – 140. Tests: `sim_book7_flood_and_parade` (new, 6). Detail: ADR 0030 "M19.6 as built".
+- Flood flag is set on day 137 (flags show a day late). Door west-wall flag `albez_door.anchor_at_liscor_wall` on day 138. Pallass link stays open.
+- Stages (inn_interior, scenes): `b7.klbkch_and_relc_visit_the_rebuilt_inn` (138, 18 – 22), `b7.victory_party_at_the_inn` (139, 19 – 23), `b7.vuliel_drae_confess_the_eggs` (140, 9 – 13).
+- Gotchas: in a crowded stage a seated guest can block `ToyMaps.walk_to` (seed-dependent); the new test places the player next to the NPC instead.
+  The day-139 play (Battle of Liscor) is an event, not a stage. No records for Halliss, Euriss, Raskghar hunters, the head collector: the events use existing NPCs only.
+- Next: the user merges the PR. Then M19.7 (5.16 S – 5.18 S), M19.8 (5.19 G, 5.20 G).
+
 ## Just done (2026-10-08, local): world wireframe (branch `docs/world-wireframe`)
 - `docs/WORLD_WIREFRAME.md` + `docs/world_wireframe.svg`: continents, Izril spine, Celum - Invrisil - Riverfarm rules, open questions.
 - Rule to keep: Riverfarm lies 50 - 80 mi SOUTH-WEST of Invrisil (not on the Celum road). Pallass is 400 mi south of the inn (Book 7). Invrisil 430 mi is a pick (books say 400 / 600).

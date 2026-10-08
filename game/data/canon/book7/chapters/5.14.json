@@ -1,0 +1,809 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.14",
+	"order": 45,
+	"events": {
+		"b7.battle_of_liscor_play": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"wesle": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": []
+				},
+				"jasi": {
+					"prefer": [
+						"jasi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"wesle"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"players.battle_of_liscor_play_shown"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Players stage the Battle of Liscor. Pisces raises dead moths to play the foe. Ilvriss grumbles, then enjoys it. Autographs sell well."
+		},
+		"b7.vuliel_drae_looks_guilty": {
+			"tier": 1,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"anith": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": []
+				},
+				"insill": {
+					"prefer": [
+						"insill"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pekona": {
+					"prefer": [
+						"pekona"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dasha": {
+					"prefer": [
+						"dasha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"larr": {
+					"prefer": [
+						"larr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"anith"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The five of Vuliel Drae sit in the crowd and look sick at the applause."
+		},
+		"b7.redfang_decide_to_leave": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.resolve_to_return"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The five Redfang Goblins decide to go home to their tribe. They have one sword and one bow between them."
+		},
+		"b7.redfang_test_the_door_for_weapons": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"octavia": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.pallass_door_watched"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Goblins use the door to ask Octavia for weapons. Rabbiteater's Skill warns him of four watchers on the Pallass end."
+		},
+		"b7.quillfish_strike_the_flooded_hill": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A quillfish leaps from the flood and hits Erin. It does no harm. Rabbiteater catches it. Liscor launches boats on the new lake."
+		},
+		"b7.bird_kills_an_octopus_fish": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"bird": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.bow_broken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "likely",
+				"note": "The Skill name is not shown here."
+			},
+			"summary": "A huge octopus fish rises out of the flood to attack the hill. Bird kills it from the roof with a new Skill. His good bow breaks."
+		},
+		"b7.erin_pays_the_goblins_weekly": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.pays_goblins_weekly"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Erin pays each Goblin a silver coin and one gold coin, and promises weekly pay. Bird used some of the coins as bait."
+		},
+		"b7.vuliel_drae_confess_the_eggs": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"anith": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"insill": {
+					"prefer": [
+						"insill"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ylawes_byres": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"revi": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"typhenous": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"adventurers.know_vuliel_drae_guilt",
+					"dungeon.egg_swarm_released_by_vuliel_drae"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Vuliel Drae tell the teams that they smashed the moth eggs in the dungeon and so loosed the swarm. Revi attacks and Typhenous webs her. Pisces urges mercy. Jelaqua refuses to take revenge.",
+			"news": "The adventurers learned that Vuliel Drae set the moth swarm loose.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					9,
+					13
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							11
+						]
+					},
+					{
+						"npc": "ylawes_byres",
+						"pos": [
+							6,
+							7
+						]
+					},
+					{
+						"npc": "falene_skystrall",
+						"pos": [
+							7,
+							5
+						]
+					},
+					{
+						"npc": "dawil",
+						"pos": [
+							6,
+							4
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "halrac",
+						"pos": [
+							10,
+							6
+						]
+					},
+					{
+						"npc": "typhenous",
+						"pos": [
+							11,
+							7
+						]
+					},
+					{
+						"npc": "revi",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							4,
+							7
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							3,
+							9
+						]
+					},
+					{
+						"npc": "anith",
+						"pos": [
+							8,
+							12
+						]
+					},
+					{
+						"npc": "insill",
+						"pos": [
+							9,
+							11
+						]
+					},
+					{
+						"npc": "pekona",
+						"pos": [
+							10,
+							12
+						]
+					},
+					{
+						"npc": "dasha",
+						"pos": [
+							7,
+							10
+						]
+					},
+					{
+						"npc": "larr",
+						"pos": [
+							6,
+							11
+						]
+					}
+				],
+				"line": "Adventurers fill the common room. Vuliel Drae stand together in the middle, pale and silent. Revi is held back from them.",
+				"note": "M19.6: a scene. Hours are guesses (the text ends near lunch)."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_the_confession",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"revi"
+								]
+							}
+						}
+					],
+					"days": [
+						140,
+						140
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"adventurers.earther_heard_the_vuliel_drae_confession"
+						],
+						"relationship": [
+							{
+								"from": "revi",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn was there when Vuliel Drae confessed."
+				}
+			]
+		},
+		"b7.dungeon_account_heard": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": []
+				},
+				"anith": {
+					"prefer": [
+						"anith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"halrac"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"dungeon.treasure_room_location_known",
+					"dungeon.raskghar_organised_known"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Vuliel Drae describe a treasure room behind an illusion wall off a trap corridor, and organised Raskghar killing teams. A masked woman is also mentioned. Halrac draws a map."
+		},
+		"b7.redfang_slip_away_to_the_dungeon": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.entered_dungeon"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.14",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The five Redfang Goblins sink down the dungeon rift, with their gear, to take what they need from the Maze."
+		}
+	},
+	"system": []
+}
