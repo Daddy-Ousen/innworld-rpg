@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-08, local): world wireframe (branch `docs/world-wireframe`)
+- `docs/WORLD_WIREFRAME.md` + `docs/world_wireframe.svg`: continents, Izril spine, Celum - Invrisil - Riverfarm rules, open questions.
+- Rule to keep: Riverfarm lies 50 - 80 mi SOUTH-WEST of Invrisil (not on the Celum road). Pallass is 400 mi south of the inn (Book 7). Invrisil 430 mi is a pick (books say 400 / 600).
+- Next: the user checks the open questions (Drath, Zeres/Salazsar/Manus sides). Read this doc before any new road or map.
+- Gotcha: another session left uncommitted work in this checkout (M19.5 canon 5.09E - 5.11E, `riverfarm.json`). I did not commit it.
+
 ## Just done (2026-10-07, local): wiki class tree, step 2 (branch `feat/class-tree-wiki`)
 - Added 4 tags, 4 actions (with sounds), 4 map objects, 8 classes (2 consolidations), 8 Skills. See `progress.md`.
 - Test: `unit_class_tree_step2`. Objects: `inn_hill` `garden_bed`, `celum_gate` `hitching_post` + `stable_yard`, `celum_square` `wayside_shrine`.

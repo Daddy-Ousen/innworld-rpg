@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <rect width="1400" height="900" fill="#f6f1e4"/>
+  <text x="20" y="28" font-size="20" font-weight="bold" fill="#222">Innworld wireframe (schematic, not to scale on the left)</text>
+  <text x="20" y="48" fill="#555">Solid = confirmed by book or wiki. Dashed = guess or conflict. Notes: docs/WORLD_WIREFRAME.md</text>
+
+  <!-- LEFT: world -->
+  <g>
+    <rect x="20" y="70" width="640" height="810" fill="none" stroke="#999"/>
+    <text x="30" y="92" font-weight="bold" fill="#222">WORLD (north is up)</text>
+
+    <!-- Edge of the world -->
+    <path d="M30 100 L330 100" stroke="#a33" stroke-dasharray="6 4"/>
+    <text x="40" y="118" fill="#a33">Edge of the World: west and north of Rhir (wiki)</text>
+
+    <!-- Terandria -->
+    <ellipse cx="400" cy="215" rx="190" ry="70" fill="#cfd8b5" stroke="#667"/>
+    <text x="400" y="212" text-anchor="middle" font-weight="bold">TERANDRIA</text>
+    <text x="400" y="230" text-anchor="middle" fill="#444">north of Izril; arctic far north</text>
+
+    <!-- Rhir -->
+    <ellipse cx="150" cy="260" rx="85" ry="55" fill="#d9b8b8" stroke="#667"/>
+    <text x="150" y="257" text-anchor="middle" font-weight="bold">RHIR</text>
+    <text x="150" y="274" text-anchor="middle" fill="#444">NW of Izril</text>
+    <text x="150" y="325" text-anchor="middle" fill="#a33" font-size="11">(Ryoka's chess set said NE: unreliable)</text>
+
+    <!-- Izril -->
+    <path d="M330 345 L480 345 L505 440 L480 520 L470 585 L520 635 L440 665 L350 600 L350 520 L320 430 Z" fill="#e8d9a8" stroke="#667"/>
+    <text x="410" y="470" text-anchor="middle" font-weight="bold" font-size="16">IZRIL</text>
+    <text x="410" y="488" text-anchor="middle" fill="#444">3rd largest, ~8,000 mi N-S</text>
+    <text x="410" y="506" text-anchor="middle" fill="#444">Humans north, Drakes/Gnolls south</text>
+    <line x1="332" y1="552" x2="472" y2="552" stroke="#7a6a50" stroke-width="5" stroke-dasharray="10 4"/>
+    <text x="470" y="570" text-anchor="end" fill="#7a6a50" font-size="11">High Passes (dashed bar)</text>
+
+    <!-- Baleros -->
+    <ellipse cx="130" cy="560" rx="105" ry="115" fill="#b8d4c8" stroke="#667"/>
+    <text x="130" y="556" text-anchor="middle" font-weight="bold">BALEROS</text>
+    <text x="130" y="574" text-anchor="middle" fill="#444">west / SW of Izril</text>
+
+    <!-- Wistram -->
+    <circle cx="255" cy="520" r="14" fill="#fff" stroke="#36a" stroke-dasharray="4 3"/>
+    <text x="255" y="498" text-anchor="middle" fill="#36a">Wistram (isle)</text>
+    <text x="255" y="548" text-anchor="middle" fill="#36a" font-size="11">near the middle of all</text>
+    <text x="255" y="561" text-anchor="middle" fill="#36a" font-size="11">sea routes (guess)</text>
+
+    <!-- Chandrar -->
+    <ellipse cx="410" cy="775" rx="190" ry="70" fill="#e6c79a" stroke="#667"/>
+    <text x="410" y="772" text-anchor="middle" font-weight="bold">CHANDRAR</text>
+    <text x="410" y="790" text-anchor="middle" fill="#444">southernmost, desert, largest</text>
+
+    <!-- Minos -->
+    <ellipse cx="620" cy="790" rx="32" ry="20" fill="#dcc" stroke="#667" stroke-dasharray="4 3"/>
+    <text x="620" y="822" text-anchor="middle" fill="#444" font-size="11">Isles of Minos (east of Chandrar)</text>
+
+    <!-- Drath -->
+    <ellipse cx="60" cy="400" rx="26" ry="22" fill="#ddd" stroke="#a33" stroke-dasharray="4 3"/>
+    <text x="90" y="438" text-anchor="middle" fill="#a33" font-size="11">Drath? (article: west)</text>
+    <ellipse cx="600" cy="480" rx="28" ry="22" fill="#ddd" stroke="#a33" stroke-dasharray="4 3"/>
+    <text x="600" y="518" text-anchor="middle" fill="#a33" font-size="11">Drath? (Map page: east)</text>
+  </g>
+
+  <!-- RIGHT: Izril corridor -->
+  <g>
+    <rect x="680" y="70" width="700" height="810" fill="none" stroke="#999"/>
+    <text x="690" y="92" font-weight="bold" fill="#222">IZRIL CORRIDOR (miles from Liscor, north is up, 1 px = 1.4 mi N-S)</text>
+
+    <!-- axis: y_px = 160 + (520 - y)*0.68 ; x_px = 1030 + x -->
+    <line x1="1030" y1="120" x2="1030" y2="870" stroke="#ccc"/>
+
+    <!-- High Passes belt -->
+    <rect x="800" y="490" width="460" height="75" fill="#cdbf9f" opacity="0.6"/>
+    <text x="1262" y="530" fill="#7a6a50" font-size="11">High Passes</text>
+    <text x="1262" y="544" fill="#7a6a50" font-size="11">(E-W belt, approx)</text>
+
+    <!-- Blood Fields -->
+    <rect x="940" y="570" width="180" height="55" fill="#d9a0a0" opacity="0.7"/>
+    <text x="1030" y="602" text-anchor="middle" fill="#722">Blood Fields (edge ~90 mi S)</text>
+
+    <!-- Hivelands -->
+    <rect x="720" y="560" width="110" height="80" fill="none" stroke="#666" stroke-dasharray="5 3"/>
+    <text x="775" y="595" text-anchor="middle" fill="#444" font-size="11">Hivelands</text>
+    <text x="775" y="609" text-anchor="middle" fill="#444" font-size="11">NW coast, below</text>
+    <text x="775" y="623" text-anchor="middle" fill="#444" font-size="11">the High Passes</text>
+
+    <!-- Black castle -->
+    <circle cx="930" cy="590" r="5" fill="#333"/>
+    <text x="925" y="580" text-anchor="end" font-size="11">Black Castle</text>
+
+    <!-- Great Plains -->
+    <rect x="1215" y="750" width="160" height="110" fill="none" stroke="#666" stroke-dasharray="5 3"/>
+    <text x="1295" y="800" text-anchor="middle" fill="#444" font-size="11">Great Plains</text><text x="1295" y="815" text-anchor="middle" fill="#444" font-size="11">(south-central;</text><text x="1295" y="829" text-anchor="middle" fill="#444" font-size="11">Oteslia nearby)</text>
+
+    <!-- nodes -->
+    <!-- Invrisil y=430 -> 160+90*.68=221 -->
+    <circle cx="1030" cy="221" r="7" fill="#c33"/>
+    <text x="1042" y="225" font-weight="bold">Invrisil (~430 N)</text>
+    <text x="1042" y="241" fill="#a33" font-size="11">Book 3: "over 400"; Book 2: "600" (conflict)</text>
+
+    <circle cx="999" cy="246" r="6" fill="#c33" stroke="#222"/>
+    <text x="988" y="266" text-anchor="end" font-weight="bold">Riverfarm</text>
+    <text x="988" y="280" text-anchor="end" fill="#444" font-size="11">50-80 mi SW of Invrisil</text>
+    <circle cx="1009" cy="246" r="3" fill="#555"/>
+    <text x="1015" y="258" fill="#444" font-size="11">Windrest (14 E, ruined)</text>
+
+    <circle cx="1030" cy="395" r="5" fill="#444"/>
+    <text x="1040" y="399">Lellisdam (80 N of Celum)</text>
+
+    <circle cx="1030" cy="440" r="7" fill="#27a"/>
+    <text x="1042" y="444" font-weight="bold">Celum (~88 N)</text>
+    <circle cx="1030" cy="466" r="5" fill="#27a"/>
+    <text x="1042" y="470">Esthelm (30 N)</text>
+    <circle cx="1017" cy="478" r="4" fill="#e92"/>
+    <text x="1005" y="484" text-anchor="end" font-size="11">The Wandering Inn</text>
+    <circle cx="1030" cy="513" r="9" fill="#e44" stroke="#222"/>
+    <text x="1042" y="517" font-weight="bold">LISCOR (0,0)</text>
+
+    <circle cx="1060" cy="650" r="5" fill="#666"/>
+    <text x="1070" y="654">Hectval (just past Blood Fields)</text>
+    <text x="1070" y="668" fill="#444" font-size="11">Drisshia, Luldem, Sasil also south</text>
+
+    <circle cx="1030" cy="787" r="8" fill="#82b" stroke="#222" stroke-dasharray="3 2"/>
+    <text x="1042" y="791" font-weight="bold">Pallass (~400 S, x unknown)</text>
+    <text x="1042" y="805" fill="#82b" font-size="11">Book 7: 400 mi south of the inn</text>
+
+    <circle cx="1030" cy="850" r="4" fill="#666"/>
+    <text x="1040" y="854" font-size="11">Comoller (160 S of Pallass)</text>
+
+    <!-- off chart arrows -->
+    <text x="1030" y="114" text-anchor="middle" fill="#444">^ Reizmelt: 600-800 N of Liscor (estimate); Laiss 30 mi S of it</text>
+    <text x="1030" y="130" text-anchor="middle" fill="#444">^ First Landing: ~4,000 N (northernmost city)</text>
+    <text x="1370" y="705" text-anchor="end" fill="#444" font-size="11">Fissival: far SE coast (off chart)</text>
+    <text x="1370" y="720" text-anchor="end" fill="#444" font-size="11">Manus: nearest Walled City to Antinium lands</text>
+    <text x="1370" y="735" text-anchor="end" fill="#444" font-size="11">Zeres, Salazsar: side not stated</text>
+  </g>
+</svg>
