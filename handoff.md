@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-08, local): long road confirm + walk scene (branch `feat/long-road-confirm`)
+- `game/ui/travel_prompt.gd` (TravelPrompt, built in code, added to `$SystemLayer` by `main.gd`): question panel (Travel / Stay, Esc = Stay), then a 1.8 s walker-on-a-track scene; `arrived` makes the real step. `main.gd`: `_ask_travel`, `confirm_travel` (false headless), `is_busy` includes `travel.visible`.
+- Rule: exits with `minutes >= TravelPrompt.LONG_MINUTES` (300). Today: Celum gate <-> road camp <-> Liscor gate. Not the wagon rides, not Esthelm (180).
+- Next: the user looks at it. If the look is wrong, tune `_layout` in `travel_prompt.gd`. No render was checked by eye.
+- Test: `unit_travel_prompt`.
+
 ## Just done (2026-10-08, local): phone UI bigger + see-through (branch `feat/mobile-ui-bigger`)
 - `game/ui/ui_scale.gd`: `MOBILE` = 2.5 (Auto on Android/iOS/web-on-phone, any dpi), `MOBILE_ALPHA` = 0.78, `set_box_alpha(theme, alpha)`. `game/ui/session.gd` applies both in `apply_ui_scale`. Test: `unit_ui_scale`.
 - Next: the user checks it on the phone. If still small, raise `UiScale.MOBILE`; the interact menu is a fixed 440 x 220 box (no keep_fit), so above about 2.6 it may overflow in portrait.

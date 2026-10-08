@@ -176,6 +176,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 - [x] Phone UI bigger and see-through (2026-10-08, user request, branch `feat/mobile-ui-bigger`): on a phone OS (Android, iOS, or a browser on them) Auto menu size is 250 % (`UiScale.MOBILE`) whatever the dpi says; panel, button and list boxes are 78 % opaque (`UiScale.MOBILE_ALPHA`, theme edited at run time). Desktop unchanged. Tests run: `unit_ui_scale` (9), `unit_ui_theme`, `unit_touch_controls`, `unit_audio_settings`. All pass. Full suite not run. The user still has to look at it on a phone.
 
+- [x] Long road confirm + walk scene (2026-10-08, user request, branch `feat/long-road-confirm`): an exit of 300 min or more (Celum <-> camp <-> Liscor, 10 h) asks "Travel to X?" first, then plays a 1.8 s walker-on-a-track scene; the move happens at its end. Stay or Esc cancels. `ui/travel_prompt.gd` (new), `world/main.gd`. Off headless-only (`confirm_travel`). Wagon rides and the 180 min Esthelm roads do not ask. Tests run: `unit_travel_prompt` (new, 6), `unit_travel`, `unit_input_actions`, `unit_touch_controls`, `sim_celum_trip`, `unit_hud_log`. All pass. Full suite not run. The user still has to look at it (`godot --path game`, walk onto the Celum south exit).
+
 ## Releases (ADR 0029)
 - [x] v0.1.3-alpha (branch `release/v0.1.3`, 2026-10-08, local): version bump (code 2), `tools/release.ps1` now also builds the signed apk. Smoke tests pass (events=1089, maps=40, problems=0). Three zips + `InnworldRPG-v0.1.3-alpha-android.apk` built. Waits: user merges the PR, then tag + `gh release create` with all four files.
 - [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
