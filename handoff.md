@@ -1,6 +1,15 @@
 # Handoff
 
-## Just done (2026-10-07, local): wiki class tree, step 2 (branch `feat/class-tree-wiki`)
+## Just done (2026-10-08, local): M19.5 canon 5.09 E - 5.11 E (branch `feat/m19.5-canon-5-09`, from main fdfec5e)
+- `game/data/canon/book7/chapters/5.09E.json`, `5.10E.json`, `5.11E.json` (orders 40 - 42): 26 events, days 130 - 142 (Laken's Day + 45).
+- New map `game/data/maps/riverfarm.json`. Banquet = scene stage `b7.laken_feasts_the_nobles_and_the_spring_court` (day 142, 18 - 24 h) with hooks: Ivolethe talk, poisoned cup (Rie / Bethal).
+- No road yet (user: the open world comes bit by bit). `celum_gate` exit `road_to_riverfarm` needs flag `world.road_to_riverfarm`; nothing sets it. To look at the map: console `flag world.road_to_riverfarm`, then walk west at `celum_gate` (0, 10).
+- Behaviour: off-map place `north_izril`; 15 new `npc_behaviour` entries. No character sheets (square markers).
+- Test: `sim_book7_riverfarm` (7). Detail: ADR 0030 "M19.5 as built".
+- Next: user merges the PR. Then M19.6 canon 5.12 - 5.15 (flood, door to the west wall, Embria, parade, dive). The flood overlays are already drawn (M19.1).
+- Gotchas: a scene stage needs a `npc_behaviour` entry for every placed NPC. Pattin, Melbore, Geram, Wellim and Horst have no NPC records. Wiki not checked against the ebook for 5.09 E - 5.11 E.
+
+## Before that (2026-10-07, local): wiki class tree, step 2 (merged)
 - Added 4 tags, 4 actions (with sounds), 4 map objects, 8 classes (2 consolidations), 8 Skills. See `progress.md`.
 - Test: `unit_class_tree_step2`. Objects: `inn_hill` `garden_bed`, `celum_gate` `hitching_post` + `stable_yard`, `celum_square` `wayside_shrine`.
 - Next: the user merges the PR, then picks: M19.5 canon 5.09 E, M20.2 Android, or more wiki classes.
