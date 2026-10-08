@@ -18,7 +18,10 @@ Date: 2026-10-05 · Status: accepted (user answers in the cloud session, plan `d
    Rejected: touch buttons that send fake key events. A smaller diff, but it ties the touch layer to key codes and
    breaks with key remapping. Actions also make gamepad support and a remap screen cheap later.
 2. **M20.1: touch layer.** `ui/touch_controls.gd` in a `TouchLayer` (CanvasLayer 2, after the menus):
-   - a 4-way D-pad with Wait (bottom left). Rejected: a virtual joystick (an analog stick gives wrong steps near
+   - a 4-way D-pad with Wait (bottom left). **Changed 2026-10-08 (user): a floating stick replaces the D-pad.** A finger
+     anywhere on the left half starts it; the walk stays 4-way (stronger axis wins, a turn needs a 1.3x lead, a dead
+     zone of 18 px, the centre follows a long swipe). It is off while a fight turn is on (a touch is a cell tap) and
+     while a panel is open. Wait stays as one button, bottom left. First rejected: a virtual joystick (an analog stick gives wrong steps near
      the diagonals on a 4-way grid) and tap-to-walk (needs paths outside fights, slow for small steps);
    - Use, Bag, More, Menu (middle of the right edge); More opens a grid of the other commands;
    - Back (only while a panel is open; it sends `back`, which every panel reads as Esc); Cancel above the column

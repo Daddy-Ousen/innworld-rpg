@@ -8,6 +8,13 @@
   The day-139 play (Battle of Liscor) is an event, not a stage. No records for Halliss, Euriss, Raskghar hunters, the head collector: the events use existing NPCs only.
 - Next: the user merges the PR. Then M19.7 (5.16 S – 5.18 S), M19.8 (5.19 G, 5.20 G).
 
+## Just done (2026-10-08, local): floating touch stick (branch `feat/touch-stick`, PR open)
+- `game/ui/touch_controls.gd`: stick on the left half replaces the D-pad; Wait stays. `main.gd` passes `tapping` (fight turn) to `sync`.
+- Files: `game/ui/touch_controls.gd`, `game/world/main.gd`, `game/ui/system_messages.gd`, `game/tests/unit_touch_controls.gd`, ADR 0032.
+- Tests run: `unit_touch_controls`, `unit_ui_scale`, `unit_input_actions`. All pass.
+- Next: commit these files on their own branch (not with the 5.12 canon files), PR, user tries it on a phone.
+- Gotcha: a real touch also makes an emulated mouse tap; the stick is off in a fight turn so cell taps still work.
+
 ## Just done (2026-10-08, local): world wireframe (branch `docs/world-wireframe`)
 - `docs/WORLD_WIREFRAME.md` + `docs/world_wireframe.svg`: continents, Izril spine, Celum - Invrisil - Riverfarm rules, open questions.
 - Rule to keep: Riverfarm lies 50 - 80 mi SOUTH-WEST of Invrisil (not on the Celum road). Pallass is 400 mi south of the inn (Book 7). Invrisil 430 mi is a pick (books say 400 / 600).

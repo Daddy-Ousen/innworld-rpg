@@ -164,7 +164,7 @@ func _sync_touch() -> void:
 	var panel_open := menu.visible or sheet.visible or journal.visible or bag.visible \
 			or pause.visible or message_log.visible or help.visible
 	touch.sync(shown, panel_open, dialog.visible or console_layer.visible,
-			_armed != "" or _walking())
+			_armed != "" or _walking(), Encounter.is_player_turn(Session.gs))
 	hud.make_room_left(touch.pad_width() if shown else 0.0)
 
 
