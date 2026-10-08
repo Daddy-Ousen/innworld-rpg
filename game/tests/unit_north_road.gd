@@ -115,3 +115,15 @@ func test_invrisil_staff_have_posts_on_walkable_tiles() -> void:
 				var at := Vector2i(int(t["pos"][0]), int(t["pos"][1]))
 				assert_true(_db.maps.is_walkable(t["area"], at), "%s post %s" % [id, at])
 		assert_eq(placed, 1, id)
+
+
+func test_magnolia_estate_joins_the_gate_and_the_hall() -> void:
+	for pair: Array in [["invrisil_gate", "magnolia_estate_grounds"], ["magnolia_estate_grounds", "magnolia_estate_hall"]]:
+		assert_false(_exit_to(pair[0], pair[1]).is_empty(), "%s" % [pair])
+		assert_false(_exit_to(pair[1], pair[0]).is_empty(), "%s" % [pair])
+		var x := _exit_to(pair[0], pair[1])
+		var back := _exit_to(pair[1], pair[0])
+		assert_true(_db.maps.is_walkable(pair[1], Vector2i(int(x["arrive"][0]), int(x["arrive"][1]))), "%s arrive" % [pair])
+		assert_true(_db.maps.is_walkable(pair[0], Vector2i(int(back["arrive"][0]), int(back["arrive"][1]))), "%s back" % [pair])
+	assert_true(_db.maps.is_indoor("magnolia_estate_hall"))
+	assert_false(TravelPrompt.is_long(int(_exit_to("invrisil_gate", "magnolia_estate_grounds")["minutes"])))

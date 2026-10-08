@@ -9,7 +9,8 @@
 	"exits": [
 		{"at": [16, 0, 2, 1], "to": "invrisil_square", "arrive": [15, 18], "minutes": 0, "sign": {"icon": "shield", "text": "Invrisil"}},
 		{"at": [16, 19, 2, 1], "to": "road_to_invrisil", "arrive": [16, 1], "minutes": 3100, "sign": {"icon": "none", "text": "Road to Celum"}},
-		{"at": [0, 12, 1, 2], "to": "riverfarm", "arrive": [30, 11], "minutes": 900, "sign": {"icon": "none", "text": "Road to Riverfarm"}}
+		{"at": [0, 12, 1, 2], "to": "riverfarm", "arrive": [30, 11], "minutes": 900, "sign": {"icon": "none", "text": "Road to Riverfarm"}},
+		{"at": [31, 12, 1, 2], "to": "magnolia_estate_grounds", "arrive": [1, 10], "minutes": 20, "sign": {"icon": "none", "text": "Reinhart estate"}}
 	],
 	"objects": [
 		{"id": "invrisil_gate_brazier", "kind": "brazier", "at": [13, 4], "name": "Guard's brazier", "actions": [], "solid": true, "warm": true},

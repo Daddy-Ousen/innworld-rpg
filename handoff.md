@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-08, local): Magnolia's estate (branch `feat/magnolia-estate`)
+- Maps `magnolia_estate_grounds`, `magnolia_estate_hall`; east exit on `invrisil_gate`; moods in `audio.json`. Test: `unit_north_road`. No NPCs, no events.
+- Next: user picks Book 8 plan, more wiki classes, or Magnolia/Butler NPCs. Gotcha: patch map JSON as text/bytes (CRLF).
+
 ## Just done (2026-10-08, local): Invrisil staff (branch `feat/invrisil-staff`)
 - `game/data/npc_behaviour.json`: `merec`, `raisha`, place `invrisil`. Test: `unit_north_road`. No art, no events.
 - Next: user picks Magnolia's estate map, Book 8 plan, or more wiki classes. No canon Runners' Guild staff in Invrisil exists in the data: do not invent one.

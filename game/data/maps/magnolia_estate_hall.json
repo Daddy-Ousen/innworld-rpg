@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"id": "magnolia_estate_hall",
+	"name": "Magnolia's estate hall",
+	"location": "magnolia_estate",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. The hall where Magnolia plays chess with Erin (2.37). The layout is a guess.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "magnolia_estate_grounds", "arrive": [15, 6], "minutes": 0}
+	],
+	"objects": [
+		{"id": "estate_chess_table", "kind": "chess_table", "at": [10, 4], "name": "Table with a chessboard", "actions": ["play_chess"], "solid": true},
+		{"id": "estate_hearth", "kind": "hearth", "at": [17, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "estate_shelves", "kind": "shelves", "at": [4, 1], "name": "Bookshelves", "actions": [], "solid": true},
+		{"id": "estate_table", "kind": "table", "at": [15, 7], "name": "Long table", "actions": [], "solid": true},
+		{"id": "estate_bench", "kind": "bench", "at": [4, 7], "name": "Bench", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHVHHHHHHHVHHHVHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}
