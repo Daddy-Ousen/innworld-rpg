@@ -374,58 +374,59 @@ the keys work as before; the GUT tests that touch it pass; the user has played i
 ## Audit work (2026-10-09)
 From the project audit of 2026-10-08 (`progress.md` "Audit"). Suggested order: M21 → M22 → M23 → M24 → M25 → M26,
 then Book 8. One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
+Model tag `[Model · effort]` at the end of each step: the model and effort to pick for that session. Default is Sonnet · medium. Opus for engine, save and design work and for canon logic; high effort where lore, balance or cascades are easy to get wrong; low for mechanical steps.
 
 ## M21 — Housekeeping (cleanup)
 Small and fast. No game change.
-- [ ] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`)
-- [ ] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): merge, redo in M22.3, or drop (user)
-- [ ] M21.2 Docs: README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas
-- [ ] M21.3 Disk: delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms)
-- [ ] M21.4 Full GUT suite once, in a subagent; fix any red script (user asks for the run)
-- [ ] M21.5 Legal: read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user)
-- [ ] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user)
+- [ ] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) **[Sonnet · low]**
+- [ ] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): merge, redo in M22.3, or drop (user) **[Sonnet · medium]**
+- [ ] M21.2 Docs: README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
+- [ ] M21.3 Disk: delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
+- [ ] M21.4 Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
+- [ ] M21.5 Legal: read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
+- [ ] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]**
 **Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
 
 ## M22 — Breakthroughs (fix: no class can pass level 9)
 Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
-- [ ] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change
-- [ ] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved)
-- [ ] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter)
-- [ ] M22.3 Consolidation on top of breakthroughs (redo 565bc9b if M21.1 says so)
-- [ ] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days
+- [ ] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]**
+- [ ] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]**
+- [ ] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]**
+- [ ] M22.3 Consolidation on top of breakthroughs (redo 565bc9b if M21.1 says so) **[Opus · medium]**
+- [ ] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]**
 **Done when:** a player can reach level 10+ in normal play; `unit_levels`, `unit_class_system` and the new probe pass.
 
 ## M23 — Canon bends (divergence depth)
 Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 67 of 1089 events have hooks.
-- [ ] M23.0 Tool + list: `tools/divergence_report.py` (per book: roles, fallbacks, hooks, events that depend on one NPC); the user picks the key NPCs and key events per book (user)
-- [ ] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane)
-- [ ] M23.2 Book 3: the same
-- [ ] M23.3 Book 4: the same
-- [ ] M23.4 Book 5: the same
-- [ ] M23.5 Book 6: the same
-- [ ] M23.6 Book 7: the same
-- [ ] M23.7 Drift warning: at high drift the journal and the morning page say canon knowledge is unreliable (DESIGN §4.1)
+- [ ] M23.0 Tool + list: `tools/divergence_report.py` (per book: roles, fallbacks, hooks, events that depend on one NPC); the user picks the key NPCs and key events per book (user) **[Sonnet · medium]**
+- [ ] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane) **[Opus · high]**
+- [ ] M23.2 Book 3: the same **[Opus · high]**
+- [ ] M23.3 Book 4: the same **[Opus · high]**
+- [ ] M23.4 Book 5: the same **[Opus · high]**
+- [ ] M23.5 Book 6: the same **[Opus · high]**
+- [ ] M23.6 Book 7: the same **[Opus · high]**
+- [ ] M23.7 Drift warning: at high drift the journal and the morning page say canon knowledge is unreliable (DESIGN §4.1) **[Sonnet · medium]**
 **Done when:** each book has a kill sim that passes; each book has at least one hook per day of on-map canon; `sim_canon_book1` – `7` still run with drift 0.
 
 ## M24 — Level by living (content depth)
-- [ ] M24.0 Actions for the new classes: hunt, shoot a bow, brew a potion, forge, teach; with map objects or stations on existing art
-- [ ] M24.1 Recipes and goods: more dishes from the Books (canon names, numbers are guesses), tools and weapons in shops
-- [ ] M24.2 Spells: more spells from Books 1 – 7 with teachers and spellbooks
-- [ ] M24.3 Skills: capstone Skills at 10 / 20 for the main classes; Skills for the class-tree step 1 – 3 classes that have none
+- [ ] M24.0 Actions for the new classes: hunt, shoot a bow, brew a potion, forge, teach; with map objects or stations on existing art **[Sonnet · medium]**
+- [ ] M24.1 Recipes and goods: more dishes from the Books (canon names, numbers are guesses), tools and weapons in shops **[Sonnet · medium]**
+- [ ] M24.2 Spells: more spells from Books 1 – 7 with teachers and spellbooks **[Sonnet · medium]**
+- [ ] M24.3 Skills: capstone Skills at 10 / 20 for the main classes; Skills for the class-tree step 1 – 3 classes that have none **[Sonnet · high]**
 **Done when:** every class in `classes.json` has at least one action that feeds it; the new data has unit tests.
 
 ## M25 — NPC life
-- [ ] M25.0 NPCs level at low detail through the same System (DESIGN §4.5); save change + migration
-- [ ] M25.1 Talk topics: NPCs share news, rumours and requests (short summaries in our words, from events and flags)
-- [ ] M25.2 Job boards in more places (Liscor Adventurers' Guild, Invrisil, Celum Merchants)
-- [ ] M25.3 Character sheets for Merec, Raisha and the estate NPCs (from the "Later" list)
-- [ ] M25.4 Magnolia's real whereabouts by flags (Celum in Book 1, the road, the estate); the Earth transplants' stay (2.37)
+- [ ] M25.0 NPCs level at low detail through the same System (DESIGN §4.5); save change + migration **[Opus · high]**
+- [ ] M25.1 Talk topics: NPCs share news, rumours and requests (short summaries in our words, from events and flags) **[Opus · medium]**
+- [ ] M25.2 Job boards in more places (Liscor Adventurers' Guild, Invrisil, Celum Merchants) **[Sonnet · medium]**
+- [ ] M25.3 Character sheets for Merec, Raisha and the estate NPCs (from the "Later" list) **[Sonnet · medium]**
+- [ ] M25.4 Magnolia's real whereabouts by flags (Celum in Book 1, the road, the estate); the Earth transplants' stay (2.37) **[Opus · medium]**
 **Done when:** NPC levels change in a long sim; talking gives news or a job; the new art draws.
 
 ## M26 — Code health
 No behaviour change.
-- [ ] M26.0 Split `game/world/main.gd` (965 lines): input, travel and panel parts in their own scripts
-- [ ] M26.1 Split `game/world/world_view.gd` (1285 lines): markers, overlays, effects
+- [ ] M26.0 Split `game/world/main.gd` (965 lines): input, travel and panel parts in their own scripts **[Opus · medium]**
+- [ ] M26.1 Split `game/world/world_view.gd` (1285 lines): markers, overlays, effects **[Opus · medium]**
 **Done when:** both files are under about 500 lines; `unit_world_view`, `unit_play_loop`, `unit_touch_controls` and the UI scripts that touch them pass.
 
 ## Later
