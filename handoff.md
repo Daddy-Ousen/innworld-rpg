@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-08, local): later-list + keystore check (branch `docs/later-and-keystore`)
+- Marked for later in `progress.md`: Magnolia's estate map; Invrisil staff NPCs + Runners jobs. Keystore and icon were already done (v0.1.3 shipped the signed apk); only the user's keystore backup is open.
+- Next: the user picks (Book 8 plan, more wiki classes, the later items) or plays and reports.
+
 ## Just done (2026-10-08, local): Invrisil city (branch `feat/invrisil-city`, from main after PR 132)
 - New maps `invrisil_main_street`, `invrisil_runners_guild`, `invrisil_crag_pig`, `invrisil_merchants_guild`; square got a north exit and a stall; shops in `economy.json`; moods in `audio.json`. Test: `unit_north_road` (7).
 - No NPCs, no events. Hedault's house is a closed plaque (canon `hedault_house`, enchanter, 3.36). Next ideas: Magnolia's estate map (outside the city), Invrisil Runners jobs, staff NPCs, then release keystore + icon check (needs the user).
