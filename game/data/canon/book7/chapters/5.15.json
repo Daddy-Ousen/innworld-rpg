@@ -1,0 +1,426 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.15",
+	"order": 46,
+	"events": {
+		"b7.tyrion_stalls_at_the_war_camp": {
+			"tier": 1,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "tyrion_war_camp",
+			"roles": {
+				"tyrion_veltras": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				},
+				"yitton_byres": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.tyrion_waits_for_the_rain_to_stop"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Tyrion Veltras holds his army back, waiting for the right moment as the rain falls. A report of a new Emperor near Invrisil reaches him. He thinks of his sons Hethon and Sammial.",
+			"news": "Lord Tyrion Veltras holds his army and waits for the rains to end."
+		},
+		"b7.redfang_ambush_raskghar_at_the_rift": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon_rift",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At the bottom of the rift the Hobs beat a Raskghar ambush. They take the dead hunters' bows, axes and daggers."
+		},
+		"b7.redfang_cross_the_dungeon": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A slug swarm chases a wounded giant moth across their path. A smoke bag saves the Hobs from another ambush. A light trap hits Rabbiteater."
+		},
+		"b7.hobs_strip_enchanted_armour": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.dungeon_armour_scraps"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Hobs tear scraps from enchanted armour in the dungeon and take them."
+		},
+		"b7.hobs_loot_the_treasure_room": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"numbtongue": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shorthilt": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"dungeon.treasure_room_looted",
+					"redfang.carry_three_artifacts"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A headless creature follows the Hobs and paralyses them. A trap in the treasure room drives it off. They take three artefacts: a cloth, a bell and a necklace."
+		},
+		"b7.cave_goblins_wound_badarrow": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"badarrow"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.badarrow_poisoned"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Cave Goblins and Raskghar chase the Hobs. A stink potion slows them. Badarrow is hit by poisoned arrows."
+		},
+		"b7.erin_rescues_headscratcher_and_badarrow": {
+			"tier": 2,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon_rift",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"headscratcher": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"badarrow": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ksmvr": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.goblin_adventurers_idea",
+					"redfang.artifacts_recovered",
+					"ksmvr.ring_lent_to_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.15",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Erin dives into the rift with Ksmvr's water-breathing ring and the adventurers help carry the Hobs out. She suggests they become Goblin adventurers.",
+			"news": "Erin pulled wounded Goblins out of the dungeon flood."
+		}
+	},
+	"system": []
+}

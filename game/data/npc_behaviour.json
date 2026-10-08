@@ -516,6 +516,62 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"embria_grasstongue": {
+			"confidence": "guess",
+			"notes": "M19.6. Wing Commander of Liscor's 4th Company, Relc's daughter (5.12 - 5.13). Off the map; the victory party (day 139) brings her to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"tekshia": {
+			"confidence": "guess",
+			"notes": "M19.6. Seen at the victory party in 5.13. Off the map; the party stage (day 139) brings her to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"ocelos": {
+			"confidence": "guess",
+			"notes": "M19.6. Seen with Ilvriss at the victory party in 5.13. Off the map; the party stage (day 139) brings him to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"anith": {
+			"confidence": "guess",
+			"notes": "M19.6. Vuliel Drae adventurer (5.14). Off the map; the confession stage brings the team to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"insill": {
+			"confidence": "guess",
+			"notes": "M19.6. Vuliel Drae adventurer (5.14). Off the map; the confession stage brings the team to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"pekona": {
+			"confidence": "guess",
+			"notes": "M19.6. Vuliel Drae adventurer (5.14). Off the map; the confession stage brings the team to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"dasha": {
+			"confidence": "guess",
+			"notes": "M19.6. Vuliel Drae adventurer (5.14). Off the map; the confession stage brings the team to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
+		"larr": {
+			"confidence": "guess",
+			"notes": "M19.6. Vuliel Drae adventurer (5.14). Off the map; the confession stage brings the team to the inn.",
+			"goals": [
+				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
+			]
+		},
 		"tkrn": {
 			"confidence": "guess",
 			"combat": {"agility": 4, "hp": 40, "accuracy": 6, "evasion": 4, "armor": 2, "damage": [3, 6]},

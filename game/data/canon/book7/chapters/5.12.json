@@ -1,0 +1,894 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.12",
+	"order": 43,
+	"events": {
+		"b7.the_flood_reaches_the_inn_hill": {
+			"tier": 2,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.flood"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "likely",
+				"note": "Set on day 137 so the water shows from the morning of day 138 (flags show a day late)."
+			},
+			"summary": "The rain keeps falling after the moth battle. By the next morning the floodplains, the dungeon rift and the low ground around the inn lie under water.",
+			"news": "Floodwater now covers the floodplains south of Liscor."
+		},
+		"b7.liscor_wakes_to_dead_moths": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.painted_soldiers_hold_walls"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Zevara and Klbkch report on the night. The Painted Soldiers hold the walls while the Hive repairs the damage, and both leaders nap in turns.",
+			"news": "The Painted Soldiers kept the walls of Liscor through the night."
+		},
+		"b7.pawn_blesses_the_fallen_on_the_walls": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"pawn": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"yellow_splatters": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"antinium.pawn_mass_for_dead"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pawn walks the wall with incense and speaks the names of the Antinium who died. The Painted Soldiers click their mandibles for each name."
+		},
+		"b7.olesm_and_ilvriss_burn_infested_moths": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.moth_larvae_found"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Olesm and Ilvriss find young moths alive inside some corpses. They have the bodies burned before the larvae can spread."
+		},
+		"b7.olesm_becomes_a_strategist": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.is_strategist",
+					"liscor.olesm_celebration_pending"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The battle has raised Olesm two levels. His class is now [Strategist] and he gains an army Skill. Ilvriss wants a feast for him. Olesm says the work comes first.",
+			"news": "Olesm of Liscor is now a Strategist."
+		},
+		"b7.olesm_learns_antinium_take_no_reward": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"pawn": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.moth_heads_displayed"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pawn explains that the Antinium take no war reward. The heads of fourteen giant moths go on show in the central square. Olesm decides to feed the Soldiers at the inn."
+		},
+		"b7.erin_wakes_to_the_flooded_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mrsha": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Level 35 is a system record."
+			},
+			"summary": "Erin wakes to a wrecked inn on an island of mud. Nobody died there. She has reached level 35 but gained no new Skill."
+		},
+		"b7.olesm_swims_to_the_inn_with_news": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.antinium_stay_in_hive_during_rains"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Olesm swims out to the inn with news from the city. The Antinium will not leave Liscor while the rains last, because they cannot swim."
+		},
+		"b7.horns_wake_and_octavia_demands_payment": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"octavia": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": []
+				},
+				"ceria_springwalker": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"yvlon_byres": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"octavia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"octavia.potions_gone_debt"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Octavia finds her shelves empty. The Horns used her potions in the battle. She demands payment. The Horns come through the door to the inn to escape the flood."
+		},
+		"b7.erin_serves_enchiladas_from_the_pantry": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bird": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.moths_being_cleared"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Erin feeds everyone from her preserved stores. The Redfang Hobs and Bird drag dead moths into the water. Bird eats a baby moth."
+		},
+		"b7.pisces_and_erin_set_the_door_to_the_west_wall": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ksmvr": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"octavia": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"albez_door.anchor_at_liscor_wall"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "The Pallass and Celum ends stay in use."
+			},
+			"summary": "Ksmvr shakes at the sight of the water. Erin and Pisces plan a new end for the magic door, set against Liscor's west wall with mana stones. Octavia hits Pisces with the door."
+		},
+		"b7.watch_briefing_on_moth_cleanup": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_barracks",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.moth_cleanup_underway"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Zevara tells the Watch how the larvae spread. Shifts double. Bodies in the city burn and bodies outside go into the water."
+		},
+		"b7.klbkch_and_relc_visit_the_rebuilt_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pawn": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"octavia": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.reimburses_defence_losses",
+					"antinium.workers_to_repair_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Klbkch and Relc walk through the west wall door into the inn. Painted Soldiers eat on the floor. Klbkch sends Workers to mend the walls and says Liscor law repays defence losses. They are invited to the play.",
+			"news": "Antinium Workers came to mend the Wandering Inn after the moth battle.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					18,
+					22
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							12,
+							3
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							10,
+							5
+						]
+					},
+					{
+						"npc": "klbkch",
+						"pos": [
+							7,
+							7
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							8,
+							10
+						]
+					},
+					{
+						"npc": "pawn",
+						"pos": [
+							6,
+							9
+						]
+					},
+					{
+						"npc": "olesm",
+						"pos": [
+							7,
+							11
+						]
+					},
+					{
+						"npc": "octavia",
+						"pos": [
+							10,
+							11
+						]
+					},
+					{
+						"npc": "ishkr",
+						"pos": [
+							12,
+							10
+						]
+					},
+					{
+						"npc": "bird",
+						"pos": [
+							13,
+							12
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							3,
+							7
+						]
+					},
+					{
+						"npc": "yvlon_byres",
+						"pos": [
+							3,
+							9
+						]
+					}
+				],
+				"line": "The common room is crowded and loud. Painted Soldiers eat on the floor. The new door to Liscor's wall stands near the south-west corner.",
+				"note": "M19.6: a scene. Hours are guesses. Most Painted Soldiers stay off-map; only the named NPCs stand here."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_klbkch_on_the_repairs",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"klbkch"
+								]
+							}
+						}
+					],
+					"days": [
+						138,
+						138
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_heard_klbkch_on_the_repairs"
+						],
+						"relationship": [
+							{
+								"from": "klbkch",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn spoke with Klbkch about the repairs the night after the moths."
+				}
+			]
+		},
+		"b7.embria_camp_waits_outside_the_flood": {
+			"tier": 1,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "embria_camp",
+			"roles": {
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.12",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The 4th Company camps outside the flood and sends a Message spell to Liscor. Fish from the new lake find their way into the camp.",
+			"news": "A Drake company waits outside the floodwater near Liscor."
+		}
+	},
+	"system": [
+		{
+			"who": "olesm",
+			"kind": "level",
+			"name": "[Strategist]",
+			"level": 30,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "olesm",
+			"kind": "skill",
+			"name": "[Vigor of Champions]",
+			"level": null,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 35,
+			"confidence": "confirmed"
+		}
+	]
+}

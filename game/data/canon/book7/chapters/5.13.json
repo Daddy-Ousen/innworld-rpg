@@ -1,0 +1,905 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.13",
+	"order": 44,
+	"events": {
+		"b7.erin_closes_after_two_plays": {
+			"tier": 2,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"wesle": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jasi": {
+					"prefer": [
+						"jasi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"players.two_plays_given_day_138"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Players give two plays to a crowd that includes Relc and Klbkch. Erin closes for the night. Apista lived through the moths by hiding in honey."
+		},
+		"b7.fourth_company_decides_to_attack": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At dawn Embria's 4th Company sees Antinium on Liscor's walls. They take them for an enemy and cast a bridge of light across the water to charge."
+		},
+		"b7.painted_soldiers_ring_the_alarm": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"yellow_splatters": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"purple_smile": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.false_alarm_day_139"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Painted Soldiers ring the alarm bell at the sight of the charge. The city wakes to the sound."
+		},
+		"b7.zevara_and_olesm_stop_the_fight": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"yellow_splatters": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.army_4th_company_present"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Olesm's Skill clears the Soldiers off the wall before blood is shed. Zevara steps between the two sides. Yellow Splatters is shown to be a [Sergeant]."
+		},
+		"b7.zevara_faces_embria_in_her_office": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.watch_captain_commands_the_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Embria and Zevara quarrel over the Antinium and the army's late arrival. Embria apologises. Zevara states that inside the city she commands the military."
+		},
+		"b7.adventurers_gather_for_the_parade": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"halrac": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ylawes_byres": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"dawil": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"revi": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"typhenous": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"jelaqua"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"jelaqua.new_drake_body"
+				],
+				"clear_flags": [
+					"jelaqua.body_broken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The adventurer teams gather for the parade. Many have gained levels. Jelaqua wears a new Drake body, paid for by the dead Guardsman's family under the Guild's rules."
+		},
+		"b7.horns_open_the_victory_parade": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"ceria_springwalker": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				},
+				"yvlon_byres": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ksmvr": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ceria_springwalker"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.victory_parade_held"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The Horns lead the parade. Ceria's ice blooms and fire shapes warm the crowd. The other teams follow with tricks."
+		},
+		"b7.crowd_cheers_the_painted_soldiers": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"pawn": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": []
+				},
+				"yellow_splatters": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"purple_smile": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pawn"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.cheered_the_antinium"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pawn leads the Painted Soldiers through the street. The crowd cheers the Antinium for the first time.",
+			"news": "Liscor cheered the Antinium in the victory parade."
+		},
+		"b7.embria_speaks_and_erin_mocks_the_army": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor_plaza",
+			"roles": {
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.insulted_the_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Embria's speech to the crowd goes badly. Erin shouts a loud joke about the army and the crowd laughs."
+		},
+		"b7.embria_confronts_relc": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Taverns turn Embria away. She finds Relc, her father. He draws her to the inn by saying Zel once ate there."
+		},
+		"b7.victory_party_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"olesm": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"relc.has_his_spear",
+					"embria.asked_relc_to_rejoin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The inn throws a party with a cake shaped like a Goblin face. Ilvriss pays for the table. Embria hands back Relc's spear and asks him to return to the army. He refuses. A tug-of-war breaks the table.",
+			"news": "Embria asked her father Relc to rejoin the army. He said no.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					19,
+					23
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							11
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							10,
+							10
+						]
+					},
+					{
+						"npc": "embria_grasstongue",
+						"pos": [
+							8,
+							10
+						]
+					},
+					{
+						"npc": "klbkch",
+						"pos": [
+							6,
+							8
+						]
+					},
+					{
+						"npc": "olesm",
+						"pos": [
+							7,
+							12
+						]
+					},
+					{
+						"npc": "krshia",
+						"pos": [
+							11,
+							11
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							12,
+							7
+						]
+					},
+					{
+						"npc": "ocelos",
+						"pos": [
+							13,
+							6
+						]
+					},
+					{
+						"npc": "selys",
+						"pos": [
+							4,
+							8
+						]
+					},
+					{
+						"npc": "tekshia",
+						"pos": [
+							3,
+							6
+						]
+					},
+					{
+						"npc": "drassi",
+						"pos": [
+							12,
+							12
+						]
+					},
+					{
+						"npc": "ishkr",
+						"pos": [
+							13,
+							10
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							3,
+							12
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							4,
+							12
+						]
+					}
+				],
+				"line": "A cake shaped like a Goblin's face sits on the biggest table. Drakes, Gnolls and Antinium crowd the room. Relc and Embria stand opposite one another.",
+				"note": "M19.6: a scene. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_watched_relc_and_embria",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"relc"
+								]
+							}
+						}
+					],
+					"days": [
+						139,
+						139
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_watched_relc_and_embria"
+						],
+						"relationship": [
+							{
+								"from": "relc",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn spoke with Relc during the victory party."
+				}
+			]
+		},
+		"b7.ilvriss_tells_erin_relcs_history": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ocelos": {
+					"prefer": [
+						"ocelos"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "likely",
+				"note": "The levels are Ilvriss's guess."
+			},
+			"summary": "Ilvriss tells Erin that Relc was once known as the Gecko of Liscor, a high-ranking Spearmaster. He guesses Relc's levels from what he has heard."
+		},
+		"b7.embria_warns_the_goblins": {
+			"tier": 2,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				},
+				"rabbiteater": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.goblin_hunt_declared",
+					"redfang.warned_by_embria"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.13",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Embria warns the Redfang five that the Walled Cities have raised the bounty on Goblins fivefold. Two small tribes are already dead. Human nobles are gathering their armies.",
+			"news": "The Walled Cities raised the bounty on Goblins fivefold."
+		}
+	},
+	"system": []
+}
