@@ -1,0 +1,537 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.19G",
+	"order": 50,
+	"events": {
+		"b7.garen_feels_the_goblin_lord_coming": {
+			"tier": 2,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "dwarfhalls_rest",
+			"roles": {
+				"garen": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"tremborag": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.feels_the_goblin_lord_coming",
+					"dwarfhalls_rest.holds_tortured_gold_scouts"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). The scouts are unnamed."
+			},
+			"summary": "Garen wakes sure that the Goblin Lord is near. He walks past the cells where two Gold-rank scouts are being tortured; their third member took poison. He is Tremborag's second, and he hates how the mountain treats captives."
+		},
+		"b7.garen_and_tremborag_agree_to_hold_the_mountain": {
+			"tier": 1,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "dwarfhalls_rest",
+			"roles": {
+				"garen": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"tremborag": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.garen_feels_the_goblin_lord_coming"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"dwarfhalls_rest.barred_against_the_goblin_lord",
+					"tremborag.refused_the_goblin_lord",
+					"garen.refused_the_goblin_lord",
+					"garen.carries_a_key_to_velans_secret",
+					"tremborag.wants_velans_secret"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Both Hobs felt the Goblin Lord's call and refused it. Tremborag orders the gates barred and his armies called in. They agree to wait for him at the mountain and decide who gets Velan's hidden secret after the fight.",
+			"news": "Dwarfhalls Rest shuts its gates against the Goblin Lord."
+		},
+		"b7.tremborag_tells_of_refusing_velan": {
+			"tier": 2,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "dwarfhalls_rest",
+			"roles": {
+				"tremborag": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": []
+				},
+				"garen": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.garen_feels_the_goblin_lord_coming"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tremborag.says_he_refused_velan",
+					"garen.remembers_velan_hid_something"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030). The claim to have refused Velan is Tremborag's own words. Not checked against the wikis."
+			},
+			"summary": "Tremborag says he once refused the Goblin King to his face and calls Velan's war a waste. Garen is shaken, for he never saw Velan. Touching the key, Garen recalls that Velan hid something and needed two keys."
+		},
+		"b7.rags_scouts_north_and_runs_from_a_human_force": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noears": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.blocked_by_human_patrols",
+					"flooded_waters.redfang_riders_saved_the_scouts"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Rags leads a scouting party about thirty miles north and meets a thousand Human soldiers. With spells and crossbows she holds off their cavalry until Redscar's wolf riders drive them back. Humans are hunting Goblins everywhere after Invrisil."
+		},
+		"b7.rags_breaks_camp_and_marches_west": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.left_the_lake_camp",
+					"flooded_waters.marching_west_then_south",
+					"flooded_waters.holds_two_rose_knights",
+					"rags.forbids_harming_prisoners"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Rags leaves the lake camp before Human troops close in. Pyrite spreads the order and the tribe is on the move within minutes. The two captured Rose Knights ride in a wagon. Rags forbids anyone to harm prisoners.",
+			"news": "The Flooded Waters Tribe leaves its lake camp."
+		},
+		"b7.rags_officers_debate_the_route": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"poisonbite": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noears": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"quietstab": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rockfall_chieftain": {
+					"prefer": [
+						"rockfall_chieftain"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.officers_talk_of_liscor",
+					"rags.tribe_fleet_foot_carries_the_march",
+					"pyrite.says_avoid_human_fights",
+					"pyrite.keeps_quiet_about_greydath"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The officers argue in few words. Poisonbite wants to raid or to level in fights. Pyrite says raiding brings the pink knights again. He says little about Greydath. Rumour in the tribe says Rags wants to go back to Liscor and the dungeon."
+		},
+		"b7.tribe_wades_the_swamp_with_fly_whisks": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"noears": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.makes_fly_whisks",
+					"noears.guards_his_group_with_charged_air"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A flooded swamp and clouds of biting insects stop the march. Rags calls in the old swamp tribes. One female Goblin shows a reed whisk that scares the insects away. The whole tribe makes them within the hour."
+		},
+		"b7.pyrite_beats_off_the_mountain_goblins_who_grab_welca": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.saved_welca",
+					"pyrite.knocked_welca_out_when_she_ran",
+					"kerrig.thanks_pyrite",
+					"flooded_waters.mountain_goblins_broke_rags_order"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Six Hobs and nine Goblins from the Mountain City group seize Welca on the march. Pyrite breaks them with his fists, and Kerrig helps. Welca thanks him, then bolts, and Pyrite stops her with a thrown Hob and a light blow. Kerrig asks to talk.",
+			"news": "A Goblin tribe protects a Human knight from its own warriors."
+		}
+	},
+	"system": [
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Chieftain]",
+			"level": 19,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Mage]",
+			"level": 13,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Tactician]",
+			"level": 18,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Warrior]",
+			"level": 11,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "rags",
+			"kind": "skill",
+			"name": "[Fleet Foot]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}

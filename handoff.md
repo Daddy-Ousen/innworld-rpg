@@ -1,5 +1,10 @@
 # Handoff
 
+## Just done (2026-10-08, local): M19.8 canon 5.19 G - 5.20 G (branch `feat/m19.8-canon-5-19`, from main 08451c7)
+- `game/data/canon/book7/chapters/5.19G.json`, `5.20G.json` (orders 50 - 51): 21 events, days 141 - 143, all off-map. Test: `sim_book7_goblin_road` (new, 4). Detail: ADR 0030 "M19.8 as built".
+- No stage, hook or xp_window. Pyrite's lunch with the Knights is a possible later scene (place `northern_swamp` has no map). Open: Tremborag's refusal of Velan is "likely"; places for Knights/Welca/Kerrig are guesses.
+- Next: the user merges the PR. Then `sim_canon_book7` (run to the last Book 7 day, drift 0) closes M19.
+
 ## Just done (2026-10-08, local): M19.7 canon 5.16 S - 5.18 S (branch `feat/m19.7-canon-5-16`, from main 67287ff)
 - `game/data/canon/book7/chapters/5.16S.json` - `5.18S.json` (orders 47 - 49): 33 events, days 140 - 143. Test: `sim_book7_zel_and_selys` (new, 4). Detail: ADR 0030 "M19.7 as built".
 - Stages: `b7.zel_funeral_in_the_plaza` (liscor_plaza, 10 - 13, day 142, hook Zevara) and `b7.selys_haggles_with_jelaqua_at_the_inn` (inn_interior, 18 - 22, day 143, hook Selys). No xp_window.

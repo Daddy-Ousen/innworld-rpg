@@ -319,6 +319,44 @@
 				"note": "Selys and Pisces read the Heartflame legends here (5.17 S). Not a map."
 			},
 			"summary": "The archive of Pallass."
+		},
+		"northern_swamp": {
+			"name": "The northern swamp",
+			"kind": "landmark",
+			"parent": "north_izril",
+			"tags": [
+				"swamp",
+				"wet",
+				"insects",
+				"goblin_march"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.19G",
+				"confidence": "likely",
+				"note": "A flooded, insect-ridden lowland west of the Flooded Waters lake camp, on Rags's way west then south (5.19 G, 5.20 G). Exact place not given; it may be only spring flood."
+			},
+			"summary": "A wet, buzzing swamp where the Goblin tribe makes fly whisks and the Knights talk with Pyrite."
+		},
+		"northern_high_road": {
+			"name": "The big road",
+			"kind": "landmark",
+			"parent": "north_izril",
+			"tags": [
+				"road",
+				"battlefield",
+				"human_army",
+				"goblin_march"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "likely",
+				"note": "A large Human road south of the swamp, where an army hunted the Frostfeeder Tribe and Rags ambushed it at twilight (5.20 G). A signpost crossroads lies near it. Position is not given."
+			},
+			"summary": "A wide Human road in the north where Rags's tribe breaks an army."
 		}
 	}
 }
