@@ -1,4 +1,4 @@
-# Build the release zips (Windows, Linux, Web) into export/. See docs/adr/0029-release-builds.md
+# Build the release files (Windows, Linux, Web zips + signed Android apk) into export/. See docs/adr/0029-release-builds.md
 # and docs/adr/0031-web-build.md.
 #
 #   $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
@@ -7,6 +7,10 @@
 # Needs the Godot 4.7.2 export templates (Editor > Manage Export Templates).
 # Use the *console* exe: the WinGet "godot" link returns before Godot is done.
 # The version comes from game/project.godot (application/config/version).
+# Android: signed with the release key kept OUTSIDE the repo (ADR 0034). If the three env vars
+# GODOT_ANDROID_KEYSTORE_RELEASE_PATH / _USER / _PASSWORD are not set, they are read from
+# %USERPROFILE%\.android\innworld-release.txt (lines path=, alias=, password=).
+# Also bump version/code in the Android preset (game/export_presets.cfg) for each release.
 
 param([string]$Godot = $env:GODOT)
 
@@ -59,6 +63,23 @@ foreach ($b in $builds) {
     if ($LASTEXITCODE -ne 0) { throw "Zip failed: $zip" }
     Write-Host "Made $zip"
 }
+
+# Android apk (signed with the release key). Not zipped: the .apk is the release file.
+if (-not $env:GODOT_ANDROID_KEYSTORE_RELEASE_PATH) {
+    $keyFile = "$env:USERPROFILE/.android/innworld-release.txt"
+    if (-not (Test-Path $keyFile)) { throw "No release key: set GODOT_ANDROID_KEYSTORE_RELEASE_* or make $keyFile" }
+    $kv = @{}
+    Get-Content $keyFile | ForEach-Object { $k, $v = $_ -split '=', 2; $kv[$k] = $v }
+    $env:GODOT_ANDROID_KEYSTORE_RELEASE_PATH = $kv.path
+    $env:GODOT_ANDROID_KEYSTORE_RELEASE_USER = $kv.alias
+    $env:GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD = $kv.password
+}
+Write-Host 'Export Android...'
+$apk = "$out/InnworldRPG-v$version-android.apk"
+if (Test-Path $apk) { Remove-Item -Force $apk }
+& $Godot --headless --path "$root/game" --export-release Android $apk *> "$out/export_android.log"
+if ($LASTEXITCODE -ne 0 -or -not (Test-Path $apk)) { throw 'Export failed: see export/export_android.log' }
+Write-Host "Made $apk"
 
 Write-Host 'Done. If git now shows .import files as changed and you did not change art:'
 Write-Host '  git checkout -- game/assets'

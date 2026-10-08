@@ -1,5 +1,8 @@
 # Handoff
 
+## Just done (2026-10-08, local): release v0.1.3-alpha prepared (branch `release/v0.1.3`)
+- Files in `export/`: `InnworldRPG-v0.1.3-alpha-{windows,linux,web}.zip` and `-android.apk`. Next: after the PR merge, tag `v0.1.3-alpha` on main, `git push origin v0.1.3-alpha`, `gh release create` as pre-release with the four files. RULE: every release uploads the apk.
+
 ## Just done (2026-10-08, local): M20.2 Android build (branch `feat/m20.2-android-build`, from main)
 - Added preset `Android` (`game/export_presets.cfg`), `window/handheld/orientation=6` and ETC2/ASTC import in `game/project.godot`. ADR 0034 has the build and install commands.
 - Debug APK: `export/android/InnworldRPG-debug.apk` (gitignored). Signed with the Godot debug keystore. No phone was plugged in, so no install test.

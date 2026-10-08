@@ -27,7 +27,7 @@ Date: 2026-10-01 · Status: accepted (the user asked for a release and chose the
   and Linux files of `Godot_v4.7.2-stable_export_templates.tpz` into `%APPDATA%\Godot\export_templates\4.7.2.stable`).
 
 ## Consequences
-- A release: bump `config/version`, run `tools/release.ps1`, tag `v<version>` on main, upload the two zips.
+- A release: bump `config/version` and the Android `version/name` + `version/code`, run `tools/release.ps1`, tag `v<version>` on main, upload the three zips AND the Android `.apk` (user rule, 2026-10-08: every GitHub release carries the apk; ADR 0034).
 - Linux: the zip loses the exec bit; `README.txt` tells players to `chmod +x`.
 - Saves from an alpha may not load in a later build (save migrations exist, but are not promised to players).
 - Android (and touch controls) is a future milestone. It needs an on-screen pad and menu buttons first.
