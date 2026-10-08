@@ -187,6 +187,19 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 - [x] Long road confirm + walk scene (2026-10-08, user request, branch `feat/long-road-confirm`): an exit of 300 min or more (Celum <-> camp <-> Liscor, 10 h) asks "Travel to X?" first, then plays a 1.8 s walker-on-a-track scene; the move happens at its end. Stay or Esc cancels. `ui/travel_prompt.gd` (new), `world/main.gd`. Off headless-only (`confirm_travel`). Wagon rides and the 180 min Esthelm roads do not ask. Tests run: `unit_travel_prompt` (new, 6), `unit_travel`, `unit_input_actions`, `unit_touch_controls`, `sim_celum_trip`, `unit_hud_log`. All pass. Full suite not run. The user still has to look at it (`godot --path game`, walk onto the Celum south exit).
 
+## Audit (2026-10-08, local, read-only; no code changed)
+- [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
+- [ ] M21 Housekeeping · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
+- Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
+- [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data). Needs a design pick (user).
+- [ ] Divergence is thin: Books 2–7 have 0 `substitute` / `delay` / `mutate` fallbacks (all 838 events are `cancel` only); 67 of 1089 events have hooks (Book 2: 3 of 207).
+- [ ] Unmerged commit 565bc9b on `feat/class-tree-wiki` ("consolidation is automatic and needs a level 10 source class"): merge, redo or drop (user).
+- [ ] New classes `hunter`, `archer`, `alchemist`, `blacksmith`, `teacher` have no own action (no hunt, shoot, brew, forge, teach). Thin pools: 4 spells, 4 recipes, 5 items.
+- [ ] Cleanup: 36 merged local branches; `export/` holds 2.8 GB (old v0.1.0–v0.1.2 builds are on GitHub); stray `game/tests/sim_book7_goblin_road.gd.uid`; README counts stale (898 events / 38 maps → 1089 / 50); this file and `handoff.md` are long (archive done items).
+- [ ] Full GUT suite last run at M17.6. Two sims were found red later. One full run (subagent) when the user asks.
+- [ ] Legal: DESIGN §7 says "check pirateaba's stance before public release". The game is public; no note says it was checked (user).
+- [ ] About 9 "the user plays …" checks are open (M17, M18, M19 rain, M20 phone, touch stick, phone UI, long road, class objects, north road).
+
 ## Releases (ADR 0029)
 - [x] v0.1.3-alpha (branch `release/v0.1.3`, 2026-10-08, local): version bump (code 2), `tools/release.ps1` now also builds the signed apk. Smoke tests pass (events=1089, maps=40, problems=0). Three zips + `InnworldRPG-v0.1.3-alpha-android.apk` built. Waits: user merges the PR, then tag + `gh release create` with all four files.
 - [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
