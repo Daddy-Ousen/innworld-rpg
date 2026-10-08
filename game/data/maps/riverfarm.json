@@ -1,0 +1,258 @@
+{
+	"schema_version": 1,
+	"id": "riverfarm",
+	"name": "Riverfarm",
+	"location": "riverfarm",
+	"confidence": "guess",
+	"note": "Design map (M19.5, ADR 0030). Laken's village in the north of Izril (3.00 E on, 5.09 E - 5.11 E). In the text: a village that grows fast, a meeting hall with a carved-eye throne, houses built at night, trebuchets, a meadow past the new farmland where the banquet of Laken's Day 97 is held, forest around it. Guesses: the layout, every position and the map name. No road leads here yet: the exit from celum_gate opens with the flag world.road_to_riverfarm, which no event sets (an open world is planned; the user, M19.5).",
+	"zones": {},
+	"exits": [
+		{
+			"id": "road_to_celum_gate",
+			"at": [
+				0,
+				11,
+				1,
+				2
+			],
+			"to": "celum_gate",
+			"arrive": [
+				1,
+				10
+			],
+			"minutes": 720
+		}
+	],
+	"objects": [
+		{
+			"id": "riverfarm_well",
+			"kind": "well",
+			"at": [
+				9,
+				10
+			],
+			"name": "Well",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "road_totem_notice",
+			"kind": "notice_board",
+			"at": [
+				5,
+				10
+			],
+			"name": "Road totem notice",
+			"actions": [],
+			"sign": {
+				"icon": "shield",
+				"text": "Notice: no harm without consent"
+			}
+		},
+		{
+			"id": "throne_hall_throne",
+			"kind": "table",
+			"at": [
+				14,
+				5
+			],
+			"name": "Wooden throne with carved eyes",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "hall_scaffolding",
+			"kind": "woodpile",
+			"at": [
+				16,
+				9
+			],
+			"name": "Fallen scaffolding",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "trebuchet_frame",
+			"kind": "woodpile",
+			"at": [
+				16,
+				19
+			],
+			"name": "Trebuchet frame",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cottage_bench",
+			"kind": "bench",
+			"at": [
+				10,
+				13
+			],
+			"name": "Bench",
+			"actions": []
+		},
+		{
+			"id": "banquet_table_a",
+			"kind": "table",
+			"at": [
+				22,
+				9
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "banquet_table_b",
+			"kind": "table",
+			"at": [
+				24,
+				9
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "banquet_table_c",
+			"kind": "table",
+			"at": [
+				26,
+				9
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "banquet_table_d",
+			"kind": "table",
+			"at": [
+				22,
+				14
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "banquet_table_e",
+			"kind": "table",
+			"at": [
+				24,
+				14
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "banquet_table_f",
+			"kind": "table",
+			"at": [
+				26,
+				14
+			],
+			"name": "Long table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "meadow_brazier_nw",
+			"kind": "brazier",
+			"at": [
+				20,
+				7
+			],
+			"name": "Brazier",
+			"actions": [],
+			"solid": true,
+			"warm": true
+		},
+		{
+			"id": "meadow_brazier_sw",
+			"kind": "brazier",
+			"at": [
+				20,
+				16
+			],
+			"name": "Brazier",
+			"actions": [],
+			"solid": true,
+			"warm": true
+		},
+		{
+			"id": "meadow_brazier_ne",
+			"kind": "brazier",
+			"at": [
+				28,
+				7
+			],
+			"name": "Brazier",
+			"actions": [],
+			"solid": true,
+			"warm": true
+		},
+		{
+			"id": "meadow_brazier_se",
+			"kind": "brazier",
+			"at": [
+				28,
+				16
+			],
+			"name": "Brazier",
+			"actions": [],
+			"solid": true,
+			"warm": true
+		},
+		{
+			"id": "meadow_horseshoe",
+			"kind": "horseshoe",
+			"at": [
+				29,
+				14
+			],
+			"name": "Iron horseshoe on a post",
+			"actions": []
+		}
+	],
+	"legend": {
+		".": "grass",
+		",": "tall_grass",
+		":": "dirt_road",
+		"T": "tree",
+		"O": "boulder",
+		"H": "wood_wall",
+		"+": "door",
+		"P": "plain_house",
+		"p": "plain_house_b",
+		"d": "plain_door"
+	},
+	"rows": [
+		"T..T.T..T.T..T.T..T.T..T.T..T.T.",
+		".T..T.T..T.T..T.T..T.T..T.T..T.T",
+		"..................,............T",
+		"..........HHHHHHHHH........,..T.",
+		"..........H.......H.,....TT...TT",
+		"..PPP.ppp.H.......H...........TT",
+		"..PPP.ppp.H.......H...........T.",
+		"..PdP.pdp.H.......H...........TT",
+		"..........HHHH+HHHH...........TT",
+		".T...,..........................",
+		"...............................T",
+		"::::::::::::::::::::::::::::::::",
+		"::::::::::::::::::::::::::::::::",
+		"...............................T",
+		"..PPP.ppp..PPP.................T",
+		"..PPP.ppp..PPP..................",
+		"..PdP.pdp..PdP.................T",
+		"...............................T",
+		"................,...............",
+		".....................,..TTT..O.T",
+		"..............,....O........,..T",
+		"....,.......T...................",
+		"..T...T..,T...T...T...T...T...T.",
+		".T...T...T...T...T...T...T...T.."
+	]
+}
