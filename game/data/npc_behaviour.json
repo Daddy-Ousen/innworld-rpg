@@ -5,7 +5,8 @@
 		"liscor": {"liscor_gate": [1, 11], "liscor_market": [2, 4]},
 		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]},
 		"celum": {"celum_square": [31, 9]},
-		"esthelm": {"esthelm_ruins": [1, 4]}, "north_izril": {"riverfarm": [1, 12]}
+		"esthelm": {"esthelm_ruins": [1, 4]}, "north_izril": {"riverfarm": [1, 12]},
+		"invrisil": {"invrisil_gate": [16, 3]}
 	},
 	"npcs": {
 		"erin_solstice": {
@@ -694,6 +695,25 @@
 				{"goal": "work", "base": 2, "hours": [[8, 18, 1]], "unless_flags": ["celum_runners_guild.new_guildmaster"],
 					"target": {"area": "celum_runners_guild", "pos": [14, 2]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "celum"}}
+			]
+		},
+		"merec": {
+			"confidence": "guess",
+			"notes": "Invrisil staff. The [Merchant] at the Merchants' Guild who takes Laken's winter order (3.37). Hours and spot are guesses.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[8, 18, 1]],
+					"target": {"area": "invrisil_merchants_guild", "pos": [10, 2]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "invrisil"}}
+			]
+		},
+		"raisha": {
+			"confidence": "guess",
+			"combat": {"agility": 4, "hp": 36, "accuracy": 6, "evasion": 4, "armor": 2, "damage": [3, 6]},
+			"notes": "Invrisil staff. Gnoll [Guardswoman] who returns Durene's pouch (3.36). She stands at the city gate by day; post and hours are guesses.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[6, 20, 1]],
+					"target": {"area": "invrisil_gate", "pos": [14, 4]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "invrisil"}}
 			]
 		},
 		"umbral": {

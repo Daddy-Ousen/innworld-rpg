@@ -102,3 +102,16 @@ func test_invrisil_shops_exist_and_the_guild_board_works() -> void:
 	for o: Dictionary in _db.maps.areas["invrisil_runners_guild"]["objects"]:
 		board = board or "deliver_parcel" in o["actions"]
 	assert_true(board, "the Runners' Guild has a parcel board")
+
+
+func test_invrisil_staff_have_posts_on_walkable_tiles() -> void:
+	for id: String in ["merec", "raisha"]:
+		assert_true(_db.behaviour.npcs.has(id), id)
+		var placed := 0
+		for g: Dictionary in _db.behaviour.npcs[id]["goals"]:
+			var t: Dictionary = g["target"]
+			if t.has("area"):
+				placed += 1
+				var at := Vector2i(int(t["pos"][0]), int(t["pos"][1]))
+				assert_true(_db.maps.is_walkable(t["area"], at), "%s post %s" % [id, at])
+		assert_eq(placed, 1, id)
