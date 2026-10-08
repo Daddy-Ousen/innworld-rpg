@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-08, local): Invrisil staff (branch `feat/invrisil-staff`)
+- `game/data/npc_behaviour.json`: `merec`, `raisha`, place `invrisil`. Test: `unit_north_road`. No art, no events.
+- Next: user picks Magnolia's estate map, Book 8 plan, or more wiki classes. No canon Runners' Guild staff in Invrisil exists in the data: do not invent one.
+
 ## Just done (2026-10-08, local): later-list + keystore check (branch `docs/later-and-keystore`)
 - Marked for later in `progress.md`: Magnolia's estate map; Invrisil staff NPCs + Runners jobs. Keystore and icon were already done (v0.1.3 shipped the signed apk); only the user's keystore backup is open.
 - Next: the user picks (Book 8 plan, more wiki classes, the later items) or plays and reports.
