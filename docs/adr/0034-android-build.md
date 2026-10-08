@@ -22,7 +22,19 @@ Turn on USB debugging, plug in, then:
 & "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" install -r export/android/InnworldRPG-debug.apk
 ```
 
+## Release APK
+- Icon: `game/icon.png`, drawn by `tools/build_icon.py` (original pixel art), set in `project.godot`.
+- Keystore: `%USERPROFILE%\.android\innworld-release.keystore` (alias `innworld`; password in `%USERPROFILE%\.android\innworld-release.txt`).
+  It is outside the repo and `.gitignore` blocks `*.keystore`. BACK IT UP: a lost key means no updates to an installed app.
+- The preset holds no secret. Export reads three env vars:
+```powershell
+$env:GODOT_ANDROID_KEYSTORE_RELEASE_PATH = "<keystore path>"
+$env:GODOT_ANDROID_KEYSTORE_RELEASE_USER = "innworld"
+$env:GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD = "<password>"
+& $env:GODOT --headless --path game --export-release Android ../export/android/InnworldRPG-v0.1.2-alpha.apk
+```
+- Output: `export/android/InnworldRPG-v0.1.2-alpha.apk` (87 MB, signed with the release key).
+
 ## Not done
-- Release APK / AAB: needs a release keystore (the user makes it; never commit it).
-- Project icon: none set (Godot logs an error and uses its default). Needs art.
+- AAB (Play Store) needs the Gradle build; not set up.
 - Not played on a device yet.

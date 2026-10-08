@@ -9,6 +9,7 @@ config_version=5
 config/name="Innworld RPG"
 config/description="Fan-made, non-commercial RPG set in The Wandering Inn."
 config/version="0.1.2-alpha"
+config/icon="res://icon.png"
 run/main_scene="res://ui/title_menu.tscn"
 config/features=PackedStringArray("4.7")
 
