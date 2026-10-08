@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_merchants_guild",
+	"name": "Merchants' Guild of Invrisil",
+	"location": "invrisil_merchants_guild",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "Design map. The Merchants' Guild of Invrisil (3.37) holds a truth stone. The layout, stock and prices are guesses; the stone has no effect in play.",
+	"zones": {},
+	"exits": [
+		{"at": [10, 11], "to": "invrisil_main_street", "arrive": [27, 6], "minutes": 0}
+	],
+	"objects": [
+		{"id": "merchants_counter", "kind": "counter", "at": [10, 3], "name": "Merchants' counter", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "invrisil_merchants", "sign": {"icon": "coin"}},
+		{"id": "truth_stone", "kind": "plaque", "at": [3, 1], "name": "Truth stone", "actions": [], "sign": {"icon": "star", "text": "Truth stone"}},
+		{"id": "merchants_hearth", "kind": "hearth", "at": [17, 1], "name": "Hearth", "actions": [], "solid": true, "warm": true},
+		{"id": "merchants_shelf", "kind": "shelves", "at": [7, 1], "name": "Ledger shelf", "actions": [], "solid": true},
+		{"id": "merchants_table", "kind": "table", "at": [15, 6], "name": "Table", "actions": [], "solid": true}
+	],
+	"legend": {"+": "door", "=": "wood_floor", "H": "wood_wall", "V": "wood_window"},
+	"rows": [
+		"HHVHHHHHHHVHHHVHHHHH",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"H==================H",
+		"HHHHHHHHHH+HHHHHHHHH"
+	]
+}

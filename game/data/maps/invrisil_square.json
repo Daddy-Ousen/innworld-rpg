@@ -4,12 +4,14 @@
 	"name": "Invrisil square",
 	"location": "invrisil",
 	"confidence": "guess",
-	"note": "Design map (north road). The square is a guess; the text describes no square. Only a gate and a square so far: shops, the Runners' Guild and Magnolia's mansion (outside the city) come later.",
+	"note": "Design map (north road). The square is a guess; the text describes no square. North of it is the main street with the guilds and the inn. Magnolia's mansion (outside the city) comes later.",
 	"zones": {},
 	"exits": [
+		{"at": [16, 0, 2, 1], "to": "invrisil_main_street", "arrive": [16, 22], "minutes": 2},
 		{"at": [15, 19, 2, 1], "to": "invrisil_gate", "arrive": [16, 2], "minutes": 0}
 	],
 	"objects": [
+		{"id": "invrisil_stall", "kind": "market_stall", "at": [26, 14], "name": "Market stall", "actions": ["buy_supplies", "sell_goods", "haggle"], "solid": true, "shop": "invrisil_stall", "sign": {"icon": "coin"}},
 		{"id": "invrisil_well", "kind": "well", "at": [16, 12], "name": "Well", "actions": ["carry_water"], "solid": true},
 		{"id": "invrisil_notice", "kind": "notice_board", "at": [12, 10], "name": "Notice board", "actions": [], "solid": true},
 		{"id": "invrisil_brazier_west", "kind": "brazier", "at": [10, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
