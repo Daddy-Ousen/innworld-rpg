@@ -69,7 +69,9 @@ func test_the_data_is_loaded() -> void:
 
 func test_riverfarm_is_not_linked_to_celum() -> void:
 	# Riverfarm lies south-west of Invrisil, not on the Celum road (docs/WORLD_WIREFRAME.md, section 4).
-	assert_eq(_db.maps.areas["riverfarm"]["exits"], [], "no exits until an Invrisil map exists")
+	var exits: Array = _db.maps.areas["riverfarm"]["exits"]
+	assert_eq(exits.size(), 1, "one road, to the Invrisil gate")
+	assert_eq(exits[0]["to"], "invrisil_gate")
 	for ex: Dictionary in _db.maps.areas["celum_gate"]["exits"]:
 		assert_ne(ex.get("to", ""), "riverfarm", "celum_gate must not lead to riverfarm")
 

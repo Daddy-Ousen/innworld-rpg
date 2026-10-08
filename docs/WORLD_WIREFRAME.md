@@ -72,6 +72,7 @@ Hard rules for the road:
 
 Suggested graph (miles, soft): Liscor –30– Esthelm –58– Celum –~340– Invrisil –~65 (SW)– Riverfarm.
 The long Celum – Invrisil stretch needs 3 – 5 waypoints from rule 4. The data already has `road_to_invrisil` and `riverfarm_road`.
+In the game (2026-10-08): Celum north gate -1500 min- `road_to_invrisil` (camp) -3100 min- `invrisil_gate` -900 min (west side)- `riverfarm`. Times are guesses (4.4 mi/h).
 
 ## 5. Southern Izril (fan maps agree, no border is canon)
 

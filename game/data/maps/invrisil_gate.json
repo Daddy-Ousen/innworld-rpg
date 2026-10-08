@@ -1,0 +1,41 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_gate",
+	"name": "Outside Invrisil's gate",
+	"location": "invrisil",
+	"confidence": "guess",
+	"note": "Design map (north road). Invrisil is a big walled city; its gate and layout are guesses. Arrival from Celum is from the south. Riverfarm lies 50 - 80 miles south-west of Invrisil (3.01 E, docs/WORLD_WIREFRAME.md section 4), so its road leaves from the west side. Distances are guesses.",
+	"zones": {},
+	"exits": [
+		{"at": [16, 0, 2, 1], "to": "invrisil_square", "arrive": [15, 18], "minutes": 0, "sign": {"icon": "shield", "text": "Invrisil"}},
+		{"at": [16, 19, 2, 1], "to": "road_to_invrisil", "arrive": [16, 1], "minutes": 3100, "sign": {"icon": "none", "text": "Road to Celum"}},
+		{"at": [0, 12, 1, 2], "to": "riverfarm", "arrive": [30, 11], "minutes": 900, "sign": {"icon": "none", "text": "Road to Riverfarm"}}
+	],
+	"objects": [
+		{"id": "invrisil_gate_brazier", "kind": "brazier", "at": [13, 4], "name": "Guard's brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "invrisil_road_notice", "kind": "notice_board", "at": [14, 11], "name": "Road notice", "actions": [], "sign": {"icon": "none", "text": "Riverfarm"}}
+	],
+	"legend": {"#": "city_wall", ".": "grass", ":": "dirt_road", "B": "building", "T": "tree", "_": "cobble", "b": "building_b"},
+	"rows": [
+		"############BBB#__bbb###########",
+		"############BBB#__bbb###########",
+		"............BBB.::bbb...........",
+		"................::..............",
+		"................::..............",
+		"................::..............",
+		"................::........T.....",
+		"....T...........::..............",
+		".........T......::..............",
+		"................::..............",
+		"................::..............",
+		"................::..........T...",
+		"::::::::::::::::::..............",
+		"::::::::::::::::::..............",
+		"................::..............",
+		"................::......T.......",
+		"......T.........::..............",
+		"................::..............",
+		"................::..............",
+		"................::.............."
+	]
+}

@@ -8,7 +8,8 @@
 	"zones": {"celum_runners_guild": [[4, 6, 6, 2]]},
 	"exits": [
 		{"at": [7, 5], "to": "celum_runners_guild", "arrive": [10, 10], "minutes": 0, "sign": {"icon": "badge", "text": "Runners' Guild"}},
-		{"at": [15, 23, 2, 1], "to": "celum_square", "arrive": [15, 1], "minutes": 2}
+		{"at": [15, 23, 2, 1], "to": "celum_square", "arrive": [15, 1], "minutes": 2},
+		{"at": [15, 0, 2, 1], "to": "celum_north_gate", "arrive": [16, 18], "minutes": 2, "sign": {"icon": "shield", "text": "North gate"}}
 	],
 	"crowd": {"lanes": [{"path": [[2, 8], [29, 8]], "walkers": 4, "looks": ["race_human", "race_human", "race_drake", "race_human"]}, {"path": [[15, 10], [15, 22]], "walkers": 2, "looks": ["race_human", "race_gnoll"]}, {"path": [[3, 19], [28, 19]], "walkers": 3, "looks": ["race_human", "race_human", "race_human"]}]},
 	"objects": [
@@ -26,12 +27,12 @@
 	],
 	"legend": {"B": "brick_house", "b": "brick_house_b", "d": "brick_door", "_": "cobble", ":": "dirt_road"},
 	"rows": [
-		"BBBBBbbbbbBBBBBbbbbbBBBBBbbbbbBB",
-		"BBBBBbbbbbBBBBBbbbbbBBBBBbbbbbBB",
-		"BBBBBbbbbbBBBBBbbbbbBBBBBbbbbbBB",
-		"BBBBBbbbbbBBBBBbbbbbBBBBBbbbbbBB",
-		"BBBBBbbbbbBBBBBbbbbbBBBBBbbbbbBB",
-		"BBBBBbbdbbBBBBBbbbbbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBB__bbbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBB__bbbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBB__bbbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBB__bbbBBBBBbbbbbBB",
+		"BBBBBbbbbbBBBBB__bbbBBBBBbbbbbBB",
+		"BBBBBbbdbbBBBBB__bbbBBBBBbbbbbBB",
 		"________________________________",
 		"________________________________",
 		"________________________________",

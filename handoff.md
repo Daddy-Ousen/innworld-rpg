@@ -1,9 +1,9 @@
 # Handoff
 
-## Just done (2026-10-08, local): wiki class tree step 3 (branch `feat/class-tree-step3`)
-- 7 classes + 8 Skills in `game/data/classes.json`, `skills.json` (patched as text, CRLF kept). Test: `unit_class_tree_step3`.
-- User picked three jobs, in this order: (1) this step, (2) Invrisil: Celum NORTH gate (none exists yet; `celum_gate` is the south gate), a road map, Invrisil gate + square, and a south-west road to `riverfarm` (user chose road + city + Riverfarm road). Read `docs/WORLD_WIREFRAME.md` first; plan in plan mode, list files. (3) release keystore + project icon (needs the user).
-- Next: commit, push, open PR (author Daddy-Ousen only), then start the Invrisil plan.
+## Just done (2026-10-08, local): north road (branch `feat/invrisil-road`)
+- New maps `celum_north_gate`, `road_to_invrisil` (camp), `invrisil_gate`, `invrisil_square`; exits added to `celum_main_street` (top, x 15-16) and `riverfarm` (east edge to the Invrisil gate west edge). Audio moods in `audio.json`. Test: `unit_north_road`.
+- Invrisil has only a gate and a square (no shops, no NPCs, no canon moved). Next ideas: Invrisil shops/Runners' Guild, Magnolia's mansion, put Laken/Riverfarm travel to use, then release keystore + icon.
+- Gotchas: a tree hides a wall 4 rows above it (`unit_ground_art`). Generator script was in the scratchpad (gone later); maps are plain JSON now.
 
 ## Just done (2026-10-08, local): long road confirm + walk scene (branch `feat/long-road-confirm`)
 - `game/ui/travel_prompt.gd` (TravelPrompt, built in code, added to `$SystemLayer` by `main.gd`): question panel (Travel / Stay, Esc = Stay), then a 1.8 s walker-on-a-track scene; `arrived` makes the real step. `main.gd`: `_ask_travel`, `confirm_travel` (false headless), `is_busy` includes `travel.visible`.
