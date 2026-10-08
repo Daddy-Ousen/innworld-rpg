@@ -95,6 +95,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `unit_skill_system`, `unit_world_view`, `sim_winter`, validator, Python tool tests (105). All pass. Full suite not run.
   - [ ] The user plays: do the new objects feel right? Later steps could add NPC users of these classes.
   - Skipped on purpose: Erin/NPC-unique classes (Rocksoup Cook, Wandering Innkeeper, Goblinfriend Innkeeper), Skeleton, Bandit, Necromancer lines.
+- [x] World wireframe (branch `docs/world-wireframe`, 2026-10-08, local): `docs/WORLD_WIREFRAME.md` + `docs/world_wireframe.svg`. Compass and order rules for continents and the Izril corridor (Liscor – Esthelm – Celum – Invrisil – Riverfarm SW of Invrisil; Pallass 400 mi S), with confidence marks and open questions. Docs only. No tests run. PR waits for the user to merge.
 - [ ] M20 — Touch controls (ADR 0032, plan `docs/plans/m20.md`). User answers 2026-10-05: InputMap actions, 4-way D-pad,
   fight tap = plan then act, M20.0 + M20.1 in one PR.
   - [x] M20.0 input actions + M20.1 touch layer (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud). Checked on Xvfb renders
