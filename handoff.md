@@ -5,7 +5,10 @@
 - Debug APK: `export/android/InnworldRPG-debug.apk` (gitignored). Signed with the Godot debug keystore. No phone was plugged in, so no install test.
 - Next: the user plugs in a phone (USB debugging on) and runs the `adb install -r` line from ADR 0034, then plays. Then: release keystore (user makes it), project icon (needs art), more wiki classes, or Book 8 plan.
 - Gotchas: the export rewrites `.import` files: run `git checkout -- game/assets` after. Stray `game/tests/sim_book7_goblin_road.gd.uid` is untracked (from M19.8, not part of this branch).
-- The M19.9 PR must still be merged by the user.
+
+## Just done (2026-10-08, local): M19.9 `sim_canon_book7` (branch `feat/m19.9-sim-canon-book7`, from main after PR 125)
+- `game/tests/sim_canon_book7.gd` (5 tests): Book 7 runs days 130 - 143 with drift 0, 191 events, no kills, stages and order checked. Passes.
+- Next: the user merges the PR; M19 is then done except the play check (rain, flood, door, Book 7 stages). Then pick: M20.2 Android, more wiki classes, or Book 8 plan.
 
 ## Just done (2026-10-08, local): M19.8 canon 5.19 G - 5.20 G (branch `feat/m19.8-canon-5-19`, from main 08451c7)
 - `game/data/canon/book7/chapters/5.19G.json`, `5.20G.json` (orders 50 - 51): 21 events, days 141 - 143, all off-map. Test: `sim_book7_goblin_road` (new, 4). Detail: ADR 0030 "M19.8 as built".
