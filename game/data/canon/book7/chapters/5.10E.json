@@ -1,0 +1,454 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.10E",
+	"order": 41,
+	"system": [],
+	"events": {
+		"b7.magnolia_sets_her_test_for_laken": {
+			"tier": 1,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spy": {
+					"prefer": [
+						"sacra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.tests_laken_at_the_gathering",
+					"sacra.carries_magnolias_ring"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 89 = day 134 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Magnolia tells Ressa and Sacra the gathering is a test of how Laken answers. Rie's help will push him toward a stiff event; failing or winning too well both count against him. Sacra gets a ring that can wreck half a building, for a last resort.",
+			"news": "Magnolia Reinhart planned her gathering as a test of the Emperor of Eyes."
+		},
+		"b7.laken_admits_he_knows_no_noble_manners": {
+			"tier": 1,
+			"window": {
+				"earliest": 135,
+				"latest": 135,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rie.orders_furnishings_from_invrisil",
+					"laken.hides_that_he_is_from_earth",
+					"durene.is_jealous_of_rie"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 90 = day 135 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Rie says the nobles need a hall four times the throne room. Laken accepts but knows nothing of forks and silver. He blames his blindness and hides his Earth past. Durene says Rie is flirting. Laken says he is with her.",
+			"news": "Riverfarm began to ready a great hall for the northern nobles."
+		},
+		"b7.scaffold_collapse_sparks_a_feud_in_riverfarm": {
+			"tier": 1,
+			"window": {
+				"earliest": 137,
+				"latest": 137,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.builders_feud_begins",
+					"riverfarm.serving_staff_not_to_be_touched"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 92 = day 137 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Night scaffolding on the hall collapses. Builder Wellim of Tunslaven and Carpenter Horst of Windrest blame each other, and the quarrel grows to a brawl of thirty or forty. Durene and Wiskeria stop it. Laken sets a rule that serving staff may not be touched.",
+			"news": "A scaffold collapse at Riverfarm led to a brawl between two villages."
+		},
+		"b7.rie_and_durene_argue_over_the_seating": {
+			"tier": 1,
+			"window": {
+				"earliest": 138,
+				"latest": 138,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rie.wants_durene_in_armour_not_seated",
+					"durene.yields_to_rie_for_now"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 93 = day 138 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Rie says Durene must stand guard in armour, since she is not noble or engaged to Laken. Durene argues, then gives in. Rie plans a visored helm to hide her face. Laken stays silent for a moment.",
+			"news": "Rie and Durene argued over where Durene would stand at the banquet."
+		},
+		"b7.laken_cancels_the_great_hall_banquet": {
+			"tier": 1,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.moves_the_banquet_to_the_meadow",
+					"laken.puts_durene_at_the_head_table",
+					"riverfarm.posts_notices_on_road_totems",
+					"laken.asks_nobles_for_food_and_sweets"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 94 = day 139 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken says no: Durene will sit at the head table. He sees the trap is to hide her and play Magnolia's game, so he drops the hall. The banquet moves to a meadow, standing, with the village fed too. Nobles must bring food, bards and pudding.",
+			"news": "Laken moved his banquet out of the great hall and into a meadow."
+		},
+		"b7.laken_ends_the_builders_feud": {
+			"tier": 1,
+			"window": {
+				"earliest": 139,
+				"latest": 139,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.builders_feud_ended",
+					"riverfarm.night_building_stopped",
+					"rie.is_sullen_but_works"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 94 = day 139 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken makes Wellim and Horst wait, lectures them, and they make peace in fifteen minutes. Night building stops as error-prone. Prost steered him to it. Rie is sullen and no longer touches his arm.",
+			"news": "Laken ended the feud between the builders of Riverfarm."
+		},
+		"b7.riverfarm_cooks_sweets_for_the_nobles": {
+			"tier": 1,
+			"window": {
+				"earliest": 140,
+				"latest": 140,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.cooks_local_dishes_and_sweets",
+					"laken.dream_asks_for_sweets_and_pudding"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.10E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 95 = day 140 (his Day + 45, ADR 0028)."
+			},
+			"summary": "The dream voices now ask for sweets and pudding. Cooks prepare local dishes and sweets, Wiskeria hunts, and Laken plans popcorn and dishes from home. His phone is dead and no mage of his can charge it. Rie keeps seats for unexpected guests.",
+			"news": "Riverfarm's cooks made dishes and sweets for the coming feast."
+		}
+	}
+}

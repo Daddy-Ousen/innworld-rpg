@@ -1,0 +1,605 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.09E",
+	"order": 40,
+	"system": [],
+	"events": {
+		"b7.laken_dreams_of_whispering_voices": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.dreams_of_voices_saying_early"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 85 = day 130 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Each night Laken dreams of hushed voices that say they are early and in trouble. He wakes without the words. The dream repeats until the banquet.",
+			"news": "Laken of Riverfarm dreams each night of whispering voices."
+		},
+		"b7.laken_names_the_mossbear_bismarck": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bird": {
+					"prefer": [
+						"frostwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.has_lesser_bond_with_bismarck",
+					"durene.stronger_than_the_mossbear",
+					"riverfarm.mossbear_lives_at_the_cottage"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 85 = day 130 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken names the tamed Mossbear Bismarck and gains a Lesser Bond with him. Bismarck lets him ride, begs food at the cottage and pesters Durene. She now has [Enhanced Strength] and a plain iron greatsword. Frostwing has grown.",
+			"news": "Laken of Riverfarm bonded with a Mossbear and named it Bismarck."
+		},
+		"b7.riverfarm_grows_toward_a_city": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.builds_houses_by_night",
+					"riverfarm.has_public_outhouses",
+					"riverfarm.grows_toward_a_city"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 85 = day 130 (his Day + 45, ADR 0028)."
+			},
+			"summary": "The Unseen Empire holds a few thousand people in Riverfarm, Windrest, Tunslaven and Kiquel. Trottvisk has declared for it. Houses go up fast, with night crews. Prost lays out the town from Laken's descriptions, and public outhouses stand far from the river.",
+			"news": "Riverfarm is building houses by night and growing into a town."
+		},
+		"b7.laken_takes_counsel_from_prost_wiskeria_and_rie": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rie.counsels_laken",
+					"laken.watches_rie_after_odveig",
+					"rie.fortune_is_the_empires"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 85 = day 130 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Rie, three days a vassal, urges Laken to receive the local nobles. Her fortune is now the Empire's by [King's Bounty]. Laken and Wiskeria quietly watch her, remembering Odveig. Rie explains that the war left many lands without a lord.",
+			"news": "Lady Rie Valerund advised Laken to meet the nobles of the north."
+		},
+		"b7.beniar_hunts_a_bandit_camp_with_the_blacksky_riders": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"beniar.has_blacksky_riders",
+					"bandits.camp_west_of_riverfarm_destroyed",
+					"rumour.laken_needs_no_eyes"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 85 = day 130 (his Day + 45, ADR 0028)."
+			},
+			"summary": "At night Beniar and his riders kill a bandit camp over fifteen miles west, with no losses. The new Skill [Blacksky Riders] gives them night sight and can dim light. Rumour grows that Laken's people need no eyes.",
+			"news": "Riders of the Unseen Empire destroyed a bandit camp west of Riverfarm in the night."
+		},
+		"b7.laken_hears_zel_shivertail_is_dead": {
+			"tier": 1,
+			"window": {
+				"earliest": 131,
+				"latest": 131,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"nesor"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.heard_that_zel_shivertail_is_dead",
+					"laken.knows_magnolias_army_was_broken",
+					"laken.knows_the_goblin_lord_marches_on_invrisil"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 86 = day 131 (his Day + 45, ADR 0028)."
+			},
+			"summary": "A [Message] to all nobles says General Zel Shivertail is dead, Magnolia's army is broken and the Goblin Lord marches on Invrisil. Wiskeria explains the Antinium Wars. Laken can field about a thousand and will not lie to his people. Durene comforts him.",
+			"news": "Word of Zel Shivertail's death reached Riverfarm by [Message] on the morning after he fell."
+		},
+		"b7.riverfarm_tests_trebuchets_and_a_ballista": {
+			"tier": 1,
+			"window": {
+				"earliest": 132,
+				"latest": 132,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"girl": {
+					"prefer": [
+						"tessia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"steward": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.has_working_trebuchets",
+					"riverfarm.trains_engineers",
+					"laken.plans_communal_farms"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 87 = day 132 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Villagers fire two trebuchets and a ballista built from Ryoka's designs. Tessia leads the team and the stone flies over two hundred feet. Rie says Pallass will not sell such machines to Humans, so Riverfarm could export them. Laken plans communal farming and a public contest with ale for prizes.",
+			"news": "Riverfarm tested trebuchets and a ballista built by its own villagers."
+		},
+		"b7.rie_names_tyrion_veltras_as_the_hope": {
+			"tier": 1,
+			"window": {
+				"earliest": 132,
+				"latest": 132,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.hears_tyrion_veltras_is_the_hope"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 87 = day 132 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Rie tells Laken that Lord Tyrion Veltras has an army far better than Magnolia's and is the north's best hope against the Goblin Lord. She names Lady Bethal Walchais and the Knights of the Petal. Laken reads her touch on his arm as flirting.",
+			"news": "Lady Rie said Tyrion Veltras is the north's hope against the Goblin Lord."
+		},
+		"b7.laken_holds_audiences_in_the_carved_throne_room": {
+			"tier": 1,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"carver": {
+					"prefer": [
+						"jelov"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"headman": {
+					"prefer": [
+						"filk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.has_a_throne_with_carved_eyes",
+					"gec.headman_courts_laken"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 89 = day 134 (his Day + 45, ADR 0028)."
+			},
+			"summary": "In the new meeting hall Laken sits on a wooden throne with carved eyes, made by Jelov. Headman Filk of Gec brings gifts and may pledge soon. Laken promises to guard his lands from raiders and leaves the Goblin Lord to Tyrion and Magnolia.",
+			"news": "Headman Filk of Gec brought gifts to Laken's throne room."
+		},
+		"b7.magnolias_letter_invites_laken_to_a_gathering": {
+			"tier": 1,
+			"window": {
+				"earliest": 134,
+				"latest": 134,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"tilwa_petroms"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.invited_to_magnolias_gathering",
+					"magnolia.gathering_set_at_riverfarm_for_day_142",
+					"tilwa_petroms.invited_laken_to_invrisil"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.09E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 89 = day 134 (his Day + 45, ADR 0028)."
+			},
+			"summary": "A City Runner brings two letters. Lord Tilwa Petroms of Invrisil invites Laken to his city, a scheme Rie says to ignore. Magnolia Reinhart will bring about thirty nobles to Riverfarm in a week, with Lady Bethal and her servant Sacra. Rie calls it a trap.",
+			"news": "Magnolia Reinhart will gather the northern nobles at Riverfarm in a week."
+		}
+	}
+}
