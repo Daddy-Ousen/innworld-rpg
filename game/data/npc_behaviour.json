@@ -454,6 +454,12 @@
 				{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}
 			]
 		},
+		"seborn": {
+			"confidence": "guess",
+			"notes": "M19.7. The Halfseekers' Drowned Man [Rogue]; off the map in Liscor. The lease stage (day 143) brings him to the inn.",
+			"combat": {"agility": 5, "hp": 40, "accuracy": 7, "evasion": 7, "armor": 1, "damage": [3, 7]},
+			"goals": [{"goal": "off_map", "base": 1, "target": {"off_map": "liscor"}}]
+		},
 		"jelaqua": {
 			"confidence": "guess",
 			"notes": "M18.6. The Halfseekers' Selphid [Swashbuckler]; off the map in Liscor. The arrival stage (4.43, day 129) brings her to the inn.",

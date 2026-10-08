@@ -1,0 +1,635 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.17S",
+	"order": 48,
+	"events": {
+		"b7.zevara_hides_the_healer_death": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_plaza",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.body_cursed_touch_kills"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030). The curse detail is a guess."
+			},
+			"summary": "A Drake healer died within the hour after touching Zel's body. Zevara and Selys agree to burn it. Only those who touch the body are harmed.",
+			"news": "A healer died after touching General Shivertail. The city will burn the body."
+		},
+		"b7.zel_funeral_in_the_plaza": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_plaza",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mrsha": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.cremated",
+					"izril.zel_funeral_held"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "General Shivertail is cremated in the plaza before Liscor's people, a Pallass company and its senators.",
+			"news": "General Shivertail is cremated before Liscor and a Pallass delegation.",
+			"stage": {
+				"area": "liscor_plaza",
+				"hours": [
+					10,
+					13
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "zevara",
+						"pos": [
+							14,
+							11
+						]
+					},
+					{
+						"npc": "tekshia",
+						"pos": [
+							16,
+							11
+						]
+					},
+					{
+						"npc": "selys",
+						"pos": [
+							15,
+							12
+						]
+					},
+					{
+						"npc": "ilvriss",
+						"pos": [
+							17,
+							11
+						]
+					},
+					{
+						"npc": "embria_grasstongue",
+						"pos": [
+							13,
+							12
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							18,
+							12
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							19,
+							12
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							20,
+							11
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							12,
+							11
+						]
+					},
+					{
+						"npc": "klbkch",
+						"pos": [
+							21,
+							12
+						]
+					}
+				],
+				"line": "The plaza is full and quiet. Soldiers stand in ranks around the pyre. Rain falls on the Drakes and Gnolls.",
+				"note": "M19.7: a scene. Hours are guesses (the text gives about four and a half hours after Selys wakes)."
+			},
+			"hooks": [
+				{
+					"id": "player_stood_at_zels_funeral",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"liscor_plaza"
+								],
+								"npc": [
+									"zevara"
+								]
+							}
+						}
+					],
+					"days": [
+						142,
+						142
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_stood_at_zels_funeral"
+						],
+						"relationship": [
+							{
+								"from": "zevara",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human stood in the plaza at General Shivertail's funeral."
+				}
+			]
+		},
+		"b7.ilvriss_and_embria_vow_vengeance": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_plaza",
+			"roles": {
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.drakes_vow_vengeance_on_the_goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "After the pyre burns down, Ilvriss and Embria swear to punish the Goblin Lord who killed Zel.",
+			"news": "Drake officers swear to avenge Zel on the Goblin Lord."
+		},
+		"b7.selys_offered_breastplate_deals": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.offers_pour_in"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Offers for the Heartflame Breastplate come in at once. Ilvriss wants to buy it, Embria wants it for the army, and a Pallass envoy waits. A thief was caught trying to break in.",
+			"news": "Many ask to buy Selys's Heartflame Breastplate."
+		},
+		"b7.selys_checks_pisces_sewer_undead": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_sewers",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.sewer_bone_horror_active"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Selys inspects Pisces's bone creature in the sewers and kicks it to test it. He sets out to build four more, with armour and bone-spike shooters.",
+			"news": "Pisces's bone creature starts clearing Liscor's sewers."
+		},
+		"b7.pisces_advises_on_the_armour": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_sewers",
+			"roles": {
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.advised_selys_on_armour"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pisces explains the politics around the breastplate to Selys and tells her not to sell yet."
+		},
+		"b7.erin_runs_the_door_after_the_funeral": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.door_open_for_6h_after_funeral"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "After the funeral many Drakes cross between Liscor and Pallass by Erin's door. It lets them pass for six hours.",
+			"news": "Many Drakes use Erin's door to cross between Liscor and Pallass."
+		},
+		"b7.selys_reads_the_heartflame_in_pallass_archive": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "pallass_archive",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.flame_ward_myth_learnt"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "In Pallass's Archive Selys and Pisces learn that the breastplate belongs to a set and has a hidden command.",
+			"news": "Selys studies the Heartflame legends in Pallass's Archive."
+		},
+		"b7.selys_kidnapped_in_pallass": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.selys_kidnapped"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.17S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Leaving the Archive, Selys is seized in a Pallass street by a gang led by an orange-scaled Drake.",
+			"news": "Selys Shivertail is snatched in Pallass."
+		}
+	},
+	"system": []
+}

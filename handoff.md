@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-08, local): M19.7 canon 5.16 S - 5.18 S (branch `feat/m19.7-canon-5-16`, from main 67287ff)
+- `game/data/canon/book7/chapters/5.16S.json` - `5.18S.json` (orders 47 - 49): 33 events, days 140 - 143. Test: `sim_book7_zel_and_selys` (new, 4). Detail: ADR 0030 "M19.7 as built".
+- Stages: `b7.zel_funeral_in_the_plaza` (liscor_plaza, 10 - 13, day 142, hook Zevara) and `b7.selys_haggles_with_jelaqua_at_the_inn` (inn_interior, 18 - 22, day 143, hook Selys). No xp_window.
+- Gotchas: the validator allows tier 1 or 2 only (no tier 3 in data). Scene NPCs need a behaviour entry (added Seborn). `npc_behaviour.json` must be patched as text: a JSON dump reformats the whole file.
+- Next: the user merges the PR. Then M19.8 (5.19 G, 5.20 G: Rags, Garen, Tremborag, road battle; off-map), then `sim_canon_book7` (done-when in the roadmap).
+
 ## Just done (2026-10-08, local): M19.6 canon 5.12 – 5.15 (branch `feat/m19.6-canon-5-12`)
 - `game/data/canon/book7/chapters/5.12.json` – `5.15.json` (orders 43 – 46): 44 events, days 137 – 140. Tests: `sim_book7_flood_and_parade` (new, 6). Detail: ADR 0030 "M19.6 as built".
 - Flood flag is set on day 137 (flags show a day late). Door west-wall flag `albez_door.anchor_at_liscor_wall` on day 138. Pallass link stays open.

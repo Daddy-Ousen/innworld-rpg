@@ -265,6 +265,60 @@
 				"note": "A small, poor town in Laken's lands whose headman Filk thanks him for his guards (5.09 E). Off-map."
 			},
 			"summary": "A small town near Riverfarm. Off-map."
+		},
+		"liscor_city_hall": {
+			"name": "Liscor city hall",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": [
+				"government",
+				"liscor",
+				"city_hall"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Rooms where Zel's casket is opened, the will is read and the Heartflame Breastplate is kept (5.16 S - 5.18 S). Not a map."
+			},
+			"summary": "The rooms of Liscor's city government. Zel's body and his armour lie here."
+		},
+		"liscor_sewers": {
+			"name": "Liscor sewers",
+			"kind": "district",
+			"parent": "liscor",
+			"tags": [
+				"sewer",
+				"liscor",
+				"underground"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Pisces sends a bone creature to clear the sewers (5.16 S, 5.17 S). Not a map."
+			},
+			"summary": "The sewers under Liscor."
+		},
+		"pallass_archive": {
+			"name": "Pallass Archive",
+			"kind": "building",
+			"parent": "pallass",
+			"tags": [
+				"library",
+				"pallass",
+				"walled_city"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "confirmed",
+				"note": "Selys and Pisces read the Heartflame legends here (5.17 S). Not a map."
+			},
+			"summary": "The archive of Pallass."
 		}
 	}
 }

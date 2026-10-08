@@ -1,0 +1,970 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.18S",
+	"order": 49,
+	"events": {
+		"b7.pisces_saves_selys": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pisces.killed_selys_kidnappers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pisces raises his dead and kills five of the kidnappers. Selys pokes one in the eye.",
+			"news": "Pisces rescues Selys in Pallass."
+		},
+		"b7.venim_arrests_the_kidnappers": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "pallass_streets",
+			"roles": {
+				"venim": {
+					"prefer": [
+						"venim"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"venim"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pallass.kidnappers_arrested"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Venim arrests the gang. He says they planned to ask forty thousand gold for Selys.",
+			"news": "Pallass arrests the men who took Selys."
+		},
+		"b7.liscor_waits_for_selys_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fleiss": {
+					"prefer": [
+						"fleiss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.selys_under_guard"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Liscor's leaders wait for Selys at the inn. She storms out when they set a guard on her. Tekshia gives her only one day off.",
+			"news": "Selys is home and now under guard."
+		},
+		"b7.pisces_brings_selys_dinner": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "selys_home",
+			"roles": {
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pisces"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"selys.warmed_to_pisces"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pisces brings Selys dinner in her flat."
+		},
+		"b7.selys_and_pisces_visit_the_armour": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.activation_sounds_tried"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At night Selys and Pisces try phrases on the breastplate for two hours. Nothing wakes it."
+		},
+		"b7.selys_gets_the_dignitaries": {
+			"tier": 2,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.cities_bid"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Envoys from Pallass, Wistram, Zeres, Oteslia and Salazsar make offers for the armour.",
+			"news": "Walled Cities line up to buy Selys's breastplate."
+		},
+		"b7.selys_hisses_and_the_armour_burns": {
+			"tier": 1,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.hiss_activates"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Selys hisses at the breastplate and it bursts into flame without burning her.",
+			"news": "Selys wakes the Heartflame Breastplate."
+		},
+		"b7.selys_walks_burning_to_the_guild": {
+			"tier": 1,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"embria_grasstongue": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.selys_wears_it"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Selys walks ten minutes through the rain in the burning armour to the Guild. The whole city watches.",
+			"news": "Selys Shivertail walks through Liscor in the burning Heartflame Breastplate."
+		},
+		"b7.selys_leases_the_armour_to_halfseekers": {
+			"tier": 1,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"moore": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"seborn": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"zevara": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ilvriss": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.leased_to_halfseekers",
+					"heartflame.will_sends_it_to_magnolia",
+					"pallass.pays_selys_not_to_lend_to_ilvriss"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Selys leases the breastplate to the Halfseekers. By the will it passes to Magnolia on her death. Pallass pays her not to lend it to Ilvriss.",
+			"news": "Selys leases the Heartflame Breastplate to the Halfseekers."
+		},
+		"b7.tekshia_signs_the_goblin_team": {
+			"tier": 2,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"tekshia": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tekshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.bronze_team_registered"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Tekshia registers the Goblin team as Bronze rank. She admits she never meant Selys to take her seat.",
+			"news": "Liscor's Guild registers a Bronze-rank Goblin team."
+		},
+		"b7.selys_haggles_with_jelaqua_at_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"jelaqua": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"moore": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"seborn": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"erin_solstice": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ishkr": {
+					"prefer": [
+						"ishkr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lyonette": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mrsha": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.lease_cut_agreed"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). Hours are guesses (evening)."
+			},
+			"summary": "Selys and Jelaqua haggle over the lease, from forty percent down to thirty. Selys asks Erin for a favour.",
+			"stage": {
+				"area": "inn_interior",
+				"hours": [
+					18,
+					22
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "selys",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							11,
+							7
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "seborn",
+						"pos": [
+							10,
+							6
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							6,
+							7
+						]
+					},
+					{
+						"npc": "ishkr",
+						"pos": [
+							7,
+							5
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							4,
+							7
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							4,
+							10
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							5,
+							11
+						]
+					}
+				],
+				"line": "The Halfseekers sit with Selys at a table, arguing over figures. The breastplate glows faintly on the chair beside her.",
+				"note": "M19.7: a scene. Hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_the_lease_haggle",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"selys"
+								]
+							}
+						}
+					],
+					"days": [
+						143,
+						143
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"halfseekers.earther_heard_the_lease_haggle"
+						],
+						"relationship": [
+							{
+								"from": "selys",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at the Wandering Inn heard Selys haggle over the Heartflame lease."
+				}
+			]
+		},
+		"b7.selys_buries_zels_ashes_by_sserys": {
+			"tier": 1,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "liscor_graveyard",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				},
+				"pisces": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"relc": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"klbkch": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.buried_by_sserys_secretly",
+					"sserys.zel_loved"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030). That Sserys was Zel's love is stated by the will line; confidence likely."
+			},
+			"summary": "At night Selys buries Zel's ashes beside General Sserys, as the will asked in secret. She keeps the urn and fills it with fireplace ash for the public."
+		},
+		"b7.heartflame_riddle_reaches_selys": {
+			"tier": 2,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "selys_home",
+			"roles": {
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.helm_riddle_known"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.18S",
+				"confidence": "likely",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "That night a riddle about the rest of the set comes to Selys. It may point to a place called a village without rest; this is a guess and does not name one."
+		}
+	},
+	"system": [
+		{
+			"who": "selys",
+			"kind": "level",
+			"name": "[Receptionist]",
+			"level": 19,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "selys",
+			"kind": "level",
+			"name": "[Heiress]",
+			"level": 6,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "selys",
+			"kind": "skill",
+			"name": "[Legacy Whispers: Heartflame Set]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}
