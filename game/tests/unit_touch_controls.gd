@@ -1,5 +1,5 @@
 extends GutTest
-## M20.1 touch controls (ADR 0032): the setting (Auto / On / Off), the pad and
+## M20.1 touch controls (ADR 0032): the setting (Auto / On / Off), the floating stick and
 ## buttons sending input actions, Back on panels, a tap that picks a list item,
 ## and a fight tap that shows the plan before it acts. Headless has no touch
 ## screen, so Auto hides the controls here.
@@ -92,18 +92,79 @@ func test_on_shows_the_pad_and_makes_room_in_the_hud() -> void:
 	assert_eq(m.hud.get_node("Bottom").offset_left, Hud.LOG_LEFT, "the log goes back")
 
 
-func test_a_held_pad_button_walks_and_stops() -> void:
+func test_the_stick_walks_and_stops() -> void:
 	var m := _main()
 	var gs: GameState = _session.gs
 	var start: Vector2i = gs.player.pos()
-	_hold(m, &"move_e", true)
+	m.touch.zone_override = 500.0
+	m.touch.stick_down(0, Vector2(150, 300))
+	m.touch.stick_move(0, Vector2(150 + 40, 300 + 4))
+	Input.flush_buffered_events()
+	assert_eq(m.touch.stick_dir(), Vector2.RIGHT)
 	assert_true(Input.is_action_pressed(&"move_e"))
 	m._process(1.0)
 	assert_eq(gs.player.pos(), start + Vector2i(1, 0), "a step east")
-	_hold(m, &"move_e", false)
+	m.touch.stick_up(0)
+	Input.flush_buffered_events()
 	assert_false(Input.is_action_pressed(&"move_e"))
 	m._process(1.0)
 	assert_eq(gs.player.pos(), start + Vector2i(1, 0), "let go: no more steps")
+
+
+func test_the_stick_starts_anywhere_on_the_left_only() -> void:
+	var m := _main()
+	m.touch.zone_override = 500.0
+	m.touch.stick_down(0, Vector2(700, 300))
+	assert_false(m.touch.stick.active, "the right half does not start it")
+	m.touch.stick_down(0, Vector2(90, 120))
+	assert_true(m.touch.stick.active, "anywhere on the left half")
+	assert_eq(m.touch.stick.origin, Vector2(90, 120), "the stick is where the finger touched")
+	m.touch.stick_down(1, Vector2(200, 200))
+	assert_eq(m.touch.stick.origin, Vector2(90, 120), "a second finger does not move it")
+	m.touch.stick_up(1)
+	assert_true(m.touch.stick.active, "the second finger lifting changes nothing")
+	m.touch.stick_up(0)
+	assert_false(m.touch.stick.active)
+
+
+func test_the_stick_dead_zone_turns_and_follows() -> void:
+	var m := _main()
+	var t: TouchControls = m.touch
+	t.zone_override = 500.0
+	t.stick_down(0, Vector2(100, 300))
+	t.stick_move(0, Vector2(105, 300))
+	assert_eq(t.stick_dir(), Vector2.ZERO, "inside the dead zone")
+	t.stick_move(0, Vector2(100, 300 - 40))
+	assert_eq(t.stick_dir(), Vector2.UP)
+	t.stick_move(0, Vector2(100 + 35, 300 - 34))
+	assert_eq(t.stick_dir(), Vector2.UP, "near the diagonal: no turn")
+	t.stick_move(0, Vector2(100 + 50, 300 - 20))
+	assert_eq(t.stick_dir(), Vector2.RIGHT, "clearly sideways: it turns")
+	t.stick_move(0, Vector2(400, 300))
+	assert_lt(t.stick.origin.distance_to(Vector2(400, 300)), TouchControls.RADIUS + 0.1, "the centre follows")
+	t.stick_up(0)
+	assert_eq(t.stick_dir(), Vector2.ZERO)
+
+
+func test_the_stick_is_off_in_a_fight_turn_and_with_a_panel() -> void:
+	var m := _main()
+	var t: TouchControls = m.touch
+	t.zone_override = 500.0
+	t.sync(true, false, false, false, true)
+	t.stick_down(0, Vector2(100, 300))
+	assert_false(t.stick.active, "a fight turn: a touch is a tap")
+	t.sync(true, true, false, false)
+	t.stick_down(0, Vector2(100, 300))
+	assert_false(t.stick.active, "a panel has the screen")
+	t.sync(true, false, false, false)
+	t.stick_down(0, Vector2(100, 300))
+	t.stick_move(0, Vector2(100, 360))
+	Input.flush_buffered_events()
+	assert_true(Input.is_action_pressed(&"move_s"))
+	t.sync(true, true, false, false)
+	Input.flush_buffered_events()
+	assert_false(Input.is_action_pressed(&"move_s"), "a panel lets go of the stick")
+	assert_false(t.stick.active)
 
 
 func test_a_button_opens_a_panel_and_back_closes_it() -> void:
@@ -121,18 +182,18 @@ func test_a_button_opens_a_panel_and_back_closes_it() -> void:
 
 func test_a_panel_lets_go_of_a_held_pad_button() -> void:
 	var m := _main()
-	_hold(m, &"move_e", true)
+	_hold(m, &"wait", true)
 	m.journal.open(_session.gs, _session.db)
 	m._process(0.0)
 	Input.flush_buffered_events()
-	assert_false(m.touch.is_held(&"move_e"))
-	assert_false(Input.is_action_pressed(&"move_e"), "no walking on after the panel closes")
+	assert_false(m.touch.is_held(&"wait"))
+	assert_false(Input.is_action_pressed(&"wait"), "nothing stays held after the panel opens")
 
 
 func test_buttons_send_their_actions() -> void:
 	var m := _main()
 	for action: StringName in [&"use", &"bag", &"back", &"eat", &"sleep", &"sheet", &"journal", &"log",
-			&"help", &"block", &"throw", &"drop", &"move_n", &"move_s", &"move_w", &"wait"]:
+			&"help", &"block", &"throw", &"drop", &"wait"]:
 		assert_true(m.touch.buttons.has(action), "a button for %s" % action)
 		assert_eq(_button(m, action).focus_mode, Control.FOCUS_NONE, "%s takes no key focus" % action)
 
