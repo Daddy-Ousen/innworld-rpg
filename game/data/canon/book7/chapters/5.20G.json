@@ -1,0 +1,829 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.20G",
+	"order": 51,
+	"events": {
+		"b7.rags_judges_the_goblins_who_attacked_welca": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"quietstab": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"poisonbite": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.pyrite_beats_off_the_mountain_goblins_who_grab_welca"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.chose_redfang_style_punishment",
+					"flooded_waters.factions_split_over_justice"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). What 'Redfang style' means is shown only as the guilty going into the front of the next battle."
+			},
+			"summary": "Redscar wants the guilty buried to the neck, Quietstab wants exile and Poisonbite wants worse. Rags picks a punishment 'Redfang style' that both sides accept. The tribe moves on."
+		},
+		"b7.noears_teaches_lightning_to_the_young": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"noears": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": []
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"noears"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"noears.teaches_lightning_bolt",
+					"rags.cannot_cast_lightning_yet",
+					"rags.misses_pisces_and_a_spellbook"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Noears teaches fourteen adults and eight children to throw lightning from a wagon. Rags tries it and fails, since fire comes easier to her. She wishes she had a spellbook or Pisces to explain it."
+		},
+		"b7.pyrite_talks_with_the_knights_over_lunch": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.told_the_knights_goblins_want_to_live",
+					"flooded_waters.admits_a_counted_revenge_killing",
+					"pyrite.was_goldstone_chieftain_and_never_fought_humans",
+					"pyrite.gave_the_knights_cut_gems",
+					"kerrig.begins_to_doubt_the_hunt"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). The revenge killing matches the Book 6 town raid (4.32 G)."
+			},
+			"summary": "Pyrite sits with the Knights, eats soap and answers plainly. His tribe only robbed caravans, and it killed as many Humans as Humans killed Goblins: it counted. He says Goblins want only to live. He gives away cut gems he keeps as bait. Kerrig starts to fear he has been killing people.",
+			"news": "A Goblin Hob talks peace and magic with captive Knights of the Petal."
+		},
+		"b7.pyrite_chews_a_topaz_and_sinks_the_ground": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.casts_stone_magic_by_chewing_gems",
+					"rags.has_pyrites_ruby",
+					"rags.refuses_peace_with_humans",
+					"rags.wonders_if_gems_hold_magic"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Pyrite asks the Knights what magic is and what it wants. He then chews a topaz and turns the ground to mud with one word. He learned long ago that chewing stones lets him use their magic. Rags takes a ruby from him and tells the Knights there is no peace.",
+			"news": "A Goblin Hob draws magic from a chewed gem."
+		},
+		"b7.rags_divides_the_rose_knights_arms": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_swamp",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"quietstab": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.wields_kerrigs_flame_battleaxe",
+					"redscar.wields_welcas_sword",
+					"quietstab.has_a_rose_knight_shield",
+					"flooded_waters.split_the_rose_knight_armour"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Rags shares the enchanted gear taken from the Rose Knights. Pyrite chooses first and takes the flame battleaxe, Redscar the sword, Quietstab a shield. The two sets of pink armour are split in pieces among the Hobs. The Knights watch in anger."
+		},
+		"b7.redfang_scout_reports_a_human_army_hunting_goblins": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"humans.army_of_eight_hundred_hunts_the_frostfeeder_tribe",
+					"flooded_waters.sees_a_human_army_on_the_road"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "A Redfang scout rides in: eight hundred Human soldiers are on a big road, hunting a Goblin tribe. Rags decides to take them."
+		},
+		"b7.kerrig_begs_rags_to_spare_the_army": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": []
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"kerrig_louis"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.redfang_scout_reports_a_human_army_hunting_goblins"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.refused_kerrigs_plea",
+					"rags.hunts_those_who_hunt_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Kerrig asks Rags to let the army pass. Welca threatens that the Knights will kill them. Rags laughs bitterly: Humans always try. She says they started it and rides out with the tribe."
+		},
+		"b7.flooded_waters_rout_the_army_on_the_road": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"poisonbite": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noears": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.kerrig_begs_rags_to_spare_the_army"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"humans.army_routed_on_the_road",
+					"frostfeeder.saved_by_flooded_waters",
+					"flooded_waters.pike_squares_beat_the_army",
+					"pyrite.killed_the_army_captain",
+					"rags.let_the_routed_soldiers_flee",
+					"flooded_waters.mountain_goblins_who_hurt_welca_cut_to_three"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At twilight the Redfang riders cut up the Human horse and the pike squares break a hollow square of foot soldiers. Pyrite kills the captain with the flame axe. Rags stops the chase. The Frostfeeder Tribe is saved. Only three of the Goblins who attacked Welca live.",
+			"news": "A Goblin tribe breaks a Human army that was hunting another tribe."
+		},
+		"b7.welca_escapes_on_a_stolen_horse": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"welca_caveis": {
+					"prefer": [
+						"welca_caveis"
+					],
+					"fallback_tags": []
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"welca_caveis"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.kerrig_begs_rags_to_spare_the_army"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"welca.escaped_the_goblins",
+					"welca.carries_word_to_bethal",
+					"kerrig.stays_among_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). That she gets away is told by Rags and Kerrig later in the chapter, not shown."
+			},
+			"summary": "While the battle rages, Kerrig sends Welca off on a spare horse to warn Lady Bethal. She promises to return. Kerrig stays to watch the tribe and, he hopes, to change it."
+		},
+		"b7.kerrig_beats_five_hobs_bare_handed": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"kerrig_louis"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.welca_escapes_on_a_stolen_horse"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"kerrig.beat_five_hobs_unarmed",
+					"pyrite.knocked_kerrig_out",
+					"redscar.respects_kerrig",
+					"kerrig.under_heavy_guard"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "Kerrig fights the Redfang guards one at a time with his fists and puts down five Hobs and eight Goblins without killing any. Rags is furious. Pyrite knocks him out. The Redfang warriors respect him for it and keep him under close guard."
+		},
+		"b7.flooded_waters_burn_the_dead_and_salute_in_silence": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "northern_high_road",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redscar": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.flooded_waters_rout_the_army_on_the_road"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.burned_the_human_dead",
+					"flooded_waters.silent_victory_salute"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "The tribe strips the Human dead and burns the bodies so they cannot rise. Rags lights her hands, and the warriors raise their weapons in silence. Kerrig watches, moved and troubled."
+		},
+		"b7.rags_turns_south_toward_liscor": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"pyrite": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"kerrig_louis": {
+					"prefer": [
+						"kerrig_louis"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.heads_south_away_from_the_humans",
+					"flooded_waters.heads_for_liscor",
+					"rags.fears_being_hunted",
+					"rags.feels_the_goblin_lord_near"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030)."
+			},
+			"summary": "At a crossroads Rags chooses the road south and orders a close watch on Kerrig. She says Liscor is not a Human place, so the Humans will not follow. That night she lies awake, feeling the Goblin Lord close and something coming, and thinks of Erin's inn.",
+			"news": "The Flooded Waters Tribe turns south toward Liscor."
+		},
+		"b7.rags_reaches_chieftain_level_20": {
+			"tier": 2,
+			"window": {
+				"earliest": 143,
+				"latest": 143,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b7.rags_turns_south_toward_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.chieftain_level_20",
+					"rags.has_tribe_scavenger_armor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.20G",
+				"confidence": "confirmed",
+				"note": "Day is a guess (ADR 0030). The level-up is the last line of the chapter."
+			},
+			"summary": "Rags reaches [Chieftain] Level 20 and gains the skill [Tribe: Scavenger Armor]."
+		}
+	},
+	"system": [
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Chieftain]",
+			"level": 20,
+			"confidence": "confirmed"
+		},
+		{
+			"who": "rags",
+			"kind": "skill",
+			"name": "[Tribe: Scavenger Armor]",
+			"level": null,
+			"confidence": "confirmed"
+		}
+	]
+}
