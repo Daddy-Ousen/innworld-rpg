@@ -127,3 +127,14 @@ func test_magnolia_estate_joins_the_gate_and_the_hall() -> void:
 		assert_true(_db.maps.is_walkable(pair[0], Vector2i(int(back["arrive"][0]), int(back["arrive"][1]))), "%s back" % [pair])
 	assert_true(_db.maps.is_indoor("magnolia_estate_hall"))
 	assert_false(TravelPrompt.is_long(int(_exit_to("invrisil_gate", "magnolia_estate_grounds")["minutes"])))
+
+
+func test_magnolia_estate_residents_have_posts_on_the_estate_maps() -> void:
+	for id: String in ["magnolia_reinhart", "ressa", "reynold", "reinhart_golem_west", "reinhart_golem_east"]:
+		assert_true(_db.behaviour.npcs.has(id), id)
+		for g: Dictionary in _db.behaviour.npcs[id]["goals"]:
+			var t: Dictionary = g["target"]
+			if t.has("area"):
+				assert_true(str(t["area"]).begins_with("magnolia_estate_"), id)
+				var at := Vector2i(int(t["pos"][0]), int(t["pos"][1]))
+				assert_true(_db.maps.is_walkable(t["area"], at), "%s post %s" % [id, at])
