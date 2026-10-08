@@ -8,8 +8,7 @@
 	"zones": {},
 	"exits": [
 		{"at": [16, 0, 2, 1], "to": "celum_square", "arrive": [15, 18], "minutes": 0, "sign": {"icon": "shield", "text": "Celum"}},
-		{"at": [16, 19, 2, 1], "to": "road_camp", "arrive": [16, 1], "minutes": 600},
-		{"id": "road_to_riverfarm", "at": [0, 10, 1, 2], "to": "riverfarm", "arrive": [1, 11], "minutes": 720, "when_flags": ["world.road_to_riverfarm"]}
+		{"at": [16, 19, 2, 1], "to": "road_camp", "arrive": [16, 1], "minutes": 600}
 	],
 	"objects": [
 		{"id": "gate_brazier", "kind": "brazier", "at": [11, 4], "name": "Guard's brazier", "actions": [], "solid": true, "warm": true},
