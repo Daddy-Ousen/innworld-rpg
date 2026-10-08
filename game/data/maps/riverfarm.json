@@ -4,9 +4,11 @@
 	"name": "Riverfarm",
 	"location": "riverfarm",
 	"confidence": "guess",
-	"note": "Design map (M19.5, ADR 0030). Laken's village in the north of Izril (3.00 E on, 5.09 E - 5.11 E). In the text: a village that grows fast, a meeting hall with a carved-eye throne, houses built at night, trebuchets, a meadow past the new farmland where the banquet of Laken's Day 97 is held, forest around it. Guesses: the layout, every position and the map name. Riverfarm lies 50 - 80 mi south-west of Invrisil, not on the Celum road (docs/WORLD_WIREFRAME.md section 4). It has no exits until an Invrisil map exists; the road will come from the Invrisil side (fixed after M19.5).",
+	"note": "Design map (M19.5, ADR 0030). Laken's village in the north of Izril (3.00 E on, 5.09 E - 5.11 E). In the text: a village that grows fast, a meeting hall with a carved-eye throne, houses built at night, trebuchets, a meadow past the new farmland where the banquet of Laken's Day 97 is held, forest around it. Guesses: the layout, every position and the map name. Riverfarm lies 50 - 80 mi south-west of Invrisil, not on the Celum road (docs/WORLD_WIREFRAME.md section 4). Its one road leads north-east to the Invrisil gate (about 65 miles; time is a guess).",
 	"zones": {},
-	"exits": [],
+	"exits": [
+		{"at": [31, 11, 1, 2], "to": "invrisil_gate", "arrive": [1, 12], "minutes": 900, "sign": {"icon": "none", "text": "Road to Invrisil"}}
+	],
 	"objects": [
 		{
 			"id": "riverfarm_well",

@@ -1,0 +1,41 @@
+{
+	"schema_version": 1,
+	"id": "celum_north_gate",
+	"name": "Outside Celum's north gate",
+	"location": "celum",
+	"confidence": "guess",
+	"note": "Design map (north road). Celum has a gate on the north side too; the layout is a guess. The road north leads to Invrisil, about 340 miles (docs/WORLD_WIREFRAME.md). Travel time is a guess.",
+	"zones": {},
+	"exits": [
+		{"at": [16, 0, 2, 1], "to": "road_to_invrisil", "arrive": [16, 22], "minutes": 1500, "sign": {"icon": "none", "text": "Road to Invrisil"}},
+		{"at": [16, 19, 2, 1], "to": "celum_main_street", "arrive": [15, 1], "minutes": 0, "sign": {"icon": "shield", "text": "Celum"}}
+	],
+	"objects": [
+		{"id": "north_gate_brazier", "kind": "brazier", "at": [13, 14], "name": "Guard's brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "north_gate_milestone", "kind": "milestone", "at": [19, 9], "name": "Road stone", "actions": ["sprint_training"], "solid": true},
+		{"id": "north_gate_notice", "kind": "plaque", "at": [14, 15], "name": "Road notice", "actions": [], "sign": {"icon": "none", "text": "Invrisil"}}
+	],
+	"legend": {"#": "city_wall", ",": "tall_grass", ".": "grass", ":": "dirt_road", "B": "building", "T": "tree", "^": "rock", "_": "cobble", "b": "building_b"},
+	"rows": [
+		"................::..............",
+		"................::..............",
+		"...T............::..............",
+		"................::........T.....",
+		"..........^.....::..............",
+		"................::..............",
+		"........T.......::..............",
+		"................::..............",
+		"................::....^.........",
+		"................::..........T...",
+		"................::..............",
+		"................::..............",
+		".....T..........::..............",
+		"................::......T.......",
+		"................::..............",
+		"................::..............",
+		"............BBB.::bbb...........",
+		"............BBB.::bbb...........",
+		"############BBB#__bbb###########",
+		"############BBB#__bbb###########"
+	]
+}

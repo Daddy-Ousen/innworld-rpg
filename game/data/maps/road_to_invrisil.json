@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"id": "road_to_invrisil",
+	"name": "North road",
+	"location": "road_to_invrisil",
+	"confidence": "guess",
+	"note": "Design map (north road). A camp halfway between Celum (south) and Invrisil (north). The road and the camp are guesses; Celum to Invrisil is about 340 miles (docs/WORLD_WIREFRAME.md, confidence X), shown as one map with a camp.",
+	"zones": {},
+	"camp": true,
+	"exits": [
+		{"at": [16, 0, 2, 1], "to": "invrisil_gate", "arrive": [16, 18], "minutes": 3100, "sign": {"icon": "none", "text": "Road to Invrisil"}},
+		{"at": [16, 23, 2, 1], "to": "celum_north_gate", "arrive": [16, 1], "minutes": 1500, "sign": {"icon": "none", "text": "Road to Celum"}}
+	],
+	"objects": [
+		{"id": "north_campfire", "kind": "campfire", "at": [20, 12], "name": "Campfire", "actions": ["cook_simple_meal", "keep_watch"], "solid": true, "warm": true},
+		{"id": "north_bedroll", "kind": "bedroll", "at": [21, 14], "name": "Bedroll", "actions": [], "sleep": true},
+		{"id": "north_herbs", "kind": "herbs", "at": [12, 7], "name": "Herb patch", "actions": ["gather_herbs"]},
+		{"id": "north_stones", "kind": "stones", "at": [13, 18], "name": "Loose stones", "actions": [], "item": "stone"},
+		{"id": "north_road_milestone", "kind": "milestone", "at": [19, 4], "name": "Road stone", "actions": ["sprint_training"], "solid": true}
+	],
+	"legend": {".": "grass", ",": "tall_grass", ":": "dirt_road", "T": "tree", "O": "boulder"},
+	"rows": [
+		"................::..............",
+		"................::....T.........",
+		"...T............::..............",
+		"................::..............",
+		"................::........T.....",
+		"........O.......::..............",
+		"................::..............",
+		"................::..............",
+		"................::..............",
+		".......T........::..............",
+		"................::..............",
+		"................::.........O....",
+		".........,,.....::..............",
+		"................::..............",
+		"................::..............",
+		"................::.....,,...T...",
+		"................::.....,,.......",
+		"....T...........::..............",
+		"................::..............",
+		"................::..............",
+		"................::.......T......",
+		"..........T.....::..............",
+		"................::..............",
+		"................::.............."
+	]
+}
