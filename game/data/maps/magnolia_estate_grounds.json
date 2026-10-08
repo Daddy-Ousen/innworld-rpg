@@ -1,0 +1,43 @@
+{
+	"schema_version": 1,
+	"id": "magnolia_estate_grounds",
+	"name": "Magnolia's estate grounds",
+	"location": "magnolia_estate",
+	"indoor": false,
+	"confidence": "guess",
+	"note": "Design map. Magnolia Reinhart's warded mansion outside Invrisil (2.37). The text gives no layout or direction; the grounds are a guess. The golems and illusions are not drawn.",
+	"zones": {},
+	"exits": [
+		{"at": [0, 10, 1, 2], "to": "invrisil_gate", "arrive": [30, 12], "minutes": 20, "sign": {"icon": "none", "text": "Road to Invrisil"}},
+		{"at": [15, 5], "to": "magnolia_estate_hall", "arrive": [10, 10], "minutes": 0, "sign": {"icon": "none", "text": "Reinhart estate"}}
+	],
+	"objects": [
+		{"id": "estate_brazier_west", "kind": "brazier", "at": [12, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "estate_brazier_east", "kind": "brazier", "at": [17, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
+		{"id": "estate_bench", "kind": "bench", "at": [20, 8], "name": "Garden bench", "actions": [], "solid": true},
+		{"id": "estate_plaque", "kind": "plaque", "at": [13, 12], "name": "Reinhart estate plaque", "actions": [], "solid": true}
+	],
+	"legend": {".": "grass", "T": "tree", "b": "brick_house_b", "d": "brick_door", "_": "cobble", ":": "dirt_road"},
+	"rows": [
+		".........bbbbbbbbbbbbbb.........",
+		".........bbbbbbbbbbbbbb.........",
+		".......T.bbbbbbbbbbbbbb.........",
+		"..T......bbbbbbbbbbbbbb.........",
+		".........bbbbbbbbbbbbbb...T.....",
+		".........bbbbbbdbbbbbbb.........",
+		"..............__................",
+		"..............__................",
+		".....T........__................",
+		"..............__............T...",
+		"::::::::::::::__................",
+		"::::::::::::::__................",
+		"................................",
+		"................................",
+		".............................T..",
+		"....T...........................",
+		"........................T.......",
+		"................................",
+		"................................",
+		"................................"
+	]
+}
