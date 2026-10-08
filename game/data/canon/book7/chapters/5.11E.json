@@ -1,0 +1,828 @@
+{
+	"schema_version": 1,
+	"book": 7,
+	"chapter": "5.11E",
+	"order": 42,
+	"system": [],
+	"events": {
+		"b7.nobles_ride_to_riverfarm_with_sixty_guards": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"beniar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"bevia_veniford"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"rael_veniford"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chevalier": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spy": {
+					"prefer": [
+						"sacra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.hosts_the_northern_nobles",
+					"durene.wears_a_suit_at_the_banquet"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "The nobles arrive as one group, escorted by sixty armed guards. Laken rides Bismarck, Frostwing on his arm, in long robes with no lace. Durene wears a suit. Lady Bevia Veniford reads him as a true Emperor. Sacra is introduced openly and Wiskeria tenses.",
+			"news": "Thirty northern nobles rode into Riverfarm for the Emperor of Eyes' feast."
+		},
+		"b7.laken_feasts_the_nobles_and_the_spring_court": {
+			"tier": 2,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"bevia_veniford"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fae": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady2": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chevalier": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.held_the_banquet_in_the_meadow"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "likely",
+				"note": "Added scene: the evening of Laken's Day 97 (day 142). Hours are guesses."
+			},
+			"summary": "Dusk falls on the meadow. Laken's guests mingle on their feet with the villagers eating nearby. Braziers burn at the corners and the fae stand at the tree line.",
+			"news": "Laken's banquet in the Riverfarm meadow went on past dusk.",
+			"stage": {
+				"area": "riverfarm",
+				"hours": [
+					18,
+					24
+				],
+				"kind": "scene",
+				"npcs": [
+					{
+						"npc": "laken_godart",
+						"pos": [
+							23,
+							11
+						]
+					},
+					{
+						"npc": "durene",
+						"pos": [
+							24,
+							11
+						]
+					},
+					{
+						"npc": "prost",
+						"pos": [
+							18,
+							13
+						]
+					},
+					{
+						"npc": "wiskeria",
+						"pos": [
+							19,
+							10
+						]
+					},
+					{
+						"npc": "rie",
+						"pos": [
+							20,
+							13
+						]
+					},
+					{
+						"npc": "gamel",
+						"pos": [
+							25,
+							12
+						]
+					},
+					{
+						"npc": "beniar",
+						"pos": [
+							28,
+							13
+						]
+					},
+					{
+						"npc": "bethal",
+						"pos": [
+							26,
+							11
+						]
+					},
+					{
+						"npc": "thomast",
+						"pos": [
+							27,
+							11
+						]
+					},
+					{
+						"npc": "sacra",
+						"pos": [
+							17,
+							14
+						]
+					},
+					{
+						"npc": "bevia_veniford",
+						"pos": [
+							23,
+							13
+						]
+					},
+					{
+						"npc": "rael_veniford",
+						"pos": [
+							27,
+							16
+						]
+					},
+					{
+						"npc": "oswalt",
+						"pos": [
+							21,
+							15
+						]
+					},
+					{
+						"npc": "tourant",
+						"pos": [
+							21,
+							16
+						]
+					},
+					{
+						"npc": "ivolethe",
+						"pos": [
+							29,
+							6
+						]
+					}
+				],
+				"line": "Braziers burn in the meadow and tall fae stand at the edge of the trees. Nobles and villagers eat at the same long tables, and nobody wanders out of the light.",
+				"note": "M19.5: a scene. Hours are guesses. The text ends with the fae gone; the stage keeps them for the evening."
+			},
+			"hooks": [
+				{
+					"id": "player_spoke_with_ivolethe_at_the_meadow_edge",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"riverfarm"
+								],
+								"npc": [
+									"ivolethe"
+								]
+							}
+						}
+					],
+					"days": [
+						142,
+						142
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"riverfarm.earther_heard_ivolethe_is_punished"
+						],
+						"relationship": [
+							{
+								"from": "ivolethe",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human spoke with the frost fae Ivolethe at the edge of Laken's meadow."
+				},
+				{
+					"id": "player_helped_after_the_poisoned_cup",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"riverfarm"
+								],
+								"npc": [
+									"rie",
+									"bethal"
+								]
+							}
+						}
+					],
+					"days": [
+						142,
+						142
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"riverfarm.earther_helped_after_the_poisoned_cup"
+						],
+						"relationship": [
+							{
+								"from": "rie",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "bethal",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human at Laken's banquet spoke with Rie and Lady Bethal after the poisoned cup."
+				}
+			]
+		},
+		"b7.laken_calls_the_spring_court_to_his_feast": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"fae": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"fae.spring_court_came_to_riverfarm",
+					"laken.invited_the_fae_as_his_court",
+					"laken.senses_green_through_the_fae"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken invites his court to feast. Nothing happens, then the voices from his dreams speak and thirty fae step out of the trees. They accept one night in the meadow. Laken warns the nobles to promise nothing and stay put. He senses green for the first time.",
+			"news": "The fae came out of the forest at Riverfarm to Laken's feast."
+		},
+		"b7.laken_tells_bevia_he_wants_no_lands": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"wife": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"bevia_veniford"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bevia.treats_durene_as_a_guest_of_honour",
+					"laken.calls_durene_his_consort",
+					"bevia.becomes_lakens_emissary"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Laken calls Durene his consort and says he loves her for her bluntness. He says the fae are no vassals and that he wants no neighbour's land. He offers to swear on a truth gem and tries to sell crops that grow twenty times faster. Bevia turns sharp and becomes his emissary among the nobles.",
+			"news": "Laken told Lady Bevia Veniford he sought no lands from the northern lords."
+		},
+		"b7.the_fae_turn_wild_and_the_bells_ring": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"rael_veniford"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"youth": {
+					"prefer": [
+						"oswalt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fae": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"oswalt.lost_part_of_an_ear_to_the_fae",
+					"rael.bitten_by_a_fae",
+					"riverfarm.rang_bells_to_break_the_fae_frenzy",
+					"riverfarm.drew_a_salt_circle"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "At night the fae go feral and lure young nobles from the meadow. Oswalt returns bloody, an ear part gone, and Rael is bitten. Laken, Gamel and the servants ring sheep bells and cowbells, and light spells break the frenzy. Gamel heals Oswalt.",
+			"news": "Fae at Riverfarm lured young nobles away and hurt two, until bells drove them back."
+		},
+		"b7.lord_tourant_draws_on_a_fae": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"tourant"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chevalier": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tourant.drew_steel_on_a_fae",
+					"bethal.settled_the_standoff"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Lord Tourant, Oswalt's father, draws on a fae woman, who grips the blade with her bare hand. The fae demand duels with cold iron and starmetal. Lady Bethal says Oswalt chased his own passion and stops the quarrel.",
+			"news": "A northern lord drew his sword on a fae at Riverfarm; Lady Bethal ended it."
+		},
+		"b7.a_poisoned_cup_is_found_at_the_banquet": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"rie"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"fae": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.was_offered_a_poisoned_cup",
+					"riverfarm.poisoner_unknown",
+					"rie.proved_the_poison_with_silver"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Gamel sets two cups of wine down for a moment. A fae slaps one away and calls it treachery under the law of hospitality. Rie's silver fork turns black in the wine. The fae offer a hunt, and Laken calms them. Ivolethe drinks the rest harmlessly and says he has enemies and must live to meet Ryoka.",
+			"news": "A poisoned cup was found at Laken's banquet at Riverfarm."
+		},
+		"b7.the_fae_leave_and_bow_to_the_emperor_of_eyes": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"fae": {
+					"prefer": [
+						"ivolethe"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"fae.spring_court_left_riverfarm",
+					"laken.owes_the_fae_no_debt",
+					"ivolethe.banned_until_ryoka_dies",
+					"laken.is_to_tell_ryoka_ivolethe_lives"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Bethal swears to find the poisoner and says Laken passed. Ivolethe says the fae King forbids meddling here and this feast was one exception. She asks him to tell Ryoka she lives, and says they will not meet again. The fae bow and vanish. Laken owes no debt.",
+			"news": "The fae left Riverfarm after bowing to its Emperor."
+		},
+		"b7.bethal_tells_magnolia_that_laken_passed": {
+			"tier": 1,
+			"window": {
+				"earliest": 142,
+				"latest": 142,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lady": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chevalier": {
+					"prefer": [
+						"thomast"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.is_told_laken_passed",
+					"bethal.suspects_the_poison_was_for_her",
+					"bethal.and_thomast_were_sent_to_duel_laken_if_needed"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.11E",
+				"confidence": "confirmed",
+				"note": "Laken's journal Day 97 = day 142 (his Day + 45, ADR 0028)."
+			},
+			"summary": "Bethal reports to Magnolia by amulet that Laken passed and should be treated as a friend. Thomast says the armoured fae guard was no Human. Bethal privately fears the poison was meant for her. Her orders were to duel Laken if he proved too dangerous.",
+			"news": "Lady Bethal reported to Magnolia Reinhart that Laken passed her test."
+		}
+	}
+}
