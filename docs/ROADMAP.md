@@ -362,7 +362,7 @@ in a fight a tap shows the plan and a second tap acts, M20.0 + M20.1 in one PR.
   Cancel), option Touch controls Auto / On / Off (`user://settings.cfg`, not `GameState`), one tap picks a list item,
   fight tap = plan then act, Bag buttons for X and P, a Back button on the Load list. No save change
 - [ ] The user plays it on a phone (the browser build after the next release) and on a PC with a touch screen
-- [ ] M20.2 Android build (local session: Android SDK, JDK and a keystore on the user's PC); landscape only
+- [x] M20.2 Android build (ADR 0034, 2026-10-08, local): preset `Android`, landscape, debug APK exports and is signed. Open: user installs it on a phone; release keystore; project icon
 - [x] M20.3 UI scale (ADR 0033, 2026-10-05, cloud): Options "Menu size" Auto / 100% / 150% / 200%; Auto is 200%
   on a touch screen under 5 in; the map and the touch pad keep their size; the Journal, Character sheet, Bag and
   text pages fit a small view. No save change

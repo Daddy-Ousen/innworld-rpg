@@ -1,5 +1,12 @@
 # Handoff
 
+## Just done (2026-10-08, local): M20.2 Android build (branch `feat/m20.2-android-build`, from main)
+- Added preset `Android` (`game/export_presets.cfg`), `window/handheld/orientation=6` and ETC2/ASTC import in `game/project.godot`. ADR 0034 has the build and install commands.
+- Debug APK: `export/android/InnworldRPG-debug.apk` (gitignored). Signed with the Godot debug keystore. No phone was plugged in, so no install test.
+- Also done: icon (`game/icon.png`, `tools/build_icon.py`) and a signed release APK `export/android/InnworldRPG-v0.1.2-alpha.apk`. Keystore + password file are in `%USERPROFILE%\.android\` (NOT in git; env vars at export, see ADR 0034). The user must back them up.
+- Next: the user plugs in a phone (USB debugging on) and runs the `adb install -r` line from ADR 0034, then plays. Then: release keystore (user makes it), project icon (needs art), more wiki classes, or Book 8 plan.
+- Gotchas: the export rewrites `.import` files: run `git checkout -- game/assets` after. Stray `game/tests/sim_book7_goblin_road.gd.uid` is untracked (from M19.8, not part of this branch).
+
 ## Just done (2026-10-08, local): M19.9 `sim_canon_book7` (branch `feat/m19.9-sim-canon-book7`, from main after PR 125)
 - `game/tests/sim_canon_book7.gd` (5 tests): Book 7 runs days 130 - 143 with drift 0, 191 events, no kills, stages and order checked. Passes.
 - Next: the user merges the PR; M19 is then done except the play check (rain, flood, door, Book 7 stages). Then pick: M20.2 Android, more wiki classes, or Book 8 plan.
