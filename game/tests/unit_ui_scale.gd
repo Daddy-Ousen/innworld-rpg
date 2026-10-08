@@ -34,6 +34,23 @@ func test_auto_is_big_only_on_a_phone() -> void:
 	assert_eq(UiScale.auto_factor(1080, 0, true), 1.0, "no dpi: 1")
 
 
+func test_mobile_os_is_bigger_and_see_through() -> void:
+	var s := UiScale.new()
+	assert_eq(s.factor(1080, 96, false, true), UiScale.MOBILE, "a phone OS: Auto is MOBILE, any dpi")
+	assert_eq(s.factor(1080, 96, false, false), 1.0, "not mobile: unchanged")
+	s.set_mode("1")
+	assert_eq(s.factor(1080, 96, false, true), 1.0, "a fixed mode still wins")
+	var theme := Theme.new()
+	var box := StyleBoxFlat.new()
+	box.bg_color = Color(0.2, 0.2, 0.2, 0.96)
+	theme.set_stylebox("panel", "PanelContainer", box)
+	UiScale.set_box_alpha(theme, UiScale.MOBILE_ALPHA)
+	UiScale.set_box_alpha(theme, UiScale.MOBILE_ALPHA)
+	assert_almost_eq(box.bg_color.a, 0.96 * UiScale.MOBILE_ALPHA, 0.001, "twice is the same as once")
+	UiScale.set_box_alpha(theme, 1.0)
+	assert_almost_eq(box.bg_color.a, 0.96, 0.001, "1.0 restores the first alpha")
+
+
 func test_modes_and_bad_values() -> void:
 	var s := UiScale.new()
 	assert_eq(s.factor(1080, 400, true), UiScale.BIG, "Auto follows the screen")

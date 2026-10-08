@@ -1,5 +1,12 @@
 # Handoff
 
+## Just done (2026-10-08, local): phone UI bigger + see-through (branch `feat/mobile-ui-bigger`)
+- `game/ui/ui_scale.gd`: `MOBILE` = 2.5 (Auto on Android/iOS/web-on-phone, any dpi), `MOBILE_ALPHA` = 0.78, `set_box_alpha(theme, alpha)`. `game/ui/session.gd` applies both in `apply_ui_scale`. Test: `unit_ui_scale`.
+- Next: the user checks it on the phone. If still small, raise `UiScale.MOBILE`; the interact menu is a fixed 440 x 220 box (no keep_fit), so above about 2.6 it may overflow in portrait.
+- Gotcha: a fixed Options mode (100/150/200 %) still wins over Auto on a phone.
+
+
+
 ## Just done (2026-10-08, local): release v0.1.3-alpha prepared (branch `release/v0.1.3`)
 - Files in `export/`: `InnworldRPG-v0.1.3-alpha-{windows,linux,web}.zip` and `-android.apk`. Next: after the PR merge, tag `v0.1.3-alpha` on main, `git push origin v0.1.3-alpha`, `gh release create` as pre-release with the four files. RULE: every release uploads the apk.
 
