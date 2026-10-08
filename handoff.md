@@ -1,5 +1,10 @@
 # Handoff
 
+## Just done (2026-10-08, local): wiki class tree step 3 (branch `feat/class-tree-step3`)
+- 7 classes + 8 Skills in `game/data/classes.json`, `skills.json` (patched as text, CRLF kept). Test: `unit_class_tree_step3`.
+- User picked three jobs, in this order: (1) this step, (2) Invrisil: Celum NORTH gate (none exists yet; `celum_gate` is the south gate), a road map, Invrisil gate + square, and a south-west road to `riverfarm` (user chose road + city + Riverfarm road). Read `docs/WORLD_WIREFRAME.md` first; plan in plan mode, list files. (3) release keystore + project icon (needs the user).
+- Next: commit, push, open PR (author Daddy-Ousen only), then start the Invrisil plan.
+
 ## Just done (2026-10-08, local): long road confirm + walk scene (branch `feat/long-road-confirm`)
 - `game/ui/travel_prompt.gd` (TravelPrompt, built in code, added to `$SystemLayer` by `main.gd`): question panel (Travel / Stay, Esc = Stay), then a 1.8 s walker-on-a-track scene; `arrived` makes the real step. `main.gd`: `_ask_travel`, `confirm_travel` (false headless), `is_busy` includes `travel.visible`.
 - Rule: exits with `minutes >= TravelPrompt.LONG_MINUTES` (300). Today: Celum gate <-> road camp <-> Liscor gate. Not the wagon rides, not Esthelm (180).
