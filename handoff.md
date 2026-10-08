@@ -7,6 +7,8 @@
 - 2026-10-09: on `main`, pulled (at 1a94073). Findings are now modules M21 – M26 in `docs/ROADMAP.md` "Audit work".
   These ROADMAP / progress / handoff edits are NOT committed yet: commit them on a branch (`docs/audit-modules`) with M21.0.
 - Next: start M21.0 (stray .uid, merged branches), then M22.0 (user picks how a breakthrough is earned).
+- 2026-10-09: PR 138 merged. Each roadmap step M21 – M26 now ends with `[Model · effort]` (branch `docs/roadmap-model-tags`).
+  The user runs Sonnet · medium by default; tell them to switch when a step says Opus or another effort.
 
 ## Just done (2026-10-08, local): Magnolia estate NPCs (branch `feat/magnolia-npcs`)
 - `npc_behaviour.json`: `magnolia_reinhart`, `ressa`, `reynold`, two golems, place `magnolia_estate`; golem records in `canon/book2/npcs.json`. Test: `unit_north_road`.
