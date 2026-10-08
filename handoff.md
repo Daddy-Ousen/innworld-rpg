@@ -1,5 +1,10 @@
 # Handoff
 
+## Just done (2026-10-08, local): Magnolia estate NPCs (branch `feat/magnolia-npcs`)
+- `npc_behaviour.json`: `magnolia_reinhart`, `ressa`, `reynold`, two golems, place `magnolia_estate`; golem records in `canon/book2/npcs.json`. Test: `unit_north_road`.
+- Gotcha: Magnolia is placed at the estate by day for every day: a guess. Canon has her in Celum (Book 1) and on the road. Watch for odd scenes and fix with `when_flags` / `unless_flags`.
+- Next: user picks Book 8 plan or more wiki classes.
+
 ## Just done (2026-10-08, local): Magnolia's estate (branch `feat/magnolia-estate`)
 - Maps `magnolia_estate_grounds`, `magnolia_estate_hall`; east exit on `invrisil_gate`; moods in `audio.json`. Test: `unit_north_road`. No NPCs, no events.
 - Next: user picks Book 8 plan, more wiki classes, or Magnolia/Butler NPCs. Gotcha: patch map JSON as text/bytes (CRLF).

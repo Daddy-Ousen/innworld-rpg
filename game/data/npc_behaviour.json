@@ -6,7 +6,8 @@
 		"wilds": {"floodplains_south": [0, 23], "inn_hill": [31, 0]},
 		"celum": {"celum_square": [31, 9]},
 		"esthelm": {"esthelm_ruins": [1, 4]}, "north_izril": {"riverfarm": [1, 12]},
-		"invrisil": {"invrisil_gate": [16, 3]}
+		"invrisil": {"invrisil_gate": [16, 3]},
+		"magnolia_estate": {"magnolia_estate_grounds": [1, 10]}
 	},
 	"npcs": {
 		"erin_solstice": {
@@ -714,6 +715,51 @@
 				{"goal": "guard_post", "base": 2, "hours": [[6, 20, 1]],
 					"target": {"area": "invrisil_gate", "pos": [14, 4]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "invrisil"}}
+			]
+		},
+		"magnolia_reinhart": {
+			"confidence": "guess",
+			"notes": "Magnolia's estate (2.37, 2.38). Canon puts her in Celum or on the road at other times and the data cannot track that yet, so this is only a guess: she sits in the hall by day.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[10, 20, 1]],
+					"target": {"area": "magnolia_estate_hall", "pos": [10, 5]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
+			]
+		},
+		"ressa": {
+			"confidence": "guess",
+			"notes": "Magnolia's Head Maid (2.37). Resident at the estate by day; hours and spot are guesses.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[6, 22, 1]],
+					"target": {"area": "magnolia_estate_hall", "pos": [12, 3]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
+			]
+		},
+		"reynold": {
+			"confidence": "guess",
+			"notes": "Magnolia's Butler (2.37). Resident at the estate by day; hours and spot are guesses.",
+			"goals": [
+				{"goal": "work", "base": 2, "hours": [[6, 22, 1]],
+					"target": {"area": "magnolia_estate_hall", "pos": [8, 3]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
+			]
+		},
+		"reinhart_golem_west": {
+			"confidence": "guess",
+			"notes": "Golem that guards the estate (2.37). Number and post are guesses. It never leaves its post.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[0, 24, 1]],
+					"target": {"area": "magnolia_estate_grounds", "pos": [13, 6]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
+			]
+		},
+		"reinhart_golem_east": {
+			"confidence": "guess",
+			"notes": "Golem that guards the estate (2.37). Number and post are guesses. It never leaves its post.",
+			"goals": [
+				{"goal": "guard_post", "base": 2, "hours": [[0, 24, 1]],
+					"target": {"area": "magnolia_estate_grounds", "pos": [16, 6]}},
+				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
 			]
 		},
 		"umbral": {

@@ -621,6 +621,30 @@
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "confirmed", "note": "Known only by this title."},
 			"summary": "A ruler of the Walled City of Zeres, hung with gemstones on neck and tail. At the Drake assembly she scorns Zel Shivertail's warnings and orders him to be silent."
+		},
+		"reinhart_golem_west": {
+			"name": "Reinhart estate golem (west)",
+			"race": "Golem",
+			"tags": ["golem", "guard", "house_reinhart", "magnolia_estate"],
+			"faction": "house_reinhart",
+			"home": "magnolia_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "likely", "note": "The text says golems guard the estate. How many, and where they stand, are guesses."},
+			"summary": "One of the golems that guard Magnolia Reinhart's warded estate outside Invrisil."
+		},
+		"reinhart_golem_east": {
+			"name": "Reinhart estate golem (east)",
+			"race": "Golem",
+			"tags": ["golem", "guard", "house_reinhart", "magnolia_estate"],
+			"faction": "house_reinhart",
+			"home": "magnolia_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "likely", "note": "The text says golems guard the estate. How many, and where they stand, are guesses."},
+			"summary": "One of the golems that guard Magnolia Reinhart's warded estate outside Invrisil."
 		}
 	}
 }
