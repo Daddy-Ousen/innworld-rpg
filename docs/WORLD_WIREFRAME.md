@@ -104,12 +104,15 @@ The Great Plains are about a fifth of their old size, and the New Lands roughly 
 6. Draw Wistram only as "an island east of Izril" until the ebook settles it. Keep Drath and the Edge off any playable map.
 7. Mark any new distance with `"confidence"` in data (project rule 9).
 
-## 7. Open questions (need the ebook or the user)
+## 7. Decisions (user, 2026-10-08)
 
-1. Wistram: east of Izril (SynMap) or on the Izril – Baleros route (wiki text)?
-2. Drath: confirm "east / north-east" in 1.03 R.
-3. Is Izril really 8,000 mi tall? The book miles (Celum 88, Invrisil 430, Pallass 400) suggest it is much smaller. Pick a game scale.
-4. Invrisil: keep 430 mi?
-5. Riverfarm is not on any fan map. Its place comes only from the wiki and Book 3 text (SW of Invrisil).
+1. Wistram: draw it only as "an island east of Izril" until the ebook settles it.
+2. Game scale: use the **book miles** (Celum 88, Invrisil 430, Pallass 400). Do not measure the fan maps. Ryoka's 8,000 mi is not used.
+3. Invrisil: 430 mi north of Liscor.
+
+## 8. Still open
+
+1. Drath: confirm "east / north-east" in 1.03 R.
+2. Riverfarm is not on any fan map. Its place comes only from the wiki and Book 3 text (SW of Invrisil).
 
 The wiki is thin on directions. Most Walled City pages say only "in Izril". The fan maps fill that gap, but they are speculation.
