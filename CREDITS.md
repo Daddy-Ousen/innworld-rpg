@@ -70,7 +70,7 @@ is CC-BY-SA, else CC-BY 4.0 like their source.
 
 <!-- build_sprites:begin -->
 Built by `tools/build_sprites.py` from the Universal LPC Spritesheet Character Generator
-(https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator, commit `4963a69795255fb15a934c47f478a8bdcf3668f5`).
+(https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator, commit `58ce1aa479e4df32845a73a5d0afc221c3a893c2`).
 The sheets in `game/assets/characters/` combine these files. Do not edit this block by hand.
 
 - `arms/armour/plate/male` by Michael Whitlock (bigbeargames), Matthew Krohn (makrohn), Johannes Sjölund (wulax), bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
@@ -140,6 +140,9 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `body/tail/lizard` by Nila122, bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/drakes-and-lizardfolk
   - Notes: edited for v3 bases and recolored by bluecarrot16, additional animations added by JaidynReiman
+- `body/wings/pixie` by The Foreman. Licence: OGA-BY 4.0 / CC-BY-SA 4.0.
+  - https://opengameart.org/content/lpc-fairy-wings
+  - Notes: In dedication to my grandmother, Sharon Rowe
 - `cape/solid/bg` by Nila122, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
   - https://opengameart.org/content/lpc-roman-armor
@@ -156,6 +159,12 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `eyes/cyclops` by kirts, JaidynReiman. Licence: CC0.
   - https://opengameart.org/content/cyclops-and-his-eye
   - Notes: original by kirts, repositioned by JaidynReiman
+- `facial/glasses/round` by bluecarrot16, Thane Brimhall (pennomi), laetissima. Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/clothing-facial-features-and-ui-elements
+  - https://opengameart.org/content/lpc-gentleman
+- `facial/glasses/sunglasses` by Michael Whitlock (bigbeargames), Thane Brimhall (pennomi), laetissima. Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-base-character-expressions
+  - https://opengameart.org/content/lpc-expanded-hats-facial-helmets
 - `feet/armour/plate` by Matthew Krohn (makrohn), Johannes Sjölund (wulax). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - Notes: original by wulax, recolors by bigbeargames, edits for v3 base and recolors by bluecarrot16
@@ -177,11 +186,23 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - http://opengameart.org/content/lpc-clothing-updates
   - https://opengameart.org/content/lpc-expanded-socks-shoes
   - Notes: original by wulax, edited for female base by Joe White, edited for v3 base by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+- `hair/balding` by ElizaWy. Licence: OGA-BY 3.0.
+  - https://opengameart.org/content/lpc-hair
+- `hair/bangs_bun` by ElizaWy, bluecarrot16. Licence: CC0.
+  - https://opengameart.org/content/lpc-hair
+  - https://github.com/ElizaWy/LPC/blob/main/Characters/Hair
+  - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+  - Notes: Original by bluecarrot16, animated by ElizaWy.
 - `hair/bob` by ElizaWy, bluecarrot16. Licence: CC0.
   - https://opengameart.org/content/lpc-hair
   - https://github.com/ElizaWy/LPC/blob/main/Characters/Hair
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - Notes: Original by bluecarrot16. Edited and animated by ElizaWy.
+- `hair/buzzcut` by ElizaWy. Licence: OGA-BY 3.0.
+  - https://opengameart.org/content/lpc-hair
+- `hair/curly_short` by ElizaWy. Licence: OGA-BY 3.0.
+  - https://opengameart.org/content/lpc-hair
+  - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
 - `hair/dreadlocks_long` by bluecarrot16. Licence: CC0.
   - https://opengameart.org/content/lpc-hair
 - `hair/high_ponytail` by JaidynReiman, ElizaWy, bluecarrot16. Licence: OGA-BY 3.0.
@@ -190,15 +211,44 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `hair/long` by JaidynReiman, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-expanded-hair
+- `hair/long_center_part` by thecilekli, bluecarrot16. Licence: CC0.
+  - https://opengameart.org/content/lpc-long-straight-hair-with-12-colors
+  - https://opengameart.org/content/lpc-hair
+- `hair/long_messy` by Mandi Paugh, bluecarrot16. Licence: GPL 2.0 / GPL 3.0 / CC-BY 3.0.
+  - https://opengameart.org/content/puck-overland
+  - https://opengameart.org/content/lpc-hair
+  - Notes: (puck)
+- `hair/long_tied` by JaidynReiman, thecilekli, bluecarrot16. Licence: CC0.
+  - https://opengameart.org/content/lpc-long-tied-hair-with-12-colors
+  - https://opengameart.org/content/lpc-hair
+  - https://opengameart.org/content/lpc-expanded-hair
 - `hair/messy1` by JaidynReiman, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-expanded-hair
+- `hair/parted` by JaidynReiman, Joe White, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://github.com/jrconway3/Universal-LPC-spritesheet/commit/46ddcf05a0e43e7aa6ffd47d350eef0eb529ac24
+  - https://opengameart.org/content/lpc-expanded-hair
+  - Notes: down 4 and 5 added by JaidynReiman; recolors by Joe White; original by Manuel Riecke (MrBeast)
 - `hair/plain` by JaidynReiman, Manuel Riecke (MrBeast), Joe White. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/ponytail-and-plain-hairstyles
   - https://opengameart.org/content/lpc-expanded-hair
 - `hair/ponytail` by JaidynReiman, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://opengameart.org/content/lpc-expanded-hair
+- `hair/ponytail2` by JaidynReiman, Manuel Riecke (MrBeast), Joe White. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://opengameart.org/content/ponytail-and-plain-hairstyles
+  - https://opengameart.org/content/lpc-expanded-hair
+- `hair/swoop` by JaidynReiman, Manuel Riecke (MrBeast). Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://opengameart.org/content/lpc-expanded-hair
+- `hair/swoop_side` by JaidynReiman. Licence: OGA-BY 3.0+ / CC-BY 3.0+ / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles
+  - https://github.com/jrconway3/Universal-LPC-spritesheet/commit/46ddcf05a0e43e7aa6ffd47d350eef0eb529ac24
+- `hair/wavy` by JaidynReiman, Nila122. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 2.0 / GPL 3.0.
+  - https://opengameart.org/content/3-hairs-for-lpc
   - https://opengameart.org/content/lpc-expanded-hair
 - `hat/cloth/bandana` by Matthew Krohn (makrohn), JaidynReiman, Marcel van de Steeg (MadMarcel), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0.
   - https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle
@@ -255,6 +305,8 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-revised-elders
   - https://opengameart.org/content/lpc-character-bases
+- `head/heads/human/female_small` by ElizaWy, Stephen Challener (Redshrike). Licence: OGA-BY 3.0 / CC-BY.
+  - Notes: original head by Redshrike, reduced size head by ElizaWy
 - `head/heads/human/male` by bluecarrot16, Benjamin K. Smith (BenCreating), Stephen Challener (Redshrike). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-character-bases
@@ -263,6 +315,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-folk
   - Notes: original head by Redshrike, gaunt version by bluecarrot16
+- `head/heads/human/male_plump` by Stephen Challener (Redshrike), ??. Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+  - https://opengameart.org/content/lpc-folk
+  - Notes: original head by Redshrike, plump version by ??
 - `head/heads/lizard/female` by bluecarrot16, Benjamin K. Smith (BenCreating), Nila122. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/drakes-and-lizardfolk
   - https://opengameart.org/content/lpc-character-bases
@@ -285,6 +341,11 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - https://opengameart.org/content/lpc-skeleton
   - https://opengameart.org/content/lpc-character-bases
+- `head/heads/troll` by bluecarrot16, AntumDeluge, Tuomo Untinen (reemax). Licence: CC-BY 3.0.
+  - https://opengameart.org/content/musclemanogreminotaur
+  - https://opengameart.org/content/trolls-0
+  - https://opengameart.org/content/lpc-folk
+  - Notes: original "Muscleman/Ogre/Minotaur" by Reemax, modified to "Troll" by AntumDeluge, edited to LPC style and converted to modular head by bluecarrot16
 - `head/heads/wolf/child` by bluecarrot16, Sander Frenken (castelonia), Benjamin K. Smith (BenCreating), William.Thompsonj, Stephen Challener (Redshrike). Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-wolf-animation
@@ -345,6 +406,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-shields-pack
 - `torso/aprons/apron` by Nila122. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 2.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-aprons
+- `torso/aprons/overalls` by ElizaWy, bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-revised-character-basics
+  - http://opengameart.org/content/lpc-clothing-updates
+  - Notes: original overalls by ElizaWy, extended to all animation frames, adapted from teen to male base, and edited for v3 bases by bluecarrot16; extended to combat animations by JaidynReiman
 - `torso/armour/leather` by Johannes Sjölund (wulax), bluecarrot16, JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - https://opengameart.org/content/lpc-clothing-updates
@@ -368,6 +433,10 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
 - `torso/chainmail` by Johannes Sjölund (wulax), Napsio (Vitruvian Studio), JaidynReiman. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
   - Notes: minor edits by bluecarrot16, reduced colors by Napsio, adjusted Male colors and Idle/Sit/Emote/Climb/Run by JaidynReiman
+- `torso/clothes/corset` by ElizaWy, Nila122. Licence: OGA-SA 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-clothes-and-hair
+  - https://opengameart.org/content/lpc-7-womens-shirts
+  - Notes: original by Nila122, recolored by ElizaWy
 - `torso/clothes/longsleeve/longsleeve/female` by bluecarrot16, ElizaWy, JaidynReiman, Stephen Challener (Redshrike). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
   - https://opengameart.org/content/lpc-7-womens-shirts
@@ -385,6 +454,8 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - https://opengameart.org/content/lpc-expanded-simple-shirts
   - Notes: original by wulax; tweaks and further recolors by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
+- `torso/clothes/robe` by Luke Mehl. Licence: CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/female-mage-clothing-set
 - `torso/clothes/shirt/child` by Nila122. Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-clothes-for-children
 - `torso/clothes/shortsleeve/tshirt` by ElizaWy, JaidynReiman, Stephen Challener (Redshrike), Johannes Sjölund (wulax). Licence: OGA-BY 3.0.
@@ -393,6 +464,12 @@ The sheets in `game/assets/characters/` combine these files. Do not edit this bl
   - https://opengameart.org/content/lpc-expanded-sit-run-jump-more
   - https://opengameart.org/content/lpc-expanded-simple-shirts
   - Notes: original by ElizaWy; spellcast/thrust/shoot/hurt/male adapted from original by JaidynReiman
+- `torso/clothes/sleeveless/sleeveless/female` by ElizaWy, JaidynReiman, Matthew Krohn (makrohn), Marcel van de Steeg (MadMarcel), Stephen Challener (Redshrike), Johannes Sjölund (wulax). Licence: OGA-BY 3.0 / CC-BY-SA 3.0 / GPL 3.0.
+  - https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle
+  - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+  - https://opengameart.org/content/lpc-7-womens-shirts
+  - http://opengameart.org/content/lpc-clothing-updates
+  - Notes: "pirate shirt" by MadMarcel, edited to all poses by makrohn, edited from tube-top/tanktop to sleeveless by JaidynReiman, cleanup and re-drawing by ElizaWy, edits for v3 bases and further cleanup by bluecarrot16
 - `torso/clothes/vest_open` by bluecarrot16, Thane Brimhall (pennomi), laetissima. Licence: CC-BY-SA 3.0 / GPL 3.0.
   - https://opengameart.org/content/lpc-2-characters
   - https://opengameart.org/content/lpc-gentleman

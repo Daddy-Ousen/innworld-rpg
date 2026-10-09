@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.4 NPC art (branch `feat/m21.4-npc-art`)
+- 35 new looks at the end of `game/data/appearance.json` (all Book 6 – 7 NPCs with a schedule that had none) and their sheets in `game/assets/characters/`. Portraits are cut from the sheets. `unit_art` and `unit_portrait` pass. Most looks are guesses (noted per look). The LPC clone was in the scratchpad (gone later). CREDITS.md was rewritten by the builder.
+- Next: M21.6 play pass (user), then M22.0 (user picks how a breakthrough is earned).
+
 ## Just done (2026-10-09, local): M21.4 full suite (branch `fix/m21.4-red-tests`)
 - Full run: 166 scripts, 6 red. Fixed 4: `sim_player_hooks` (68), `unit_cover` (bones half cover; estate plaque not solid), `unit_sign_art` (plaque sign), `unit_portal` (links form). Still red: `unit_art`, `unit_portrait` (35 NPCs have no sheet, 10 or so no portrait; list in the test output). User chose to make the art (option 2).
 - Next: build the missing character sheets and portraits (needs the LPC clone, about 240 MB: ask the user first).
