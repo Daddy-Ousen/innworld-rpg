@@ -21,7 +21,7 @@ The images use LPC art (CC-BY-SA), so the page must keep the credits link.
 
 ## Short description or tagline
 
-> Live in the world of The Wandering Inn. The books happen around you, unless you change them.
+> Live in pirateaba's Innworld. The books happen around you, unless you change them.
 
 ## Description
 
@@ -30,7 +30,7 @@ open it in a browser, select all, copy, and paste into the editor.
 
 ---
 
-**Innworld RPG** is a free, fan-made RPG set in *The Wandering Inn* by pirateaba.
+**Innworld RPG** is a free, fan-made RPG set in pirateaba's Innworld.
 
 You are an unnamed Earther. You arrive in Innworld at the start of Book 1. The story of the books goes on
 around you, day by day. What you do with your days is up to you.
@@ -81,7 +81,7 @@ Next: Book 7 (The Rains of Liscor).
 ### Policy check (2026-10-09)
 
 Source: https://wanderinginn.com/fanworks-permissions/ . The policy does not name games; when in doubt it says to assume "not allowed".
-We follow: no book text or art, credit given, free, no crowdfunding. Open: it forbids the book titles in marketing material.
+We follow: no book text or art, credit given, free, no crowdfunding. Done 2026-10-09: marketing text now says "pirateaba's Innworld"; the title stays only in the credit line.
 The page text above names the book to say what the work is about. Decide with the author. See `docs/DESIGN.md` §7.
 
 ### Fan work

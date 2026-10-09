@@ -104,7 +104,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] New classes `hunter`, `archer`, `alchemist`, `blacksmith`, `teacher` have no own action (no hunt, shoot, brew, forge, teach). Thin pools: 4 spells, 4 recipes, 5 items.
 - [ ] Cleanup: 36 merged local branches; README counts stale (898 events / 38 maps → 1089 / 50); this file and `handoff.md` are long (archive done items).
 - [ ] Full GUT suite last run at M17.6. Two sims were found red later. One full run (subagent) when the user asks.
-- [ ] Legal: policy read 2026-10-09 (DESIGN §7). Games not named; book titles in marketing are forbidden. User decides: ask pirateaba, or change the page text.
+- [ ] Legal: policy read 2026-10-09 (DESIGN §7). Games not named; book titles in marketing are forbidden. Page text reworded 2026-10-09 (no title in marketing). Asking pirateaba is still optional (user).
 - [ ] About 9 "the user plays …" checks are open (M17, M18, M19 rain, M20 phone, touch stick, phone UI, long road, class objects, north road).
 
 ## Releases (ADR 0029)
