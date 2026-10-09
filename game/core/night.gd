@@ -47,6 +47,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	offered.append_array(ClassSystem.make_offers(gs, db, ClassSystem.KIND_CONSOLIDATION,
 			budget - offered.size()))
 	lines.append_array(progress)
+	var progress_end := lines.size()
 	lines.append_array(hunger)
 	# 2c. The inn (M14.2): the day's takings; the guests go home.
 	lines.append_array(Guests.night(gs, db))
@@ -55,7 +56,13 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	# 5. World director: canon events up to the day before the wake day.
 	var history_before := gs.world.history.size()
 	var news_before := gs.world.news.size()
+	var keys_before := gs.progression.breakthroughs.duplicate()
 	var world := Director.run(gs, db, gs.clock.wake_day(db.rules["clock"], long_sleep) - 1)
+	# 5b. Canon moments (M22): a class given its key in step 5 levels up now.
+	var canon_keys := resolve_canon_keys(gs, db, keys_before)
+	progress.append_array(canon_keys)
+	for i in canon_keys.size():
+		lines.insert(progress_end + i, canon_keys[i])
 	var news: Array[String] = []
 	for n: Dictionary in gs.world.news.slice(news_before):
 		if n["kind"] == Director.NEWS:
@@ -96,7 +103,10 @@ static func close_day(gs: GameState) -> Array[Dictionary]:
 
 
 ## Step 2: feeds the records into classes and pools, then levels up held
-## classes (in the order gained) and rolls a skill for each new level.
+## classes (in the order gained) and rolls a skill for each new level. A class
+## that waits for a capstone first checks today's records for its
+## breakthrough (M22, ADR 0035), so a class that reaches 9 tonight is not
+## checked with today's records.
 static func resolve_xp(gs: GameState, db: DataDb, records: Array[Dictionary]) -> Array[String]:
 	var p := gs.progression
 	var level_rules: Dictionary = db.rules["levels"]
@@ -107,12 +117,42 @@ static func resolve_xp(gs: GameState, db: DataDb, records: Array[Dictionary]) ->
 		ClassSystem.feed(gs, db, r)
 	var lines: Array[String] = []
 	for id: String in p.classes:
-		var name: String = db.classes[id]["name"]
-		for level in Levels.level_up(p, id, level_rules):
-			lines.append("%s reached level %d." % [name, level])
-			var skill := SkillSystem.on_level(gs, db, id, level)
-			if skill != "":
-				lines.append("Skill gained: %s." % db.skills[skill]["name"])
+		var key := Breakthrough.check_records(gs, db, id, records)
+		if key != "":
+			lines.append(key)
+		lines.append_array(level_lines(gs, db, id))
 		if Levels.is_blocked(p, id, level_rules) and not blocked_before[id]:
-			lines.append("%s needs a breakthrough to reach level %d." % [name, p.level_of(id) + 1])
+			lines.append("%s needs a breakthrough to reach level %d." % [db.classes[id]["name"], p.level_of(id) + 1])
+	return lines
+
+
+## Levels the class up as far as its XP goes. Returns a line per level, the
+## Skill it gained, and the breakthrough hint when it reaches the level under
+## a capstone without a key.
+static func level_lines(gs: GameState, db: DataDb, id: String) -> Array[String]:
+	var p := gs.progression
+	var level_rules: Dictionary = db.rules["levels"]
+	var name: String = db.classes[id]["name"]
+	var lines: Array[String] = []
+	for level in Levels.level_up(p, id, level_rules):
+		lines.append("%s reached level %d." % [name, level])
+		var skill := SkillSystem.on_level(gs, db, id, level)
+		if skill != "":
+			lines.append("Skill gained: %s." % db.skills[skill]["name"])
+		if level == p.level_of(id) and Breakthrough.waiting_for(p, id, level_rules) != 0:
+			var hint := Breakthrough.hint(db, id)
+			if hint != "":
+				lines.append(hint)
+	return lines
+
+
+## Step 5b: classes that got a key from a canon moment in step 5 level up the
+## same night. `keys_before` = Progression.breakthroughs before step 5.
+static func resolve_canon_keys(gs: GameState, db: DataDb, keys_before: Array[String]) -> Array[String]:
+	var p := gs.progression
+	var lines: Array[String] = []
+	for id: String in p.classes:
+		if p.breakthroughs.has(id) and not keys_before.has(id):
+			lines.append(Breakthrough.key_line(db, id, p.level_of(id)))
+			lines.append_array(level_lines(gs, db, id))
 	return lines

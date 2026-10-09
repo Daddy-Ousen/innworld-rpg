@@ -48,7 +48,8 @@ ON_FAIL_SIMPLE = {"substitute", "delay", "cancel"}
 SUMMARY_MAX = 300
 NEWS_MAX = 200
 OUTCOMES = {"success", "partial", "fail"}
-HOOK_THEN = {"cancel", "change"}
+HOOK_THEN = {"cancel", "change", "boon"}  # boon: M22, ADR 0035
+HOOK_FX = {"change", "boon"}  # results that carry effects
 LOG_DAYS = 7  # the action log keeps this many days (rules xp.novelty.window_days)
 COPY_RUN = 7  # words; a shared run this long counts as copied text
 PLAYER = "player"  # relationship id of the player (a hook's effects may name it as "to")
@@ -360,9 +361,13 @@ def check_wave(r: Report, where: str, w) -> None:
         _str(r, f"{where}.line", w["line"], NEWS_MAX)
 
 
-def check_effects(r: Report, where: str, fx) -> None:
-    if not _keys(r, where, fx, set(), {"set_flags", "clear_flags", "kill", "revive", "relationship"}):
+def check_effects(r: Report, where: str, fx, hook: bool = False) -> None:
+    """Event or hook effects. `breakthrough` (M22) is allowed only in hook effects."""
+    keys = {"set_flags", "clear_flags", "kill", "revive", "relationship"} | ({"breakthrough"} if hook else set())
+    if not _keys(r, where, fx, set(), keys):
         return
+    if "breakthrough" in fx:
+        check_breakthrough(r, f"{where}.breakthrough", fx["breakthrough"])
     for k in ("set_flags", "clear_flags"):
         if k in fx:
             _str_list(r, f"{where}.{k}", fx[k], RE_FLAG)
@@ -380,6 +385,18 @@ def check_effects(r: Report, where: str, fx) -> None:
                     r.err(f"{rw}.{k}", "must be an npc id")
             if not (_int(rel["delta"]) and rel["delta"] != 0):
                 r.err(f"{rw}.delta", "must be a non-zero int")
+
+
+def check_breakthrough(r: Report, where: str, b) -> None:
+    """{"class": id} or {"tags": {tag: weight > 0}}. Class and tag ids are checked by the game (DataDb)."""
+    if not (isinstance(b, dict) and len(b) == 1 and ("class" in b or "tags" in b)):
+        r.err(where, 'must be {"class": id} or {"tags": {tag: weight}}')
+    elif "class" in b:
+        if not (isinstance(b["class"], str) and RE_ID.match(b["class"])):
+            r.err(f"{where}.class", "must be a class id")
+    elif not (isinstance(b["tags"], dict) and b["tags"]
+              and all(isinstance(k, str) and isinstance(v, (int, float)) and v > 0 for k, v in b["tags"].items())):
+        r.err(f"{where}.tags", "must be a non-empty {tag: weight > 0}")
 
 
 def _scalar(v) -> bool:
@@ -435,14 +452,14 @@ def check_hooks(r: Report, where: str, hooks, window) -> None:
             r.warn(hw, "days start after the event's window; the hook only matches if the event is delayed")
         then = h["then"]
         if not (isinstance(then, str) and (then in HOOK_THEN or then.startswith("mutate:"))):
-            r.err(f"{hw}.then", "must be cancel | change | mutate:<event id>")
-        elif then == "change":
+            r.err(f"{hw}.then", "must be cancel | change | boon | mutate:<event id>")
+        elif then in HOOK_FX:
             if "effects" in h:
-                check_effects(r, f"{hw}.effects", h["effects"])
+                check_effects(r, f"{hw}.effects", h["effects"], hook=True)
             else:
-                r.err(hw, "'change' needs effects")
+                r.err(hw, f"'{then}' needs effects")
         elif "effects" in h:
-            r.err(hw, "effects only with 'change'")
+            r.err(hw, "effects only with 'change' or 'boon'")
         if "news" in h:
             _str(r, f"{hw}.news", h["news"], NEWS_MAX)
 

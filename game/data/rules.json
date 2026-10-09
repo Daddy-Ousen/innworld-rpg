@@ -18,7 +18,14 @@
 		"novelty": {"window_days": 7, "half_life_days": 2.0, "k": 0.35, "floor": 0.1, "first_time_bonus": 1.5},
 		"conviction": {"match_mult": 1.25}
 	},
-	"levels": {"base_xp": 40, "growth": 1.25, "late_from": 10, "late_growth": 1.12, "total_cap": 100, "capstones": [10, 20, 30]},
+	"levels": {"base_xp": 40, "growth": 1.25, "late_from": 10, "late_growth": 1.12, "total_cap": 100, "capstones": [10, 20, 30],
+		"breakthrough": {
+			"min_match": 0.5,
+			"bars": {"risk": 0.6, "duress": 1.8, "window": 2.0},
+			"need": {"10": 1, "20": 2, "30": 3},
+			"hint": "Something must still test you as %s."
+		}
+	},
 	"offers": {"max_per_night": 2},
 	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
 	"director": {

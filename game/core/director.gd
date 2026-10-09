@@ -2,7 +2,8 @@
 ## events that are due, and patches the story when their conditions fail:
 ## substitute, delay, mutate, cancel, then propagation to dependent events.
 ## Player hooks (M6.4, ADR 0011): what the player did (the action log) can
-## cancel, mutate or change a due event. Events and hooks with `news` add
+## cancel, mutate or change a due event. A "boon" hook (M22, ADR 0035) keeps
+## the event canon (no drift) and only adds its effects, such as a breakthrough. Events and hooks with `news` add
 ## local news; T1 rumors are news too (gs.world.news).
 ## Pure functions over GameState + DataDb. No randomness: every choice is
 ## ordered by data and id.
@@ -158,12 +159,14 @@ static func did(gs: GameState, hook: Dictionary, day: int) -> bool:
 		if rday < from or rday > to:
 			continue
 		for m: Dictionary in hook["did"]:
-			if _record_matches(r, m):
+			if record_matches(r, m):
 				return true
 	return false
 
 
-static func _record_matches(r: Dictionary, m: Dictionary) -> bool:
+## True if the record matches a hook "did" entry (also a class trial, M22):
+## {"action": [ids], "outcome"?: [..], "context"?: {key: value or [values]}}.
+static func record_matches(r: Dictionary, m: Dictionary) -> bool:
 	if not (m["action"] as Array).has(r["action_id"]):
 		return false
 	if m.has("outcome") and not (m["outcome"] as Array).has(r["outcome"]):
@@ -235,7 +238,8 @@ static func _player_hook(gs: GameState, db: DataDb, id: String, day: int,
 		lines: Array[String]) -> bool:
 	var ev: Dictionary = db.canon.events[id]
 	for hook: Dictionary in ev.get("hooks", []):
-		if hook["then"] == CanonDb.HOOK_CHANGE or not did(gs, hook, day):
+		if hook["then"] == CanonDb.HOOK_CHANGE or hook["then"] == CanonDb.HOOK_BOON \
+				or not did(gs, hook, day):
 			continue
 		var by := {"by": BY_PLAYER, "hook": hook["id"]}
 		var reason := "the player: %s" % hook["id"]
@@ -302,19 +306,32 @@ static func _substitute(gs: GameState, db: DataDb, ev: Dictionary, check: Dictio
 
 
 ## Runs the event. A matching "change" hook adds its effects (outcome
-## changed), and its news replaces the event's news.
+## changed), and its news replaces the event's news. Every matching "boon"
+## hook adds its effects too, but the outcome stays (history "boons": ids).
 static func _fire(gs: GameState, db: DataDb, id: String, day: int, outcome: String,
 		roles: Dictionary, lines: Array[String]) -> void:
 	var ev: Dictionary = db.canon.events[id]
 	var hook := matching_hook(gs, ev, day, [CanonDb.HOOK_CHANGE])
-	if hook.is_empty():
-		_close(gs, db, id, day, outcome, roles, "", "")
-	else:
-		_close(gs, db, id, day, CHANGED, roles, "", "", {"by": BY_PLAYER, "hook": hook["id"]})
-	_apply_effects(gs, ev["effects"], ev, roles)
+	var boons: Array[Dictionary] = []
+	for h: Dictionary in ev.get("hooks", []):
+		if h["then"] == CanonDb.HOOK_BOON and did(gs, h, day):
+			boons.append(h)
+	var extra := {}
 	if not hook.is_empty():
-		_apply_effects(gs, hook["effects"], ev, roles)
-	_add_news(gs, day, id, NEWS, hook.get("news", ev.get("news", "")))
+		outcome = CHANGED
+		extra = {"by": BY_PLAYER, "hook": hook["id"]}
+	if not boons.is_empty():
+		extra["boons"] = boons.map(func(h: Dictionary) -> String: return h["id"])
+	_close(gs, db, id, day, outcome, roles, "", "", extra)
+	_apply_effects(gs, db, ev["effects"], ev, roles)
+	var news: String = ev.get("news", "")
+	for h in boons:
+		_apply_effects(gs, db, h.get("effects", {}), ev, roles)
+		news = h.get("news", news)
+	if not hook.is_empty():
+		_apply_effects(gs, db, hook["effects"], ev, roles)
+		news = hook.get("news", news)
+	_add_news(gs, day, id, NEWS, news)
 	if int(ev["tier"]) == 1 and ev.has("rumor"):
 		lines.append("Rumor: %s" % ev["rumor"])
 		_add_news(gs, day, id, RUMOR, ev["rumor"])
@@ -328,8 +345,11 @@ static func _add_news(gs: GameState, day: int, id: String, kind: String, text: S
 ## Effects on flags, NPCs and relationships. kill runs before revive (M7.4:
 ## an NPC brought back to life). An NPC id in kill/revive/relationship
 ## that a role replaced (substitute, or a later prefer) means the replacement.
-static func _apply_effects(gs: GameState, fx: Dictionary, ev: Dictionary,
+## `breakthrough` (hook effects only, M22) gives a class its capstone key.
+static func _apply_effects(gs: GameState, db: DataDb, fx: Dictionary, ev: Dictionary,
 		roles: Dictionary) -> void:
+	if fx.has("breakthrough"):
+		Breakthrough.grant(gs, db, fx["breakthrough"])
 	for f: String in fx.get("set_flags", []):
 		gs.flags[f] = true
 	for f: String in fx.get("clear_flags", []):

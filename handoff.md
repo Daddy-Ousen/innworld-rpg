@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-10-10, local): M22.1 breakthrough engine (branch `feat/m22.1-breakthrough-engine`)
+- New `game/core/breakthrough.gd` (sources 1 – 3, hint, key line, `validate`). `Night.resolve_xp` checks a waiting
+  class before `level_up`; new `Night.level_lines` and `Night.resolve_canon_keys` (step 5b). `Director._fire` runs
+  `boon` hooks (outcome stays, history `"boons"`, no `"by"`); `_player_hook` skips them. `_record_matches` is now
+  public `Director.record_matches` (trials use it). `_apply_effects` takes `db` now.
+- `rules.json` `levels.breakthrough` added (ADR numbers). No class has a `breakthrough` block yet; no canon hook
+  uses `boon` yet. That is M22.2.
+- Tests run (all pass): `unit_breakthrough` (new, 16), `unit_levels`, `unit_class_system`, `unit_night`,
+  `unit_director`, `unit_canon_db`, `unit_player_hooks`, `unit_data_db`, `sim_canon_book1`; Python 107 OK;
+  validator 0 errors. Full suite not run.
+- Next: M22.2 data **[Sonnet · medium]**: trials + hints in `game/data/classes.json` for inn, cook, warrior, runner,
+  mage, scout, priest, crafter; a few `boon` hooks (Books 1 – 3). Run `unit_breakthrough` (real-data test),
+  `unit_data_db`, the validator, Python tests and `sim_canon_book1..3`.
+- Gotchas: the Python validator only checks the `breakthrough` shape; class and tag ids are checked by
+  `Breakthrough.validate` (in `DataDb.load_dir`). Toy capstone is 3, so toy classes wait at level 2.
+  A heredoc `\` + newline lost the backslash in a Python patch: use the Edit tool for GDScript line breaks.
+
 ## Just done (2026-10-09, local): M22.0 breakthrough design (branch `docs/m22.0-breakthrough-design`)
 - ADR `docs/adr/0035-breakthroughs.md`. User picks: all three sources (hard moment, class trial, canon `boon` hook),
   a moment counts only at level 9 / 19 / 29 (key kept until XP fills), a vague hint line. Docs only, no tests run.

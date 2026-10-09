@@ -9,6 +9,8 @@ const SCHEMA_VERSION := 1
 ## Hook results (besides "mutate:<id>").
 const HOOK_CANCEL := "cancel"
 const HOOK_CHANGE := "change"
+## M22 (ADR 0035): the event runs as canon (no drift); only the hook's effects apply.
+const HOOK_BOON := "boon"
 const NO_RANK := [0, 0, 0]
 
 var npcs: Dictionary = {}
@@ -150,6 +152,8 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 	_check_npcs(where + " requires.alive", ev["requires"].get("alive", []))
 	_check_npcs(where + " effects.kill", ev["effects"].get("kill", []))
 	_check_npcs(where + " effects.revive", ev["effects"].get("revive", []))
+	if ev["effects"].has("breakthrough"):
+		errors.append("%s: 'breakthrough' is only allowed in hook effects." % where)
 	var hook_ids := {}
 	for hook: Dictionary in ev.get("hooks", []):
 		_validate_hook(where, hook, hook_ids)
@@ -267,7 +271,8 @@ func _validate_wave(ww: String, w: Variant) -> void:
 
 ## A player hook (M6.4, ADR 0011): {"id", "did": [{"action": [ids],
 ## "outcome"?: [..], "context"?: {key: value or [values]}}], "days": [from, to],
-## "then": "cancel" | "change" | "mutate:<id>", "effects"? (change only), "news"?}.
+## "then": "cancel" | "change" | "boon" | "mutate:<id>", "effects"? (change and
+## boon only; both need it), "news"?}. Breakthrough effects: Breakthrough.validate.
 func _validate_hook(where: String, hook: Dictionary, seen: Dictionary) -> void:
 	for field: String in ["id", "did", "days", "then"]:
 		if not hook.has(field):
@@ -292,13 +297,13 @@ func _validate_hook(where: String, hook: Dictionary, seen: Dictionary) -> void:
 			errors.append("%s: mutate target '%s' is unknown." % [hw, target])
 		else:
 			alt_only[target] = true
-	elif then == HOOK_CHANGE:
+	elif then == HOOK_CHANGE or then == HOOK_BOON:
 		if not hook.has("effects"):
-			errors.append("%s: 'change' needs effects." % hw)
+			errors.append("%s: '%s' needs effects." % [hw, then])
 		_check_npcs(hw + " effects.kill", hook.get("effects", {}).get("kill", []))
 		_check_npcs(hw + " effects.revive", hook.get("effects", {}).get("revive", []))
 	elif then != HOOK_CANCEL:
-		errors.append("%s: 'then' must be cancel, change or mutate:<id>." % hw)
+		errors.append("%s: 'then' must be cancel, change, boon or mutate:<id>." % hw)
 
 
 func _check_npcs(where: String, ids: Array) -> void:
