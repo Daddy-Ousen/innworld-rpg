@@ -96,14 +96,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
 - [x] Each M21 – M26 step has a model tag `[Model · effort]` (2026-10-09, branch `docs/roadmap-model-tags`). Default Sonnet · medium.
 - [x] `docs/ROADMAP.md` shows open work first and done milestones at the bottom, newest first (2026-10-09, branch `docs/roadmap-open-first`).
-- [ ] M21 Housekeeping (M21.0 – M21.3 and M21.5 done 2026-10-09) · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
+- [ ] M21 Housekeeping (M21.0 – M21.5 done (M21.6 play pass open) 2026-10-09) · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
 - Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
 - [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data). Needs a design pick (user).
 - [ ] Divergence is thin: Books 2–7 have 0 `substitute` / `delay` / `mutate` fallbacks (all 838 events are `cancel` only); 67 of 1089 events have hooks (Book 2: 3 of 207).
 - [x] Commit 565bc9b on `feat/class-tree-wiki`: not merged; redo in M22.3 (M21.1).
 - [ ] New classes `hunter`, `archer`, `alchemist`, `blacksmith`, `teacher` have no own action (no hunt, shoot, brew, forge, teach). Thin pools: 4 spells, 4 recipes, 5 items.
 - [ ] Cleanup: 36 merged local branches; README counts stale (898 events / 38 maps → 1089 / 50); this file and `handoff.md` are long (archive done items).
-- [ ] Full GUT suite last run at M17.6. Two sims were found red later. One full run (subagent) when the user asks.
+- [x] Full GUT suite run 2026-10-09 (M21.4): 166 scripts, 6 red, all fixed. Not re-run in full after the fixes.
 - [ ] Legal: policy read 2026-10-09 (DESIGN §7). Games not named; book titles in marketing are forbidden. Page text reworded 2026-10-09 (no title in marketing). Asking pirateaba is still optional (user).
 - [ ] About 9 "the user plays …" checks are open (M17, M18, M19 rain, M20 phone, touch stick, phone UI, long road, class objects, north road).
 

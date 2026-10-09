@@ -2935,6 +2935,994 @@
 			],
 			"confidence": "likely",
 			"note": "A painted Soldier: four arms, spade hands, a purple ring round both eyes and a smile drawn across his mandibles (4.40 L, 4.41 L). The mandibles are drawn purple; the eye rings are not drawn. Otherwise the antinium_soldier look."
+		},
+		"anith": {
+			"body": "male",
+			"skin": "fur_tan",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_tan"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "blue"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "guess",
+			"note": "Jackal Beastkin [Mage] of Vuliel Drae (5.x). Drawn as a tan wolf head and a blue robe; the jackal look and the colours are guesses."
+		},
+		"beniar": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Brash leader of the Windfrozen Riders at Riverfarm. Looks are guesses."
+		},
+		"bethal": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long_tied",
+					"color": "dark_gray"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "black"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Fierce northern lady, an old friend of Magnolia. Looks are guesses."
+		},
+		"bevia_veniford": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female_elderly"
+				},
+				{
+					"part": "hair_bangs_bun",
+					"color": "gray"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "navy"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "The iron aunt of the Veniford family. Looks are guesses."
+		},
+		"dasha": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female_small"
+				},
+				{
+					"part": "hair_ponytail",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_chainmail",
+					"color": "iron"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "guess",
+			"note": "Part-Dwarf axe fighter of Vuliel Drae. Looks are guesses."
+		},
+		"durene": {
+			"body": "female",
+			"skin": "pale_green",
+			"parts": [
+				{
+					"part": "heads_troll"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "brown"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Huge, gentle half-Troll girl of Riverfarm. Troll head with pale green skin; the size is not drawn. Colours are guesses."
+		},
+		"embria_grasstongue": {
+			"body": "female",
+			"skin": "all.lpcr.fern",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young Drake Wing Commander of the 4th Company. Scale colour is a guess."
+		},
+		"gamel": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Young man of Riverfarm who follows Laken. Looks are guesses."
+		},
+		"insill": {
+			"body": "male",
+			"skin": "black",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "likely",
+			"note": "Black-scaled Drake [Rogue] of Vuliel Drae. Black scales are in the text; the rest is a guess."
+		},
+		"ivolethe": {
+			"body": "female",
+			"skin": "all.lpcr.azure",
+			"parts": [
+				{
+					"part": "heads_human_female_small"
+				},
+				{
+					"part": "hair_long",
+					"color": "white"
+				},
+				{
+					"part": "torso_clothes_sleeveless",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "white"
+				},
+				{
+					"part": "wings_pixie_transparent",
+					"color": "white"
+				}
+			],
+			"confidence": "guess",
+			"note": "Frost Faerie of the Winter Court. Pale blue skin, white hair and thin wings are guesses."
+		},
+		"jelaqua": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long_messy",
+					"color": "red"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Selphid in a dead Human woman's body, leader of the Halfseekers. The body is the Human's; looks are guesses."
+		},
+		"laken_godart": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "black"
+				},
+				{
+					"part": "facial_glasses_sunglasses",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "gray"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Blind young Earther, Emperor of Riverfarm. Dark glasses show the blindness; clothes are a guess."
+		},
+		"larr": {
+			"body": "male",
+			"skin": "fur_gold",
+			"parts": [
+				{
+					"part": "heads_wolf_male"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_gold"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "forest"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_ranged_bow_great",
+					"color": "medium"
+				}
+			],
+			"confidence": "guess",
+			"note": "Gnoll archer of Vuliel Drae. Looks are guesses."
+		},
+		"magnolia_reinhart": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_wavy",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "rose"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "rose"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "likely",
+			"note": "Noble of northern Izril who dresses in loud pink (canon). Hair is a guess."
+		},
+		"merec": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male_plump"
+				},
+				{
+					"part": "hair_balding",
+					"color": "chestnut"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Merchants' Guild [Merchant] of Invrisil. Looks are guesses."
+		},
+		"moore": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male_plump"
+				},
+				{
+					"part": "hair_buzzcut",
+					"color": "light_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "brown"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "guess",
+			"note": "Huge, gentle part-Giant mage of the Halfseekers. The size is not drawn. Looks are guesses."
+		},
+		"ocelos": {
+			"body": "male",
+			"skin": "dark_green",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Drake army officer. Looks are guesses."
+		},
+		"oswalt": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_swoop",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "red"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Careless young lord. Looks are guesses."
+		},
+		"pekona": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_ponytail2",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_corset",
+					"color": "red"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "[Blade Dancer] of Vuliel Drae. Looks are guesses."
+		},
+		"prost": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_balding",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "tan"
+				},
+				{
+					"part": "torso_aprons_overalls",
+					"color": "brown"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "Riverfarm farmer. Looks are guesses."
+		},
+		"rael_veniford": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_swoop_side",
+					"color": "blonde"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "blue"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Proud young noble of the Veniford family. Looks are guesses."
+		},
+		"raisha": {
+			"body": "female",
+			"skin": "fur_brown",
+			"parts": [
+				{
+					"part": "heads_wolf_female"
+				},
+				{
+					"part": "tail_wolf_fluffy",
+					"color": "fur_brown"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "brown"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Gnoll [Guardswoman] of Invrisil's gate. Looks are guesses."
+		},
+		"reinhart_golem_east": {
+			"body": "male",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "iron"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				},
+				{
+					"part": "legs_armour",
+					"color": "iron"
+				},
+				{
+					"part": "feet_armour",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Golem guarding Magnolia's estate. Drawn as a grey figure in iron plate; the real look is not in the text."
+		},
+		"reinhart_golem_west": {
+			"body": "male",
+			"skin": "fur_grey",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "torso_armour_plate",
+					"color": "iron"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				},
+				{
+					"part": "legs_armour",
+					"color": "iron"
+				},
+				{
+					"part": "feet_armour",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Golem guarding Magnolia's estate. Drawn as a grey figure in iron plate; the real look is not in the text."
+		},
+		"ressa": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_bangs_bun",
+					"color": "black"
+				},
+				{
+					"part": "facial_glasses_round",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "black"
+				},
+				{
+					"part": "torso_aprons_apron",
+					"color": "white"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "likely",
+			"note": "Magnolia's [Head Maid] with severe spectacles (canon). Hair and colours are guesses."
+		},
+		"reynold": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_parted",
+					"color": "gray"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "black"
+				},
+				{
+					"part": "legs_pants",
+					"color": "black"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "Magnolia's Butler. Looks are guesses."
+		},
+		"rie": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long_center_part",
+					"color": "navy"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "lavender"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "lavender"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "[Lady] of Invrisil. Looks are guesses."
+		},
+		"sacra": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_ponytail",
+					"color": "black"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "guess",
+			"note": "Magnolia's agent (Celestial Trackers). Looks are guesses."
+		},
+		"seborn": {
+			"body": "male",
+			"skin": "olive",
+			"parts": [
+				{
+					"part": "heads_human_male_gaunt"
+				},
+				{
+					"part": "hair_messy1",
+					"color": "gray"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_dagger",
+					"color": "dagger"
+				}
+			],
+			"confidence": "guess",
+			"note": "Drowned Man [Rogue] of the Halfseekers: looks Human until he opens his mouth (canon). Pale olive skin is a guess."
+		},
+		"tekshia": {
+			"body": "female",
+			"skin": "lavender",
+			"parts": [
+				{
+					"part": "heads_lizard_female"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "gray"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "Elderly Drake Guildmistress with dusky purple scales (canon) and a spear. Clothes are guesses."
+		},
+		"thomast": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_plain",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "navy"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_sword_arming",
+					"color": "steel"
+				}
+			],
+			"confidence": "guess",
+			"note": "Quiet noble swordsman. Looks are guesses."
+		},
+		"tourant": {
+			"body": "male",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_curly_short",
+					"color": "sandy"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "purple"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "A noble at Magnolia's gathering. Looks are guesses."
+		},
+		"venim": {
+			"body": "male",
+			"skin": "all.lpcr.azure",
+			"parts": [
+				{
+					"part": "heads_lizard_male"
+				},
+				{
+					"part": "tail_lizard"
+				},
+				{
+					"part": "torso_armour_leather"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_polearm_spear",
+					"color": "iron"
+				}
+			],
+			"confidence": "guess",
+			"note": "Pallass Watch Captain. Looks are guesses."
+		},
+		"wiskeria": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_robe",
+					"color": "purple"
+				},
+				{
+					"part": "legs_skirts_plain",
+					"color": "black"
+				},
+				{
+					"part": "feet_boots_basic",
+					"color": "black"
+				},
+				{
+					"part": "weapon_magic_simple",
+					"color": "simple"
+				}
+			],
+			"confidence": "guess",
+			"note": "Witch of the Celestial Trackers, Laken's General. Looks are guesses."
+		},
+		"yellow_splatters": {
+			"body": "male",
+			"skin": "all.lpcr.black",
+			"parts": [
+				{
+					"part": "innworld_extra_arms"
+				},
+				{
+					"part": "heads_alien"
+				},
+				{
+					"part": "innworld_antennae"
+				},
+				{
+					"part": "innworld_mandibles"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				}
+			],
+			"confidence": "likely",
+			"note": "One of Pawn's painted Soldiers, marked with yellow paint. Drawn as a plain Soldier; the paint is not drawn."
 		}
 	}
 }

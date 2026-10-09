@@ -17,7 +17,7 @@ Small and fast. No game change.
 - [x] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): decision 2026-10-09 = not merged now; redo in M22.3 after breakthroughs exist. The branch stays as the source (`git show 565bc9b`) **[Sonnet · medium]**
 - [x] M21.2 Docs (done 2026-10-09; gotchas not deduped, only older entries archived): README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
 - [x] M21.3 Disk (done 2026-10-09, user said start; `export/` 2.8 GB to under 1 GB, v0.1.3 files kept): delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
-- [ ] M21.4 Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
+- [x] M21.4 (done 2026-10-09: 6 red found; 4 fixed in PR 147, 2 fixed by making 35 NPC sheets) Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
 - [x] M21.5 Legal (done 2026-10-09; open: ask pirateaba, user): read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
 - [ ] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]**
 **Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
