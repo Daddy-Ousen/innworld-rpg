@@ -25,58 +25,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] M17 — Tactical combat, XCOM-style. M17.0–M17.8 merged ([PR #79](https://github.com/Daddy-Ousen/innworld-rpg/pull/79) … [PR #87](https://github.com/Daddy-Ousen/innworld-rpg/pull/87), last merge commit a7a5e37). Detail in the archive and ADR 0027.
   Tags `m17.0-done` … `m17.8-done` and `m17-done` are on GitHub (checked 2026-10-01).
   - [ ] The user plays fights with Skills, spells and cover (`godot --path game`). Needs the user at home.
-- [ ] M18 — Book 6 (The General of Izril). Plan: ADR 0028, steps M18.0 – M18.7 in `docs/ROADMAP.md`. Text in the private repo.
-  - [x] M18.P plan (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): six reading agents (summaries only), ADR 0028, roadmap steps.
-    User answers: chapter `order` number (M18.0 engine step), maps Wirclaw's village + crypt ossuary + inn basement, Esthelm attack as a
-    night wave stage. Laken's calendar (changed the same day): game day = his journal day + 45 in every book, no squeeze; tying his
-    first snow to Liscor's winter (day 42) breaks Book 4 and Zel's death (ADR 0028 "Laken's calendar"). Book 6 Liscor days move to
-    115 – 130 (Zel dies on 130). PR waits for the user to merge (merging = plan approved).
-  - [x] M18.0 canon timing (branch `claude/kind-feynman-y4x1mm`, 2026-10-01, cloud): optional chapter key `order` in
-    `CanonDb` and the validator (same day: book, chapter order, place in the file; Books 1 – 5 order unchanged); Laken's
-    Book 3 events on days 46 – 91 and Book 5 events on days 100 – 115 (his Day + 45). Tests run: `unit_event_order` (new),
-    `unit_canon_db`, `sim_canon_book2` – `sim_canon_book5`, `sim_book4_christmas`, `sim_book4_homecoming`,
-    `sim_book4_relief_home`, Python tool tests (100), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M18.0 merged ([PR #89](https://github.com/Daddy-Ousen/innworld-rpg/pull/89), merge commit 5d0930e).
-  - [x] M18.1 world (branch `claude/nice-albattani-wj8hw6`, 2026-10-01, cloud): maps `wirclaw_village`, `inn_basement`
-    (trapdoor opens with `wandering_inn.expansion_begun`), `liscor_ruins_hall` and `liscor_ruins_ossuary` (the text puts
-    the ossuary in the Ruins of Liscor: illusion wall until `liscor_ruins.hidden_chute_found`, one-way chute, corridor
-    with a trap to `liscor_crypt`); the Eater Goat (`leap`, drawn art); 10 looks; 38 Book 6 NPC records, no events.
-    Tests run: `sim_book6_world` (new) and 18 scripts the change touches, Python tool tests (102), validator. All pass.
-    Full suite not run. [PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90) waits for the user to merge.
-  - [x] M18.1 merged ([PR #90](https://github.com/Daddy-Ousen/innworld-rpg/pull/90), merge commit 440a0dd).
-  - [x] M18.2 canon 4.32 G, 1.02 C – 1.05 C (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 17 events (days 114 – 121),
-    the march as a scene stage with a talk hook, Rags's raid as news, Tom's Paranfer weeks off-map, `paranfer` location.
-    Tests run: `sim_canon_book6` (new), `sim_book6_goblin_march` (new), `sim_book6_world`, `unit_canon_db`,
-    `unit_event_order`, `sim_canon_book5`, Python tool tests (102), validator. All pass. Full suite not run. PR waits for the user.
-  - [x] M18.2 merged ([PR #91](https://github.com/Daddy-Ousen/innworld-rpg/pull/91), merge commit f5cc08b).
-  - [x] M18.3 canon 4.33 – 4.34 (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 14 events (day 115; the goats' night is 114).
-    The Eater Goat attack is a fight stage with waves at `wirclaw_village`; the feast is a scene stage in the inn; both have hooks.
-    Bugear dies by event effect. New behaviour entries for Wirclaw and the five Redfang (basement from day 116). Bugear's tag is
-    sword. Tests run: `sim_book6_eater_goats` (new, 7), `sim_canon_book6`, `sim_book6_goblin_march`, `sim_book6_world`,
-    `unit_canon_db`, `unit_event_order`, `sim_canon_book3`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool
-    tests (102), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M18.3 merged ([PR #92](https://github.com/Daddy-Ousen/innworld-rpg/pull/92), merge commit 6120ef3).
-  - [x] M18.4 canon 4.35 E – 4.38 B (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 28 events (days 117 – 127), Laken off-map,
-    Olesm's day 126 with the crypt search as a scene stage and hook, Esthelm as news only, Zel leaves through the door, Magnolia.
-    Tests run: `sim_canon_book6`, `sim_book6_crypt_search` (new), `sim_canon_book5` (fixed a stale M18.3 assert), the touched Book 6 sims,
-    Zel and behaviour scripts, Python tool tests (102), validator. All pass. Full suite not run. PR waits for the user.
-  - [x] M18.5 canon 4.39 G – 4.42 L (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 20 events (days 126 – 129). The party is a scene stage
-    in the inn with a talk hook; the Rose Knights fights and the Hive front are events only. Greydath is a flag on `greybeard`; Purple Smile
-    is [Sergeant] by flag on day 129. Tests run: `sim_book6_goblin_party` (new, 4), `sim_canon_book6`, the touched Book 6 sims, `sim_canon_book5`,
-    `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102), validator. All pass.
-    Full suite not run. PR waits for the user to merge.
-  - [x] M18.5 merged ([PR #94](https://github.com/Daddy-Ousen/innworld-rpg/pull/94), merge commit c1f3904).
-  - [x] M18.6 canon 4.43 – 4.47 (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 23 events (days 128 – 129). The Silver Swords arrive at
-    the inn as a scene stage with a talk hook; Zel's speech is T1 news with an Ilvriss hook on the council; Erin is level 33. 4.44 M is day 128.
-    Tests run: `sim_book6_silver_swords` (new, 6), `sim_canon_book6`, the touched Book 6 sims, `sim_canon_book5`, `unit_canon_db`, `unit_event_order`,
-    `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M18.6 merged ([PR #95](https://github.com/Daddy-Ousen/innworld-rpg/pull/95), merge commit 639fd45).
-  - [x] M18.7 canon Antinium Wars Pt. 3 – 5, 4.48, 4.49 (branch `claude/sleepy-feynman-txet0j`, 2026-10-01, cloud): 31 events (days 129 – 130).
-    Zel dies on day 130 and names the Goblin Lord Reiss (`goblin_lord.named_reiss`). The mourning is a scene stage in the inn with a talk hook
-    with Erin. Chosen records and the 4.31 scroll flag fixed. Tests run: `sim_book6_zel_dies` (new, 7), `sim_canon_book6`, `sim_canon_book5`, the
-    touched Book 6 sims, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, Python tool tests (102),
-    validator. All pass. Full suite not run. PR waits for the user to merge. After the merge M18 is done except the user's play check.
-  - [x] M18.7 merged ([PR #96](https://github.com/Daddy-Ousen/innworld-rpg/pull/96), merge commit 6a9e8b8).
+- [ ] M18 — Book 6 (The General of Izril). M18.P – M18.7 merged; detail in `docs/PROGRESS_ARCHIVE.md`.
   - [ ] The user plays Book 6 (`godot --path game`).
 - [x] itch.io page kit (2026-10-02, branch `docs/itch-page`): `docs/ITCH.md` (tagline, description, settings, tags,
   Comments on). Cover 630 × 500 (two choices) and 6 screenshots in `export/itch/` (local, gitignored), made from the
@@ -134,51 +83,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
   Merged ([PR #110](https://github.com/Daddy-Ousen/innworld-rpg/pull/110), merge commit 01f1adb).
 
-- [ ] M19 — Book 7 (The Rains of Liscor). Plan: ADR 0030, steps M19.0 – M19.8 in `docs/ROADMAP.md`.
-  - [x] M19.P plan (branch `docs/m19-plan`, 2026-10-07, local): Book 7 cut from the epub to `canon/raw/book7/` (gitignored);
-    seven reading agents (summaries only); ADR 0030, roadmap steps, `docs/CLOUD.md` queue. User answers: rain + flood (door is
-    the way to Liscor), door with several links + small Pallass map (portal schema change approved), moth attack = wave stage
-    with `xp_window` x3, dungeon dive = events only. Days 133 – about 143. No code, no tests run. PR waits for the user to merge.
-
-  - [x] M19.0 engine (branch `feat/m19.0-door-links-rains`, 2026-10-07, local): door `links` (pick the stone; flags, hours, power per
-    link; one shared trip count), `rules.rains` (season and flood flags), rain on screen and in the sound (`amb_rain.ogg` made by
-    `tools/build_rain.py`). User answers: no rain duress; rain sound by tool. No save change. Detail: ADR 0030 "M19.0 as built".
-    Tests run: `unit_portal_links` (new), `unit_rains` (new), 16 touched scripts, Python tool tests (105), validator. All pass.
-    Full suite not run. PR waits for the user to merge.
-  - [x] M19.0 merged ([PR #112](https://github.com/Daddy-Ousen/innworld-rpg/pull/112), merge commit fef7f44).
-  - [x] M19.1 world (branch `feat/m19.1-world`, 2026-10-07, local): door with 3 links (Celum, Pallass `pallass_door_street`, Liscor west wall on
-    `liscor_watch`), flood overlays (flag `izril.flood`) on 4 maps and 3 gated exits, Grand Theatre and smashed-tower flags, moth enemies + sheets,
-    Book 7 records (33 NPCs, 14 places, no events). Detail: ADR 0030 "M19.1 as built". Tests run: `sim_book7_world` (new, 11), `unit_portal_links`,
-    `unit_map_db`, `unit_combat_db`, `unit_monster_art`, `unit_sound_cues`, `unit_gated_exits`, `unit_world_view`, `unit_canon_db`, `unit_liscor_map`,
-    `unit_audio_data`, `unit_ambience`, `sim_winter` (narrowed to the snow-wall overlay), `sim_book4_homecoming`, `sim_book6_world`, Python tool tests (105),
-    validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.1 merged ([PR #113](https://github.com/Daddy-Ousen/innworld-rpg/pull/113), merge commit 00767ce).
-  - [x] M19.2 canon 5.00 – 5.03 (branch `feat/m19.2-canon-5-00`, 2026-10-07, local): 23 events (days 133 – 135). Stages: the lunch (day 133) and the Venim
-    deal (day 134, sets `izril.rains`), both scenes in the inn with a talk hook. No Pallass walk, no Riefel death. Venim has a behaviour entry.
-    Tests run: `sim_book7_pallass_crisis` (new, 6), `sim_book7_world`, `sim_canon_book6`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`,
-    `unit_npc_sim`, Python tool tests (105), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.2 merged ([PR #114](https://github.com/Daddy-Ousen/innworld-rpg/pull/114), merge commit f9552eb).
-  - [x] M19.3 canon 5.04 – 5.06 M (branch `feat/m19.3-canon-5-04`, 2026-10-07, local): 19 events (days 135 – 136). One scene stage: the Players' play night
-    (day 135) with a Wesle hook. No dinner stage, no xp_window. Erin level 34 by `system` record. Records fixed: Toren, Wesle, Halrac, Mrsha.
-    Tests run: `sim_book7_players_and_toren` (new, 5), `sim_book7_pallass_crisis`, `sim_book7_world`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`,
-    `unit_npc_sim`, `sim_canon_book2`, `sim_canon_book3`, `sim_canon_book6`, Python tool tests (105), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.4 canon 5.07, 5.08, Interlude - Flos (branch `feat/m19.4-canon-5-07`, 2026-10-07, local): 28 events (days 137 - 138). The moths are a 6-wave fight stage on
-    `inn_hill` with `xp_window` x3 and a fight hook; a scene in the inn that night with a talk hook. Pallass lifts the embargo and the Pallass door link opens. Flos notes are tier 1.
-    Tests run: `sim_book7_moths` (new, 6), `sim_winter`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_xp_window`, `unit_map_db`, `sim_book7_world`,
-    `sim_book7_pallass_crisis`, `sim_book7_players_and_toren`, `sim_canon_book6`, Python tool tests (105), validator. All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.5 canon 5.09 E - 5.11 E (branch `feat/m19.5-canon-5-09`, 2026-10-08, local): 26 events (days 130 - 142, Laken's Day + 45). New map `riverfarm`; the banquet (day 142) is a scene stage with two hooks (Ivolethe, the poisoned cup). No road: the first `celum_gate` link was removed (Riverfarm is SW of Invrisil); no exits until an Invrisil map exists. Detail: ADR 0030 "M19.5 as built".
-    Tests run: `sim_book7_riverfarm` (new, 7), `unit_map_db`, `unit_behaviour_db`, `unit_npc_sim`, `unit_canon_db`, `unit_event_order`, `unit_gated_exits`, `unit_audio_data`, `unit_ambience`, `unit_world_view`, `unit_ground_art`, `sim_book7_world`, `sim_book7_moths`, `sim_book7_pallass_crisis`, `sim_book7_players_and_toren`, `sim_canon_book6`, `sim_winter`, `unit_liscor_map`, Python tool tests, validator. All pass (Python tool tests 105, validator 0 errors; first run of `unit_ground_art` failed on a tree hiding a wall, fixed). Full suite not run. PR waits for the user to merge.
-  - [x] M19.6 canon 5.12 – 5.15 (branch `feat/m19.6-canon-5-12`, 2026-10-08, local): 44 events (days 137 – 140). The flood starts (`izril.flood`, set on day 137 so it shows on 138);
-    the door gets its Liscor west-wall end on day 138 (Pallass and Celum ends stay). Three scene stages in the inn, each with one talk hook, no `xp_window`: the Soldiers' dinner
-    (day 138, Klbkch), the victory party (day 139, Relc), the Vuliel Drae confession (day 140, Revi). Parade, play, Embria's fight, Tyrion and the whole dungeon dive are events.
-    Olesm is [Strategist] 30 and Erin level 35 by `system` records. 8 NPCs got behaviour entries. Tests run: `sim_book7_flood_and_parade` (new, 6), `sim_book7_world`, `sim_book7_moths`,
-    `sim_book7_pallass_crisis`, `sim_book7_players_and_toren`, `sim_winter`, `sim_canon_book6`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`,
-    `unit_data_db`, Python tool tests (105), validator (0 errors). All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.7 canon 5.16 S – 5.18 S (branch `feat/m19.7-canon-5-16`, 2026-10-08, local): 33 events (days 140 – 143). Two scene stages with one talk hook each, no `xp_window`: Zel's funeral in `liscor_plaza` (day 142, hook Zevara) and the lease haggle in the inn (day 143, hook Selys). Selys is [Heiress] 4 then 6, [Receptionist] 19. New places `liscor_city_hall`, `liscor_sewers`, `pallass_archive`; Seborn has a behaviour entry. Detail: ADR 0030 "M19.7 as built".
-    Tests run: `sim_book7_zel_and_selys` (new, 4), `sim_book7_flood_and_parade`, `sim_book7_world`, `sim_book7_moths`, `sim_book7_riverfarm`, `sim_book7_pallass_crisis`, `sim_book7_players_and_toren`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, `unit_data_db`, `sim_winter`, `sim_canon_book6`, Python tool tests (105), validator (0 errors). All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.8 canon 5.19 G, 5.20 G (branch `feat/m19.8-canon-5-19`, 2026-10-08, local): 21 events (days 141 – 143), all off-map; no stage, no hook, no `xp_window`. Rags gets `system` records ([Chieftain] 20 on day 143). New places `northern_swamp`, `northern_high_road`. Detail: ADR 0030 "M19.8 as built".
-    Tests run: `sim_book7_goblin_road` (new, 4), `sim_book7_zel_and_selys`, `sim_book7_flood_and_parade`, `sim_book7_world`, `sim_canon_book6`, `unit_canon_db`, `unit_event_order`, `unit_behaviour_db`, `unit_npc_sim`, `unit_map_db`, `sim_winter`, Python tool tests (105), validator (0 errors). All pass. Full suite not run. PR waits for the user to merge.
-  - [x] M19.9 `sim_canon_book7` (branch `feat/m19.9-sim-canon-book7`, 2026-10-08, local): days 130 – 143, 191 events, drift 0, no named deaths, 11 stages, one `xp_window`. Test run: `sim_canon_book7` (new, 5). All pass. Full suite not run. After the merge M19 is done except the user's play check.
+- [ ] M19 — Book 7 (The Rains of Liscor). Plan: ADR 0030. M19.P – M19.9 merged; detail in `docs/PROGRESS_ARCHIVE.md`.
   - [ ] The user looks at the rain (`flag izril.rains` in the console, then walk outside) and hears it.
 
 - [x] Floating touch stick (2026-10-08, user request): replaces the D-pad; `ui/touch_controls.gd`, `unit_touch_controls` (18 pass), ADR 0032 note. The user still has to try it on a phone. PR open (branch `feat/touch-stick`).
@@ -191,7 +96,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
 - [x] Each M21 – M26 step has a model tag `[Model · effort]` (2026-10-09, branch `docs/roadmap-model-tags`). Default Sonnet · medium.
 - [x] `docs/ROADMAP.md` shows open work first and done milestones at the bottom, newest first (2026-10-09, branch `docs/roadmap-open-first`).
-- [ ] M21 Housekeeping (M21.0 and M21.1 done 2026-10-09) · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
+- [ ] M21 Housekeeping (M21.0 – M21.2 done 2026-10-09) · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
 - Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
 - [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data). Needs a design pick (user).
 - [ ] Divergence is thin: Books 2–7 have 0 `substitute` / `delay` / `mutate` fallbacks (all 838 events are `cancel` only); 67 of 1089 events have hooks (Book 2: 3 of 207).
@@ -204,36 +109,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 ## Releases (ADR 0029)
 - [x] v0.1.3-alpha (branch `release/v0.1.3`, 2026-10-08, local): version bump (code 2), `tools/release.ps1` now also builds the signed apk. Smoke tests pass (events=1089, maps=40, problems=0). Three zips + `InnworldRPG-v0.1.3-alpha-android.apk` built. Waits: user merges the PR, then tag + `gh release create` with all four files.
-- [x] v0.1.2-alpha (branch `release/v0.1.2`, 2026-10-06, local): version bump, README and ITCH.md text (touch is no longer "next release"). Three zips built and
-  smoke-tested (898 events, 38 maps, 0 problems). Tests run: smoke only. Full suite not run. PR waits for the user to merge.
-  - [x] Merged ([PR #108](https://github.com/Daddy-Ousen/innworld-rpg/pull/108), merge commit e9ad2e2). Tag `v0.1.2-alpha` pushed. Pre-release published 2026-10-06 with three zips: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.2-alpha. Pages deploy run succeeded.
-  - [x] The user uploaded the v0.1.2 web zip to itch.io (said 2026-10-07).
-- [x] v0.1.0-alpha (branch `release/v0.1.0`, 2026-10-01, local): `game/export_presets.cfg` (Windows, Linux; `*.json` packed; tests and GUT
-  left out), `config/version` and a version label on the title screen, `tools/release.ps1` + `tools/release/smoke.gd` + player
-  `README-PLAYERS.txt`. Built and smoke-tested both zips (898 events, 38 maps, 0 problems; 5 nights run from the pack). The Windows
-  exe opens and closes clean. Tests run: `unit_play_loop` (16 pass). Full suite not run.
-  - [x] Merged ([PR #97](https://github.com/Daddy-Ousen/innworld-rpg/pull/97), merge commit 548f0f5). Tag `v0.1.0-alpha` pushed.
-    Pre-release published 2026-10-01: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.0-alpha (two zips).
-  - [ ] Android: skipped (user, 2026-10-01). Needs touch controls first (roadmap "Releases").
-- [x] README rewrite for players first, developers second (branch `docs/readme-rewrite`, 2026-10-01, local). Counts checked:
-  898 events, 261 NPCs, 103 places, 38 maps, 147 GUT scripts (~1,419 tests), 102 Python tests. Merged ([PR #99](https://github.com/Daddy-Ousen/innworld-rpg/pull/99)).
-- [ ] Web build (ADR 0031; user, 2026-10-01: itch.io + GitHub Pages, GitHub URL first, own subdomain later).
-  - [x] Branch `feat/web-build` (from `docs/readme-rewrite`): "Web" preset, web zip in `tools/release.ps1`, web-only
-    stretch in `project.godot`, Quit hidden in a browser, `.github/workflows/pages.yml`, README "Play in your browser".
-    All three zips built and smoke-tested (898 events, 38 maps, 0 problems). Checked in Chrome: play, save, reload, night 0.3 s.
-    Tests run: `unit_play_loop` (17 pass). Full suite not run. Merged ([PR #100](https://github.com/Daddy-Ousen/innworld-rpg/pull/100), d565a3b).
-  - [x] GitHub Pages on, source "GitHub Actions" (user, 2026-10-02).
-  - [x] v0.1.1-alpha (user, 2026-10-02) on branch `release/v0.1.1`: version bump, README download link. Three zips built and
-    smoke-tested (898 events, 38 maps, 0 problems). Tests run: `unit_play_loop` (17 pass). Full suite not run.
-  - [x] Merged ([PR #101](https://github.com/Daddy-Ousen/innworld-rpg/pull/101), merge commit 429583e). Tag `v0.1.1-alpha` pushed.
-    Pre-release published 2026-10-02 with three zips: https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.1-alpha
-  - [x] Live: https://daddy-ousen.github.io/innworld-rpg/ (title screen v0.1.1-alpha, no errors; wasm served gzip, 10 MB).
-    The release-event run failed: the `github-pages` environment allows only `main`, not tags. Deployed by hand with
-    `gh workflow run pages.yml --ref main -f tag=v0.1.1-alpha` (success).
-  - [x] Tag rule `v*` added to the `github-pages` environment (user, 2026-10-02). The re-run of the release-event run
-    succeeded, so a published release now deploys by itself.
-  - [x] itch.io: the page is live with the web zip (user, 2026-10-02).
-  - [ ] Later: own subdomain (CNAME + Settings → Pages → Custom domain).
+- Older releases v0.1.0 – v0.1.2, the README rewrite and the web build: see `docs/PROGRESS_ARCHIVE.md`.
+- [ ] Web build: later, own subdomain (CNAME + Settings → Pages → Custom domain).
 
 ## Cloud setup
 - Done; detail in the archive. Book text in a cloud session: attach `Daddy-Ousen/innworld-canon-raw` (add_repo), clone it
