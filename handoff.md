@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-09, local): M22.0 breakthrough design (branch `docs/m22.0-breakthrough-design`)
+- ADR `docs/adr/0035-breakthroughs.md`. User picks: all three sources (hard moment, class trial, canon `boon` hook),
+  a moment counts only at level 9 / 19 / 29 (key kept until XP fills), a vague hint line. Docs only, no tests run.
+- Schema changes the user approved (build them in M22.1): `rules.json` `levels.breakthrough`; optional `classes.json`
+  `breakthrough` {hint, default, trials}; hook `"then": "boon"` (event runs as canon, no drift, hook effects apply);
+  hook effect `breakthrough` {tags | class}. No save change.
+- Next: M22.1 engine **[Opus · medium]**. Files: new `core/breakthrough.gd`, `core/night.gd` (step 2 check, step 5b
+  level again), `core/director.gd` + `core/canon_db.gd` (boon), `core/data_db.gd` + `tools/validate_data.py` (checks).
+- Gotchas: the director runs AFTER `resolve_xp`, so a canon key needs the step-5b `level_up`. A `change` hook adds
+  0.25 drift; that is why `boon` is a new hook result. Records already store `risk`, `duress`, `window`.
+
 ## Just done (2026-10-09, local): M21.4 NPC art (branch `feat/m21.4-npc-art`)
 - 35 new looks at the end of `game/data/appearance.json` (all Book 6 – 7 NPCs with a schedule that had none) and their sheets in `game/assets/characters/`. Portraits are cut from the sheets. `unit_art` and `unit_portrait` pass. Most looks are guesses (noted per look). The LPC clone was in the scratchpad (gone later). CREDITS.md was rewritten by the builder.
 - Next: M21.6 play pass (user), then M22.0 (user picks how a breakthrough is earned).

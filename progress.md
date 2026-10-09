@@ -96,9 +96,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
 - [x] Each M21 – M26 step has a model tag `[Model · effort]` (2026-10-09, branch `docs/roadmap-model-tags`). Default Sonnet · medium.
 - [x] `docs/ROADMAP.md` shows open work first and done milestones at the bottom, newest first (2026-10-09, branch `docs/roadmap-open-first`).
-- [ ] M21 Housekeeping (M21.0 – M21.5 done (M21.6 play pass open) 2026-10-09) · [ ] M22 Breakthroughs · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
+- [ ] M21 Housekeeping (M21.0 – M21.5 done (M21.6 play pass open) 2026-10-09) · [ ] M22 Breakthroughs (M22.0 done) · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
 - Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
-- [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data). Needs a design pick (user).
+- [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data).
+  - [x] M22.0 design (2026-10-09, branch `docs/m22.0-breakthrough-design`): ADR 0035. User picks: hard moment + class trial + canon `boon` hook; a moment counts from level 9 / 19 / 29; a vague hint. Docs only, no tests run.
+  - [ ] M22.1 engine, M22.2 data, M22.3 consolidation, M22.4 probe sim.
 - [ ] Divergence is thin: Books 2–7 have 0 `substitute` / `delay` / `mutate` fallbacks (all 838 events are `cancel` only); 67 of 1089 events have hooks (Book 2: 3 of 207).
 - [x] Commit 565bc9b on `feat/class-tree-wiki`: not merged; redo in M22.3 (M21.1).
 - [ ] New classes `hunter`, `archer`, `alchemist`, `blacksmith`, `teacher` have no own action (no hunt, shoot, brew, forge, teach). Thin pools: 4 spells, 4 recipes, 5 items.
