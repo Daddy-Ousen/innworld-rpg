@@ -30,8 +30,8 @@ The story of the books goes on around you, day by day. What you do with your day
 
 | | |
 |---|---|
-| Story | Books 1–6 as canon data: 898 events, 261 characters, 103 places |
-| World | 38 maps, day and night, winter snow, NPC schedules |
+| Story | Books 1–7 as canon data: 1,089 events, 296 characters, 122 places |
+| World | 50 maps, day and night, winter snow, NPC schedules |
 | Systems | Classes, levels, Skills, spells, tactical combat, traps, cooking, money, hunger, travel |
 | Art and sound | Pixel art, character animation, music, sound effects, ambience |
 | Saves | 3 slots, plus an autosave each morning |
@@ -127,7 +127,7 @@ python -m unittest discover -s tools/tests        # Python tool tests
 python tools/validate_data.py game/data/canon --all
 ```
 
-GUT: 147 scripts, about 1,400 tests. Python: 102 tests.
+GUT: 166 scripts. Python: 105 tests.
 
 ### Build the release zips
 
@@ -159,7 +159,7 @@ docs/          design, roadmap, decisions (ADRs in docs/adr/), cloud guide
 game/          Godot project
   core/        headless simulation (no nodes, no scenes)
   data/        classes, skills, spells, actions, enemies, maps (JSON)
-    canon/     Books 1–6: events, NPCs and locations (JSON)
+    canon/     Books 1–7: events, NPCs and locations (JSON)
   world/ ui/   scenes and presentation
   tests/       GUT tests
 tools/         Python: epub extraction, art and sound builders, data validator (not shipped)

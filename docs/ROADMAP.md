@@ -15,7 +15,7 @@ Model tag `[Model · effort]` at the end of each step: the model and effort to p
 Small and fast. No game change.
 - [x] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) (done 2026-10-09: 39 deleted; only `main` and the unmerged `feat/class-tree-wiki` stay) **[Sonnet · low]**
 - [x] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): decision 2026-10-09 = not merged now; redo in M22.3 after breakthroughs exist. The branch stays as the source (`git show 565bc9b`) **[Sonnet · medium]**
-- [ ] M21.2 Docs: README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
+- [x] M21.2 Docs (done 2026-10-09; gotchas not deduped, only older entries archived): README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
 - [ ] M21.3 Disk: delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
 - [ ] M21.4 Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
 - [ ] M21.5 Legal: read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
