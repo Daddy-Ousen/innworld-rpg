@@ -9,6 +9,8 @@
 - Next: start M21.0 (stray .uid, merged branches), then M22.0 (user picks how a breakthrough is earned).
 - 2026-10-09: PR 138 merged. Each roadmap step M21 – M26 now ends with `[Model · effort]` (branch `docs/roadmap-model-tags`).
   The user runs Sonnet · medium by default; tell them to switch when a step says Opus or another effort.
+- 2026-10-09: `docs/ROADMAP.md` reordered (branch `docs/roadmap-open-first`): "Next up" (M21 – M26) first, then "Open: waits on a user
+  check" (M20, Releases), Later, then "Done (newest first)" M19 … M0. No line text changed. When a milestone is fully ticked, move it to the top of Done.
 
 ## Just done (2026-10-08, local): Magnolia estate NPCs (branch `feat/magnolia-npcs`)
 - `npc_behaviour.json`: `magnolia_reinhart`, `ressa`, `reynold`, two golems, place `magnolia_estate`; golem records in `canon/book2/npcs.json`. Test: `unit_north_road`.
