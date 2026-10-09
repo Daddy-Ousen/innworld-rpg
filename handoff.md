@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.3 (branch `chore/m21.3-export-cleanup`)
+- Deleted local v0.1.0 – v0.1.2 builds in `export/` (still on GitHub releases). v0.1.3 files, `android/` and `itch/` kept. Docs only.
+- Next: M21.4 (full suite; user asks), M21.5 (legal), M21.6 (play pass).
+
 ## Just done (2026-10-09, local): M21.2 (branch `chore/m21.2-docs`)
 - README counts fixed (1,089 events, 296 NPCs, 122 places, 50 maps, 166 GUT scripts, 105 Python tests). Old detail from `progress.md` and `handoff.md` moved to `docs/PROGRESS_ARCHIVE.md`. Gotchas were not deduped.
 - Next: M21.3 (delete old builds in `export/`; user confirms), M21.4 (full suite; user asks), M21.5 (legal, user).
