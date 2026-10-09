@@ -64,6 +64,13 @@
 					"then": "change",
 					"effects": {"set_flags": ["liscor.earther_heard_erins_stories"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "pawn", "to": "player", "delta": 1}]},
 					"news": "A second Human sat late into the night at the Wandering Inn as its keeper told old Earth stories to a shaken Antinium individual."
+				},
+				{
+					"id": "boon_heard_pawn",
+					"did": [{"action": ["talk_with_guest", "comfort_someone"], "outcome": ["success"]}],
+					"days": [56, 56],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"faith": 1.0}}}
 				}
 			],
 			"status": "candidate",

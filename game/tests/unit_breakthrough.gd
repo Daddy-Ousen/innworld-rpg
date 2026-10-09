@@ -217,3 +217,17 @@ func test_real_data_has_breakthrough_rules_and_no_errors() -> void:
 	var d := DataDb.load_dir()
 	assert_false(Breakthrough.rules_of(d).is_empty())
 	assert_eq(Breakthrough.validate(d), [] as Array[String])
+
+
+func test_real_main_classes_have_trials_and_boon_hooks_exist() -> void:
+	var d := DataDb.load_dir()
+	for id: String in ["innkeeper", "cook", "warrior", "runner", "mage", "scout", "priest", "carpenter"]:
+		var block: Dictionary = d.classes[id].get("breakthrough", {})
+		assert_false(block.get("trials", []).is_empty(), "%s has a trial" % id)
+		assert_ne(block.get("hint", ""), "", "%s has a hint" % id)
+	var boons := 0
+	for eid: String in d.canon.events:
+		for h: Dictionary in d.canon.events[eid].get("hooks", []):
+			if h["then"] == CanonDb.HOOK_BOON:
+				boons += 1
+	assert_eq(boons, 6)

@@ -91,6 +91,13 @@
 						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 3}, {"from": "krshia", "to": "player", "delta": 1}]
 					},
 					"news": "A second Human stood with Erin Solstice against the Silverfang war party at the Wandering Inn."
+				},
+				{
+					"id": "boon_inn_battle",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"]}],
+					"days": [55, 55],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"combat": 1.0}}}
 				}
 			],
 			"status": "candidate",

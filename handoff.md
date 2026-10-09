@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-10, local): M22.2 breakthrough data (branch `feat/m22.2-breakthrough-data`)
+- `game/data/classes.json`: `breakthrough` {hint, trials} on innkeeper, cook, warrior, runner, mage, scout, priest, carpenter.
+- Six `boon` hooks (tags effect) in `1.21`, `1.29`, `1.60`, `2.26`, `2.31`, `3.20T`. `sim_player_hooks` count is 74 now.
+- Tests run (all pass): `unit_breakthrough` (17), `unit_data_db`, `unit_canon_db`, `unit_director`, `unit_player_hooks`,
+  `sim_player_hooks`, `sim_canon_book1..3`; Python 107 OK; validator 0 errors. Full suite not run.
+- Next: M22.3 consolidation **[Opus · medium]** (start from `git show 565bc9b`), then M22.4 probe sim **[Sonnet · high]**
+  (tunes the bar numbers; they are guesses).
+- Gotchas: all these data files are CRLF in the working copy: patch on bytes (scratchpad script), not `sed -i`.
+
 ## Just done (2026-10-10, local): M22.1 breakthrough engine (branch `feat/m22.1-breakthrough-engine`)
 - New `game/core/breakthrough.gd` (sources 1 – 3, hint, key line, `validate`). `Night.resolve_xp` checks a waiting
   class before `level_up`; new `Night.level_lines` and `Night.resolve_canon_keys` (step 5b). `Director._fire` runs

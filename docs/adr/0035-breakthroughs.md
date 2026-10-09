@@ -89,6 +89,10 @@ gained first). The usual rule holds: the class must be at 9 / 19 / 29 without a 
 - A trial `outcome` left out matches every outcome (like a hook). The hard moment never counts a `fail`.
 - Records from old saves have no `risk` / `duress` / `window`: they count as 0.0 / 1.0 / 1.0.
 
+## Built (M22.2, 2026-10-10)
+- Trials and a hint on `innkeeper`, `cook`, `warrior`, `runner`, `mage`, `scout`, `priest`, `carpenter` ("crafter" = carpenter). All keep `default` true. Trials need `outcome: success` and one `min` bar (risk 0.6, duress 1.8 or window 2.0). Numbers are guesses; M22.4 tunes them.
+- Six `boon` hooks (each beside the event's own hook, same deeds): `b1.inn_first_regulars` (hospitality), `b1.klbkch_dies_defending_erin`, `b1.skinner_leads_the_dead_into_liscor` (combat), `b2.battle_at_the_wandering_inn` (combat), `b2.pawns_faith_crisis_earns_the_acolyte_class` (faith), `b3.the_last_battle_of_esthelm` (combat). `sim_player_hooks` hook count 68 -> 74.
+
 ## Not chosen
 - A random chance per night: breaks the hidden but fair feel, and hard to test.
 - Key by XP alone (no moment): the capstone would be only a bigger number.

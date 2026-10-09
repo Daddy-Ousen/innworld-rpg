@@ -10,6 +10,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 30, "neglect_tags": ["hospitality", "cooking", "cleaning"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Something must test your inn before you can grow past this.", "trials": [{"action": ["serve_guests"], "outcome": ["success"], "min": {"duress": 1.8}}]},
 			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed"}
 		},
 		"cook": {
@@ -21,6 +22,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["cooking"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "A kitchen under real strain may teach what practice cannot.", "trials": [{"action": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread"], "outcome": ["success"], "min": {"duress": 1.8}}]},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
 		},
 		"server": {
@@ -65,6 +67,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["crafting"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Build or mend under pressure, and the craft may deepen.", "trials": [{"action": ["repair_furniture", "chop_wood"], "outcome": ["success"], "min": {"duress": 1.8}}]},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
 		},
 		"forager": {
@@ -109,6 +112,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["running", "travel"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Run when it truly matters, and the road may open.", "trials": [{"action": ["flee_danger"], "outcome": ["success"], "min": {"risk": 0.6}}, {"action": ["deliver_parcel"], "outcome": ["success"], "min": {"duress": 1.8}}]},
 			"combat": {"move_ap_mod_q": 4, "note": "M17.4: the user's rule (ADR 0022): a [Runner] may spend 2 AP (8 tiles) on moving in a turn, not 1."},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
 		},
@@ -121,6 +125,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["combat"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Only a fight where you could truly fall will take you further.", "trials": [{"action": ["attack_melee", "block_attack", "throw_object"], "outcome": ["success"], "min": {"risk": 0.6}}]},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely"}
 		},
 		"guardsman": {
@@ -209,6 +214,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["magic"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Cast when failing would cost you dearly.", "trials": [{"action": ["cast_spell"], "outcome": ["success"], "min": {"risk": 0.6}}]},
 			"combat": {"mp_bonus": 1, "note": "M17.5: each [Mage] level adds this much max MP."},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Pisces is a [Mage] (book 1 cast list). The prereq (knowing a spell), threshold, weights and MP bonus are design guesses."}
 		},
@@ -243,6 +249,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["stealth", "vigilance"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Watch and creep where one slip is the end.", "trials": [{"action": ["sneak", "keep_watch", "search_for_traps"], "outcome": ["success"], "min": {"risk": 0.6}}]},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
 		},
 		"veteran_scout": {
@@ -331,6 +338,7 @@
 			"race_limits": null,
 			"loss": {"neglect_days": 40, "neglect_tags": ["faith"]},
 			"consolidation": null,
+			"breakthrough": {"hint": "Faith is tested where hope is thin.", "trials": [{"action": ["pray", "comfort_someone", "bandage_wound"], "outcome": ["success"], "min": {"window": 2.0}}]},
 			"canon_ref": {"book": 1, "chapter": null, "confidence": "likely", "note": "Advancement of [Acolyte]. Wiki class tree (wiki.wanderinginn.com/Classes, follows the web serial; not checked against the ebook). Threshold, weights and loss are design guesses."}
 		},
 		"bishop": {
