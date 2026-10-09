@@ -24,7 +24,7 @@ Small and fast. No game change.
 
 ## M22 — Breakthroughs (fix: no class can pass level 9)
 Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
-- [ ] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]**
+- [x] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]** (done 2026-10-09: ADR 0035; user picked all three sources, from level 9, a vague hint; schema changes approved: `classes.json` `breakthrough`, hook `then: boon`, effect `breakthrough`, `rules.levels.breakthrough`)
 - [ ] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]**
 - [ ] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]**
 - [ ] M22.3 Consolidation on top of breakthroughs (redo 565bc9b: M21.1 said yes; start from `git show 565bc9b`) **[Opus · medium]**

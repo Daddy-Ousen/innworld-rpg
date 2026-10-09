@@ -52,6 +52,7 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
 
 ### 3.4 Levels
 - Cost per level grows exponentially. Levels 10/20/30 are capstones (rare skill, needs a "breakthrough" event, not only XP).
+  A breakthrough is earned at level 9 / 19 / 29 by a hard moment, a class trial or a canon `boon` hook (ADR 0035).
 - **Multi-class dilution:** XP is split across accepted classes by tag match. More classes → slower each. No hard cap; the curve does the work.
 - Class loss: acting against a class (e.g. `[Innkeeper]` who abandons the inn for 30 days) drains it; at 0 the class is lost.
 - Consolidation/advancement: rules in data (`[Warrior]` + `[Strategist]` → `[Commander]`), offered at night, can cost levels.
