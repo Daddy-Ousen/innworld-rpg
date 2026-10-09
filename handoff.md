@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.5 (branch `docs/m21.5-legal`)
+- Read https://wanderinginn.com/fanworks-permissions/ . Result in `docs/DESIGN.md` §7 and `docs/ITCH.md` ("Policy check"). Docs only.
+- Open for the user: the policy bans book titles in marketing material; ask pirateaba or reword the itch.io and README text.
+
 ## Just done (2026-10-09, local): M21.3 (branch `chore/m21.3-export-cleanup`)
 - Deleted local v0.1.0 – v0.1.2 builds in `export/` (still on GitHub releases). v0.1.3 files, `android/` and `itch/` kept. Docs only.
 - Next: M21.4 (full suite; user asks), M21.5 (legal), M21.6 (play pass).

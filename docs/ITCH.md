@@ -78,6 +78,12 @@ Next: Book 7 (The Rains of Liscor).
 - **C / J / I:** character sheet / journal / bag
 - **H:** help (all keys) · **Esc:** menu (save, load, options)
 
+### Policy check (2026-10-09)
+
+Source: https://wanderinginn.com/fanworks-permissions/ . The policy does not name games; when in doubt it says to assume "not allowed".
+We follow: no book text or art, credit given, free, no crowdfunding. Open: it forbids the book titles in marketing material.
+The page text above names the book to say what the work is about. Decide with the author. See `docs/DESIGN.md` §7.
+
 ### Fan work
 
 A free, non-commercial fan work. *The Wandering Inn* and its world belong to pirateaba.
