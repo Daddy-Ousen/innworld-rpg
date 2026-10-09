@@ -13,7 +13,7 @@ Model tag `[Model · effort]` at the end of each step: the model and effort to p
 
 ## M21 — Housekeeping (cleanup)
 Small and fast. No game change.
-- [ ] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) **[Sonnet · low]**
+- [x] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) (done 2026-10-09: 39 deleted; only `main` and the unmerged `feat/class-tree-wiki` stay) **[Sonnet · low]**
 - [ ] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): merge, redo in M22.3, or drop (user) **[Sonnet · medium]**
 - [ ] M21.2 Docs: README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
 - [ ] M21.3 Disk: delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
