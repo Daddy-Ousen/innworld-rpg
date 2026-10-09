@@ -78,6 +78,17 @@ gained first). The usual rule holds: the class must be at 9 / 19 / 29 without a 
 - Today's "needs a breakthrough" line and the character sheet note stay as they are.
 - The debug console `breakthrough <class>` stays (it ignores the level rule).
 
+## Built (M22.1, 2026-10-10)
+- `core/breakthrough.gd` holds sources 1 – 3, the hint, the key line and `Breakthrough.validate` (rules, class
+  trials, hook effects: classes and tags must exist). `Night.resolve_xp` checks each class before its `level_up`;
+  `Night.resolve_canon_keys` is step 5b. Its lines go into `progress` and in `lines` right after step 2's lines.
+- A `breakthrough` effect works in `change` and `boon` hooks. `CanonDb` refuses it in an event's own effects.
+- With `tags`, the best-fitting held class is picked first; if that class is not waiting, nothing happens (no
+  fallback to the next class).
+- A `boon` history entry has `"boons": [hook ids]` and no `"by"`, so the journal does not list it as a change.
+- A trial `outcome` left out matches every outcome (like a hook). The hard moment never counts a `fail`.
+- Records from old saves have no `risk` / `duress` / `window`: they count as 0.0 / 1.0 / 1.0.
+
 ## Not chosen
 - A random chance per night: breaks the hidden but fair feel, and hard to test.
 - Key by XP alone (no moment): the capstone would be only a bigger number.
