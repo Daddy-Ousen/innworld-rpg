@@ -301,6 +301,32 @@ class ValidateTest(unittest.TestCase):
         self.assertError(rep, "hooks[5].did[0].outcome")
         self.assertError(rep, "hooks[6].days: the action log keeps 7 days")
 
+    # --- M22 boon hooks and breakthrough effects (ADR 0035)
+
+    def test_boon_hook_with_breakthrough_passes(self):
+        self.ev()["hooks"] = [
+            self.hook(then="boon", effects={"breakthrough": {"tags": {"cooking": 1.0}}}),
+            self.hook(id="named", then="boon", effects={"breakthrough": {"class": "cook"}}),
+            self.hook(id="changed", effects={"set_flags": ["hut.x"], "breakthrough": {"class": "cook"}}),
+        ]
+        self.assertEqual(self.fx.run().errors, [])
+
+    def test_breakthrough_errors(self):
+        self.ev()["effects"]["breakthrough"] = {"class": "cook"}
+        self.ev()["hooks"] = [
+            self.hook(then="boon", effects=None),
+            self.hook(id="both", then="boon", effects={"breakthrough": {"class": "cook", "tags": {"a": 1}}}),
+            self.hook(id="zero", then="boon", effects={"breakthrough": {"tags": {"cooking": 0}}}),
+            self.hook(id="bad_id", then="boon", effects={"breakthrough": {"class": "Cook!"}}),
+        ]
+        del self.ev()["hooks"][0]["effects"]
+        rep = self.fx.run()
+        self.assertError(rep, "effects: unknown key")
+        self.assertError(rep, "hooks[0]: 'boon' needs effects")
+        self.assertError(rep, "hooks[1].effects.breakthrough")
+        self.assertError(rep, "hooks[2].effects.breakthrough.tags")
+        self.assertError(rep, "hooks[3].effects.breakthrough.class")
+
     def test_hook_references(self):
         self.ev()["hooks"] = [
             self.hook(effects={"kill": ["zed"]}),

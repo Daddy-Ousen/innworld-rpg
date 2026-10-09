@@ -105,6 +105,7 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.errors.append_array(Standing.validate(db))  # rules.standing (M14.3)
 	db.errors.append_array(Brawl.validate(db))  # rules.brawl (M14.5)
 	db.errors.append_array(XpWindow.validate(db))  # xp_window boost tiers (M17.8)
+	db.errors.append_array(Breakthrough.validate(db))  # rules, class trials, hook effects (M22)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
 			+ db.combat.errors + db.economy.errors + db.spells.errors
 	for e in db.errors:
