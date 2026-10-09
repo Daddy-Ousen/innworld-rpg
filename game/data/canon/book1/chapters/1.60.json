@@ -207,6 +207,13 @@
 						]
 					},
 					"news": "The dead poured into Liscor at sunset. At the east gate a Human stood with the Watch and helped cut down a Crypt Lord before the line gave way."
+				},
+				{
+					"id": "boon_gate_stand",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"]}],
+					"days": [39, 40],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"combat": 1.0}}}
 				}
 			],
 			"status": "reviewed",

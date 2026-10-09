@@ -133,6 +133,13 @@
 						"relationship": [{"from": "ylawes_byres", "to": "player", "delta": 3}, {"from": "headscratcher", "to": "player", "delta": 1}]
 					},
 					"news": "At Esthelm a stranger from no known city fought at Ylawes Byres' barricade until the Silver Swords broke the Goblin vanguard."
+				},
+				{
+					"id": "boon_esthelm_barricade",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"]}],
+					"days": [80, 80],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"combat": 1.0}}}
 				}
 			],
 			"status": "candidate",

@@ -84,6 +84,13 @@
 						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 3}]
 					},
 					"news": "Goblins raided the inn on the hill. The Human there did not stand alone, but Senior Guardsman Klbkch still died holding off the rest."
+				},
+				{
+					"id": "boon_raid_stand",
+					"did": [{"action": ["attack_melee", "throw_object", "block_attack"], "outcome": ["success"]}],
+					"days": [21, 21],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"combat": 1.0}}}
 				}
 			],
 			"status": "reviewed",

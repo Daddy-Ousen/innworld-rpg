@@ -96,12 +96,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
 - [x] Each M21 – M26 step has a model tag `[Model · effort]` (2026-10-09, branch `docs/roadmap-model-tags`). Default Sonnet · medium.
 - [x] `docs/ROADMAP.md` shows open work first and done milestones at the bottom, newest first (2026-10-09, branch `docs/roadmap-open-first`).
-- [ ] M21 Housekeeping (M21.0 – M21.5 done (M21.6 play pass open) 2026-10-09) · [ ] M22 Breakthroughs (M22.0 – M22.1 done) · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
+- [ ] M21 Housekeeping (M21.0 – M21.5 done (M21.6 play pass open) 2026-10-09) · [ ] M22 Breakthroughs (M22.0 – M22.2 done) · [ ] M23 Canon bends · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
 - Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
 - [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data).
   - [x] M22.0 design (2026-10-09, branch `docs/m22.0-breakthrough-design`): ADR 0035. User picks: hard moment + class trial + canon `boon` hook; a moment counts from level 9 / 19 / 29; a vague hint. Docs only, no tests run.
   - [x] M22.1 engine (2026-10-10, branch `feat/m22.1-breakthrough-engine`): `core/breakthrough.gd`, night steps 2 + 5b, hook `boon`, effect `breakthrough`, `rules.levels.breakthrough`, checks in `DataDb` + validator. No save change. Tests: `unit_breakthrough` (16), `unit_levels`, `unit_class_system`, `unit_night`, `unit_director`, `unit_canon_db`, `unit_player_hooks`, `unit_data_db`, `sim_canon_book1` all pass; Python 107 OK; validator 0 errors. Full suite not run.
-  - [ ] M22.2 data, M22.3 consolidation, M22.4 probe sim.
+  - [x] M22.2 data (2026-10-10, branch `feat/m22.2-breakthrough-data`): trials + hints on 8 classes, 6 `boon` hooks (Books 1 – 3). Tests: `unit_breakthrough` (17), `unit_data_db`, `unit_canon_db`, `unit_director`, `unit_player_hooks`, `sim_player_hooks` (count 74), `sim_canon_book1..3` pass; Python 107 OK; validator 0 errors. Full suite not run.
+  - [ ] M22.3 consolidation, M22.4 probe sim.
 - [ ] Divergence is thin: Books 2–7 have 0 `substitute` / `delay` / `mutate` fallbacks (all 838 events are `cancel` only); 67 of 1089 events have hooks (Book 2: 3 of 207).
 - [x] Commit 565bc9b on `feat/class-tree-wiki`: not merged; redo in M22.3 (M21.1).
 - [ ] New classes `hunter`, `archer`, `alchemist`, `blacksmith`, `teacher` have no own action (no hunt, shoot, brew, forge, teach). Thin pools: 4 spells, 4 recipes, 5 items.

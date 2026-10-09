@@ -29,6 +29,13 @@
 					"then": "change",
 					"effects": {"set_flags": ["wandering_inn.earther_cooks"], "relationship": [{"from": "klbkch", "to": "erin_solstice", "delta": 1}, {"from": "pisces", "to": "erin_solstice", "delta": 1}]},
 					"news": "The Wandering Inn's first regulars ate well today: the Earther cooked. Even the Human mage found nothing to complain about."
+				},
+				{
+					"id": "boon_first_regulars",
+					"did": [{"action": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "serve_guests"], "outcome": ["success"]}],
+					"days": [15, 15],
+					"then": "boon",
+					"effects": {"breakthrough": {"tags": {"hospitality": 1.0}}}
 				}
 			],
 			"status": "reviewed",

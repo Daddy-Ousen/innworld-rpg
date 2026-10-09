@@ -26,7 +26,7 @@ Small and fast. No game change.
 Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
 - [x] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]** (done 2026-10-09: ADR 0035; user picked all three sources, from level 9, a vague hint; schema changes approved: `classes.json` `breakthrough`, hook `then: boon`, effect `breakthrough`, `rules.levels.breakthrough`)
 - [x] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]** (done 2026-10-10: `core/breakthrough.gd`, night steps 2 and 5b, hook `boon`, checks in `DataDb` and the validator; `unit_breakthrough` 16 tests)
-- [ ] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]**
+- [x] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]** (done 2026-10-10: trials + hints on 8 classes in `classes.json`, 6 `boon` hooks in Books 1 – 3)
 - [ ] M22.3 Consolidation on top of breakthroughs (redo 565bc9b: M21.1 said yes; start from `git show 565bc9b`) **[Opus · medium]**
 - [ ] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]**
 **Done when:** a player can reach level 10+ in normal play; `unit_levels`, `unit_class_system` and the new probe pass.
