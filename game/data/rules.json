@@ -118,7 +118,7 @@
 					"counter": "half", "table": "half", "chess_table": "half", "bench": "half", "bed": "half",
 					"stove": "half", "hearth": "half", "brazier": "half", "woodpile": "half", "milestone": "half",
 					"market_stall": "half", "well": "half", "notice_board": "half", "basin": "half",
-					"tombstone": "half", "grave_cross": "half", "bee_nest": "half", "honeycomb": "half",
+					"tombstone": "half", "grave_cross": "half", "bones": "half", "bee_nest": "half", "honeycomb": "half",
 					"shelves": "full", "wagon": "full", "fruit_tree": "full", "dead_tree": "full",
 					"stone_doors": "wall"
 				}

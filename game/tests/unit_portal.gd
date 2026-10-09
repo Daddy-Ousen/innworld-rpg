@@ -42,7 +42,7 @@ func test_the_door_data_loads() -> void:
 	var exits: Array = _db.maps.areas["celum_stitchworks_street"]["exits"]
 	assert_eq(exits.filter(func(e: Dictionary) -> bool: return e["to"] == "celum_stitchworks").size(), 1,
 			"a door from the street")
-	assert_eq(Interact.object_of(_db, "inn_interior", INN_DOOR)["portal"]["to"], "celum_stitchworks")
+	assert_eq(Interact.object_of(_db, "inn_interior", INN_DOOR)["portal"]["links"][0]["to"], "celum_stitchworks")
 	assert_eq(int(_db.rules["portal"]["trips_per_day"]), 4)
 
 

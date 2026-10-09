@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.4 full suite (branch `fix/m21.4-red-tests`)
+- Full run: 166 scripts, 6 red. Fixed 4: `sim_player_hooks` (68), `unit_cover` (bones half cover; estate plaque not solid), `unit_sign_art` (plaque sign), `unit_portal` (links form). Still red: `unit_art`, `unit_portrait` (35 NPCs have no sheet, 10 or so no portrait; list in the test output). User chose to make the art (option 2).
+- Next: build the missing character sheets and portraits (needs the LPC clone, about 240 MB: ask the user first).
+
 ## Just done (2026-10-09, local): M21.5 (branch `docs/m21.5-legal`)
 - Read https://wanderinginn.com/fanworks-permissions/ . Result in `docs/DESIGN.md` §7 and `docs/ITCH.md` ("Policy check"). Docs only.
 - Open for the user: the policy bans book titles in marketing material; ask pirateaba or reword the itch.io and README text.
