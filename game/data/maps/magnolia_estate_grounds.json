@@ -15,7 +15,7 @@
 		{"id": "estate_brazier_west", "kind": "brazier", "at": [12, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "estate_brazier_east", "kind": "brazier", "at": [17, 7], "name": "Brazier", "actions": [], "solid": true, "warm": true},
 		{"id": "estate_bench", "kind": "bench", "at": [20, 8], "name": "Garden bench", "actions": [], "solid": true},
-		{"id": "estate_plaque", "kind": "plaque", "at": [13, 12], "name": "Reinhart estate plaque", "actions": [], "solid": true}
+		{"id": "estate_plaque", "kind": "plaque", "at": [13, 12], "name": "Reinhart estate plaque", "actions": [], "sign": {"icon": "home"}}
 	],
 	"legend": {".": "grass", "T": "tree", "b": "brick_house_b", "d": "brick_door", "_": "cobble", ":": "dirt_road"},
 	"rows": [
