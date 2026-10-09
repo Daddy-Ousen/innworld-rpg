@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.1 (branch `chore/m21.1-consolidation-decision`)
+- Decision: 565bc9b is not merged now. Redo it in M22.3. Branch `feat/class-tree-wiki` stays as the source. Docs only.
+- Next: M21.2 (docs cleanup).
+
 ## Just done (2026-10-09, local): M21.0 (branch `chore/m21.0-housekeeping`)
 - Committed the stray `.uid`; deleted 39 merged local branches. Only `main` and `feat/class-tree-wiki` (unmerged, M21.1) remain. No tests needed (no code).
 - Next: M21.1 (user decides on 565bc9b), then M21.2 docs. M22.0 needs a user design pick.
