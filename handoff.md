@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-09, local): M21.0 (branch `chore/m21.0-housekeeping`)
+- Committed the stray `.uid`; deleted 39 merged local branches. Only `main` and `feat/class-tree-wiki` (unmerged, M21.1) remain. No tests needed (no code).
+- Next: M21.1 (user decides on 565bc9b), then M21.2 docs. M22.0 needs a user design pick.
+
 ## Just done (2026-10-08, local): full project audit (read-only, branch `feat/magnolia-npcs`, PR 137 already merged)
 - Findings are in `progress.md` "Audit". No code or data changed. Memory `targeted-tests` updated to match CLAUDE.md.
 - Biggest bug: capstone level 10 is unreachable in play (no breakthrough source except the debug console). Check: `grep -rn grant_breakthrough game --include=*.gd`.
