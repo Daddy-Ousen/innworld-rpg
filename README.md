@@ -1,6 +1,6 @@
 # Innworld RPG
 
-**A free, fan-made RPG set in *The Wandering Inn* by pirateaba.**
+**A free, fan-made RPG set in pirateaba's Innworld.**
 
 You are an unnamed Earther. The Great Ritual pulls you into Innworld at the start of Book 1.
 The story of the books goes on around you, day by day. What you do with your days is up to you.

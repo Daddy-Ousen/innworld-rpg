@@ -2,7 +2,7 @@ Innworld RPG
 ============
 Version {VERSION}
 
-A free, fan-made, non-commercial RPG set in The Wandering Inn by pirateaba.
+A free, fan-made, non-commercial RPG set in pirateaba's Innworld.
 You play an unnamed Earther. You arrive at the start of Book 1.
 The books and the world belong to pirateaba. This game holds no book text.
 

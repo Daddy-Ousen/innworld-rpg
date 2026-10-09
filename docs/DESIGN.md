@@ -134,5 +134,4 @@ An event may also have a `stage`: its fight appears on the map when the player i
 - Art. Mitigation: one paid/free tileset (e.g. Kenney, a 16×16 fantasy pack); no AI art mixing styles.
 - Legal. Free, non-commercial, no book text shipped. Checked 2026-10-09 against pirateaba's fanworks policy (https://wanderinginn.com/fanworks-permissions/):
   the policy does not name games and says to assume "not allowed" when in doubt. Rules that touch us: no book text or interior art (we ship none);
-  credit the author (we do); no crowdfunding or sale (we have none); no trademark in marketing material, for example the book titles (open: the itch.io
-  and README text name *The Wandering Inn* to say what the fan work is about). No written permission is on file. Safest step: ask pirateaba by email or on her Discord (the user does this).
+  credit the author (we do); no crowdfunding or sale (we have none); no trademark in marketing material, for example the book titles (done 2026-10-09: marketing text says "pirateaba's Innworld"; the title stays only in the credit lines). No written permission is on file. Safest step: ask pirateaba by email or on her Discord (the user does this).
