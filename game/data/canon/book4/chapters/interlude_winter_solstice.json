@@ -12,6 +12,21 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["riverfarm.owes_ryoka_a_debt", "anabelle.wants_to_be_a_runner", "ryoka.knows_the_solstice_rules", "ryoka.heading_home_to_liscor"], "clear_flags": ["ryoka.at_riverfarm"], "relationship": [{"from": "yesel", "to": "ryoka_griffin", "delta": 1}]},
+			"hooks": [
+				{
+					"id": "player_saw_ryoka_off_from_riverfarm",
+					"did": [
+						{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["riverfarm"]}}
+					],
+					"days": [96, 96],
+					"then": "change",
+					"effects": {
+						"set_flags": ["riverfarm.earther_saw_ryoka_off"],
+						"relationship": [{"from": "ryoka_griffin", "to": "player", "delta": 1}, {"from": "prost", "to": "player", "delta": 1}]
+					},
+					"news": "Riverfarm saw the Runner Ryoka Griffin off on the solstice morning, and a stranger from the road walked her to the edge of the fields."
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "interlude_winter_solstice", "confidence": "confirmed", "note": "Day 95 at Riverfarm is a guess (user choice): 3.41 has her arrive on the night before Christmas and the Interlude has her leave the day after. The rules: enter no house unasked, ask no favours, make no bargains, tell no lies, be behind stone and iron by deep night."},
 			"summary": "The day after Christmas, the solstice, Riverfarm sees Ryoka off after breakfast. Prost says the village owes her. Anabelle wants to be a Runner. Yesel gives her a knitted scarf, and Ivolethe says to take it: on the solstice a gift must not be refused. Ivolethe lays down the day's rules."
@@ -64,6 +79,21 @@
 			"depends_on": ["b4.erin_turns_down_three_gifts"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["wandering_inn.kitchen_eaten_bare", "winter.snow_stopped_after_the_solstice", "erin.keeps_the_white_coin"]},
+			"hooks": [
+				{
+					"id": "player_restocked_the_solstice_kitchen",
+					"did": [
+						{"action": ["cook_stew", "cook_simple_meal", "cook_pasta", "bake_bread", "buy_supplies"], "context": {"location": ["wandering_inn", "liscor_market"]}}
+					],
+					"days": [96, 96],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_restocked_the_kitchen"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "lyonette", "to": "player", "delta": 1}]
+					},
+					"news": "On the solstice dawn the Wandering Inn's kitchen was bare, but a Human guest had already cooked for everyone who came home."
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "interlude_winter_solstice", "confidence": "confirmed", "note": "The dawn is the start of day 97. Erin thinks of it as a kind of New Year. End of Book 4."},
 			"summary": "Late that night Lyonette, Mrsha, Zel and the three adventuring teams wake Erin. Every scrap of food in the kitchen is gone, so they run to Liscor for more. Erin finds the coin was real. The snow has stopped and two moons show as the sun comes up."

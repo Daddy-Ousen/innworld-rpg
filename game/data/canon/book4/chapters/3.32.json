@@ -8,8 +8,8 @@
 			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
 			"location": "frenzied_hare",
 			"roles": {"storyteller": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}},
-			"requires": {"alive": ["ceria_springwalker", "erin_solstice"], "flags": ["erin.met_teriarch"], "not_flags": []},
-			"depends_on": ["b4.teriarch_hides_the_wagon_in_a_snowstorm"],
+			"requires": {"alive": ["ceria_springwalker", "erin_solstice"], "flags": ["erin.on_wagon_south", "horns_of_hammerad.left_celum"], "not_flags": []},
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["erin.knows_of_wistram", "ceria.told_the_wistram_story"],
@@ -63,9 +63,9 @@
 			"tier": 2,
 			"window": {"earliest": 90, "latest": 90, "confidence": "guess"},
 			"location": "celum_liscor_road",
-			"roles": {"cook": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
-			"depends_on": ["b4.erin_doubts_the_wistram_story"],
+			"roles": {"cook": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south", "horns_of_hammerad.left_celum"], "not_flags": []},
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.fed_the_horns_corusdeer_soup", "erin.tested_the_door_on_the_road", "pisces.practises_flash_step"]},
 			"status": "candidate",
@@ -78,9 +78,24 @@
 			"location": "esthelm",
 			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "gatekeeper": {"prefer": ["umbral"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "scout": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south", "esthelm.saved"], "not_flags": []},
-			"depends_on": ["b4.erin_feeds_the_horns_corusdeer_soup"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["esthelm.fed_by_erin", "esthelm.believes_the_purple_eyed_skeleton_died", "yvlon.knows_ylawes_searches_for_her", "horns_of_hammerad.hide_names_in_esthelm", "ylawes.gone_north_to_find_yvlon"], "clear_flags": ["ylawes.at_esthelm"], "relationship": [{"from": "umbral", "to": "erin_solstice", "delta": 1}]},
+			"hooks": [
+				{
+					"id": "player_helped_feed_esthelm",
+					"did": [
+						{"action": ["cook_stew", "cook_simple_meal", "serve_guests", "carry_water", "comfort_someone"], "context": {"location": ["esthelm"]}}
+					],
+					"days": [90, 90],
+					"then": "change",
+					"effects": {
+						"set_flags": ["esthelm.earther_helped_feed_the_town"],
+						"relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "umbral", "to": "player", "delta": 1}]
+					},
+					"news": "When Erin Solstice's wagon stopped at Esthelm, another Human helped her hand out blankets and stew at the gate."
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Toren lives. Umbral only tells what the town believes; nobody says it is Toren. The flower grave by the plaza fits the Florist but is never named. The Horns will not open the door here. Ylawes has left, so the siblings do not meet."},
 			"summary": "The wagon reaches Esthelm. Umbral, a former [Soldier] who keeps the gate, lets it in. Erin hands out blankets and cooks stew, and Yvlon hides her name. Umbral tells how Ylawes saved the city, that he went north for his sister, and that Goblins killed a purple-eyed skeleton."
@@ -103,14 +118,27 @@
 			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
 			"location": "wandering_inn",
 			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "watchman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
-			"depends_on": ["b4.the_horns_reach_esthelm", "b4.lyonette_finds_the_hidden_basement"],
-			"on_fail": ["cancel"],
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south", "erin.has_albez_door"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["mutate:b4.erin_comes_home_without_the_door", "cancel"],
 			"effects": {"set_flags": ["erin.home_at_the_inn", "albez_door.at_wandering_inn"], "clear_flags": ["erin.on_wagon_south", "erin.left_celum", "erin.in_celum", "erin.stranded_north", "erin.left_liscor", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"]},
 			"rumor": "Erin Solstice is back at the Wandering Inn. The whole hill has heard the Gnoll cub howl.",
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "confirmed", "note": "Day 91 is confirmed by the text (the wagon reaches Esthelm on day 90). The door is shown in the inn from day 92 but stays dry until Erin's Level 30."},
 			"summary": "Just before sunset on day 91 the wagon reaches Liscor and the hill. Mrsha howls, Krshia answers, and word runs through the city: Erin Solstice is home. Klbkch knew when she crossed the floodplains, and Relc kicks over a table for joy. The door is carried into the common room."
+		},
+		"b4.erin_comes_home_without_the_door": {
+			"tier": 1,
+			"window": {"earliest": 91, "latest": 91, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "friend": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "watchman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.home_at_the_inn"], "clear_flags": ["erin.on_wagon_south", "erin.left_celum", "erin.in_celum", "erin.stranded_north", "erin.left_liscor", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.32", "confidence": "guess", "note": "Not in the book (M23.3, divergence only): runs when Erin comes home with no magic door (it was never recovered from Albez)."},
+			"summary": "Just before sunset the wagon reaches Liscor and the hill. Mrsha howls, word runs through the city that Erin Solstice is home, and Relc kicks over a table for joy. There is no magic door to carry in."
 		}
 	},
 	"system": []

@@ -179,7 +179,7 @@ func test_ceria_dies_and_reynold_fetches_ryoka_from_celum() -> void:
 		"magnolia_kills_nemor_and_his_assassins", "erin_stages_romeo_and_juliet", "erin_says_goodbye_to_octavia",
 		"pawns_soldiers_stop_a_street_battle"])
 	_mutated(gs, "erin_leaves_celum_on_the_wagon", "erin_goes_home_without_the_horns", 87)
-	assert_true(gs.flags.has("erin.on_wagon_south"))
+	assert_true(gs.flags.has("erin.home_at_the_inn"), "Book 4 hands off on erin.on_wagon_south (M23.3)")
 	assert_false(gs.flags.has("horns_of_hammerad.has_albez_treasure"))
 	assert_false(gs.flags.has("ryoka.carries_the_horns_relics"), "no relics without the Ocre visit")
 
@@ -197,8 +197,8 @@ func test_pisces_dies_and_the_horns_dig_albez_by_hand() -> void:
 	_not_happened(gs, ["pisces_confesses_he_made_toren_to_level", "pisces_and_ksmvr_recover_the_albez_door",
 		"the_horns_give_erin_the_albez_door"])
 	_mutated(gs, "erin_leaves_celum_on_the_wagon", "erin_and_the_horns_leave_celum_without_the_door", 87)
-	assert_true(gs.flags.has("erin.on_wagon_south"))
-	assert_true(gs.flags.has("horns_of_hammerad.bound_for_liscor"))
+	assert_eq(gs.world.status("b4.erin_comes_home_without_the_door"), Director.DONE, "Book 4 hand-off (M23.3)")
+	assert_true(gs.flags.has("erin.home_at_the_inn"))
 	assert_false(gs.flags.has("erin.has_albez_door"))
 
 

@@ -39,7 +39,7 @@
 			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "antinium": {"prefer": ["klbkch"], "fallback_tags": []}, "queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true}, "worker": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "prognugator": {"prefer": ["xrn"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["mrsha", "klbkch"], "flags": ["mrsha.fled_into_liscor"], "not_flags": []},
 			"depends_on": ["b4.mrsha_flees_zels_scent"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b4.pawn_leads_mrsha_out_of_the_hive", "cancel"],
 			"effects": {
 				"set_flags": ["mrsha.met_the_free_queen"],
 				"relationship": [{"from": "klbkch", "to": "mrsha", "delta": 1}]
@@ -54,8 +54,9 @@
 			"location": "krshia_home",
 			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "accuser": {"prefer": ["brunkr"], "fallback_tags": ["gnoll"]}, "elder": {"prefer": ["krshia"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["mrsha"], "flags": ["mrsha.met_the_free_queen"], "not_flags": []},
-			"depends_on": ["b4.mrsha_strays_into_the_hive"],
-			"on_fail": ["cancel"],
+			"depends_on": ["b4.mrsha_flees_zels_scent"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {
 				"set_flags": ["mrsha.called_a_doombringer", "mrsha.ran_from_liscor", "brunkr.hand_infected"],
 				"relationship": [{"from": "mrsha", "to": "brunkr", "delta": -1}]
@@ -190,6 +191,19 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "confirmed", "note": "Zel gets Lyonette past the gate guards; Halrac and Jelaqua come from the Guild; Klbkch fetches Xrn. Krshia and Halrac fix ropes; Xrn's [Featherfall] takes six down. A red worm-like monster lies dead below. In the text nobody waits at the top. Jelaqua only smiles at the offer of a room."},
 			"summary": "Lyonette hears a howl from a crack in the snow and runs for help. Zel, Halrac, Jelaqua, Klbkch, Xrn and Krshia go down into the dungeon and bring Mrsha up alive. Lyonette hugs her and swears never to let her out of her sight again."
+		},
+		"b4.pawn_leads_mrsha_out_of_the_hive": {
+			"tier": 2,
+			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"cub": {"prefer": ["mrsha"], "fallback_tags": []}, "worker": {"prefer": ["pawn"], "fallback_tags": []}, "queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["mrsha", "pawn"], "flags": ["mrsha.fled_into_liscor"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["mrsha.met_the_free_queen"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.27M", "confidence": "guess", "note": "Not in the book (M23.3, divergence only): runs instead of Klbkch's rescue in the Hive when Klbkch is dead. Pawn knows Krshia from the inn."},
+			"summary": "Mrsha trails Pawn into the Hive and wanders down to the Free Queen's chamber. With no Klbkch to find her, Pawn carries her back up and takes her to Krshia."
 		}
 	},
 	"system": [

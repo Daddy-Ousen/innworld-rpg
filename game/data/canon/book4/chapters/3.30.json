@@ -9,7 +9,7 @@
 			"location": "stitchworks",
 			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.has_albez_door"], "not_flags": []},
-			"depends_on": ["b3.erin_leaves_celum_on_the_wagon"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"clear_flags": ["albez_door.linked_to_frenzied_hare"],
@@ -49,7 +49,7 @@
 				"driver": {"prefer": ["termin"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["teriarch", "erin_solstice"], "flags": ["teriarch.copied_the_iphone", "erin.on_wagon_south"], "not_flags": []},
-			"depends_on": ["b4.erin_moves_the_door_anchor_to_the_stitchworks"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["erin.met_teriarch", "horns_of_hammerad.humbled_by_teriarch"],
@@ -71,7 +71,7 @@
 			},
 			"requires": {"alive": ["teriarch", "ceria_springwalker"], "flags": ["erin.met_teriarch"], "not_flags": []},
 			"depends_on": ["b4.teriarch_stops_the_wagon"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b4.the_wagon_hides_from_the_goblin_army", "mutate:b4.the_horns_hide_from_the_goblin_army", "cancel"],
 			"effects": {
 				"set_flags": ["ceria.teriarch_marked_a_spell", "pisces.refused_by_teriarch", "goblin_army.on_the_liscor_road"],
 				"relationship": [{"from": "ceria_springwalker", "to": "teriarch", "delta": 1}]
@@ -80,6 +80,32 @@
 			"status": "candidate",
 			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "confirmed", "note": "The army is almost surely the Goblin Lord's, but the text does not name him: no link. He marks a spell in Ceria's burnt spellbook, asks about Archmage Zelkyr and turns Pisces down as an apprentice. Later, alone, he half-remembers Erin; do not link him to the 1.00 Dragon."},
 			"summary": "A Goblin army of thousands in black armour, with undead among them, comes down the road. The old man teaches Ceria and Pisces to raise a snowstorm from the snow around them, and the wagon stays hidden until the army has passed."
+		},
+		"b4.the_wagon_hides_from_the_goblin_army": {
+			"tier": 1,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "driver": {"prefer": ["termin"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.on_wagon_south"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["goblin_army.on_the_liscor_road", "erin.hid_from_the_goblin_army"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "guess", "note": "Not in the book (M23.3, divergence only): runs instead of the old man's snowstorm when he or Ceria cannot raise it (Teriarch or Ceria dead, or the old man never stopped the wagon)."},
+			"summary": "A Goblin army in black armour comes down the road. The wagon pulls off into a fold of the hills, everyone lies still under the snow, and the army passes without seeing it."
+		},
+		"b4.the_horns_hide_from_the_goblin_army": {
+			"tier": 1,
+			"window": {"earliest": 89, "latest": 89, "confidence": "guess"},
+			"location": "celum_liscor_road",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.left_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["goblin_army.on_the_liscor_road", "horns_of_hammerad.hid_from_the_goblin_army"]},
+			"status": "candidate",
+			"canon_ref": {"book": 4, "chapter": "3.30", "confidence": "guess", "note": "Not in the book (M23.3, divergence only): runs when the Horns of Hammerad travel south without Erin (Erin dead): no old man stops their wagon."},
+			"summary": "On the road south the Horns see a Goblin army in black armour, with undead among it. Ceria buries the wagon in a drift of snow and ice, and the army marches past."
 		}
 	},
 	"system": [
