@@ -8,7 +8,7 @@
 		"herbs": {"name": "Herbs", "confidence": "guess", "buy": 0, "sell": 3},
 		"firewood": {"name": "Firewood", "confidence": "guess", "buy": 3, "sell": 2},
 		"hot_meal": {"name": "Hot meal", "confidence": "guess", "buy": 5, "sell": 0, "eat_now": true},
-		"healing_potion": {"name": "Healing potion", "confidence": "guess", "buy": 30, "sell": 0, "heal": 10,
+		"healing_potion": {"name": "Healing potion", "confidence": "guess", "buy": 30, "sell": 0, "heal": [8,15],
 			"canon_ref": {"book": 2, "chapter": "2.08", "confidence": "likely", "note": "Octavia is an [Alchemist] who sells potions at Stitchworks. This potion and its price are a guess."}},
 		"spellbook_fireball": {"name": "Spellbook: [Fireball]", "confidence": "guess", "buy": 0, "sell": 0, "teaches": "fireball",
 			"canon_ref": {"book": 2, "chapter": "2.23", "confidence": "guess", "note": "Spellbooks exist (2.23 has 23 lost ones; 3.07H a vault). This one, and that it teaches [Fireball], is a design guess. No shop sells it yet."}},
@@ -18,22 +18,27 @@
 			"warm_minutes": 240, "from_flag": "erin.makes_corusdeer_soup",
 			"canon_ref": {"book": 3, "chapter": "3.09", "confidence": "likely", "note": "Erin and Octavia make Corusdeer soup in Octavia's shop; it keeps Ryoka warm in the snow. That Stitchworks sells it, its price and its four hours are guesses (M9.2, user choice 2026-09-26)."}},
 		"rolling_pin": {"name": "Rolling pin", "confidence": "guess", "buy": 0, "sell": 0, "item": "rolling_pin"},
-		"horseshoe": {"name": "Rusty horseshoe", "confidence": "guess", "buy": 0, "sell": 0, "item": "horseshoe"},
+		"horseshoe": {"name": "Rusty horseshoe", "confidence": "guess", "buy": 0, "sell": 2, "item": "horseshoe"},
 		"stone": {"name": "Stone", "confidence": "guess", "buy": 0, "sell": 0, "item": "stone"},
 		"flour": {"name": "Flour", "confidence": "guess", "buy": 4, "sell": 0},
+		"egg": {"name": "Egg", "confidence": "guess", "buy": 2, "sell": 0},
 		"vegetables": {"name": "Vegetables", "confidence": "guess", "buy": 2, "sell": 0},
 		"meat": {"name": "Meat", "confidence": "guess", "buy": 6, "sell": 0},
 		"dry_pasta": {"name": "Dry pasta", "confidence": "guess", "buy": 4, "sell": 0},
 		"simple_meal": {"name": "Simple meal", "confidence": "guess", "buy": 0, "sell": 4, "food": true},
 		"stew": {"name": "Stew", "confidence": "guess", "buy": 0, "sell": 8, "food": true},
-		"pasta_dish": {"name": "Pasta dish", "confidence": "guess", "buy": 0, "sell": 8, "food": true}
+		"pasta_dish": {"name": "Pasta dish", "confidence": "guess", "buy": 0, "sell": 8, "food": true},
+		"grilled_meat": {"name": "Grilled Meat", "confidence": "guess", "buy": 0, "sell": 9, "food": true},
+		"blue_pastry": {"name": "Blue pastry", "confidence": "guess", "buy": 0, "sell": 12, "food": true}
+
+
 	},
 	"shops": {
 		"krshia_stall": {"name": "Krshia's stall", "sells": ["bread", "firewood", "winter_clothes", "flour",
 			"vegetables", "meat", "dry_pasta"],
 			"buys": ["blue_fruit", "herbs", "firewood"]},
-		"lism_stall": {"name": "Lism's stall", "sells": ["bread"], "buys": []},
-		"celum_stall": {"name": "Celum market stall", "sells": ["bread", "firewood", "winter_clothes", "flour",
+		"lism_stall": {"name": "Lism's stall", "sells": ["bread","egg"], "buys": []},
+		"celum_stall": {"name": "Celum market stall", "sells": ["bread","egg", "firewood", "winter_clothes", "flour",
 			"vegetables", "meat"],
 			"buys": ["blue_fruit", "herbs", "firewood"]},
 		"stitchworks": {"name": "Stitchworks", "sells": ["healing_potion", "corusdeer_soup"], "buys": ["herbs"]},
@@ -41,15 +46,15 @@
 		"invrisil_stall": {"name": "Invrisil market stall", "sells": ["bread", "firewood", "winter_clothes", "flour",
 			"vegetables", "meat"],
 			"buys": ["blue_fruit", "herbs", "firewood"]},
-		"crag_pig": {"name": "The Crag Pig", "sells": ["hot_meal", "bread"], "buys": []},
-		"invrisil_merchants": {"name": "Invrisil Merchants' Guild", "sells": ["bread", "flour", "winter_clothes"], "buys": ["herbs", "firewood", "blue_fruit"]},
-		"frenzied_hare": {"name": "The Frenzied Hare", "sells": ["hot_meal", "bread"], "buys": []},
+		"crag_pig": {"name": "The Crag Pig", "sells": ["hot_meal", "bread"], "buys": ["blue_fruit", "herbs"]},
+		"invrisil_merchants": {"name": "Invrisil Merchants' Guild", "sells": ["bread", "flour", "winter_clothes"], "buys": ["herbs", "firewood", "blue_fruit","horseshoe"]},
+		"frenzied_hare": {"name": "The Frenzied Hare", "sells": ["hot_meal", "bread"], "buys": ["grilled_meat", "blue_pastry","stew"]},
 		"wandering_inn": {"name": "The Wandering Inn", "sells": ["hot_meal", "bread"], "buys": []}
 	},
 	"yields": {
-		"forage_fruit": {"blue_fruit": 2},
-		"gather_herbs": {"herbs": 1},
-		"chop_wood": {"firewood": 1}
+		"forage_fruit": {"blue_fruit": [1,3]},
+		"gather_herbs": {"herbs": [0,2 ]},
+		"chop_wood": {"firewood": [1,2]}
 	},
 	"jobs": {
 		"deliver_parcel": {"pay": [3, 6]}
