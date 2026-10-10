@@ -1,14 +1,27 @@
 # Roadmap
 
 Rule: finish a milestone's acceptance tests before starting the next. Tick boxes as you go.
-Open work is at the top. Finished milestones are at the bottom, newest first (M19 … M0).
-Keep this order: a new milestone goes into "Next up"; when every box of a milestone is ticked, move it to the top of "Done".
+Order of this file: **Next up** (open work) → **Waits on a user check** → **Later** → **Done** (newest first, M22 … M0).
+When every box of a milestone is ticked, move it to the top of Done. A new milestone goes into Next up.
+
+## At a glance
+
+| Milestone | State | Open items |
+|---|---|---|
+| M21 Housekeeping | open | M21.6 play pass (user) |
+| M23 Canon bends | open | M23.4 Book 5, M23.5 Book 6, M23.6 Book 7, M23.7 drift warning |
+| M24 Level by living | not started | M24.0 – M24.3 |
+| M25 NPC life | not started | M25.0 – M25.4 |
+| M26 Code health | not started | M26.0, M26.1 |
+| M20 Touch controls | waits on user | play on a phone and a touch PC |
+| Later | idea | Book 8 plan (after M25), optional LLM flavour layer |
+
+---
 
 # Next up
 
-## Audit work (2026-10-09)
-From the project audit of 2026-10-08 (`progress.md` "Audit"). Suggested order: M21 → M22 → M23 → M24 → M25 → M26,
-then Book 8. One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
+From the project audit of 2026-10-08 (`progress.md` "Audit"). Suggested order: M21 → M23 → M24 → M25 → M26, then Book 8.
+One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
 Model tag `[Model · effort]` at the end of each step: the model and effort to pick for that session. Default is Sonnet · medium. Opus for engine, save and design work and for canon logic; high effort where lore, balance or cascades are easy to get wrong; low for mechanical steps.
 
 ## M21 — Housekeeping (cleanup)
@@ -21,15 +34,6 @@ Small and fast. No game change.
 - [x] M21.5 Legal (done 2026-10-09; open: ask pirateaba, user): read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
 - [ ] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]**
 **Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
-
-## M22 — Breakthroughs (fix: no class can pass level 9)
-Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
-- [x] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]** (done 2026-10-09: ADR 0035; user picked all three sources, from level 9, a vague hint; schema changes approved: `classes.json` `breakthrough`, hook `then: boon`, effect `breakthrough`, `rules.levels.breakthrough`)
-- [x] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]** (done 2026-10-10: `core/breakthrough.gd`, night steps 2 and 5b, hook `boon`, checks in `DataDb` and the validator; `unit_breakthrough` 16 tests)
-- [x] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]** (done 2026-10-10: trials + hints on 8 classes in `classes.json`, 6 `boon` hooks in Books 1 – 3)
-- [x] M22.3 Consolidation on top of breakthroughs (redo 565bc9b: M21.1 said yes; start from `git show 565bc9b`) **[Opus · medium]** (done 2026-10-10: automatic at night, a source class at level 10, so after its breakthrough; `consolidate_ready`, `rules.offers.consolidation_min_level`)
-- [x] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]** (done 2026-10-10: `sim_breakthrough_probe`; busy inn level 10 on night 31 – 32, quiet inn on night 73, fighter on night 17 – 22; bar numbers kept)
-**Done when:** a player can reach level 10+ in normal play; `unit_levels`, `unit_class_system` and the new probe pass.
 
 ## M23 — Canon bends (divergence depth)
 Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 67 of 1089 events have hooks.
@@ -63,8 +67,7 @@ No behaviour change.
 - [ ] M26.0 Split `game/world/main.gd` (965 lines): input, travel and panel parts in their own scripts **[Opus · medium]**
 - [ ] M26.1 Split `game/world/world_view.gd` (1285 lines): markers, overlays, effects **[Opus · medium]**
 **Done when:** both files are under about 500 lines; `unit_world_view`, `unit_play_loop`, `unit_touch_controls` and the UI scripts that touch them pass.
-
-# Open: waits on a user check
+# Waits on a user check
 
 ## M20 — Touch controls (ADR 0032)
 Planned 2026-10-05 (cloud, `docs/plans/m20.md`). User answers: InputMap actions (not fake key events), a 4-way D-pad,
@@ -88,13 +91,21 @@ the keys work as before; the GUT tests that touch it pass; the user has played i
   screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
 - [x] v0.1.1-alpha with the web build (ADR 0031, published 2026-10-02, https://daddy-ousen.github.io/innworld-rpg/): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow,
   itch.io upload by the user
-- [ ] Touch controls (on-screen pad, menu buttons), then an Android build: M20 below
+- [x] Touch controls and an Android build: see M20 above (open: the user plays it on a phone)
 
 ## Later
 - Book 8 plan (after M25)
 - optional LLM flavour layer
-
 # Done (newest first)
+
+## M22 — Breakthroughs (fix: no class can pass level 9)
+Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
+- [x] M22.0 Design + ADR: how a breakthrough is earned (canon moments, a hard fight with high duress, an `xp_window` event, a class's own trial) (user picks). Ask before the schema change **[Opus · high]** (done 2026-10-09: ADR 0035; user picked all three sources, from level 9, a vague hint; schema changes approved: `classes.json` `breakthrough`, hook `then: boon`, effect `breakthrough`, `rules.levels.breakthrough`)
+- [x] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]** (done 2026-10-10: `core/breakthrough.gd`, night steps 2 and 5b, hook `boon`, checks in `DataDb` and the validator; `unit_breakthrough` 16 tests)
+- [x] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]** (done 2026-10-10: trials + hints on 8 classes in `classes.json`, 6 `boon` hooks in Books 1 – 3)
+- [x] M22.3 Consolidation on top of breakthroughs (redo 565bc9b: M21.1 said yes; start from `git show 565bc9b`) **[Opus · medium]** (done 2026-10-10: automatic at night, a source class at level 10, so after its breakthrough; `consolidate_ready`, `rules.offers.consolidation_min_level`)
+- [x] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]** (done 2026-10-10: `sim_breakthrough_probe`; busy inn level 10 on night 31 – 32, quiet inn on night 73, fighter on night 17 – 22; bar numbers kept)
+**Done when:** a player can reach level 10+ in normal play; `unit_levels`, `unit_class_system` and the new probe pass.
 
 ## M19 — Book 7 (The Rains of Liscor)
 Planned 2026-10-07 (ADR 0030). Same flow as M18; the book text is in `canon/raw/book7/` (local: cut from the epub;
