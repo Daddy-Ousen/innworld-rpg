@@ -120,7 +120,6 @@ func _ready() -> void:
 	bar.skill.connect(pick_skill)
 	view.replay_step.connect(_on_replay_step)
 	view.replay_done.connect(_on_replay_done)
-	journal.focus_changed.connect(Session.changed)
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
 	touch.cancel_pressed.connect(cancel)

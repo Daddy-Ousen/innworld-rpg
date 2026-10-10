@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-11): M21.6 closed, journal focus picker removed (branch `fix/journal-no-focus-picker`)
+- The user played every open check: all fine. M21.6 and M21 are ticked.
+- Journal: the Focus list, its hint line and the "Focus:" line are gone (`ui/journal.gd`, `journal.tscn`, `main.gd`). `focus_choices`, `focus_name`, `main_tags` stay (character sheet, console, tests). Focus still works through the console `focus` command.
+- Tests run (pass): `unit_journal` (7), `unit_touch_controls` (18; the tap test now uses its own ItemList), `unit_character_sheet`. Full suite not run.
+- Next: M23.4 Book 5 **[Opus · high]**. Optional: console `skip <days>` command (offered to the user, no answer yet).
+
 ## Just done (2026-10-10): ROADMAP.md reorganised
 - `docs/ROADMAP.md`: added an "At a glance" table. Open work is first (M21, M23 – M26). M20 and Releases sit under "Waits on a user check". M22 (all ticked) moved to the top of Done. No content lost. Not committed yet.
 

@@ -8,7 +8,7 @@ When every box of a milestone is ticked, move it to the top of Done. A new miles
 
 | Milestone | State | Open items |
 |---|---|---|
-| M21 Housekeeping | open | M21.6 play pass (user) |
+| M21 Housekeeping | done | - |
 | M23 Canon bends | open | M23.4 Book 5, M23.5 Book 6, M23.6 Book 7, M23.7 drift warning |
 | M24 Level by living | not started | M24.0 – M24.3 |
 | M25 NPC life | not started | M25.0 – M25.4 |
@@ -32,7 +32,7 @@ Small and fast. No game change.
 - [x] M21.3 Disk (done 2026-10-09, user said start; `export/` 2.8 GB to under 1 GB, v0.1.3 files kept): delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
 - [x] M21.4 (done 2026-10-09: 6 red found; 4 fixed in PR 147, 2 fixed by making 35 NPC sheets) Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
 - [x] M21.5 Legal (done 2026-10-09; open: ask pirateaba, user): read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
-- [ ] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]**
+- [x] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]** (done 2026-10-11: the user played all checks, all fine)
 **Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
 
 ## M23 — Canon bends (divergence depth)

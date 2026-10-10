@@ -40,11 +40,11 @@ func test_focus_name() -> void:
 	assert_eq(Journal.focus_name(gs, _db), "cooking, commerce", "a focus set in the console")
 
 
-func test_lines_show_the_day_the_focus_and_the_hints() -> void:
+func test_lines_show_the_day_and_the_hints() -> void:
 	var gs := GameState.new_game(1, _db)
 	var text := "\n".join(Journal.lines(gs, _db))
 	assert_string_contains(text, "Day 1, 06:00.")
-	assert_string_contains(text, "Focus: none")
+	assert_false(text.contains("Focus:"), "no focus line in the journal")
 	assert_string_contains(text, SystemMessages.HINTS[0])
 
 
@@ -71,21 +71,12 @@ func test_lines_show_news_changes_and_drift() -> void:
 	assert_string_contains(text, "Drift: 9.00. " + Director.UNRELIABLE_LINE)
 
 
-func test_choose_sets_the_focus() -> void:
+func test_journal_has_no_focus_picker() -> void:
 	var gs := GameState.new_game(1, _db)
 	var journal: Journal = add_child_autofree(load("res://ui/journal.tscn").instantiate())
 	journal.open(gs, _db)
 	assert_true(journal.visible)
-	var items: ItemList = journal.get_node("%Focus")
-	var index := -1
-	for i in items.item_count:
-		if items.get_item_text(i) == "Become [Innkeeper]":
-			index = i
-	assert_eq(journal.choose(index), "")
-	assert_eq(gs.focus_tags, ["hospitality", "cooking", "cleaning"] as Array[String])
-	assert_string_contains(journal.get_node("%Text").text, "Focus: Become [Innkeeper]")
-	assert_eq(journal.choose(0), "")
-	assert_eq(gs.focus_tags, [] as Array[String])
+	assert_null(journal.get_node_or_null("%Focus"))
 
 
 func test_focus_speeds_the_first_offer() -> void:
