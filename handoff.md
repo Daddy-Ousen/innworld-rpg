@@ -1,5 +1,15 @@
 # Handoff
 
+## Just done (2026-10-10, local): M22.4 probe sim (branch `feat/m22.4-probe-sim`)
+- New `game/tests/sim_breakthrough_probe.gd` (2 tests, ~3 min of sim): busy inn worker, quiet inn worker, fighter, days 1 – 87,
+  3 seeds. Busy inn passes level 10 on night 31 – 32; quiet inn waits for its key until night 73; fighter level 10 on
+  night 17 – 22. Table and decision in ADR 0035 "Probe result". No bar number changed. No code or data changed.
+- Tests run: `sim_breakthrough_probe` (2 pass). Full suite not run. M22.3's state-file notes are committed here too.
+- M22 is complete. Next: the user picks M23 (canon bends, **[Opus · high]** per book) or M21.6 (play pass). Start M23.0
+  (`tools/divergence_report.py`, **[Sonnet · medium]**) first; it needs the user to pick key NPCs.
+- Gotchas: a GutTest method named `_summary` makes a parse error ("Member is not a function"): the probe uses `_describe`
+  and `_log_lines`. `BALANCE_LOG=<file>` writes every night row. 11 merged local branches (M21 / M22) can be cleaned up.
+
 ## Just done (2026-10-10, local): M22.3 consolidation (branch `feat/m22.3-consolidation`)
 - Cherry-picked 565bc9b onto main (code + tests + DESIGN). Fixed the `rules.json` conflict by hand (kept
   `levels.breakthrough`, added `offers.consolidation_min_level: 10`). Old state-file edits from 565bc9b dropped.
@@ -9,7 +19,10 @@
 - Tests run (all pass): `unit_class_system`, `unit_class_tree_step2`, `unit_class_tree_step3`, `unit_night`,
   `unit_system_messages`, `unit_journal`, `unit_game_state`, `unit_data_db`, `unit_breakthrough`, `sim_decline`;
   Python 107 OK; validator 0 errors. Full suite not run.
-- Next: M22.4 probe sim **[Sonnet · high]**. After the PR merges, `git branch -D feat/class-tree-wiki` (user OK first).
+- PR #152 merged. Local branches `feat/class-tree-wiki` and `feat/m22.3-consolidation` deleted (user OK).
+  Remote `origin/feat/class-tree-wiki` still exists. This note and the `progress.md` line are NOT committed yet:
+  commit them on the M22.4 branch.
+- Next: M22.4 probe sim **[Sonnet · high]**. 11 merged local branches (M21 / M22) can be cleaned up later.
 - Gotchas: a source class that gets its canon key in night step 5b reaches level 10 there, so it consolidates on
   the NEXT night (step 4 runs before 5b). The Python test run prints validator ERROR lines from its fixtures: read
   only the `Ran` / `OK` lines.

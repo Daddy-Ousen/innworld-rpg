@@ -110,3 +110,18 @@ gained first). The usual rule holds: the class must be at 9 / 19 / 29 without a 
   its own key at its next capstone. `ClassSystem.make_offers` lost its `kind` argument; `consolidate_ready` is new.
   An old save with a pending consolidation offer can still accept it.
 - M22.4 probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days.
+
+## Probe result (M22.4, 2026-10-10)
+`sim_breakthrough_probe` plays days 1 – 87 on three seeds (no RNG-sensitive result: all three agree within one night).
+| Play style | Level 9 | Key | Level 10 |
+|---|---|---|---|
+| Busy inn worker (guests up to 20) | night 25 – 26 | night 26 – 27 | night 31 – 32 |
+| Quiet inn worker (guests up to 4) | night 37 – 38 | night 73 | night 73 |
+| Fighter (two Goblin fights a day) | night 13 – 16 | night 14 – 22 | night 17 – 22 |
+- The busy worker has the key one night after level 9 (10 guests is duress 1.8 from day 8), so the gate costs a busy
+  player nothing. The XP still takes 5 more nights. After level 10 the class keeps growing (level 16 on night 87).
+- The quiet worker has no hard moment, so the key waits about 35 days for a Book 3 moment. The gate holds, and the
+  player is not stuck for good.
+- The fighter is the fastest by 10 nights or more. That is the M17.8 balance, not a breakthrough effect.
+- Decision: the bar numbers stay (risk 0.6, duress 1.8, window 2.0). Levels 20 / 30 are not probed (Books 1 – 3 end at
+  day 87 and the curve is far from them).
