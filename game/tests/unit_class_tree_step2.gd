@@ -30,23 +30,46 @@ func test_priest_line_chain() -> void:
 	assert_eq(_db.classes["bishop"]["prereqs"]["classes"], ["priest"])
 
 
-func test_dragoon_needs_warrior_and_rider() -> void:
+func test_dragoon_needs_warrior_and_rider_and_a_level_10() -> void:
 	var gs := GameState.new()
-	ToyData.give_class(gs, "warrior", 4)
+	ToyData.give_class(gs, "warrior", 1)
 	gs.progression.pools["dragoon"] = 1000.0
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2), [] as Array[String])
-	ToyData.give_class(gs, "rider", 3)
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2), ["dragoon"] as Array[String])
-	ClassSystem.accept(gs, _db, "dragoon")
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "no rider")
+	ToyData.give_class(gs, "rider", 1)
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "both at level 1")
+	gs.progression.classes["warrior"]["level"] = 10
+	var lines := ClassSystem.consolidate_ready(gs, _db)
+	assert_string_contains(lines[0], "[Warrior] and [Rider] became [Dragoon]")
 	assert_false(gs.progression.has_class("rider"))
-	assert_eq(gs.progression.level_of("dragoon"), 2, "level 4 minus cost 2")
+	assert_eq(gs.progression.level_of("dragoon"), 8, "level 10 minus cost 2")
 
 
-func test_druid_needs_three_classes() -> void:
+func test_consolidation_waits_for_the_source_breakthrough() -> void:
 	var gs := GameState.new()
-	ToyData.give_class(gs, "gardener", 5)
+	var levels: Dictionary = _db.rules["levels"]
+	ToyData.give_class(gs, "warrior", 9)
+	ToyData.give_class(gs, "rider", 1)
+	gs.progression.pools["dragoon"] = 1000.0
+	assert_eq(Breakthrough.waiting_for(gs.progression, "warrior", levels), 10)
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "level 9 waits for its key")
+	ClassSystem.grant_breakthrough(gs, "warrior")
+	gs.progression.classes["warrior"]["level"] = 10
+	ClassSystem.consolidate_ready(gs, _db)
+	assert_true(gs.progression.has_class("dragoon"))
+	assert_false(gs.progression.breakthroughs.has("warrior"), "the old key goes with the class")
+	assert_false(gs.progression.breakthroughs.has("dragoon"), "no key carried over")
+	gs.progression.classes["dragoon"]["level"] = 9
+	assert_eq(Breakthrough.waiting_for(gs.progression, "dragoon", levels), 10,
+			"the new class needs its own breakthrough")
+
+
+func test_druid_needs_three_classes_and_a_level_10() -> void:
+	var gs := GameState.new()
+	ToyData.give_class(gs, "gardener", 10)
 	ToyData.give_class(gs, "beast_tamer", 2)
 	gs.progression.pools["druid"] = 1000.0
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2), [] as Array[String])
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "mage missing")
 	ToyData.give_class(gs, "mage", 1)
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2), ["druid"] as Array[String])
+	ClassSystem.consolidate_ready(gs, _db)
+	assert_true(gs.progression.has_class("druid"))
+	assert_eq(gs.progression.level_of("druid"), 7, "level 10 minus cost 3")

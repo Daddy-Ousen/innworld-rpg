@@ -103,5 +103,10 @@ gained first). The usual rule holds: the class must be at 9 / 19 / 29 without a 
   `unit_breakthrough`, plus `unit_levels`, `unit_class_system`, `unit_night`, `unit_director`, `unit_canon_db`, validator,
   Python tool tests.
 - M22.2 data: trials and hints for the main class lines; a few `boon` hooks on big canon moments (Books 1 – 3).
-- M22.3 consolidation on top (redo 565bc9b).
+- M22.3 consolidation on top (redo 565bc9b). Built 2026-10-10: consolidation is automatic at night step 4 (no offer,
+  no choice) once the player holds every `from` class, one of them is at level 10
+  (`rules.offers.consolidation_min_level`) and the pool is full. So a source class must first pass its own level 10
+  breakthrough. The source keys go with the source classes; the new class starts at `best − level_cost` and needs
+  its own key at its next capstone. `ClassSystem.make_offers` lost its `kind` argument; `consolidate_ready` is new.
+  An old save with a pending consolidation offer can still accept it.
 - M22.4 probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days.
