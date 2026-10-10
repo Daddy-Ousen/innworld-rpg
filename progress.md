@@ -96,6 +96,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.
 - [x] Each M21 – M26 step has a model tag `[Model · effort]` (2026-10-09, branch `docs/roadmap-model-tags`). Default Sonnet · medium.
 - [x] `docs/ROADMAP.md` shows open work first and done milestones at the bottom, newest first (2026-10-09, branch `docs/roadmap-open-first`).
+- [x] `docs/ROADMAP.md` reorganised again (2026-10-11, branch `docs/roadmap-reorg`): M21 moved to Done; M20 phone check ticked (M21.6), touch-screen PC still open; "Waits on the user" has user to-dos (keystore backup, ask pirateaba); Later has the small asks; Releases lists v0.1.0 – v0.1.4. Docs only, no tests run.
 - [x] M21 Housekeeping (M21.0 – M21.6 done 2026-10-11) · [x] M22 Breakthroughs (M22.0 – M22.4 done) · [ ] M23 Canon bends (M23.0 – M23.4 done) · [ ] M24 Level by living · [ ] M25 NPC life · [ ] M26 Code health
 - Healthy: hard rules hold (all RNG via `gs.rng`, core is 58 `RefCounted` files, UI does not write state), validator 0 errors, Python tool tests 105 OK.
 - [ ] BUG: no class can pass level 9. Capstones 10/20/30 need a breakthrough, and only the debug console grants one (`ClassSystem.grant_breakthrough`; no event effect, no data).

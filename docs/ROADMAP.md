@@ -1,42 +1,36 @@
 # Roadmap
 
 Rule: finish a milestone's acceptance tests before starting the next. Tick boxes as you go.
-Order of this file: **Next up** (open work) → **Waits on a user check** → **Later** → **Done** (newest first, M22 … M0).
+Order of this file: **At a glance** → **Next up** (open work, in the order to do it) → **Waits on the user** →
+**Later** → **Releases** → **Done** (newest first).
 When every box of a milestone is ticked, move it to the top of Done. A new milestone goes into Next up.
 
 ## At a glance
 
 | Milestone | State | Open items |
 |---|---|---|
-| M21 Housekeeping | done | - |
 | M23 Canon bends | open | M23.5 Book 6, M23.6 Book 7, M23.7 drift warning |
 | M24 Level by living | not started | M24.0 – M24.3 |
 | M25 NPC life | not started | M25.0 – M25.4 |
 | M26 Code health | not started | M26.0, M26.1 |
-| M20 Touch controls | waits on user | play on a phone and a touch PC |
-| Later | idea | Book 8 plan (after M25), optional LLM flavour layer |
+| M20 Touch controls | waits on the user | play on a PC with a touch screen |
+| Later | idea | Book 8 plan (after M25), LLM flavour layer, small asks |
+
+Last release: v0.1.4-alpha (2026-10-10). Next step: **M23.5 Book 6** [Opus · high].
 
 ---
 
 # Next up
 
-From the project audit of 2026-10-08 (`progress.md` "Audit"). Suggested order: M21 → M23 → M24 → M25 → M26, then Book 8.
+From the project audit of 2026-10-08 (`progress.md` "Audit"). Order: M23 → M24 → M25 → M26, then Book 8.
 One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
-Model tag `[Model · effort]` at the end of each step: the model and effort to pick for that session. Default is Sonnet · medium. Opus for engine, save and design work and for canon logic; high effort where lore, balance or cascades are easy to get wrong; low for mechanical steps.
-
-## M21 — Housekeeping (cleanup)
-Small and fast. No game change.
-- [x] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) (done 2026-10-09: 39 deleted; only `main` and the unmerged `feat/class-tree-wiki` stay) **[Sonnet · low]**
-- [x] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): decision 2026-10-09 = not merged now; redo in M22.3 after breakthroughs exist. The branch stays as the source (`git show 565bc9b`) **[Sonnet · medium]**
-- [x] M21.2 Docs (done 2026-10-09; gotchas not deduped, only older entries archived): README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
-- [x] M21.3 Disk (done 2026-10-09, user said start; `export/` 2.8 GB to under 1 GB, v0.1.3 files kept): delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
-- [x] M21.4 (done 2026-10-09: 6 red found; 4 fixed in PR 147, 2 fixed by making 35 NPC sheets) Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
-- [x] M21.5 Legal (done 2026-10-09; open: ask pirateaba, user): read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
-- [x] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]** (done 2026-10-11: the user played all checks, all fine)
-**Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
+Model tag `[Model · effort]` at the end of each step: the model and effort to pick for that session. Default is
+Sonnet · medium. Opus for engine, save and design work and for canon logic; high effort where lore, balance or
+cascades are easy to get wrong; low for mechanical steps.
 
 ## M23 — Canon bends (divergence depth)
 Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 67 of 1089 events have hooks.
+Key NPCs and events per book: `docs/divergence/picks.md`. Model for each book: ADR 0036 and `sim_kill_book5`.
 - [x] M23.0 Tool + list: `tools/divergence_report.py` (per book: roles, fallbacks, hooks, events that depend on one NPC); the user picks the key NPCs and key events per book (user) **[Sonnet · medium]** (done 2026-10-10: report in `docs/divergence/report.md`; user rule: top 5 NPCs + top 3 events per book, in `docs/divergence/picks.md`)
 - [x] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane) **[Opus · high]** (done 2026-10-10, ADR 0036: story-order links cut, 2 substitutes, 3 alt events, flag hand-off + delay, 19 hooks (one per on-map day), director runs an alt on its own day; Erin's death loses 109 events, was 140)
 - [x] M23.2 Book 3: the same **[Opus · high]** (done 2026-10-10, ADR 0036 "Book 3": links cut, real-cause flags, 1 substitute, 9 alt events, flag hand-offs with delay, 13 hooks (one per on-map day), director lets a dependent wait on a delayed dependency; Book 2 Goblin raid no longer needs Ksmvr; Octavia's death loses 4 events, was 49)
@@ -58,7 +52,7 @@ Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 6
 - [ ] M25.0 NPCs level at low detail through the same System (DESIGN §4.5); save change + migration **[Opus · high]**
 - [ ] M25.1 Talk topics: NPCs share news, rumours and requests (short summaries in our words, from events and flags) **[Opus · medium]**
 - [ ] M25.2 Job boards in more places (Liscor Adventurers' Guild, Invrisil, Celum Merchants) **[Sonnet · medium]**
-- [ ] M25.3 Character sheets for Merec, Raisha and the estate NPCs (from the "Later" list) **[Sonnet · medium]**
+- [ ] M25.3 Character sheets for Merec, Raisha and the estate NPCs **[Sonnet · medium]**
 - [ ] M25.4 Magnolia's real whereabouts by flags (Celum in Book 1, the road, the estate); the Earth transplants' stay (2.37) **[Opus · medium]**
 **Done when:** NPC levels change in a long sim; talking gives news or a job; the new art draws.
 
@@ -67,36 +61,70 @@ No behaviour change.
 - [ ] M26.0 Split `game/world/main.gd` (965 lines): input, travel and panel parts in their own scripts **[Opus · medium]**
 - [ ] M26.1 Split `game/world/world_view.gd` (1285 lines): markers, overlays, effects **[Opus · medium]**
 **Done when:** both files are under about 500 lines; `unit_world_view`, `unit_play_loop`, `unit_touch_controls` and the UI scripts that touch them pass.
-# Waits on a user check
+
+---
+
+# Waits on the user
 
 ## M20 — Touch controls (ADR 0032)
-Planned 2026-10-05 (cloud, `docs/plans/m20.md`). User answers: InputMap actions (not fake key events), a 4-way D-pad,
-in a fight a tap shows the plan and a second tap acts, M20.0 + M20.1 in one PR.
+Planned 2026-10-05 (cloud, `docs/plans/m20.md`). User answers: InputMap actions (not fake key events), a 4-way D-pad
+(later a floating stick), in a fight a tap shows the plan and a second tap acts, M20.0 + M20.1 in one PR.
 - [x] M20.0 Input actions (2026-10-05, cloud): every command is a named action in `project.godot` `[input]` with
   today's keys; `world/main.gd` and the panels read actions, not key codes. No behaviour change (Delete now also
   drops the held item outside the bag). No save change
 - [x] M20.1 Touch layer (2026-10-05, cloud): `ui/touch_controls.gd` (pad, Use / Bag / More / Menu, More grid, Back,
   Cancel), option Touch controls Auto / On / Off (`user://settings.cfg`, not `GameState`), one tap picks a list item,
   fight tap = plan then act, Bag buttons for X and P, a Back button on the Load list. No save change
-- [ ] The user plays it on a phone (the browser build after the next release) and on a PC with a touch screen
-- [x] M20.2 Android build (ADR 0034, 2026-10-08, local): preset `Android`, landscape, debug APK exports and is signed. Open: user installs it on a phone; release keystore; project icon
+- [x] M20.2 Android build (ADR 0034, 2026-10-08, local): preset `Android`, landscape, debug APK exports and is signed; release keystore and project icon added (v0.1.3)
 - [x] M20.3 UI scale (ADR 0033, 2026-10-05, cloud): Options "Menu size" Auto / 100% / 150% / 200%; Auto is 200%
   on a touch screen under 5 in; the map and the touch pad keep their size; the Journal, Character sheet, Bag and
   text pages fit a small view. No save change
+- [x] The user plays it on a phone (done 2026-10-11 in the M21.6 play pass: phone, touch stick and phone UI fine)
+- [ ] The user plays it on a PC with a touch screen (user)
 **Done when:** the whole game (title, walking, menus, fights, the System dialog) can be played with touch only;
 the keys work as before; the GUT tests that touch it pass; the user has played it on a phone.
 
-## Releases
-- [x] v0.1.0-alpha (ADR 0029, published 2026-10-01): export presets (Windows, Linux), `tools/release.ps1` with a smoke test, version on the title
-  screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
-- [x] v0.1.1-alpha with the web build (ADR 0031, published 2026-10-02, https://daddy-ousen.github.io/innworld-rpg/): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow,
-  itch.io upload by the user
-- [x] Touch controls and an Android build: see M20 above (open: the user plays it on a phone)
+## Other user to-dos
+- [ ] Back up the release keystore and its password file (`%USERPROFILE%\.android\`). A lost key means no app updates.
+- [ ] Optional: ask pirateaba about the fan game (M21.5 result in `docs/DESIGN.md` §7).
 
-## Later
+---
+
+# Later
 - Book 8 plan (after M25)
-- optional LLM flavour layer
+- Optional LLM flavour layer
+- Console `skip <days>` command (offered 2026-10-11, no answer yet)
+- Web build on its own subdomain (CNAME + Settings → Pages → Custom domain)
+- Runners' Guild staff in Invrisil: no canon NPC found, so none added (user, 2026-10-08)
+
+---
+
+# Releases
+ADR 0029 (Windows, Linux), ADR 0031 (web), ADR 0034 (Android). Build with `tools/release.ps1`. Every release
+uploads the signed Android apk too.
+- [x] v0.1.0-alpha (published 2026-10-01): export presets (Windows, Linux), `tools/release.ps1` with a smoke test,
+  version on the title screen, GitHub pre-release with two zips. Android skipped: no touch controls yet.
+- [x] v0.1.1-alpha (published 2026-10-02): "Web" preset, web zip in `tools/release.ps1`, GitHub Pages workflow
+  (https://daddy-ousen.github.io/innworld-rpg/), itch.io upload by the user
+- [x] v0.1.2-alpha (published 2026-10-06): touch controls and UI scale (M20.0, M20.1, M20.3), three zips
+- [x] v0.1.3-alpha (2026-10-08): signed Android apk added to `tools/release.ps1` (M20.2)
+- [x] v0.1.4-alpha (2026-10-10): up to M23.3, four files (win, linux, web zips + signed apk). Web build on itch.io and
+  Pages not re-uploaded
+
+---
+
 # Done (newest first)
+
+## M21 — Housekeeping (cleanup)
+Small and fast. No game change.
+- [x] M21.0 Git: commit the stray `game/tests/sim_book7_goblin_road.gd.uid`; delete the 36 merged local branches (`git branch -d`) (done 2026-10-09: 39 deleted; only `main` and the unmerged `feat/class-tree-wiki` stay) **[Sonnet · low]**
+- [x] M21.1 Commit 565bc9b on `feat/class-tree-wiki` (consolidation is automatic, needs a level 10 source class): decision 2026-10-09 = not merged now; redo in M22.3 after breakthroughs exist. The branch stays as the source (`git show 565bc9b`) **[Sonnet · medium]**
+- [x] M21.2 Docs (done 2026-10-09; gotchas not deduped, only older entries archived): README counts (events, NPCs, places, maps, tests); move finished items from `progress.md` and `handoff.md` to `docs/PROGRESS_ARCHIVE.md`; dedupe the handoff gotchas **[Sonnet · medium]**
+- [x] M21.3 Disk (done 2026-10-09, user said start; `export/` 2.8 GB to under 1 GB, v0.1.3 files kept): delete old builds in `export/` (v0.1.0 – v0.1.2, about 1.9 GB; they are on GitHub releases) (user confirms) **[Sonnet · low]**
+- [x] M21.4 (done 2026-10-09: 6 red found; 4 fixed in PR 147, 2 fixed by making 35 NPC sheets) Full GUT suite once, in a subagent; fix any red script (user asks for the run) **[Sonnet · medium; Opus · high if a red script is in `core/`]**
+- [x] M21.5 Legal (done 2026-10-09; open: ask pirateaba, user): read pirateaba's stance on fan games; write the result in `docs/DESIGN.md` §7 and `docs/ITCH.md` (user) **[Sonnet · low]**
+- [x] M21.6 Play pass: one session that closes the open "the user plays …" checks (fights, Book 6, rain, phone, touch stick, phone UI, long road, class objects, north road) and lists bugs (user) **[Sonnet · medium]** (done 2026-10-11: the user played all checks, all fine)
+**Done when:** no stray files or merged branches; README counts are true; the full suite is green; the open play checks have a result.
 
 ## M22 — Breakthroughs (fix: no class can pass level 9)
 Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants one today.
