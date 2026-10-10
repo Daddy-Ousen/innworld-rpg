@@ -1,6 +1,6 @@
 # ADR 0036: Canon bends (M23)
 
-Status: accepted (2026-10-10, M23.1 Book 2; M23.2 Book 3 added). Applies to M23.3 – M23.6 (Books 4 – 7) too.
+Status: accepted (2026-10-10, M23.1 Book 2; M23.2 Book 3 and M23.3 Book 4 added). Applies to M23.4 – M23.6 (Books 5 – 7) too.
 
 ## Problem
 Books 2 – 7 had only `cancel` in `on_fail`, and few hooks. One dead NPC cancelled long chains that did not need
@@ -101,6 +101,44 @@ stories that need them (no Erin, no Lyonette at the inn; no Toren, no inn explos
 What is left is real: each NPC's own scenes, Pisces's confession to Erin, and the Horns' trip (Ceria). Most of the
 drift left is Book 4 (Erin's trip home waits on `b3.erin_leaves_celum_on_the_wagon`; M23.3 can hand off on the
 leaving flags).
+
+## Book 4 (M23.3)
+No engine change. Data and a kill sim only.
+- Links cut: the trip home is one chain no more. The door move, the old man on the road, the Wistram story, the
+  soup, Esthelm and the homecoming each wait on the trip flags (`erin.on_wagon_south`, and
+  `horns_of_hammerad.left_celum` for the Horns' scenes; `horns_of_hammerad.bound_for_liscor` is stale-true since
+  Book 1). The homecoming party, the door running dry, level 30 and the relief pitch wait on `erin.home_at_the_inn`
+  / `erin.level_30`, not on each other. Ryoka's library no longer waits for the slime at Esthelm. Also cut: the
+  Rags story order (Ulvama, the raid, Noears), Hedault without Reynold, Laken's court, Zel and Ilvriss at the gate.
+- Real cause, not the canon order: Pawn is at Esthelm because the Antinium went (`antinium.expedition_to_esthelm`);
+  the carol, the slime and the ride home wait for the convoy; the actors' visit to Celum needs the door at the inn;
+  Brunkr's scene needs Mrsha's flight from the inn; Laken's request waits for Ryoka's replies (she meant to go home).
+  `ryoka.heading_home_to_liscor` moved from Erin's chat to Ryoka's replies, so Erin's death does not change it.
+- Optional now: Pisces at the soup, the door and the pitch; Ceria at the pitch and at "where is Erin from"; Klbkch
+  as Santa's partner; Reynold at Hedault's; Ryoka at Laken's "Enough".
+- Mutates (5 alt events): Klbkch's rescue in the Hive → `pawn_leads_mrsha_out_of_the_hive`; the old man's snowstorm
+  → `the_wagon_hides_from_the_goblin_army`, else `the_horns_hide_from_the_goblin_army` (Erin dead); the homecoming
+  → `erin_comes_home_without_the_door` (no Albez door); the Celum wagons → `liscor_sends_wagons_to_esthelm`
+  (no door at Octavia's).
+- Flag hand-offs with delay: Brunkr's scene (`mrsha.met_the_free_queen`), the relief convoy
+  (`liscor.sends_aid_to_esthelm`).
+- 4 new `change` hooks: Esthelm on day 90 and 92, the solstice kitchen and Ryoka at Riverfarm on day 96. All 9
+  on-map days (85, 89 – 96) have a hook.
+
+| Dies on day 85 | Book 4 lost before → after | Drift before → after |
+|---|---|---|
+| Erin | 85 → 55 | 88.25 → 58.5 |
+| Zel | 83 → 14 | 78.5 → 13 |
+| Ceria | 85 → 15 | 89.25 → 22 |
+| Teriarch | 83 → 2 | 78 → 1.25 |
+| Klbkch | 77 → 6 | 73 → 5 |
+| Lyonette | 79 → 5 | 74.5 → 5 |
+| Pisces | 85 → 11 | 84.75 → 14.25 |
+
+What is left is real: each NPC's own scenes; with no Zel, Mrsha never flees the inn, so no rift, no Brunkr bite and
+no honey dressing; with no door (Ceria or Pisces dead before day 87), no Celum trips or Octavia research. Erin's
+death still loses the homecoming, the relief and Christmas (her ideas), but not the Ryoka, Laken, Mrsha or Rags
+threads.
 
 ## Open
 - Drift counts later-book cancels at once, so a Book 2 death shows drift for Books 3 – 7 too.

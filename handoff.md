@@ -1,27 +1,28 @@
 # Handoff
 
-## Just done (2026-10-10, local): M23.2 Book 3 canon bends (branch `feat/m23.2-book3-bends`)
-- ADR 0036 "Book 3" lists every change. Patch script pattern: text-level edits per event block (keeps CRLF and
-  layout); the M23.2 one lived in the session scratchpad (`patch_m232.py`), gone now.
-- Engine: `Director._wait_until`: a dependent may wait while a dependency is pending (delayed). Needed because a
-  flag hand-off whose id sorts before the mutating event is delayed first in the resolve pass. `unit_director` +2.
-- Data: 24 chapter files (23 Book 3 + `2.32H`). 9 alt events, 1 substitute, 8 delay steps, 13 hooks.
-  `sim_player_hooks` count 106.
-- New `game/tests/sim_kill_book3.gd` (11): kills Erin, Octavia, Ceria, Pisces, Lyonette, Yvlon, Ksmvr on day 72,
-  Ksmvr on day 41; hook-per-day (23 days); chess at the inn on day 81 changes Pawn's supper. Copy it for Book 4.
-- Tests run: all pass: `sim_kill_book3` (11), `unit_director` (27), `unit_canon_db`, `sim_player_hooks` (106),
-  `sim_canon_book1..4`, `sim_book3_finale`, `sim_book3_stages`, `sim_book4_relief_home`, `sim_esthelm_siege`,
-  `sim_divergence`, `sim_book2_end_stages`, `sim_kill_book2`; validator 0 / 0; Python 114 OK. Full suite not run.
-- Next: M23.3 Book 4 **[Opus · high]**. Key events: `b4.erin_moves_the_door_anchor_to_the_stitchworks` (depends on
-  `b3.erin_leaves_celum_on_the_wagon`; the Book 3 leaving alts set `erin.on_wagon_south` and
-  `horns_of_hammerad.bound_for_liscor` to hand off on), `b4.teriarch_stops_the_wagon`, the snowstorm.
-- Gotchas: Books 1 – 5 break same-day ties by id, so a cut link can reorder a day. Check kills and clear_flags
-  inside one day: cutting `the_last_battle_of_esthelm` from the Florist's scene would kill Grunter before she
-  splints his arm (drift in the canon run). The probe (`game/_scratch/probe.gd`, `extends SceneTree`, env BOOK,
-  KILL_DAY, END_DAY, VICTIMS, LIST=1) runs a book of kills in about 20 s; it is deleted, rebuild it from
-  `Director.run` + `Director.player_kill` if needed. Some chapter files have roles on one line, others one role per
-  line: patch scripts must handle both. Substitute scoring sees every NPC in the world (ties go to the lowest id):
-  the kill sim checks the pick.
+## Just done (2026-10-10, local): M23.3 Book 4 canon bends (branch `feat/m23.3-book4-bends`)
+- ADR 0036 "Book 4" lists every change. Data only (15 Book 4 chapter files), no engine change.
+- Patch scripts were in the session scratchpad (`patch_m233*.py`: text edits per event block, keep CRLF; helpers
+  `set_field`, `requires`, `optional`, `on_fail`, `add_alt`, `add_hook`). Gone next session; rebuild if needed.
+- New `game/tests/sim_kill_book4.gd` (10): kills Erin, Zel, Ceria, Teriarch, Klbkch, Lyonette, Pisces on day 85;
+  hook-per-day (9 days); cooking at the inn stove on day 96 changes the solstice dawn. Copy it for Book 5.
+- `sim_kill_book3`: the Ceria and Pisces tests now see Erin home on day 91 (Book 4 hand-off), not still on the wagon.
+- Tests run (all pass): `sim_kill_book4`, `sim_kill_book3`, `sim_kill_book2`, `sim_player_hooks` (110), `unit_canon_db`,
+  `sim_divergence`, `sim_canon_book3..7`, `sim_book4_christmas`, `_homecoming`, `_mrsha`, `_relief_home`, `_wistram`;
+  validator 0 / 0; Python 114 OK. Full suite not run. `docs/divergence/report.md` regenerated.
+- Next: M23.4 Book 5 **[Opus · high]**. Picks: Ryoka, Erin, Laken, Venitra, Lyonette; key events in `docs/divergence/picks.md`
+  (small chains: 5 dependents at most). Book 5 days 97 – 115.
+- Gotchas: `horns_of_hammerad.bound_for_liscor` is set in Book 1 (1.47R) and never cleared until Book 4: use
+  `horns_of_hammerad.left_celum` to test that the Horns left Celum. Cutting links reorders a day: watch a flag that
+  one event sets and another clears on the same day (`ryoka.heading_home_to_liscor` broke `sim_book4_christmas` until
+  Laken's request waited for Ryoka's replies). Chapter files have more top-level keys after `events` (insert alts
+  before the first `
+	}` after `"events": {`). The probe (`game/_scratch/probe.gd`, `extends SceneTree`, env BOOK,
+  KILL_DAY, END_DAY, VICTIMS (comma, `+` for several, `none`), LIST=1) runs `Director.run` only: 11 victims in ~20 s.
+  It is deleted; rebuild from `GameState.new_game` + `Director.run` + `Director.player_kill`.
+
+## Earlier (2026-10-10): M23.2 Book 3 (merged, PR #156)
+- `Director._wait_until`: a dependent waits while a dependency is delayed. `sim_kill_book3` is the model for the kill sims.
 
 ## Earlier (2026-10-10): M23.0 divergence report
 - `tools/divergence_report.py`; rerun `python tools/divergence_report.py game/data/canon --out docs/divergence/report.md`
