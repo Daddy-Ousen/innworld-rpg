@@ -391,10 +391,16 @@ static func _log(gs: GameState, db: DataDb, id: String, day: int, outcome: Strin
 
 
 ## A cancelled or mutated event never happened: every pending event that
-## depends on it fails for good now (recursively).
+## depends on it fails for good now (recursively). A dependent with a mutate
+## step whose window has not opened yet is left pending: it fails (and
+## mutates) on its own day, so its alt does not run early (M23.1, ADR 0036).
 static func _propagate(gs: GameState, db: DataDb, id: String, day: int, lines: Array[String]) -> void:
 	for dep: String in db.canon.dependents[id]:
 		if db.canon.alt_only.has(dep) or gs.world.status(dep) != WorldState.PENDING:
+			continue
+		var ev: Dictionary = db.canon.events[dep]
+		if int(ev["window"]["earliest"]) > day \
+				and (ev["on_fail"] as Array).any(func(s: String) -> bool: return CanonDb.mutate_target(s) != ""):
 			continue
 		var why := "%s was %s" % [id, gs.world.status(id)]
 		var check := {"fails": [_fail(FAIL_HARD, why)], "roles": {}, "open": []}

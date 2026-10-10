@@ -194,11 +194,27 @@ func test_cancel_propagates_down_the_chain() -> void:
 	var gs := _gs(d)
 	Commands.kill_npc(gs, d, "mentor")
 	Director.run(gs, d, 1)
-	assert_eq(ToyCanon.timeline(gs), ["D1 killed player.kill", "D1 cancelled e.a", "D1 cancelled e.b",
-			"D1 mutated e.c", "D1 done e.c_alt"] as Array[String])
-	assert_true(gs.flags.has("c.alt"), "a dependent may still mutate")
+	assert_eq(ToyCanon.timeline(gs), ["D1 killed player.kill", "D1 cancelled e.a", "D1 cancelled e.b"] as Array[String])
+	assert_eq(gs.world.status("e.c"), WorldState.PENDING, "a mutating dependent waits for its own day (M23.1)")
 	assert_eq(gs.world.status("e.d"), WorldState.PENDING, "unrelated events untouched")
+	Director.run(gs, d, 9)
+	assert_eq(ToyCanon.timeline(gs).slice(3), ["D2 done e.d", "D9 mutated e.c", "D9 done e.c_alt"] as Array[String])
+	assert_true(gs.flags.has("c.alt"), "a dependent may still mutate")
 	assert_almost_eq(gs.world.drift, 1.0 + 1.0 + 0.5, EPS)
+
+
+func test_a_mutating_dependent_whose_window_is_open_mutates_at_once() -> void:
+	var d := _db({
+		"e.a": ToyCanon.event(1, 1, {"requires": ToyCanon.req(["mentor"])}),
+		"e.c": ToyCanon.event(1, 3, {"depends_on": ["e.a"], "on_fail": ["mutate:e.c_alt", "cancel"]}),
+		"e.c_alt": ToyCanon.event(1, 3),
+		"e.after": ToyCanon.event(5, 5, {"depends_on": ["e.c"]}),
+	})
+	var gs := _gs(d)
+	Commands.kill_npc(gs, d, "mentor")
+	Director.run(gs, d, 1)
+	assert_eq(ToyCanon.timeline(gs), ["D1 killed player.kill", "D1 cancelled e.a", "D1 mutated e.c",
+			"D1 done e.c_alt", "D1 cancelled e.after"] as Array[String])
 
 
 func test_mutate_skips_an_alt_that_cannot_run() -> void:
