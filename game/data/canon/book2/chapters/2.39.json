@@ -18,6 +18,15 @@
 			"depends_on": ["b2.magnolia_warns_erin_of_a_coming_world_war", "b2.rags_and_garen_approach_the_wandering_inn"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.back_from_magnolias", "erin.threw_relc_out", "erin.protects_goblins_openly"], "relationship": [{"from": "relc", "to": "erin_solstice", "delta": -2}, {"from": "rags", "to": "erin_solstice", "delta": 2}]},
+			"hooks": [
+				{
+					"id": "player_stood_with_erin_against_relc",
+					"did": [{"action": ["persuade", "comfort_someone"], "context": {"location": ["wandering_inn"]}}],
+					"days": [67, 67],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_stood_with_erin_against_relc"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "rags", "to": "player", "delta": 1}, {"from": "relc", "to": "player", "delta": -1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,
@@ -31,9 +40,9 @@
 			"tier": 2,
 			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
 			"location": "wandering_inn",
-			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin", "mrsha"], "flags": ["mrsha.rescued"], "not_flags": []},
-			"depends_on": ["b2.ryoka_escapes_with_mrsha_gains_first_class", "b2.erin_throws_relc_out_to_protect_the_goblins"],
+			"depends_on": ["b2.ryoka_escapes_with_mrsha_gains_first_class"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ryoka.back_at_the_wandering_inn", "mrsha.at_the_wandering_inn", "erin.knows_of_the_goblin_lords_army"]},
 			"status": "candidate",

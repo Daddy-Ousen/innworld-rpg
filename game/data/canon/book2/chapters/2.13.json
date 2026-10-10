@@ -16,6 +16,15 @@
 			"depends_on": ["b2.erin_introduces_hamburgers"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.selling_hamburgers", "liscor.knows_hamburgers"]},
+			"hooks": [
+				{
+					"id": "player_worked_the_hamburger_stand",
+					"did": [{"action": ["serve_guests", "sell_goods", "cook_simple_meal", "haggle"], "context": {"location": ["liscor_market"]}}],
+					"days": [44, 44],
+					"then": "change",
+					"effects": {"set_flags": ["liscor_market.earther_sold_hamburgers"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "krshia", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.13", "confidence": "confirmed"},
 			"summary": "Erin sets up a grill at Krshia's market stall and sells hamburgers to Drakes and Gnolls all day, an overnight sensation with Selys helping manage the crowd."

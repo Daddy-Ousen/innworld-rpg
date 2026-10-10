@@ -53,7 +53,7 @@
 			"location": "floodplains_of_liscor",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "courier": {"prefer": ["valceif_godfrey"], "fallback_tags": []}},
 			"requires": {"alive": ["ryoka_griffin", "valceif_godfrey"], "flags": [], "not_flags": []},
-			"depends_on": ["b2.ryoka_detects_curse_dreamcatcher"],
+			"depends_on": ["b2.ryoka_races_valceif"],
 			"on_fail": ["cancel"],
 			"effects": {},
 			"status": "candidate",

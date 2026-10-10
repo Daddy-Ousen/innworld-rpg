@@ -39,9 +39,18 @@
 				"scholar": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["valceif_godfrey", "erin_solstice"], "flags": [], "not_flags": []},
-			"depends_on": ["b2.ryoka_races_valceif", "b2.erin_hamburger_stand_debut"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.receives_magic_chessboard", "wandering_inn.hamburgers_copied_by_city"]},
+			"hooks": [
+				{
+					"id": "player_saw_the_magic_chessboard",
+					"did": [{"action": ["play_chess", "talk_with_guest"], "context": {"location": ["wandering_inn"]}}],
+					"days": [46, 46],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_saw_the_chessboard"], "relationship": [{"from": "valceif_godfrey", "to": "player", "delta": 1}, {"from": "olesm", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.16", "confidence": "likely"},
 			"summary": "Val delivers an enchanted chessboard, a reward meant for Liscor's best chess player. Everyone assumes Olesm, but Erin turns out to be the real solver; meanwhile all of Liscor is now selling copycat hamburgers."
@@ -74,7 +83,7 @@
 				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ryoka_griffin", "erin_solstice"], "flags": [], "not_flags": []},
-			"depends_on": ["b2.ryoka_finds_mystery_battlefield", "b2.valceif_delivers_chessboard_to_erin"],
+			"depends_on": ["b2.ryoka_races_valceif"],
 			"on_fail": ["cancel"],
 			"effects": {},
 			"status": "candidate",
@@ -91,7 +100,7 @@
 				"courier": {"prefer": ["valceif_godfrey"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": [], "not_flags": []},
-			"depends_on": ["b2.ryoka_arrives_exhausted_reunites"],
+			"depends_on": ["b2.ryoka_races_valceif"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ryoka.dreamcatcher_destroyed", "ryoka.memory_restored"]},
 			"status": "candidate",

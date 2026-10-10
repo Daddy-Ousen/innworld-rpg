@@ -32,7 +32,7 @@
 			},
 			"requires": {"alive": ["urksh"], "flags": ["mrsha.rescued"], "not_flags": []},
 			"depends_on": ["b2.ryoka_pulls_mrsha_from_the_crevasse"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b2.goblin_lord_overruns_the_stone_spears", "cancel"],
 			"effects": {"kill": ["urksh"], "set_flags": ["stone_spears.tribe_devastated", "goblin_lord.army_seen_in_the_north", "zel.retreated_to_save_gnolls"]},
 			"news": "Terrible word from the north: a Goblin Lord's army, a Necromancer commanding thousands, has all but destroyed a Gnoll tribe, and even General Zel Shivertail's Drakes had to fall back from it.",
 			"status": "candidate",
@@ -61,6 +61,29 @@
 				"note": "The faeries carry Ryoka and Mrsha through the paralyzed battlefield, paying the price they warned of with Urksh's death. The System offers Ryoka [Barefoot Runner], but a faerie cancels it: she never gains a level (user, 2026-09-26). Event id kept for old saves."
 			},
 			"summary": "The Frost Faeries carry Ryoka and Mrsha through the frozen battlefield at impossible speed to save them, at the cost they warned of. That night a class reaches for Ryoka and a faerie snuffs it out; she stays without a level. Mrsha's fur turns pure white for no reason anyone can explain."
+		},
+		"b2.goblin_lord_overruns_the_stone_spears": {
+			"tier": 1,
+			"window": {"earliest": 65, "latest": 65, "confidence": "guess"},
+			"location": "stone_spears_camp",
+			"roles": {
+				"chieftain": {"prefer": ["urksh"], "fallback_tags": [], "optional": true},
+				"general": {"prefer": ["zel_shivertail"], "fallback_tags": [], "optional": true},
+				"lord": {"prefer": ["ilvriss"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": [], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["stone_spears.tribe_devastated", "goblin_lord.army_seen_in_the_north", "zel.retreated_to_save_gnolls"]},
+			"news": "Gnolls on the road say a Goblin Lord's army has overrun the Stone Spears camp; Zel Shivertail pulled back to save the survivors.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.35",
+				"confidence": "guess",
+				"note": "Not in the book (M23.1, divergence only): the army still comes when the Ryoka and Mrsha thread or Urksh is gone. No one is killed here on purpose."
+			},
+			"summary": "With no Runner in the camp that night, the Goblin Lord's army still falls on the Stone Spears; Zel and Ilvriss break off to cover the fleeing Gnolls."
 		}
 	},
 	"system": [

@@ -48,6 +48,15 @@
 			"depends_on": ["b2.garen_trains_rags_and_shows_the_goblin_key"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["rags.disguised_visit_to_inn_underway"]},
+			"hooks": [
+				{
+					"id": "player_served_the_hooded_hob",
+					"did": [{"action": ["serve_guests", "talk_with_guest", "play_chess"], "context": {"location": ["wandering_inn"]}}],
+					"days": [66, 66],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_served_the_hooded_hob"], "relationship": [{"from": "rags", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,

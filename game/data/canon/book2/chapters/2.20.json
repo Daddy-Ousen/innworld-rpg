@@ -64,6 +64,15 @@
 			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["klbkch.tried_forcing_chess_on_workers", "klbkch.reconsiders_coercion"]},
+			"hooks": [
+				{
+					"id": "player_taught_the_workers_chess",
+					"did": [{"action": ["teach_chess", "play_chess"], "context": {"location": ["wandering_inn"]}}],
+					"days": [47, 47],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_taught_workers_chess"], "relationship": [{"from": "klbkch", "to": "player", "delta": 1}, {"from": "erin_solstice", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "confirmed"},
 			"summary": "Klbkch brings Antinium Workers to force-learn chess, hoping to copy Pawn's spark of individuality. Erin tells him coercion won't work that way, and he seems to genuinely take it in."

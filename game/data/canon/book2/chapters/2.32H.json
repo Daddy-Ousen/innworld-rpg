@@ -15,8 +15,17 @@
 			},
 			"requires": {"alive": ["ceria_springwalker", "yvlon_byres", "pisces"], "flags": [], "not_flags": []},
 			"depends_on": [],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b2.ceria_reforms_the_horns_short_handed", "cancel"],
 			"effects": {"set_flags": ["horns_of_hammerad.reformed", "olesm.rejected_from_new_party"], "relationship": [{"from": "olesm", "to": "ceria_springwalker", "delta": -1}]},
+			"hooks": [
+				{
+					"id": "player_saw_the_horns_reform",
+					"did": [{"action": ["talk_with_guest", "serve_guests", "persuade"], "context": {"location": ["wandering_inn"]}}],
+					"days": [57, 57],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_saw_the_horns_reform"], "relationship": [{"from": "ceria_springwalker", "to": "player", "delta": 1}, {"from": "yvlon_byres", "to": "player", "delta": 1}, {"from": "pisces", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,
@@ -35,9 +44,10 @@
 				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
 				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
 			},
-			"requires": {"alive": ["ksmvr", "ceria_springwalker", "erin_solstice"], "flags": ["horns_of_hammerad.reformed"], "not_flags": []},
-			"depends_on": ["b2.ceria_reforms_the_horns_of_hammerad"],
-			"on_fail": ["cancel"],
+			"requires": {"alive": ["ksmvr", "ceria_springwalker"], "flags": ["horns_of_hammerad.reformed"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["ksmvr.relieved_of_duty", "ksmvr.joined_horns_of_hammerad"], "relationship": [{"from": "ksmvr", "to": "erin_solstice", "delta": 1}]},
 			"status": "candidate",
 			"canon_ref": {
@@ -54,13 +64,13 @@
 			"location": "floodplains_of_liscor",
 			"roles": {
 				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
-				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []},
-				"necromancer": {"prefer": ["pisces"], "fallback_tags": []},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
 				"prognugator": {"prefer": ["ksmvr"], "fallback_tags": []},
 				"archer": {"prefer": ["halrac"], "fallback_tags": [], "optional": true},
 				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true}
 			},
-			"requires": {"alive": ["ceria_springwalker", "yvlon_byres", "pisces", "ksmvr"], "flags": ["ksmvr.joined_horns_of_hammerad"], "not_flags": []},
+			"requires": {"alive": ["ceria_springwalker", "ksmvr"], "flags": ["ksmvr.joined_horns_of_hammerad"], "not_flags": []},
 			"depends_on": ["b2.ksmvr_joins_the_horns_of_hammerad"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["horns_of_hammerad.first_fight_together", "liscor.new_goblin_tribe_scouted"]},
@@ -73,6 +83,30 @@
 				"note": "A notch-eared goblin war party, not Rags's tribe, raids a farming village. Halrac kills most alone; the new party fights a splinter group, Pisces raising fallen goblins with [Animate Dead]; the Watch arrives late. Loot points to a new tribe in the Blood Fields."
 			},
 			"summary": "A well-armed, unusually disciplined goblin war party - not Rags's tribe - raids a farming village. Halrac, the Watch and the newly-reformed Horns of Hammerad drive them off, and notched-ear markings on the dead point to something new and dangerous rising in the Blood Fields."
+		},
+		"b2.ceria_reforms_the_horns_short_handed": {
+			"tier": 2,
+			"window": {"earliest": 57, "latest": 57, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {"prefer": ["ceria_springwalker"], "fallback_tags": []},
+				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true},
+				"necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true},
+				"tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}
+			},
+			"requires": {"alive": ["ceria_springwalker"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.reformed", "horns_of_hammerad.short_handed", "olesm.rejected_from_new_party"]},
+			"news": "Ceria Springwalker has put the Horns of Hammerad back together, short of the friends she meant to bring.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.32H",
+				"confidence": "guess",
+				"note": "Not in the book (M23.1, divergence only): runs instead of the reforming when Yvlon or Pisces is dead."
+			},
+			"summary": "With Yvlon or Pisces dead, Ceria still will not let the Horns of Hammerad end; she reforms the team with whoever is left and turns Olesm down."
 		}
 	},
 	"system": []

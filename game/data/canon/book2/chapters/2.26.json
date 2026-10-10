@@ -33,7 +33,7 @@
 				"leader": {"prefer": ["jelaqua"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["erin_solstice", "brunkr"], "flags": ["gnoll.silverfang_warband_attacks_inn"], "not_flags": []},
-			"depends_on": ["b2.brunkr_leads_gnoll_warband_to_inn", "b2.selys_tries_warn_krshia_blocked", "b2.toren_returns_finds_gnoll_siege"],
+			"depends_on": ["b2.brunkr_leads_gnoll_warband_to_inn", "b2.selys_tries_warn_krshia_blocked"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": [

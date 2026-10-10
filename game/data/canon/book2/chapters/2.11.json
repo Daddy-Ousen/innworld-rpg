@@ -86,6 +86,15 @@
 			"depends_on": ["b2.pawn_and_bird_lead_reconstruction"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["wandering_inn.rebuilt", "wandering_inn.upgraded", "wandering_inn.copper_nails"]},
+			"hooks": [
+				{
+					"id": "player_helped_rebuild_the_inn",
+					"did": [{"action": ["repair_furniture", "carry_water", "chop_wood"], "context": {"location": ["wandering_inn"]}}],
+					"days": [43, 43],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_helped_rebuild"], "relationship": [{"from": "pawn", "to": "player", "delta": 2}, {"from": "erin_solstice", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,

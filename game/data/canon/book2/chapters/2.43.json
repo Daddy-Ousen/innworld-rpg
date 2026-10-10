@@ -33,7 +33,7 @@
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "skeleton": {"prefer": ["toren"], "fallback_tags": []}},
 			"requires": {"alive": ["erin_solstice", "toren"], "flags": ["erin.built_a_sledge"], "not_flags": []},
 			"depends_on": ["b2.erin_builds_a_sledge_for_toren"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b2.erin_winters_in_liscor", "cancel"],
 			"effects": {"set_flags": ["erin.stranded_north", "erin.left_liscor", "toren.left_erin", "toren.broke_his_bond"]},
 			"status": "candidate",
 			"canon_ref": {
@@ -60,6 +60,15 @@
 			"depends_on": ["b2.toren_drags_erin_north_and_leaves_her"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["liscor.searched_for_erin", "halrac.tracked_erin_north"]},
+			"hooks": [
+				{
+					"id": "player_searched_for_erin",
+					"did": [{"action": ["keep_watch", "persuade", "talk_with_guest"], "context": {"location": ["wandering_inn", "floodplains_of_liscor", "liscor"]}}],
+					"days": [70, 70],
+					"then": "change",
+					"effects": {"set_flags": ["liscor.earther_searched_for_erin"], "relationship": [{"from": "ryoka_griffin", "to": "player", "delta": 1}, {"from": "halrac", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,
@@ -109,6 +118,26 @@
 				"note": "Told in a short closing aside; place and day are guesses. He is called a [Skeleton Knight]. Whether he reaches the dungeon is left for Book 3."
 			},
 			"summary": "Free at last, Toren stabs two travellers to death on a road, pockets their coins, and walks back toward Liscor, meaning to level up in its dungeon until no one can ever command him again."
+		},
+		"b2.erin_winters_in_liscor": {
+			"tier": 2,
+			"window": {"earliest": 70, "latest": 70, "confidence": "guess"},
+			"location": "wandering_inn",
+			"roles": {
+				"host": {"prefer": ["erin_solstice"], "fallback_tags": []}
+			},
+			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.wintered_in_liscor"]},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.43",
+				"confidence": "guess",
+				"note": "Not in the book (M23.1, divergence only): runs when Toren cannot take Erin north."
+			},
+			"summary": "No sledge carries Erin north this winter. She stays at the Wandering Inn outside Liscor, and the road to Celum stays someone else's story."
 		}
 	},
 	"system": [
