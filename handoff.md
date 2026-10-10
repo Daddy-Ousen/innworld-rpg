@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-10-10, local): M23.0 divergence report (branch `feat/m23.0-divergence-report`)
+- User pick: top 5 NPCs + top 3 events per book, written to `docs/divergence/picks.md`. M23.0 ticked; PR opened.
+- Next: M23.1 Book 2 **[Opus · high]**: read `picks.md` Book 2, add `fallback_tags` + `substitute` / `delay` / `mutate`
+  to those roles and events, more hooks, and `sim_kill_book2`. The Book 2 chain (Horns / Albez, 110+ dependents) is
+  the big risk: one cancel there drops half the book.
+
+- Done: `tools/divergence_report.py` (read-only, Markdown out), `tools/tests/test_divergence_report.py` (7 pass),
+  `docs/divergence/report.md` (generated; rerun `python tools/divergence_report.py game/data/canon --out docs/divergence/report.md`).
+  Commit 8485b2c. Python 114 OK. No game code or data changed, so no GUT run.
+- "Pinned" = the event fails hard if that one NPC dies (`requires.alive`, or a lone `prefer` in a required role that
+  cannot be substituted). "Lost" adds the same-book `depends_on` cascade.
+- Finding: Books 2 – 4 are one long chain (each Horns / Albez event has 100+ dependents). Books 5 – 7 chains are short.
+
 ## Just done (2026-10-10, local): M22.4 probe sim (branch `feat/m22.4-probe-sim`)
 - New `game/tests/sim_breakthrough_probe.gd` (2 tests, ~3 min of sim): busy inn worker, quiet inn worker, fighter, days 1 – 87,
   3 seeds. Busy inn passes level 10 on night 31 – 32; quiet inn waits for its key until night 73; fighter level 10 on
