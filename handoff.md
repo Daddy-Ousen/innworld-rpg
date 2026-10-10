@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-11): ROADMAP.md reorganised (branch `docs/roadmap-reorg`)
+- Order now: At a glance → Next up (M23 – M26) → Waits on the user (M20 touch-screen PC, keystore backup, ask
+  pirateaba) → Later → Releases (v0.1.0 – v0.1.4) → Done (M21 at the top, then M22, M19 … M0).
+- M20 phone check ticked from the M21.6 play pass. Nothing lost (old file: 170 ticked / 15 open; new: 173 / 17).
+- Next: M23.5 Book 6 **[Opus · high]**. Picks in `docs/divergence/picks.md`.
+
 ## Just done (2026-10-11, local): M23.4 Book 5 canon bends (branch `feat/m23.4-book5-bends`)
 - ADR 0036 "Book 5" lists every change. Data only (13 Book 5 chapter files), no engine change.
 - New `game/tests/sim_kill_book5.gd` (10): kills Ryoka, Erin, Laken, Venitra, Lyonette on day 97 and Ken, Quallet
