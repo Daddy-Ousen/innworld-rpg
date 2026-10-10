@@ -1,5 +1,8 @@
 # Handoff
 
+## Just done (2026-10-10): ROADMAP.md reorganised
+- `docs/ROADMAP.md`: added an "At a glance" table. Open work is first (M21, M23 – M26). M20 and Releases sit under "Waits on a user check". M22 (all ticked) moved to the top of Done. No content lost. Not committed yet.
+
 ## Just done (2026-10-10): release v0.1.4-alpha
 - Built from branch `feat/m23.3-book4-bends` (version bump commit, tag `v0.1.4-alpha` pushed). Pre-release with 4 files (win, linux, web zips + signed apk): https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.4-alpha
 - Not done: the M23.3 PR is not merged yet. The itch.io / GitHub Pages web build is not re-uploaded.
