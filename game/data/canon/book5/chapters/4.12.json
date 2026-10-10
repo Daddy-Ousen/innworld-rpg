@@ -119,6 +119,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.t_erin_pays_the_antinium_to_build_the_inn",
 				"cancel"
 			],
 			"effects": {
@@ -344,13 +345,14 @@
 					"bird",
 					"pawn"
 				],
-				"flags": [],
+				"flags": [
+					"bird.to_guard_the_inn"
+				],
 				"not_flags": []
 			},
-			"depends_on": [
-				"b5.t_klbkch_takes_the_building_contract"
-			],
+			"depends_on": [],
 			"on_fail": [
+				"delay",
 				"cancel"
 			],
 			"effects": {
@@ -371,7 +373,65 @@
 				"confidence": "confirmed",
 				"note": "Day 102 is a guess. Pawn's danger is only a possibility: no injury. The Walled City [Strategist] is unnamed and not linked. The farm trip is 'a day or two' away (tentative)."
 			},
-			"summary": "Over dinner, Relc wants his old army spear back and Olesm says a Walled City strategist wants to play Erin. Bird takes the guard job, then says Pawn was sent to fight with his Soldiers today. The room goes quiet."
+			"summary": "Over dinner, Relc wants his old army spear back and Olesm says a Walled City strategist wants to play Erin. Bird takes the guard job, then says Pawn was sent to fight with his Soldiers today. The room goes quiet.",
+			"delay_limit": 3
+		},
+		"b5.t_erin_pays_the_antinium_to_build_the_inn": {
+			"tier": 2,
+			"window": {
+				"earliest": 102,
+				"latest": 102,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"antinium": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guard": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch",
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.expansion_planned",
+					"klbkch.antinium_to_build_the_inn",
+					"bird.to_guard_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.12",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of Klbkch's contract when Ryoka is dead and cannot pay. Erin takes on the debt herself."
+			},
+			"summary": "Klbkch prices Erin's sketch: a bigger common room, a third floor and a tower. It comes to 328 gold. With no Ryoka to pay, Erin agrees to pay the Hive from her soup money over the spring. Bird may guard the inn."
 		}
 	},
 	"system": []

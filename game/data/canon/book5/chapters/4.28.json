@@ -300,7 +300,7 @@
 					"ryoka_griffin"
 				],
 				"flags": [
-					"venitra.seized_ryoka_in_liscor"
+					"ryoka.seized_by_the_necromancers_servants"
 				],
 				"not_flags": []
 			},
@@ -337,7 +337,10 @@
 					"prefer": [
 						"venitra"
 					],
-					"fallback_tags": []
+					"fallback_tags": [
+						"azkerash_servant",
+						"shadow"
+					]
 				},
 				"runner": {
 					"prefer": [
@@ -355,16 +358,16 @@
 			},
 			"requires": {
 				"alive": [
-					"venitra",
 					"ryoka_griffin"
 				],
 				"flags": [
-					"venitra.seized_ryoka_in_liscor"
+					"ryoka.seized_by_the_necromancers_servants"
 				],
 				"not_flags": []
 			},
 			"depends_on": [],
 			"on_fail": [
+				"substitute",
 				"cancel"
 			],
 			"effects": {

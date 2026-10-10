@@ -30,7 +30,7 @@ func _geneva_events() -> Array[String]:
 	var out: Array[String] = []
 	for id: String in _db.canon.events:
 		var ch: String = _db.canon.events[id]["canon_ref"]["chapter"]
-		if id.begins_with("b5.") and ch in ["1.02D", "1.03D", "1.04D", "1.05D", "1.06D"]:
+		if id.begins_with("b5.") and ch in ["1.02D", "1.03D", "1.04D", "1.05D", "1.06D"] 				and not _db.canon.alt_only.has(id):
 			out.append(id)
 	return out
 
@@ -86,16 +86,19 @@ func test_without_geneva_there_is_no_red_cross() -> void:
 		assert_true(Director.happened(gs.world.status(id)), id + " goes on")
 
 
-func test_without_ken_geneva_still_saves_luan_but_founds_nothing() -> void:
+func test_without_ken_luan_and_aiko_still_found_the_red_cross() -> void:
 	var gs := _fresh()
 	assert_eq(Commands.kill_npc(gs, _db, "kenjiro_murata"), "")
 	_sleep_to_last_day(gs)
-	for id: String in ["b5.zp_ken_becomes_the_companys_negotiator", "b5.zt_ken_luan_and_aiko_go_to_the_last_light",
-			"b5.zu_the_red_cross_company_is_founded", "b5.zw_the_red_cross_medics_carry_the_wounded",
-			"b5.zx_zalthia_burns_the_red_cross_camp", "b5.zza_the_united_nations_company_is_founded"]:
+	for id: String in ["b5.zp_ken_becomes_the_companys_negotiator", "b5.zw_the_red_cross_medics_carry_the_wounded"]:
 		assert_eq(gs.world.status(id), Director.CANCELLED, id)
+	# M23.4: Luan and Aiko go to the Last Light without him (alt event).
+	assert_eq(gs.world.status("b5.zt_ken_luan_and_aiko_go_to_the_last_light"), Director.MUTATED)
+	assert_eq(gs.world.status("b5.zt_luan_and_aiko_go_to_the_last_light"), Director.DONE)
+	assert_false(gs.flags.has("kenjiro_murata.with_geneva"))
 	for id: String in ["b5.zr_geneva_cuts_the_arrowhead_out_of_luan", "b5.zv_geneva_saves_a_war_walker",
-			"b5.zs_dullahans_behead_the_deserting_americans"]:
+			"b5.zs_dullahans_behead_the_deserting_americans", "b5.zu_the_red_cross_company_is_founded",
+			"b5.zx_zalthia_burns_the_red_cross_camp", "b5.zza_the_united_nations_company_is_founded"]:
 		assert_true(Director.happened(gs.world.status(id)), id + " goes on")
 
 

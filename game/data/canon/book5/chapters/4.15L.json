@@ -74,7 +74,8 @@
 					"prefer": [
 						"lyonette"
 					],
-					"fallback_tags": []
+					"fallback_tags": [],
+					"optional": true
 				},
 				"staff": {
 					"prefer": [
@@ -100,8 +101,7 @@
 			},
 			"requires": {
 				"alive": [
-					"erin_solstice",
-					"lyonette"
+					"erin_solstice"
 				],
 				"flags": [
 					"safry.works_at_the_inn"
@@ -132,7 +132,60 @@
 				"confidence": "confirmed",
 				"note": "Day 105 is a guess. Ryoka spent the day invisible (Pisces' spell) and tripped Safry. Erin also brought back Octavia's potion-grown mould to try on Brunkr. The next day she argues with Agnes in Celum."
 			},
-			"summary": "Safry and Maran bring Human friends and serve only them. Erin puts Lyonette in charge and fires the two; her aura sends them fleeing through the door into Octavia's shop. Then Lyonette yells at Erin about Toren."
+			"summary": "Safry and Maran bring Human friends and serve only them. Erin puts Lyonette in charge and fires the two; her aura sends them fleeing through the door into Octavia's shop. Then Lyonette yells at Erin about Toren.",
+			"hooks": [
+				{
+					"id": "player_spoke_up_for_mrsha_and_bird",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"erin_solstice",
+									"lyonette",
+									"mrsha",
+									"bird"
+								]
+							}
+						}
+					],
+					"days": [
+						105,
+						105
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_spoke_up_for_mrsha_and_bird"
+						],
+						"relationship": [
+							{
+								"from": "mrsha",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "lyonette",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "Before Safry and Maran were fired, a Human guest had already told Erin how they treated Mrsha and Bird."
+				}
+			]
 		},
 		"b5.ze_ryoka_learns_lyonette_is_a_princess": {
 			"tier": 2,
@@ -284,7 +337,8 @@
 					"prefer": [
 						"lyonette"
 					],
-					"fallback_tags": []
+					"fallback_tags": [],
+					"optional": true
 				},
 				"visitor": {
 					"prefer": [
@@ -303,8 +357,7 @@
 			},
 			"requires": {
 				"alive": [
-					"pawn",
-					"lyonette"
+					"pawn"
 				],
 				"flags": [],
 				"not_flags": []

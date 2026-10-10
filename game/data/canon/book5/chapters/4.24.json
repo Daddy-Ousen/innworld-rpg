@@ -860,13 +860,15 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzzl_imenet_comes_to_liscor_alone",
 				"cancel"
 			],
 			"effects": {
 				"set_flags": [
 					"venitra.disguised_as_regrika_blackpaw",
 					"liscor.hosts_regrika_blackpaw",
-					"ijvani.disguised_as_imenet"
+					"ijvani.disguised_as_imenet",
+					"azkerash.servants_in_liscor"
 				],
 				"clear_flags": [
 					"venitra.turns_for_liscor"
@@ -980,6 +982,48 @@
 				"note": "Snow still lies deep; the winter rules are not ended here."
 			},
 			"summary": "Ivolethe feels many threads of fate meet at the inn today. By night she has begun to melt: winter is ending."
+		},
+		"b5.zzzl_imenet_comes_to_liscor_alone": {
+			"tier": 2,
+			"window": {
+				"earliest": 110,
+				"latest": 110,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ijvani"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ijvani.disguised_as_imenet",
+					"azkerash.servants_in_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.24",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of Regrika's arrival when Venitra is dead. Az'kerash still wants the Runner who knows the Dragon, so he sends Ijvani alone."
+			},
+			"summary": "That night a young Drake [Mage] who calls herself Imenet comes to the inn alone and asks about the city's Runners. No one sees the black skeleton under the illusion."
 		}
 	},
 	"system": [

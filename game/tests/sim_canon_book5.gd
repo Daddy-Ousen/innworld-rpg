@@ -234,16 +234,20 @@ func test_without_ilvriss_ryoka_still_comes_home() -> void:
 		assert_true(Director.happened(gs.world.status(id)), id)
 
 
-func test_without_ryoka_there_is_no_homecoming_and_no_contract() -> void:
+func test_without_ryoka_there_is_no_homecoming_and_erin_pays_for_the_build() -> void:
 	var gs := _fresh()
 	assert_eq(Commands.kill_npc(gs, _db, "ryoka_griffin"), "")
 	_sleep_to_last_day(gs)
 	for id: String in ["b5.m_ryoka_comes_home_to_liscor", "b5.n_ilvriss_confronts_ryoka_in_the_street",
-			"b5.p_ryoka_hands_the_horns_their_gear", "b5.q_erin_and_ryoka_talk_in_celum",
-			"b5.t_klbkch_takes_the_building_contract", "b5.v_bird_takes_the_watch_and_pawn_goes_to_war"]:
+			"b5.p_ryoka_hands_the_horns_their_gear", "b5.q_erin_and_ryoka_talk_in_celum"]:
 		assert_eq(gs.world.status(id), Director.CANCELLED, id)
-	assert_false(gs.flags.has("wandering_inn.expansion_planned"), "nobody pays for the build")
-	assert_eq(gs.world.status("b5.zze_the_workers_start_building_the_inn"), Director.CANCELLED, "so no build starts (4.18)")
+	# M23.4: Erin pays the Hive herself, so the build still starts (4.18).
+	assert_eq(gs.world.status("b5.t_klbkch_takes_the_building_contract"), Director.MUTATED)
+	assert_eq(gs.world.status("b5.t_erin_pays_the_antinium_to_build_the_inn"), Director.DONE)
+	assert_true(gs.flags.has("wandering_inn.expansion_planned"))
+	assert_false(gs.flags.has("ryoka.pays_for_the_inn_expansion"))
+	for id: String in ["b5.v_bird_takes_the_watch_and_pawn_goes_to_war", "b5.zze_the_workers_start_building_the_inn"]:
+		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_eq(gs.world.status("b5.zzb_ryoka_and_mrsha_come_home_from_the_farm"), Director.CANCELLED)
 	assert_true(gs.flags.has("ryoka.has_rihal_spellbook"), "the tome never reaches Krshia")
 	for id: String in ["b5.k_vuliel_drae_find_the_new_section", "b5.r_venitra_warns_the_goblin_lord",
@@ -325,12 +329,13 @@ func test_without_venitra_there_is_no_regrika_but_liscor_still_hears() -> void:
 			"b5.zzzzc_the_horns_burn_a_creler_nest"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 	assert_false(gs.flags.has("ryoka.knows_regrika_is_venitra"))
-	# M13.7: no Regrika, no murders, no Word of Death; the inn is still finished and winter still ends.
+	# M13.7: no Regrika, no murders; the inn is still finished and winter still ends.
+	# M23.4: Imenet comes alone, so the Word of Death still falls and Teriarch still revives Ryoka.
 	for npc: String in ["brunkr", "ulrien", "ryoka_griffin"]:
 		assert_true(gs.world.is_alive(_db.canon, npc), npc + " lives")
-	for id: String in ["b5.zzzzj_venitra_murders_brunkr", "b5.zzzzq_regrika_kills_ulrien_in_the_inn",
-			"b5.zzzzw_ryoka_names_the_necromancer_and_dies"]:
+	for id: String in ["b5.zzzzj_venitra_murders_brunkr", "b5.zzzzq_regrika_kills_ulrien_in_the_inn"]:
 		assert_false(Director.happened(gs.world.status(id)), id)
+	assert_true(Director.happened(gs.world.status("b5.zzzzw_ryoka_names_the_necromancer_and_dies")))
 	for id: String in ["b5.zzzzk_the_workers_finish_the_third_floor_and_tower", "b5.zzzzzh_winter_ends_and_the_faeries_fly_north"]:
 		assert_true(Director.happened(gs.world.status(id)), id)
 

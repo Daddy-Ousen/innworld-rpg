@@ -22,13 +22,13 @@
 					"prefer": [
 						"venitra"
 					],
-					"fallback_tags": [],
-					"optional": true
+					"fallback_tags": []
 				}
 			},
 			"requires": {
 				"alive": [
-					"teriarch"
+					"teriarch",
+					"venitra"
 				],
 				"flags": [
 					"ryoka.killed_by_word_of_death"
@@ -37,6 +37,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzzzx_teriarch_revives_ryoka_and_flies_her_home",
 				"cancel"
 			],
 			"effects": {
@@ -90,7 +91,7 @@
 					"azkerash"
 				],
 				"flags": [
-					"venitra.burned_by_teriarch"
+					"ryoka.revived_by_teriarch"
 				],
 				"not_flags": []
 			},
@@ -159,6 +160,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzzzz_the_gnolls_burn_brunkr",
 				"cancel"
 			],
 			"effects": {
@@ -764,7 +766,56 @@
 				"confidence": "confirmed",
 				"note": "How long they stay in Celum is not said (Book 6)."
 			},
-			"summary": "As the drums go on, Lyonette and Mrsha carry their things through the door to Celum and Octavia's shop. Ishkr boards up the inn's windows. Erin sits alone in her inn and listens: the Goblins have come."
+			"summary": "As the drums go on, Lyonette and Mrsha carry their things through the door to Celum and Octavia's shop. Ishkr boards up the inn's windows. Erin sits alone in her inn and listens: the Goblins have come.",
+			"hooks": [
+				{
+					"id": "player_helped_board_up_the_inn",
+					"did": [
+						{
+							"action": [
+								"repair_furniture",
+								"carry_water",
+								"keep_watch",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"wandering_inn",
+									"celum"
+								]
+							}
+						}
+					],
+					"days": [
+						114,
+						114
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_helped_board_it_up"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "lyonette",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ishkr",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "When the Goblin Lord's drums reached Liscor, a Human guest helped Ishkr board up the inn and carried Mrsha's things to Celum."
+				}
+			]
 		},
 		"b5.zzzzzj_the_necromancer_turns_to_the_goblins": {
 			"tier": 2,
@@ -814,6 +865,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzzzzj_the_necromancer_calls_his_servants_home",
 				"cancel"
 			],
 			"effects": {
@@ -832,6 +884,154 @@
 				"note": "He muses on a new servant. The day is a guess."
 			},
 			"summary": "In his burnt castle Az'kerash strips Venitra of his favour, shames Ijvani and gives Kerash his authority. He sees in Ryoka the Dragon's weakness, and turns his mind to his other plague: the Goblins."
+		},
+		"b5.zzzzx_teriarch_revives_ryoka_and_flies_her_home": {
+			"tier": 2,
+			"window": {
+				"earliest": 112,
+				"latest": 112,
+				"confidence": "guess"
+			},
+			"location": "teriarch_cave",
+			"roles": {
+				"dragon": {
+					"prefer": [
+						"teriarch"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"teriarch"
+				],
+				"flags": [
+					"ryoka.killed_by_word_of_death"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.revived_by_teriarch",
+					"ryoka.flew_home_with_teriarch"
+				],
+				"clear_flags": [
+					"ryoka.under_word_of_death"
+				],
+				"revive": [
+					"ryoka_griffin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of the revival when Venitra is dead: no one followed Ryoka to the cave, so there is no one to burn."
+			},
+			"summary": "Teriarch mends Ryoka's shredded heart and she wakes. No servant of the Necromancer came after her. The Dragon flies her home to Liscor under a spell of invisibility."
+		},
+		"b5.zzzzzj_the_necromancer_calls_his_servants_home": {
+			"tier": 2,
+			"window": {
+				"earliest": 114,
+				"latest": 114,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"chosen": {
+					"prefer": [
+						"kerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"azkerash"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"kerash.holds_the_necromancers_authority",
+					"azkerash.turns_to_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of the Necromancer's turn when there was no accord with Teriarch (Ryoka or Teriarch dead, or no Word of Death). His hunt in Liscor ends without the Dragon's warning."
+			},
+			"summary": "Az'kerash calls his servants home from Liscor. The Runner is out of his reach, and he gives Kerash his authority. He turns his mind to his other plague: the Goblins."
+		},
+		"b5.zzzzz_the_gnolls_burn_brunkr": {
+			"tier": 2,
+			"window": {
+				"earliest": 113,
+				"latest": 113,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"elder": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"brunkr.murdered_by_venitra"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.gnolls_burned_brunkr"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.31",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of the double pyre when Ulrien still lives (no one exposed Regrika at the inn)."
+			},
+			"summary": "Outside Liscor's walls the Gnolls burn Brunkr with his sword and shield beside him. Krshia lights the pyre, and the Gnolls of the city howl for him."
 		}
 	},
 	"system": [
