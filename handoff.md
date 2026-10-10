@@ -1,23 +1,27 @@
 # Handoff
 
-## Just done (2026-10-10, local): M23.1 Book 2 canon bends (branch `feat/m23.1-book2-bends`)
-- Rules for all books are in ADR 0036 (`docs/adr/0036-canon-bends.md`). Read it before M23.2.
-- Engine: `Director._propagate` leaves a dependent that has a `mutate:` step and an unopened window pending; it
-  mutates on its own day. `unit_director` changed (+1 test).
-- Data (25 Book 2 chapter files): story-order links cut; substitutes (Klbkch rescue 2.02, Relc warning 2.23);
-  alts `b2.ceria_reforms_the_horns_short_handed`, `b2.goblin_lord_overruns_the_stone_spears`, `b2.erin_winters_in_liscor`;
-  flag hand-off + delay (`ksmvr_joins…`, `drake_assembly…`, `magnolia_plans…`); 19 `change` hooks.
-- New `game/tests/sim_kill_book2.gd` (10): kills Erin, Ryoka, Toren, Rags, Ceria, Pisces, Yvlon on day 41; ceilings
-  on lost events and drift; hook-per-day check; chess hook played on day 47. Copy it for Books 3 – 7.
-- Tests run (all pass): `sim_kill_book2`, `unit_director`, `sim_divergence`, `sim_canon_book1..3`,
-  `sim_book2_end_stages`, `sim_player_hooks` (93), `unit_canon_db`; validator 0 / 0; Python 114 OK. Full suite not run.
-- Next: M23.2 Book 3 **[Opus · high]**. Key events there are the Albez chain (`b3.horns_run_out_of_coin_at_albez`
-  etc.); Ksmvr's death in Book 2 still drops it.
-- Gotchas: a quick probe beats guessing: a throwaway `extends SceneTree` script that kills an NPC, runs
-  `Director.run(gs, db, <day>)` (0.3 s for a book) and prints non-`done` history. Some chapter files have the roles
-  on one line (2.39), others one role per line: patch scripts must handle both. Topological order breaks same-day
-  ties by id, so a cut link can move an event earlier in the day (statuses stay). Substitute scoring sees every NPC
-  in the world: check the pick (ties go to the lowest id, e.g. `anith` for "adventurer + mage").
+## Just done (2026-10-10, local): M23.2 Book 3 canon bends (branch `feat/m23.2-book3-bends`)
+- ADR 0036 "Book 3" lists every change. Patch script pattern: text-level edits per event block (keeps CRLF and
+  layout); the M23.2 one lived in the session scratchpad (`patch_m232.py`), gone now.
+- Engine: `Director._wait_until`: a dependent may wait while a dependency is pending (delayed). Needed because a
+  flag hand-off whose id sorts before the mutating event is delayed first in the resolve pass. `unit_director` +2.
+- Data: 24 chapter files (23 Book 3 + `2.32H`). 9 alt events, 1 substitute, 8 delay steps, 13 hooks.
+  `sim_player_hooks` count 106.
+- New `game/tests/sim_kill_book3.gd` (11): kills Erin, Octavia, Ceria, Pisces, Lyonette, Yvlon, Ksmvr on day 72,
+  Ksmvr on day 41; hook-per-day (23 days); chess at the inn on day 81 changes Pawn's supper. Copy it for Book 4.
+- Tests run: all pass: `sim_kill_book3` (11), `unit_director` (27), `unit_canon_db`, `sim_player_hooks` (106),
+  `sim_canon_book1..4`, `sim_book3_finale`, `sim_book3_stages`, `sim_book4_relief_home`, `sim_esthelm_siege`,
+  `sim_divergence`, `sim_book2_end_stages`, `sim_kill_book2`; validator 0 / 0; Python 114 OK. Full suite not run.
+- Next: M23.3 Book 4 **[Opus · high]**. Key events: `b4.erin_moves_the_door_anchor_to_the_stitchworks` (depends on
+  `b3.erin_leaves_celum_on_the_wagon`; the Book 3 leaving alts set `erin.on_wagon_south` and
+  `horns_of_hammerad.bound_for_liscor` to hand off on), `b4.teriarch_stops_the_wagon`, the snowstorm.
+- Gotchas: Books 1 – 5 break same-day ties by id, so a cut link can reorder a day. Check kills and clear_flags
+  inside one day: cutting `the_last_battle_of_esthelm` from the Florist's scene would kill Grunter before she
+  splints his arm (drift in the canon run). The probe (`game/_scratch/probe.gd`, `extends SceneTree`, env BOOK,
+  KILL_DAY, END_DAY, VICTIMS, LIST=1) runs a book of kills in about 20 s; it is deleted, rebuild it from
+  `Director.run` + `Director.player_kill` if needed. Some chapter files have roles on one line, others one role per
+  line: patch scripts must handle both. Substitute scoring sees every NPC in the world (ties go to the lowest id):
+  the kill sim checks the pick.
 
 ## Earlier (2026-10-10): M23.0 divergence report
 - `tools/divergence_report.py`; rerun `python tools/divergence_report.py game/data/canon --out docs/divergence/report.md`
