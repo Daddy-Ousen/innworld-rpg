@@ -1,14 +1,11 @@
-## The journal (J, M6.1): the day, the player's focus, the news of the last
-## days, what the player changed in the story and the drift (M6.4), and how
-## to play.
-## Picking a focus ("Become an [Innkeeper]") calls Commands.set_focus with
-## that class's main tags: matching actions count for more (conviction,
-## DESIGN §3.2). The screen never shows XP numbers (M15.3). Presentation only; `lines` and `focus_choices` are static
-## and headless, so tests can check them.
+## The journal (J, M6.1): the day, the news of the last days, what the player
+## changed in the story and the drift (M6.4), and how to play.
+## The focus picker was removed from the screen (2026-10-11); `focus_choices`,
+## `focus_name` and `main_tags` stay for the character sheet, console and tests.
+## The screen never shows XP numbers (M15.3). Presentation only; `lines` is static
+## and headless, so tests can check it.
 class_name Journal
 extends PanelContainer
-
-signal focus_changed
 
 ## A class tag is a main tag for a focus at this weight or more.
 const FOCUS_MIN_WEIGHT := 0.5
@@ -20,19 +17,13 @@ var _db: DataDb
 
 ## The panel's size (the .tscn offsets) when the view has room (M20.3).
 const DESIGN_SIZE := Vector2(600, 600)
-## The focus list's height (journal.tscn), at most FOCUS_SHARE of a small view.
-const FOCUS_HEIGHT := 170.0
-const FOCUS_SHARE := 0.3
 @onready var _text: Label = %Text
-@onready var _focus: ItemList = %Focus
 @onready var _scroll: ScrollContainer = %Scroll
 
 
 func _ready() -> void:
 	hide()
-	UiScale.keep_fit(self, DESIGN_SIZE, _fit_focus)  # M20.3: cut to a small view
-	_focus.item_activated.connect(choose)
-	TouchControls.activate_on_tap(_focus)
+	UiScale.keep_fit(self, DESIGN_SIZE)  # M20.3: cut to a small view
 
 
 func open(gs: GameState, db: DataDb) -> void:
@@ -40,29 +31,11 @@ func open(gs: GameState, db: DataDb) -> void:
 	_db = db
 	_text.text = "\n".join(lines(gs, db))
 	_scroll.scroll_vertical = 0
-	_focus.clear()
-	var current := 0
-	for c: Dictionary in focus_choices(gs, db):
-		var i := _focus.add_item(c["name"])
-		_focus.set_item_metadata(i, c["tags"])
-		if _same(c["tags"], gs.focus_tags):
-			current = i
 	show()
-	_focus.select(current)
-	_focus.grab_focus()
 
 
 func close() -> void:
 	hide()
-	_focus.release_focus()
-
-
-## Sets the focus of the list entry at `index`. Returns "" or an error text.
-func choose(index: int) -> String:
-	var err := Commands.set_focus(_gs, _db, _focus.get_item_metadata(index))
-	_text.text = "\n".join(lines(_gs, _db))
-	focus_changed.emit()
-	return err
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -115,7 +88,6 @@ static func focus_name(gs: GameState, db: DataDb) -> String:
 static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = [
 		"Day %d, %s." % [_pday(gs.clock.day(), db), gs.clock.time_string()],
-		"Focus: %s" % focus_name(gs, db),
 		"",
 		"Your mark on the story:",
 	]
@@ -137,8 +109,6 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	out.append("How to play:")
 	for h: String in SystemMessages.HINTS:
 		out.append("  " + h)
-	out.append("")
-	out.append("Choose a focus (Enter). Work that matches it brings that class closer.")
 	return out
 
 
@@ -185,8 +155,3 @@ static func _same(a: Array, b: Array) -> bool:
 		if not b.has(x):
 			return false
 	return true
-
-
-## On a small view the focus list takes less height, so the text keeps room.
-func _fit_focus() -> void:
-	_focus.custom_minimum_size.y = minf(FOCUS_HEIGHT, get_viewport_rect().size.y * FOCUS_SHARE)

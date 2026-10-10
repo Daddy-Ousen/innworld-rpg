@@ -199,10 +199,9 @@ func test_buttons_send_their_actions() -> void:
 
 
 func test_a_tap_picks_a_list_item() -> void:
-	var m := _main()
-	m.journal.open(_session.gs, _session.db)
-	var list: ItemList = m.journal._focus
-	assert_gt(list.item_count, 0, "focus choices")
+	var list: ItemList = add_child_autofree(ItemList.new())
+	list.add_item("one")
+	TouchControls.activate_on_tap(list)
 	watch_signals(list)
 	list.item_clicked.emit(0, Vector2.ZERO, MOUSE_BUTTON_LEFT)
 	assert_signal_emitted(list, "item_activated", "one tap picks on touch")
