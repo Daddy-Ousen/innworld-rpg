@@ -9,7 +9,7 @@ When every box of a milestone is ticked, move it to the top of Done. A new miles
 | Milestone | State | Open items |
 |---|---|---|
 | M21 Housekeeping | done | - |
-| M23 Canon bends | open | M23.4 Book 5, M23.5 Book 6, M23.6 Book 7, M23.7 drift warning |
+| M23 Canon bends | open | M23.5 Book 6, M23.6 Book 7, M23.7 drift warning |
 | M24 Level by living | not started | M24.0 – M24.3 |
 | M25 NPC life | not started | M25.0 – M25.4 |
 | M26 Code health | not started | M26.0, M26.1 |
@@ -41,7 +41,7 @@ Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 6
 - [x] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane) **[Opus · high]** (done 2026-10-10, ADR 0036: story-order links cut, 2 substitutes, 3 alt events, flag hand-off + delay, 19 hooks (one per on-map day), director runs an alt on its own day; Erin's death loses 109 events, was 140)
 - [x] M23.2 Book 3: the same **[Opus · high]** (done 2026-10-10, ADR 0036 "Book 3": links cut, real-cause flags, 1 substitute, 9 alt events, flag hand-offs with delay, 13 hooks (one per on-map day), director lets a dependent wait on a delayed dependency; Book 2 Goblin raid no longer needs Ksmvr; Octavia's death loses 4 events, was 49)
 - [x] M23.3 Book 4: the same **[Opus · high]** (done 2026-10-10, ADR 0036 "Book 4": trip, homecoming and relief links cut, trip-flag hand-offs, 5 alt events (Pawn in the Hive, the wagon hides from the Goblin army, home without the door, Liscor-only relief), 4 hooks (all 9 on-map days); Teriarch's death loses 2 events, was 83)
-- [ ] M23.4 Book 5: the same **[Opus · high]**
+- [x] M23.4 Book 5: the same **[Opus · high]** (done 2026-10-11, ADR 0036 "Book 5": hand-off flags, 2 substitutes (Etretta for Quallet, Ijvani for Venitra), 9 alt events (Luan and Aiko go to Geneva, Erin pays for the build, Imenet comes alone, the Necromancer still turns to the Goblins, the Gnolls burn Brunkr, Riverfarm without Laken), 4 hooks (all 16 on-map days); Venitra's death loses 20 events, was 30; Quallet's loses 0, was 6)
 - [ ] M23.5 Book 6: the same **[Opus · high]**
 - [ ] M23.6 Book 7: the same **[Opus · high]**
 - [ ] M23.7 Drift warning: at high drift the journal and the morning page say canon knowledge is unreliable (DESIGN §4.1) **[Sonnet · medium]**

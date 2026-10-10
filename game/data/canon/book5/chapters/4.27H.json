@@ -524,13 +524,15 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzzzd_imenet_seizes_ryoka_in_an_alley",
 				"cancel"
 			],
 			"effects": {
 				"set_flags": [
 					"regrika.asked_ryoka_to_scout_the_goblin_lord",
 					"ryoka.knows_regrika_is_venitra",
-					"venitra.seized_ryoka_in_liscor"
+					"venitra.seized_ryoka_in_liscor",
+					"ryoka.seized_by_the_necromancers_servants"
 				]
 			},
 			"status": "candidate",
@@ -541,6 +543,58 @@
 				"note": "Hawk refused the job. What happens to Ryoka is in 4.28."
 			},
 			"summary": "'Regrika' and her mage Imenet find Ryoka and ask her to scout the Goblin Lord's army. In an alley Regrika twists a ring and becomes Venitra, grips Ryoka's throat and threatens all she loves."
+		},
+		"b5.zzzzd_imenet_seizes_ryoka_in_an_alley": {
+			"tier": 2,
+			"window": {
+				"earliest": 111,
+				"latest": 111,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ijvani"
+					],
+					"fallback_tags": []
+				},
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"ijvani",
+					"ryoka_griffin"
+				],
+				"flags": [
+					"ijvani.disguised_as_imenet"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.seized_by_the_necromancers_servants",
+					"ryoka.knows_imenet_is_ijvani",
+					"ryoka.watched_by_a_listening_spell"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.27H",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of Venitra's alley scene when Venitra is dead. Ijvani alone binds Ryoka with spells."
+			},
+			"summary": "Imenet asks Ryoka to scout the Goblin Lord's army. In an alley the illusion falls away: a black skeleton mage. Her truth spell shows Ryoka told no one of their master, and a listening spell stays on her."
 		}
 	},
 	"system": [

@@ -233,14 +233,14 @@
 					"prefer": [
 						"venitra"
 					],
-					"fallback_tags": [],
-					"optional": true
+					"fallback_tags": []
 				}
 			},
 			"requires": {
 				"alive": [
 					"ivolethe",
-					"ryoka_griffin"
+					"ryoka_griffin",
+					"venitra"
 				],
 				"flags": [
 					"ryoka.ran_for_the_high_passes"

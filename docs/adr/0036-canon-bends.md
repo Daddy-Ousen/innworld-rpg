@@ -1,6 +1,6 @@
 # ADR 0036: Canon bends (M23)
 
-Status: accepted (2026-10-10, M23.1 Book 2; M23.2 Book 3 and M23.3 Book 4 added). Applies to M23.4 – M23.6 (Books 5 – 7) too.
+Status: accepted (2026-10-10, M23.1 Book 2; M23.2 Book 3, M23.3 Book 4 and M23.4 Book 5 (2026-10-11) added). Applies to M23.5 – M23.6 (Books 6 – 7) too.
 
 ## Problem
 Books 2 – 7 had only `cancel` in `on_fail`, and few hooks. One dead NPC cancelled long chains that did not need
@@ -139,6 +139,45 @@ What is left is real: each NPC's own scenes; with no Zel, Mrsha never flees the 
 no honey dressing; with no door (Ceria or Pisces dead before day 87), no Celum trips or Octavia research. Erin's
 death still loses the homecoming, the relief and Christmas (her ideas), but not the Ryoka, Laken, Mrsha or Rags
 threads.
+
+## Book 5 (M23.4)
+No engine change. Data and a kill sim only. Book 5 has few story-order links (lost was close to pinned), so the
+work is mostly alt events and hand-off flags. Most chains here hang on flags, not `depends_on`; the M23.0 report
+undercounts them (it counts `depends_on` only), so the numbers below come from a director run.
+- Hand-off flags (new): `earthers.joined_the_last_light` (Ken's walk to the Last Light and its alt; the Red Cross
+  waits on it, Ken optional there), `bird.to_guard_the_inn` (Bird's watch no longer `depends_on` the contract),
+  `azkerash.servants_in_liscor`, `ryoka.seized_by_the_necromancers_servants` (the feast standoff and the Word of
+  Death wait on it, not on `venitra.seized_ryoka_in_liscor`). The accord waits on `ryoka.revived_by_teriarch`, not
+  on Venitra being burned.
+- Substitutes: Etretta (Gravetender's Fist veteran) marches the company to the valley if Quallet is dead
+  (`fallback_tags` dullahan + soldier + mercenary); Ijvani carries the Word of Death if Venitra is dead
+  (`fallback_tags` azkerash_servant + shadow).
+- Optional now: Lyonette in Pawn's return, the firing of Safry and Maran, and the Soldiers' bee soup.
+- Venitra now required where her presence is the cause: Ivolethe freezes the pass because Venitra chases Ryoka;
+  Teriarch burns Venitra in the cave.
+- Mutates (9 alt events): Ken's walk → `zt_luan_and_aiko_go_to_the_last_light`; Klbkch's contract (Ryoka cannot pay)
+  → `t_erin_pays_the_antinium_to_build_the_inn`; Regrika's arrival → `zzzl_imenet_comes_to_liscor_alone`; the alley
+  → `zzzzd_imenet_seizes_ryoka_in_an_alley`; the revival with no Venitra → `zzzzx_teriarch_revives_ryoka_and_flies_her_home`
+  (it revives Ryoka too); no accord → `zzzzzj_the_necromancer_calls_his_servants_home` (he still turns to the Goblins);
+  Ulrien alive → `zzzzz_the_gnolls_burn_brunkr`; Laken dead → `zzo_durene_drives_off_a_mossbear`,
+  `zzp_riverfarm_takes_in_windrest`.
+- 4 new `change` hooks: the new staff's first day (103), Mrsha and Bird before the firing (105), boarding up the inn
+  (114), Riverfarm's graves (115). All 16 on-map days (100 – 115) have a hook. The Baleros days (77 – 90) are off-map.
+
+| Dies on | Book 5 lost before → after | Drift before → after |
+|---|---|---|
+| Ryoka (97) | 34 → 31 | 33.5 → 29.5 |
+| Erin (97) | 30 → 30 | 31 → 30.5 |
+| Laken (97) | 15 → 15 | 14.5 → 13.5 |
+| Venitra (97) | 30 → 20 | 29.5 → 18.25 |
+| Lyonette (97) | 12 → 8 | 12 → 8 |
+| Ken (78) | 7 → 3 | 6.5 → 2.5 |
+| Quallet (78) | 6 → 0 | 6 → 0.25 |
+
+What is left is real: Ryoka is the climax of the book (her return, the farm, the Word of Death, the run); Erin's
+own scenes, and with no Erin no bone steak, so Regrika is never exposed and Ulrien lives; Laken's Riverfarm is his
+Emperor's arc (the riders came with him, so the Goblin fights need him); with no Venitra, no Gnoll murders and no
+Ivolethe sacrifice. A Book 5 death never cancels a Book 6 – 7 event (only one Book 6 event reads a Book 5 flag).
 
 ## Open
 - Drift counts later-book cancels at once, so a Book 2 death shows drift for Books 3 – 7 too.

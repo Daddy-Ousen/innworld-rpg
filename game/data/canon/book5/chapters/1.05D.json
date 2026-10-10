@@ -22,7 +22,8 @@
 					"prefer": [
 						"kenjiro_murata"
 					],
-					"fallback_tags": []
+					"fallback_tags": [],
+					"optional": true
 				},
 				"rower": {
 					"prefer": [
@@ -55,18 +56,16 @@
 			},
 			"requires": {
 				"alive": [
-					"geneva_scala",
-					"kenjiro_murata"
+					"geneva_scala"
 				],
 				"flags": [
-					"kenjiro_murata.with_geneva"
+					"earthers.joined_the_last_light"
 				],
 				"not_flags": []
 			},
-			"depends_on": [
-				"b5.zt_ken_luan_and_aiko_go_to_the_last_light"
-			],
+			"depends_on": [],
 			"on_fail": [
+				"delay",
 				"cancel"
 			],
 			"effects": {
@@ -82,7 +81,8 @@
 				"confidence": "confirmed",
 				"note": "Placeholder day. Calectus says the Earthers die if they leave the camp: her name is Geneva's only shield. Xalandrass sold the Evercut arrows to Roving Arrow."
 			},
-			"summary": "Aiko becomes Geneva's surgical assistant. Ken sells Luan's arrowhead to the Naga war vendor Xalandrass for paint, and red-cross signs soon ring the camp. The tallest names it the Red Cross Company."
+			"summary": "Aiko becomes Geneva's surgical assistant. Ken sells Luan's arrowhead to the Naga war vendor Xalandrass for paint, and red-cross signs soon ring the camp. The tallest names it the Red Cross Company.",
+			"delay_limit": 3
 		},
 		"b5.zv_geneva_saves_a_war_walker": {
 			"tier": 2,

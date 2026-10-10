@@ -200,6 +200,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zt_luan_and_aiko_go_to_the_last_light",
 				"cancel"
 			],
 			"effects": {
@@ -207,7 +208,8 @@
 					"kenjiro_murata.with_geneva",
 					"luan_khumalo.with_geneva",
 					"aiko_nonomura.with_geneva",
-					"daly.stays_with_gravetenders_fist"
+					"daly.stays_with_gravetenders_fist",
+					"earthers.joined_the_last_light"
 				],
 				"clear_flags": [
 					"kenjiro_murata.speaks_for_gravetenders_fist"
@@ -221,6 +223,81 @@
 				"note": "Placeholder day. About forty Earthers are in the company. Geneva will not leave the valley while the battle lasts."
 			},
 			"summary": "Under a white flag Luan asks Geneva if she comes from another world. She does, and offers food and shelter to every Earther. Only Ken, Luan and Aiko take it; Daly and the rest stay. Quallet lets them go as deserters."
+		},
+		"b5.zt_luan_and_aiko_go_to_the_last_light": {
+			"tier": 2,
+			"window": {
+				"earliest": 84,
+				"latest": 84,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"doctor": {
+					"prefer": [
+						"geneva_scala"
+					],
+					"fallback_tags": []
+				},
+				"rower": {
+					"prefer": [
+						"luan_khumalo"
+					],
+					"fallback_tags": []
+				},
+				"spear": {
+					"prefer": [
+						"aiko_nonomura"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"leader": {
+					"prefer": [
+						"daly"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"quallet_marshhand"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"geneva_scala",
+					"luan_khumalo"
+				],
+				"flags": [
+					"earthers.in_gravetenders_fist",
+					"geneva.called_the_last_light"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"luan_khumalo.with_geneva",
+					"aiko_nonomura.with_geneva",
+					"daly.stays_with_gravetenders_fist",
+					"earthers.joined_the_last_light"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "1.04D",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of Ken, Luan and Aiko going to the Last Light when Ken is dead. Luan asks Geneva the question in the book too."
+			},
+			"summary": "Under a white flag Luan asks Geneva if she comes from another world. She does, and offers food and shelter to every Earther. With Ken dead, only Luan and Aiko take it; Daly and the rest stay."
 		}
 	},
 	"system": [

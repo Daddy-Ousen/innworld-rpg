@@ -275,7 +275,55 @@
 				"confidence": "confirmed",
 				"note": "Laken's Day 70 = game day 115 (his Day + 45, ADR 0028). The informant is not named; do not link."
 			},
-			"summary": "Riverfarm buries its dead. Laken tells Durene his tricks came from an informant he met in Invrisil. A City Runner brings letters from Lady Rie, two [Merchants] and a [Lord]."
+			"summary": "Riverfarm buries its dead. Laken tells Durene his tricks came from an informant he met in Invrisil. A City Runner brings letters from Lady Rie, two [Merchants] and a [Lord].",
+			"hooks": [
+				{
+					"id": "player_helped_riverfarm_bury_its_dead",
+					"did": [
+						{
+							"action": [
+								"comfort_someone",
+								"bandage_wound",
+								"chop_wood",
+								"carry_water"
+							],
+							"context": {
+								"location": [
+									"riverfarm"
+								]
+							}
+						}
+					],
+					"days": [
+						115,
+						115
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"riverfarm.earther_helped_bury_the_dead"
+						],
+						"relationship": [
+							{
+								"from": "durene",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "prost",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "laken_godart",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "After the Goblin attack a stranger from the south dug graves beside the people of Riverfarm."
+				}
+			]
 		}
 	},
 	"system": [

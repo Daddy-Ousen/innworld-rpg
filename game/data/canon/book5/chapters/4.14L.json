@@ -83,7 +83,55 @@
 				"confidence": "confirmed",
 				"note": "Day 103 is a guess ('day one', the morning after the offer). Erin never says who is in charge. Safry and Maran shun Mrsha and Bird; Drassi and Ishkr work well."
 			},
-			"summary": "Erin's four new hires start at dawn: Safry and Maran from Agnes' inn, Drassi, and the quiet Gnoll Ishkr. Lyonette must train them, but Safry and Maran think their levels put them in charge."
+			"summary": "Erin's four new hires start at dawn: Safry and Maran from Agnes' inn, Drassi, and the quiet Gnoll Ishkr. Lyonette must train them, but Safry and Maran think their levels put them in charge.",
+			"hooks": [
+				{
+					"id": "player_helped_train_the_new_staff",
+					"did": [
+						{
+							"action": [
+								"serve_guests",
+								"wash_dishes",
+								"sweep_floor",
+								"talk_with_guest"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								]
+							}
+						}
+					],
+					"days": [
+						103,
+						103
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_trained_the_new_staff"
+						],
+						"relationship": [
+							{
+								"from": "lyonette",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "drassi",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "ishkr",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "On the new staff's first day a Human guest worked beside them and showed them how the Wandering Inn is run."
+				}
+			]
 		},
 		"b5.za_pawn_comes_back_from_the_front": {
 			"tier": 2,
@@ -104,7 +152,8 @@
 					"prefer": [
 						"lyonette"
 					],
-					"fallback_tags": []
+					"fallback_tags": [],
+					"optional": true
 				},
 				"runner": {
 					"prefer": [
@@ -123,8 +172,7 @@
 			},
 			"requires": {
 				"alive": [
-					"pawn",
-					"lyonette"
+					"pawn"
 				],
 				"flags": [
 					"pawn.lost_25_soldiers"

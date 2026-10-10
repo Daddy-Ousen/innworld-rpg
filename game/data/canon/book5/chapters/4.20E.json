@@ -190,6 +190,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzo_durene_drives_off_a_mossbear",
 				"cancel"
 			],
 			"effects": {
@@ -248,6 +249,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b5.zzp_riverfarm_takes_in_windrest",
 				"cancel"
 			],
 			"effects": {
@@ -264,6 +266,104 @@
 				"note": "Laken's Day 60 = game day 105 (his Day + 45, ADR 0028). Helm says a Great Chieftain has risen near Invrisil for the Goblin Lord."
 			},
 			"summary": "Helm brings word that Goblins burned Windrest, killed a dozen people and took two young women. Over Prost's worry, Laken takes in the whole village."
+		},
+		"b5.zzo_durene_drives_off_a_mossbear": {
+			"tier": 2,
+			"window": {
+				"earliest": 104,
+				"latest": 104,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"durene"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"riverfarm.drove_off_a_mossbear",
+					"durene.fought_a_mossbear"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of the Mossbear raid when Laken is dead (no command, no glare). Durene fights it alone."
+			},
+			"summary": "A Mossbear raids the village. Durene fights it bare-handed and is clawed, but she does not give way, and at last it lumbers back into the trees."
+		},
+		"b5.zzp_riverfarm_takes_in_windrest": {
+			"tier": 2,
+			"window": {
+				"earliest": 105,
+				"latest": 105,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"farmer": {
+					"prefer": [
+						"prost"
+					],
+					"fallback_tags": []
+				},
+				"smith": {
+					"prefer": [
+						"helm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"prost"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"windrest.burned_by_goblins",
+					"riverfarm.sheltering_windrest"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 5,
+				"chapter": "4.20E",
+				"confidence": "guess",
+				"note": "Not in the book (M23.4, divergence only): runs instead of Laken taking in Windrest when Laken is dead. Prost worries about food, but Riverfarm will not turn them away."
+			},
+			"summary": "Helm brings word that Goblins burned Windrest, killed a dozen people and took two young women. Prost worries about food for the winter, but Riverfarm takes the survivors in."
 		}
 	},
 	"system": [

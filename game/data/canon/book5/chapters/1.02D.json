@@ -106,7 +106,11 @@
 					"prefer": [
 						"quallet_marshhand"
 					],
-					"fallback_tags": []
+					"fallback_tags": [
+						"dullahan",
+						"soldier",
+						"mercenary"
+					]
 				},
 				"recruit": {
 					"prefer": [
@@ -131,9 +135,7 @@
 				}
 			},
 			"requires": {
-				"alive": [
-					"quallet_marshhand"
-				],
+				"alive": [],
 				"flags": [
 					"earthers.in_gravetenders_fist"
 				],
@@ -141,6 +143,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"substitute",
 				"cancel"
 			],
 			"effects": {
