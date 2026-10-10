@@ -14,11 +14,20 @@
 				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ryoka_griffin", "krshia"], "flags": ["stone_spears.tribe_devastated", "ryoka.back_at_the_wandering_inn"], "not_flags": []},
-			"depends_on": ["b2.erin_and_ryoka_fight_over_magnolia"],
+			"depends_on": ["b2.ryoka_returns_with_mrsha"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["liscor.knows_stone_spears_fell", "liscor.knows_zel_lost_to_goblin_lord"]},
 			"news": "Word runs through Liscor's market: a Goblin Lord's army has wiped out the Stone Spears Gnoll tribe in the north, and even General Zel Shivertail could not stop it.",
 			"rumor": "Gnoll traders whisper that a whole tribe died in the northern snows, and that the Goblin Lord who did it is still on the march.",
+			"hooks": [
+				{
+					"id": "player_heard_of_the_stone_spears",
+					"did": [{"action": ["comfort_someone", "talk_with_guest"], "context": {"location": ["liscor_market"]}}],
+					"days": [68, 68],
+					"then": "change",
+					"effects": {"set_flags": ["liscor_market.earther_heard_of_the_stone_spears"], "relationship": [{"from": "krshia", "to": "player", "delta": 1}, {"from": "ryoka_griffin", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.40", "confidence": "confirmed"},
 			"summary": "Taking Mrsha through the market, Ryoka finds Krshia and Brunkr snarling at each other and hushes the whole street: she tells Krshia Silverfang, in front of every Gnoll within earshot, that the Stone Spears tribe is gone."
@@ -98,8 +107,8 @@
 				"clerk": {"prefer": ["selys"], "fallback_tags": [], "optional": true},
 				"guard": {"prefer": ["klbkch"], "fallback_tags": [], "optional": true}
 			},
-			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["rags.banned_from_inn"], "not_flags": []},
-			"depends_on": ["b2.rags_sent_away_from_the_inn"],
+			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["ryoka.back_at_the_wandering_inn"], "not_flags": []},
+			"depends_on": ["b2.ryoka_returns_with_mrsha"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ryoka.tasted_faerie_flower_drink", "frost_fairies.dismayed_by_the_drink"]},
 			"status": "candidate",

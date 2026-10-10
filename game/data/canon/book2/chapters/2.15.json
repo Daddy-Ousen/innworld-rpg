@@ -12,6 +12,15 @@
 			"depends_on": ["b2.ryoka_confronts_teriarch"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ryoka.suspects_teriarch_dragon"]},
+			"hooks": [
+				{
+					"id": "player_heard_the_faeries_in_the_pass",
+					"did": [{"action": ["talk_to_fairy"], "context": {"location": ["high_passes"]}}],
+					"days": [45, 45],
+					"then": "change",
+					"effects": {"set_flags": ["high_passes.earther_heard_the_faeries"]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.15", "confidence": "likely"},
 			"summary": "Frost Faeries taunt Ryoka on the road, mockingly calling Teriarch 'the old smoker' and hinting he is not what he seems."

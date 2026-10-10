@@ -46,10 +46,10 @@
 			"tier": 2,
 			"window": {"earliest": 49, "latest": 49, "confidence": "guess"},
 			"location": "liscor_adventurers_guild",
-			"roles": {"clerk": {"prefer": ["selys"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}},
-			"requires": {"alive": ["selys", "pisces"], "flags": ["lyonette.exiled_without_gear"], "not_flags": []},
+			"roles": {"clerk": {"prefer": ["selys"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": ["guard", "senior_guard", "drake"]}},
+			"requires": {"alive": ["selys"], "flags": ["lyonette.exiled_without_gear"], "not_flags": []},
 			"depends_on": ["b2.thief_exiled_into_the_snow"],
-			"on_fail": ["cancel"],
+			"on_fail": ["substitute", "cancel"],
 			"effects": {"set_flags": ["selys.recruited_pisces_bronze_rank", "pisces.tipped_off_erin_about_exile"]},
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.23", "confidence": "confirmed"},
@@ -116,6 +116,15 @@
 			"depends_on": ["b2.selys_recruits_pisces_to_warn_erin"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.rescuing_lyonette"]},
+			"hooks": [
+				{
+					"id": "player_searched_the_snow_for_lyonette",
+					"did": [{"action": ["comfort_someone", "bandage_wound", "keep_watch"], "context": {"location": ["floodplains_of_liscor"]}}],
+					"days": [49, 49],
+					"then": "change",
+					"effects": {"set_flags": ["floodplains.earther_helped_find_lyonette"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "lyonette", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.23", "confidence": "confirmed"},
 			"summary": "Tipped off by Pisces, Erin grabs her coat and runs out onto the snowy plains to save the exiled thief before the cold kills her."

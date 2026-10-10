@@ -50,6 +50,15 @@
 			"depends_on": ["b2.erin_and_ryoka_send_messages_to_liscor"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.cooking_at_the_frenzied_hare", "ryoka.reunited_with_garia"]},
+			"hooks": [
+				{
+					"id": "player_cooked_beside_erin_at_the_hare",
+					"did": [{"action": ["cook_simple_meal", "cook_stew", "wash_dishes", "serve_guests"], "context": {"location": ["frenzied_hare"]}}],
+					"days": [71, 71],
+					"then": "change",
+					"effects": {"set_flags": ["frenzied_hare.earther_cooked_beside_erin"], "relationship": [{"from": "erin_solstice", "to": "player", "delta": 1}, {"from": "agnes", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,

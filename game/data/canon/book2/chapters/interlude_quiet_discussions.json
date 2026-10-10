@@ -8,9 +8,10 @@
 			"window": {"earliest": 67, "latest": 67, "confidence": "guess"},
 			"location": "magnolia_estate",
 			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["magnolia_reinhart"], "flags": ["erin.sent_home_by_magnolia"], "not_flags": []},
-			"depends_on": ["b2.magnolia_warns_erin_of_a_coming_world_war"],
-			"on_fail": ["cancel"],
+			"requires": {"alive": ["magnolia_reinhart"], "flags": ["goblin_lord.army_seen_in_the_north"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["magnolia.plans_to_recruit_zel", "magnolia.knows_ryoka_survived"]},
 			"status": "candidate",
 			"canon_ref": {

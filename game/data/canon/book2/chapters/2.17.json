@@ -27,7 +27,7 @@
 			"location": "wandering_inn",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}},
 			"requires": {"alive": ["erin_solstice", "ryoka_griffin"], "flags": ["wandering_inn.hamburgers_copied_by_city"], "not_flags": []},
-			"depends_on": ["b2.valceif_delivers_chessboard_to_erin", "b2.ryoka_detects_curse_dreamcatcher"],
+			"depends_on": ["b2.valceif_delivers_chessboard_to_erin", "b2.ryoka_arrives_exhausted_reunites"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.level_21", "erin.class_singer", "wandering_inn.iphone_concert_legendary", "liscor.heard_earth_music_first_time"]},
 			"stage": {

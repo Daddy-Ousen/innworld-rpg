@@ -12,7 +12,7 @@
 				"host": {"prefer": ["erin_solstice"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.back_in_liscor"], "not_flags": []},
-			"depends_on": ["b2.ryoka_and_erin_share_what_they_know"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["ryoka.saving_for_ceria_hand", "ryoka.bound_for_celum", "erin.plans_a_well", "erin.keeps_earth_secrets"],

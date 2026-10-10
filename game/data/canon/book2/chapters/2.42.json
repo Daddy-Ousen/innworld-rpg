@@ -12,6 +12,15 @@
 			"depends_on": ["b2.erin_takes_in_lyonette"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lyonette.class_barmaid", "lyonette.secretly_a_princess"]},
+			"hooks": [
+				{
+					"id": "player_worked_beside_lyonette",
+					"did": [{"action": ["serve_guests", "wash_dishes", "sweep_floor"], "context": {"location": ["wandering_inn"]}}],
+					"days": [69, 69],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_worked_beside_lyonette"], "relationship": [{"from": "lyonette", "to": "player", "delta": 2}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 2,

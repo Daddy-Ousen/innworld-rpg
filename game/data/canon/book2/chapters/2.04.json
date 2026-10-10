@@ -12,7 +12,7 @@
 				"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}
 			},
 			"requires": {"alive": ["pisces", "ryoka_griffin"], "flags": ["earthers.magic_call_held"], "not_flags": []},
-			"depends_on": ["b2.earthers_meet_in_a_magic_call", "b2.erin_leads_the_rescue_into_the_ruins"],
+			"depends_on": ["b2.earthers_meet_in_a_magic_call"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["pisces.saw_the_call_log", "pisces.knows_ryoka_is_different", "ryoka.knows_flos_returned"]

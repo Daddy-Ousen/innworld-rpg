@@ -22,7 +22,7 @@
 			"location": "wandering_inn",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "skeleton": {"prefer": ["toren"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.had_fey_dream"], "not_flags": []},
-			"depends_on": ["b2.erin_has_symbolic_fey_dream", "b2.frost_fairy_swarm_torments_ceria"],
+			"depends_on": ["b2.erin_has_symbolic_fey_dream"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.preparing_faerie_banquet"]},
 			"status": "candidate",
@@ -38,6 +38,15 @@
 			"depends_on": ["b2.thief_caught_stealing_in_liscor"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lism.publicly_rebuked_by_erin"], "relationship": [{"from": "lism", "to": "erin_solstice", "delta": -1}]},
+			"hooks": [
+				{
+					"id": "player_stood_by_krshia",
+					"did": [{"action": ["persuade", "comfort_someone", "buy_supplies"], "context": {"location": ["liscor_market"]}}],
+					"days": [48, 48],
+					"then": "change",
+					"effects": {"set_flags": ["liscor_market.earther_stood_by_krshia"], "relationship": [{"from": "krshia", "to": "player", "delta": 2}, {"from": "lism", "to": "player", "delta": -1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 2, "chapter": "2.21", "confidence": "confirmed"},
 			"summary": "Drake agitator Lism publicly blames all Humans for the destroyed stall; Erin rebukes him in front of a crowd of onlookers."
