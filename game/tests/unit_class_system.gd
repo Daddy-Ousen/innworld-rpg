@@ -15,7 +15,7 @@ func _feed(gs: GameState, tags: Dictionary, xp: float, day: int = 1) -> void:
 
 
 func _offer_new(gs: GameState, budget: int = 2) -> Array[String]:
-	return ClassSystem.make_offers(gs, _db, ClassSystem.KIND_NEW, budget)
+	return ClassSystem.make_offers(gs, _db, budget)
 
 
 func test_feed_fills_pools_by_tag_match() -> void:
@@ -59,8 +59,9 @@ func test_consolidation_class_is_not_a_normal_offer() -> void:
 	var gs := GameState.new()
 	gs.progression.pools["battle_chef"] = 1000.0
 	assert_false(_offer_new(gs, 9).has("battle_chef"))
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2), [] as Array[String],
-			"needs both source classes")
+	ToyData.give_class(gs, "cook", 12)
+	ToyData.give_class(gs, "warrior", 12)
+	assert_false(_offer_new(gs, 9).has("battle_chef"), "even with both source classes")
 
 
 func test_excluded_class_is_not_offered() -> void:
@@ -131,21 +132,33 @@ func test_declined_class_never_returns() -> void:
 	assert_true(p.has_offer("innkeeper"), "the XP still flows to related classes")
 
 
-func test_consolidation_offer_and_accept() -> void:
+func test_consolidation_is_automatic_and_needs_a_level_10_source() -> void:
 	var gs := GameState.new()
 	ToyData.give_class(gs, "cook", 4)
 	ToyData.give_class(gs, "warrior", 2)
 	gs.progression.skills.append({"id": "swing", "class": "warrior", "level": 1, "day": 1})
 	gs.progression.pools["battle_chef"] = 10.0
-	assert_eq(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_CONSOLIDATION, 2),
-			["battle_chef"] as Array[String])
-	assert_eq(gs.progression.offers[0]["kind"], "consolidation")
-	ClassSystem.accept(gs, _db, "battle_chef")
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "no source class at level 10")
+	assert_true(gs.progression.has_class("cook"))
+	gs.progression.classes["cook"]["level"] = 10
+	var lines := ClassSystem.consolidate_ready(gs, _db)
+	assert_string_contains(lines[0], "Your classes have consolidated")
+	assert_true(gs.progression.offers.is_empty(), "no offer, no choice")
 	var p := gs.progression
 	assert_false(p.has_class("cook"))
 	assert_false(p.has_class("warrior"))
-	assert_eq(p.level_of("battle_chef"), 3, "best source level 4 − level_cost 1")
+	assert_eq(p.level_of("battle_chef"), 9, "best source level 10 - level_cost 1")
 	assert_true(p.has_skill("swing"), "skills stay")
+
+
+func test_consolidation_needs_the_pool_and_all_sources() -> void:
+	var gs := GameState.new()
+	ToyData.give_class(gs, "cook", 10)
+	gs.progression.pools["battle_chef"] = 10.0
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "warrior missing")
+	ToyData.give_class(gs, "warrior", 1)
+	gs.progression.pools["battle_chef"] = 0.0
+	assert_eq(ClassSystem.consolidate_ready(gs, _db), [] as Array[String], "pool empty")
 
 
 func test_neglect_drains_then_loses_the_class() -> void:

@@ -26,7 +26,7 @@
 			"hint": "Something must still test you as %s."
 		}
 	},
-	"offers": {"max_per_night": 2},
+	"offers": {"max_per_night": 2, "consolidation_min_level": 10},
 	"skills": {"on_accept": 1, "chance_per_level": 0.75, "base_weight": 0.1},
 	"director": {
 		"default_delay_limit": 3,

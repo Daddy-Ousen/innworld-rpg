@@ -31,6 +31,6 @@ func test_advancements_need_their_base_class() -> void:
 func test_knight_offer_needs_exemplar_warrior() -> void:
 	var gs := GameState.new()
 	gs.progression.pools["knight"] = 1000.0
-	assert_false(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_NEW, 2).has("knight"))
+	assert_false(ClassSystem.make_offers(gs, _db, 2).has("knight"))
 	ToyData.give_class(gs, "exemplar_warrior", 5)
-	assert_true(ClassSystem.make_offers(gs, _db, ClassSystem.KIND_NEW, 2).has("knight"))
+	assert_true(ClassSystem.make_offers(gs, _db, 2).has("knight"))

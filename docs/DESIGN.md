@@ -55,7 +55,7 @@ Reference games: Caves of Qud, Elona, Warsim, Roadwarden, Stardew Valley (day lo
   A breakthrough is earned at level 9 / 19 / 29 by a hard moment, a class trial or a canon `boon` hook (ADR 0035).
 - **Multi-class dilution:** XP is split across accepted classes by tag match. More classes → slower each. No hard cap; the curve does the work.
 - Class loss: acting against a class (e.g. `[Innkeeper]` who abandons the inn for 30 days) drains it; at 0 the class is lost.
-- Consolidation/advancement: rules in data (`[Warrior]` + `[Strategist]` → `[Commander]`), offered at night, can cost levels.
+- Consolidation/advancement: rules in data (`[Warrior]` + `[Strategist]` → `[Commander]`), happens by itself at night (no offer, no choice) once the player holds every source class, one of them is at level 10 (`rules.offers.consolidation_min_level`) and the pool is full; the System only reports it; can cost levels. Advancement (a class with `prereqs.classes`) is still an offer.
 
 ### 3.5 Skills
 - Skill pools per class and level band. Choice is weighted by the player's tag history ("needs and desires").
