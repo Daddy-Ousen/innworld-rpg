@@ -12,6 +12,15 @@
 			"depends_on": ["b3.laken_declares_himself_emperor"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["riverfarm.snowed_in", "laken.refused_to_leave_durene"]},
+			"hooks": [
+				{
+					"id": "player_readied_durenes_cottage_for_snow",
+					"did": [{"action": ["chop_wood", "carry_water", "talk_with_guest"], "context": {"location": ["riverfarm"]}}],
+					"days": [64, 64],
+					"then": "change",
+					"effects": {"set_flags": ["riverfarm.earther_readied_the_cottage"], "relationship": [{"from": "laken_godart", "to": "player", "delta": 1}, {"from": "yesel", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {
 				"book": 3,
@@ -36,6 +45,15 @@
 					{"from": "prost", "to": "durene", "delta": -2}
 				]
 			},
+			"hooks": [
+				{
+					"id": "player_stood_by_durene_in_the_snow",
+					"did": [{"action": ["persuade", "comfort_someone"], "context": {"location": ["riverfarm"]}}],
+					"days": [67, 67],
+					"then": "change",
+					"effects": {"set_flags": ["riverfarm.earther_stood_by_durene"], "relationship": [{"from": "durene", "to": "player", "delta": 2}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.01E", "confidence": "confirmed", "note": "Laken's Day 22. Game day = his Day + 45 (ADR 0028). Durene breaks a table in her anger."},
 			"summary": "Village children pelt Durene with snowballs and pinecones and turn on Laken. His anger bursts out as [Aura of the Emperor] and they flee in terror. Prost comes to warn him off; Durene throws him out and screams after him that she is a Troll."

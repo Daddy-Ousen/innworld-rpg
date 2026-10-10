@@ -81,7 +81,7 @@
 			"location": "wandering_inn",
 			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "acolyte": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["lyonette"], "flags": ["lyonette.works_at_inn", "erin.left_liscor", "lyonette.supplied_by_olesm"], "not_flags": []},
-			"depends_on": ["b3.relc_klbkch_and_halrac_walk_out"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["wandering_inn.reopened_by_lyonette", "lyonette.runs_the_inn", "pawn.ate_at_lyonettes_inn", "lyonette.knows_erin_is_in_celum"],
@@ -133,11 +133,24 @@
 			},
 			"requires": {"alive": ["pawn"], "flags": ["pawn.ate_at_lyonettes_inn"], "not_flags": []},
 			"depends_on": ["b3.lyonette_reopens_the_inn"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b3.pawn_resolves_alone_to_tell_klbkch", "cancel"],
 			"effects": {"set_flags": ["pawn.will_tell_klbkch_of_his_class", "antinium.individuals_specialise"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "confirmed", "note": "Over a hundred new Individuals now play chess in the Hive, but only the five originals have real personalities. Pawn's [Tactician] class has stalled. Klbkch is now Revalantor."},
 			"summary": "In the Hive, the other original Individuals find roles: Bird shoots birds, Garry fries them, Belgrade and Anand lead fights in the tunnels. Pawn sits doubting his [Acolyte] faith. After Lyonette's meal he resolves to tell Klbkch of his class."
+		},
+		"b3.pawn_resolves_alone_to_tell_klbkch": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn"], "flags": [], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.will_tell_klbkch_of_his_class"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.05L", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of Pawn's meal-and-resolve when Lyonette's inn never reopens."},
+			"summary": "With the inn dark and no meal to warm him, Pawn sits alone in the Hive with his doubts and still resolves to tell Klbkch of his [Acolyte] class."
 		}
 	},
 	"system": [

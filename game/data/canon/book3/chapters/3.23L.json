@@ -9,7 +9,7 @@
 			"location": "wandering_inn",
 			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["olesm"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "courier": {"prefer": ["hawk"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
-			"depends_on": ["b3.lyonette_plays_chess_with_the_unknown_player"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["olesm.sells_chess_games_by_mail", "lyonette.sells_honey_water", "selys.trusts_lyonette_with_mrsha"],
@@ -24,8 +24,8 @@
 			"window": {"earliest": 83, "latest": 83, "confidence": "guess"},
 			"location": "liscor_hive",
 			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
-			"requires": {"alive": ["pawn", "klbkch"], "flags": ["liscor_hive.soldiers_painted"], "not_flags": []},
-			"depends_on": ["b3.the_soldiers_paint_themselves"],
+			"requires": {"alive": ["pawn", "klbkch"], "flags": ["liscor.soldiers_patrol_the_floodplains"], "not_flags": []},
+			"depends_on": ["b3.pawn_leads_the_soldiers_on_patrol"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["pawn.patrols_with_klbkchs_blessing", "klbkch.watches_the_painted_soldiers", "liscor.goodwill_for_the_soldiers"],
@@ -73,12 +73,21 @@
 			"location": "wandering_inn",
 			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}, "queen": {"prefer": ["free_queen"], "fallback_tags": [], "optional": true}, "cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["klbkch", "lyonette"], "flags": ["lyonette.has_ashfire_bees"], "not_flags": []},
-			"depends_on": ["b3.lyonette_sends_krshia_honey"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["liscor_hive.queen_eats_fried_bees"],
 				"relationship": [{"from": "klbkch", "to": "lyonette", "delta": 1}]
 			},
+			"hooks": [
+				{
+					"id": "player_fried_bees_for_klbkch",
+					"did": [{"action": ["cook_simple_meal", "serve_guests", "talk_with_guest"], "context": {"location": ["wandering_inn"]}}],
+					"days": [83, 83],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_fried_bees"], "relationship": [{"from": "klbkch", "to": "player", "delta": 1}, {"from": "lyonette", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.23L", "confidence": "confirmed", "note": "That day Pawn's second patrol ate two or three bees each; Drakes came for honey water and honey. Selys taught Lyonette shepherd's pie. The jars are knee-high, made by [Glassblowers]."},
 			"summary": "At supper Klbkch comes in and buys a whole jar of bees for his Queen, a third of it fried so the Hive's [Cook] can learn. He eats five while he waits and plays a quiet game of hide and seek with Mrsha. Lyonette again forgets to offer the grub, and finds she is growing fond of it."
@@ -89,7 +98,7 @@
 			"location": "wandering_inn",
 			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
 			"requires": {"alive": ["lyonette"], "flags": ["lyonette.raises_a_bee_grub"], "not_flags": []},
-			"depends_on": ["b3.klbkch_buys_a_jar_of_bees_for_the_queen"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lyonette.class_beast_tamer", "lyonette.keeps_the_bee_grub"]},
 			"status": "candidate",
@@ -102,7 +111,7 @@
 			"location": "wandering_inn",
 			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "runner": {"prefer": [], "fallback_tags": ["gnoll"], "optional": true}},
 			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
-			"depends_on": ["b3.lyonette_becomes_a_beast_tamer"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["wandering_inn.deliveries_resumed"]},
 			"status": "candidate",
@@ -115,7 +124,7 @@
 			"location": "liscor_hive",
 			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "acolyte": {"prefer": ["pawn"], "fallback_tags": [], "optional": true}, "archer": {"prefer": ["bird"], "fallback_tags": [], "optional": true}, "cook": {"prefer": ["garry"], "fallback_tags": [], "optional": true}, "tactician": {"prefer": ["belgrade"], "fallback_tags": [], "optional": true}, "second_tactician": {"prefer": ["anand"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["klbkch"], "flags": [], "not_flags": []},
-			"depends_on": ["b3.klbkch_buys_a_jar_of_bees_for_the_queen"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["antinium.delegation_expected", "pawn.told_to_hide_his_acolyte_class", "klbkch.knows_xrn_is_coming"]},
 			"status": "candidate",
@@ -146,7 +155,7 @@
 			"location": "floodplains_of_liscor",
 			"roles": {"revalantor": {"prefer": ["klbkch"], "fallback_tags": []}, "prognugator": {"prefer": ["xrn"], "fallback_tags": []}, "armored": {"prefer": ["tersk"], "fallback_tags": [], "optional": true}, "flyer": {"prefer": ["pivr"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["klbkch", "xrn"], "flags": ["antinium.delegation_expected"], "not_flags": []},
-			"depends_on": ["b3.klbkch_briefs_the_individuals", "b3.traveling_antinium_kill_goblin_raiders"],
+			"depends_on": ["b3.klbkch_briefs_the_individuals"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["antinium_delegation.at_liscor", "klbkch.reunited_with_xrn", "pivr.defies_xrn"],
@@ -170,7 +179,7 @@
 				"captain": {"prefer": ["zevara"], "fallback_tags": [], "optional": true},
 				"spearman": {"prefer": ["relc"], "fallback_tags": [], "optional": true}
 			},
-			"requires": {"alive": ["klbkch", "zel_shivertail", "pawn"], "flags": ["zel.in_liscor", "antinium_delegation.at_liscor", "liscor_hive.soldiers_painted"], "not_flags": []},
+			"requires": {"alive": ["klbkch", "zel_shivertail", "pawn"], "flags": ["zel.in_liscor", "antinium_delegation.at_liscor", "pawn.leads_a_soldier_patrol"], "not_flags": []},
 			"depends_on": ["b3.the_antinium_delegation_arrives", "b3.zel_shield_walls_the_scaleling_attack"],
 			"on_fail": ["cancel"],
 			"effects": {
@@ -189,7 +198,7 @@
 			"location": "wandering_inn",
 			"roles": {"general": {"prefer": ["zel_shivertail"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["zel_shivertail", "lyonette"], "flags": ["lyonette.runs_the_inn", "zel.in_liscor"], "not_flags": []},
-			"depends_on": ["b3.pawns_soldiers_stop_a_street_battle"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["zel.at_wandering_inn", "wandering_inn.has_a_lodger"],

@@ -9,7 +9,7 @@
 			"location": "ocre",
 			"roles": {"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []}},
 			"requires": {"alive": ["yvlon_byres"], "flags": ["yvlon.armor_fused_to_arms", "horns_of_hammerad.in_ocre"], "not_flags": []},
-			"depends_on": ["b3.horns_bank_their_treasure_in_ocre"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["yvlon.metal_bonded_to_bone"]},
 			"status": "candidate",
@@ -31,7 +31,7 @@
 			},
 			"requires": {"alive": ["ryoka_griffin", "ressa"], "flags": ["magnolia.summoned_ryoka"], "not_flags": []},
 			"depends_on": ["b3.reynold_and_ressa_come_for_ryoka"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b3.reynold_fetches_ryoka_from_celum", "cancel"],
 			"effects": {
 				"set_flags": ["ryoka.gone_to_magnolia", "ryoka.carries_the_horns_relics", "ryoka.carries_invrisil_deliveries", "yvlon.defied_ressa"],
 				"relationship": [
@@ -50,8 +50,9 @@
 			"location": "road_to_invrisil",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.gone_to_magnolia"], "not_flags": []},
-			"depends_on": ["b3.ressa_takes_ryoka_from_ocre"],
-			"on_fail": ["cancel"],
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["ryoka.glimpsed_the_wind"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.10", "confidence": "confirmed", "note": "Ressa threatens to hit her if she keeps needling, so Ryoka climbs up front beside Reynold. Ivolethe says this is the first step. Not a class or Skill."},
@@ -68,7 +69,7 @@
 				"chieftain": {"prefer": ["rags"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.gone_to_magnolia"], "not_flags": []},
-			"depends_on": ["b3.ryoka_glimpses_the_wind_from_the_coach"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["rags.tribe_flees_north", "rags.shot_at_magnolias_coach", "ryoka.saw_rags_again"]},
 			"news": "A Goblin tribe thousands strong, with young and wolf riders, is marching north through the snow between Ocre and Invrisil. A noble's coach barely got through it.",
@@ -76,6 +77,19 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.10", "confidence": "confirmed", "note": "Ivolethe says the Goblin Lord's great army waits below the pass, and this smaller tribe flees it. Ryoka names Rags. The Hob with a crimson sword is unnamed and not linked to garen."},
 			"summary": "Too late, Ivolethe warns of Goblins ahead. The coach tops a hill into a column of thousands, with young, Hobs and Carn Wolf riders. Ressa hides it with the coach's [Invisibility Field] until Rags' black crossbow bolt breaks the spell; Ressa's throwing stars hold off a Hob with a crimson sword."
+		},
+		"b3.reynold_fetches_ryoka_from_celum": {
+			"tier": 2,
+			"window": {"earliest": 76, "latest": 76, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.in_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["magnolia.summoned_ryoka", "ryoka.gone_to_magnolia"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.10", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of Ressa's visit to Ocre when Ryoka never met the Horns there (Ceria dead or the reunion lost)."},
+			"summary": "With no reunion in Ocre, Reynold finds Ryoka in Celum instead. Lady Magnolia is expecting her, and her horseless coach carries the Runner north that evening."
 		}
 	},
 	"system": []

@@ -9,7 +9,7 @@
 			"location": "magnolia_estate",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin"], "flags": ["ryoka.gone_to_magnolia"], "not_flags": []},
-			"depends_on": ["b3.magnolias_coach_runs_through_rags_tribe"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ryoka.at_magnolias_estate", "reynold.knows_ryoka_is_erins_friend"]},
 			"status": "candidate",
@@ -54,7 +54,7 @@
 			"location": "magnolia_estate",
 			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["magnolia_reinhart", "ryoka_griffin"], "flags": ["magnolia.questioned_ryoka"], "not_flags": []},
-			"depends_on": ["b3.magnolia_banishes_ivolethe"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["magnolia.allied_with_ryoka", "magnolia.knows_the_antinium_fear_a_god", "ryoka.guest_of_magnolia", "ryoka.has_krsysl_antinium_history"],

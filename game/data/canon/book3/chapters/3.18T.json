@@ -58,6 +58,15 @@
 			"depends_on": ["b3.ylawes_byres_beats_toren_in_esthelm"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["ylawes.rallies_esthelms_men"]},
+			"hooks": [
+				{
+					"id": "player_stood_with_ylawes",
+					"did": [{"action": ["persuade", "comfort_someone", "bandage_wound"], "context": {"location": ["esthelm"]}}],
+					"days": [79, 79],
+					"then": "change",
+					"effects": {"set_flags": ["esthelm.earther_stood_with_ylawes"], "relationship": [{"from": "ylawes_byres", "to": "player", "delta": 2}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "Two club blows to the same spot on his head fail to drop him. The man who struck him is the first to follow. Toren's bones reform after they leave."},
 			"summary": "Clubbed and stoned, Ylawes will not kneel. He kills one attacker, rips weapons from others and sheathes his sword. He shames them for preying on their own while their families suffer, gives his name, and walks off asking those who still believe in Esthelm to follow. Most do."
@@ -90,7 +99,7 @@
 			"location": "esthelm_sewers",
 			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
 			"requires": {"alive": ["toren"], "flags": ["toren.in_esthelm"], "not_flags": []},
-			"depends_on": ["b3.toren_watches_esthelms_survivors"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["toren.leader_class", "toren.commands_lesser_undead"]},
 			"status": "candidate",

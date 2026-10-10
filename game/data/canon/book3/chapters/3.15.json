@@ -22,7 +22,7 @@
 			"location": "frenzied_hare",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}, "barmaid": {"prefer": ["maran"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
-			"depends_on": ["b3.erin_brews_thickskin_soup"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.bored_in_celum"]},
 			"status": "candidate",
@@ -35,7 +35,7 @@
 			"location": "celum_watch_house",
 			"roles": {"guard": {"prefer": ["wesle"], "fallback_tags": []}, "host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
 			"requires": {"alive": ["erin_solstice", "wesle"], "flags": ["erin.in_celum"], "not_flags": []},
-			"depends_on": ["b3.erin_asks_the_hare_what_people_do_for_fun"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.still_seeking_toren", "celum.watch_tracks_goblin_bands", "goblin_lord.warband_seen_near_verdun"]},
 			"news": "Celum's Watch pins every Goblin sighting around ruined Esthelm on a map. The village of Verdun saw about a hundred armed Goblins march north in good order.",
@@ -50,7 +50,7 @@
 			"location": "celum_poor_quarter",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "thief": {"prefer": ["grev"], "fallback_tags": []}, "washer": {"prefer": ["jasi"], "fallback_tags": []}},
 			"requires": {"alive": ["erin_solstice", "grev"], "flags": ["erin.in_celum", "grev.spared_by_erin"], "not_flags": []},
-			"depends_on": ["b3.wesle_shows_erin_the_goblin_map"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["erin.met_jasi", "grev.caught_stealing_again"],
@@ -73,6 +73,15 @@
 				"relationship": [{"from": "jasi", "to": "erin_solstice", "delta": 2}, {"from": "grev", "to": "erin_solstice", "delta": 1}]
 			},
 			"news": "A Drake now waits tables at the Frenzied Hare in Celum. The inn's new cook took her on, and her young Human brother sleeps there too.",
+			"hooks": [
+				{
+					"id": "player_welcomed_jasi",
+					"did": [{"action": ["serve_guests", "wash_dishes", "talk_with_guest"], "context": {"location": ["frenzied_hare"]}}],
+					"days": [77, 77],
+					"then": "change",
+					"effects": {"set_flags": ["frenzied_hare.earther_welcomed_jasi"], "relationship": [{"from": "jasi", "to": "player", "delta": 1}, {"from": "erin_solstice", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.15", "confidence": "confirmed", "note": "Agnes agrees, but warns of the old grudge between Drakes and Humans. Guests stare but say nothing aloud. Erin wonders if she can take the pair to Liscor later. She levels in her sleep."},
 			"summary": "Erin brings Jasi and Grev to the Hare, asks Agnes to take Jasi on as a [Barmaid], and finds them a room. Grev eats until he drops asleep; Jasi serves all night under wary looks. In bed Erin fears she acted on a whim, but decides doing nothing would have been worse."

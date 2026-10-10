@@ -8,8 +8,8 @@
 			"window": {"earliest": 85, "latest": 85, "confidence": "guess"},
 			"location": "remendia",
 			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "driver": {"prefer": ["adelynn"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.reformed"], "not_flags": []},
-			"depends_on": ["b3.yvlon_learns_the_metal_is_in_her_bones"],
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.reformed", "horns_of_hammerad.escaped_albez"], "not_flags": []},
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["horns_of_hammerad.nearly_broke", "horns_of_hammerad.bound_for_celum", "ceria.studies_the_burnt_spellbook"]},
 			"status": "candidate",
@@ -45,6 +45,15 @@
 				"relationship": [{"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}, {"from": "erin_solstice", "to": "yvlon_byres", "delta": 1}]
 			},
 			"news": "The Frenzied Hare in Celum now plays a new tale every night, a dark story of a prince, his father's ghost and poison. The Horns of Hammerad were in the crowd.",
+			"hooks": [
+				{
+					"id": "player_watched_hamlet",
+					"did": [{"action": ["serve_guests", "talk_with_guest", "buy_supplies"], "context": {"location": ["frenzied_hare"]}}],
+					"days": [85, 85],
+					"then": "change",
+					"effects": {"set_flags": ["frenzied_hare.earther_saw_hamlet"], "relationship": [{"from": "ceria_springwalker", "to": "player", "delta": 1}, {"from": "erin_solstice", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.24", "confidence": "confirmed", "note": "Agnes now needs four [Barmaids]. Other groups copy the plays and tour. Some [Actors] have [Perfect Recall]. The Hamlet lead is the moustached guardsman, not Wesle (Wesle has no moustache in 3.25). Ksmvr eats raw dough under his food-poison charm."},
 			"summary": "The Hare is packed. Agnes tries to turn them away, but Erin, floured and sauced from making pizza, rushes out to hug them and offers free rooms when she learns they are broke. Then the troupe plays Hamlet. Pisces and Yvlon are gripped, Ksmvr stares, and Ceria mostly enjoys the pizza."

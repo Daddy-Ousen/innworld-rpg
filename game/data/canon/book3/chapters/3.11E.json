@@ -41,7 +41,7 @@
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.emperor"], "not_flags": []},
-			"depends_on": ["b3.laken_buys_food_from_riverfarm"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.gave_the_faeries_titles", "laken.warned_of_a_disaster", "winter_court.promised_to_spare_lakens_land"]},
 			"status": "candidate",

@@ -14,8 +14,9 @@
 				"warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.lost_most_of_thresks_treasure"], "not_flags": []},
-			"depends_on": ["b3.yvlon_shatters_the_flame_guardian"],
-			"on_fail": ["cancel"],
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {
 				"set_flags": ["horns_of_hammerad.escaped_albez", "horns_of_hammerad.has_albez_treasure", "horns_of_hammerad.has_a_sealed_bag"],
 				"clear_flags": ["horns_of_hammerad.trapped_in_albez"]
@@ -45,10 +46,11 @@
 			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
 			"location": "ocre",
 			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.in_ocre"], "not_flags": []},
-			"depends_on": ["b3.ocre_guards_shoot_at_ksmvr"],
-			"on_fail": ["cancel"],
-			"effects": {"set_flags": ["horns_of_hammerad.treasure_in_ocre_guild_vault", "horns_of_hammerad.known_alive"]},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.escaped_albez"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
+			"effects": {"set_flags": ["horns_of_hammerad.treasure_in_ocre_guild_vault", "horns_of_hammerad.known_alive", "horns_of_hammerad.in_ocre"]},
 			"news": "The Horns of Hammerad, long thought dead, walked into Ocre's Adventurers' Guild half-burnt and hauling gold and relics from the ruins of Albez.",
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.08H", "confidence": "confirmed", "note": "They stay at The Nobleman's Disgrace, Ocre's best inn (no location entry). Yvlon is booked with a [Healer] and a [Blacksmith]."},
