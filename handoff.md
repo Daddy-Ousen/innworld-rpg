@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-10, local): M22.3 consolidation (branch `feat/m22.3-consolidation`)
+- Cherry-picked 565bc9b onto main (code + tests + DESIGN). Fixed the `rules.json` conflict by hand (kept
+  `levels.breakthrough`, added `offers.consolidation_min_level: 10`). Old state-file edits from 565bc9b dropped.
+- `unit_class_tree_step3` now calls `make_offers(gs, db, budget)` (no `kind`). New test in `unit_class_tree_step2`:
+  consolidation waits for the source class's level 10 breakthrough; keys do not carry over.
+- ADR 0035 "Steps" has the M22.3 build note. ROADMAP ticked.
+- Tests run (all pass): `unit_class_system`, `unit_class_tree_step2`, `unit_class_tree_step3`, `unit_night`,
+  `unit_system_messages`, `unit_journal`, `unit_game_state`, `unit_data_db`, `unit_breakthrough`, `sim_decline`;
+  Python 107 OK; validator 0 errors. Full suite not run.
+- Next: M22.4 probe sim **[Sonnet · high]**. After the PR merges, `git branch -D feat/class-tree-wiki` (user OK first).
+- Gotchas: a source class that gets its canon key in night step 5b reaches level 10 there, so it consolidates on
+  the NEXT night (step 4 runs before 5b). The Python test run prints validator ERROR lines from its fixtures: read
+  only the `Ran` / `OK` lines.
+
 ## Just done (2026-10-10, local): M22.2 breakthrough data (branch `feat/m22.2-breakthrough-data`)
 - `game/data/classes.json`: `breakthrough` {hint, trials} on innkeeper, cook, warrior, runner, mage, scout, priest, carpenter.
 - Six `boon` hooks (tags effect) in `1.21`, `1.29`, `1.60`, `2.26`, `2.31`, `3.20T`. `sim_player_hooks` count is 74 now.
