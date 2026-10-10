@@ -28,7 +28,7 @@ Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants on
 - [x] M22.1 Engine: event effect `breakthrough` (director) + emergent triggers in the night pipeline; System message when it happens; no save change expected (`breakthroughs` is already saved) **[Opus · medium]** (done 2026-10-10: `core/breakthrough.gd`, night steps 2 and 5b, hook `boon`, checks in `DataDb` and the validator; `unit_breakthrough` 16 tests)
 - [x] M22.2 Data: breakthrough sources for the main class lines (inn, cook, warrior, runner, mage, scout, priest, crafter) **[Sonnet · medium]** (done 2026-10-10: trials + hints on 8 classes in `classes.json`, 6 `boon` hooks in Books 1 – 3)
 - [x] M22.3 Consolidation on top of breakthroughs (redo 565bc9b: M21.1 said yes; start from `git show 565bc9b`) **[Opus · medium]** (done 2026-10-10: automatic at night, a source class at level 10, so after its breakthrough; `consolidate_ready`, `rules.offers.consolidation_min_level`)
-- [ ] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]**
+- [x] M22.4 A probe sim: a busy player passes level 10 in one class within the Book 1 – 3 days **[Sonnet · high]** (done 2026-10-10: `sim_breakthrough_probe`; busy inn level 10 on night 31 – 32, quiet inn on night 73, fighter on night 17 – 22; bar numbers kept)
 **Done when:** a player can reach level 10+ in normal play; `unit_levels`, `unit_class_system` and the new probe pass.
 
 ## M23 — Canon bends (divergence depth)
