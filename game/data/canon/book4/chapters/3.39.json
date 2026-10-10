@@ -47,7 +47,7 @@
 			"window": {"earliest": 93, "latest": 93, "confidence": "guess"},
 			"location": "celum",
 			"roles": {"innkeeper": {"prefer": ["erin_solstice"], "fallback_tags": []}, "actor": {"prefer": ["jasi"], "fallback_tags": []}, "actor2": {"prefer": ["wesle"], "fallback_tags": []}, "boy": {"prefer": ["grev"], "fallback_tags": []}},
-			"requires": {"alive": ["erin_solstice"], "flags": [], "not_flags": []},
+			"requires": {"alive": ["erin_solstice"], "flags": ["albez_door.at_wandering_inn"], "not_flags": []},
 			"depends_on": ["b4.the_convoy_eats_at_the_wandering_inn"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["agnes.on_holiday_with_her_sick_husband", "celum_actors.join_christmas_gifts", "jasi.wants_pisces_on_her_list", "grev.joins_the_gift_list"]},

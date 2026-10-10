@@ -88,7 +88,7 @@
 			"location": "invrisil_runners_guild",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin", "laken_godart"], "flags": [], "not_flags": []},
-			"depends_on": ["b4.laken_tells_ryoka_he_is_an_emperor"],
+			"depends_on": ["b4.laken_tells_ryoka_he_is_an_emperor", "b4.ryoka_sends_replies_to_liscor"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["invrisil.snowed_in_for_a_week", "laken.convoy_delayed_a_week", "ryoka.carries_lakens_food_to_riverfarm", "reynold.to_drive_ryoka_only_to_liscor"], "clear_flags": ["ryoka.heading_home_to_liscor"]},
 			"status": "candidate",
