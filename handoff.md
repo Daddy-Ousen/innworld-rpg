@@ -1,5 +1,26 @@
 # Handoff
 
+## Just done (2026-10-11, local): M23.4 Book 5 canon bends (branch `feat/m23.4-book5-bends`)
+- ADR 0036 "Book 5" lists every change. Data only (13 Book 5 chapter files), no engine change.
+- New `game/tests/sim_kill_book5.gd` (10): kills Ryoka, Erin, Laken, Venitra, Lyonette on day 97 and Ken, Quallet
+  on day 78 (second base save for the Baleros thread); hook-per-day (16 days); washing up on day 103 changes the
+  new staff's first day. Copy it for Book 6.
+- Changed old tests: `sim_canon_book5` (no Ryoka: Erin pays for the build; no Venitra: the Word of Death still
+  falls), `sim_book5_geneva` (alt events left out of the arc list; no Ken: the Red Cross is still founded),
+  `sim_player_hooks` count 114.
+- Tests run (all pass): `sim_kill_book5`, `sim_canon_book5..7`, `sim_book5_*` (7 scripts), `sim_player_hooks`,
+  `unit_canon_db`, `sim_divergence`, `sim_kill_book4`; validator 0 / 0 on Books 1 – 7; Python 114 OK. Full suite
+  not run. `docs/divergence/report.md` regenerated.
+- Next: M23.5 Book 6 **[Opus · high]**. Picks in `docs/divergence/picks.md`.
+- Gotchas: Book 5 chapter files are fully expanded JSON (tab indent, CRLF), but 4.06KM and 4.07 mix in one-line
+  objects. The patch helper kept each untouched event's original text and dumped only changed events (split on
+  `		"b5.<id>": {` ... `
+		}`). The M23.0 report counts `depends_on` only; Book 5 chains run on flags, so
+  measure with a director run: a scratch `extends SceneTree` script (`GameState.new_game`, `Director.run` to the
+  day before, `gs.world.set_alive(npc, false)`, `Director.run` to the end, count `b<N>.` events that are not
+  happened and not alt-only). A script error in a `-s` script hangs Godot (no quit): kill it by command line.
+  An alt event that replaces a revival needs the `revive` effect too.
+
 ## Just done (2026-10-11): M21.6 closed, journal focus picker removed (branch `fix/journal-no-focus-picker`)
 - The user played every open check: all fine. M21.6 and M21 are ticked.
 - Journal: the Focus list, its hint line and the "Focus:" line are gone (`ui/journal.gd`, `journal.tscn`, `main.gd`). `focus_choices`, `focus_name`, `main_tags` stay (character sheet, console, tests). Focus still works through the console `focus` command.
