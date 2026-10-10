@@ -34,7 +34,7 @@ Capstones 10 / 20 / 30 need a breakthrough, and only the debug console grants on
 ## M23 — Canon bends (divergence depth)
 Books 2 – 7 events only `cancel` on failure (0 substitute / delay / mutate); 67 of 1089 events have hooks.
 - [x] M23.0 Tool + list: `tools/divergence_report.py` (per book: roles, fallbacks, hooks, events that depend on one NPC); the user picks the key NPCs and key events per book (user) **[Sonnet · medium]** (done 2026-10-10: report in `docs/divergence/report.md`; user rule: top 5 NPCs + top 3 events per book, in `docs/divergence/picks.md`)
-- [ ] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane) **[Opus · high]**
+- [x] M23.1 Book 2: roles with `fallback_tags`, `substitute` / `delay` / `mutate` on the key events, more hooks; `sim_kill_book2` (a key NPC dies, the book still runs and drift is sane) **[Opus · high]** (done 2026-10-10, ADR 0036: story-order links cut, 2 substitutes, 3 alt events, flag hand-off + delay, 19 hooks (one per on-map day), director runs an alt on its own day; Erin's death loses 109 events, was 140)
 - [ ] M23.2 Book 3: the same **[Opus · high]**
 - [ ] M23.3 Book 4: the same **[Opus · high]**
 - [ ] M23.4 Book 5: the same **[Opus · high]**

@@ -1,17 +1,27 @@
 # Handoff
 
-## Just done (2026-10-10, local): M23.0 divergence report (branch `feat/m23.0-divergence-report`)
-- User pick: top 5 NPCs + top 3 events per book, written to `docs/divergence/picks.md`. M23.0 ticked; PR opened.
-- Next: M23.1 Book 2 **[Opus · high]**: read `picks.md` Book 2, add `fallback_tags` + `substitute` / `delay` / `mutate`
-  to those roles and events, more hooks, and `sim_kill_book2`. The Book 2 chain (Horns / Albez, 110+ dependents) is
-  the big risk: one cancel there drops half the book.
+## Just done (2026-10-10, local): M23.1 Book 2 canon bends (branch `feat/m23.1-book2-bends`)
+- Rules for all books are in ADR 0036 (`docs/adr/0036-canon-bends.md`). Read it before M23.2.
+- Engine: `Director._propagate` leaves a dependent that has a `mutate:` step and an unopened window pending; it
+  mutates on its own day. `unit_director` changed (+1 test).
+- Data (25 Book 2 chapter files): story-order links cut; substitutes (Klbkch rescue 2.02, Relc warning 2.23);
+  alts `b2.ceria_reforms_the_horns_short_handed`, `b2.goblin_lord_overruns_the_stone_spears`, `b2.erin_winters_in_liscor`;
+  flag hand-off + delay (`ksmvr_joins…`, `drake_assembly…`, `magnolia_plans…`); 19 `change` hooks.
+- New `game/tests/sim_kill_book2.gd` (10): kills Erin, Ryoka, Toren, Rags, Ceria, Pisces, Yvlon on day 41; ceilings
+  on lost events and drift; hook-per-day check; chess hook played on day 47. Copy it for Books 3 – 7.
+- Tests run (all pass): `sim_kill_book2`, `unit_director`, `sim_divergence`, `sim_canon_book1..3`,
+  `sim_book2_end_stages`, `sim_player_hooks` (93), `unit_canon_db`; validator 0 / 0; Python 114 OK. Full suite not run.
+- Next: M23.2 Book 3 **[Opus · high]**. Key events there are the Albez chain (`b3.horns_run_out_of_coin_at_albez`
+  etc.); Ksmvr's death in Book 2 still drops it.
+- Gotchas: a quick probe beats guessing: a throwaway `extends SceneTree` script that kills an NPC, runs
+  `Director.run(gs, db, <day>)` (0.3 s for a book) and prints non-`done` history. Some chapter files have the roles
+  on one line (2.39), others one role per line: patch scripts must handle both. Topological order breaks same-day
+  ties by id, so a cut link can move an event earlier in the day (statuses stay). Substitute scoring sees every NPC
+  in the world: check the pick (ties go to the lowest id, e.g. `anith` for "adventurer + mage").
 
-- Done: `tools/divergence_report.py` (read-only, Markdown out), `tools/tests/test_divergence_report.py` (7 pass),
-  `docs/divergence/report.md` (generated; rerun `python tools/divergence_report.py game/data/canon --out docs/divergence/report.md`).
-  Commit 8485b2c. Python 114 OK. No game code or data changed, so no GUT run.
-- "Pinned" = the event fails hard if that one NPC dies (`requires.alive`, or a lone `prefer` in a required role that
-  cannot be substituted). "Lost" adds the same-book `depends_on` cascade.
-- Finding: Books 2 – 4 are one long chain (each Horns / Albez event has 100+ dependents). Books 5 – 7 chains are short.
+## Earlier (2026-10-10): M23.0 divergence report
+- `tools/divergence_report.py`; rerun `python tools/divergence_report.py game/data/canon --out docs/divergence/report.md`
+  after data changes (done for M23.1). "Pinned" = fails if that one NPC dies; "Lost" adds the same-book cascade.
 
 ## Just done (2026-10-10, local): M22.4 probe sim (branch `feat/m22.4-probe-sim`)
 - New `game/tests/sim_breakthrough_probe.gd` (2 tests, ~3 min of sim): busy inn worker, quiet inn worker, fighter, days 1 – 87,

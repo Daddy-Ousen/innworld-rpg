@@ -103,7 +103,7 @@ An event may also have a `stage`: its fight appears on the map when the player i
    - **delay**: move the window forward (limit applies).
    - **mutate**: run the alternate event.
    - **cancel**: mark cancelled.
-4. Cancel → walk `depends_on` in reverse and re-check every downstream event (propagation).
+4. Cancel → walk `depends_on` in reverse and re-check every downstream event (propagation). A downstream event that can mutate and whose window has not opened waits, and mutates on its own day (ADR 0036).
 5. Add drift.
 
 ### 4.5 NPCs
