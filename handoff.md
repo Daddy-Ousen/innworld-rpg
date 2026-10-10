@@ -1,5 +1,9 @@
 # Handoff
 
+## Just done (2026-10-10): release v0.1.4-alpha
+- Built from branch `feat/m23.3-book4-bends` (version bump commit, tag `v0.1.4-alpha` pushed). Pre-release with 4 files (win, linux, web zips + signed apk): https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.4-alpha
+- Not done: the M23.3 PR is not merged yet. The itch.io / GitHub Pages web build is not re-uploaded.
+
 ## Just done (2026-10-10, local): M23.3 Book 4 canon bends (branch `feat/m23.3-book4-bends`)
 - ADR 0036 "Book 4" lists every change. Data only (15 Book 4 chapter files), no engine change.
 - Patch scripts were in the session scratchpad (`patch_m233*.py`: text edits per event block, keep CRLF; helpers
