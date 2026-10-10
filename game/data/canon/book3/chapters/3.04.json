@@ -23,7 +23,7 @@
 			"location": "celum_runners_guild",
 			"roles": {"rival": {"prefer": ["persua"], "fallback_tags": []}, "runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "friend": {"prefer": ["garia_strongheart"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["persua", "ryoka_griffin"], "flags": ["ryoka.in_celum"], "not_flags": []},
-			"depends_on": ["b3.ivolethe_bites_a_guest_at_the_frenzied_hare"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["persua.has_double_step", "persua.bound_north_as_courier"]},
 			"status": "candidate",

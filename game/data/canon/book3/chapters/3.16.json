@@ -41,7 +41,7 @@
 			"location": "frenzied_hare",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "guard": {"prefer": ["wesle"], "fallback_tags": [], "optional": true}, "washer": {"prefer": ["jasi"], "fallback_tags": [], "optional": true}, "thief": {"prefer": ["grev"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
-			"depends_on": ["b3.erin_searches_for_a_class_for_jasi"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.knows_plays_by_heart", "erin.told_of_hollywood"]},
 			"status": "candidate",

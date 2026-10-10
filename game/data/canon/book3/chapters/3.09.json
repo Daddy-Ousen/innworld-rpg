@@ -35,7 +35,7 @@
 			"location": "frenzied_hare",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "friend": {"prefer": ["fals"], "fallback_tags": []}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin", "fals"], "flags": ["ryoka.in_celum"], "not_flags": []},
-			"depends_on": ["b3.ivolethe_tries_to_teach_ryoka_the_wind"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["ryoka.banned_from_runners_guild", "ryoka.heard_the_horns_are_in_ocre", "fals.lost_work_to_persua"],
@@ -81,7 +81,7 @@
 			"location": "ocre",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "faerie": {"prefer": ["ivolethe"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin", "ceria_springwalker"], "flags": ["ryoka.heard_the_horns_are_in_ocre", "horns_of_hammerad.in_ocre"], "not_flags": []},
-			"depends_on": ["b3.ryoka_and_fals_talk_at_the_frenzied_hare", "b3.ocre_parades_the_horns_of_hammerad"],
+			"depends_on": ["b3.ryoka_and_fals_talk_at_the_frenzied_hare"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["ryoka.reunited_with_ceria", "ivolethe.warned_by_her_sisters", "ceria.met_ivolethe"],
@@ -110,7 +110,7 @@
 			"location": "ocre",
 			"roles": {"runner": {"prefer": ["ryoka_griffin"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": []}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ryoka_griffin", "ressa"], "flags": ["ryoka.reunited_with_ceria"], "not_flags": []},
-			"depends_on": ["b3.horns_plan_to_share_their_gold_and_send_the_relics_north"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["magnolia.summoned_ryoka"]},
 			"news": "A horseless Reinhart coach drew up at The Nobleman's Disgrace in Ocre. Lady Magnolia's own head maid came for a barefoot Runner.",

@@ -22,12 +22,21 @@
 			"location": "wandering_inn",
 			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
 			"requires": {"alive": ["pawn", "lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
-			"depends_on": ["b3.pawn_takes_command_of_the_wounded_soldiers"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["pawn.will_take_the_soldiers_above"],
 				"relationship": [{"from": "lyonette", "to": "pawn", "delta": 1}, {"from": "pawn", "to": "lyonette", "delta": 1}]
 			},
+			"hooks": [
+				{
+					"id": "player_kept_pawn_company",
+					"did": [{"action": ["play_chess", "serve_guests", "talk_with_guest"], "context": {"location": ["wandering_inn"]}}],
+					"days": [81, 81],
+					"then": "change",
+					"effects": {"set_flags": ["wandering_inn.earther_kept_pawn_company"], "relationship": [{"from": "pawn", "to": "player", "delta": 1}, {"from": "lyonette", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "His new [Humble Presence] lets him walk through Liscor unnoticed. Lyonette has a few coppers and two silver left; he pays in bronze coins. He would like cheese in his eggs next time."},
 			"summary": "In the evening Pawn walks up to the inn. Lyonette, with no guest for two days, panics, serves him eggs and bacon again and can barely talk. He leaves content, and under the stars on the way home he sees that he must take the Soldiers out of the Hive to see such things."
@@ -38,7 +47,7 @@
 			"location": "liscor_watch_barracks",
 			"roles": {"captain": {"prefer": ["zevara"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
 			"requires": {"alive": ["zevara", "klbkch"], "flags": [], "not_flags": []},
-			"depends_on": ["b3.pawn_eats_eggs_and_bacon_at_lyonettes_inn"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["liscor.antinium_soldiers_may_patrol", "zevara.reports_on_the_antinium"]},
 			"news": "Liscor's Watch Captain has let a score of Antinium Soldiers patrol the land around the city for monsters and Goblin bands.",
@@ -52,7 +61,7 @@
 			"location": "giant_bee_cave",
 			"roles": {"barmaid": {"prefer": ["lyonette"], "fallback_tags": []}},
 			"requires": {"alive": ["lyonette"], "flags": ["lyonette.runs_the_inn"], "not_flags": []},
-			"depends_on": ["b3.pawn_eats_eggs_and_bacon_at_lyonettes_inn"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lyonette.first_bee_raid_failed", "lyonette.knows_faerie_flower_smoke", "wandering_inn.faerie_flowers_wilting"]},
 			"status": "candidate",
@@ -130,13 +139,26 @@
 			"location": "wandering_inn",
 			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "barmaid": {"prefer": ["lyonette"], "fallback_tags": []}, "receptionist": {"prefer": ["selys"], "fallback_tags": [], "optional": true}, "cub": {"prefer": ["mrsha"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["pawn", "lyonette"], "flags": ["liscor.antinium_soldiers_may_patrol"], "not_flags": []},
-			"depends_on": ["b3.mrsha_runs_back_to_the_inn", "b3.zevara_lets_twenty_soldiers_above_ground"],
-			"on_fail": ["cancel"],
+			"depends_on": ["b3.zevara_lets_twenty_soldiers_above_ground"],
+			"on_fail": ["mutate:b3.pawn_takes_twenty_soldiers_above_ground", "cancel"],
 			"effects": {"set_flags": ["pawn.leads_a_soldier_patrol", "wandering_inn.antinium_soldiers_visited"]},
 			"rumor": "A Drake at the Adventurers' Guild says she fainted when a line of Antinium Soldiers came up to the inn on the hill.",
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "confirmed", "note": "Twenty Soldiers come with Pawn; one is missing a hand. Nobody catches Selys. The chapter ends as Lyonette offers them food."},
 			"summary": "As Selys yanks the door open to leave, a huge Soldier stands behind Pawn and she faints on the spot. Pawn helps drag her in while twenty wounded Soldiers file into the common room. Lyonette sees customers, thinks of her jar of bees, and asks them all if they want to eat."
+		},
+		"b3.pawn_takes_twenty_soldiers_above_ground": {
+			"tier": 2,
+			"window": {"earliest": 82, "latest": 82, "confidence": "guess"},
+			"location": "liscor_hive",
+			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}},
+			"requires": {"alive": ["pawn"], "flags": ["liscor.antinium_soldiers_may_patrol"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["pawn.leads_a_soldier_patrol"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.21L", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of the Soldiers' visit to the inn when Lyonette cannot host them."},
+			"summary": "With no one at the inn to feed them, Pawn leads his twenty wounded Soldiers straight out of the Hive and into the snow on the floodplains."
 		}
 	},
 	"system": [

@@ -269,8 +269,18 @@ static func _is_due(gs: GameState, db: DataDb, id: String, day: int) -> bool:
 ## Only "wait" failures (plus role gaps) and the window is still open.
 static func _can_wait(gs: GameState, db: DataDb, id: String, day: int, check: Dictionary) -> bool:
 	var kinds := (check["fails"] as Array).map(func(f: Dictionary) -> String: return f["kind"])
-	return kinds.has(FAIL_WAIT) and not kinds.has(FAIL_HARD) \
-			and day < gs.world.latest(id, db.canon.events[id])
+	return kinds.has(FAIL_WAIT) and not kinds.has(FAIL_HARD) and day < _wait_until(gs, db, id)
+
+
+## The last day the event may wait: its own latest day, or later while a
+## pending dependency may still happen (a delayed one keeps its dependents
+## waiting with it, M23.2, ADR 0036).
+static func _wait_until(gs: GameState, db: DataDb, id: String) -> int:
+	var until := gs.world.latest(id, db.canon.events[id])
+	for dep: String in db.canon.events[id]["depends_on"]:
+		if gs.world.status(dep) == WorldState.PENDING:
+			until = maxi(until, _wait_until(gs, db, dep))
+	return until
 
 
 static func _only(check: Dictionary, kind: String) -> bool:

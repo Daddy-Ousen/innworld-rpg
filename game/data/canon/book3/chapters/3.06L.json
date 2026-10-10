@@ -9,8 +9,9 @@
 			"location": "liscor_hive",
 			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
 			"requires": {"alive": ["pawn", "klbkch"], "flags": ["pawn.will_tell_klbkch_of_his_class"], "not_flags": []},
-			"depends_on": ["b3.pawn_resolves_to_tell_klbkch_of_his_class"],
-			"on_fail": ["cancel"],
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {
 				"set_flags": ["pawn.told_klbkch_of_his_class", "pawn.forbidden_to_speak_of_god", "klbkch.knows_of_erins_god"],
 				"relationship": [{"from": "pawn", "to": "klbkch", "delta": -2}]
@@ -38,7 +39,7 @@
 			"location": "liscor_hive",
 			"roles": {"acolyte": {"prefer": ["pawn"], "fallback_tags": []}, "revalantor": {"prefer": ["klbkch"], "fallback_tags": []}},
 			"requires": {"alive": ["pawn", "klbkch"], "flags": ["pawn.told_klbkch_of_his_class"], "not_flags": []},
-			"depends_on": ["b3.pawn_eats_in_the_soldiers_mess"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["pawn.spared_by_the_queen", "pawn.may_not_pray", "pawn.heard_of_the_centenium"]},
 			"status": "candidate",

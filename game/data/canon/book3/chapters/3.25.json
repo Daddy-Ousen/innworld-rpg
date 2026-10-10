@@ -22,7 +22,7 @@
 			"location": "frenzied_hare",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice", "yvlon_byres"], "flags": ["yvlon.distrusts_pisces"], "not_flags": []},
-			"depends_on": ["b3.pisces_sets_out_for_the_albez_door"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["yvlon.spares_pisces", "horns_of_hammerad.know_pisces_guarded_the_inn"],
@@ -46,7 +46,7 @@
 				"innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum"], "not_flags": []},
-			"depends_on": ["b3.erin_talks_yvlon_out_of_harming_pisces"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["erin.staged_frozen", "frenzied_hare.staged_frozen", "ceria.does_stage_magic", "jasi.played_elsa"],
@@ -90,10 +90,10 @@
 			"tier": 2,
 			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
 			"location": "ruins_of_albez",
-			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": []}, "driver": {"prefer": ["adelynn"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["pisces", "ksmvr"], "flags": ["horns_of_hammerad.seek_the_albez_door"], "not_flags": []},
+			"roles": {"mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": ["adventurer", "wistram"]}, "driver": {"prefer": ["adelynn"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["pisces"], "flags": ["horns_of_hammerad.seek_the_albez_door"], "not_flags": []},
 			"depends_on": ["b3.pisces_sets_out_for_the_albez_door"],
-			"on_fail": ["cancel"],
+			"on_fail": ["substitute", "cancel"],
 			"effects": {
 				"clear_flags": ["horns_of_hammerad.seek_the_albez_door"],
 				"set_flags": ["horns_of_hammerad.have_the_albez_door", "pisces.can_trigger_the_albez_door"]
@@ -108,7 +108,7 @@
 			"location": "stitchworks",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "alchemist": {"prefer": ["octavia"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "innkeeper": {"prefer": ["agnes"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice", "octavia"], "flags": ["erin.in_celum"], "not_flags": []},
-			"depends_on": ["b3.erin_stages_frozen"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["erin.decided_to_go_home", "erin.said_goodbye_to_octavia"],
@@ -124,7 +124,7 @@
 			"location": "frenzied_hare",
 			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": []}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["erin_solstice", "pisces"], "flags": ["horns_of_hammerad.have_the_albez_door"], "not_flags": []},
-			"depends_on": ["b3.pisces_and_ksmvr_recover_the_albez_door", "b3.erin_says_goodbye_to_octavia"],
+			"depends_on": ["b3.pisces_and_ksmvr_recover_the_albez_door"],
 			"on_fail": ["cancel"],
 			"effects": {
 				"clear_flags": ["horns_of_hammerad.have_the_albez_door"],
@@ -153,8 +153,8 @@
 				"alchemist": {"prefer": ["octavia"], "fallback_tags": [], "optional": true}
 			},
 			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "erin.has_albez_door"], "not_flags": []},
-			"depends_on": ["b3.the_horns_give_erin_the_albez_door", "b3.erin_says_goodbye_to_octavia"],
-			"on_fail": ["cancel"],
+			"depends_on": ["b3.the_horns_give_erin_the_albez_door"],
+			"on_fail": ["mutate:b3.erin_and_the_horns_leave_celum_without_the_door", "mutate:b3.erin_goes_home_without_the_horns", "mutate:b3.the_horns_leave_celum_without_erin", "cancel"],
 			"effects": {
 				"clear_flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "horns_of_hammerad.lodge_at_the_frenzied_hare"],
 				"set_flags": ["erin.left_celum", "erin.on_wagon_south", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"],
@@ -194,6 +194,45 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "confirmed", "note": "The driver south is a man, not Adelynn, and not named. That night Erin sees the stone could stay behind: Ksmvr runs it back to the Hare, and they step through to eat there while the wagon and door roll on. The trip should take one to three days."},
 			"summary": "Agnes, Maran, Safry, the [Actors], Octavia and regulars gather to say goodbye; Erin hugs them all and rides out of Celum with the Horns as evening falls, promising herself to return. On the road she realises the anchor stone could stay behind, and Pisces links the door to the Hare."
+		},
+		"b3.erin_and_the_horns_leave_celum_without_the_door": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["erin_solstice", "ceria_springwalker"], "flags": ["erin.in_celum", "horns_of_hammerad.in_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.left_celum", "erin.on_wagon_south", "horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"], "clear_flags": ["erin.in_celum", "horns_of_hammerad.in_celum", "horns_of_hammerad.lodge_at_the_frenzied_hare"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of the farewell when there is no Albez door (Pisces or Ksmvr lost it)."},
+			"summary": "With no magic door to give her, Erin still says her goodbyes to the Frenzied Hare and rides south out of Celum on a wagon with the Horns of Hammerad."
+		},
+		"b3.erin_goes_home_without_the_horns": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"host": {"prefer": ["erin_solstice"], "fallback_tags": []}},
+			"requires": {"alive": ["erin_solstice"], "flags": ["erin.in_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["erin.left_celum", "erin.on_wagon_south"], "clear_flags": ["erin.in_celum"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of the farewell when the Horns of Hammerad are not in Celum (Ceria dead)."},
+			"summary": "With no Horns of Hammerad to ride with, Erin finds a merchant wagon heading south and goes home to Liscor alone."
+		},
+		"b3.the_horns_leave_celum_without_erin": {
+			"tier": 2,
+			"window": {"earliest": 87, "latest": 87, "confidence": "guess"},
+			"location": "celum",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "mage": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "antinium": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.in_celum"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.left_celum", "horns_of_hammerad.bound_for_liscor"], "clear_flags": ["horns_of_hammerad.in_celum", "horns_of_hammerad.lodge_at_the_frenzied_hare"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.25", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of the farewell when Erin is dead."},
+			"summary": "With no Erin to take home, the Horns of Hammerad take a guard job on a wagon going south and leave Celum for Liscor."
 		}
 	},
 	"system": [

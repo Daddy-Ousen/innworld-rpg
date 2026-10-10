@@ -189,7 +189,7 @@
 			"location": "esthelm",
 			"roles": {"skeleton": {"prefer": ["toren"], "fallback_tags": []}},
 			"requires": {"alive": ["toren"], "flags": ["toren.commands_lesser_undead"], "not_flags": []},
-			"depends_on": ["b3.the_last_battle_of_esthelm"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["toren.heading_to_liscor", "toren.leads_undead"]},
 			"rumor": "A skeleton with burning purple eyes was seen leaving Esthelm southward, a dozen zombies and a Ghoul shambling behind it.",

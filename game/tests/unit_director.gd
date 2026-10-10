@@ -217,6 +217,34 @@ func test_a_mutating_dependent_whose_window_is_open_mutates_at_once() -> void:
 			"D1 done e.c_alt", "D1 cancelled e.after"] as Array[String])
 
 
+func test_a_dependent_waits_while_its_dependency_is_delayed() -> void:
+	var d := _db({
+		"e.a_handoff": ToyCanon.event(1, 1, {"requires": ToyCanon.req([], ["tunnel"]),
+				"on_fail": ["delay", "cancel"], "delay_limit": 3}),
+		"e.b_after": ToyCanon.event(1, 1, {"depends_on": ["e.a_handoff"]}),
+		"e.m_dig": ToyCanon.event(1, 1, {"requires": ToyCanon.req(["mentor"]), "on_fail": ["mutate:e.m_alt", "cancel"]}),
+		"e.m_alt": ToyCanon.event(1, 1, {"effects": {"set_flags": ["tunnel"]}}),
+	})
+	var gs := _gs(d)
+	Commands.kill_npc(gs, d, "mentor")
+	Director.run(gs, d, 1)
+	assert_eq(ToyCanon.timeline(gs), ["D1 killed player.kill", "D1 delayed e.a_handoff", "D1 mutated e.m_dig",
+			"D1 done e.m_alt", "D1 done e.a_handoff", "D1 done e.b_after"] as Array[String],
+			"the flag hand-off and its dependent still run on day 1 (M23.2)")
+
+
+func test_a_dependent_cancels_when_its_delayed_dependency_does() -> void:
+	var d := _db({
+		"e.a": ToyCanon.event(1, 1, {"requires": ToyCanon.req([], ["never"]), "on_fail": ["delay", "cancel"],
+				"delay_limit": 2}),
+		"e.b": ToyCanon.event(1, 1, {"depends_on": ["e.a"]}),
+	})
+	var gs := _gs(d)
+	Director.run(gs, d, 5)
+	assert_eq(ToyCanon.timeline(gs), ["D1 delayed e.a", "D2 delayed e.a", "D3 cancelled e.a",
+			"D3 cancelled e.b"] as Array[String])
+
+
 func test_mutate_skips_an_alt_that_cannot_run() -> void:
 	var d := _db({
 		"e.x": ToyCanon.event(1, 1, {"requires": ToyCanon.req(["mentor"]), "on_fail": ["mutate:e.alt", "cancel"]}),

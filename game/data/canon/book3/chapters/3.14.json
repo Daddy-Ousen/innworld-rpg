@@ -43,7 +43,7 @@
 			"location": "first_landing",
 			"roles": {"lady": {"prefer": ["magnolia_reinhart"], "fallback_tags": []}, "head_maid": {"prefer": ["ressa"], "fallback_tags": [], "optional": true}, "butler": {"prefer": ["reynold"], "fallback_tags": [], "optional": true}, "dragon": {"prefer": ["teriarch"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["magnolia_reinhart"], "flags": ["magnolia.survived_the_circle_of_thorns"], "not_flags": []},
-			"depends_on": ["b3.ryoka_tends_magnolias_wounded_servants"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["magnolia.gone_to_first_landing", "magnolia.at_war_with_the_circle_of_thorns"]},
 			"news": "Magnolia Reinhart's coach left her Invrisil estate in the dark hours, bound for the Reinhart house in First Landing.",
@@ -57,12 +57,21 @@
 			"location": "riverfarm",
 			"roles": {"emperor": {"prefer": ["laken_godart"], "fallback_tags": []}, "paladin": {"prefer": ["durene"], "fallback_tags": [], "optional": true}, "farmer": {"prefer": ["prost"], "fallback_tags": [], "optional": true}, "villager": {"prefer": ["gamel"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["laken_godart"], "flags": ["laken.rules_riverfarm"], "not_flags": []},
-			"depends_on": ["b3.riverfarm_wakes_under_the_blessing_of_the_hearth"],
+			"depends_on": [],
 			"on_fail": ["cancel"],
 			"effects": {
 				"set_flags": ["laken.funds_riverfarm", "laken.plans_to_go_to_invrisil"],
 				"relationship": [{"from": "prost", "to": "laken_godart", "delta": 1}]
 			},
+			"hooks": [
+				{
+					"id": "player_helped_rebuild_riverfarm",
+					"did": [{"action": ["carry_water", "chop_wood", "repair_furniture"], "context": {"location": ["riverfarm"]}}],
+					"days": [90, 90],
+					"then": "change",
+					"effects": {"set_flags": ["riverfarm.earther_helped_rebuild"], "relationship": [{"from": "laken_godart", "to": "player", "delta": 1}, {"from": "prost", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 45. Game day = his Day + 45 (ADR 0028). Gamel camps outside the cottage to serve him. Foxes gnaw a frozen cow, so Laken has the dead animals stored in the barn and traps set."},
 			"summary": "Riverfarm hails Laken as Emperor; no one throws stones at Durene now. With the animals dead and monsters a threat, he tells the elders he has hundreds of gold coins and will buy food and hire guards in Invrisil. When they fear he will not return, he gives his word as Emperor, and Prost backs him."
@@ -76,6 +85,15 @@
 			"depends_on": ["b3.laken_rules_riverfarm_and_plans_for_invrisil"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["laken.left_for_invrisil", "durene.left_riverfarm", "gamel.travels_with_laken"]},
+			"hooks": [
+				{
+					"id": "player_saw_laken_off",
+					"did": [{"action": ["talk_with_guest", "comfort_someone", "persuade"], "context": {"location": ["riverfarm"]}}],
+					"days": [91, 91],
+					"then": "change",
+					"effects": {"set_flags": ["riverfarm.earther_saw_laken_off"], "relationship": [{"from": "laken_godart", "to": "player", "delta": 1}, {"from": "durene", "to": "player", "delta": 1}, {"from": "gamel", "to": "player", "delta": 1}]}
+				}
+			],
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.14", "confidence": "confirmed", "note": "Laken's Day 46. Game day = his Day + 45 (ADR 0028). The villagers cleared the road overnight. None of the three has been to Invrisil. The arrival is later canon."},
 			"summary": "At dawn Durene pulls a wagon with Laken, Frostwing in her nest, a fortune in gold and supplies, while young Gamel walks beside them to talk to guards. The village cheers them off down the cleared road. Durene frets about how a city will treat a half-Troll."

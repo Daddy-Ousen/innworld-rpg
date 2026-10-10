@@ -32,8 +32,8 @@
 			"roles": {"necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "captain": {"prefer": ["ceria_springwalker"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["pisces"], "flags": ["horns_of_hammerad.covered_the_insanity_rune"], "not_flags": []},
 			"depends_on": ["b3.ksmvr_and_ceria_smother_the_insanity_rune"],
-			"on_fail": ["cancel"],
-			"effects": {"set_flags": ["pisces.built_a_bone_stair", "ceria.found_a_dead_adventurers_pack"]},
+			"on_fail": ["mutate:b3.horns_climb_out_of_the_pit_by_hand", "cancel"],
+			"effects": {"set_flags": ["pisces.built_a_bone_stair", "ceria.found_a_dead_adventurers_pack", "horns_of_hammerad.out_of_the_pit"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "confirmed", "note": "Ksmvr reasons the pit must have an air hole, and his eyes find it in the ceiling. Yvlon stays mad for hours and is kept tied up."},
 			"summary": "Pisces, himself again, lifts the bones of countless dead adventurers into a floating stair, and his skeletons dig up to the tunnel. A falling skeleton knocks loose old tar from a wall: the whole pit is lined with the rune. Ceria takes a dead adventurer's pack."
@@ -43,9 +43,10 @@
 			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
 			"location": "ruins_of_albez",
 			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
-			"requires": {"alive": ["ceria_springwalker"], "flags": ["pisces.built_a_bone_stair"], "not_flags": []},
-			"depends_on": ["b3.pisces_builds_a_bone_stair_out_of_the_pit"],
-			"on_fail": ["cancel"],
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.out_of_the_pit"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["horns_of_hammerad.found_thresks_vault"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "guess", "note": "Day guess: they may have lost hours or days in the pit. Warmage Thresk is named only by his guardian; no NPC."},
@@ -63,7 +64,7 @@
 			},
 			"requires": {"alive": ["yvlon_byres"], "flags": ["horns_of_hammerad.found_thresks_vault"], "not_flags": []},
 			"depends_on": ["b3.horns_break_into_warmage_thresks_vault"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b3.horns_outlast_the_flame_guardian", "cancel"],
 			"effects": {
 				"set_flags": ["yvlon.armor_fused_to_arms", "horns_of_hammerad.lost_most_of_thresks_treasure", "ceria.has_a_burnt_spellbook"],
 				"relationship": [{"from": "ceria_springwalker", "to": "yvlon_byres", "delta": 2}, {"from": "pisces", "to": "yvlon_byres", "delta": 1}]
@@ -71,6 +72,32 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "confirmed", "note": "Ceria's [Ice Spike] and [Frozen Wind] do nothing to it. Pisces gets badly burnt; Ksmvr's sword melts. The last page shows all four passing out in the heat of the pit."},
 			"summary": "A man of white fire rises to guard the vault. It ashes the skeletons and walls them in. Using the spell-proof door as a shield they stun it, and Yvlon cuts its heart-gem; her silver armour melts onto her arms. Dying, it burns the vault. Pisces' skeletons fetch what they can."
+		},
+		"b3.horns_climb_out_of_the_pit_by_hand": {
+			"tier": 2,
+			"window": {"earliest": 73, "latest": 73, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.covered_the_insanity_rune"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.out_of_the_pit", "horns_of_hammerad.climbed_out_by_hand"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of Pisces's bone stair when Pisces is dead."},
+			"summary": "With no bone stair, the Horns find the air hole in the pit's ceiling and cut handholds up the wall of bones, climbing out one by one to the tunnel before the door that trapped them."
+		},
+		"b3.horns_outlast_the_flame_guardian": {
+			"tier": 2,
+			"window": {"earliest": 74, "latest": 74, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.found_thresks_vault"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.lost_most_of_thresks_treasure", "ceria.has_a_burnt_spellbook", "horns_of_hammerad.hid_from_the_flame_guardian"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of Yvlon's strike at the guardian when Yvlon is dead."},
+			"summary": "With no Yvlon to break its heart-gem, the Horns crouch behind the spell-proof door while the guardian of white fire rages until it burns itself out, taking most of the vault with it."
 		}
 	},
 	"system": [

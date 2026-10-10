@@ -15,7 +15,8 @@
 			},
 			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.has_albez_map", "izril.dangersense_alarm"], "not_flags": []},
 			"depends_on": ["b2.horns_of_hammerad_claim_the_albez_map"],
-			"on_fail": ["cancel"],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["horns_of_hammerad.gone_to_albez", "horns_of_hammerad.nearly_broke"]},
 			"status": "candidate",
 			"canon_ref": {
@@ -33,7 +34,7 @@
 			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "necromancer": {"prefer": ["pisces"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ceria_springwalker", "pisces"], "flags": ["horns_of_hammerad.gone_to_albez"], "not_flags": []},
 			"depends_on": ["b3.horns_run_out_of_coin_at_albez"],
-			"on_fail": ["cancel"],
+			"on_fail": ["mutate:b3.horns_dig_into_albez_by_hand", "cancel"],
 			"effects": {"set_flags": ["pisces.raised_skeletons_at_albez", "horns_of_hammerad.found_a_sealed_tunnel"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "Ceria and Pisces talk of their Wistram days and their friend Mons. Pisces thinks he could study a Lich's animating spell."},
@@ -45,8 +46,9 @@
 			"location": "ruins_of_albez",
 			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "necromancer": {"prefer": ["pisces"], "fallback_tags": [], "optional": true}},
 			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.found_a_sealed_tunnel"], "not_flags": []},
-			"depends_on": ["b3.pisces_raises_skeletons_to_dig_albez"],
-			"on_fail": ["cancel"],
+			"depends_on": [],
+			"on_fail": ["delay", "cancel"],
+			"delay_limit": 3,
 			"effects": {"set_flags": ["horns_of_hammerad.killed_a_creler_nest", "ksmvr.hurt_by_crelers"]},
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "They creep through the tunnel with sticks and a skeleton trap-finder, past an arrow trap and an acid trap."},
@@ -64,6 +66,19 @@
 			"status": "candidate",
 			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "confirmed", "note": "Cliffhanger, continued in 3.07H. Under the rune Yvlon takes herself for her aunt Yenelaw Byres (no entry) and Pisces for a fencing master."},
 			"summary": "A plain wooden door at the tunnel's end shrugs off spells and swords. When Ceria and Pisces study its enchantment, it notices them and teleports all four into a pit of bones, where a glowing [Insanity] rune drives them mad."
+		},
+		"b3.horns_dig_into_albez_by_hand": {
+			"tier": 2,
+			"window": {"earliest": 72, "latest": 72, "confidence": "guess"},
+			"location": "ruins_of_albez",
+			"roles": {"captain": {"prefer": ["ceria_springwalker"], "fallback_tags": []}, "warrior": {"prefer": ["yvlon_byres"], "fallback_tags": [], "optional": true}, "soldier": {"prefer": ["ksmvr"], "fallback_tags": [], "optional": true}},
+			"requires": {"alive": ["ceria_springwalker"], "flags": ["horns_of_hammerad.gone_to_albez"], "not_flags": []},
+			"depends_on": [],
+			"on_fail": ["cancel"],
+			"effects": {"set_flags": ["horns_of_hammerad.found_a_sealed_tunnel", "horns_of_hammerad.dug_albez_by_hand"]},
+			"status": "candidate",
+			"canon_ref": {"book": 3, "chapter": "3.02H", "confidence": "guess", "note": "Not in the book (M23.2, divergence only): runs instead of Pisces's skeleton dig when Pisces is dead."},
+			"summary": "With no Pisces to raise skeletons, the Horns dig at the sunken ruins of Albez by hand for a whole day until they break into a buried corridor and set off a fresh fire trap."
 		}
 	},
 	"system": [
