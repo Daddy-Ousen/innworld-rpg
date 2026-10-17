@@ -12,11 +12,12 @@
 		},
 		"wandering_inn": {
 			"name": "The abandoned inn on the hill",
+			"names": [{"flag": "wandering_inn.named", "name": "The Wandering Inn"}],
 			"kind": "building",
 			"parent": "floodplains_of_liscor",
 			"tags": ["inn", "shelter", "abandoned", "plague_site"],
 			"status": "reviewed",
-			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Erin paints the name 'The Wandering Inn' on the sign on day 13 (1.18); flag wandering_inn.named. The name field keeps the day-8 name."},
+			"canon_ref": {"book": 1, "chapter": "1.00", "confidence": "confirmed", "note": "Erin paints the name 'The Wandering Inn' on the sign on day 13 (1.18); flag wandering_inn.named. The name field keeps the early name; names (M29.1) shows 'The Wandering Inn' once the flag is set."},
 			"summary": "Large old wooden inn on a high hill: common room, long bar, kitchen with stone oven, upstairs rooms. Last of a small settlement that died of plague about ten years ago. No law stops anyone living there."
 		},
 		"inn_stream": {

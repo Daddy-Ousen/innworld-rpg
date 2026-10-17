@@ -80,6 +80,8 @@ func test_a_week_of_serving_earns_coin_and_a_name() -> void:
 	gs.player.place(INN, Vector2i(12, 11))
 	Commands.settle(gs, _db)
 	assert_true(Guests.is_open(gs, _db), "Book 1 day 8: the inn is open")
+	assert_false(Guests.patrons_come(gs, _db), "M29.1: no patrons before the regulars (day 15)")
+	gs.flags["wandering_inn.has_regulars"] = true  # this sim tests serving, not the calendar
 	Commands.give(gs, _db, 0, "stew", 3)  # left from yesterday
 	var coins := gs.economy.coins
 	var served := 0

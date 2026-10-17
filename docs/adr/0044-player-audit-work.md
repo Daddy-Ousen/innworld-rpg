@@ -61,6 +61,23 @@ The user said (2026-10-17): "We will do all."
 - The action `talk_with_guest` shows "Talk". The id is unchanged, so records, hooks and saves still work.
 - No schema change, no save change.
 
+## M29.1 (2026-10-17): the inn's name, signs and first guests
+User picks (rule 11): names by flag, and two optional guest rules.
+- Schema: optional `names: [{flag, name}]` on a canon location. `CanonDb.location_name(flags, id)` gives the
+  last entry whose flag is set, else `name`. The HUD, the knock-out page and the console `where` use it. The
+  validator checks it. The inn: "The abandoned inn on the hill" until `wandering_inn.named` (1.18, day 13 in our
+  data), then "The Wandering Inn".
+- Signs (data only): the door sign says "Inn"; a plaque "The Wandering Inn" (`inn_name_sign`) shows from
+  `wandering_inn.named`; the No Killing Goblins board from `wandering_inn.no_killing_goblins_sign`.
+- Schema: optional `rules.inn.patron_flags [flag]`: no patron comes until ANY of these flags is set (any, not all,
+  so one cancelled event does not keep the inn empty forever). Canon NPC guests are not gated. Data:
+  `wandering_inn.has_regulars` (new flag on `b1.inn_first_regulars`, 1.21, day 15) and `wandering_inn.full_house`.
+- Schema: optional `rules.inn.race_flags {race: flag}`: a race weighs 0 while its flag is not set. Data: Goblin
+  patrons (weight 2, a guess) from `goblin_tribe.paying_guests` (1.25, day 19). Goblins stay a patron race after
+  that; later books may want to clear or boycott it.
+- Save v21 -> v22 (user pick): an old save in which `b1.inn_first_regulars` already ran (done, substituted or
+  changed) gets `wandering_inn.has_regulars` on load, so its patrons keep coming.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

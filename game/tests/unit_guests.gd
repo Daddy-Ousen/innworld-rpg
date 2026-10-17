@@ -19,6 +19,7 @@ func before_all() -> void:
 func _game(rep: int = 80, hour: int = 7) -> GameState:
 	var gs := GameState.new_game(SEED, _db)
 	gs.flags["wandering_inn.open"] = true
+	gs.flags["wandering_inn.has_regulars"] = true
 	gs.flags.erase("wandering_inn.destroyed")
 	gs.inn.reputation = rep
 	gs.player.place(INN, Vector2i(12, 11))
@@ -141,6 +142,7 @@ func test_a_boycott_keeps_one_race_away_while_its_flag_is_set() -> void:
 	for s in [1, 2, 3, 4, 5, 6]:
 		var gs := GameState.new_game(SEED + s, _db)
 		gs.flags["wandering_inn.open"] = true
+		gs.flags["wandering_inn.has_regulars"] = true
 		gs.flags["wandering_inn.test_boycott"] = true
 		gs.inn.reputation = 80
 		gs.player.place(INN, Vector2i(12, 11))
@@ -163,6 +165,7 @@ func test_a_boycott_factor_thins_a_race_but_does_not_end_it() -> void:
 	for s in range(1, 13):
 		var gs := GameState.new_game(SEED + s, _db)
 		gs.flags["wandering_inn.open"] = true
+		gs.flags["wandering_inn.has_regulars"] = true
 		gs.flags["wandering_inn.test_boycott"] = true
 		gs.inn.reputation = 80
 		gs.player.place(INN, Vector2i(12, 11))
@@ -182,6 +185,7 @@ func test_with_every_race_boycotted_nobody_comes() -> void:
 	_db.rules["inn"] = rules
 	var gs := GameState.new_game(SEED, _db)
 	gs.flags["wandering_inn.open"] = true
+	gs.flags["wandering_inn.has_regulars"] = true
 	gs.flags["wandering_inn.test_boycott"] = true
 	gs.inn.reputation = 80
 	gs.player.place(INN, Vector2i(12, 11))
@@ -404,3 +408,60 @@ func test_the_view_draws_patrons() -> void:
 	v.refresh(gs)
 	for g in gs.inn.guests:
 		assert_not_null(v.npcs.get_node_or_null(NodePath("guest_" + String(g["id"]))), g["id"])
+
+
+# --- M29.1: first guests (ADR 0044) -----------------------------------------
+
+## A game at 7:00 on day 1 in the open inn, with `flags` set (no has_regulars unless given).
+func _game_with(flags: Array, seed_add: int = 0) -> GameState:
+	var gs := GameState.new_game(SEED + seed_add, _db)
+	gs.flags.erase("wandering_inn.destroyed")
+	gs.flags["wandering_inn.open"] = true
+	for f: String in flags:
+		gs.flags[f] = true
+	gs.inn.reputation = 80
+	gs.player.place(INN, Vector2i(12, 11))
+	_to_hour(gs, 7)
+	return gs
+
+
+func test_no_patrons_before_the_inn_has_regulars() -> void:
+	assert_false(Guests.patrons_come(_game_with([]), _db))
+	for s in [0, 1, 2, 3]:
+		assert_eq(_game_with([], s).inn.guests.size(), 0, "day-5 inn: nobody comes (seed %d)" % s)
+	assert_gt(_game_with(["wandering_inn.has_regulars"]).inn.guests.size(), 0, "regulars: patrons come")
+	assert_gt(_game_with(["wandering_inn.full_house"]).inn.guests.size(), 0, "any listed flag will do")
+
+
+func test_goblin_patrons_only_once_goblins_pay() -> void:
+	var seen_without := 0
+	var seen_with := 0
+	for s in range(0, 12):
+		seen_without += int(_races(_game_with(["wandering_inn.has_regulars"], s)).get("goblin", 0))
+		seen_with += int(_races(_game_with(["wandering_inn.has_regulars", "goblin_tribe.paying_guests"], s)).get("goblin", 0))
+	assert_eq(seen_without, 0, "no Goblin patrons before Rags pays (1.25)")
+	assert_gt(seen_with, 0, "Goblin patrons after")
+
+
+func test_bad_patron_and_race_flags_are_errors() -> void:
+	var good: Dictionary = _db.rules["inn"]
+	var bad := good.duplicate(true)
+	bad["patron_flags"] = [""]
+	bad["race_flags"] = {"elf": "x", "drake": ""}
+	_db.rules["inn"] = bad
+	var errs := Guests.validate(_db)
+	_db.rules["inn"] = good
+	assert_eq(errs.size(), 3, str(errs))
+
+
+func test_v21_save_after_the_regulars_event_gets_the_flag() -> void:
+	var ran := {"save_version": 21, "flags": {"wandering_inn.open": true},
+		"world": {"history": [{"day": 15, "event": "b1.inn_first_regulars", "outcome": "done", "roles": {}}]}}
+	var out := SaveMigrations.migrate(ran)
+	assert_eq(int(out["save_version"]), GameState.SAVE_VERSION)
+	assert_true(out["flags"].has("wandering_inn.has_regulars"), "the event ran: regulars")
+	var early := {"save_version": 21, "flags": {}, "world": {"history": [
+		{"day": 15, "event": "b1.inn_first_regulars", "outcome": "cancelled", "roles": {}}]}}
+	assert_false(SaveMigrations.migrate(early)["flags"].has("wandering_inn.has_regulars"), "cancelled: none")
+	assert_false(SaveMigrations.migrate({"save_version": 21, "flags": {}, "world": {"history": []}})["flags"]
+			.has("wandering_inn.has_regulars"), "before day 15: none")

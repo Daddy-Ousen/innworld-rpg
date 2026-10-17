@@ -125,7 +125,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_class_system`, `unit_breakthrough`, `unit_console`, `unit_night`, `unit_journal`, `unit_no_xp_shown`,
   `unit_interact` pass; validator books 1 – 8: 0 errors. Full suite not run.
   - [ ] The user looks at the first night's System page (`godot --path game`).
-- [ ] M29.1 inn name, signs, first guests (two schema asks first).
+- [x] M29.0 merged ([PR #202](https://github.com/Daddy-Ousen/innworld-rpg/pull/202)).
+- [x] M29.1 inn name, signs, first guests (2026-10-17, branch `feat/m29.1-inn-name`). User picks: location
+  `names [{flag, name}]` + `CanonDb.location_name`; `rules.inn.patron_flags` (any of) + `rules.inn.race_flags`;
+  save v22 migration (sets `wandering_inn.has_regulars` if `b1.inn_first_regulars` ran). Signs by flag (data).
+  Goblin patrons weight 2 (guess). Detail in ADR 0044 "M29.1". Tests: `unit_inn_name` (new, 5), `unit_guests`
+  (+4), `sim_inn_service`, `unit_map_db`, `unit_ground_art`, `unit_sign_art`, `unit_other_maps`, `unit_hud_log`,
+  `unit_system_messages`, `unit_console`, `unit_canon_db`, `unit_standing`, `sim_canon_book1`, `unit_game_state`,
+  `unit_npc_levels` pass; validator books 1 – 8: 0 errors; Python 117 OK. Full suite not run.
+  - [ ] The user looks at the inn on day 1 and day 14, and sees no patrons before day 15 (`godot --path game`).
+- [ ] M29.2 Liscor is wary of Humans (schema ask first).
 
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 

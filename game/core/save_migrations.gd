@@ -37,6 +37,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			18: out = _migrate_18_to_19(out)
 			19: out = _migrate_19_to_20(out)
 			20: out = _migrate_20_to_21(out)
+			21: out = _migrate_21_to_22(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -219,4 +220,16 @@ static func _migrate_20_to_21(d: Dictionary) -> Dictionary:
 	var w: Dictionary = d.get("world", {})
 	w["npc_levels"] = {}
 	d["world"] = w
+	return d
+
+
+## v22 (M29.1, ADR 0044): patrons wait for the flag wandering_inn.has_regulars, which the
+## day-15 event b1.inn_first_regulars now sets. A save made after that event ran gets the flag.
+static func _migrate_21_to_22(d: Dictionary) -> Dictionary:
+	for h: Variant in d.get("world", {}).get("history", []):
+		if h is Dictionary and String(h.get("event", "")) == "b1.inn_first_regulars" \
+				and ["done", "substituted", "changed"].has(String(h.get("outcome", ""))):
+			var flags: Dictionary = d.get("flags", {})
+			flags["wandering_inn.has_regulars"] = true
+			d["flags"] = flags
 	return d

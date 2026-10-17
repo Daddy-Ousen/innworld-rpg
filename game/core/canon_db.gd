@@ -366,6 +366,17 @@ func _build_book_start() -> void:
 			book_start[book] = day
 
 
+## The place's name now (M29.1, ADR 0044): the last entry of its optional `names`
+## [{flag, name}] whose flag is set, else its `name`. An unknown id comes back as is.
+func location_name(flags: Dictionary, id: String) -> String:
+	var loc: Dictionary = locations.get(id, {})
+	var out := String(loc.get("name", id))
+	for n: Dictionary in loc.get("names", []):
+		if flags.has(n.get("flag", "")):
+			out = String(n["name"])
+	return out
+
+
 ## The first day of the NPC's book (canon_ref.book); 0 = no book or no events.
 func first_day_of(npc: String) -> int:
 	var ref: Variant = npcs.get(npc, {}).get("canon_ref")

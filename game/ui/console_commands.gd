@@ -280,7 +280,7 @@ func _where() -> Array[String]:
 		return out
 	var p := gs.player
 	var place := Movement.location_at(gs, db)
-	var place_name: String = db.canon.locations.get(place, {}).get("name", place)
+	var place_name := db.canon.location_name(gs.flags, place)
 	out.append("%s (%s) at %d,%d, facing %s. %s." % [db.maps.areas[p.area]["name"], p.area,
 			p.x, p.y, p.facing, place_name])
 	out.append("Day %d, %s." % [gs.clock.day(), gs.clock.time_string()])

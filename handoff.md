@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-10-17, local): M29.1 inn name, signs, first guests (branch `feat/m29.1-inn-name`)
+- Schema (user picks): canon location `names [{flag, name}]` -> `CanonDb.location_name(flags, id)` (used by
+  `ui/hud.gd`, `ui/system_messages.gd` knock-out page, `ui/console_commands.gd` `where`); validator + Python test.
+  `rules.inn.patron_flags` (ANY of) and `rules.inn.race_flags {race: flag}` in `core/guests.gd` (`patrons_come`,
+  `race_weights`, `validate`). Save v22: `_migrate_21_to_22` sets `wandering_inn.has_regulars` when
+  `b1.inn_first_regulars` ran.
+- Data: `canon/book1/locations.json` (inn names), `chapters/1.21.json` (+flag `wandering_inn.has_regulars`),
+  `rules.json` (goblin patrons 2, gates), `maps/inn_hill.json` (door sign "Inn", plaque `inn_name_sign`, board by flag).
+- Tests: list in `progress.md` M29.1 line. All pass. Full suite not run.
+- Next: user merges the PR. Then M29.2 Liscor is wary of Humans **[Opus · medium]**: ask the
+  `rules.standing.race_regard` schema question first.
+- Gotchas: a test that wants patrons with real data must set `wandering_inn.has_regulars` (see `unit_guests._game`).
+  `sim_inn_service` plays days 8 – 14 and sets the flag by hand. Goblins stay a patron race after day 19 (no end
+  flag yet). In a loop of several Godot runs in one Bash call, some runs died with no output once; rerunning them
+  alone worked. The Bash heredoc ate a `\` line end again: write patch scripts with the Write tool.
+
 ## Just done (2026-10-17, local): M29.0 the System speaks like the books (branch `feat/m29.0-system-voice`)
 - New `game/core/system_voice.gd` (`SystemVoice`): every System line goes through it. Changed callers:
   `core/night.gd` (level, Skill, offer log line), `core/class_system.gd` (accept, consolidation, neglect, loss),
@@ -261,7 +277,7 @@
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken's days: game day = his journal day + 45 in every book (ADR 0028).
   Geneva, Niers (3.22L) and Venitra use placeholder days.
-- Save is v21 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
+- Save is v22 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: Book 6+ chapter files carry `"order"`; events then run in chapter order and file order
   (M18.0). Books 1 – 5 still run in id order. Use `depends_on` only for a real dependency (a cancel spreads).
   Siblings that share one dependency run in that order too, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.

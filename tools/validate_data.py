@@ -167,9 +167,20 @@ def check_npc(r: Report, where: str, npc, book: int, chapters) -> None:
 
 def check_location(r: Report, where: str, loc, book: int, chapters) -> None:
     req = {"name", "kind", "parent", "tags", "status", "canon_ref", "summary"}
-    if not _keys(r, where, loc, req):
+    if not _keys(r, where, loc, req, {"names"}):
         return
     _str(r, f"{where}.name", loc["name"], 80)
+    # M29.1: optional later names, each shown while its flag is set (the last set one wins).
+    if "names" in loc:
+        if not isinstance(loc["names"], list) or not loc["names"]:
+            r.err(f"{where}.names", "must be a non-empty list of {flag, name}")
+        else:
+            for i, n in enumerate(loc["names"]):
+                w = f"{where}.names[{i}]"
+                if _keys(r, w, n, {"flag", "name"}):
+                    if not (isinstance(n["flag"], str) and RE_FLAG.match(n["flag"])):
+                        r.err(f"{w}.flag", "must be a flag id")
+                    _str(r, f"{w}.name", n["name"], 80)
     if loc["kind"] not in LOCATION_KINDS:
         r.err(f"{where}.kind", f"must be one of {sorted(LOCATION_KINDS)}")
     if loc["parent"] is not None and not (isinstance(loc["parent"], str) and RE_ID.match(loc["parent"])):

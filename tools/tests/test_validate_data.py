@@ -236,6 +236,18 @@ class ValidateTest(unittest.TestCase):
         self.fx.data["locations.json"]["locations"]["hut"]["parent"] = "moon"
         self.assertError(self.fx.run(), "unknown location 'moon'")
 
+    def test_location_names_by_flag(self):
+        hut = self.fx.data["locations.json"]["locations"]["hut"]
+        hut["names"] = [{"flag": "hut.named", "name": "The Hut"}]
+        self.assertEqual(self.fx.run().errors, [])
+        hut["names"] = [{"flag": "Bad Flag", "name": ""}, {"name": "x"}]
+        rep = self.fx.run()
+        self.assertError(rep, "names[0].flag")
+        self.assertError(rep, "names[0].name")
+        self.assertError(rep, "names[1]: missing key 'flag'")
+        hut["names"] = []
+        self.assertError(self.fx.run(), "must be a non-empty list")
+
     def test_summary_length(self):
         self.ev()["summary"] = "x" * (vd.SUMMARY_MAX + 1)
         self.assertError(self.fx.run(), "too long")

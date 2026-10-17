@@ -123,7 +123,8 @@ static func knockout_page(gs: GameState, db: DataDb) -> Dictionary:
 	var place := gs.player.area
 	if db.maps.areas.has(place):
 		var loc := Movement.location_at(gs, db)
-		place = db.canon.locations.get(loc, {}).get("name", db.maps.areas[place]["name"])
+		place = db.canon.location_name(gs.flags, loc) if db.canon.locations.has(loc) \
+				else String(db.maps.areas[place]["name"])
 	return page(KNOCKOUT, "Knocked Out", [Night.KNOCKOUT_LINE,
 		"You wake at %s with %d HP." % [place, Combat.hp(gs, db)]])
 

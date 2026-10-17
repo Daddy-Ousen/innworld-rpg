@@ -17,7 +17,7 @@
 			"depends_on": ["b1.erin_names_the_inn"],
 			"on_fail": ["cancel"],
 			"effects": {
-				"set_flags": ["wandering_inn.new_door", "erin.knows_antinium_diet", "pisces.runs_a_tab"],
+				"set_flags": ["wandering_inn.new_door", "erin.knows_antinium_diet", "pisces.runs_a_tab", "wandering_inn.has_regulars"],
 				"clear_flags": ["wandering_inn.door_boarded"]
 			},
 			"news": "The Wandering Inn has regulars now: Relc, Klbkch, and a thin Human mage who eats on credit.",
