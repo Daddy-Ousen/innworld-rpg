@@ -1,5 +1,2327 @@
 {
 	"schema_version": 1,
 	"note": "M30 (ADR 0044 \"M30.0\"). NPC voices: canon NPC id -> {confidence, canon_ref?, greet {band: [text]}, idle [text], lines [{text, flags?, not_flags?, days?, min_band?}], options [{id, label, action, context?, flags?, not_flags?, days?, min_band?}]}. Own words only, no book quotes. The cast comes in M30.2 and M30.3.",
-	"voices": {}
+	"voices": {
+		"erin_solstice": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.01"
+			},
+			"greet": {
+				"stranger": [
+					"Oh! Hi. Sorry, I talk to myself a lot. Are you hungry?",
+					"Hello! Welcome. Don't mind the mess. I'm still fixing the place up."
+				],
+				"wary": [
+					"Oh. Um. Hi. Please don't be mad at me."
+				],
+				"acquaintance": [
+					"Hey, you came back! Sit anywhere. Most of the chairs work.",
+					"Hi again! I was hoping someone friendly would show up."
+				],
+				"friend": [
+					"There you are! I was getting lonely. Sit, sit, tell me everything.",
+					"My favourite customer! Don't tell the others I said that."
+				],
+				"close friend": [
+					"Hey, you. I'm really glad you're here. Stay a while.",
+					"Come in, come in. This place feels better with you in it."
+				]
+			},
+			"idle": [
+				"[Erin mutters to herself about a chess opening.]",
+				"Who wants pasta?",
+				"Hmm. Knight to... no, wait.",
+				"[Erin scrubs a table, humming.]",
+				"Don't walk the floodplains without a plan!"
+			],
+			"lines": [
+				{
+					"text": "I cook too much pasta and eat it alone. Please eat some.",
+					"flags": [
+						"wandering_inn.open"
+					],
+					"not_flags": [
+						"wandering_inn.has_regulars"
+					]
+				},
+				{
+					"text": "I killed a Goblin chieftain. I'd rather not talk about it.",
+					"flags": [
+						"erin.killed_chieftain"
+					],
+					"days": [
+						9,
+						20
+					]
+				},
+				{
+					"text": "Klbkch died to save me. I can't stop thinking about it.",
+					"flags": [
+						"klbkch.died_saving_erin"
+					],
+					"not_flags": [
+						"klbkch.reborn"
+					]
+				},
+				{
+					"text": "Pisces owes me a huge tab. I'm keeping count.",
+					"flags": [
+						"pisces.runs_a_tab"
+					],
+					"not_flags": [
+						"pisces.tab_paid"
+					]
+				},
+				{
+					"text": "Toren cleans the whole inn. Skeletons make great staff.",
+					"flags": [
+						"toren.named"
+					]
+				},
+				{
+					"text": "We held the door. The inn is a wreck, but we're alive.",
+					"flags": [
+						"skinner.dead"
+					]
+				},
+				{
+					"text": "Klbkch is alive again. I keep checking that he's real.",
+					"flags": [
+						"klbkch.reborn"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "work",
+					"label": "Offer to help Erin serve",
+					"action": "serve_guests",
+					"flags": [
+						"wandering_inn.open"
+					]
+				},
+				{
+					"id": "chess",
+					"label": "Ask Erin for a game of chess",
+					"action": "play_chess",
+					"context": {
+						"opponent_skill": 0.95
+					},
+					"min_band": "acquaintance"
+				},
+				{
+					"id": "inn",
+					"label": "Ask Erin about the inn",
+					"action": "talk_with_guest"
+				}
+			]
+		},
+		"relc": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.04"
+			},
+			"greet": {
+				"stranger": [
+					"Hey! Human, right? Keep your hands where I can see them. Joking! Mostly.",
+					"Oi, new face. Stay out of trouble and we'll get along."
+				],
+				"wary": [
+					"I'm busy. Take it to the Watch house."
+				],
+				"acquaintance": [
+					"Oh, it's you! Seen any Rock Crabs worth stabbing?",
+					"Hey! Good timing. I'm bored and hungry."
+				],
+				"friend": [
+					"My favourite Human! You buying? I could eat a whole Crab.",
+					"There you are! Walk with me. I'll tell you about my last fight."
+				],
+				"close friend": [
+					"Pull up a chair. Tell me everything, and bring food.",
+					"You're good people. I'd throw a spear for you."
+				]
+			},
+			"idle": [
+				"Don't you dare call me a lizard.",
+				"I could eat a whole cow.",
+				"Never missed a throw yet!",
+				"Another quiet day. Boring.",
+				"[Relc spins his spear lazily.]"
+			],
+			"lines": [
+				{
+					"text": "That inn girl threw me out. Over Goblins! They're monsters.",
+					"flags": [
+						"erin.threw_out_relc"
+					],
+					"not_flags": [
+						"relc.made_peace_with_erin"
+					]
+				},
+				{
+					"text": "Klbkch is gone. My partner, gone. I keep turning to talk to him.",
+					"flags": [
+						"klbkch.died_saving_erin"
+					],
+					"not_flags": [
+						"klbkch.reborn"
+					]
+				},
+				{
+					"text": "A Human outran me. I'm not saying another word about it.",
+					"flags": [
+						"relc.outrun_by_human"
+					]
+				},
+				{
+					"text": "Fine, the inn girl is alright. Don't tell her I said that.",
+					"flags": [
+						"relc.made_peace_with_erin"
+					]
+				},
+				{
+					"text": "Klbkch is back! Don't tell him I cried. Nobody saw anything.",
+					"flags": [
+						"klbkch.reborn"
+					]
+				},
+				{
+					"text": "That skeleton fight was something. My arms still ache.",
+					"flags": [
+						"skinner.dead"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "spar",
+					"label": "Ask Relc to spar",
+					"action": "weapon_practice",
+					"min_band": "acquaintance"
+				}
+			]
+		},
+		"klbkch": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.06"
+			},
+			"greet": {
+				"stranger": [
+					"Citizen. State your business, or move along.",
+					"Greetings. Please keep to the law while in Liscor."
+				],
+				"wary": [
+					"I am watching you. Do not break the law."
+				],
+				"acquaintance": [
+					"Greetings. I trust the inn is in order.",
+					"Good day. Your presence is noted."
+				],
+				"friend": [
+					"Good day. I find your conversation acceptable.",
+					"Welcome. You are a calm presence. This is useful."
+				],
+				"close friend": [
+					"You are a friend to this Antinium. This is rare.",
+					"I am glad to see you. I do not say this lightly."
+				]
+			},
+			"idle": [
+				"[Klbkch watches the street with four arms folded.]",
+				"Order must be kept.",
+				"[Klbkch adjusts his swords.]",
+				"The Hive endures."
+			],
+			"lines": [
+				{
+					"text": "Acid flies are excellent food. I will say no more.",
+					"flags": [
+						"klbkch.loves_acid_flies"
+					]
+				},
+				{
+					"text": "Ten years in the Watch. A badge is a small thing. I keep it.",
+					"flags": [
+						"klbkch.ten_year_badge"
+					]
+				},
+				{
+					"text": "I am Klbkch again. Some of me is new. The work remains.",
+					"flags": [
+						"klbkch.reborn"
+					]
+				}
+			]
+		},
+		"zevara": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.07"
+			},
+			"greet": {
+				"stranger": [
+					"Captain Zevara. Do you have business with the Watch?",
+					"State your name. I like to know who walks my streets."
+				],
+				"wary": [
+					"Humans. Stay out of trouble in my city.",
+					"I have my eye on you. Behave."
+				],
+				"acquaintance": [
+					"You again. Stay out of trouble.",
+					"Good. At least you do not bring me paperwork."
+				],
+				"friend": [
+					"Good. Some Humans do keep the peace.",
+					"Walk with me a moment. I would like your view."
+				],
+				"close friend": [
+					"I trust your word. Few people get that from me.",
+					"Welcome. The city is safer with you in it."
+				]
+			},
+			"idle": [
+				"Where is Relc?",
+				"Paperwork never ends.",
+				"[Zevara studies the street with sharp purple eyes.]",
+				"Report to me, not to rumours."
+			],
+			"lines": [
+				{
+					"text": "There is a Human necromancer out there. Tell me if you see him.",
+					"flags": [
+						"liscor.hunting_pisces"
+					],
+					"not_flags": [
+						"pisces.welcome_in_liscor"
+					]
+				},
+				{
+					"text": "Klbkch is dead. I do not forgive that easily.",
+					"flags": [
+						"zevara.blames_erin"
+					],
+					"not_flags": [
+						"klbkch.reborn"
+					]
+				},
+				{
+					"text": "I breathed fire on the dead. I would rather not do it again.",
+					"flags": [
+						"zevara.breathed_fire"
+					]
+				},
+				{
+					"text": "The undead are gone. Count the cost, then rebuild.",
+					"flags": [
+						"skinner.dead"
+					]
+				}
+			]
+		},
+		"beilmark": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.05"
+			},
+			"greet": {
+				"stranger": [
+					"Name and business. I can smell where you have been.",
+					"Halt. State your business in Liscor."
+				],
+				"wary": [
+					"Keep your hands visible. I am watching."
+				],
+				"acquaintance": [
+					"You smell of pasta and woodsmoke. The inn, yes?",
+					"Welcome back. Quiet day at the gate."
+				],
+				"friend": [
+					"Good to see you. My cubs would love your stories.",
+					"Ah, a friendly scent. Come, walk with me."
+				],
+				"close friend": [
+					"You are family to my nose now. Welcome home.",
+					"I am glad you are safe. Stay well."
+				]
+			},
+			"idle": [
+				"[Beilmark sniffs the wind.]",
+				"Smoke on the breeze.",
+				"Quiet shift. Good.",
+				"[Beilmark scans the hills.]"
+			],
+			"lines": [
+				{
+					"text": "I smelled smoke from the old inn. Somebody lives there now.",
+					"flags": [
+						"liscor.watch_knows_inn_occupied"
+					],
+					"days": [
+						5,
+						12
+					]
+				},
+				{
+					"text": "Pasta smoke from the hill again. It makes me hungry on watch.",
+					"flags": [
+						"wandering_inn.serves_pasta"
+					]
+				},
+				{
+					"text": "The dead stank of old graves. I will never forget it.",
+					"flags": [
+						"liscor.undead_siege"
+					]
+				}
+			]
+		},
+		"pisces": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.09"
+			},
+			"greet": {
+				"stranger": [
+					"Do you know who I am? No. Of course you do not.",
+					"Ah. A commoner approaches. Speak quickly; my time is precious."
+				],
+				"wary": [
+					"I suppose you have come to arrest me. How tedious."
+				],
+				"acquaintance": [
+					"Oh, it is you. I suppose I can spare a moment.",
+					"Ah, a familiar face. Do try not to bore me."
+				],
+				"friend": [
+					"You are, I admit, less tiresome than most. Do sit.",
+					"A pleasure. Of a sort. Please, speak."
+				],
+				"close friend": [
+					"I will say this once: your company is a pleasure.",
+					"You are the only one here worth talking to."
+				]
+			},
+			"idle": [
+				"[Pisces examines his filthy sleeve with disgust.]",
+				"Magic is wasted on peasants.",
+				"I require a bath. And wine.",
+				"[Pisces mutters an incantation under his breath.]"
+			],
+			"lines": [
+				{
+					"text": "There is a bounty on my head. A misunderstanding, naturally.",
+					"flags": [
+						"pisces.exposed_necromancer"
+					],
+					"not_flags": [
+						"pisces.welcome_in_liscor"
+					]
+				},
+				{
+					"text": "Erin spared me when no one else would. I do not forget.",
+					"flags": [
+						"pisces.spared_by_erin"
+					]
+				},
+				{
+					"text": "My tab is a trifle. I shall settle it eventually.",
+					"flags": [
+						"pisces.runs_a_tab"
+					],
+					"not_flags": [
+						"pisces.tab_paid"
+					]
+				},
+				{
+					"text": "My tab is paid. You may stop looking at me like that.",
+					"flags": [
+						"pisces.tab_paid"
+					]
+				},
+				{
+					"text": "I fought for this wretched city. I expect some gratitude.",
+					"flags": [
+						"pisces.fought_for_liscor"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "magic",
+					"label": "Ask Pisces about magic",
+					"action": "talk_with_guest",
+					"min_band": "acquaintance"
+				}
+			]
+		},
+		"olesm": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.13"
+			},
+			"greet": {
+				"stranger": [
+					"Hello! Excuse my claws, I just finished writing. Do you play chess?",
+					"Oh, hello. Are you new in Liscor?"
+				],
+				"wary": [
+					"Oh. Um. Hello. I should go."
+				],
+				"acquaintance": [
+					"Oh, good day! I was just thinking about my last game.",
+					"Hello again! Chess on your mind too?"
+				],
+				"friend": [
+					"Hello! I have a new opening to try. Shall we play?",
+					"Good to see you! Sit, I'll set the board."
+				],
+				"close friend": [
+					"My best opponent is also my friend. Lucky me.",
+					"I hoped you would come. Sit, sit, I have so much to say."
+				]
+			},
+			"idle": [
+				"[Olesm taps a claw on an imaginary chessboard.]",
+				"If I move the knight there...",
+				"Perhaps a game later?",
+				"[Olesm blots a page, flustered.]"
+			],
+			"lines": [
+				{
+					"text": "I lost to Erin. It was the best game I ever lost.",
+					"flags": [
+						"erin.won_money_back"
+					],
+					"days": [
+						13,
+						60
+					]
+				},
+				{
+					"text": "I am working on Erin's puzzle. It is wonderful and maddening.",
+					"flags": [
+						"olesm.copies_erins_puzzle"
+					],
+					"not_flags": [
+						"olesm.solved_erins_puzzle"
+					]
+				},
+				{
+					"text": "I solved Erin's puzzle! Do not tell me I was slow.",
+					"flags": [
+						"olesm.solved_erins_puzzle"
+					]
+				},
+				{
+					"text": "I am going into the ruins. Please do not tell my uncle.",
+					"flags": [
+						"olesm.joined_expedition"
+					],
+					"days": [
+						38,
+						39
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "chess",
+					"label": "Ask Olesm for a game of chess",
+					"action": "play_chess",
+					"context": {
+						"opponent_skill": 0.85
+					}
+				}
+			]
+		},
+		"selys": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.07"
+			},
+			"greet": {
+				"stranger": [
+					"Welcome to the Adventurer's Guild! How can I help?",
+					"Hello! First time here? Ask me anything."
+				],
+				"wary": [
+					"Oh. Hello. Um. What do you need?"
+				],
+				"acquaintance": [
+					"Hello again! Need a job, a map, or just a chat?",
+					"Oh, hi! Good to see a friendly face."
+				],
+				"friend": [
+					"Oh, good, you're here! Sit, tell me all the gossip.",
+					"Hey, you! My shift just got a lot better."
+				],
+				"close friend": [
+					"You're the best part of my shift, honestly.",
+					"Come here, come here! I have so much to tell you."
+				]
+			},
+			"idle": [
+				"[Selys shuffles papers at the desk.]",
+				"Adventurers never read the notice board.",
+				"Next, please!",
+				"Need directions?"
+			],
+			"lines": [
+				{
+					"text": "So many adventurers since the ruins opened. Paperwork everywhere.",
+					"flags": [
+						"liscor.adventurer_influx"
+					]
+				},
+				{
+					"text": "I drew Erin a map of Izril. She didn't know where anything was.",
+					"flags": [
+						"erin.knows_izril_map"
+					]
+				},
+				{
+					"text": "I fought the dead on Market Street. My claws still shake.",
+					"flags": [
+						"selys.killed_undead"
+					]
+				}
+			]
+		},
+		"krshia": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.07"
+			},
+			"greet": {
+				"stranger": [
+					"You there! Fine goods, fair prices. Come, look, buy!",
+					"Welcome, welcome! Don't be shy. Everything is good value."
+				],
+				"wary": [
+					"Look, but keep your hands to yourself."
+				],
+				"acquaintance": [
+					"Back again! Good. I kept the best of today's goods for you.",
+					"Ah, you return. A sensible customer."
+				],
+				"friend": [
+					"My friend! No haggling today. Well, a little.",
+					"Welcome! Sit, sit. Tell me the news."
+				],
+				"close friend": [
+					"For you, honest prices. Don't tell the other Gnolls.",
+					"You are pack to me now. Eat, then we talk."
+				]
+			},
+			"idle": [
+				"Fresh goods, honest prices!",
+				"Come, come, look!",
+				"[Krshia sniffs a crate and nods.]",
+				"Lism, stop cheating people!"
+			],
+			"lines": [
+				{
+					"text": "Lism overcharges Humans. I told him to stop. He did not.",
+					"flags": [
+						"erin.cheated_in_market"
+					]
+				},
+				{
+					"text": "Erin is a friend now. She buys, she laughs, she does not cheat.",
+					"flags": [
+						"erin.friend_of_krshia"
+					]
+				},
+				{
+					"text": "Half the market burned. People blame Humans. I blame whoever lit it.",
+					"flags": [
+						"liscor_market.half_burned"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "haggle",
+					"label": "Haggle with Krshia",
+					"action": "haggle"
+				}
+			]
+		},
+		"lism": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.08"
+			},
+			"greet": {
+				"stranger": [
+					"What do you want? Buy something or move along.",
+					"Flour, salt, sugar. Coin first, talk later."
+				],
+				"wary": [
+					"A Human. Expect Human prices.",
+					"Hm. Your kind pays more here. Don't complain."
+				],
+				"acquaintance": [
+					"Hm. You again. Flour is flour. No discounts.",
+					"Back? Fine. What do you need?"
+				],
+				"friend": [
+					"You are not the worst Human. Don't spread it around.",
+					"Hm. Fine. I'll give you a fair price. Once."
+				],
+				"close friend": [
+					"Fine. You get the good price. Do not make me regret it.",
+					"Sit. Do not touch the chess sets."
+				]
+			},
+			"idle": [
+				"Flour! Salt! Sugar!",
+				"Chess sets, best in Liscor!",
+				"No haggling, no credit.",
+				"[Lism counts his coins twice.]"
+			],
+			"lines": [
+				{
+					"text": "Prices are prices. If a Human pays more, that is her problem.",
+					"flags": [
+						"erin.cheated_in_market"
+					],
+					"not_flags": [
+						"erin.won_money_back"
+					]
+				},
+				{
+					"text": "I lost a bet to a Human girl. The coins still hurt.",
+					"flags": [
+						"erin.won_money_back"
+					]
+				},
+				{
+					"text": "I said she stole from me. I still believe it.",
+					"flags": [
+						"erin.accused_of_theft"
+					]
+				}
+			]
+		},
+		"ryoka_griffin": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.12"
+			},
+			"greet": {
+				"stranger": [
+					"I'm in a hurry. What?",
+					"Don't talk to me. I'm busy."
+				],
+				"wary": [
+					"Back off. I don't need company."
+				],
+				"acquaintance": [
+					"Fine, ask. Quickly.",
+					"Yeah? What now?"
+				],
+				"friend": [
+					"You can have a minute. One.",
+					"Hey. Okay. Talk."
+				],
+				"close friend": [
+					"You're one of the few people I like. Don't get used to it.",
+					"Sit. I'll even stop moving for you."
+				]
+			},
+			"idle": [
+				"[Ryoka stretches her bare feet.]",
+				"I need to run.",
+				"[Ryoka scans the road ahead.]",
+				"No small talk."
+			],
+			"lines": [
+				{
+					"text": "My leg was broken on purpose. I'm fine. I'm fine.",
+					"flags": [
+						"ryoka.leg_crushed"
+					],
+					"not_flags": [
+						"ryoka.leg_healed"
+					]
+				},
+				{
+					"text": "I can run again. I forgot how good that feels.",
+					"flags": [
+						"ryoka.leg_healed"
+					]
+				},
+				{
+					"text": "Everyone says the High Passes kill Runners. I'll go anyway.",
+					"flags": [
+						"ryoka.took_high_passes_request"
+					],
+					"not_flags": [
+						"ryoka.survived_high_passes"
+					]
+				},
+				{
+					"text": "I saw something in the mountains. I'm not talking about it.",
+					"flags": [
+						"ryoka.survived_high_passes"
+					]
+				},
+				{
+					"text": "Someone put a command in my head. I hate it.",
+					"flags": [
+						"ryoka.geas_to_find_azkerash"
+					],
+					"not_flags": [
+						"ryoka.geas_broken"
+					]
+				},
+				{
+					"text": "The command is gone. I broke it. Never again.",
+					"flags": [
+						"ryoka.geas_broken"
+					]
+				}
+			]
+		},
+		"ceria_springwalker": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.15"
+			},
+			"greet": {
+				"stranger": [
+					"Hm? Speak up. I'm tired and I'd like a drink.",
+					"Yes? Be quick. Ice mages get grumpy when they wait."
+				],
+				"wary": [
+					"I'd rather you kept your distance."
+				],
+				"acquaintance": [
+					"Oh, you're the one from the inn. Hello.",
+					"Well. You again. Fine, sit."
+				],
+				"friend": [
+					"Good to see you. Sit, drink with me.",
+					"There you are. Tell me something that isn't about monsters."
+				],
+				"close friend": [
+					"You're a friend of the Horns. Remember that.",
+					"Come on, sit. You're always welcome at our table."
+				]
+			},
+			"idle": [
+				"[Ceria rubs frost off her fingers.]",
+				"Someone buy me a drink.",
+				"My team is slow today.",
+				"I'm older than I look."
+			],
+			"lines": [
+				{
+					"text": "Pisces and I have history. I would rather not talk about it.",
+					"flags": [
+						"ceria.met_pisces_again"
+					]
+				},
+				{
+					"text": "Erin's inn is warm and the food is good. We stay.",
+					"flags": [
+						"horns_of_hammerad.stay_at_inn"
+					]
+				},
+				{
+					"text": "We go into the ruins at dawn. Wish us luck.",
+					"flags": [
+						"ruins_expedition.leave_at_dawn"
+					],
+					"days": [
+						38,
+						39
+					]
+				}
+			]
+		},
+		"pawn": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.21"
+			},
+			"greet": {
+				"stranger": [
+					"Greetings. I clean the inn. I watch the chess.",
+					"Hello. I am... a Worker. Hello."
+				],
+				"wary": [
+					"I will keep away. I do not wish trouble."
+				],
+				"acquaintance": [
+					"Hello again. I have thought about chess all day.",
+					"Good day. I am glad you came."
+				],
+				"friend": [
+					"Hello, friend. I... like this word.",
+					"You are kind. I did not expect that."
+				],
+				"close friend": [
+					"You are a friend to me. I did not know I could have one.",
+					"I am glad you are here. It matters to me."
+				]
+			},
+			"idle": [
+				"[Pawn cleans the floor in silence.]",
+				"[Pawn watches a chessboard.]",
+				"Chess... good.",
+				"[Pawn tilts his head.]"
+			],
+			"lines": [
+				{
+					"text": "My name is Pawn. I chose it myself. It still feels strange.",
+					"flags": [
+						"pawn.named"
+					]
+				},
+				{
+					"text": "Klbkch is gone. I feel it in my chest. It is called sad.",
+					"flags": [
+						"pawn.individual"
+					],
+					"not_flags": [
+						"klbkch.reborn"
+					]
+				},
+				{
+					"text": "I lost an antenna. I was judged, and I lived. I am still me.",
+					"flags": [
+						"pawn.maimed"
+					]
+				}
+			]
+		},
+		"rags": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.00"
+			},
+			"greet": {
+				"stranger": [
+					"Human. Why you look at Rags?",
+					"You not hit Rags? Good."
+				],
+				"wary": [
+					"Go away, Human. Rags watch you."
+				],
+				"acquaintance": [
+					"Human. Rags not hurt you.",
+					"You again. Rags not run."
+				],
+				"friend": [
+					"Rags like you. You give food.",
+					"Good you come. Rags have things to say."
+				],
+				"close friend": [
+					"You friend. Rags tell tribe. Tribe listen.",
+					"You safe with Rags. Always."
+				]
+			},
+			"idle": [
+				"[Rags counts on her claws.]",
+				"Food? Food good.",
+				"[Rags sniffs a basket.]",
+				"Some blue fruit bad. Rags know which."
+			],
+			"lines": [
+				{
+					"text": "Bad fruit has sign. Rags can see. Rags teach Goblins.",
+					"flags": [
+						"rags.knows_bad_fruit_tell"
+					]
+				},
+				{
+					"text": "Goblins eat at the inn now. Pay with shiny things.",
+					"flags": [
+						"goblin_tribe.paying_guests"
+					]
+				},
+				{
+					"text": "Rags is chief now. Big word. Heavy.",
+					"flags": [
+						"rags.chieftain"
+					]
+				},
+				{
+					"text": "Rags make fire bug. Fire bug burn enemies. Magic! Rags magic!",
+					"flags": [
+						"rags.casts_firefly"
+					]
+				},
+				{
+					"text": "Rags killed the dead thing. Rags is not small now.",
+					"flags": [
+						"rags.killed_skinner"
+					]
+				}
+			]
+		},
+		"toren": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.31"
+			},
+			"greet": {
+				"stranger": [
+					"[Toren stares at you with empty eye sockets.]"
+				],
+				"acquaintance": [
+					"[Toren tilts his skull at you.]"
+				],
+				"friend": [
+					"[Toren rattles happily.]"
+				],
+				"close friend": [
+					"[Toren bows his skull to you.]"
+				]
+			},
+			"idle": [
+				"[Toren dusts a table.]",
+				"[Toren clicks his jaw.]",
+				"[Toren sweeps the floor, bone by bone.]",
+				"[Toren stands guard by the door.]",
+				"[Toren rearranges the chairs.]"
+			],
+			"lines": [
+				{
+					"text": "[Toren stands over Erin, perfectly still.]",
+					"flags": [
+						"toren.guards_erin"
+					]
+				},
+				{
+					"text": "[Toren pushes a pawn forward. He wants a game.]",
+					"flags": [
+						"toren.plays_chess"
+					]
+				},
+				{
+					"text": "[Toren holds out a flat fish and waits.]",
+					"flags": [
+						"toren.hunts_flat_fish"
+					]
+				},
+				{
+					"text": "[Toren shifts. Something clicks inside his ribs.]",
+					"flags": [
+						"toren.hides_skinners_eye"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "chess",
+					"label": "Play chess with Toren",
+					"action": "play_chess",
+					"context": {
+						"opponent_skill": 0.3
+					},
+					"flags": [
+						"toren.plays_chess"
+					]
+				}
+			]
+		},
+		"lyonette": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.30"
+			},
+			"greet": {
+				"stranger": [
+					"Welcome to The Wandering Inn. Please, find a seat. I'll be right with you.",
+					"Good day. May I take your order?"
+				],
+				"wary": [
+					"Oh. I... yes. Can I help you?"
+				],
+				"acquaintance": [
+					"Oh, hello again. Sit anywhere. I'll bring something warm.",
+					"Welcome back. We saved a table for you."
+				],
+				"friend": [
+					"There you are. Sit, sit. I'll fetch your usual.",
+					"Good to see you. Mrsha will want to say hello."
+				],
+				"close friend": [
+					"I'm glad you're here. Truly. Stay as long as you like.",
+					"You feel like family. Come, sit with us."
+				]
+			},
+			"idle": [
+				"[Lyonette wipes a table with sharp, neat strokes.]",
+				"Mrsha, not on the stairs!",
+				"Is someone being served?",
+				"[Lyonette counts coins and frowns.]"
+			],
+			"lines": [
+				{
+					"text": "Erin took me in when I had nothing. I try to earn it.",
+					"flags": [
+						"lyonette.taken_in_by_erin"
+					]
+				},
+				{
+					"text": "I run the inn while Erin is away. It is harder than it looks.",
+					"flags": [
+						"lyonette.runs_the_inn"
+					],
+					"days": [
+						72,
+						90
+					]
+				},
+				{
+					"text": "I never let Mrsha out of my sight. Not again.",
+					"flags": [
+						"lyonette.never_lets_mrsha_out_of_sight"
+					]
+				},
+				{
+					"text": "I trained the new staff myself. They are learning.",
+					"flags": [
+						"lyonette.trains_the_new_staff"
+					]
+				},
+				{
+					"text": "My [Princess] class is gone. I only felt surprise. Perhaps that is the strangest part.",
+					"flags": [
+						"lyonette.lost_her_princess_class"
+					],
+					"not_flags": [
+						"lyonette.princess_class_restored"
+					]
+				},
+				{
+					"text": "My [Princess] class came back changed and took my other classes into it. I feel strange.",
+					"flags": [
+						"lyonette.is_a_worldly_princess"
+					]
+				}
+			]
+		},
+		"mrsha": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.20"
+			},
+			"greet": {
+				"stranger": [
+					"[Mrsha stares at you, white fur bristling.]"
+				],
+				"acquaintance": [
+					"[Mrsha waves a paw and sniffs your hand.]"
+				],
+				"friend": [
+					"[Mrsha bounces over and tugs your sleeve.]"
+				],
+				"close friend": [
+					"[Mrsha jumps into your arms, tail wagging.]"
+				]
+			},
+			"idle": [
+				"[Mrsha chases a bee across the floor.]",
+				"[Mrsha stuffs a cookie into her cheek.]",
+				"[Mrsha rolls under a table.]",
+				"[Mrsha holds up a muddy paw proudly.]"
+			],
+			"lines": [
+				{
+					"text": "[Mrsha glares at you, turns her back and stomps away.]",
+					"flags": [
+						"mrsha.angry_at_erin_over_the_goblins"
+					],
+					"not_flags": [
+						"mrsha.promised_not_to_hurt_the_goblins"
+					]
+				},
+				{
+					"text": "[Mrsha waves a flower bud in front of your face.]",
+					"flags": [
+						"mrsha.has_moores_flower_bud"
+					]
+				},
+				{
+					"text": "[Mrsha proudly makes a tuft of grass grow.]",
+					"flags": [
+						"mrsha.learned_grow_grass"
+					]
+				},
+				{
+					"text": "[Mrsha mimes a wobbling slime, then pats her chest proudly.]",
+					"flags": [
+						"mrsha.tamed_a_healing_slime"
+					]
+				},
+				{
+					"text": "[Mrsha clings to your leg and shivers.]",
+					"flags": [
+						"mrsha.rescued_from_the_raskghar"
+					]
+				}
+			]
+		},
+		"bird": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.40"
+			},
+			"greet": {
+				"stranger": [
+					"Hello. I am Bird. I like birds. Do you like birds?",
+					"Greetings. I am watching for birds. Do not worry."
+				],
+				"wary": [
+					"I am watching you. Also birds."
+				],
+				"acquaintance": [
+					"Hello again. I have seen many birds today.",
+					"Good day. Erin says I am useful. I try."
+				],
+				"friend": [
+					"Hello, friend. I have a new thing to say about birds.",
+					"I am glad to see you. I will not shoot you."
+				],
+				"close friend": [
+					"You are a good friend. I would sing for you.",
+					"I am happy when you come. This is a good feeling."
+				]
+			},
+			"idle": [
+				"Birds are very tasty.",
+				"[Bird scans the sky.]",
+				"I am a guard. I guard the birds. No. The inn.",
+				"[Bird holds his bow carefully.]"
+			],
+			"lines": [
+				{
+					"text": "Erin pays me now. I am a real guard.",
+					"flags": [
+						"bird.is_paid_by_erin"
+					]
+				},
+				{
+					"text": "I have a watchtower. It is too short. I wish it were taller.",
+					"flags": [
+						"bird.has_his_watchtower"
+					]
+				},
+				{
+					"text": "I lost a duel to Badarrow. I am still learning.",
+					"flags": [
+						"bird.lost_the_duel_with_badarrow"
+					]
+				},
+				{
+					"text": "I sang for the Free Queen. She liked it. I will go back and sing.",
+					"flags": [
+						"bird.sang_for_the_free_queen"
+					]
+				},
+				{
+					"text": "I shot at Halrac. I am sorry. I could have killed him.",
+					"flags": [
+						"bird.apologised_to_halrac"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "archery",
+					"label": "Practise archery with Bird",
+					"action": "shoot_bow",
+					"flags": [
+						"bird.has_a_yew_bow"
+					],
+					"min_band": "acquaintance"
+				}
+			]
+		},
+		"ksmvr": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.46"
+			},
+			"greet": {
+				"stranger": [
+					"Greetings. I am Ksmvr. I serve the Free Queen.",
+					"Hello. State your purpose, please. I will assist if I can."
+				],
+				"wary": [
+					"I do not trust you. This is not personal."
+				],
+				"acquaintance": [
+					"Greetings. I trust you are well. I am functional.",
+					"Hello again. I have not died today. This is good."
+				],
+				"friend": [
+					"Hello, friend. I am glad to see you. I think.",
+					"Friend, welcome. I have prepared nothing, but I am happy."
+				],
+				"close friend": [
+					"You are a true friend. This is an honour to me.",
+					"I would fight for you. I say this honestly."
+				]
+			},
+			"idle": [
+				"[Ksmvr checks his blades, twice.]",
+				"I am merely a humble Antinium.",
+				"[Ksmvr stands very still.]",
+				"I am functional."
+			],
+			"lines": [
+				{
+					"text": "I am Prognugator now. I am not Klbkch. I will try to serve the Queen well.",
+					"flags": [
+						"ksmvr.is_prognugator"
+					],
+					"not_flags": [
+						"ksmvr.relieved_of_duty"
+					]
+				},
+				{
+					"text": "I have joined the Horns of Hammerad. They are kind to me.",
+					"flags": [
+						"ksmvr.joined_horns_of_hammerad"
+					]
+				},
+				{
+					"text": "I am afraid of deep water. This is a failing of mine.",
+					"flags": [
+						"ksmvr.terrified_of_water"
+					]
+				},
+				{
+					"text": "I challenged Klbkch and lost. I lived. This surprised me.",
+					"flags": [
+						"ksmvr.challenged_klbkch_and_lost"
+					]
+				}
+			]
+		},
+		"yvlon_byres": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.11"
+			},
+			"greet": {
+				"stranger": [
+					"Hello. I am Yvlon Byres. Is there something I can do?",
+					"Good day. Forgive my armour; it is part of me now."
+				],
+				"wary": [
+					"Keep your distance. I am not in a good mood."
+				],
+				"acquaintance": [
+					"Hello again. It is good to see someone friendly.",
+					"Good day. I hope you are well."
+				],
+				"friend": [
+					"It is good to see you. Come, sit with me.",
+					"Friend! Pull up a chair. I could use the company."
+				],
+				"close friend": [
+					"You've stood by me. I will not forget that.",
+					"I'm glad you are here. Truly. Sit."
+				]
+			},
+			"idle": [
+				"[Yvlon flexes her silver arms.]",
+				"I'll never be weak again.",
+				"[Yvlon studies her reflection and sighs.]",
+				"Where's my team?"
+			],
+			"lines": [
+				{
+					"text": "My squad died, and I blamed myself. I still do, some days.",
+					"flags": [
+						"yvlon.blames_self_for_squad_death"
+					],
+					"not_flags": [
+						"yvlon.has_enchanted_arms_and_armour"
+					]
+				},
+				{
+					"text": "My brother Ylawes is searching for me. I am not ready to be found.",
+					"flags": [
+						"yvlon.knows_ylawes_searches_for_her"
+					],
+					"not_flags": [
+						"yvlon.reunited_with_ylawes"
+					]
+				},
+				{
+					"text": "Ryoka brought me enchanted armour. It is good steel. I will wear it well.",
+					"flags": [
+						"yvlon.has_enchanted_arms_and_armour"
+					]
+				},
+				{
+					"text": "I saw Ylawes again. He asked me to go home. I said no.",
+					"flags": [
+						"yvlon.refuses_to_go_home"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "spar",
+					"label": "Ask Yvlon to spar",
+					"action": "weapon_practice",
+					"min_band": "acquaintance"
+				}
+			]
+		},
+		"numbtongue": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.18"
+			},
+			"greet": {
+				"stranger": [
+					"Hm. Human. What?",
+					"You want something?"
+				],
+				"wary": [
+					"Go away."
+				],
+				"acquaintance": [
+					"Hello. You are fine.",
+					"Good. You again. Okay."
+				],
+				"friend": [
+					"Hello, friend. Sit. I play something.",
+					"Good to see you. Come."
+				],
+				"close friend": [
+					"You are good people. I like you.",
+					"Stay. Listen. I will play for you."
+				]
+			},
+			"idle": [
+				"[Numbtongue hums a low tune to himself.]",
+				"[Numbtongue taps a rhythm on his knee.]",
+				"I sing. Do not tell anyone.",
+				"[Numbtongue watches the room silently.]"
+			],
+			"lines": [
+				{
+					"text": "Goblins can speak. Not all of us do. I do.",
+					"flags": [
+						"numbtongue.says_goblins_can_speak"
+					]
+				},
+				{
+					"text": "I drummed at the party. It felt good. Do not laugh.",
+					"flags": [
+						"numbtongue.sings"
+					],
+					"not_flags": [
+						"numbtongue.is_a_bard"
+					]
+				},
+				{
+					"text": "I am a bard now. The guitar is broken. I fix it.",
+					"flags": [
+						"numbtongue.is_a_bard"
+					]
+				},
+				{
+					"text": "I speak Goblin for the Drakes now. Ilvriss said my name.",
+					"flags": [
+						"numbtongue.translates_for_liscor"
+					]
+				}
+			]
+		},
+		"headscratcher": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.24"
+			},
+			"greet": {
+				"stranger": [
+					"Human. You want fight?",
+					"Hello. I scratch my head. Do not stare."
+				],
+				"wary": [
+					"Stay back, Human."
+				],
+				"acquaintance": [
+					"Hello. You are okay Human.",
+					"You again. Good. Sit."
+				],
+				"friend": [
+					"Friend. Sit. Eat.",
+					"Good to see you. Redfang like you."
+				],
+				"close friend": [
+					"You are Redfang family. Always welcome.",
+					"I fight for you. I say it now."
+				]
+			},
+			"idle": [
+				"[Headscratcher scratches his scalp.]",
+				"Where is food?",
+				"[Headscratcher sharpens his sword.]",
+				"I miss the Florist."
+			],
+			"lines": [
+				{
+					"text": "I held the Florist as she died. I remember.",
+					"flags": [
+						"headscratcher.lost_the_florist"
+					]
+				},
+				{
+					"text": "Something is changing in me. I feel it. It is big.",
+					"flags": [
+						"headscratcher.feels_a_change_coming"
+					],
+					"not_flags": [
+						"headscratcher.is_a_berserker"
+					]
+				},
+				{
+					"text": "I am a berserker now. I am still me. Mostly.",
+					"flags": [
+						"headscratcher.is_a_berserker"
+					]
+				},
+				{
+					"text": "Erin gave us armbands. We guard the inn now.",
+					"flags": [
+						"redfang.work_as_inn_security"
+					]
+				}
+			]
+		},
+		"badarrow": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.24"
+			},
+			"greet": {
+				"stranger": [
+					"Do not touch my arrows.",
+					"Human. Make it quick."
+				],
+				"wary": [
+					"I will shoot you. I mean it."
+				],
+				"acquaintance": [
+					"Hm. You can stay. Do not touch my bow.",
+					"Fine. Speak."
+				],
+				"friend": [
+					"You are alright. Look at this arrow. Good, yes?",
+					"Sit. Do not breathe on my fletching."
+				],
+				"close friend": [
+					"You may touch my bow. Once. Be careful.",
+					"You are a friend. I will not forget it."
+				]
+			},
+			"idle": [
+				"[Badarrow inspects an arrow for flaws.]",
+				"Bad arrow. Throw it away.",
+				"[Badarrow squints along his bow.]",
+				"I never miss. Almost never."
+			],
+			"lines": [
+				{
+					"text": "I beat the Antinium in a duel. His aim was good. Mine was better.",
+					"flags": [
+						"badarrow.won_the_archery_duel"
+					]
+				},
+				{
+					"text": "My ear is cut. It looks fine. It looks fine.",
+					"flags": [
+						"badarrow.left_ear_cut"
+					]
+				},
+				{
+					"text": "The bell hurts me. I used it anyway. It hurt the Raskghar more.",
+					"flags": [
+						"badarrow.rang_the_bell_of_pain"
+					]
+				},
+				{
+					"text": "I have a new bow. A good one. I am a sniper now.",
+					"flags": [
+						"badarrow.is_a_sniper"
+					]
+				}
+			]
+		},
+		"rabbiteater": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.24"
+			},
+			"greet": {
+				"stranger": [
+					"Human. Hello. I eat rabbits.",
+					"What? I keep watch."
+				],
+				"wary": [
+					"Stay away."
+				],
+				"acquaintance": [
+					"Hello. You are fine.",
+					"Hm. Good. You can stay."
+				],
+				"friend": [
+					"Friend! Sit. Eat. Good rabbit.",
+					"Good to see you. I tell stories."
+				],
+				"close friend": [
+					"You are good people. I will watch your back.",
+					"Redfang is your family. Sit."
+				]
+			},
+			"idle": [
+				"Rabbit is best meat.",
+				"[Rabbiteater keeps watch.]",
+				"Where is my food?",
+				"[Rabbiteater hums.]"
+			],
+			"lines": [
+				{
+					"text": "A zombie bit me to the bone. I lived. I am tough.",
+					"flags": [
+						"redfang_band.broke_toren"
+					]
+				},
+				{
+					"text": "My cloak is strange. It runs like water. I like it.",
+					"flags": [
+						"rabbiteater.wears_the_liquid_cloak"
+					]
+				}
+			]
+		},
+		"shorthilt": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.24"
+			},
+			"greet": {
+				"stranger": [
+					"Human. Why you look at my sword?",
+					"Hello. I am Shorthilt."
+				],
+				"wary": [
+					"Back away."
+				],
+				"acquaintance": [
+					"Hello. You are fine.",
+					"Good. You can sit."
+				],
+				"friend": [
+					"Friend! Sit. I sharpen swords.",
+					"Good to see you."
+				],
+				"close friend": [
+					"You are family. I fight for you.",
+					"Stay. Redfang is safe with you."
+				]
+			},
+			"idle": [
+				"[Shorthilt sharpens a blade.]",
+				"A short hilt is easier to hold.",
+				"[Shorthilt practices a slash.]",
+				"Where are the other Goblins?"
+			],
+			"lines": [
+				{
+					"text": "I tackled the bone creature from behind. My nose broke. It was worth it.",
+					"flags": [
+						"redfang_band.broke_toren"
+					]
+				},
+				{
+					"text": "I took an arrow for a cave Goblin. I would again.",
+					"flags": [
+						"shorthilt.took_an_arrow_for_a_cave_goblin"
+					]
+				},
+				{
+					"text": "I am a Weapon Expert now. My edge bites deeper.",
+					"flags": [
+						"shorthilt.is_a_weapon_expert"
+					]
+				}
+			]
+		},
+		"zel_shivertail": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38"
+			},
+			"greet": {
+				"stranger": [
+					"Hm? Speak up, young one. These ears are old.",
+					"Sit down, stand up, whatever. Just do not spill the honey water."
+				],
+				"wary": [
+					"I do not know you. State your business."
+				],
+				"acquaintance": [
+					"Ah, you. Good. Sit. I have stories.",
+					"Hm. Always good to see a friendly face."
+				],
+				"friend": [
+					"Welcome, welcome. Pull up a chair. I'll tell you about my first war.",
+					"Ah! The very person I wanted to see."
+				],
+				"close friend": [
+					"You are as dear to me as an old comrade. Sit.",
+					"I'm glad you came. An old Drake needs company."
+				]
+			},
+			"idle": [
+				"[Zel sips milk and sighs.]",
+				"I've fought battles older than you.",
+				"[Zel taps the table with a claw.]",
+				"This milk is wonderful. Truly."
+			],
+			"lines": [
+				{
+					"text": "I fought in the Antinium Wars. I remember too much. Now I just want a quiet inn.",
+					"flags": [
+						"zel.at_wandering_inn"
+					]
+				},
+				{
+					"text": "I broke off the attack to save fleeing Gnolls. Ilvriss did too. I would do it again.",
+					"flags": [
+						"zel.retreated_to_save_gnolls"
+					]
+				},
+				{
+					"text": "Milk with honey. Who knew? The best thing in this world.",
+					"flags": [
+						"zel.drinks_milk_with_ashfire_bee_honey"
+					]
+				},
+				{
+					"text": "I shook hands with Magnolia. She says the Goblin Lord comes first.",
+					"flags": [
+						"zel.allied_with_magnolia"
+					]
+				},
+				{
+					"text": "I must go north. There is a war that needs an old fool like me.",
+					"flags": [
+						"zel.announces_he_is_leaving"
+					],
+					"not_flags": [
+						"zel.left_liscor"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "spar",
+					"label": "Ask Zel to show you a stance",
+					"action": "weapon_practice",
+					"min_band": "friend"
+				}
+			]
+		},
+		"ilvriss": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38"
+			},
+			"greet": {
+				"stranger": [
+					"Do I know you? No. Then state your business.",
+					"Speak quickly. I have little patience."
+				],
+				"wary": [
+					"Keep away from me."
+				],
+				"acquaintance": [
+					"You again. Fine. What is it?",
+					"Hm. I suppose you are tolerable."
+				],
+				"friend": [
+					"You are better company than most. Sit.",
+					"I will allow you a moment. Make use of it."
+				],
+				"close friend": [
+					"You've earned my trust. That is not easy.",
+					"I rarely say this: I value your company."
+				]
+			},
+			"idle": [
+				"[Ilvriss glances at the exits.]",
+				"I trust no one.",
+				"[Ilvriss swirls his drink, scowling.]",
+				"This city is too loud."
+			],
+			"lines": [
+				{
+					"text": "Someone killed Periss. I will find who. I will find them.",
+					"flags": [
+						"ilvriss.demands_the_truth_about_periss"
+					],
+					"not_flags": [
+						"ilvriss.admits_he_loved_periss"
+					]
+				},
+				{
+					"text": "I loved Periss. I should have said so. Now it is too late.",
+					"flags": [
+						"ilvriss.admits_he_loved_periss"
+					]
+				},
+				{
+					"text": "I told Erin about Periss. I took the blame for Regrika. I thanked the Halfseekers.",
+					"flags": [
+						"ilvriss.apologised_to_the_inn"
+					]
+				},
+				{
+					"text": "I drink at the Tailless Thief every morning. The road to Salazsar is not safe.",
+					"flags": [
+						"ilvriss.drinks_daily_at_the_tailless_thief"
+					]
+				},
+				{
+					"text": "I started a brawl at the play. I will pay for it.",
+					"flags": [
+						"ilvriss.started_the_play_brawl"
+					]
+				}
+			]
+		},
+		"jelaqua": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38"
+			},
+			"greet": {
+				"stranger": [
+					"Hey there! Jelaqua Ivirith, Gold-rank, at your service! Nice to meet you!",
+					"Well hello! New face! Buy me a drink and we'll be friends."
+				],
+				"wary": [
+					"Hm. Do I know you? I'm watching."
+				],
+				"acquaintance": [
+					"Hey, you! Good to see you. Pull up a chair!",
+					"Oh, hi again! The Halfseekers could use a laugh."
+				],
+				"friend": [
+					"There you are! Sit, sit. Tell me everything.",
+					"Friend! Look what I found today. You'll love it."
+				],
+				"close friend": [
+					"You're the best. Truly. I'd cross a dungeon for you.",
+					"Come here! A hug from a Selphid. A rare honour."
+				]
+			},
+			"idle": [
+				"[Jelaqua flexes and grins.]",
+				"I need a drink.",
+				"Halfseekers forever!",
+				"[Jelaqua pats her body fondly.]"
+			],
+			"lines": [
+				{
+					"text": "This body is falling apart. I need a new one soon. Wish me luck.",
+					"flags": [
+						"jelaqua.needs_a_new_body"
+					],
+					"not_flags": [
+						"jelaqua.new_drake_body"
+					]
+				},
+				{
+					"text": "New Drake body! Never thought I'd be scaly. I love it.",
+					"flags": [
+						"jelaqua.new_drake_body"
+					]
+				},
+				{
+					"text": "Garen turned on us and I still do not know why. Do not ask.",
+					"flags": [
+						"jelaqua.told_of_garens_betrayal"
+					]
+				},
+				{
+					"text": "Selys leased us the Heartflame breastplate, so drinks for the whole house. Worth every coin.",
+					"flags": [
+						"jelaqua.bought_the_inn_drinks_for_the_lease"
+					]
+				}
+			]
+		},
+		"moore": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.38"
+			},
+			"greet": {
+				"stranger": [
+					"Oh! Hello. I am Moore. Please do not mind my size.",
+					"Good day. Watch your head. I always forget the door."
+				],
+				"wary": [
+					"Oh dear. I would rather not fight."
+				],
+				"acquaintance": [
+					"Hello again! I have been thinking about flowers.",
+					"Oh, good day! I am glad you came."
+				],
+				"friend": [
+					"Friend! Come sit. The grass is lovely today.",
+					"Hello! I picked this for you. It is a daisy."
+				],
+				"close friend": [
+					"You are very dear to me. I mean it.",
+					"I am happy you are here. Truly."
+				]
+			},
+			"idle": [
+				"[Moore sniffs a flower gently.]",
+				"Please be careful with the plants.",
+				"[Moore ducks under a doorway.]",
+				"I wish everyone would be kind."
+			],
+			"lines": [
+				{
+					"text": "I gave Mrsha a flower bud. She loves it.",
+					"flags": [
+						"mrsha.has_moores_flower_bud"
+					]
+				},
+				{
+					"text": "A blade went through my leg once. Healing potions mended it. I am fine.",
+					"flags": [
+						"moore.stabbed_and_healed"
+					]
+				},
+				{
+					"text": "I was hurt saving Mrsha. I would do it again.",
+					"flags": [
+						"moore.badly_wounded_saving_mrsha"
+					]
+				}
+			]
+		},
+		"halrac": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.19"
+			},
+			"greet": {
+				"stranger": [
+					"State your business. Quickly.",
+					"Hm. Stay out of my line of fire."
+				],
+				"wary": [
+					"Do not move."
+				],
+				"acquaintance": [
+					"You again. Fine.",
+					"Hm. You're tolerable."
+				],
+				"friend": [
+					"Sit. I do not say that often.",
+					"Hm. Good to see you."
+				],
+				"close friend": [
+					"You are one of the few I trust.",
+					"I'll watch your back. Do not make me regret it."
+				]
+			},
+			"idle": [
+				"[Halrac scans the room, expressionless.]",
+				"Quiet.",
+				"[Halrac tests his bowstring.]",
+				"Hm."
+			],
+			"lines": [
+				{
+					"text": "I saw my lost village. I won't talk about it.",
+					"flags": [
+						"halrac.saw_his_lost_village"
+					]
+				},
+				{
+					"text": "The soup is good here. Do not tell Typhenous.",
+					"flags": [
+						"halrac.likes_the_inn"
+					]
+				},
+				{
+					"text": "We failed Ulrien. I think about it every day.",
+					"flags": [
+						"halrac.admits_the_team_failed_ulrien"
+					]
+				},
+				{
+					"text": "Bird shot at me. I caught it, barely. The Antinium aims well.",
+					"flags": [
+						"halrac.caught_birds_arrow"
+					]
+				},
+				{
+					"text": "I told Bird he did a good thing. Do not repeat that.",
+					"flags": [
+						"halrac.forgives_bird"
+					]
+				}
+			]
+		},
+		"wesle": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.03"
+			},
+			"greet": {
+				"stranger": [
+					"Halt! Oh. Sorry. Are you here for Celum?",
+					"Welcome to Celum. Please keep the peace. Please."
+				],
+				"wary": [
+					"I'm watching you. I really am."
+				],
+				"acquaintance": [
+					"Oh, it's you! Good day. Quiet here.",
+					"Hello again. No trouble today, I hope."
+				],
+				"friend": [
+					"Friend! Come, you must see our play.",
+					"Oh good, a friendly face. Sit with me."
+				],
+				"close friend": [
+					"You're a great friend. I mean it.",
+					"I'm so glad you are here. Truly."
+				]
+			},
+			"idle": [
+				"[Wesle stifles a yawn at his post.]",
+				"Move along, move along.",
+				"[Wesle straightens his tiny mustache.]",
+				"I should practice my lines."
+			],
+			"lines": [
+				{
+					"text": "I played Romeo in the play. I finally felt brave.",
+					"flags": [
+						"wesle.acts_romeo"
+					]
+				},
+				{
+					"text": "I lead the players of Celum now. Who would have thought?",
+					"flags": [
+						"wesle.leads_the_players_of_celum"
+					]
+				}
+			]
+		},
+		"octavia": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.09"
+			},
+			"greet": {
+				"stranger": [
+					"Welcome to Stitchworks! The best alchemist in Celum is at your service!",
+					"Oh, a customer! Come in, come in. Look at my wares."
+				],
+				"wary": [
+					"Look, don't touch. And don't haggle."
+				],
+				"acquaintance": [
+					"Back again! I've something new. You'll want it.",
+					"Oh good. A returning customer. I love those."
+				],
+				"friend": [
+					"Friend! I saved you the best of today's batch.",
+					"Come in! I've got a new recipe. You'll love it."
+				],
+				"close friend": [
+					"For you, honest prices. Don't tell anyone.",
+					"You're my favourite customer. Truly."
+				]
+			},
+			"idle": [
+				"Potions! Fresh potions!",
+				"[Octavia stirs a bubbling pot.]",
+				"I need new recipes!",
+				"Best alchemist in Celum, that's me."
+			],
+			"lines": [
+				{
+					"text": "I want Erin's ingredients. Every last one. Tell her.",
+					"flags": [
+						"octavia.covets_erins_ingredients"
+					]
+				},
+				{
+					"text": "I made these matches overnight! Corusdeer horn and sulphur. Strike one on a rough box.",
+					"flags": [
+						"octavia.makes_matches"
+					]
+				},
+				{
+					"text": "Erin's matches made me rich. I owe her a favour, so take whatever potions you need.",
+					"flags": [
+						"octavia.rich_from_matches"
+					]
+				},
+				{
+					"text": "My shop has a door to the inn. Isn't it grand?",
+					"flags": [
+						"octavia.has_door_link_to_the_inn"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "haggle",
+					"label": "Haggle with Octavia",
+					"action": "haggle"
+				}
+			]
+		},
+		"magnolia_reinhart": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.12"
+			},
+			"greet": {
+				"stranger": [
+					"Oh, hello! Do sit. I'm Magnolia. You must tell me everything.",
+					"Well, a new face. Delightful."
+				],
+				"wary": [
+					"Oh. Hm. Do I know you?"
+				],
+				"acquaintance": [
+					"Ah, you again. Do come, do sit.",
+					"How lovely. I do like a familiar face."
+				],
+				"friend": [
+					"Darling! Sit. Tell me your news. I've heard a few things.",
+					"My dear, it's wonderful to see you."
+				],
+				"close friend": [
+					"You are one of my favourite people. Do not let it go to your head.",
+					"Dear one, you are always welcome here."
+				]
+			},
+			"idle": [
+				"[Magnolia swirls a glass of wine, smiling.]",
+				"Pink is a statement, don't you think?",
+				"[Magnolia whispers to an attendant.]",
+				"I do enjoy a good scheme."
+			],
+			"lines": [
+				{
+					"text": "I'm watching the inn closely. It interests me.",
+					"flags": [
+						"magnolia.watches_the_inn"
+					]
+				},
+				{
+					"text": "I have other Earthers hidden away. Not even you may know where.",
+					"flags": [
+						"magnolia.hides_other_earthers"
+					]
+				},
+				{
+					"text": "I'm at war with the Circle of Thorns. They shall regret it.",
+					"flags": [
+						"magnolia.at_war_with_the_circle_of_thorns"
+					]
+				},
+				{
+					"text": "I call a levy from every town. The Goblin Lord will not cross my lands.",
+					"flags": [
+						"magnolia.raises_an_army_against_the_goblins"
+					]
+				},
+				{
+					"text": "I weep for Zel. I rarely weep. Please forgive me.",
+					"flags": [
+						"magnolia.weeps_for_zel"
+					]
+				}
+			]
+		},
+		"laken_godart": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.01"
+			},
+			"greet": {
+				"stranger": [
+					"Hello. I cannot see you, but I can hear you. Who are you?",
+					"Good day. Forgive me if I do not meet your eyes."
+				],
+				"wary": [
+					"I sense hostility. Speak plainly."
+				],
+				"acquaintance": [
+					"Ah, I know that voice. Good day.",
+					"Hello again. It is good to hear you."
+				],
+				"friend": [
+					"Friend! Sit. Tell me what the road is like.",
+					"Welcome. Durene will want to say hello."
+				],
+				"close friend": [
+					"You are one of the few I trust. Sit, please.",
+					"I am glad you came. Truly."
+				]
+			},
+			"idle": [
+				"[Laken tilts his head, listening.]",
+				"I see with my domain.",
+				"[Laken smiles faintly at the wind.]",
+				"Durene, are you there?"
+			],
+			"lines": [
+				{
+					"text": "I am an Emperor now. It is a strange thing to say.",
+					"flags": [
+						"laken.emperor"
+					],
+					"not_flags": [
+						"laken.rules_riverfarm"
+					]
+				},
+				{
+					"text": "I rule Riverfarm. I hope I do it well.",
+					"flags": [
+						"laken.rules_riverfarm"
+					]
+				},
+				{
+					"text": "I am not going to tell the nobles where I come from.",
+					"flags": [
+						"laken.hides_that_he_is_from_earth"
+					]
+				},
+				{
+					"text": "General Zel is dead and the Goblin Lord marches. I will not lie to my people about it.",
+					"flags": [
+						"laken.heard_that_zel_shivertail_is_dead"
+					]
+				}
+			]
+		},
+		"calruz": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.15"
+			},
+			"greet": {
+				"stranger": [
+					"I am Calruz. State your name and purpose.",
+					"Hm. You stand tall, for a Human. Good."
+				],
+				"wary": [
+					"Speak, or leave."
+				],
+				"acquaintance": [
+					"Hm. Honest eyes. Sit.",
+					"I know your face. Good. Stay."
+				],
+				"friend": [
+					"A worthy friend. Sit, drink with me.",
+					"Welcome. Honour to you."
+				],
+				"close friend": [
+					"You are one of mine. Never forget it.",
+					"I would fight beside you. This I swear."
+				]
+			},
+			"idle": [
+				"[Calruz stands very still, axe at his side.]",
+				"Honour matters.",
+				"[Calruz snorts, steam in the air.]",
+				"I fear nothing."
+			],
+			"lines": [
+				{
+					"text": "That girl punched me down a flight of stairs. I like her.",
+					"flags": [
+						"calruz.courts_ryoka"
+					]
+				},
+				{
+					"text": "I will train Erin myself. She has potential.",
+					"flags": [
+						"calruz.will_train_erin"
+					]
+				},
+				{
+					"text": "I lead the Raskghar. We will take the dungeon and be heroes.",
+					"flags": [
+						"calruz.alive_in_the_dungeon"
+					]
+				},
+				{
+					"text": "I am in the Watch prison. I will answer for what I did.",
+					"flags": [
+						"calruz.in_watch_prison"
+					]
+				}
+			]
+		}
+	}
 }

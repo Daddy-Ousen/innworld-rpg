@@ -180,6 +180,29 @@ Ids (checked): `erin_solstice`, `relc`, `klbkch`, `pisces`, `olesm`, `selys`, `k
 - Python: `validate_data.py --all` also checks `voices.json` (`check_voices`, `validate_voices`). No copy check
   against book text for voices yet (they have no chapter); the tone rule and review cover it.
 
+### M30.2 (2026-10-18): the Book 1 cast
+- `data/voices.json` has the 15 entries (all `confidence: guess`): 2 lines per band for stranger, acquaintance,
+  friend, close friend (more for "wary" where the NPC starts wary: Liscor Drakes Zevara and Lism, M29.2), 4 – 5 idle
+  barks, 3 – 8 flag lines each. Toren speaks only in brackets. Ryoka, Klbkch, Zevara, Rags, Pawn have lines only.
+- Own options: Erin (work = `serve_guests`, chess 0.95, inn), Relc (spar), Pisces (magic, a talk), Olesm (chess 0.85),
+  Krshia (`haggle`), Toren (chess 0.3, after `toren.plays_chess`).
+- A new game starts on day 8 with the inn open, so a line gated on the inn being closed never shows. Lines gate on
+  flags that canon events really set (`unit_voice.test_book1_voice_flags_are_real` checks every flag).
+- A reading agent (Sonnet) checked traits against the Book 1 text; 11 fixes applied (eye colour, Rags's fire bug,
+  Pawn cleans the inn, Ceria and Pisces have history, and so on). The first talk with a voiced NPC now adds a greeting
+  line AND an own line (or topic), so `unit_talk_topics` expects 2 lines and `unit_standing` clears voices for the generic band line.
+
+### M30.3 (2026-10-18): the Books 2 – 8 cast (one step, not split)
+- 20 more entries (35 in all): Lyonette, Mrsha (brackets only), Bird, Ksmvr, Yvlon, Numbtongue, the Redfang four
+  (Headscratcher, Badarrow, Rabbiteater, Shorthilt), Zel, Ilvriss, Jelaqua, Moore, Halrac, Wesle, Octavia, Magnolia,
+  Laken, Calruz. Every later line waits for a story flag (zel.*, ilvriss.periss, mrsha.*, calruz.* and so on).
+- Own options: Bird (archery, needs `bird.has_a_yew_bow`), Yvlon (spar), Zel (a stance, friend band), Octavia (haggle).
+- Two reading agents checked 20 characters against the Book 2 – 5, 7, 8 text; Book 6 flags (Zel's death) only against our
+  canon summaries, no Book 6 text on this machine. 33 fixes applied: invented facts removed (a siege, a cat, a tall tower),
+  lines moved to the right flag (Rabbiteater and Shorthilt use `redfang_band.broke_toren`), Halrac and Bird reversed.
+- Calruz's greeting no longer names the Horns (he is a Raskghar chief in Book 8). Open: Wesle and Laken are thin
+  (3 and 4 lines); Laken and Durene appear only in the north, so most players meet them late.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

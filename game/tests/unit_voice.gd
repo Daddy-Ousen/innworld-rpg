@@ -176,3 +176,146 @@ func test_real_data_is_valid() -> void:
 	assert_eq(d.errors, [] as Array[String])
 	assert_true(Voice.on(d))
 	assert_eq(Voice.validate(d), [] as Array[String])
+
+
+## M30.2: the Book 1 cast (ADR 0044 "M30.0" first cast).
+const BOOK1_CAST := ["erin_solstice", "relc", "klbkch", "pisces", "olesm", "selys", "krshia", "zevara",
+		"lism", "ryoka_griffin", "ceria_springwalker", "pawn", "rags", "toren", "beilmark"]
+
+
+## Every flag the canon events (and their alt events and hooks) can set.
+func _canon_flags(d: DataDb) -> Dictionary:
+	var out := {}
+	var walk := func(again: Callable, v: Variant) -> void:
+		if v is Dictionary:
+			for k: String in v:
+				if k == "set_flags":
+					for f: String in v[k]:
+						out[f] = true
+				else:
+					again.call(again, v[k])
+		elif v is Array:
+			for x: Variant in v:
+				again.call(again, x)
+	walk.call(walk, d.canon.events)
+	return out
+
+
+## Every flag a voice entry's gates name.
+func _voice_flags(v: Dictionary) -> Array[String]:
+	var out: Array[String] = []
+	var gates: Array = (v.get("lines", []) as Array) + (v.get("options", []) as Array)
+	for g: Dictionary in gates:
+		for k in ["flags", "not_flags"]:
+			for f: String in g.get(k, []):
+				out.append(f)
+	return out
+
+
+func test_book1_cast_has_voices() -> void:
+	var d := DataDb.load_dir()
+	for id: String in BOOK1_CAST:
+		assert_true(d.voices.has(id), "%s has a voice" % id)
+		var v: Dictionary = d.voices.get(id, {})
+		assert_true((v.get("greet", {}) as Dictionary).has(Voice.STRANGER), "%s greets a stranger" % id)
+		assert_gte((v.get("idle", []) as Array).size(), 3, "%s has map barks" % id)
+		assert_gt((v.get("lines", []) as Array).size(), 0, "%s has lines after events" % id)
+
+
+func test_book1_voice_flags_are_real() -> void:
+	var d := DataDb.load_dir()
+	var known := _canon_flags(d)
+	for id: String in d.voices:
+		for f in _voice_flags(d.voices[id]):
+			assert_true(known.has(f), "%s: flag '%s' is set by no canon event" % [id, f])
+
+
+func test_book1_options() -> void:
+	var d := DataDb.load_dir()
+	var want := {"erin_solstice": ["work", "chess", "inn"], "relc": ["spar"], "pisces": ["magic"],
+			"olesm": ["chess"], "krshia": ["haggle"], "toren": ["chess"]}
+	for id: String in want:
+		var ids: Array = (d.voices[id]["options"] as Array).map(func(o: Dictionary) -> String: return o["id"])
+		assert_eq(ids, want[id], id)
+	for id: String in ["ryoka_griffin", "klbkch", "zevara", "rags", "pawn"]:
+		assert_false(d.voices[id].has("options"), "%s has lines only" % id)
+
+
+func test_book1_speech_and_actions() -> void:
+	var d := DataDb.load_dir()
+	for id: String in BOOK1_CAST:
+		for text in (d.voices[id].get("idle", []) as Array):
+			if id == "toren":
+				assert_true(String(text).begins_with("["), "Toren never speaks: %s" % text)
+			assert_eq(Voice.say(d, id, String(text)).begins_with("["), String(text).begins_with("["))
+	var l := Voice.say(d, "relc", "Hi.")
+	assert_eq(l, "Relc Grasstongue: \"Hi.\"")
+
+
+## A real first talk (a new game starts on day 8 with the inn open): Erin's own greeting and an own line, no gs.rng drawn.
+func test_real_talk_with_erin() -> void:
+	var d := DataDb.load_dir()
+	var gs := GameState.new_game(20261018, d)
+	gs.clock.total_minutes = 1440 * 5 + 10 * 60
+	gs.player.place("inn_interior", Vector2i(5, 5))
+	gs.npcs.npcs["erin_solstice"]["area"] = "inn_interior"
+	gs.npcs.npcs["erin_solstice"]["x"] = 6
+	gs.npcs.npcs["erin_solstice"]["y"] = 5
+	var before := gs.rng.to_dict()
+	var r := Interact.perform(gs, d, "erin_solstice", "talk_with_guest")
+	assert_eq(r["error"], "")
+	var lines: Array = gs.combat.lines.slice(-2)
+	assert_true(String(lines[0]).begins_with("Erin Solstice: \""), str(lines))
+	assert_eq(lines[1], "Erin Solstice: \"I cook too much pasta and eat it alone. Please eat some.\"")
+	assert_eq(gs.rng.to_dict(), before, "own greeting and line draw no gs.rng")
+
+
+## M30.3: the Books 2 - 8 cast.
+const LATER_CAST := ["lyonette", "mrsha", "bird", "ksmvr", "yvlon_byres", "numbtongue", "headscratcher",
+		"badarrow", "rabbiteater", "shorthilt", "zel_shivertail", "ilvriss", "jelaqua", "moore", "halrac",
+		"wesle", "octavia", "magnolia_reinhart", "laken_godart", "calruz"]
+
+
+func test_later_cast_has_voices() -> void:
+	var d := DataDb.load_dir()
+	for id: String in LATER_CAST:
+		assert_true(d.voices.has(id), "%s has a voice" % id)
+		var v: Dictionary = d.voices.get(id, {})
+		for band in [Voice.STRANGER, "acquaintance", "friend", "close friend"]:
+			assert_true((v.get("greet", {}) as Dictionary).has(band), "%s greets band %s" % [id, band])
+		assert_gte((v.get("idle", []) as Array).size(), 3, "%s has map barks" % id)
+		assert_gt((v.get("lines", []) as Array).size(), 0, "%s has lines after events" % id)
+		assert_true(d.canon.npcs.has(id), id)
+
+
+func test_later_cast_lines_follow_each_books_flags() -> void:
+	var d := DataDb.load_dir()
+	var keyed := 0
+	for id: String in LATER_CAST:
+		for l: Dictionary in d.voices[id]["lines"]:
+			assert_true(l.has("flags"), "%s: every later line waits for a story flag" % id)
+			keyed += 1
+	assert_gte(keyed, 60)
+
+
+func test_mrsha_acts_and_never_speaks() -> void:
+	var d := DataDb.load_dir()
+	var v: Dictionary = d.voices["mrsha"]
+	var texts: Array = (v["idle"] as Array).duplicate()
+	for band: String in v["greet"]:
+		texts.append_array(v["greet"][band])
+	for l: Dictionary in v["lines"]:
+		texts.append(l["text"])
+	for t in texts:
+		assert_true(String(t).begins_with("[") and String(t).ends_with("]"), "Mrsha is mute: %s" % t)
+
+
+func test_lines_depend_on_the_story() -> void:
+	var d := DataDb.load_dir()
+	var gs := GameState.new_game(20261018, d)
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail"), [] as Array[String], "no Zel line before his flags")
+	gs.flags["zel.drinks_milk_with_ashfire_bee_honey"] = true
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail").size(), 1)
+	gs.flags["zel.allied_with_magnolia"] = true
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail").size(), 2)
+

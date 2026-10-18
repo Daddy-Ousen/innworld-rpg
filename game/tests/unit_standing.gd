@@ -259,7 +259,10 @@ func test_the_talk_menu_shows_the_band_and_a_greeting() -> void:
 		if x["id"] == id:
 			o = x
 	assert_eq(o.get("standing", "?"), "acquaintance")
+	var own := _db.voices
+	_db.voices = {}  # M30.2: Krshia has her own greeting now; this test is for the generic band line
 	var r := Interact.perform(gs, _db, id, "talk_with_guest")
+	_db.voices = own
 	assert_eq(r["error"], "")
 	assert_true(gs.combat.lines.any(func(l: String) -> bool: return l.contains("greets you warmly")),
 			str(gs.combat.lines))
