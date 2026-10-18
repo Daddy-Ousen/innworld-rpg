@@ -617,6 +617,22 @@ class VoicesTest(unittest.TestCase):
                     "unknown action 'no_such'", "min_band 'pal'"]:
             self.assertIn(bit, text)
 
+    def test_option_effects(self):
+        """M30.4: an option may set flags, change the relationship and show a page."""
+        v = self.good()
+        v["krshia"]["options"].append({"id": "earth", "label": "Earth", "action": "persuade",
+                                       "set_flags": ["krshia.knows"], "relationship": 3,
+                                       "page": {"title": "Earth", "lines": ["One.", "Two."]}})
+        self.assertEqual(self.check(v), [])
+        v["krshia"]["options"] += [
+            {"id": "a", "label": "A", "action": "persuade", "set_flags": ["Bad Flag"], "relationship": 1.5},
+            {"id": "b", "label": "B", "action": "persuade", "page": {"title": "T", "lines": []}},
+            {"id": "c", "label": "C", "action": "persuade", "page": {"title": "T", "lines": ["one two three four five six"]}}]
+        text = " | ".join(self.check(v))
+        for bit in ["bad format 'Bad Flag'", "relationship must be a whole number", "page must be",
+                    "more than 5 words"]:
+            self.assertIn(bit, text)
+
     def test_real_voices_file(self):
         root = Path(__file__).resolve().parents[2] / "game" / "data"
         acts = set(json.loads((root / "actions.json").read_text(encoding="utf-8"))["actions"])

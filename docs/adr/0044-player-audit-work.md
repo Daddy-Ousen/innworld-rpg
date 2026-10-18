@@ -203,6 +203,20 @@ Ids (checked): `erin_solstice`, `relc`, `klbkch`, `pisces`, `olesm`, `selys`, `k
 - Calruz's greeting no longer names the Horns (he is a Raskghar chief in Book 8). Open: Wesle and Laken are thin
   (3 and 4 lines); Laken and Durene appear only in the north, so most players meet them late.
 
+### M30.4 (2026-10-19): the Earther meeting
+User picks (rule 11): three new optional fields on a voice option; all six Earthers the player can meet react.
+- Schema: a voice option may have `set_flags` [flag] (set once the option's action is done), `relationship`
+  (a whole number added to the NPC's relationship with the player) and `page` {`title`, `lines`} (each line at most
+  `max_words` words). `Voice.apply` does it; `Interact.perform` returns `page` in its result. The option's own
+  `not_flags` (the flag it sets) make it one-time, so a voice still keeps no state. No save change.
+- Screen: `SystemMessages.talk_page` (kind `talk`, with the NPC's face) opens in the System dialog after the talk.
+  The console prints the page lines.
+- Data: option `earth` on Erin (+3, page "From Earth", 6 lines, ends with her work offer), Ryoka, Laken (+2 each),
+  and new small entries for Rose, Imani and Joseph (only the Earth talk). Flags `<name>.knows_player_is_earther`.
+  Erin has 4 Earth lines (food, songs, games, keep it quiet) and Ryoka 1, gated on their flag.
+- Canon is not touched: `sim_earther_meeting` plays the same seed with and without the talk to day 12 and gets the
+  same history, drift 0 and the same RNG stream.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

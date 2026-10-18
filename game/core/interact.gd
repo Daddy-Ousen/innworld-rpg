@@ -28,6 +28,8 @@
 ## option's action with the NPC context plus the option's own context. The first talk
 ## of the day says the NPC's own greeting (else the band line), then one own line (else
 ## a talk topic).
+## M30.4: a done own option sets its set_flags and relationship (Voice.apply); with a
+## "page" the result also has "page" {"title", "lines"} for the screen to show.
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -195,6 +197,7 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	if rec.is_empty():
 		return _fail("You are too tired." if gs.clock.is_collapse_due(db.rules["clock"])
 				else "You cannot do that.")
+	var page := Voice.apply(gs, db, object_id, voiced) if not voiced.is_empty() else {}  # M30.4
 	if obj["npc"] and NpcSim.note_talk(gs, db, object_id):
 		var own := Voice.greet(gs, db, object_id)  # M30.1: the NPC's own greeting first
 		var greeting: String = Standing.band(gs, db, object_id)["line"]
@@ -206,6 +209,8 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 		var topic := said if said != "" else TalkTopics.line(gs, db, object_id)  # M25.1
 		if topic != "":
 			gs.combat.lines.append(topic)
+	if not page.is_empty():
+		return {"record": rec, "error": "", "page": page}
 	return {"record": rec, "error": ""}
 
 

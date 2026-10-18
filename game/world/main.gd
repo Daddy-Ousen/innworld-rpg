@@ -394,6 +394,9 @@ func use(object_id: String, action_id: String) -> void:
 	else:
 		hud.add_lines(["%s." % Session.db.actions[action_id]["name"]])
 	_finish()
+	if r.has("page"):  # M30.4: an own option's talk page, with the NPC's face
+		dialog.open([SystemMessages.talk_page(object_id, r["page"])] as Array[Dictionary],
+				Session.gs, Session.db)
 
 
 ## Attacks the NPC next to you (M14.5). A major NPC's first attack shows the fate warning

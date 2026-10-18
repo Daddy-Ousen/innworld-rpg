@@ -27,6 +27,8 @@ const MORNING := "morning"
 const STORY_END := "story_end"
 const WELCOME := "welcome"
 const FATE := "fate"
+## M30.4: a talk page from an NPC's own option (Voice "page"), with the NPC's face.
+const TALK := "talk"
 
 const NEXT := "next"
 const ACCEPT := "accept"
@@ -172,6 +174,14 @@ static func fate_page(db: DataDb, npc: String) -> Dictionary:
 	var p := page(FATE, String(r["fate_title"]), Brawl.fate_lines(db, npc), [STRIKE, SPARE])
 	p["npc"] = npc
 	p["delay"] = float(r["fate_delay"])
+	return p
+
+
+## M30.4: the talk page of an NPC's own option (`page` from Interact.perform). It has "npc"
+## for the face; its only choice is NEXT.
+static func talk_page(npc: String, talk: Dictionary) -> Dictionary:
+	var p := page(TALK, String(talk["title"]), talk["lines"])
+	p["npc"] = npc
 	return p
 
 

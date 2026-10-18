@@ -24,7 +24,7 @@ How to read the last column: pick that model and effort in the app before you st
 at the end of each step in "Next up" is the source; this column copies it. Reading agents that a step starts (book
 text, summaries only) run on Sonnet · medium. "(user)" steps need no model.
 
-Last release: v0.1.5-alpha (2026-10-15). Next step: M30.4 the Earther meeting with Erin (M30.2 and M30.3 voices done, ADR 0044).
+Last release: v0.1.5-alpha (2026-10-15). Next step: M30.5 who you are (name, look, background; M30.4 Earther meeting done, ADR 0044).
 
 ---
 
@@ -76,7 +76,7 @@ cascades are easy to get wrong; low for mechanical steps.
 - [x] M30.1 Engine: `core/voice.gd`, NPC talk options, speech bubbles, validator **[Opus · medium]** (2026-10-18)
 - [x] M30.2 Voices for the Book 1 cast (15 NPCs; own words; a reading agent checks traits) **[Sonnet · high]** (2026-10-18)
 - [x] M30.3 Voices for the Books 2 – 8 cast, lines keyed to each book's big flags **[Sonnet · high]** (2026-10-18)
-- [ ] M30.4 The Earther meeting with Erin (one time), and the other Earthers react **[Opus · medium]**
+- [x] M30.4 The Earther meeting with Erin (one time), and the other Earthers react **[Opus · medium]** (2026-10-19, ADR 0044 "M30.4")
 - [ ] M30.5 Who you are: name, look, Earth background; save v23 + migration **[Opus · high]**
 - [ ] (user) Play: talk to the Book 1 cast, tell Erin you are from Earth, start a new game
 **Done when:** the Book 1 cast has own greetings, lines and options; barks show; old saves load; the touched tests pass; the user has played it.

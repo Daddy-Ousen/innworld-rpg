@@ -91,6 +91,30 @@
 					"flags": [
 						"klbkch.reborn"
 					]
+				},
+				{
+					"text": "I miss pizza so much. Do you think I could make cheese here?",
+					"flags": [
+						"erin.knows_player_is_earther"
+					]
+				},
+				{
+					"text": "Do you know any songs all the way through? I keep losing the words.",
+					"flags": [
+						"erin.knows_player_is_earther"
+					]
+				},
+				{
+					"text": "I tried to explain video games to Relc. It did not go well.",
+					"flags": [
+						"erin.knows_player_is_earther"
+					]
+				},
+				{
+					"text": "Let's keep the Earth thing between us. People here might not understand.",
+					"flags": [
+						"erin.knows_player_is_earther"
+					]
 				}
 			],
 			"options": [
@@ -115,6 +139,29 @@
 					"id": "inn",
 					"label": "Ask Erin about the inn",
 					"action": "talk_with_guest"
+				},
+				{
+					"id": "earth",
+					"label": "Tell Erin you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"erin.knows_player_is_earther"
+					],
+					"set_flags": [
+						"erin.knows_player_is_earther"
+					],
+					"relationship": 3,
+					"page": {
+						"title": "From Earth",
+						"lines": [
+							"You tell Erin you are from Earth. She stops wiping the table.",
+							"Erin: \"Earth? Like phones and school and pizza Earth? You're not joking?\"",
+							"You name a few things nobody here could know. She laughs and wipes her eyes.",
+							"Erin: \"Another Earther. I can't believe it. Come here!\"",
+							"[Erin hugs you hard, then lets go, a little embarrassed.]",
+							"Erin: \"You need a place to stay. Help me run the inn. I'll feed you.\""
+						]
+					}
 				}
 			]
 		},
@@ -796,6 +843,36 @@
 					"flags": [
 						"ryoka.geas_broken"
 					]
+				},
+				{
+					"text": "Keep quiet about home. I mean it. Not everyone here is friendly.",
+					"flags": [
+						"ryoka.knows_player_is_earther"
+					]
+				}
+			],
+			"options": [
+				{
+					"id": "earth",
+					"label": "Tell Ryoka you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"ryoka.knows_player_is_earther"
+					],
+					"set_flags": [
+						"ryoka.knows_player_is_earther"
+					],
+					"relationship": 2,
+					"page": {
+						"title": "Another One",
+						"lines": [
+							"You tell Ryoka you are from Earth. Her eyes narrow at once.",
+							"Ryoka: \"Prove it. Name a country. Name a song everyone hates.\"",
+							"You do. She stares at you for a long moment, then breathes out.",
+							"Ryoka: \"Fine. I believe you. Don't go telling everyone.\"",
+							"Ryoka: \"People here would use what we know. Keep your head down.\""
+						]
+					}
 				}
 			]
 		},
@@ -2261,6 +2338,30 @@
 						"laken.heard_that_zel_shivertail_is_dead"
 					]
 				}
+			],
+			"options": [
+				{
+					"id": "earth",
+					"label": "Tell Laken you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"laken.knows_player_is_earther"
+					],
+					"set_flags": [
+						"laken.knows_player_is_earther"
+					],
+					"relationship": 2,
+					"page": {
+						"title": "A Voice From Home",
+						"lines": [
+							"You tell Laken you are from Earth. He turns his head toward your voice.",
+							"Laken: \"Truly? Then tell me something only an Earther would say.\"",
+							"You talk about traffic, phones and bad coffee. A slow smile spreads on his face.",
+							"Laken: \"I stepped out of a food court into a forest. Strange what you miss.\"",
+							"Laken: \"You are welcome in my lands. Few here understand where we came from.\""
+						]
+					}
+				}
 			]
 		},
 		"calruz": {
@@ -2320,6 +2421,100 @@
 					"flags": [
 						"calruz.in_watch_prison"
 					]
+				}
+			]
+		},
+		"rose": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.23"
+			},
+			"note": "M30.4: only the one-time Earther talk. Cautious; wants to find other Earthers (npcs.json summary).",
+			"options": [
+				{
+					"id": "earth",
+					"label": "Tell Rose you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"rose.knows_player_is_earther"
+					],
+					"set_flags": [
+						"rose.knows_player_is_earther"
+					],
+					"relationship": 2,
+					"page": {
+						"title": "Rose",
+						"lines": [
+							"You tell Rose you are from Earth. She looks you over, careful.",
+							"Rose: \"Where did you arrive? Who found you first?\"",
+							"You tell her. She listens closely and asks good questions.",
+							"Rose: \"We should stay in touch. Earthers need to look out for each other.\""
+						]
+					}
+				}
+			]
+		},
+		"joseph": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.37"
+			},
+			"note": "M30.4: only the one-time Earther talk. Eager; wants to be an adventurer (npcs.json summary).",
+			"options": [
+				{
+					"id": "earth",
+					"label": "Tell Joseph you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"joseph.knows_player_is_earther"
+					],
+					"set_flags": [
+						"joseph.knows_player_is_earther"
+					],
+					"relationship": 2,
+					"page": {
+						"title": "Joseph",
+						"lines": [
+							"You tell Joseph you are from Earth. He grins and grabs your hand.",
+							"Joseph: \"No way! Another one! Have you got a class yet? Levels?\"",
+							"He talks fast about monsters, swords and becoming an adventurer.",
+							"Joseph: \"This world is wild. Scary, sure. But wild.\""
+						]
+					}
+				}
+			]
+		},
+		"imani": {
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 2,
+				"chapter": "2.37"
+			},
+			"note": "M30.4: only the one-time Earther talk. Deeply hurt, the only one of her group left (npcs.json summary).",
+			"options": [
+				{
+					"id": "earth",
+					"label": "Tell Imani you are from Earth",
+					"action": "talk_with_guest",
+					"not_flags": [
+						"imani.knows_player_is_earther"
+					],
+					"set_flags": [
+						"imani.knows_player_is_earther"
+					],
+					"relationship": 2,
+					"page": {
+						"title": "Imani",
+						"lines": [
+							"You tell Imani you are from Earth. She flinches, then looks up slowly.",
+							"Imani: \"Did you come alone? Are you safe here?\"",
+							"You tell her you are. She nods, but her hands still shake.",
+							"Imani: \"I didn't come alone either. I'm the only one left.\"",
+							"[Imani is quiet for a while. She does not ask you to go.]"
+						]
+					}
 				}
 			]
 		}

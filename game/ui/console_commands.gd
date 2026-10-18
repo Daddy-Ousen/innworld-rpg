@@ -400,6 +400,9 @@ func _use(args: Array) -> Array[String]:
 	var rec: Dictionary = r["record"]
 	out.append("%s  %s: %.1f XP  (novelty %.2f)" % [
 		_time_of(rec), db.actions[rec["action_id"]]["name"], float(rec["xp"]), float(rec["novelty"])])
+	if r.has("page"):  # M30.4: an own option's talk page
+		out.append("[%s]" % r["page"]["title"])
+		out.append_array(r["page"]["lines"])
 	return out
 
 

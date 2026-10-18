@@ -851,7 +851,7 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
 
 VOICE_ENTRY = {"confidence", "canon_ref", "greet", "idle", "lines", "options", "note"}
 VOICE_GATE = {"flags", "not_flags", "days", "min_band"}
-VOICE_OPTION = {"id", "label", "action", "context"}
+VOICE_OPTION = {"id", "label", "action", "context", "set_flags", "relationship", "page"}
 STRANGER = "stranger"
 
 
@@ -938,6 +938,17 @@ def check_voices(r: Report, voices, npc_ids: set[str], actions: set[str] | None,
                 r.err(ow, f"unknown action '{o['action']}'")
             if "context" in o and not isinstance(o["context"], dict):
                 r.err(ow, "context must be an object")
+            if "set_flags" in o:  # M30.4: what the option sets once it is done
+                _str_list(r, f"{ow}.set_flags", o["set_flags"], RE_FLAG)
+            if "relationship" in o and not _int(o["relationship"]):
+                r.err(ow, "relationship must be a whole number")
+            if "page" in o:
+                p = o["page"]
+                if not (isinstance(p, dict) and set(p) <= {"title", "lines"} and isinstance(p.get("title"), str)
+                        and p["title"].strip() and isinstance(p.get("lines"), list) and p["lines"]):
+                    r.err(ow, "page must be {title, lines} with a title and at least one line")
+                else:
+                    _voice_texts(r, f"{ow} page", p["lines"], max_words)
             _voice_gate(r, ow, o, VOICE_OPTION, bands)
 
 
