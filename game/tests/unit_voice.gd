@@ -268,3 +268,54 @@ func test_real_talk_with_erin() -> void:
 	assert_true(String(lines[0]).begins_with("Erin Solstice: \""), str(lines))
 	assert_eq(lines[1], "Erin Solstice: \"I cook too much pasta and eat it alone. Please eat some.\"")
 	assert_eq(gs.rng.to_dict(), before, "own greeting and line draw no gs.rng")
+
+
+## M30.3: the Books 2 - 8 cast.
+const LATER_CAST := ["lyonette", "mrsha", "bird", "ksmvr", "yvlon_byres", "numbtongue", "headscratcher",
+		"badarrow", "rabbiteater", "shorthilt", "zel_shivertail", "ilvriss", "jelaqua", "moore", "halrac",
+		"wesle", "octavia", "magnolia_reinhart", "laken_godart", "calruz"]
+
+
+func test_later_cast_has_voices() -> void:
+	var d := DataDb.load_dir()
+	for id: String in LATER_CAST:
+		assert_true(d.voices.has(id), "%s has a voice" % id)
+		var v: Dictionary = d.voices.get(id, {})
+		for band in [Voice.STRANGER, "acquaintance", "friend", "close friend"]:
+			assert_true((v.get("greet", {}) as Dictionary).has(band), "%s greets band %s" % [id, band])
+		assert_gte((v.get("idle", []) as Array).size(), 3, "%s has map barks" % id)
+		assert_gt((v.get("lines", []) as Array).size(), 0, "%s has lines after events" % id)
+		assert_true(d.canon.npcs.has(id), id)
+
+
+func test_later_cast_lines_follow_each_books_flags() -> void:
+	var d := DataDb.load_dir()
+	var keyed := 0
+	for id: String in LATER_CAST:
+		for l: Dictionary in d.voices[id]["lines"]:
+			assert_true(l.has("flags"), "%s: every later line waits for a story flag" % id)
+			keyed += 1
+	assert_gte(keyed, 60)
+
+
+func test_mrsha_acts_and_never_speaks() -> void:
+	var d := DataDb.load_dir()
+	var v: Dictionary = d.voices["mrsha"]
+	var texts: Array = (v["idle"] as Array).duplicate()
+	for band: String in v["greet"]:
+		texts.append_array(v["greet"][band])
+	for l: Dictionary in v["lines"]:
+		texts.append(l["text"])
+	for t in texts:
+		assert_true(String(t).begins_with("[") and String(t).ends_with("]"), "Mrsha is mute: %s" % t)
+
+
+func test_lines_depend_on_the_story() -> void:
+	var d := DataDb.load_dir()
+	var gs := GameState.new_game(20261018, d)
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail"), [] as Array[String], "no Zel line before his flags")
+	gs.flags["zel.drinks_milk_with_ashfire_bee_honey"] = true
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail").size(), 1)
+	gs.flags["zel.allied_with_magnolia"] = true
+	assert_eq(Voice.lines_now(gs, d, "zel_shivertail").size(), 2)
+
