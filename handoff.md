@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-10-19, local): M30.4 Earther meeting + M30.5 who you are
+- M30.4 (branch `feat/m30.4-earther-meeting`, [PR #211](https://github.com/Daddy-Ousen/innworld-rpg/pull/211)):
+  voice options may have `set_flags`, `relationship`, `page` (`Voice.apply`; `Interact.perform` returns `page`;
+  `SystemMessages.talk_page` shows it with the NPC's face). One-time "earth" talks on Erin (+3), Ryoka, Laken, Rose,
+  Imani, Joseph (+2). Flags `<name>.knows_player_is_earther`. Test `sim_earther_meeting`.
+- M30.5 (branch `feat/m30.5-who-you-are`, stacked on M30.4, PR to main): save v23 (`player.name/look/background`),
+  `core/player_identity.gd`, `data/backgrounds.json`, looks `player_2` – `player_6` (sheets built), `ui/create_player.gd`
+  inside a scroll box in `ui/title_menu.gd`. Test `unit_player_identity`. Detail in ADR 0044 "M30.4" / "M30.5";
+  test lists in `progress.md`.
+- Next: user merges PR #211 first, then the M30.5 PR. Then the user plays M30 (`godot --path game`: New game ->
+  "Who are you?", talk to Erin -> "Tell Erin you are from Earth"). Then M31.0 design **[Opus · high]** (ask the
+  `foreshadow` / `beats` schema first, rule 11).
+- Gotchas: `Commands.sleep(..., Rest.ANYWHERE)` is refused inside the inn (`inn_interior`): a sleep loop there never
+  ends. Sleep at `liscor_gate` like `sim_canon_book1`, and cap the loop. A command moves NPCs on, so look up a voice
+  option with `Voice.options`, not the `Interact` row, after a command. `title.new_game()` still starts at once
+  (tests use it); the buttons go through `open_create`. Save is v23 now. The LPC clone is in this session's
+  scratchpad (`ulpc`, gone next session). `build_sprites` rewrites the CREDITS.md commit line: `git checkout CREDITS.md`.
+
 ## Just done (2026-10-18, local): M30.2 + M30.3 voices (branches `feat/m30.2-voices-book1`, `feat/m30.3-voices-books2-8`)
 - `game/data/voices.json` now has 35 NPC voices (15 Book 1 + 20 Books 2 - 8). No engine or schema change. Tests added to
   `game/tests/unit_voice.gd` (cast present, every gate flag is set by a real canon event, Mrsha mute, Book 1 options).
@@ -339,7 +357,7 @@
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken's days: game day = his journal day + 45 in every book (ADR 0028).
   Geneva, Niers (3.22L) and Venitra use placeholder days.
-- Save is v22 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
+- Save is v23 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: Book 6+ chapter files carry `"order"`; events then run in chapter order and file order
   (M18.0). Books 1 – 5 still run in id order. Use `depends_on` only for a real dependency (a cancel spreads).
   Siblings that share one dependency run in that order too, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.

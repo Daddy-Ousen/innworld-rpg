@@ -1,7 +1,8 @@
 ## The title screen (M6.1, the main scene): New game, Continue (the newest
 ## save), Load, Options (volumes, M12.1), Quit. With more than one start in rules.world.starts, New
-## game first asks where the player arrives (M8.5). Sets Session's game,
-## then opens the game screen. Presentation only.
+## game first asks where the player arrives (M8.5), then who the player is (M30.5,
+## CreatePlayer: name, look, background). Sets Session's game, then opens the game
+## screen. Presentation only.
 class_name TitleMenu
 extends Control
 
@@ -21,6 +22,12 @@ var new_game_seed := -1
 @onready var _load: Button = %Load
 @onready var _note: Label = %Note
 @onready var _starts: VBoxContainer = %Starts
+## M30.5: the "Who are you?" step (made in _ready). It sits in its own scroll box over the
+## whole screen, so a big menu size (a phone) can still reach Begin.
+var create: CreatePlayer
+var create_box: ScrollContainer
+## The start picked before the "Who are you?" step.
+var _start_id := ""
 ## The New game, Continue, Load, Options and Quit buttons (hidden while choosing a start).
 @onready var _menu: Array[Control] = [%NewGame, %Continue, %Load, %OptionsButton, %Quit]
 
@@ -35,6 +42,22 @@ func _ready() -> void:
 	if not shows_quit(OS.has_feature("web")):
 		_menu.erase(%Quit)
 		%Quit.hide()
+	create_box = ScrollContainer.new()
+	create_box.name = "CreateBox"
+	create_box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	create_box.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	create_box.follow_focus = true  # keys and pads scroll to the focused button
+	create_box.visible = false
+	$Center.add_sibling(create_box)
+	var middle := CenterContainer.new()
+	middle.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	middle.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	create_box.add_child(middle)
+	create = CreatePlayer.new()
+	create.visible = false
+	middle.add_child(create)
+	create.begun.connect(func(identity: Dictionary) -> void: new_game(_start_id, identity))
+	create.cancelled.connect(close_create)
 	slots.picked.connect(load_slot)
 	slots.cancelled.connect(_focus_first)
 	%Version.text = version_text()
@@ -66,7 +89,7 @@ func refresh() -> void:
 func open_starts() -> void:
 	var starts: Array = Session.db.rules.get("world", {}).get("starts", [])
 	if starts.size() <= 1:
-		new_game()
+		open_create("")
 		return
 	for child: Node in _starts.get_children():
 		if child is Button:
@@ -76,7 +99,7 @@ func open_starts() -> void:
 		var b := Button.new()
 		b.name = "Start_" + String(s["id"])
 		b.text = s["name"]
-		b.pressed.connect(new_game.bind(String(s["id"])))
+		b.pressed.connect(open_create.bind(String(s["id"])))
 		_starts.add_child(b)
 	var back := Button.new()
 	back.name = "Back"
@@ -103,15 +126,44 @@ func close_starts() -> void:
 	_focus_first()
 
 
-## Starts a new game at the start `start_id` ("" = the first).
-func new_game(start_id: String = "") -> void:
+## M30.5: the "Who are you?" step for the start `start_id`.
+func open_create(start_id: String) -> void:
+	_start_id = start_id
+	_show_starts(false)
+	for c: Control in _menu:
+		c.visible = false
+	create.setup(Session.db)
+	$Center.visible = false
+	create_box.visible = true
+	create.visible = true
+	create.name_edit.grab_focus()
+
+
+## Back from "Who are you?": to the start chooser when there is one, else the menu.
+func close_create() -> void:
+	create.visible = false
+	create_box.visible = false
+	$Center.visible = true
+	if Session.db.rules.get("world", {}).get("starts", []).size() > 1:
+		open_starts()
+	else:
+		_show_starts(false)
+		_focus_first()
+
+
+## Starts a new game at the start `start_id` ("" = the first) as `identity` (M30.5).
+func new_game(start_id: String = "", identity: Dictionary = {}) -> void:
 	Session.start_new_game(new_game_seed if new_game_seed >= 0 else int(Time.get_unix_time_from_system()),
-			start_id)
+			start_id, identity)
 	_enter()
 
 
 func _show_starts(on: bool) -> void:
 	_starts.visible = on
+	if create != null:
+		create.visible = false
+		create_box.visible = false
+		$Center.visible = true
 	for c: Control in _menu:
 		c.visible = not on
 

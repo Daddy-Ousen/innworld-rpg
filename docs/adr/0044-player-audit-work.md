@@ -217,6 +217,22 @@ User picks (rule 11): three new optional fields on a voice option; all six Earth
 - Canon is not touched: `sim_earther_meeting` plays the same seed with and without the talk to day 12 and gets the
   same history, drift 0 and the same RNG stream.
 
+### M30.5 (2026-10-19): who you are
+User picks (rule 11): save v23; backgrounds start their class pool 25 % full; 6 look presets.
+- Save v23: `player.name` (default "Earther", at most 20 characters), `player.look` (default "player"),
+  `player.background` ("" = none). `_migrate_22_to_23` gives an old save the defaults (old look, no head start).
+- New `data/backgrounds.json` (`DataDb.creation`): `pool_start` 0.25, `looks` [{id, name}] (the first is the old
+  "player" look) and `backgrounds` {id: {name, blurb, class}}: student → Scholar, cook → Cook, nurse → Healer,
+  athlete → Runner, office → Merchant, gamer → Strategist. All guesses. A background sets the flag
+  `background.<id>`; Erin has one line per background once she knows you are an Earther (M30.4 flag).
+- `core/player_identity.gd` (`PlayerIdentity`): `apply` (no `gs.rng`), `who` / `line`, `validate`. Python
+  `check_backgrounds` in `validate_data.py --all`.
+- Looks: `player_2` – `player_6` in `appearance.json` (3 female, 2 male; light, brown, black, olive skin), built
+  with `tools/build_sprites.py`. The world view and the fight bar show `gs.player.look`.
+- New game: start → "Who are you?" (`ui/create_player.gd`, built in code: name field, look arrows with a front
+  frame, 6 background buttons in a 3-wide grid, Back / Begin) → game. It sits in a full-screen scroll box, so at a
+  big menu size (a phone) Begin is one scroll away. The welcome page and the character sheet name the player.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

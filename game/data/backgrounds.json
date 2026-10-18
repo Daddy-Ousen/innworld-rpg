@@ -1,0 +1,22 @@
+{
+	"schema_version": 1,
+	"note": "M30.5 (ADR 0044). Character creation: the look presets and the Earth backgrounds. A background starts its class pool at pool_start of the class's offer_threshold and sets the flag background.<id> (voice lines use it). Old saves and a skipped pick have no background. Design values, not canon.",
+	"confidence": "guess",
+	"pool_start": 0.25,
+	"looks": [
+		{"id": "player", "name": "Look 1"},
+		{"id": "player_2", "name": "Look 2"},
+		{"id": "player_3", "name": "Look 3"},
+		{"id": "player_4", "name": "Look 4"},
+		{"id": "player_5", "name": "Look 5"},
+		{"id": "player_6", "name": "Look 6"}
+	],
+	"backgrounds": {
+		"student": {"name": "Student", "blurb": "You were at school, buried in books and exams.", "class": "scholar"},
+		"cook": {"name": "Cook", "blurb": "You worked long shifts in a hot kitchen.", "class": "cook"},
+		"nurse": {"name": "Nurse", "blurb": "You cared for the sick on long night shifts.", "class": "healer"},
+		"athlete": {"name": "Athlete", "blurb": "You trained every day and ran for fun.", "class": "runner"},
+		"office": {"name": "Office worker", "blurb": "You sold, counted and wrote emails for a living.", "class": "merchant"},
+		"gamer": {"name": "Gamer", "blurb": "You played strategy games late into the night.", "class": "strategist"}
+	}
+}

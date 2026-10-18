@@ -122,9 +122,10 @@ func changed() -> void:
 	state_changed.emit()
 
 
-## A new game from the title menu, at the start `start` ("" = the first).
-func start_new_game(seed_value: int, start: String = "") -> void:
-	set_state(GameState.new_game(seed_value, db, start))
+## A new game from the title menu, at the start `start` ("" = the first), as `identity`
+## (M30.5, PlayerIdentity: name, look, background).
+func start_new_game(seed_value: int, start: String = "", identity: Dictionary = {}) -> void:
+	set_state(GameState.new_game(seed_value, db, start, identity))
 	start_id = start
 	fresh = true
 

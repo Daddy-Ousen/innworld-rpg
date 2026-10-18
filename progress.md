@@ -191,7 +191,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_standing`, `unit_console`, `unit_data_db`, `unit_system_messages`, `sim_canon_book1` pass; validator 0 errors;
   Python 121 OK. Full suite not run.
   - [ ] The user tells Erin, then sees the page with her face (`godot --path game`, talk to Erin, "Tell Erin you are from Earth").
-- [ ] M30.5 who you are **[Opus · high]**.
+- [x] M30.5 who you are (2026-10-19, branch `feat/m30.5-who-you-are`, stacked on M30.4). User picks: save v23,
+  background pool 25 %, 6 look presets. `core/player_identity.gd`, `data/backgrounds.json` (6 backgrounds, flag
+  `background.<id>`, one Erin line each), `player_2` – `player_6` looks + sheets, `ui/create_player.gd` ("Who are
+  you?" after the start pick, in a scroll box), welcome page and character sheet name the player, view and fight bar
+  use the look. Save v22 -> v23 migration. Checked on renders at 100 % and 200 % menu size. Tests:
+  `unit_player_identity` (new, 12), `unit_play_loop` (changed title flow, +1), `unit_game_state`, `unit_voice`,
+  `unit_save_slots`, `unit_touch_controls`, `unit_ui_scale`, `unit_art`, `unit_class_system`, `unit_combat_screen`,
+  `unit_system_messages`, `unit_no_xp_shown`, `unit_console`, `unit_data_db`, `unit_standing`, `unit_spell_ui` pass;
+  `unit_world_view` 19 pass, 1 old red (stove count). Validator 0 errors; Python 124 OK. Full suite not run.
+  - [ ] The user makes a new game (name, look, background), then tells Erin about Earth (`godot --path game`).
+  - [ ] The user tries the "Who are you?" screen on a phone (touch, big menu size, the on-screen keyboard).
 
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 

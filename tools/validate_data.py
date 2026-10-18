@@ -975,6 +975,67 @@ def validate_voices(path: Path, canon_root: Path, actions: set[str] | None) -> R
     return r
 
 
+# ---------------------------------------------------------------- backgrounds (M30.5)
+
+BACKGROUND_FIELDS = {"name", "blurb", "class"}
+
+
+def check_backgrounds(r: Report, doc, classes: set[str], looks: set[str]) -> None:
+    """data/backgrounds.json: pool_start 0..1, look presets (with a look in appearance.json, 'player'
+    kept for old saves), backgrounds {id: {name, blurb, class}} with a real class."""
+    if not isinstance(doc, dict):
+        r.err("backgrounds.json", "must be an object")
+        return
+    ps = doc.get("pool_start")
+    if not (isinstance(ps, (int, float)) and not isinstance(ps, bool) and 0 <= ps <= 1):
+        r.err("backgrounds.json", "pool_start must be a number from 0 to 1")
+    if doc.get("confidence") not in CONFIDENCE:
+        r.err("backgrounds.json", f"confidence must be one of {sorted(CONFIDENCE)}")
+    seen: set[str] = set()
+    for i, lk in enumerate(doc.get("looks", []) if isinstance(doc.get("looks"), list) else []):
+        where = f"backgrounds.json looks[{i}]"
+        if not (isinstance(lk, dict) and isinstance(lk.get("id"), str) and str(lk.get("name", "")).strip()):
+            r.err(where, "needs an id and a name")
+            continue
+        if lk["id"] in seen:
+            r.err(where, f"look '{lk['id']}' is listed twice")
+        seen.add(lk["id"])
+        if lk["id"] not in looks:
+            r.err(where, f"look '{lk['id']}' is not in appearance.json")
+    if "player" not in seen:
+        r.err("backgrounds.json", "looks must keep 'player' (old saves use it)")
+    bgs = doc.get("backgrounds", {})
+    if not isinstance(bgs, dict):
+        r.err("backgrounds.json", "backgrounds must be an object")
+        return
+    for bid, b in bgs.items():
+        where = f"backgrounds.json background {bid}"
+        if not RE_FLAG.match(f"background.{bid}"):
+            r.err(where, "id must work as a flag part (lower case, digits, _)")
+        if not isinstance(b, dict):
+            r.err(where, "must be an object")
+            continue
+        for k in b:
+            if k not in BACKGROUND_FIELDS:
+                r.err(where, f"unknown field '{k}'")
+        for k in sorted(BACKGROUND_FIELDS):
+            if not (isinstance(b.get(k), str) and b[k].strip()):
+                r.err(where, f"{k} must be a non-empty string")
+        if isinstance(b.get("class"), str) and b["class"] not in classes:
+            r.err(where, f"unknown class '{b['class']}'")
+
+
+def validate_backgrounds(data_dir: Path) -> Report:
+    r = Report()
+    doc = _load(r, data_dir / "backgrounds.json")
+    cls = _load(r, data_dir / "classes.json")
+    app = _load(r, data_dir / "appearance.json")
+    if doc is None or not isinstance(cls, dict) or not isinstance(app, dict):
+        return r
+    check_backgrounds(r, doc, set(cls.get("classes", {})), set(app.get("looks", {})))
+    return r
+
+
 def _book_dirs(canon_root: Path) -> list[Path]:
     dirs = [p for p in canon_root.iterdir() if p.is_dir() and _book_from_dir(p) is not None]
     return sorted(dirs, key=lambda p: _book_from_dir(p))
@@ -1034,6 +1095,12 @@ def main(argv: list[str] | None = None) -> int:
         for e in rep.errors:
             print(f"ERROR {e}")
         print(f"voices.json: {len(rep.errors)} errors")
+        errors += len(rep.errors)
+    if args.all and (base.parent / "backgrounds.json").exists():
+        rep = validate_backgrounds(base.parent)
+        for e in rep.errors:
+            print(f"ERROR {e}")
+        print(f"backgrounds.json: {len(rep.errors)} errors")
         errors += len(rep.errors)
     return 1 if errors else 0
 

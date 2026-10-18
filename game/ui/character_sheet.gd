@@ -41,6 +41,7 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var p := gs.progression
 	var awake := gs.clock.awake_minutes
 	var out: Array[String] = [
+		PlayerIdentity.line(gs, db),  # M30.5
 		"Day %d, %s. Awake %dh %02dm." % [Clock.player_day(gs.clock.day(), db.rules["clock"]), gs.clock.time_string(), awake / 60, awake % 60],
 		"Race: %s." % gs.race.capitalize(),
 		Hud.health(gs, db),

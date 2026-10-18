@@ -27,6 +27,11 @@ var held: String = ""
 ## none) and the trips made on that day (Portal).
 var portal_day: int = -1
 var portal_trips: int = 0
+## M30.5 (save v23, PlayerIdentity): the player's name, look preset (a sheet id in
+## assets/characters) and Earth background id ("" = none).
+var name: String = PlayerIdentity.DEFAULT_NAME
+var look: String = PlayerIdentity.DEFAULT_LOOK
+var background: String = ""
 
 
 func is_placed() -> bool:
@@ -46,7 +51,7 @@ func place(to_area: String, at: Vector2i) -> void:
 func to_dict() -> Dictionary:
 	return {"area": area, "x": x, "y": y, "facing": facing, "sub_seconds": sub_seconds,
 		"hp": hp, "mp": mp, "mp_minutes": mp_minutes, "held": held, "portal_day": portal_day,
-		"portal_trips": portal_trips}
+		"portal_trips": portal_trips, "name": name, "look": look, "background": background}
 
 
 ## Accepts {} (a migrated v3 save): a player who is not placed yet.
@@ -63,4 +68,7 @@ static func from_dict(d: Dictionary) -> PlayerState:
 	p.held = d.get("held", "")
 	p.portal_day = int(d.get("portal_day", -1))
 	p.portal_trips = int(d.get("portal_trips", 0))
+	p.name = String(d.get("name", PlayerIdentity.DEFAULT_NAME))
+	p.look = String(d.get("look", PlayerIdentity.DEFAULT_LOOK))
+	p.background = String(d.get("background", ""))
 	return p
