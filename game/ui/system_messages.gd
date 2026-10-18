@@ -24,6 +24,7 @@ const OFFER := "offer"
 const CONFIRM := "confirm"
 const RESULT := "result"
 const MORNING := "morning"
+const STORY_END := "story_end"
 const WELCOME := "welcome"
 const FATE := "fate"
 
@@ -36,6 +37,13 @@ const STRIKE := "strike"
 const SPARE := "spare"
 
 const SILENT_LINE := "The System is silent."
+
+## The end of the written story (M29.4): shown once, after the last canon day.
+const STORY_END_LINES: Array[String] = [
+	"The story of the books is told up to here. This game has no more of it.",
+	"The world goes on. The inn stays open, the guests still come, and your friends still need you.",
+	"Keep playing. What happens next is yours.",
+]
 
 ## The key list: the help page (H, M15.2).
 const KEYS: Array[String] = [
@@ -95,6 +103,8 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 	if (night.get("world", []) as Array).has(Director.UNRELIABLE_LINE):
 		out.append(page(DRIFT, "A Warning", [Director.UNRELIABLE_LINE]))
 	out.append_array(offer_pages(gs, db))
+	if night.get("story_end", false):
+		out.append(page(STORY_END, "The Story So Far", STORY_END_LINES))
 	var morning: Array[String] = []
 	if out.is_empty():
 		morning.append(SILENT_LINE)

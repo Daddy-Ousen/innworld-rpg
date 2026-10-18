@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-18, local): M29.3 – M29.5 (branch `feat/m29.3-looks`, on top of the M29.2 branch)
+- M29.3 looks (Magnolia pink, Erin green shirt, Moore `scale` 1.35 via `CharacterSprite.scale_for`), M29.4 end page
+  (`Night.STORY_END_FLAG`, `CanonDb.last_day`, `SystemMessages.STORY_END`), M29.5 `WorldView.FIGHT_LIFT`. Three
+  commits. Test list in `progress.md`. ADR 0044 "M29.3 – M29.5". Full suite not run.
+- Next: user merges (M29.2 first, then this branch). Then M30 voices and the Earther **[Opus · high]**: ask the
+  NPC-voice schema question first. Antinium art is a later art step.
+- Gotchas: `unit_world_view` `test_use_menu_lists_and_uses` is red on this branch and was red before (Blue Pastry
+  stove actions: 9, not 8). LPC clone for sheets is in the old scratchpad `ulpc` (gone next session). `build_sprites`
+  rewrites the CREDITS.md commit line: `git checkout CREDITS.md` after. `sed -i` on a new file turned CRLF to LF
+  (harmless with autocrlf).
+
 ## Just done (2026-10-18, local): M29.2 Liscor is wary of Humans (branch `feat/m29.2-wary-liscor`)
 - `rules.standing.race_regard` (optional): `Standing.race_start` feeds `regard`; `Standing.shop_markup` feeds `Economy.price`
   (BUY only). Weight = clamp(1 - town reputation / fade, 0, 1). Data in `rules.json`; ADR 0044 "M29.2".

@@ -177,3 +177,21 @@ func test_npc_with_no_own_sheet_takes_its_race_look() -> void:
 	var s: Node = v.npcs.get_node("guard").get_child(0)
 	assert_true(s is CharacterSprite, "the generic Gnoll look")
 	assert_eq((s as CharacterSprite).texture.resource_path, CharacterSprite.path_for("race_gnoll"))
+
+
+func test_a_big_look_is_scaled_around_its_feet() -> void:
+	assert_eq(CharacterSprite.scale_for("moore"), 1.35, "Moore is drawn bigger")
+	assert_eq(CharacterSprite.scale_for("erin_solstice"), 1.0, "no scale means 1")
+	assert_eq(CharacterSprite.scale_for("no_such_look"), 1.0)
+	var big := CharacterSprite.make("moore")
+	var norm := CharacterSprite.make("erin_solstice")
+	assert_eq(big.scale, Vector2.ONE * 1.35)
+	assert_eq(norm.scale, Vector2.ONE)
+	assert_eq(norm.head(), CharacterSprite.HEAD, "label height unchanged at size 1")
+	assert_gt(big.head(), norm.head(), "label sits higher on a big look")
+	# The feet stay where they were: the bottom edge of the frame, scaled.
+	var feet_big: float = big.offset.y * big.scale.y + 32.0 * big.scale.y
+	var feet_norm: float = norm.offset.y + 32.0
+	assert_almost_eq(feet_big, feet_norm, 0.01)
+	big.free()
+	norm.free()

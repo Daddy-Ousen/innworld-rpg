@@ -6,6 +6,8 @@ extends RefCounted
 
 const COLLAPSE_LINE := "You collapsed. The System still works while you sleep."
 const KNOCKOUT_LINE := "You were knocked out. The System still works while you sleep."
+## Set once the page for the end of the written story has been made (M29.4).
+const STORY_END_FLAG := "story.end_shown"
 
 
 ## Runs one night: the player sleeps, or collapses (`collapsed` = true).
@@ -67,6 +69,12 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 		if n["kind"] == Director.NEWS:
 			news.append(n["text"])
 			lines.append("News: %s" % n["text"])
+	# 5c. The end of the written story: once, when every canon day is behind us.
+	var story_end := false
+	var last_canon := db.canon.last_day()
+	if last_canon > 0 and gs.world.last_day >= last_canon and not gs.flags.get(STORY_END_FLAG, false):
+		gs.flags[STORY_END_FLAG] = true
+		story_end = true
 	var warn := Winter.warning(gs, db)
 	if warn != "":
 		world.append(warn)
@@ -87,7 +95,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	gs.morning = lines.duplicate()
 	return {"days_passed": days, "records": records.size(), "offers": offered, "lines": lines,
 			"events": events, "collapsed": collapsed, "knocked_out": knocked_out,
-			"progress": progress, "news": news, "world": world}
+			"progress": progress, "news": news, "world": world, "story_end": story_end}
 
 
 ## Step 1: returns the records made since the last night, and starts a new day.

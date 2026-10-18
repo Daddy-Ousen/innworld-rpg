@@ -85,6 +85,15 @@ func test_the_bar_shows_the_order_and_the_ap() -> void:
 	assert_eq(m.bar.move_text(), "Move 3")
 
 
+func test_the_view_sits_lower_in_a_fight_to_clear_the_log() -> void:
+	var m := _main()
+	var lift: float = WorldView.FIGHT_LIFT / m.view.camera.zoom.y
+	assert_almost_eq(m.view.camera.offset.y, lift, 0.01, "the fight is above the log strip")
+	_session.gs.combat.fight = {}
+	_session.changed()
+	assert_eq(m.view.camera.offset, Vector2.ZERO, "no fight, the camera is centred")
+
+
 func test_the_ap_text_counts_quarters() -> void:
 	assert_eq(CombatBar._ap_string(24), "6")
 	assert_eq(CombatBar._ap_string(18), "4.5")

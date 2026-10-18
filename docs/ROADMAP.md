@@ -11,7 +11,7 @@ When every box of a milestone is ticked, move it to the top of Done. A new miles
 |---|---|---|---|
 | M27 Balance from player feedback | merged | user plays (level pace, trading) | – (user) |
 | M28 Book 8 (Blood of Liscor) | merged (PR #200) | `sim_canon_book8`; user plays Book 8 | `sim_canon_book8`: Sonnet · medium |
-| M29 Lore polish | M29.0 – M29.2 done | `docs/plans/m29.md` | M29.0 – M29.2: Opus · medium · M29.3 – M29.5: Sonnet · medium |
+| M29 Lore polish | M29.0 – M29.5 done | `docs/plans/m29.md` | M29.0 – M29.2: Opus · medium · M29.3 – M29.5: Sonnet · medium |
 | M30 Voices and the Earther | planned | `docs/plans/m30.md` | M30.0: Opus · high · M30.1: Opus · medium · M30.2 – M30.3: Sonnet · high · M30.4: Opus · medium · M30.5: Opus · high |
 | M31 Signposts and scene beats | planned | `docs/plans/m31.md` | M31.0: Opus · medium · M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned | `docs/plans/m32.md` | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
@@ -24,7 +24,7 @@ How to read the last column: pick that model and effort in the app before you st
 at the end of each step in "Next up" is the source; this column copies it. Reading agents that a step starts (book
 text, summaries only) run on Sonnet · medium. "(user)" steps need no model.
 
-Last release: v0.1.5-alpha (2026-10-15). Next step: user merges the M29.2 PR, then M29.3 (looks; asks about Antinium art and Moore's size).
+Last release: v0.1.5-alpha (2026-10-15). Next step: user merges the M29.2 – M29.5 PR(s), then M30 (voices and the Earther).
 
 ---
 
@@ -65,9 +65,9 @@ cascades are easy to get wrong; low for mechanical steps.
 - [x] M29.0 The System speaks like the books ("[Innkeeper Level 2!]", "[Skill – X obtained!]", "[X Class Obtained!]"); "Talk" instead of "Talk with a guest" **[Opus · medium]** (2026-10-17, `core/system_voice.gd`)
 - [x] M29.1 The inn's name and signs by flag (1.18); no generic patrons before the inn has regulars; schema asks **[Opus · medium]** (2026-10-17, save v22)
 - [x] M29.2 Liscor is wary of Humans: start regard and prices by NPC race in a town (schema ask) **[Opus · medium]** (2026-10-18, `rules.standing.race_regard`)
-- [ ] M29.3 Looks: Magnolia in pink, Erin's shirt colour, Moore's size; Antinium art (user: now or later) **[Sonnet · medium]**
-- [ ] M29.4 A page at the end of the written story **[Sonnet · medium]**
-- [ ] M29.5 The fight stays in view (not under the message box) **[Sonnet · medium]**
+- [x] M29.3 Looks: Magnolia in pink, Erin's shirt colour, Moore's size (Antinium art: later, user pick) **[Sonnet · medium]**
+- [x] M29.4 A page at the end of the written story **[Sonnet · medium]**
+- [x] M29.5 The fight stays in view (not under the message box) **[Sonnet · medium]**
 - [ ] (user) Look at it: the first night's System page, the inn on day 1 and day 14, Lism's prices, a fight at a map's edge
 **Done when:** each step's tests pass; the validator has 0 errors; the user has looked at it.
 

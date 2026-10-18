@@ -106,7 +106,7 @@ func _show_npcs(gs: GameState) -> void:
 			marker.add_child(square)
 		var name_text := String(_v.npc_names.get(id, id))
 		ViewArt.add_label(marker, name_text + " (down)" if down else name_text,
-				CharacterSprite.HEAD if sprite != null else 5.0 * U)
+				sprite.head() if sprite != null else 5.0 * U)
 		var most := int(_v.npc_max_hp.get(id, 0))
 		var now := int(n.get("hp", -1))
 		if most > 0 and now >= 0:

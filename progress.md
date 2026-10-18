@@ -145,6 +145,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   0 errors. Full suite not run.
   - [ ] The user talks to Lism and buys at his stall on day 1, then after some talks and serving (`godot --path game`).
 
+- [x] M29.3 – M29.5 (2026-10-18, branch `feat/m29.3-looks`, stacked on the M29.2 branch; three commits). Looks: Magnolia
+  pink, Erin green shirt, Moore `scale` 1.35 (new optional look key, user pick; Antinium art later). M29.4: one
+  "The Story So Far" page after the last canon day (flag `story.end_shown`, no save change). M29.5: camera offset
+  lifts the fight above the log strip. Tests: `unit_art` (+1), `unit_story_end` (new, 4), `unit_system_messages`,
+  `unit_night`, `unit_canon_db`, `unit_journal`, `unit_no_xp_shown`, `sim_decline`, `sim_30_days`, `unit_play_loop`,
+  `unit_game_state`, `unit_combat_screen` (+1), `unit_hud_log`, `unit_touch_controls`, `unit_ui_scale`, `unit_monster_art`,
+  `unit_portrait` pass. `unit_world_view` has 1 red (`test_use_menu_lists_and_uses`: stove actions, from the Blue Pastry
+  PR, not from this work). Full suite not run.
+  - [ ] The user looks at Erin, Magnolia and Moore, a fight at the bottom of a map, and the end page after day 163.
+
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 
 ## Audit (2026-10-08, local, read-only; no code changed)

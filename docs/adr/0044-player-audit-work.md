@@ -90,6 +90,14 @@ User pick (rule 11): regard and shop price. Schema: optional `rules.standing.rac
   `olesm`, `selys` (friendly to Erin in Books 1 – 2). Gnolls and Krshia: no change.
 - No save change. The gate-guard stranger line waits for M30.
 
+### M29.3 – M29.5 (2026-10-18)
+- Looks: Magnolia `all.lpcr.pink` dress and skirt, Erin a green T-shirt (guess). New optional look key `scale`
+  (user pick): `CharacterSprite.scale_for` reads it from `appearance.json`; the sprite scales around its feet and
+  `head()` moves the label. Moore 1.35. The sheet tool ignores the key. Antinium art: later, its own step.
+- End of the story: `CanonDb.last_day()`; `Night.run` sets flag `story.end_shown` once the director has passed it
+  and returns `story_end`; `SystemMessages` adds the page "The Story So Far" (text is a const, no rules key).
+- Fight view: `WorldView.FIGHT_LIFT` (60 px) moves the camera offset down while `combat.has_fight()`.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

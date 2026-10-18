@@ -368,6 +368,15 @@ func _build_book_start() -> void:
 
 ## The place's name now (M29.1, ADR 0044): the last entry of its optional `names`
 ## [{flag, name}] whose flag is set, else its `name`. An unknown id comes back as is.
+## The last day any canon event can happen (the end of the written story), or 0
+## when there are no events.
+func last_day() -> int:
+	var last := 0
+	for id: String in events:
+		last = maxi(last, int(events[id]["window"].get("latest", 0)))
+	return last
+
+
 func location_name(flags: Dictionary, id: String) -> String:
 	var loc: Dictionary = locations.get(id, {})
 	var out := String(loc.get("name", id))

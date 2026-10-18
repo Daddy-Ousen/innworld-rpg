@@ -68,6 +68,8 @@ const TEXT_SCALE := ViewArt.TEXT_SCALE
 const ANIM_FPS := ViewMap.ANIM_FPS
 const STEP_TIME := ViewEffects.STEP_TIME
 const NOSE := 4 * U
+## M29.5: in a fight the camera sits this many screen pixels lower on the map.
+const FIGHT_LIFT := 60.0
 const HIDDEN_TILE := ViewMarkers.HIDDEN_TILE
 const HOSTILE_EDGE := ViewMarkers.HOSTILE_EDGE
 const FLEE_EDGE := ViewMarkers.FLEE_EDGE
@@ -230,6 +232,11 @@ func refresh(gs: GameState, db: DataDb = null, replayed: bool = false) -> void:
 		elif new_area or old != player.position or not look.is_walking():
 			look.finish()
 			look.pose(gs.player.facing)
+	# M29.5: in a fight the view sits lower on the map, so the fighters stay
+	# above the log strip at the bottom of the screen.
+	var lift := FIGHT_LIFT / camera.zoom.y if gs.combat.has_fight() else 0.0
+	if not is_equal_approx(camera.offset.y, lift):
+		camera.offset = Vector2(0.0, lift)
 	if new_area:  # jump, do not glide across the new map
 		camera.reset_smoothing()
 	var snap := AnimDiff.snapshot(gs, Stats.max_hp(gs, db) if db != null else 0)

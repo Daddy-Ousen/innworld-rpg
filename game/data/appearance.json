@@ -42,7 +42,7 @@
 				},
 				{
 					"part": "torso_clothes_tshirt",
-					"color": "white"
+					"color": "green"
 				},
 				{
 					"part": "legs_pants",
@@ -54,7 +54,7 @@
 				}
 			],
 			"confidence": "guess",
-			"note": "T-shirt, blue jeans and shoes (1.00, 1.01, 1.11). Hair and eye colour are not stated in Books 1-4: a brown ponytail is a guess."
+			"note": "T-shirt, blue jeans and shoes (1.00, 1.01, 1.11). The shirt colour (green) is a guess, so it does not read as skin in warm light. Hair and eye colour are not stated in Books 1-4: a brown ponytail is a guess."
 		},
 		"pisces": {
 			"body": "male",
@@ -3391,11 +3391,11 @@
 				},
 				{
 					"part": "torso_clothes_longsleeve",
-					"color": "rose"
+					"color": "all.lpcr.pink"
 				},
 				{
 					"part": "legs_skirts_plain",
-					"color": "rose"
+					"color": "all.lpcr.pink"
 				},
 				{
 					"part": "feet_boots_basic",
@@ -3460,8 +3460,9 @@
 					"color": "simple"
 				}
 			],
+			"scale": 1.35,
 			"confidence": "guess",
-			"note": "Huge, gentle part-Giant mage of the Halfseekers. The size is not drawn. Looks are guesses."
+			"note": "Huge, gentle part-Giant mage of the Halfseekers. Drawn 1.35 times as big (scale). Looks are guesses."
 		},
 		"ocelos": {
 			"body": "male",

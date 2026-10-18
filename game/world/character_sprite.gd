@@ -22,6 +22,9 @@ const ATTACK_FRAMES := 6
 ## Facing → row inside a 4-row animation.
 const DIR_ROW := {"n": 0, "w": 1, "s": 2, "e": 3}
 const PATH := "res://assets/characters/%s.png"
+const APPEARANCE := "res://data/appearance.json"
+## Feet and head of an unscaled frame, in pixels from the node (down is plus).
+const FEET := 14.0
 ## The frame centre is this far above the cell centre, so the feet are
 ## a little above the cell's bottom edge.
 const LIFT := 18.0
@@ -39,6 +42,10 @@ var shown: Array = ["walk", "s", 0]
 ## Which half of the walk cycle the next step plays (0 or 1).
 var half := 0
 var _tween: Tween
+## Size factor of this look (appearance.json "scale", default 1).
+var size_factor := 1.0
+static var _scales: Dictionary = {}
+static var _scales_read := false
 
 
 static func path_for(id: String) -> String:
@@ -70,6 +77,20 @@ static func look_for(id: String, race: String = "") -> String:
 	return generic if race != "" and has_sheet(generic) else ""
 
 
+## The "scale" of a look in appearance.json (1.0 when it has none).
+static func scale_for(look: String) -> float:
+	if not _scales_read:
+		_scales_read = true
+		if FileAccess.file_exists(APPEARANCE):
+			var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(APPEARANCE))
+			if data is Dictionary and data.get("looks") is Dictionary:
+				for k in data["looks"]:
+					var l: Variant = data["looks"][k]
+					if l is Dictionary and l.has("scale"):
+						_scales[String(k)] = clampf(float(l["scale"]), 0.5, 2.0)
+	return float(_scales.get(look, 1.0))
+
+
 ## A new sprite for `id`, or null when there is no sheet.
 static func make(id: String) -> CharacterSprite:
 	if not has_sheet(id):
@@ -77,9 +98,17 @@ static func make(id: String) -> CharacterSprite:
 	var s := CharacterSprite.new()
 	s.texture = load(path_for(id))
 	s.region_enabled = true
-	s.offset = Vector2(0, -LIFT)
+	s.size_factor = scale_for(id)
+	s.scale = Vector2.ONE * s.size_factor
+	# Scale around the feet, so a big look still stands on its cell.
+	s.offset = Vector2(0, -(FRAME / 2.0 - FEET / s.size_factor))
 	s.show_frame("walk", "s", 0)
 	return s
+
+
+## Height of the head above the node, for labels (HEAD when the size is 1).
+func head() -> float:
+	return (HEAD + FEET) * size_factor - FEET
 
 
 ## Shows one frame. Both frame sizes share a centre, so the feet stay put.
