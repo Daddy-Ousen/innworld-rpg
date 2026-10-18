@@ -180,6 +180,18 @@ Ids (checked): `erin_solstice`, `relc`, `klbkch`, `pisces`, `olesm`, `selys`, `k
 - Python: `validate_data.py --all` also checks `voices.json` (`check_voices`, `validate_voices`). No copy check
   against book text for voices yet (they have no chapter); the tone rule and review cover it.
 
+### M30.2 (2026-10-18): the Book 1 cast
+- `data/voices.json` has the 15 entries (all `confidence: guess`): 2 lines per band for stranger, acquaintance,
+  friend, close friend (more for "wary" where the NPC starts wary: Liscor Drakes Zevara and Lism, M29.2), 4 – 5 idle
+  barks, 3 – 8 flag lines each. Toren speaks only in brackets. Ryoka, Klbkch, Zevara, Rags, Pawn have lines only.
+- Own options: Erin (work = `serve_guests`, chess 0.95, inn), Relc (spar), Pisces (magic, a talk), Olesm (chess 0.85),
+  Krshia (`haggle`), Toren (chess 0.3, after `toren.plays_chess`).
+- A new game starts on day 8 with the inn open, so a line gated on the inn being closed never shows. Lines gate on
+  flags that canon events really set (`unit_voice.test_book1_voice_flags_are_real` checks every flag).
+- A reading agent (Sonnet) checked traits against the Book 1 text; 11 fixes applied (eye colour, Rags's fire bug,
+  Pawn cleans the inn, Ceria and Pisces have history, and so on). The first talk with a voiced NPC now adds a greeting
+  line AND an own line (or topic), so `unit_talk_topics` expects 2 lines and `unit_standing` clears voices for the generic band line.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

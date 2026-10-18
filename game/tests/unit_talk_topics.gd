@@ -146,6 +146,6 @@ func test_real_data_loads_and_npcs_talk_once_a_day() -> void:
 	assert_eq(r["error"], "")
 	var said := func() -> int:
 		return gs.combat.lines.filter(func(l: String) -> bool: return l.begins_with("Krshia: \"")).size()
-	assert_eq(said.call(), 1, str(gs.combat.lines))
+	assert_eq(said.call(), 2, "her own greeting and one line: " + str(gs.combat.lines))
 	Interact.perform(gs, d, "krshia", "talk_with_guest")
-	assert_eq(said.call(), 1, "one topic a day")
+	assert_eq(said.call(), 2, "one talk a day")
