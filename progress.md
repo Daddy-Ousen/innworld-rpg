@@ -167,7 +167,23 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_talk_topics`, `unit_play_loop`, `unit_console`, `unit_data_db`, `unit_race_regard` pass; `unit_world_view`
   19 pass, 1 red (`test_use_menu_lists_and_uses`, old Blue Pastry stove count, not from this work). Validator books
   1 - 8 + voices: 0 errors. Python 120 OK. Full suite not run.
-- [ ] M30.2 voices for the Book 1 cast (15) **[Sonnet · high]**.
+- [x] M30.1 merged ([PR #208](https://github.com/Daddy-Ousen/innworld-rpg/pull/208)).
+- [x] M30.2 voices for the Book 1 cast (2026-10-18, branch `feat/m30.2-voices-book1`): 15 entries in `data/voices.json`
+  (Erin, Relc, Klbkch, Zevara, Beilmark, Pisces, Olesm, Selys, Krshia, Lism, Ryoka, Ceria, Pawn, Rags, Toren). Own
+  options: Erin (work, chess, inn), Relc (spar), Pisces (magic), Olesm (chess), Krshia (haggle), Toren (chess). A reading
+  agent fixed 11 lines. Tests: `unit_voice` (+5, now 21), `unit_talk_topics` and `unit_standing` (changed: a voiced NPC's
+  first talk gives a greeting AND a line), `unit_interact`, `unit_play_loop`, `unit_console`, `unit_race_regard`,
+  `unit_data_db`, `sim_canon_book1`, `unit_hud_log`, `unit_npc_react`, `unit_game_state` pass; validator: 0 errors;
+  Python 120 OK. `unit_world_view` still has the old red (`test_use_menu_lists_and_uses`). Full suite not run.
+- [x] M30.3 voices for the Books 2 – 8 cast (2026-10-18, branch `feat/m30.3-voices-books2-8`, stacked on M30.2): 20
+  entries (35 in all): Lyonette, Mrsha (brackets), Bird, Ksmvr, Yvlon, Numbtongue, Headscratcher, Badarrow, Rabbiteater,
+  Shorthilt, Zel, Ilvriss, Jelaqua, Moore, Halrac, Wesle, Octavia, Magnolia, Laken, Calruz. Every line waits for a story
+  flag. Options: Bird (archery), Yvlon (spar), Zel (stance), Octavia (haggle). Two reading agents fixed 33 lines; Book 6
+  flags (Zel's death) were checked against canon summaries only (no Book 6 text here). Tests: `unit_voice` (+4, now 21),
+  `unit_interact`, `unit_standing`, `unit_talk_topics`, `unit_data_db`, `unit_play_loop` pass; validator 0 errors; Python 120 OK.
+  Full suite not run.
+  - [ ] The user talks to Erin, Relc, Krshia and Toren on day 8 and walks past them (barks), then later to Zel and Mrsha (`godot --path game`).
+- [ ] M30.4 the Earther meeting with Erin **[Opus · medium]**; M30.5 who you are **[Opus · high]**.
 
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 

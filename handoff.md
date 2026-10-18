@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-18, local): M30.2 + M30.3 voices (branches `feat/m30.2-voices-book1`, `feat/m30.3-voices-books2-8`)
+- `game/data/voices.json` now has 35 NPC voices (15 Book 1 + 20 Books 2 - 8). No engine or schema change. Tests added to
+  `game/tests/unit_voice.gd` (cast present, every gate flag is set by a real canon event, Mrsha mute, Book 1 options).
+  Detail in ADR 0044 "M30.2" and "M30.3"; test list in `progress.md`.
+- Two small test edits: `unit_talk_topics` (a first talk with a voiced NPC now logs 2 lines) and `unit_standing`
+  (clears `_db.voices` for the generic band line).
+- Next: user merges the two PRs (M30.2 first). Then M30.4 the Earther meeting **[Opus · medium]**: a one-time option
+  "Tell Erin you are from Earth" on Erin's voice (flag-gated, sets `erin.knows_player_is_earther` through an action
+  effect), a 4 - 6 line text page, Ryoka and other Earthers react once. Check `sim_canon_book1` drift 0.
+- Gotchas: a new game starts on DAY 8 with the inn open, so lines for days 1 - 7 never show. Voices use flag names from
+  canon `set_flags`; the test `test_book1_voice_flags_are_real` catches typos. Book 6 text is not on this machine.
+  Write voice data as scratchpad JSON and merge with a script (tabs + CRLF). `git add game` sweeps in the untracked
+  `.uid` files: add paths by name. Reading agents (Sonnet) found about one wrong line in five: always fact-check.
+
 ## Just done (2026-10-18, local): M30.1 voice engine (branch `feat/m30.1-voice-engine`)
 - Built ADR 0044 "M30.0" as designed; detail in ADR 0044 "M30.1". Files: `game/core/voice.gd` (new),
   `game/world/view_bubbles.gd` (new), `game/data/voices.json` (new, empty), `game/data/rules.json` (`voice`),
