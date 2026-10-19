@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-19, local): release v0.1.6-alpha + Google Play closed test setup
+- Release: PR #214 merged (a366c24), tag `v0.1.6-alpha`, GitHub release with 3 zips + apk. Pages deploy ran from it.
+- `docs/PLAY_STORE.md`: section 0 now lists the author's fan-work rules and how we keep them (no book or series name in
+  marketing, "unofficial", credit to pirateaba, no crowdfunding). Description counts updated.
+- Play Console (Chrome, account "Thrive IT Solutions", app id 4974346913680933873): app made, all App content forms,
+  content rating, store listing, store settings and closed track "Alpha" countries done. Detail in `progress.md`.
+- The user dragged the AAB in. Taiwan removed from the closed track (IARC refused a rating there; Play blocks the
+  release otherwise). Release saved; 14 changes sent to Google for review (2026-10-19, up to 7 days).
+- Next: the user adds 12+ testers (Closed testing > Alpha > Testers) and keeps them opted in for 14 days, then applies
+  for production. Then M31.0 (see the older entry below).
+- Gotchas: the Chrome tool cannot upload files over 10 MB (the AAB is 88 MB): the user must drag it in. The asset
+  library upload took only the first file of a multi-file batch once; upload one at a time. The IARC form needs Save
+  before Next turns on. Store text must never name a book or the series (author's rule). A new rating refusal for a country means that country must leave every track.
+
 ## Just done (2026-10-19, local): ROADMAP update (branch `docs/roadmap-update`)
 - PR #211 (M30.4) and PR #212 (M30.5) are merged (main at bad8b49). `docs/ROADMAP.md`: M29 and M30 rows say merged,
   "All steps merged" lines, a phone check for "Who are you?", next step M31.0, outside PR #210 (DKemp98) in Later.

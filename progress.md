@@ -237,10 +237,24 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 ## Google Play (ADR 0037, `docs/PLAY_STORE.md`)
 - [x] Prep (2026-10-11, branch `feat/play-store-prep`, local): preset `Android Play` (Gradle, AAB, target API 36, min 29); `tools/release.ps1` builds `export/InnworldRPG-v<version>-play.aab` (`-PlayOnly` for only that); Gradle template in `game/android/` (gitignored); store graphics tool `tools/build_store_art.py`; `PRIVACY.md`; listing text and form answers. Built and checked: AAB 88 MB, signed with the release key (jarsigner ok), no permissions. Python tool tests 116 OK. No game code changed, so no GUT run. Full suite not run.
-- [ ] pirateaba says yes in writing (user). **No upload before this** (user pick 2026-10-11).
-- [ ] Play developer account, internal test on a phone, closed test (12 testers, 14 days), tablet check, production.
+- [x] Permission (user decision 2026-10-19): a mod on the author's Discord said fan games are fine while they keep the
+  author's fan-work rules. Store text reworded to keep them (`docs/PLAY_STORE.md` section 0). Keep the Discord screenshot.
+- [x] Play Console (2026-10-19, account "Thrive IT Solutions", Personal): app "Innworld RPG" created
+  (`org.daddyousen.innworldrpg`, Game, Free). App content all saved: privacy policy, no ads, no sign-in, no ad ID,
+  not government / financial / health, target 16-17 + 18+, data safety "no data". Content rating saved: ESRB Teen,
+  PEGI 16, USK 16; Taiwan refused a rating (not sold there). Store listing saved (text, icon, banner, 6 screenshots;
+  icon and banner labelled AI-assisted, user pick). Category Role Playing, email rhasan229@gmail.com, website GitHub.
+  Closed track "Alpha": 178 countries; release 1 draft has release notes.
+- [x] AAB uploaded (user dragged it in; version code 5, API 29+, target 36, arm64). Taiwan removed from the track
+  (rating refused there: 177 countries). Release saved and 14 changes sent to Google for review (2026-10-19; managed
+  publishing off, so the closed test goes live when approved; review takes up to 7 days).
+- [ ] The user adds 12+ testers (emails or a Google Group) to the closed track; 14 days; then apply for production.
+- [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] v0.1.6-alpha (2026-10-19, [PR #214](https://github.com/Daddy-Ousen/innworld-rpg/pull/214), merge commit a366c24,
+  tag `v0.1.6-alpha`): version code 5. Smoke tests pass (events=1403, maps=51, problems=0). GitHub release has the 3 zips
+  + signed apk; Pages deploy started from the release. The aab goes to Play only. No GUT run (no game code changed).
 - [x] v0.1.5-alpha (branch `release/v0.1.5`, 2026-10-15, local): version bump (Android code 4). Smoke tests pass (events=1134, maps=50, problems=0). Windows, Linux, Web zips + signed apk + play aab built in `export/`. Waits: user merges the PR, then tag `v0.1.5-alpha` + `gh release create` with the four files (zips + apk; the aab stays out, no Play upload yet).
 - [x] v0.1.3-alpha (branch `release/v0.1.3`, 2026-10-08, local): version bump (code 2), `tools/release.ps1` now also builds the signed apk. Smoke tests pass (events=1089, maps=40, problems=0). Three zips + `InnworldRPG-v0.1.3-alpha-android.apk` built. Waits: user merges the PR, then tag + `gh release create` with all four files.
 - Older releases v0.1.0 – v0.1.2, the README rewrite and the web build: see `docs/PROGRESS_ARCHIVE.md`.
