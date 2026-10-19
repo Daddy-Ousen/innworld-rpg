@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-19, local): ROADMAP update (branch `docs/roadmap-update`)
+- PR #211 (M30.4) and PR #212 (M30.5) are merged (main at bad8b49). `docs/ROADMAP.md`: M29 and M30 rows say merged,
+  "All steps merged" lines, a phone check for "Who are you?", next step M31.0, outside PR #210 (DKemp98) in Later.
+  Docs only, no tests run.
+- Next: user merges this PR. Then M31.0 signposts and scene beats engine **[Opus · medium]**: ask the `foreshadow` /
+  `beats` schema first (rule 11). Plan `docs/plans/m31.md`. User play checks for M29 / M30 stay open.
+- Gotchas: local `main` was stale (behind origin); branch from `origin/main`. Untracked `.uid` files and `web/` are
+  still in the tree: not committed here.
+
 ## Just done (2026-10-19, local): M30.4 Earther meeting + M30.5 who you are
 - M30.4 (branch `feat/m30.4-earther-meeting`, [PR #211](https://github.com/Daddy-Ousen/innworld-rpg/pull/211)):
   voice options may have `set_flags`, `relationship`, `page` (`Voice.apply`; `Interact.perform` returns `page`;
@@ -9,7 +18,7 @@
   `core/player_identity.gd`, `data/backgrounds.json`, looks `player_2` – `player_6` (sheets built), `ui/create_player.gd`
   inside a scroll box in `ui/title_menu.gd`. Test `unit_player_identity`. Detail in ADR 0044 "M30.4" / "M30.5";
   test lists in `progress.md`.
-- Next: user merges PR #211 first, then the M30.5 PR. Then the user plays M30 (`godot --path game`: New game ->
+- Merged (PR #211, #212). Then the user plays M30 (`godot --path game`: New game ->
   "Who are you?", talk to Erin -> "Tell Erin you are from Earth"). Then M31.0 design **[Opus · high]** (ask the
   `foreshadow` / `beats` schema first, rule 11).
 - Gotchas: `Commands.sleep(..., Rest.ANYWHERE)` is refused inside the inn (`inn_interior`): a sleep loop there never

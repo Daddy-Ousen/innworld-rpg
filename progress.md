@@ -202,6 +202,9 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_world_view` 19 pass, 1 old red (stove count). Validator 0 errors; Python 124 OK. Full suite not run.
   - [ ] The user makes a new game (name, look, background), then tells Erin about Earth (`godot --path game`).
   - [ ] The user tries the "Who are you?" screen on a phone (touch, big menu size, the on-screen keyboard).
+- [x] M30.4 and M30.5 merged ([PR #211](https://github.com/Daddy-Ousen/innworld-rpg/pull/211), [PR #212](https://github.com/Daddy-Ousen/innworld-rpg/pull/212), merge commit bad8b49).
+- [x] ROADMAP updated (2026-10-19, branch `docs/roadmap-update`): M29 and M30 marked merged, phone check for M30.5 added,
+  next step M31.0, outside PR #210 in Later. Docs only, no tests run.
 
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 
