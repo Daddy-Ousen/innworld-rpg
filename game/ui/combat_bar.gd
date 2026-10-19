@@ -197,7 +197,7 @@ func _face(gs: GameState, db: DataDb, id: String) -> Control:
 	var who := ""
 	var side := WorldView.ALLY_EDGE
 	if id == Encounter.PLAYER:
-		look = "player"
+		look = gs.player.look if CharacterSprite.has_sheet(gs.player.look) else PlayerIdentity.DEFAULT_LOOK
 		who = "You"
 	elif id.begins_with(Encounter.NPC):
 		var npc := id.substr(Encounter.NPC.length())

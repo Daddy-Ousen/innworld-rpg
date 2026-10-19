@@ -639,5 +639,36 @@ class VoicesTest(unittest.TestCase):
         rep = vd.validate_voices(root / "voices.json", root / "canon", acts)
         self.assertEqual(rep.errors, [])
 
+class BackgroundsTest(unittest.TestCase):
+    """M30.5: data/backgrounds.json checks (ADR 0044 "M30.5")."""
+
+    def check(self, doc):
+        r = vd.Report()
+        vd.check_backgrounds(r, doc, {"cook", "scholar"}, {"player", "player_2"})
+        return r.errors
+
+    def good(self):
+        return {"confidence": "guess", "pool_start": 0.25,
+                "looks": [{"id": "player", "name": "Look 1"}, {"id": "player_2", "name": "Look 2"}],
+                "backgrounds": {"cook": {"name": "Cook", "blurb": "Hot kitchens.", "class": "cook"}}}
+
+    def test_good_passes(self):
+        self.assertEqual(self.check(self.good()), [])
+
+    def test_errors(self):
+        d = self.good()
+        d["pool_start"] = 2
+        d["looks"] = [{"id": "player_2", "name": "A"}, {"id": "player_2", "name": "B"}, {"id": "nope", "name": "C"}]
+        d["backgrounds"]["Bad"] = {"name": "", "blurb": "x", "class": "wizard", "extra": 1}
+        text = " | ".join(self.check(d))
+        for bit in ["pool_start", "listed twice", "'nope' is not in appearance.json", "keep 'player'",
+                    "work as a flag part", "name must be", "unknown class 'wizard'", "unknown field 'extra'"]:
+            self.assertIn(bit, text)
+
+    def test_real_file(self):
+        root = Path(__file__).resolve().parents[2] / "game" / "data"
+        self.assertEqual(vd.validate_backgrounds(root).errors, [])
+
+
 if __name__ == "__main__":
     unittest.main()

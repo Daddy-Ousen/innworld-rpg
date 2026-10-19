@@ -116,7 +116,8 @@ func _ready() -> void:
 	if Session.fresh:
 		Session.fresh = false
 		var start := Movement.start_of(Session.db, Session.start_id)
-		dialog.open([SystemMessages.welcome_page(start)] as Array[Dictionary], Session.gs, Session.db)
+		dialog.open([SystemMessages.welcome_page(start,
+				PlayerIdentity.who(Session.gs, Session.db))] as Array[Dictionary], Session.gs, Session.db)
 
 
 func _redraw() -> void:

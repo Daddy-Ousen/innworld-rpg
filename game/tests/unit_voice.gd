@@ -286,6 +286,8 @@ func test_book1_voice_flags_are_real() -> void:
 		for o: Dictionary in d.voices[id].get("options", []):
 			for f: String in o.get("set_flags", []):
 				known[f] = true
+	for bg: String in PlayerIdentity.backgrounds(d):  # M30.5: a new game sets its background flag
+		known[PlayerIdentity.FLAG + bg] = true
 	for id: String in d.voices:
 		for f in _voice_flags(d.voices[id]):
 			assert_true(known.has(f), "%s: flag '%s' is set by no canon event" % [id, f])

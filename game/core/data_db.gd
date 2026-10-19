@@ -79,6 +79,8 @@ var spells: SpellDb = SpellDb.new()
 var talk: Dictionary = {}
 ## NPC voices (data/voices.json, M30.1): canon NPC id → voice. Empty in toy dbs.
 var voices: Dictionary = {}
+## Character creation (data/backgrounds.json, M30.5): looks and Earth backgrounds. Empty in toy dbs.
+var creation: Dictionary = {}
 var errors: Array[String] = []
 
 
@@ -114,6 +116,8 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.errors.append_array(TalkTopics.validate(db))  # rules.talk, talk.json (M25.1)
 	db.voices = _read_json(dir.path_join("voices.json"), load_errors).get("voices", {})
 	db.errors.append_array(Voice.validate(db))  # rules.voice, voices.json (M30.1)
+	db.creation = _read_json(dir.path_join("backgrounds.json"), load_errors)
+	db.errors.append_array(PlayerIdentity.validate(db))  # looks, backgrounds (M30.5)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
 			+ db.combat.errors + db.economy.errors + db.spells.errors
 	for e in db.errors:

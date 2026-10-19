@@ -12,7 +12,7 @@ When every box of a milestone is ticked, move it to the top of Done. A new miles
 | M27 Balance from player feedback | merged | user plays (level pace, trading) | – (user) |
 | M28 Book 8 (Blood of Liscor) | merged (PR #200) | `sim_canon_book8`; user plays Book 8 | `sim_canon_book8`: Sonnet · medium |
 | M29 Lore polish | M29.0 – M29.5 done | `docs/plans/m29.md` | M29.0 – M29.2: Opus · medium · M29.3 – M29.5: Sonnet · medium |
-| M30 Voices and the Earther | planned | `docs/plans/m30.md` | M30.0: Opus · high · M30.1: Opus · medium · M30.2 – M30.3: Sonnet · high · M30.4: Opus · medium · M30.5: Opus · high |
+| M30 Voices and the Earther | built, waits for play test | `docs/plans/m30.md` | M30.0: Opus · high · M30.1: Opus · medium · M30.2 – M30.3: Sonnet · high · M30.4: Opus · medium · M30.5: Opus · high |
 | M31 Signposts and scene beats | planned | `docs/plans/m31.md` | M31.0: Opus · medium · M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned | `docs/plans/m32.md` | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned | `docs/plans/m33.md` | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
@@ -24,7 +24,7 @@ How to read the last column: pick that model and effort in the app before you st
 at the end of each step in "Next up" is the source; this column copies it. Reading agents that a step starts (book
 text, summaries only) run on Sonnet · medium. "(user)" steps need no model.
 
-Last release: v0.1.5-alpha (2026-10-15). Next step: M30.5 who you are (name, look, background; M30.4 Earther meeting done, ADR 0044).
+Last release: v0.1.5-alpha (2026-10-15). Next step: the user plays M30 (voices, the Earther meeting, New game), then M31 signposts and scene beats (ADR 0044).
 
 ---
 
@@ -77,7 +77,7 @@ cascades are easy to get wrong; low for mechanical steps.
 - [x] M30.2 Voices for the Book 1 cast (15 NPCs; own words; a reading agent checks traits) **[Sonnet · high]** (2026-10-18)
 - [x] M30.3 Voices for the Books 2 – 8 cast, lines keyed to each book's big flags **[Sonnet · high]** (2026-10-18)
 - [x] M30.4 The Earther meeting with Erin (one time), and the other Earthers react **[Opus · medium]** (2026-10-19, ADR 0044 "M30.4")
-- [ ] M30.5 Who you are: name, look, Earth background; save v23 + migration **[Opus · high]**
+- [x] M30.5 Who you are: name, look, Earth background; save v23 + migration **[Opus · high]** (2026-10-19, ADR 0044 "M30.5")
 - [ ] (user) Play: talk to the Book 1 cast, tell Erin you are from Earth, start a new game
 **Done when:** the Book 1 cast has own greetings, lines and options; barks show; old saves load; the touched tests pass; the user has played it.
 

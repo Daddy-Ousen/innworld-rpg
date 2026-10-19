@@ -38,6 +38,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			19: out = _migrate_19_to_20(out)
 			20: out = _migrate_20_to_21(out)
 			21: out = _migrate_21_to_22(out)
+			22: out = _migrate_22_to_23(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -232,4 +233,15 @@ static func _migrate_21_to_22(d: Dictionary) -> Dictionary:
 			var flags: Dictionary = d.get("flags", {})
 			flags["wandering_inn.has_regulars"] = true
 			d["flags"] = flags
+	return d
+
+
+## v23 (M30.5, ADR 0044): who the player is. An old save keeps the old look and gets the
+## default name and no background (no class pool head start, no background flag).
+static func _migrate_22_to_23(d: Dictionary) -> Dictionary:
+	var p: Dictionary = d.get("player", {})
+	p["name"] = PlayerIdentity.DEFAULT_NAME
+	p["look"] = PlayerIdentity.DEFAULT_LOOK
+	p["background"] = ""
+	d["player"] = p
 	return d

@@ -29,6 +29,141 @@
 			"confidence": "guess",
 			"note": "The player is an unnamed Earther; plain modern clothes."
 		},
+		"player_2": {
+			"body": "female",
+			"skin": "light",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_bob",
+					"color": "ginger"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "M30.5 player look preset (character creation); plain modern Earth clothes."
+		},
+		"player_3": {
+			"body": "male",
+			"skin": "brown",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_buzzcut",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "green"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "white"
+				}
+			],
+			"confidence": "guess",
+			"note": "M30.5 player look preset (character creation); plain modern Earth clothes."
+		},
+		"player_4": {
+			"body": "female",
+			"skin": "black",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_curly_short",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "red"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "black"
+				}
+			],
+			"confidence": "guess",
+			"note": "M30.5 player look preset (character creation); plain modern Earth clothes."
+		},
+		"player_5": {
+			"body": "male",
+			"skin": "olive",
+			"parts": [
+				{
+					"part": "heads_human_male"
+				},
+				{
+					"part": "hair_swoop",
+					"color": "black"
+				},
+				{
+					"part": "torso_clothes_longsleeve",
+					"color": "white"
+				},
+				{
+					"part": "legs_pants",
+					"color": "navy"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "brown"
+				}
+			],
+			"confidence": "guess",
+			"note": "M30.5 player look preset (character creation); plain modern Earth clothes."
+		},
+		"player_6": {
+			"body": "female",
+			"skin": "olive",
+			"parts": [
+				{
+					"part": "heads_human_female"
+				},
+				{
+					"part": "hair_long",
+					"color": "dark_brown"
+				},
+				{
+					"part": "torso_clothes_tshirt",
+					"color": "blue"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "feet_shoes_basic",
+					"color": "white"
+				}
+			],
+			"confidence": "guess",
+			"note": "M30.5 player look preset (character creation); plain modern Earth clothes."
+		},
 		"erin_solstice": {
 			"body": "female",
 			"skin": "light",

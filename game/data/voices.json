@@ -115,6 +115,48 @@
 					"flags": [
 						"erin.knows_player_is_earther"
 					]
+				},
+				{
+					"text": "A student? Then you know more than me. Teach me something useful!",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.student"
+					]
+				},
+				{
+					"text": "You cooked for a living? Please save me from my own pasta.",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.cook"
+					]
+				},
+				{
+					"text": "A nurse! Thank goodness. People here get stabbed a lot.",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.nurse"
+					]
+				},
+				{
+					"text": "You trained every day back home? Good. You can outrun the crabs.",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.athlete"
+					]
+				},
+				{
+					"text": "Office work, huh? You can do my accounts. I can't count coins here.",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.office"
+					]
+				},
+				{
+					"text": "A gamer? Good. Chess tonight. No excuses.",
+					"flags": [
+						"erin.knows_player_is_earther",
+						"background.gamer"
+					]
 				}
 			],
 			"options": [

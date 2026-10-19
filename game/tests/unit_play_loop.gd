@@ -81,10 +81,28 @@ func test_title_new_game_asks_where_you_arrive() -> void:
 	var celum: Button = starts.get_node("Start_celum")
 	assert_eq(celum.text, "Arrive at Celum")
 	celum.pressed.emit()
+	assert_signal_not_emitted(t, "entered_game")  # M30.5: "Who are you?" comes first
+	assert_true(t.create.visible)
+	assert_false(starts.visible)
+	t.create.name_edit.text = "Mara"
+	(t.create.find_child("Bg_cook", true, false) as Button).pressed.emit()
+	t.create.begin.pressed.emit()
 	assert_signal_emitted(t, "entered_game")
 	assert_eq(_session.gs.player.area, "celum_gate")
+	assert_eq(_session.gs.player.name, "Mara")
+	assert_eq(_session.gs.player.background, "cook")
 	assert_eq(_session.start_id, "celum")
 	assert_true(_session.fresh)
+
+
+func test_title_who_are_you_back_returns_to_the_starts() -> void:
+	var t := _title()
+	watch_signals(t)
+	t.open_create("liscor")
+	(t.create.find_child("Back", true, false) as Button).pressed.emit()
+	assert_false(t.create.visible)
+	assert_true(t.get_node("%Starts").visible, "back to where you arrive")
+	assert_signal_not_emitted(t, "entered_game")
 
 
 func test_title_start_chooser_back_returns_to_the_menu() -> void:

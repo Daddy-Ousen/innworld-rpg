@@ -95,6 +95,8 @@ var object_art: Dictionary = {}
 var sign_table: Dictionary = {}
 ## The player's sprite (null = the red square).
 var look: CharacterSprite
+## The sheet id the player's sprite shows (M30.5: the chosen look preset).
+var look_id := ""
 ## NPC id → name shown over its marker.
 var npc_names: Dictionary = {}
 ## NPC id → race (canon npcs.json), for the generic look of an NPC with
@@ -181,10 +183,18 @@ func setup(maps: MapDb, names: Dictionary = {}, enemy_defs: Dictionary = {},
 	tiles.tile_set = make_tile_set(maps.tiles, atlas, false, sprites)
 	edges.tile_set = tiles.tile_set
 	area = ""
+	set_look(PlayerIdentity.DEFAULT_LOOK)
+
+
+## The player's sprite shows sheet `id` (M30.5); a look with no sheet shows the default one.
+func set_look(id: String) -> void:
+	if not CharacterSprite.has_sheet(id):
+		id = PlayerIdentity.DEFAULT_LOOK
+	look_id = id
 	if look != null:
 		player.remove_child(look)
 		look.queue_free()
-	look = CharacterSprite.make("player")
+	look = CharacterSprite.make(id)
 	if look != null:
 		player.add_child(look)
 	body.visible = look == null
@@ -200,6 +210,8 @@ func refresh(gs: GameState, db: DataDb = null, replayed: bool = false) -> void:
 	if _maps == null or not gs.player.is_placed():
 		return
 	_maps.sync_flags(gs.flags)  # the overlays are a cache shared by every game on this db
+	if gs.player.look != look_id and (CharacterSprite.has_sheet(gs.player.look) or look_id == ""):
+		set_look(gs.player.look)  # M30.5
 	var winter := _winter_flag != "" and gs.flags.has(_winter_flag)
 	if winter != _winter:
 		_winter = winter
