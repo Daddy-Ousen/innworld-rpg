@@ -9,6 +9,11 @@
 ## "not_flags" (none set), "days" [from, to], "min_band" (regard at or above the
 ## band's minimum in rules.standing.bands; "stranger" is the band with label "").
 ## Text in square brackets is an action, not speech ("[Toren rattles.]").
+##
+## M30.4: an option may also have "set_flags" [flag] (set once the option is done),
+## "relationship" (added to the NPC's relationship with the player) and "page"
+## {"title", "lines"} (a text page the screen shows). Its own not_flags make it a
+## one-time talk (the Earther meetings), so a voice still keeps no state.
 class_name Voice
 extends RefCounted
 
@@ -16,7 +21,7 @@ const STRANGER := "stranger"
 const RULE_FIELDS := ["bark_tiles", "bark_minutes", "max_words", "line"]
 const ENTRY_FIELDS := ["confidence", "canon_ref", "greet", "idle", "lines", "options", "note"]
 const GATE_FIELDS := ["flags", "not_flags", "days", "min_band"]
-const OPTION_FIELDS := ["id", "label", "action", "context"]
+const OPTION_FIELDS := ["id", "label", "action", "context", "set_flags", "relationship", "page"]
 const FNV_OFFSET := 2166136261
 const FNV_PRIME := 16777619
 
@@ -82,6 +87,21 @@ static func option(db: DataDb, npc: String, id: String) -> Dictionary:
 		if String(o["id"]) == id:
 			return o
 	return {}
+
+
+## M30.4: what a done option `opt` of `npc` changes: its set_flags and relationship.
+## Returns its page {"title", "lines"}, or {} (none).
+static func apply(gs: GameState, db: DataDb, npc: String, opt: Dictionary) -> Dictionary:
+	for f: String in opt.get("set_flags", []):
+		gs.flags[f] = true
+	var rel := int(opt.get("relationship", 0))
+	if rel != 0:
+		gs.world.add_relationship(npc, NpcSim.PLAYER, rel)
+	if not opt.has("page"):
+		return {}
+	var lines: Array[String] = []
+	lines.assign(opt["page"]["lines"])
+	return {"title": String(opt["page"]["title"]), "lines": lines}
 
 
 ## The map bark of `npc` for this game minute: one idle line per rules.voice.bark_minutes
@@ -238,7 +258,29 @@ static func _validate_entry(db: DataDb, id: String, v: Variant) -> Array[String]
 			errs.append("%s: unknown action '%s'." % [oat, od["action"]])
 		if od.has("context") and not od["context"] is Dictionary:
 			errs.append("%s: context must be an object." % oat)
+		errs.append_array(_effects(db, oat, od))
 		errs.append_array(_gate(db, oat, od, OPTION_FIELDS))
+	return errs
+
+
+## M30.4: set_flags (strings), relationship (a whole number), page {title, lines}.
+static func _effects(db: DataDb, at: String, o: Dictionary) -> Array[String]:
+	var errs: Array[String] = []
+	if o.has("set_flags") and not (o["set_flags"] is Array \
+			and (o["set_flags"] as Array).all(func(x: Variant) -> bool: return x is String)):
+		errs.append("%s: set_flags must be a list of strings." % at)
+	if o.has("relationship"):
+		var r: Variant = o["relationship"]
+		if not ((r is int) or (r is float and is_equal_approx(float(r), roundf(float(r))))):
+			errs.append("%s: relationship must be a whole number." % at)
+	if o.has("page"):
+		var p: Variant = o["page"]
+		if not (p is Dictionary and (p as Dictionary).get("title", null) is String \
+				and String(p["title"]).strip_edges() != "" and (p as Dictionary).get("lines", null) is Array \
+				and not (p["lines"] as Array).is_empty()):
+			errs.append("%s: page must be {title, lines} with a title and at least one line." % at)
+		else:
+			errs.append_array(_texts(db, at + " page", p["lines"]))
 	return errs
 
 

@@ -183,7 +183,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_interact`, `unit_standing`, `unit_talk_topics`, `unit_data_db`, `unit_play_loop` pass; validator 0 errors; Python 120 OK.
   Full suite not run.
   - [ ] The user talks to Erin, Relc, Krshia and Toren on day 8 and walks past them (barks), then later to Zel and Mrsha (`godot --path game`).
-- [ ] M30.4 the Earther meeting with Erin **[Opus · medium]**; M30.5 who you are **[Opus · high]**.
+- [x] M30.4 the Earther meeting (2026-10-19, branch `feat/m30.4-earther-meeting`). User picks: three optional voice
+  option fields (`set_flags`, `relationship`, `page`), all six Earthers react. Erin's talk: page "From Earth" (6 lines,
+  her face), +3, flag `erin.knows_player_is_earther`, 4 Earth lines after. Ryoka, Laken (+2) and new small entries for
+  Rose, Imani, Joseph. No save change. Tests: `sim_earther_meeting` (new, 5: once, lines, save, Ryoka, same canon
+  history and RNG with and without the talk), `unit_voice` (+3, now 24), `unit_interact`, `unit_talk_topics`,
+  `unit_standing`, `unit_console`, `unit_data_db`, `unit_system_messages`, `sim_canon_book1` pass; validator 0 errors;
+  Python 121 OK. Full suite not run.
+  - [ ] The user tells Erin, then sees the page with her face (`godot --path game`, talk to Erin, "Tell Erin you are from Earth").
+- [ ] M30.5 who you are **[Opus · high]**.
 
 - [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
 

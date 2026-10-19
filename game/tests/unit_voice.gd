@@ -163,6 +163,63 @@ func test_validate() -> void:
 	assert_false(text.contains("voice 'krshia'"), "the good entry passes")
 
 
+## M30.4: an option's set_flags, relationship and page; its own not_flags make it one-time.
+func test_option_effects_once() -> void:
+	var v := _voice()
+	(v["options"] as Array).append({"id": "earth", "label": "Tell her", "action": "talk_with_guest",
+		"not_flags": ["krshia.knows"], "set_flags": ["krshia.knows"], "relationship": 3,
+		"page": {"title": "Home", "lines": ["One.", "Two."]}})
+	var gs := _gs()
+	_db.voices = {"krshia": v}
+	var before := gs.rng.to_dict()
+	var r := Interact.perform(gs, _db, "krshia", Interact.VOICE + "earth")
+	assert_eq(r["error"], "")
+	assert_eq(r["page"], {"title": "Home", "lines": ["One.", "Two."] as Array[String]})
+	assert_true(gs.flags.get("krshia.knows", false))
+	assert_eq(gs.world.relationship("krshia", NpcSim.PLAYER), 3 + int(_db.rules["npc"]["talk_relationship"]))
+	assert_eq(gs.rng.to_dict(), before, "no gs.rng")
+	var row: Dictionary = Interact.options(gs, _db).filter(func(o: Dictionary) -> bool:
+		return o["id"] == "krshia")[0]
+	assert_false((row["voice"] as Array).any(func(o: Dictionary) -> bool: return o["id"] == "earth"), "once")
+	assert_ne(Interact.perform(gs, _db, "krshia", Interact.VOICE + "earth")["error"], "")
+	r = Interact.perform(gs, _db, "krshia", Interact.VOICE + "chess")
+	assert_false(r.has("page"), "an option with no page gives none")
+
+
+func test_validate_option_effects() -> void:
+	var v := _voice()
+	(v["options"] as Array).append_array([
+		{"id": "a", "label": "A", "action": "persuade", "set_flags": "x", "relationship": 1.5},
+		{"id": "b", "label": "B", "action": "persuade", "page": {"title": "T", "lines": []}},
+		{"id": "c", "label": "C", "action": "persuade", "page": {"title": "T", "lines": ["one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone"]}},
+		{"id": "d", "label": "D", "action": "persuade", "set_flags": ["x.ok"], "relationship": 2,
+		 "page": {"title": "T", "lines": ["Fine."]}}])
+	_db.voices = {"krshia": v}
+	var text := "\n".join(Voice.validate(_db))
+	for bit in ["set_flags must be", "relationship must be", "page must be", "more than 20 words"]:
+		assert_true(text.contains(bit), "%s in %s" % [bit, text])
+	assert_false(text.contains("options[5]"), "the good option passes: " + text)
+
+
+## M30.4: the Earthers the player can meet, each with a one-time Earth talk.
+const EARTHERS := {"erin_solstice": "erin", "ryoka_griffin": "ryoka", "laken_godart": "laken",
+		"rose": "rose", "imani": "imani", "joseph": "joseph"}
+
+
+func test_earthers_have_an_earth_talk() -> void:
+	var d := DataDb.load_dir()
+	for id: String in EARTHERS:
+		var o := Voice.option(d, id, "earth")
+		var flag := "%s.knows_player_is_earther" % EARTHERS[id]
+		assert_false(o.is_empty(), "%s has an earth talk" % id)
+		assert_eq(o.get("set_flags", []), [flag], id)
+		assert_eq(o.get("not_flags", []), [flag], "%s: once" % id)
+		var n := (o.get("page", {}).get("lines", []) as Array).size()
+		assert_true(n >= 4 and n <= 6, "%s: 4 - 6 lines, got %d" % [id, n])
+		assert_gte(int(o.get("relationship", 0)), 2, id)
+	assert_eq(int(Voice.option(d, "erin_solstice", "earth")["relationship"]), 3)
+
+
 func test_no_rules_no_voices() -> void:
 	var d := ToyData.db()
 	assert_false(Voice.on(d))
@@ -225,6 +282,10 @@ func test_book1_cast_has_voices() -> void:
 func test_book1_voice_flags_are_real() -> void:
 	var d := DataDb.load_dir()
 	var known := _canon_flags(d)
+	for id: String in d.voices:  # M30.4: a flag an own option sets is real too
+		for o: Dictionary in d.voices[id].get("options", []):
+			for f: String in o.get("set_flags", []):
+				known[f] = true
 	for id: String in d.voices:
 		for f in _voice_flags(d.voices[id]):
 			assert_true(known.has(f), "%s: flag '%s' is set by no canon event" % [id, f])
@@ -232,12 +293,12 @@ func test_book1_voice_flags_are_real() -> void:
 
 func test_book1_options() -> void:
 	var d := DataDb.load_dir()
-	var want := {"erin_solstice": ["work", "chess", "inn"], "relc": ["spar"], "pisces": ["magic"],
-			"olesm": ["chess"], "krshia": ["haggle"], "toren": ["chess"]}
+	var want := {"erin_solstice": ["work", "chess", "inn", "earth"], "relc": ["spar"], "pisces": ["magic"],
+			"olesm": ["chess"], "krshia": ["haggle"], "toren": ["chess"], "ryoka_griffin": ["earth"]}
 	for id: String in want:
 		var ids: Array = (d.voices[id]["options"] as Array).map(func(o: Dictionary) -> String: return o["id"])
 		assert_eq(ids, want[id], id)
-	for id: String in ["ryoka_griffin", "klbkch", "zevara", "rags", "pawn"]:
+	for id: String in ["klbkch", "zevara", "rags", "pawn"]:
 		assert_false(d.voices[id].has("options"), "%s has lines only" % id)
 
 
