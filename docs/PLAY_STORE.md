@@ -1,18 +1,28 @@
 # Google Play
 
 What we need to put Innworld RPG on Google Play, and the text for each Play Console page.
-Prepared 2026-10-11. Nothing is uploaded yet.
+Prepared 2026-10-11. Text checked against the author's rules 2026-10-19 (v0.1.6-alpha).
+Developer account: "Thrive IT Solutions" (Personal account, ID 8735138160545874037). Package `org.daddyousen.innworldrpg`.
 
-## 0. Stop: permission first
+## 0. Permission and the author's rules
 
-**Do not upload anything to Google Play until pirateaba says yes in writing.**
+**User decision 2026-10-19:** a moderator on the author's Discord said a fan game is fine to develop and release
+while it keeps the author's fan-work rules. Upload is allowed from now on. Keep a screenshot of that message:
+Google can ask for proof if someone reports the app (Play policy "Intellectual property").
 
-- Google Play removes apps that use another person's work without permission (Play policy "Intellectual property").
-- A removal gives the developer account a strike. Some strikes close the account, and Google can close other
-  accounts of the same person too.
-- pirateaba's fanworks policy (https://wanderinginn.com/fanworks-permissions/) does not name games. It says to
-  assume "not allowed" when in doubt (`docs/DESIGN.md` section 7).
-- Keep the written yes (email or Discord screenshot). Google can ask for it if someone reports the app.
+The rules, and how this listing keeps them:
+
+| Rule | How we keep it |
+|---|---|
+| No book or series names (trademarks) in marketing | Store text, graphics and screenshots never name a book or the series. Say "pirateaba's Innworld". |
+| No book covers in ads | Icon, feature graphic and screenshots are our own art and real game frames. |
+| Character names and scenes are fine, with credit | The description credits pirateaba for the characters, world and ideas. |
+| No copyrighted text or interior art | The game holds no book text (CLAUDE.md rule 10) and no art from the books or the website. |
+| No merchandise with the author's IP | We sell nothing. |
+| Do not license fan art to third parties | Our own art stays under the licences in `CREDITS.md`; we grant no rights in the author's IP. |
+| Do not claim it is official | The description says "unofficial" and "not made or approved by pirateaba". |
+| No crowdfunding | No Patreon, Ko-fi, donation or sponsor links anywhere (no `.github/FUNDING.yml`). |
+| Non-commercial | Free, no ads, no in-app purchases. Keep it that way. |
 
 ## 1. Build the AAB
 
@@ -78,7 +88,8 @@ powershell -ExecutionPolicy Bypass -File tools/release.ps1
 Make the graphics: `python tools/build_store_art.py` (reads `export/itch/screenshot_*.png`, writes `export/play/`).
 The screenshots are from the PC build (no touch buttons). Better: take new ones on a phone later.
 
-Marketing text says "pirateaba's Innworld". The book title stays only in the credit line (DESIGN section 7).
+Marketing text says "pirateaba's Innworld". It never names a book or the series, not even in the credit line
+(author's rule, section 0). The in-game credits (`CREDITS.md`) may keep the title: they are not marketing.
 
 ### Full description (4000 at most)
 
@@ -96,8 +107,10 @@ The books define how the world begins. You decide what happens next.
 • A real place to live in. Liscor, Celum, the Floodplains, the inn on the hill, the dungeon below. People keep their own schedules. Work at the inn, cook, take guests, go hungry, and get through the winter.
 
 In this alpha:
-• Books 1–7 as story data: 1,089 events, 296 characters, 122 places
-• 50 maps, day and night, winter snow
+• Books 1–8 as story data: 1,403 events, 319 characters, 127 places
+• 51 maps, day and night, winter snow
+• Make your own Earther: name, look and background
+• People talk: 35 characters have their own voice lines
 • Classes, levels, Skills, spells, tactical combat, traps, cooking, money, hunger, travel
 • Pixel art, animation, music and sound
 • Touch controls, 3 save slots and a morning autosave
@@ -105,7 +118,7 @@ In this alpha:
 
 This is an alpha. Expect bugs. Saves may not load in a later version.
 
-Fan work: a free, non-commercial fan game. The Wandering Inn and its world belong to pirateaba. The game holds no book text: events are short summaries in our own words. Read the story at wanderinginn.com and support the author.
+Fan work: an unofficial, free, non-commercial fan game. It is not made or approved by pirateaba. The characters, places, world and story ideas belong to pirateaba and are used with credit. The game holds no text or art from the books: events are short summaries in our own words. Read pirateaba's story online and support the author.
 
 Credits: art from the Liberated Pixel Cup (LPC) on OpenGameArt (CC-BY-SA), music by RandomMind and cynicmusic, sounds by Kenney (CC0), font Pixel Operator (CC0). Made with Godot. Full list and source code: github.com/Daddy-Ousen/innworld-rpg
 ```
