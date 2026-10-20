@@ -81,7 +81,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `unit_no_xp_shown`. All pass (202). Full suite not run. PR waits for the user to merge.
   - [x] Merged ([PR #106](https://github.com/Daddy-Ousen/innworld-rpg/pull/106), merge commit 6a79b46).
   - [ ] The user plays with touch and Menu size on a phone (browser build after the next release) and on a touch-screen PC.
-  - [x] M20.2 Android build (branch `feat/m20.2-android-build`, 2026-10-08, local; ADR 0034): preset `Android`, sensor landscape, ETC2/ASTC on. Debug APK exported (89 MB), signed, checked with apksigner and aapt. Not run on a phone (none plugged in). Icon (`game/icon.png`) and signed release APK added later the same day; keystore kept outside git (ADR 0034). Open: user installs and plays it; back up the keystore.
+  - [ ] M34 — Phone controls, second pass (user ask 2026-10-21: menus hard to pick from, Use button not ideal).
+  - [x] M34.P research + plan (2026-10-21, branch `docs/m34-phone-controls`): `docs/plans/m34.md`, ADR 0045, ROADMAP
+    M34 section (placed before M31). User took the picks: menus and button first (M34.0 – M34.2), tap the world
+    later (M34.3); same card on desktop; hold to attack on touch, Yes / No with keys. Docs only, no tests run.
+  - [ ] User merges the PR. Then M34.0 action card **[Opus · medium]**.
+- [x] M20.2 Android build (branch `feat/m20.2-android-build`, 2026-10-08, local; ADR 0034): preset `Android`, sensor landscape, ETC2/ASTC on. Debug APK exported (89 MB), signed, checked with apksigner and aapt. Not run on a phone (none plugged in). Icon (`game/icon.png`) and signed release APK added later the same day; keystore kept outside git (ADR 0034). Open: user installs and plays it; back up the keystore.
 - [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
   User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.
   Also fixed `sim_winter` (red on main since M18.2: Bird on a snow wall tile in the 4.32 G stage). Tests run: see ADR 0027 "M17.9".

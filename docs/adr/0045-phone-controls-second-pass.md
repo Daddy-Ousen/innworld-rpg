@@ -1,0 +1,42 @@
+# ADR 0045: Phone controls, second pass (M34)
+
+Status: accepted (2026-10-21).
+
+## Problem
+The user played on an Android phone and reported: it is hard to pick an option from a menu (a shop, a talk with
+an NPC), and the Use button is not ideal.
+
+The code shows why (`docs/plans/m34.md` section 1):
+- The use menu (`ui/interact_menu.gd`) is one flat `ItemList`. It holds every nearby object and every action of
+  each: a shop or a busy inn gives 15 – 40 rows.
+- One tap on a row runs it (`TouchControls.activate_on_tap`, M20.1). An `ItemList` does not scroll with a finger
+  drag, so a try to scroll picks a row. Attack has no guard.
+- Rows are one text line high: under the 48 dp touch minimum.
+- The Use button does not say what it will do. Outside a fight, a tap on the map does nothing.
+
+Other phone RPGs (Stardew Valley, Shattered Pixel Dungeon, Don't Starve: Pocket Edition) let the player tap a
+thing to walk to it and act, and use one context button whose label says what it does. Sources are in the plan.
+
+## Decision
+Presentation only. Core, data schemas and the save format do not change (rules 1, 2, 8). Rows still come from
+`Interact.options`; picks are the same strings (`Interact.trade_action`, `Interact.VOICE`, ...).
+
+- **Action card (M34.0):** two steps, target first, then action. One card per target: face, name, standing; big
+  buttons in groups (Talk, Serve, Trade, Learn, Other). Buttons fire on release and only if the finger moved less
+  than 12 px; a drag scrolls. 64 px rows at phone scale, 8 px gaps. It replaces the flat list on every platform
+  (user pick: one menu to keep). Keys: arrows, Enter, Esc.
+- **Attack guard (M34.0):** on touch, hold Attack for 0.6 s. With keys or a mouse, a "Attack <name>? Yes / No" box.
+- **Shop screen (M34.1):** Buy and Sell tabs, item cards, a count strip (− / + / Max, total, one Buy or Sell button).
+  It sends the existing trade picks with a count.
+- **Context button (M34.2):** replaces Use. It shows the nearest target's main action and name ("Talk · Erin"). With
+  2+ targets near, small chips pick the target. Bottom right, bigger than the other buttons. Menu moves to the top
+  right.
+- **Tap the world (M34.3, later):** outside a fight, a tap on a target walks next to it (normal move commands, so
+  rule 3 holds) and opens its card. Options "Controls: Tap + stick / Stick only" in the touch settings file, not in
+  `GameState`.
+
+## Consequences
+- Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
+- The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several
+  targets are near. With one target near, the card opens on it at once.
+- Layout must be checked on a phone render (2400 × 1080 at 250 %) and by the user on a phone.
