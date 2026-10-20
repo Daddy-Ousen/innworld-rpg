@@ -1,5 +1,17 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.P phone controls plan (branch `docs/m34-phone-controls`)
+- User: phone menus (shop, NPC talk) are hard to pick from; the Use button is not ideal. Asked for research + a proposal.
+- Wrote `docs/plans/m34.md` (root causes, what other phone RPGs do, steps M34.0 – M34.4), ADR 0045, ROADMAP M34
+  section (before M31). Root causes: flat `ItemList` in `ui/interact_menu.gd`, one tap fires via
+  `TouchControls.activate_on_tap`, no finger-drag scroll on `ItemList`, rows under 48 dp, no map tap outside fights
+  in `world/main_input.gd`. User picks: B – D first, same card on desktop (old list goes), hold to attack on touch.
+- Next: user merges the PR. Then M34.0 action card **[Opus · medium]**: new `ui/action_card.gd/.tscn`, wire it in
+  `world/main_panels.gd`, move the tests that drive the old list (`unit_world_view`, `unit_play_loop`, ...).
+- Gotchas: an unrelated `.gitignore` change and `web/` sit in the tree; not committed. Keep core
+  untouched: rows still come from `Interact.options`; trade picks use `Interact.trade_action(prefix, good, count)`.
+  Tap-walk must send normal move commands (determinism). Check layout on a phone render (Touch notes below).
+
 ## Just done (2026-10-19, local): release v0.1.6-alpha + Google Play closed test setup
 - Release: PR #214 merged (a366c24), tag `v0.1.6-alpha`, GitHub release with 3 zips + apk. Pages deploy ran from it.
 - `docs/PLAY_STORE.md`: section 0 now lists the author's fan-work rules and how we keep them (no book or series name in
