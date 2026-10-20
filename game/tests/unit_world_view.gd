@@ -161,15 +161,25 @@ func test_use_menu_lists_and_uses() -> void:
 	assert_false(main.menu.visible, "nothing to use at the start")
 	session.gs.player.place("inn_interior", Vector2i(20, 2))
 	main.open_use_menu()
-	assert_true(main.menu.visible)
+	var menu: InteractMenu = main.menu
+	assert_true(menu.visible)
 	assert_true(main.is_busy(), "no walking while the menu is open")
-	var items: ItemList = main.menu.get_node("%Items")
-	assert_eq(items.item_count, 8, "seven stove actions and Take Rolling pin")
-	assert_string_contains(items.get_item_text(7), "Take Rolling pin")
-	assert_string_contains(items.get_item_text(0), "Stove")
-	items.item_activated.emit(0)
-	assert_false(main.menu.visible)
+	# M34.0: one thing near (the stove, with a rolling pin on it): its card at once.
+	assert_eq(menu.page, InteractMenu.ACTIONS)
+	assert_eq(menu.title_text(), "Stove")
+	assert_gt(menu.rows().size(), 5, "the stove's cooking actions")
+	assert_eq(_texts(menu)[-1], "Take Rolling pin", "Take comes after the work")
+	assert_eq(menu.rows()[0]["action"], "cook_simple_meal")
+	menu.pick(0)
+	assert_false(menu.visible)
 	assert_eq(session.gs.action_log.records[-1]["action_id"], "cook_simple_meal")
+
+
+func _texts(menu: InteractMenu) -> Array[String]:
+	var out: Array[String] = []
+	for r: Dictionary in menu.rows():
+		out.append(String(r["text"]))
+	return out
 
 
 func test_npc_markers_with_names() -> void:
@@ -316,10 +326,11 @@ func test_take_block_throw_and_drop_keys() -> void:
 	var gs := _floodplains(session, Vector2i(14, 9))  # the loose stones are at 13,9
 	var main: Node = add_child_autofree(load("res://world/main.tscn").instantiate())
 	main.open_use_menu()
-	var items: ItemList = main.menu.get_node("%Items")
-	assert_eq(items.item_count, 1)
-	assert_eq(items.get_item_text(0), "Loose stones — Take Stone")
-	items.item_activated.emit(0)
+	var menu: InteractMenu = main.menu
+	assert_eq(menu.page, InteractMenu.ACTIONS, "one thing near: its card at once")
+	assert_eq(menu.title_text(), "Loose stones")
+	assert_eq(_texts(menu), ["Take Stone"] as Array[String])
+	menu.pick(0)
 	assert_eq(gs.player.held, "stone")
 	assert_string_contains(main.hud.get_node("%Health").text, "Held: Stone")
 	main.throw()

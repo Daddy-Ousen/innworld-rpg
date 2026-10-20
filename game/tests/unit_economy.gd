@@ -321,12 +321,10 @@ func test_trades_list_the_bag_count_and_the_bulk_size() -> void:
 func test_the_use_menu_offers_sell_all_and_buy_many() -> void:
 	var gs := _game_at("celum_square", "celum_stall")
 	Commands.give(gs, _db, 0, "herbs", 4)
-	var menu: InteractMenu = add_child_autofree(load("res://ui/interact_menu.tscn").instantiate())
-	assert_true(menu.open(Interact.options(gs, _db), _db))
-	var items: ItemList = menu.get_node("%Items")
 	var picks: Array[String] = []
-	for i in items.item_count:
-		picks.append(String(items.get_item_metadata(i)[1]))
+	for o: Dictionary in Interact.options(gs, _db):  # the rows of each card (M34.0)
+		for r: Dictionary in InteractMenu.action_rows(o, _db, gs):
+			picks.append(String(r["action"]))
 	assert_has(picks, "sell:herbs", "one at a time stays")
 	assert_has(picks, "sell:herbs#4", "sell all")
 	assert_has(picks, "buy:bread#%d" % int(_db.rules["economy"]["bulk_buy"]), "buy many")
