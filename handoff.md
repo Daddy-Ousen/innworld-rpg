@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.3 tap the world (branch `feat/m34.3-tap-world`)
+- New `game/world/main_tap.gd` (`MainTap`: `tap`, `next`, `cancel`, `walking`, static `target_at`). Wiring:
+  `world/main.gd` (`tapper`, `tap_world`, `cancel`, `_walking`, `_process` steps the walk), `world/main_input.gd`
+  (`world_tap`, `_tap_from`), `world/main_panels.gd` (Cancel shows during the walk), `ui/touch_controls.gd`
+  (`stick_walked`), `ui/touch_settings.gd` (`controls`, `TAP`, `STICK`), `ui/session.gd` (`set_touch_controls`,
+  `tap_walk_on`), `ui/options_menu.gd` / `.tscn` (Controls row). Detail in ADR 0045 "M34.3 as built".
+- Tests: new `unit_tap_walk` (10); list in `progress.md`. Full suite not run. No render (behaviour only).
+- Next: user merges the PR. Then M34.4 phone render check **[Sonnet · medium]**: renders at 2400 × 1080 / 250 % of
+  the card, shop, context button and chips, Options; then the user plays on the phone (needs a new release build).
+- Gotchas: Godot sends the emulated mouse event BEFORE its screen-touch event, so `stick_walked` is reset in
+  `stick_down` (touch down) and read at the mouse release. `world_tap` ignores real mouse clicks (desktop) on purpose.
+  Tests set `Session.touch.set_controls` without saving; the Options test points `touch_settings_path` at a temp file.
+
 ## Just done (2026-10-21, local): M34.2 context button (branch `feat/m34.2-context-button`)
 - `game/ui/touch_controls.gd`: `context` button (in `buttons[&"use"]`), `chips`, `menu_button`, `set_targets`,
   `targets`, `chip_ids`, `press_chip`, `set_top_room`, signal `context_pressed(id)`; `_place_right` became

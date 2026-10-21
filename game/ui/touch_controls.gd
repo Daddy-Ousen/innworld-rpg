@@ -75,6 +75,8 @@ var _finger := -1
 var _dir := Vector2.ZERO
 ## False while a fight turn or a panel has the screen: a touch is a tap then.
 var stick_enabled := false
+## M34.3: the finger down now (or the last one) walked with the stick, so its lift is no tap.
+var stick_walked := false
 ## Tests set this: the right edge of the stick's zone in pixels (0 = by the screen).
 var zone_override := 0.0
 ## The UI scale factor (M20.3) and the box that undoes it.
@@ -245,6 +247,8 @@ func _input(event: InputEvent) -> void:
 ## A finger touched the screen at `at` (this layer's pixels): the stick starts
 ## there, when it is on the left part of the screen and not on a button.
 func stick_down(finger: int, at: Vector2) -> void:
+	if _finger == -1:
+		stick_walked = false
 	if not stick_enabled or _finger != -1 or at.x > _zone_right():
 		return
 	if _on_button(at):
@@ -314,6 +318,7 @@ func _set_dir(dir: Vector2) -> void:
 		_send(STICK_ACTIONS[_dir], false)
 	_dir = dir
 	if _dir != Vector2.ZERO:
+		stick_walked = true
 		_send(STICK_ACTIONS[_dir], true)
 
 

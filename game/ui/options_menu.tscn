@@ -58,6 +58,17 @@ text = "Touch controls"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="ControlsRow" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="ControlsLabel" type="Label" parent="Margin/VBox/ControlsRow"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Controls" type="OptionButton" parent="Margin/VBox/ControlsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="ScaleRow" type="HBoxContainer" parent="Margin/VBox"]
 layout_mode = 2
 

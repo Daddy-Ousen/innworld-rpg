@@ -99,6 +99,17 @@ func set_touch_mode(mode: String) -> void:
 	touch_changed.emit()
 
 
+## M34.3: Tap + stick or Stick only (TouchSettings); saved at once.
+func set_touch_controls(c: String) -> void:
+	touch.set_controls(c)
+	touch.save(touch_settings_path)
+
+
+## True when a touch tap on the map walks and acts (M34.3).
+func tap_walk_on() -> bool:
+	return touch_shown() and touch.controls == TouchSettings.TAP
+
+
 ## True when the touch controls show: On, or Auto on a touch screen.
 func touch_shown() -> bool:
 	return touch.shows(touch_seen or DisplayServer.is_touchscreen_available())

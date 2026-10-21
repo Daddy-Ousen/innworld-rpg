@@ -8,6 +8,9 @@
 class_name MainInput
 extends RefCounted
 
+## Where the last touch went down outside a fight (M34.3; INF = none).
+var _tap_from := Vector2.INF
+
 ## Held input actions (project.godot [input], M20.0): direction -> action.
 const MOVE_ACTIONS := {
 	"n": &"move_n", "s": &"move_s", "e": &"move_e", "w": &"move_w", "wait": &"wait",
@@ -103,9 +106,13 @@ func held_direction() -> String:
 
 
 ## Mouse in a fight (M17.3): the hover preview, a left click walks or
-## attacks, a right click stops a walk.
+## attacks, a right click stops a walk. Outside a fight, a touch tap walks
+## and acts (M34.3, world_tap).
 func mouse(event: InputEventMouse) -> void:
-	if _m.is_busy() or not Encounter.is_player_turn(Session.gs):
+	if _m.is_busy():
+		return
+	if not Encounter.is_player_turn(Session.gs):
+		world_tap(event)
 		return
 	# The event's own position: a touch moves no mouse pointer.
 	var view: WorldView = _m.view
@@ -113,6 +120,7 @@ func mouse(event: InputEventMouse) -> void:
 	if event is InputEventMouseMotion:
 		_m.hover(cell)
 	elif event is InputEventMouseButton and event.pressed:
+		_tap_from = Vector2.INF
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.device == InputEvent.DEVICE_ID_EMULATION:
 				_m.tap(cell)
@@ -122,3 +130,25 @@ func mouse(event: InputEventMouse) -> void:
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_m.cancel()
 			_m.get_viewport().set_input_as_handled()
+
+
+## M34.3: outside a fight, a touch tap on the map (Controls: Tap + stick) walks
+## to what is there and opens its card (MainScreen.tap_world). It acts when the
+## finger lifts, and only when it did not move the stick or slide.
+func world_tap(event: InputEventMouse) -> void:
+	if not event is InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT \
+			or event.device != InputEvent.DEVICE_ID_EMULATION:
+		return
+	if not Session.tap_walk_on() or Encounter.active(Session.gs):
+		_tap_from = Vector2.INF
+		return
+	if event.pressed:
+		_tap_from = event.position
+		return
+	var from := _tap_from
+	_tap_from = Vector2.INF
+	if from == Vector2.INF or event.position.distance_to(from) > MainTap.SLOP or _m.touch.stick_walked:
+		return
+	var view: WorldView = _m.view
+	_m.tap_world(view.cell_at(view.get_canvas_transform().affine_inverse() * event.position))
+	_m.get_viewport().set_input_as_handled()
