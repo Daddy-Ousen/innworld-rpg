@@ -35,6 +35,19 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
   rule 3 holds) and opens its card. Options "Controls: Tap + stick / Stick only" in the touch settings file, not in
   `GameState`.
 
+## M34.0 as built (2026-10-21)
+- `ui/interact_menu.gd` / `.tscn` were rewritten in place (class `InteractMenu`, same `chosen` signal, `open`,
+  `open_bag`, `look_of`), not a new `action_card` file: `main.gd` and the panels needed no change.
+- Pages: `TARGETS` (2+ things near; a face icon on each NPC or patron button), `ACTIONS` (one target),
+  `CONFIRM` (Attack with keys or a mouse). Back / Escape / the card's Close button go back one page.
+- `InteractMenu.action_rows(option, db, gs)` (static) builds a card's rows in group order: talk, serve, work,
+  trade, travel, learn, other, attack. Button text has no name prefix ("Take Stone", not "Loose stones — Take Stone").
+- `CardButton`: fires on release; a move past `DRAG` (12 UI px) scrolls the card and cancels the pick.
+  `HoldButton` (Attack on touch): fires after `HOLD` (0.6 s); a ring fills.
+- Buttons are `ROW_H` 32 UI px high (about 53 dp at the phone's 250 % menu size). Two columns, one column when a
+  row is longer than 22 letters. The card sits at the bottom middle, at most 560 px wide and 85 % of the height.
+- Checked on a render at 1200 × 540 with menu size 250 % (same layout as 2400 × 1080): target list, Krshia's card.
+
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
 - The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several

@@ -85,7 +85,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] M34.P research + plan (2026-10-21, branch `docs/m34-phone-controls`): `docs/plans/m34.md`, ADR 0045, ROADMAP
     M34 section (placed before M31). User took the picks: menus and button first (M34.0 – M34.2), tap the world
     later (M34.3); same card on desktop; hold to attack on touch, Yes / No with keys. Docs only, no tests run.
-  - [ ] User merges the PR. Then M34.0 action card **[Opus · medium]**.
+  - [x] Plan merged ([PR #216](https://github.com/Daddy-Ousen/innworld-rpg/pull/216)).
+  - [x] M34.0 action card (2026-10-21, branch `feat/m34.0-action-card`): `ui/interact_menu.gd` / `.tscn` rewritten
+    in place: target page, one card per target, drag-safe buttons (fire on release, a 12 px move scrolls), Attack
+    = hold 0.6 s on touch, Yes / No with keys. No core, schema or save change. Checked on a 250 % render
+    (1200 × 540). Tests: `unit_action_card` (new, 11), `unit_world_view` (20, the old stove red is fixed),
+    `unit_brawl`, `unit_economy`, `unit_spell_ui`, `unit_portrait`, `unit_input_actions`, `unit_touch_controls`,
+    `unit_play_loop`, `unit_interact`, `unit_ui_scale`, `unit_ui_theme` pass. Full suite not run.
+    - [ ] The user tries it on the phone (shop rows, talk to Erin, hold to attack).
+  - [ ] M34.1 shop screen **[Opus · medium]**.
 - [x] M20.2 Android build (branch `feat/m20.2-android-build`, 2026-10-08, local; ADR 0034): preset `Android`, sensor landscape, ETC2/ASTC on. Debug APK exported (89 MB), signed, checked with apksigner and aapt. Not run on a phone (none plugged in). Icon (`game/icon.png`) and signed release APK added later the same day; keystore kept outside git (ADR 0034). Open: user installs and plays it; back up the keystore.
 - [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
   User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.

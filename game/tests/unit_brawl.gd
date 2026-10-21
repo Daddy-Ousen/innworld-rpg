@@ -266,11 +266,16 @@ func test_the_use_menu_has_an_attack_row_for_npcs_only() -> void:
 			assert_false(o.get("attack", false))
 	assert_true(seen)
 	var menu: InteractMenu = add_child_autofree(load("res://ui/interact_menu.tscn").instantiate())
+	menu.touch_override = 0
 	assert_true(menu.open(Interact.options(gs, _db), _db))
-	var items: ItemList = menu.get_node("%Items")
-	var last := items.item_count - 1
-	assert_eq(items.get_item_metadata(last)[1], Interact.ATTACK, "the Attack row is last")
-	assert_string_contains(items.get_item_text(last), "Attack")
+	if menu.page == InteractMenu.TARGETS:  # M34.0: pick the NPC first
+		for i in menu.rows().size():
+			if menu.rows()[i]["object"] == id:
+				menu.pick(i)
+				break
+	var rows := menu.rows()
+	assert_eq(rows[-1]["action"], Interact.ATTACK, "the Attack row is last")
+	assert_string_contains(rows[-1]["text"], "Attack")
 
 
 func test_the_fate_page_and_dialog() -> void:

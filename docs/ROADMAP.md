@@ -93,7 +93,7 @@ User ask 2026-10-21: phone menus (shop, NPC talk) are hard to pick from; the Use
 only: no core, schema or save change. User picks: menus and the button first, the same card on desktop, hold to
 attack on touch (Yes / No with keys).
 - [x] M34.P Research and plan (2026-10-21) **[Opus · medium]**
-- [ ] M34.0 Action card per target (replaces the flat use list everywhere); drag-safe buttons; attack guard **[Opus · medium]**
+- [x] M34.0 Action card per target (replaces the flat use list everywhere); drag-safe buttons; attack guard **[Opus · medium]** (2026-10-21, `ui/interact_menu.gd` rewritten)
 - [ ] M34.1 Shop screen: Buy / Sell tabs, item cards, count strip **[Opus · medium]**
 - [ ] M34.2 Context button ("Talk · Erin") with target chips; Menu to the top right **[Opus · medium]**
 - [ ] M34.3 Tap the world to walk and act; Options "Controls: Tap + stick / Stick only" **[Opus · medium]**

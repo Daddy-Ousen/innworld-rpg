@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.0 action card (branch `feat/m34.0-action-card`)
+- `game/ui/interact_menu.gd` / `.tscn` rewritten in place (class `InteractMenu` kept, so `world/main.gd` and
+  `world/main_panels.gd` did not change). Pages `TARGETS` / `ACTIONS` / `CONFIRM`; static `action_rows(o, db, gs)`;
+  inner classes `CardButton` (drag-safe) and `HoldButton` (Attack on touch). Test API: `rows()`, `buttons()`,
+  `pick(i)`, `confirm(yes)`, `back()`, `title_text()`, `touch_override`. Detail in ADR 0045 "M34.0 as built".
+- Tests moved from the old `%Items` list: `unit_world_view`, `unit_brawl`, `unit_economy`, `unit_spell_ui`,
+  `unit_portrait`. New `unit_action_card` (11). List in `progress.md`. Full suite not run.
+- Next: user merges the PR and tries it on the phone. Then M34.1 shop screen **[Opus · medium]**: a "Shop" button on
+  the card opens a Buy / Sell panel with a count strip; picks stay `Interact.trade_action(prefix, good, count)`.
+- Gotchas: at inn_interior (20, 2) the stove is ONE target (the rolling pin is its `item`), and Erin is near on day 1.
+  Render recipe that worked locally: a `game/_scratch/shot.gd` SceneTree script, console exe with
+  `--path game --resolution 1200x540 --audio-driver Dummy -s res://_scratch/shot.gd -- <out>`; force 250 % with
+  `session.ui_scale.mode = "2.5"` then `session.apply_ui_scale()` (setting `content_scale_factor` alone is undone);
+  call `main.view.refresh(gs, db)` after moving the player by hand. On touch the Attack button needs a hold, so
+  `pick()` on it does nothing (by design). `--import` touches `game/icon.png.import`: check it out after.
+
 ## Just done (2026-10-21, local): M34.P phone controls plan (branch `docs/m34-phone-controls`)
 - User: phone menus (shop, NPC talk) are hard to pick from; the Use button is not ideal. Asked for research + a proposal.
 - Wrote `docs/plans/m34.md` (root causes, what other phone RPGs do, steps M34.0 – M34.4), ADR 0045, ROADMAP M34

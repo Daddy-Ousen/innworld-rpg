@@ -1,114 +1,335 @@
-## The "use" menu: one entry per nearby object action, plus "Sleep" for a
-## bed (Interact.SLEEP; "Rent a room" for a paid one) and "Take <item>" for
-## an object with an item (Interact.TAKE). A shop lists its trades instead
-## of the bare buy and sell actions (Interact.BUY / SELL + good), a wagon
-## its ride (Interact.RIDE), a magic door its trip (Interact.PORTAL). open_bag lists the goods in the bag
-## (Interact.USE_GOOD + good). A guest lists the dishes you can serve them
-## (Interact.SERVE + good, M14.2). An NPC shows their standing band, e.g. "Erin (friend)" (M14.3),
-## and an Attack row last, in red (Interact.ATTACK, M14.5). An NPC or a patron shows their face beside
-## the list while their row is selected (Portrait, M14.7). Enter or a double click picks one; Escape
-## closes. Presentation only.
+## The use menu as an action card (M34.0, ADR 0045). With two or more things
+## near, the first page asks who or what (one big button each, with a face);
+## then the card of that target shows its actions as big buttons. One target
+## opens its card at once. The rows come from Interact.options and the picks are
+## the same as before: "Sleep" for a bed (Interact.SLEEP; "Rent a room" for a
+## paid one), "Take <item>" (Interact.TAKE), a shop's trades (Interact.BUY /
+## SELL + good, M27.2 many), a wagon's ride (Interact.RIDE), a magic door's trips
+## (Interact.PORTAL), the dishes a guest can get (Interact.SERVE, M14.2), an
+## NPC's own talk options (Interact.VOICE, M30.1), spells (Interact.LEARN,
+## M17.5), Appraise (M25.3) and Attack last, in red (Interact.ATTACK, M14.5).
+## An NPC or a patron shows their face and standing on the card (M14.3, M14.7).
+## open_bag lists the goods to eat, drink or read (Interact.USE_GOOD).
+## A button fires on release, and only when the finger moved less than DRAG: a
+## drag scrolls the card. Attack needs a HOLD on touch and a Yes / No with keys
+## or a mouse. Arrows move between buttons, Enter picks, Escape goes back a page.
+## Presentation only.
 class_name InteractMenu
 extends PanelContainer
 
 signal chosen(object_id: String, action_id: String)
 
-## Row index → the look (sheet id) of the object the row is for, "" for no face.
-var _looks: Array[String] = []
+const TARGETS := "targets"
+const ACTIONS := "actions"
+const CONFIRM := "confirm"
+## Button height (UI pixels; the phone menu size scales it, M20.3: 32 at 250 % is about 53 dp).
+const ROW_H := 32.0
+const GAP := 8
+## A finger that moves more than this (UI pixels) scrolls the card instead of picking.
+const DRAG := 12.0
+## Seconds a finger holds Attack on touch.
+const HOLD := 0.6
+## The card's widest size, the room kept at its sides and under it, and its
+## greatest part of the screen height.
+const MAX_W := 560.0
+const SIDE := 56.0
+const BOTTOM := 8.0
+const MAX_H := 0.85
+## A row longer than this puts the card in one column.
+const LONG := 22
+const ATTACK_GROUP := "attack"
+## The order of the button groups on a card.
+const GROUPS := ["talk", "serve", "work", "trade", "travel", "learn", "other", ATTACK_GROUP]
+const ATTACK_COLOR := Color(0.9, 0.35, 0.3)
 
-@onready var _items: ItemList = %Items
+## The page now: TARGETS, ACTIONS or CONFIRM.
+var page := ""
+## -1 = ask Session (touch controls shown), 0 = keys and mouse, 1 = touch. Tests set it.
+var touch_override := -1
+
+var _options: Array[Dictionary] = []
+var _db: DataDb
+## The option on the card ({} on the target page).
+var _target := {}
+var _bag := false
+var _rows: Array[Dictionary] = []
+var _buttons: Array[CardButton] = []
+
 @onready var _face: TextureRect = %Face
+@onready var _title: Label = %Title
+@onready var _sub: Label = %Sub
+@onready var _close: Button = %Close
+@onready var _scroll: ScrollContainer = %Scroll
+@onready var _list: VBoxContainer = %Rows
+
+
+## A big card button: fires on release, and not after a drag (the drag scrolls
+## the card instead).
+class CardButton extends Button:
+	signal fired
+
+	var dragged := false
+	var _down := false
+	var _from := Vector2.ZERO
+
+	func _init() -> void:
+		action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
+		clip_text = true
+		text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		custom_minimum_size = Vector2(0, ROW_H)
+		pressed.connect(_on_pressed)
+
+	# Runs before the button's own input (which sends `pressed` on release).
+	func _gui_input(event: InputEvent) -> void:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				press_at(event.position)
+			else:
+				_down = false
+				_end_drag.call_deferred()
+		elif event is InputEventMouseMotion and _down:
+			move_to(event.position, event.relative)
+
+	## A finger or the mouse went down at `at` (the button's pixels).
+	func press_at(at: Vector2) -> void:
+		_down = true
+		dragged = false
+		_from = at
+
+	## It moved to `at`; past DRAG it scrolls the card by `step`.
+	func move_to(at: Vector2, step: Vector2) -> void:
+		if not dragged and at.distance_to(_from) > DRAG:
+			dragged = true
+		if not dragged:
+			return
+		var n := get_parent()
+		while n != null and not n is ScrollContainer:
+			n = n.get_parent()
+		if n != null:
+			(n as ScrollContainer).scroll_vertical -= int(step.y)
+
+	func _end_drag() -> void:
+		dragged = false
+
+	func _on_pressed() -> void:
+		if dragged:
+			dragged = false
+			return
+		fired.emit()
+
+
+## Attack on touch: it fires after the finger held it for HOLD seconds; a ring
+## fills while it is held. A tap alone does nothing.
+class HoldButton extends CardButton:
+	var held := 0.0
+	var _holding := false
+
+	func _init() -> void:
+		super()
+		button_down.connect(func() -> void:
+			_holding = true
+			held = 0.0)
+		button_up.connect(func() -> void:
+			_holding = false
+			held = 0.0
+			queue_redraw())
+
+	func _process(delta: float) -> void:
+		if not _holding:
+			return
+		if dragged:
+			_holding = false
+			held = 0.0
+		else:
+			held += delta
+			if held >= HOLD:
+				_holding = false
+				held = 0.0
+				fired.emit()
+		queue_redraw()
+
+	func _on_pressed() -> void:
+		dragged = false
+
+	func _draw() -> void:
+		if not _holding or held <= 0.0:
+			return
+		var r := minf(size.y * 0.35, 14.0)
+		draw_arc(Vector2(size.x - r - 8.0, size.y / 2.0), r, -PI / 2.0, -PI / 2.0 + TAU * held / HOLD, 32,
+				ATTACK_COLOR, 3.0, true)
 
 
 func _ready() -> void:
 	hide()
-	_items.item_activated.connect(_on_activated)
-	TouchControls.activate_on_tap(_items)
-	_items.item_selected.connect(_show_face)
+	_close.pressed.connect(back)
+	get_viewport().size_changed.connect(_fit)
+	Session.ui_scale_changed.connect(_fit)
 
 
-## options: Interact.options(). Shows nothing and returns false if empty.
+func _exit_tree() -> void:
+	# The viewport and Session outlive the card.
+	if get_viewport().size_changed.is_connected(_fit):
+		get_viewport().size_changed.disconnect(_fit)
+	if Session.ui_scale_changed.is_connected(_fit):
+		Session.ui_scale_changed.disconnect(_fit)
+
+
+## options: Interact.options(). Shows nothing and returns false if no option has a row.
 func open(options: Array[Dictionary], db: DataDb) -> bool:
-	_items.clear()
-	_looks.clear()
-	for o: Dictionary in options:
-		var rows_before := _items.item_count
-		var label := String(o["name"])
-		if String(o.get("standing", "")) != "":
-			label += " (%s)" % o["standing"]
-		var trades: Array = o.get("trades", [])
-		for t: Dictionary in trades:
-			var buying: bool = t["kind"] == Economy.BUY
-			var prefix := Interact.BUY if buying else Interact.SELL
-			var i := _items.add_item("%s — %s %s (%s)" % [label,
-					"Buy" if buying else "Sell", t["name"], Economy.format(db, int(t["price"]))])
-			_items.set_item_metadata(i, [o["id"], Interact.trade_action(prefix, t["good"])])
-			# M27.2: many in one trade (buy a few, sell all).
-			var many := int(t.get("bulk", 0)) if buying else int(t.get("have", 0))
-			if many > 1:
-				i = _items.add_item("%s — %s %d %s (%s)" % [label, "Buy" if buying else "Sell all",
-						many, String(t["name"]).to_lower(), Economy.format(db, int(t["price"]) * many)])
-				_items.set_item_metadata(i, [o["id"], Interact.trade_action(prefix, t["good"], many)])
-		if not (o.get("ride", {}) as Dictionary).is_empty():
-			var r: Dictionary = o["ride"]
-			@warning_ignore("integer_division")
-			var i := _items.add_item("%s — Ride to %s (%s, %d h)" % [label, db.maps.areas[r["to"]]["name"],
-					Economy.format(db, int(r["price"])), int(r["minutes"]) / 60])
-			_items.set_item_metadata(i, [o["id"], Interact.RIDE])
-		if not (o.get("portal", {}) as Dictionary).is_empty():
-			for l: Dictionary in Portal.open_links(Session.gs, o["portal"]):
-				var i := _items.add_item("%s — To %s (%d left today)" % [label,
-						Portal.link_name(db, l), Portal.trips_left(Session.gs, db)])
-				_items.set_item_metadata(i, [o["id"], Interact.portal_action(l)])
-		for c: Dictionary in o.get("serve", []):
-			var i := _items.add_item("%s — Serve %s (%s%s)" % [label, String(c["name"]).to_lower(),
-					"ordered, " if c["ordered"] else "", Economy.format(db, int(c["pay"]))])
-			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(c["good"])])
-		if o.get("guest", false) and not (o["serve"] as Array).any(func(c: Dictionary) -> bool: return c["ordered"]):
-			var want := String(db.economy.goods[o["order"]]["name"]).to_lower()
-			var i := _items.add_item("%s — Wants %s (you have none)" % [label, want])
-			_items.set_item_metadata(i, [o["id"], Interact.SERVE + String(o["order"])])
-		for v: Dictionary in o.get("voice", []):  # M30.1: the NPC's own talk options first
-			var i := _items.add_item("%s — %s (%d min)" % [label, v["label"],
-					int(db.actions[v["action"]]["minutes"])])
-			_items.set_item_metadata(i, [o["id"], Interact.VOICE + String(v["id"])])
-		for action_id: String in o["actions"]:
-			if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
-				continue
-			var hint := "" if Session.gs == null else Cooking.hint(Session.gs, db, action_id,
-					String(Interact.object_of(db, Session.gs.player.area, o["id"]).get("kind", "")))
-			var i := _items.add_item("%s — %s (%d min%s)" % [label, db.actions[action_id]["name"],
-					int(db.actions[action_id]["minutes"]), "" if hint == "" else "; " + hint])
-			_items.set_item_metadata(i, [o["id"], action_id])
-		if o["sleep"]:
-			var i := _items.add_item(("%s — Sleep (end the day)" % label) if int(o.get("price", 0)) == 0
-					else "%s — Rent a room and sleep (%s)" % [label, Economy.format(db, int(o["price"]))])
-			_items.set_item_metadata(i, [o["id"], Interact.SLEEP])
-		if o["item"] != "":
-			var i := _items.add_item("%s — Take %s" % [label,
-					db.combat.items.get(o["item"], {}).get("name", o["item"])])
-			_items.set_item_metadata(i, [o["id"], Interact.TAKE])
-		for sid: String in o.get("teach", []):  # M17.5: a teacher's spells
-			var i := _items.add_item("%s — Learn %s (%s)" % [label, Spells.name_of(db, sid),
-					_hours(int(Spells.spell(db, sid).get("learn", {}).get("minutes", 60)))])
-			_items.set_item_metadata(i, [o["id"], Interact.LEARN + sid])
-		if o.get("appraise", false):  # M25.3: [Appraisal] reads an NPC's sheet
-			var i := _items.add_item("%s — Appraise" % label)
-			_items.set_item_metadata(i, [o["id"], Interact.APPRAISE])
-		if o.get("attack", false):  # the last row of an NPC, in red (M14.5)
-			var i := _items.add_item("%s — Attack" % label)
-			_items.set_item_metadata(i, [o["id"], Interact.ATTACK])
-			_items.set_item_custom_fg_color(i, Color(0.9, 0.35, 0.3))
-		var look := look_of(o, db, Session.gs)
-		for _row in range(rows_before, _items.item_count):
-			_looks.append(look)
-	if _items.item_count == 0:
+	_db = db
+	_bag = false
+	_options.assign(options.filter(func(o: Dictionary) -> bool:
+		return not action_rows(o, db, Session.gs).is_empty()))
+	if _options.is_empty():
 		return false
-	show()
-	_items.select(0)
-	_show_face(0)
-	_items.grab_focus()
+	if _options.size() == 1:
+		_show_card(_options[0])
+	else:
+		_show_targets()
+	_open()
 	return true
+
+
+## The bag: one button per good you can eat, drink or read. Returns false if none.
+func open_bag(gs: GameState, db: DataDb) -> bool:
+	_db = db
+	_bag = true
+	_options.clear()
+	Portrait.show_in(_face, "")
+	var rows: Array[Dictionary] = []
+	for g in gs.economy.goods():
+		var use := db.economy.use_of(g)
+		if use not in ["food", "heal", "teaches"]:
+			continue
+		rows.append({"text": "%s %s (%d left)" % [{"food": "Eat", "heal": "Drink", "teaches": "Read"}[use],
+				db.economy.goods[g]["name"], gs.economy.count(g)], "object": "bag",
+				"action": Interact.USE_GOOD + g, "group": "other"})
+	if rows.is_empty():
+		return false
+	page = ACTIONS
+	_target = {"id": "bag", "name": "Bag"}
+	_head("Bag", "Eat, drink or read", "")
+	_fill(rows, _on_action)
+	_close.text = "Close"
+	_open()
+	return true
+
+
+## The buttons of the page now, in order: {"text", "object", "action", "group"}.
+func rows() -> Array[Dictionary]:
+	return _rows
+
+
+func buttons() -> Array[CardButton]:
+	return _buttons
+
+
+## The card's title and the line under it.
+func title_text() -> String:
+	return ("%s %s" % [_title.text, _sub.text]).strip_edges()
+
+
+## Picks button `i` of the page, as a tap or a click does.
+func pick(i: int) -> void:
+	_buttons[i].pressed.emit()
+
+
+## The answer on the Attack page.
+func confirm(yes: bool) -> void:
+	if page == CONFIRM:
+		pick(0 if yes else 1)
+
+
+## Back one page: the confirm page to the card, a card to the target list, else close.
+func back() -> void:
+	if page == CONFIRM:
+		_show_card(_target)
+	elif page == ACTIONS and _options.size() > 1:
+		_show_targets()
+	else:
+		close()
+		return
+	_after_page()
+
+
+func close() -> void:
+	hide()
+	for b in _buttons:
+		b.release_focus()
+
+
+## The rows of one Interact option, in group order (GROUPS), with the text a
+## button shows (no name prefix: the card's title names the target).
+static func action_rows(o: Dictionary, db: DataDb, gs: GameState) -> Array[Dictionary]:
+	var by := {}
+	for g: String in GROUPS:
+		by[g] = [] as Array[Dictionary]
+	var id := String(o["id"])
+	var add := func(group: String, text: String, action: String) -> void:
+		(by[group] as Array[Dictionary]).append({"text": text, "object": id, "action": action, "group": group})
+	var trades: Array = o.get("trades", [])
+	for t: Dictionary in trades:
+		var buying: bool = t["kind"] == Economy.BUY
+		var prefix := Interact.BUY if buying else Interact.SELL
+		add.call("trade", "%s %s (%s)" % ["Buy" if buying else "Sell", t["name"],
+				Economy.format(db, int(t["price"]))], Interact.trade_action(prefix, t["good"]))
+		# M27.2: many in one trade (buy a few, sell all).
+		var many := int(t.get("bulk", 0)) if buying else int(t.get("have", 0))
+		if many > 1:
+			add.call("trade", "%s %d %s (%s)" % ["Buy" if buying else "Sell all", many,
+					String(t["name"]).to_lower(), Economy.format(db, int(t["price"]) * many)],
+					Interact.trade_action(prefix, t["good"], many))
+	if not (o.get("ride", {}) as Dictionary).is_empty():
+		var r: Dictionary = o["ride"]
+		@warning_ignore("integer_division")
+		add.call("travel", "Ride to %s (%s, %d h)" % [db.maps.areas[r["to"]]["name"],
+				Economy.format(db, int(r["price"])), int(r["minutes"]) / 60], Interact.RIDE)
+	if not (o.get("portal", {}) as Dictionary).is_empty() and gs != null:
+		for l: Dictionary in Portal.open_links(gs, o["portal"]):
+			add.call("travel", "To %s (%d left today)" % [Portal.link_name(db, l), Portal.trips_left(gs, db)],
+					Interact.portal_action(l))
+	for c: Dictionary in o.get("serve", []):
+		add.call("serve", "Serve %s (%s%s)" % [String(c["name"]).to_lower(), "ordered, " if c["ordered"] else "",
+				Economy.format(db, int(c["pay"]))], Interact.SERVE + String(c["good"]))
+	if o.get("guest", false) and not (o["serve"] as Array).any(func(c: Dictionary) -> bool: return c["ordered"]):
+		var want := String(db.economy.goods[o["order"]]["name"]).to_lower()
+		add.call("serve", "Wants %s (you have none)" % want, Interact.SERVE + String(o["order"]))
+	for v: Dictionary in o.get("voice", []):  # M30.1: the NPC's own talk options first
+		add.call("talk", "%s (%d min)" % [v["label"], int(db.actions[v["action"]]["minutes"])],
+				Interact.VOICE + String(v["id"]))
+	var person: bool = o.get("npc", false) or o.get("fairy", false)
+	for action_id: String in o["actions"]:
+		if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:
+			continue
+		var hint := "" if gs == null else Cooking.hint(gs, db, action_id,
+				String(Interact.object_of(db, gs.player.area, id).get("kind", "")))
+		add.call("talk" if person else "work", "%s (%d min%s)" % [db.actions[action_id]["name"],
+				int(db.actions[action_id]["minutes"]), "" if hint == "" else "; " + hint], action_id)
+	if o.get("sleep", false):
+		add.call("other", "Sleep (end the day)" if int(o.get("price", 0)) == 0
+				else "Rent a room and sleep (%s)" % Economy.format(db, int(o["price"])), Interact.SLEEP)
+	if String(o.get("item", "")) != "":
+		add.call("other", "Take %s" % db.combat.items.get(o["item"], {}).get("name", o["item"]), Interact.TAKE)
+	for sid: String in o.get("teach", []):  # M17.5: a teacher's spells
+		add.call("learn", "Learn %s (%s)" % [Spells.name_of(db, sid),
+				_hours(int(Spells.spell(db, sid).get("learn", {}).get("minutes", 60)))], Interact.LEARN + sid)
+	if o.get("appraise", false):  # M25.3: [Appraisal] reads an NPC's sheet
+		add.call("other", "Appraise", Interact.APPRAISE)
+	if o.get("attack", false):  # the last row of an NPC, in red (M14.5)
+		add.call(ATTACK_GROUP, "Attack", Interact.ATTACK)
+	var out: Array[Dictionary] = []
+	for g: String in GROUPS:
+		out.append_array(by[g])
+	return out
+
+
+## A target's button text: "Erin (friend)", "Stove".
+static func target_label(o: Dictionary) -> String:
+	var label := String(o["name"])
+	if String(o.get("standing", "")) != "":
+		label += " (%s)" % o["standing"]
+	return label
 
 
 ## "2 h" or "90 min".
@@ -130,42 +351,132 @@ static func look_of(o: Dictionary, db: DataDb, gs: GameState) -> String:
 	return ""
 
 
-func _show_face(index: int) -> void:
-	Portrait.show_in(_face, _looks[index] if index < _looks.size() else "")
+func _touch() -> bool:
+	return touch_override == 1 if touch_override >= 0 else Session.touch_shown()
 
 
-## The bag: one entry per good you can eat, drink or read. Returns false if none.
-func open_bag(gs: GameState, db: DataDb) -> bool:
-	_items.clear()
-	_looks.clear()
-	_show_face(0)
-	for g in gs.economy.goods():
-		var use := db.economy.use_of(g)
-		if use not in ["food", "heal", "teaches"]:
-			continue
-		var i := _items.add_item("%s — %s (%d left)" % [db.economy.goods[g]["name"],
-				{"food": "Eat", "heal": "Drink", "teaches": "Read"}[use], gs.economy.count(g)])
-		_items.set_item_metadata(i, ["bag", Interact.USE_GOOD + g])
-	if _items.item_count == 0:
-		return false
+func _open() -> void:
 	show()
-	_items.select(0)
-	_items.grab_focus()
-	return true
+	_after_page()
 
 
-func _on_activated(index: int) -> void:
-	var pick: Array = _items.get_item_metadata(index)
-	hide()
-	chosen.emit(pick[0], pick[1])
+func _after_page() -> void:
+	_fit()
+	_fit.call_deferred()  # again once the new buttons have their theme sizes
+	if is_visible_in_tree() and not _buttons.is_empty():
+		_buttons[0].grab_focus()
+
+
+func _show_targets() -> void:
+	page = TARGETS
+	_target = {}
+	_head("Who or what?", "%d near you" % _options.size(), "")
+	var rows: Array[Dictionary] = []
+	for o: Dictionary in _options:
+		rows.append({"text": target_label(o), "object": String(o["id"]), "action": "", "group": "target",
+				"look": look_of(o, _db, Session.gs)})
+	_fill(rows, func(i: int) -> void:
+		_show_card(_options[i])
+		_after_page())
+	_close.text = "Close"
+
+
+func _show_card(o: Dictionary) -> void:
+	page = ACTIONS
+	_target = o
+	_head(String(o["name"]), String(o.get("standing", "")), look_of(o, _db, Session.gs))
+	_fill(action_rows(o, _db, Session.gs), _on_action)
+	_close.text = "Back" if _options.size() > 1 else "Close"
+
+
+func _on_action(i: int) -> void:
+	var r := _rows[i]
+	if r["action"] == Interact.ATTACK and not _touch():
+		_show_confirm(r)
+		_after_page()
+		return
+	_choose(r)
+
+
+func _show_confirm(attack: Dictionary) -> void:
+	page = CONFIRM
+	_head("Attack %s?" % _target["name"], "", look_of(_target, _db, Session.gs))
+	var rows: Array[Dictionary] = [
+		{"text": "Yes, attack", "object": attack["object"], "action": Interact.ATTACK, "group": "confirm"},
+		{"text": "No", "object": attack["object"], "action": "", "group": "confirm"}]
+	_fill(rows, func(i: int) -> void:
+		if i == 0:
+			_choose(attack)
+		else:
+			_show_card(_target)
+			_after_page())
+	_close.text = "Back"
+
+
+func _choose(r: Dictionary) -> void:
+	close()
+	chosen.emit(String(r["object"]), String(r["action"]))
+
+
+func _head(title: String, sub: String, look: String) -> void:
+	_title.text = title
+	_sub.text = sub
+	_sub.visible = sub != ""
+	Portrait.show_in(_face, look)
+
+
+## Puts `rows` on the card as buttons; a pick calls `on_pick` with the row index.
+func _fill(rows: Array[Dictionary], on_pick: Callable) -> void:
+	for c: Node in _list.get_children():
+		c.visible = false  # a button may still be inside its own signal: free it later
+		c.queue_free()
+	_rows = rows
+	_buttons.clear()
+	var grid := GridContainer.new()
+	grid.columns = 1 if rows.any(func(r: Dictionary) -> bool: return String(r["text"]).length() > LONG) else 2
+	grid.add_theme_constant_override("h_separation", GAP)
+	grid.add_theme_constant_override("v_separation", GAP)
+	_list.add_child(grid)
+	var touch := _touch()
+	for i in rows.size():
+		var r := rows[i]
+		var attack: bool = r["group"] == ATTACK_GROUP
+		var b: CardButton = HoldButton.new() if attack and touch else CardButton.new()
+		b.text = "Hold to attack" if attack and touch else String(r["text"])
+		if attack or r["group"] == "confirm" and i == 0:
+			for k: String in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
+				b.add_theme_color_override(k, ATTACK_COLOR)
+		if attack:
+			_list.add_child(HSeparator.new())
+			_list.add_child(b)
+		else:
+			grid.add_child(b)
+		var face := Portrait.texture(String(r.get("look", "")))
+		if face != null:
+			b.icon = face
+			b.add_theme_constant_override("icon_max_width", int(ROW_H) - 8)
+		b.fired.connect(on_pick.bind(i))
+		_buttons.append(b)
+
+
+## Sits the card at the bottom middle, as wide as fits (MAX_W at most), and as
+## high as its buttons need (MAX_H of the screen at most; then it scrolls).
+func _fit() -> void:
+	if not is_inside_tree():
+		return
+	var view := get_viewport_rect().size
+	var w := maxf(minf(MAX_W, view.x - SIDE * 2.0), 160.0)
+	var head := (%Header as Control).get_combined_minimum_size().y
+	_scroll.custom_minimum_size.y = maxf(minf(_list.get_combined_minimum_size().y,
+			view.y * MAX_H - head - 3.0 * GAP - BOTTOM), ROW_H)
+	var h := get_combined_minimum_size().y
+	offset_left = -w / 2.0
+	offset_right = w / 2.0
+	offset_bottom = -BOTTOM
+	offset_top = -BOTTOM - h
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if visible and event.is_action_pressed(&"back"):
-		close()
+		back()
 		get_viewport().set_input_as_handled()
-
-
-func close() -> void:
-	hide()
-	_items.release_focus()

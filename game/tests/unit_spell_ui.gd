@@ -209,17 +209,19 @@ func test_a_teacher_row_and_a_spellbook_row() -> void:
 	var menu: InteractMenu = load("res://ui/interact_menu.tscn").instantiate()
 	add_child_autofree(menu)
 	assert_true(menu.open(Interact.options(gs, db), db))
-	var items: ItemList = menu.get_node("%Items")
+	if menu.page == InteractMenu.TARGETS:  # M34.0: pick Ceria first
+		for i in menu.rows().size():
+			if menu.rows()[i]["object"] == "ceria_springwalker":
+				menu.pick(i)
+				break
 	var rows: Array[String] = []
-	for i in items.item_count:
-		rows.append(items.get_item_text(i))
+	for r: Dictionary in menu.rows():
+		rows.append(String(r["text"]))
 	assert_true(rows.any(func(r: String) -> bool: return r.contains("Learn [Ice Spike] (2 h)")), str(rows))
 	assert_true(rows.any(func(r: String) -> bool: return r.contains("Learn [Flashfire] (3 h)")))
 	var picked: Array = []
 	menu.chosen.connect(func(obj: String, act: String) -> void: picked.append([obj, act]))
-	for i in items.item_count:
-		if items.get_item_text(i).contains("Learn [Ice Spike]"):
-			items.item_activated.emit(i)
+	menu.pick(rows.find(rows.filter(func(r: String) -> bool: return r.contains("Learn [Ice Spike]"))[0]))
 	assert_eq(picked, [["ceria_springwalker", "learn:ice_spike"]])
 	Commands.give(gs, db, 0, "spellbook_fireball", 1)
 	var bag_rows := Bag.rows(gs, db)
@@ -229,4 +231,4 @@ func test_a_teacher_row_and_a_spellbook_row() -> void:
 	var menu2: InteractMenu = load("res://ui/interact_menu.tscn").instantiate()
 	add_child_autofree(menu2)
 	assert_true(menu2.open_bag(gs, db))
-	assert_string_contains((menu2.get_node("%Items") as ItemList).get_item_text(0), "Read")
+	assert_string_contains(String(menu2.rows()[0]["text"]), "Read")
