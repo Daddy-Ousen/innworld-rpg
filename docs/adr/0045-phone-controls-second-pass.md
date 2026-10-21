@@ -41,7 +41,7 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
 - Pages: `TARGETS` (2+ things near; a face icon on each NPC or patron button), `ACTIONS` (one target),
   `CONFIRM` (Attack with keys or a mouse). Back / Escape / the card's Close button go back one page.
 - `InteractMenu.action_rows(option, db, gs)` (static) builds a card's rows in group order: talk, serve, work,
-  trade, travel, learn, other, attack. Button text has no name prefix ("Take Stone", not "Loose stones — Take Stone").
+  trade, travel, learn, other, attack (M34.2 moved trade before work). Button text has no name prefix ("Take Stone", not "Loose stones — Take Stone").
 - `CardButton`: fires on release; a move past `DRAG` (12 UI px) scrolls the card and cancels the pick.
   `HoldButton` (Attack on touch): fires after `HOLD` (0.6 s); a ring fills.
 - Buttons are `ROW_H` 32 UI px high (about 53 dp at the phone's 250 % menu size). Two columns, one column when a
@@ -63,6 +63,23 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
 - Core: `Economy._single` became public `Economy.is_single` (same code). No schema or save change.
 - Checked on a render at 1200 × 540, menu size 250 %: about one and a half rows of cards show, the rest scrolls. The
   first layout had the tabs and the note in their own rows and showed only one row; they moved into the header.
+
+## M34.2 as built (2026-10-21)
+- `ui/touch_controls.gd`: the Use button is gone. The right column is now More, Bag and the context button (96 px
+  high), on the bottom right edge. Menu sits at the top right, just under the HUD status bar
+  (`Hud.top_bottom`, `TouchControls.set_top_room`), so it does not cover the coins. Back takes the same spot while a
+  panel is open. Cancel and the More grid moved down with the column.
+- The context button shows the nearest target's verb and name on two lines ("Talk / Erin"; "-" and off when nothing
+  is near). Verbs come from `InteractMenu.verb_of`: Serve, Talk, Shop, Sleep, Door, Ride, Take, Use. A tap sends
+  `context_pressed(id)`; `MainPanels.open_target` opens that target's card (`InteractMenu.open_on`).
+- Chips: up to 3, in a row LEFT of the context button (not above it as planned: the column has no room above on a
+  phone), nearest next to the button. A chip shows the face (NPC, patron) or the first 5 letters of the name. With
+  more than 4 targets near, the last chip is "All" (the target list).
+- `MainPanels.refresh_context` reads `InteractMenu.targets(Interact.options(...))` only when the game, area, square,
+  clock minute or flag count changes (not every frame).
+- On a stall the card now lists Shop before Haggle (group order: trade before work).
+- Not done: the planned 20 % larger hit area. The button itself is bigger (104 × 96).
+- The key E still opens the whole use menu. Checked on a render at 1200 × 540, menu size 250 %, touch on.
 
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.

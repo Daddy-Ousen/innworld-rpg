@@ -109,6 +109,7 @@ func _ready() -> void:
 	pause.message.connect(func(line: String) -> void: hud.add_lines([line]))
 	pause.quit_requested.connect(quit_to_title)
 	touch.cancel_pressed.connect(cancel)
+	touch.context_pressed.connect(panels.open_target)
 	Session.touch_changed.connect(panels.sync_touch)
 	Session.ui_scale_changed.connect(panels.apply_ui_scale)
 	panels.apply_ui_scale()
