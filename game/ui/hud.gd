@@ -102,6 +102,11 @@ func make_room_left(px: float) -> void:
 		_bottom.offset_left = LOG_LEFT + px
 
 
+## The bottom edge of the status bar (this layer's pixels): touch Menu sits under it (M34.2).
+func top_bottom() -> float:
+	return ($Top as Control).get_global_rect().end.y
+
+
 func add_lines(lines: Array) -> void:
 	if lines.is_empty():
 		return

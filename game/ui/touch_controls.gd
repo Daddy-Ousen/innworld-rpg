@@ -1,8 +1,15 @@
 ## On-screen controls for touch screens (M20.1, ADR 0032): a floating stick
 ## (a finger anywhere on the left half of the screen walks; user, 2026-10-08)
-## and a Wait button (bottom left); Use, Bag, More and Menu (right); the More
-## grid (Eat, Sleep, Character, Journal, Log, Help, Block, Throw, Drop); Back
-## while a panel is open; Cancel while a Skill is armed or a walk runs.
+## and a Wait button (bottom left); More, Bag and the context button (bottom
+## right, M34.2); Menu (top right); the More grid (Eat, Sleep, Character,
+## Journal, Log, Help, Block, Throw, Drop); Back (top right) while a panel is
+## open; Cancel while a Skill is armed or a walk runs.
+## M34.2 (ADR 0045): the context button replaces Use. It names the nearest
+## target's main action and the target ("Talk / Erin"); a tap opens that
+## target's card (`context_pressed`). With 2+ targets near, chips left of it
+## (a face or a short name) open the others' cards; with more than CHIPS + 1
+## the last chip is "All" (the whole target list). The game screen sends the
+## targets with set_targets (InteractMenu.targets).
 ## Each button sends the input action of its key (project.godot [input]) as
 ## an InputEventAction, so the game reads a tap and a key the same way. A held
 ## button, or the stick pushed one way, is a held key. The game screen calls sync() every frame.
@@ -13,11 +20,19 @@ class_name TouchControls
 extends Control
 
 signal cancel_pressed
+## M34.2: the context button or a chip: open the card of `object_id` ("" = the target list).
+signal context_pressed(object_id: String)
 
 const SIZE := 64.0
 const WIDE := 104.0
 const GAP := 6.0
 const MARGIN := 12.0
+## The context button's height: bigger than the others, in thumb reach.
+const BIG := 96.0
+## Chips beside the context button (the last one is "All" when more are near).
+const CHIPS := 3
+## A chip without a face shows this many letters of the name.
+const CHIP_LETTERS := 5
 ## Room the Wait button takes from the left edge at factor 1: the HUD log moves right of it.
 const PAD_WIDTH := MARGIN + SIZE + MARGIN
 ## The stick (pixels on the screen). A finger moved less than DEAD from where it
@@ -31,8 +46,9 @@ const STICK_ZONE := 0.5
 const STICK_ACTIONS := {
 	Vector2.UP: &"move_n", Vector2.DOWN: &"move_s", Vector2.RIGHT: &"move_e", Vector2.LEFT: &"move_w",
 }
-## Right column: label, action ("" = opens the More grid).
-const COLUMN := [["Use", &"use"], ["Bag", &"bag"], ["More", &""], ["Menu", &"back"]]
+## Right column, top down: label, action ("" = opens the More grid). The
+## context button comes last (M34.2).
+const COLUMN := [["More", &""], ["Bag", &"bag"]]
 const MORE := [
 	["Eat", &"eat"], ["Sleep", &"sleep"], ["Character", &"sheet"],
 	["Journal", &"journal"], ["Log", &"log"], ["Help", &"help"],
@@ -45,6 +61,11 @@ var column: VBoxContainer
 var more: GridContainer
 var back: Button
 var cancel: Button
+## M34.2: the context button, its chips and Menu (top right).
+var context: Button
+var chips: HBoxContainer
+var menu_button: Button
+var _targets: Array[Dictionary] = []
 ## Action -> its button (the pad, the column and the More grid).
 var buttons := {}
 ## Actions a button holds down now.
@@ -94,8 +115,11 @@ func _ready() -> void:
 	add_child(stick)
 	_build_column()
 	_build_more()
+	menu_button = _button("Menu", &"back", WIDE)
+	_place_top_right(menu_button)
 	back = _button("Back", &"back", WIDE)
-	_place_right(back, MARGIN)
+	_place_top_right(back)
+	set_targets([] as Array[Dictionary])
 	visible = false
 
 
@@ -110,12 +134,78 @@ func sync(shown: bool, panel_open: bool, blocked: bool, can_cancel: bool, tappin
 	pad.visible = play
 	stick_enabled = play and not tapping
 	column.visible = play
+	menu_button.visible = play
 	cancel.visible = play and can_cancel
 	if not play:
 		more.visible = false
+	chips.visible = play and not more.visible and chips.get_child_count() > 0
 	back.visible = visible and panel_open
 	if not play:
 		release_all()
+
+
+## M34.2: Menu and Back sit `px` (this layer's pixels) from the top: under the HUD's status bar.
+func set_top_room(px: float) -> void:
+	var top := MARGIN + px * factor
+	for c: Control in [menu_button, back]:
+		if c.offset_top != top:  # called each frame: no relayout when unchanged
+			c.offset_top = top
+			c.offset_bottom = top
+
+
+## M34.2: the targets near, nearest first ({"id", "verb", "name", "look"},
+## InteractMenu.targets). The first is on the context button; the others are chips.
+func set_targets(targets: Array[Dictionary]) -> void:
+	_targets = targets
+	context.disabled = targets.is_empty()
+	context.text = "-" if targets.is_empty() else "%s\n%s" % [targets[0]["verb"], targets[0]["name"]]
+	for c: Node in chips.get_children():
+		chips.remove_child(c)
+		c.queue_free()
+	var others := _chip_targets()
+	others.reverse()  # the row grows left: the nearest sits next to the button
+	for t: Dictionary in others:
+		var b := Button.new()
+		b.focus_mode = Control.FOCUS_NONE
+		b.custom_minimum_size = Vector2(SIZE, SIZE)
+		b.tooltip_text = ("%s %s" % [t["verb"], t["name"]]).strip_edges()
+		var face := Portrait.texture(String(t["look"]))
+		if face != null:
+			b.icon = face
+			b.expand_icon = true
+		else:
+			b.text = String(t["name"]).left(CHIP_LETTERS)
+		b.pressed.connect(func() -> void: context_pressed.emit(String(t["id"])))
+		chips.add_child(b)
+
+
+## The targets on the context button and its chips now.
+func targets() -> Array[Dictionary]:
+	return _targets
+
+
+## The ids the chips open, nearest first ("" = All).
+func chip_ids() -> Array[String]:
+	var out: Array[String] = []
+	for t: Dictionary in _chip_targets():
+		out.append(String(t["id"]))
+	return out
+
+
+## Presses chip `i` (nearest first), as a tap does.
+func press_chip(i: int) -> void:
+	var b: Button = chips.get_child(chips.get_child_count() - 1 - i)
+	b.pressed.emit()
+
+
+## The targets after the first, CHIPS at most; the last is "All" when more are near.
+func _chip_targets() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	out.assign(_targets.slice(1))
+	if out.size() > CHIPS:
+		out.resize(CHIPS - 1)
+		out.append({"id": "", "verb": "", "name": "All", "look": ""})
+	return out
 
 
 ## The UI scale factor (M20.3): the controls keep their size on the screen.
@@ -233,7 +323,7 @@ func _zone_right() -> float:
 
 ## True when `at` is over a visible button (the stick does not start on one).
 func _on_button(at: Vector2) -> bool:
-	for c: Control in [pad, column, more, back, cancel]:
+	for c: Control in [pad, column, more, back, cancel, chips, menu_button]:
 		if c.is_visible_in_tree() and c.get_global_rect().has_point(at):
 			return true
 	return false
@@ -277,7 +367,22 @@ func _build_column() -> void:
 			column.add_child(b)
 		else:
 			column.add_child(_button(row[0], row[1], WIDE))
-	_place_right(column, MARGIN)
+	context = Button.new()
+	context.name = "Context"
+	context.focus_mode = Control.FOCUS_NONE
+	context.custom_minimum_size = Vector2(WIDE, BIG)
+	context.clip_text = true
+	context.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	context.pressed.connect(func() -> void:
+		if not _targets.is_empty():
+			context_pressed.emit(String(_targets[0]["id"])))
+	buttons[&"use"] = context  # E opens the use menu; on touch this button does
+	column.add_child(context)
+	_place_bottom_right(column, MARGIN)
+	chips = HBoxContainer.new()
+	chips.name = "Chips"
+	chips.add_theme_constant_override("separation", int(GAP))
+	_place_bottom_right(chips, MARGIN + WIDE + GAP * 2)
 	# Cancel sits above the column (not in it), so the column never moves.
 	cancel = Button.new()
 	cancel.text = "Cancel"
@@ -285,9 +390,8 @@ func _build_column() -> void:
 	cancel.focus_mode = Control.FOCUS_NONE
 	cancel.custom_minimum_size = Vector2(WIDE, SIZE)
 	cancel.pressed.connect(func() -> void: cancel_pressed.emit())
-	_place_right(cancel, MARGIN)
-	cancel.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	cancel.offset_bottom = -(column.get_combined_minimum_size().y / 2.0 + GAP)
+	_place_bottom_right(cancel, MARGIN)
+	cancel.offset_bottom = -(MARGIN + column.get_combined_minimum_size().y + GAP)
 	cancel.offset_top = cancel.offset_bottom
 
 
@@ -302,20 +406,33 @@ func _build_more() -> void:
 		b.button_up.connect(func() -> void: more.visible = false)
 		more.add_child(b)
 	more.visible = false
-	_place_right(more, MARGIN + WIDE + GAP * 2)
+	_place_bottom_right(more, MARGIN + WIDE + GAP * 2)
 
 
-## Anchors `c` to the middle of the right edge, `right` px in.
-func _place_right(c: Control, right: float) -> void:
+## Anchors `c` to the bottom right corner, `right` px in from the right edge (M34.2).
+func _place_bottom_right(c: Control, right: float) -> void:
 	if c.get_parent() == null:
 		_box.add_child(c)
-	c.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	c.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	c.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	c.grow_vertical = Control.GROW_DIRECTION_BOTH
+	c.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	c.offset_right = -right
 	c.offset_left = -right
-	c.offset_top = 0.0
-	c.offset_bottom = 0.0
+	c.offset_bottom = -MARGIN
+	c.offset_top = -MARGIN
+
+
+## Anchors `c` to the top right corner (Menu, Back; M34.2).
+func _place_top_right(c: Control) -> void:
+	if c.get_parent() == null:
+		_box.add_child(c)
+	c.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	c.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	c.grow_vertical = Control.GROW_DIRECTION_END
+	c.offset_right = -MARGIN
+	c.offset_left = -MARGIN
+	c.offset_top = MARGIN
+	c.offset_bottom = MARGIN
 
 
 func _button(label: String, action: StringName, width: float) -> Button:

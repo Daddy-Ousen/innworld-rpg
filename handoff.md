@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.2 context button (branch `feat/m34.2-context-button`)
+- `game/ui/touch_controls.gd`: `context` button (in `buttons[&"use"]`), `chips`, `menu_button`, `set_targets`,
+  `targets`, `chip_ids`, `press_chip`, `set_top_room`, signal `context_pressed(id)`; `_place_right` became
+  `_place_bottom_right` + `_place_top_right`. `game/ui/interact_menu.gd`: `targets`, `verb_of`, GROUPS order (trade
+  before work). `game/ui/hud.gd`: `top_bottom`. `game/world/main_panels.gd`: `refresh_context` (cached by a key),
+  `open_target`. `game/world/main.gd`: one connect. Detail in ADR 0045 "M34.2 as built".
+- Tests: new `unit_context_button` (9); list in `progress.md`. Full suite not run.
+- Next: user merges the PR and tries it on the phone. Then M34.3 tap the world **[Opus · medium]**: outside a fight
+  a tap on a target walks next to it (normal move commands) and opens its card; Options "Controls: Tap + stick /
+  Stick only" in `ui/touch_settings.gd`. Files: `world/main_input.gd`, `world/main_aim.gd`. New test `unit_tap_walk`.
+- Gotchas: a Git Bash heredoc with tabs and quotes broke again: put Python patch scripts in the scratchpad with the
+  Write tool. The HUD status line "Coins 0c" touches "H: help" in a long place name at 250 % (old, not from this
+  work). Render with touch on: set `session.touch_settings_path` to the out dir first, then `set_touch_mode("on")`.
+
 ## Just done (2026-10-21, local): M34.1 shop screen (branch `feat/m34.1-shop-screen`)
 - New `game/ui/shop_panel.gd` / `.tscn` (`ShopPanel`), node `MenuLayer/ShopPanel` in `world/main.tscn`.
   `InteractMenu.action_rows` gives one `InteractMenu.SHOP` row ("menu:shop") per shop; picking it emits

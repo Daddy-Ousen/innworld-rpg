@@ -43,8 +43,8 @@ const MAX_H := 0.85
 ## A row longer than this puts the card in one column.
 const LONG := 22
 const ATTACK_GROUP := "attack"
-## The order of the button groups on a card.
-const GROUPS := ["talk", "serve", "work", "trade", "travel", "learn", "other", ATTACK_GROUP]
+## The order of the button groups on a card (M34.2: Shop before a stall's Haggle).
+const GROUPS := ["talk", "serve", "trade", "work", "travel", "learn", "other", ATTACK_GROUP]
 const ATTACK_COLOR := Color(0.9, 0.35, 0.3)
 
 ## The page now: TARGETS, ACTIONS or CONFIRM.
@@ -197,7 +197,8 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 
 
 ## Opens on the card of the option with id `object_id` (Back from the shop
-## screen, M34.1); with no such option it opens as `open` does.
+## screen, M34.1; the context button and its chips, M34.2); with no such option
+## it opens as `open` does.
 func open_on(options: Array[Dictionary], db: DataDb, object_id: String) -> bool:
 	if not open(options, db):
 		return false
@@ -331,6 +332,38 @@ static func action_rows(o: Dictionary, db: DataDb, gs: GameState) -> Array[Dicti
 	for g: String in GROUPS:
 		out.append_array(by[g])
 	return out
+
+
+## M34.2: the targets near for the context button, nearest first (the order of
+## Interact.options), only those with a button: [{"id", "verb", "name", "look"}].
+static func targets(options: Array[Dictionary], db: DataDb, gs: GameState) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for o: Dictionary in options:
+		if action_rows(o, db, gs).is_empty():
+			continue
+		out.append({"id": String(o["id"]), "verb": verb_of(o), "name": String(o["name"]),
+				"look": look_of(o, db, gs)})
+	return out
+
+
+## The one word the context button shows for a target: "Serve" (a patron, or a
+## dish ordered), "Talk", "Shop", "Sleep", "Door", "Ride", "Use", "Take".
+static func verb_of(o: Dictionary) -> String:
+	if o.get("guest", false) or (o.get("serve", []) as Array).any(func(c: Dictionary) -> bool: return c["ordered"]):
+		return "Serve"
+	if o.get("npc", false) or o.get("fairy", false):
+		return "Talk"
+	if not (o.get("trades", []) as Array).is_empty():
+		return "Shop"
+	if o.get("sleep", false):
+		return "Sleep"
+	if not (o.get("portal", {}) as Dictionary).is_empty():
+		return "Door"
+	if not (o.get("ride", {}) as Dictionary).is_empty():
+		return "Ride"
+	if (o.get("actions", []) as Array).is_empty() and String(o.get("item", "")) != "":
+		return "Take"
+	return "Use"
 
 
 ## A target's button text: "Erin (friend)", "Stove".

@@ -8,6 +8,8 @@ extends RefCounted
 
 ## The MainScreen (untyped: a typed back link makes a script cycle that leaks at exit).
 var _m
+## M34.2: the place and time the context button's targets were read at.
+var _context_key := ""
 
 
 func _init(screen: Node) -> void:
@@ -42,6 +44,33 @@ func sync_touch() -> void:
 	_m.touch.sync(shown, panel_open(), _m.dialog.visible or _m.console_layer.visible,
 			_m.aim.armed != "" or _m.aim.walking(), Encounter.is_player_turn(Session.gs))
 	_m.hud.make_room_left(_m.touch.pad_width() if shown else 0.0)
+	if shown:
+		_m.touch.set_top_room(_m.hud.top_bottom())
+		refresh_context()
+
+
+## M34.2: the targets near for the context button and its chips. Read again
+## only when the place, the time (people move), the flags or the game changed.
+func refresh_context() -> void:
+	var gs: GameState = Session.gs
+	var key := "%d|%s|%s|%d|%d" % [gs.get_instance_id(), gs.player.area, gs.player.pos(),
+			gs.clock.total_minutes, gs.flags.size()]
+	if key == _context_key:
+		return
+	_context_key = key
+	var targets: Array[Dictionary] = []
+	if gs.player.is_placed():
+		targets = InteractMenu.targets(Interact.options(gs, Session.db), Session.db, gs)
+	_m.touch.set_targets(targets)
+
+
+## The context button or a chip (M34.2): the card of `object_id`, or the target list ("").
+func open_target(object_id: String) -> void:
+	var options := Interact.options(Session.gs, Session.db)
+	var ok: bool = _m.menu.open(options, Session.db) if object_id == "" \
+			else _m.menu.open_on(options, Session.db, object_id)
+	if not ok:
+		_m.hud.add_lines(["There is nothing to use here."])
 
 
 func toggle_console() -> void:
