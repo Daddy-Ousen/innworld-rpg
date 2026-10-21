@@ -81,6 +81,24 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
 - Not done: the planned 20 % larger hit area. The button itself is bigger (104 × 96).
 - The key E still opens the whole use menu. Checked on a render at 1200 × 540, menu size 250 %, touch on.
 
+## M34.3 as built (2026-10-21)
+- New `world/main_tap.gd` (`MainTap`, `MainScreen.tapper`). Outside a fight, a touch tap on an NPC, a seated patron or
+  a map object (`MainTap.target_at`) walks next to it, then opens its card (`MainPanels.open_target`). A tap on a
+  target that is already near opens the card at once (no time passes). A tap on the floor walks there; a tap on an
+  exit walks onto it and leaves the map.
+- Each step is `MainScreen.step` (a normal move), one every `STEP_REPEAT`. The path (`Pathfind.path`, around people
+  and monsters) is found again before each step, so a moving NPC is followed. At most 80 steps.
+- The walk ends on: a new tap, a held direction (stick or key), Cancel (shown during the walk), a panel or the System
+  dialog or the long-road question, a fight, a new map, or a step that does not move.
+- `MainInput.world_tap`: only emulated (touch) left clicks, and only when the touch controls show and Controls is
+  "Tap + stick" (`Session.tap_walk_on`). It acts when the finger lifts, only if it moved less than `MainTap.SLOP`
+  (24 px) and did not walk with the stick (`TouchControls.stick_walked`). A desktop mouse click outside a fight still
+  does nothing.
+- Controls: `TouchSettings.controls` (`tap` default, `stick`), key `controls` in the `touch` section of
+  `user://settings.cfg` (not in `GameState`). Options has a "Controls" row (`Session.set_touch_controls`).
+- No core, schema or save change. Determinism checked: a tap walk and the same moves by key give the same clock and
+  RNG state (`unit_tap_walk`). Not checked on a render (behaviour only, no new layout except one Options row).
+
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
 - The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several

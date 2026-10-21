@@ -71,11 +71,13 @@ var controls: MainInput
 var aim: MainAim
 var road: MainTravel
 var panels: MainPanels
+var tapper: MainTap
 
 
 func _ready() -> void:
 	controls = MainInput.new(self)
 	aim = MainAim.new(self)
+	tapper = MainTap.new(self)
 	panels = MainPanels.new(self)
 	road = MainTravel.new(self, $SystemLayer)
 	travel = road.prompt
@@ -176,12 +178,20 @@ func tap(cell: Vector2i) -> void:
 		_cooldown = STEP_REPEAT
 
 
+## M34.3: a touch tap on `cell` outside a fight (MainTap.tap); a walk steps every STEP_REPEAT.
+func tap_world(cell: Vector2i) -> void:
+	tapper.tap(cell)
+	if tapper.walking():
+		_cooldown = STEP_REPEAT
+
+
 func cancel() -> void:
 	aim.cancel()
+	tapper.cancel()
 
 
 func _walking() -> bool:
-	return aim.walking()
+	return aim.walking() or tapper.walking()
 
 
 func _input(event: InputEvent) -> void:
@@ -196,6 +206,7 @@ func _process(delta: float) -> void:
 	panels.sync_touch()
 	_cooldown = maxf(_cooldown - delta, 0.0)
 	if is_busy():
+		tapper.cancel()  # a panel, the dialog or a question ends a tap walk
 		return
 	if aim.walking():
 		if _cooldown == 0.0:
@@ -203,6 +214,14 @@ func _process(delta: float) -> void:
 			_cooldown = STEP_REPEAT
 		return
 	var dir := controls.held_direction()
+	if tapper.walking():
+		if dir != "":
+			tapper.cancel()  # the stick or a key takes over
+		else:
+			if _cooldown == 0.0:
+				tapper.next()
+				_cooldown = STEP_REPEAT
+			return
 	if dir != _attack_dir:
 		_attack_dir = ""
 	if dir == "":

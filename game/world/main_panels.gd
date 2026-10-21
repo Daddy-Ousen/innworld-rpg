@@ -42,7 +42,7 @@ func apply_ui_scale() -> void:
 func sync_touch() -> void:
 	var shown: bool = Session.touch_shown()
 	_m.touch.sync(shown, panel_open(), _m.dialog.visible or _m.console_layer.visible,
-			_m.aim.armed != "" or _m.aim.walking(), Encounter.is_player_turn(Session.gs))
+			_m.aim.armed != "" or _m.aim.walking() or _m.tapper.walking(), Encounter.is_player_turn(Session.gs))
 	_m.hud.make_room_left(_m.touch.pad_width() if shown else 0.0)
 	if shown:
 		_m.touch.set_top_room(_m.hud.top_bottom())
