@@ -1,5 +1,20 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.1 shop screen (branch `feat/m34.1-shop-screen`)
+- New `game/ui/shop_panel.gd` / `.tscn` (`ShopPanel`), node `MenuLayer/ShopPanel` in `world/main.tscn`.
+  `InteractMenu.action_rows` gives one `InteractMenu.SHOP` row ("menu:shop") per shop; picking it emits
+  `shop_opened(option)`. Wiring in `world/main.gd` (`shop` var, 3 connects) and `world/main_panels.gd`
+  (`open_shop`, `use_from_shop`, `shop_back`, `_option`; `panel_open` and the console close the shop).
+  `InteractMenu.open_on(options, db, id)` opens a given target's card. Detail in ADR 0045 "M34.1 as built".
+- Test API: `open`, `rows`, `cards`, `pick`, `step_count`, `set_max`, `deal`, `sell_all`, `show_tab`, `back`,
+  `deal_text`, `deal_enabled`, `sub_text`, `tab`, `good`, `count`. Test list in `progress.md`. Full suite not run.
+- Next: user merges the PR and tries it on the phone. Then M34.2 context button **[Opus · medium]**: replaces Use
+  ("Talk · Erin"), chips for 2+ targets, Menu to the top right (`ui/touch_controls.gd`).
+- Gotchas: a `extends SceneTree` render script must not name UI classes (`InteractMenu`, `ShopPanel`) in types or
+  constants: they use the `Session` autoload and fail to compile before autoloads load. Use untyped vars and string
+  ids. At 250 % the UI is only about 216 px high on a 1200 × 540 render: every extra row in a panel costs a card
+  row. The test that loads `world/main.tscn` prints the old "ObjectDB leaked / resources still in use" lines.
+
 ## Just done (2026-10-21, local): M34.0 action card (branch `feat/m34.0-action-card`)
 - `game/ui/interact_menu.gd` / `.tscn` rewritten in place (class `InteractMenu` kept, so `world/main.gd` and
   `world/main_panels.gd` did not change). Pages `TARGETS` / `ACTIONS` / `CONFIRM`; static `action_rows(o, db, gs)`;

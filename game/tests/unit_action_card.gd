@@ -138,14 +138,15 @@ func test_touch_attack_needs_a_hold() -> void:
 	assert_signal_emitted_with_parameters(m, "chosen", ["erin_solstice", Interact.ATTACK])
 
 
-func test_rows_keep_every_old_pick() -> void:
+## M34.1: a shop's trades are one Shop button (the shop screen has the goods).
+func test_a_shop_is_one_shop_button() -> void:
 	var gs := GameState.new_game(SEED, _db, "celum")
 	var o := {"id": "celum_stall", "name": "Stall", "npc": false, "actions": [], "sleep": false, "item": "",
 		"price": 0, "ride": {}, "trades": [
 			{"kind": Economy.BUY, "good": "bread", "name": "Bread", "price": 3, "bulk": 5},
 			{"kind": Economy.SELL, "good": "herbs", "name": "Herbs", "price": 2, "have": 4}] as Array[Dictionary]}
 	var picks: Array = InteractMenu.action_rows(o, _db, gs).map(func(r: Dictionary) -> String: return r["action"])
-	assert_eq(picks, ["buy:bread", "buy:bread#5", "sell:herbs", "sell:herbs#4"])
+	assert_eq(picks, [InteractMenu.SHOP])
 
 
 func test_the_card_shows_the_target_face() -> void:

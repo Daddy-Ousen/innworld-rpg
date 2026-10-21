@@ -54,6 +54,7 @@ var _replayed := false
 @onready var hud: Hud = $HudLayer/HUD
 @onready var bar: CombatBar = $HudLayer/CombatBar
 @onready var menu: InteractMenu = $MenuLayer/InteractMenu
+@onready var shop: ShopPanel = $MenuLayer/ShopPanel
 @onready var sheet: CharacterSheet = $MenuLayer/CharacterSheet
 @onready var journal: Journal = $MenuLayer/Journal
 @onready var bag: Bag = $MenuLayer/Bag
@@ -95,6 +96,9 @@ func _ready() -> void:
 		Audio.place_loops(view.loop_spots, loops, WorldView.TILE))
 	Session.state_changed.connect(_redraw)
 	menu.chosen.connect(use)
+	menu.shop_opened.connect(panels.open_shop)
+	shop.chosen.connect(panels.use_from_shop)
+	shop.went_back.connect(panels.shop_back)
 	bag.chosen.connect(panels.use_from_bag)
 	dialog.closed.connect(panels.on_dialog_closed)
 	dialog.struck.connect(attack_npc.bind(true))

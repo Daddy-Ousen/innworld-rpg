@@ -318,13 +318,26 @@ func test_trades_list_the_bag_count_and_the_bulk_size() -> void:
 	assert_eq(int(sells[0]["have"]), 4)
 
 
-func test_the_use_menu_offers_sell_all_and_buy_many() -> void:
+## M34.1: the shop screen sends one at a time, sell all and buy many.
+func test_the_shop_screen_offers_sell_all_and_buy_many() -> void:
 	var gs := _game_at("celum_square", "celum_stall")
-	Commands.give(gs, _db, 0, "herbs", 4)
-	var picks: Array[String] = []
-	for o: Dictionary in Interact.options(gs, _db):  # the rows of each card (M34.0)
-		for r: Dictionary in InteractMenu.action_rows(o, _db, gs):
-			picks.append(String(r["action"]))
-	assert_has(picks, "sell:herbs", "one at a time stays")
-	assert_has(picks, "sell:herbs#4", "sell all")
-	assert_has(picks, "buy:bread#%d" % int(_db.rules["economy"]["bulk_buy"]), "buy many")
+	Commands.give(gs, _db, 100, "herbs", 4)
+	var stall := {}
+	for o: Dictionary in Interact.options(gs, _db):
+		if o["id"] == "celum_stall":
+			stall = o
+	var p: ShopPanel = add_child_autofree(load("res://ui/shop_panel.tscn").instantiate())
+	watch_signals(p)
+	assert_true(p.open(stall, _db, gs))
+	var bread := p.rows().map(func(r: Dictionary) -> String: return r["good"]).find("bread")
+	p.pick(bread)
+	p.step_count(4)
+	p.deal()
+	assert_signal_emitted_with_parameters(p, "chosen", ["celum_stall", "buy:bread#5"], 0)
+	p.show_tab(Economy.SELL)
+	var herbs := p.rows().map(func(r: Dictionary) -> String: return r["good"]).find("herbs")
+	p.pick(herbs)
+	p.deal()
+	assert_signal_emitted_with_parameters(p, "chosen", ["celum_stall", "sell:herbs"], 1)
+	p.sell_all(herbs)
+	assert_signal_emitted_with_parameters(p, "chosen", ["celum_stall", "sell:herbs#4"], 2)
