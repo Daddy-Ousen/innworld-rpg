@@ -4,8 +4,9 @@
 ## size, so a load does not change it. Auto picks BIG on a phone (a touch
 ## screen with a short side under PHONE_INCHES), else 1. The map and the touch
 ## pad keep their size under a bigger UI (user, 2026-10-05): the camera zoom
-## and the pad's sizes are divided by the factor. Pure except for `fit`,
-## `keep_fit` and the window read in `Session`.
+## and the pad's sizes are divided by the factor. M34.4: on a phone they grow
+## to a size in dp instead (map_grow, touch_grow). Pure except for `fit`,
+## `keep_fit`, the screen dpi and the window read in `Session`.
 class_name UiScale
 extends RefCounted
 
@@ -25,6 +26,21 @@ const PHONE_INCHES := 5.0
 const CAMERA_ZOOM := 2.0
 ## Space kept around a panel that is cut to fit a small view.
 const MARGIN := 8.0
+## M34.4 (ADR 0045, user pick 2026-10-21): on a phone or tablet OS the touch
+## pad, the map and the menu buttons grow to a size in dp (density-independent
+## pixels, DP_PER_INCH to the inch, the screen's dpi): a touch button at least
+## TOUCH_DP, a map tile about TILE_DP. A desktop keeps the sizes of M20.3.
+const DP_PER_INCH := 160.0
+const TOUCH_DP := 48.0
+const TILE_DP := 40.0
+## The smallest touch pad button (TouchControls.SIZE) and a map tile (ViewArt.TILE)
+## at camera zoom CAMERA_ZOOM, in screen pixels at factor 1.
+const PAD_PX := 64.0
+const TILE_PX := 32.0
+
+## Renders and tests set these: dpi (0 = the screen's), mobile (-1 = the OS, 0 = no, 1 = yes).
+static var dpi_override := 0.0
+static var mobile_override := -1
 
 var mode := AUTO
 
@@ -68,7 +84,31 @@ static func auto_factor(short_px: float, dpi: float, touch: bool) -> float:
 
 ## True on a phone or tablet OS, in the app or in a browser on it.
 static func is_mobile_os() -> bool:
+	if mobile_override >= 0:
+		return mobile_override == 1
 	return OS.has_feature("mobile") or OS.has_feature("web_android") or OS.has_feature("web_ios")
+
+
+## Screen pixels in one dp (M34.4).
+static func px_per_dp() -> float:
+	var dpi := dpi_override if dpi_override > 0.0 else float(DisplayServer.screen_get_dpi())
+	return maxf(dpi, 1.0) / DP_PER_INCH
+
+
+## How much the touch pad grows on a phone so its smallest button is TOUCH_DP (1 on a desktop).
+static func touch_grow() -> float:
+	return maxf(px_per_dp() * TOUCH_DP / PAD_PX, 1.0) if is_mobile_os() else 1.0
+
+
+## How much the map grows on a phone so a tile is about TILE_DP (1 on a desktop).
+static func map_grow() -> float:
+	return maxf(px_per_dp() * TILE_DP / (TILE_PX * CAMERA_ZOOM), 1.0) if is_mobile_os() else 1.0
+
+
+## The smallest height of a menu button in UI pixels at factor `f`: TOUCH_DP on a
+## phone, else 0 (the menu's own size holds).
+static func touch_ui_px(f: float) -> float:
+	return TOUCH_DP * px_per_dp() / maxf(f, 0.1) if is_mobile_os() else 0.0
 
 
 ## Sets the alpha of every flat box in `theme` that has a fill: `alpha` x its
@@ -91,9 +131,10 @@ static func set_box_alpha(theme: Theme, alpha: float) -> void:
 			box.bg_color = c
 
 
-## The world camera's zoom at `f`: the map keeps its size on the screen.
+## The world camera's zoom at `f`: the map keeps its size on the screen
+## (M34.4: on a phone it grows to map_grow).
 static func camera_zoom(f: float) -> float:
-	return CAMERA_ZOOM / f
+	return CAMERA_ZOOM * map_grow() / f
 
 
 ## The size of a panel designed at `design` in a view of `view`: the design

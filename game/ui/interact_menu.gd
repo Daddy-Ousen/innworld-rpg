@@ -27,7 +27,7 @@ const SHOP := "menu:shop"
 const TARGETS := "targets"
 const ACTIONS := "actions"
 const CONFIRM := "confirm"
-## Button height (UI pixels; the phone menu size scales it, M20.3: 32 at 250 % is about 53 dp).
+## Button height (UI pixels). M34.4: on a phone row_h() makes it at least 48 dp.
 const ROW_H := 32.0
 const GAP := 8
 ## A finger that moves more than this (UI pixels) scrolls the card instead of picking.
@@ -82,7 +82,7 @@ class CardButton extends Button:
 		clip_text = true
 		text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		custom_minimum_size = Vector2(0, ROW_H)
+		custom_minimum_size = Vector2(0, InteractMenu.row_h())
 		pressed.connect(_on_pressed)
 
 	# Runs before the button's own input (which sends `pressed` on release).
@@ -366,6 +366,14 @@ static func verb_of(o: Dictionary) -> String:
 	return "Use"
 
 
+## M34.4: the height of a card button now: ROW_H, and at least UiScale.TOUCH_DP on a
+## phone (the UI factor alone gave about 30 dp at 250 %).
+static func row_h() -> float:
+	var tree := Engine.get_main_loop() as SceneTree
+	var f := tree.root.content_scale_factor if tree != null else 1.0
+	return maxf(ROW_H, UiScale.touch_ui_px(f))
+
+
 ## A target's button text: "Erin (friend)", "Stove".
 static func target_label(o: Dictionary) -> String:
 	var label := String(o["name"])
@@ -403,6 +411,7 @@ func _open() -> void:
 
 
 func _after_page() -> void:
+	_close.custom_minimum_size.y = row_h()
 	_fit()
 	_fit.call_deferred()  # again once the new buttons have their theme sizes
 	if is_visible_in_tree() and not _buttons.is_empty():
@@ -500,7 +509,7 @@ func _fill(rows: Array[Dictionary], on_pick: Callable) -> void:
 		var face := Portrait.texture(String(r.get("look", "")))
 		if face != null:
 			b.icon = face
-			b.add_theme_constant_override("icon_max_width", int(ROW_H) - 8)
+			b.add_theme_constant_override("icon_max_width", int(row_h()) - 8)
 		b.fired.connect(on_pick.bind(i))
 		_buttons.append(b)
 
@@ -514,7 +523,7 @@ func _fit() -> void:
 	var w := maxf(minf(MAX_W, view.x - SIDE * 2.0), 160.0)
 	var head := (%Header as Control).get_combined_minimum_size().y
 	_scroll.custom_minimum_size.y = maxf(minf(_list.get_combined_minimum_size().y,
-			view.y * MAX_H - head - 3.0 * GAP - BOTTOM), ROW_H)
+			view.y * MAX_H - head - 3.0 * GAP - BOTTOM), row_h())
 	var h := get_combined_minimum_size().y
 	offset_left = -w / 2.0
 	offset_right = w / 2.0

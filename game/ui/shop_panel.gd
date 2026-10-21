@@ -59,7 +59,6 @@ class StepButton extends Button:
 
 	func _init() -> void:
 		action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		custom_minimum_size = Vector2(InteractMenu.ROW_H * 1.5, InteractMenu.ROW_H)
 		button_down.connect(func() -> void:
 			_held = true
 			_t = -REPEAT_WAIT
@@ -82,7 +81,6 @@ func _ready() -> void:
 	for b: Button in [_buy_tab, _sell_tab]:
 		b.toggle_mode = true
 		b.button_group = tabs
-		b.custom_minimum_size.y = InteractMenu.ROW_H
 	_buy_tab.pressed.connect(show_tab.bind(Economy.BUY))
 	_sell_tab.pressed.connect(show_tab.bind(Economy.SELL))
 	_minus = StepButton.new()
@@ -90,17 +88,14 @@ func _ready() -> void:
 	_minus.step.connect(step_count.bind(-1))
 	_count = Label.new()
 	_count.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_count.custom_minimum_size.x = InteractMenu.ROW_H * 1.25
 	_plus = StepButton.new()
 	_plus.text = "+"
 	_plus.step.connect(step_count.bind(1))
 	_max = Button.new()
 	_max.text = "Max"
-	_max.custom_minimum_size = Vector2(InteractMenu.ROW_H * 2.0, InteractMenu.ROW_H)
 	_max.pressed.connect(set_max)
 	_deal = Button.new()
 	_deal.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_deal.custom_minimum_size.y = InteractMenu.ROW_H
 	_deal.clip_text = true
 	_deal.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	_deal.pressed.connect(deal)
@@ -282,6 +277,7 @@ func _show_coins() -> void:
 
 
 func _refresh() -> void:
+	_size_buttons()
 	_show_coins()
 	_buy_tab.set_pressed_no_signal(tab == Economy.BUY)
 	_sell_tab.set_pressed_no_signal(tab == Economy.SELL)
@@ -298,6 +294,17 @@ func _refresh() -> void:
 		_deal.grab_focus()
 	elif not _cards.is_empty():
 		_cards[maxi(_rows.map(func(r: Dictionary) -> String: return r["good"]).find(good), 0)].grab_focus()
+
+
+## The fixed buttons at the height of a card (M34.4: at least 48 dp on a phone).
+func _size_buttons() -> void:
+	var h := InteractMenu.row_h()
+	for b: Control in [_close, _buy_tab, _sell_tab, _deal]:
+		b.custom_minimum_size.y = h
+	for b: Control in [_minus, _plus]:
+		b.custom_minimum_size = Vector2(h * 1.5, h)
+	_count.custom_minimum_size.x = h * 1.25
+	_max.custom_minimum_size = Vector2(h * 2.0, h)
 
 
 ## Puts the cards of the tab on the panel: two columns of goods to buy (one when
@@ -334,7 +341,7 @@ func _fill() -> void:
 			var all := InteractMenu.CardButton.new()
 			all.text = "Sell all"
 			all.size_flags_horizontal = Control.SIZE_FILL
-			all.custom_minimum_size.x = InteractMenu.ROW_H * 3.0
+			all.custom_minimum_size.x = InteractMenu.row_h() * 3.0
 			all.fired.connect(sell_all.bind(i))
 			grid.add_child(all)
 
@@ -377,7 +384,7 @@ func _fit() -> void:
 		if c.visible:
 			rest += c.get_combined_minimum_size().y + InteractMenu.GAP
 	_scroll.custom_minimum_size.y = maxf(minf(_list.get_combined_minimum_size().y,
-			view.y * InteractMenu.MAX_H - rest - 2.0 * InteractMenu.GAP - InteractMenu.BOTTOM), InteractMenu.ROW_H)
+			view.y * InteractMenu.MAX_H - rest - 2.0 * InteractMenu.GAP - InteractMenu.BOTTOM), InteractMenu.row_h())
 	var h := get_combined_minimum_size().y
 	offset_left = -w / 2.0
 	offset_right = w / 2.0

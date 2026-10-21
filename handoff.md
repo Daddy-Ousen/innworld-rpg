@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-10-21, local): M34.4 phone render check (branch `feat/m34.4-phone-sizes`)
+- Rendered at 2400 × 1080, 250 %, touch on, no stretch (the Android build). Found 64 px touch buttons and tiles
+  (about 25 dp) and 30 dp card buttons. User pick: buttons and map by dpi on a phone; desktop stays.
+- Code: `game/ui/ui_scale.gd` (`px_per_dp`, `touch_grow`, `map_grow`, `touch_ui_px`, `dpi_override`,
+  `mobile_override`; `camera_zoom` uses `map_grow`), `game/world/main_panels.gd` (`set_factor(f / touch_grow)`),
+  `game/ui/interact_menu.gd` (`row_h()`), `game/ui/shop_panel.gd` (`_size_buttons`). ADR 0045 "M34.4 as built",
+  ADR 0033 "Later change". Tests in `progress.md`. Full suite not run.
+- M34 is all built. Next: user merges the PR, then a new release build so the user can play M34 on the phone. Then
+  M31.0 signposts and scene beats (ask the `foreshadow` / `beats` schema first). Later: the bag screen (old list).
+- Gotchas: a 1200 × 540 render at 250 % is NOT the phone; the Android build has no stretch, so render at
+  2400 × 1080 with `root.size` set and `UiScale.dpi_override = 405`, `UiScale.mobile_override = 1`. A real phone's
+  dpi may differ from 405. Mobile override also turns on the see-through boxes (`MOBILE_ALPHA`).
+
 ## Just done (2026-10-21, local): M34.3 tap the world (branch `feat/m34.3-tap-world`)
 - New `game/world/main_tap.gd` (`MainTap`: `tap`, `next`, `cancel`, `walking`, static `target_at`). Wiring:
   `world/main.gd` (`tapper`, `tap_world`, `cancel`, `_walking`, `_process` steps the walk), `world/main_input.gd`
