@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://world/world_view.tscn" id="2_view"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://ui/text_page.tscn" id="11_page"]
 [ext_resource type="PackedScene" path="res://ui/combat_bar.tscn" id="12_bar"]
 [ext_resource type="Script" path="res://ui/touch_controls.gd" id="13_touch"]
+[ext_resource type="PackedScene" path="res://ui/shop_panel.tscn" id="14_shop"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
@@ -29,6 +30,8 @@ script = ExtResource("1_main")
 layer = 2
 
 [node name="InteractMenu" parent="MenuLayer" instance=ExtResource("4_menu")]
+
+[node name="ShopPanel" parent="MenuLayer" instance=ExtResource("14_shop")]
 
 [node name="CharacterSheet" parent="MenuLayer" instance=ExtResource("7_sheet")]
 

@@ -23,7 +23,7 @@ func is_busy() -> bool:
 
 ## True while a menu or page panel is open (not the dialog or the console).
 func panel_open() -> bool:
-	return _m.menu.visible or _m.sheet.visible or _m.journal.visible or _m.bag.visible \
+	return _m.menu.visible or _m.shop.visible or _m.sheet.visible or _m.journal.visible or _m.bag.visible \
 			or _m.pause.visible or _m.message_log.visible or _m.help.visible
 
 
@@ -49,6 +49,7 @@ func toggle_console() -> void:
 	layer.visible = not layer.visible
 	if layer.visible:
 		_m.menu.close()
+		_m.shop.close()
 		_m.sheet.close()
 		_m.journal.close()
 		_m.bag.close()
@@ -61,6 +62,38 @@ func toggle_console() -> void:
 func open_use_menu() -> void:
 	if not _m.menu.open(Interact.options(Session.gs, Session.db), Session.db):
 		_m.hud.add_lines(["There is nothing to use here."])
+
+
+## The Shop button on a shop's card (M34.1): the shop screen.
+func open_shop(option: Dictionary) -> void:
+	_m.shop.open(option, Session.db, Session.gs)
+
+
+## A deal on the shop screen: runs it like a use-menu pick, then shows the shop
+## again with the new prices and counts and what the deal did (not when the
+## player went down or the day ended).
+func use_from_shop(object_id: String, action_id: String) -> void:
+	_m.use(object_id, action_id)
+	var o := _option(object_id)
+	if Combat.is_down(Session.gs) or _m.dialog.visible or not _m.shop.open(o, Session.db, Session.gs):
+		_m.shop.close()
+		return
+	var lines: Array[String] = _m.hud.history()
+	_m.shop.note(lines[-1] if not lines.is_empty() else "")
+
+
+## Back on the shop screen: the shop's card again.
+func shop_back(object_id: String) -> void:
+	if not _m.menu.open_on(Interact.options(Session.gs, Session.db), Session.db, object_id):
+		_m.hud.add_lines(["There is nothing to use here."])
+
+
+## The Interact option with id `object_id` near the player now, or {}.
+func _option(object_id: String) -> Dictionary:
+	for o: Dictionary in Interact.options(Session.gs, Session.db):
+		if o["id"] == object_id:
+			return o
+	return {}
 
 
 ## The bag (F): eat or drink something you carry.

@@ -48,6 +48,22 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
   row is longer than 22 letters. The card sits at the bottom middle, at most 560 px wide and 85 % of the height.
 - Checked on a render at 1200 × 540 with menu size 250 % (same layout as 2400 × 1080): target list, Krshia's card.
 
+## M34.1 as built (2026-10-21)
+- New `ui/shop_panel.gd` / `.tscn` (class `ShopPanel`) in `world/main.tscn` `MenuLayer`. A shop's card now has one
+  button, "Shop" or "Shop (N to sell)" (`InteractMenu.SHOP`, a menu pick only). It sends `shop_opened(option)`;
+  `MainPanels.open_shop` shows the panel.
+- Header row: shop name, Buy and Sell tabs, Back. The line under it shows the coins, or after a deal what the deal did
+  and the coins left. Cards: name, price, "(have N)"; two columns. The Sell tab puts "Sell all" next to each good.
+- Count strip: `-`, count, `+`, Max, and one big button "Buy 3 for 9c". `-` and `+` repeat while held (0.4 s wait,
+  then every 0.08 s). Max = what the coins pay for (1 for a meal eaten there or clothes, `Economy.is_single`), or what
+  the bag holds; 99 at most. With too few coins the button says "Not enough coins" and is off.
+- A deal sends `chosen(object_id, Interact.trade_action(prefix, good, count))`. `MainPanels.use_from_shop` runs it with
+  `MainScreen.use` and opens the panel again on the same shop: tab and good stay, the count is clamped. Back sends
+  `went_back`; `InteractMenu.open_on` shows that shop's card again.
+- Core: `Economy._single` became public `Economy.is_single` (same code). No schema or save change.
+- Checked on a render at 1200 × 540, menu size 250 %: about one and a half rows of cards show, the rest scrolls. The
+  first layout had the tabs and the note in their own rows and showed only one row; they moved into the header.
+
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
 - The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several

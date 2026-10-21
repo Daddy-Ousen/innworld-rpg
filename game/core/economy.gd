@@ -94,13 +94,14 @@ static func trades(gs: GameState, db: DataDb, obj: Dictionary) -> Array[Dictiona
 ## M27.2: how many of `good` the use menu offers to buy in one trade (rules.economy.bulk_buy),
 ## or 0. A meal eaten where bought or clothes put on are always one.
 static func bulk_of(db: DataDb, good: String) -> int:
-	if _single(db, good):
+	if is_single(db, good):
 		return 0
 	var n := int(rules(db).get("bulk_buy", 0))
 	return n if n > 1 else 0
 
 
-static func _single(db: DataDb, good: String) -> bool:
+## True for a good bought one at a time: a meal eaten where bought, clothes put on.
+static func is_single(db: DataDb, good: String) -> bool:
 	return db.economy.use_of(good) in ["eat_now", "wear_flag"]
 
 
@@ -116,7 +117,7 @@ static func buy(gs: GameState, db: DataDb, object_id: String, good: String, coun
 		return _fail("%s does not sell that." % obj["name"])
 	if not db.economy.on_sale(good, gs.flags):
 		return _fail("That is not for sale yet.")
-	count = 1 if _single(db, good) else maxi(count, 1)
+	count = 1 if is_single(db, good) else maxi(count, 1)
 	var cost := price(gs, db, shop, good, BUY) * count
 	if gs.economy.coins < cost:
 		return _fail("You cannot afford it (%s; you have %s)." % [format(db, cost),

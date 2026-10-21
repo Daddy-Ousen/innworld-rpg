@@ -3,8 +3,9 @@
 ## then the card of that target shows its actions as big buttons. One target
 ## opens its card at once. The rows come from Interact.options and the picks are
 ## the same as before: "Sleep" for a bed (Interact.SLEEP; "Rent a room" for a
-## paid one), "Take <item>" (Interact.TAKE), a shop's trades (Interact.BUY /
-## SELL + good, M27.2 many), a wagon's ride (Interact.RIDE), a magic door's trips
+## paid one), "Take <item>" (Interact.TAKE), one Shop button for a shop's trades
+## (M34.1: `shop_opened`, the game screen shows ShopPanel), a wagon's ride
+## (Interact.RIDE), a magic door's trips
 ## (Interact.PORTAL), the dishes a guest can get (Interact.SERVE, M14.2), an
 ## NPC's own talk options (Interact.VOICE, M30.1), spells (Interact.LEARN,
 ## M17.5), Appraise (M25.3) and Attack last, in red (Interact.ATTACK, M14.5).
@@ -18,7 +19,11 @@ class_name InteractMenu
 extends PanelContainer
 
 signal chosen(object_id: String, action_id: String)
+## M34.1: the Shop button of a shop object: the game screen opens ShopPanel on it.
+signal shop_opened(option: Dictionary)
 
+## The pick of the Shop button (a menu pick only, not a command).
+const SHOP := "menu:shop"
 const TARGETS := "targets"
 const ACTIONS := "actions"
 const CONFIRM := "confirm"
@@ -191,6 +196,18 @@ func open(options: Array[Dictionary], db: DataDb) -> bool:
 	return true
 
 
+## Opens on the card of the option with id `object_id` (Back from the shop
+## screen, M34.1); with no such option it opens as `open` does.
+func open_on(options: Array[Dictionary], db: DataDb, object_id: String) -> bool:
+	if not open(options, db):
+		return false
+	for o: Dictionary in _options:
+		if o["id"] == object_id and page != ACTIONS:
+			_show_card(o)
+			_after_page()
+	return true
+
+
 ## The bag: one button per good you can eat, drink or read. Returns false if none.
 func open_bag(gs: GameState, db: DataDb) -> bool:
 	_db = db
@@ -269,17 +286,9 @@ static func action_rows(o: Dictionary, db: DataDb, gs: GameState) -> Array[Dicti
 	var add := func(group: String, text: String, action: String) -> void:
 		(by[group] as Array[Dictionary]).append({"text": text, "object": id, "action": action, "group": group})
 	var trades: Array = o.get("trades", [])
-	for t: Dictionary in trades:
-		var buying: bool = t["kind"] == Economy.BUY
-		var prefix := Interact.BUY if buying else Interact.SELL
-		add.call("trade", "%s %s (%s)" % ["Buy" if buying else "Sell", t["name"],
-				Economy.format(db, int(t["price"]))], Interact.trade_action(prefix, t["good"]))
-		# M27.2: many in one trade (buy a few, sell all).
-		var many := int(t.get("bulk", 0)) if buying else int(t.get("have", 0))
-		if many > 1:
-			add.call("trade", "%s %d %s (%s)" % ["Buy" if buying else "Sell all", many,
-					String(t["name"]).to_lower(), Economy.format(db, int(t["price"]) * many)],
-					Interact.trade_action(prefix, t["good"], many))
+	if not trades.is_empty():  # M34.1: the trades are on the shop screen (ShopPanel)
+		var sells := trades.filter(func(t: Dictionary) -> bool: return t["kind"] == Economy.SELL).size()
+		add.call("trade", "Shop" if sells == 0 else "Shop (%d to sell)" % sells, SHOP)
 	if not (o.get("ride", {}) as Dictionary).is_empty():
 		var r: Dictionary = o["ride"]
 		@warning_ignore("integer_division")
@@ -391,6 +400,10 @@ func _show_card(o: Dictionary) -> void:
 
 func _on_action(i: int) -> void:
 	var r := _rows[i]
+	if r["action"] == SHOP:
+		close()
+		shop_opened.emit(_target)
+		return
 	if r["action"] == Interact.ATTACK and not _touch():
 		_show_confirm(r)
 		_after_page()
