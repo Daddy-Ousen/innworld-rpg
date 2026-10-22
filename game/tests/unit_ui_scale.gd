@@ -13,6 +13,8 @@ func before_each() -> void:
 
 
 func after_each() -> void:
+	UiScale.dpi_override = 0.0
+	UiScale.mobile_override = -1
 	_session.set_ui_scale_mode(UiScale.AUTO)
 	_session.set_touch_mode(TouchSettings.AUTO)
 
@@ -105,6 +107,44 @@ func test_a_bigger_ui_keeps_the_map_and_the_pad() -> void:
 	_session.set_ui_scale_mode(UiScale.AUTO)
 	assert_eq(get_window().content_scale_factor, 1.0, "Auto on a desktop: 1")
 	assert_eq(m.view.camera.zoom, Vector2(2, 2))
+
+
+## M34.4: on a phone the touch pad, the map and the menu buttons grow to a size in dp.
+func test_a_phone_grows_to_dp_sizes() -> void:
+	UiScale.dpi_override = 405.0
+	UiScale.mobile_override = 0
+	assert_almost_eq(UiScale.px_per_dp(), 405.0 / 160.0, 0.001)
+	assert_eq(UiScale.touch_grow(), 1.0, "a desktop keeps the M20.3 sizes")
+	assert_eq(UiScale.map_grow(), 1.0)
+	assert_eq(UiScale.touch_ui_px(2.5), 0.0)
+	assert_eq(UiScale.camera_zoom(2.0), 1.0)
+	UiScale.mobile_override = 1
+	var ppd := 405.0 / 160.0
+	assert_almost_eq(UiScale.touch_grow(), ppd * UiScale.TOUCH_DP / UiScale.PAD_PX, 0.001,
+			"the smallest pad button is 48 dp")
+	assert_almost_eq(UiScale.map_grow(), ppd * UiScale.TILE_DP / (UiScale.TILE_PX * UiScale.CAMERA_ZOOM), 0.001,
+			"a tile is about 40 dp")
+	assert_almost_eq(UiScale.camera_zoom(2.5), UiScale.CAMERA_ZOOM * UiScale.map_grow() / 2.5, 0.001)
+	assert_almost_eq(UiScale.touch_ui_px(2.5) * 2.5 / ppd, UiScale.TOUCH_DP, 0.001, "a menu button is 48 dp")
+	UiScale.dpi_override = 100.0
+	assert_eq(UiScale.touch_grow(), 1.0, "a low-dpi tablet never shrinks")
+	assert_eq(UiScale.map_grow(), 1.0)
+
+
+func test_a_phone_grows_the_pad_map_and_card_buttons() -> void:
+	UiScale.dpi_override = 405.0
+	UiScale.mobile_override = 1
+	var m := _main()
+	_session.set_touch_mode(TouchSettings.ON)
+	_session.set_ui_scale_mode("2")
+	var f := get_window().content_scale_factor
+	assert_almost_eq(m.touch.factor, f / UiScale.touch_grow(), 0.001, "the pad grows to 48 dp")
+	assert_almost_eq(m.view.camera.zoom.x, UiScale.camera_zoom(f), 0.001, "the map grows")
+	assert_gt(m.view.camera.zoom.x, UiScale.CAMERA_ZOOM / f)
+	assert_almost_eq(InteractMenu.row_h(), UiScale.touch_ui_px(f), 0.001, "card buttons at 48 dp")
+	assert_gt(InteractMenu.row_h(), InteractMenu.ROW_H)
+	UiScale.mobile_override = 0
+	assert_eq(InteractMenu.row_h(), InteractMenu.ROW_H, "a desktop keeps ROW_H")
 
 
 func test_a_freed_panel_lets_go_of_the_signals() -> void:

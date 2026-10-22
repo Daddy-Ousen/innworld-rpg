@@ -30,11 +30,12 @@ func panel_open() -> bool:
 
 
 ## The UI scale factor changed (M20.3): the map and the touch pad keep their
-## size on the screen (user, 2026-10-05).
+## size on the screen (user, 2026-10-05); on a phone they grow to a size in dp
+## (M34.4, UiScale.map_grow / touch_grow).
 func apply_ui_scale() -> void:
 	var f: float = _m.get_window().content_scale_factor
 	_m.view.camera.zoom = Vector2.ONE * UiScale.camera_zoom(f)
-	_m.touch.set_factor(f)
+	_m.touch.set_factor(f / UiScale.touch_grow())  # M34.4: 48 dp buttons on a phone
 
 
 ## Shows the touch controls that fit now (M20.1) and makes room for the pad

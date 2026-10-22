@@ -13,7 +13,7 @@ When every box of a milestone is ticked, move it to the top of Done. A new miles
 | M28 Book 8 (Blood of Liscor) | merged (PR #200) | `sim_canon_book8`; user plays Book 8 | `sim_canon_book8`: Sonnet · medium |
 | M29 Lore polish | merged (PR #202 – #206) | user looks at it | – (user) |
 | M30 Voices and the Earther | merged (PR #207 – #212) | user plays it (new game, talks, the Earther meeting) | – (user) |
-| M34 Phone controls, second pass | M34.0 – M34.3 built | `docs/plans/m34.md` | M34.0 – M34.3: Opus · medium · M34.4: Sonnet · medium |
+| M34 Phone controls, second pass | all built; the user plays on a phone | `docs/plans/m34.md` | M34.0 – M34.3: Opus · medium · M34.4: Sonnet · medium |
 | M31 Signposts and scene beats | planned | `docs/plans/m31.md` | M31.0: Opus · medium · M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned | `docs/plans/m32.md` | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned | `docs/plans/m33.md` | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
@@ -26,7 +26,7 @@ at the end of each step in "Next up" is the source; this column copies it. Readi
 text, summaries only) run on Sonnet · medium. "(user)" steps need no model.
 
 Last release: v0.1.5-alpha (2026-10-15). M29 and M30 are on `main` (2026-10-19), not in a release yet.
-Next step: M34.4 phone render check (phone controls; the Play closed test runs on phones, so it goes before M31).
+Next step: the user plays M34 on a phone (new build), then M31.0 (phone controls; the Play closed test runs on phones, so it goes before M31).
 Then M31.0 signposts and scene beats engine (ask the `foreshadow` / `beats` schema first). The user plays
 M29 and M30 when they can; that does not block M31.
 
@@ -97,7 +97,7 @@ attack on touch (Yes / No with keys).
 - [x] M34.1 Shop screen: Buy / Sell tabs, item cards, count strip **[Opus · medium]** (2026-10-21, new `ui/shop_panel.gd`)
 - [x] M34.2 Context button ("Talk · Erin") with target chips; Menu to the top right **[Opus · medium]** (2026-10-21, `ui/touch_controls.gd`)
 - [x] M34.3 Tap the world to walk and act; Options "Controls: Tap + stick / Stick only" **[Opus · medium]** (2026-10-21, new `world/main_tap.gd`)
-- [ ] M34.4 Phone render check (2400 × 1080, 250 %) **[Sonnet · medium]**
+- [x] M34.4 Phone render check (2400 × 1080, 250 %) **[Sonnet · medium]** (2026-10-21; found buttons and map too small; now sized by dpi on a phone)
 - [ ] (user) Play on the phone: shop at Krshia's, talk to Erin, serve a guest, attack guard
 **Done when:** every touch target is 48 dp or more; a drag never picks; the keys still work; the touched tests pass;
 the user has played it on a phone.

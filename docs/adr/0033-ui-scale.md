@@ -34,3 +34,8 @@ Date: 2026-10-05 · Status: accepted (user answers in the cloud session, plan `d
 - The pixel font draws at non-16 sizes at 150 % (TextSettings note): it may look a little soft. 200 % is sharp.
 - Headless tests: a faked screen touch makes Auto see a tiny "phone" and pick 200 %. Tests that fake a touch
   call `Session.apply_ui_scale()` after they reset `touch_seen`.
+
+## Later change (M34.4, 2026-10-21, ADR 0045)
+- On a phone or tablet OS the map and the touch pad no longer keep their pixel size: they grow by the screen's dpi
+  (touch buttons at least 48 dp, map tiles about 40 dp; `UiScale.touch_grow`, `map_grow`). A desktop is unchanged.
+  User pick 2026-10-21, after phone renders showed 64 px buttons are about 25 dp.

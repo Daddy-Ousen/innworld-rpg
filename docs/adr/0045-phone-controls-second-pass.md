@@ -44,7 +44,7 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
   trade, travel, learn, other, attack (M34.2 moved trade before work). Button text has no name prefix ("Take Stone", not "Loose stones — Take Stone").
 - `CardButton`: fires on release; a move past `DRAG` (12 UI px) scrolls the card and cancels the pick.
   `HoldButton` (Attack on touch): fires after `HOLD` (0.6 s); a ring fills.
-- Buttons are `ROW_H` 32 UI px high (about 53 dp at the phone's 250 % menu size). Two columns, one column when a
+- Buttons are `ROW_H` 32 UI px high (wrong first note: "about 53 dp"; it is about 30 dp on a phone; M34.4 fixed it). Two columns, one column when a
   row is longer than 22 letters. The card sits at the bottom middle, at most 560 px wide and 85 % of the height.
 - Checked on a render at 1200 × 540 with menu size 250 % (same layout as 2400 × 1080): target list, Krshia's card.
 
@@ -98,6 +98,20 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
   `user://settings.cfg` (not in `GameState`). Options has a "Controls" row (`Session.set_touch_controls`).
 - No core, schema or save change. Determinism checked: a tap walk and the same moves by key give the same clock and
   RNG state (`unit_tap_walk`). Not checked on a render (behaviour only, no new layout except one Options row).
+
+## M34.4 as built (2026-10-21)
+- Renders at 2400 × 1080, menu size 250 %, touch on, no stretch (the Android build: the UI is 960 × 432). The
+  earlier 1200 × 540 renders were a smaller case than the phone.
+- Found: the touch pad and the map kept 64 px buttons and 64 px tiles (M20.3), about 25 dp on a 405 dpi phone; card
+  and shop buttons were about 30 dp. The touch minimum is 48 dp.
+- Fix (user pick: buttons and map by dpi; a desktop stays): `UiScale.px_per_dp` (screen dpi / 160), `touch_grow`
+  (smallest pad button 48 dp), `map_grow` (a tile about 40 dp, in `camera_zoom`), `touch_ui_px` (a menu button
+  48 dp). Only on a phone or tablet OS (`is_mobile_os`). `InteractMenu.row_h()` replaces `ROW_H` for card and shop
+  buttons, Close, Back and the tabs. `UiScale.dpi_override` and `mobile_override` are for tests and renders.
+- Rendered again as a 405 dpi phone: pad buttons about 48 dp, labels about 12 dp, tiles about 40 dp, card and
+  shop buttons about 48 dp; Erin's card shows 5 buttons, the shop 4 rows of goods plus the strip.
+- Left for later: the bag screen is still the old list with key hints ("Enter: Eat"); "H: help" shows on a
+  phone. A real phone may report another dpi: the user checks on the phone.
 
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
