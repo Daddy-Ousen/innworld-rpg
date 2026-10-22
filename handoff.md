@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-22, local): release build v0.1.7-alpha (branch `release/v0.1.7`)
+- Bumped `game/project.godot` and both Android presets (`version/code=6`). Ran `--import`, then `tools/release.ps1`
+  from the PowerShell tool with `C:\Windows\System32` first in PATH. Smoke tests pass for all three. The apk verifies
+  (apksigner v2 + v3, versionCode 6). SendUserFile cannot reach the phone with it (84.5 MiB, limit 30 MiB): the phone
+  gets the apk from the GitHub release.
+- Next: user merges the PR. Then tag `v0.1.7-alpha` on the merge commit and `gh release create` with the 3 zips + apk
+  (Pages deploys from the release). The aab (`export/InnworldRPG-v0.1.7-alpha-play.aab`) goes to the Play closed track
+  only if the user wants (the user drags it in; the Chrome tool cannot upload 88 MB).
+- Then the user plays M34 on the phone; then M31.0.
+- Gotchas: `--import` and the export rewrite many `.import` files: `git checkout -- game/assets game/icon.png.import`.
+
 ## Just done (2026-10-21, local): M34.4 phone render check (branch `feat/m34.4-phone-sizes`)
 - Rendered at 2400 × 1080, 250 %, touch on, no stretch (the Android build). Found 64 px touch buttons and tiles
   (about 25 dp) and 30 dp card buttons. User pick: buttons and map by dpi on a phone; desktop stays.
