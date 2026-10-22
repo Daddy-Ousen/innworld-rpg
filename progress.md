@@ -302,6 +302,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] v0.1.7-alpha build (2026-10-22, branch `release/v0.1.7`): version bump (Android code 6) for the M34 phone
+  controls. Smoke tests pass (events=1403, maps=51, problems=0). Windows, Linux, Web zips + signed apk (apksigner:
+  verifies, v2 + v3) + play aab in `export/`. The apk is too big (84.5 MiB) to send to the phone app (30 MiB limit): the phone gets it from the GitHub release. No GUT run (no game code changed).
+  - [ ] User merges the PR; then tag `v0.1.7-alpha` + `gh release create` with 3 zips + apk. The aab goes to Play by hand.
 - [x] v0.1.6-alpha (2026-10-19, [PR #214](https://github.com/Daddy-Ousen/innworld-rpg/pull/214), merge commit a366c24,
   tag `v0.1.6-alpha`): version code 5. Smoke tests pass (events=1403, maps=51, problems=0). GitHub release has the 3 zips
   + signed apk; Pages deploy started from the release. The aab goes to Play only. No GUT run (no game code changed).
