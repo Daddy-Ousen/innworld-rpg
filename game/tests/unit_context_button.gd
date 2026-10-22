@@ -5,6 +5,7 @@ extends GutTest
 ## Menu and Back sit top right.
 
 const SEED := 20260929
+const FIGHT_AREA := "ruins_entrance"
 
 var _session: Node
 
@@ -70,9 +71,10 @@ func test_verbs_name_the_main_action() -> void:
 func test_the_button_shows_the_nearest_target() -> void:
 	var t := _touch()
 	assert_true(t.context.disabled, "nothing near")
-	assert_eq(t.context.text, "-")
+	assert_false(t.context.visible, "M34.5: no empty button")
 	t.set_targets([_t("erin"), _t("bed", "Sleep")] as Array[Dictionary])
 	assert_false(t.context.disabled)
+	assert_true(t.context.visible)
 	assert_eq(t.context.text, "Talk\nErin")
 	assert_eq(t.chip_ids(), ["bed"] as Array[String], "the other target is a chip")
 
@@ -160,4 +162,48 @@ func test_game_screen_context_follows_the_player() -> void:
 	gs.player.place("celum_square", far)
 	m._process(0.0)
 	assert_true(t.context.disabled, "nothing near: the button is off")
-	assert_eq(t.context.text, "-")
+	assert_false(t.context.visible, "and hidden")
+
+
+## M34.5 (user, phone play 2026-10-22): in a fight the context button hides and
+## More / Bag sit above the combat bar, so End turn and the faces stay free.
+func test_a_fight_hides_the_button_and_lifts_the_column() -> void:
+	var db: DataDb = _session.db
+	var gs := GameState.new_game(4, db)
+	_session.set_state(gs)
+	var m: Node = load("res://world/main.tscn").instantiate()
+	m.switch_scene = false
+	add_child_autofree(m)
+	var spot := _open_spot(gs, db)
+	assert_ne(spot, Vector2i(-1, -1), "an open spot")
+	gs.player.place(FIGHT_AREA, spot)
+	Combat.sync(gs, db)
+	Combat.add_monster(gs, db, "rock_crab", spot + Vector2i(0, 2), CombatState.HOSTILE)
+	Commands.wait(gs, db, 0)
+	_session.changed()
+	m._process(0.0)
+	var t: TouchControls = m.touch
+	assert_true(Encounter.active(gs))
+	assert_true(m.bar.visible, "the combat bar shows")
+	assert_false(t.context.visible, "no context button in a fight")
+	var room: float = m.panels._bar_room()
+	assert_gt(room, 0.0, "the bar takes room at the bottom")
+	assert_almost_eq(t.column.offset_bottom, -(TouchControls.MARGIN + room * t.factor), 0.01,
+			"the column sits above the bar")
+	assert_lt(t.cancel.offset_bottom, t.column.offset_bottom - t.column.get_combined_minimum_size().y,
+			"Cancel stays above the column")
+
+
+func _open_spot(gs: GameState, db: DataDb) -> Vector2i:
+	var size := db.maps.size(FIGHT_AREA)
+	for y in range(3, size.y - 3):
+		for x in range(3, size.x - 3):
+			var ok := true
+			for dy in range(-3, 4):
+				for dx in range(-3, 4):
+					var c := Vector2i(x + dx, y + dy)
+					if not Movement.can_enter(gs, db, FIGHT_AREA, c) or not db.maps.exit_at(FIGHT_AREA, c).is_empty():
+						ok = false
+			if ok:
+				return Vector2i(x, y)
+	return Vector2i(-1, -1)

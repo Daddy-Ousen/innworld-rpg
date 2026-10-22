@@ -257,3 +257,18 @@ func test_game_screen_buys_and_stays_open() -> void:
 	assert_true(menu.visible)
 	assert_eq(menu.page, InteractMenu.ACTIONS, "Back shows the stall's card")
 	assert_eq(menu.title_text().begins_with(String(at["name"])), true)
+
+
+## M34.5 (user, phone play 2026-10-22): on a narrow upright phone the Buy button
+## was squeezed to a sliver beside the count. It keeps its width and wraps.
+func test_the_buy_button_never_shrinks_to_a_sliver() -> void:
+	var gs := _game(30)
+	var p := _panel()
+	p.open(_stall(gs), _db, gs)
+	p.pick(_index_of(p, "bread"))
+	for i in 3:
+		await get_tree().process_frame
+	var deal: Button = p._deal
+	assert_true(deal.visible)
+	assert_gte(deal.size.x, InteractMenu.row_h() * ShopPanel.DEAL_WIDTH - 0.5, "at least DEAL_WIDTH buttons wide")
+	assert_gte(deal.size.y, InteractMenu.row_h() - 0.5)

@@ -20,6 +20,8 @@ const MAX_COUNT := 99
 const REPEAT_WAIT := 0.4
 const REPEAT_EVERY := 0.08
 const PICKED_COLOR := Color(1.0, 0.85, 0.4)
+## The big Buy or Sell button is at least this many button heights wide (M34.5).
+const DEAL_WIDTH := 4.0
 
 ## The tab now: Economy.BUY or Economy.SELL.
 var tab := Economy.BUY
@@ -47,7 +49,7 @@ var _note := ""
 @onready var _sell_tab: Button = %SellTab
 @onready var _scroll: ScrollContainer = %Scroll
 @onready var _list: VBoxContainer = %Items
-@onready var _strip: HBoxContainer = %Strip
+@onready var _strip: HFlowContainer = %Strip
 
 
 ## - or +: one step when pressed, then a step each REPEAT_EVERY while held.
@@ -305,6 +307,9 @@ func _size_buttons() -> void:
 		b.custom_minimum_size = Vector2(h * 1.5, h)
 	_count.custom_minimum_size.x = h * 1.25
 	_max.custom_minimum_size = Vector2(h * 2.0, h)
+	# M34.5: the big button never shrinks to a sliver; on a narrow (upright) phone it
+	# wraps to its own line under the count, as wide as the panel.
+	_deal.custom_minimum_size.x = h * DEAL_WIDTH
 
 
 ## Puts the cards of the tab on the panel: two columns of goods to buy (one when

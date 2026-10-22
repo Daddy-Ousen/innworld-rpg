@@ -97,6 +97,7 @@ attack on touch (Yes / No with keys).
 - [x] M34.1 Shop screen: Buy / Sell tabs, item cards, count strip **[Opus · medium]** (2026-10-21, new `ui/shop_panel.gd`)
 - [x] M34.2 Context button ("Talk · Erin") with target chips; Menu to the top right **[Opus · medium]** (2026-10-21, `ui/touch_controls.gd`)
 - [x] M34.3 Tap the world to walk and act; Options "Controls: Tap + stick / Stick only" **[Opus · medium]** (2026-10-21, new `world/main_tap.gd`)
+- [x] M34.5 Phone fixes from play: no empty context button, column above the combat bar, Buy button wraps on an upright phone (2026-10-22)
 - [x] M34.4 Phone render check (2400 × 1080, 250 %) **[Sonnet · medium]** (2026-10-21; found buttons and map too small; now sized by dpi on a phone)
 - [ ] (user) Play on the phone: shop at Krshia's, talk to Erin, serve a guest, attack guard
 **Done when:** every touch target is 48 dp or more; a drag never picks; the keys still work; the touched tests pass;
