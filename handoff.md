@@ -1,5 +1,12 @@
 # Handoff
 
+## Just done (2026-10-22, local): release v0.1.7-alpha published
+- PR #222 merged (e42ae14). Tag `v0.1.7-alpha` pushed. GitHub release (pre-release):
+  https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.7-alpha with 3 zips + apk. Pages deploy started.
+- Next: the user installs the apk on the phone and plays M34 (sizes, card, shop, context button, tap walk). Then
+  M31.0 signposts and scene beats (ask the `foreshadow` / `beats` schema first). Optional: aab to the Play track.
+- Gotchas: the apk (84.5 MiB) is too big for SendUserFile to the phone app (30 MiB): use the release page.
+
 ## Just done (2026-10-22, local): release build v0.1.7-alpha (branch `release/v0.1.7`)
 - Bumped `game/project.godot` and both Android presets (`version/code=6`). Ran `--import`, then `tools/release.ps1`
   from the PowerShell tool with `C:\Windows\System32` first in PATH. Smoke tests pass for all three. The apk verifies
