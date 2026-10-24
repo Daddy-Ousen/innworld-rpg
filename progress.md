@@ -362,7 +362,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   Tests (all pass): `unit_foreshadow` (new, 13), `unit_stage` (27, +9), `unit_journal`, `unit_system_messages`,
   `unit_voice`, `unit_battle`, `unit_music_pick`, `unit_canon_moments`, `unit_world_view`, `unit_canon_db`,
   `sim_canon_book1`. Validator books 1 – 8: 0 errors. Python 128 OK. Full suite not run.
-- [ ] M31.1 signposts for the 25 fight stages and key scenes. M31.2 / M31.3 beats.
+- [x] M31.1 signposts (2026-10-24, branch `data/m31.1-signposts`): a `foreshadow` on all 25 fight stages and on 10
+  key scenes (list in ADR 0044 "M31.1" and `KEY_SCENES` in `unit_foreshadow`). `days_before` 1; burning of Brunkr
+  and Ulrien 0; Zel's funeral 2. New Python check: given foreshadow hours must fit the stage hours.
+  Tests (all pass): `unit_foreshadow` (15, +2 real-data tests), `unit_canon_db`, `sim_canon_book1`,
+  `sim_canon_book7`. Validator books 1 – 8: 0 errors (book 6 copy check skipped: no raw text here). Python 129 OK.
+  Full suite not run.
+- [ ] M31.2 beats for the Books 1 – 4 scenes. M31.3 beats for Books 5 – 8.
 
 ## Docs
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line

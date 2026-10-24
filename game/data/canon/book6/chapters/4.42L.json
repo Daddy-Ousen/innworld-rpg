@@ -219,6 +219,7 @@
 					}
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Erin plans a party at the inn. Everyone is welcome, the Redfang Goblins too."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [

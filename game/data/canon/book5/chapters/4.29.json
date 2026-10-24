@@ -442,6 +442,7 @@
 				]
 			},
 			"xp_window": {"boost": 2, "hours": [20, 24]},
+			"foreshadow": {"days_before": 1, "text": "Griffon Hunt and the Halfseekers will share drinks at the inn with a Gold-rank Gnoll, Regrika Blackpaw."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [

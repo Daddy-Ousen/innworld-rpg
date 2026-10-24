@@ -12,14 +12,14 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Milestone | State | Model · effort per step |
 |---|---|---|
 | `sim_canon_book8` (M28 loose end) | to do | Sonnet · medium |
-| M31 Signposts and scene beats | M31.0 built; M31.1 next (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
+| M31 Signposts and scene beats | M31.0 – M31.1 built; M31.2 next (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned (`docs/plans/m32.md`) | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M30, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: M31.1 signposts for the 25 fight stages and the key scenes (data only; the engine is M31.0).
+Next step: M31.2 beats for the Books 1 – 4 scenes (data only; the engine is M31.0).
 The play checks do not block M31.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
@@ -38,7 +38,7 @@ M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10
 
 ## M31 — Signposts and scene beats (plan `docs/plans/m31.md`, ADR 0044)
 - [x] M31.0 Engine: event `foreshadow` (talk in town, journal "Coming up") and stage `beats` (timed lines with a speaker); schema ask **[Opus · medium]** (2026-10-24, ADR 0044 "M31.0", no save change)
-- [ ] M31.1 A signpost for each of the 25 fight stages and the key scenes **[Sonnet · medium]**
+- [x] M31.1 A signpost for each of the 25 fight stages and the key scenes **[Sonnet · medium]** (2026-10-24, 25 fights + 10 scenes)
 - [ ] M31.2 Beats for the Books 1 – 4 scenes **[Sonnet · high]**
 - [ ] M31.3 Beats for the Books 5 – 8 scenes, and ally shouts in fight stages **[Sonnet · high]**
 - [ ] (user) Play a signposted day (the Skinner night) and a scene (the play in Celum)

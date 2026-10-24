@@ -61,6 +61,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.level_up_innkeeper", "erin.class_skill_inns_aura", "erin.class_skill_wondrous_fare", "wandering_inn.paid_in_faerie_gold"]},
 			"news": "The Winter Sprites came down to the Wandering Inn in the hundreds last night for a feast innkeeper Erin Solstice laid out for them, and paid her in gold.",
+			"foreshadow": {"days_before": 1, "text": "The faeries that came with the winter wind circle the inn at night. Erin cooks as if for a hundred guests."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [19, 24],

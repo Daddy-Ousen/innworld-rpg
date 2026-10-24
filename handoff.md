@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-24, local): M31.1 signposts (branch `data/m31.1-signposts`)
+- One `"foreshadow"` line inserted before `"stage"` in 35 canon events (books 1 – 8): 25 fights, 10 key scenes.
+  No `where` / `hours` given: they come from the stage. Own words; no outcome.
+- `tools/validate_data.py`: `_hour_set`; `check_foreshadow` now takes the stage and checks given hours fit it.
+  Test `test_foreshadow_hours_fit_the_stage`.
+- `game/tests/unit_foreshadow.gd`: real-data tests (every fight stage and each `KEY_SCENES` id has a foreshadow;
+  the burning's signpost starts after the Regrika fight).
+- ADR 0044 "M31.1", ROADMAP, `docs/plans/m31.md`. Tests in `progress.md`. Full suite not run.
+- Next: user merges the PR. Then M31.2 **[Sonnet · high]**: 3 – 6 beats per Books 1 – 4 scene; a reading agent
+  summarises each chapter (no book text back).
+- Gotchas: book 6 has no raw text locally, so its copy check is skipped. A new signpost on a death-dependent
+  scene needs `days_before` 0 (see the burning). Untracked `.uid` files and the `.gitignore` `secrets/` line are
+  not part of this branch.
+
 ## Just done (2026-10-24, local): M31.0 signposts and beats engine (branch `feat/m31.0-foreshadow-beats`)
 - Event field `foreshadow` {days_before, text, where?, hours?}: `core/foreshadow.gd` (`coming`, `morning_lines`,
   `hours_text`). Morning page "Talk in Town" (`SystemMessages.TOWN`), journal "Coming up" (`Journal.NOTHING_COMING`).

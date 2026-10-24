@@ -19,6 +19,7 @@
 				"set_flags": ["rags.killed_rival_chieftain", "goblin_tribe.feathered_chieftain_dead", "rags.casts_firefly"]
 			},
 			"news": "Two Goblin bands fought in a valley on the Floodplains. The small band won: its tiny leader set the big rival chieftain on fire with a spell.",
+			"foreshadow": {"days_before": 1, "text": "Hunters saw two Goblin tribes in the valleys to the south. A big tribe in feathers is chasing a small one."},
 			"stage": {
 				"area": "floodplains_south",
 				"hours": [8, 11],

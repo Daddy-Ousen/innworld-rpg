@@ -104,6 +104,7 @@
 			},
 			"news": "The Frenzied Hare in Celum staged something new: a 'play' of a Human lord and a Drake lady who die for love. The Watch Captain took a part, and the crowd cheered past midnight.",
 			"rumor": "Folk in Celum talk of a show at an inn where people pretend to be others, and a Drake girl stabs herself for a Human.",
+			"foreshadow": {"days_before": 1, "text": "The Frenzied Hare has hired actors. Erin says her story has two houses, real swords and a pair of young lovers."},
 			"stage": {
 				"area": "celum_frenzied_hare",
 				"hours": [19, 23],

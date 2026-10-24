@@ -98,6 +98,7 @@
 					"erin.killed_a_razorbeak_with_a_knife"
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "A Razorbeak hunts over the snowy hills near the inn. Gnoll mothers keep their little ones close."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

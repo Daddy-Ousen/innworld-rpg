@@ -94,6 +94,7 @@
 					"bugear"
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Eater Goats were seen on the hills near Wirclaw's village. Gnolls say they eat anything, even fences."},
 			"stage": {
 				"area": "wirclaw_village",
 				"hours": [

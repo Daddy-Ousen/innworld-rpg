@@ -253,6 +253,15 @@ User picks (rule 11): `where` / `hours` optional; morning page and journal; log 
 - Checks: `CanonDb` (shape, beat order, beat npc on the stage), `CombatDb` (foreshadow map), Python
   `check_foreshadow` / `check_beats` (with the copy check on the text and beat lines).
 
+### M31.1 (2026-10-24): the signposts
+- A `foreshadow` on all 25 fight stages and on 10 key scenes: the concert, the Frost Faerie banquet, Romeo and
+  Juliet and Frozen at the Hare, Brunkr's feast, the burning of Brunkr and Ulrien, the Goblin party, the Silver
+  Swords' arrival, the Players of Celum at the inn, Zel's funeral. The list is `KEY_SCENES` in `unit_foreshadow`.
+- Text is what the town could know (a sighting, a plan, a warning), in our own words, never the outcome.
+  `where` and `hours` come from the stage, so no line gives them.
+- `days_before` is 1, except the burning (0: they are still alive the day before) and Zel's funeral (2).
+- New check: given foreshadow `hours` must fit inside the stage's hours (Python `check_foreshadow`).
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

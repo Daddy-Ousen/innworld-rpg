@@ -320,6 +320,7 @@
 				]
 			},
 			"xp_window": {"boost": 1, "hours": [13, 23]},
+			"foreshadow": {"days_before": 1, "text": "The Horns of Hammerad took a bounty on a bear den in a cave past Esthelm."},
 			"stage": {
 				"area": "esthelm_creler_cave",
 				"hours": [

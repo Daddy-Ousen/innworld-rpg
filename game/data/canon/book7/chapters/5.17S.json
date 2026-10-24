@@ -161,6 +161,7 @@
 			},
 			"summary": "General Shivertail is cremated in the plaza before Liscor's people, a Pallass company and its senators.",
 			"news": "General Shivertail is cremated before Liscor and a Pallass delegation.",
+			"foreshadow": {"days_before": 2, "text": "Zel Shivertail comes home to Liscor. The city will say goodbye in the plaza, and Pallass sends senators."},
 			"stage": {
 				"area": "liscor_plaza",
 				"hours": [
