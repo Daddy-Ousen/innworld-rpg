@@ -1,5 +1,17 @@
 # Handoff
 
+## Just done (2026-10-24, local): Greydath one id (branch `fix/greydath-one-id`)
+- `sim_canon_book6` `test_greydath_is_a_flag_not_a_merge` failed at line 185 (`npcs.has("greydath")`), not at
+  the flag check. The flag was set on day 126 all along. Cause: M28.1 added a `greydath` NPC record in
+  `game/data/canon/book8/npcs.json`, a second id for Greybeard.
+- Fix: record removed; `b8.greydath_duels_garen` and `b8.greydath_throws_a_sword_at_the_kingslayer` (5.37 G) now
+  prefer and require `greybeard`. Event ids and `greydath.*` flags kept. Guard added in `sim_book8_world`.
+- Tests in `progress.md` ("Fixes"). Full suite not run.
+- Next: user merges the PR. Then the M31 play check and M32, as in the M31.3 note below.
+- Gotchas: a fresh worktree needs `godot --headless --path game --import` first, or every test shows
+  "Could not find type DataDb". The import rewrites many `.import` files (line ends only): do not commit them.
+  `canon_ref.note` is max 300 chars (validator).
+
 ## Just done (2026-10-24, local): M31.3 beats for Books 5 – 8 and the fights (branch `data/m31.3-beats-books-5-8`)
 - `"beats"` on all 30 Books 5 – 8 scenes (5 – 6 each) and all 25 fight stages (2 – 3 ally shouts). M31 data is
   complete. Three reading agents (Sonnet) gave paraphrased summaries; book 6 was written from the canon JSON.
