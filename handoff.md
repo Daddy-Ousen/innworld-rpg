@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-24, local): release v0.1.8-alpha published
+- PR #225 merged (c331307). Tag `v0.1.8-alpha` pushed. GitHub release (pre-release):
+  https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.8-alpha with 3 zips + apk. Pages deploy started.
+- Next: the user installs the apk and checks the M34.5 fixes (fight: End turn free; shop: Buy button upright).
+  Then M31.0 signposts and scene beats (ask the `foreshadow` / `beats` schema first). Optional: aab to Play.
+
 ## Just done (2026-10-24, local): release build v0.1.8-alpha (branch `release/v0.1.8`)
 - Bumped `game/project.godot` and both Android presets (`version/code=7`). `--import`, then `tools/release.ps1`
   (PowerShell tool, System32 first in PATH). Smoke tests pass. Apk verifies (v2 + v3), versionCode 7.

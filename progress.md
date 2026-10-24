@@ -312,10 +312,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
-- [x] v0.1.8-alpha build (2026-10-24, branch `release/v0.1.8`): the M34.5 phone fixes. Android code 7. Smoke tests
-  pass (events=1403, maps=51, problems=0). Zips + signed apk (verifies v2 + v3) + play aab in `export/`. The apk
-  differs from v0.1.7 in exactly the M34.5 files (same total size: zip padding). No GUT run (no game code changed).
-  - [ ] User merges the PR; then tag `v0.1.8-alpha` + `gh release create` with 3 zips + apk.
+- [x] v0.1.8-alpha (2026-10-24, [PR #225](https://github.com/Daddy-Ousen/innworld-rpg/pull/225), merge commit c331307,
+  tag `v0.1.8-alpha`): the M34.5 phone fixes. Android code 7. Smoke tests pass (events=1403, maps=51, problems=0).
+  GitHub release (pre-release) has the 3 zips + signed apk (sizes checked); Pages deploy started from the release.
+  The aab stays local (`export/`) for Play. No GUT run (no game code changed).
+  - [ ] The user installs the apk from the release page and checks the fight and shop fixes on the phone.
 - [x] v0.1.7-alpha (2026-10-22, [PR #222](https://github.com/Daddy-Ousen/innworld-rpg/pull/222), merge commit e42ae14,
   tag `v0.1.7-alpha`): the M34 phone controls. Android code 6. Smoke tests pass (events=1403, maps=51, problems=0).
   GitHub release (pre-release) has the 3 zips + signed apk (sizes checked); Pages deploy started from the release.
