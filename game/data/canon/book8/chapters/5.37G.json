@@ -131,7 +131,7 @@
 			"roles": {
 				"old_goblin": {
 					"prefer": [
-						"greydath"
+						"greybeard"
 					],
 					"fallback_tags": []
 				},
@@ -145,7 +145,7 @@
 			},
 			"requires": {
 				"alive": [
-					"greydath"
+					"greybeard"
 				],
 				"flags": [],
 				"not_flags": []
@@ -170,7 +170,7 @@
 				"book": 8,
 				"chapter": "5.37G",
 				"confidence": "confirmed",
-				"note": "Day 151 (guess, plan). The text follows straight on from 5.32 G (day 150) and may be the same day. Greydath says something strange is to the south. His old title is from the text; no more is said here."
+				"note": "Day 151 (guess, plan). The text follows straight on from 5.32 G (day 150) and may be the same day. Greydath says something strange is to the south. He is greybeard (4.39 G set greybeard.is_greydath_of_blades): one id; the name is a flag."
 			},
 			"summary": "An old grey-bearded Goblin, called Greybeard in Tremborag's tribe, has killed the three Gold-ranks. He names himself Greydath of Blades, a Goblin Lord thought dead, outfights Garen easily and mocks him as a failed Chieftain who is no Goblin."
 		},
@@ -185,7 +185,7 @@
 			"roles": {
 				"old_goblin": {
 					"prefer": [
-						"greydath"
+						"greybeard"
 					],
 					"fallback_tags": []
 				},
@@ -206,7 +206,7 @@
 			},
 			"requires": {
 				"alive": [
-					"greydath"
+					"greybeard"
 				],
 				"flags": [],
 				"not_flags": []

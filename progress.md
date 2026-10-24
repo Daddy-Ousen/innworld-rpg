@@ -379,6 +379,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
+## Fixes
+- [x] Greydath one id (2026-10-24, branch `fix/greydath-one-id`): `sim_canon_book6` failed at line 185 because M28.1
+  added a second record `greydath` for the same Goblin (4.39 G: Greybeard is Greydath; the Book 6 note says keep the id
+  `greybeard`). Removed the `greydath` record from `canon/book8/npcs.json`; the two 5.37 G events now use `greybeard`.
+  Event ids and `greydath.*` flags kept (saves still load). Tests (all pass): `sim_canon_book6` (13/13),
+  `sim_book8_world` (7, +1 guard), `sim_book8_raid_two` (8), `unit_canon_db`. Validator books 6 and 8: 0 errors.
+  Python 129 OK. Full suite not run.
+
 ## Blockers
 - None.
 

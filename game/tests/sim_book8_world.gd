@@ -5,7 +5,7 @@ extends GutTest
 
 const CAMP := "raskghar_camp"
 const NPCS := ["nokha", "pebblesnatch", "elirr", "vakk", "bevussa_slenderscale", "keldrass", "earlia",
-	"nailren", "joiah_kellisman", "xess", "cassa", "fess", "rebat", "greydath", "minerva", "jackal",
+	"nailren", "joiah_kellisman", "xess", "cassa", "fess", "rebat", "minerva", "jackal",
 	"elia_arcsinger", "aaron_vanwell", "baiss", "teura"]
 const PLACES := ["raskghar_camp", "dungeon_city", "cave_goblin_refuge", "lancrel"]
 
@@ -100,6 +100,9 @@ func test_the_book8_records_exist() -> void:
 		assert_true(_db.canon.locations.has(id), id)
 	assert_eq(_db.canon.npcs["nokha"]["race"], "Raskghar")
 	assert_eq(_db.canon.npcs["cassa"]["race"], "Drake")
+	# Greydath is Greybeard (4.39 G): one id, the name is a flag.
+	assert_false(_db.canon.npcs.has("greydath"))
+	assert_eq(_db.canon.events["b8.greydath_duels_garen"]["roles"]["old_goblin"]["prefer"], ["greybeard"])
 
 
 func test_calruz_is_alive_in_book_8() -> void:

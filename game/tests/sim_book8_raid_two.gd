@@ -190,7 +190,7 @@ func test_the_dive_night_and_north_flags_are_set_by_day_161() -> void:
 	for f: String in ["lancrel.fallen_to_goblins", "halfseekers.dive_with_the_horns", "griffon_hunt.dives_with_the_silver_swords"]:
 		assert_false(gs.flags.has(f), f + " is cleared")
 	assert_true(gs.flags.has("izril.moons_nearly_full"), "not yet full before day 161")
-	for n: String in ["pebblesnatch", "greydath", "garen", "rags", "redscar", "minerva", "calruz"]:
+	for n: String in ["pebblesnatch", "greybeard", "garen", "rags", "redscar", "minerva", "calruz"]:
 		assert_true(gs.world.is_alive(_db.canon, n), n)
 
 

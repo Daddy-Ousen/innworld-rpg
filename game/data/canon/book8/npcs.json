@@ -277,27 +277,6 @@
 			},
 			"summary": "A Gold-rank adventurer lost to the Raskghar."
 		},
-		"greydath": {
-			"name": "Greydath",
-			"race": "Goblin",
-			"tags": [
-				"goblin",
-				"elder",
-				"warrior"
-			],
-			"faction": null,
-			"home": null,
-			"classes": [],
-			"alive_at_start": true,
-			"status": "candidate",
-			"canon_ref": {
-				"book": 8,
-				"chapter": "5.37G",
-				"confidence": "confirmed",
-				"note": "An old Goblin thought dead; he kills three Gold adventurers, duels Garen and throws a sword at Elia Arcsinger (5.37 G)."
-			},
-			"summary": "A grim old Goblin who turns up at Dwarfhalls Rest and kills Gold-rank hunters."
-		},
 		"minerva": {
 			"name": "Minerva",
 			"race": "Unknown",
