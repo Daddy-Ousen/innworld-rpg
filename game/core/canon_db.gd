@@ -33,6 +33,8 @@ var alt_only: Dictionary = {}
 var stages: Array[String] = []
 ## Events with an `xp_window` (hidden XP boost, M17.8; see XpWindow), in run order.
 var windows: Array[String] = []
+## Events with a `foreshadow` (a signpost, M31.0; see Foreshadow), in run order.
+var foreshadows: Array[String] = []
 ## Book number → the earliest window day of its events (M25.0: an NPC of a
 ## later book starts to level on that day). From `rank`; toy dbs have none.
 var book_start: Dictionary = {}
@@ -165,6 +167,34 @@ func _validate_event(id: String, ev: Dictionary) -> void:
 		_validate_stage(where, ev["stage"])
 	if ev.has("xp_window"):
 		_validate_xp_window(where, ev["xp_window"])
+	if ev.has("foreshadow"):
+		_validate_foreshadow(where, ev["foreshadow"], ev.has("stage"))
+
+
+## A signpost (M31.0, ADR 0044 "M31.0"): {"days_before": whole number >= 0, "text",
+## "where"?: map id, "hours"?: [from, to]}. Without a stage, where and hours are
+## needed (with one they default to the stage's). CombatDb.validate checks the map.
+func _validate_foreshadow(where: String, f: Variant, has_stage: bool) -> void:
+	var fw := where + " foreshadow"
+	if not f is Dictionary:
+		errors.append("%s: must be an object." % fw)
+		return
+	for k: String in (f as Dictionary).keys():
+		if not k in ["days_before", "text", "where", "hours"]:
+			errors.append("%s: unknown key '%s'." % [fw, k])
+	var d: Variant = f.get("days_before", null)
+	if not (d is int or d is float) or int(d) < 0 or float(d) != float(int(d)):
+		errors.append("%s: days_before must be a whole number >= 0." % fw)
+	if not f.get("text", null) is String or String(f["text"]).strip_edges() == "":
+		errors.append("%s: text must be a non-empty string." % fw)
+	if f.has("where") and (not f["where"] is String or String(f["where"]) == ""):
+		errors.append("%s: where must be a map id." % fw)
+	if f.has("hours"):
+		var h: Variant = f["hours"]
+		if not h is Array or (h as Array).size() != 2 or int(h[0]) == int(h[1]) 				or int(h[0]) < 0 or int(h[0]) > 24 or int(h[1]) < 0 or int(h[1]) > 24:
+			errors.append("%s: hours must be [from, to], whole hours 0 to 24, from != to." % fw)
+	if not has_stage and not (f.has("where") and f.has("hours")):
+		errors.append("%s: needs 'where' and 'hours' (no stage)." % fw)
 
 
 ## An XP window (M17.8): {"boost": whole number >= 1, "hours"?: [from, to]} (whole hours 0-24,
@@ -197,6 +227,8 @@ func _validate_xp_window(where: String, w: Variant) -> void:
 ## "line"?}, with at least one foe, helper or ally.
 ## A "scene" stage has no fight: "npcs": [{"npc", "pos": [x, y]}] are moved
 ## in with no monster involved; it cannot have waves.
+## Any stage may have "beats"?: [{"after_seconds" >= 0, "line", "npc"?}] (M31.0),
+## in time order; a beat's npc is one the stage puts on the map.
 ## CombatDb.validate checks the enemies, the map and the tiles.
 func _validate_stage(where: String, st: Variant) -> void:
 	var sw := where + " stage"
@@ -216,6 +248,8 @@ func _validate_stage(where: String, st: Variant) -> void:
 	if not h is Array or (h as Array).size() != 2 or int(h[0]) < 0 or int(h[1]) > 24 \
 			or int(h[0]) == int(h[1]):
 		errors.append("%s: hours must be [from, to] with 0 <= from != to <= 24." % sw)
+	if st.has("beats"):
+		_validate_beats(sw, st)
 	if kind == "scene":
 		if st.has("waves"):
 			errors.append("%s: a scene stage cannot have waves." % sw)
@@ -247,6 +281,46 @@ func _validate_stage(where: String, st: Variant) -> void:
 		return
 	for i in (waves as Array).size():
 		_validate_wave("%s wave %d" % [sw, i + 1], waves[i])
+
+
+## Stage beats (M31.0): see _validate_stage. A beat's npc must be a scene npc,
+## a fight ally or a wave ally of this stage.
+func _validate_beats(sw: String, st: Dictionary) -> void:
+	var beats: Variant = st["beats"]
+	if not beats is Array:
+		errors.append("%s: beats must be a list." % sw)
+		return
+	var on_stage: Array = (st.get("allies", []) as Array).duplicate() if st.get("allies", []) is Array else []
+	for n: Variant in st.get("npcs", []) if st.get("npcs", []) is Array else []:
+		if n is Dictionary:
+			on_stage.append(n.get("npc", ""))
+	for w: Variant in st.get("waves", []) if st.get("waves", []) is Array else []:
+		if w is Dictionary and w.get("allies", []) is Array:
+			on_stage.append_array(w.get("allies", []))
+	var last := 0
+	for i in (beats as Array).size():
+		var bw := "%s beat %d" % [sw, i + 1]
+		var b: Variant = beats[i]
+		if not b is Dictionary:
+			errors.append("%s: must be an object." % bw)
+			continue
+		for k: String in (b as Dictionary).keys():
+			if not k in ["after_seconds", "line", "npc"]:
+				errors.append("%s: unknown key '%s'." % [bw, k])
+		var t: Variant = b.get("after_seconds", null)
+		if not (t is int or t is float) or int(t) < 0:
+			errors.append("%s: after_seconds must be a number >= 0." % bw)
+		elif int(t) < last:
+			errors.append("%s: after_seconds must not be less than the beat before." % bw)
+		else:
+			last = int(t)
+		if not b.get("line", null) is String or String(b["line"]).strip_edges() == "":
+			errors.append("%s: line must be a non-empty string." % bw)
+		var npc: Variant = b.get("npc", "")
+		if not npc is String:
+			errors.append("%s: npc must be an npc id." % bw)
+		elif npc != "" and not on_stage.has(npc):
+			errors.append("%s: npc '%s' is not on the stage." % [bw, npc])
 
 
 func _validate_wave(ww: String, w: Variant) -> void:
@@ -350,6 +424,8 @@ func _build_order() -> void:
 	for id in order:
 		if events[id].has("stage"):
 			stages.append(id)
+		if events[id].has("foreshadow"):
+			foreshadows.append(id)
 		if events[id].has("xp_window"):
 			windows.append(id)
 			if alt_only.has(id):

@@ -21,6 +21,14 @@
 ## ally) and allies (canon NPCs; one in another area is moved in) at its
 ## `from` tile or the nearest free one. The fight does not end while waves
 ## are left (Combat.settle_if_over).
+##
+## Beats (M31.0, ADR 0044 "M31.0"): any stage may have `beats`, short lines in
+## time order, each `after_seconds` after the stage began, with an optional
+## speaker (`npc`). While the player stays in the stage area (and, for a scene,
+## while it is live) one due beat plays per command: its line goes to the log
+## ("Name: line") and the view shows it in a speech bubble (last_beat). A dead
+## speaker's beat is skipped. combat.stage_run holds the next beat ("beat"); a
+## scene with beats gets a stage_run too, unless a fight's run is on.
 class_name Stage
 extends RefCounted
 
@@ -76,6 +84,8 @@ static func run(gs: GameState, db: DataDb, id: String) -> Array[String]:
 			var at := Vector2i(int(n["pos"][0]), int(n["pos"][1]))
 			if place_npc(gs, db, n["npc"], at):
 				moved.append(n["npc"])
+		if not (st.get("beats", []) as Array).is_empty() and c.stage_run.is_empty():
+			c.stage_run = {"event": id, "start": NpcSim.world_sec(gs), "next": 0, "beat": 0}
 		return moved
 	var group := "m%d" % c.next_id
 	var placed: Array[String] = []
@@ -87,14 +97,14 @@ static func run(gs: GameState, db: DataDb, id: String) -> Array[String]:
 			placed.append(mid)
 	for mid in placed:
 		c.monsters[mid]["pack"] = placed.size()
-	if not (st.get("waves", []) as Array).is_empty():
-		c.stage_run = {"event": id, "start": NpcSim.world_sec(gs), "next": 0}
+	if not (st.get("waves", []) as Array).is_empty() or not (st.get("beats", []) as Array).is_empty():
+		c.stage_run = {"event": id, "start": NpcSim.world_sec(gs), "next": 0, "beat": 0}
 	return placed
 
 
-## Sends in the next wave of the staged fight in progress, if it is due
-## (see the class comment). Leaving the stage area drops the rest.
-## Returns the new monster ids.
+## Plays the next beat and sends in the next wave of the stage in progress,
+## if they are due (see the class comment). Leaving the stage area (or the end
+## of a scene) drops the rest. Returns the new monster ids.
 static func tick(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = []
 	var c := gs.combat
@@ -102,9 +112,10 @@ static func tick(gs: GameState, db: DataDb) -> Array[String]:
 		return out
 	var id: String = c.stage_run["event"]
 	var st: Dictionary = db.canon.events.get(id, {}).get("stage", {})
-	if st.is_empty() or gs.player.area != st["area"]:
+	if st.is_empty() or gs.player.area != st["area"] 			or (st.get("kind", "fight") == "scene" and not is_scene_live(gs, db, id)):
 		c.stage_run = {}
 		return out
+	_beat(gs, db, st)
 	var waves: Array = st.get("waves", [])
 	var next := int(c.stage_run["next"])
 	if next >= waves.size():
@@ -118,6 +129,40 @@ static func tick(gs: GameState, db: DataDb) -> Array[String]:
 		return out
 	c.stage_run["next"] = next + 1
 	return send_wave(gs, db, id, w)
+
+
+## Plays the stage's next beat if it is due (one per call).
+static func _beat(gs: GameState, db: DataDb, st: Dictionary) -> void:
+	var run := gs.combat.stage_run
+	var beats: Array = st.get("beats", [])
+	var b := int(run.get("beat", 0))
+	if b >= beats.size() or NpcSim.world_sec(gs) - int(run["start"]) < int(beats[b]["after_seconds"]):
+		return
+	run["beat"] = b + 1
+	var npc := String(beats[b].get("npc", ""))
+	if npc != "" and not gs.world.is_alive(db.canon, npc):
+		return
+	gs.combat.lines.append(beat_line(db, beats[b]))
+
+
+## A beat's log line: "Name: line", or the line alone with no speaker.
+static func beat_line(db: DataDb, beat: Dictionary) -> String:
+	var npc := String(beat.get("npc", ""))
+	return String(beat["line"]) if npc == "" else "%s: %s" % [Combat.npc_name(db, npc), beat["line"]]
+
+
+## The beat played last in the stage in progress, for the view's speech
+## bubble: {"key": "<event>|<count>", "npc" ("" = none), "line"}; {} if none.
+static func last_beat(gs: GameState, db: DataDb) -> Dictionary:
+	var run := gs.combat.stage_run
+	var b := int(run.get("beat", 0))
+	if run.is_empty() or b <= 0:
+		return {}
+	var beats: Array = db.canon.events.get(run["event"], {}).get("stage", {}).get("beats", [])
+	if b > beats.size():
+		return {}
+	var beat: Dictionary = beats[b - 1]
+	return {"key": "%s|%d" % [run["event"], b], "npc": String(beat.get("npc", "")), "line": String(beat["line"])}
 
 
 ## Puts wave `w` of event `id`'s stage on the map. Returns the new monster ids.
@@ -201,14 +246,18 @@ static func waves_left(gs: GameState, db: DataDb) -> bool:
 
 
 ## Foes of the staged fight in progress still to beat: those on the map
-## plus those in the waves to come. -1 if no staged fight is on.
+## plus those in the waves to come. -1 if no staged fight with waves is on
+## (a scene, or a fight run kept only for its beats).
 static func foes_left(gs: GameState, db: DataDb) -> int:
 	var run := gs.combat.stage_run
 	if run.is_empty():
 		return -1
 	var id: String = run["event"]
+	var st: Dictionary = db.canon.events.get(id, {}).get("stage", {})
+	if not st.has("waves"):
+		return -1
 	var left := foes_here(gs, id)
-	var waves: Array = db.canon.events.get(id, {}).get("stage", {}).get("waves", [])
+	var waves: Array = st["waves"]
 	for i in range(int(run["next"]), waves.size()):
 		left += (waves[i].get("foes", []) as Array).size()
 	return left

@@ -1,5 +1,6 @@
 ## The journal (J, M6.1): the day, the news of the last days, what the player
-## changed in the story and the drift (M6.4), and how to play.
+## changed in the story and the drift (M6.4), what is coming up (M31.0, Foreshadow),
+## and how to play.
 ## The focus picker was removed from the screen (2026-10-11); `focus_choices`,
 ## `focus_name` and `main_tags` stay for the character sheet, console and tests.
 ## The screen never shows XP numbers (M15.3). Presentation only; `lines` is static
@@ -11,6 +12,8 @@ extends PanelContainer
 const FOCUS_MIN_WEIGHT := 0.5
 ## News from this many days (today included).
 const NEWS_DAYS := 7
+## M31.0: the "Coming up" list with no signpost in it.
+const NOTHING_COMING := "  Nothing you have heard of."
 
 var _gs: GameState
 var _db: DataDb
@@ -97,6 +100,14 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	for m: String in marks:
 		out.append("  " + m)
 	out.append(drift_line(gs, db))
+	out.append("")
+	out.append("Coming up:")
+	var coming := Foreshadow.coming(gs, db)
+	if coming.is_empty():
+		out.append(NOTHING_COMING)
+	for e: Dictionary in coming:
+		out.append("  Day %d, %s, %s: %s" % [_pday(int(e["day"]), db), Foreshadow.hours_text(e["hours"]),
+				Foreshadow.place(db, e["where"]), e["text"]])
 	out.append("")
 	out.append("News:")
 	var news := gs.world.news_since(gs.clock.day() - NEWS_DAYS + 1)

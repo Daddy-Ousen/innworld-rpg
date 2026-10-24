@@ -45,7 +45,7 @@ The user said (2026-10-17): "We will do all."
 | M29.4 | `rules.director`: end-of-story page text (or computed from the last canon day) | no |
 | M30.1 | new `data/voices.json` (per NPC: greet by band, idle, lines by flag, talk options); `rules.voice` | no |
 | M30.5 | player name, look and Earth background | v23 + migration (v22 went to M29.1) |
-| M31.0 | event field `foreshadow` and stage field `beats` | no (beat index lives in `combat.stage_run`; check at the step) |
+| M31.0 | event field `foreshadow` and stage field `beats` | no (checked: "beat" in `combat.stage_run`, tolerant read) |
 | M32.1 | enemy field for a boss who yields (not killed) if `flee_below` is not enough | no |
 | M33.0 | new spell effect kinds (for example blink, light) only if needed | maybe |
 | M33.2 | new `data/quests.json` and quest state | v24 + migration (if M30.5 takes v23) |
@@ -232,6 +232,26 @@ User picks (rule 11): save v23; backgrounds start their class pool 25 % full; 6 
 - New game: start → "Who are you?" (`ui/create_player.gd`, built in code: name field, look arrows with a front
   frame, 6 background buttons in a 3-wide grid, Back / Begin) → game. It sits in a full-screen scroll box, so at a
   big menu size (a phone) Begin is one scroll away. The welcome page and the character sheet name the player.
+
+### M31.0 (2026-10-24): signposts and scene beats
+User picks (rule 11): `where` / `hours` optional; morning page and journal; log line and bubble; no save bump.
+- Event field `foreshadow` {"days_before" >= 0, "text", "where"?: map id, "hours"?: [from, to]}. Without a stage,
+  `where` and `hours` are needed; with one they default to the stage's area and hours.
+- `core/foreshadow.gd` (`Foreshadow.coming`): shows from `window.earliest - days_before` to the last window day
+  (with delays) while the event is pending, not staged, has no hard fail (`Director.evaluate`) and no set stage
+  `unless_flags`. Read only. `CanonDb.foreshadows` lists them in run order.
+- Morning: a "Talk in Town" page (`SystemMessages.TOWN`) after the drift warning: "<text> (tomorrow, <place>,
+  18:00 – 23:00)". Journal: a "Coming up" list ("Day N, hours, place: text").
+- Stage field `beats` [{"after_seconds" >= 0, "line", "npc"?}] on any stage, in time order. A beat's npc must be a
+  scene npc, a stage ally or a wave ally. One due beat per command: the log gets "Name: line"; a dead speaker's
+  beat is skipped. The view shows the newest beat over its speaker once (`Stage.last_beat`, `ViewBubbles`), not in
+  a fight.
+- `combat.stage_run` gets "beat" (next beat). A fight stage with waves or beats gets a run; a scene with beats gets
+  one if no fight run is on. A scene's run ends when the scene ends or the player leaves. Old saves read "beat" as
+  0: no save version change (like M17.8). `Stage.foes_left` stays -1 for a scene or a fight with no `waves`, so the
+  HUD and the battle music do not change.
+- Checks: `CanonDb` (shape, beat order, beat npc on the stage), `CombatDb` (foreshadow map), Python
+  `check_foreshadow` / `check_beats` (with the copy check on the text and beat lines).
 
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
