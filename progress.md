@@ -139,7 +139,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `unit_shop_panel` (+1), `unit_touch_controls`, `unit_combat_screen`, `unit_tap_walk`, `unit_ui_scale`,
     `unit_economy`, `unit_world_view`, `unit_play_loop`, `unit_action_card`, `unit_input_actions`,
     `unit_skill_bar`, `unit_spell_ui` pass. Full suite not run.
-    - [ ] A new build (v0.1.8) so the user can check the fixes on the phone.
+    - [x] M34.5 merged ([PR #224](https://github.com/Daddy-Ousen/innworld-rpg/pull/224)).
+    - [ ] The user checks the fixes on the phone with v0.1.8-alpha.
 - [x] M20.2 Android build (branch `feat/m20.2-android-build`, 2026-10-08, local; ADR 0034): preset `Android`, sensor landscape, ETC2/ASTC on. Debug APK exported (89 MB), signed, checked with apksigner and aapt. Not run on a phone (none plugged in). Icon (`game/icon.png`) and signed release APK added later the same day; keystore kept outside git (ADR 0034). Open: user installs and plays it; back up the keystore.
 - [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
   User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.
@@ -311,6 +312,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] v0.1.8-alpha build (2026-10-24, branch `release/v0.1.8`): the M34.5 phone fixes. Android code 7. Smoke tests
+  pass (events=1403, maps=51, problems=0). Zips + signed apk (verifies v2 + v3) + play aab in `export/`. The apk
+  differs from v0.1.7 in exactly the M34.5 files (same total size: zip padding). No GUT run (no game code changed).
+  - [ ] User merges the PR; then tag `v0.1.8-alpha` + `gh release create` with 3 zips + apk.
 - [x] v0.1.7-alpha (2026-10-22, [PR #222](https://github.com/Daddy-Ousen/innworld-rpg/pull/222), merge commit e42ae14,
   tag `v0.1.7-alpha`): the M34 phone controls. Android code 6. Smoke tests pass (events=1403, maps=51, problems=0).
   GitHub release (pre-release) has the 3 zips + signed apk (sizes checked); Pages deploy started from the release.
