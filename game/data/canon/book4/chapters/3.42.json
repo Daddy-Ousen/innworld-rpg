@@ -78,6 +78,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.cried_for_home_at_christmas", "pisces.guarded_erin_invisibly"], "relationship": [{"from": "pisces", "to": "erin_solstice", "delta": 1}]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Behind the door, a song about coming home goes on without its singer."}, {"after_seconds": 40, "npc": "erin_solstice", "line": "I'm fine. Just... something in my throat. I'm fine."}, {"after_seconds": 100, "line": "She stands in the falling snow, shoulders shaking, looking at nothing."}, {"after_seconds": 170, "npc": "erin_solstice", "line": "Home's so far away. I can't even... I can't get back."}, {"after_seconds": 240, "line": "Footprints appear in the snow beside her, though no one is there."}],
 				"area": "inn_hill",
 				"hours": [19, 23],
 				"kind": "scene",

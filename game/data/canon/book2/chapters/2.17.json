@@ -32,6 +32,7 @@
 			"effects": {"set_flags": ["erin.level_21", "erin.class_singer", "wandering_inn.iphone_concert_legendary", "liscor.heard_earth_music_first_time"]},
 			"foreshadow": {"days_before": 1, "text": "Copycat stalls in Liscor sell Erin's food for less. Erin says she has a plan to win the crowd back, and it is loud."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Music pours off the inn's roof, louder than any voice, and the crowd from Liscor keeps growing."}, {"after_seconds": 40, "npc": "pisces", "line": "Yes, the spell is mine. No, it is not free. Do tell the innkeeper."}, {"after_seconds": 90, "npc": "ceria_springwalker", "line": "I heard songs like this once before. I never thought I'd hear them again."}, {"after_seconds": 150, "npc": "relc", "line": "Watch this move! Ha! Nobody in Liscor can spin like me!"}, {"after_seconds": 210, "npc": "selys", "line": "We're out of burgers again? Ceria, flip faster! No, the other way!"}, {"after_seconds": 270, "npc": "krshia", "line": "So many customers in one night. The Human knows how to bring a crowd, yes?"}],
 				"area": "inn_hill",
 				"hours": [20, 24],
 				"kind": "scene",

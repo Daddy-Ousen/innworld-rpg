@@ -368,7 +368,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   Tests (all pass): `unit_foreshadow` (15, +2 real-data tests), `unit_canon_db`, `sim_canon_book1`,
   `sim_canon_book7`. Validator books 1 – 8: 0 errors (book 6 copy check skipped: no raw text here). Python 129 OK.
   Full suite not run.
-- [ ] M31.2 beats for the Books 1 – 4 scenes. M31.3 beats for Books 5 – 8.
+- [x] M31.2 beats (2026-10-24, branch `data/m31.2-beats-books-1-4`): 5 – 6 beats on all 17 Books 1 – 4 scenes
+  (Book 1 has none). Speakers only placed NPCs; Toren and Mrsha get unspoken lines. Summaries from a reading agent.
+  New `unit_scene_beats` (count 3 – 6, speakers, at most 20 words, inside the scene hours).
+  Tests (all pass): `unit_scene_beats` (5, new), `unit_canon_db`, `sim_canon_book2`, `sim_canon_book3`,
+  `sim_canon_book4`. Validator books 1 – 4: 0 errors (copy check on). Python 129 OK. Full suite not run.
+- [ ] M31.3 beats for the Books 5 – 8 scenes and ally shouts in fight stages.
 
 ## Docs
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line

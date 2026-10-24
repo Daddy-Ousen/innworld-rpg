@@ -206,6 +206,7 @@
 			},
 			"news": "Zel Shivertail, the Tidebreaker, is lodging at the Wandering Inn outside Liscor rather than in the city.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "zel_shivertail", "line": "Every inn in the city is full. Is the innkeeper in? I stayed here once, long ago."}, {"after_seconds": 50, "npc": "lyonette", "line": "She's away. I'm the only one here, and I'm not much of a cook, I'm afraid."}, {"after_seconds": 110, "npc": "zel_shivertail", "line": "Edible will do. Glass windows and a warm fire? That's more than most places offer."}, {"after_seconds": 170, "line": "A small white Gnoll creeps out from behind the counter and presses a wet nose to Zel's leg."}, {"after_seconds": 230, "npc": "lyonette", "line": "Mrsha! Sorry, sir! Please, stay. Your room is upstairs."}],
 				"area": "inn_interior",
 				"hours": [18, 23],
 				"kind": "scene",

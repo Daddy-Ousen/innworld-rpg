@@ -56,6 +56,7 @@
 			"rumor": "They say a half-Elf mage makes it snow indoors at the Hare every night, and the whole city hums the Ice Queen's song.",
 			"foreshadow": {"days_before": 1, "text": "The Hare's players have a new show about a queen of ice and snow. People say it has songs."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "A Drake in a pale gown steps onto the stage, and the fiddles start a cold, bright tune."}, {"after_seconds": 50, "line": "Jasi sings of setting herself free, and a little ice castle rises behind her."}, {"after_seconds": 110, "npc": "ceria_springwalker", "line": "Snow, now? Fine. It melts the moment it hits the tables, but fine."}, {"after_seconds": 170, "npc": "erin_solstice", "line": "Look at them! They're humming along! Ceria, more snow at the end!"}, {"after_seconds": 230, "npc": "ceria_springwalker", "line": "A third encore. My hands are freezing. At least the pay is good."}, {"after_seconds": 290, "npc": "jasi", "line": "Thank you, all of you! No more tonight, I promise. My voice needs rest."}],
 				"area": "celum_frenzied_hare",
 				"hours": [19, 23],
 				"kind": "scene",
@@ -163,6 +164,7 @@
 			},
 			"news": "Erin Solstice has left Celum by wagon for Liscor with the Horns of Hammerad. Half the Frenzied Hare turned out to see her off.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "I want the door. It's coming with us. That's final."}, {"after_seconds": 45, "npc": "pisces", "line": "Outvoted by common decency, then. Very well. But I found the loophole, mind you."}, {"after_seconds": 95, "npc": "ksmvr", "line": "I have asked about the artifact thirty-eight times. I would like to ask once more."}, {"after_seconds": 150, "npc": "yvlon_byres", "line": "The wagon's loaded. If we leave now, we make camp before full dark."}, {"after_seconds": 200, "npc": "ceria_springwalker", "line": "Come on, Pisces. Lunch is in the wagon, and you can sulk on the road."}, {"after_seconds": 260, "npc": "erin_solstice", "line": "Bye, Celum. I'll be back. Hey, why not just leave the stone at the Hare?"}],
 				"area": "celum_gate",
 				"hours": [17, 20],
 				"kind": "scene",

@@ -16,6 +16,7 @@
 				"relationship": [{"from": "erin_solstice", "to": "ceria_springwalker", "delta": 1}, {"from": "ceria_springwalker", "to": "erin_solstice", "delta": 1}]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ceria_springwalker", "line": "Pisces and I met at Wistram. We were friends, once. Real friends."}, {"after_seconds": 50, "npc": "erin_solstice", "line": "That's so unfair! The other mages should've been nicer to him!"}, {"after_seconds": 110, "npc": "ceria_springwalker", "line": "He was always a necromancer, Erin. He kept secrets. Even from me."}, {"after_seconds": 170, "npc": "ceria_springwalker", "line": "My master, Illphres, died there. After that, I couldn't stay."}, {"after_seconds": 230, "npc": "ceria_springwalker", "line": "Truth is, I'm a dropout. The praise was always meant for him."}, {"after_seconds": 290, "npc": "erin_solstice", "line": "You're not a failure. You went into Albez and walked back out. That counts."}],
 				"area": "celum_frenzied_hare",
 				"hours": [20, 24],
 				"kind": "scene",

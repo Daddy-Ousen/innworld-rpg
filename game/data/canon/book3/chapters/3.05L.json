@@ -89,6 +89,7 @@
 			},
 			"news": "The Wandering Inn has its lights on again. Erin Solstice's barmaid keeps it open while she is away, though folk say the pasta is poor.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "The common room is empty. A plate of salty pasta smokes in the fireplace."}, {"after_seconds": 40, "npc": "pawn", "line": "I am looking for Erin. She is gone? Then may I still eat here? No bread, please."}, {"after_seconds": 90, "npc": "lyonette", "line": "I can cook! Mostly. Bacon and eggs? They might be a little burnt."}, {"after_seconds": 150, "npc": "pawn", "line": "It is hot and salty. This is very good. May I have a second plate?"}, {"after_seconds": 220, "npc": "lyonette", "line": "He paid. He really paid. Maybe I can keep this place open after all."}],
 				"area": "inn_interior",
 				"hours": [18, 22],
 				"kind": "scene",

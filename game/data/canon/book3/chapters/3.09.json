@@ -42,6 +42,7 @@
 				"relationship": [{"from": "fals", "to": "ryoka_griffin", "delta": 1}, {"from": "ryoka_griffin", "to": "fals", "delta": 1}]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "fals", "line": "Two fingers gone? Well, you still run. That's what matters. Sit, have a drink."}, {"after_seconds": 50, "npc": "fals", "line": "Sorry to say it, but Celum's guild won't take your deliveries now. You're banned."}, {"after_seconds": 110, "npc": "fals", "line": "Sixteen years I've run these roads, and Persua's lucky Skill takes every job."}, {"after_seconds": 170, "npc": "ryoka_griffin", "line": "She'll move on soon. Then you'll be the fastest again. Well, except for me."}, {"after_seconds": 230, "npc": "fals", "line": "Oh, did you hear? The Horns of Hammerad came out of a dungeon. Ocre threw them a parade."}, {"after_seconds": 280, "npc": "ryoka_griffin", "line": "The Horns are alive? Tell Garia. Tell Erin! I have to go, now!"}],
 				"area": "celum_frenzied_hare",
 				"hours": [9, 12],
 				"kind": "scene",

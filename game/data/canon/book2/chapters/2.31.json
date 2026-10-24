@@ -49,6 +49,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["pawn.crisis_of_purpose", "pawn.gained_acolyte_class", "liscor.first_antinium_acolyte"]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "pawn", "line": "I did not come for chess tonight, Erin. I came because I do not know what I am."}, {"after_seconds": 60, "npc": "pawn", "line": "I told the Workers to fight for you. They died. Who will remember them?"}, {"after_seconds": 130, "npc": "pawn", "line": "This place you call heaven. Is it a story, or is it true?"}, {"after_seconds": 200, "npc": "pawn", "line": "When Antinium die, they simply stop. There is nothing after. I would like there to be."}, {"after_seconds": 270, "line": "Pawn sits very still, as if he hears something far above the roof."}],
 				"area": "inn_interior",
 				"hours": [20, 24],
 				"kind": "scene",

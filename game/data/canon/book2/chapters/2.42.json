@@ -122,6 +122,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["liscor.sledding_craze", "krshia.sells_sleds", "toren.used_as_a_sled_lift"]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "The big sledge shoots down the slope in a spray of snow, and the skeleton drags it back up."}, {"after_seconds": 45, "npc": "klbkch", "line": "This is neither a sled nor a sleigh. A hybrid. And it exists for amusement?"}, {"after_seconds": 100, "npc": "selys", "line": "My turn! I call the front! Ancestors, this is fast!"}, {"after_seconds": 160, "npc": "klbkch", "line": "Clear the slope before it runs again. Anyone standing there would be killed."}, {"after_seconds": 220, "npc": "krshia", "line": "Small sleds for small cubs, a good price, today only! Come, before they are gone."}, {"after_seconds": 290, "line": "Toren hauls the sledge up again without rest, and the line of riders keeps growing."}],
 				"area": "inn_hill",
 				"hours": [14, 18],
 				"kind": "scene",

@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-24, local): M31.2 beats for Books 1 – 4 (branch `data/m31.2-beats-books-1-4`)
+- `"beats"` added to the stage of all 17 Books 1 – 4 scenes (16 chapter files; 3.25 and 3.27M hold two each).
+  5 – 6 beats each, every 40 – 70 s, from 0 to about 290 s. Own words; no lyrics.
+- New test `game/tests/unit_scene_beats.gd` (real data). Its `BOOKS` list and the count 17 grow in M31.3.
+- ADR 0044 "M31.2", ROADMAP, `docs/plans/m31.md`. Tests in `progress.md`. Full suite not run.
+- Next: user merges the PR. Then M31.3 **[Sonnet · high]**: beats for the Books 5 – 8 scenes (30 scenes) and
+  1 – 3 ally shouts per fight stage. Same method: a reading agent (Sonnet) summarises the chapters with the
+  allowed speakers per scene; write beats; extend `unit_scene_beats` to b5 – b8 and fights.
+- Gotchas: a heredoc with many apostrophes broke Git Bash; write such scripts with the Write tool. Mute NPCs
+  (Toren, Mrsha) get no-speaker beats. Book 6 has no raw text here, so its copy check is skipped.
+
 ## Just done (2026-10-24, local): M31.1 signposts (branch `data/m31.1-signposts`)
 - One `"foreshadow"` line inserted before `"stage"` in 35 canon events (books 1 – 8): 25 fights, 10 key scenes.
   No `where` / `hours` given: they come from the stage. Own words; no outcome.

@@ -33,6 +33,7 @@
 			"news": "Twenty Antinium Soldiers came back to Liscor's Hive painted in every colour, each one different, after a meal of fried bees at the Wandering Inn.",
 			"rumor": "Gnolls swear they saw a Soldier with white paw prints all over his shell marching out of the inn on the hill.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "lyonette", "line": "I'm so sorry about the paw prints! Paint is so hard to wash off a shell!"}, {"after_seconds": 50, "npc": "pawn", "line": "I am not angry. I am grateful. He has a mark of his own now."}, {"after_seconds": 110, "line": "The Soldiers dip huge fingers in the cans. No two shells come out alike."}, {"after_seconds": 170, "npc": "lyonette", "line": "Can I help paint them too? I'll be careful. Mostly careful."}, {"after_seconds": 230, "line": "A white Gnoll cub darts between the Soldiers' legs, leaving fresh paw prints on the floor."}, {"after_seconds": 290, "npc": "pawn", "line": "Fried bees for every Soldier, please. They have earned them."}],
 				"area": "inn_interior",
 				"hours": [12, 18],
 				"kind": "scene",
