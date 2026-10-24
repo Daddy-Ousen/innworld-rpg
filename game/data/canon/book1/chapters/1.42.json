@@ -53,6 +53,7 @@
 			"xp_window": {"boost": 1, "hours": [19, 21]},
 			"foreshadow": {"days_before": 1, "text": "Three Human adventurers came to Liscor looking for work. They ask about rooms, and they hate Goblins."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "Stop! They're friendly! These Goblins are my guests! Read the sign!"}, {"after_seconds": 40, "line": "Pawn catches a big man's fists in his two hands, then hits back with two more."}],
 				"area": "inn_interior",
 				"hours": [19, 21],
 				"foes": [

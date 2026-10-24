@@ -52,6 +52,7 @@
 			"xp_window": {"boost": 2, "hours": [17, 22]},
 			"foreshadow": {"days_before": 1, "text": "Some young Gnolls in the market are angry with the Human on the hill. They carry weapons and talk of paying her a visit."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ceria_springwalker", "line": "Put her down, Brunkr. Nobody is getting killed here tonight."}, {"after_seconds": 40, "npc": "erin_solstice", "line": "Toren, stop! Nobody kills anybody!"}, {"after_seconds": 95, "npc": "zevara", "line": "This is the Watch! Everyone stop fighting, now!"}],
 				"area": "inn_hill",
 				"hours": [17, 22],
 				"when_flags": ["gnoll.silverfang_warband_attacks_inn"],

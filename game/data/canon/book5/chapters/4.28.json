@@ -122,6 +122,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Krshia's Gnolls will fill the inn for a feast in Brunkr's honour."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Gnolls fill every table. Erin pushes through with a huge pink cake that spells out [Knight]."}, {"after_seconds": 45, "npc": "erin_solstice", "line": "Everybody sing! It goes like this. Come on, Zel, you too!"}, {"after_seconds": 100, "npc": "relc", "line": "This cake is... I'm crying. How do you make this? Tell me!"}, {"after_seconds": 160, "npc": "brunkr", "line": "This feast is more for my aunt than for me, I think."}, {"after_seconds": 220, "npc": "brunkr", "line": "I do not know what I will be. More than I am, I hope, yes?"}, {"after_seconds": 280, "npc": "brunkr", "line": "Thank you for my arm, Erin. I was wrong about you."}],
 				"area": "inn_interior",
 				"hours": [
 					18,

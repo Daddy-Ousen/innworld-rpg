@@ -373,7 +373,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   New `unit_scene_beats` (count 3 – 6, speakers, at most 20 words, inside the scene hours).
   Tests (all pass): `unit_scene_beats` (5, new), `unit_canon_db`, `sim_canon_book2`, `sim_canon_book3`,
   `sim_canon_book4`. Validator books 1 – 4: 0 errors (copy check on). Python 129 OK. Full suite not run.
-- [ ] M31.3 beats for the Books 5 – 8 scenes and ally shouts in fight stages.
+- [x] M31.3 beats (2026-10-24, branch `data/m31.3-beats-books-5-8`): 5 – 6 beats on all 30 Books 5 – 8 scenes,
+  2 – 3 ally shouts on all 25 fight stages (a shout only after its speaker's wave arrives). Book 6 (no raw text
+  here) written from the canon summaries only. 3 lines reworded after the copy check. `unit_scene_beats` now
+  covers 47 scenes and 25 fights.
+  Tests: `unit_scene_beats` (6), `unit_canon_db`, `sim_canon_fights`, `sim_book8_raid_one`, `sim_book8_raid_two`,
+  `sim_book8_battle_one`, `sim_canon_book5`, `sim_canon_book7` pass. `sim_canon_book6` 12/13: the failing test
+  (`test_greydath_is_a_flag_not_a_merge`, line 185) also fails on main without this change (old failure).
+  Validator books 1 – 8: 0 errors. Python 129 OK. Full suite not run.
+- [ ] M31 play check: the user plays a signposted day and a scene.
+- [ ] Old failure: `sim_canon_book6` `test_greydath_is_a_flag_not_a_merge` (flag `greybeard.is_greydath_of_blades`
+  not set by the last day). Fails on main too.
 
 ## Docs
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line

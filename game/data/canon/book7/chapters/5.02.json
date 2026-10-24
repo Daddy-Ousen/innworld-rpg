@@ -187,6 +187,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "zevara", "line": "I'm not here to scold you. I'm here to talk. Sit down."}, {"after_seconds": 50, "npc": "zevara", "line": "Pallass wants your door. They've cut off supplies to Liscor until you give it up."}, {"after_seconds": 100, "npc": "erin_solstice", "line": "It is a really cool door. You're not going to ask me to hand it over?"}, {"after_seconds": 160, "npc": "zevara", "line": "No. Liscor doesn't bow to Pallass. Open the door to Pallass. Just for a moment."}, {"after_seconds": 220, "npc": "venim", "line": "This meeting never happened. Pallass fears a war with Salazsar more than it fears you."}, {"after_seconds": 280, "npc": "venim", "line": "Sign these, and the door is a legal residence. Ah. There are filing fees."}],
 				"area": "inn_interior",
 				"hours": [
 					20,

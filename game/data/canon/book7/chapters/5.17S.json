@@ -163,6 +163,7 @@
 			"news": "General Shivertail is cremated before Liscor and a Pallass delegation.",
 			"foreshadow": {"days_before": 2, "text": "Zel Shivertail comes home to Liscor. The city will say goodbye in the plaza, and Pallass sends senators."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Rain falls on a packed plaza. Liscor and a company from Pallass stand at attention."}, {"after_seconds": 50, "line": "The casket is laid on a pyre of wood brought from Pallass."}, {"after_seconds": 100, "npc": "zevara", "line": "Zel Shivertail is dead. Who will stand to avenge him?"}, {"after_seconds": 150, "npc": "ilvriss", "line": "I will."}, {"after_seconds": 200, "npc": "embria_grasstongue", "line": "And I. And every soldier under me."}, {"after_seconds": 270, "npc": "tekshia", "line": "I'm too old to light another one of these, Selys. Too old."}],
 				"area": "liscor_plaza",
 				"hours": [
 					10,

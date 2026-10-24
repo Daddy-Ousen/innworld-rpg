@@ -77,6 +77,7 @@
 			"effects": {"set_flags": ["erin.fought_snow_golems", "erin.has_golem_core_snow", "erin.has_corusdeer_horns"]},
 			"foreshadow": {"days_before": 1, "text": "Hunters say some snowmen on the south plains were not there the day before."},
 			"stage": {
+				"beats": [{"after_seconds": 5, "npc": "erin_solstice", "line": "Ow! It bit me! Snowmen don't bite! Toren, help me, you jerk!"}, {"after_seconds": 60, "npc": "erin_solstice", "line": "And you faeries, stop betting and help!"}],
 				"area": "floodplains_south",
 				"hours": [10, 14],
 				"foes": [

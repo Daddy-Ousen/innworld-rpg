@@ -596,6 +596,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "The flood has made the inn's hill an island. The Watch warns that Raskghar from the dungeon swim at night."},
 			"stage": {
+				"beats": [{"after_seconds": 20, "npc": "bird", "line": "Raskghar in the water! Alarm! Alarm! They are coming for the inn!"}, {"after_seconds": 100, "npc": "ceria_springwalker", "line": "Pisces, undead! Yvlon, Ksmvr, take the flanks!"}, {"after_seconds": 110, "line": "Headscratcher howls and hurls a Raskghar across the room."}],
 				"area": "inn_hill",
 				"hours": [
 					21,

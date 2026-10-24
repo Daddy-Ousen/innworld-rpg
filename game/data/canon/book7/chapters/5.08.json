@@ -760,6 +760,7 @@
 			"summary": "That night the inn is full of the wounded and the tired. Bird sits with his broken bow. Numbtongue has a round bite gone from his arm. Jelaqua cannot move. Pisces is toasted as the hero.",
 			"news": "At the Wandering Inn the wounded rested after the moths. Bird, Numbtongue and Jelaqua were hurt.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "bird", "line": "I failed my duty. My bow is broken. My tower is broken."}, {"after_seconds": 45, "npc": "erin_solstice", "line": "You didn't fail anyone, Bird. Here, drink this. All of it."}, {"after_seconds": 100, "npc": "numbtongue", "line": "More potions! Arm is missing a piece!"}, {"after_seconds": 160, "npc": "jelaqua", "line": "Can't move this body anymore. Talking still works, though. Lucky you."}, {"after_seconds": 220, "line": "Someone raises a mug to Pisces. Then everyone does."}, {"after_seconds": 280, "npc": "pisces", "line": "Rain, at the right moment. One simply needs a plan, and friends to cast it with."}],
 				"area": "inn_interior",
 				"hours": [
 					20,

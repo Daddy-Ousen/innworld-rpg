@@ -179,6 +179,7 @@
 			"summary": "Dusk falls on the meadow. Laken's guests mingle on their feet with the villagers eating nearby. Braziers burn at the corners and the fae stand at the tree line.",
 			"news": "Laken's banquet in the Riverfarm meadow went on past dusk.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "laken_godart", "line": "Keep seats free, Prost. More guests are coming than the ones we invited."}, {"after_seconds": 50, "npc": "laken_godart", "line": "Remember: make no deals, take no gold, and cold iron burns them."}, {"after_seconds": 110, "npc": "wiskeria", "line": "And if one of them needs hurting? How would one do that?"}, {"after_seconds": 170, "line": "Pale shapes stand at the tree line, watching the braziers, and the music turns strange."}, {"after_seconds": 230, "npc": "bethal", "line": "You were warned, my lord. Now hush. I want to hear what happens next."}, {"after_seconds": 290, "npc": "ivolethe", "line": "Mind your cup, Emperor. Not every guest at this table loves you."}],
 				"area": "riverfarm",
 				"hours": [
 					18,

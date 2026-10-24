@@ -64,6 +64,7 @@
 			"xp_window": {"boost": 3, "hours": [8, 18]},
 			"foreshadow": {"days_before": 1, "text": "Refugees say a Goblin army in black armour marches on what is left of Esthelm. A knight in silver plate holds the survivors together."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ylawes_byres", "line": "To arms! Man the barricades! Hold the choke points!"}, {"after_seconds": 150, "npc": "ylawes_byres", "line": "Watch the flanks! The skeleton is leading the dead!"}, {"after_seconds": 300, "npc": "ylawes_byres", "line": "Do not falter! Hold, Esthelm, hold!"}],
 				"area": "esthelm_ruins",
 				"hours": [8, 18],
 				"when_flags": ["ylawes.at_esthelm"],

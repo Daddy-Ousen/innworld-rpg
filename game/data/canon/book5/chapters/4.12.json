@@ -140,6 +140,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "A bigger room, a third floor, and a tower on the roof. For Bird!"}, {"after_seconds": 50, "npc": "klbkch", "line": "The plan is workable. But the Hive cannot build for free."}, {"after_seconds": 100, "npc": "klbkch", "line": "The price is 328 gold."}, {"after_seconds": 150, "npc": "erin_solstice", "line": "Three hundred and what? That's robbery! Highway robbery!"}, {"after_seconds": 210, "npc": "klbkch", "line": "Treaty tax, fees outside the walls, guards, and about eight gold for each window."}, {"after_seconds": 270, "npc": "ryoka_griffin", "line": "I'll pay it. The Horns earn me more than that."}],
 				"area": "inn_interior",
 				"hours": [
 					13,

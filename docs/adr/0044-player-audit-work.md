@@ -271,6 +271,15 @@ User picks (rule 11): `where` / `hours` optional; morning page and journal; log 
   checks the count (3 – 6), the speakers, the word limit and that each beat falls inside the scene's hours.
 - No song lyrics: a beat says what a song is about, never its words.
 
+### M31.3 (2026-10-24): beats for the Books 5 – 8 scenes and the fights
+- All 30 scenes of Books 5 – 8 have 5 – 6 beats, like M31.2. All 25 fight stages (Books 1 – 8) have 2 – 3
+  beats: ally shouts, or a line with no speaker. A shout comes only after its speaker's wave has arrived.
+- Book 6 has no raw text on this machine. Its 6 scenes and 1 fight are written from the canon JSON summaries
+  only; the copy check for book 6 is skipped. Check them when the book 6 text is available.
+- The copy check caught 3 lines that matched book text by chance; they were reworded.
+- A fight with beats now always has a `stage_run` (as M31.0 allows); `Stage.foes_left` stays -1 without waves.
+- `unit_scene_beats` now checks all 47 scenes (3 – 6 beats) and all 25 fights (1 – 3 beats).
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

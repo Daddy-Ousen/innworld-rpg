@@ -47,6 +47,7 @@
 			"xp_window": {"boost": 2, "hours": [12, 14]},
 			"foreshadow": {"days_before": 1, "text": "A big band of Goblins camps near the inn now. They grow bolder every day."},
 			"stage": {
+				"beats": [{"after_seconds": 10, "npc": "erin_solstice", "line": "Put that chess piece down. Now. That's mine."}, {"after_seconds": 155, "npc": "klbkch", "line": "Cover me. I will reach her. Goblins, come, if you wish to die."}, {"after_seconds": 245, "line": "Rags screeches orders, and her small band slips in to stab the raiders from the side."}],
 				"area": "inn_interior",
 				"hours": [12, 14],
 				"foes": [

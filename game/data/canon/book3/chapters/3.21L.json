@@ -81,6 +81,7 @@
 			"xp_window": {"boost": 1, "hours": [3, 8]},
 			"foreshadow": {"days_before": 1, "text": "Hunters say the giant bees in the cave near Liscor are slow before dawn. No one is fool enough to test it."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "lyonette", "line": "Smoke. Faerie flowers and smoke. That's all it takes. I hope."}, {"after_seconds": 150, "npc": "lyonette", "line": "Got you. Three jars of honey. Ha! I did it!"}],
 				"area": "bee_cave",
 				"hours": [3, 8],
 				"when_flags": ["lyonette.runs_the_inn"],

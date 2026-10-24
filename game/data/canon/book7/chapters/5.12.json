@@ -711,6 +711,7 @@
 			"summary": "Klbkch and Relc walk through the west wall door into the inn. Painted Soldiers eat on the floor. Klbkch sends Workers to mend the walls and says Liscor law repays defence losses. They are invited to the play.",
 			"news": "Antinium Workers came to mend the Wandering Inn after the moth battle.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "relc", "line": "Whoa. This room's huge now! Was it this big yesterday?"}, {"after_seconds": 45, "npc": "klbkch", "line": "A Skill is at work here. I can feel it."}, {"after_seconds": 100, "npc": "bird", "line": "Forty-one. Forty-two. That one is very dead. Forty-three."}, {"after_seconds": 160, "npc": "erin_solstice", "line": "Can I borrow some Workers to fix the walls? I'll pay!"}, {"after_seconds": 220, "npc": "klbkch", "line": "Octavia. Liscor law repays goods spent defending the city. Submit your potions."}, {"after_seconds": 280, "npc": "relc", "line": "See? Klbkch does the boring law stuff. To Klbkch! Drink up!"}],
 				"area": "inn_interior",
 				"hours": [
 					18,

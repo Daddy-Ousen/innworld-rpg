@@ -322,6 +322,7 @@
 			"xp_window": {"boost": 1, "hours": [13, 23]},
 			"foreshadow": {"days_before": 1, "text": "The Horns of Hammerad took a bounty on a bear den in a cave past Esthelm."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "yvlon_byres", "line": "Behind me! Ceria, seal the tunnel!"}, {"after_seconds": 60, "npc": "ceria_springwalker", "line": "Too many gaps! Ice wall, and fall back!"}, {"after_seconds": 150, "npc": "pisces", "line": "Rise, bears! Ceria, get back, I'm casting!"}],
 				"area": "esthelm_creler_cave",
 				"hours": [
 					13,

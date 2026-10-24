@@ -221,6 +221,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Erin plans a party at the inn. Everyone is welcome, the Redfang Goblins too."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Ishkr strums the guitar, and Numbtongue beats out a rhythm on a tabletop."}, {"after_seconds": 50, "npc": "erin_solstice", "line": "Everybody dance! Yes, you too, Ksmvr! Purple Smile, you're a natural!"}, {"after_seconds": 110, "npc": "headscratcher", "line": "Song again! Teach next song!"}, {"after_seconds": 170, "npc": "ksmvr", "line": "I am dancing. I believe I am doing it correctly. Captain Ceria would disagree."}, {"after_seconds": 230, "line": "The Goblins taste their first drink, cough, and ask for more."}, {"after_seconds": 290, "line": "Even Yellow Splatters, stiff all night, starts to tap one foot."}],
 				"area": "inn_interior",
 				"hours": [
 					16,

@@ -712,6 +712,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Liscor means to strike the Raskghar camp in the dungeon. No one says how the soldiers will get there."},
 			"stage": {
+				"beats": [{"after_seconds": 20, "npc": "jelaqua", "line": "That's the armoured one! He's mine!"}, {"after_seconds": 75, "npc": "zevara", "line": "Watch, stand firm! Keep them in front of the mages!"}, {"after_seconds": 120, "npc": "lyonette", "line": "Put her down. Put Mrsha down, now."}],
 				"area": "raskghar_camp",
 				"hours": [
 					18,

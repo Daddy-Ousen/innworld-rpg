@@ -26,6 +26,7 @@
 			"xp_window": {"boost": 2, "hours": [18, 6]},
 			"foreshadow": {"days_before": 1, "text": "Adventurers went deep into the ruins. The Watch says the dead below are stirring, and the gate guards are on edge."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "zevara", "line": "Close ranks! Hold the line! Push, you cowards, push!"}, {"after_seconds": 60, "npc": "relc", "line": "Relc! Relc! Ha! Miss me, Captain? Fall back, make space, hold the line!"}, {"after_seconds": 185, "npc": "pisces", "line": "Don't shoot me, Captain. I'm on your side. Gold would be nicer than a medal."}],
 				"area": "liscor_gate",
 				"hours": [
 					18,
