@@ -1,5 +1,13 @@
 # Handoff
 
+## Just done (2026-10-24, local): release build v0.1.8-alpha (branch `release/v0.1.8`)
+- Bumped `game/project.godot` and both Android presets (`version/code=7`). `--import`, then `tools/release.ps1`
+  (PowerShell tool, System32 first in PATH). Smoke tests pass. Apk verifies (v2 + v3), versionCode 7.
+- Next: user merges the PR. Then tag `v0.1.8-alpha` on the merge commit and `gh release create --prerelease`
+  with the 3 zips + apk (same notes style as v0.1.7). Then the user checks the M34.5 fixes on the phone.
+- Gotchas: a new apk can have the SAME byte size as the last one (zip padding). Check it by comparing the files
+  inside both apks with Python `zipfile`; scripts are binary `.gdc`, so a text search finds nothing.
+
 ## Just done (2026-10-22, local): M34.5 phone fixes (branch `fix/m34.5-fight-column`)
 - User played v0.1.7 on the phone, UPRIGHT (orientation 6 = sensor). Two bugs: the empty context button covered
   End turn in a fight; the shop's Buy button was a sliver upright.
