@@ -17,8 +17,10 @@
 ##          highest HP before a foe's blow and the lowest after one; their gap is the
 ##          fight's XP duress (Combat.fight_lost). Hidden; no save version change (tolerant read).
 ##   lines: combat text from the last command (the UI shows it).
-##   stage_run: {} or the staged fight in progress (M7.B): {"event": event id,
-##              "start": world second it began, "next": index of its next wave}.
+##   stage_run: {} or the stage in progress (M7.B): {"event": event id,
+##              "start": world second it began, "next": index of its next wave,
+##              "beat": index of its next beat (M31.0; a scene with beats has a run
+##              too; an older save has none = 0, no save version change)}.
 ##   traps (M13.T, save v14): "<area>/<trap id>" → {"found", "spent",
 ##          "disarmed", "sprung"} (see Traps); only traps that changed. Unlike
 ##          monsters, traps keep their state when the player leaves.
@@ -135,6 +137,7 @@ static func from_dict(d: Dictionary) -> CombatState:
 	if not run.is_empty():
 		run["start"] = int(run["start"])
 		run["next"] = int(run["next"])
+		run["beat"] = int(run.get("beat", 0))
 	c.stage_run = run
 	for k: String in d.get("traps", {}):
 		var s: Dictionary = (d["traps"][k] as Dictionary).duplicate()

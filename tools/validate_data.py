@@ -200,7 +200,7 @@ def check_location(r: Report, where: str, loc, book: int, chapters) -> None:
 def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     req = {"tier", "window", "location", "roles", "requires", "depends_on", "on_fail", "effects",
            "status", "canon_ref", "summary"}
-    opt = {"delay_limit", "rumor", "news", "hooks", "stage", "xp_window"}
+    opt = {"delay_limit", "rumor", "news", "hooks", "stage", "xp_window", "foreshadow"}
     if not _keys(r, where, ev, req, opt):
         return
     if ev["tier"] not in TIERS:
@@ -271,6 +271,27 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
         check_stage(r, f"{where}.stage", ev["stage"])
     if "xp_window" in ev:
         check_xp_window(r, f"{where}.xp_window", ev["xp_window"])
+    if "foreshadow" in ev:
+        check_foreshadow(r, f"{where}.foreshadow", ev["foreshadow"], "stage" in ev)
+
+
+def check_foreshadow(r: Report, where: str, f, has_stage: bool) -> None:
+    """A signpost before the event (M31.0, ADR 0044). Without a stage it needs where and
+    hours; with one they default to the stage's. The game checks the map."""
+    if not _keys(r, where, f, {"days_before", "text"}, {"where", "hours"}):
+        return
+    if not (_int(f["days_before"]) and f["days_before"] >= 0):
+        r.err(f"{where}.days_before", "must be a whole number >= 0")
+    _str(r, f"{where}.text", f["text"], NEWS_MAX)
+    if "where" in f and not (isinstance(f["where"], str) and RE_ID.match(f["where"])):
+        r.err(f"{where}.where", "must be a map id")
+    if "hours" in f:
+        h = f["hours"]
+        if not (isinstance(h, list) and len(h) == 2 and all(_int(x) for x in h)
+                and 0 <= h[0] <= 24 and 0 <= h[1] <= 24 and h[0] != h[1]):
+            r.err(f"{where}.hours", "must be [from, to] whole hours with 0 <= from != to <= 24")
+    if not has_stage and not ("where" in f and "hours" in f):
+        r.err(where, "needs 'where' and 'hours' (the event has no stage)")
 
 
 def check_xp_window(r: Report, where: str, w) -> None:
@@ -295,9 +316,10 @@ def check_stage(r: Report, where: str, st) -> None:
         r.err(f"{where}.kind", "must be 'fight' or 'scene'")
         return
     if kind == "fight":
-        req, opt = {"area", "hours", "foes"}, {"when_flags", "unless_flags", "allies", "line", "note", "waves", "kind"}
+        req, opt = {"area", "hours", "foes"}, {"when_flags", "unless_flags", "allies", "line", "note", "waves", "kind",
+                                               "beats"}
     else:
-        req, opt = {"area", "hours", "npcs"}, {"when_flags", "unless_flags", "line", "note", "kind"}
+        req, opt = {"area", "hours", "npcs"}, {"when_flags", "unless_flags", "line", "note", "kind", "beats"}
     if not _keys(r, where, st, req, opt):
         return
     if not (isinstance(st["area"], str) and RE_ID.match(st["area"])):
@@ -313,6 +335,8 @@ def check_stage(r: Report, where: str, st) -> None:
         _str(r, f"{where}.line", st["line"], NEWS_MAX)
     if "note" in st:
         _str(r, f"{where}.note", st["note"], SUMMARY_MAX)
+    if "beats" in st:
+        check_beats(r, f"{where}.beats", st)
     if kind == "scene":
         npcs = st["npcs"]
         if not isinstance(npcs, list) or not npcs:
@@ -349,6 +373,37 @@ def check_stage(r: Report, where: str, st) -> None:
         else:
             for i, w in enumerate(st["waves"]):
                 check_wave(r, f"{where}.waves[{i}]", w)
+
+
+def check_beats(r: Report, where: str, st: dict) -> None:
+    """Stage beats (M31.0): short lines in time order; a beat's npc is a scene npc, a stage
+    ally or a wave ally."""
+    beats = st["beats"]
+    if not isinstance(beats, list):
+        r.err(where, "must be a list")
+        return
+    on_stage = set(x for x in st.get("allies", []) if isinstance(x, str)) if isinstance(st.get("allies"), list) else set()
+    for n in st.get("npcs", []) if isinstance(st.get("npcs"), list) else []:
+        if isinstance(n, dict) and isinstance(n.get("npc"), str):
+            on_stage.add(n["npc"])
+    for w in st.get("waves", []) if isinstance(st.get("waves"), list) else []:
+        if isinstance(w, dict) and isinstance(w.get("allies"), list):
+            on_stage.update(x for x in w["allies"] if isinstance(x, str))
+    last = 0
+    for i, b in enumerate(beats):
+        bw = f"{where}[{i}]"
+        if not _keys(r, bw, b, {"after_seconds", "line"}, {"npc"}):
+            continue
+        t = b["after_seconds"]
+        if not (_int(t) and t >= 0):
+            r.err(f"{bw}.after_seconds", "must be an int >= 0 (seconds after the stage began)")
+        elif t < last:
+            r.err(f"{bw}.after_seconds", "must not be less than the beat before")
+        else:
+            last = t
+        _str(r, f"{bw}.line", b["line"], NEWS_MAX)
+        if "npc" in b and not (isinstance(b["npc"], str) and b["npc"] in on_stage):
+            r.err(f"{bw}.npc", f"'{b['npc']}' is not on the stage")
 
 
 def check_wave(r: Report, where: str, w) -> None:
@@ -832,8 +887,13 @@ def validate_dir(data_dir: str | Path, raw_dir: str | Path | None = None,
                 for i, h in enumerate(ev.get("hooks") if isinstance(ev.get("hooks"), list) else []):
                     if isinstance(h, dict):
                         copy_check(f"{fn}:events.{eid}.hooks[{i}]", h, ("news",), ref)
+                if isinstance(ev.get("foreshadow"), dict):
+                    copy_check(f"{fn}:events.{eid}.foreshadow", ev["foreshadow"], ("text",), ref)
                 if isinstance(ev.get("stage"), dict):
                     copy_check(f"{fn}:events.{eid}.stage", ev["stage"], ("line",), ref)
+                    for i, beat in enumerate(ev["stage"].get("beats") if isinstance(ev["stage"].get("beats"), list) else []):
+                        if isinstance(beat, dict):
+                            copy_check(f"{fn}:events.{eid}.stage.beats[{i}]", beat, ("line",), ref)
                     for i, wave in enumerate(ev["stage"].get("waves") if isinstance(ev["stage"].get("waves"), list) else []):
                         if isinstance(wave, dict):
                             copy_check(f"{fn}:events.{eid}.stage.waves[{i}]", wave, ("line",), ref)

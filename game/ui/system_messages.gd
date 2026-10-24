@@ -1,7 +1,7 @@
 ## The Voice of the World as pages (ADR 0009). Turns a night result
 ## (Night.run) and GameState into the pages the System dialog shows, in
 ## this order: collapse (or knock-out), levels and skills, local news (M6.4),
-## rumors, drift warning, one page per open class offer, then the morning. Headless, so tests can check
+## rumors, drift warning, talk in town (M31.0), one page per open class offer, then the morning. Headless, so tests can check
 ## it. Reads state only; the dialog sends the answers as Commands.
 ##
 ## A page: {"kind", "title", "lines": Array[String], "choices": Array[String],
@@ -18,6 +18,8 @@ const PROGRESS := "progress"
 const NEWS := "news"
 const RUMORS := "rumors"
 const DRIFT := "drift"
+## M31.0: talk of the town before a big day (Foreshadow signposts).
+const TOWN := "town"
 ## Every morning once the drift passes `unreliable_at` (M23.7; the one-time warning page stays).
 const DRIFT_REMINDER := "What you remember of the story may not hold."
 const OFFER := "offer"
@@ -104,6 +106,9 @@ static func pages(night: Dictionary, gs: GameState, db: DataDb) -> Array[Diction
 		out.append(page(RUMORS, "Rumors", rumors))
 	if (night.get("world", []) as Array).has(Director.UNRELIABLE_LINE):
 		out.append(page(DRIFT, "A Warning", [Director.UNRELIABLE_LINE]))
+	var talk := Foreshadow.morning_lines(gs, db)
+	if not talk.is_empty():
+		out.append(page(TOWN, "Talk in Town", talk))
 	out.append_array(offer_pages(gs, db))
 	if night.get("story_end", false):
 		out.append(page(STORY_END, "The Story So Far", STORY_END_LINES))

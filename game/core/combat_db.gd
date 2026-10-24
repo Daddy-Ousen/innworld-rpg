@@ -91,6 +91,10 @@ func validate(db: DataDb) -> Array[String]:
 		_validate_spawn(spawns[i], seen, db)
 	for id: String in db.canon.stages:
 		_validate_stage(id, db.canon.events[id]["stage"], db)
+	for id: String in db.canon.foreshadows:
+		var f: Variant = db.canon.events[id]["foreshadow"]
+		if f is Dictionary and f.get("where", null) is String and not db.maps.areas.has(f["where"]):
+			errors.append("event '%s' foreshadow: unknown map '%s'." % [id, f["where"]])
 	_validate_rules(db)
 	return errors
 

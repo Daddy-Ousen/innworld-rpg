@@ -1,9 +1,10 @@
 ## Speech bubbles over NPCs on the map (M30.1, ADR 0044 "M30.0"): barks. An NPC
 ## with idle lines within rules.voice.bark_tiles of the player says one line per
 ## bark bucket (Voice.bark: a stable pick, never gs.rng). The bubble fades after a
-## few real seconds. View only: nothing here reads or writes game state beyond
-## looking at it. No bubbles in a fight. WorldView makes and owns one; `_v` is the
-## view (untyped: no script cycle).
+## few real seconds. M31.0: a stage beat with a speaker (Stage.last_beat) shows
+## over that NPC once, in place of a bark. View only: nothing here reads or writes
+## game state beyond looking at it. No bubbles in a fight. WorldView makes and owns
+## one; `_v` is the view (untyped: no script cycle).
 class_name ViewBubbles
 extends RefCounted
 
@@ -20,6 +21,8 @@ const TEXT := Color(0.1, 0.1, 0.12)
 var _v
 ## NPC id → the "day|bucket" key of the last bark shown (one per bucket).
 var _said: Dictionary = {}
+## The key of the last stage beat shown (Stage.last_beat), "" = none yet.
+var _beat := ""
 var layer: Node2D
 
 
@@ -31,17 +34,20 @@ func _init(view) -> void:
 ## Bubbles of NPCs that left the area go away. `db` null = no barks.
 func update(gs: GameState, db: DataDb) -> void:
 	_ensure_layer()
-	if db == null or not Voice.on(db) or gs.combat.has_fight():
+	if db == null or gs.combat.has_fight():
 		_clear_all()
 		return
 	var here := {}
-	var reach := int(Voice.rules(db)["bark_tiles"])
+	var barks := Voice.on(db)
+	var reach := int(Voice.rules(db)["bark_tiles"]) if barks else 0
 	var day := gs.clock.day()
 	var minute := gs.clock.minute()
 	for id in gs.npcs.in_area(_v.area):
 		var n: Dictionary = gs.npcs.npcs[id]
 		var at := NpcRoster.pos_of(n)
 		here[id] = true
+		if not barks:
+			continue
 		var d := at - gs.player.pos()
 		if bool(n.get("down", false)) or maxi(absi(d.x), absi(d.y)) > reach:
 			continue
@@ -58,6 +64,18 @@ func update(gs: GameState, db: DataDb) -> void:
 		if not here.has(String(b.name)):
 			layer.remove_child(b)
 			b.queue_free()
+	_beat_bubble(gs, db, here)
+
+
+## Shows the stage's newest beat over its speaker, once (if the speaker is here).
+func _beat_bubble(gs: GameState, db: DataDb, here: Dictionary) -> void:
+	var beat := Stage.last_beat(gs, db)
+	if beat.is_empty() or beat["key"] == _beat:
+		return
+	_beat = beat["key"]
+	var npc: String = beat["npc"]
+	if npc != "" and here.has(npc):
+		_show(npc, NpcRoster.pos_of(gs.npcs.npcs[npc]), beat["line"])
 
 
 ## Ages and fades the bubbles (real time).

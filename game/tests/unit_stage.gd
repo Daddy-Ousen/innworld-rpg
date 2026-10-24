@@ -293,3 +293,140 @@ func test_combat_db_checks_stage_enemies_and_tiles() -> void:
 	assert_string_contains(text, "event 'e.unknown_map' stage: unknown map 'moon'.")
 	assert_string_contains(text, "event 'e.on_a_wall' stage: foe pos")
 	assert_string_contains(text, "event 'e.on_an_exit' stage: foe pos")
+
+
+# --- M31.0 beats (ADR 0044 "M31.0")
+
+const BEATS := [
+	{"after_seconds": 0, "npc": "baker", "line": "Fresh bread for everyone!"},
+	{"after_seconds": 0, "line": "Someone claps."},
+	{"after_seconds": 60, "npc": "baker", "line": "Come back tomorrow."},
+]
+
+
+func _beat_scene() -> Dictionary:
+	var st: Dictionary = _scene_events()["e.gathering"]["stage"].duplicate(true)
+	st["beats"] = BEATS.duplicate(true)
+	return _scene_events(st)
+
+
+func test_scene_beats_play_one_at_a_time_when_due() -> void:
+	_make(_beat_scene())
+	assert_eq(_db.canon.errors, [] as Array[String])
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_has(gs.combat.lines, "A small crowd gathers.")
+	assert_has(gs.combat.lines, "Baker: Fresh bread for everyone!", "a due beat plays with the stage")
+	assert_does_not_have(gs.combat.lines, "Someone claps.", "one beat per command")
+	Commands.wait(gs, _db, 6)
+	assert_has(gs.combat.lines, "Someone claps.", "no npc: the line alone")
+	Commands.wait(gs, _db, 6)
+	assert_false(gs.combat.lines.has("Baker: Come back tomorrow."), "not due yet")
+	Commands.wait(gs, _db, 60)
+	assert_has(gs.combat.lines, "Baker: Come back tomorrow.")
+	assert_eq(gs.combat.stage_run["beat"], 3)
+	Commands.wait(gs, _db, 60)
+	assert_false(gs.combat.lines.has("Baker: Come back tomorrow."), "each beat plays once")
+
+
+func test_a_scene_run_is_no_fight() -> void:
+	_make(_beat_scene())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_eq(gs.combat.stage_run["event"], "e.gathering")
+	assert_eq(Stage.foes_left(gs, _db), -1, "the HUD shows no foes")
+	assert_false(Stage.waves_left(gs, _db))
+	assert_false(gs.combat.has_fight())
+
+
+func test_leaving_the_area_stops_the_beats() -> void:
+	_make(_beat_scene())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_true(ToyMaps.walk_to_area(gs, _db, "town"))
+	assert_eq(gs.combat.stage_run, {})
+	assert_true(ToyMaps.walk_to_area(gs, _db, "field"))
+	Commands.wait(gs, _db, 60)
+	assert_false(gs.combat.lines.has("Someone claps."), "the scene does not start again")
+
+
+func test_a_scene_without_beats_keeps_no_run() -> void:
+	_make(_scene_events())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_eq(gs.combat.stage_run, {})
+
+
+func test_fight_stage_beats_play_and_keep_the_hud() -> void:
+	_make(_events(_stage({"beats": [{"after_seconds": 0, "npc": "farmer", "line": "Watch its club!"}]})))
+	assert_eq(_db.canon.errors, [] as Array[String])
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	assert_has(gs.combat.lines, "Farmer: Watch its club!")
+	assert_eq(Stage.foes_left(gs, _db), -1, "no waves: no foe count, as before")
+
+
+func test_last_beat_names_the_speaker_for_the_bubble() -> void:
+	_make(_beat_scene())
+	var gs := ToyNpcs.new_game(_db)
+	assert_eq(Stage.last_beat(gs, _db), {})
+	_to_field(gs)
+	assert_eq(Stage.last_beat(gs, _db),
+		{"key": "e.gathering|1", "npc": "baker", "line": "Fresh bread for everyone!"})
+	Commands.wait(gs, _db, 6)
+	assert_eq(Stage.last_beat(gs, _db), {"key": "e.gathering|2", "npc": "", "line": "Someone claps."})
+
+
+func test_the_beat_index_survives_save_and_load() -> void:
+	_make(_beat_scene())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(loaded.to_json(), gs.to_json())
+	assert_eq(typeof(loaded.combat.stage_run["beat"]), TYPE_INT)
+	var old := gs.to_dict()
+	(old["combat"]["stage_run"] as Dictionary).erase("beat")
+	var from_old := GameState.from_json(JSON.stringify(SaveCodec.encode(old)))
+	assert_eq(from_old.combat.stage_run["beat"], 0, "an older save reads no beat as 0")
+
+
+func test_canon_db_checks_the_beats() -> void:
+	var scene: Dictionary = _scene_events()["e.gathering"]["stage"]
+	var bad := {
+		"e.not_list": ToyCanon.event(1, 1, {"stage": scene.merged({"beats": "x"}, true)}),
+		"e.bad_time": ToyCanon.event(1, 1, {"stage": scene.merged(
+			{"beats": [{"after_seconds": -1, "line": "Hi."}]}, true)}),
+		"e.no_line": ToyCanon.event(1, 1, {"stage": scene.merged(
+			{"beats": [{"after_seconds": 0}]}, true)}),
+		"e.extra": ToyCanon.event(1, 1, {"stage": scene.merged(
+			{"beats": [{"after_seconds": 0, "line": "Hi.", "mood": "sad"}]}, true)}),
+		"e.back_in_time": ToyCanon.event(1, 1, {"stage": scene.merged(
+			{"beats": [{"after_seconds": 30, "line": "Hi."}, {"after_seconds": 10, "line": "Bye."}]}, true)}),
+		"e.not_placed": ToyCanon.event(1, 1, {"stage": scene.merged(
+			{"beats": [{"after_seconds": 0, "npc": "guard", "line": "Hi."}]}, true)}),
+		"e.fight_not_ally": ToyCanon.event(1, 1, {"stage": _stage(
+			{"beats": [{"after_seconds": 0, "npc": "baker", "line": "Hi."}]})}),
+	}
+	var canon := CanonDb.from_dicts(ToyNpcs.npcs(), {}, bad)
+	var text := "\n".join(canon.errors)
+	assert_string_contains(text, "event 'e.not_list' stage: beats must be a list.")
+	assert_string_contains(text, "event 'e.bad_time' stage beat 1: after_seconds must be a number >= 0.")
+	assert_string_contains(text, "event 'e.no_line' stage beat 1: line must be a non-empty string.")
+	assert_string_contains(text, "event 'e.extra' stage beat 1: unknown key 'mood'.")
+	assert_string_contains(text, "event 'e.back_in_time' stage beat 2: after_seconds must not be less than the beat before.")
+	assert_string_contains(text, "event 'e.not_placed' stage beat 1: npc 'guard' is not on the stage.")
+	assert_string_contains(text, "event 'e.fight_not_ally' stage beat 1: npc 'baker' is not on the stage.")
+
+
+func test_the_view_shows_a_beat_over_its_speaker_once() -> void:
+	_make(_beat_scene())
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs)
+	var v: WorldView = add_child_autofree(load("res://world/world_view.tscn").instantiate())
+	v.setup(_db.maps)
+	v.refresh(gs, _db)
+	assert_eq(v.bubbles.text_of("baker"), "Fresh bread for everyone!")
+	v.bubbles.tick(ViewBubbles.HOLD + ViewBubbles.FADE + 0.1)
+	await get_tree().process_frame
+	v.refresh(gs, _db)
+	assert_eq(v.bubbles.text_of("baker"), "", "each beat shows once")

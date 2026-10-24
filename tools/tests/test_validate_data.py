@@ -482,6 +482,51 @@ class ValidateTest(unittest.TestCase):
         self.ev()["stage"] = self.scene(line="Here the quick brown fox jumps over the lazy dog again.")
         self.assertError(self.fx.run(with_raw=True), "stage.line: copies book text")
 
+    # --- M31.0 signposts and beats
+
+    def test_foreshadow_and_beats_pass(self):
+        self.ev()["stage"] = self.scene(beats=[{"after_seconds": 0, "npc": "bob", "line": "Welcome!"},
+                                               {"after_seconds": 30, "line": "Someone claps."}])
+        self.ev()["foreshadow"] = {"days_before": 1, "text": "People talk of a crowd."}
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+        self.ev()["stage"] = self.stage(beats=[{"after_seconds": 0, "npc": "bob", "line": "Behind you!"}])
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+        del self.ev()["stage"]
+        self.ev()["foreshadow"] = {"days_before": 0, "text": "Talk.", "where": "hut_inside", "hours": [20, 24]}
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_foreshadow_errors(self):
+        self.ev()["stage"] = self.scene()
+        self.ev()["foreshadow"] = {"days_before": -1, "text": "", "where": "Hut!", "hours": [6, 6], "outcome": 1}
+        rep = self.fx.run()
+        self.assertError(rep, "foreshadow.days_before")
+        self.assertError(rep, "foreshadow.text")
+        self.assertError(rep, "foreshadow.where")
+        self.assertError(rep, "foreshadow.hours")
+        self.assertError(rep, "unknown key 'outcome'")
+        del self.ev()["stage"]
+        self.ev()["foreshadow"] = {"days_before": 1, "text": "Talk."}
+        self.assertError(self.fx.run(), "needs 'where' and 'hours'")
+
+    def test_beat_errors(self):
+        self.ev()["stage"] = self.scene(beats=[{"after_seconds": 30, "line": "Hi."},
+                                               {"after_seconds": 10, "line": "Bye."},
+                                               {"after_seconds": 40, "npc": "zed", "line": "Who?"},
+                                               {"after_seconds": 50, "mood": "sad", "line": "x"},
+                                               {"after_seconds": 60}])
+        rep = self.fx.run()
+        self.assertError(rep, "beats[1].after_seconds: must not be less")
+        self.assertError(rep, "beats[2].npc: 'zed' is not on the stage")
+        self.assertError(rep, "unknown key 'mood'")
+        self.assertError(rep, "beats[4]: missing key 'line'")
+        self.ev()["stage"] = self.scene(beats="x")
+        self.assertError(self.fx.run(), "stage.beats: must be a list")
+
+    def test_beat_line_copy_check(self):
+        self.ev()["stage"] = self.scene(beats=[
+            {"after_seconds": 0, "line": "Here the quick brown fox jumps over the lazy dog again."}])
+        self.assertError(self.fx.run(with_raw=True), "beats[0].line: copies book text")
+
     def test_cli_exit_codes(self):
         self.fx.write()
         self.assertEqual(vd.main([str(self.fx.root), "--no-raw"]), 0)

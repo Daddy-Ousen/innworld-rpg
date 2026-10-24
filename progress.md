@@ -354,6 +354,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - Tests: about 133 GUT scripts (last full suite at M17.6, all pass); M17.7 – M18.1 ran only the scripts they touch (user rule). Runner: `bash tools/run_tests.sh <script>... | --all`. Python tool tests: 102 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
+## M31 — Signposts and scene beats (plan `docs/plans/m31.md`, ADR 0044)
+- [x] M31.0 engine (2026-10-24, branch `feat/m31.0-foreshadow-beats`). User picks: foreshadow `where` / `hours`
+  optional (from the stage), morning "Talk in Town" page + journal "Coming up", beats as log line + bubble, no
+  save bump ("beat" in `combat.stage_run`, tolerant read). New `core/foreshadow.gd`; `core/stage.gd` beats and
+  `last_beat`; `CanonDb` / `CombatDb` / Python validator checks. No canon data uses the fields yet.
+  Tests (all pass): `unit_foreshadow` (new, 13), `unit_stage` (27, +9), `unit_journal`, `unit_system_messages`,
+  `unit_voice`, `unit_battle`, `unit_music_pick`, `unit_canon_moments`, `unit_world_view`, `unit_canon_db`,
+  `sim_canon_book1`. Validator books 1 – 8: 0 errors. Python 128 OK. Full suite not run.
+- [ ] M31.1 signposts for the 25 fight stages and key scenes. M31.2 / M31.3 beats.
+
 ## Docs
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.

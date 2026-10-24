@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-24, local): M31.0 signposts and beats engine (branch `feat/m31.0-foreshadow-beats`)
+- Event field `foreshadow` {days_before, text, where?, hours?}: `core/foreshadow.gd` (`coming`, `morning_lines`,
+  `hours_text`). Morning page "Talk in Town" (`SystemMessages.TOWN`), journal "Coming up" (`Journal.NOTHING_COMING`).
+- Stage field `beats` [{after_seconds, line, npc?}]: `core/stage.gd` (`_beat`, `beat_line`, `last_beat`); one beat
+  per command; `world/view_bubbles.gd` shows the newest beat over its speaker. `combat.stage_run["beat"]`, tolerant read.
+- Checks: `core/canon_db.gd` (`_validate_foreshadow`, `_validate_beats`, `foreshadows` list), `core/combat_db.gd`
+  (foreshadow map), `tools/validate_data.py` (`check_foreshadow`, `check_beats`, copy check). ADR 0044 "M31.0".
+- Tests in `progress.md`. Full suite not run.
+- Next: user merges the PR. Then M31.1 **[Sonnet · medium]**: a `foreshadow` on each of the 25 fight stages and the
+  key scenes (list in `docs/plans/m31.md`). Own words; never the outcome.
+- Gotchas: `unit_stage` takes about 10 minutes and `unit_battle` about 5 when two Godot runs share the CPU. Give a
+  single-script run a 1500 s limit, or it is cut off with no summary line (looks like a crash, is not).
+  `Stage.foes_left` stays -1 for a stage without a `waves` key (keeps the HUD and the battle music as before).
+
 ## Just done (2026-10-24, local): ROADMAP cleanup (branch `docs/roadmap-cleanup`)
 - `docs/ROADMAP.md` 595 -> about 170 lines. Open work first (`sim_canon_book8`, M31 – M33), then "Waits on the
   user" (all play checks in one list, Google Play steps left), Later, Releases (table, v0.1.0 – v0.1.8), Done (one
