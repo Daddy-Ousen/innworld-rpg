@@ -101,6 +101,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lyonette.searched_for_mrsha"]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "lyonette", "line": "Mrsha! Mrsha, where are you? Please answer me!"}, {"after_seconds": 60, "line": "Small paw tracks lead away from the inn. The wind is already filling them with snow."}, {"after_seconds": 120, "npc": "lyonette", "line": "Mrsha! It's me! I'm not angry, I promise. Just come back!"}, {"after_seconds": 190, "line": "Her voice is only a croak now, but she keeps calling into the white."}, {"after_seconds": 260, "line": "Far below the snow, something howls, thin and small. Lyonette goes still."}],
 				"area": "floodplains_south",
 				"hours": [11, 16],
 				"kind": "scene",
@@ -160,6 +161,7 @@
 			"news": "Zel Shivertail went down a new crack into Liscor's dungeon with Gold-rank adventurers and two Antinium to bring back a lost Gnoll cub, and came up with her alive.",
 			"rumor": "They say a hole has opened in the snow outside Liscor that drops straight into the dungeon, and something big down there is already dead.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "klbkch", "line": "This crack leads straight down into the dungeon. Expect danger below."}, {"after_seconds": 40, "npc": "krshia", "line": "The cub is my responsibility too. Tie the rope. I go down with you."}, {"after_seconds": 90, "npc": "zel_shivertail", "line": "Stay by the rope, Lyonette. We'll find her."}, {"after_seconds": 160, "npc": "zel_shivertail", "line": "There you are, little one. You're found. Hold on to me now."}, {"after_seconds": 220, "npc": "krshia", "line": "Foolish, foolish cub! Someone, a healing potion. Now!"}, {"after_seconds": 280, "npc": "lyonette", "line": "Mrsha! Thank you, all of you. I won't let you out of my sight again."}],
 				"area": "dungeon_rift",
 				"hours": [14, 20],
 				"kind": "scene",

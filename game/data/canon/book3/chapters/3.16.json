@@ -106,6 +106,7 @@
 			"rumor": "Folk in Celum talk of a show at an inn where people pretend to be others, and a Drake girl stabs herself for a Human.",
 			"foreshadow": {"days_before": 1, "text": "The Frenzied Hare has hired actors. Erin says her story has two houses, real swords and a pair of young lovers."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "wesle", "line": "I'm only a guardsman, Erin. How am I meant to play a hero in love?"}, {"after_seconds": 45, "npc": "erin_solstice", "line": "Nobody starts as Romeo. You become him. So stop being Wesle for an hour!"}, {"after_seconds": 100, "line": "The tables go quiet as Romeo and Tybalt cross real swords on the little stage."}, {"after_seconds": 160, "line": "Half the room is on its feet, shouting at Juliet to put the dagger down."}, {"after_seconds": 220, "npc": "erin_solstice", "line": "More soup on table four! And don't block the stage, they're about to die!"}, {"after_seconds": 290, "npc": "wesle", "line": "They're asking for it again. Erin, they want the whole thing again!"}],
 				"area": "celum_frenzied_hare",
 				"hours": [19, 23],
 				"kind": "scene",

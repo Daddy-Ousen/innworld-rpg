@@ -262,6 +262,15 @@ User picks (rule 11): `where` / `hours` optional; morning page and journal; log 
 - `days_before` is 1, except the burning (0: they are still alive the day before) and Zel's funeral (2).
 - New check: given foreshadow `hours` must fit inside the stage's hours (Python `check_foreshadow`).
 
+### M31.2 (2026-10-24): beats for the Books 1 – 4 scenes
+- All 17 scenes of Books 1 – 4 have 5 – 6 beats (Book 1 has no scenes). Beats come every 40 – 70 game seconds,
+  from 0 to about 290 s, so a player who stays a few minutes sees them all.
+- Speakers are only NPCs the scene places. Toren and Mrsha cannot speak, so their moments are lines with no
+  speaker. A reading agent gave paraphrased chapter summaries; no book text reached the data.
+- Each beat has at most `rules.voice.max_words` (20) words, so it fits a speech bubble. `unit_scene_beats`
+  checks the count (3 – 6), the speakers, the word limit and that each beat falls inside the scene's hours.
+- No song lyrics: a beat says what a song is about, never its words.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

@@ -63,6 +63,7 @@
 			"news": "The Winter Sprites came down to the Wandering Inn in the hundreds last night for a feast innkeeper Erin Solstice laid out for them, and paid her in gold.",
 			"foreshadow": {"days_before": 1, "text": "The faeries that came with the winter wind circle the inn at night. Erin cooks as if for a hundred guests."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Cold little lights settle on every table, where plates of food and fruit wait in neat rows."}, {"after_seconds": 45, "npc": "ceria_springwalker", "line": "Dead gods, they actually came. All of them. Erin, don't say anything rude."}, {"after_seconds": 100, "line": "The faeries eat, laugh in high voices, and heap a table with shining gold."}, {"after_seconds": 160, "npc": "ceria_springwalker", "line": "This gold is pure. Not a speck of anything else in it. Who pays like this?"}, {"after_seconds": 220, "line": "The skeleton clatters its jaw at the gold and lunges at the faeries, until Erin orders it away."}],
 				"area": "inn_hill",
 				"hours": [19, 24],
 				"kind": "scene",
