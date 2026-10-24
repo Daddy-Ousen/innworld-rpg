@@ -75,6 +75,7 @@
 			"depends_on": ["b2.erin_raids_the_giant_bee_cave"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.fought_snow_golems", "erin.has_golem_core_snow", "erin.has_corusdeer_horns"]},
+			"foreshadow": {"days_before": 1, "text": "Hunters say some snowmen on the south plains were not there the day before."},
 			"stage": {
 				"area": "floodplains_south",
 				"hours": [10, 14],

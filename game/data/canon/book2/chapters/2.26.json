@@ -50,6 +50,7 @@
 			},
 			"news": "A brawl broke out at the Wandering Inn: Silverfang Gnolls, the Watch and Griffon Hunt traded blows before the Halfseekers stepped in. Klbkch arrested everyone; Krshia hauled off her kinsman Brunkr.",
 			"xp_window": {"boost": 2, "hours": [17, 22]},
+			"foreshadow": {"days_before": 1, "text": "Some young Gnolls in the market are angry with the Human on the hill. They carry weapons and talk of paying her a visit."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [17, 22],

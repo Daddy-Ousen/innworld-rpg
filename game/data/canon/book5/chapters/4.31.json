@@ -169,6 +169,7 @@
 					"griffon_hunt.fired_a_last_salute"
 				]
 			},
+			"foreshadow": {"days_before": 0, "text": "Brunkr and Ulrien will be burned below the inn. The adventurers of Liscor mean to see them off."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

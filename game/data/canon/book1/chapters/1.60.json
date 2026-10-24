@@ -24,6 +24,7 @@
 			},
 			"news": "At sunset a horde of undead from the ruins broke into Liscor through open gates. The Watch fought street by street; the Antinium sent only a handful of Soldiers.",
 			"xp_window": {"boost": 2, "hours": [18, 6]},
+			"foreshadow": {"days_before": 1, "text": "Adventurers went deep into the ruins. The Watch says the dead below are stirring, and the gate guards are on edge."},
 			"stage": {
 				"area": "liscor_gate",
 				"hours": [

@@ -272,12 +272,19 @@ def check_event(r: Report, where: str, ev, book: int, chapters) -> None:
     if "xp_window" in ev:
         check_xp_window(r, f"{where}.xp_window", ev["xp_window"])
     if "foreshadow" in ev:
-        check_foreshadow(r, f"{where}.foreshadow", ev["foreshadow"], "stage" in ev)
+        check_foreshadow(r, f"{where}.foreshadow", ev["foreshadow"], ev.get("stage"))
 
 
-def check_foreshadow(r: Report, where: str, f, has_stage: bool) -> None:
+def _hour_set(h) -> set[int]:
+    """The clock hours in [from, to), wrapping past midnight."""
+    return {(h[0] + i) % 24 for i in range((h[1] - h[0]) % 24 or 24)}
+
+
+def check_foreshadow(r: Report, where: str, f, stage) -> None:
     """A signpost before the event (M31.0, ADR 0044). Without a stage it needs where and
-    hours; with one they default to the stage's. The game checks the map."""
+    hours; with one they default to the stage's, and given hours must fit the stage's
+    (M31.1). The game checks the map."""
+    has_stage = stage is not None
     if not _keys(r, where, f, {"days_before", "text"}, {"where", "hours"}):
         return
     if not (_int(f["days_before"]) and f["days_before"] >= 0):
@@ -290,6 +297,11 @@ def check_foreshadow(r: Report, where: str, f, has_stage: bool) -> None:
         if not (isinstance(h, list) and len(h) == 2 and all(_int(x) for x in h)
                 and 0 <= h[0] <= 24 and 0 <= h[1] <= 24 and h[0] != h[1]):
             r.err(f"{where}.hours", "must be [from, to] whole hours with 0 <= from != to <= 24")
+        else:
+            sh = stage.get("hours") if isinstance(stage, dict) else None
+            if (isinstance(sh, list) and len(sh) == 2 and all(_int(x) for x in sh) and sh[0] != sh[1]
+                    and not _hour_set(h) <= _hour_set(sh)):
+                r.err(f"{where}.hours", f"{h} must fit the stage hours {sh}")
     if not has_stage and not ("where" in f and "hours" in f):
         r.err(where, "needs 'where' and 'hours' (the event has no stage)")
 

@@ -644,6 +644,7 @@
 					19
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Adventurers say something big moves in the dark below the rift. Folk on the hill should run for the walls if anything climbs out."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

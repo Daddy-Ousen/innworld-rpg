@@ -916,6 +916,7 @@
 					18
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "The moons are full and Liscor's walls need every fighter. Few will stay behind at the inn."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

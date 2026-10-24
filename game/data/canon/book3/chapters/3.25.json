@@ -54,6 +54,7 @@
 			},
 			"news": "The Frenzied Hare's new show has singing: a Drake as an [Ice Queen] raises a castle of ice while real snow falls on the crowd. It ran to three encores.",
 			"rumor": "They say a half-Elf mage makes it snow indoors at the Hare every night, and the whole city hums the Ice Queen's song.",
+			"foreshadow": {"days_before": 1, "text": "The Hare's players have a new show about a queen of ice and snow. People say it has songs."},
 			"stage": {
 				"area": "celum_frenzied_hare",
 				"hours": [19, 23],

@@ -188,6 +188,7 @@
 				]
 			},
 			"news": "The Players of Celum played at the Wandering Inn. Antinium stood and cheered for minutes.",
+			"foreshadow": {"days_before": 1, "text": "The Players of Celum come through the magic door to act their first play at the inn."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [

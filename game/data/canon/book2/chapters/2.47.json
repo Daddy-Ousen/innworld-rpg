@@ -83,6 +83,7 @@
 			"depends_on": ["b2.erin_takes_over_the_frenzied_hares_kitchen"],
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["erin.won_the_hare_bar_fight", "brilliant_swords.thrown_out_of_the_hare"], "relationship": [{"from": "agnes", "to": "erin_solstice", "delta": 2}, {"from": "maran", "to": "erin_solstice", "delta": 1}, {"from": "safry", "to": "erin_solstice", "delta": 1}]},
+			"foreshadow": {"days_before": 1, "text": "The Brilliant Swords of Celum drink at the Frenzied Hare most nights. The barmaids wish they would not."},
 			"stage": {
 				"area": "celum_frenzied_hare",
 				"hours": [19, 23],

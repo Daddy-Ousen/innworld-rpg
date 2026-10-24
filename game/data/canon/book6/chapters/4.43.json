@@ -413,6 +413,7 @@
 					}
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Yvlon's brother Ylawes is on the road to Liscor with his team, the Silver Swords."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [

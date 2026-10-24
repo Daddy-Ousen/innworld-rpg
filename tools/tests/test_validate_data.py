@@ -508,6 +508,15 @@ class ValidateTest(unittest.TestCase):
         self.ev()["foreshadow"] = {"days_before": 1, "text": "Talk."}
         self.assertError(self.fx.run(), "needs 'where' and 'hours'")
 
+    def test_foreshadow_hours_fit_the_stage(self):
+        self.ev()["stage"] = self.scene(hours=[20, 2])
+        self.ev()["foreshadow"] = {"days_before": 1, "text": "Talk.", "hours": [22, 24]}
+        self.assertEqual(self.fx.run().errors, [])
+        self.ev()["foreshadow"]["hours"] = [23, 1]
+        self.assertEqual(self.fx.run().errors, [])
+        self.ev()["foreshadow"]["hours"] = [18, 22]
+        self.assertError(self.fx.run(), "must fit the stage hours")
+
     def test_beat_errors(self):
         self.ev()["stage"] = self.scene(beats=[{"after_seconds": 30, "line": "Hi."},
                                                {"after_seconds": 10, "line": "Bye."},

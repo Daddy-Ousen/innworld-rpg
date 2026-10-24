@@ -120,6 +120,7 @@
 					"brunkr.thinks_of_joining_adventurers"
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Krshia's Gnolls will fill the inn for a feast in Brunkr's honour."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [

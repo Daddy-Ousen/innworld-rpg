@@ -79,6 +79,7 @@
 			"effects": {"set_flags": ["lyonette.has_ashfire_honey", "lyonette.has_ashfire_bees", "lyonette.raises_a_bee_grub", "lyonette.robbed_the_bee_cave"]},
 			"rumor": "Someone smoked out the giant bee nest near Liscor with a strange yellow smoke and walked off with its honey.",
 			"xp_window": {"boost": 1, "hours": [3, 8]},
+			"foreshadow": {"days_before": 1, "text": "Hunters say the giant bees in the cave near Liscor are slow before dawn. No one is fool enough to test it."},
 			"stage": {
 				"area": "bee_cave",
 				"hours": [3, 8],

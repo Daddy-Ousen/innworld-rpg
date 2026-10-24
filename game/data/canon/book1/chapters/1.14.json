@@ -19,6 +19,7 @@
 				"kill": ["goblin_chieftain"]
 			},
 			"news": "The local Goblin Chieftain is dead. The Human at the old inn on the hill killed him in her own common room, and nearly died of it.",
+			"foreshadow": {"days_before": 1, "text": "Goblins have been seen near the inn on the hill, more of them than before."},
 			"stage": {
 				"area": "inn_interior",
 				"hours": [9, 12],

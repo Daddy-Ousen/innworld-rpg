@@ -710,6 +710,7 @@
 					23
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "Liscor means to strike the Raskghar camp in the dungeon. No one says how the soldiers will get there."},
 			"stage": {
 				"area": "raskghar_camp",
 				"hours": [

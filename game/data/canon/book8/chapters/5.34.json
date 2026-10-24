@@ -594,6 +594,7 @@
 					24
 				]
 			},
+			"foreshadow": {"days_before": 1, "text": "The flood has made the inn's hill an island. The Watch warns that Raskghar from the dungeon swim at night."},
 			"stage": {
 				"area": "inn_hill",
 				"hours": [

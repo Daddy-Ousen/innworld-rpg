@@ -204,6 +204,7 @@
 				]
 			},
 			"xp_window": {"boost": 2, "hours": [15, 19]},
+			"foreshadow": {"days_before": 1, "text": "A team goes down the dungeon rift south of the inn. The Gold-rank teams stay close, in case something follows them up."},
 			"stage": {
 				"area": "floodplains_south",
 				"hours": [
