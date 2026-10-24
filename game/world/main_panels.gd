@@ -47,20 +47,31 @@ func sync_touch() -> void:
 	_m.hud.make_room_left(_m.touch.pad_width() if shown else 0.0)
 	if shown:
 		_m.touch.set_top_room(_m.hud.top_bottom())
+		_m.touch.set_bottom_room(_bar_room())
 		refresh_context()
 
 
+## M34.5: room the combat bar takes from the bottom edge while a fight runs (this layer's pixels), or 0.
+func _bar_room() -> float:
+	var bar: Control = _m.bar
+	if not bar.visible:
+		return 0.0
+	return _m.get_viewport().get_visible_rect().size.y - bar.get_global_rect().position.y
+
+
 ## M34.2: the targets near for the context button and its chips. Read again
-## only when the place, the time (people move), the flags or the game changed.
+## only when the place, the time (people move), the flags, the game or a fight
+## changed. M34.5: none in a fight.
 func refresh_context() -> void:
 	var gs: GameState = Session.gs
-	var key := "%d|%s|%s|%d|%d" % [gs.get_instance_id(), gs.player.area, gs.player.pos(),
-			gs.clock.total_minutes, gs.flags.size()]
+	var fight := Encounter.active(gs)
+	var key := "%d|%s|%s|%d|%d|%s" % [gs.get_instance_id(), gs.player.area, gs.player.pos(),
+			gs.clock.total_minutes, gs.flags.size(), fight]
 	if key == _context_key:
 		return
 	_context_key = key
 	var targets: Array[Dictionary] = []
-	if gs.player.is_placed():
+	if gs.player.is_placed() and not fight:  # M34.5: in a fight a tap acts; the button would hide End turn
 		targets = InteractMenu.targets(Interact.options(gs, Session.db), Session.db, gs)
 	_m.touch.set_targets(targets)
 

@@ -155,11 +155,27 @@ func set_top_room(px: float) -> void:
 			c.offset_bottom = top
 
 
+## M34.5: the bottom-right controls sit `px` (this layer's pixels) above the
+## bottom edge: over the combat bar while a fight runs (0 = none). Cancel stays
+## on top of the column, whose height changes when the context button hides.
+func set_bottom_room(px: float) -> void:
+	var bottom := -(MARGIN + px * factor)
+	for c: Control in [column, chips, more]:
+		if c.offset_bottom != bottom:  # called each frame: no relayout when unchanged
+			c.offset_bottom = bottom
+			c.offset_top = bottom
+	var over := bottom - column.get_combined_minimum_size().y - GAP
+	if cancel.offset_bottom != over:
+		cancel.offset_bottom = over
+		cancel.offset_top = over
+
+
 ## M34.2: the targets near, nearest first ({"id", "verb", "name", "look"},
 ## InteractMenu.targets). The first is on the context button; the others are chips.
 func set_targets(targets: Array[Dictionary]) -> void:
 	_targets = targets
 	context.disabled = targets.is_empty()
+	context.visible = not targets.is_empty()  # M34.5: no empty button (it hid End turn in a fight)
 	context.text = "-" if targets.is_empty() else "%s\n%s" % [targets[0]["verb"], targets[0]["name"]]
 	for c: Node in chips.get_children():
 		chips.remove_child(c)

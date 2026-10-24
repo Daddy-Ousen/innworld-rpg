@@ -131,6 +131,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     Full suite not run.
     - [ ] The user plays M34 on a phone (needs a new release build): sizes, card, shop, context button, tap walk.
     - [ ] Later: the bag screen is still the old list with key hints; "H: help" shows on a phone.
+  - [x] M34.4 merged ([PR #221](https://github.com/Daddy-Ousen/innworld-rpg/pull/221)).
+  - [x] M34.5 phone fixes (2026-10-22, branch `fix/m34.5-fight-column`, from the user's v0.1.7 play, phone upright):
+    the empty context button hid End turn in a fight -> it hides when nothing is near and in fights, and More /
+    Bag sit above the combat bar; the shop's Buy button shrank to a sliver upright -> the strip wraps, Buy at least
+    4 button heights wide. Rendered upright and sideways. Tests: `unit_context_button` (+1, changed 2),
+    `unit_shop_panel` (+1), `unit_touch_controls`, `unit_combat_screen`, `unit_tap_walk`, `unit_ui_scale`,
+    `unit_economy`, `unit_world_view`, `unit_play_loop`, `unit_action_card`, `unit_input_actions`,
+    `unit_skill_bar`, `unit_spell_ui` pass. Full suite not run.
+    - [ ] A new build (v0.1.8) so the user can check the fixes on the phone.
 - [x] M20.2 Android build (branch `feat/m20.2-android-build`, 2026-10-08, local; ADR 0034): preset `Android`, sensor landscape, ETC2/ASTC on. Debug APK exported (89 MB), signed, checked with apksigner and aapt. Not run on a phone (none plugged in). Icon (`game/icon.png`) and signed release APK added later the same day; keystore kept outside git (ADR 0034). Open: user installs and plays it; back up the keystore.
 - [x] M17.9 Work duress for non-fighters (branch `claude/whats-next-xpoe4w`, 2026-10-05, cloud; ADR 0027 "M17.9", plan `docs/plans/m17.9.md`).
   User answers: work duress in data, level 5 by night 9 – 10, crowd and cold. Inn worker: level 5 on night 10 (was 14); fighter unchanged.

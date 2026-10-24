@@ -113,6 +113,18 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
 - Left for later: the bag screen is still the old list with key hints ("Enter: Eat"); "H: help" shows on a
   phone. A real phone may report another dpi: the user checks on the phone.
 
+## M34.5 phone fixes (2026-10-22, from the user's first play of v0.1.7 on a phone)
+- The phone ran the game upright (portrait; `window/handheld/orientation=6` is "sensor", any way up). The
+  M34 renders were all sideways, so two layouts were never seen upright.
+- Fight: the empty context button ("-") sat on the combat bar's End turn button, and the column covered the turn
+  order faces. Now the context button hides when nothing is near and in every fight
+  (`MainPanels.refresh_context`), and the bottom-right controls sit above the combat bar while it shows
+  (`TouchControls.set_bottom_room`, `MainPanels._bar_room`). Cancel stays on top of the column.
+- Shop: on an upright phone the panel is about 320 UI px wide; the count row took it all and the Buy button
+  shrank to a sliver. The strip is now an `HFlowContainer` and the Buy button is at least 4 button heights wide
+  (`ShopPanel.DEAL_WIDTH`): upright it wraps to its own line with Max; sideways all stays on one line.
+- Rendered upright (1080 x 2400) and sideways (2400 x 1080) as a 405 dpi phone: fight and shop look right.
+
 ## Consequences
 - Tests that drive the old `InteractMenu` list (`unit_world_view`, `unit_play_loop`, others) move to the new card.
 - The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several

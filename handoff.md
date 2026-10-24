@@ -1,5 +1,15 @@
 # Handoff
 
+## Just done (2026-10-22, local): M34.5 phone fixes (branch `fix/m34.5-fight-column`)
+- User played v0.1.7 on the phone, UPRIGHT (orientation 6 = sensor). Two bugs: the empty context button covered
+  End turn in a fight; the shop's Buy button was a sliver upright.
+- Fixes: `ui/touch_controls.gd` (`context.visible`, `set_bottom_room`), `world/main_panels.gd` (`_bar_room`, no
+  targets in a fight), `ui/shop_panel.tscn` (Strip is an `HFlowContainer`), `ui/shop_panel.gd` (`DEAL_WIDTH`).
+  ADR 0045 "M34.5". Tests in `progress.md`. Full suite not run.
+- Next: user merges the PR; then a v0.1.8 build if the user wants to check on the phone. Then M31.0.
+- Gotchas: ALWAYS render both 1080 x 2400 and 2400 x 1080 for phone layout: the user plays upright. The render
+  script takes width and height as user args; set `root.size` and the dpi / mobile overrides.
+
 ## Just done (2026-10-22, local): release v0.1.7-alpha published
 - PR #222 merged (e42ae14). Tag `v0.1.7-alpha` pushed. GitHub release (pre-release):
   https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.7-alpha with 3 zips + apk. Pages deploy started.
