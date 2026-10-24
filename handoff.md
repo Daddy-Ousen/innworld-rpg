@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-24, local): v0.1.8 sent to the Play closed test
+- Play Console (Chrome, account Thrive IT Solutions, developer 8735138160545874037, app 4974346913680933873):
+  new release on Closed testing - Alpha. The user dragged in `export/InnworldRPG-v0.1.8-alpha-play.aab` (88 MB;
+  the Chrome tool cannot upload over 10 MB). Name "7 (0.1.8-alpha)", en-US notes, full rollout. Saved, then
+  Publishing overview -> "Submit 1 change for review" -> "Send changes for review". Release 5 (v0.1.6) was live.
+- Next: Google reviews (up to 7 days). The user checks the M34.5 fixes on the phone. Then M31.0.
+- Gotchas: Play release notes need the language tags on their OWN lines: type `<en-US>`, press Enter, type the
+  text, press Enter, type `</en-US>`. Typing it all in one `type` action, or on one line, fails the check.
+
 ## Just done (2026-10-24, local): release v0.1.8-alpha published
 - PR #225 merged (c331307). Tag `v0.1.8-alpha` pushed. GitHub release (pre-release):
   https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.8-alpha with 3 zips + apk. Pages deploy started.

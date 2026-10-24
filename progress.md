@@ -308,6 +308,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] AAB uploaded (user dragged it in; version code 5, API 29+, target 36, arm64). Taiwan removed from the track
   (rating refused there: 177 countries). Release saved and 14 changes sent to Google for review (2026-10-19; managed
   publishing off, so the closed test goes live when approved; review takes up to 7 days).
+- [x] Release 5 (v0.1.6) was approved and is live on the Alpha track (seen 2026-10-24; testers managed by a Google Group).
+- [x] v0.1.8 sent (2026-10-24): release "7 (0.1.8-alpha)" on Closed testing - Alpha, full rollout, notes in en-US.
+  The user dragged in the aab; I filled the notes, saved and sent 1 change for review (quick checks first, then up to
+  7 days). Two warnings only: no deobfuscation file, no native debug symbols (same as before; not blocking).
+  - [ ] Google approves the v0.1.8 release.
 - [ ] The user adds 12+ testers (emails or a Google Group) to the closed track; 14 days; then apply for production.
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
