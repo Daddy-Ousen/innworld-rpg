@@ -7,10 +7,21 @@
 - Fix: record removed; `b8.greydath_duels_garen` and `b8.greydath_throws_a_sword_at_the_kingslayer` (5.37 G) now
   prefer and require `greybeard`. Event ids and `greydath.*` flags kept. Guard added in `sim_book8_world`.
 - Tests in `progress.md` ("Fixes"). Full suite not run.
-- Next: user merges the PR. Then M31.3 as before (PR #232 can rebase; it is not touched here).
+- Next: user merges the PR. Then the M31 play check and M32, as in the M31.3 note below.
 - Gotchas: a fresh worktree needs `godot --headless --path game --import` first, or every test shows
-  "Could not find type DataDb". The import rewrites many `.import` files: do not commit them.
+  "Could not find type DataDb". The import rewrites many `.import` files (line ends only): do not commit them.
   `canon_ref.note` is max 300 chars (validator).
+
+## Just done (2026-10-24, local): M31.3 beats for Books 5 – 8 and the fights (branch `data/m31.3-beats-books-5-8`)
+- `"beats"` on all 30 Books 5 – 8 scenes (5 – 6 each) and all 25 fight stages (2 – 3 ally shouts). M31 data is
+  complete. Three reading agents (Sonnet) gave paraphrased summaries; book 6 was written from the canon JSON.
+- `game/tests/unit_scene_beats.gd` covers all scenes (47) and fights (25).
+- ADR 0044 "M31.3", ROADMAP, `docs/plans/m31.md`. Tests in `progress.md`. Full suite not run.
+- Next: user merges the PR, then plays a signposted day and a scene (M31 "Done when"). Then M32
+  (`docs/plans/m32.md`). Separate: the old `sim_canon_book6` failure (see `progress.md`).
+- Gotchas: the copy check (7-word runs) can hit plain lines like "hold the line"; reword and rerun.
+  Do not run `godot --import`: it rewrites every `.import` file's line endings (content unchanged).
+  A beat speaker who arrives in a wave must get a beat time at or after that wave.
 
 ## Just done (2026-10-24, local): M31.2 beats for Books 1 – 4 (branch `data/m31.2-beats-books-1-4`)
 - `"beats"` added to the stage of all 17 Books 1 – 4 scenes (16 chapter files; 3.25 and 3.27M hold two each).

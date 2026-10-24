@@ -206,6 +206,7 @@
 			"xp_window": {"boost": 2, "hours": [15, 19]},
 			"foreshadow": {"days_before": 1, "text": "A team goes down the dungeon rift south of the inn. The Gold-rank teams stay close, in case something follows them up."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "typhenous", "line": "A platform of air for you, Halrac. Revi, the Crypt Lord is coming."}, {"after_seconds": 90, "npc": "halrac", "line": "Shock arrow! Ghouls behind the mages, watch it!"}, {"after_seconds": 200, "npc": "revi", "line": "Give me a moment. There. Summoning!"}],
 				"area": "floodplains_south",
 				"hours": [
 					15,

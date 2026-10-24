@@ -100,6 +100,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "A Razorbeak hunts over the snowy hills near the inn. Gnoll mothers keep their little ones close."},
 			"stage": {
+				"beats": [{"after_seconds": 40, "npc": "ryoka_griffin", "line": "Get behind me, Mrsha! Flare!"}, {"after_seconds": 70, "npc": "erin_solstice", "line": "Ryoka, duck!"}],
 				"area": "inn_hill",
 				"hours": [
 					7,
@@ -423,6 +424,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "brunkr", "line": "Again. Higher guard. Good, that is better, yes?"}, {"after_seconds": 50, "npc": "lyonette", "line": "My arms are dying. Do you think I'll get the Warrior class?"}, {"after_seconds": 110, "npc": "brunkr", "line": "When I was a cub I had a book of knights. I wanted to be one."}, {"after_seconds": 170, "npc": "brunkr", "line": "Only a Human noble can make a knight. So, a dream, yes?"}, {"after_seconds": 230, "line": "Lyonette speaks a few soft, formal words. Inside the inn, a whole tray of dishes crashes."}, {"after_seconds": 290, "npc": "lyonette", "line": "So! Parrying next? Show me parrying."}],
 				"area": "inn_hill",
 				"hours": [
 					13,
@@ -734,6 +736,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "hawk", "line": "Sound the alarm! Get the Council! Get Watch Captain Zevara, now!"}, {"after_seconds": 45, "npc": "zel_shivertail", "line": "Where did you find him?"}, {"after_seconds": 90, "npc": "hawk", "line": "Thirty miles south. Barely breathing. The potions bought him a few moments."}, {"after_seconds": 150, "npc": "zel_shivertail", "line": "What did he say before he died?"}, {"after_seconds": 210, "npc": "hawk", "line": "The Goblin Lord crushed both armies. And he raises the dead."}, {"after_seconds": 270, "npc": "zel_shivertail", "line": "Everyone to the Council. Now."}],
 				"area": "inn_interior",
 				"hours": [
 					19,

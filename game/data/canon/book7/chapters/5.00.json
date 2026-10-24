@@ -170,6 +170,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "relc", "line": "Somebody threw mud at you? I head-butted him. You're welcome. I saved you."}, {"after_seconds": 45, "npc": "relc", "line": "I miss your food. Goblins or no Goblins, I'm eating here."}, {"after_seconds": 100, "npc": "relc", "line": "I already drank for the General. Soldiers carry on. The Goblin Lord will pay."}, {"after_seconds": 160, "npc": "erin_solstice", "line": "Pork belly sandwiches and milkshakes. Lunch is on me, Relc."}, {"after_seconds": 220, "npc": "relc", "line": "Ow, my head! It's cold inside my brain! Give me another one!"}, {"after_seconds": 280, "line": "Mrsha climbs onto the table, steals bread and laps at a milkshake. Her tail starts to wag."}],
 				"area": "inn_interior",
 				"hours": [
 					11,

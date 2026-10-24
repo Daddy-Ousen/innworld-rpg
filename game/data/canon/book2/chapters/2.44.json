@@ -68,6 +68,7 @@
 			"effects": {"set_flags": ["erin.beat_celum_muggers", "grev.spared_by_erin"], "relationship": [{"from": "wesle", "to": "erin_solstice", "delta": 1}]},
 			"foreshadow": {"days_before": 1, "text": "In Celum a street boy offers to guide newcomers for a coin. Not every guide leads somewhere safe."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "Go away now, and nobody gets hurt. I mean it."}, {"after_seconds": 40, "npc": "erin_solstice", "line": "You're not cutting me. Here, have a bee!"}],
 				"area": "celum_square",
 				"hours": [14, 18],
 				"when_flags": ["erin.stranded_north"],

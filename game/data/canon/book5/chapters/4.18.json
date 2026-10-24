@@ -226,6 +226,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "lyonette", "line": "I played it a few times. It always reset the board. It wants you."}, {"after_seconds": 45, "line": "Erin moves her king. A moment later, a piece across the board moves by itself."}, {"after_seconds": 100, "npc": "erin_solstice", "line": "See this opening? It's sneaky. Watch what they do with the knight."}, {"after_seconds": 160, "npc": "olesm", "line": "I need every move of this for the newsletter! Don't move yet, Erin!"}, {"after_seconds": 220, "npc": "pawn", "line": "Erin is busy. May my Soldiers stay here tonight?"}, {"after_seconds": 290, "line": "Game after game, in silence. Somewhere, the other player seems very lonely."}],
 				"area": "inn_interior",
 				"hours": [
 					17,
@@ -458,6 +459,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "bird", "line": "Build my tower very high, Pawn. Then I can shoot every bird."}, {"after_seconds": 45, "npc": "erin_solstice", "line": "Here. It's a yew recurve. It's yours, Bird."}, {"after_seconds": 100, "npc": "bird", "line": "It is too beautiful. I cannot take it."}, {"after_seconds": 150, "npc": "erin_solstice", "line": "It's advance pay. You're guarding the inn now. Take it."}, {"after_seconds": 210, "npc": "halrac", "line": "That's a fine bow. Cost a fortune. Come on, then. Outside."}, {"after_seconds": 270, "npc": "halrac", "line": "Feet apart. Breathe out. Now loose. Again."}],
 				"area": "inn_hill",
 				"hours": [
 					14,

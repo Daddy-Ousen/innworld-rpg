@@ -444,6 +444,7 @@
 			"xp_window": {"boost": 2, "hours": [20, 24]},
 			"foreshadow": {"days_before": 1, "text": "Griffon Hunt and the Halfseekers will share drinks at the inn with a Gold-rank Gnoll, Regrika Blackpaw."},
 			"stage": {
+				"beats": [{"after_seconds": 30, "npc": "revi", "line": "Answer me! What are you? Answer me!"}, {"after_seconds": 60, "npc": "halrac", "line": "The Drake's gone! Watch the room!"}, {"after_seconds": 120, "line": "Typhenous roars and hurls bolts of magic. They break on her like rain on stone."}],
 				"area": "inn_interior",
 				"hours": [
 					20,

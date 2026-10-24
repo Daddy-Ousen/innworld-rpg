@@ -191,6 +191,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "lyonette", "line": "Pawn! You're back! You're alive!"}, {"after_seconds": 45, "npc": "pawn", "line": "A quarter of my Soldiers died protecting me. I could not stop it."}, {"after_seconds": 100, "npc": "ryoka_griffin", "line": "You're a believer now? Maybe you should let that go."}, {"after_seconds": 160, "npc": "pawn", "line": "No. Faith is all I can give Soldiers who will die young."}, {"after_seconds": 220, "npc": "ryoka_griffin", "line": "You're right. I was wrong. Let me tell you about other faiths."}, {"after_seconds": 280, "npc": "pawn", "line": "A burner for incense, on a chain? A thurible. I would like one."}],
 				"area": "inn_interior",
 				"hours": [
 					12,

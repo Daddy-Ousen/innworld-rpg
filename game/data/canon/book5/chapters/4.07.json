@@ -26,6 +26,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["lyonette.class_beast_tamer", "lyonette.class_carer", "apista.pupating", "erin.promised_lyonette_wages", "lyonette.takes_mrsha_to_liscor"], "relationship": [{"from": "lyonette", "to": "erin_solstice", "delta": 1}]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "In a bowl by the fire, a bee grub has hardened into a smooth, dark shell."}, {"after_seconds": 45, "npc": "erin_solstice", "line": "How's the little one doing? Still alive in there?"}, {"after_seconds": 100, "npc": "lyonette", "line": "She's healthy. I can feel it, somehow. It's one of my Skills."}, {"after_seconds": 160, "npc": "lyonette", "line": "Erin, I levelled in the night! Beast Tamer and Carer, both of them!"}, {"after_seconds": 220, "npc": "erin_solstice", "line": "Oh no, I never paid you! Right. You're getting a real wage from now on."}, {"after_seconds": 280, "npc": "erin_solstice", "line": "Here, take some coins. You and Mrsha go have fun in Liscor today."}],
 				"area": "inn_interior",
 				"hours": [
 					9,
@@ -115,6 +116,7 @@
 			"on_fail": ["cancel"],
 			"effects": {"set_flags": ["bird.hunts_birds_for_erin", "erin.cooks_birds_for_bird", "mrsha.grabbed_a_maggot"], "relationship": [{"from": "bird", "to": "erin_solstice", "delta": 1}]},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "Wait. You love birds, Bird. So why do you shoot them?"}, {"after_seconds": 45, "npc": "bird", "line": "Because shooting them is fun. Also I like birds. Both are true."}, {"after_seconds": 100, "npc": "bird", "line": "Sometimes I eat them before I reach the Hive. Please do not tell anyone."}, {"after_seconds": 160, "line": "Bird opens his sack. The smell of very old bird fills the room."}, {"after_seconds": 210, "npc": "lyonette", "line": "Something in there is moving. Erin, something in there is moving!"}, {"after_seconds": 270, "npc": "erin_solstice", "line": "Deal: bring me fresh birds, on ice, and I'll cook them free. Outside with that sack!"}],
 				"area": "inn_interior",
 				"hours": [
 					12,
@@ -212,6 +214,7 @@
 			"effects": {"set_flags": ["erin.sells_magic_soups", "liscor.adventurers_order_erins_soups", "erin.knows_her_soups_are_underpriced", "relc.punched_a_soup_tester"], "relationship": [{"from": "selys", "to": "erin_solstice", "delta": 1}]},
 			"news": "Erin Solstice gave out soup samples by the Adventurers' Guild. One makes scales too hard for a knife; another makes you steam in the snow. Teams have ordered more.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "Free samples! Magic soup! Try it before the Gold-rank teams buy it all!"}, {"after_seconds": 45, "npc": "drassi", "line": "Is that the crazy Human? The hamburger one?"}, {"after_seconds": 90, "npc": "selys", "line": "Drassi! Shh. She's my friend. And she's mostly not crazy."}, {"after_seconds": 150, "line": "Erin stabs a volunteer Drake with a kitchen knife. The blade barely scratches his scales."}, {"after_seconds": 210, "npc": "relc", "line": "My turn! Ha, I punched him and he's fine! I'm calling it Scale Soup!"}, {"after_seconds": 270, "npc": "erin_solstice", "line": "Two gold a bowl. What? It stops knives! That's a bargain!"}],
 				"area": "liscor_market",
 				"hours": [
 					14,

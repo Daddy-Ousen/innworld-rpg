@@ -175,6 +175,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "olesm", "line": "Count again. No Minotaur among the dead, and no axe either."}, {"after_seconds": 50, "npc": "pisces", "line": "Calruz is not here. Interesting. Then where did he go?"}, {"after_seconds": 110, "npc": "olesm", "line": "Wait. Through this ring, the wall isn't a wall. It's a door."}, {"after_seconds": 170, "npc": "pisces", "line": "A hexagon room, and a chute. Down you go, little spider."}, {"after_seconds": 230, "line": "Far below, the bone spider shows a hall heaped with Raskghar bones."}, {"after_seconds": 290, "npc": "pisces", "line": "Bones. Hundreds of them. If Calruz fell here, he may yet live."}],
 				"area": "liscor_ruins_hall",
 				"hours": [
 					13,

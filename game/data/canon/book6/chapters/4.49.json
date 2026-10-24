@@ -691,6 +691,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Horns blow from Liscor's walls, long and low, again and again."}, {"after_seconds": 60, "line": "Erin sits at the counter with her face in her hands. No one asks for food."}, {"after_seconds": 130, "npc": "lyonette", "line": "He stayed here. He sat right there, by the fire. He was kind to us."}, {"after_seconds": 200, "line": "On the roof, a small white Gnoll howls at the sky."}, {"after_seconds": 270, "line": "Klbkch stands in the doorway for a long moment, says nothing, and leaves."}],
 				"area": "inn_interior",
 				"hours": [
 					10,

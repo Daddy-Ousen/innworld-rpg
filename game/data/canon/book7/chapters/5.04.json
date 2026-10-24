@@ -190,6 +190,7 @@
 			"news": "The Players of Celum played at the Wandering Inn. Antinium stood and cheered for minutes.",
 			"foreshadow": {"days_before": 1, "text": "The Players of Celum come through the magic door to act their first play at the inn."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "Every night, right here. A real stage, a real audience. What do you say?"}, {"after_seconds": 45, "npc": "wesle", "line": "Goblin bouncers? I never thought I'd act with Goblin bouncers."}, {"after_seconds": 100, "npc": "jasi", "line": "A big room, good food, and nobody heckling with Hobs by the door. I like it."}, {"after_seconds": 160, "npc": "wesle", "line": "They're just an audience. Antinium or not, give them your best."}, {"after_seconds": 220, "npc": "grev", "line": "The Goblins are fine. It's the grown-ups who keep jumping."}, {"after_seconds": 280, "npc": "bird", "line": "I will guard against threats from above. And eat popcorn. Both."}],
 				"area": "inn_interior",
 				"hours": [
 					19,

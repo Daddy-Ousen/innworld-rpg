@@ -21,6 +21,7 @@
 			"news": "Two Goblin bands fought in a valley on the Floodplains. The small band won: its tiny leader set the big rival chieftain on fire with a spell.",
 			"foreshadow": {"days_before": 1, "text": "Hunters saw two Goblin tribes in the valleys to the south. A big tribe in feathers is chasing a small one."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "The little Goblin leader raises her sword, and her heavy warriors swing into the enemy flank."}, {"after_seconds": 60, "line": "Rags mutters under her breath, and fire bursts across the chieftain's feathers."}],
 				"area": "floodplains_south",
 				"hours": [8, 11],
 				"foes": [

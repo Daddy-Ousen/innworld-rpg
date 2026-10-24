@@ -52,6 +52,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Torches stretch across the plain below, more than anyone could count."}, {"after_seconds": 40, "npc": "bird", "line": "So many Goblins. I could shoot one. Erin says I may not shoot one."}, {"after_seconds": 100, "line": "Fire arrows hiss against the inn's walls and glass, and go out."}, {"after_seconds": 160, "npc": "erin_solstice", "line": "Stay inside, everyone. Stay away from the windows."}, {"after_seconds": 220, "line": "Liscor's walls stay silent while the black army marches on into the dark."}],
 				"area": "inn_hill",
 				"hours": [
 					22,
