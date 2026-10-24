@@ -354,6 +354,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - Tests: about 133 GUT scripts (last full suite at M17.6, all pass); M17.7 – M18.1 ran only the scripts they touch (user rule). Runner: `bash tools/run_tests.sh <script>... | --all`. Python tool tests: 102 pass (`python -m unittest discover -s tools/tests`).
 - Tools: `tools/extract_epub.py`, `tools/validate_data.py`, `tools/build_sprites.py`, `tools/build_objects.py`, `tools/build_creatures.py` (all need Pillow: `pip install -r tools/requirements.txt`), `tools/build_sfx.py` (standard library only).
 
+## Docs
+- [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line
+  table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
+
 ## Blockers
 - None.
 

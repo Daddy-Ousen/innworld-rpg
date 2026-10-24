@@ -1,5 +1,13 @@
 # Handoff
 
+## Just done (2026-10-24, local): ROADMAP cleanup (branch `docs/roadmap-cleanup`)
+- `docs/ROADMAP.md` 595 -> about 170 lines. Open work first (`sim_canon_book8`, M31 – M33), then "Waits on the
+  user" (all play checks in one list, Google Play steps left), Later, Releases (table, v0.1.0 – v0.1.8), Done (one
+  line per milestone with its ADR). Ticked steps of M27 – M30 and M34 are gone; their detail is in the ADRs, plans,
+  archive and git history. Stale lines fixed: last release, Google Play permission, "ask pirateaba" to-do.
+- Docs only. No tests run.
+- Next: user merges the PR. Then M31.0 (ask the `foreshadow` / `beats` schema first).
+
 ## Just done (2026-10-24, local): v0.1.8 sent to the Play closed test
 - Play Console (Chrome, account Thrive IT Solutions, developer 8735138160545874037, app 4974346913680933873):
   new release on Closed testing - Alpha. The user dragged in `export/InnworldRPG-v0.1.8-alpha-play.aab` (88 MB;
