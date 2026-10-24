@@ -373,6 +373,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Over a hundred Soldiers sit in the snow on the hill, each with a steaming bowl."}, {"after_seconds": 45, "npc": "pawn", "line": "Take seconds, please. Do not be shy. There is enough."}, {"after_seconds": 100, "npc": "lyonette", "line": "Here, one for you too. Careful, it's hot!"}, {"after_seconds": 160, "npc": "tersk", "line": "Shield Spider shells could make armour for your Soldiers. Think on it."}, {"after_seconds": 220, "npc": "tersk", "line": "May I take this recipe to my Queen?"}, {"after_seconds": 280, "npc": "pawn", "line": "I am praying. You wish to learn? Then have faith in each other. That is enough."}],
 				"area": "inn_hill",
 				"hours": [
 					19,

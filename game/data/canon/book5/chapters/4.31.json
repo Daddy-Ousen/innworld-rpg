@@ -171,6 +171,7 @@
 			},
 			"foreshadow": {"days_before": 0, "text": "Brunkr and Ulrien will be burned below the inn. The adventurers of Liscor mean to see them off."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Two shrouded bodies lie side by side on one pyre in the snow."}, {"after_seconds": 50, "line": "The Gnolls lay Brunkr's sword and shield beside him. Erin adds a small yellow flower."}, {"after_seconds": 110, "npc": "krshia", "line": "Does anyone wish to speak?"}, {"after_seconds": 170, "line": "No one does. Krshia and Halrac lower their torches, and the fire takes hold."}, {"after_seconds": 230, "line": "Two glowing arrows climb into the night and burst together, high above."}, {"after_seconds": 290, "line": "Then the sky fills with spells: lightning, ghostly warriors and hundreds of points of light."}],
 				"area": "inn_hill",
 				"hours": [
 					19,

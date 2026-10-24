@@ -415,6 +415,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Yvlon's brother Ylawes is on the road to Liscor with his team, the Silver Swords."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Three strangers stand in the doorway: a knight in silver, a Half-Elf mage and a Dwarf in plate."}, {"after_seconds": 40, "npc": "yvlon_byres", "line": "Ylawes? What are you doing here?"}, {"after_seconds": 90, "npc": "ylawes_byres", "line": "Goblins! Yvlon, get behind me!"}, {"after_seconds": 140, "line": "A cake flies across the room and hits the knight full in the face."}, {"after_seconds": 190, "npc": "dawil", "line": "Ha! Never seen a knight brought down by dessert!"}, {"after_seconds": 250, "npc": "falene_skystrall", "line": "Ylawes. The sign. It says no killing Goblins. Put the sword down."}],
 				"area": "inn_interior",
 				"hours": [
 					16,

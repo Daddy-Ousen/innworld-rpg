@@ -71,6 +71,7 @@
 			"xp_window": {"boost": 2, "hours": [18, 6]},
 			"foreshadow": {"days_before": 1, "text": "If the dead come out of the ruins, the inn on the hill stands alone outside the city walls."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "erin_solstice", "line": "The inn won't hold. We go out there. Now."}, {"after_seconds": 40, "npc": "bird", "line": "It is death out there, Erin."}, {"after_seconds": 80, "npc": "erin_solstice", "line": "It's death everywhere. So let's go! Skinner, go to hell!"}],
 				"area": "inn_hill",
 				"hours": [
 					20,

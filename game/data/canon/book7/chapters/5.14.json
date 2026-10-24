@@ -519,6 +519,7 @@
 			"summary": "Vuliel Drae tell the teams that they smashed the moth eggs in the dungeon and so loosed the swarm. Revi attacks and Typhenous webs her. Pisces urges mercy. Jelaqua refuses to take revenge.",
 			"news": "The adventurers learned that Vuliel Drae set the moth swarm loose.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "insill", "line": "It's my fault. All of it. I can't stay quiet anymore."}, {"after_seconds": 45, "npc": "ylawes_byres", "line": "Insill and Anith came to me with a crime. They should tell it themselves."}, {"after_seconds": 100, "npc": "erin_solstice", "line": "You smashed the eggs. The moth eggs. That's why they came."}, {"after_seconds": 160, "npc": "revi", "line": "I'll kill them! I'll kill every one of them!"}, {"after_seconds": 220, "npc": "typhenous", "line": "Revi's tied up. Anyone else who wants a swing, try now. I'll wait."}, {"after_seconds": 280, "npc": "jelaqua", "line": "Halfseekers don't kill idiots. If a mob comes, they hide behind us."}],
 				"area": "inn_interior",
 				"hours": [
 					9,

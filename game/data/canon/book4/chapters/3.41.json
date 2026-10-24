@@ -79,6 +79,7 @@
 			"effects": {"set_flags": ["liscor.santa_caught_two_thieves", "klbkch.knows_santa_is_not_real", "relc.and_klbkch_are_each_others_secret_santa"], "relationship": [{"from": "relc", "to": "klbkch", "delta": 1}, {"from": "klbkch", "to": "relc", "delta": 1}]},
 			"foreshadow": {"days_before": 1, "text": "Thieves take wrapped presents from homes in Liscor this winter. The Watch asks folk to lock their doors."},
 			"stage": {
+				"beats": [{"after_seconds": 30, "npc": "relc", "line": "Santa found someone naughty! Have some coal!"}, {"after_seconds": 60, "npc": "klbkch", "line": "Ho. Ho. Ho. Merry Christmas."}],
 				"area": "liscor_market",
 				"hours": [18, 22],
 				"when_flags": ["christmas.word_spreads_in_liscor_and_celum"],

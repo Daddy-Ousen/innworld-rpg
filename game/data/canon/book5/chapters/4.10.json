@@ -164,6 +164,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ryoka_griffin", "line": "I sold one thing. One. And Hedault gave me all of this for it."}, {"after_seconds": 50, "npc": "ceria_springwalker", "line": "All this came out of your bag of holding? Dead gods, Ryoka."}, {"after_seconds": 100, "npc": "pisces", "line": "These two rings are mine, naturally. Ceria, put that one down."}, {"after_seconds": 150, "npc": "ksmvr", "line": "Yvlon should take my shield. Strength should rest with one fighter. It is logical."}, {"after_seconds": 210, "npc": "yvlon_byres", "line": "Ksmvr, I can't... Thank you. Truly."}, {"after_seconds": 270, "npc": "ceria_springwalker", "line": "Ksmvr, take my ring. I'll keep the spellbook. That's fair."}],
 				"area": "inn_interior",
 				"hours": [
 					18,

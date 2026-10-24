@@ -32,6 +32,7 @@
 			"xp_window": {"boost": 1, "hours": [13, 17]},
 			"foreshadow": {"days_before": 1, "text": "Some mean to go into the ruins for the adventurers still trapped below. Guards at the palisade say they feel watched."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "relc", "line": "You! I know you! Get away from her, you freak!"}, {"after_seconds": 40, "npc": "klbkch", "line": "Archers only. Four guards with me. Surrender, Gazi Pathseeker."}, {"after_seconds": 95, "npc": "krshia", "line": "Blood for blood! Silverfang, loose!"}],
 				"area": "ruins_entrance",
 				"hours": [13, 17],
 				"when_flags": ["gazi.hunts_ryoka"],

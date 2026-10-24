@@ -53,6 +53,7 @@
 			"news": "Ryoka Griffin beat Persua bloody in Celum's Runners' Guild after Persua's friends caught a Winter Sprite and asked for a ransom. Persua swore to have her killed.",
 			"foreshadow": {"days_before": 1, "text": "Persua waits at Celum's Runners' Guild. She tells everyone the barefoot Runner owes her."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ryoka_griffin", "line": "Hurt her and you die. Give her to me. Now."}, {"after_seconds": 40, "npc": "ryoka_griffin", "line": "She's alive, not a coin purse. Let her go!"}],
 				"area": "celum_runners_guild",
 				"hours": [10, 14],
 				"when_flags": ["ryoka.in_celum"],

@@ -96,6 +96,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Eater Goats were seen on the hills near Wirclaw's village. Gnolls say they eat anything, even fences."},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "headscratcher", "line": "Hold line! Goats come over wall!"}, {"after_seconds": 60, "npc": "erin_solstice", "line": "This way, you stupid goats! Over here! Follow me!"}, {"after_seconds": 140, "line": "Bottles and arrows rain down on the herd from behind the wall."}],
 				"area": "wirclaw_village",
 				"hours": [
 					12,
@@ -380,6 +381,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "line": "Erin bows low to the five Hobgoblins. The room goes very still."}, {"after_seconds": 40, "npc": "erin_solstice", "line": "Drink these. All of them. You're hurt, and nobody bleeds in my inn."}, {"after_seconds": 100, "line": "Numbtongue reads the little signs on the plates under his breath, one word at a time."}, {"after_seconds": 160, "npc": "erin_solstice", "line": "You know Rags? Do you know where she is?"}, {"after_seconds": 220, "npc": "headscratcher", "line": "Rags, yes. Where, no. Not with Goblin Lord. Never."}, {"after_seconds": 280, "line": "Upstairs, a small Gnoll glares down the stairs and will not come near."}],
 				"area": "inn_interior",
 				"hours": [
 					16,

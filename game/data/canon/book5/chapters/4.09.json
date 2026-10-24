@@ -226,6 +226,7 @@
 				]
 			},
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "ilvriss", "line": "Stand aside. I am Wall Lord Ilvriss, and this is a matter of war."}, {"after_seconds": 50, "npc": "ryoka_griffin", "line": "Fine. Ask your question. Here, now."}, {"after_seconds": 100, "npc": "ilvriss", "line": "How did Periss die? You were there. Tell me."}, {"after_seconds": 150, "npc": "ryoka_griffin", "line": "A Runner keeps her client's secrets. I can't tell you. I'm sorry."}, {"after_seconds": 210, "npc": "zevara", "line": "No drawn swords in my city. Not by anyone. Not even a Wall Lord."}, {"after_seconds": 270, "line": "A frying pan comes flying out of nowhere and rings off the Wall Lord's head."}],
 				"area": "liscor_market",
 				"hours": [
 					12,

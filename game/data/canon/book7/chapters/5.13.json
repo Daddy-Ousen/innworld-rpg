@@ -655,6 +655,7 @@
 			"summary": "The inn throws a party with a cake shaped like a Goblin face. Ilvriss pays for the table. Embria hands back Relc's spear and asks him to return to the army. He refuses. A tug-of-war breaks the table.",
 			"news": "Embria asked her father Relc to rejoin the army. He said no.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "relc", "line": "Is there a slice without a smiling Goblin on it? No? Fine. Fine!"}, {"after_seconds": 50, "npc": "embria_grasstongue", "line": "Hm. It's good. The cake is good. Don't look at me like that."}, {"after_seconds": 100, "npc": "ilvriss", "line": "Put the Drakes' bill on my account. And the Strategist's."}, {"after_seconds": 160, "npc": "embria_grasstongue", "line": "Here is your spear, father. Come back to the army."}, {"after_seconds": 220, "npc": "relc", "line": "No. The Antinium saved this city. I'm staying. Now let go!"}, {"after_seconds": 280, "npc": "selys", "line": "Erin. My grandmother is coming. About the Hobgoblin papers. Brace yourself."}],
 				"area": "inn_interior",
 				"hours": [
 					19,

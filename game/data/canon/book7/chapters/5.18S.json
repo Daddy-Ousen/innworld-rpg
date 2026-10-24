@@ -745,6 +745,7 @@
 			},
 			"summary": "Selys and Jelaqua haggle over the lease, from forty percent down to thirty. Selys asks Erin for a favour.",
 			"stage": {
+				"beats": [{"after_seconds": 0, "npc": "selys", "line": "Forty percent of what you find. The Heartflame armour is worth it."}, {"after_seconds": 50, "npc": "jelaqua", "line": "Forty? We do all the work! Thirty, and that's generous."}, {"after_seconds": 100, "npc": "pisces", "line": "And my cut, as the one who suggested it? No? Very well."}, {"after_seconds": 160, "npc": "selys", "line": "I could always ask the Silver Swords instead. Ylawes would say yes."}, {"after_seconds": 220, "npc": "erin_solstice", "line": "Skewers! Ishkr made them, not me, so they're good."}, {"after_seconds": 280, "npc": "selys", "line": "Erin. I need a big favour. Tonight. Don't ask yet."}],
 				"area": "inn_interior",
 				"hours": [
 					18,
