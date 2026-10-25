@@ -384,6 +384,19 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] M31 play check: the user plays a signposted day and a scene.
 - [x] Old failure: `sim_canon_book6` `test_greydath_is_a_flag_not_a_merge`. Fixed: see "Fixes" (Greydath one id).
 
+## M32 — Climaxes of Books 6 – 8 (plan `docs/plans/m32.md`, ADR 0044)
+- [x] `sim_canon_book8` merged (PR #235).
+- [x] M32.0 choices and reading (2026-10-25, branch `docs/m32.0-choices`). User picks: Zel can be saved (drive off
+  Bea and Ijvani before the last wave, Zel standing); a new battlefield map; Tremborag's hall stays news; Klbkch
+  always dies; a living Zel gives Selys the Heartflame himself. Reading agents (Sonnet) read 5.44 and 4.47 – 4.49:
+  no Drakes beside Zel (Human levy, Rose Knights, Thomast); five Chosen; Nokha is a swordswoman. Book 6 text was
+  extracted locally to `canon/raw/book6/` (gitignored). M32.4 is now the "Zel lives" bend. Docs only, no tests run.
+- [ ] M32.1 three-door battle (Calruz yields, the Horns, Nokha flees; hooks on all three Book 8 stages).
+- [ ] M32.2 Zel's stage on `invrisil_battlefield` (Zel still dies; hook flag `zel.saved_by_the_player` recorded).
+- [ ] M32.3 boss feel.
+- [ ] M32.4 Zel lives (bend and cascade, `sim_book6_zel_lives`).
+- [ ] The user plays the three doors and Zel's last stand.
+
 ## Docs
 - [x] ROADMAP update (2026-10-25, branch `docs/roadmap-update-2`): M31 marked merged (PR #230 - #232), next step `sim_canon_book8` then M32.0. `sim_canon_book6` 13/13 pass on main. Docs only.
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line

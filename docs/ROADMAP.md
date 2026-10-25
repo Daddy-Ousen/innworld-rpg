@@ -12,14 +12,13 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Milestone | State | Model · effort per step |
 |---|---|---|
 | M31 Signposts and scene beats | M31.0 – M31.3 merged (PR #230 – #232); the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
-| M32 Climaxes of Books 6 – 8 | planned (`docs/plans/m32.md`) | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
+| M32 Climaxes of Books 6 – 8 | M32.0 done (picks in ADR 0044 "M32.0"); next M32.1 (`docs/plans/m32.md`) | M32.1 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M30, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: M32.0 (choices for the user, then the build). The M31 play check and the
-other play checks do not block M32. The old `sim_canon_book6` failure is fixed (PR #233, 13/13 pass).
+Next step: M32.1 (the three-door battle). The M31 play check and the other play checks do not block M32.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -41,11 +40,11 @@ M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10
 **Done when:** every fight stage has a signpost; every scene has beats; `sim_canon_book1` – `8` keep drift 0; the user has played it.
 
 ## M32 — Climaxes of Books 6 – 8 (plan `docs/plans/m32.md`, ADR 0044)
-- [ ] M32.0 Choices and reading: can Zel be saved, where his stage is, Tremborag's hall, Klbkch (user picks) **[Opus · high]**
+- [x] M32.0 Choices and reading **[Opus · high]** (2026-10-25: Zel can be saved; new battlefield map; Tremborag stays news; Klbkch always dies)
 - [ ] M32.1 The three-door battle in full: Calruz as the last foe (he yields), the Horns as allies; hooks on all three Book 8 stages **[Opus · high]**
-- [ ] M32.2 Zel's last stand as a fight stage (day 130, north) with a signpost and hooks **[Opus · high]**
+- [ ] M32.2 Zel's last stand on a new map `invrisil_battlefield` (day 130): the Chosen as foes, a signpost and hooks **[Opus · high]**
 - [ ] M32.3 Boss feel: Skinner's fear, the Crypt Lord's bile, Regrika, the Goblin Lord **[Opus · medium]**
-- [ ] M32.4 Optional per M32.0: Tremborag's hall stage or the Klbkch bend **[Opus · high]**
+- [ ] M32.4 Zel lives: drive off Bea and Ijvani and he survives; the Book 6 – 7 mourning cancels; he gives Selys the Heartflame **[Opus · high]**
 - [ ] (user) Play the three doors and Zel's last stand
 **Done when:** Calruz, the Horns and the Chosen fight on the map; every Book 8 stage has a hook; the kill sims and `sim_canon_book6` – `8` stay green; the user has played it.
 
