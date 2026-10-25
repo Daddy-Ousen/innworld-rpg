@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-10-25, local): M32.0 choices and reading (branch `docs/m32.0-choices`)
+- User picks (ADR 0044 "M32.0"): Zel can be saved; new map `invrisil_battlefield`; Tremborag's hall stays news;
+  Klbkch always dies. Win rule: drive off Bea and Ijvani before the last wave while Zel stands. A living Zel gives
+  Selys the Heartflame himself (sets `heartflame.selys_inherits`, so her 12 Book 7 events still run).
+- Reading (Sonnet agents, summaries only): 5.44 and 4.47 – 4.49. Key facts are in ADR 0044 "M32.0". No Drakes
+  fight beside Zel (Human levy, Rose Knights, Thomast, Reynold, Ressa, two War Golems). Five Chosen (Venitra,
+  Ijvani, Bea, Oom, Kerash). Nokha is a swordswoman who goes for Mrsha's cage; her fate is open (she flees).
+- `docs/plans/m32.md` rewritten for the picks: M32.1 doors, M32.2 Zel's stage (he still dies), M32.3 boss feel,
+  M32.4 the "Zel lives" bend. ROADMAP and `progress.md` updated. Docs only, no tests run.
+- Next: user merges the PR. Then M32.1 **[Opus · high]**. Ask first (rule 11) if Calruz's yield needs a new enemy
+  field (`flee_below` makes a foe run, not give up).
+- Gotchas: Book 6 text is now in `canon/raw/book6/` (extracted from the epub; gitignored). The Book 6 copy check
+  can run now. The Zel cascade list (who `depends_on` his death, which events assume it) is in ADR 0044 "M32.0"
+  and `docs/plans/m32.md` M32.4. Most mourning events have no flag check on his death yet: M32.4 adds
+  `requires.flags: ["zel.dead_at_invrisil"]` to them. Untracked `.uid` files, `web/` and the `.gitignore`
+  `secrets/` line are not part of this branch.
+
 ## Just done (2026-10-25, local): sim_canon_book8 (branch `test/sim-canon-book8`)
 - New `game/tests/sim_canon_book8.gd` (6 tests, all pass): 269 events done days 143 - 163 with drift 0; the 4 named dead;
   3 stages each with `xp_window`; moon / boycott / Calruz flags; chapter order. Test only, no data change. Full suite not run.

@@ -47,6 +47,7 @@ The user said (2026-10-17): "We will do all."
 | M30.5 | player name, look and Earth background | v23 + migration (v22 went to M29.1) |
 | M31.0 | event field `foreshadow` and stage field `beats` | no (checked: "beat" in `combat.stage_run`, tolerant read) |
 | M32.1 | enemy field for a boss who yields (not killed) if `flee_below` is not enough | no |
+| M32.4 | none expected: the Zel bend uses `requires`, `mutate:` alts and flag hand-offs (ADR 0036) | no |
 | M33.0 | new spell effect kinds (for example blink, light) only if needed | maybe |
 | M33.2 | new `data/quests.json` and quest state | v24 + migration (if M30.5 takes v23) |
 
@@ -279,6 +280,43 @@ User picks (rule 11): `where` / `hours` optional; morning page and journal; log 
 - The copy check caught 3 lines that matched book text by chance; they were reworded.
 - A fight with beats now always has a `stage_run` (as M31.0 allows); `Stage.foes_left` stays -1 without waves.
 - `unit_scene_beats` now checks all 47 scenes (3 – 6 beats) and all 25 fights (1 – 3 beats).
+
+### M32.0 (2026-10-25): the user's picks and the reading
+Two reading agents (Sonnet) read 5.44 and 4.47 – 4.49 (book 6 text was extracted locally for this). Summaries only.
+**Picks (user, 2026-10-25):**
+1. **Zel can be saved** if the player wins (option b). A large bend, built as its own step (M32.4).
+2. **Zel's stage is on a new map**, an open battlefield near Invrisil (not `road_to_invrisil`).
+3. **Tremborag's hall stays news.** No stage.
+4. **Klbkch (1.29) always dies.** No bend.
+5. **Win rule:** the player saves Zel by driving off **Bea** (her plague) and **Ijvani** (black fire) before the
+   last wave, while Zel is still standing. Then Az'kerash does not come (the book hints a faster Zel would have
+   made him stay away). Driven off, not killed: the Chosen flee or yield, as in canon they are repaired.
+6. **Selys:** if Zel lives, he gives Selys the Heartflame armour himself. The alt sets `heartflame.selys_inherits`,
+   so her 12 Book 7 events still run (flag hand-off, ADR 0036 rule 3).
+
+**Facts from the reading that change the plan:**
+- 4.47 – 4.49: the field is open grassland about four miles outside Invrisil. Flat, churned mud, overcast, light
+  drizzle, daytime. A ring-shaped dome of bone closes over Zel and the Goblin Lord in mid-field.
+- **No Drakes fight beside Zel.** Ilvriss is in Liscor. Zel's side: Magnolia's Human levy (cavalry, archers,
+  mages), about 40 Rose Knights under Lady Bethal, Sir Thomast, Reynold and Ressa (Magnolia's servants), two War
+  Golems. Allies on the stage come from these.
+- **Five Chosen**, not three: Venitra (bone knight, heavy), Ijvani (skeleton mage, black fire), Bea (plague touch;
+  healing potions make it worse), Oom (acid slime; Zel destroys him in canon), Kerash (undead Gnoll swordsman,
+  leader). Az'kerash arrives last by scroll and is never a foe the player can fight (a beat only).
+- Goblin side: soldiers, Hobs, Shield Spiders, undead (zombies, ghouls, Crypt Lords), lieutenants Snapjaw, Eater
+  of Spears, Illbreath, Noface. The Goblin Lord rides a Shield Spider.
+- 5.44: three doors (Gold-rank teams; Liscor's army, Watch, Relc, Klbkch, Ilvriss; the Antinium). Calruz fights
+  the Horns (Ceria, Yvlon, Pisces, Ksmvr), drops his axe and falls to Ceria's ice spike: alive, jailed.
+- **Nokha is a swordswoman, not a caster.** She breaks toward Mrsha's cage; Lyonette, Apista and Moore stop her;
+  her fate is open. In the game she flees (never dies). About 20 Gnolls are caged at the back of the camp.
+- The Zel cascade (from the data): after `b6.zel_names_the_goblin_lord_reiss_and_dies`, 4 events `depends_on` it
+  (Reiss withdraws, Magnolia's bounty, Az'kerash's words, Klbkch and the Grand Queen) and about 25 Book 6 – 7
+  events assume his death (the mourning, the casket, the will, the funeral, the vengeance vow, the ashes) — most
+  with no flag that says so. Selys's Heartflame thread (12 events) hangs on `heartflame.selys_inherits`.
+
+**Step layout after the picks:** M32.1 three doors; M32.2 Zel's stage on the new map (he still dies, the hook flag
+is recorded); M32.3 boss feel; **M32.4 the "Zel lives" bend** (replaces the old optional Tremborag / Klbkch step).
+Detail per step in `docs/plans/m32.md`.
 
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
