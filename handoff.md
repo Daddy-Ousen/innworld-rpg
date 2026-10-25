@@ -6,6 +6,13 @@
 - Next: user merges the PR. Then M32.0 **[Opus · high]**: ask the user the choices first (Zel, his stage, Tremborag's hall, Klbkch).
 - Gotchas: `mrsha.taken_by_the_raskghar` and `ceria.taken_by_the_raskghar` are cleared in 5.44 (freed). Dead check: `gs.world.is_alive(_db.canon, id)`.
 
+## Just done (2026-10-25, local): ROADMAP update (branch `docs/roadmap-update-2`)
+- PR #232 (M31.3) and #233 (Greydath fix) are merged. ROADMAP "At a glance" says M31.0 – M31.3 merged; next step
+  is `sim_canon_book8`, then M32.0. Checked: `sim_canon_book6` 13/13 pass on main. Docs only.
+- Next: user merges the PR. Then `sim_canon_book8` **[Sonnet · medium]**, then M32.0 **[Opus · high]** (ask the user
+  the choices first: can Zel be saved, his stage, Tremborag's hall, Klbkch).
+- Gotchas: local branch `data/m31.3-beats-books-5-8` was behind main; branch from `origin/main`.
+
 ## Just done (2026-10-24, local): Greydath one id (branch `fix/greydath-one-id`)
 - `sim_canon_book6` `test_greydath_is_a_flag_not_a_merge` failed at line 185 (`npcs.has("greydath")`), not at
   the flag check. The flag was set on day 126 all along. Cause: M28.1 added a `greydath` NPC record in

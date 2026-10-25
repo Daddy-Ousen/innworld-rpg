@@ -11,15 +11,15 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| M31 Signposts and scene beats | M31.0 – M31.3 built; the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
+| M31 Signposts and scene beats | M31.0 – M31.3 merged (PR #230 – #232); the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned (`docs/plans/m32.md`) | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M30, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: the user plays a signposted day and a scene (M31 "Done when"). Then M32.
-The play checks do not block M32.
+Next step: M32.0 (choices for the user, then the build). The M31 play check and the
+other play checks do not block M32. The old `sim_canon_book6` failure is fixed (PR #233, 13/13 pass).
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for

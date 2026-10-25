@@ -385,6 +385,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] Old failure: `sim_canon_book6` `test_greydath_is_a_flag_not_a_merge`. Fixed: see "Fixes" (Greydath one id).
 
 ## Docs
+- [x] ROADMAP update (2026-10-25, branch `docs/roadmap-update-2`): M31 marked merged (PR #230 - #232), next step `sim_canon_book8` then M32.0. `sim_canon_book6` 13/13 pass on main. Docs only.
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
