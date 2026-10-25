@@ -4,7 +4,7 @@
 	"name": "The Raskghar camp",
 	"location": "raskghar_camp",
 	"confidence": "guess",
-	"note": "Design map (M28.1, ADR 0043). A large dungeon hall where Calruz's Raskghar hold their prisoners (5.39 - 5.44). The text gives no plan: the size, the rocks and the three doorways are guesses. Erin's door is set in the three entrances for the final battle (5.44). No exits: the player comes in through Erin's magic door (inn_interior albez_door, link raskghar_camp, open from day 163 until raskghar.broken) and goes home by the north door's portal (M28.9).",
+	"note": "Design map (M28.1, ADR 0043). A large dungeon hall where Calruz's Raskghar hold their prisoners (5.39 - 5.44). The text gives no plan: the size, the rocks and the three doorways are guesses. Erin's door is set in the three entrances for the final battle (5.44). No exits: the player comes in through Erin's magic door (inn_interior albez_door, link raskghar_camp, open from day 163 until raskghar.broken) and goes home by the north door's portal (M28.9). M32.1: one cage object at the back stands for the cages of Mrsha and about twenty Gnolls (5.38, 5.44); the spot is a guess, and it is gone once the captives are home.",
 	"zones": {},
 	"exits": [],
 	"objects": [
@@ -45,6 +45,21 @@
 			],
 			"name": "East entrance",
 			"actions": []
+		},
+		{
+			"id": "raskghar_cages",
+			"kind": "cage",
+			"at": [
+				16,
+				18
+			],
+			"name": "Cages of captive Gnolls",
+			"actions": [
+				"comfort_someone"
+			],
+			"when_flags": [
+				"raskghar.camp_holds_the_gnoll_captives"
+			]
 		}
 	],
 	"legend": {

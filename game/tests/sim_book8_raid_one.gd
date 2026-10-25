@@ -2,7 +2,8 @@ extends GutTest
 ## M28.6 on the real Book 8 data (5.33 B, Interlude - Blackmage, 5.34, 5.35 H, days 157 - 159): the Grand Queen's
 ## proxy, Bird the [Singer], Wistram's search teams, the first Raskghar raid on Liscor and the inn (a fight stage on
 ## inn_hill with an XP window x3), Headscratcher the [Berserker], Yvlon's bone-braced arms and the Pallass teams.
-## One talk hook (5.35 H). The game is slept to day 158 once (before_all); each test starts from a copy.
+## One talk hook (5.35 H). M32.1: a fight hook on the raid (the player held the inn).
+## The game is slept to day 158 once (before_all); each test starts from a copy.
 
 const SEED := 20261016
 const DAY := 159
@@ -10,6 +11,7 @@ const CHAPTERS := ["5.33B", "interlude_blackmage", "5.34", "5.35H"]
 const RAID := "b8.raskghar_raid_the_wandering_inn"
 const GUARD := "b8.the_redfangs_guard_the_door_after_the_raid"
 const HOOK := "player_stood_with_headscratcher_after_the_raid"
+const RAID_HOOK := "player_held_the_inn_in_the_night_raid"
 const HILL_SPOT := Vector2i(16, 13)
 const RASKGHAR := ["awakened_raskghar", "raskghar_armoured", "not_gnoll", "cave_goblin"]
 
@@ -102,7 +104,7 @@ func _system(chapter: String) -> Array:
 	return doc["system"]
 
 
-func test_the_batch_has_one_stage_and_one_hook() -> void:
+func test_the_batch_has_one_stage_and_two_hooks() -> void:
 	var ids := _batch_ids()
 	assert_eq(ids.size(), 37)
 	var stages: Array[String] = []
@@ -117,7 +119,13 @@ func test_the_batch_has_one_stage_and_one_hook() -> void:
 		assert_false(ev["effects"].has("kill"), id)
 		assert_true(int(ev["window"]["earliest"]) >= 157 and int(ev["window"]["latest"]) <= DAY, id)
 	assert_eq(stages, [RAID] as Array[String])
-	assert_eq(hooks, [HOOK] as Array[String])
+	hooks.sort()
+	assert_eq(hooks, [RAID_HOOK, HOOK] as Array[String])
+	var h: Dictionary = _db.canon.events[RAID]["hooks"][0]
+	assert_eq(h["id"], RAID_HOOK)
+	assert_eq(h["then"], "change", "the raid still happens")
+	assert_eq([int(h["days"][0]), int(h["days"][1])], [DAY, DAY])
+	assert_ne(String(h.get("news", "")), "")
 	assert_eq(String(_db.canon.events[GUARD]["canon_ref"]["chapter"]), "5.35H")
 
 
@@ -177,8 +185,12 @@ func test_the_raid_can_be_fought_through() -> void:
 			break
 		_fight_turn(gs, db)
 	assert_eq(_stage_foe(gs), "", "the Raskghar are down")
+	var before := gs.world.relationship("erin_solstice", "player")
 	ToyCanon.sleep_through(gs, db, DAY)
-	assert_eq(gs.world.status(RAID), Director.DONE)
+	assert_eq(gs.world.status(RAID), Director.CHANGED)
+	assert_eq(_hook_of(gs, RAID), RAID_HOOK)
+	assert_true(gs.flags.has("wandering_inn.earther_held_the_inn_in_the_night_raid"))
+	assert_gt(gs.world.relationship("erin_solstice", "player"), before)
 	assert_true(gs.flags.has("wandering_inn.raided_by_raskghar"))
 	assert_true(gs.flags.has("headscratcher.is_a_berserker"), "the canon still happens")
 
@@ -192,6 +204,7 @@ func test_staying_away_still_sets_the_canon_flags() -> void:
 	ToyCanon.sleep_through(gs, _db, DAY)
 	assert_eq(gs.world.status(RAID), Director.DONE)
 	assert_false(gs.flags.has("wandering_inn.earther_stood_with_the_redfangs"))
+	assert_false(gs.flags.has("wandering_inn.earther_held_the_inn_in_the_night_raid"))
 	for f: String in ["izril.moons_nearly_full", "raskghar.awakened_by_the_moons", "liscor.raided_by_raskghar",
 			"wandering_inn.raided_by_raskghar", "headscratcher.is_a_berserker", "numbtongue.is_a_bard",
 			"rabbiteater.wears_the_liquid_cloak", "yvlon.arms_braced_with_bone", "pisces.may_use_raskghar_and_goblin_bones",

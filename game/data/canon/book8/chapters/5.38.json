@@ -909,6 +909,22 @@
 			},
 			"summary": "While the walls hold, Raskghar break down the inn's door, where only Lyonette, Mrsha and a sleeping Bird remain. They ignore Lyonette's sword, break her wrist, stun her and smash Apista. Erin and Zevara's squad arrive too late.",
 			"news": "Raskghar raided the Wandering Inn in daylight while Liscor fought on its walls.",
+			"hooks": [
+				{
+					"id": "player_fought_the_daylight_raid",
+					"did": [{"action": ["attack_melee", "block_attack", "throw_object", "cast_spell"], "context": {"location": "wandering_inn", "enemy": ["awakened_raskghar", "raskghar_armoured", "not_gnoll", "cave_goblin"]}}],
+					"days": [161, 161],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_fought_the_daylight_raid"],
+						"relationship": [
+							{"from": "lyonette", "to": "player", "delta": 2},
+							{"from": "erin_solstice", "to": "player", "delta": 1}
+						]
+					},
+					"news": "Raskghar raided the Wandering Inn in daylight. A Human guest fought beside Lyonette on the hill, but the Raskghar still carried off the white Gnoll child."
+				}
+			],
 			"xp_window": {
 				"boost": 3,
 				"hours": [

@@ -318,6 +318,25 @@ Two reading agents (Sonnet) read 5.44 and 4.47 – 4.49 (book 6 text was extract
 is recorded); M32.3 boss feel; **M32.4 the "Zel lives" bend** (replaces the old optional Tremborag / Klbkch step).
 Detail per step in `docs/plans/m32.md`.
 
+### M32.1 (2026-10-25): the three-door battle in full
+- **No new enemy field.** Calruz's yield and Nokha's flight use the M8.1 `escape` field (the foe cannot die; a hit
+  below its share removes it with a line; a foe counts as routed). The question in the plan (rule 11) is closed.
+- **New enemies:** `calruz` (enemy id = his NPC id, so he is drawn with `calruz.png`; the enemy `look` must name
+  another enemy, so a `look: "calruz"` was refused by the validator) and `nokha_awakened` (Gnoll art, very fast,
+  no ranged attack). Boss numbers are guesses.
+- **The fight names its foe by danger.** A fight's action records carry the most dangerous foe type, ties going to
+  the first foe. So Calruz has danger 1.0 alone: `awakened_raskghar` drops from 1.0 to 0.95 and Nokha is 0.98.
+  The hook on Calruz matches `context.enemy: "calruz"`, which only shows once he joined the fight.
+- **Waves:** Nokha leads the knot to the cages; the Horns (Ceria, Yvlon, Pisces, Ksmvr) come as one ally wave;
+  Calruz comes alone in the last wave. Watch guardsmen and Antinium Soldiers come as helpers with their doors.
+- **The cages:** one new object kind `cage` (art in `tools/build_objects.py`), one object `raskghar_cages` at the
+  back of the camp with `comfort_someone`, shown while `raskghar.camp_holds_the_gnoll_captives`.
+- **Hooks (all `change`; the canon still runs; each adds a flag, relationships and news):**
+  `player_stood_with_the_horns_against_calruz` (on `b8.the_horns_bring_down_calruz`), `player_reached_the_cages`
+  (on `b8.lyonette_and_moore_take_back_mrsha`), `player_held_the_inn_in_the_night_raid` (5.34) and
+  `player_fought_the_daylight_raid` (5.38). Calruz and Nokha stay alive in every outcome. A `change` hook adds 0.25
+  drift; a player who stays away keeps drift 0.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

@@ -322,6 +322,20 @@ def glow_mushrooms() -> Image.Image:
     return img
 
 
+def cage() -> Image.Image:
+    """A wooden-framed cage with iron bars and a dark inside, as wide as one tile."""
+    img, d = canvas(32, 40)
+    d.rectangle((2, 4, 29, 37), fill=(26, 22, 20, 255))
+    d.rectangle((1, 1, 30, 5), fill=WOOD, outline=OUTLINE)
+    d.rectangle((1, 34, 30, 38), fill=WOOD_DARK, outline=OUTLINE)
+    for x in range(4, 29, 5):
+        d.line((x, 6, x, 33), fill=IRON, width=2)
+        d.point((x, 7), fill=IRON_LIGHT)
+    d.line((2, 20, 29, 20), fill=IRON)
+    d.rectangle((24, 17, 27, 22), fill=IRON_LIGHT, outline=OUTLINE)
+    return img
+
+
 EDITS: list[tuple[str, list]] = [
     ("wagon", [wagon]),
     ("chess_table", [chess_table]),
@@ -341,6 +355,7 @@ EDITS: list[tuple[str, list]] = [
     ("cobweb", [cobweb]),
     ("bones", [bones]),
     ("glow_mushrooms", [glow_mushrooms]),
+    ("cage", [cage]),
 ]
 
 

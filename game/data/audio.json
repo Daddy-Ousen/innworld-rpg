@@ -217,7 +217,9 @@
     "face_eater_moth": {"hurt": "bug_hurt"},
     "moth_swarm": {"hurt": "bug_hurt"},
     "raskghar_armoured": {"hurt": "human_hurt"},
-    "awakened_raskghar": {"hurt": "human_hurt"}
+    "awakened_raskghar": {"hurt": "human_hurt"},
+    "nokha_awakened": {"hurt": "human_hurt"},
+    "calruz": {"hurt": "human_hurt", "gone": "big_roar"}
   },
   "pages": {
     "open": "chime",

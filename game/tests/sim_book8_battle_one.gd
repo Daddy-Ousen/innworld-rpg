@@ -2,18 +2,27 @@ extends GutTest
 ## M28.9 on the real Book 8 data (5.43, Interlude - Niers, 5.44; days 162 - 163): the failed Gold-rank raid (Cassa
 ## dies), Vakk and twenty Gnolls sacrificed, Mrsha's grass magic and howl, Niers in Baleros, and the three-door battle
 ## (a fight stage on raskghar_camp with an XP window x3). Mrsha and Ceria are freed; Calruz goes to the Watch prison;
-## Erin reaches [Magical Innkeeper] 36. No hooks.
+## Erin reaches [Magical Innkeeper] 36. M32.1: Nokha (flees) and Calruz (yields, last wave) fight on the map, the
+## Horns come as one ally wave before him, and two hooks: standing with the Horns against Calruz, reaching the cages.
 ## The game is slept to day 162 once (before_all); each test starts from a copy.
 
 const SEED := 20261016
 const DAY := 163
 const CHAPTERS := ["5.43", "interlude_niers", "5.44"]
 const BATTLE := "b8.three_doors_open_on_the_raskghar_camp"
+const HORNS_EVENT := "b8.the_horns_bring_down_calruz"
+const RESCUE := "b8.lyonette_and_moore_take_back_mrsha"
+const CALRUZ_HOOK := "player_stood_with_the_horns_against_calruz"
+const CAGES_HOOK := "player_reached_the_cages"
 const CAMP := "raskghar_camp"
 const INN_DOOR := "albez_door"
 const NEXT_TO_INN_DOOR := Vector2i(3, 12)
 const CAMP_DOOR := "raskghar_door_north"
-const RASKGHAR := ["awakened_raskghar", "raskghar_armoured", "not_gnoll"]
+const CAGES := "raskghar_cages"
+const CALRUZ := "calruz"
+const NOKHA := "nokha_awakened"
+const RASKGHAR := ["awakened_raskghar", "raskghar_armoured", "not_gnoll", CALRUZ, NOKHA]
+const HORNS := ["ceria_springwalker", "yvlon_byres", "pisces", "ksmvr"]
 const DOORS := ["raskghar_door_north", "raskghar_door_west", "raskghar_door_east"]
 const CAPTIVE := ["mrsha.taken_by_the_raskghar", "ceria.taken_by_the_raskghar", "calruz.holds_ceria",
 		"mrsha.caged_in_the_raskghar_camp"]
@@ -99,6 +108,19 @@ func _fight_turn(gs: GameState, db: DataDb) -> void:
 		Commands.wait(gs, db, 6)
 
 
+func _hook_of(gs: GameState, id: String) -> String:
+	var entry: Dictionary = gs.world.history.filter(func(h: Dictionary) -> bool: return h["event"] == id)[0]
+	return str(entry.get("hook", ""))
+
+
+## The cages object as data (shown or not).
+func _cages() -> Dictionary:
+	for o: Dictionary in _db.maps.areas[CAMP]["objects"]:
+		if o["id"] == CAGES:
+			return o
+	return {}
+
+
 func _system(chapter: String) -> Array:
 	var f := FileAccess.open("res://data/canon/book8/chapters/%s.json" % chapter, FileAccess.READ)
 	var doc: Dictionary = JSON.parse_string(f.get_as_text())
@@ -109,16 +131,21 @@ func _near(a: Vector2i, b: Vector2i) -> bool:
 	return absi(a.x - b.x) + absi(a.y - b.y) <= 1
 
 
-func test_the_batch_has_one_stage_and_no_hooks() -> void:
+func test_the_batch_has_one_stage_and_two_hooks() -> void:
 	var ids := _batch_ids()
 	assert_eq(ids.size(), 26)
 	var stages: Array[String] = []
 	var killed: Array[String] = []
+	var hooks: Array[String] = []
 	for id: String in ids:
 		var ev: Dictionary = _db.canon.events[id]
 		if ev.has("stage"):
 			stages.append(id)
-		assert_false(ev.has("hooks"), id + " has no hook")
+		for h: Dictionary in ev.get("hooks", []):
+			hooks.append("%s %s" % [id, h["id"]])
+			assert_eq(h["then"], "change", h["id"] + " keeps the canon and adds to it")
+			assert_eq([int(h["days"][0]), int(h["days"][1])], [DAY, DAY], h["id"])
+			assert_ne(String(h.get("news", "")), "", h["id"] + " has news")
 		if id != BATTLE:
 			assert_false(ev.has("xp_window"), id)
 		for n: String in ev["effects"].get("kill", []):
@@ -127,8 +154,33 @@ func test_the_batch_has_one_stage_and_no_hooks() -> void:
 		if String(ev["canon_ref"]["chapter"]) == "interlude_niers":
 			assert_eq(ev["location"], "baleros", id)
 	assert_eq(stages, [BATTLE] as Array[String])
+	hooks.sort()
+	assert_eq(hooks, ["%s %s" % [RESCUE, CAGES_HOOK], "%s %s" % [HORNS_EVENT, CALRUZ_HOOK]] as Array[String])
 	killed.sort()
 	assert_eq(killed, ["cassa", "vakk"] as Array[String], "Cassa and Vakk die by name; Nokha only vanishes")
+
+
+## M32.1: Calruz yields and Nokha flees (escape): neither can die on the map. Calruz is the one most dangerous foe of
+## the battle, so the fight's records name him once he is in it (Combat.end_fight), and he looks like his NPC.
+func test_calruz_and_nokha_cannot_die_and_calruz_names_the_fight() -> void:
+	var foes: Dictionary = _db.combat.enemies
+	for type: String in [CALRUZ, NOKHA]:
+		assert_true(foes.has(type), type)
+		assert_true(foes[type].has("escape"), type + " cannot die")
+		assert_eq(int(foes[type]["canon_ref"]["book"]), 8, type)
+	assert_false(foes[CALRUZ].has("look"), "drawn with his own NPC sheet (calruz)")
+	assert_false(foes[NOKHA].has("ranged"), "Nokha is a swordswoman, not a caster")
+	assert_lt(int(foes[NOKHA]["act_seconds"]), int(foes["awakened_raskghar"]["act_seconds"]), "Nokha is very fast")
+	var types := {}
+	var st: Dictionary = _db.canon.events[BATTLE]["stage"]
+	for f: Dictionary in st["foes"]:
+		types[f["enemy"]] = true
+	for w: Dictionary in st["waves"]:
+		for e: String in w.get("foes", []):
+			types[e] = true
+	for t: String in types:
+		if t != CALRUZ:
+			assert_lt(float(foes[t]["danger"]), float(foes[CALRUZ]["danger"]), t + " is less dangerous than Calruz")
 
 
 func test_the_battle_stage_data_is_sound() -> void:
@@ -177,6 +229,27 @@ func test_the_battle_stage_data_is_sound() -> void:
 	assert_eq(fronts.size(), 3, "allies come through all three doors")
 	assert_true(last_ally_only < last_foe, "ally-only waves come before the last foe wave")
 	assert_true(int(waves[0]["after_seconds"]) > 0, "the first allies are delayed")
+	assert_eq(waves[last_foe].get("foes", []), [CALRUZ], "Calruz comes alone, in the last wave")
+	var horns := -1
+	var nokha := -1
+	for i in waves.size():
+		var allies: Array = waves[i].get("allies", [])
+		if HORNS.all(func(h: String) -> bool: return allies.has(h)):
+			horns = i
+		if (waves[i].get("foes", []) as Array).has(NOKHA):
+			nokha = i
+	assert_true(horns >= 0, "the four Horns come as one wave")
+	assert_true(horns < last_foe, "the Horns come before Calruz")
+	assert_true(nokha >= 0 and nokha < horns, "Nokha comes before the Horns")
+	for f: Dictionary in st["foes"]:
+		assert_false(f["enemy"] in [CALRUZ, NOKHA], "Calruz and Nokha are not in the first foes")
+	var cages := _cages()
+	assert_false(cages.is_empty(), "the camp has the cages")
+	assert_true(walk.call(cages["at"]), "the cages stand on the floor")
+	assert_true(int(cages["at"][1]) >= 16, "the cages are at the back of the camp")
+	assert_eq(cages["kind"], "cage")
+	assert_eq(cages["actions"], ["comfort_someone"])
+	assert_eq(cages["when_flags"], ["raskghar.camp_holds_the_gnoll_captives"], "gone once the captives are home")
 
 
 func test_the_battle_opens_at_nightfall_with_the_adventurers() -> void:
@@ -203,15 +276,66 @@ func test_the_battle_can_be_fought_through() -> void:
 	ToyCombat.always_hit(db)
 	var gs := _fresh()
 	_wait_for_battle(gs, db)
+	var seen := {}
 	for i in 5000:
 		if _stage_foe(gs) == "" and not gs.combat.has_fight():
 			break
 		_fight_turn(gs, db)
+		for n: String in HORNS:
+			if _area_of(gs, n) == CAMP:
+				seen[n] = true
+		for id: String in gs.combat.ids():
+			if gs.combat.monsters[id]["type"] in [CALRUZ, NOKHA]:
+				seen[gs.combat.monsters[id]["type"]] = true
 	assert_eq(_stage_foe(gs), "", "the Raskghar are down")
+	assert_has(gs.combat.lines, db.combat.enemies[CALRUZ]["escape"]["line"], "Calruz yields")
+	for n: String in HORNS + [CALRUZ, NOKHA]:
+		assert_true(seen.has(n), n + " was in the battle")
+	assert_false(gs.combat.ids().any(func(id: String) -> bool: return gs.combat.monsters[id]["type"] == NOKHA),
+			"Nokha got away (the log keeps only the last lines)")
+	var before := {}
+	for n: String in HORNS:
+		before[n] = gs.world.relationship(n, "player")
 	ToyCanon.sleep_through(gs, db, DAY)
 	assert_eq(gs.world.status(BATTLE), Director.DONE)
 	assert_true(gs.flags.has("raskghar.camp_stormed_through_three_doors"))
 	assert_true(gs.flags.has("calruz.in_watch_prison"), "the canon still happens")
+	assert_true(gs.world.is_alive(db.canon, "calruz"), "Calruz lives for his trial")
+	assert_true(gs.world.is_alive(db.canon, "nokha"), "Nokha only vanishes")
+	assert_eq(gs.world.status(HORNS_EVENT), Director.CHANGED)
+	assert_eq(_hook_of(gs, HORNS_EVENT), CALRUZ_HOOK)
+	assert_true(gs.flags.has("horns_of_hammerad.earther_stood_with_them_against_calruz"))
+	assert_true(gs.flags.has("calruz.beaten_by_the_horns"), "the Horns still bring him down")
+	for n: String in HORNS:
+		assert_gt(gs.world.relationship(n, "player"), int(before[n]), n + " remembers")
+	assert_eq(gs.world.status(RESCUE), Director.DONE, "the cages were not reached")
+	assert_true(gs.flags.has("mrsha.rescued_from_the_raskghar"))
+
+
+func test_reaching_the_cages_changes_the_rescue() -> void:
+	var gs := _fresh()
+	gs.player.place("inn_interior", NEXT_TO_INN_DOOR)
+	Commands.settle(gs, _db)
+	assert_eq(Commands.portal(gs, _db, INN_DOOR, CAMP), "")
+	var at := Vector2i(int(_cages()["at"][0]), int(_cages()["at"][1]))
+	gs.player.place(CAMP, at + Vector2i(0, -1))
+	Commands.settle(gs, _db)
+	var shown := _db.maps.objects_on(CAMP).filter(func(o: Dictionary) -> bool: return o["id"] == CAGES)
+	assert_eq(shown.size(), 1, "the cages stand while the captives are held")
+	var before := gs.world.relationship("mrsha", "player")
+	var r := Commands.interact(gs, _db, CAGES, "comfort_someone")
+	assert_eq(r["error"], "")
+	assert_eq(r["record"]["context"]["location"], CAMP)
+	ToyCanon.sleep_through(gs, _db, DAY)
+	assert_eq(gs.world.status(RESCUE), Director.CHANGED)
+	assert_eq(_hook_of(gs, RESCUE), CAGES_HOOK)
+	assert_true(gs.flags.has("wandering_inn.earther_reached_the_cages"))
+	assert_true(gs.flags.has("mrsha.rescued_from_the_raskghar"), "Lyonette and Moore still free Mrsha")
+	assert_gt(gs.world.relationship("mrsha", "player"), before)
+	assert_eq(gs.world.status(HORNS_EVENT), Director.DONE, "no fight, no Calruz hook")
+	Commands.settle(gs, _db)
+	assert_false(_db.maps.objects_on(CAMP).any(func(o: Dictionary) -> bool: return o["id"] == CAGES),
+			"the cages are empty and gone after the battle")
 
 
 func test_erins_door_leads_into_the_camp_and_home_until_the_tribe_breaks() -> void:
@@ -253,6 +377,10 @@ func test_staying_away_still_frees_the_captives() -> void:
 	var gs := _fresh()
 	ToyCanon.sleep_through(gs, _db, DAY)
 	assert_eq(gs.world.status(BATTLE), Director.DONE)
+	for id: String in [HORNS_EVENT, RESCUE]:
+		assert_eq(gs.world.status(id), Director.DONE, id + " runs as canon")
+	for f: String in ["horns_of_hammerad.earther_stood_with_them_against_calruz", "wandering_inn.earther_reached_the_cages"]:
+		assert_false(gs.flags.has(f), f)
 	for f: String in CAPTIVE + ["calruz.alive_in_the_dungeon", "mrsha.recaptured_by_nokha"]:
 		assert_false(gs.flags.has(f), f + " is cleared")
 	for f: String in ["mrsha.rescued_from_the_raskghar", "ceria.freed_from_the_raskghar", "calruz.in_watch_prison",

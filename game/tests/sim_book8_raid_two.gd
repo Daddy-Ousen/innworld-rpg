@@ -1,13 +1,15 @@
 extends GutTest
 ## M28.7 on the real Book 8 data (5.36, 5.37 G, 5.38; days 151 - 161): the first great dive, Pebblesnatch spared,
 ## Greydath and Rags spared "an hour to run" in the north, the second night raid, and the daylight raid on the inn
-## (a fight stage on inn_hill with an XP window x3). Mrsha and Ceria are taken; Calruz is revealed. No hooks.
+## (a fight stage on inn_hill with an XP window x3). Mrsha and Ceria are taken; Calruz is revealed. M32.1: one fight
+## hook on the daylight raid (the player fought it; Mrsha is still taken).
 ## The game is slept to day 160 once (before_all); each test starts from a copy.
 
 const SEED := 20261016
 const DAY := 161
 const CHAPTERS := ["5.36", "5.37G", "5.38"]
 const RAID := "b8.raskghar_raid_the_inn_by_daylight"
+const RAID_HOOK := "player_fought_the_daylight_raid"
 const MOON := "raskghar.awakened_by_the_moons"
 const HILL_SPOT := Vector2i(16, 13)
 const RASKGHAR := ["awakened_raskghar", "raskghar_armoured", "not_gnoll", "cave_goblin"]
@@ -96,7 +98,7 @@ func _system(chapter: String) -> Array:
 	return doc["system"]
 
 
-func test_the_batch_has_one_stage_and_no_hooks() -> void:
+func test_the_batch_has_one_stage_and_one_hook() -> void:
 	var ids := _batch_ids()
 	assert_eq(ids.size(), 41)
 	var stages: Array[String] = []
@@ -105,12 +107,19 @@ func test_the_batch_has_one_stage_and_no_hooks() -> void:
 		var ev: Dictionary = _db.canon.events[id]
 		if ev.has("stage"):
 			stages.append(id)
-		assert_false(ev.has("hooks"), id + " has no hook")
+		if id != RAID:
+			assert_false(ev.has("hooks"), id + " has no hook")
 		assert_ne(ev["location"], "raskghar_camp", id)
 		for n: String in ev["effects"].get("kill", []):
 			killed.append(n)
 		assert_true(int(ev["window"]["earliest"]) >= 151 and int(ev["window"]["latest"]) <= DAY, id)
 	assert_eq(stages, [RAID] as Array[String])
+	var hooks: Array = _db.canon.events[RAID]["hooks"]
+	assert_eq(hooks.size(), 1)
+	assert_eq(hooks[0]["id"], RAID_HOOK)
+	assert_eq(hooks[0]["then"], "change", "Mrsha is still taken")
+	assert_eq([int(hooks[0]["days"][0]), int(hooks[0]["days"][1])], [DAY, DAY])
+	assert_ne(String(hooks[0].get("news", "")), "")
 	assert_eq(killed, ["fess"] as Array[String], "only Fess dies by name")
 	for id: String in ["b8.the_great_raid_dives_the_rift", "b8.greydath_duels_garen"]:
 		assert_false(_db.canon.events[id].has("stage"), id + " is a plain event")
@@ -174,8 +183,13 @@ func test_the_raid_can_be_fought_through() -> void:
 			break
 		_fight_turn(gs, db)
 	assert_eq(_stage_foe(gs), "", "the Raskghar are down")
+	var before := gs.world.relationship("lyonette", "player")
 	ToyCanon.sleep_through(gs, db, DAY)
-	assert_eq(gs.world.status(RAID), Director.DONE)
+	assert_eq(gs.world.status(RAID), Director.CHANGED)
+	var entry: Dictionary = gs.world.history.filter(func(h: Dictionary) -> bool: return h["event"] == RAID)[0]
+	assert_eq(str(entry.get("hook", "")), RAID_HOOK)
+	assert_true(gs.flags.has("wandering_inn.earther_fought_the_daylight_raid"))
+	assert_gt(gs.world.relationship("lyonette", "player"), before)
 	assert_true(gs.flags.has("wandering_inn.raided_by_daylight"))
 	assert_true(gs.flags.has("mrsha.taken_by_the_raskghar"), "the canon still happens")
 
@@ -198,6 +212,7 @@ func test_staying_away_still_takes_mrsha_and_ceria() -> void:
 	var gs := _fresh()
 	ToyCanon.sleep_through(gs, _db, DAY)
 	assert_eq(gs.world.status(RAID), Director.DONE)
+	assert_false(gs.flags.has("wandering_inn.earther_fought_the_daylight_raid"))
 	for f: String in ["izril.moons_full", MOON, "liscor.walls_held_by_day", "wandering_inn.raided_by_daylight",
 			"mrsha.taken_by_the_raskghar", "ceria.taken_by_the_raskghar", "raskghar.ordered_to_take_mrsha_and_ceria",
 			"liscor.knows_a_one_armed_minotaur_leads_the_raskghar", "calruz.revealed_as_the_raskghar_great_chieftain",

@@ -1,5 +1,20 @@
 # Handoff
 
+## Just done (2026-10-25, local): M32.1 three doors (branch `feat/m32.1-three-doors`)
+- Built (ADR 0044 "M32.1"): enemies `calruz` (enemy id = NPC id, so his sheet; an enemy `look` must name an
+  enemy) and `nokha_awakened`, both with `escape` (they never die). Awakened Raskghar danger 1.0 -> 0.95, so the
+  fight records name Calruz. New object kind `cage` (tools/build_objects.py, last edit) and `raskghar_cages`.
+  Waves: Nokha leads the knot, then the Horns, then Calruz alone. Helpers with the Watch and Antinium doors.
+  Hooks: `player_stood_with_the_horns_against_calruz`, `player_reached_the_cages`,
+  `player_held_the_inn_in_the_night_raid`, `player_fought_the_daylight_raid`. Hook count 133.
+- Tests: see `progress.md` M32.1. Full suite not run.
+- Next: user merges the PR. Then M32.2 **[Opus · high]** (Zel's stage on `invrisil_battlefield`).
+- Gotchas: `gs.combat.lines` keeps only the last lines; a test that wants an early line must check state
+  instead. After a stage fight, NPC allies walk back to their schedule. JSON numbers are floats: compare
+  `hook.days` with `int()`. `godot --import` segfaulted once (run it twice); after it, many `.import` files show
+  as changed (LF noise): delete them and `git checkout --` them. `.gitignore`, `web/` and stray `.uid` files
+  are not part of this branch.
+
 ## Just done (2026-10-25, local): M32.0 choices and reading (branch `docs/m32.0-choices`)
 - User picks (ADR 0044 "M32.0"): Zel can be saved; new map `invrisil_battlefield`; Tremborag's hall stays news;
   Klbkch always dies. Win rule: drive off Bea and Ijvani before the last wave while Zel stands. A living Zel gives
