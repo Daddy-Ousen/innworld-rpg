@@ -391,7 +391,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   always dies; a living Zel gives Selys the Heartflame himself. Reading agents (Sonnet) read 5.44 and 4.47 – 4.49:
   no Drakes beside Zel (Human levy, Rose Knights, Thomast); five Chosen; Nokha is a swordswoman. Book 6 text was
   extracted locally to `canon/raw/book6/` (gitignored). M32.4 is now the "Zel lives" bend. Docs only, no tests run.
-- [ ] M32.1 three-door battle (Calruz yields, the Horns, Nokha flees; hooks on all three Book 8 stages).
+- [x] M32.1 three-door battle (2026-10-25, branch `feat/m32.1-three-doors`, ADR 0044 "M32.1"). Enemies `calruz`
+  (yields) and `nokha_awakened` (flees) use `escape` (no new field); awakened Raskghar danger 0.95; cage object
+  `raskghar_cages`; the Horns wave and Calruz last; 4 `change` hooks (Calruz, cages, night raid, daylight raid).
+  Tests (all pass): `sim_book8_battle_one` (11), `sim_book8_raid_one` (8), `sim_book8_raid_two` (8),
+  `sim_kill_book8` (6), `sim_canon_book8` (6), `sim_player_hooks` (6), `unit_combat_db`, `unit_monster_art`,
+  `unit_sound_cues`, `unit_ground_art`. Validator books 1 - 8: 0 errors. Python 129 OK. Full suite not run.
 - [ ] M32.2 Zel's stage on `invrisil_battlefield` (Zel still dies; hook flag `zel.saved_by_the_player` recorded).
 - [ ] M32.3 boss feel.
 - [ ] M32.4 Zel lives (bend and cascade, `sim_book6_zel_lives`).

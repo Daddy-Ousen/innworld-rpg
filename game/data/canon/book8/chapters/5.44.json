@@ -712,7 +712,7 @@
 			},
 			"foreshadow": {"days_before": 1, "text": "Liscor means to strike the Raskghar camp in the dungeon. No one says how the soldiers will get there."},
 			"stage": {
-				"beats": [{"after_seconds": 20, "npc": "jelaqua", "line": "That's the armoured one! He's mine!"}, {"after_seconds": 75, "npc": "zevara", "line": "Watch, stand firm! Keep them in front of the mages!"}, {"after_seconds": 120, "npc": "lyonette", "line": "Put her down. Put Mrsha down, now."}],
+				"beats": [{"after_seconds": 20, "npc": "jelaqua", "line": "That's the armoured one! He's mine!"}, {"after_seconds": 75, "npc": "zevara", "line": "Watch, stand firm! Keep them in front of the mages!"}, {"after_seconds": 120, "npc": "lyonette", "line": "Put her down. Put Mrsha down, now."}, {"after_seconds": 160, "npc": "ceria_springwalker", "line": "Horns of Hammerad, to me! Calruz is ours to face."}, {"after_seconds": 180, "line": "Calruz bellows and charges the Horns, as if looking for a side to die on."}],
 				"area": "raskghar_camp",
 				"hours": [
 					18,
@@ -801,6 +801,10 @@
 							"relc",
 							"klbkch"
 						],
+						"helpers": [
+							"liscor_guardsman",
+							"liscor_guardsman"
+						],
 						"line": "The west sheet opens on the same warm room. The Watch storms in behind its Captain, with Relc and Klbkch in front."
 					},
 					{
@@ -813,6 +817,10 @@
 						"allies": [
 							"yellow_splatters",
 							"purple_smile"
+						],
+						"helpers": [
+							"antinium_soldier",
+							"antinium_soldier"
 						],
 						"line": "The east sheet opens. Painted Soldiers charge out without a sound and hit the Raskghar from the side."
 					},
@@ -837,14 +845,42 @@
 							16
 						],
 						"foes": [
+							"nokha_awakened",
 							"awakened_raskghar",
 							"raskghar_armoured",
 							"not_gnoll"
 						],
-						"line": "A last knot of awakened Raskghar breaks toward the cages to seize the white Gnoll."
+						"line": "Nokha leads a last knot of awakened Raskghar toward the cages, her sword out, to seize the white Gnoll."
+					},
+					{
+						"after_seconds": 150,
+						"left_at_most": 3,
+						"from": [
+							15,
+							1
+						],
+						"allies": [
+							"ceria_springwalker",
+							"yvlon_byres",
+							"pisces",
+							"ksmvr"
+						],
+						"line": "Yvlon, Pisces and Ksmvr cut their way to Ceria. The Horns of Hammerad stand together again."
+					},
+					{
+						"after_seconds": 170,
+						"left_at_most": 2,
+						"from": [
+							15,
+							13
+						],
+						"foes": [
+							"calruz"
+						],
+						"line": "The ring of Raskghar breaks. Calruz, one-armed and huge, strides out of it with his axe."
 					}
 				],
-				"note": "M28.9: the three-door battle. Twelve foes; the awakened stand for Nokha's pack. The Cave Goblins have fled, so none fight. Ally waves come before the last foe wave."
+				"note": "M28.9: the three-door battle; the Cave Goblins have fled. M32.1: Nokha (flees) leads the knot to the cages; the Horns come as one wave; Calruz comes alone last and yields (escape). Watch and Painted Soldier helpers come with their doors. Fourteen foes; ally waves come before the last foe wave."
 			}
 		},
 		"b8.lyonette_and_moore_take_back_mrsha": {
@@ -942,7 +978,23 @@
 				"note": "Day 163 night (guess). Nokha's fate is open: no kill. Mrsha's hurt is treated at the inn (cleared here, a guess)."
 			},
 			"summary": "As the Raskghar break, Nokha tears open Mrsha's cage. Lyonette stands in her way, parries and stabs her shoulder; Apista stings her face. Moore breaks the arm holding Mrsha and throws Nokha into the melee, where she vanishes. Lyonette carries Mrsha to the door.",
-			"news": "The white Gnoll child taken by the Raskghar was rescued in the battle."
+			"news": "The white Gnoll child taken by the Raskghar was rescued in the battle.",
+			"hooks": [
+				{
+					"id": "player_reached_the_cages",
+					"did": [{"action": ["comfort_someone"], "context": {"location": "raskghar_camp"}}],
+					"days": [163, 163],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_reached_the_cages"],
+						"relationship": [
+							{"from": "mrsha", "to": "player", "delta": 2},
+							{"from": "lyonette", "to": "player", "delta": 1}
+						]
+					},
+					"news": "The white Gnoll child taken by the Raskghar was rescued in the battle. A Human from the inn reached the cages first and kept the captive Gnolls calm."
+				}
+			]
 		},
 		"b8.the_horns_bring_down_calruz": {
 			"tier": 2,
@@ -1036,7 +1088,25 @@
 				"confidence": "confirmed",
 				"note": "Day 163 night (guess). Calruz is not required: if he is dead, Ceria is still freed. His [Hammer Blow] is in the system records."
 			},
-			"summary": "Calruz looks for a side to die on. Ceria stands before him with Yvlon, Pisces and Ksmvr. He scorns them, then charges. Ksmvr's dagger sets him alight, Ceria puts the fire out with snow and drops him with an ice spike. He thanks her and lives."
+			"summary": "Calruz looks for a side to die on. Ceria stands before him with Yvlon, Pisces and Ksmvr. He scorns them, then charges. Ksmvr's dagger sets him alight, Ceria puts the fire out with snow and drops him with an ice spike. He thanks her and lives.",
+			"hooks": [
+				{
+					"id": "player_stood_with_the_horns_against_calruz",
+					"did": [{"action": ["attack_melee", "block_attack", "throw_object", "cast_spell"], "context": {"enemy": "calruz", "location": "raskghar_camp"}}],
+					"days": [163, 163],
+					"then": "change",
+					"effects": {
+						"set_flags": ["horns_of_hammerad.earther_stood_with_them_against_calruz"],
+						"relationship": [
+							{"from": "ceria_springwalker", "to": "player", "delta": 2},
+							{"from": "yvlon_byres", "to": "player", "delta": 2},
+							{"from": "pisces", "to": "player", "delta": 2},
+							{"from": "ksmvr", "to": "player", "delta": 2}
+						]
+					},
+					"news": "The Horns of Hammerad brought down Calruz together in the Raskghar camp, and a Human from the inn fought at their side. The Minotaur yielded and lives."
+				}
+			]
 		},
 		"b8.calruz_is_taken_to_the_watch_prison": {
 			"tier": 2,

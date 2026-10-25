@@ -587,6 +587,22 @@
 			},
 			"summary": "Bird sees heads in the flood: Raskghar and Cave Goblins swimming for the inn. He shouts the alarm and shoots from the tower. Six Raskghar break in. The Horns and the Hobs fight them to a standstill in the common room; Yvlon's shield arm bends.",
 			"news": "Raskghar and Cave Goblins attacked the Wandering Inn in the night. The guests drove them off.",
+			"hooks": [
+				{
+					"id": "player_held_the_inn_in_the_night_raid",
+					"did": [{"action": ["attack_melee", "block_attack", "throw_object", "cast_spell"], "context": {"location": "wandering_inn", "enemy": ["awakened_raskghar", "raskghar_armoured", "not_gnoll", "cave_goblin"]}}],
+					"days": [159, 159],
+					"then": "change",
+					"effects": {
+						"set_flags": ["wandering_inn.earther_held_the_inn_in_the_night_raid"],
+						"relationship": [
+							{"from": "erin_solstice", "to": "player", "delta": 2},
+							{"from": "bird", "to": "player", "delta": 1}
+						]
+					},
+					"news": "Raskghar and Cave Goblins attacked the Wandering Inn in the night. A Human guest held the hill beside the Horns and the Hobs, and the raiders were driven off."
+				}
+			],
 			"xp_window": {
 				"boost": 3,
 				"hours": [
