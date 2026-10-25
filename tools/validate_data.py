@@ -329,7 +329,7 @@ def check_stage(r: Report, where: str, st) -> None:
         return
     if kind == "fight":
         req, opt = {"area", "hours", "foes"}, {"when_flags", "unless_flags", "allies", "line", "note", "waves", "kind",
-                                               "beats"}
+                                               "beats", "protect"}
     else:
         req, opt = {"area", "hours", "npcs"}, {"when_flags", "unless_flags", "line", "note", "kind", "beats"}
     if not _keys(r, where, st, req, opt):
@@ -343,6 +343,13 @@ def check_stage(r: Report, where: str, st) -> None:
     for k in ("when_flags", "unless_flags"):
         if k in st:
             _str_list(r, f"{where}.{k}", st[k], RE_FLAG)
+    if "protect" in st:  # M32.2: the ally whose standing drive_off_foe records note
+        allies = list(st.get("allies", [])) if isinstance(st.get("allies"), list) else []
+        for w in st.get("waves", []) if isinstance(st.get("waves"), list) else []:
+            if isinstance(w, dict) and isinstance(w.get("allies"), list):
+                allies += w["allies"]
+        if st["protect"] not in allies:
+            r.err(f"{where}.protect", "must be one of the stage's allies")
     if "line" in st:
         _str(r, f"{where}.line", st["line"], NEWS_MAX)
     if "note" in st:
@@ -494,7 +501,7 @@ def check_hooks(r: Report, where: str, hooks, window) -> None:
     seen: set[str] = set()
     for i, h in enumerate(hooks):
         hw = f"{where}.hooks[{i}]"
-        if not _keys(r, hw, h, {"id", "did", "days", "then"}, {"effects", "news"}):
+        if not _keys(r, hw, h, {"id", "did", "days", "then"}, {"effects", "news", "all"}):
             continue
         if not (isinstance(h["id"], str) and RE_ID.match(h["id"])):
             r.err(f"{hw}.id", "must be snake_case")
@@ -502,6 +509,8 @@ def check_hooks(r: Report, where: str, hooks, window) -> None:
             r.err(f"{hw}.id", f"duplicate hook id '{h['id']}'")
         else:
             seen.add(h["id"])
+        if "all" in h and not isinstance(h["all"], bool):
+            r.err(f"{hw}.all", "must be true or false (M32.2: every 'did' entry needs its own record)")
         did = h["did"]
         if not isinstance(did, list) or not did:
             r.err(f"{hw}.did", "must be a non-empty list")

@@ -152,18 +152,24 @@ static func matching_hook(gs: GameState, ev: Dictionary, day: int, thens: Array)
 
 
 ## True if an action record in the log matches one of the hook's "did"
-## entries, on a day in hook.days (and not after `day`).
+## entries, on a day in hook.days (and not after `day`). With "all": true
+## (M32.2), every "did" entry needs a matching record of its own.
 static func did(gs: GameState, hook: Dictionary, day: int) -> bool:
 	var from := int(hook["days"][0])
 	var to := mini(int(hook["days"][1]), day)
+	var need: Array = hook["did"]
+	var all := bool(hook.get("all", false))
+	var met := {}
 	for r: Dictionary in gs.action_log.records:
 		var rday := int(r["day"])
 		if rday < from or rday > to:
 			continue
-		for m: Dictionary in hook["did"]:
-			if record_matches(r, m):
-				return true
-	return false
+		for i in need.size():
+			if record_matches(r, need[i]):
+				if not all:
+					return true
+				met[i] = true
+	return all and met.size() == need.size()
 
 
 ## True if the record matches a hook "did" entry (also a class trial, M22):

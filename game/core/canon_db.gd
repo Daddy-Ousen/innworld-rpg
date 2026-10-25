@@ -281,6 +281,19 @@ func _validate_stage(where: String, st: Variant) -> void:
 		return
 	for i in (waves as Array).size():
 		_validate_wave("%s wave %d" % [sw, i + 1], waves[i])
+	if st.has("protect"):
+		_validate_protect(sw, st)
+
+
+## M32.2: a fight stage's "protect" names the ally whose standing its drive_off_foe records note: a stage ally or
+## a wave ally.
+func _validate_protect(sw: String, st: Dictionary) -> void:
+	var allies: Array = (st.get("allies", []) as Array).duplicate() if st.get("allies", []) is Array else []
+	for w: Variant in st.get("waves", []):
+		if w is Dictionary and w.get("allies", []) is Array:
+			allies.append_array(w.get("allies", []))
+	if not st["protect"] is String or not allies.has(st["protect"]):
+		errors.append("%s: protect must be one of the stage's allies." % sw)
 
 
 ## Stage beats (M31.0): see _validate_stage. A beat's npc must be a scene npc,
@@ -365,6 +378,8 @@ func _validate_hook(where: String, hook: Dictionary, seen: Dictionary) -> void:
 	for m: Dictionary in hook["did"]:
 		if (m.get("action", []) as Array).is_empty():
 			errors.append("%s: a 'did' entry has no action." % hw)
+	if hook.has("all") and not hook["all"] is bool:
+		errors.append("%s: 'all' must be true or false." % hw)
 	var days: Array = hook["days"]
 	if days.size() != 2 or int(days[0]) < 1 or int(days[1]) < int(days[0]):
 		errors.append("%s: 'days' must be [from, to] with 1 <= from <= to." % hw)

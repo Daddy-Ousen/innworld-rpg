@@ -101,7 +101,8 @@
 			"inn_basement": {"area": "inn_interior", "pos": [20, 13]},
 			"liscor_ruins_hall": {"area": "liscor_gate", "pos": [3, 12]},
 			"liscor_ruins_ossuary": {"area": "liscor_gate", "pos": [3, 12]},
-			"raskghar_camp": {"area": "inn_interior", "pos": [20, 13]}
+			"raskghar_camp": {"area": "inn_interior", "pos": [20, 13]},
+			"invrisil_battlefield": {"area": "invrisil_gate", "pos": [28, 6]}
 		}},
 		"xp": {"count_per_intensity": 4, "max_intensity": 2.0},
 		"spare_tags": ["goblin"],

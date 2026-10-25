@@ -1,0 +1,183 @@
+{
+	"schema_version": 1,
+	"id": "invrisil_battlefield",
+	"name": "The field before Invrisil",
+	"location": "invrisil",
+	"confidence": "guess",
+	"note": "Design map (M32.2, ADR 0044 \"M32.2\"). Open grassland about four miles outside Invrisil where Zel meets the Goblin Lord (4.47 - 4.49): flat, churned mud, overcast. The bones in mid-field stand for the dome of bone that closes over Zel. Size, mud and the ring are guesses. West exit to the Invrisil gate road (time a guess).",
+	"zones": {},
+	"exits": [
+		{
+			"at": [
+				0,
+				11,
+				1,
+				2
+			],
+			"to": "invrisil_gate",
+			"arrive": [
+				30,
+				6
+			],
+			"minutes": 80,
+			"sign": {
+				"icon": "none",
+				"text": "Invrisil"
+			}
+		}
+	],
+	"objects": [
+		{
+			"id": "bone_ring_1",
+			"kind": "bones",
+			"at": [
+				20,
+				12
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_2",
+			"kind": "bones",
+			"at": [
+				19,
+				14
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_3",
+			"kind": "bones",
+			"at": [
+				18,
+				15
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_4",
+			"kind": "bones",
+			"at": [
+				16,
+				15
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_5",
+			"kind": "bones",
+			"at": [
+				14,
+				15
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_6",
+			"kind": "bones",
+			"at": [
+				13,
+				14
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_7",
+			"kind": "bones",
+			"at": [
+				12,
+				12
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_8",
+			"kind": "bones",
+			"at": [
+				13,
+				10
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_9",
+			"kind": "bones",
+			"at": [
+				14,
+				9
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_10",
+			"kind": "bones",
+			"at": [
+				16,
+				9
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_11",
+			"kind": "bones",
+			"at": [
+				18,
+				9
+			],
+			"name": "Ring of bone",
+			"actions": []
+		},
+		{
+			"id": "bone_ring_12",
+			"kind": "bones",
+			"at": [
+				19,
+				10
+			],
+			"name": "Ring of bone",
+			"actions": []
+		}
+	],
+	"legend": {
+		".": "grass",
+		",": "tall_grass",
+		":": "dirt_road",
+		"O": "boulder"
+	},
+	"rows": [
+		",..........::,........::..,.....",
+		"....,....::......,..::........,.",
+		".......::.........::.,..........",
+		".....::.....,...::.......,.::...",
+		"...,:.O.......::,........::..,..",
+		".......,....::......,..::..O....",
+		"..........::.........::.,.......",
+		"..,.....::.....,...::.......,...",
+		"......::.........::,........:...",
+		"....::....,....:.......,..::....",
+		".,............:.........::.,....",
+		".....,.....::.....,...::.......,",
+		".........::..........:,.........",
+		",......::....,....::......,.....",
+		"....,::.........::.........::.,.",
+		"....:...,......:.....,...::.....",
+		"............::.........::,......",
+		"...,......::....,....::......,..",
+		".......,::.........::...........",
+		"......::.O.,.....::.....,O..:...",
+		"..,.::.........::.........::,...",
+		"......,......::....,....::......",
+		"..........,::.........::........",
+		".,.......::...,.....::.....,...."
+	]
+}

@@ -430,7 +430,8 @@
 				"confidence": "confirmed",
 				"note": "A diamond shard takes Zel's left eye. Az'kerash comes by Scroll of Greater Teleport; Zel cuts his throat and he flees. The scroll count (eleven, then four) is the Goblin Lord's thought and may be wrong. Ijvani leaves by Lesser Teleport."
 			},
-			"summary": "Zel tears Bea apart, crushes Ijvani and cracks Kerash's skull. Az'kerash arrives in person with a Scroll of Greater Teleport and strikes Zel from behind; Zel cuts the Necromancer's throat. The Necromancer and the Chosen flee."
+			"summary": "Zel tears Bea apart, crushes Ijvani and cracks Kerash's skull. Az'kerash arrives in person with a Scroll of Greater Teleport and strikes Zel from behind; Zel cuts the Necromancer's throat. The Necromancer and the Chosen flee.",
+			"hooks": [{"id": "player_broke_bea_and_ijvani", "all": true, "did": [{"action": ["drive_off_foe"], "context": {"enemy": "bea", "location": "invrisil", "protect_standing": true, "waves_left": true}}, {"action": ["drive_off_foe"], "context": {"enemy": "ijvani", "location": "invrisil", "protect_standing": true, "waves_left": true}}], "days": [130, 130], "then": "change", "effects": {"set_flags": ["zel.saved_by_the_player"], "relationship": [{"from": "zel_shivertail", "to": "player", "delta": 2}]}, "news": "Before the last of the Chosen came, a Human drove off the plague-bringer Bea and the black-fire mage Ijvani while Zel Shivertail still stood."}]
 		},
 		"b6.zel_names_the_goblin_lord_reiss_and_dies": {
 			"tier": 1,

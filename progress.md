@@ -397,7 +397,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   Tests (all pass): `sim_book8_battle_one` (11), `sim_book8_raid_one` (8), `sim_book8_raid_two` (8),
   `sim_kill_book8` (6), `sim_canon_book8` (6), `sim_player_hooks` (6), `unit_combat_db`, `unit_monster_art`,
   `unit_sound_cues`, `unit_ground_art`. Validator books 1 - 8: 0 errors. Python 129 OK. Full suite not run.
-- [ ] M32.2 Zel's stage on `invrisil_battlefield` (Zel still dies; hook flag `zel.saved_by_the_player` recorded).
+- [x] M32.2 Zel's stage (2026-10-25, branch `feat/m32.2-zel-stage`, ADR 0044 "M32.2"). User pick: the full save
+  rule. Engine: `drive_off_foe` records (context `waves_left`, `protect_standing`), stage key `protect`, hook key
+  `all` (CanonDb and the Python validator check both). New map `invrisil_battlefield` (exit from `invrisil_gate`),
+  enemies `rose_knight`, `bea`, `ijvani`, `oom`, `venitra`, `kerash` (all escape). Stage on
+  `b6.the_battle_of_invrisil_opens`, signpost 3 days before; hooks `player_fought_beside_zel`,
+  `player_broke_bea_and_ijvani` (sets `zel.saved_by_the_player`; Zel still dies). Tests (all pass): new
+  `sim_book6_zel_stage` (9), `unit_stage` (33), `unit_director` (27), `unit_combat` (93), `unit_player_hooks` (16),
+  `unit_canon_db` (7), `unit_combat_db`, `unit_monster_art`, `unit_sound_cues`, `unit_map_db`, `unit_other_maps`,
+  `unit_ground_art`, `sim_canon_book6` (13), `sim_book6_zel_dies` (7), `sim_kill_book6` (9), `sim_book6_world` (9),
+  `sim_gazi_attack` (5), `sim_book3_stages` (10), `sim_book8_battle_one` (11). Validator: 0 errors. Python 131 OK.
+  `sim_book5_last_light` 7/9: the 2 failures (`standing.gd:100` String error) fail on main too (old). Full suite not run.
 - [ ] M32.3 boss feel.
 - [ ] M32.4 Zel lives (bend and cascade, `sim_book6_zel_lives`).
 - [ ] The user plays the three doors and Zel's last stand.
@@ -408,6 +418,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
 ## Fixes
+- [ ] Old failure: `sim_book5_last_light` (2 tests) errors at `core/standing.gd:100` (`Invalid call 'String'
+  constructor: Drake` in `race_start`). Fails on main too (found 2026-10-25 in M32.2). Not fixed yet.
 - [x] Greydath one id (2026-10-24, branch `fix/greydath-one-id`): `sim_canon_book6` failed at line 185 because M28.1
   added a second record `greydath` for the same Goblin (4.39 G: Greybeard is Greydath; the Book 6 note says keep the id
   `greybeard`). Removed the `greydath` record from `canon/book8/npcs.json`; the two 5.37 G events now use `greybeard`.

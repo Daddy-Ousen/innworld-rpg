@@ -524,7 +524,7 @@ static func fight_lost(f: Dictionary) -> float:
 ## Returns true if the monster died (it is removed; a foe counts as a kill,
 ## a helper does not). A monster with "escape" (M8.1) never dies: a hit that
 ## takes it below its escape share removes it with the escape line, and a
-## foe counts as routed, not killed.
+## foe counts as routed, not killed (and noted for a drive_off_foe record, M32.2).
 static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -> bool:
 	var c := gs.combat
 	var m: Dictionary = c.monsters[id]
@@ -536,6 +536,7 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 		c.monsters.erase(id)
 		if c.has_fight() and fled:
 			c.fight["routed"] += 1
+			_note_drive_off(gs, db, m)
 		return false
 	if int(m["hp"]) > 0:
 		return false
@@ -547,6 +548,22 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 	return true
 
 
+## M32.2 (ADR 0044 "M32.2"): notes foe `m`, just driven off, in fight["driven_off"]: {"enemy": its type,
+## "waves_left": waves of the stage in progress still to come, "protect_standing"?: only when its stage has a
+## "protect" NPC — that NPC is alive, in the player's area and not down}.
+static func _note_drive_off(gs: GameState, db: DataDb, m: Dictionary) -> void:
+	var entry := {"enemy": m["type"], "waves_left": Stage.waves_left(gs, db)}
+	var st: Dictionary = db.canon.events.get(m.get("stage", ""), {}).get("stage", {})
+	var who := String(st.get("protect", ""))
+	if who != "":
+		var n: Dictionary = gs.npcs.npcs.get(who, {})
+		entry["protect_standing"] = not n.is_empty() and n["area"] == gs.player.area \
+				and not bool(n.get("down", false)) and gs.world.is_alive(db.canon, who)
+	var list: Array = gs.combat.fight.get("driven_off", [])
+	list.append(entry)
+	gs.combat.fight["driven_off"] = list
+
+
 ## Ends the fight (WON, FLED or KNOCKED_OUT) and writes its action records:
 ## melee with fists, melee with a held item (context weapon "improvised"),
 ## blocks and throws, each once with intensity = count / count_per_intensity;
@@ -554,8 +571,9 @@ static func damage_monster(gs: GameState, db: DataDb, id: String, amount: int) -
 ## foe's danger. Every record's context has "enemy" (that foe's type),
 ## "location" and "killed" (a foe died, by anyone's hand; M6.5). A won fight
 ## where foes ran and none died, against a foe with a combat.spare_tags tag,
-## adds spare_foe (the player let them go). Records take no time (the turns
-## already did). Returns them.
+## adds spare_foe (the player let them go). M32.2: one drive_off_foe record per
+## foe driven off (escape), its context the base merged with that foe's note
+## (_note_drive_off). Records take no time (the turns already did). Returns them.
 static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var c := gs.combat
@@ -592,6 +610,8 @@ static func end_fight(gs: GameState, db: DataDb, cause: String) -> Array[Diction
 		var intensity := minf(float(part[1]) / float(xp_rules["count_per_intensity"]),
 				float(xp_rules["max_intensity"]))
 		out.append_array(_record(gs, db, part[0], intensity, danger, OUTCOMES[cause], part[2], duress))
+	for d: Dictionary in f.get("driven_off", []):
+		out.append_array(_record(gs, db, "drive_off_foe", 1.0, danger, OUTCOMES[cause], base.merged(d, true), duress))
 	if cause == FLED:
 		out.append_array(_record(gs, db, "flee_danger", 1.0, danger, "success", base, duress))
 		c.lines.append("You got away.")
