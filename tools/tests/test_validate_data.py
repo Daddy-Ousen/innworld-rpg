@@ -419,6 +419,20 @@ class ValidateTest(unittest.TestCase):
         self.assertError(rep, "stage.foes")
         self.assertError(rep, "boss")
 
+    # --- M32.2 protect and all-deeds hooks
+
+    def test_a_protected_ally_and_an_all_hook_pass(self):
+        self.ev()["stage"] = self.stage(protect="bob")
+        self.ev()["hooks"] = [self.hook(all=True, did=[{"action": ["attack_melee"]}, {"action": ["cook_stew"]}])]
+        self.assertEqual(self.fx.run(with_raw=True).errors, [])
+
+    def test_protect_and_all_errors(self):
+        self.ev()["stage"] = self.stage(protect="alice")
+        self.ev()["hooks"] = [self.hook(all="yes")]
+        rep = self.fx.run()
+        self.assertError(rep, "stage.protect: must be one of the stage's allies")
+        self.assertError(rep, "hooks[0].all")
+
     # --- M7.B waves
 
     def test_stage_waves_pass(self):

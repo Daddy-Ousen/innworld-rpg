@@ -430,3 +430,96 @@ func test_the_view_shows_a_beat_over_its_speaker_once() -> void:
 	await get_tree().process_frame
 	v.refresh(gs, _db)
 	assert_eq(v.bubbles.text_of("baker"), "", "each beat shows once")
+
+
+## M32.2 (ADR 0044 "M32.2"): the toy goblin can escape; the farmer is the stage's "protect" ally, put in the field
+## (down or not). One hit drives the goblin off.
+func _drive_off(down: bool, extra: Dictionary = {}) -> GameState:
+	_make(_events(_stage({"protect": "farmer"}.merged(extra, true))))
+	ToyCombat.always_hit(_db)
+	_db.combat.enemies["goblin"]["escape"] = {"below": 0.9, "line": "The goblin runs."}
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs, FOE_AT + Vector2i(0, -1))
+	var farmer: Dictionary = gs.npcs.npcs["farmer"]
+	farmer["area"] = "field"
+	farmer["down"] = down
+	Commands.attack(gs, _db, "s")
+	return gs
+
+
+func _drive_off_records(gs: GameState) -> Array:
+	return gs.action_log.records.filter(func(r: Dictionary) -> bool: return r["action_id"] == "drive_off_foe")
+
+
+func test_driving_off_a_foe_writes_a_record_with_the_protected_ally() -> void:
+	var gs := _drive_off(false)
+	assert_has(gs.combat.lines, "The goblin runs.")
+	assert_false(gs.combat.has_fight(), "the goblin is gone")
+	var recs := _drive_off_records(gs)
+	assert_eq(recs.size(), 1, "one record per foe driven off")
+	var ctx: Dictionary = recs[0]["context"]
+	assert_eq(ctx["enemy"], "goblin")
+	assert_eq(ctx["location"], _db.maps.areas["field"]["location"])
+	assert_true(ctx["protect_standing"], "the farmer stands")
+	assert_false(ctx["waves_left"], "no waves")
+	var loaded := GameState.from_json(gs.to_json())
+	assert_eq(_drive_off_records(loaded)[0]["context"]["protect_standing"], true, "the flag survives a save")
+
+
+func test_a_downed_protected_ally_is_noted() -> void:
+	var gs := _drive_off(true)
+	var recs := _drive_off_records(gs)
+	assert_eq(recs.size(), 1)
+	assert_false(recs[0]["context"]["protect_standing"], "the farmer was down")
+
+
+func test_a_drive_off_notes_waves_still_to_come() -> void:
+	var gs := _drive_off(false, {"waves": [{"after_seconds": 9999, "from": [3, 2], "foes": ["goblin"]}]})
+	# No foe left, so the wave comes at once; the farmer drives its goblin off too and the fight ends.
+	var recs := _drive_off_records(gs)
+	assert_eq(recs.size(), 2, " | ".join(gs.combat.lines))
+	if recs.size() == 2:
+		assert_true(recs[0]["context"]["waves_left"], "the first goblin ran before the wave came")
+		assert_false(recs[1]["context"]["waves_left"], "the second ran after the last wave")
+
+
+func test_a_stage_without_protect_notes_no_ally() -> void:
+	_make()
+	ToyCombat.always_hit(_db)
+	_db.combat.enemies["goblin"]["escape"] = {"below": 0.9, "line": "The goblin runs."}
+	var gs := ToyNpcs.new_game(_db)
+	_to_field(gs, FOE_AT + Vector2i(0, -1))
+	Commands.attack(gs, _db, "s")
+	var recs := _drive_off_records(gs)
+	assert_eq(recs.size(), 1)
+	assert_false((recs[0]["context"] as Dictionary).has("protect_standing"))
+
+
+func test_an_all_hook_needs_a_record_for_every_deed() -> void:
+	_make()
+	var gs := ToyNpcs.new_game(_db)
+	var hook := {"id": "broke_both", "days": [1, 1], "then": "change", "all": true, "effects": {},
+		"did": [{"action": ["drive_off_foe"], "context": {"enemy": "bea"}},
+			{"action": ["drive_off_foe"], "context": {"enemy": "ijvani"}}]}
+	gs.action_log.records.append({"day": 1, "action_id": "drive_off_foe", "outcome": "success",
+		"context": {"enemy": "bea"}})
+	assert_false(Director.did(gs, hook, 1), "Ijvani is still there")
+	var any := hook.duplicate(true)
+	any.erase("all")
+	assert_true(Director.did(gs, any, 1), "without all, one deed is enough")
+	gs.action_log.records.append({"day": 1, "action_id": "drive_off_foe", "outcome": "success",
+		"context": {"enemy": "ijvani"}})
+	assert_true(Director.did(gs, hook, 1), "both driven off")
+	assert_false(Director.did(gs, hook, 0), "not before the hook's days")
+
+
+func test_canon_db_checks_protect_and_all() -> void:
+	var bad := {
+		"e.bad_protect": ToyCanon.event(1, 1, {"stage": _stage({"protect": "baker"})}),
+		"e.bad_all": ToyCanon.event(1, 1, {"hooks": [{"id": "h", "did": [{"action": ["attack_melee"]}],
+			"days": [1, 1], "then": "change", "effects": {}, "all": "yes"}]}),
+	}
+	var canon := CanonDb.from_dicts(ToyNpcs.npcs(), {}, bad)
+	var text := "\n".join(canon.errors)
+	assert_string_contains(text, "event 'e.bad_protect' stage: protect must be one of the stage's allies.")
+	assert_string_contains(text, "hook 'h': 'all' must be true or false.")

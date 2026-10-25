@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-10-25, local): M32.2 Zel's stage (branch `feat/m32.2-zel-stage`)
+- User pick: the full save rule (ADR 0044 "M32.2"). Engine: a foe driven off (escape) writes a `drive_off_foe`
+  record at fight end, context = base + `enemy`, `waves_left`, and `protect_standing` when the stage has a
+  `protect` NPC. Hook key `all`: every `did` entry needs its own record. Old escape fights write the record too.
+- Data: map `invrisil_battlefield` (west exit to `invrisil_gate`, east exit added there at [31, 6]); 6 enemies;
+  stage on `b6.the_battle_of_invrisil_opens` (hours 9 - 15); hooks `player_fought_beside_zel` and
+  `player_broke_bea_and_ijvani` (on `b6.zel_breaks_the_chosen_and_azkerash_comes`; sets `zel.saved_by_the_player`).
+- Next: user merges the PR. Then M32.3 **[Opus · medium]** (boss feel), then M32.4 (Zel lives) reads the flag.
+- Gotchas: a fight with no foes and waves left does not tick on `Commands.wait` if you erased foes by hand (no
+  turn to pass): tests call `Stage.tick` + `Combat.settle_if_over`. Godot runs are slow when an old Godot
+  process is still alive: kill stray `Godot_v4.7.2*` first (a `timeout` does not kill the child). Old failure:
+  `sim_book5_last_light` 2 tests (`standing.gd:100`), also on main.
+
 ## Just done (2026-10-25, local): M32.1 three doors (branch `feat/m32.1-three-doors`)
 - Built (ADR 0044 "M32.1"): enemies `calruz` (enemy id = NPC id, so his sheet; an enemy `look` must name an
   enemy) and `nokha_awakened`, both with `escape` (they never die). Awakened Raskghar danger 1.0 -> 0.95, so the

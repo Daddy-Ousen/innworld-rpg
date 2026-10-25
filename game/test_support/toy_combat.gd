@@ -44,6 +44,8 @@ static func db() -> DataDb:
 		"tags": {"running.escape": 1.0}}
 	d.actions["spare_foe"] = {"name": "Spare", "minutes": 5, "base_xp": 6, "risk": 0.0,
 		"tags": {"social.empathy": 1.0}}
+	d.actions["drive_off_foe"] = {"name": "Drive off", "minutes": 5, "base_xp": 6, "risk": 0.5,
+		"tags": {"combat.melee": 1.0}}
 	d.actions["bandage_wound"] = {"name": "Bandage", "minutes": 20, "base_xp": 6, "risk": 0.0,
 		"tags": {"medicine.first_aid": 1.0}}
 	d.rules["combat"]["knockout"]["wake"] = {"field": {"area": "shop", "pos": [1, 1]}}

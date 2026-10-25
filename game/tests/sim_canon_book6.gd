@@ -188,12 +188,13 @@ func test_greydath_is_a_flag_not_a_merge() -> void:
 	assert_true(gs.flags.has("greybeard.is_greydath_of_blades"))
 
 
-func test_the_party_and_the_arrival_are_the_new_stages() -> void:
+func test_the_party_the_arrival_and_zels_battle_are_the_new_stages() -> void:
 	var staged: Array[String] = []
 	for id: String in _b6_events():
 		if _db.canon.events[id].has("stage") and int(_db.canon.events[id]["window"]["earliest"]) >= 127:
 			staged.append(id)
-	assert_eq(staged, ["b6.the_goblin_party_at_the_inn", "b6.the_silver_swords_arrive_into_a_cake_fight", "b6.liscor_mourns_zel"])
+	assert_eq(staged, ["b6.the_goblin_party_at_the_inn", "b6.the_silver_swords_arrive_into_a_cake_fight",
+			"b6.the_battle_of_invrisil_opens", "b6.liscor_mourns_zel"], "M32.2: Zel's last stand on invrisil_battlefield")
 
 
 func test_raskghar_has_its_name() -> void:

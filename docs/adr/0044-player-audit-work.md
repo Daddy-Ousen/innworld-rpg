@@ -337,6 +337,29 @@ Detail per step in `docs/plans/m32.md`.
   `player_fought_the_daylight_raid` (5.38). Calruz and Nokha stay alive in every outcome. A `change` hook adds 0.25
   drift; a player who stays away keeps drift 0.
 
+### M32.2 (2026-10-25): Zel's last stand on a new map
+**Rule check (user pick, 2026-10-25: "full rule").** A fight's records name only its most dangerous foe, and a hook
+fired on any one deed, so "drive off Bea and Ijvani before the last wave while Zel stands" could not be seen. Two
+small, optional additions (no save change: the new fight key is read with a default):
+- **`drive_off_foe` records (core, `Combat`).** When a foe with `escape` is driven off in a fight, the fight notes
+  it; at the end of the fight one `drive_off_foe` record per foe is written. Its context is the fight's base
+  context with `enemy` = that foe, `waves_left` (waves of the stage in progress still to come) and, when the
+  foe's stage has a `protect` NPC, `protect_standing` (that NPC is alive, on the map and not down). New action
+  `drive_off_foe` in `actions.json` (tag `combat`). Old escape fights (Gazi, Persua, Regrika, Calruz, Nokha) now
+  write this record too.
+- **Stage key `protect`** (a fight stage ally or wave ally) and **hook key `all`** (true: every `did` entry needs a
+  record of its own). `CanonDb` and `tools/validate_data.py` check both.
+
+**The stage** sits on `b6.the_battle_of_invrisil_opens` (4.48, day 130, hours 9 – 15 a guess, XP window x3,
+signpost 3 days before) on the new map `invrisil_battlefield` (west exit to `invrisil_gate`, 80 minutes, a guess;
+knock-out wakes you at the gate). Waves: Zel, Thomast and Bethal with two Rose Knight helpers; Goblins; the undead
+with a Crypt Lord; a lieutenant (the Goblin commander stands in); Bea, Ijvani and Oom in the ring of bone; last
+Venitra and Kerash. No Drakes beside Zel. New enemies `rose_knight` (helper), `bea`, `ijvani` (ranged), `oom`,
+`venitra`, `kerash` (all Chosen use `escape`: none dies on the map; Oom still dies by his canon event).
+**Hooks:** `player_fought_beside_zel` (on the stage event) and `player_broke_bea_and_ijvani` (`all`, on
+`b6.zel_breaks_the_chosen_and_azkerash_comes`, which Zel's death `depends_on`, so the flag is set first): it sets
+`zel.saved_by_the_player`. In M32.2 nothing reads the flag; Zel still dies. M32.4 makes the bend.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the
