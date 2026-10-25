@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-10-25, local): sim_canon_book8 (branch `test/sim-canon-book8`)
+- New `game/tests/sim_canon_book8.gd` (6 tests, all pass): 269 events done days 143 - 163 with drift 0; the 4 named dead;
+  3 stages each with `xp_window`; moon / boycott / Calruz flags; chapter order. Test only, no data change. Full suite not run.
+- Next: user merges the PR. Then M32.0 **[Opus · high]**: ask the user the choices first (Zel, his stage, Tremborag's hall, Klbkch).
+- Gotchas: `mrsha.taken_by_the_raskghar` and `ceria.taken_by_the_raskghar` are cleared in 5.44 (freed). Dead check: `gs.world.is_alive(_db.canon, id)`.
+
 ## Just done (2026-10-25, local): ROADMAP update (branch `docs/roadmap-update-2`)
 - PR #232 (M31.3) and #233 (Greydath fix) are merged. ROADMAP "At a glance" says M31.0 – M31.3 merged; next step
   is `sim_canon_book8`, then M32.0. Checked: `sim_canon_book6` 13/13 pass on main. Docs only.

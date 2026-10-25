@@ -46,7 +46,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] M28.8 canon 5.39 – 5.42 (2026-10-17, branch `feat/m28.8-canon-5-39`): 41 events, days 161 – 162, events only (no stage, no hook). One kill (Rebat). System records: Shorthilt, Badarrow, Rabbiteater, Drassi, Ksmvr, Calruz. Tests: `sim_book8_dive_one` (new, 6), raid_two, north_two, `sim_canon_book7`, `unit_canon_db` pass; validator 0 errors; Python 116 OK. Full suite not run.
   - [x] M28.9 canon 5.43, Interlude – Niers, 5.44 (2026-10-17, branch `feat/m28.9-canon-5-43`): 26 events, days 162 – 163. Stage `b8.three_doors_open_on_the_raskghar_camp` (`raskghar_camp`, day 163, 18 – 23 h, xp x3). No hook. Way in: Erin's magic door in `inn_interior` links to the camp on day 163 only (user pick: flag-gated exit); knock-out wakes at the inn. Kills: Cassa, Vakk. Calruz in the Watch prison; captives freed; Erin [Magical Innkeeper] 36. Tests: `sim_book8_battle_one` (new, 9), `sim_kill_book8` (new, 6), `sim_book8_world` (changed), `unit_map_db`, `unit_other_maps`, `unit_ground_art`, `sim_liscor_depths`, `unit_data_db` pass; validator books 1 – 8: 0 errors. Full suite not run.
   - [x] M28 all canon batches done. Merged (PR #200, 2026-10-17).
-  - [ ] `sim_canon_book8` (named in the M28 "Done when"; not written yet).
+  - [x] `sim_canon_book8` (2026-10-25, branch `test/sim-canon-book8`): 6 tests, 269 events, days 143 - 163, drift 0, 3 stages, 4 kills, flags, order. Pass. Full suite not run.
   - [ ] The user plays Book 8 (`godot --path game`): the raid stages, the camp door on day 163, the boycott.
 - [x] Class tree from the wiki, steps 1 – 3 (2026-10-07/08): advancement classes, riding / animals / gardening / faith tags, hunter, archer, alchemist, blacksmith, teacher, knight, assassin. Test lists in the archive.
 - [x] Class tree step 4 (2026-10-13, branch `feat/class-tree-step4`): 15 classes (4 base: tailor, glassblower, tinkerer, bard; 7 advancements: pyromancer, necromancer, illusionist, armorer, weaponsmith, trader, diplomat; 4 consolidations: battlemage, paladin, spymaster, apothecary) + 15 passive Skills. Data only, existing tags. All `confidence: guess`. Tests: `unit_class_tree_step4` (new, 5), step2, step3, `unit_class_system`, `unit_class_actions` pass. Full suite not run.
@@ -266,7 +266,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] ROADMAP updated (2026-10-19, branch `docs/roadmap-update`): M29 and M30 marked merged, phone check for M30.5 added,
   next step M31.0, outside PR #210 in Later. Docs only, no tests run.
 
-- [ ] M28 leftover found: `sim_canon_book8` (in M28 "Done when") does not exist. Roadmap item added under M28.
+- [x] M28 leftover `sim_canon_book8` written (see M28 above).
 
 ## Audit (2026-10-08, local, read-only; no code changed)
 - [x] Findings split into modules M21 – M26 in `docs/ROADMAP.md` "Audit work" (2026-10-09). Work them from there; the list below is the source.

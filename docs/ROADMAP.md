@@ -11,7 +11,6 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| `sim_canon_book8` (M28 loose end) | to do | Sonnet · medium |
 | M31 Signposts and scene beats | M31.0 – M31.3 merged (PR #230 – #232); the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
 | M32 Climaxes of Books 6 – 8 | planned (`docs/plans/m32.md`) | M32.0 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
@@ -19,7 +18,7 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: `sim_canon_book8` (small), then M32.0 (choices for the user, then the build). The M31 play check and the
+Next step: M32.0 (choices for the user, then the build). The M31 play check and the
 other play checks do not block M32. The old `sim_canon_book6` failure is fixed (PR #233, 13/13 pass).
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
@@ -32,9 +31,6 @@ engine, save and design work and for canon logic; high effort where lore, balanc
 
 M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10-17.md`, ADR 0044); the user said
 "we will do all". One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
-
-## M28 loose end
-- [ ] `sim_canon_book8`: Book 8 runs to its last day (163) with drift 0. Named in the M28 "Done when", not written yet **[Sonnet · medium]**
 
 ## M31 — Signposts and scene beats (plan `docs/plans/m31.md`, ADR 0044)
 - [x] M31.0 Engine: event `foreshadow` (talk in town, journal "Coming up") and stage `beats` (timed lines with a speaker); schema ask **[Opus · medium]** (2026-10-24, ADR 0044 "M31.0", no save change)
