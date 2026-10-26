@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-10-26, local): M33.2 quest engine (branch `feat/m33.2-quest-engine`)
+- User picks: a quest starts from an auto talk row on its giver ("Ask about: <title>"); a spell reward unlocks the
+  teacher (spell `learn.flags`, set by a reward flag). Plan: `docs/plans/m33.md` "M33.2 build plan". ADR 0044 "M33.2".
+- Code: new `core/quests.gd` (offers, start, after_action, update, journal_lines, validate) and `core/quest_state.gd`
+  (`gs.quests`, save v24 + `_migrate_23_to_24`). Hooks: `Actions.perform`, `Commands._after`, `Night.run` (step 5d),
+  `Interact` (`QUEST`, NPC option `quests`), `ui/interact_menu.gd`, `ui/console_commands.gd`, `ui/journal.gd`
+  ("Tasks" at the top), `Spells.teach_error` + `SpellDb` (`learn.flags`). `tools/validate_data.py` checks quests.json.
+- Data: `data/quests.json` has no quests yet.
+- Next: user merges the PR. Then M33.3 three quest lines **[Sonnet · high]**: ask the user to pick the lines first
+  (plan: Erin's inn, Pawn, magic from Pisces or Ceria). Each line is quests.json data; a magic line can end with a
+  reward flag that a spell's `learn.flags` waits on.
+- Gotchas: a "go back to the giver" step is a `did` step on `talk_with_guest` with context `{"npc": giver}`. The
+  "Ask about" talk record itself never counts (the quest starts after it). Quest lines go to `gs.combat.lines`
+  (during the day) or the night lines. The Bash tool turns a backslash line break inside a heredoc into tabs: write
+  long patch scripts to the scratchpad with the Write tool, or use Edit.
+
 ## Just done (2026-10-26, local): M33.1 Erin's food and drink (branch `feat/m33.1-erin-food`)
 - Data only (ADR 0044 "M33.1"): 5 recipes, 5 actions (`make_juice`, `fry_burgers`, `warm_honey_milk`, `mix_milkshake`,
   `mix_faerie_drink`), 5 dishes, 5 ingredients; stove lists in `inn_interior` and `invrisil_crag_pig`; `rules.inn.dishes`;
@@ -727,7 +743,7 @@
 - Rhir is real; Calruz stays missing; never link two canon entities unless the text says so (Ylawes is Yvlon's brother: 3.24 says so).
 - Book 3 "E" chapters are Laken, not Erin. Laken's days: game day = his journal day + 45 in every book (ADR 0028).
   Geneva, Niers (3.22L) and Venitra use placeholder days.
-- Save is v23 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
+- Save is v24 (see `core/game_state.gd`). `MapDb` holds maps in `areas`; use `objects_on(area)` or `objects_near`, not `areas[a]['objects']`, so flag-hidden objects stay hidden. Enemy `danger` must be 0.0–1.0.
 - Same-day canon order: Book 6+ chapter files carry `"order"`; events then run in chapter order and file order
   (M18.0). Books 1 – 5 still run in id order. Use `depends_on` only for a real dependency (a cancel spreads).
   Siblings that share one dependency run in that order too, so a sibling can clear a flag another still `requires` (M10.1: the rescue cleared `mrsha.fell_into_the_dungeon` before Toren's event). Debug with a throwaway `extends SceneTree` script that prints `gs.world.history` reasons. Helper-only waves come at once when no foe is left; put helper waves before the last foe wave.
