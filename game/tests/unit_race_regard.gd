@@ -49,6 +49,19 @@ func test_friends_of_erin_and_other_races_are_not_wary() -> void:
 	assert_eq(Standing.race_start(gs, _db, "no_such_npc"), 0)
 
 
+
+## Zel's canon "home" is null (he has none). A null home or race must not break the
+## String() call; such an NPC simply has no town, so no wariness.
+func test_an_npc_with_a_null_home_or_race_starts_at_zero() -> void:
+	var gs := _game()
+	_db.canon.npcs["test_homeless_drake"] = {"race": "Drake", "home": null}
+	_db.canon.npcs["test_no_race"] = {"race": null, "home": MARKET}
+	var out := [Standing.race_start(gs, _db, "test_homeless_drake"), Standing.race_start(gs, _db, "test_no_race")]
+	_db.canon.npcs.erase("test_homeless_drake")
+	_db.canon.npcs.erase("test_no_race")
+	assert_eq(out, [0, 0])
+	assert_eq(Standing.race_start(gs, _db, "zel_shivertail"), 0, "a Drake with no home")
+
 func test_reputation_wears_the_wariness_away() -> void:
 	var gs := _game()
 	var id := _drake(false)

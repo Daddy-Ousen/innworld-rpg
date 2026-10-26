@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-26, local): fix race start null home (branch `fix/race-start-null-home`)
+- `Standing.race_start` crashed on `String(null)`: Zel's canon `"home"` is `null`, and `Dictionary.get(key, default)`
+  returns a stored `null`, not the default. It now returns 0 when race or home is not a String. Guard test in
+  `unit_race_regard`. `sim_book5_last_light` is green again (9/9). Two broken line breaks in `standing.gd` fixed.
+- Next: user merges the PR. Optional follow-up in `progress.md` "Fixes": the same broken line breaks in 9 other files.
+- Gotcha: the Bash tool turns `\\` into `\` in a Python heredoc. A `\` + newline then vanishes, and a line break
+  becomes one long line with tabs. That is most likely how these broken lines were made. Use the Edit tool to write
+  a GDScript `\` line break. Also: `--import` rewrites all `.import` files (CRLF noise): `git checkout -- game/addons game/assets game/icon.png.import`.
+
 ## Just done (2026-10-25, local): M32.2 Zel's stage (branch `feat/m32.2-zel-stage`)
 - User pick: the full save rule (ADR 0044 "M32.2"). Engine: a foe driven off (escape) writes a `drive_off_foe`
   record at fight end, context = base + `enemy`, `waves_left`, and `protect_standing` when the stage has a
