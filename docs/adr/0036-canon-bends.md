@@ -289,5 +289,5 @@ sims (Books 2 – 6) still pass: they stop at their own book's last day.
 - Drift counts later-book cancels at once, so a Book 2 death shows drift for Books 3 – 7 too.
 - Event effects are not remapped for flags: a substitute in Erin's rescue role still sets `erin.fought_in_the_ruins`.
   Later events that read such flags need Erin anyway.
-- A Zel killed before Invrisil (Book 6) still gets the Book 7 casket, will and funeral, with the Heartflame
-  Breastplate on his body. No Book 7 event reads a Book 6 Zel flag yet.
+- ~~A Zel killed before Invrisil (Book 6) still gets the Book 7 casket, will and funeral.~~ Closed by M32.4
+  (ADR 0044): the Book 7 mourning needs `zel.dead_at_invrisil`; a living Zel with the armour gives it to Selys.

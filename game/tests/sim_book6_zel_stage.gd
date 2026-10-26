@@ -2,8 +2,8 @@ extends GutTest
 ## M32.2 (ADR 0044 "M32.2") on the real Book 6 data: Zel's last stand (4.48 - 4.49, day 130) is a fight stage on
 ## the new map invrisil_battlefield. Goblins, the undead, a lieutenant, then the Chosen: Bea, Ijvani and Oom, and last
 ## Venitra and Kerash. None of the Chosen can die on the map (escape). Two hooks: fighting beside Zel, and driving off
-## Bea and Ijvani before the last wave while Zel stands (sets zel.saved_by_the_player). In M32.2 nothing reads that
-## flag yet: Zel still dies. The game is slept to day 129 once (before_all); each test starts from a copy.
+## Bea and Ijvani before the last wave while Zel stands (sets zel.saved_by_the_player). Since M32.4 the flag saves
+## him (sim_book6_zel_lives). The game is slept to day 129 once (before_all); each test starts from a copy.
 
 const SEED := 20261004
 const DAY := 130
@@ -226,7 +226,7 @@ func test_the_battle_can_be_fought_through() -> void:
 	assert_eq(gs.world.status(BATTLE), Director.CHANGED)
 	assert_eq(_hook_of(gs, BATTLE), FIGHT_HOOK)
 	assert_true(gs.flags.has("invrisil.earther_fought_beside_zel"))
-	assert_false(gs.world.is_alive(db.canon, ZEL), "M32.2: Zel still dies")
+	assert_eq(gs.world.is_alive(db.canon, ZEL), gs.flags.has(SAVED), "M32.4: Zel lives only if saved")
 	for n: String in ["venitra", "ijvani", "bea", "kerash", LORD]:
 		assert_true(gs.world.is_alive(db.canon, n), n + " is not killed on the map")
 
@@ -247,8 +247,9 @@ func test_driving_off_bea_and_ijvani_with_zel_standing_saves_him_in_the_record()
 	assert_eq(gs.world.status(BREAK), Director.CHANGED)
 	assert_eq(_hook_of(gs, BREAK), SAVE_HOOK)
 	assert_true(gs.flags.has(SAVED))
-	assert_false(gs.world.is_alive(db.canon, ZEL), "nothing reads the flag yet (M32.4 does)")
-	assert_eq(gs.world.status(DEATH), Director.DONE)
+	assert_true(gs.world.is_alive(db.canon, ZEL), "M32.4: Zel lives")
+	assert_eq(gs.world.status(DEATH), Director.MUTATED)
+	assert_false(gs.flags.has("azkerash.came_to_invrisil_by_scroll"), "Az'kerash never came")
 
 
 func test_with_zel_down_the_flag_is_not_set() -> void:

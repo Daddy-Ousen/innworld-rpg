@@ -419,7 +419,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_combat` (31), `unit_combat_preview` (15), `unit_combat_skills` (21), `sim_canon_fights` (6),
   `sim_canon_book1` (15), `sim_canon_book5` (19), `sim_kill_book5` (10), `sim_canon_book6` (13),
   `sim_book6_zel_dies` (7). Validator books 1, 5, 6: 0 errors. Python 131 OK. Full suite not run.
-- [ ] M32.4 Zel lives (bend and cascade, `sim_book6_zel_lives`).
+- [x] M32.4 Zel lives (2026-10-26, branch `feat/m32.4-zel-lives`, ADR 0044 "M32.4"). No engine, schema or save
+  change. Death `not_flags: zel.saved_by_the_player` + mutate to `b6.zel_spares_reiss_and_lives` (sets
+  `zel.survived_invrisil` and the Goblin flags). Alts: Magnolia's bounty, Az'kerash's anger, Liscor hears he lived;
+  Reiss guarding the body and Klbkch's mirror cancel. Book 7 mourning needs `zel.dead_at_invrisil`; funeral stage
+  `when_flags`. `b7.zel_gives_selys_the_heartflame` (needs a living Zel with the armour). Zel goes back to Liscor
+  (behaviour `unless_flags`). Save hook clears the "Az'kerash came" flags. Cost: 25 events lost, drift 15.
+  Tests (all pass): new `sim_book6_zel_lives` (8), `sim_book6_zel_stage` (9, Zel now lives when saved),
+  `sim_canon_book6` (13), `sim_canon_book7` (5), `sim_kill_book6` (9), `sim_book6_zel_dies` (7),
+  `sim_book7_zel_and_selys` (4), `unit_canon_db` (7). `sim_kill_book7` 9/10: Magnolia ceiling raised 12 / 18 ->
+  31 / 30 (no battle, so Zel lives and is not mourned); the Laken drift failure (50 > 13) is old (also on main).
+  Validator books 6, 7: 0 errors. Python 131 OK. Full suite not run.
 - [ ] The user plays the three doors and Zel's last stand.
 
 ## Docs
@@ -428,6 +438,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
 ## Fixes
+- [ ] Old failure: `sim_kill_book7` `test_laken_dies_and_riverfarm_holds_together` drift 50 > 13 (also on main
+  2026-10-26, before M32.4). Cause not checked yet.
 - [x] Race start null home (2026-10-26, branch `fix/race-start-null-home`): `sim_book5_last_light` (2 tests) errored
   at `core/standing.gd:100` (`Invalid call 'String' constructor: Drake`). Cause: Zel's canon `"home"` is `null`;
   `get("home", "")` returns that `null` (the default is only for a missing key), and `String(null)` fails. Only a
