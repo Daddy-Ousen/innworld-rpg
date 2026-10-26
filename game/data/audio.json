@@ -225,7 +225,8 @@
     "ijvani": {"hurt": "ghoul_hurt"},
     "oom": {"hurt": "ghoul_hurt"},
     "venitra": {"hurt": "ghoul_hurt"},
-    "kerash": {"hurt": "ghoul_hurt", "gone": "big_roar"}
+    "kerash": {"hurt": "ghoul_hurt", "gone": "big_roar"},
+    "goblin_lord": {"hurt": "goblin_hurt", "gone": "goblin_gone"}
   },
   "pages": {
     "open": "chime",

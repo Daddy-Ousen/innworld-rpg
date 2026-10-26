@@ -360,6 +360,26 @@ Venitra and Kerash. No Drakes beside Zel. New enemies `rose_knight` (helper), `b
 `b6.zel_breaks_the_chosen_and_azkerash_comes`, which Zel's death `depends_on`, so the flag is set first): it sets
 `zel.saved_by_the_player`. In M32.2 nothing reads the flag; Zel still dies. M32.4 makes the bend.
 
+### M32.3 (2026-10-26): boss feel
+User picks (2026-10-26): **three new ability kinds** (rule 11: asked first); Skinner's fear **takes AP** (not a
+frozen turn); **the Goblin Lord is a new foe** on Zel's stage (not the Goblin commander). No save change: the new
+state lives in the encounter dictionary, which is already saved and ends with the fight.
+- **`fear`** {`range`, `ap_q`}: at the start of the player's turn, a hostile monster with fear in sight within
+  `range` takes `ap_q` of the player's AP (`Encounter._run_until_player`). Several fears do not add up. Skinner:
+  "Red eyes", range 6, 8 q (2 AP of 6; the question said "1 of 3", the share is the same). Break sight to escape it.
+- **`bile`** {`range`, `ap_q`, `cooldown`, `chance`, `rounds`, `damage`}: before it walks or hits, the monster spits
+  at its target in sight (player, NPC or helper). A hit poisons: a `damage` roll (no armor) at the start of each of
+  the target's next `rounds` turns (`encounter.poison`). A new spit sets the rounds again. Crypt Lord: "Black bile",
+  range 3, 8 q, cooldown 3, chance 0.6, 3 rounds, 1 – 3. It replaces the Crypt Lord's old `ranged` stone.
+- **`command`** {`radius`, `accuracy`, `tag`}: other hostile monsters with `tag` within `radius` of a hostile
+  commander get +`accuracy` to hit (`Combat.monster_attack`, `_attack_other`) and do not run at `flee_below`
+  (`MonsterSim._hostile_checks`). Not on the commander itself.
+- **Regrika** needs no new kind: `agility` 8 (she acts before most) and a leap "Charge" (range 4, 4 q, cooldown 2).
+- **New enemy `goblin_lord`** (enemy id = NPC id, as Calruz): Shaman art (`look`), `escape` at 60% (he lives, as in
+  4.49), command (radius 6, +2, tag `goblin`), danger 0.98 (records still name Kerash or the commander). He rides
+  in with the commander and a Hob in the wave before the Chosen; `player_fought_beside_zel` counts him.
+- All numbers are guesses.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

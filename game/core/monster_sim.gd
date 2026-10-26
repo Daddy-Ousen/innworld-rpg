@@ -296,7 +296,7 @@ static func _hostile_checks(gs: GameState, db: DataDb, id: String) -> bool:
 	var m: Dictionary = c.monsters[id]
 	var e: Dictionary = db.combat.enemies[m["type"]]
 	var you := gs.player.pos()
-	if _beaten(db, c, m, e):
+	if _beaten(db, c, m, e) and MonsterAbilities.command_over(gs, db, id).is_empty():  # M32.3: commanded ones stand
 		m["state"] = CombatState.FLEE
 		if c.has_fight():
 			c.fight["routed"] += 1

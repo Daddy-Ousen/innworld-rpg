@@ -12,13 +12,13 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Milestone | State | Model · effort per step |
 |---|---|---|
 | M31 Signposts and scene beats | M31.0 – M31.3 merged (PR #230 – #232); the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
-| M32 Climaxes of Books 6 – 8 | M32.0 - M32.1 merged; M32.2 done (PR open); next M32.3 (`docs/plans/m32.md`) | M32.1 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
+| M32 Climaxes of Books 6 – 8 | M32.0 - M32.2 merged; M32.3 done (PR open); next M32.4 (`docs/plans/m32.md`) | M32.1 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
 | M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M30, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: M32.3 (boss feel). The M31 play check and the other play checks do not block M32.
+Next step: M32.4 (Zel lives). The M31 play check and the other play checks do not block M32.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -43,7 +43,7 @@ M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10
 - [x] M32.0 Choices and reading **[Opus · high]** (2026-10-25: Zel can be saved; new battlefield map; Tremborag stays news; Klbkch always dies)
 - [x] M32.1 The three-door battle in full: Calruz as the last foe (he yields), the Horns as allies; hooks on all three Book 8 stages **[Opus · high]**
 - [x] M32.2 Zel's last stand on a new map `invrisil_battlefield` (day 130): the Chosen as foes, a signpost and hooks **[Opus · high]**
-- [ ] M32.3 Boss feel: Skinner's fear, the Crypt Lord's bile, Regrika, the Goblin Lord **[Opus · medium]**
+- [x] M32.3 Boss feel: Skinner's fear, the Crypt Lord's bile, Regrika, the Goblin Lord **[Opus · medium]** (2026-10-26: new kinds `fear`, `bile`, `command`; new foe `goblin_lord`)
 - [ ] M32.4 Zel lives: drive off Bea and Ijvani and he survives; the Book 6 – 7 mourning cancels; he gives Selys the Heartflame **[Opus · high]**
 - [ ] (user) Play the three doors and Zel's last stand
 **Done when:** Calruz, the Horns and the Chosen fight on the map; every Book 8 stage has a hook; the kill sims and `sim_canon_book6` – `8` stay green; the user has played it.

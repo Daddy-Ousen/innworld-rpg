@@ -33,7 +33,7 @@ func _sprite(v: WorldView, id: String) -> CharacterSprite:
 
 func test_every_enemy_has_a_sheet() -> void:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))
-	assert_eq(data["enemies"].size(), 57)  # M32.2: rose_knight, bea, ijvani, oom, venitra, kerash; M32.1: calruz, nokha_awakened; M28.1: raskghar_armoured, awakened_raskghar; M19.1: face_eater_moth, moth_swarm; M18.1: eater_goat
+	assert_eq(data["enemies"].size(), 58)  # M32.3: goblin_lord; M32.2: rose_knight, bea, ijvani, oom, venitra, kerash; M32.1: calruz, nokha_awakened; M28.1: raskghar_armoured, awakened_raskghar; M19.1: face_eater_moth, moth_swarm; M18.1: eater_goat
 	for type: String in data["enemies"]:
 		var look := String(data["enemies"][type].get("look", type))
 		assert_true(CharacterSprite.has_sheet(look), "no sheet for %s (tools/build_sprites.py or build_creatures.py)" % type)

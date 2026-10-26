@@ -1,5 +1,20 @@
 # Handoff
 
+## Just done (2026-10-26, local): M32.3 boss feel (branch `feat/m32.3-boss-feel`)
+- User picks (ADR 0044 "M32.3"): three new ability kinds; fear takes AP; the Goblin Lord is a new foe.
+- Code: `core/monster_abilities.gd` (kinds `fear`, `bile`, `command`; `ready`, `apply_fear`, `spit`,
+  `poison_tick`, `command_over`, `command_bonus`), `core/encounter.gd` (poison tick at each turn start, fear at the
+  player's turn start, the spit in `_hostile_turn`), `core/combat.gd` (command accuracy in both monster attacks),
+  `core/monster_sim.gd` (a commanded foe does not flee).
+- Data: Skinner fear, Crypt Lord bile (its `ranged` removed), Regrika agility 8 + "Charge" leap, new enemy
+  `goblin_lord` (voice in `audio.json`), Zel's stage wave 3 and the hook enemy list (`4.48.json`).
+- Next: user merges the PR. Then M32.4 **[Opus · high]** (Zel lives: the bend reads `zel.saved_by_the_player`).
+  Also PR #239 (the `standing.gd` fix from a side session) waits for a merge.
+- Gotchas: `-gselect=unit_combat` also runs `unit_combat_db`, `_preview`, `_screen`, `_skills`: use
+  `-gselect=unit_combat.gd`. `-gtest=...` without a match runs the whole suite: do not use it. A Godot run can
+  stall at exit; kill stray `Godot_v4.7.2*` and rerun. Q_PER_AP is 4 (6 AP a turn at level 0), not 8.
+  `canon_ref` / stage `note` max 300 chars.
+
 ## Just done (2026-10-25, local): M32.2 Zel's stage (branch `feat/m32.2-zel-stage`)
 - User pick: the full save rule (ADR 0044 "M32.2"). Engine: a foe driven off (escape) writes a `drive_off_foe`
   record at fight end, context = base + `enemy`, `waves_left`, and `protect_standing` when the stage has a
