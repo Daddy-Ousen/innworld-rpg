@@ -1,0 +1,5 @@
+{
+	"schema_version": 1,
+	"note": "M33.2 (ADR 0044 \"M33.2\"). Quests: id -> {title, giver (canon NPC), offer, gate? {flags, not_flags, days, min_band}, fail? {flags, after_day}, steps [{text, flag} or {text, did {action, outcome?, context?}, count?}], rewards? {relationship, coins, goods {good: n}, flags}, done?, confidence, canon_ref?, note?}. The giver dying fails a quest. Own words only, no book quotes. The quest lines come in M33.3.",
+	"quests": {}
+}

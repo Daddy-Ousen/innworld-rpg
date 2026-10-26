@@ -324,8 +324,12 @@ func _look() -> Array[String]:
 	var options := Interact.options(gs, db)
 	for o: Dictionary in options:
 		var actions: Array = (o.get("voice", []) as Array).map(func(v: Dictionary) -> String:
-				return Interact.VOICE + String(v["id"])) 				+ (o["actions"] as Array) + ([Interact.SLEEP] if o["sleep"] else []) \
-				+ ([Interact.TAKE] if o["item"] != "" else [])
+				return Interact.VOICE + String(v["id"]))
+		actions.append_array((o.get("quests", []) as Array).map(func(q: Dictionary) -> String:
+				return Interact.QUEST + String(q["id"])))  # M33.2
+		actions.append_array(o["actions"])
+		actions.append_array([Interact.SLEEP] if o["sleep"] else [])
+		actions.append_array([Interact.TAKE] if o["item"] != "" else [])
 		if int(o.get("price", 0)) > 0:
 			actions.append("(room %s)" % Economy.format(db, int(o["price"])))
 		for t: Dictionary in o.get("trades", []):

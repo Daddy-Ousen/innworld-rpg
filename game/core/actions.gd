@@ -100,6 +100,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 		"xp": xp,
 	}
 	gs.action_log.add(record)
+	Quests.after_action(gs, db, record)  # M33.2: a quest step may count it
 	var minutes := maxi(int(opts.get("minutes", def["minutes"])), 0)
 	gs.clock.advance(minutes)
 	Mana.tick(gs, db, minutes)

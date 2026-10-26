@@ -73,7 +73,7 @@ func test_validate_catches_bad_data() -> void:
 
 
 func test_save_v23_keeps_who_you_are() -> void:
-	assert_eq(GameState.SAVE_VERSION, 23)
+	assert_true(GameState.SAVE_VERSION >= 23)
 	var gs := GameState.new_game(5, _db, "", {"name": "Mara", "look": "player_2", "background": "gamer"})
 	var loaded := GameState.from_json(gs.to_json())
 	assert_eq(loaded.player.name, "Mara")
@@ -88,7 +88,7 @@ func test_v22_save_migrates() -> void:
 		(d["player"] as Dictionary).erase(k)
 	var gs := GameState.from_json(JSON.stringify(d))
 	assert_not_null(gs)
-	assert_eq(gs.save_version, 23)
+	assert_eq(gs.save_version, GameState.SAVE_VERSION)
 	assert_eq(gs.player.name, PlayerIdentity.DEFAULT_NAME)
 	assert_eq(gs.player.look, PlayerIdentity.DEFAULT_LOOK)
 	assert_eq(gs.player.background, "")

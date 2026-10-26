@@ -1,4 +1,4 @@
-## The journal (J, M6.1): the day, the news of the last days, what the player
+## The journal (J, M6.1): the day, the player's tasks (M33.2, Quests), the news of the last days, what the player
 ## changed in the story and the drift (M6.4), what is coming up (M31.0, Foreshadow),
 ## and how to play.
 ## The focus picker was removed from the screen (2026-10-11); `focus_choices`,
@@ -92,8 +92,11 @@ static func lines(gs: GameState, db: DataDb) -> Array[String]:
 	var out: Array[String] = [
 		"Day %d, %s." % [_pday(gs.clock.day(), db), gs.clock.time_string()],
 		"",
-		"Your mark on the story:",
+		"Tasks:",
 	]
+	out.append_array(Quests.journal_lines(gs, db))  # M33.2
+	out.append("")
+	out.append("Your mark on the story:")
 	var marks := changes(gs, db)
 	if marks.is_empty():
 		out.append("  Nothing yet.")

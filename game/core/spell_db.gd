@@ -17,7 +17,8 @@
 ##          {"teacher": canon npc id, "after_event": canon event id that must be done,
 ##          "minutes": study time, "book": good id (a good with "teaches": this spell),
 ##          "band": a standing band label (rules.standing.bands) the teacher's regard
-##          for the player must reach (M33.0)}.
+##          for the player must reach (M33.0), "flags": flags that must all be set,
+##          e.g. by a quest reward (M33.2)}.
 ##          A spell nobody teaches is for NPC casters only.
 ##          The names are canon; every number is a design guess (see canon_ref).
 class_name SpellDb
@@ -162,8 +163,11 @@ func _validate_spell(id: String, s: Variant, db: DataDb) -> void:
 			errors.append("%s learn: unknown after_event '%s'." % [where, learn["after_event"]])
 		if learn.has("band") and not Voice.band_keys(db).has(String(learn["band"])):
 			errors.append("%s learn: unknown band '%s'." % [where, learn["band"]])
-	elif learn.has("after_event") or learn.has("band"):
-		errors.append("%s learn: after_event and band need a teacher." % where)
+		if learn.has("flags") and not (learn["flags"] is Array \
+				and (learn["flags"] as Array).all(func(f: Variant) -> bool: return f is String and f != "")):
+			errors.append("%s learn: flags must be a list of flag names." % where)
+	elif learn.has("after_event") or learn.has("band") or learn.has("flags"):
+		errors.append("%s learn: after_event, band and flags need a teacher." % where)
 	if learn.has("book"):
 		var good: String = String(learn["book"])
 		if not db.economy.goods.has(good):

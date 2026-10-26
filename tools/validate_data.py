@@ -31,6 +31,9 @@ With --all, <canon root>/../voices.json (M30, ADR 0044 "M30.0") is checked too, 
 NPC ids exist in some book, greet keys are "stranger" or band labels from rules.json,
 texts have at most rules.voice.max_words words, option ids are unique per NPC and
 their actions exist, gates (flags, not_flags, days, min_band) are well formed.
+With --all, <canon root>/../quests.json (M33.2, ADR 0044 "M33.2") is checked too, if it exists:
+givers exist, steps have a flag or a did (with known actions), rewards name known goods,
+gates and fails are well formed.
 
 Exit code 0 = valid, 1 = errors. Stdlib only.
 """
@@ -1056,6 +1059,148 @@ def validate_voices(path: Path, canon_root: Path, actions: set[str] | None) -> R
     return r
 
 
+# ---------------------------------------------------------------- quests (M33.2)
+
+QUEST_FIELDS = {"title", "giver", "offer", "gate", "fail", "steps", "rewards", "done", "confidence",
+                "canon_ref", "note"}
+QUEST_STEP = {"text", "flag", "did", "count"}
+QUEST_DID = {"action", "outcome", "context"}
+QUEST_FAIL = {"flags", "after_day"}
+QUEST_REWARD = {"relationship", "coins", "goods", "flags"}
+
+
+def _nonempty(v) -> bool:
+    return isinstance(v, str) and bool(v.strip())
+
+
+def _quest_step(r: Report, where: str, s, actions: set[str] | None) -> None:
+    if not isinstance(s, dict):
+        r.err(where, "must be an object")
+        return
+    for k in s:
+        if k not in QUEST_STEP:
+            r.err(where, f"unknown field '{k}'")
+    if not _nonempty(s.get("text")):
+        r.err(where, "text must be a non-empty string")
+    if ("flag" in s) == ("did" in s):
+        r.err(where, "needs a flag or a did, not both")
+    if "flag" in s and not (isinstance(s["flag"], str) and RE_FLAG.match(s["flag"])):
+        r.err(where, "flag must be a flag name")
+    if "count" in s and ("flag" in s or not (_int(s["count"]) and s["count"] >= 1)):
+        r.err(where, "count must be a whole number >= 1, on a did step")
+    if "did" not in s:
+        return
+    d = s["did"]
+    if not isinstance(d, dict):
+        r.err(where, "did must be an object")
+        return
+    for k in d:
+        if k not in QUEST_DID:
+            r.err(where, f"did: unknown field '{k}'")
+    acts = d.get("action")
+    if not (isinstance(acts, list) and acts and all(_nonempty(a) for a in acts)):
+        r.err(where, "did.action must be a non-empty list of action ids")
+    elif actions is not None:
+        for a in acts:
+            if a not in actions:
+                r.err(where, f"unknown action '{a}'")
+    if "outcome" in d:
+        _str_list(r, f"{where}.did.outcome", d["outcome"])
+    if "context" in d and not isinstance(d["context"], dict):
+        r.err(where, "did.context must be an object")
+
+
+def _quest_rewards(r: Report, where: str, rw, goods: set[str]) -> None:
+    if not isinstance(rw, dict):
+        r.err(where, "rewards must be an object")
+        return
+    for k in rw:
+        if k not in QUEST_REWARD:
+            r.err(where, f"unknown reward '{k}'")
+    if "coins" in rw and not (_int(rw["coins"]) and rw["coins"] >= 0):
+        r.err(where, "rewards.coins must be a whole number >= 0")
+    if "relationship" in rw and not _int(rw["relationship"]):
+        r.err(where, "rewards.relationship must be a whole number")
+    if "flags" in rw:
+        _str_list(r, f"{where}.rewards.flags", rw["flags"], RE_FLAG)
+    g = rw.get("goods", {})
+    if not isinstance(g, dict):
+        r.err(where, "rewards.goods must be {good: count}")
+        return
+    for good, n in g.items():
+        if good not in goods:
+            r.err(where, f"unknown good '{good}'")
+        if not (_int(n) and n >= 1):
+            r.err(where, f"good '{good}' needs a count >= 1")
+
+
+def check_quests(r: Report, quests, npc_ids: set[str], actions: set[str] | None, goods: set[str],
+                 bands: set[str]) -> None:
+    if not isinstance(quests, dict):
+        r.err("quests.json", "quests must be an object")
+        return
+    for qid, q in quests.items():
+        where = f"quest {qid}"
+        if not RE_ID.match(qid):
+            r.err(where, "bad id (lower case, digits, _)")
+        if not isinstance(q, dict):
+            r.err(where, "must be an object")
+            continue
+        for k in q:
+            if k not in QUEST_FIELDS:
+                r.err(where, f"unknown field '{k}'")
+        for f in ("title", "offer"):
+            if not _nonempty(q.get(f)):
+                r.err(where, f"{f} must be a non-empty string")
+        if "done" in q and not isinstance(q["done"], str):
+            r.err(where, "done must be a string")
+        if q.get("giver") not in npc_ids:
+            r.err(where, f"unknown giver '{q.get('giver')}'")
+        if q.get("confidence") not in CONFIDENCE:
+            r.err(where, f"confidence must be one of {sorted(CONFIDENCE)}")
+        if "gate" in q:
+            if isinstance(q["gate"], dict):
+                _voice_gate(r, f"{where} gate", q["gate"], set(), bands)
+            else:
+                r.err(where, "gate must be an object")
+        fail = q.get("fail", {})
+        if not isinstance(fail, dict):
+            r.err(where, "fail must be an object")
+        else:
+            for k in fail:
+                if k not in QUEST_FAIL:
+                    r.err(where, f"fail: unknown field '{k}'")
+            if "flags" in fail:
+                _str_list(r, f"{where}.fail.flags", fail["flags"], RE_FLAG)
+            if "after_day" in fail and not (_int(fail["after_day"]) and fail["after_day"] >= 1):
+                r.err(where, "fail.after_day must be a day >= 1")
+        steps = q.get("steps")
+        if not isinstance(steps, list) or not steps:
+            r.err(where, "needs at least one step")
+        else:
+            for i, s in enumerate(steps):
+                _quest_step(r, f"{where} step {i}", s, actions)
+        _quest_rewards(r, where, q.get("rewards", {}), goods)
+
+
+def validate_quests(path: Path, canon_root: Path, actions: set[str] | None) -> Report:
+    r = Report()
+    doc = _load(r, path)
+    rules = _load(r, path.parent / "rules.json")
+    econ = _load(r, path.parent / "economy.json")
+    if not isinstance(doc, dict) or not isinstance(rules, dict) or not isinstance(econ, dict):
+        return r
+    npc_ids: set[str] = set()
+    for d in _book_dirs(canon_root):
+        npcs = _read_quiet(d / "npcs.json")
+        if isinstance(npcs, dict):
+            npc_ids |= set(npcs.get("npcs", {}))
+    bands = {STRANGER} | {b[1] for b in rules.get("standing", {}).get("bands", [])
+                          if isinstance(b, list) and len(b) == 3 and b[1]}
+    check_quests(r, doc.get("quests", {}), npc_ids, actions, set(econ.get("goods", {})), bands)
+    return r
+
+
 # ---------------------------------------------------------------- backgrounds (M30.5)
 
 BACKGROUND_FIELDS = {"name", "blurb", "class"}
@@ -1176,6 +1321,12 @@ def main(argv: list[str] | None = None) -> int:
         for e in rep.errors:
             print(f"ERROR {e}")
         print(f"voices.json: {len(rep.errors)} errors")
+        errors += len(rep.errors)
+    if args.all and (base.parent / "quests.json").exists():
+        rep = validate_quests(base.parent / "quests.json", data_dir, actions)
+        for e in rep.errors:
+            print(f"ERROR {e}")
+        print(f"quests.json: {len(rep.errors)} errors")
         errors += len(rep.errors)
     if args.all and (base.parent / "backgrounds.json").exists():
         rep = validate_backgrounds(base.parent)

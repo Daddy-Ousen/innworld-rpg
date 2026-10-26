@@ -81,6 +81,8 @@ var talk: Dictionary = {}
 var voices: Dictionary = {}
 ## Character creation (data/backgrounds.json, M30.5): looks and Earth backgrounds. Empty in toy dbs.
 var creation: Dictionary = {}
+## Quests (data/quests.json, M33.2): quest id → quest. Empty in toy dbs.
+var quests: Dictionary = {}
 var errors: Array[String] = []
 
 
@@ -118,6 +120,8 @@ static func load_dir(dir: String = "res://data") -> DataDb:
 	db.errors.append_array(Voice.validate(db))  # rules.voice, voices.json (M30.1)
 	db.creation = _read_json(dir.path_join("backgrounds.json"), load_errors)
 	db.errors.append_array(PlayerIdentity.validate(db))  # looks, backgrounds (M30.5)
+	db.quests = _read_json(dir.path_join("quests.json"), load_errors).get("quests", {})
+	db.errors.append_array(Quests.validate(db))  # quests.json (M33.2)
 	db.errors = load_errors + db.errors + db.canon.errors + db.maps.errors + db.behaviour.errors \
 			+ db.combat.errors + db.economy.errors + db.spells.errors
 	for e in db.errors:
