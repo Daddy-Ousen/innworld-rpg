@@ -232,7 +232,7 @@
 			"floor": 0.5,
 			"inn_location": "wandering_inn",
 			"inn_npc": "erin_solstice",
-			"inn_work_actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "bake_pizza", "roast_meat", "cook_vegetable_soup", "serve_guests",
+			"inn_work_actions": ["cook_simple_meal", "cook_stew", "cook_pasta", "bake_bread", "bake_pizza", "make_juice", "fry_burgers", "warm_honey_milk", "mix_milkshake", "mix_faerie_drink", "roast_meat", "cook_vegetable_soup", "serve_guests",
 				"clean_room", "sweep_floor", "wash_dishes", "repair_furniture", "chop_wood", "carry_water"],
 			"hungry_line": "You went to bed hungry. Your max HP is down %d%% until you eat.",
 			"fed_line": "You eat at the inn after your work."
@@ -258,7 +258,7 @@
 		"patron_flags": ["wandering_inn.has_regulars", "wandering_inn.full_house"],
 		"race_flags": {"goblin": "goblin_tribe.paying_guests"},
 		"race_boycott": [{"flag": "wandering_inn.drake_boycott", "race": "drake", "factor": 0.15}],
-		"dishes": ["simple_meal", "stew", "pasta_dish", "bread", "roast_meat", "blue_pastry"],
+		"dishes": ["simple_meal", "stew", "pasta_dish", "bread", "roast_meat", "blue_pastry", "blue_fruit_juice", "hamburger_and_fries", "ashfire_honey_milk", "milkshake", "faerie_flower_drink"],
 		"patience_minutes": [45, 90],
 		"pay_factor": 2.0,
 		"other_dish_share": 0.5,

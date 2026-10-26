@@ -35,7 +35,7 @@ func _lines(gs: GameState) -> String:
 
 
 func test_recipes_load_and_name_known_things() -> void:
-	assert_eq(_db.economy.recipes.size(), 8)
+	assert_eq(_db.economy.recipes.size(), 13)
 	for id: String in _db.economy.recipes:
 		assert_true(_db.actions.has(_db.economy.recipes[id]["action"]), id)
 	assert_eq(_db.economy.recipes_for("cook_stew"), ["stew"] as Array[String])

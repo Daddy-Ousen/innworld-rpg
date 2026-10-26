@@ -12,7 +12,7 @@
 	],
 	"objects": [
 		{"id": "pig_bar", "kind": "counter", "at": [5, 2], "name": "Bar", "actions": ["buy_supplies", "sell_goods", "wash_dishes"], "solid": true, "shop": "crag_pig"},
-		{"id": "pig_stove", "kind": "stove", "at": [17, 1], "name": "Kitchen stove", "actions": ["cook_simple_meal", "cook_stew","bake_bread","bake_pizza","make_pastry"], "solid": true, "warm": true},
+		{"id": "pig_stove", "kind": "stove", "at": [17, 1], "name": "Kitchen stove", "actions": ["cook_simple_meal", "cook_stew","bake_bread","bake_pizza","make_pastry", "make_juice", "fry_burgers", "warm_honey_milk", "mix_milkshake", "mix_faerie_drink"], "solid": true, "warm": true},
 		{"id": "pig_table_west", "kind": "table", "at": [6, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
 		{"id": "pig_table_east", "kind": "table", "at": [12, 7], "name": "Table", "actions": ["serve_guests", "talk_with_guest"], "solid": true},
 		{"id": "pig_room", "kind": "bed", "at": [17, 9], "name": "Rented bed", "actions": [], "solid": true, "sleep": true, "price": 10},

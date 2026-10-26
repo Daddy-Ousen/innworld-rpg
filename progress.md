@@ -443,6 +443,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_monster_sim` (32), `unit_cover_position` (10), `unit_combat.gd` (31), `unit_combat_preview` (15),
   `unit_combat_skills` (21), `unit_monster_abilities` (18), `unit_movement` (13). Validator books 1 – 8: 0 errors.
   Python 131 OK. Full suite not run.
+- [x] M33.1 Erin's food and drink (2026-10-26, branch `feat/m33.1-erin-food`, ADR 0044 "M33.1"). 5 recipes, 5 actions, 5 dishes, 5
+  ingredients; ingredient `from_flag` is the story gate. Also fixed: `make_pastry` had no sound (`unit_m24_goods` red on main).
+  Tests: `unit_m33_food` (new, 3), `unit_m24_goods`, `unit_cooking` (8 -> 13 recipes), `unit_economy`, `unit_guests`,
+  `sim_inn_service`, `unit_data_db`, `unit_sound_cues` pass; validator books 1 – 8: 0 errors; Python 131 OK. Full suite not run.
+  - [ ] The user plays: buy honey after 2.42, cook at the inn stove, serve the new dishes.
 - [ ] The user learns a spell from a friend and casts the new kinds in a fight.
 
 ## Docs
