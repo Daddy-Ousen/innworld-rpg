@@ -20,7 +20,7 @@ func _has_error(errors: Array[String], part: String) -> bool:
 func test_shipped_combat_data_is_valid() -> void:
 	var db := DataDb.load_dir()
 	assert_eq(db.combat.errors, [] as Array[String])
-	assert_eq(db.combat.enemies.keys().size(), 57)  # M32.2: rose_knight, bea, ijvani, oom, venitra, kerash; M32.1: calruz, nokha_awakened; M28.1: raskghar_armoured, awakened_raskghar; M19.1: face_eater_moth, moth_swarm; M18.1: eater_goat
+	assert_eq(db.combat.enemies.keys().size(), 58)  # M32.3: goblin_lord; M32.2: rose_knight, bea, ijvani, oom, venitra, kerash; M32.1: calruz, nokha_awakened; M28.1: raskghar_armoured, awakened_raskghar; M19.1: face_eater_moth, moth_swarm; M18.1: eater_goat
 	for id: String in ["goblin_grunt", "rock_crab", "razorbeak", "goblin_chieftain", "goblin_raid_leader",
 			"adventurer_brawler", "adventurer_axeman", "goblin_feathered_chieftain", "zombie", "skeleton", "ghoul",
 			"crypt_lord", "skinner", "antinium_worker", "antinium_soldier", "gazi_of_reim", "liscor_guardsman",

@@ -400,17 +400,23 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 			continue
 		var id: String = order[int(e["turn"])]
 		if id == PLAYER:
+			MonsterAbilities.poison_tick(gs, db, id)  # M32.3
+			if Combat.is_down(gs):
+				return
 			e["ap_q"] = player_ap(gs, db)
+			MonsterAbilities.apply_fear(gs, db)  # M32.3
 			e["moved_q"] = 0
 			e["move_bonus_q"] = 0
 			c.blocking = false  # a guard lasts until the player's next turn
 			return
 		if _is_fighter(gs, db, id):
 			log_begin(gs, id)
-			if id.begins_with(NPC):
-				_npc_turn(gs, db, id.substr(NPC.length()))
-			else:
-				_monster_turn(gs, db, id)
+			MonsterAbilities.poison_tick(gs, db, id)  # M32.3: it may fell the fighter
+			if _is_fighter(gs, db, id):
+				if id.begins_with(NPC):
+					_npc_turn(gs, db, id.substr(NPC.length()))
+				else:
+					_monster_turn(gs, db, id)
 			Combat.settle_if_over(gs, db)
 			log_end(gs)
 		if active(gs):
@@ -476,6 +482,8 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 	var sheltered := false
 	var leaped := false
 	var leap := MonsterAbilities.find(e, MonsterAbilities.LEAP)  # M17.7
+	var bile := MonsterAbilities.find(e, MonsterAbilities.BILE)  # M32.3
+	var spat := false
 	# M17.6: a shooter seeks and holds cover only for its first hold_rounds rounds of the chase
 	var hold := MonsterSim.is_shooter(e) and int(m["chase"]) < int(Cover.rules(db).get("hold_rounds", 0))
 	var reached := false
@@ -485,6 +493,13 @@ static func _hostile_turn(gs: GameState, db: DataDb, id: String, ap: int, cap: i
 			break
 		var pos := CombatState.pos_of(m)
 		var at: Vector2i = target["pos"]
+		if not bile.is_empty() and not spat and ap >= int(bile["ap_q"]) \
+				and MonsterAbilities.ready(gs, id, MonsterAbilities.BILE) \
+				and MonsterSim._dist(pos, at) <= int(bile["range"]) and Cover.sight(db, m["area"], pos, at):
+			spat = true  # M32.3: the spit comes first, then it walks or hits
+			MonsterAbilities.spit(gs, db, id, target, bile)
+			ap -= int(bile["ap_q"])
+			continue
 		if MonsterSim._next_to(pos, at):
 			reached = true
 			if ap < atk:

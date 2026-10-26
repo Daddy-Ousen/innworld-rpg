@@ -408,7 +408,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_ground_art`, `sim_canon_book6` (13), `sim_book6_zel_dies` (7), `sim_kill_book6` (9), `sim_book6_world` (9),
   `sim_gazi_attack` (5), `sim_book3_stages` (10), `sim_book8_battle_one` (11). Validator: 0 errors. Python 131 OK.
   `sim_book5_last_light` 7/9: the 2 failures (`standing.gd:100` String error) fail on main too (old). Full suite not run.
-- [ ] M32.3 boss feel.
+- [x] M32.3 boss feel (2026-10-26, branch `feat/m32.3-boss-feel`, ADR 0044 "M32.3"). User picks: 3 new ability
+  kinds, fear takes AP, the Goblin Lord is a new foe. `MonsterAbilities`: `fear` (Skinner "Red eyes", 2 AP when in
+  sight within 6), `bile` (Crypt Lord, poison 3 rounds; replaces its `ranged`), `command` (+accuracy, no flee for
+  tagged foes near). Regrika: agility 8 and a "Charge" leap (data only). New enemy `goblin_lord` (escape, command,
+  Shaman look, voice) in the wave before the Chosen on Zel's stage; `player_fought_beside_zel` counts him. No save
+  change (state in `encounter`). Tests (all pass): `unit_monster_abilities` (18), `unit_combat_db` (14),
+  `unit_monster_art` (6), `unit_sound_cues` (9), `sim_book6_zel_stage` (9), `sim_skinner_night` (7),
+  `sim_esthelm_siege` (6), `unit_cover_position` (10), `unit_encounter` (25), `unit_monster_sim` (32),
+  `unit_combat` (31), `unit_combat_preview` (15), `unit_combat_skills` (21), `sim_canon_fights` (6),
+  `sim_canon_book1` (15), `sim_canon_book5` (19), `sim_kill_book5` (10), `sim_canon_book6` (13),
+  `sim_book6_zel_dies` (7). Validator books 1, 5, 6: 0 errors. Python 131 OK. Full suite not run.
 - [ ] M32.4 Zel lives (bend and cascade, `sim_book6_zel_lives`).
 - [ ] The user plays the three doors and Zel's last stand.
 

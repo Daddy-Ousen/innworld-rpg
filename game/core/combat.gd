@@ -424,7 +424,7 @@ static func monster_attack(gs: GameState, db: DataDb, id: String, ranged: bool =
 		bonus -= float(rules["block"]["hit_malus"])
 		c.fight["blocks"] += 1
 	var out := {"hit": false, "damage": 0}
-	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]),
+	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]) + MonsterAbilities.command_bonus(gs, db, id),
 			Stats.get_stat(gs, db, "dexterity"), bonus)
 	var how := "throws a stone at you" if ranged else "attacks you"
 	if not out["hit"]:
@@ -459,7 +459,8 @@ static func _attack_other(gs: GameState, db: DataDb, id: String, ranged: bool,
 		victim = "the " + name_of(db, c.monsters[tid])
 	var out := {"hit": false, "damage": 0}
 	var bonus := position_bonus(gs, db, CombatState.pos_of(c.monsters[id]), target["pos"], ranged, Cover.FOE)
-	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]), int(stats["evasion"]), bonus)
+	out["hit"] = gs.rng.randf() < hit_chance(db, int(e["accuracy"]) + MonsterAbilities.command_bonus(gs, db, id),
+			int(stats["evasion"]), bonus)
 	var how := "throws a stone at" if ranged else "attacks"
 	if not out["hit"]:
 		c.lines.append("The %s %s %s and misses." % [who, how, victim])

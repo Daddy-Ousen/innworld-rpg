@@ -17,6 +17,7 @@ const SAVED := "zel.saved_by_the_player"
 const ZEL := "zel_shivertail"
 const CHOSEN := ["bea", "ijvani", "oom", "venitra", "kerash"]
 const CHOSEN_WAVE := 4
+const LORD := "goblin_lord"
 const START := Vector2i(2, 11)
 
 var _db: DataDb
@@ -171,6 +172,11 @@ func test_the_stage_data_is_sound() -> void:
 	for t: String in CHOSEN:
 		assert_true(_db.combat.enemies[t].has("escape"), t + " cannot die on the map")
 	assert_true(_db.canon.events[DEATH]["depends_on"].has(BREAK), "the save hook runs before Zel's death")
+	# M32.3: the Goblin Lord comes before the Chosen, commands his Goblins and cannot die on the map
+	assert_true((waves[CHOSEN_WAVE - 1]["foes"] as Array).has(LORD), "the Goblin Lord rides in before the Chosen")
+	assert_true(_db.combat.enemies[LORD].has("escape"))
+	var hook: Dictionary = (ev["hooks"] as Array).filter(func(h: Dictionary) -> bool: return h["id"] == FIGHT_HOOK)[0]
+	assert_true((hook["did"][0]["context"]["enemy"] as Array).has(LORD), "fighting him counts for the hook")
 
 
 func test_the_field_links_to_the_invrisil_gate() -> void:
@@ -215,12 +221,13 @@ func test_the_battle_can_be_fought_through() -> void:
 	assert_eq(_stage_foe(gs), "", "the field is clear")
 	for t: String in CHOSEN:
 		assert_true(seen.has(t), t + " came")
+	assert_true(seen.has(LORD), "the Goblin Lord came (M32.3)")
 	ToyCanon.sleep_through(gs, db, DAY)
 	assert_eq(gs.world.status(BATTLE), Director.CHANGED)
 	assert_eq(_hook_of(gs, BATTLE), FIGHT_HOOK)
 	assert_true(gs.flags.has("invrisil.earther_fought_beside_zel"))
 	assert_false(gs.world.is_alive(db.canon, ZEL), "M32.2: Zel still dies")
-	for n: String in ["venitra", "ijvani", "bea", "kerash"]:
+	for n: String in ["venitra", "ijvani", "bea", "kerash", LORD]:
 		assert_true(gs.world.is_alive(db.canon, n), n + " is not killed on the map")
 
 

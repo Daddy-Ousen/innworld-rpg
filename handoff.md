@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-10-26, local): M32.3 boss feel (branch `feat/m32.3-boss-feel`)
+- User picks (ADR 0044 "M32.3"): three new ability kinds; fear takes AP; the Goblin Lord is a new foe.
+- Code: `core/monster_abilities.gd` (kinds `fear`, `bile`, `command`; `ready`, `apply_fear`, `spit`,
+  `poison_tick`, `command_over`, `command_bonus`), `core/encounter.gd` (poison tick at each turn start, fear at the
+  player's turn start, the spit in `_hostile_turn`), `core/combat.gd` (command accuracy in both monster attacks),
+  `core/monster_sim.gd` (a commanded foe does not flee).
+- Data: Skinner fear, Crypt Lord bile (its `ranged` removed), Regrika agility 8 + "Charge" leap, new enemy
+  `goblin_lord` (voice in `audio.json`), Zel's stage wave 3 and the hook enemy list (`4.48.json`).
+- Next: user merges the PR. Then M32.4 **[Opus · high]** (Zel lives: the bend reads `zel.saved_by_the_player`). PR #239 (`standing.gd` fix) is merged.
+- Gotchas: `-gselect=unit_combat` also runs `unit_combat_db`, `_preview`, `_screen`, `_skills`: use
+  `-gselect=unit_combat.gd`. `-gtest=...` without a match runs the whole suite: do not use it. A Godot run can
+  stall at exit; kill stray `Godot_v4.7.2*` and rerun. Q_PER_AP is 4 (6 AP a turn at level 0), not 8.
+  `canon_ref` / stage `note` max 300 chars.
+
 ## Just done (2026-10-26, local): fix race start null home (branch `fix/race-start-null-home`)
 - `Standing.race_start` crashed on `String(null)`: Zel's canon `"home"` is `null`, and `Dictionary.get(key, default)`
   returns a stored `null`, not the default. It now returns 0 when race or home is not a String. Guard test in
