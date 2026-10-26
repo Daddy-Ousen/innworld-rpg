@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-10-26, local): M32.4 Zel lives (branch `feat/m32.4-zel-lives`)
+- Data only (ADR 0044 "M32.4"): the death event has `not_flags: ["zel.saved_by_the_player"]` and mutates to
+  `b6.zel_spares_reiss_and_lives`. New alts: `b6.magnolia_offers_a_bounty_for_the_trap`, `b6.azkerash_rages_that_zel_lived`,
+  `b6.liscor_hears_zel_lived` (4.49), `b7.zel_gives_selys_the_heartflame` (5.16S, first mutate of the bequest; needs a
+  living Zel with `zel.wears_the_heartflame_breastplate`). Book 7 mourning needs `zel.dead_at_invrisil`; the funeral stage
+  has `when_flags: ["zel.body_in_liscor"]`. Zel's Celum goal has `unless_flags: ["zel.survived_invrisil"]`.
+- Tests: new `sim_book6_zel_lives` (8). `sim_book6_zel_stage` and `sim_kill_book7` (Magnolia ceiling) changed. See
+  `progress.md` M32.4. Full suite not run.
+- Next: user merges the PR. Then the user plays the three doors and Zel's last stand. Optional: the old
+  `sim_kill_book7` Laken drift failure (50 > 13, also on main).
+- Gotchas: a stage does not read `requires.flags`: a scene that must not show needs stage `when_flags`. JSON chapter
+  files mix inline and expanded blocks (CRLF, tabs): edit by hand or by raw text, never `json.dump`. An alt event stays
+  `pending` for ever (it is `alt_only`): do not assert it is resolved. Stash test: `git stash push -- game/data <files>`
+  runs a sim on main data without a second checkout. Do not `taskkill` Godot: the auto-mode check blocks it, and the
+  open Godot may be the user's editor.
+
 ## Just done (2026-10-26, local): M32.3 boss feel (branch `feat/m32.3-boss-feel`)
 - User picks (ADR 0044 "M32.3"): three new ability kinds; fear takes AP; the Goblin Lord is a new foe.
 - Code: `core/monster_abilities.gd` (kinds `fear`, `bile`, `command`; `ready`, `apply_fear`, `spit`,

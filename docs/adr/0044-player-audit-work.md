@@ -380,6 +380,31 @@ state lives in the encounter dictionary, which is already saved and ends with th
   in with the commander and a Hob in the wave before the Chosen; `player_fought_beside_zel` counts him.
 - All numbers are guesses.
 
+### M32.4 (2026-10-26): Zel lives (the bend)
+No engine change, no schema change, no save change (flags and new event ids only). Data and one new sim.
+- **The bend.** `b6.zel_names_the_goblin_lord_reiss_and_dies` has `not_flags: ["zel.saved_by_the_player"]` and
+  `on_fail: ["mutate:b6.zel_spares_reiss_and_lives", "cancel"]`. The alt names Reiss, sets the same Goblin flags
+  (`goblin_lord.named_reiss`, `goblin_lord.swore_to_kill_the_necromancer`, `goblin_army.withdrew_from_invrisil`) and
+  `zel.survived_invrisil`. It kills no one. The save hook (M32.2) now also clears the three "Az'kerash came" flags.
+- **Hand-offs (ADR 0036 rule 3).** Of the 5 events that `depends_on` the death: Magnolia's bounty and Az'kerash's
+  words mutate (`b6.magnolia_offers_a_bounty_for_the_trap`, `b6.azkerash_rages_that_zel_lived`); Liscor's mourning
+  mutates to `b6.liscor_hears_zel_lived` (after the Erin-dead alt); Reiss guarding the body and Klbkch telling the
+  Grand Queen cancel (both are about the body or the death; nothing reads their flags).
+- **Mourning.** Izril mourns, the Pallass parade, Laken hears, Selys remembers and the door for the body need
+  `zel.dead_at_invrisil`. The casket, will, healer, funeral, vow and ashes follow by their flags. The funeral scene
+  stage has `when_flags: ["zel.body_in_liscor"]` (a stage does not read `requires.flags`).
+- **Heartflame.** `b7.zel_gives_selys_the_heartflame` is the first mutate of the will's bequest. It needs Zel and
+  Selys alive and `zel.wears_the_heartflame_breastplate` (not the save flag): any living Zel who has the armour
+  gives it, so a Magnolia death on day 130 (no battle) keeps Selys's thread too.
+- **Zel after the bend:** alive, off the map in Liscor (`npc_behaviour.json`: his Celum goal has
+  `unless_flags: ["zel.survived_invrisil"]`). No later canon role.
+- **Cost (sim_book6_zel_lives):** 25 Book 6 – 7 canon events lost, drift 15. Without a funeral there is no Pallass
+  door after it, so Selys reads in the guild archive (alt) and is never kidnapped (6 scenes).
+- **Changed meaning:** a Zel who dies before Invrisil (or lives, with no battle) gets no Book 7 mourning, casket or
+  funeral any more: they are about the body from Invrisil. `sim_kill_book7` Magnolia ceiling 12 / 18 → 31 / 30.
+- **Not a gap:** the mourning scene (day 130, hours 10 – 22) stages before the night run sets the flag, but the
+  battlefield is about three days from the inn, so a player who saved Zel cannot reach it that day.
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the

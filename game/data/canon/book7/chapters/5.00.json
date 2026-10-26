@@ -23,7 +23,9 @@
 			},
 			"requires": {
 				"alive": [],
-				"flags": [],
+				"flags": [
+					"zel.dead_at_invrisil"
+				],
 				"not_flags": []
 			},
 			"depends_on": [],

@@ -243,7 +243,10 @@
 					}
 				],
 				"line": "The plaza is full and quiet. Soldiers stand in ranks around the pyre. Rain falls on the Drakes and Gnolls.",
-				"note": "M19.7: a scene. Hours are guesses (the text gives about four and a half hours after Selys wakes)."
+				"when_flags": [
+					"zel.body_in_liscor"
+				],
+				"note": "M19.7: a scene. Hours are guesses (the text gives about four and a half hours after Selys wakes). M32.4: no body, no funeral."
 			},
 			"hooks": [
 				{

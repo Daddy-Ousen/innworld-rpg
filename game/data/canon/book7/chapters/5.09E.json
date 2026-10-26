@@ -371,7 +371,9 @@
 				"alive": [
 					"laken_godart"
 				],
-				"flags": [],
+				"flags": [
+					"zel.dead_at_invrisil"
+				],
 				"not_flags": []
 			},
 			"depends_on": [],

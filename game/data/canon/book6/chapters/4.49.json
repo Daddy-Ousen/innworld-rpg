@@ -431,7 +431,7 @@
 				"note": "A diamond shard takes Zel's left eye. Az'kerash comes by Scroll of Greater Teleport; Zel cuts his throat and he flees. The scroll count (eleven, then four) is the Goblin Lord's thought and may be wrong. Ijvani leaves by Lesser Teleport."
 			},
 			"summary": "Zel tears Bea apart, crushes Ijvani and cracks Kerash's skull. Az'kerash arrives in person with a Scroll of Greater Teleport and strikes Zel from behind; Zel cuts the Necromancer's throat. The Necromancer and the Chosen flee.",
-			"hooks": [{"id": "player_broke_bea_and_ijvani", "all": true, "did": [{"action": ["drive_off_foe"], "context": {"enemy": "bea", "location": "invrisil", "protect_standing": true, "waves_left": true}}, {"action": ["drive_off_foe"], "context": {"enemy": "ijvani", "location": "invrisil", "protect_standing": true, "waves_left": true}}], "days": [130, 130], "then": "change", "effects": {"set_flags": ["zel.saved_by_the_player"], "relationship": [{"from": "zel_shivertail", "to": "player", "delta": 2}]}, "news": "Before the last of the Chosen came, a Human drove off the plague-bringer Bea and the black-fire mage Ijvani while Zel Shivertail still stood."}]
+			"hooks": [{"id": "player_broke_bea_and_ijvani", "all": true, "did": [{"action": ["drive_off_foe"], "context": {"enemy": "bea", "location": "invrisil", "protect_standing": true, "waves_left": true}}, {"action": ["drive_off_foe"], "context": {"enemy": "ijvani", "location": "invrisil", "protect_standing": true, "waves_left": true}}], "days": [130, 130], "then": "change", "effects": {"set_flags": ["zel.saved_by_the_player"], "clear_flags": ["azkerash.came_to_invrisil_by_scroll", "azkerash.cut_by_zel", "azkerash.lost_a_greater_teleport_scroll_count_to_four"], "relationship": [{"from": "zel_shivertail", "to": "player", "delta": 2}]}, "news": "Before the last of the Chosen came, a Human drove off the plague-bringer Bea and the black-fire mage Ijvani while Zel Shivertail still stood."}]
 		},
 		"b6.zel_names_the_goblin_lord_reiss_and_dies": {
 			"tier": 1,
@@ -458,12 +458,15 @@
 			"requires": {
 				"alive": [],
 				"flags": [],
-				"not_flags": []
+				"not_flags": [
+					"zel.saved_by_the_player"
+				]
 			},
 			"depends_on": [
 				"b6.zel_breaks_the_chosen_and_azkerash_comes"
 			],
 			"on_fail": [
+				"mutate:b6.zel_spares_reiss_and_lives",
 				"cancel"
 			],
 			"effects": {
@@ -575,6 +578,7 @@
 				"b6.zel_names_the_goblin_lord_reiss_and_dies"
 			],
 			"on_fail": [
+				"mutate:b6.magnolia_offers_a_bounty_for_the_trap",
 				"cancel"
 			],
 			"effects": {
@@ -624,6 +628,7 @@
 				"b6.zel_names_the_goblin_lord_reiss_and_dies"
 			],
 			"on_fail": [
+				"mutate:b6.azkerash_rages_that_zel_lived",
 				"cancel"
 			],
 			"effects": {
@@ -681,6 +686,7 @@
 			],
 			"on_fail": [
 				"mutate:b6.the_inn_mourns_zel",
+				"mutate:b6.liscor_hears_zel_lived",
 				"cancel"
 			],
 			"effects": {
@@ -978,6 +984,204 @@
 				"note": "Not in the book (M23.5, divergence only): runs instead of the mourning scene when Erin is dead: Lyonette keeps the inn."
 			},
 			"summary": "News of Zel's death reaches Liscor. Horns sound and the city weeps. In the inn Lyonette sits at the counter where Erin used to stand, and Mrsha howls on the roof."
+		},
+		"b6.zel_spares_reiss_and_lives": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"zel.saved_by_the_player"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"zel.survived_invrisil",
+					"goblin_lord.named_reiss",
+					"goblin_lord.swore_to_kill_the_necromancer",
+					"goblin_army.withdrew_from_invrisil"
+				]
+			},
+			"news": "The bone dome at Invrisil fell and Zel Shivertail walked out of it alive, badly hurt. The Goblin Lord's army pulled back.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "guess",
+				"note": "Not in the book (M32.4, divergence only): runs instead of Zel's death when the player drove off Bea and Ijvani while he stood (zel.saved_by_the_player). He spares the Goblin Lord and names him Reiss as in 4.49, but lives. Kills no one."
+			},
+			"summary": "With Bea and Ijvani driven off, the trap fails before the Necromancer can strike. Zel lets the wounded Goblin Lord go and tells him to take the name Reiss. The Goblin army withdraws, and Zel lives, badly hurt."
+		},
+		"b6.magnolia_offers_a_bounty_for_the_trap": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "invrisil",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"zel.survived_invrisil"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.offered_a_bounty_on_the_necromancer"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "guess",
+				"note": "Not in the book (M32.4, divergence only): runs instead of the bounty scene when Zel lives. The Necromancer still set a trap for her general, so she still puts a price on him."
+			},
+			"summary": "Magnolia is furious that the Necromancer set a trap for her general. She offers every Assassins' Guild a vast reward for his death."
+		},
+		"b6.azkerash_rages_that_zel_lived": {
+			"tier": 1,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": []
+				},
+				"bea": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"zel.survived_invrisil"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.down_to_four_chosen",
+					"azkerash.failed_to_kill_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "guess",
+				"note": "Not in the book (M32.4, divergence only): runs instead of Az'kerash's calm words when Zel lives. Oom is still lost, so four Chosen are left."
+			},
+			"summary": "At his castle Az'kerash looks over his broken Chosen in cold anger. The trap cost him Oom and a Goblin Lord's trust, and Zel Shivertail still lives."
+		},
+		"b6.liscor_hears_zel_lived": {
+			"tier": 2,
+			"window": {
+				"earliest": 130,
+				"latest": 130,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"zel.survived_invrisil"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.hears_zel_lived"
+				]
+			},
+			"news": "Word reached Liscor from the north: Zel Shivertail broke the Necromancer's trap at Invrisil and lives.",
+			"status": "candidate",
+			"canon_ref": {
+				"book": 6,
+				"chapter": "4.49",
+				"confidence": "guess",
+				"note": "Not in the book (M32.4, divergence only): runs instead of the mourning scene when Zel lives."
+			},
+			"summary": "News of the battle reaches Liscor: Zel Shivertail was hurt, but he lives. At the inn, Erin laughs and cries at the same time."
 		}
 	},
 	"system": []

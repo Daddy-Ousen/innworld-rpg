@@ -12,13 +12,16 @@ const LAST_DAY := 143
 ## Selys 18 / 15, Zevara 17 / 15, Rags 14 / 12.5, Magnolia 0 / 11.5, Kerrig 5 / 4.5.
 ## Erin and Selys lose more now: the Pallass door, the inn's moth fight and
 ## Selys's kidnapping no longer run without their cause (ADR 0036 "Book 7").
+## M32.4: Magnolia 12 / 18 -> 31 / 30. Her death on day 130 stops the battle of Invrisil, so Zel lives:
+## his mourning, casket, will and funeral (and the Pallass door after it) do not happen; he gives Selys
+## the Heartflame himself.
 const CEILING := {
 	"erin_solstice": [51, 49.0],
 	"laken_godart": [26, 13.0],
 	"selys": [25, 21.5],
 	"zevara": [5, 6.0],
 	"rags": [14, 11.5],
-	"magnolia_reinhart": [12, 18.0],
+	"magnolia_reinhart": [31, 30.0],
 	"kerrig_louis": [3, 3.0],
 }
 const ALTS := ["the_face_eater_moths_fall_on_liscor", "the_adventurers_haul_the_hobs_out_of_the_rift",
@@ -274,6 +277,10 @@ func test_magnolia_dies_and_riverfarm_feasts_alone() -> void:
 	_happened(gs, FAE)
 	_happened(gs, ["laken_ends_the_builders_feud", "scaffold_collapse_sparks_a_feud_in_riverfarm"])
 	_not_happened(gs, NOBLES)
+	assert_true(gs.world.is_alive(_db.canon, "zel_shivertail"), "M32.4: no battle, so Zel lives")
+	_not_happened(gs, ZEL)
+	_mutated(gs, "zel_leaves_his_gear_to_selys", "zel_gives_selys_the_heartflame", 141)
+	_happened(gs, HEARTFLAME.filter(func(id: String) -> bool: return id != "zel_leaves_his_gear_to_selys"))
 
 
 func test_kerrig_dies_and_the_army_is_still_routed() -> void:

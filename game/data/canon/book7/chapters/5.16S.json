@@ -24,7 +24,9 @@
 				"alive": [
 					"selys"
 				],
-				"flags": [],
+				"flags": [
+					"zel.dead_at_invrisil"
+				],
 				"not_flags": []
 			},
 			"depends_on": [],
@@ -314,7 +316,9 @@
 			},
 			"requires": {
 				"alive": [],
-				"flags": [],
+				"flags": [
+					"zel.dead_at_invrisil"
+				],
 				"not_flags": []
 			},
 			"depends_on": [],
@@ -666,6 +670,7 @@
 			},
 			"depends_on": [],
 			"on_fail": [
+				"mutate:b7.zel_gives_selys_the_heartflame",
 				"mutate:b7.zels_will_sends_the_heartflame_to_magnolia",
 				"cancel"
 			],
@@ -683,6 +688,58 @@
 			},
 			"summary": "The will gives Zel's gear, with the armour on his body, to his niece Selys. Xalia screams at her. Zevara says the law is clear.",
 			"news": "General Shivertail leaves his armour to his niece Selys."
+		},
+		"b7.zel_gives_selys_the_heartflame": {
+			"tier": 1,
+			"window": {
+				"earliest": 141,
+				"latest": 141,
+				"confidence": "guess"
+			},
+			"location": "selys_home",
+			"roles": {
+				"general": {
+					"prefer": [
+						"zel_shivertail"
+					],
+					"fallback_tags": []
+				},
+				"selys": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys",
+					"zel_shivertail"
+				],
+				"flags": [
+					"zel.wears_the_heartflame_breastplate"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"heartflame.selys_inherits",
+					"heartflame.given_by_zel"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 7,
+				"chapter": "5.16S",
+				"confidence": "guess",
+				"note": "Not in the book (M32.4, divergence only): runs instead of the will when Zel is alive and has the armour (user pick, ADR 0044 \"M32.0\"). He gives his niece the armour himself, so her Heartflame scenes still run."
+			},
+			"summary": "Zel comes back to Liscor, still hurt, and gives his niece Selys the Heartflame Breastplate himself. He wants it to go to family while he is alive to see it.",
+			"news": "General Shivertail gives the Heartflame Breastplate to his niece Selys."
 		},
 		"b7.ilvriss_confirms_the_law": {
 			"tier": 2,
