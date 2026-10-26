@@ -1,5 +1,15 @@
 # Handoff
 
+## Just done (2026-10-26, local): Laken drift ceiling (branch `fix/laken-drift-ceiling`)
+- `sim_kill_book7` Laken test is green (10/10). The extra drift (37) came from Book 8 day 143: the whole Riverfarm
+  and Goblin war chain cancels when Laken is dead. Real causes, so the ceiling is now 26 / 49.5 (comment in the test).
+- Data fix (ADR 0036 rule 1): `b8.elia_arcsinger_breaks_the_mountain_siege` no longer `depends_on`
+  `b8.tyrion_lances_redscar_and_saves_laken`; `b8.tyrion_offers_laken_his_hand` depends on it instead (5.32G).
+- Next: user merges the PR. Optional design pick: an alt for Rags's Book 8 thread when Laken dies.
+- Gotcha: a kill sim's drift counts all books. New book data with windows inside the sim's days (here Book 8 day 143)
+  can push an old ceiling. To see which events add drift, read `gs.world.history` entries (skip non-canon ids like
+  `player.kill`) and weigh them with `rules.director.drift` x `tier_weight`.
+
 ## Just done (2026-10-26, local): M32.4 Zel lives (branch `feat/m32.4-zel-lives`)
 - Data only (ADR 0044 "M32.4"): the death event has `not_flags: ["zel.saved_by_the_player"]` and mutates to
   `b6.zel_spares_reiss_and_lives`. New alts: `b6.magnolia_offers_a_bounty_for_the_trap`, `b6.azkerash_rages_that_zel_lived`,

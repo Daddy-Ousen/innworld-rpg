@@ -438,8 +438,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
 ## Fixes
-- [ ] Old failure: `sim_kill_book7` `test_laken_dies_and_riverfarm_holds_together` drift 50 > 13 (also on main
-  2026-10-26, before M32.4). Cause not checked yet.
+- [x] Laken drift ceiling (2026-10-26, branch `fix/laken-drift-ceiling`): `sim_kill_book7`
+  `test_laken_dies_and_riverfarm_holds_together` failed, drift 50 > 13 (also on main before M32.4). Cause: the M28
+  Book 8 data. Book 7 still adds exactly 13.0. On day 143, `b8.riverfarm_shows_its_trebuchets_to_the_nobles` needs
+  Laken, and its whole chain (5.21 E - 5.32 G: gathering, night raid, Rags and Pyrite, Bethal, Lancrel) cancels at
+  once. Real causes, so a fair cost. One link was story order only (ADR 0036 rule 1): Elia's mountain siege waited on
+  Tyrion saving Laken; now `tyrion_offers_laken_his_hand` waits on that instead. Laken ceiling 26 / 49.5.
+  Tests (all pass): `sim_kill_book7` 10/10, `sim_canon_book7` 5/5, `sim_canon_book8` 6/6, `sim_kill_book8` 6/6,
+  `sim_book8_north_two` 6/6. Validator book 8: 0 errors. Full suite not run.
+  - [ ] Follow-up (design, user pick): Rags's Book 8 thread (Pyrite, Bethal, Lancrel) has no alt when Laken dies.
 - [x] Race start null home (2026-10-26, branch `fix/race-start-null-home`): `sim_book5_last_light` (2 tests) errored
   at `core/standing.gd:100` (`Invalid call 'String' constructor: Drake`). Cause: Zel's canon `"home"` is `null`;
   `get("home", "")` returns that `null` (the default is only for a missing key), and `String(null)` fails. Only a
