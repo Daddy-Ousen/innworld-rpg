@@ -4,28 +4,76 @@
 	"spells": {
 		"ice_spike": {
 			"name": "[Ice Spike]", "shape": "one", "ap_q": 8, "mp": 2, "range": 6, "damage": [4, 7], "hit": "roll", "cooldown": 0,
-			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "minutes": 120, "book": "spellbook_ice_spike"},
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "band": "friend", "minutes": 120, "book": "spellbook_ice_spike"},
 			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "likely", "note": "Ceria's best spell (3.07H; also 2.13, 2.23). That she would teach it to the player is a design guess; her lesson to Ryoka is 1.45."}
 		},
 		"flashfire": {
 			"name": "[Flashfire]", "shape": "around", "ap_q": 12, "mp": 3, "damage": [3, 6], "hit": "auto", "cooldown": 1,
-			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "minutes": 180, "book": "spellbook_flashfire"},
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "band": "friend", "minutes": 180, "book": "spellbook_flashfire"},
 			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "likely", "note": "Ceria burns webs away with it (1.54), and casts it in 1.58H. A burst around the caster and the teacher are design guesses."}
 		},
 		"gust": {
 			"name": "[Gust]", "shape": "line", "ap_q": 8, "mp": 2, "length": 4, "damage": [2, 4], "hit": "auto", "cooldown": 0,
-			"learn": {"teacher": "pisces", "after_event": "b1.pisces_saves_erin_from_flies", "minutes": 120, "book": "spellbook_gust"},
+			"learn": {"teacher": "pisces", "after_event": "b1.pisces_saves_erin_from_flies", "band": "friend", "minutes": 120, "book": "spellbook_gust"},
 			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "Pisces blasts the Acid Fly swarm aside with [Gust] before [Frozen Wind] (1.22). Here it is a short line of wind that hurts; the numbers, and that he teaches it, are design guesses."}
 		},
 		"frozen_wind": {
 			"name": "[Frozen Wind]", "shape": "line", "ap_q": 12, "mp": 3, "length": 5, "damage": [3, 5], "hit": "auto", "cooldown": 1,
-			"learn": {"teacher": "pisces", "after_event": "b1.pisces_tests_erin_and_rags", "minutes": 180, "book": "spellbook_frozen_wind"},
+			"learn": {"teacher": "pisces", "after_event": "b1.pisces_tests_erin_and_rags", "band": "friend", "minutes": 180, "book": "spellbook_frozen_wind"},
 			"canon_ref": {"book": 1, "chapter": "1.22", "confidence": "likely", "note": "Pisces kills a swarm of flies with [Frozen Wind] (1.22); Ceria also uses it (3.07H). A straight line and the teacher are design guesses."}
 		},
 		"fireball": {
 			"name": "[Fireball]", "shape": "blast", "ap_q": 16, "mp": 5, "range": 6, "radius": 1, "damage": [5, 9], "hit": "roll", "cooldown": 2,
 			"learn": {"book": "spellbook_fireball", "minutes": 240},
 			"canon_ref": {"book": 1, "chapter": "1.47R", "confidence": "likely", "note": "Ceria learned [Fireball] at Level 18 as an [Elementalist] (1.47R) and casts it in 1.58H. A spellbook that teaches it is a design guess (spellbooks exist: 2.23, 3.07H); no shop sells it yet."}
+		},
+		"stone_dart": {"name": "[Stone Dart]", "shape": "one", "ap_q": 6, "mp": 1, "range": 5, "damage": [2, 5], "hit": "roll", "cooldown": 0,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b3.ksmvr_and_ceria_smother_the_insanity_rune", "band": "friend", "minutes": 90, "book": "spellbook_stone_dart"},
+			"canon_ref": {"book": 3, "chapter": "3.07H", "confidence": "likely", "note": "Ceria fires a small stone with it in the Albez pit (3.07H; also 3.30). That she teaches it, and the numbers, are design guesses."}
+		},
+		"ice_shard": {"name": "[Ice Shard]", "shape": "around", "ap_q": 8, "mp": 2, "damage": [2, 5], "hit": "auto", "cooldown": 1,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b2.ryoka_starts_learning_magic_from_ceria", "band": "friend", "minutes": 120, "book": "spellbook_ice_shard"},
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "likely", "note": "A short-range spray of ice, weaker than [Ice Spike] (2.20; 2.32H, 3.07H). A burst around the caster is a design guess."}
+		},
+		"lightning_jolt": {"name": "[Lightning Jolt]", "shape": "one", "ap_q": 4, "mp": 1, "range": 3, "damage": [1, 4], "hit": "roll", "cooldown": 0,
+			"learn": {"teacher": "pisces", "after_event": "b5.s_the_inn_door_is_tested", "band": "friend", "minutes": 60, "book": "spellbook_lightning_jolt"},
+			"canon_ref": {"book": 5, "chapter": "4.12", "confidence": "likely", "note": "Pisces casts a small, cheap shock (4.12; 4.27H). Short range and the numbers are design guesses."}
+		},
+		"stone_spray": {"name": "[Stone Spray]", "shape": "line", "ap_q": 10, "mp": 2, "length": 3, "damage": [3, 6], "hit": "auto", "cooldown": 1,
+			"learn": {"teacher": "pisces", "after_event": "b7.pisces_saves_selys", "band": "friend", "minutes": 150, "book": "spellbook_stone_spray"},
+			"canon_ref": {"book": 7, "chapter": "5.18S", "confidence": "likely", "note": "Pisces blasts sharp stone shards at Selys's kidnappers (5.18S). A short line is a design guess."}
+		},
+		"frost_bloom": {"name": "[Frost Bloom]", "shape": "blast", "ap_q": 14, "mp": 4, "range": 5, "radius": 1, "damage": [4, 7], "hit": "auto", "cooldown": 2,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b7.adventurers_gather_for_the_parade", "band": "friend", "minutes": 210, "book": "spellbook_frost_bloom"},
+			"canon_ref": {"book": 7, "chapter": "5.13", "confidence": "likely", "note": "Ceria makes frost burst and spread out from her wand (5.13). A burst on a spot is a design guess."}
+		},
+		"lightning_bolt": {"name": "[Lightning Bolt]", "shape": "line", "ap_q": 12, "mp": 3, "length": 6, "damage": [4, 8], "hit": "roll", "cooldown": 1,
+			"learn": {"book": "spellbook_lightning_bolt", "minutes": 200},
+			"canon_ref": {"book": 7, "chapter": "5.20G", "confidence": "likely", "note": "Noears the Goblin mage throws bolts of lightning and teaches it to Goblins (5.20G; 5.31G). No Goblin teacher here: a spellbook only (design guess)."}
+		},
+		"fire_arrow": {"name": "[Fire Arrow]", "shape": "one", "ap_q": 8, "mp": 2, "range": 7, "damage": [3, 6], "hit": "roll", "cooldown": 0,
+			"learn": {"book": "spellbook_fire_arrow", "minutes": 120},
+			"canon_ref": {"book": 7, "chapter": "5.19G", "confidence": "likely", "note": "Rags casts a bolt of fire that Noears taught her (5.19G; 5.20G). A spellbook for the player is a design guess."}
+		},
+		"grand_fireball": {"name": "[Grand Fireball]", "shape": "blast", "ap_q": 24, "mp": 8, "range": 6, "radius": 2, "damage": [7, 12], "hit": "roll", "cooldown": 3,
+			"learn": {"book": "spellbook_grand_fireball", "minutes": 360},
+			"canon_ref": {"book": 5, "chapter": "4.30", "confidence": "likely", "note": "A bigger [Fireball] that blows holes in walls (named 2.20; cast 4.30, 4.39G, 5.32G). The cost and a sold spellbook are design guesses."}
+		},
+		"astral_binding": {"name": "[Astral Binding]", "shape": "one", "effect": "hold", "ap_q": 12, "mp": 3, "range": 5, "rounds": 1, "hit": "roll", "cooldown": 2,
+			"learn": {"teacher": "typhenous", "after_event": "b5.zzk_the_gold_teams_chart_the_trap_rooms", "band": "friend", "minutes": 240, "book": "spellbook_astral_binding"},
+			"canon_ref": {"book": 5, "chapter": "4.30", "confidence": "likely", "note": "Typhenous holds a foe for a moment with ties of light (4.30). One lost turn, and that he teaches it, are design guesses."}
+		},
+		"flash_step": {"name": "[Flash Step]", "shape": "tile", "effect": "blink", "ap_q": 4, "mp": 2, "range": 3, "hit": "auto", "cooldown": 2,
+			"learn": {"teacher": "pisces", "after_event": "b1.pisces_saves_erin_from_flies", "band": "friend", "minutes": 150, "book": "spellbook_flash_step"},
+			"canon_ref": {"book": 1, "chapter": "1.09", "confidence": "likely", "note": "Pisces leaps quickly out of danger with it (1.09; 3.07H, 3.08H). Three tiles, and that he teaches it, are design guesses."}
+		},
+		"invisibility": {"name": "[Invisibility]", "shape": "self", "effect": "hide", "ap_q": 8, "mp": 5, "rounds": 2, "hit": "auto", "cooldown": 4,
+			"learn": {"teacher": "pisces", "after_event": "b5.zzzz_the_guild_bans_pisces_from_raising_the_dead", "band": "friend", "minutes": 300, "book": "spellbook_invisibility"},
+			"canon_ref": {"book": 1, "chapter": "1.34", "confidence": "likely", "note": "Pisces hides from sight with this Tier 4 spell (1.34; 4.15L, 4.49, 5.06M). Two rounds, and that he teaches it, are design guesses."}
+		},
+		"ice_wall": {"name": "[Ice Wall]", "shape": "tile", "effect": "wall", "ap_q": 12, "mp": 4, "range": 4, "length": 3, "rounds": 3, "hit": "auto", "cooldown": 3,
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b5.zzzza_ceria_learns_ice_wall_and_yvlon_takes_a_request", "band": "friend", "minutes": 240, "book": "spellbook_ice_wall"},
+			"canon_ref": {"book": 5, "chapter": "4.27H", "confidence": "likely", "note": "Ceria learns it and raises sheets of ice as a barrier (4.27H; 5.08, 5.29, 5.34). Three tiles for three rounds are design guesses."}
 		}
 	}
 }

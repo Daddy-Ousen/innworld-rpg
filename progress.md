@@ -433,6 +433,18 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [x] M32.4 merged ([PR #241](https://github.com/Daddy-Ousen/innworld-rpg/pull/241)). All M32 build steps are merged.
 - [ ] The user plays the three doors and Zel's last stand.
 
+## M33 — Depth: spells, dishes, quests, friends (plan `docs/plans/m33.md`, ADR 0044)
+- [x] M33.0 canon spells (2026-10-26, branch `feat/m33.0-canon-spells`, ADR 0044 "M33.0"). User picks: 8 damage
+  spells, all 4 new kinds, friend gate. Reading: 2 Sonnet agents, Books 1 – 8. New `core/spell_effects.gd`: `hold`
+  ([Astral Binding]), `blink` ([Flash Step]), `hide` ([Invisibility]), `wall` ([Ice Wall]); shapes `self`, `tile`;
+  state in `combat.encounter`. `learn.band` ("friend" on every teacher). 17 spells, each with a spellbook on the
+  Liscor shelf. No save change. Tests (all pass): new `unit_spell_effects` (12), `unit_spells` (31),
+  `unit_spell_learning` (19), `unit_spell_ui` (13), `unit_m24_spells` (4), `unit_economy` (25), `unit_encounter` (25),
+  `unit_monster_sim` (32), `unit_cover_position` (10), `unit_combat.gd` (31), `unit_combat_preview` (15),
+  `unit_combat_skills` (21), `unit_monster_abilities` (18), `unit_movement` (13). Validator books 1 – 8: 0 errors.
+  Python 131 OK. Full suite not run.
+- [ ] The user learns a spell from a friend and casts the new kinds in a fight.
+
 ## Docs
 - [x] ROADMAP update (2026-10-26, branch `docs/roadmap-update-3`): M31 and M32 moved to Done, their play checks to
   "Waits on the user", the Rags / Laken alt to Later, next step M33.0. Docs only, no tests run.

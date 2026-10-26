@@ -11,12 +11,12 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| M33 Depth: spells, dishes, quests, friends | next: M33.0 canon spells (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
+| M33 Depth: spells, dishes, quests, friends | M33.0 done (PR open); next: M33.1 dishes (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: M33.0 canon spells **[Opus · medium]** (a reading agent lists the spells, then the user picks). The play checks do not block M33.
+Next step: the user merges M33.0 (canon spells). Then M33.1 Erin's food and drink **[Sonnet · medium]**. The play checks do not block M33.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -30,7 +30,7 @@ M33 comes from the player audit of 2026-10-17 (the last of M31 – M33; `docs/AU
 "we will do all". One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
 
 ## M33 — Depth: spells, dishes, quests, friends (plan `docs/plans/m33.md`, ADR 0044)
-- [ ] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees **[Opus · medium]**
+- [x] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees **[Opus · medium]** (2026-10-26: 12 new spells, kinds `hold`, `blink`, `hide`, `wall`, friend gate)
 - [ ] M33.1 Erin's food and drink from the books (names from the text, numbers guessed) **[Sonnet · medium]**
 - [ ] M33.2 Quest engine: `data/quests.json`, journal "Tasks", save version bump + migration (schema ask) **[Opus · high]**
 - [ ] M33.3 Three personal quest lines (user picks: Erin's inn, Pawn, magic from Pisces or Ceria) **[Sonnet · high]**

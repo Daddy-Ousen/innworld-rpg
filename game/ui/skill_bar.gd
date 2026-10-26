@@ -94,8 +94,22 @@ static func spell_tip(s: Dictionary) -> String:
 				int(s["radius"]), "" if int(s["radius"]) == 1 else "s", int(s["range"])])
 		"around":
 			parts.append("Hits every foe around you.")
-	parts.append("%d-%d damage." % [int(s["damage"][0]), int(s["damage"][1])])
-	parts.append("Never misses." if String(s["hit"]) == "auto" else "Your Intellect decides if it hits.")
+	var rounds := int(s.get("rounds", 0))
+	var for_rounds := "%d round%s" % [rounds, "" if rounds == 1 else "s"]
+	match SpellEffects.effect(s):  # M33.0
+		SpellEffects.HOLD:
+			parts.append("It loses its next %s." % ("turn" if rounds == 1 else "%d turns" % rounds))
+		SpellEffects.BLINK:
+			parts.append("Jump to a free tile up to %d tiles away that you can see." % int(s["range"]))
+		SpellEffects.HIDE:
+			parts.append("Foes cannot find you for %s. Striking a foe ends it." % for_rounds)
+		SpellEffects.WALL:
+			parts.append("Ice on %d tiles across a spot up to %d tiles away, for %s. No one can pass; shots across it meet full cover." % [
+				int(s["length"]), int(s["range"]), for_rounds])
+		_:
+			parts.append("%d-%d damage." % [int(s["damage"][0]), int(s["damage"][1])])
+	if [SpellEffects.DAMAGE, SpellEffects.HOLD].has(SpellEffects.effect(s)):
+		parts.append("Never misses." if String(s["hit"]) == "auto" else "Your Intellect decides if it hits.")
 	if int(s.get("cooldown", 0)) > 0:
 		parts.append("Ready again after %d round%s." % [int(s["cooldown"]), "" if int(s["cooldown"]) == 1 else "s"])
 	return " ".join(parts)

@@ -30,6 +30,39 @@ func _put(gs: GameState, id: String, at: Vector2i) -> void:
 
 func _done(gs: GameState, event: String) -> void:
 	gs.world.events[event] = {"status": Spells.DONE}
+	_befriend(gs, "ceria_springwalker")
+
+
+## M33.0: a teacher teaches only a friend (learn.band).
+func _befriend(gs: GameState, npc: String) -> void:
+	var need := Voice.band_min(_db, "friend") - Standing.regard(gs, _db, npc)
+	if need > 0:
+		gs.world.add_relationship(npc, NpcSim.PLAYER, need)
+
+
+func test_a_teacher_teaches_only_a_friend() -> void:
+	var gs := GameState.new_game(SEED, _db)
+	gs.player.place(MARKET, PLAYER_AT)
+	gs.world.events[TEACHER_EVENT] = {"status": Spells.DONE}
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"),
+			Spells.NOT_FRIEND % "Ceria Springwalker")
+	_befriend(gs, "ceria_springwalker")
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"), "")
+
+
+func test_every_teacher_lesson_needs_a_friend() -> void:
+	for id in _db.spells.ids():
+		var learn: Dictionary = _db.spells.spells[id].get("learn", {})
+		if learn.has("teacher"):
+			assert_eq(String(learn.get("band", "")), "friend", id)
+
+
+func test_an_unknown_band_is_reported() -> void:
+	var bad := SpellDb.from_dicts({"w": {"name": "[W]", "shape": "around", "ap_q": 8, "mp": 1, "damage": [1, 2],
+		"hit": "auto", "cooldown": 0, "canon_ref": {"book": 1, "confidence": "guess"},
+		"learn": {"teacher": "ceria_springwalker", "band": "best pal", "minutes": 10}}})
+	var errs := bad.validate(_db)
+	assert_true(errs.any(func(e: String) -> bool: return e.contains("unknown band")))
 
 
 func test_the_shipped_spells_are_all_guesses_with_a_canon_ref() -> void:

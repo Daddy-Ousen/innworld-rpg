@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-10-26, local): M33.0 canon spells (branch `feat/m33.0-canon-spells`)
+- User picks: 8 damage spells, all 4 new kinds, friend gate (ADR 0044 "M33.0", plan `docs/plans/m33.md`).
+- Code: new `core/spell_effects.gd` (hold, blink, hide, wall; state in `combat.encounter`: `held`, `hidden`,
+  `walls`). Hooks: `Spells.cells/use/why_not/aim_for_dir/npc_pick`, `SpellDb` (field `effect`, shapes `self` and
+  `tile`, `learn.band`), `Encounter._run_until_player` (hold skip, rounds tick), `Combat.monster_target` (hide),
+  `MonsterSim._taken` and `Movement` (ice blocks), `Cover.details` (ice = full cover), `Commands._encounter_act_q`
+  (a strike ends hide), `world/main_aim.gd` and `ui/skill_bar.gd` (cast "self" at once, tips).
+- Data: 12 new spells in `data/spells.json`, 12 spellbooks in `data/economy.json` and on the Liscor shelf. Every
+  teacher lesson has `"band": "friend"`.
+- Next: user merges the PR. Then M33.1 Erin's food and drink **[Sonnet · medium]**. Play check: learn a spell from
+  a friend, cast the new kinds.
+- Gotchas: `unit_spells` takes about 7 minutes (each test loads all data): give it a long timeout or run it in the
+  background; it is not stuck. A new `class_name` needs `godot --headless --path game --import` (it can segfault
+  once: run it twice), then `git checkout -- addons assets icon.png.import`. Only monsters can be held or fooled by
+  [Invisibility]; hostile NPCs still see you. Ice does not block sight.
+
 ## Just done (2026-10-26, local): ROADMAP update (branch `docs/roadmap-update-3`)
 - PR #241 (M32.4) and PR #242 (Laken drift) are merged. M31 and M32 now sit in the Done table. Their play checks
   are under "Waits on the user". The Rags / Laken alt idea is under "Later". Docs only, no tests run.

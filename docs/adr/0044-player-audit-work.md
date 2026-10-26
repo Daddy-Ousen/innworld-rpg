@@ -405,6 +405,24 @@ No engine change, no schema change, no save change (flags and new event ids only
 - **Not a gap:** the mourning scene (day 130, hours 10 – 22) stages before the night run sets the flag, but the
   battlefield is about three days from the inn, so a player who saved Zel cannot reach it that day.
 
+### M33.0 (2026-10-26): canon spells
+- Reading: two Sonnet agents searched Books 1 – 8 for named spells (summaries only). About 100 names; most are
+  Wistram lessons, items or mentions. The user picked 12 new spells (plan `docs/plans/m33.md` "M33.0 build plan").
+- 8 damage spells use today's shapes: [Stone Dart], [Ice Shard], [Lightning Jolt], [Stone Spray], [Frost Bloom]
+  (Ceria and Pisces teach them), [Lightning Bolt], [Fire Arrow], [Grand Fireball] (spellbook only; the Goblin casters
+  do not teach the player).
+- New spell field `effect` (`core/spell_effects.gd`, schema change agreed by the user): `hold` ([Astral Binding],
+  Typhenous), `blink` ([Flash Step], Pisces), `hide` ([Invisibility], Pisces), `wall` ([Ice Wall], Ceria). New shapes
+  `self` and `tile`. A non-damage spell has no `damage`. NPCs cast only damage spells.
+- Hide: monsters do not pick the player as a target. Any action that strikes a foe ends it. Hostile NPCs still see
+  you (only monsters fight in tactical fights today). Ice: no one steps on it (player moves, monster paths through
+  `MonsterSim._taken`); a ranged attack with an ice tile on its line meets full cover (`Cover.details`). Ice does
+  not block sight. Hold: the monster loses its next turns; NPC fighters cannot be held (spells hit monsters only).
+- New `learn.band`: a teacher teaches only when their regard reaches that band. Every teacher lesson is `"friend"`
+  (6). Spellbooks have no band. Every spell keeps a spellbook on the Liscor Mages' Guild shelf.
+- State in `combat.encounter` (`held`, `hidden`, `walls`): it ends with the fight. No save version change.
+- Every number, teacher, gate event and price is a design guess (`canon_ref` notes).
+
 ## Consequences
 - More text in data. The validator and `tools/tests` grow a check for each new file.
 - More hooks and stages raise the cascade risk. Each canon change keeps `sim_canon_book<N>` at drift 0 and the
