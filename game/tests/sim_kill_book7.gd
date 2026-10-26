@@ -15,9 +15,13 @@ const LAST_DAY := 143
 ## M32.4: Magnolia 12 / 18 -> 31 / 30. Her death on day 130 stops the battle of Invrisil, so Zel lives:
 ## his mourning, casket, will and funeral (and the Pallass door after it) do not happen; he gives Selys
 ## the Heartflame himself.
+## Laken 26 / 13 -> 26 / 49.5 (M28 Book 8 data): Book 7 alone still adds 13.0. The rest is Book 8 day 143:
+## with no Laken there is no gathering, no night raid on the Goblin camp and no Lancrel war, so that whole
+## chain (5.21 E - 5.32 G, Rags, Pyrite and Bethal too) cancels at once by real causes (ADR 0036 rule 1).
+## Elia's mountain siege no longer waits on Tyrion saving Laken (story order only).
 const CEILING := {
 	"erin_solstice": [51, 49.0],
-	"laken_godart": [26, 13.0],
+	"laken_godart": [26, 49.5],
 	"selys": [25, 21.5],
 	"zevara": [5, 6.0],
 	"rags": [14, 11.5],
