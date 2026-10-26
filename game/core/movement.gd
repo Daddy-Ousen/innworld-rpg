@@ -59,7 +59,7 @@ static func step(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> 
 	if gs.winter.area == p.area:
 		out["fairy"] = gs.winter.at(to)
 	if not db.maps.is_walkable(p.area, to) or out["npc"] != "" or out["monster"] != "" \
-			or out["fairy"] != "" or Guests.at(gs, p.area, to) != "":
+			or out["fairy"] != "" or Guests.at(gs, p.area, to) != "" or SpellEffects.is_wall(gs, p.area, to):
 		out["blocked"] = true
 		return out
 	if Traps.blocks(gs, db, p.area, to):
@@ -90,7 +90,7 @@ static func step(gs: GameState, db: DataDb, dir: String, spend: bool = true) -> 
 ## not count (the screen must not give it away).
 static func can_enter(gs: GameState, db: DataDb, area: String, to: Vector2i) -> bool:
 	if not db.maps.is_walkable(area, to) or gs.npcs.at(area, to) != "" or gs.combat.at(area, to) != "" \
-			or Guests.at(gs, area, to) != "":
+			or Guests.at(gs, area, to) != "" or SpellEffects.is_wall(gs, area, to):
 		return false
 	if gs.winter.area == area and gs.winter.at(to) != "":
 		return false

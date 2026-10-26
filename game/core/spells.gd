@@ -138,6 +138,12 @@ static func cells(gs: GameState, db: DataDb, id: String, aim: Vector2i, origin: 
 	match String(s.get("shape", "")):
 		"one":
 			out.append(aim)
+		"self":  # M33.0
+			out.append(origin)
+		"tile":  # M33.0: a blink lands on the aim tile; a wall stands across it
+			if SpellEffects.effect(s) == SpellEffects.WALL:
+				return SpellEffects.wall_cells(gs, db, id, aim, origin)
+			out.append(aim)
 		"blast":
 			var r := int(s["radius"])
 			for dx in range(-r, r + 1):
@@ -233,6 +239,15 @@ static func why_not(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> Str
 		"around":
 			if none:
 				return NO_FOE_NEAR
+		"tile":  # M33.0
+			if Combat._dist(here, aim) > int(s["range"]):
+				return TOO_FAR
+			if not Cover.sight(db, gs.player.area, here, aim):
+				return Combat.NO_SIGHT
+			if SpellEffects.effect(s) == SpellEffects.BLINK:
+				return SpellEffects.landing_error(gs, db, aim)
+			if cells(gs, db, id, aim, here).is_empty():
+				return SpellEffects.NO_ROOM
 	return ""
 
 
@@ -259,6 +274,10 @@ static func aim_for_dir(gs: GameState, db: DataDb, id: String, dir: Vector2i) ->
 			var at := here + dir * k
 			if not foes_in(gs, [at] as Array[Vector2i]).is_empty():
 				return at
+	elif String(s["shape"]) == "tile":  # M33.0: the farthest tile that way it can reach
+		for k in range(int(s["range"]), 0, -1):
+			if why_not(gs, db, id, here + dir * k) == "":
+				return here + dir * k
 	return here + dir
 
 
@@ -292,9 +311,21 @@ static func use(gs: GameState, db: DataDb, id: String, aim: Vector2i) -> Diction
 	out["cells"] = tiles
 	if not gs.combat.turns.is_empty():
 		gs.combat.turns[-1]["cells"] = tiles
-	for foe in foes_in(gs, tiles):
-		(out["strikes"] as Array).append(foe)
-		Encounter._logged_hit(gs, db, foe, func() -> void: _hit_monster(gs, db, foe, id, ""), true)
+	match SpellEffects.effect(s):  # M33.0
+		SpellEffects.HOLD:
+			for foe in foes_in(gs, tiles):
+				(out["strikes"] as Array).append(foe)
+				SpellEffects.hold(gs, db, id, foe)
+		SpellEffects.BLINK:
+			SpellEffects.blink(gs, aim)
+		SpellEffects.HIDE:
+			SpellEffects.hide(gs, db, id)
+		SpellEffects.WALL:
+			SpellEffects.wall(gs, db, id, tiles)
+		_:
+			for foe in foes_in(gs, tiles):
+				(out["strikes"] as Array).append(foe)
+				Encounter._logged_hit(gs, db, foe, func() -> void: _hit_monster(gs, db, foe, id, ""), true)
 	if gs.combat.has_fight():
 		gs.combat.fight["casts"] = int(gs.combat.fight.get("casts", 0)) + 1
 	return out
@@ -383,6 +414,8 @@ static func npc_pick(gs: GameState, db: DataDb, npc: String, ap: int, foe: Strin
 	var at := CombatState.pos_of(gs.combat.monsters[foe])
 	for id in of_npc(gs, db, npc):
 		var s := spell(db, id)
+		if not SpellEffects.is_damage(s):  # M33.0: NPCs only cast damage spells
+			continue
 		if not ready(gs, Encounter.NPC + npc, id) or int(s["ap_q"]) > ap or int(s["mp"]) > npc_mp(gs, db, npc):
 			continue
 		var reach := true

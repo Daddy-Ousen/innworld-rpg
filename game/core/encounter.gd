@@ -405,6 +405,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 				return
 			e["ap_q"] = player_ap(gs, db)
 			MonsterAbilities.apply_fear(gs, db)  # M32.3
+			SpellEffects.player_turn_starts(gs)  # M33.0: hide and ice count down
 			e["moved_q"] = 0
 			e["move_bonus_q"] = 0
 			c.blocking = false  # a guard lasts until the player's next turn
@@ -415,7 +416,7 @@ static func _run_until_player(gs: GameState, db: DataDb) -> void:
 			if _is_fighter(gs, db, id):
 				if id.begins_with(NPC):
 					_npc_turn(gs, db, id.substr(NPC.length()))
-				else:
+				elif not SpellEffects.skip_held(gs, db, id):  # M33.0: a bound foe loses its turn
 					_monster_turn(gs, db, id)
 			Combat.settle_if_over(gs, db)
 			log_end(gs)

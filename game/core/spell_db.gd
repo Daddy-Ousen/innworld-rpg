@@ -6,7 +6,13 @@
 ##            a wall; every foe on it is hit;
 ##          "blast": "range" (aim tile) and "radius" - every foe within radius of the
 ##            aim tile;
-##          "around": the 8 tiles around the caster.
+##          "around": the 8 tiles around the caster;
+##          "self" (M33.0): the caster's own tile;
+##          "tile" (M33.0): "range" - a tile in range and in sight.
+##          Optional "effect" (M33.0, SpellEffects): "damage" (default), "hold",
+##          "blink", "hide" or "wall"; each non-damage effect has one shape
+##          (SpellEffects.SHAPE_OF) and needs no "damage". "hold", "hide" and
+##          "wall" need "rounds" (1-5); "wall" needs "length" (1-5).
 ##          Optional "intellect_div" (damage + Intellect / div, default 3) and "learn":
 ##          {"teacher": canon npc id, "after_event": canon event id that must be done,
 ##          "minutes": study time, "book": good id (a good with "teaches": this spell),
@@ -18,9 +24,9 @@ class_name SpellDb
 extends RefCounted
 
 const SCHEMA_VERSION := 1
-const SHAPES := ["one", "line", "blast", "around"]
+const SHAPES := ["one", "line", "blast", "around", "self", "tile"]
 const HITS := ["auto", "roll"]
-const FIELDS := ["name", "shape", "ap_q", "mp", "damage", "hit", "cooldown", "canon_ref"]
+const FIELDS := ["name", "shape", "ap_q", "mp", "hit", "cooldown", "canon_ref"]
 
 var spells: Dictionary = {}
 var errors: Array[String] = []
@@ -100,10 +106,23 @@ func _validate_spell(id: String, s: Variant, db: DataDb) -> void:
 		errors.append("%s: ap_q must be 1-40 (up to 10 AP)." % where)
 	if int(s["mp"]) < 1 or int(s["mp"]) > 10:
 		errors.append("%s: mp must be 1-10." % where)
-	var dmg: Variant = s["damage"]
-	if not dmg is Array or (dmg as Array).size() != 2 or int(dmg[0]) < 0 or int(dmg[0]) > int(dmg[1]) \
-			or int(dmg[1]) < 1:
-		errors.append("%s: damage must be [a, b] with 0 <= a <= b and b >= 1." % where)
+	var effect := SpellEffects.effect(s)
+	if not SpellEffects.EFFECTS.has(effect):
+		errors.append("%s: effect must be one of %s." % [where, SpellEffects.EFFECTS])
+	elif effect == SpellEffects.DAMAGE:
+		var dmg: Variant = s.get("damage")
+		if not dmg is Array or (dmg as Array).size() != 2 or int(dmg[0]) < 0 or int(dmg[0]) > int(dmg[1]) \
+				or int(dmg[1]) < 1:
+			errors.append("%s: damage must be [a, b] with 0 <= a <= b and b >= 1." % where)
+		if ["self", "tile"].has(shape):
+			errors.append("%s: a damage spell cannot have shape '%s'." % [where, shape])
+	else:
+		if shape != String(SpellEffects.SHAPE_OF[effect]):
+			errors.append("%s: a %s spell needs shape '%s'." % [where, effect, SpellEffects.SHAPE_OF[effect]])
+		if effect != SpellEffects.BLINK and (int(s.get("rounds", 0)) < 1 or int(s.get("rounds", 0)) > 5):
+			errors.append("%s: a %s spell needs rounds 1-5." % [where, effect])
+		if effect == SpellEffects.WALL and (int(s.get("length", 0)) < 1 or int(s.get("length", 0)) > 5):
+			errors.append("%s: a wall spell needs length 1-5." % where)
 	if not HITS.has(String(s["hit"])):
 		errors.append("%s: hit must be one of %s." % [where, HITS])
 	if int(s["cooldown"]) < 0:
@@ -120,6 +139,9 @@ func _validate_spell(id: String, s: Variant, db: DataDb) -> void:
 		"blast":
 			if int(s.get("range", 0)) < 1 or int(s.get("radius", 0)) < 1:
 				errors.append("%s: a blast spell needs range >= 1 and radius >= 1." % where)
+		"tile":
+			if int(s.get("range", 0)) < 1:
+				errors.append("%s: a tile spell needs range >= 1." % where)
 	var ref: Variant = s["canon_ref"]
 	if not ref is Dictionary or not (ref as Dictionary).has("book"):
 		errors.append("%s: canon_ref needs 'book'." % where)

@@ -149,6 +149,8 @@ static func details(gs: GameState, db: DataDb, area: String, from: Vector2i, tar
 		return out
 	if ranged:
 		out["cover"] = against(db, area, target, from)
+		if SpellEffects.walled(gs, area, from, target):  # M33.0: a shot across [Ice Wall]
+			out["cover"] = FULL
 		match out["cover"]:
 			HALF:
 				out["bonus"] -= float(r["half"])

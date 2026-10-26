@@ -558,6 +558,7 @@ static func _taken(gs: GameState, except_id: String) -> Dictionary:
 		var m: Dictionary = gs.combat.monsters[id]
 		if id != except_id and m["area"] == area:
 			out[CombatState.pos_of(m)] = true
+	out.merge(SpellEffects.wall_tiles(gs))  # M33.0: no one walks through the ice
 	return out
 
 

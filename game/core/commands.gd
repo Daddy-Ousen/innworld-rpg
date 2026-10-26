@@ -273,6 +273,8 @@ static func _encounter_act_q(gs: GameState, db: DataDb, cost: int, ranged: bool,
 	var paid: bool = r["error"] == "" and not r.get("warn", false)
 	if paid:
 		Encounter.pay(gs, cost, false)
+		if String(r.get("target", "")) != "" or not (r.get("strikes", []) as Array).is_empty():
+			SpellEffects.reveal(gs)  # M33.0: striking a foe ends [Invisibility]
 		if String(r.get("target", "")) != "" and r.has("damage"):
 			Encounter.log_strike(gs, prefix + String(r["target"]), int(r["damage"]), ranged)
 	Encounter.log_end(gs)

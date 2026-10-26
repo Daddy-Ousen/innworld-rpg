@@ -166,7 +166,7 @@ static func monster_target(gs: GameState, db: DataDb, id: String) -> Dictionary:
 	var from := CombatState.pos_of(gs.combat.monsters[id])
 	var area := gs.player.area
 	var cands: Array[Dictionary] = []
-	if not is_down(gs):
+	if not is_down(gs) and not SpellEffects.hidden(gs):  # M33.0: [Invisibility]
 		cands.append({"kind": PLAYER, "id": "", "pos": gs.player.pos()})
 	for nid in gs.npcs.in_area(area):
 		var n: Dictionary = gs.npcs.npcs[nid]

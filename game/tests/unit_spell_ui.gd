@@ -202,6 +202,8 @@ func test_a_teacher_row_and_a_spellbook_row() -> void:
 	var gs := GameState.new_game(4, db)
 	gs.player.place("liscor_market", Vector2i(5, 5))
 	gs.world.events["b1.ceria_teaches_ryoka_light"] = {"status": Spells.DONE}
+	gs.world.add_relationship("ceria_springwalker", NpcSim.PLAYER, Voice.band_min(db, "friend")
+			- Standing.regard(gs, db, "ceria_springwalker"))  # M33.0: she teaches a friend
 	gs.npcs.npcs["ceria_springwalker"]["area"] = "liscor_market"
 	gs.npcs.npcs["ceria_springwalker"]["x"] = 6
 	gs.npcs.npcs["ceria_springwalker"]["y"] = 5

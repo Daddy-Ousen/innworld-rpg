@@ -78,7 +78,7 @@ func pick_spell(sid: String) -> void:
 		_m.hud.add_lines([why])
 		return
 	match String(Spells.spell(db, sid)["shape"]):
-		"around":
+		"around", "self":  # M33.0: "self" ([Invisibility]) needs no aim
 			_m.cast_spell(sid, gs.player.pos())
 			return
 		"one":
@@ -271,7 +271,7 @@ func _show_spell_plan(sid: String) -> void:
 	var s := Spells.spell(db, sid)
 	var here := gs.player.pos()
 	var shape := String(s["shape"])
-	if shape in ["one", "blast"] and (Combat._dist(here, hover_cell) > int(s["range"])
+	if shape in ["one", "blast", "tile"] and (Combat._dist(here, hover_cell) > int(s["range"])
 			or not Cover.sight(db, gs.player.area, here, hover_cell)):  # M17.6: no sight through a wall
 		overlay.clear_plan()
 		return
