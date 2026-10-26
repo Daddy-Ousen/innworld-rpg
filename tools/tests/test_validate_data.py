@@ -707,6 +707,52 @@ class VoicesTest(unittest.TestCase):
         rep = vd.validate_voices(root / "voices.json", root / "canon", acts)
         self.assertEqual(rep.errors, [])
 
+class QuestsTest(unittest.TestCase):
+    """M33.2: data/quests.json checks (ADR 0044 "M33.2")."""
+
+    BANDS = {"stranger", "acquaintance", "friend"}
+
+    def check(self, quests):
+        r = vd.Report()
+        vd.check_quests(r, quests, {"krshia"}, {"play_chess", "talk_with_guest"}, {"bread"}, self.BANDS)
+        return r.errors
+
+    def good(self):
+        return {"help_krshia": {
+            "title": "Krshia's stall", "giver": "krshia", "offer": "Help me, yes?", "confidence": "guess",
+            "gate": {"flags": ["x.open"], "min_band": "acquaintance"}, "fail": {"flags": ["x.closed"], "after_day": 30},
+            "steps": [{"text": "Play chess.", "did": {"action": ["play_chess"]}, "count": 2},
+                      {"text": "Wait.", "flag": "x.sign"},
+                      {"text": "Back.", "did": {"action": ["talk_with_guest"], "context": {"npc": "krshia"}}}],
+            "rewards": {"relationship": 3, "coins": 150, "goods": {"bread": 2}, "flags": ["x.done"]},
+            "done": "Good."}}
+
+    def test_good_passes(self):
+        self.assertEqual(self.check(self.good()), [])
+
+    def test_errors(self):
+        q = self.good()
+        q["Bad Id"] = {"title": "", "giver": "nobody", "offer": "x", "steps": [], "more": 1}
+        h = q["help_krshia"]
+        h["steps"] += [{"text": "a"}, {"text": "b", "flag": "x.y", "did": {"action": ["play_chess"]}},
+                       {"text": "c", "did": {"action": ["fly"]}, "count": 0}]
+        h["rewards"].update({"goods": {"gold_bar": 1}, "coins": -1, "spells": ["x"]})
+        h["gate"]["min_band"] = "pal"
+        h["fail"]["after_day"] = "soon"
+        text = " | ".join(self.check(q))
+        for bit in ["bad id", "title must be", "unknown giver 'nobody'", "at least one step", "unknown field 'more'",
+                    "confidence", "needs a flag or a did", "unknown action 'fly'", "count must be",
+                    "unknown good 'gold_bar'", "coins must be", "unknown reward 'spells'", "min_band 'pal'",
+                    "after_day must be"]:
+            self.assertIn(bit, text)
+
+    def test_real_quests_file(self):
+        root = Path(__file__).resolve().parents[2] / "game" / "data"
+        acts = set(json.loads((root / "actions.json").read_text(encoding="utf-8"))["actions"])
+        rep = vd.validate_quests(root / "quests.json", root / "canon", acts)
+        self.assertEqual(rep.errors, [])
+
+
 class BackgroundsTest(unittest.TestCase):
     """M30.5: data/backgrounds.json checks (ADR 0044 "M30.5")."""
 

@@ -548,3 +548,4 @@ static func _after(gs: GameState, db: DataDb) -> void:
 	Combat.settle_if_over(gs, db)
 	Guests.sync(gs, db)
 	Encounter.sync(gs, db)
+	gs.combat.lines.append_array(Quests.update(gs, db))  # M33.2: flag steps, fails

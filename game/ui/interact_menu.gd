@@ -7,7 +7,8 @@
 ## (M34.1: `shop_opened`, the game screen shows ShopPanel), a wagon's ride
 ## (Interact.RIDE), a magic door's trips
 ## (Interact.PORTAL), the dishes a guest can get (Interact.SERVE, M14.2), an
-## NPC's own talk options (Interact.VOICE, M30.1), spells (Interact.LEARN,
+## NPC's own talk options (Interact.VOICE, M30.1), "Ask about" a task (Interact.QUEST,
+## M33.2), spells (Interact.LEARN,
 ## M17.5), Appraise (M25.3) and Attack last, in red (Interact.ATTACK, M14.5).
 ## An NPC or a patron shows their face and standing on the card (M14.3, M14.7).
 ## open_bag lists the goods to eat, drink or read (Interact.USE_GOOD).
@@ -308,6 +309,9 @@ static func action_rows(o: Dictionary, db: DataDb, gs: GameState) -> Array[Dicti
 	for v: Dictionary in o.get("voice", []):  # M30.1: the NPC's own talk options first
 		add.call("talk", "%s (%d min)" % [v["label"], int(db.actions[v["action"]]["minutes"])],
 				Interact.VOICE + String(v["id"]))
+	for q: Dictionary in o.get("quests", []):  # M33.2: ask about a task
+		add.call("talk", "%s (%d min)" % [q["label"], int(db.actions[Interact.action_of(db, id, Interact.QUEST)]["minutes"])],
+				Interact.QUEST + String(q["id"]))
 	var person: bool = o.get("npc", false) or o.get("fairy", false)
 	for action_id: String in o["actions"]:
 		if not trades.is_empty() and action_id in [Economy.BUY_ACTION, Economy.SELL_ACTION]:

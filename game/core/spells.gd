@@ -60,6 +60,9 @@ static func teach_error(gs: GameState, db: DataDb, npc: String, id: String) -> S
 	var after := String(learn.get("after_event", ""))
 	if after != "" and gs.world.status(after) != DONE:
 		return NOT_YET % who
+	for f: String in learn.get("flags", []):  # M33.2: e.g. a quest reward unlocks the teacher
+		if not gs.flags.get(f, false):
+			return NOT_YET % who
 	var band := String(learn.get("band", ""))  # M33.0: the teacher must think well enough of you
 	if band != "" and Standing.regard(gs, db, npc) < Voice.band_min(db, band):
 		return NOT_FRIEND % who

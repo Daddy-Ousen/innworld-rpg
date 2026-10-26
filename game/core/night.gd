@@ -79,6 +79,8 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	if warn != "":
 		world.append(warn)
 	lines.append_array(world)
+	# 5d. Quests (M33.2): flag steps the night set, tasks that failed.
+	lines.append_array(Quests.update(gs, db))
 	var events := gs.world.history.slice(history_before)
 	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
 	#    player wakes at a safe place); NPCs go where their goals put them

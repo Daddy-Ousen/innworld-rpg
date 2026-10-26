@@ -449,6 +449,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `sim_inn_service`, `unit_data_db`, `unit_sound_cues` pass; validator books 1 – 8: 0 errors; Python 131 OK. Full suite not run.
   - [ ] The user plays: buy honey after 2.42, cook at the inn stove, serve the new dishes.
 - [ ] The user learns a spell from a friend and casts the new kinds in a fight.
+- [x] M33.2 quest engine (2026-10-26, branch `feat/m33.2-quest-engine`, ADR 0044 "M33.2"). User picks: auto "Ask about"
+  row on the giver; spell reward = teacher unlock (`learn.flags`). New `core/quests.gd`, `core/quest_state.gd`,
+  `data/quests.json` (empty; M33.3 adds lines). Hooks: `Actions.perform` (did steps), `Commands._after` and `Night.run`
+  (flag steps, fails, rewards), `Interact.QUEST`, menu and console rows, journal "Tasks". Save v24 + migration.
+  Python validator checks quests.json. Tests (all pass): `unit_quests` (new, 17), `unit_journal` (7), `unit_voice` (24),
+  `unit_interact` (11), `unit_game_state` (15), `unit_save_slots` (6), `unit_player_identity` (12), `unit_data_db` (15),
+  `unit_player_hooks` (16), `unit_spell_learning` (21, +2). Validator books 1 – 8, voices, quests: 0 errors. Python 134 OK.
+  Full suite not run.
+  - [ ] The user plays a quest (after M33.3 adds one): ask, do the steps, see "Tasks" in the journal (J).
 
 ## Docs
 - [x] ROADMAP update (2026-10-26, branch `docs/roadmap-update-3`): M31 and M32 moved to Done, their play checks to

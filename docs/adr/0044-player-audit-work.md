@@ -438,3 +438,16 @@ No engine change, no schema change, no save change (flags and new event ids only
   honey `erin.has_ashfire_honey`, nectar `erin.wary_of_faerie_flower_drink`. The Krshia stall sells them.
 - Names come from the Books. Amounts and prices are guesses. Acid Fly dish, magic soups, bee soup and the knight cake are
   left out (no ingredient source or no fit); they can be added later as data.
+
+### M33.2 (2026-10-26): the quest engine
+- User picks: a quest starts from an auto talk row on its giver ("Ask about: <title>", `Interact.QUEST`); a spell
+  reward unlocks the teacher by a flag (spell `learn.flags`), the lesson itself stays.
+- New `data/quests.json` (schema ask done): giver, offer, gate (as a voice option), fail (`flags`, `after_day`; the
+  giver's death always fails), steps (`flag`, or `did` with the event-hook matcher `Director.record_matches` and
+  `count`), rewards (`relationship` with the giver, `coins`, `goods`, `flags`), `done`. No quests yet: M33.3 adds the
+  lines.
+- `Actions.perform` sends each record to `Quests.after_action` (only records made while a step is current count).
+  `Commands._after` and `Night.run` (after the director) call `Quests.update` (flag steps, fails, rewards).
+  Quests never touch canon by themselves; a reward flag can feed a hook or a spell lesson.
+- State `gs.quests` (`QuestState`), save v24 + migration (no tasks). Journal: a "Tasks" part at the top.
+- Checks: `Quests.validate` (load errors) and `tools/validate_data.py --all` (quests.json).

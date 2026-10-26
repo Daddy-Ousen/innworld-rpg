@@ -39,6 +39,7 @@ static func migrate(data: Dictionary) -> Dictionary:
 			20: out = _migrate_20_to_21(out)
 			21: out = _migrate_21_to_22(out)
 			22: out = _migrate_22_to_23(out)
+			23: out = _migrate_23_to_24(out)
 		version += 1
 	out["save_version"] = GameState.SAVE_VERSION
 	return out
@@ -244,4 +245,9 @@ static func _migrate_22_to_23(d: Dictionary) -> Dictionary:
 	p["look"] = PlayerIdentity.DEFAULT_LOOK
 	p["background"] = ""
 	d["player"] = p
+	return d
+
+## v24 (M33.2, ADR 0044): quests. An old save has taken on no task yet.
+static func _migrate_23_to_24(d: Dictionary) -> Dictionary:
+	d["quests"] = {"entries": {}}
 	return d

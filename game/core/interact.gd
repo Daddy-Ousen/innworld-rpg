@@ -30,6 +30,9 @@
 ## a talk topic).
 ## M30.4: a done own option sets its set_flags and relationship (Voice.apply); with a
 ## "page" the result also has "page" {"title", "lines"} for the screen to show.
+## M33.2: an NPC option has "quests": the quests this NPC offers now (Quests.offers,
+## [{"id", "label"}]); the menu pick is "quest:<id>" (QUEST). perform runs the first
+## talk action (rules.npc.talk_actions) and then Quests.start.
 ## M13.T: on a map with traps, the search (id Traps.SEARCH) and each found,
 ## armed trap next to the player ("trap:<id>") are options with "trap": true;
 ## using them goes to Traps.search / Traps.disarm.
@@ -63,6 +66,8 @@ const LEARN := "learn:"
 const APPRAISE := "appraise"
 ## M30.1: "voice:<option id>" runs an NPC's own talk option (Voice.options).
 const VOICE := "voice:"
+## M33.2: "quest:<quest id>" asks the NPC about a task and takes it on (Quests.start).
+const QUEST := "quest:"
 
 
 ## Objects on or next to the player, nearest first, then NPCs next to the
@@ -85,7 +90,8 @@ static func options(gs: GameState, db: DataDb) -> Array[Dictionary]:
 			"item": "", "price": 0, "trades": [] as Array[Dictionary], "ride": {},
 			"serve": Guests.serve_choices(gs, db, id), "standing": Standing.band(gs, db, id)["label"],
 			"attack": Brawl.on(db), "teach": Spells.teachable(gs, db, id),
-			"appraise": NpcSheet.can_read(gs, db), "voice": Voice.options(gs, db, id)})
+			"appraise": NpcSheet.can_read(gs, db), "voice": Voice.options(gs, db, id),
+			"quests": Quests.offers(gs, db, id)})
 	for g in Guests.near(gs):
 		var gid := Guests.GUEST + String(g["id"])
 		out.append({"id": gid, "name": Guests.patron_name(g), "npc": false, "guest": true,
@@ -158,6 +164,7 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 	if obj.is_empty():
 		return _fail("There is no '%s' here." % object_id)
 	var voiced := {}
+	var quest_id := ""
 	if obj["npc"] and action_id.begins_with(VOICE):
 		var vid := action_id.substr(VOICE.length())
 		if (obj["voice"] as Array).any(func(v: Dictionary) -> bool: return v["id"] == vid):
@@ -165,6 +172,11 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 			action_id = String(voiced["action"])
 		else:
 			return _fail("%s has nothing to say about that now." % obj["name"])
+	elif obj["npc"] and action_id.begins_with(QUEST):
+		quest_id = action_id.substr(QUEST.length())
+		if not (obj["quests"] as Array).any(func(q: Dictionary) -> bool: return q["id"] == quest_id):
+			return _fail(Quests.why_not(gs, db, quest_id))
+		action_id = _talk_action(db)
 	elif not (obj["actions"] as Array).has(action_id):
 		return _fail(("You cannot %s with %s." if obj["npc"] else "You cannot %s at the %s.")
 				% [action_id, obj["name"]])
@@ -209,14 +221,18 @@ static func perform(gs: GameState, db: DataDb, object_id: String, action_id: Str
 		var topic := said if said != "" else TalkTopics.line(gs, db, object_id)  # M25.1
 		if topic != "":
 			gs.combat.lines.append(topic)
+	if quest_id != "":
+		Quests.start(gs, db, quest_id)  # M33.2: after the greeting
 	if not page.is_empty():
 		return {"record": rec, "error": "", "page": page}
 	return {"record": rec, "error": ""}
 
 
 ## The action a menu pick runs: an NPC's own option ("voice:<id>") gives its action,
-## anything else is itself.
+## a quest pick ("quest:<id>", M33.2) the first talk action, anything else is itself.
 static func action_of(db: DataDb, object_id: String, action_id: String) -> String:
+	if action_id.begins_with(QUEST):
+		return _talk_action(db)
 	if not action_id.begins_with(VOICE):
 		return action_id
 	return String(Voice.option(db, object_id, action_id.substr(VOICE.length())).get("action", action_id))
@@ -228,6 +244,11 @@ static func object_of(db: DataDb, area: String, id: String) -> Dictionary:
 		if o["id"] == id:
 			return o
 	return {}
+
+
+## The talk a quest pick runs: the first of rules.npc.talk_actions.
+static func _talk_action(db: DataDb) -> String:
+	return String(db.rules["npc"]["talk_actions"][0])
 
 
 static func _fail(why: String) -> Dictionary:

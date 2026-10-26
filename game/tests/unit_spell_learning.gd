@@ -65,6 +65,32 @@ func test_an_unknown_band_is_reported() -> void:
 	assert_true(errs.any(func(e: String) -> bool: return e.contains("unknown band")))
 
 
+## M33.2: learn.flags (a quest reward) unlocks the teacher.
+func test_a_teacher_waits_for_the_lesson_flags() -> void:
+	var gs := _game()
+	_done(gs, TEACHER_EVENT)
+	var learn: Dictionary = _db.spells.spells["ice_spike"]["learn"]
+	learn["flags"] = ["x.ceria_trusts_you"]
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"),
+			Spells.NOT_YET % "Ceria Springwalker")
+	gs.flags["x.ceria_trusts_you"] = true
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"), "")
+	learn.erase("flags")
+
+
+func test_bad_lesson_flags_are_reported() -> void:
+	var bad := SpellDb.from_dicts({
+		"w": {"name": "[W]", "shape": "around", "ap_q": 8, "mp": 1, "damage": [1, 2], "hit": "auto",
+			"cooldown": 0, "canon_ref": {"book": 1, "confidence": "guess"},
+			"learn": {"teacher": "ceria_springwalker", "flags": "x.y", "minutes": 10}},
+		"v": {"name": "[V]", "shape": "around", "ap_q": 8, "mp": 1, "damage": [1, 2], "hit": "auto",
+			"cooldown": 0, "canon_ref": {"book": 1, "confidence": "guess"},
+			"learn": {"book": "spellbook_gust", "flags": ["x.y"], "minutes": 10}}})
+	var errs := bad.validate(_db)
+	assert_true(errs.any(func(e: String) -> bool: return e.contains("'w' learn") and e.contains("flags must")), str(errs))
+	assert_true(errs.any(func(e: String) -> bool: return e.contains("'v' learn") and e.contains("need a teacher")), str(errs))
+
+
 func test_the_shipped_spells_are_all_guesses_with_a_canon_ref() -> void:
 	assert_gt(_db.spells.ids().size(), 3)
 	for id in _db.spells.ids():

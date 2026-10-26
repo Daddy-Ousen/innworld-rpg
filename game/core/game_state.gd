@@ -3,7 +3,7 @@
 class_name GameState
 extends RefCounted
 
-const SAVE_VERSION := 23
+const SAVE_VERSION := 24
 
 var save_version: int = SAVE_VERSION
 var rng: Rng
@@ -33,6 +33,8 @@ var winter: WinterState
 var economy: EconomyState
 ## Guests, serving and the inn's reputation (M14.2).
 var inn: InnState
+## The player's tasks (M33.2).
+var quests: QuestState
 
 
 func _init(seed_value: int = 0) -> void:
@@ -47,6 +49,7 @@ func _init(seed_value: int = 0) -> void:
 	winter = WinterState.new()
 	economy = EconomyState.new()
 	inn = InnState.new()
+	quests = QuestState.new()
 
 
 ## A fresh game at the start time from data/rules.json, at the start place
@@ -91,6 +94,7 @@ func to_dict() -> Dictionary:
 		"winter": winter.to_dict(),
 		"economy": economy.to_dict(),
 		"inn": inn.to_dict(),
+		"quests": quests.to_dict(),
 	}
 
 
@@ -112,6 +116,7 @@ static func from_dict(d: Dictionary) -> GameState:
 	gs.winter = WinterState.from_dict(d["winter"])
 	gs.economy = EconomyState.from_dict(d["economy"])
 	gs.inn = InnState.from_dict(d["inn"])
+	gs.quests = QuestState.from_dict(d["quests"])
 	return gs
 
 
