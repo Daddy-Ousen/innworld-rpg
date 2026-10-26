@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-26, local): ROADMAP update (branch `docs/roadmap-update-3`)
+- PR #241 (M32.4) and PR #242 (Laken drift) are merged. M31 and M32 now sit in the Done table. Their play checks
+  are under "Waits on the user". The Rags / Laken alt idea is under "Later". Docs only, no tests run.
+- Next: user merges the PR. Then M33.0 canon spells **[Opus · medium]**: a reading agent (Sonnet) lists spells in
+  Books 1 – 8 with casters; the user picks 10 – 15 and which new effect kinds (schema ask, rule 11). Plan:
+  `docs/plans/m33.md`.
+- Also open: no release since v0.1.8 (M31 and M32 are not in an apk yet). A v0.1.9 build lets the user play them on
+  the phone (`tools/release.ps1`, and upload the apk).
+- Gotcha: `.gitignore` has a local change (signing key lines) and `web/` plus stray `.uid` files are untracked. They
+  are not part of this branch.
+
 ## Just done (2026-10-26, local): Laken drift ceiling (branch `fix/laken-drift-ceiling`)
 - `sim_kill_book7` Laken test is green (10/10). The extra drift (37) came from Book 8 day 143: the whole Riverfarm
   and Goblin war chain cancels when Laken is dead. Real causes, so the ceiling is now 26 / 49.5 (comment in the test).

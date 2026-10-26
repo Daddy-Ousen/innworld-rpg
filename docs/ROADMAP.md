@@ -11,14 +11,12 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| M31 Signposts and scene beats | M31.0 – M31.3 merged (PR #230 – #232); the user plays a signposted day and a scene (`docs/plans/m31.md`) | M31.1: Sonnet · medium · M31.2 – M31.3: Sonnet · high |
-| M32 Climaxes of Books 6 – 8 | M32.0 - M32.3 merged; M32.4 done (PR open); next: the user plays the three doors and Zel's stand (`docs/plans/m32.md`) | M32.1 – M32.2: Opus · high · M32.3: Opus · medium · M32.4: Opus · high |
-| M33 Depth: spells, dishes, quests, friends | planned (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
-| Play checks (M20, M27 – M30, M34) | waits on the user | – (user) |
+| M33 Depth: spells, dishes, quests, friends | next: M33.0 canon spells (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
+| Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: the user merges M32.4 (Zel lives), then plays the three doors and Zel's last stand. The M31 play check and the other play checks do not block M32.
+Next step: M33.0 canon spells **[Opus · medium]** (a reading agent lists the spells, then the user picks). The play checks do not block M33.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -28,25 +26,8 @@ engine, save and design work and for canon logic; high effort where lore, balanc
 
 # Next up
 
-M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10-17.md`, ADR 0044); the user said
+M33 comes from the player audit of 2026-10-17 (the last of M31 – M33; `docs/AUDIT_PLAYER_2026-10-17.md`, ADR 0044); the user said
 "we will do all". One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
-
-## M31 — Signposts and scene beats (plan `docs/plans/m31.md`, ADR 0044)
-- [x] M31.0 Engine: event `foreshadow` (talk in town, journal "Coming up") and stage `beats` (timed lines with a speaker); schema ask **[Opus · medium]** (2026-10-24, ADR 0044 "M31.0", no save change)
-- [x] M31.1 A signpost for each of the 25 fight stages and the key scenes **[Sonnet · medium]** (2026-10-24, 25 fights + 10 scenes)
-- [x] M31.2 Beats for the Books 1 – 4 scenes **[Sonnet · high]** (2026-10-24, 17 scenes)
-- [x] M31.3 Beats for the Books 5 – 8 scenes, and ally shouts in fight stages **[Sonnet · high]** (2026-10-24, 30 scenes + 25 fights)
-- [ ] (user) Play a signposted day (the Skinner night) and a scene (the play in Celum)
-**Done when:** every fight stage has a signpost; every scene has beats; `sim_canon_book1` – `8` keep drift 0; the user has played it.
-
-## M32 — Climaxes of Books 6 – 8 (plan `docs/plans/m32.md`, ADR 0044)
-- [x] M32.0 Choices and reading **[Opus · high]** (2026-10-25: Zel can be saved; new battlefield map; Tremborag stays news; Klbkch always dies)
-- [x] M32.1 The three-door battle in full: Calruz as the last foe (he yields), the Horns as allies; hooks on all three Book 8 stages **[Opus · high]**
-- [x] M32.2 Zel's last stand on a new map `invrisil_battlefield` (day 130): the Chosen as foes, a signpost and hooks **[Opus · high]**
-- [x] M32.3 Boss feel: Skinner's fear, the Crypt Lord's bile, Regrika, the Goblin Lord **[Opus · medium]** (2026-10-26: new kinds `fear`, `bile`, `command`; new foe `goblin_lord`)
-- [x] M32.4 Zel lives: drive off Bea and Ijvani and he survives; the Book 6 – 7 mourning cancels; he gives Selys the Heartflame **[Opus · high]** (2026-10-26: new sim `sim_book6_zel_lives`)
-- [ ] (user) Play the three doors and Zel's last stand
-**Done when:** Calruz, the Horns and the Chosen fight on the map; every Book 8 stage has a hook; the kill sims and `sim_canon_book6` – `8` stay green; the user has played it.
 
 ## M33 — Depth: spells, dishes, quests, friends (plan `docs/plans/m33.md`, ADR 0044)
 - [ ] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees **[Opus · medium]**
@@ -63,6 +44,8 @@ M31 – M33 come from the player audit of 2026-10-17 (`docs/AUDIT_PLAYER_2026-10
 
 ## Play checks
 All build steps are merged. Run the game with `godot --path game`, or install the apk from the latest release.
+- [ ] M32: the three doors (the Book 8 raid, Calruz yields) and Zel's last stand at Invrisil (drive off Bea and Ijvani: Zel lives)
+- [ ] M31: a signposted day (the Skinner night) and a scene with beats (the play in Celum)
 - [ ] M34 on the phone (v0.1.8 apk): shop at Krshia's, talk to Erin, serve a guest, attack a guard; the M34.5 fixes (End turn free in a fight; the shop's Buy button upright)
 - [ ] M30: talk to the Book 1 cast, tell Erin you are from Earth, start a new game; the "Who are you?" screen on a phone
 - [ ] M29: the first night's System page, the inn on day 1 and day 14, Lism's prices, a fight at a map's edge
@@ -91,6 +74,7 @@ v0.1.8 sent for review (2026-10-24).
 - Outside PR #164 (DKemp98, more Skills and classes): changes asked 2026-10-12; wait for rebased, split PRs
 - Outside PR #210 (DKemp98, sort the tags, add `crafting.potions`): open since 2026-10-18, not reviewed yet
 - Web build on its own subdomain (CNAME + Settings → Pages → Custom domain)
+- Rags's Book 8 thread (Pyrite, Bethal, Lancrel) has no alt when Laken dies (design pick, from PR #242)
 
 ---
 
@@ -116,6 +100,8 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 
 | Milestone | What it gave the game | ADR |
 |---|---|---|
+| M32 Climaxes of Books 6 – 8 | three-door battle, Zel's stand on `invrisil_battlefield`, boss abilities (fear, bile, command), Zel can live | 0044 |
+| M31 Signposts and scene beats | event signposts (talk, journal "Coming up"), timed scene beats, ally shouts | 0044 |
 | M34 Phone controls, second pass | action card per target, shop screen, context button, tap to walk, sizes by dpi, upright fixes | 0045 |
 | M30 Voices and the Earther | NPC voices and barks for Books 1 – 8, the Earther meeting, "Who are you?" (save v23) | 0044 |
 | M29 Lore polish | System voice like the books, inn name by flag, Liscor wary of Humans, looks, end-of-story page | 0044 |
