@@ -15,6 +15,7 @@ const KNOWN := "You already know %s."
 const CANNOT_TEACH := "%s cannot teach you that."
 const NOT_YET := "%s will not teach you that yet."
 const NOT_HERE := "%s is not next to you."
+const NOT_FRIEND := "%s does not know you well enough to teach you that."
 
 
 static func spell(db: DataDb, id: String) -> Dictionary:
@@ -59,6 +60,9 @@ static func teach_error(gs: GameState, db: DataDb, npc: String, id: String) -> S
 	var after := String(learn.get("after_event", ""))
 	if after != "" and gs.world.status(after) != DONE:
 		return NOT_YET % who
+	var band := String(learn.get("band", ""))  # M33.0: the teacher must think well enough of you
+	if band != "" and Standing.regard(gs, db, npc) < Voice.band_min(db, band):
+		return NOT_FRIEND % who
 	if knows(gs, id):
 		return KNOWN % name_of(db, id)
 	return ""
