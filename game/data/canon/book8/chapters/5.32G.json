@@ -660,8 +660,7 @@
 				"not_flags": []
 			},
 			"depends_on": [
-				"b8.a_human_army_rides_on_the_mountain",
-				"b8.tyrion_lances_redscar_and_saves_laken"
+				"b8.a_human_army_rides_on_the_mountain"
 			],
 			"on_fail": [
 				"cancel"
@@ -722,7 +721,8 @@
 				"not_flags": []
 			},
 			"depends_on": [
-				"b8.elia_arcsinger_breaks_the_mountain_siege"
+				"b8.elia_arcsinger_breaks_the_mountain_siege",
+				"b8.tyrion_lances_redscar_and_saves_laken"
 			],
 			"on_fail": [
 				"cancel"
