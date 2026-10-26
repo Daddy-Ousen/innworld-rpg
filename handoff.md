@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-26, local): M33.1 Erin's food and drink (branch `feat/m33.1-erin-food`)
+- Data only (ADR 0044 "M33.1"): 5 recipes, 5 actions (`make_juice`, `fry_burgers`, `warm_honey_milk`, `mix_milkshake`,
+  `mix_faerie_drink`), 5 dishes, 5 ingredients; stove lists in `inn_interior` and `invrisil_crag_pig`; `rules.inn.dishes`;
+  `audio.json` sounds (also `make_pastry`). Krshia's stall sells the ingredients; `from_flag` on potatoes, honey, nectar.
+- Tests: `unit_m33_food` (new). `unit_cooking` recipe count is now 13. See `progress.md` M33.1.
+- Next: user merges the PR. Then M33.2 quest engine **[Opus · high]** (schema ask first, save bump + migration).
+- Gotchas: data files here use CRLF (some tools hide it): edit in Python with `newline=''`. A recipe has no flag gate: gate by
+  the ingredient's `from_flag`. Shop `sells` order is tested in `unit_economy` (Celum stall); new goods went to Krshia only.
+
 ## Just done (2026-10-26, local): M33.0 canon spells (branch `feat/m33.0-canon-spells`)
 - User picks: 8 damage spells, all 4 new kinds, friend gate (ADR 0044 "M33.0", plan `docs/plans/m33.md`).
 - Code: new `core/spell_effects.gd` (hold, blink, hide, wall; state in `combat.encounter`: `held`, `hidden`,

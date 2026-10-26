@@ -429,3 +429,12 @@ No engine change, no schema change, no save change (flags and new event ids only
   book's kill sim green.
 - Book text reading (Zel's last stand, Calruz, beats, spells, recipes) goes to reading agents (CLAUDE.md
   "Context discipline"); only summaries reach the main session.
+
+### M33.1 (2026-10-26): Erin's food and drink
+- Data only, no schema change. 5 recipes at the stove (`recipes.json`): blue fruit juice (1.05), hamburger and fries (2.11),
+  Ashfire honey milk (4.11), milkshake (5.00), faerie flower drink (2.31). 5 new actions, 5 dishes, 5 ingredients (milk, ale,
+  potatoes, Ashfire honey, faerie nectar). The inn serves the new dishes (`rules.inn.dishes`).
+- Gate: the engine has no flag on a recipe, so the ingredient carries `from_flag`: potatoes `wandering_inn.hamburgers`,
+  honey `erin.has_ashfire_honey`, nectar `erin.wary_of_faerie_flower_drink`. The Krshia stall sells them.
+- Names come from the Books. Amounts and prices are guesses. Acid Fly dish, magic soups, bee soup and the knight cake are
+  left out (no ingredient source or no fit); they can be added later as data.

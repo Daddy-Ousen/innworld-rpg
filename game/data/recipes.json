@@ -17,6 +17,16 @@
 		"vegetable_soup": {"action": "cook_vegetable_soup", "inputs": {"vegetables": 2}, "outputs": {"vegetable_soup": 3},
 			"stations": ["stove", "campfire"], "confidence": "guess"},
 		"blue_pastry": {"action": "make_pastry", "inputs": {"flour": 1, "egg": 1, "blue_fruit": 1}, "outputs": {"blue_pastry": 3},
+			"stations": ["stove"], "confidence": "guess"},
+		"blue_fruit_juice": {"action": "make_juice", "inputs": {"blue_fruit": 2}, "outputs": {"blue_fruit_juice": 2},
+			"stations": ["stove"], "confidence": "likely"},
+		"hamburger_and_fries": {"action": "fry_burgers", "inputs": {"meat": 1, "flour": 1, "potatoes": 1}, "outputs": {"hamburger_and_fries": 2},
+			"stations": ["stove"], "confidence": "likely"},
+		"ashfire_honey_milk": {"action": "warm_honey_milk", "inputs": {"milk": 1, "honey": 1}, "outputs": {"ashfire_honey_milk": 2},
+			"stations": ["stove"], "confidence": "guess"},
+		"milkshake": {"action": "mix_milkshake", "inputs": {"milk": 2, "honey": 1}, "outputs": {"milkshake": 3},
+			"stations": ["stove"], "confidence": "guess"},
+		"faerie_flower_drink": {"action": "mix_faerie_drink", "inputs": {"ale": 1, "faerie_nectar": 1}, "outputs": {"faerie_flower_drink": 2},
 			"stations": ["stove"], "confidence": "guess"}		
 	}
 }
