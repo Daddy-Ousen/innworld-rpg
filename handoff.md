@@ -8,12 +8,20 @@
   `core/monster_sim.gd` (a commanded foe does not flee).
 - Data: Skinner fear, Crypt Lord bile (its `ranged` removed), Regrika agility 8 + "Charge" leap, new enemy
   `goblin_lord` (voice in `audio.json`), Zel's stage wave 3 and the hook enemy list (`4.48.json`).
-- Next: user merges the PR. Then M32.4 **[Opus · high]** (Zel lives: the bend reads `zel.saved_by_the_player`).
-  Also PR #239 (the `standing.gd` fix from a side session) waits for a merge.
+- Next: user merges the PR. Then M32.4 **[Opus · high]** (Zel lives: the bend reads `zel.saved_by_the_player`). PR #239 (`standing.gd` fix) is merged.
 - Gotchas: `-gselect=unit_combat` also runs `unit_combat_db`, `_preview`, `_screen`, `_skills`: use
   `-gselect=unit_combat.gd`. `-gtest=...` without a match runs the whole suite: do not use it. A Godot run can
   stall at exit; kill stray `Godot_v4.7.2*` and rerun. Q_PER_AP is 4 (6 AP a turn at level 0), not 8.
   `canon_ref` / stage `note` max 300 chars.
+
+## Just done (2026-10-26, local): fix race start null home (branch `fix/race-start-null-home`)
+- `Standing.race_start` crashed on `String(null)`: Zel's canon `"home"` is `null`, and `Dictionary.get(key, default)`
+  returns a stored `null`, not the default. It now returns 0 when race or home is not a String. Guard test in
+  `unit_race_regard`. `sim_book5_last_light` is green again (9/9). Two broken line breaks in `standing.gd` fixed.
+- Next: user merges the PR. Optional follow-up in `progress.md` "Fixes": the same broken line breaks in 9 other files.
+- Gotcha: the Bash tool turns `\\` into `\` in a Python heredoc. A `\` + newline then vanishes, and a line break
+  becomes one long line with tabs. That is most likely how these broken lines were made. Use the Edit tool to write
+  a GDScript `\` line break. Also: `--import` rewrites all `.import` files (CRLF noise): `git checkout -- game/addons game/assets game/icon.png.import`.
 
 ## Just done (2026-10-25, local): M32.2 Zel's stage (branch `feat/m32.2-zel-stage`)
 - User pick: the full save rule (ADR 0044 "M32.2"). Engine: a foe driven off (escape) writes a `drive_off_foe`

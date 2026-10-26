@@ -428,9 +428,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
 
 ## Fixes
-- [ ] Old failure: `sim_book5_last_light` (2 tests) errors at `core/standing.gd:100` (`Invalid call 'String'
-  constructor: Drake` in `race_start`). Fails on main too (found 2026-10-25 in M32.2). Fix in PR #239 (branch
-  `fix/race-start-null-home`, side session): Zel's null home broke `String()`. Waits for the user to merge.
+- [x] Race start null home (2026-10-26, branch `fix/race-start-null-home`): `sim_book5_last_light` (2 tests) errored
+  at `core/standing.gd:100` (`Invalid call 'String' constructor: Drake`). Cause: Zel's canon `"home"` is `null`;
+  `get("home", "")` returns that `null` (the default is only for a missing key), and `String(null)` fails. Only a
+  Drake reaches that call, so Zel trips it once he is on the roster. `race_start` now returns 0 when race or home
+  is not a String. Also fixed two broken line breaks in `standing.gd` (tabs where `\` was). Guard test in
+  `unit_race_regard` (+1, now 7). Tests (all pass): `unit_race_regard` 7/7, `sim_book5_last_light` 9/9,
+  `unit_standing` 21/21. Full suite not run.
+  - [ ] Follow-up: the same broken line breaks (tabs, no `\`) sit in `canon_db.gd:194`, `data_db.gd:365`,
+    `map_db.gd:675` and `:704`, `npc_react.gd:109`, `npc_sim.gd:91`, `stage.gd:115`, `ui/skill_bar.gd:51`,
+    `world/ground_art.gd:199`. They still parse (one long line). Cosmetic only.
 - [x] Greydath one id (2026-10-24, branch `fix/greydath-one-id`): `sim_canon_book6` failed at line 185 because M28.1
   added a second record `greydath` for the same Goblin (4.39 G: Greybeard is Greydath; the Book 6 note says keep the id
   `greybeard`). Removed the `greydath` record from `canon/book8/npcs.json`; the two 5.37 G events now use `greybeard`.

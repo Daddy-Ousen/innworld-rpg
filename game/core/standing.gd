@@ -95,9 +95,16 @@ static func race_start(gs: GameState, db: DataDb, npc: String) -> int:
 	var n: Dictionary = db.canon.npcs.get(npc, {})
 	if n.is_empty():
 		return 0
+	# Canon may hold null here (Zel has no home): get()'s default does not cover that.
+	var race: Variant = n.get("race")
+	var home: Variant = n.get("home")
+	if not race is String or not home is String:
+		return 0
+	var town := town_of_location(db, home)
 	var total := 0.0
 	for e: Dictionary in rules(db).get("race_regard", []):
-		if String(n.get("race", "")) == String(e["race"]) and not (e.get("except", []) as Array).has(npc) 				and town_of_location(db, String(n.get("home", ""))) == String(e["town"]):
+		if race == String(e["race"]) and town == String(e["town"]) \
+				and not (e.get("except", []) as Array).has(npc):
 			total += float(e["start"]) * _weight(gs, e)
 	return roundi(total)
 
@@ -230,7 +237,11 @@ static func validate(db: DataDb) -> Array[String]:
 		errs.append("rules.standing.race_regard: must be a list.")
 	else:
 		for e: Variant in rr:
-			if not e is Dictionary or String((e as Dictionary).get("town", "")) == "" 					or String((e as Dictionary).get("race", "")) == "" 					or not (e as Dictionary).get("start", null) is int and not (e as Dictionary).get("start", null) is float 					or float((e as Dictionary).get("fade", 0)) <= 0.0 or float((e as Dictionary).get("price", 0.0)) < 0.0 					or not (e as Dictionary).get("shops", []) is Array or not (e as Dictionary).get("except", []) is Array:
+			if not e is Dictionary or String((e as Dictionary).get("town", "")) == "" \
+					or String((e as Dictionary).get("race", "")) == "" \
+					or not (e as Dictionary).get("start", null) is int and not (e as Dictionary).get("start", null) is float \
+					or float((e as Dictionary).get("fade", 0)) <= 0.0 or float((e as Dictionary).get("price", 0.0)) < 0.0 \
+					or not (e as Dictionary).get("shops", []) is Array or not (e as Dictionary).get("except", []) is Array:
 				errs.append("rules.standing.race_regard: each entry needs town, race, start (a number), fade > 0, and optional price >= 0, shops, except (lists).")
 			elif not db.canon.locations.is_empty() and not db.canon.locations.has(e["town"]):
 				errs.append("rules.standing.race_regard: unknown town '%s'." % e["town"])
