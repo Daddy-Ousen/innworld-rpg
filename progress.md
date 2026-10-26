@@ -430,9 +430,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `sim_book7_zel_and_selys` (4), `unit_canon_db` (7). `sim_kill_book7` 9/10: Magnolia ceiling raised 12 / 18 ->
   31 / 30 (no battle, so Zel lives and is not mourned); the Laken drift failure (50 > 13) is old (also on main).
   Validator books 6, 7: 0 errors. Python 131 OK. Full suite not run.
+- [x] M32.4 merged ([PR #241](https://github.com/Daddy-Ousen/innworld-rpg/pull/241)). All M32 build steps are merged.
 - [ ] The user plays the three doors and Zel's last stand.
 
 ## Docs
+- [x] ROADMAP update (2026-10-26, branch `docs/roadmap-update-3`): M31 and M32 moved to Done, their play checks to
+  "Waits on the user", the Rags / Laken alt to Later, next step M33.0. Docs only, no tests run.
 - [x] ROADMAP update (2026-10-25, branch `docs/roadmap-update-2`): M31 marked merged (PR #230 - #232), next step `sim_canon_book8` then M32.0. `sim_canon_book6` 13/13 pass on main. Docs only.
 - [x] ROADMAP cleanup (2026-10-24, branch `docs/roadmap-cleanup`): open work first, done milestones as a one-line
   table at the bottom, ticked steps removed, stale lines fixed. Docs only, no tests run.
