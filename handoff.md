@@ -1,6 +1,14 @@
 # Handoff
 
-## Just done (2026-10-31, local): release v0.1.9-alpha (branch `release/v0.1.9`)
+## Just done (2026-10-31, local): ROADMAP update (branch `docs/roadmap-update-4`)
+- PR #249 (v0.1.9-alpha) is merged. Tag and GitHub pre-release exist. `docs/ROADMAP.md` "Next step" and `progress.md`
+  Releases now say so. Docs only, no tests run.
+- Next: user merges the PR. Nothing is queued to build. The user plays M31 - M33 (apk on the v0.1.9-alpha release page).
+  Optional picks: bag screen in the card look; Rags alt when Laken dies; console `skip <days>`; Play aab for v0.1.9.
+- Gotchas: local `.import` line-end changes, `.gitignore` and `.uid` files are not part of this branch. No `python3`
+  in this shell: use Edit for doc changes.
+
+## Earlier (2026-10-31, local): release v0.1.9-alpha (branch `release/v0.1.9`)
 - Bumped `game/project.godot` and both Android presets (`version/code=8`). `--import` twice, then `tools/release.ps1`
   from the PowerShell tool (System32 first in PATH, `$env:GODOT` = the console exe). Smoke tests pass for all three.
   Apk verifies (v2 + v3), versionCode 8. Files in `export/`: 3 zips, apk, aab.
