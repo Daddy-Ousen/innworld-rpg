@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-11-01, local): cloud prep for M35 – M37 (branch `docs/cloud-prep-m35-m37`)
+- Pushed the extracted text of Books 1 – 5 and 8 – 10 to the PRIVATE repo `Daddy-Ousen/innworld-canon-raw` (user said
+  yes; commit bd0c137). Books 6 – 7 were there already. Book 9 = 5.45 – 5.62 + 4 interludes (22 chapters); Book 10 =
+  6.00 – 6.16 (17 chapters). `canon/raw/book9` and `book10` are local and gitignored.
+- Wrote `docs/plans/m35.md` (Ceria's magic line, stat sheets, Runners' Guild staff in Invrisil, Magnolia's whereabouts),
+  `m36.md` (Book 9) and `m37.md` (Book 10). Updated `docs/CLOUD.md` (queue items 6 – 9, checklist, schedule),
+  `CLAUDE.md` (cloud book text: Books 1 – 10) and ROADMAP. Docs only, no tests run.
+- Next: the user merges the PR. Then, in the cloud: M35.0 and M36.P first (they may run together), then M35.1 –
+  M35.3 one at a time, then M36.0 … M36.n, then M37 (`docs/CLOUD.md`, "Task queue" 6 – 9 has the prompts).
+- Gotchas: "character sheets" = NPC stat sheets, not art (art exists). Book 10 chapter ids start with `6.`: M37.P must
+  check `tools/validate_data.py` and `core/canon_db.gd` for chapter-id checks first (none found by search). The next
+  ADR numbers are reserved: 0046 (M35), 0047 (Book 9), 0048 (Book 10). The old branch `docs/changelog-v0.2.0` is
+  pushed with a changelog commit and has no PR yet.
+
 ## Just done (2026-11-01, local): release build v0.2.0-alpha (branch `release/v0.2.0`)
 - Bumped `game/project.godot` and both Android presets (`version/code=9`, name `0.2.0-alpha`). `--import` twice, then
   `tools/release.ps1` (PowerShell tool, System32 first in PATH, `$env:GODOT` = console exe). Smoke tests pass for all

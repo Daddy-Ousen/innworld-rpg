@@ -170,6 +170,18 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] Pushed, [PR #251](https://github.com/Daddy-Ousen/innworld-rpg/pull/251) open (2026-11-01). Waits: user merges.
   - [ ] The user opens the bag on the phone (needs a new release build).
 
+## Cloud prep for M35 – M37 (2026-11-01, local, branch `docs/cloud-prep-m35-m37`)
+- [x] Book text for the cloud: Books 1 – 5 and 8 – 10 pushed to the PRIVATE repo `Daddy-Ousen/innworld-canon-raw`
+  (commit bd0c137; user said yes; repo still private). Books 9 and 10 extracted locally with `tools/extract_epub.py`
+  (22 and 17 chapters). `tools/cloud/setup.sh` already links every `book*` folder: no script change.
+- [x] Plans written: `docs/plans/m35.md` (4 data steps), `m36.md` (Book 9 skeleton, ADR 0047 to come), `m37.md` (Book 10
+  skeleton, ADR 0048 to come). `docs/CLOUD.md` has the new text list, a before-session checklist, a schedule guide and
+  task queue items 6 – 9 with paste-ready prompts. `CLAUDE.md` cloud section says Books 1 – 10. ROADMAP rows added.
+- Finding: "character sheets" in the Later list means NPC stat sheets (`core/npc_sheet.gd`), not art. Merec, Raisha and the
+  estate NPCs already have looks and sprites; their classes have `level: null`. M35.1 fills real levels only.
+- Docs only. No tests run (no code or data changed).
+- [ ] Next: the user merges the PR, then starts the cloud sessions in `docs/CLOUD.md` order.
+
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
   v0.1.5 web build (title, gate, inn, Erin, a night, the day-9 Chieftain fight) and two headless runs (do nothing to

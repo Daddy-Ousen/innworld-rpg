@@ -11,12 +11,16 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
+| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | ready for cloud sessions (`docs/plans/m35.md`) | M35.0: Sonnet · high · M35.1: Sonnet · medium · M35.2: Sonnet · high · M35.3: Opus · high |
+| M36 Book 9 (Tears of Liscor) | text extracted, in the cloud repo; M36.P plan session is next (`docs/plans/m36.md`, ADR 0047) | M36.P: Opus · high · data steps: Sonnet · high · engine and stages: Opus · medium |
+| M37 Book 10 (The Wind Runner) | text extracted, in the cloud repo; starts after M36 is merged (`docs/plans/m37.md`, ADR 0048) | same as M36 |
 | M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
-Last release: v0.2.0-alpha (2026-11-01): v0.1.9 plus the bag screen in the card look (M31 – M33: signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
-Next step: the user merges the release PR; then the tag and the GitHub release. Then the user plays M31 – M33 and the bag (apk on the release page, or `godot --path game`). Nothing is queued to build.
+Last release: v0.2.0-alpha (2026-11-01, tag and GitHub pre-release published): v0.1.9 plus the bag screen in the card look (M31 – M33: signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
+Next step: cloud sessions (prompts in `docs/CLOUD.md` "Task queue" items 6 – 9). Order: M35.0 and M36.P first, then M35.1 – M35.3 one by one, then M36.0 … M36.n, then M37. The user still plays M31 – M33 and the bag (apk on the release page, or `godot --path game`).
+Cloud text: Books 1 – 10 are in the private repo `Daddy-Ousen/innworld-canon-raw` (2026-11-01).
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
