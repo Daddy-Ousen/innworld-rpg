@@ -7,7 +7,7 @@ then a start hook (`tools/cloud/setup.sh`) sets it up. You steer it from claude.
 1. Installs Godot 4.7.2. It tries the official download first. If that is blocked, it uses the unchanged copy
    in this repo's Releases (tag `tools-godot-4.7.2`).
 2. Installs Pillow (for the art tools).
-3. Links the Book 6 and Book 7 text into `canon/raw/` from the PRIVATE repo `Daddy-Ousen/innworld-canon-raw`.
+3. Links the text of Books 1 – 10 into `canon/raw/` from the PRIVATE repo `Daddy-Ousen/innworld-canon-raw`.
    `canon/raw/` is gitignored. The book text never goes into this public repo.
 4. Sets the git name to Daddy-Ousen.
 5. Runs the Godot import (about 2 minutes).
@@ -42,7 +42,7 @@ You see `[setup] ...` lines at the start of the session. All lines must say ok, 
 
 If the setup line says `book text: NOT FOUND`, you do not need a new session. The session proxy lets the hook
 reach only the repos attached to the session. Claude attaches `innworld-canon-raw` itself (add_repo), clones it
-to `/home/user/innworld-canon-raw` and links `canon/raw/book6` and `book7` (seen on 2026-10-01). If the attach
+to `/home/user/innworld-canon-raw` and links `canon/raw/book<N>` for every book in it (seen on 2026-10-01). If the attach
 fails, step 1 is missing. Only the book tasks need the text.
 
 If it still says NOT FOUND: start the session with BOTH repos (`innworld-rpg` and `innworld-canon-raw`).
@@ -51,7 +51,10 @@ With two repos the hook does not run, so begin your prompt with:
 
 ## What a cloud session cannot do
 - Play the game or show it. The "you play a fight" checks wait until you are home.
-- Read Books 1–5 text. It uses the canon JSON for those books.
+- Build character art (looks, sheets). That needs a clone of the LPC generator (`tools/build_sprites.py --ulpc`).
+  M35 to M37 do not need art. Ask first if a step wants a new look.
+- Run the full test suite on a whim. Run only the scripts a step lists (CLAUDE.md "Test scope"). A single
+  script such as `unit_spells` can take 7 minutes: run it in the background.
 - Push tags (maybe). It writes "tag pending" in `progress.md`. At home, run the tag commands it lists.
 
 ## Task queue (one session each, in this order)
@@ -72,5 +75,38 @@ Each prompt is ready to paste.
    > choices first. Then build, test, update the docs, and open a PR.
 5. **M19.P Book 7 plan** (done 2026-10-07, ADR 0030), then **M19.0 … M19.8** (same prompt as item 4, with ADR 0030
    and canon/raw/book7; M19.0 is next)
+
+6. **M35 New content** (plan `docs/plans/m35.md`; four sessions, any order; the first one writes ADR 0046)
+   > Do M35.0 (Ceria's magic line) from docs/plans/m35.md. Read progress.md and handoff.md first. Follow
+   > CLAUDE.md. Read the chapters in canon/raw with subagents (summaries only). Ask me the open choices, then
+   > build, run only the tests the plan lists, update the docs, and open a PR.
+   > (For the others, say M35.1 stat sheets, M35.2 Runners' Guild staff in Invrisil, or M35.3 Magnolia's whereabouts.)
+7. **M36.P Book 9 plan** (plan `docs/plans/m36.md`, text in `canon/raw/book9`). Needs no earlier M35 PR.
+   > Do M36.P: plan Book 9 (Tears of Liscor) like M28.P did for Book 8 (docs/plans/m28.md, ADR 0043). Follow
+   > docs/plans/m36.md. Read progress.md and handoff.md first. Read all of canon/raw/book9 with subagents
+   > (summaries only). Write the plan into docs/plans/m36.md and ADR 0047. Ask me the open choices. Open a PR
+   > with docs only.
+8. **M36.0 … M36.n Book 9 steps** (one session per step, as the merged plan lists them)
+   > Do the next open M36 step in docs/plans/m36.md. Read progress.md and handoff.md first. Follow CLAUDE.md
+   > and ADR 0047. Ask me the stage and hook choices first. Then build, run only the tests the step lists,
+   > update the docs, and open a PR.
+9. **M37.P Book 10 plan** (after M36 is merged; plan `docs/plans/m37.md`, text in `canon/raw/book10`), then
+   **M37.0 … M37.n** (same prompts as items 7 and 8, with Book 10, ADR 0048 and docs/plans/m37.md)
+
+## Before each cloud session (checklist, 1 minute)
+- [ ] The last session's PR is merged into `main` (the next session starts from `main`).
+- [ ] `git status` on your PC has nothing you need in the cloud. The cloud sees only what is pushed.
+- [ ] The setup line says `book text: book1 … book10`. If not, see "If the setup line says `book text: NOT FOUND`".
+- [ ] You are ready to answer questions. A step stops and waits for your picks. If you will be away, tell it
+      "use the recommended choices".
+
+## How the sessions fit in the next days (guide)
+Size is from M28 (Book 8: one plan session, 10 steps, 26 chapters). Book 9 has 22 chapters, Book 10 has 17.
+- Days 1 – 2: M35.0 (Ceria) and M36.P (the Book 9 plan) touch different files, so they may run at the same
+  time. Run M35.1, M35.2 and M35.3 one after the other (they share `npcs.json` and `npc_behaviour.json`).
+  Merge each PR before the next session starts from `main`.
+- Days 2 – 5: M36.0 … M36.n (about 8 – 10 steps, one per session, in order: each needs the one before).
+- After M36 is merged: M37.P, then M37.0 … M37.n (about 7 – 9 steps).
+Do not run two canon batches of one book at once. Two sessions that edit the same JSON file will conflict.
 
 To continue after a break, paste: "Read progress.md and handoff.md. Go on with the next open task."

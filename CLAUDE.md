@@ -100,9 +100,9 @@ Canon batches and full test runs blow up context fast. To keep quality without t
 - **Shell is Linux bash.** Ignore the PowerShell forms. Tests: `bash tools/run_tests.sh <script>...` or
   `bash tools/run_tests.sh --all` (full suite, one Godot run per script; only when the user asks: see "Test scope").
   Python is `python3`.
-- **Book text:** only `canon/raw/book6/` and `canon/raw/book7/` exist (linked from the PRIVATE repo
-  `Daddy-Ousen/innworld-canon-raw`; `canon/raw/` is gitignored). Never copy that text into this public repo,
-  a PR, an issue or a commit message. Books 1–5 text is NOT in the cloud: use the canon JSON and flag questions.
+- **Book text:** `canon/raw/book1/` … `canon/raw/book10/` exist (linked from the PRIVATE repo
+  `Daddy-Ousen/innworld-canon-raw`, all ten books since 2026-11-01; `canon/raw/` is gitignored). Never copy that
+  text into this public repo, a PR, an issue or a commit message. Reading agents return summaries only.
 - **No screen, but renders work.** You cannot play the game. You can take screenshots with Xvfb (a virtual
   display) to check a layout: steps in `handoff.md` ("Touch notes"). A render is not a play test: leave
   "the user plays ..." checks open.
