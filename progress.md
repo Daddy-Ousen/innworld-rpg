@@ -190,7 +190,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_spell_learning` (changed: Flashfire waits for the flag), `unit_spells` pass; validator books 1 - 8 + quests.json:
   0 errors; Python 134 OK. Full suite not run.
   - [ ] The user takes "Ceria and the spark" on day 36 and learns [Flashfire] (`godot --path game`).
-  - [ ] Next: M35.1 stat sheets (cloud session).
+  - [x] Done, see M35.1 below.
+- [x] M35.1 Stat sheets (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`). Reading (Sonnet, Books 1 - 8): no level is
+  stated for Merec, Raisha, Reynold, Rose, Imani, Joseph or the golems; Rose/Imani/Joseph/golems name no class. User pick:
+  add only Reynold's past [Lieutenant] (4.48), level null. Data only (`book2/npcs.json`). No Skills field in the schema: skipped.
+  Tests: `unit_npc_sheet`, `unit_npc_levels`, `sim_npc_levels`, `unit_canon_db`, `sim_canon_book2`, `sim_canon_book4` = 41/41 pass;
+  validator books 2 and 4: 0 errors. Full suite not run.
+  - [ ] Next: M35.2 Runners' Guild staff in Invrisil (cloud session).
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the

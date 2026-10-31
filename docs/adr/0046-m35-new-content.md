@@ -25,3 +25,14 @@ Status: accepted (2026-11-01). Plan: `docs/plans/m35.md`. One note per step; M35
 - Why the quest steps are guesses: the quest is made up (confidence `guess`). The flags are real canon flags.
 - Known gap (not changed here): between day 40 and her move to Celum she has no map goal, so Book 2 (she lodges at
   the inn from day 43) has no Ceria on the map. M35 does not add one.
+
+## M35.1 note (2026-11-01)
+- Reading (Sonnet agents, Books 1 - 8, summaries only): the text states NO level for Merec, Raisha, Reynold, Rose,
+  Imani, Joseph or the two estate golems. Classes in the data ([Merchant], [Guardswoman], [Butler]) match the text.
+  Rose, Imani and Joseph name no class (the Earthers only talk about choosing one, 2.37). The golems are constructs:
+  no class, level or Skill.
+- User pick: add Reynold's past [Lieutenant] (4.48) with `level: null`, nothing else. Data only (`book2/npcs.json`).
+  Reynold's "few levels" in unnamed auxiliary classes (3.36) are not recorded.
+- The NPC record has no place for Skills (`classes` only). Not added: a schema change needs the user (Rule 11).
+  Named Skills seen: Magnolia [Sense Intentions] (2.38, 3.13); Ressa is [Head Maid] (2.37). Not in scope.
+- Effect: a `null` level counts as `unknown_level` (1) in `NpcLevels`, so the extra class adds a small hidden total.

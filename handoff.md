@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M35.1 stat sheets (branch `claude/m35-1-stat-sheets-pt83je`)
+- Two Sonnet reading agents (Books 1 - 4, 5 - 8; summaries only). Result: no level is stated for any of the eight NPCs.
+  User pick: add Reynold's past [Lieutenant] (level null) only. One data edit in `book2/npcs.json`; ADR 0046 note; plan answers.
+- Tests: 6 scripts (41 pass) + validator books 2, 4. Full suite not run. Details in `progress.md` "M35".
+- Next: the user merges the PR. Then M35.2 (Runners' Guild staff, Sonnet · high), then M35.3.
+- Gotchas: the private text repo must be added first (`add_repo` Daddy-Ousen/innworld-canon-raw, clone, then `bash tools/cloud/setup.sh --force`).
+  NpcLevels counts a null level as 1, so the extra class adds a tiny hidden total. No Skills field in NPC records (schema change needs the user).
+  17 old `.uid` files in `game/tests/` stay untracked on purpose.
+
 ## Just done (2026-11-01, cloud): M35.0 Ceria's fire lesson (branch `claude/bold-ritchie-459a52`)
 - Three Sonnet reading agents (Books 1 - 4, 7 - 8; summaries only). User picks: [Flashfire], start Book 1 day 36.
 - Data only (ADR 0046, `docs/plans/m35.md` "Answers"): quest `ceria_teaches_flashfire` in `data/quests.json`; `flashfire`
