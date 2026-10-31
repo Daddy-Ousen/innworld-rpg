@@ -317,6 +317,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] v0.1.9-alpha (2026-10-31, branch `release/v0.1.9`): M31 – M33 (signposts and beats, Book 6 – 8 climaxes, canon spells,
+  Erin's dishes, quest engine and three quest lines, friend perks). Android code 8. Smoke tests pass (events=1408, maps=52,
+  problems=0). Apk verifies (v2 + v3), versionCode 8. Three zips + apk + aab built in `export/`. No GUT run (version
+  bump only). The aab stays local for Play.
 - [x] v0.1.8-alpha (2026-10-24, [PR #225](https://github.com/Daddy-Ousen/innworld-rpg/pull/225), merge commit c331307,
   tag `v0.1.8-alpha`): the M34.5 phone fixes. Android code 7. Smoke tests pass (events=1403, maps=51, problems=0).
   GitHub release (pre-release) has the 3 zips + signed apk (sizes checked); Pages deploy started from the release.

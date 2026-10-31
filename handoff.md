@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-10-31, local): release v0.1.9-alpha (branch `release/v0.1.9`)
+- Bumped `game/project.godot` and both Android presets (`version/code=8`). `--import` twice, then `tools/release.ps1`
+  from the PowerShell tool (System32 first in PATH, `$env:GODOT` = the console exe). Smoke tests pass for all three.
+  Apk verifies (v2 + v3), versionCode 8. Files in `export/`: 3 zips, apk, aab.
+- Next: PR merged, then tag `v0.1.9-alpha` on the merge commit and `gh release create --prerelease` with the 3 zips +
+  apk (Pages deploys from the release). The user installs the apk and plays M31 – M33. Optional: the aab to the Play track.
+- Gotchas: `--import` rewrites many `.import` files (line ends only): do not commit them. The `.gitignore` change and
+  `web/` are not part of the release.
+
 ## Just done (2026-10-26, local): M33.4 friend perks (branch `feat/m33.4-friend-perks`)
 - User picks: passive perks only; a perk at friend and one at close friend. M33.3 is merged (PR #247).
 - Code: `rules.standing.perks` read by `core/standing.gd` (`perk_discount`, `talk_xp_mult`, `is_friend`, `perk_news`,

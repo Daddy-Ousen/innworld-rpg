@@ -15,7 +15,7 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
-Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
+Last release: v0.1.9-alpha (2026-10-31): M31 – M33 (signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
 Next step: the user merges M33.4 (friend perks). M33 is then built; the play checks do not block it. A v0.1.9 build would let the user play M31 – M33 on the phone.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
@@ -84,6 +84,7 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 
 | Version | Date | What |
 |---|---|---|
+| v0.1.9-alpha | 2026-10-31 | M31 – M33 (Android code 8); the aab stays local |
 | v0.1.8-alpha | 2026-10-24 | M34.5 phone fixes (Android code 7); sent to the Play closed test |
 | v0.1.7-alpha | 2026-10-22 | M34 phone controls (code 6) |
 | v0.1.6-alpha | 2026-10-19 | M28 – M30 (code 5); first Play closed test release |
