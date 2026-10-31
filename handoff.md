@@ -1,5 +1,17 @@
 # Handoff
 
+## Just done (2026-10-26, local): M33.4 friend perks (branch `feat/m33.4-friend-perks`)
+- User picks: passive perks only; a perk at friend and one at close friend. M33.3 is merged (PR #247).
+- Code: `rules.standing.perks` read by `core/standing.gd` (`perk_discount`, `talk_xp_mult`, `is_friend`, `perk_news`,
+  `_validate_perks`); hooks in `Economy` (through `shop_markup`), `Actions.perform` (XP x), `Night.run` (a line once).
+  Data: 32 perks in `data/rules.json`. ADR 0044 "M33.4".
+- Tests: new `game/tests/unit_friend_perks.gd` (11). See `progress.md` M33.4. Full suite not run.
+- Next: user merges the PR. M33 is then built. Open: the play checks, and a v0.1.9 release build (M31 – M33 are in no
+  apk yet, `tools/release.ps1`). Optional: Python validator check for `perks` (only the GDScript check exists).
+- Gotchas: a close-friend NPC already fought beside the player (`friend_fight` 10); `fight_help` perks add the friend
+  band. `Standing.regard` of a Drake in Liscor starts wary, so a Lism discount needs a few points more. Perk flags use
+  an underscore for the band (`perk.lism.close_friend`).
+
 ## Just done (2026-10-26, local): M33.3 three quest lines (branch `feat/m33.3-quest-lines`)
 - User pick: Pisces for the magic line. Data only (ADR 0044 "M33.3"): `data/quests.json` has `erin_gets_the_inn_going`
   (Erin, offered on day 8), `pawn_and_the_painted_soldiers` (Pawn, from day 82), `pisces_teaches_mana` (Pisces, from
