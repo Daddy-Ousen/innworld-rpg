@@ -1,5 +1,10 @@
 # Handoff
 
+## Just done (2026-11-01, local): model · effort tags in `docs/CLOUD.md` (branch `docs/cloud-model-tags`)
+- Task queue items 6 – 9 each say which model and effort to pick (M35.0 Sonnet · high, M35.1 Sonnet · medium, M35.2 Sonnet · high,
+  M35.3 Opus · high, M36.P / M37.P Opus · high, later steps by type). PR #254 (cloud prep) is merged. Docs only, no tests run.
+- Next: the user merges this PR, then starts the cloud sessions (M35.0 and M36.P first).
+
 ## Just done (2026-11-01, local): cloud prep for M35 – M37 (branch `docs/cloud-prep-m35-m37`)
 - Pushed the extracted text of Books 1 – 5 and 8 – 10 to the PRIVATE repo `Daddy-Ousen/innworld-canon-raw` (user said
   yes; commit bd0c137). Books 6 – 7 were there already. Book 9 = 5.45 – 5.62 + 4 interludes (22 chapters); Book 10 =

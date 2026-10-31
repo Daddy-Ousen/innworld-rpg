@@ -58,7 +58,11 @@ With two repos the hook does not run, so begin your prompt with:
 - Push tags (maybe). It writes "tag pending" in `progress.md`. At home, run the tag commands it lists.
 
 ## Task queue (one session each, in this order)
-Each prompt is ready to paste.
+Each prompt is ready to paste. Items 1 – 5 are done (kept as examples of the prompt style).
+**Model · effort:** pick the model and the effort in the session's menu BEFORE you send the first prompt.
+Reading agents that a session starts run on Sonnet · medium by themselves.
+Rule of thumb: Sonnet · high for data from the books; Opus · high for plans, cascades and anything with a
+schema or save question; Opus · medium for engine code and fight-stage logic.
 
 1. **M17.6 Cover and position**
    > Do M17.6 (cover and position) from docs/ROADMAP.md. Follow CLAUDE.md. Plan first and write the plan
@@ -76,22 +80,37 @@ Each prompt is ready to paste.
 5. **M19.P Book 7 plan** (done 2026-10-07, ADR 0030), then **M19.0 … M19.8** (same prompt as item 4, with ADR 0030
    and canon/raw/book7; M19.0 is next)
 
-6. **M35 New content** (plan `docs/plans/m35.md`; four sessions, any order; the first one writes ADR 0046)
+6. **M35 New content** (plan `docs/plans/m35.md`; four sessions; the first one writes ADR 0046)
+   **Model · effort per session:**
+   - M35.0 Ceria's magic line: **Sonnet · high**
+   - M35.1 Stat sheets: **Sonnet · medium**
+   - M35.2 Runners' Guild staff in Invrisil: **Sonnet · high**
+   - M35.3 Magnolia's whereabouts: **Opus · high**
    > Do M35.0 (Ceria's magic line) from docs/plans/m35.md. Read progress.md and handoff.md first. Follow
    > CLAUDE.md. Read the chapters in canon/raw with subagents (summaries only). Ask me the open choices, then
    > build, run only the tests the plan lists, update the docs, and open a PR.
    > (For the others, say M35.1 stat sheets, M35.2 Runners' Guild staff in Invrisil, or M35.3 Magnolia's whereabouts.)
 7. **M36.P Book 9 plan** (plan `docs/plans/m36.md`, text in `canon/raw/book9`). Needs no earlier M35 PR.
+   **Model · effort: Opus · high** (a plan with a day map, conflicts and schema questions).
    > Do M36.P: plan Book 9 (Tears of Liscor) like M28.P did for Book 8 (docs/plans/m28.md, ADR 0043). Follow
    > docs/plans/m36.md. Read progress.md and handoff.md first. Read all of canon/raw/book9 with subagents
    > (summaries only). Write the plan into docs/plans/m36.md and ADR 0047. Ask me the open choices. Open a PR
    > with docs only.
 8. **M36.0 … M36.n Book 9 steps** (one session per step, as the merged plan lists them)
+   **Model · effort:** the merged plan tags every step; use that tag. If a tag is missing:
+   - engine or schema step (M36.0): **Opus · medium**
+   - world and records (M36.1): **Sonnet · high**
+   - canon batch with events only: **Sonnet · high**
+   - canon batch with a fight stage, hook or kill: **Opus · medium**
+   - last step (`sim_canon_book9`, `sim_kill_book9`): **Sonnet · medium**
    > Do the next open M36 step in docs/plans/m36.md. Read progress.md and handoff.md first. Follow CLAUDE.md
    > and ADR 0047. Ask me the stage and hook choices first. Then build, run only the tests the step lists,
    > update the docs, and open a PR.
 9. **M37.P Book 10 plan** (after M36 is merged; plan `docs/plans/m37.md`, text in `canon/raw/book10`), then
-   **M37.0 … M37.n** (same prompts as items 7 and 8, with Book 10, ADR 0048 and docs/plans/m37.md)
+   **M37.0 … M37.n** (same prompts as items 7 and 8, with Book 10, ADR 0048 and docs/plans/m37.md).
+   **Model · effort:** M37.P **Opus · high**; the steps follow the tags in item 8 (use the merged M37 plan's tags first).
+   M37.P also checks the `6.` chapter ids in the validator and `core/canon_db.gd`; if one fails, that fix is an
+   **Opus · medium** step.
 
 ## Before each cloud session (checklist, 1 minute)
 - [ ] The last session's PR is merged into `main` (the next session starts from `main`).
