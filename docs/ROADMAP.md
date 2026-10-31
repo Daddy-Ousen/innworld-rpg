@@ -11,12 +11,12 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| M33 Depth: spells, dishes, quests, friends | M33.0 – M33.2 done; next: M33.3 quest lines (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
+| M33 Depth: spells, dishes, quests, friends | M33.0 – M33.3 done; next: M33.4 friendship perks (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.8-alpha (2026-10-24). It is on Google Play's closed test track, waiting for review.
-Next step: the user merges M33.2 (quest engine). Then M33.3 quest lines **[Sonnet · high]** (user picks the lines). The play checks do not block M33.
+Next step: the user merges M33.3 (three quest lines). Then M33.4 friendship perks **[Sonnet · medium]**. The play checks do not block M33.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -33,7 +33,7 @@ M33 comes from the player audit of 2026-10-17 (the last of M31 – M33; `docs/AU
 - [x] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees **[Opus · medium]** (2026-10-26: 12 new spells, kinds `hold`, `blink`, `hide`, `wall`, friend gate)
 - [x] M33.1 Erin's food and drink from the books (names from the text, numbers guessed) **[Sonnet · medium]**
 - [x] M33.2 Quest engine: `data/quests.json`, journal "Tasks", save version bump + migration (schema ask) **[Opus · high]** (2026-10-26: auto "Ask about" row, `learn.flags` teacher unlock, save v24)
-- [ ] M33.3 Three personal quest lines (user picks: Erin's inn, Pawn, magic from Pisces or Ceria) **[Sonnet · high]**
+- [x] M33.3 Three personal quest lines (Erin's inn, Pawn's Soldiers, Pisces's mana lesson) **[Sonnet · high]** (2026-10-26: data only; Pisces's reward opens [Flash Step])
 - [ ] M33.4 Friendship that does something: one perk per main NPC at friend and close-friend level **[Sonnet · medium]**
 - [ ] (user) Play a quest line and learn a spell from a friend
 **Done when:** the spells, dishes, quest lines and perks work; old saves load; the touched tests pass; the user has played it.

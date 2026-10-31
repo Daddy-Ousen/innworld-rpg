@@ -451,3 +451,20 @@ No engine change, no schema change, no save change (flags and new event ids only
   Quests never touch canon by themselves; a reward flag can feed a hook or a spell lesson.
 - State `gs.quests` (`QuestState`), save v24 + migration (no tasks). Journal: a "Tasks" part at the top.
 - Checks: `Quests.validate` (load errors) and `tools/validate_data.py --all` (quests.json).
+
+### M33.3 (2026-10-26): three quest lines
+- User pick: the magic line is Pisces (not Ceria). Data only: three quests in `data/quests.json`; no code, schema or
+  save change. Steps use canon flags (so a line fits the timeline) and actions the player can do at the inn.
+- `erin_gets_the_inn_going` (giver Erin, gate `wandering_inn.open`, so it is offered on day 8): repair a table, cook
+  3 meals, wash dishes or sweep twice, wait for `wandering_inn.has_regulars` (day 15), tell Erin. +3 regard, 150c,
+  2 pasta dishes.
+- `pawn_and_the_painted_soldiers` (giver Pawn, gate `liscor_hive.soldiers_painted`, day 82; fails after day 125):
+  cook 3 meals, talk to Pawn twice, wait for `liscor.old_drakes_cheer_pawns_soldiers` (day 101) and
+  `wandering_inn.third_floor_built` (day 112), tell Pawn. +3 regard, 200c.
+- `pisces_teaches_mana` (giver Pisces, gate `erin.saved_by_pisces`, day 17): talk to Pisces twice, cook a meal for his
+  tab, wait for `pisces.teaches_rags` (day 34), play chess, tell Pisces. +3 regard and the flag
+  `quest.pisces_mana_lesson`. Spell `flash_step` (teacher Pisces) now also has `learn.flags: [that flag]`, so Pisces
+  teaches it only after the task. Gust stays free for a friend.
+- Why no `pray` or `study_spell` step: no map object offers `pray` near Liscor, and `study_spell` is only logged
+  when a spell is learned. `serve_guests` is made by the inn service, not by a button, so it is not a step either.
+- All confidence `guess`; texts in own words. The Ceria line can be added later as data.

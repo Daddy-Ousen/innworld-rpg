@@ -458,6 +458,13 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_player_hooks` (16), `unit_spell_learning` (21, +2). Validator books 1 – 8, voices, quests: 0 errors. Python 134 OK.
   Full suite not run.
   - [ ] The user plays a quest (after M33.3 adds one): ask, do the steps, see "Tasks" in the journal (J).
+- [x] M33.3 three quest lines (2026-10-26, branch `feat/m33.3-quest-lines`, ADR 0044 "M33.3"). User pick: Pisces for the
+  magic line. Data only: `data/quests.json` has `erin_gets_the_inn_going`, `pawn_and_the_painted_soldiers`,
+  `pisces_teaches_mana` (5 steps each, canon flags + inn actions); `spells.json` `flash_step` has
+  `learn.flags: ["quest.pisces_mana_lesson"]`. Tests: `unit_quest_lines` (new, 7), `unit_quests` (17),
+  `unit_spell_learning` (21), `unit_data_db` (15), `sim_canon_book1` (15, drift 0), `unit_journal` (7), `unit_voice` (24), `unit_spells` (31) pass; validator books 1 – 8: 0 errors; Python 134 OK.
+  Full suite not run.
+  - [ ] The user plays a line: ask Erin on day 8, finish it; ask Pisces after day 17 and learn [Flash Step] from him.
 
 ## Docs
 - [x] ROADMAP update (2026-10-26, branch `docs/roadmap-update-3`): M31 and M32 moved to Done, their play checks to
