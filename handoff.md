@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M35.0 Ceria's fire lesson (branch `claude/bold-ritchie-459a52`)
+- Three Sonnet reading agents (Books 1 - 4, 7 - 8; summaries only). User picks: [Flashfire], start Book 1 day 36.
+- Data only (ADR 0046, `docs/plans/m35.md` "Answers"): quest `ceria_teaches_flashfire` in `data/quests.json`; `flashfire`
+  has `learn.flags: ["quest.ceria_fire_lesson"]` in `data/spells.json`. Tests changed: `unit_quest_lines` (+2),
+  `unit_spell_learning` (Flashfire waits for the flag). Tests in `progress.md` "M35". Full suite not run.
+- Next: the user merges the PR. Then M36.P (Book 9 plan, Opus · high), then M35.1 stat sheets (`docs/CLOUD.md` queue).
+- Gotchas: the plan said Ceria is a [Pyromancer]; the canon record says [Elementalist] / [Cryomancer] (fixed in the plan).
+  Ceria has no map goal between day 40 and Celum (day 85): in Book 2 she lodges at the inn (`ceria.staying_at_inn`) but
+  is off the map. Not fixed (out of M35 scope); add a goal if the user asks. The cloud needs the private text repo
+  cloned (`add_repo` Daddy-Ousen/innworld-canon-raw, then `bash tools/cloud/setup.sh --force`): the SessionStart hook
+  did not find it this time. The validator wants `python3 tools/validate_data.py game/data/canon --all` for
+  quests.json. 17 old `.uid` files are untracked in `game/tests/`: not part of any branch, the stop hook nags about them.
+
 ## Just done (2026-11-01, local): model · effort tags in `docs/CLOUD.md` (branch `docs/cloud-model-tags`)
 - Task queue items 1 – 4 each say which model and effort to pick (M35.0 Sonnet · high, M35.1 Sonnet · medium, M35.2 Sonnet · high,
   M35.3 Opus · high, M36.P / M37.P Opus · high, later steps by type). PR #254 (cloud prep) is merged. Docs only, no tests run.

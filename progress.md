@@ -182,6 +182,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - Docs only. No tests run (no code or data changed).
 - [ ] Next: the user merges the PR, then starts the cloud sessions in `docs/CLOUD.md` order.
 
+## M35 New content (plan `docs/plans/m35.md`, ADR 0046)
+- [x] M35.0 Ceria's fire lesson (2026-11-01, cloud, branch `claude/bold-ritchie-459a52`). User picks: [Flashfire], start
+  Book 1 day 36 (gate `ryoka.knows_light_spell`). Data only: quest `ceria_teaches_flashfire` (5 steps, +3 regard, flag
+  `quest.ceria_fire_lesson`) in `data/quests.json`; `flashfire` got `learn.flags` in `data/spells.json`. Plan text fixed
+  (Ceria is an [Elementalist] / [Cryomancer], not a [Pyromancer]). Tests: `unit_quest_lines` (9, +2 new), `unit_quests`,
+  `unit_spell_learning` (changed: Flashfire waits for the flag), `unit_spells` pass; validator books 1 - 8 + quests.json:
+  0 errors; Python 134 OK. Full suite not run.
+  - [ ] The user takes "Ceria and the spark" on day 36 and learns [Flashfire] (`godot --path game`).
+  - [ ] Next: M35.1 stat sheets (cloud session).
+
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
   v0.1.5 web build (title, gate, inn, Erin, a night, the day-9 Chieftain fight) and two headless runs (do nothing to
