@@ -16,7 +16,7 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Google Play | closed test running | – (user) |
 
 Last release: v0.1.9-alpha (2026-10-31): M31 – M33 (signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
-Next step: the user merges M33.4 (friend perks). M33 is then built; the play checks do not block it. A v0.1.9 build would let the user play M31 – M33 on the phone.
+Next step: the user plays M31 – M33 (apk on the v0.1.9-alpha release page, or `godot --path game`). All build steps are merged. Nothing is queued to build.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
