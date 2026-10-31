@@ -431,10 +431,10 @@
 			"tags": ["human", "butler", "house_reinhart", "invrisil"],
 			"faction": "house_reinhart",
 			"home": "magnolia_estate",
-			"classes": [{"name": "[Butler]", "level": null}],
+			"classes": [{"name": "[Butler]", "level": null}, {"name": "[Lieutenant]", "level": null}],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed"},
+			"canon_ref": {"book": 2, "chapter": "2.37", "confidence": "confirmed", "note": "[Butler] stated 2.37 and 3.37. [Lieutenant] is a past class (named in 4.48). No level is stated in Books 1-8. He says he holds a few levels in unnamed auxiliary classes (3.36): not recorded."},
 			"summary": "Lady Magnolia Reinhart's personable Butler, driving her magical coach. Warms into genuine friendliness with Erin on the four-hour ride to the estate before snapping back into formal reserve on arrival."
 		},
 		"imani": {
