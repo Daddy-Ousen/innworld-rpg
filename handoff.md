@@ -1,5 +1,15 @@
 # Handoff
 
+## Just done (2026-11-01, local): release build v0.2.0-alpha (branch `release/v0.2.0`)
+- Bumped `game/project.godot` and both Android presets (`version/code=9`, name `0.2.0-alpha`). `--import` twice, then
+  `tools/release.ps1` (PowerShell tool, System32 first in PATH, `$env:GODOT` = console exe). Smoke tests pass for all
+  three. Apk verifies (v2 + v3), versionCode 9. Files in `export/`: 3 zips, apk, aab. PR #251 (bag) is merged.
+- Next: user merges the release PR. Then tag `v0.2.0-alpha` on the merge commit and `gh release create --prerelease`
+  with the 3 zips + apk (Pages deploys from the release). Optional: the aab to the Play track (user drags it in).
+  Then the user plays M31 - M34 and the bag on the phone.
+- Gotchas: after the build `git checkout -- game/assets game/icon.png.import game/addons` (line-end noise). The
+  `.gitignore` change, `.uid` files and `web/` are not part of the release.
+
 ## Update (2026-11-01): the bag branch is pushed and PR #251 is open (not merged). Next: the user merges it.
 The steps below are done except the merge.
 

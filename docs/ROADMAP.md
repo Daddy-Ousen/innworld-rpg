@@ -15,8 +15,8 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
 
-Last release: v0.1.9-alpha (2026-10-31): M31 – M33 (signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
-Next step: the user plays M31 – M33 (apk on the v0.1.9-alpha release page, or `godot --path game`). All build steps are merged. Nothing is queued to build.
+Last release: v0.2.0-alpha (2026-11-01): v0.1.9 plus the bag screen in the card look (M31 – M33: signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
+Next step: the user merges the release PR; then the tag and the GitHub release. Then the user plays M31 – M33 and the bag (apk on the release page, or `godot --path game`). Nothing is queued to build.
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading
 agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
@@ -84,6 +84,7 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 
 | Version | Date | What |
 |---|---|---|
+| v0.2.0-alpha | 2026-11-01 | bag screen in the card look on top of v0.1.9 (Android code 9); the aab stays local |
 | v0.1.9-alpha | 2026-10-31 | M31 – M33 (Android code 8); the aab stays local |
 | v0.1.8-alpha | 2026-10-24 | M34.5 phone fixes (Android code 7); sent to the Play closed test |
 | v0.1.7-alpha | 2026-10-22 | M34 phone controls (code 6) |
