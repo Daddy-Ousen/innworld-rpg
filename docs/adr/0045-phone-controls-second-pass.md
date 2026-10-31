@@ -110,8 +110,7 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
   buttons, Close, Back and the tabs. `UiScale.dpi_override` and `mobile_override` are for tests and renders.
 - Rendered again as a 405 dpi phone: pad buttons about 48 dp, labels about 12 dp, tiles about 40 dp, card and
   shop buttons about 48 dp; Erin's card shows 5 buttons, the shop 4 rows of goods plus the strip.
-- Left for later: the bag screen is still the old list with key hints ("Enter: Eat"); "H: help" shows on a
-  phone. A real phone may report another dpi: the user checks on the phone.
+- Left for later: "H: help" shows on a phone (the bag screen was redone on 2026-10-31, see the end). A real phone may report another dpi: the user checks on the phone.
 
 ## M34.5 phone fixes (2026-10-22, from the user's first play of v0.1.7 on a phone)
 - The phone ran the game upright (portrait; `window/handheld/orientation=6` is "sensor", any way up). The
@@ -130,3 +129,15 @@ Presentation only. Core, data schemas and the save format do not change (rules 1
 - The long flat list is gone, so a keyboard player also picks a target first: one extra key press when several
   targets are near. With one target near, the card opens on it at once.
 - Layout must be checked on a phone render (2400 × 1080 at 250 %) and by the user on a phone.
+
+## Bag screen in the card look (2026-10-31)
+- `ui/bag.gd` / `bag.tscn` rewritten in place (class `Bag`, signal `chosen`, `%LeaveOne`, `%Stow`, static `header`
+  and `rows` kept). The `ItemList` and the key-hint line are gone. The panel sits at the bottom middle like the
+  shop panel, with a Close button and `_fit` (width first, then the height, once more one frame later: the wrapped
+  header label has no size before that).
+- One `InteractMenu.CardButton` per good: a tap uses it (eat, drink, read, hold); a trade good only gets picked.
+  A "Leave 1" card sits next to each. The picked good (tap or focus) is gold and stays picked when the bag opens
+  again after a command. X, P, I and Esc work as before. "Put the held item in the bag" shows only when a
+  tool is held.
+- Row text is "Bread x2   (Eat)": no "Enter:".
+- No core, schema or save change. Rendered at 1924 × 1061, 1080 × 1061 (phone, 405 dpi) and 1152 × 648 (desktop).

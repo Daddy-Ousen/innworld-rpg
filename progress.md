@@ -162,6 +162,14 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 
 - [x] Long road confirm + walk scene (2026-10-08, user request, branch `feat/long-road-confirm`): an exit of 300 min or more (Celum <-> camp <-> Liscor, 10 h) asks "Travel to X?" first, then plays a 1.8 s walker-on-a-track scene; the move happens at its end. Stay or Esc cancels. `ui/travel_prompt.gd` (new), `world/main.gd`. Off headless-only (`confirm_travel`). Wagon rides and the 180 min Esthelm roads do not ask. Tests run: `unit_travel_prompt` (new, 6), `unit_travel`, `unit_input_actions`, `unit_touch_controls`, `sim_celum_trip`, `unit_hud_log`. All pass. Full suite not run. The user still has to look at it (`godot --path game`, walk onto the Celum south exit).
 
+- [x] Bag screen in the card look (2026-10-31, branch `feat/bag-card-look`, local, not pushed, no PR yet): `ui/bag.gd` /
+  `bag.tscn` rewritten (cards, "Leave 1" card, Close, `_fit`; ADR 0045 "Bag screen"). UI only: no core, schema or save
+  change. Rendered at phone (two sizes) and desktop: OK. Tests: `unit_bag` (17, +6 new), `unit_touch_controls`,
+  `unit_input_actions`, `unit_action_card`, `unit_context_button`, `unit_shop_panel`, `unit_world_view`,
+  `unit_play_loop`, `unit_ui_scale` pass. Full suite not run.
+  - [ ] Push, open the PR (user paused the session before this step).
+  - [ ] The user opens the bag on the phone (needs a new release build).
+
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
   v0.1.5 web build (title, gate, inn, Erin, a night, the day-9 Chieftain fight) and two headless runs (do nothing to
