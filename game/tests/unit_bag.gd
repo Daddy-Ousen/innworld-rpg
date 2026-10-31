@@ -129,6 +129,75 @@ func test_item_goods_are_checked() -> void:
 		assert_true(errs.any(func(x: String) -> bool: return x.contains(want)), want)
 
 
+func _bag_with(goods: Array) -> Array:
+	var gs := _game()
+	for g: String in goods:
+		gs.economy.add(g, 1)
+	var bag: Bag = add_child_autofree(load("res://ui/bag.tscn").instantiate())
+	bag.open(gs, _db)
+	return [bag, gs]
+
+
+func test_card_look_has_a_card_and_a_leave_card_per_good() -> void:
+	var b: Bag = _bag_with(["bread", "herbs", "rolling_pin"])[0]
+	assert_eq(b.cards().size(), 3)
+	assert_eq(b.get_node("%Items").get_child_count(), 6, "a use card and a Leave 1 card for each good")
+	assert_string_contains(b.cards()[0].text, "Bread x1")
+	assert_false(b.cards()[0].text.contains("Enter"), "no key hints on the cards")
+
+
+func test_tap_uses_a_good_and_a_trade_good_does_nothing() -> void:
+	var b: Bag = _bag_with(["bread", "herbs"])[0]
+	watch_signals(b)
+	b.pick(1)  # herbs: sorted after bread
+	assert_signal_not_emitted(b, "chosen")
+	assert_eq(b.selected_good(), "herbs", "a tap still picks the good")
+	b.pick(0)
+	assert_signal_emitted_with_parameters(b, "chosen", [Interact.USE_GOOD + "bread"])
+
+
+func test_leave_card_and_buttons_send_the_pick() -> void:
+	var b: Bag = _bag_with(["bread", "rolling_pin"])[0]
+	watch_signals(b)
+	b.leave(1)
+	assert_signal_emitted_with_parameters(b, "chosen", [Interact.DROP_GOOD + "rolling_pin"])
+	b.get_node("%Stow").pressed.emit()
+	assert_signal_emitted_with_parameters(b, "chosen", [Interact.STOW])
+
+
+func test_the_picked_good_stays_picked_when_the_bag_opens_again() -> void:
+	var made := _bag_with(["bread", "herbs"])
+	var b: Bag = made[0]
+	b.pick(1)
+	b.open(made[1], _db)
+	assert_eq(b.selected_good(), "herbs")
+	made[1].economy.add("herbs", -1)
+	b.open(made[1], _db)
+	assert_eq(b.selected_good(), "bread", "the picked good is gone: the first one")
+
+
+func test_stow_shows_only_with_a_held_item_and_an_empty_bag_has_no_buttons() -> void:
+	var made := _bag_with([])
+	var b: Bag = made[0]
+	assert_false(b.get_node("%Stow").visible)
+	assert_false(b.get_node("%Buttons").visible)
+	made[1].player.held = "rolling_pin"
+	b.open(made[1], _db)
+	assert_true(b.get_node("%Stow").visible)
+
+
+func test_cards_are_48_dp_high_on_a_phone() -> void:
+	UiScale.mobile_override = 1
+	UiScale.dpi_override = 405
+	var b: Bag = _bag_with(["bread"])[0]
+	var want := InteractMenu.row_h()
+	assert_gt(want, InteractMenu.ROW_H, "a phone card is taller than a desktop one")
+	assert_gte(b.cards()[0].custom_minimum_size.y, want)
+	assert_gte(b.get_node("%LeaveOne").custom_minimum_size.y, want)
+	UiScale.mobile_override = -1
+	UiScale.dpi_override = 0
+
+
 func test_i_opens_the_bag_and_a_pick_runs_and_reopens_it() -> void:
 	var session := get_node("/root/Session")
 	var gs := _game()

@@ -1,6 +1,21 @@
 # Handoff
 
-## Just done (2026-10-31, local): ROADMAP update (branch `docs/roadmap-update-4`)
+## Update (2026-11-01): the bag branch is pushed and PR #251 is open (not merged). Next: the user merges it.
+The steps below are done except the merge.
+
+## Just done (2026-10-31, local): bag screen card look (branch `feat/bag-card-look`)
+- Built and checked: `game/ui/bag.gd` + `bag.tscn` rewritten (cards, "Leave 1", Close, `_fit`), tests in
+  `game/tests/unit_bag.gd` (+6). ADR 0045 "Bag screen" note, ROADMAP play check, `progress.md` entry. Committed
+  locally on the branch. NOT pushed. NO PR yet.
+- Next: `git push -u origin feat/bag-card-look`, `gh pr create` (body: what changed, tests run, full suite not run),
+  bind the PR, ask the user to merge. Then the user checks the bag on the phone after a new release build.
+- Gotchas: PowerShell splits `-gselect=unit_bag.gd` at the dot: quote it. The `godot` winget link prints nothing:
+  use the `Godot_v4.7.2-stable_win64_console.exe` in `%LOCALAPPDATA%\Microsoft\WinGet\Packages\GodotEngine.GodotEngine_*`.
+  A wrapped `Label` has no height until one frame after `show()`: `Bag._fit` runs again on the next frame.
+  A CardButton sets `text_overrun_behavior` to trim: set `OVERRUN_NO_TRIMMING` on a button that must show all its text.
+  `.gitignore` change, `.import` line ends, `.uid` files and `web/` are not part of this branch.
+
+## Earlier (2026-10-31, local): ROADMAP update (branch `docs/roadmap-update-4`, merged as PR #250)
 - PR #249 (v0.1.9-alpha) is merged. Tag and GitHub pre-release exist. `docs/ROADMAP.md` "Next step" and `progress.md`
   Releases now say so. Docs only, no tests run.
 - Next: user merges the PR. Nothing is queued to build. The user plays M31 - M33 (apk on the v0.1.9-alpha release page).

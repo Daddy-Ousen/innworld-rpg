@@ -44,6 +44,7 @@ M33 comes from the player audit of 2026-10-17 (the last of M31 – M33; `docs/AU
 
 ## Play checks
 All build steps are merged. Run the game with `godot --path game`, or install the apk from the latest release.
+- [ ] Bag screen (card look, 2026-10-31): open the bag on the phone, eat, hold a tool, "Leave 1", put the held item in the bag
 - [ ] M32: the three doors (the Book 8 raid, Calruz yields) and Zel's last stand at Invrisil (drive off Bea and Ijvani: Zel lives)
 - [ ] M31: a signposted day (the Skinner night) and a scene with beats (the play in Celum)
 - [ ] M34 on the phone (v0.1.8 apk): shop at Krshia's, talk to Erin, serve a guest, attack a guard; the M34.5 fixes (End turn free in a fight; the shop's Buy button upright)
@@ -70,7 +71,6 @@ v0.1.8 sent for review (2026-10-24).
 # Later
 - Optional LLM flavour layer
 - Console `skip <days>` command (offered 2026-10-11, no answer yet)
-- Bag screen with the new card look (M34 left it on the old list)
 - Outside PR #164 (DKemp98, more Skills and classes): changes asked 2026-10-12; wait for rebased, split PRs
 - Outside PR #210 (DKemp98, sort the tags, add `crafting.potions`): open since 2026-10-18, not reviewed yet
 - Web build on its own subdomain (CNAME + Settings → Pages → Custom domain)
