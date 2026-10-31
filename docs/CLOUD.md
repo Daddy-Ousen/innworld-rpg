@@ -66,7 +66,7 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
 
 1. **M35 New content** (plan `docs/plans/m35.md`; four sessions; the first one writes ADR 0046)
    **Model · effort per session:**
-   - M35.0 Ceria's magic line: **Sonnet · high**
+   - M35.0 Ceria's magic line: **Sonnet · high** (built 2026-11-01, ADR 0046; skip it)
    - M35.1 Stat sheets: **Sonnet · medium**
    - M35.2 Runners' Guild staff in Invrisil: **Sonnet · high**
    - M35.3 Magnolia's whereabouts: **Opus · high**

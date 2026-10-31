@@ -9,7 +9,7 @@
 		},
 		"flashfire": {
 			"name": "[Flashfire]", "shape": "around", "ap_q": 12, "mp": 3, "damage": [3, 6], "hit": "auto", "cooldown": 1,
-			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "band": "friend", "minutes": 180, "book": "spellbook_flashfire"},
+			"learn": {"teacher": "ceria_springwalker", "after_event": "b1.ceria_teaches_ryoka_light", "band": "friend", "flags": ["quest.ceria_fire_lesson"], "minutes": 180, "book": "spellbook_flashfire"},
 			"canon_ref": {"book": 1, "chapter": "1.54", "confidence": "likely", "note": "Ceria burns webs away with it (1.54), and casts it in 1.58H. A burst around the caster and the teacher are design guesses."}
 		},
 		"gust": {

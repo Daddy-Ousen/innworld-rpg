@@ -112,6 +112,8 @@ func test_a_teacher_teaches_only_after_their_event() -> void:
 	assert_eq(Spells.teachable(gs, _db, "ceria_springwalker"), [] as Array[String])
 	_done(gs, TEACHER_EVENT)
 	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"), "")
+	assert_eq(Spells.teachable(gs, _db, "ceria_springwalker"), ["ice_spike"] as Array[String], "Flashfire waits for her task (M35.0)")
+	gs.flags["quest.ceria_fire_lesson"] = true
 	assert_eq(Spells.teachable(gs, _db, "ceria_springwalker"), ["flashfire", "ice_spike"] as Array[String])
 
 
@@ -158,6 +160,7 @@ func test_a_known_spell_is_not_learned_twice() -> void:
 func test_the_teach_list_shows_in_the_npc_option() -> void:
 	var gs := _game()
 	_done(gs, TEACHER_EVENT)
+	gs.flags["quest.ceria_fire_lesson"] = true
 	_put(gs, "ceria_springwalker", PLAYER_AT + Vector2i(1, 0))
 	var mine := Interact.options(gs, _db).filter(func(o: Dictionary) -> bool:
 		return o["id"] == "ceria_springwalker")
