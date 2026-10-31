@@ -36,3 +36,12 @@ Status: accepted (2026-11-01). Plan: `docs/plans/m35.md`. One note per step; M35
 - The NPC record has no place for Skills (`classes` only). Not added: a schema change needs the user (Rule 11).
   Named Skills seen: Magnolia [Sense Intentions] (2.38, 3.13); Ressa is [Head Maid] (2.37). Not in scope.
 - Effect: a `null` level counts as `unknown_level` (1) in `NpcLevels`, so the extra class adds a small hidden total.
+
+## M35.2 note (2026-11-01)
+- **Result: none found in Books 2 - 8.** Two Sonnet reading agents (summaries only). The Runners' Guild of Invrisil has no
+  named guild-master, clerk, receptionist or dispatcher. Ryoka's visits (3.35 – 3.41) meet only unnamed staff: a String
+  Person [Receptionist], other receptionists, an unnamed Dullahan Street Runner. Books 5 – 8 have no scene in that hall.
+- Only candidate: Thasius Griff, a City Runner "from Invrisil" who brings gifts to Laken at Riverfarm (4.35E, Book 6). His race
+  is not stated and the text never puts him in the hall. User pick: add nothing. Noted as a possible later add.
+- Not Invrisil: Miss Bellia is the [Receptionist] of the CELUM hall (5.04).
+- No NPC, behaviour, voice or map change. No tests run (nothing changed in code or data).
