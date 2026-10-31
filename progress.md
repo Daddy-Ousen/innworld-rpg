@@ -167,7 +167,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   change. Rendered at phone (two sizes) and desktop: OK. Tests: `unit_bag` (17, +6 new), `unit_touch_controls`,
   `unit_input_actions`, `unit_action_card`, `unit_context_button`, `unit_shop_panel`, `unit_world_view`,
   `unit_play_loop`, `unit_ui_scale` pass. Full suite not run.
-  - [ ] Push, open the PR (user paused the session before this step).
+  - [x] Pushed, [PR #251](https://github.com/Daddy-Ousen/innworld-rpg/pull/251) open (2026-11-01). Waits: user merges.
   - [ ] The user opens the bag on the phone (needs a new release build).
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

@@ -1,6 +1,9 @@
 # Handoff
 
-## Just done (2026-10-31, local): bag screen card look (branch `feat/bag-card-look`, PAUSED by the user)
+## Update (2026-11-01): the bag branch is pushed and PR #251 is open (not merged). Next: the user merges it.
+The steps below are done except the merge.
+
+## Just done (2026-10-31, local): bag screen card look (branch `feat/bag-card-look`)
 - Built and checked: `game/ui/bag.gd` + `bag.tscn` rewritten (cards, "Leave 1", Close, `_fit`), tests in
   `game/tests/unit_bag.gd` (+6). ADR 0045 "Bag screen" note, ROADMAP play check, `progress.md` entry. Committed
   locally on the branch. NOT pushed. NO PR yet.
