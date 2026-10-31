@@ -1,6 +1,6 @@
 {
 	"schema_version": 1,
-	"note": "M33.2 (ADR 0044 \"M33.2\"). Quests: id -> {title, giver (canon NPC), offer, gate? {flags, not_flags, days, min_band}, fail? {flags, after_day}, steps [{text, flag} or {text, did {action, outcome?, context?}, count?}], rewards? {relationship, coins, goods {good: n}, flags}, done?, confidence, canon_ref?, note?}. The giver dying fails a quest. Own words only, no book quotes. M33.3 adds three lines: Erin's inn, Pawn's Soldiers, Pisces's mana lesson.",
+	"note": "M33.2 (ADR 0044 \"M33.2\"). Quests: id -> {title, giver (canon NPC), offer, gate? {flags, not_flags, days, min_band}, fail? {flags, after_day}, steps [{text, flag} or {text, did {action, outcome?, context?}, count?}], rewards? {relationship, coins, goods {good: n}, flags}, done?, confidence, canon_ref?, note?}. The giver dying fails a quest. Own words only, no book quotes. M33.3 adds three lines: Erin's inn, Pawn's Soldiers, Pisces's mana lesson. M35.0 adds Ceria's fire lesson.",
 	"quests": {
 		"erin_gets_the_inn_going": {
 			"title": "Getting the inn going",
@@ -237,6 +237,84 @@
 				"note": "Pisces trades lessons for Erin's tab (days 23 - 24) and tests Erin and Rags with his own mana (34 - 35)."
 			},
 			"note": "A made-up task. Its reward flag unlocks [Flash Step] from Pisces (spells.json learn.flags)."
+		},
+		"ceria_teaches_flashfire": {
+			"title": "Ceria and the spark",
+			"giver": "ceria_springwalker",
+			"offer": "Light was the easy part. Fire is harder, and I will not hand it to a person who has not paid attention. Pay attention, and I will teach you Flashfire.",
+			"gate": {
+				"flags": [
+					"ryoka.knows_light_spell"
+				]
+			},
+			"steps": [
+				{
+					"text": "Talk with Ceria about magic twice.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "ceria_springwalker"
+						}
+					},
+					"count": 2
+				},
+				{
+					"text": "Cook a meal for Ceria. A mage who casts gets hungry.",
+					"did": {
+						"action": [
+							"cook_pasta",
+							"cook_simple_meal",
+							"cook_stew",
+							"cook_vegetable_soup",
+							"roast_meat",
+							"bake_bread",
+							"bake_pizza",
+							"make_pastry"
+						]
+					}
+				},
+				{
+					"text": "Wait until Erin wakes up with a cold.",
+					"flag": "erin.has_a_cold"
+				},
+				{
+					"text": "Cook hot soup or stew for Erin's cold. Ceria says spells will not cure it.",
+					"did": {
+						"action": [
+							"cook_vegetable_soup",
+							"cook_stew"
+						]
+					}
+				},
+				{
+					"text": "Tell Ceria what you learned.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "ceria_springwalker"
+						}
+					}
+				}
+			],
+			"rewards": {
+				"relationship": 3,
+				"flags": [
+					"quest.ceria_fire_lesson"
+				]
+			},
+			"done": "You listened, and you fed a hungry mage. Good. A flame is mana and a clear picture of it. Sit down, I will show you.",
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.45 - 1.56",
+				"confidence": "likely",
+				"note": "Ceria teaches Ryoka [Light] (days 34 - 35) and says casting makes a mage hungry (1.47R). The Horns lodge at the inn from night 35 (1.49). She tells Erin a cold needs hot soup, not a spell (1.50, 1.53)."
+			},
+			"note": "A made-up task that follows the canon days 35 - 38. Its reward flag unlocks [Flashfire] from Ceria (spells.json learn.flags). She is on the map only while the Horns lodge at the inn (day 35 - 39), then in Celum and in the inn basement (npc_behaviour.json), so the last step can wait for days."
 		}
 	}
 }

@@ -1,7 +1,8 @@
 extends GutTest
-## The three quest lines (M33.3, ADR 0044 "M33.3"): Erin's inn, Pawn's Soldiers, Pisces's mana
-## lesson. Real data. Each line is valid, uses flags that canon (or a reward) sets, can be taken
-## on and finished, and the Pisces reward opens [Flash Step]. Quests never change canon.
+## The four quest lines (M33.3, ADR 0044 "M33.3"; M35.0, ADR 0046): Erin's inn, Pawn's Soldiers,
+## Pisces's mana lesson, Ceria's fire lesson. Real data. Each line is valid, uses flags that canon
+## (or a reward) sets, can be taken on and finished. The Pisces reward opens [Flash Step] and the
+## Ceria reward opens [Flashfire]. Quests never change canon.
 
 const SEED := 20261026
 const MARKET := "liscor_market"
@@ -9,6 +10,7 @@ const LINES := {
 	"erin_gets_the_inn_going": "erin_solstice",
 	"pawn_and_the_painted_soldiers": "pawn",
 	"pisces_teaches_mana": "pisces",
+	"ceria_teaches_flashfire": "ceria_springwalker",
 }
 
 var _db: DataDb
@@ -45,7 +47,7 @@ func _gs(id: String) -> GameState:
 	return gs
 
 
-func test_the_three_lines_are_there() -> void:
+func test_the_lines_are_there() -> void:
 	for id: String in LINES:
 		assert_true(_db.quests.has(id), id)
 		assert_eq(String(_db.quests[id]["giver"]), LINES[id], id)
@@ -121,9 +123,35 @@ func test_the_pisces_reward_opens_flash_step() -> void:
 	assert_eq(Spells.teach_error(gs, _db, "pisces", "flash_step"), "")
 
 
+func test_the_ceria_reward_opens_flashfire() -> void:
+	var gs := _gs("ceria_teaches_flashfire")
+	gs.world.events["b1.ceria_teaches_ryoka_light"] = {"status": Spells.DONE}
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "ice_spike"), "", "Ice Spike needs no task")
+	assert_ne(Spells.teach_error(gs, _db, "ceria_springwalker", "flashfire"), "", "Flashfire waits for the task")
+	assert_eq(Spells.teachable(gs, _db, "ceria_springwalker"), ["ice_spike"] as Array[String])
+	gs.flags["quest.ceria_fire_lesson"] = true
+	assert_eq(Spells.teach_error(gs, _db, "ceria_springwalker", "flashfire"), "")
+	assert_eq(Spells.teachable(gs, _db, "ceria_springwalker"), ["flashfire", "ice_spike"] as Array[String])
+
+
+func test_the_ceria_line_follows_the_light_lesson() -> void:
+	var gs := GameState.new_game(SEED, _db)
+	assert_true(Quests.offers(gs, _db, "ceria_springwalker").is_empty(), "Ceria waits for the Light lesson (day 35)")
+	var events: Dictionary = _db.canon.events
+	assert_true(events["b1.ceria_teaches_ryoka_light"]["effects"]["set_flags"].has("ryoka.knows_light_spell"))
+	assert_true(events["b1.pawn_goes_home_to_the_hive"]["effects"]["set_flags"].has("erin.has_a_cold"))
+	gs.player.place(MARKET, Vector2i(5, 5))
+	gs.npcs.npcs["ceria_springwalker"]["area"] = MARKET
+	gs.npcs.npcs["ceria_springwalker"]["x"] = 6
+	gs.npcs.npcs["ceria_springwalker"]["y"] = 5
+	gs.flags["ryoka.knows_light_spell"] = true
+	assert_eq(Quests.offers(gs, _db, "ceria_springwalker").size(), 1, "offered after the Light lesson")
+
+
 func test_a_new_game_offers_erins_line() -> void:
 	var gs := GameState.new_game(SEED, _db)
 	var ids := Quests.offers(gs, _db, "erin_solstice").map(func(o: Dictionary) -> String: return o["id"])
 	assert_true(ids.has("erin_gets_the_inn_going"), "offered on the first day: %s" % [ids])
 	assert_true(Quests.offers(gs, _db, "pawn").is_empty(), "Pawn waits for his Soldiers (day 82)")
 	assert_true(Quests.offers(gs, _db, "pisces").is_empty(), "Pisces waits for the flies (day 17)")
+	assert_true(Quests.offers(gs, _db, "ceria_springwalker").is_empty(), "Ceria waits for the Light lesson (day 35)")
