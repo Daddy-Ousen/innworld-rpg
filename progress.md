@@ -196,7 +196,10 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   add only Reynold's past [Lieutenant] (4.48), level null. Data only (`book2/npcs.json`). No Skills field in the schema: skipped.
   Tests: `unit_npc_sheet`, `unit_npc_levels`, `sim_npc_levels`, `unit_canon_db`, `sim_canon_book2`, `sim_canon_book4` = 41/41 pass;
   validator books 2 and 4: 0 errors. Full suite not run.
-  - [ ] Next: M35.2 Runners' Guild staff in Invrisil (cloud session).
+  - [x] Done, see M35.2 below.
+- [x] M35.2 Runners' Guild staff in Invrisil (2026-11-01, cloud). Reading (Sonnet, Books 2 - 8): none found; staff are all unnamed.
+  Only candidate Thasius Griff (4.35E) has no hall scene. User pick: add nothing. Docs only (ADR 0046 note, plan, ROADMAP). No tests run.
+  - [ ] Next: M35.3 Magnolia's whereabouts (cloud session, Opus · high).
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
