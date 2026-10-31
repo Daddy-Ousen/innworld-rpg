@@ -19,7 +19,7 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | Google Play | closed test running | – (user) |
 
 Last release: v0.2.0-alpha (2026-11-01, tag and GitHub pre-release published): v0.1.9 plus the bag screen in the card look (M31 – M33: signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
-Next step: cloud sessions (prompts in `docs/CLOUD.md` "Task queue" items 6 – 9). Order: M35.0 and M36.P first, then M35.1 – M35.3 one by one, then M36.0 … M36.n, then M37. The user still plays M31 – M33 and the bag (apk on the release page, or `godot --path game`).
+Next step: cloud sessions (prompts in `docs/CLOUD.md` "Task queue" items 1 – 4). Order: M35.0 and M36.P first, then M35.1 – M35.3 one by one, then M36.0 … M36.n, then M37. The user still plays M31 – M33 and the bag (apk on the release page, or `godot --path game`).
 Cloud text: Books 1 – 10 are in the private repo `Daddy-Ousen/innworld-canon-raw` (2026-11-01).
 
 How to read the last column: pick that model and effort in the app before you start the step's session. Reading

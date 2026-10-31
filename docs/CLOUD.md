@@ -58,29 +58,13 @@ With two repos the hook does not run, so begin your prompt with:
 - Push tags (maybe). It writes "tag pending" in `progress.md`. At home, run the tag commands it lists.
 
 ## Task queue (one session each, in this order)
-Each prompt is ready to paste. Items 1 – 5 are done (kept as examples of the prompt style).
+Each prompt is ready to paste. Finished tasks are listed at the bottom of this file.
 **Model · effort:** pick the model and the effort in the session's menu BEFORE you send the first prompt.
 Reading agents that a session starts run on Sonnet · medium by themselves.
 Rule of thumb: Sonnet · high for data from the books; Opus · high for plans, cascades and anything with a
 schema or save question; Opus · medium for engine code and fight-stage logic.
 
-1. **M17.6 Cover and position**
-   > Do M17.6 (cover and position) from docs/ROADMAP.md. Follow CLAUDE.md. Plan first and write the plan
-   > to docs/plans/m17.6.md. Ask me the open choices, then build, test, update the docs, and open a PR.
-2. **M17.7 Enemy abilities and balance**, then **M17.8 Hidden XP** (both done; last M17 steps)
-   > Do M17.7 from docs/ROADMAP.md. Follow CLAUDE.md. Plan first (docs/plans/m17.7.md), ask me the open
-   > choices, then build, run only the tests that touch the change, update the docs, and open a PR.
-3. **M18.P Book 6 plan** (done 2026-10-01, ADR 0028)
-   > Do M18.P: plan Book 6 (The General of Izril) like ADR 0020 did for Book 5. Read the chapters in
-   > canon/raw/book6 with subagents (summaries only). Write ADR 0028 and the M18 steps in docs/ROADMAP.md.
-   > Ask me the open choices. Open a PR with the plan only.
-4. **M18.0 … M18.7 Book 6 steps** (one session per step, as `docs/ROADMAP.md` lists them; M18.0 is next)
-   > Do the next open M18 step in docs/ROADMAP.md. Follow CLAUDE.md and ADR 0028. Ask me the stage and hook
-   > choices first. Then build, test, update the docs, and open a PR.
-5. **M19.P Book 7 plan** (done 2026-10-07, ADR 0030), then **M19.0 … M19.8** (same prompt as item 4, with ADR 0030
-   and canon/raw/book7; M19.0 is next)
-
-6. **M35 New content** (plan `docs/plans/m35.md`; four sessions; the first one writes ADR 0046)
+1. **M35 New content** (plan `docs/plans/m35.md`; four sessions; the first one writes ADR 0046)
    **Model · effort per session:**
    - M35.0 Ceria's magic line: **Sonnet · high**
    - M35.1 Stat sheets: **Sonnet · medium**
@@ -90,13 +74,13 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
    > CLAUDE.md. Read the chapters in canon/raw with subagents (summaries only). Ask me the open choices, then
    > build, run only the tests the plan lists, update the docs, and open a PR.
    > (For the others, say M35.1 stat sheets, M35.2 Runners' Guild staff in Invrisil, or M35.3 Magnolia's whereabouts.)
-7. **M36.P Book 9 plan** (plan `docs/plans/m36.md`, text in `canon/raw/book9`). Needs no earlier M35 PR.
+2. **M36.P Book 9 plan** (plan `docs/plans/m36.md`, text in `canon/raw/book9`). Needs no earlier M35 PR.
    **Model · effort: Opus · high** (a plan with a day map, conflicts and schema questions).
    > Do M36.P: plan Book 9 (Tears of Liscor) like M28.P did for Book 8 (docs/plans/m28.md, ADR 0043). Follow
    > docs/plans/m36.md. Read progress.md and handoff.md first. Read all of canon/raw/book9 with subagents
    > (summaries only). Write the plan into docs/plans/m36.md and ADR 0047. Ask me the open choices. Open a PR
    > with docs only.
-8. **M36.0 … M36.n Book 9 steps** (one session per step, as the merged plan lists them)
+3. **M36.0 … M36.n Book 9 steps** (one session per step, as the merged plan lists them)
    **Model · effort:** the merged plan tags every step; use that tag. If a tag is missing:
    - engine or schema step (M36.0): **Opus · medium**
    - world and records (M36.1): **Sonnet · high**
@@ -106,9 +90,9 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
    > Do the next open M36 step in docs/plans/m36.md. Read progress.md and handoff.md first. Follow CLAUDE.md
    > and ADR 0047. Ask me the stage and hook choices first. Then build, run only the tests the step lists,
    > update the docs, and open a PR.
-9. **M37.P Book 10 plan** (after M36 is merged; plan `docs/plans/m37.md`, text in `canon/raw/book10`), then
-   **M37.0 … M37.n** (same prompts as items 7 and 8, with Book 10, ADR 0048 and docs/plans/m37.md).
-   **Model · effort:** M37.P **Opus · high**; the steps follow the tags in item 8 (use the merged M37 plan's tags first).
+4. **M37.P Book 10 plan** (after M36 is merged; plan `docs/plans/m37.md`, text in `canon/raw/book10`), then
+   **M37.0 … M37.n** (same prompts as items 2 and 3, with Book 10, ADR 0048 and docs/plans/m37.md).
+   **Model · effort:** M37.P **Opus · high**; the steps follow the tags in item 3 (use the merged M37 plan's tags first).
    M37.P also checks the `6.` chapter ids in the validator and `core/canon_db.gd`; if one fails, that fix is an
    **Opus · medium** step.
 
@@ -129,3 +113,22 @@ Size is from M28 (Book 8: one plan session, 10 steps, 26 chapters). Book 9 has 2
 Do not run two canon batches of one book at once. Two sessions that edit the same JSON file will conflict.
 
 To continue after a break, paste: "Read progress.md and handoff.md. Go on with the next open task."
+
+## Done tasks (kept as examples of the prompt style)
+All five are merged (M17.6 – M19.9). Only your play checks are left (ROADMAP, "Waits on the user").
+
+D1. **M17.6 Cover and position**
+   > Do M17.6 (cover and position) from docs/ROADMAP.md. Follow CLAUDE.md. Plan first and write the plan
+   > to docs/plans/m17.6.md. Ask me the open choices, then build, test, update the docs, and open a PR.
+D2. **M17.7 Enemy abilities and balance**, then **M17.8 Hidden XP** (both done; last M17 steps)
+   > Do M17.7 from docs/ROADMAP.md. Follow CLAUDE.md. Plan first (docs/plans/m17.7.md), ask me the open
+   > choices, then build, run only the tests that touch the change, update the docs, and open a PR.
+D3. **M18.P Book 6 plan** (done 2026-10-01, ADR 0028)
+   > Do M18.P: plan Book 6 (The General of Izril) like ADR 0020 did for Book 5. Read the chapters in
+   > canon/raw/book6 with subagents (summaries only). Write ADR 0028 and the M18 steps in docs/ROADMAP.md.
+   > Ask me the open choices. Open a PR with the plan only.
+D4. **M18.0 … M18.7 Book 6 steps** (done; one session per step)
+   > Do the next open M18 step in docs/ROADMAP.md. Follow CLAUDE.md and ADR 0028. Ask me the stage and hook
+   > choices first. Then build, test, update the docs, and open a PR.
+D5. **M19.P Book 7 plan** (done 2026-10-07, ADR 0030), then **M19.0 … M19.9** (done; same prompt as D4, with ADR 0030
+   and canon/raw/book7)

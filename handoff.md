@@ -1,7 +1,7 @@
 # Handoff
 
 ## Just done (2026-11-01, local): model · effort tags in `docs/CLOUD.md` (branch `docs/cloud-model-tags`)
-- Task queue items 6 – 9 each say which model and effort to pick (M35.0 Sonnet · high, M35.1 Sonnet · medium, M35.2 Sonnet · high,
+- Task queue items 1 – 4 each say which model and effort to pick (M35.0 Sonnet · high, M35.1 Sonnet · medium, M35.2 Sonnet · high,
   M35.3 Opus · high, M36.P / M37.P Opus · high, later steps by type). PR #254 (cloud prep) is merged. Docs only, no tests run.
 - Next: the user merges this PR, then starts the cloud sessions (M35.0 and M36.P first).
 
@@ -10,10 +10,10 @@
   yes; commit bd0c137). Books 6 – 7 were there already. Book 9 = 5.45 – 5.62 + 4 interludes (22 chapters); Book 10 =
   6.00 – 6.16 (17 chapters). `canon/raw/book9` and `book10` are local and gitignored.
 - Wrote `docs/plans/m35.md` (Ceria's magic line, stat sheets, Runners' Guild staff in Invrisil, Magnolia's whereabouts),
-  `m36.md` (Book 9) and `m37.md` (Book 10). Updated `docs/CLOUD.md` (queue items 6 – 9, checklist, schedule),
+  `m36.md` (Book 9) and `m37.md` (Book 10). Updated `docs/CLOUD.md` (queue items 1 – 4, checklist, schedule),
   `CLAUDE.md` (cloud book text: Books 1 – 10) and ROADMAP. Docs only, no tests run.
 - Next: the user merges the PR. Then, in the cloud: M35.0 and M36.P first (they may run together), then M35.1 –
-  M35.3 one at a time, then M36.0 … M36.n, then M37 (`docs/CLOUD.md`, "Task queue" 6 – 9 has the prompts).
+  M35.3 one at a time, then M36.0 … M36.n, then M37 (`docs/CLOUD.md`, "Task queue" 1 – 4 has the prompts).
 - Gotchas: "character sheets" = NPC stat sheets, not art (art exists). Book 10 chapter ids start with `6.`: M37.P must
   check `tools/validate_data.py` and `core/canon_db.gd` for chapter-id checks first (none found by search). The next
   ADR numbers are reserved: 0046 (M35), 0047 (Book 9), 0048 (Book 10). The old branch `docs/changelog-v0.2.0` is
