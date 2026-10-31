@@ -14,6 +14,11 @@
 ##   price?, shops?, except?}]. An NPC of `race` who lives in `town` (not in `except`) starts at
 ##   regard `start` (negative: wary); the shops in `shops` charge `price` (a fraction) more. Both
 ##   shrink as the player's reputation in `town` rises from 0 to `fade`, and are gone at `fade`.
+##   Friend perks (M33.4, ADR 0044): optional rules.standing.perks [{npc, band, kind, value?, shops?, text}].
+##   A perk is on while regard with `npc` is at or above the lowest regard of `band` (a bands label).
+##   Kinds: "discount" (a fraction off BUY prices at the `shops`), "talk_xp" (XP x `value`, > 1, for any
+##   action done with that NPC), "fight_help" (the NPC fights beside the player from this band, not
+##   only at friend_fight). The biggest value of a kind wins. Night.run adds the perk's `text` once.
 ## A db without rules.standing (toy dbs) has none of this: every reader gives its old answer.
 class_name Standing
 extends RefCounted
@@ -21,6 +26,9 @@ extends RefCounted
 const FIELDS := ["confidence", "cap", "decay_after_days", "relationship_decay", "reputation_decay_every",
 	"talk_town", "talk_faction", "serve_town", "inn_town", "inn_share", "price_per_point",
 	"price_max", "faction_div", "friend_fight", "bands"]
+const PERK_KINDS := ["discount", "talk_xp", "fight_help"]
+const PERK_FIELDS := ["npc", "band", "kind", "value", "shops", "text"]
+const PERK_FLAG := "perk.%s.%s"
 
 
 static func rules(db: DataDb) -> Dictionary:
@@ -115,7 +123,7 @@ static func shop_markup(gs: GameState, db: DataDb, shop: String) -> float:
 	for e: Dictionary in rules(db).get("race_regard", []):
 		if (e.get("shops", []) as Array).has(shop):
 			total += float(e.get("price", 0.0)) * _weight(gs, e)
-	return total
+	return total - perk_discount(gs, db, shop)
 
 
 ## The greeting band for `npc`: {"label": String, "line": String} ("%s" in the line is the name).
@@ -132,7 +140,63 @@ static func band(gs: GameState, db: DataDb, npc: String) -> Dictionary:
 
 ## True if `npc` thinks so well of the player that they fight beside them.
 static func is_friend(gs: GameState, db: DataDb, npc: String) -> bool:
-	return on(db) and regard(gs, db, npc) >= int(rules(db)["friend_fight"])
+	if not on(db):
+		return false
+	return regard(gs, db, npc) >= int(rules(db)["friend_fight"]) \
+			or _perks_on(gs, db, "fight_help", npc).size() > 0
+
+
+## The lowest regard of the bands label `label` (a very high number for an unknown one).
+static func band_floor(db: DataDb, label: String) -> int:
+	for b: Array in rules(db).get("bands", []):
+		if String(b[1]) == label:
+			return int(b[0])
+	return 1 << 30
+
+
+## True while the player's regard with the perk's NPC reaches its band.
+static func perk_is_on(gs: GameState, db: DataDb, p: Dictionary) -> bool:
+	return regard(gs, db, String(p["npc"])) >= band_floor(db, String(p["band"]))
+
+
+## The perks of `kind` that are on now (for `npc`, or all NPCs when "").
+static func _perks_on(gs: GameState, db: DataDb, kind: String, npc: String = "") -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for p: Dictionary in rules(db).get("perks", []):
+		if String(p["kind"]) == kind and (npc == "" or String(p["npc"]) == npc) and perk_is_on(gs, db, p):
+			out.append(p)
+	return out
+
+
+## Fraction off BUY prices at `shop` from friend perks now (0.0 for most shops).
+static func perk_discount(gs: GameState, db: DataDb, shop: String) -> float:
+	var best := 0.0
+	for p: Dictionary in _perks_on(gs, db, "discount"):
+		if (p.get("shops", []) as Array).has(shop):
+			best = maxf(best, float(p["value"]))
+	return best
+
+
+## XP factor for an action done with a friend (context "npc"); 1.0 when no perk applies.
+static func talk_xp_mult(gs: GameState, db: DataDb, context: Dictionary) -> float:
+	var npc := String(context.get("npc", ""))
+	var best := 1.0
+	if npc == "":
+		return best
+	for p: Dictionary in _perks_on(gs, db, "talk_xp", npc):
+		best = maxf(best, float(p["value"]))
+	return best
+
+
+## The `text` of every perk that came on since the last call, once each (flag "perk.<npc>.<band>").
+static func perk_news(gs: GameState, db: DataDb) -> Array[String]:
+	var out: Array[String] = []
+	for p: Dictionary in rules(db).get("perks", []):
+		var flag := PERK_FLAG % [p["npc"], String(p["band"]).replace(" ", "_")]
+		if not gs.flags.has(flag) and perk_is_on(gs, db, p) and gs.world.is_alive(db.canon, String(p["npc"])):
+			gs.flags[flag] = true
+			out.append(String(p["text"]))
+	return out
 
 
 ## The first talk of the day with `npc` (NpcSim.note_talk): contact, town and faction reputation.
@@ -248,6 +312,7 @@ static func validate(db: DataDb) -> Array[String]:
 			elif not db.economy.shops.is_empty() and (e.get("shops", []) as Array).any(
 					func(sh: String) -> bool: return not db.economy.shops.has(sh)):
 				errs.append("rules.standing.race_regard: unknown shop in %s." % [e["shops"]])
+	errs.append_array(_validate_perks(db, r.get("perks", [])))
 	var last := -100000
 	if not r["bands"] is Array or (r["bands"] as Array).is_empty():
 		errs.append("rules.standing.bands: needs rows [min regard, label, line].")
@@ -257,4 +322,55 @@ static func validate(db: DataDb) -> Array[String]:
 				errs.append("rules.standing.bands: rows are [min regard, label, line], min rising.")
 				break
 			last = int(b[0])
+	return errs
+
+
+static func _validate_perks(db: DataDb, perks: Variant) -> Array[String]:
+	var errs: Array[String] = []
+	if not perks is Array:
+		return ["rules.standing.perks: must be a list."] as Array[String]
+	var labels: Array = []
+	for b: Array in db.rules.get("standing", {}).get("bands", []):
+		if String(b[1]) != "":
+			labels.append(String(b[1]))
+	var seen := {}
+	for i in (perks as Array).size():
+		var at := "rules.standing.perks[%d]" % i
+		var p: Variant = perks[i]
+		if not p is Dictionary:
+			errs.append("%s: must be an object." % at)
+			continue
+		for k: String in p:
+			if not PERK_FIELDS.has(k):
+				errs.append("%s: unknown field '%s'." % [at, k])
+		if not db.canon.npcs.is_empty() and not db.canon.npcs.has(String(p.get("npc", ""))):
+			errs.append("%s: unknown npc '%s'." % [at, p.get("npc", "")])
+		if not labels.has(String(p.get("band", ""))):
+			errs.append("%s: band '%s' is not one of %s." % [at, p.get("band", ""), labels])
+		var kind := String(p.get("kind", ""))
+		if not PERK_KINDS.has(kind):
+			errs.append("%s: kind must be one of %s." % [at, PERK_KINDS])
+		if not (p.get("text") is String and String(p["text"]).strip_edges() != ""):
+			errs.append("%s: text must be a non-empty string." % at)
+		var key := "%s|%s|%s" % [p.get("npc", ""), p.get("band", ""), kind]
+		if seen.has(key):
+			errs.append("%s: a second '%s' perk for the same npc and band." % [at, kind])
+		seen[key] = true
+		var v: Variant = p.get("value", null)
+		match kind:
+			"discount":
+				if not (v is float or v is int) or float(v) <= 0.0 or float(v) > 0.5:
+					errs.append("%s: a discount needs a value in 0..0.5." % at)
+				var shops: Variant = p.get("shops", [])
+				if not shops is Array or (shops as Array).is_empty():
+					errs.append("%s: a discount needs a list of shops." % at)
+				elif not db.economy.shops.is_empty() and (shops as Array).any(
+						func(sh: Variant) -> bool: return not db.economy.shops.has(sh)):
+					errs.append("%s: unknown shop in %s." % [at, shops])
+			"talk_xp":
+				if not (v is float or v is int) or float(v) <= 1.0 or float(v) > 2.0:
+					errs.append("%s: talk_xp needs a value in 1..2." % at)
+			"fight_help":
+				if v != null:
+					errs.append("%s: fight_help takes no value." % at)
 	return errs

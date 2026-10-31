@@ -80,6 +80,7 @@ static func perform(gs: GameState, db: DataDb, action_id: String, opts: Dictiona
 	var window := float(opts.get("window", XpWindow.mult(gs, db)))  # hidden XP window (M17.8)
 	var xp := Xp.compute(float(def["base_xp"]), intensity, Xp.risk_mult(risk, xp_rules),
 			novelty, conviction, Xp.outcome_mult(outcome, xp_rules), skill_m, duress, window)
+	xp *= Standing.talk_xp_mult(gs, db, opts.get("context", {}))  # M33.4: a friend teaches more
 
 	var record := {
 		"time": now,

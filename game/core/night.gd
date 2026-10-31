@@ -81,6 +81,7 @@ static func run(gs: GameState, db: DataDb, collapsed: bool = false,
 	lines.append_array(world)
 	# 5d. Quests (M33.2): flag steps the night set, tasks that failed.
 	lines.append_array(Quests.update(gs, db))
+	lines.append_array(Standing.perk_news(gs, db))  # M33.4: a friend perk came on
 	var events := gs.world.history.slice(history_before)
 	# 6. Off-screen sim. Monsters are gone and the player heals (a knocked-out
 	#    player wakes at a safe place); NPCs go where their goals put them

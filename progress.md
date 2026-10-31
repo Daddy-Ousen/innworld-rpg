@@ -465,6 +465,12 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_spell_learning` (21), `unit_data_db` (15), `sim_canon_book1` (15, drift 0), `unit_journal` (7), `unit_voice` (24), `unit_spells` (31) pass; validator books 1 – 8: 0 errors; Python 134 OK.
   Full suite not run.
   - [ ] The user plays a line: ask Erin on day 8, finish it; ask Pisces after day 17 and learn [Flash Step] from him.
+- [x] M33.4 friend perks (2026-10-26, branch `feat/m33.4-friend-perks`, ADR 0044 "M33.4"). User picks: passive perks
+  only, friend + close friend. New optional `rules.standing.perks` (32 entries, 16 NPCs): `discount`, `talk_xp`,
+  `fight_help`. Code: `core/standing.gd` (perk readers, `perk_news`, validation), `core/actions.gd` (XP factor),
+  `core/night.gd` (says a new perk once). No save change. Tests: `unit_friend_perks` (new, 11), `unit_standing` (21), `unit_economy` (25), `unit_race_regard` (7), `unit_npc_react` (8), `unit_data_db` (15), `unit_actions`, `unit_night`, `unit_interact`, `unit_voice`, `unit_quests`, `unit_quest_lines`, `unit_talk_topics`, `unit_xp`, `sim_balance_progress`, `sim_balance_fighter`, `sim_balance_money`, `sim_30_days`, `sim_breakthrough_probe`, `sim_inn_service`, `sim_canon_book1` pass.
+  Full suite not run.
+  - [ ] The user plays: befriend Krshia (cheaper stall), talk to Erin as a friend (more XP), see a friend join a fight.
 
 ## Docs
 - [x] ROADMAP update (2026-10-26, branch `docs/roadmap-update-3`): M31 and M32 moved to Done, their play checks to

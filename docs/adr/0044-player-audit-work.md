@@ -468,3 +468,15 @@ No engine change, no schema change, no save change (flags and new event ids only
 - Why no `pray` or `study_spell` step: no map object offers `pray` near Liscor, and `study_spell` is only logged
   when a spell is learned. `serve_guests` is made by the inn service, not by a button, so it is not a step either.
 - All confidence `guess`; texts in own words. The Ceria line can be added later as data.
+
+### M33.4 (2026-10-26): friend perks
+- User picks: passive perks only (no new talk rows); a perk at "friend" and another at "close friend".
+- New optional `rules.standing.perks` [{npc, band, kind, value?, shops?, text}] (checked by `Standing.validate`).
+  A perk is on while regard with the NPC reaches the band's lowest regard. Kinds: `discount` (fraction off BUY prices
+  at the listed shops, through `Standing.shop_markup`), `talk_xp` (XP x value for any action done with that NPC,
+  `Actions.perform`), `fight_help` (the NPC fights beside the player from that band, `Standing.is_friend`; before, only
+  from `friend_fight` 10 = close friend). The biggest value wins. `Night.run` says each new perk once (flag
+  `perk.<npc>.<band>`, no save version change).
+- 32 perks for 16 NPCs: discounts 5% / 10% for Krshia, Lism, Octavia; Relc, Klbkch, Zevara, Ceria, Rags, Toren, Pisces,
+  Beilmark fight beside you from friend and teach x1.25 at close friend; Erin, Olesm, Selys, Ryoka, Pawn teach x1.25 at
+  friend and x1.5 at close friend. All numbers are guesses. Lesson perks already exist (teachers need friend, M33.0).
