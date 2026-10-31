@@ -11,7 +11,7 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 
 | Milestone | State | Model · effort per step |
 |---|---|---|
-| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | M35.0 and M35.1 built (ADR 0046, PRs wait for the user); M35.2 – M35.3 ready for cloud sessions (`docs/plans/m35.md`) | M35.0: Sonnet · high · M35.1: Sonnet · medium · M35.2: Sonnet · high · M35.3: Opus · high |
+| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | M35.0 – M35.2 built (M35.2: none found, ADR 0046); M35.3 ready for cloud sessions (`docs/plans/m35.md`) | M35.0: Sonnet · high · M35.1: Sonnet · medium · M35.2: Sonnet · high · M35.3: Opus · high |
 | M36 Book 9 (Tears of Liscor) | text extracted, in the cloud repo; M36.P plan session is next (`docs/plans/m36.md`, ADR 0047) | M36.P: Opus · high · data steps: Sonnet · high · engine and stages: Opus · medium |
 | M37 Book 10 (The Wind Runner) | text extracted, in the cloud repo; starts after M36 is merged (`docs/plans/m37.md`, ADR 0048) | same as M36 |
 | M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |

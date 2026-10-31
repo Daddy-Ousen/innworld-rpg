@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M35.2 Runners' Guild staff (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #257)
+- Two Sonnet reading agents (Books 2 - 4, 5 - 8). Result: none found. User pick: add nothing. Docs only (ADR 0046, plan, ROADMAP, progress). No tests run.
+- Next: the user merges the PR. Then M35.3 Magnolia's whereabouts (Opus · high).
+- Gotchas: Thasius Griff (4.35E, Book 6) is the only Invrisil City Runner named; add him later only if the user asks. Miss Bellia is Celum, not Invrisil.
+  17 old `.uid` files in `game/tests/` stay untracked on purpose.
+
 ## Just done (2026-11-01, cloud): M35.1 stat sheets (branch `claude/m35-1-stat-sheets-pt83je`)
 - Two Sonnet reading agents (Books 1 - 4, 5 - 8; summaries only). Result: no level is stated for any of the eight NPCs.
   User pick: add Reynold's past [Lieutenant] (level null) only. One data edit in `book2/npcs.json`; ADR 0046 note; plan answers.
