@@ -176,7 +176,7 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   (22 and 17 chapters). `tools/cloud/setup.sh` already links every `book*` folder: no script change.
 - [x] Plans written: `docs/plans/m35.md` (4 data steps), `m36.md` (Book 9 skeleton, ADR 0047 to come), `m37.md` (Book 10
   skeleton, ADR 0048 to come). `docs/CLOUD.md` has the new text list, a before-session checklist, a schedule guide and
-  task queue items 6 – 9 with paste-ready prompts. `CLAUDE.md` cloud section says Books 1 – 10. ROADMAP rows added.
+  task queue items 1 – 4 with paste-ready prompts. `CLAUDE.md` cloud section says Books 1 – 10. ROADMAP rows added.
 - Finding: "character sheets" in the Later list means NPC stat sheets (`core/npc_sheet.gd`), not art. Merec, Raisha and the
   estate NPCs already have looks and sprites; their classes have `level: null`. M35.1 fills real levels only.
 - Docs only. No tests run (no code or data changed).
