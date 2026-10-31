@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-10-26, local): M33.3 three quest lines (branch `feat/m33.3-quest-lines`)
+- User pick: Pisces for the magic line. Data only (ADR 0044 "M33.3"): `data/quests.json` has `erin_gets_the_inn_going`
+  (Erin, offered on day 8), `pawn_and_the_painted_soldiers` (Pawn, from day 82), `pisces_teaches_mana` (Pisces, from
+  day 17). `spells.json`: `flash_step` has `learn.flags: ["quest.pisces_mana_lesson"]` (Pisces teaches it only after).
+- Tests: new `game/tests/unit_quest_lines.gd` (7). See `progress.md` M33.3. Full suite not run.
+- Next: user merges the PR. Then M33.4 friendship perks **[Sonnet · medium]** (one perk per main NPC at friend and
+  close-friend level; ask first if a new field is needed). Play check: take a line and learn [Flash Step].
+- Gotchas: steps can use only actions the player can do: `pray` has no object near Liscor, `study_spell` is logged
+  only when a spell is learned, `serve_guests` comes from the inn service. Cooking, repairs, washing and talking work.
+  Data files use CRLF and tabs: write them from Python with `newline=''`. The Ceria magic line is not built (add as data).
+
 ## Just done (2026-10-26, local): M33.2 quest engine (branch `feat/m33.2-quest-engine`)
 - User picks: a quest starts from an auto talk row on its giver ("Ask about: <title>"); a spell reward unlocks the
   teacher (spell `learn.flags`, set by a reward flag). Plan: `docs/plans/m33.md` "M33.2 build plan". ADR 0044 "M33.2".

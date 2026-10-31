@@ -1,5 +1,242 @@
 {
 	"schema_version": 1,
-	"note": "M33.2 (ADR 0044 \"M33.2\"). Quests: id -> {title, giver (canon NPC), offer, gate? {flags, not_flags, days, min_band}, fail? {flags, after_day}, steps [{text, flag} or {text, did {action, outcome?, context?}, count?}], rewards? {relationship, coins, goods {good: n}, flags}, done?, confidence, canon_ref?, note?}. The giver dying fails a quest. Own words only, no book quotes. The quest lines come in M33.3.",
-	"quests": {}
+	"note": "M33.2 (ADR 0044 \"M33.2\"). Quests: id -> {title, giver (canon NPC), offer, gate? {flags, not_flags, days, min_band}, fail? {flags, after_day}, steps [{text, flag} or {text, did {action, outcome?, context?}, count?}], rewards? {relationship, coins, goods {good: n}, flags}, done?, confidence, canon_ref?, note?}. The giver dying fails a quest. Own words only, no book quotes. M33.3 adds three lines: Erin's inn, Pawn's Soldiers, Pisces's mana lesson.",
+	"quests": {
+		"erin_gets_the_inn_going": {
+			"title": "Getting the inn going",
+			"giver": "erin_solstice",
+			"offer": "The place is a mess and I have no idea what I am doing. Help me fix it up, cook, and keep it open?",
+			"gate": {
+				"flags": [
+					"wandering_inn.open"
+				]
+			},
+			"steps": [
+				{
+					"text": "Repair a table or chair in the inn.",
+					"did": {
+						"action": [
+							"repair_furniture"
+						]
+					}
+				},
+				{
+					"text": "Cook three meals in the inn kitchen.",
+					"did": {
+						"action": [
+							"cook_pasta",
+							"cook_simple_meal",
+							"cook_stew",
+							"cook_vegetable_soup",
+							"roast_meat",
+							"bake_bread",
+							"bake_pizza",
+							"make_pastry"
+						]
+					},
+					"count": 3
+				},
+				{
+					"text": "Wash dishes or sweep the floor twice.",
+					"did": {
+						"action": [
+							"wash_dishes",
+							"sweep_floor",
+							"clean_room"
+						]
+					},
+					"count": 2
+				},
+				{
+					"text": "Wait until the first regular guests come to the inn.",
+					"flag": "wandering_inn.has_regulars"
+				},
+				{
+					"text": "Tell Erin the inn is ready.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "erin_solstice"
+						}
+					}
+				}
+			],
+			"rewards": {
+				"relationship": 3,
+				"coins": 150,
+				"goods": {
+					"pasta_dish": 2
+				},
+				"flags": [
+					"quest.erin_inn_going"
+				]
+			},
+			"done": "Look at it! Tables, food, a few guests. It is a real inn now. Take this, you earned it.",
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.08 - 1.21",
+				"confidence": "likely",
+				"note": "Erin repairs and names the inn and gets her first regulars (days 13 - 15)."
+			},
+			"note": "A made-up task that follows the canon days of the inn becoming a real place."
+		},
+		"pawn_and_the_painted_soldiers": {
+			"title": "Pawn's Soldiers",
+			"giver": "pawn",
+			"offer": "My Soldiers are strong, but they are hungry and have never seen the sky. Will you help me look after them?",
+			"gate": {
+				"flags": [
+					"liscor_hive.soldiers_painted"
+				]
+			},
+			"fail": {
+				"after_day": 125
+			},
+			"steps": [
+				{
+					"text": "Cook three meals for the Soldiers at the inn.",
+					"did": {
+						"action": [
+							"cook_pasta",
+							"cook_simple_meal",
+							"cook_stew",
+							"cook_vegetable_soup",
+							"roast_meat",
+							"bake_bread",
+							"bake_pizza",
+							"make_pastry"
+						]
+					},
+					"count": 3
+				},
+				{
+					"text": "Talk with Pawn about his Soldiers twice.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "pawn"
+						}
+					},
+					"count": 2
+				},
+				{
+					"text": "Wait until the old Drakes cheer the painted Soldiers in Liscor.",
+					"flag": "liscor.old_drakes_cheer_pawns_soldiers"
+				},
+				{
+					"text": "Wait until the Workers finish the inn's new floor.",
+					"flag": "wandering_inn.third_floor_built"
+				},
+				{
+					"text": "Tell Pawn how the Soldiers are doing.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "pawn"
+						}
+					}
+				}
+			],
+			"rewards": {
+				"relationship": 3,
+				"coins": 200,
+				"flags": [
+					"quest.pawn_soldiers_done"
+				]
+			},
+			"done": "They march in the sun now, and they pray. I think this is what I wanted for them. Thank you.",
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 3,
+				"chapter": "3.22 L - 4.29",
+				"confidence": "likely",
+				"note": "Pawn leads the painted Soldiers above ground (day 82), they march in Liscor (101), the Workers finish the inn (112)."
+			},
+			"note": "A made-up task that follows Pawn's canon days."
+		},
+		"pisces_teaches_mana": {
+			"title": "Pisces and the mana lesson",
+			"giver": "pisces",
+			"offer": "You cannot cast, and I will not waste my breath on a person who cannot feel mana. Show you can learn, and I will teach you a harder spell.",
+			"gate": {
+				"flags": [
+					"erin.saved_by_pisces"
+				]
+			},
+			"steps": [
+				{
+					"text": "Talk with Pisces about mana twice.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "pisces"
+						}
+					},
+					"count": 2
+				},
+				{
+					"text": "Cook a meal for Pisces's tab.",
+					"did": {
+						"action": [
+							"cook_pasta",
+							"cook_simple_meal",
+							"cook_stew",
+							"cook_vegetable_soup",
+							"roast_meat",
+							"bake_bread",
+							"bake_pizza",
+							"make_pastry"
+						]
+					}
+				},
+				{
+					"text": "Wait until Pisces tests mana in the inn.",
+					"flag": "pisces.teaches_rags"
+				},
+				{
+					"text": "Play a game of chess in the inn.",
+					"did": {
+						"action": [
+							"play_chess"
+						]
+					}
+				},
+				{
+					"text": "Tell Pisces what you learned.",
+					"did": {
+						"action": [
+							"talk_with_guest"
+						],
+						"context": {
+							"npc": "pisces"
+						}
+					}
+				}
+			],
+			"rewards": {
+				"relationship": 3,
+				"flags": [
+					"quest.pisces_mana_lesson"
+				]
+			},
+			"done": "Hm. You feel mana better than I thought. Come, I will show you a spell that needs it.",
+			"confidence": "guess",
+			"canon_ref": {
+				"book": 1,
+				"chapter": "1.34 - 1.45",
+				"confidence": "likely",
+				"note": "Pisces trades lessons for Erin's tab (days 23 - 24) and tests Erin and Rags with his own mana (34 - 35)."
+			},
+			"note": "A made-up task. Its reward flag unlocks [Flash Step] from Pisces (spells.json learn.flags)."
+		}
+	}
 }

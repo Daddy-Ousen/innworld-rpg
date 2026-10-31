@@ -64,7 +64,7 @@
 			"canon_ref": {"book": 5, "chapter": "4.30", "confidence": "likely", "note": "Typhenous holds a foe for a moment with ties of light (4.30). One lost turn, and that he teaches it, are design guesses."}
 		},
 		"flash_step": {"name": "[Flash Step]", "shape": "tile", "effect": "blink", "ap_q": 4, "mp": 2, "range": 3, "hit": "auto", "cooldown": 2,
-			"learn": {"teacher": "pisces", "after_event": "b1.pisces_saves_erin_from_flies", "band": "friend", "minutes": 150, "book": "spellbook_flash_step"},
+			"learn": {"teacher": "pisces", "after_event": "b1.pisces_saves_erin_from_flies", "band": "friend", "flags": ["quest.pisces_mana_lesson"], "minutes": 150, "book": "spellbook_flash_step"},
 			"canon_ref": {"book": 1, "chapter": "1.09", "confidence": "likely", "note": "Pisces leaps quickly out of danger with it (1.09; 3.07H, 3.08H). Three tiles, and that he teaches it, are design guesses."}
 		},
 		"invisibility": {"name": "[Invisibility]", "shape": "self", "effect": "hide", "ap_q": 8, "mp": 5, "rounds": 2, "hit": "auto", "cooldown": 4,
