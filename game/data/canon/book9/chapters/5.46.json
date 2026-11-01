@@ -1,0 +1,712 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.46",
+	"order": 79,
+	"events": {
+		"b9.erin_teaches_baseball_in_the_meadow": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"adventurer": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"crab": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"half_giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.taught_baseball",
+					"horns_of_hammerad.played_baseball",
+					"halfseekers.played_baseball"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Afternoon. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Yvlon and Ksmvr bring bats and gloves, and Erin explains baseball badly, again and again. Pillows are bases. The Horns play the Halfseekers to five points; the game ends in tackles, spells and broken rules."
+		},
+		"b9.erin_and_ceria_talk_about_calruz": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ceria.expects_calruz_to_be_executed",
+					"erin.grieves_for_the_raskghar_dead"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Ceria's view only: no verdict on Calruz in Book 9 (plan conflict 2); calruz.awaits_trial stays set. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Away from the game Erin cries: she hated the killing of the Raskghar and helped destroy their home. Ceria says Drake law will put Calruz to death, that she could not kill him herself, and that she was alone down there."
+		},
+		"b9.erin_brings_the_cave_goblins_to_the_meadow": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cave_goblin": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"cave_goblins.feared_erin_forgot_them",
+					"erin.brought_potions_to_the_goblin_cave",
+					"cave_goblins.play_in_the_meadow"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Afternoon. The cave is the Book 8 refuge reached by the door. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin goes through the door to the Redfang cave, where hundreds of Cave Goblins and wounded Hobs feared she had used them and moved on. She hands out healing potions and brings thirty Cave Goblins and the Hobs to the meadow."
+		},
+		"b9.wesle_calms_the_celum_watch": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"actor": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": []
+				},
+				"actor_two": {
+					"prefer": [
+						"jasi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"actor_three": {
+					"prefer": [
+						"emme"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"actor_four": {
+					"prefer": [
+						"grev"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"wesle"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"celum_watch.panicked_at_the_goblins",
+					"players_of_celum.want_a_raskghar_play"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Celum Watch sees Goblins by the road and panics. Wesle stops them, and the Players of Celum come out to the meadow. They have sat idle for a week while rival inns spoke ill of Erin, and now want a play about the battle."
+		},
+		"b9.the_goblins_beat_the_players_at_baseball": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"pitcher": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"actor": {
+					"prefer": [
+						"wesle"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.won_the_first_baseball_game",
+					"headscratcher.hit_a_home_run",
+					"wesle.used_method_acting"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Players face the Cave Goblins. Wesle's [Method Acting] makes him play like a real batter, but Badarrow's thrown splitters beat him and the Goblins win seven to nothing. Headscratcher hits the ball far out of the meadow."
+		},
+		"b9.liscor_comes_through_the_door_to_play": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"guard": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"revalantor": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"gossip": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.picnic_in_the_celum_meadow",
+					"celum_watch.watched_liscor_play_from_the_walls"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Zevara, Embria and Ilvriss do not come. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Word spreads, and dozens of Liscor folk come through the door: Gnolls, Drakes, Antinium and the Gold-rank teams. The Celum Watch stares from the walls. Relc hits a home run, Ishkr dives to catch it, and Drassi and Olesm call the game."
+		},
+		"b9.the_meadow_baseball_championship": {
+			"tier": 1,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"half_giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"flier": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"crab": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.promised_cake_and_ice_cream",
+					"celum_meadow.baseball_championship_played"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "Evening. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin offers cake and ice cream to the winners of a final game between two mixed teams of nine. It ends nineteen to eighteen when Bevussa catches Moore's huge last hit. As the sky turns orange, Erin and Ceria share a worn ball and go in to dinner.",
+			"news": "Liscor and Celum folk, Goblins and adventurers play an Earth ball game called baseball in a meadow north of Celum.",
+			"foreshadow": {
+				"days_before": 0,
+				"text": "Erin has bought balls in Liscor and ordered bats from a Celum carpenter. A game is planned in the meadow north of Celum."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "celum_north_gate",
+				"hours": [
+					14,
+					19
+				],
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							12,
+							8
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							11,
+							10
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							13,
+							10
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							14,
+							11
+						]
+					},
+					{
+						"npc": "yvlon_byres",
+						"pos": [
+							10,
+							7
+						]
+					},
+					{
+						"npc": "ksmvr",
+						"pos": [
+							9,
+							9
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							20,
+							7
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							21,
+							9
+						]
+					},
+					{
+						"npc": "seborn",
+						"pos": [
+							19,
+							11
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							23,
+							6
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							24,
+							10
+						]
+					},
+					{
+						"npc": "wesle",
+						"pos": [
+							20,
+							12
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							11,
+							12
+						]
+					},
+					{
+						"npc": "octavia",
+						"pos": [
+							18,
+							13
+						]
+					}
+				],
+				"line": "Sun on the grass north of Celum. Pillows mark the bases, bats lean on a magic door frame, and Goblins, Drakes and Humans argue about the rules.",
+				"when_flags": [
+					"raskghar.broken"
+				],
+				"beats": [
+					{
+						"after_seconds": 0,
+						"npc": "erin_solstice",
+						"line": "Okay! You hit the ball, then you run. No, not at the pitcher!"
+					},
+					{
+						"after_seconds": 60,
+						"line": "Badarrow's pitch curves away, and Wesle swings at empty air."
+					},
+					{
+						"after_seconds": 130,
+						"line": "Headscratcher roars and sends the ball far past the trees."
+					},
+					{
+						"after_seconds": 200,
+						"npc": "relc",
+						"line": "Ha! Did you see that? Nobody catches a Relc hit!"
+					},
+					{
+						"after_seconds": 270,
+						"npc": "erin_solstice",
+						"line": "Foul! No spells on the ball! Who taught you that?"
+					},
+					{
+						"after_seconds": 340,
+						"line": "Moore's last swing goes high, and a Garuda catches it. Nineteen to eighteen."
+					}
+				],
+				"note": "M36.2: a scene (user pick, 2026-11-01). The canon meadow (celum_meadow) is ten minutes up the road; celum_north_gate is the nearest map. Hours are a guess: afternoon to the orange sky."
+			},
+			"hooks": [
+				{
+					"id": "player_played_baseball_in_the_meadow",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"celum"
+								],
+								"npc": [
+									"erin_solstice",
+									"mrsha",
+									"ceria_springwalker",
+									"headscratcher",
+									"wesle",
+									"moore",
+									"relc"
+								]
+							}
+						},
+						{
+							"action": [
+								"sprint_training"
+							],
+							"context": {
+								"location": [
+									"celum"
+								]
+							}
+						}
+					],
+					"days": [
+						164,
+						164
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"celum_meadow.earther_played_baseball"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "mrsha",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human who knew the rules of baseball played in the meadow north of Celum, and Erin was very glad of it."
+				}
+			]
+		}
+	},
+	"system": [
+		{
+			"who": "wesle",
+			"kind": "skill",
+			"name": "[Method Acting]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "He plays a role about as well as a person of level 10 in it."
+		}
+	]
+}

@@ -1,0 +1,843 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.45",
+	"order": 78,
+	"events": {
+		"b9.the_army_comes_home_through_the_doors": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"watch_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prisoner": {
+					"prefer": [
+						"calruz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.army_home_from_the_raskghar_camp",
+					"raskghar.camp_exits_broken_behind_the_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the dark before day 164 the army comes back through the magic doors with the freed Gnolls, Ceria and Calruz in chains, and breaks the dungeon exits behind it. Calruz sits burnt in his cell. Zevara falls asleep over her report and Ilvriss drinks to the dead."
+		},
+		"b9.the_goblins_clear_the_other_raskghar_camps": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"leader": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [
+					"raskghar.broken"
+				],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"raskghar.other_camps_cleared_by_goblins",
+					"raskghar.scattered_in_the_dungeon"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "The text names the Hobs only by look; a Hob in a crimson cloak leads (Rabbiteater, guess). Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "While Liscor sleeps, Cave Goblins and Redfang Hobs fall on the other Raskghar camps in the dungeon and kill the Raskghar they find. The rest flee, broken."
+		},
+		"b9.drassi_spreads_the_news_before_dawn": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"gossip": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": []
+				},
+				"neighbour": {
+					"prefer": [
+						"rykhai"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"drassi"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drassi.spreads_the_victory_news",
+					"liscor.knows_the_raskghar_are_beaten"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Pre-dawn, curfew still on. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Before dawn, in the rain, Drassi knocks on her neighbours' doors and tells the story of the night over tea and honey. By sunrise half of Liscor knows the Raskghar are beaten."
+		},
+		"b9.mrsha_wakes_from_a_nightmare": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				},
+				"guardian": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.has_nightmares_of_the_raskghar",
+					"mrsha.has_a_secret_skill",
+					"mrsha.sleeps_with_a_wand_under_her_pillow",
+					"lyonette.has_crimson_stinger",
+					"apista.has_a_crimson_stinger"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Dawn. Mrsha's Skill is not named (flag only). Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Mrsha wakes from a nightmare of Nokha and Vakk, and Lyonette holds her. Lyonette has levelled: Apista's stinger now glows red and hot. Mrsha has a new Skill too, but she tells no one, and keeps Pisces's wand under her pillow."
+		},
+		"b9.erin_cooks_the_morning_after_breakfast": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guardian": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.quiet_after_the_raskghar_camp",
+					"mrsha.lost_her_old_ball"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin cooks a huge breakfast. Mrsha eats a goose egg and cries. Her old ball was lost in the camp, and she stays quiet and sad all morning."
+		},
+		"b9.ceria_meets_mrsha_and_skips_the_parade": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ceria_springwalker"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.skip_the_victory_parade",
+					"ceria.told_the_horns_of_the_dungeon"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Horns come down to eat. Ceria greets Mrsha awkwardly while Pisces teases and Ksmvr jokes. Ceria will not march in any parade because of Calruz, and tells her team what she saw in the dungeon."
+		},
+		"b9.liscor_gnolls_bow_to_mrsha": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "liscor_market",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"guardian": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_gnolls.honour_mrsha_as_the_doombringer",
+					"erin.bought_baseballs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "The shop is not named; the market is a guess for its place. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin, Lyonette and Mrsha walk into Liscor in the rain. Gnolls bow to Mrsha and call her Doombringer with respect: she broke the Raskghar's doom. At a Gnoll ball shop Erin buys eight cork balls wrapped in hide."
+		},
+		"b9.yvlon_explains_the_raskghar_loot": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"adventurer": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shopkeeper": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"raskghar_loot.pooled_for_bids_and_a_lottery",
+					"erin.ordered_baseball_bats"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "The pool takes a week or more to split (Jelaqua). Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In Celum Yvlon tells Erin how the loot will be shared: Ilvriss pays a doubled bounty for every prisoner freed, and about twenty artifacts go into a pool for bids and a lottery. Erin pays a carpenter for six baseball bats."
+		},
+		"b9.lyonette_scolds_erin_over_mrsha": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"guardian": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.scolded_erin_over_mrsha"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Back at the inn Mrsha is still sad; she cried in the shop for her old ball. Lyonette is angry with Erin and lets her aura show. Erin pushes back, and the Halfseekers talk over their share of the armour."
+		},
+		"b9.the_celum_door_is_carried_to_the_meadow": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"adventurer": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"crab": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shopkeeper": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"albez_door.celum_side_in_the_meadow",
+					"wandering_inn.sunlight_through_the_door"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "Map: the door link still opens in the Stitchworks (no map change in M36.2); the meadow is a short walk north of celum_north_gate. Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin and four adventurers carry the Celum door out of Octavia's shop, with Octavia hanging on, past a hostile gate guard and out of the north gate. They set it up in a meadow ten minutes up the road. Opened from the rainy inn, the door now shows sunshine."
+		},
+		"b9.ilvriss_leads_the_victory_parade_in_the_rain": {
+			"tier": 1,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "liscor_plaza",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"watch_captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guard": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss",
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.raskghar_victory_parade_held",
+					"ilvriss.named_every_race_among_the_heroes"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "The text names no street, only a podium at its end: the plaza is a guess. Late morning. Embria and Relc in the march are guesses (her soldiers and the Watch march). Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the rain the Watch, Embria's soldiers, Antinium and tired adventurers march to a podium while crowds throw fish scales. Zevara tells what happened, and Ilvriss calls it a triumph of every race; only Zevara hears him add the Goblins under his breath. Scrying orbs carry the speech far.",
+			"news": "Lord Ilvriss leads a victory parade in Liscor's rain and praises the heroes of every race who broke the Raskghar.",
+			"foreshadow": {
+				"days_before": 0,
+				"text": "Liscor is putting up a podium. The city will cheer the victory over the Raskghar this morning."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "liscor_plaza",
+				"hours": [
+					10,
+					13
+				],
+				"npcs": [
+					{
+						"npc": "ilvriss",
+						"pos": [
+							15,
+							5
+						]
+					},
+					{
+						"npc": "zevara",
+						"pos": [
+							13,
+							5
+						]
+					},
+					{
+						"npc": "embria_grasstongue",
+						"pos": [
+							18,
+							5
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							11,
+							7
+						]
+					}
+				],
+				"line": "Rain falls on a crowded plaza. Soldiers, Watch and adventurers march to a podium, and fish scales fly in place of flowers.",
+				"when_flags": [
+					"raskghar.broken"
+				],
+				"beats": [
+					{
+						"after_seconds": 0,
+						"line": "The crowd cheers. Fish scales fall on the marchers, for there are no flowers in the rain."
+					},
+					{
+						"after_seconds": 60,
+						"npc": "zevara",
+						"line": "Last night the Raskghar camp fell. The captives are home."
+					},
+					{
+						"after_seconds": 130,
+						"npc": "ilvriss",
+						"line": "A triumph! The dungeon will never break Liscor's walls."
+					},
+					{
+						"after_seconds": 200,
+						"npc": "ilvriss",
+						"line": "Heroes of every race stood together. Drake, Gnoll, Human, Dwarf... and Goblin."
+					},
+					{
+						"after_seconds": 270,
+						"line": "Some Gnolls in the crowd bow their heads for the dead."
+					}
+				],
+				"note": "M36.2: a scene (user pick, 2026-11-01). Hours are a guess: late morning, at the same time as the meadow in Celum."
+			},
+			"hooks": [
+				{
+					"id": "player_cheered_at_the_victory_parade",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"persuade",
+								"comfort_someone"
+							],
+							"context": {
+								"location": [
+									"liscor_plaza"
+								],
+								"npc": [
+									"ilvriss",
+									"zevara",
+									"embria_grasstongue",
+									"relc"
+								]
+							}
+						}
+					],
+					"days": [
+						164,
+						164
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_cheered_at_the_victory_parade"
+						],
+						"relationship": [
+							{
+								"from": "zevara",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "relc",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human stood in the rain with the Drakes and Gnolls of Liscor at the victory parade."
+				}
+			]
+		},
+		"b9.mrsha_steps_into_the_sun": {
+			"tier": 2,
+			"window": {
+				"earliest": 164,
+				"latest": 164,
+				"confidence": "guess"
+			},
+			"location": "celum_meadow",
+			"roles": {
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"worker": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mrsha.smiles_again",
+					"erin.invites_everyone_to_baseball",
+					"bird.senses_birds"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "About noon. Bird's Skill is not named (flag only). Day 164 = the morning after the three-door battle (day 163); day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Mrsha steps through the door onto the sunny grass and smiles for the first time that day. Erin calls everyone out to play baseball. Bird comes too: he says he sensed birds."
+		}
+	},
+	"system": [
+		{
+			"who": "lyonette",
+			"kind": "skill",
+			"name": "[Crimson Stinger]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Apista's stinger grows larger, red and hot. No level number; the class is not named."
+		}
+	]
+}
