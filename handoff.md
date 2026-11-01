@@ -1,5 +1,31 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M36.1 Book 9 world and records (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #260)
+- Two Sonnet reading agents (summaries only, in the session scratchpad, not in git). User picks: `draug` with its own
+  sprite; two thief enemies; 17 NPC records; keep `greybeard` as Greydath's one id.
+- Data: `game/data/canon/book9/{npcs,locations}.json` (17 + 3), `book9/chapters/.gitkeep`; enemies `draug`,
+  `brothers_thug`, `chell_sister` in `enemies.json` + `audio.json`; look `draug` in `appearance.json` and
+  `game/assets/characters/draug.png` (+ `.import`). Notes on `goblin_lord`, `garen`, `osthia_blackwing`, `calruz`,
+  `greybeard`. Test `game/tests/sim_book9_world.gd` (new); enemy count 58 → 61 in `unit_monster_art` and `unit_combat_db`.
+- Tests: 8 scripts, 79 tests, all pass (list in `progress.md` "M36"). Validator 0 errors. Full suite not run.
+- Next: the user merges the PR. Then M36.2 canon 5.45, 5.46, 5.47 G (Sonnet · high). Ask the stage and hook choices
+  first (the plan has none for M36.2). Twofeather's kill (5.47 G, by `gilam`) goes there.
+- Gotchas:
+  - A book folder with no chapter files needs `chapters/.gitkeep`, or `CanonDb` logs "Couldn't open directory" and
+    every GUT test that loads data fails with "Unexpected Errors".
+  - A new enemy changes two counts: `unit_monster_art` and `unit_combat_db` (both now 61).
+  - Sprite build in the cloud works: sparse clone of the LPC generator at the commit in `CREDITS.md`, then
+    `git sparse-checkout add /spritesheets/<folders>/`. `build_sprites.py` builds every look, so other looks fail
+    for missing art; use `--only <id> --out <scratch> --credits <scratch file>` and copy the png. Then run
+    `godot --headless --path game --import` for the `.import` file.
+  - Lord Erill's id is `erill_fienst`. Ieka is `ieka_imarris`, Gralton is `gralton_radivaek`. Gilam's level is null.
+  - Watch cells: place `liscor_watch_cells` exists, but the `liscor_watch_barracks` map has no cells. M36.4 needs a
+    spot for Erin and the four Hobs (Headscratcher, Badarrow, Rabbiteater, Shorthilt): ask the user.
+  - Jelaqua is beheaded by Garen in 5.58, and Moore and Seborn are left dying. They seem to live (Jelaqua is a Selphid),
+    but this is not checked against the text yet. No kills now; M36.7 checks it with a reading agent.
+  - 17 old `.uid` files in `game/tests/` stay untracked on purpose.
+- Active files: `game/data/canon/book9/`, `game/tests/sim_book9_world.gd`, `docs/plans/m36.md`.
+
 ## Just done (2026-11-01, cloud): M36.P Book 9 plan (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #259)
 - Eight Sonnet reading agents read all of `canon/raw/book9` (summaries only, in the session scratchpad, not in git).
   One more agent checked the 5.62 deaths line by line.
