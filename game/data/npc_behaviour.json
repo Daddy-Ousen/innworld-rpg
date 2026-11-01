@@ -720,7 +720,7 @@
 		},
 		"magnolia_reinhart": {
 			"confidence": "guess",
-			"notes": "M25.4: where she is goes by canon flags. Book 1: her Celum house (1.19R - 1.44R; no map, so off map in Celum). After her Liscor visit (1.63, magnolia.gone_north): on the road north until she watches the inn from Invrisil (2.06). Then the estate (2.37, 2.38, 3.13). From 3.14 (First Landing) she is away in the north until she is back at the estate in 4.38B; the data has no map for First Landing or her camps, so 'away' is off map in north Izril. Hours and spot at the estate are guesses.",
+			"notes": "M25.4: where she is goes by canon flags. Book 1: her Celum house (1.19R - 1.44R; no map, so off map in Celum). After her Liscor visit (1.63, magnolia.gone_north): on the road north until she watches the inn from Invrisil (2.06). Then the estate (2.37, 2.38, 3.13). From 3.14 (First Landing) she is away in the north until she is back at the estate in 4.38B; the data has no map for First Landing or her camps, so 'away' is off map in north Izril. M35.3 (Books 5 - 8): Book 5 (4.06KM Melissar estate, 4.26M First Landing) stays inside the First Landing stay. Book 6: by day she visits the army camp outside Invrisil (4.47: magnolia.recorded_the_speech on the canon path, magnolia.levy_waits_at_invrisil on the no-Zel branch; no camp map, so off map at Invrisil) and sleeps at the estate. Battle day (4.48 - 4.49, invrisil.battle_begun until her bounty on the Necromancer): she watches from behind the lines on invrisil_battlefield. After the battle she holds Invrisil and is on its walls when Reiss marches past (5.02, magnolia.defends_invrisil); the walls are not drawn, so the gate map by day. Books 7 - 8: the text names no place (5.10E, 5.23G are unplaced; 5.11E and 5.21E she is not at Riverfarm), so the estate. Every stay also ends on magnolia.defends_invrisil, in case the battle never starts. Hours and spots are guesses.",
 			"goals": [
 				{"goal": "off_map", "base": 5, "unless_flags": ["magnolia.gone_north"],
 					"target": {"off_map": "celum"}},
@@ -728,6 +728,14 @@
 					"target": {"off_map": "north_izril"}},
 				{"goal": "travel", "base": 5, "when_flags": ["magnolia.gone_to_first_landing"], "unless_flags": ["magnolia.sends_gold_to_esthelm"],
 					"target": {"off_map": "north_izril"}},
+				{"goal": "travel", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.recorded_the_speech"], "unless_flags": ["invrisil.battle_begun", "magnolia.defends_invrisil"],
+					"target": {"off_map": "invrisil"}},
+				{"goal": "travel", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.levy_waits_at_invrisil"], "unless_flags": ["invrisil.battle_begun", "magnolia.defends_invrisil"],
+					"target": {"off_map": "invrisil"}},
+				{"goal": "work", "base": 6, "when_flags": ["invrisil.battle_begun"], "unless_flags": ["magnolia.offered_a_bounty_on_the_necromancer", "magnolia.defends_invrisil"],
+					"target": {"area": "invrisil_battlefield", "pos": [3, 10]}},
+				{"goal": "guard_post", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.offered_a_bounty_on_the_necromancer"], "unless_flags": ["magnolia.defends_invrisil"],
+					"target": {"area": "invrisil_gate", "pos": [14, 3]}},
 				{"goal": "work", "base": 2, "hours": [[10, 20, 1]],
 					"target": {"area": "magnolia_estate_hall", "pos": [10, 5]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}
@@ -735,7 +743,7 @@
 		},
 		"ressa": {
 			"confidence": "guess",
-			"notes": "Magnolia's Head Maid (1.19R, 2.37). M25.4: she goes where Magnolia goes (same flags; see magnolia_reinhart). Hours and spot at the estate are guesses.",
+			"notes": "Magnolia's Head Maid (1.19R, 2.37). M25.4: she goes where Magnolia goes (same flags; see magnolia_reinhart). M35.3: also the Invrisil camp, battlefield and gate stays (she fights on the field in 4.48). Hours and spot at the estate are guesses.",
 			"goals": [
 				{"goal": "off_map", "base": 5, "unless_flags": ["magnolia.gone_north"],
 					"target": {"off_map": "celum"}},
@@ -743,6 +751,14 @@
 					"target": {"off_map": "north_izril"}},
 				{"goal": "travel", "base": 5, "when_flags": ["magnolia.gone_to_first_landing"], "unless_flags": ["magnolia.sends_gold_to_esthelm"],
 					"target": {"off_map": "north_izril"}},
+				{"goal": "travel", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.recorded_the_speech"], "unless_flags": ["invrisil.battle_begun", "magnolia.defends_invrisil"],
+					"target": {"off_map": "invrisil"}},
+				{"goal": "travel", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.levy_waits_at_invrisil"], "unless_flags": ["invrisil.battle_begun", "magnolia.defends_invrisil"],
+					"target": {"off_map": "invrisil"}},
+				{"goal": "work", "base": 6, "when_flags": ["invrisil.battle_begun"], "unless_flags": ["magnolia.offered_a_bounty_on_the_necromancer", "magnolia.defends_invrisil"],
+					"target": {"area": "invrisil_battlefield", "pos": [4, 11]}},
+				{"goal": "guard_post", "base": 4, "hours": [[8, 20, 1]], "when_flags": ["magnolia.offered_a_bounty_on_the_necromancer"], "unless_flags": ["magnolia.defends_invrisil"],
+					"target": {"area": "invrisil_gate", "pos": [13, 3]}},
 				{"goal": "work", "base": 2, "hours": [[6, 22, 1]],
 					"target": {"area": "magnolia_estate_hall", "pos": [12, 3]}},
 				{"goal": "off_map", "base": 1, "target": {"off_map": "magnolia_estate"}}

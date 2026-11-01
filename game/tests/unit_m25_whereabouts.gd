@@ -82,3 +82,62 @@ func test_the_earthers_show_once_magnolia_hides_them() -> void:
 	assert_eq(_area(gs, "imani", 67, 12), "magnolia_estate_hall")
 	assert_eq(_area(gs, "joseph", 67, 12), "magnolia_estate_grounds")
 	assert_eq(_area(gs, "rose", 67, 23), "@magnolia_estate")
+
+
+## M35.3: Book 6 camp days, the battle of Invrisil and the walls after it.
+func test_magnolia_and_ressa_at_invrisil_in_book_6() -> void:
+	var gs := GameState.new(11)
+	for f: String in ["magnolia.gone_north", "magnolia.watches_the_inn", "magnolia.sends_gold_to_esthelm"]:
+		gs.flags[f] = true
+	gs.flags["magnolia.levy_waits_at_invrisil"] = true
+	for npc: String in ["magnolia_reinhart", "ressa"]:
+		assert_eq(_area(gs, npc, 129, 12), "@invrisil", npc + " camp by day")
+		assert_eq(_area(gs, npc, 129, 23), "@magnolia_estate", npc + " estate at night")
+	gs.flags["invrisil.battle_begun"] = true
+	for npc: String in ["magnolia_reinhart", "ressa"]:
+		assert_eq(_area(gs, npc, 130, 12), "invrisil_battlefield", npc + " battle")
+		assert_eq(_area(gs, npc, 130, 23), "invrisil_battlefield", npc + " battle at night")
+	gs.flags["magnolia.offered_a_bounty_on_the_necromancer"] = true
+	for npc: String in ["magnolia_reinhart", "ressa"]:
+		assert_eq(_area(gs, npc, 132, 12), "invrisil_gate", npc + " walls by day")
+		assert_eq(_area(gs, npc, 132, 2), "@magnolia_estate", npc + " estate at night")
+	gs.flags["magnolia.defends_invrisil"] = true
+	for npc: String in ["magnolia_reinhart", "ressa"]:
+		assert_eq(_area(gs, npc, 140, 12), "magnolia_estate_hall", npc + " Book 7 estate")
+
+
+## M35.3: if the battle never starts, the camp stay still ends at 5.02.
+func test_the_camp_stay_ends_when_reiss_marches_past() -> void:
+	var gs := GameState.new(11)
+	for f: String in ["magnolia.gone_north", "magnolia.watches_the_inn", "magnolia.sends_gold_to_esthelm"]:
+		gs.flags[f] = true
+	gs.flags["magnolia.levy_waits_at_invrisil"] = true
+	gs.flags["magnolia.defends_invrisil"] = true
+	assert_eq(_area(gs, "magnolia_reinhart", 135, 12), "magnolia_estate_hall")
+
+
+## M35.3: the real canon sets the flags in order. The events need Magnolia
+## alive, so this starts a full new game and sleeps (no player choices).
+func test_the_canon_runs_magnolia_through_invrisil() -> void:
+	var gs := GameState.new_game(1, _db)
+	ToyCanon.sleep_through(gs, _db, 129)
+	assert_true(gs.flags.has("magnolia.recorded_the_speech"))
+	assert_false(gs.flags.has("invrisil.battle_begun"))
+	assert_eq(_area(gs, "magnolia_reinhart", 129, 12), "@invrisil")
+	ToyCanon.sleep_through(gs, _db, 133)
+	assert_true(gs.flags.has("magnolia.offered_a_bounty_on_the_necromancer"))
+	assert_false(gs.flags.has("magnolia.defends_invrisil"))
+	assert_eq(_area(gs, "magnolia_reinhart", 133, 12), "invrisil_gate")
+	ToyCanon.sleep_through(gs, _db, 135)
+	assert_true(gs.flags.has("magnolia.defends_invrisil"))
+	assert_eq(_area(gs, "magnolia_reinhart", 135, 12), "magnolia_estate_hall")
+
+
+## M35.3: every map post of Magnolia and Ressa is on a walkable tile.
+func test_magnolia_and_ressa_posts_are_walkable() -> void:
+	for npc: String in ["magnolia_reinhart", "ressa"]:
+		for g: Dictionary in _db.behaviour.npcs[npc]["goals"]:
+			var t: Dictionary = g["target"]
+			if t.has("area"):
+				var at := Vector2i(int(t["pos"][0]), int(t["pos"][1]))
+				assert_true(_db.maps.is_walkable(t["area"], at), "%s post %s %s" % [npc, t["area"], at])
