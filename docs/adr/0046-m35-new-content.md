@@ -45,3 +45,19 @@ Status: accepted (2026-11-01). Plan: `docs/plans/m35.md`. One note per step; M35
   is not stated and the text never puts him in the hall. User pick: add nothing. Noted as a possible later add.
 - Not Invrisil: Miss Bellia is the [Receptionist] of the CELUM hall (5.04).
 - No NPC, behaviour, voice or map change. No tests run (nothing changed in code or data).
+
+## M35.3 note (2026-11-01)
+- Reading (Sonnet agents, Books 5 – 8, summaries only). Places the text gives: Melissar estate (4.06KM) and First Landing
+  (4.26M), both inside the old "away in the north" stay; her estate (4.38B – 4.45); the army camp outside Invrisil by day,
+  nights at the estate (4.47); the open field behind the lines (4.48 – 4.49); Invrisil's walls (5.02). Books 7 – 8 name no
+  other place for her: she is not at Riverfarm for the gathering (5.11E) or Sacra's offer (5.21E).
+- Decision (user picks): Magnolia and Ressa get four flag-gated goals in `npc_behaviour.json`:
+  camp days off map at Invrisil (8 – 20 h, `magnolia.recorded_the_speech` or `magnolia.levy_waits_at_invrisil`, until
+  `invrisil.battle_begun`); the battle on `invrisil_battlefield` (until `magnolia.offered_a_bounty_on_the_necromancer`,
+  set on both Zel branches); then `invrisil_gate` by day (the walls are not drawn) until `magnolia.defends_invrisil`.
+  After that, the estate (Books 7 – 8 are unplaced). Spots and hours are guesses.
+- Why two camp flags: `b6.magnolias_levy_waits_at_invrisil` is alt-only (it runs only when Zel's speech fails). On the
+  canon path the speech event sets `magnolia.recorded_the_speech`.
+- Why every stay also ends on `magnolia.defends_invrisil`: that event (5.02) needs nothing, so a run where the battle never
+  starts still sends her home on day 134.
+- No new flag, map or schema. Tests: `unit_m25_whereabouts` (+4).

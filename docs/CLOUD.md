@@ -69,7 +69,7 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
    - M35.0 Ceria's magic line: **Sonnet · high** (built 2026-11-01, ADR 0046; skip it)
    - M35.1 Stat sheets: **Sonnet · medium**
    - M35.2 Runners' Guild staff in Invrisil: **Sonnet · high**
-   - M35.3 Magnolia's whereabouts: **Opus · high**
+   - M35.3 Magnolia's whereabouts: **Opus · high** (built 2026-11-01; skip it)
    > Do M35.0 (Ceria's magic line) from docs/plans/m35.md. Read progress.md and handoff.md first. Follow
    > CLAUDE.md. Read the chapters in canon/raw with subagents (summaries only). Ask me the open choices, then
    > build, run only the tests the plan lists, update the docs, and open a PR.
