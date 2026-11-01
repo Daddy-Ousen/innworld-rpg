@@ -70,7 +70,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Seen in the mountain in 3.28G, named in 3.29G as a faction head. A rare old Goblin with a beard."},
+			"canon_ref": {"book": 4, "chapter": "3.29G", "confidence": "confirmed", "note": "Seen in the mountain in 3.28G, named in 3.29G as a faction head. A rare old Goblin with a beard. He is Greydath of Blades (4.39 G, 5.50 G, 5.53), called a Goblin Lord. Book 9: he wrecks the inn's tower (5.53) and lives (Thereafter). One id, no merge."},
 			"summary": "An old bearded Goblin from Tremborag's mountain who joins Rags' breakout and speaks for a faction of her new tribe."
 		},
 		"termin": {

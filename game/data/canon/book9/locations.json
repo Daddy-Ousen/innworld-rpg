@@ -1,0 +1,61 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"celum_meadow": {
+			"name": "The meadow by Celum",
+			"kind": "wild",
+			"parent": "celum",
+			"tags": [
+				"meadow",
+				"celum",
+				"baseball"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.46",
+				"confidence": "confirmed",
+				"note": "A grass field just outside Celum where Erin's door stands and the inn plays baseball (5.46). North of Celum is not stated. Place only, no map."
+			},
+			"summary": "An open field outside Celum's walls where Erin teaches a crowd to play baseball."
+		},
+		"redfang_road_cave": {
+			"name": "The Redfang cave on the north road",
+			"kind": "wild",
+			"parent": "high_passes",
+			"tags": [
+				"cave",
+				"goblin",
+				"redfang",
+				"road"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "A cave in a mountainside by the road north of Liscor, with archery targets and cut trees. Garen's tribe camps there and fights the Halfseekers (5.57, 5.58). The door's red stone opens into it. Place only, no map."
+			},
+			"summary": "A Redfang hideout in the mountains beside the northern road."
+		},
+		"liscor_watch_cells": {
+			"name": "The Watch cells",
+			"kind": "building",
+			"parent": "liscor_watch_barracks",
+			"tags": [
+				"prison",
+				"cells",
+				"watch",
+				"underground"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "Underground under the Watch house, down a long stair: a few big stone cells with cots and glowing magic bars; Calruz's far cell has rune rings and no bars (5.53, 5.54, 5.57). Erin and four Hobs are held here."
+			},
+			"summary": "The Liscor Watch's prison, deep below the street, where Calruz waits for his trial."
+		}
+	}
+}

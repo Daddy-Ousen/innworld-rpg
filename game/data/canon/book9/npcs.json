@@ -1,0 +1,445 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"eltistiman_verdue": {
+			"name": "Eltistiman Verdue",
+			"race": "Human",
+			"tags": [
+				"human",
+				"magician",
+				"performer"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Magician]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "likely",
+				"note": "A [Magician] sent by an unnamed [Lady] who loves gardens (5.52). He guards the door, stops Typhenous and is knocked out by the thieves (5.54); gone after that night (5.57). Race not stated (guess)."
+			},
+			"summary": "A showy stage [Magician] who scares Erin with a Dragon illusion, then plays for the inn's guests. Someone powerful hired him to watch over the magic door."
+		},
+		"spiderslicer": {
+			"name": "Spiderslicer",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"red_fang_tribe",
+				"warrior",
+				"veteran"
+			],
+			"faction": "red_fang_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "Garen's veteran second in the Redfang tribe; he resents Redscar (5.56 G - 5.59). Dies in the battle shielding Garen from Az'kerash's bone spray (5.62). Hob or not is not stated."
+			},
+			"summary": "A hard old Redfang warrior who rides at Garen's side. He scorns Redscar for leaving the tribe and stays loyal to Garen to the end."
+		},
+		"twofeather": {
+			"name": "Twofeather",
+			"race": "Goblin",
+			"tags": [
+				"goblin",
+				"hob",
+				"flooded_waters",
+				"warrior"
+			],
+			"faction": "floodplains_goblin_tribe",
+			"home": null,
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "A female Hob warrior of Rags's tribe; Pyrite names her (5.47 G). Lord Gilam's enchanted sword and his riders' arrows cut her down in the forest ambush (5.47 G)."
+			},
+			"summary": "A Hob warrior of the Flooded Waters tribe who fights the pursuing Human cavalry in the north."
+		},
+		"sir_vumat": {
+			"name": "Sir Vumat",
+			"race": "Human",
+			"tags": [
+				"human",
+				"knight",
+				"north_izril"
+			],
+			"faction": null,
+			"home": null,
+			"classes": [
+				{
+					"name": "[Knight]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "likely",
+				"note": "A [Knight] in the Human army at Liscor (5.62); which house he serves is not stated (guess: Tyrion's coalition). He challenges the hurt Redscar and dies to Redscar and his wolf Thunderfur."
+			},
+			"summary": "A Human [Knight] who seeks single combat with a wounded Redfang in the battle on the Floodplains."
+		},
+		"gilam": {
+			"name": "Gilam",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"north_izril",
+				"young"
+			],
+			"faction": "house_pellmia",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Lord Pellmia's young, reckless son (5.47 G). He kills Twofeather; Rags holds him at crossbow point and lets him go. Pellmia takes him home (5.48 G). Level not clear in the text (null)."
+			},
+			"summary": "A young Human [Lord] who rides with his father's cavalry after the Goblins and learns that the Goblins can spare a life."
+		},
+		"lord_pellmia": {
+			"name": "Lord Pellmia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"north_izril",
+				"cavalry"
+			],
+			"faction": "house_pellmia",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "A high-level [Lord] with the Skill [Far Riders] who hunts Rags's tribe (5.47 G). He quits the hunt after Rags spares his son (5.48 G), yet leads a wing for Tyrion at Liscor (5.52, 5.61, 5.62)."
+			},
+			"summary": "An old, able cavalry [Lord] in Tyrion's coalition. He hunts the Flooded Waters tribe and comes to respect Rags."
+		},
+		"kilmet": {
+			"name": "Kilmet",
+			"race": "Human",
+			"tags": [
+				"human",
+				"retainer",
+				"north_izril"
+			],
+			"faction": "house_pellmia",
+			"home": "north_izril",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "likely",
+				"note": "An old retainer and friend of Lord Pellmia, who calls him Pell; he scolds Gilam (5.47 G, 5.48 G). Race not stated (guess)."
+			},
+			"summary": "Lord Pellmia's old adviser, blunt and loyal."
+		},
+		"genviere": {
+			"name": "Genviere",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mage",
+				"wistram",
+				"north_izril"
+			],
+			"faction": "house_fienst",
+			"home": null,
+			"classes": [
+				{
+					"name": "[High Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "likely",
+				"note": "A Wistram-trained [High Mage], Lord Erill's own mage, lent to Pellmia's company (5.48 G). She wears an illusion to look fresh. Not named after 5.48 G. Race not stated (guess)."
+			},
+			"summary": "A strong [High Mage] in the noble army who serves Lord Erill and rides with Pellmia's cavalry."
+		},
+		"erill_fienst": {
+			"name": "Lord Erill",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"merchant",
+				"north_izril"
+			],
+			"faction": "house_fienst",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Merchant Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Lord Erill of House Fienst, a rich [Merchant Lord] new to the nobility (5.48 G, 5.52). His people hire thieves for the door (5.54, 5.60). Magnolia threatens him; he pays the Circle of Thorns (Thereafter). Not Princess erille."
+			},
+			"summary": "A wealthy former [Merchant] in Tyrion's coalition. He schemes for profit and fears Magnolia Reinhart."
+		},
+		"jericha": {
+			"name": "Jericha",
+			"race": "Human",
+			"tags": [
+				"human",
+				"mage",
+				"aide",
+				"north_izril"
+			],
+			"faction": "house_veltras",
+			"home": null,
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "Tyrion Veltras's own [Mage] and aide, trained at the academy in First Landing, not Wistram. She sends his messages, casts [Siege Fireball] and shields him in the battle (5.62). Alive."
+			},
+			"summary": "Tyrion's calm, able mage, who speaks for him by spell and guards him in battle."
+		},
+		"ieka_imarris": {
+			"name": "Lady Ieka",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lady",
+				"mage",
+				"north_izril",
+				"circle_of_thorns"
+			],
+			"faction": "house_imarris",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lady]",
+					"level": null
+				},
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Lady Ieka of House Imarris, one of the strongest ladies in the camp (5.52). With Erill she sends criminals for the door (5.60). She speaks for the Circle of Thorns, Magnolia's foes, and takes Erill's gold (Thereafter)."
+			},
+			"summary": "A powerful noble [Mage] in Tyrion's coalition who works against Magnolia Reinhart in secret."
+		},
+		"gralton_radivaek": {
+			"name": "Lord Gralton",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"north_izril",
+				"dogs"
+			],
+			"faction": "house_radivaek",
+			"home": "north_izril",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "Lord Gralton of House Radivaek, a hot-tempered lord with war mastiffs (5.48 G, 5.52). He joins Laken's secret meeting (5.52) and his alliance with Yitton Byres (5.60), then goes north with Laken (Thereafter)."
+			},
+			"summary": "A blunt, proud [Lord] who hates tricks. He fights for Tyrion at Liscor but sides with Laken Godart."
+		},
+		"laskaillia": {
+			"name": "Laskaillia",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"mage",
+				"retainer",
+				"gemscale"
+			],
+			"faction": null,
+			"home": "salazsar",
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "An older Drake [Mage] with grey-blue scales, Wall Lord Ilvriss's retainer (5.49). She sends Olesm's report by [Message] and teases Embria."
+			},
+			"summary": "Ilvriss's dry-witted personal mage."
+		},
+		"raekea_silversmith": {
+			"name": "Raekea Silversmith",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"armorer",
+				"liscor_gnolls",
+				"council"
+			],
+			"faction": "liscor_gnolls",
+			"home": "liscor",
+			"classes": [
+				{
+					"name": "[Armorer]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "A Gnoll [Armorer], wife of Liscor's best Drake [Blacksmith], and one of the Gnoll speakers in Krshia's council (Interlude - Krshia). She backs Krshia's call to stay and defend the city."
+			},
+			"summary": "A Gnoll [Armorer] of Liscor who speaks for her people when the Gnolls choose to stay."
+		},
+		"fashia_splitfur": {
+			"name": "Fashia Splitfur",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"shopkeeper",
+				"liscor_gnolls",
+				"council"
+			],
+			"faction": "liscor_gnolls",
+			"home": "liscor",
+			"classes": [
+				{
+					"name": "[Shopkeeper]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "A blonde-furred Gnoll [Shopkeeper], one of the Gnoll speakers (Interlude - Krshia). She argues to flee with the tribes' spellbook, then agrees to stay."
+			},
+			"summary": "A careful Gnoll [Shopkeeper] of Liscor."
+		},
+		"zassil": {
+			"name": "Zassil",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"adventurer",
+				"pallass",
+				"flier"
+			],
+			"faction": "wings_of_pallass",
+			"home": "pallass",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "A Drake flier of the Wings of Pallass. A Redfang leaps from a Carn Wolf and drags him from the air; Bevussa throws the attacker off (5.58)."
+			},
+			"summary": "A young flier of Bevussa's team."
+		},
+		"rykhai": {
+			"name": "Rykhai",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"townsfolk",
+				"mother"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.45",
+				"confidence": "confirmed",
+				"note": "A Gnoll mother of three in Liscor, wife of the night watchman Tessil and a friend of Drassi, who wakes her with news that the Raskghar are beaten (5.45)."
+			},
+			"summary": "A Liscor Gnoll and Drassi's friend, who hears the city's news first."
+		}
+	}
+}

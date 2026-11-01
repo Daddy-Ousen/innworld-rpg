@@ -216,8 +216,16 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   steps M36.1 – M36.10. Docs only. No tests run (no code or data changed).
   - [x] User answers (2026-11-01): stages = east gate battle (5.62) + door thieves (5.54); hooks = jail visit, Gnoll
     gathering, cooking contest; day rule = march Day + 163; Erin in jail on the map. In the plan "Answers" and ADR 0047.
-  - [ ] The user merges the PR. Next: M36.1 world and records (Sonnet · high).
-- [ ] M36.1 world and records.
+  - [x] The user merged the PR (#260).
+- [x] M36.1 world and records (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after
+  PR #260). Two Sonnet reading agents (summaries only). User picks: `draug` with its own sprite; `brothers_thug` and
+  `chell_sister` (mugger look); 17 NPC records (no Geim / Helica / Meilmen); keep `greybeard` (no `greydath`).
+  Data: `canon/book9/` (17 NPCs, 3 places, `chapters/.gitkeep`), 3 enemies + sounds, `draug` look + sheet, notes on
+  5 old records. Tests: `sim_book9_world` (8, new), `unit_canon_db` 7, `unit_data_db` 15, `unit_combat_db` 14,
+  `unit_monster_art` 6, `unit_sound_cues` 9, plus `sim_book8_world` 7 and `sim_canon_book6` 13 (they guard
+  `greybeard` and `calruz`): all pass. Validator books 1, 2, 4, 5, 6, 9: 0 errors (book 9: 1 warning, no chapters
+  yet). Full suite not run.
+  - [ ] The user merges the PR. Next: M36.2 canon 5.45, 5.46, 5.47 G (Sonnet · high).
 - [ ] M36.2 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
