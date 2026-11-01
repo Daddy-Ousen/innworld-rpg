@@ -75,6 +75,7 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
    > build, run only the tests the plan lists, update the docs, and open a PR.
    > (For the others, say M35.1 stat sheets, M35.2 Runners' Guild staff in Invrisil, or M35.3 Magnolia's whereabouts.)
 2. **M36.P Book 9 plan** (plan `docs/plans/m36.md`, text in `canon/raw/book9`). Needs no earlier M35 PR.
+   (Written 2026-11-01, ADR 0047. Skip it once its PR is merged. Next is M36.1: M36.0 is skipped.)
    **Model · effort: Opus · high** (a plan with a day map, conflicts and schema questions).
    > Do M36.P: plan Book 9 (Tears of Liscor) like M28.P did for Book 8 (docs/plans/m28.md, ADR 0043). Follow
    > docs/plans/m36.md. Read progress.md and handoff.md first. Read all of canon/raw/book9 with subagents

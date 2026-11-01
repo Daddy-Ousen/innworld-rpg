@@ -1,5 +1,25 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M36.P Book 9 plan (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #259)
+- Eight Sonnet reading agents read all of `canon/raw/book9` (summaries only, in the session scratchpad, not in git).
+  One more agent checked the 5.62 deaths line by line.
+- Wrote `docs/plans/m36.md` (day map, deaths, 14 conflicts, steps M36.1 – M36.10, 4 open choices) and
+  `docs/adr/0047-m36-book9.md`. ROADMAP, `docs/CLOUD.md` queue note and `progress.md` "M36" updated. Docs only, no tests run.
+- User answers (in the plan "Answers" and ADR 0047): stages = east gate battle (5.62) + door thieves (5.54); hooks = jail
+  visit, Gnoll gathering, cooking contest; day rule = march Day + 163; Erin and the Hobs in the Watch cells on the map.
+- PR: https://github.com/Daddy-Ousen/innworld-rpg/pull/260 (draft). Next: the user merges it. Then M36.1 world and
+  records (Sonnet · high).
+- Gotchas:
+  - Book 9's "Day N" is Tyrion's march count, NOT Laken's (+45 rule of ADR 0028 does not apply). Proposed: game day = Day + 163.
+  - Numbtongue looks dead in 5.62 but lives in Book 10 (6.02 on): no kill. Purple Smile: never confirmed dead: no kill.
+    Osthia Blackwing: [False Death], alive. Calruz: still in his cell, no verdict.
+  - Reiss = the existing record `goblin_lord` (Book 6). Greydath vs Book 4 `greybeard`: not merged; M36.1 checks the text.
+    Lord Erill is not `erille` (Princess Erille).
+  - NPC records live in `data/canon/book*/npcs.json` as a dict under `npcs` (keys are the ids).
+  - 5.51 G (Day 9) comes after its Liscor twin 5.53 (Day 8): order events by day, not by chapter.
+  - 17 old `.uid` files in `game/tests/` stay untracked on purpose (the stop hook nags about them).
+- Active files: `docs/plans/m36.md`, `docs/adr/0047-m36-book9.md`.
+
 ## Just done (2026-11-01, cloud): M35.3 Magnolia's whereabouts (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #258)
 - Two Sonnet reading agents (Books 5 - 6, 7 - 8; summaries only). User picks: camp days off map at Invrisil, battle on
   `invrisil_battlefield` [3, 10], then `invrisil_gate` [14, 3] by day until 5.02; Ressa mirrors her.

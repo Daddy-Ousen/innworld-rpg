@@ -207,7 +207,19 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_data_db` pass; `unit_npc_sim` 13/14: `test_talk_to_an_npc` fails on main too (old, not this change). Validator
   `--all`: 0 errors. Full suite not run.
   - [ ] The user plays Book 6 days 129 - 134 and finds Magnolia (ROADMAP play check).
-  - [ ] Next: M36 (Book 9), `docs/CLOUD.md` "Task queue".
+  - [x] Next: M36 (Book 9), see below.
+
+## M36 Book 9 (Tears of Liscor) (plan `docs/plans/m36.md`, ADR 0047)
+- [x] M36.P plan (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`). Eight Sonnet reading agents read all 22
+  chapters (summaries only), one more checked the 5.62 deaths. Plan: day rule (march Day + 163, guess), day map 164 – 180,
+  13 named kills, no kill for Numbtongue / Purple Smile / Osthia / Calruz, 14 conflicts, no engine step (M36.0 skipped),
+  steps M36.1 – M36.10. Docs only. No tests run (no code or data changed).
+  - [x] User answers (2026-11-01): stages = east gate battle (5.62) + door thieves (5.54); hooks = jail visit, Gnoll
+    gathering, cooking contest; day rule = march Day + 163; Erin in jail on the map. In the plan "Answers" and ADR 0047.
+  - [ ] The user merges the PR. Next: M36.1 world and records (Sonnet · high).
+- [ ] M36.1 world and records.
+- [ ] M36.2 – M36.9 canon batches.
+- [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
