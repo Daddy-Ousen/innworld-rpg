@@ -10,8 +10,10 @@
 - PR: https://github.com/Daddy-Ousen/innworld-rpg/pull/262 (draft). Next: the user merges it. Then M36.3 canon
   5.48 G, 5.49, 5.50 G, Interlude – Bird (Sonnet · high). Ask the stage and hook choices first (the plan has none
   for M36.3). Quietstab's kill (5.50 G, by Tremborag) goes there; the boycott flag clears in the 5.49 batch.
-- Waits on the user: `unit_scene_beats` fails on main too. `b6.the_battle_of_invrisil_opens` has 4 ally shouts and
-  `b8.three_doors_open_on_the_raskghar_camp` has 5 (rule: 1 – 3, ADR 0044 M31). Fix the data or widen the rule.
+- User decision (2026-11-01): `unit_scene_beats` fails on main too (`b6.the_battle_of_invrisil_opens` has 4 ally
+  shouts, `b8.three_doors_open_on_the_raskghar_camp` has 5; rule 1 – 3, ADR 0044 M31). The user picked: a fight
+  stage with `waves` may have up to 5 shouts; other fights stay 1 – 3. Build it in its own PR after #262 is merged
+  (change `test_every_fight_has_one_to_three_shouts`, add an ADR 0044 note). Check first that both fights have waves.
 - Gotchas:
   - Two counts were stale on main since M32.2 – M32.4 (26 fights, 135 hooks). Each new stage or hook moves them.
   - Hooks with no NPC near the player do not fire: put the hook on a scene stage that places the NPCs.

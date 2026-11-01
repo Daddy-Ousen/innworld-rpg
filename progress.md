@@ -236,7 +236,9 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   on main (two M32 fights have 4 and 5 ally shouts; the rule is 1 – 3): waits for the user. Count fixes: scenes 49,
   hooks 137, fights 26 (the last two were stale on main since M32.2 – M32.4). Validator book 9: 0 errors, 0 warnings.
   Full suite not run. PR #262 (draft).
-  - [ ] The user decides the ally-shout rule (`unit_scene_beats`).
+  - [x] The user decided the ally-shout rule (2026-11-01): a fight stage with waves may have up to 5 shouts (other
+    fights stay 1 – 3). Do it in its own PR after #262 is merged: change `unit_scene_beats` and add an ADR 0044 note.
+  - [ ] Build the ally-shout change (test + ADR note, own PR).
   - [ ] The user merges PR #262. Next: M36.3 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (Sonnet · high).
   - [ ] The user plays day 164 (the parade in the plaza at 10 – 13, the baseball game north of Celum at 14 – 19).
 - [ ] M36.3 – M36.9 canon batches.
