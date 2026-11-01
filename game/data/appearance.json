@@ -1468,6 +1468,33 @@
 			"confidence": "guess",
 			"note": "A fast zombie with claws and crimson eyes (1.58H). A greener, bare zombie look to tell it apart (guess)."
 		},
+		"draug": {
+			"body": "male",
+			"skin": "zombie",
+			"parts": [
+				{
+					"part": "heads_goblin"
+				},
+				{
+					"part": "arms_armour",
+					"color": "iron"
+				},
+				{
+					"part": "cape_tattered",
+					"color": "black"
+				},
+				{
+					"part": "legs_pants",
+					"color": "charcoal"
+				},
+				{
+					"part": "weapon_blunt_waraxe",
+					"color": "waraxe"
+				}
+			],
+			"confidence": "guess",
+			"note": "A huge undead Hob raised by Reiss (5.51 G, 5.62): dead grey skin, a Goblin head, old gear and an axe. The gear is a guess; the size is not drawn."
+		},
 		"antinium_worker": {
 			"body": "male",
 			"skin": "all.lpcr.chocolate",

@@ -232,7 +232,10 @@
     "oom": {"hurt": "ghoul_hurt"},
     "venitra": {"hurt": "ghoul_hurt"},
     "kerash": {"hurt": "ghoul_hurt", "gone": "big_roar"},
-    "goblin_lord": {"hurt": "goblin_hurt", "gone": "goblin_gone"}
+    "goblin_lord": {"hurt": "goblin_hurt", "gone": "goblin_gone"},
+    "draug": {"hurt": "undead_hurt", "gone": "undead_gone"},
+    "brothers_thug": {"hurt": "human_hurt"},
+    "chell_sister": {"hurt": "human_hurt"}
   },
   "pages": {
     "open": "chime",
