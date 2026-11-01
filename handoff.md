@@ -1,5 +1,28 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M36.2 Book 9 canon 5.45, 5.46, 5.47 G (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #261)
+- Two Sonnet reading agents (summaries only, not in git). User picks: no fight stage; two talk hooks (the parade and
+  the baseball game), each on a scene stage with beats and a signpost.
+- Data: `game/data/canon/book9/chapters/5.45.json` (12), `5.46.json` (7), `5.47G.json` (12); Twofeather's note in
+  `book9/npcs.json`. Generator script was in the session scratchpad (gone); edit the JSON by hand from now on.
+- Tests: `game/tests/sim_book9_morning_after.gd` (new, 8). Counts: `unit_scene_beats` scenes 49 and fights 26,
+  `unit_foreshadow` fights 26, `sim_player_hooks` 137. List and results in `progress.md` "M36". Full suite not run.
+- PR: https://github.com/Daddy-Ousen/innworld-rpg/pull/262 (draft). Next: the user merges it. Then M36.3 canon
+  5.48 G, 5.49, 5.50 G, Interlude – Bird (Sonnet · high). Ask the stage and hook choices first (the plan has none
+  for M36.3). Quietstab's kill (5.50 G, by Tremborag) goes there; the boycott flag clears in the 5.49 batch.
+- Waits on the user: `unit_scene_beats` fails on main too. `b6.the_battle_of_invrisil_opens` has 4 ally shouts and
+  `b8.three_doors_open_on_the_raskghar_camp` has 5 (rule: 1 – 3, ADR 0044 M31). Fix the data or widen the rule.
+- Gotchas:
+  - Two counts were stale on main since M32.2 – M32.4 (26 fights, 135 hooks). Each new stage or hook moves them.
+  - Hooks with no NPC near the player do not fire: put the hook on a scene stage that places the NPCs.
+  - The Celum door went to the meadow in 5.45 (flag `albez_door.celum_side_in_the_meadow`), but the map link in
+    `inn_interior` still goes to the Stitchworks. If a later batch needs the meadow link, add a link with
+    `when_flags` (data only). The Celum stone is taken by Zevara (Krshia interlude) and the doors die in 5.57.
+  - Gilam's level is null; one agent read Pellmia saying "Level 20" in 5.47 G. Not checked line by line.
+  - Jelaqua (beheaded in 5.58), Moore and Seborn: still to check in M36.7 (see the M36.1 notes below).
+  - `sim_book9_morning_after.gd.uid` is not made yet (no `--import` run); it comes with the next import.
+- Active files: `game/data/canon/book9/chapters/`, `game/tests/sim_book9_morning_after.gd`, `docs/plans/m36.md`.
+
 ## Just done (2026-11-01, cloud): M36.1 Book 9 world and records (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #260)
 - Two Sonnet reading agents (summaries only, in the session scratchpad, not in git). User picks: `draug` with its own
   sprite; two thief enemies; 17 NPC records; keep `greybeard` as Greydath's one id.
