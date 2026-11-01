@@ -46,7 +46,7 @@ func test_the_canon_loads_clean() -> void:
 
 func test_every_scene_has_three_to_six_beats() -> void:
 	var scenes := _stages("scene")
-	assert_eq(scenes.size(), 47, "the 47 scenes of Books 1 – 8")
+	assert_eq(scenes.size(), 49, "the 47 scenes of Books 1 – 8 and 2 of Book 9 (M36.2)")
 	for id: String in scenes:
 		var n := (scenes[id].get("beats", []) as Array).size()
 		assert_between(n, SCENE_BEATS[0], SCENE_BEATS[1], "%s has %d beats" % [id, n])
@@ -54,7 +54,7 @@ func test_every_scene_has_three_to_six_beats() -> void:
 
 func test_every_fight_has_one_to_three_shouts() -> void:
 	var fights := _stages("fight")
-	assert_eq(fights.size(), 25, "the 25 fight stages of Books 1 – 8")
+	assert_eq(fights.size(), 26, "the 26 fight stages of Books 1 – 8 (M32.2 added Zel's last stand)")
 	for id: String in fights:
 		var n := (fights[id].get("beats", []) as Array).size()
 		assert_between(n, FIGHT_BEATS[0], FIGHT_BEATS[1], "%s has %d beats" % [id, n])

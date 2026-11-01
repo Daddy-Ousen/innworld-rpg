@@ -225,8 +225,23 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_monster_art` 6, `unit_sound_cues` 9, plus `sim_book8_world` 7 and `sim_canon_book6` 13 (they guard
   `greybeard` and `calruz`): all pass. Validator books 1, 2, 4, 5, 6, 9: 0 errors (book 9: 1 warning, no chapters
   yet). Full suite not run.
-  - [ ] The user merges the PR. Next: M36.2 canon 5.45, 5.46, 5.47 G (Sonnet · high).
-- [ ] M36.2 – M36.9 canon batches.
+  - [x] The user merged the PR (#261).
+- [x] M36.2 canon 5.45, 5.46, 5.47 G (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted from main
+  after PR #261). Two Sonnet reading agents (summaries only). User picks: no fight stage; two talk hooks on scene
+  stages, day 164: the victory parade (`liscor_plaza`) and the baseball game (`celum_north_gate`). Data: 31 events in
+  `book9/chapters/5.45.json`, `5.46.json`, `5.47G.json`; kill Twofeather (day 166); system Lyonette [Crimson Stinger],
+  Wesle [Method Acting], Rags [Chieftain] 25; Twofeather's record note fixed. Tests: `sim_book9_morning_after` 8 (new),
+  `sim_book9_world` 8, `sim_canon_book8` 6, `unit_canon_db` 7, `unit_data_db` 15, `unit_xp_window` 12,
+  `unit_foreshadow` 15, `sim_player_hooks` 6, `sim_kill_book8` 6: all pass. `unit_scene_beats` 5/6: old failure, also
+  on main (two M32 fights have 4 and 5 ally shouts; the rule is 1 – 3): waits for the user. Count fixes: scenes 49,
+  hooks 137, fights 26 (the last two were stale on main since M32.2 – M32.4). Validator book 9: 0 errors, 0 warnings.
+  Full suite not run. PR #262 (draft).
+  - [x] The user decided the ally-shout rule (2026-11-01): a fight stage with waves may have up to 5 shouts (other
+    fights stay 1 – 3). Do it in its own PR after #262 is merged: change `unit_scene_beats` and add an ADR 0044 note.
+  - [ ] Build the ally-shout change (test + ADR note, own PR).
+  - [ ] The user merges PR #262. Next: M36.3 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (Sonnet · high).
+  - [ ] The user plays day 164 (the parade in the plaza at 10 – 13, the baseball game north of Celum at 14 – 19).
+- [ ] M36.3 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

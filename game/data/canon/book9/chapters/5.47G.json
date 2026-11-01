@@ -1,0 +1,692 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.47G",
+	"order": 80,
+	"events": {
+		"b9.rags_dreams_of_velan": {
+			"tier": 2,
+			"window": {
+				"earliest": 166,
+				"latest": 166,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.dreamed_of_velan"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "The dream comes before the Day 3 heading, on the night of Day 2. March Day 3 = day 166 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "Rags dreams Velan the Kind's memory: a Goblin Lord of Baleros who fought every race until his tribe was hunted to the last, and he swam away alone. She wakes looking for a lesson in it."
+		},
+		"b9.pellmias_riders_herd_the_tribe_south": {
+			"tier": 2,
+			"window": {
+				"earliest": 166,
+				"latest": 166,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.herded_south_by_pellmia",
+					"flooded_waters.flees_at_dawn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Thousands of Goblins already died in the north (Book 8). March Day 3 = day 166 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "A horn and a warning fireball wake the tribe at dawn, and the Goblins run, leaving what they cannot carry. More than five thousand Human riders under Lord Pellmia herd them east and south, away from the towns, and only kill the stragglers."
+		},
+		"b9.gilam_kills_twofeather_at_a_creek": {
+			"tier": 1,
+			"window": {
+				"earliest": 166,
+				"latest": 166,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"twofeather"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"gilam"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"retainer": {
+					"prefer": [
+						"kilmet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"twofeather",
+					"gilam"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gilam.broke_tyrions_order",
+					"flooded_waters.lost_twofeather"
+				],
+				"kill": [
+					"twofeather"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Named death (plan). Twofeather is a female Hob. She dies at the creek on Day 3, not in the Day 4 forest fight. March Day 3 = day 166 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "At a creek where the tribe stops for water, young Lord Gilam breaks Tyrion's order and rides at a Hob struggling with a mule. She strikes back and nearly unseats him, but his riders shoot her in the back and his enchanted sword cuts her down. Kilmet scolds him."
+		},
+		"b9.pyrite_comforts_rags_at_night": {
+			"tier": 2,
+			"window": {
+				"earliest": 166,
+				"latest": 166,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.named_twofeather",
+					"rags.blames_herself_for_the_war",
+					"pyrite.trusts_rags_plan"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 3 = day 166 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "At night on an old stone road Pyrite names the dead Hob, Twofeather, who wore two duck feathers. Rags blames herself for the war. Pyrite says the Humans struck first, and that he trusts her plan, even one that hurts the Humans more than it saves the tribe."
+		},
+		"b9.rags_reaches_chieftain_level_25": {
+			"tier": 2,
+			"window": {
+				"earliest": 166,
+				"latest": 166,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.chieftain_level_25",
+					"rags.resolves_to_lead"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Level message only; her [Rapid Reload], [Flashfire Spellcraft] and [Burning Blades] came with level 24 (Book 8, 5.37 G). March Day 3 = day 166 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "After the talk with Pyrite, Rags makes up her mind to lead, and the System gives her [Chieftain] level 25 that night."
+		},
+		"b9.rags_rallies_the_tribe_at_dawn": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.rallied_by_rags",
+					"redscar.scouts_for_a_forest"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "At dawn Rags stands on a wagon with her sword on fire and rallies the tribe. She sends Redscar's riders ahead to find a forest."
+		},
+		"b9.pellmia_must_bring_the_goblins_south": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": []
+				},
+				"retainer": {
+					"prefer": [
+						"kilmet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lord_pellmia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pellmia.must_deliver_the_goblins_south_by_day_six",
+					"tyrion.wants_the_goblins_brought_alive_to_a_meeting_place"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Tyrion's plan is not told here. March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "Lord Pellmia, tired, argues with Kilmet about his son. Tyrion wants the Goblins alive and driven to a meeting place about two days south by the sixth day. Then smoke rises ahead."
+		},
+		"b9.the_goblins_set_the_forest_alight": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"young_lord": {
+					"prefer": [
+						"gilam"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.burned_a_forest_to_trap_the_riders",
+					"rags.casts_burning_blades"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "The Goblins set a forest on fire in many places, and Rags lays [Burning Blades] on their weapons. Pellmia's mages cannot put the fire out, and Gilam's thirty scouts are caught inside."
+		},
+		"b9.quietstab_unhorses_gilam": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"young_lord": {
+					"prefer": [
+						"gilam"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"quietstab",
+					"gilam"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gilam.knocked_from_his_horse",
+					"quietstab.took_gilams_white_mare",
+					"flooded_waters.killed_the_scouts_in_the_fire"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "Unnamed Human and Goblin dead; no numbers given. March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "Rags leads the Redfangs and Hobs into the burning wood and cuts the scouts off. Many riders die. Quietstab knocks Gilam from his white mare and rides off on her."
+		},
+		"b9.rags_spares_gilam": {
+			"tier": 1,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"young_lord": {
+					"prefer": [
+						"gilam"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"gilam"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.spared_gilam",
+					"pellmia.saw_rags_spare_his_son"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "Rags holds her crossbow to Gilam's head while his father watches, unable to reach him. Poisonbite urges her to shoot. She lowers it to break the circle of killing and pulls back, and Pellmia does not give chase.",
+			"news": "The Goblin Chieftain Rags spared the son of Lord Pellmia in a burning forest in the north."
+		},
+		"b9.pellmia_reins_in_gilam": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": []
+				},
+				"young_lord": {
+					"prefer": [
+						"gilam"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"retainer": {
+					"prefer": [
+						"kilmet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lord_pellmia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gilam.under_kilmets_command",
+					"pellmia.doubts_his_duty"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "Back in camp, burned, Pellmia refuses Gilam's demand for a hundred knights to take revenge and get his horse back. He puts his son under Kilmet. He still keeps his word to Tyrion, but he now doubts it."
+		},
+		"b9.the_tribe_loots_the_riders": {
+			"tier": 2,
+			"window": {
+				"earliest": 167,
+				"latest": 167,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.has_a_bag_of_holding",
+					"flooded_waters.followed_at_a_distance"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.47G",
+				"confidence": "confirmed",
+				"note": "March Day 4 = day 167 (day rule march Day + 163, ADR 0047), guess."
+			},
+			"summary": "The Goblins take weapons, gold, horses and a bag of holding from the dead riders, and Rags lets the tribe rest. Pellmia's men give them a few minutes' start, then follow without pressing."
+		}
+	},
+	"system": [
+		{
+			"who": "rags",
+			"kind": "level",
+			"name": "[Chieftain]",
+			"level": 25,
+			"confidence": "confirmed",
+			"note": "At night on Day 3, after the talk with Pyrite (24 in Book 8, 5.37 G)."
+		}
+	]
+}
