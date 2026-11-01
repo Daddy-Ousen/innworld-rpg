@@ -199,7 +199,15 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] Done, see M35.2 below.
 - [x] M35.2 Runners' Guild staff in Invrisil (2026-11-01, cloud). Reading (Sonnet, Books 2 - 8): none found; staff are all unnamed.
   Only candidate Thasius Griff (4.35E) has no hall scene. User pick: add nothing. Docs only (ADR 0046 note, plan, ROADMAP). No tests run.
-  - [ ] Next: M35.3 Magnolia's whereabouts (cloud session, Opus · high).
+  - [x] Done, see M35.3 below.
+- [x] M35.3 Magnolia's whereabouts (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`). Reading (Sonnet, Books 5 - 8).
+  User picks: camp days off map at Invrisil, battle on `invrisil_battlefield`, then the `invrisil_gate` map by day until 5.02
+  (`magnolia.defends_invrisil`); Ressa mirrors her. Data only: 4 goals each in `data/npc_behaviour.json`. Tests:
+  `unit_m25_whereabouts` (9, +4 new), `unit_behaviour_db`, `sim_npc_day`, `unit_canon_db`, `sim_canon_book5` - `book8`,
+  `unit_data_db` pass; `unit_npc_sim` 13/14: `test_talk_to_an_npc` fails on main too (old, not this change). Validator
+  `--all`: 0 errors. Full suite not run.
+  - [ ] The user plays Book 6 days 129 - 134 and finds Magnolia (ROADMAP play check).
+  - [ ] Next: M36 (Book 9), `docs/CLOUD.md` "Task queue".
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the

@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M35.3 Magnolia's whereabouts (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #258)
+- Two Sonnet reading agents (Books 5 - 6, 7 - 8; summaries only). User picks: camp days off map at Invrisil, battle on
+  `invrisil_battlefield` [3, 10], then `invrisil_gate` [14, 3] by day until 5.02; Ressa mirrors her.
+- Data: 4 goals each for `magnolia_reinhart` and `ressa` in `game/data/npc_behaviour.json`. Tests: `game/tests/unit_m25_whereabouts.gd` (+4).
+  ADR 0046 "M35.3 note", plan "Answers", ROADMAP play check, `progress.md`. M35 is now built.
+- Next: the user merges the PR. Then M36.P (Book 9 plan, Opus · high), `docs/CLOUD.md` "Task queue" item 2.
+- Gotchas: `b6.magnolias_levy_waits_at_invrisil` is alt-only (runs only if Zel's speech fails), so the canon path uses
+  `magnolia.recorded_the_speech` for the camp stay. `GameState.new` + `Director.run` skips events that need an NPC alive:
+  use `GameState.new_game` + `ToyCanon.sleep_through` (about 25 s to day 135). `unit_npc_sim` `test_talk_to_an_npc` fails on
+  main (an NPC dictionary has an extra key; old, not M35). 17 old `.uid` files in `game/tests/` stay untracked on purpose.
+
 ## Just done (2026-11-01, cloud): M35.2 Runners' Guild staff (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #257)
 - Two Sonnet reading agents (Books 2 - 4, 5 - 8). Result: none found. User pick: add nothing. Docs only (ADR 0046, plan, ROADMAP, progress). No tests run.
 - Next: the user merges the PR. Then M35.3 Magnolia's whereabouts (Opus · high).
