@@ -1,0 +1,850 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.49",
+	"order": 82,
+	"events": {
+		"b9.olesm_sends_the_raskghar_report": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"laskaillia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.sent_the_raskghar_report",
+					"drake_cities.quarrel_over_the_raskghar_treasure"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. Ilvriss has made the city hall council room his war room."
+			},
+			"summary": "Olesm finishes his report on the Raskghar war. Ilvriss's mage Laskaillia sends it to the Drake cities by [Message], and Ilvriss backs it. The cities squabble at once: Pallass wants a share of the treasure, others object or ask to trade.",
+			"news": "Liscor's report on the Raskghar war reaches the Drake cities, and they argue over the treasure."
+		},
+		"b9.embria_asks_olesm_for_a_drink": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"officer": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"laskaillia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"embria_grasstongue",
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.has_a_drink_planned_with_zevara"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess."
+			},
+			"summary": "Embria sends her own report to her High Command. Then she awkwardly asks Olesm for a drink. He says no: he has plans with Zevara at Erin's inn."
+		},
+		"b9.ilvriss_pays_erin_but_not_the_redfangs": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"ilvriss"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.paid_by_ilvriss_for_the_raskghar_war",
+					"redfang.denied_the_gnoll_rescue_bounty"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess."
+			},
+			"summary": "Erin bribes Ilvriss's guards with cookies and asks for money. He pays her over a thousand gold for the door, the potions and the food. But the Council dated the Goblin team's papers after the battle, so the Redfangs get no bounty for the Gnolls they saved. Erin is furious."
+		},
+		"b9.ilvriss_slips_erin_the_minotaurs_axe": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ilvriss",
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.ilvriss_pays_erin_but_not_the_redfangs"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"calruz_axe.given_to_erin_for_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess."
+			},
+			"summary": "Ilvriss leaves Calruz's golden axe out of the records and slides it to Erin to give to the Goblins. Erin leaves him a cookie, and he tells his guards to keep letting her in."
+		},
+		"b9.krshia_defends_the_deal_at_her_stall": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "liscor_market",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia",
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.ordered_food_for_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess."
+			},
+			"summary": "On her walk home in the rain, Liscor folk thank Erin. At Krshia's stall she complains about the bounty. Krshia says it was the best deal Erin could get, and Erin orders a great deal of food for the Goblins."
+		},
+		"b9.drakes_eat_at_the_inn_again": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"server": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.drakes_eat_there_again",
+					"wandering_inn.raskghar_play_every_night"
+				],
+				"clear_flags": [
+					"wandering_inn.drake_boycott"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "guess",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. The text never says the Drake boycott ends; Drakes are at the inn, so it clears here (ADR 0047, guess)."
+			},
+			"summary": "Drakes and Gnolls fill the common room again, with Drassi serving. Each night the Players' new play about the Raskghar packs the inn."
+		},
+		"b9.the_hobs_brawl_for_the_axe": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.ilvriss_slips_erin_the_minotaurs_axe"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"headscratcher.carries_calruzs_axe",
+					"redfang.borrowed_erins_bags_of_holding"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. Afternoon."
+			},
+			"summary": "The Hobs are told they get no gold and do not mind. They pile onto each other for the axe, and Headscratcher wins it. Then they borrow both of Erin's bags of holding and go down the stairs to the dungeon."
+		},
+		"b9.the_hobs_share_out_the_raskghar_hoard": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halfseeker": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"horn": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"griffon_hunt": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_hobs_brawl_for_the_axe"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"raskghar_hoard.given_to_three_teams",
+					"silver_swords.left_out_of_the_hoard"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. Upstairs in a guarded room. The 'treasure room' of the plan is this store room in the dungeon."
+			},
+			"summary": "Two hours later the Hobs bring up the Raskghar's hoard from a store room below: coins, gems and goblets, but no artifacts. They split it between three teams who fought below, and leave out the Silver Swords. Erin takes nothing. The teams count over a hundred thousand gold.",
+			"news": "The Redfang Goblins brought up the Raskghar's hoard and gave it all away to three adventurer teams.",
+			"foreshadow": {
+				"days_before": 0,
+				"text": "The Redfang Hobs have borrowed both of Erin's bags of holding and gone down into the dungeon. They say they know where the Raskghar kept their loot."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "inn_upper_floor",
+				"hours": [
+					16,
+					21
+				],
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							3,
+							5
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							6,
+							5
+						]
+					},
+					{
+						"npc": "ceria_springwalker",
+						"pos": [
+							9,
+							5
+						]
+					},
+					{
+						"npc": "jelaqua",
+						"pos": [
+							12,
+							5
+						]
+					},
+					{
+						"npc": "halrac",
+						"pos": [
+							15,
+							5
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							5,
+							6
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							8,
+							6
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							11,
+							6
+						]
+					},
+					{
+						"npc": "numbtongue",
+						"pos": [
+							14,
+							6
+						]
+					},
+					{
+						"npc": "pisces",
+						"pos": [
+							8,
+							2
+						]
+					},
+					{
+						"npc": "revi",
+						"pos": [
+							13,
+							2
+						]
+					},
+					{
+						"npc": "moore",
+						"pos": [
+							13,
+							8
+						]
+					}
+				],
+				"line": "Coins, gems and goblets lie in heaps on the upstairs floor. Three teams of adventurers stare, and five Hobs look very pleased with themselves.",
+				"when_flags": [
+					"raskghar.broken"
+				],
+				"beats": [
+					{
+						"after_seconds": 0,
+						"npc": "erin_solstice",
+						"line": "No, I'm not taking any. I wasn't down there, you were!"
+					},
+					{
+						"after_seconds": 60,
+						"line": "The Hobs tip out both bags of holding until the floor shines with gold."
+					},
+					{
+						"after_seconds": 130,
+						"npc": "headscratcher",
+						"line": "For you. Not for the Silver Swords."
+					},
+					{
+						"after_seconds": 200,
+						"npc": "jelaqua",
+						"line": "A third each? Dead gods. I could hug a Goblin right now."
+					},
+					{
+						"after_seconds": 270,
+						"npc": "halrac",
+						"line": "We take it. And we leave that dungeon to somebody else."
+					},
+					{
+						"after_seconds": 340,
+						"npc": "ceria_springwalker",
+						"line": "I counted twice and lost count twice. A hundred thousand, give or take a lot?"
+					}
+				],
+				"note": "M36.3: a scene (user pick, 2026-11-01). The text puts it in an upstairs room; inn_upper_floor stands for the whole upstairs. Hours are a guess: afternoon to evening."
+			},
+			"hooks": [
+				{
+					"id": "player_saw_the_raskghar_hoard_shared",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"headscratcher",
+									"badarrow",
+									"rabbiteater",
+									"shorthilt",
+									"numbtongue",
+									"erin_solstice",
+									"ceria_springwalker",
+									"jelaqua",
+									"halrac"
+								]
+							}
+						}
+					],
+					"days": [
+						169,
+						169
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_saw_the_hoard_shared"
+						],
+						"relationship": [
+							{
+								"from": "headscratcher",
+								"to": "player",
+								"delta": 1
+							},
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human guest stood with the adventurers when the Redfang Goblins shared out the Raskghar hoard."
+				}
+			]
+		},
+		"b9.three_teams_are_done_with_the_dungeon": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"horn": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": []
+				},
+				"halfseeker": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"griffon_hunt": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"ceria_springwalker"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_hobs_share_out_the_raskghar_hoard"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"horns_of_hammerad.done_with_the_dungeon",
+					"halfseekers.done_with_the_dungeon",
+					"griffon_hunt.done_with_the_dungeon",
+					"raskghar_loot.teams_want_artifacts_not_gold"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. The artifact lottery is still a few days off."
+			},
+			"summary": "With so much gold, the teams can give up their gold in the lottery and ask for artifacts only. Revi, then the Horns, then the Halfseekers say they are finished with the dungeon."
+		},
+		"b9.rabbiteater_becomes_a_champion": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rabbiteater"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rabbiteater.is_a_champion",
+					"cave_goblins.cheer_rabbiteater"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "Day 169 (user pick, 2026-11-01): a bit over a week after the Raskghar raids began; still raining. Guess. Night. The cave is behind the Celum door (not on the map)."
+			},
+			"summary": "At night the Hobs eat cakes with the Cave Goblins on their new beds. Rabbiteater levels: he cannot be a hero, so he becomes a [Champion], and his mail and sword come out clean and sharp. His shouting wakes Erin, and the other Hobs are jealous."
+		},
+		"b9.the_guild_certifies_the_redfang_team": {
+			"tier": 2,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.ilvriss_pays_erin_but_not_the_redfangs"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang.bronze_team_certified"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.49",
+				"confidence": "confirmed",
+				"note": "5.49 says it is done 'on the morrow' of day 169 (user pick), so day 170, guess. Book 8 already set redfang.accept_bronze_rank."
+			},
+			"summary": "Liscor's Adventurers' Guild certifies the Goblin team at Bronze rank, with papers dated after the battle."
+		}
+	},
+	"system": [
+		{
+			"who": "olesm",
+			"kind": "class",
+			"name": "[Strategist]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Ilvriss calls him a [Strategist] (he was a [Tactician])."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "level",
+			"name": "[Warrior]",
+			"level": 20,
+			"confidence": "confirmed",
+			"note": "At night, with the Cave Goblins."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "class",
+			"name": "[Champion]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "[Warrior] becomes [Champion]; he cannot be a [Hero]."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "skill",
+			"name": "[Champion's Gear]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "His mail and sword turn clean and sharp."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "skill",
+			"name": "[Grand Slash]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Gained with [Champion]."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "skill",
+			"name": "[Valor of Champions]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Gained with [Champion]."
+		}
+	]
+}

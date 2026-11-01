@@ -1,0 +1,281 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "interlude_bird",
+	"order": 84,
+	"events": {
+		"b9.bevussa_tells_bird_about_birds": {
+			"tier": 1,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hunter": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"flier": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.has_bevussas_feather",
+					"bevussa.likes_bird"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_bird",
+				"confidence": "confirmed",
+				"note": "Day 170 (user pick, 2026-11-01): after the hoard (Jelaqua is not worried about gold), before the rain ends; midday, rain. Guess."
+			},
+			"summary": "Bevussa of the Wings of Pallass waits in the empty inn for Jelaqua. Bird offers her the goose feathers from his pillows. For two hours she tells him bird stories. He asks if she is a bird; she says Garuda are people. She trades one of her own blue-green feathers for all of his.",
+			"news": "A Garuda of the Wings of Pallass spent an afternoon telling bird stories to an Antinium at the Wandering Inn.",
+			"foreshadow": {
+				"days_before": 0,
+				"text": "A Garuda from Pallass waits at the inn for Jelaqua, and Bird has been told to leave his bow upstairs."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "inn_interior",
+				"hours": [
+					11,
+					15
+				],
+				"npcs": [
+					{
+						"npc": "bird",
+						"pos": [
+							14,
+							7
+						]
+					},
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							12,
+							3
+						]
+					},
+					{
+						"npc": "lyonette",
+						"pos": [
+							6,
+							8
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							7,
+							10
+						]
+					},
+					{
+						"npc": "relc",
+						"pos": [
+							11,
+							5
+						]
+					}
+				],
+				"line": "Rain on the windows and an empty common room. A blue-feathered Garuda sits by the east table, and Bird sits very still beside her.",
+				"beats": [
+					{
+						"after_seconds": 0,
+						"npc": "bird",
+						"line": "Hello. I am Bird. I have feathers. Do you want to trade?"
+					},
+					{
+						"after_seconds": 60,
+						"line": "The Garuda laughs and starts a story about starlings that fly as one great shape."
+					},
+					{
+						"after_seconds": 130,
+						"npc": "bird",
+						"line": "You have feathers and wings. I think you are a bird."
+					},
+					{
+						"after_seconds": 200,
+						"line": "Bevussa says Garuda are people, not birds. Bird thinks about this for a long time."
+					},
+					{
+						"after_seconds": 270,
+						"line": "She plucks one blue-green feather and trades it for every goose feather Bird owns."
+					},
+					{
+						"after_seconds": 340,
+						"npc": "relc",
+						"line": "Day off at last! Oh, hey there. Has anyone told you that you fly very nicely?"
+					}
+				],
+				"note": "M36.3: a scene (user pick, 2026-11-01). Bevussa has no look or map goals, so she is in the line and the beats only. Hours are a guess: midday, about two hours of stories, then Relc."
+			},
+			"hooks": [
+				{
+					"id": "player_heard_bevussas_bird_stories",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"wandering_inn"
+								],
+								"npc": [
+									"bird",
+									"relc",
+									"erin_solstice"
+								]
+							}
+						}
+					],
+					"days": [
+						170,
+						170
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_heard_the_bird_stories"
+						],
+						"relationship": [
+							{
+								"from": "bird",
+								"to": "player",
+								"delta": 2
+							}
+						]
+					},
+					"news": "A Human guest sat with Bird while a Garuda told him stories about birds, and Bird was glad of it."
+				}
+			]
+		},
+		"b9.relc_flirts_with_bevussa_on_his_day_off": {
+			"tier": 2,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"guardsman": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": []
+				},
+				"flier": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"relc"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.bevussa_tells_bird_about_birds"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"relc.flirted_with_bevussa"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_bird",
+				"confidence": "confirmed",
+				"note": "Day 170 (user pick, 2026-11-01): after the hoard (Jelaqua is not worried about gold), before the rain ends; midday, rain. Guess."
+			},
+			"summary": "Relc comes in on his first day off in a long time. Bird flees after Bevussa jokes about eating ants, and Relc tries a bad pick-up line on her. He blames Embria for it."
+		},
+		"b9.bird_sleeps_on_the_feather": {
+			"tier": 2,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"hunter": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.bevussa_tells_bird_about_birds"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.sleeps_on_bevussas_feather"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_bird",
+				"confidence": "confirmed",
+				"note": "Day 170 (user pick, 2026-11-01): after the hoard (Jelaqua is not worried about gold), before the rain ends; midday, rain. Guess. Night."
+			},
+			"summary": "That night Bird puts the Garuda's feather under his pillow and promises himself to keep it always."
+		}
+	},
+	"system": []
+}

@@ -1,0 +1,526 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.48G",
+	"order": 81,
+	"events": {
+		"b9.rags_runs_her_worn_tribe_back_to_its_feet": {
+			"tier": 2,
+			"window": {
+				"earliest": 168,
+				"latest": 168,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.gear_in_noears_bag",
+					"rags.runs_at_the_head_of_the_tribe"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "March Day 5 = day 168, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The tribe is worn out after the forest fight. Rags shows them she is not beaten and runs at their head, and they run with her. They drop what they cannot carry into Noears's bag of holding."
+		},
+		"b9.pellmia_follows_the_goblins_on_foot": {
+			"tier": 2,
+			"window": {
+				"earliest": 168,
+				"latest": 168,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": []
+				},
+				"officer": {
+					"prefer": [
+						"kilmet"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"genviere"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lord_pellmia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pellmia.slows_the_hunt_after_gilam_was_spared"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "March Day 5 = day 168, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Lord Pellmia, Kilmet and the [High Mage] Genviere argue about the pace. Pellmia owes Rags his son's life, so he slows the hunt and walks beside his tired horses."
+		},
+		"b9.the_mountain_horde_floods_south": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_horde.driven_south_by_tyrion",
+					"flooded_waters.caught_up_in_the_horde"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "March Day 6 = day 169, day rule march Day + 163 (ADR 0047), guess. No exact counts in events (plan conflict 9)."
+			},
+			"summary": "Pellmia halts the tribe on open grass, and the Goblins feel something huge to the north. Reiss's army and Tremborag's mountain tribe come running south, more than a hundred thousand Goblins, with Tyrion's army behind them. They part around Rags's tribe like water around a rock.",
+			"news": "A vast Goblin horde from the north, driven by Lord Tyrion Veltras, is moving south through Izril."
+		},
+		"b9.tremborag_charges_rags_into_pyrites_pikes": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tremborag",
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_mountain_horde_floods_south"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tremborag.stopped_by_pyrites_pikes"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "March Day 6 = day 169, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Tremborag charges straight at Rags. Pyrite's pike line holds, and the Great Chieftain stops short of her."
+		},
+		"b9.reiss_parts_the_chieftains_under_fire": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tremborag_charges_rags_into_pyrites_pikes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.split_the_chieftains_apart",
+					"garen.rides_with_the_horde"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "March Day 6 = day 169, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Garen Redfang and his riders arrive, then Reiss on a dead Shield Spider, and he orders the chieftains apart. Human mages bombard the spot, but no named Goblin dies. Pyrite tells Rags that none of theirs fell."
+		},
+		"b9.pellmia_resigns_and_takes_the_infantry": {
+			"tier": 2,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"lord_pellmia"
+					],
+					"fallback_tags": []
+				},
+				"commander": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"aide": {
+					"prefer": [
+						"jericha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"genviere"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lord_pellmia",
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pellmia.commands_tyrions_infantry",
+					"tyrion.sent_word_to_laken_godart"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "Evening of March Day 6 = day 169, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the evening Pellmia tries to give up his command. Tyrion talks him round, and he agrees to lead the foot. Tyrion has Jericha send a message to Emperor Laken Godart."
+		},
+		"b9.redscar_chooses_rags_over_garen": {
+			"tier": 1,
+			"window": {
+				"earliest": 169,
+				"latest": 169,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rags": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"redscar",
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redscar.chose_rags",
+					"garen.backed_down_from_pyrite"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "Night of March Day 6 = day 169, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At night Garen rides into Rags's camp and demands his Redfang warriors back. Redscar stays with Rags, and Pyrite stands in Garen's way with an axe until Garen leaves."
+		},
+		"b9.reiss_names_garen_as_a_key_holder": {
+			"tier": 1,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"velan_keys.garen_holds_one",
+					"rags.knows_of_velans_keys",
+					"reiss.serves_a_master"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.48G",
+				"confidence": "confirmed",
+				"note": "Morning of March Day 7 = day 170, day rule march Day + 163 (ADR 0047), guess. The key thread goes on in 5.50 G."
+			},
+			"summary": "In the morning Reiss jogs beside Rags and says he serves a master. Garen charges at him, and Rags drives the wolf back with fire. Reiss then tells everyone that Garen holds one of the Goblin King Velan's two keys."
+		}
+	},
+	"system": [
+		{
+			"who": "rags",
+			"kind": "skill",
+			"name": "[Fleet Foot]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "She runs at the head of the tribe."
+		},
+		{
+			"who": "lord_pellmia",
+			"kind": "skill",
+			"name": "[Far Riders]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "His riders keep pace with the Goblins."
+		},
+		{
+			"who": "lord_pellmia",
+			"kind": "skill",
+			"name": "[Second Wind]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used to keep his force moving."
+		}
+	]
+}
