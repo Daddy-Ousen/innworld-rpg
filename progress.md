@@ -214,8 +214,8 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   chapters (summaries only), one more checked the 5.62 deaths. Plan: day rule (march Day + 163, guess), day map 164 – 180,
   13 named kills, no kill for Numbtongue / Purple Smile / Osthia / Calruz, 14 conflicts, no engine step (M36.0 skipped),
   steps M36.1 – M36.10. Docs only. No tests run (no code or data changed).
-  - [ ] The user answers the 4 open choices (stages, hooks, day rule, Erin in jail). Then the answers go into the plan
-    "Answers" and ADR 0047.
+  - [x] User answers (2026-11-01): stages = east gate battle (5.62) + door thieves (5.54); hooks = jail visit, Gnoll
+    gathering, cooking contest; day rule = march Day + 163; Erin in jail on the map. In the plan "Answers" and ADR 0047.
   - [ ] The user merges the PR. Next: M36.1 world and records (Sonnet · high).
 - [ ] M36.1 world and records.
 - [ ] M36.2 – M36.9 canon batches.

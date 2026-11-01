@@ -5,8 +5,10 @@
   One more agent checked the 5.62 deaths line by line.
 - Wrote `docs/plans/m36.md` (day map, deaths, 14 conflicts, steps M36.1 – M36.10, 4 open choices) and
   `docs/adr/0047-m36-book9.md`. ROADMAP, `docs/CLOUD.md` queue note and `progress.md` "M36" updated. Docs only, no tests run.
-- Next: the user answers the 4 choices (stages, hooks, day rule, Erin in jail). Write them under "Answers" in the plan
-  and in ADR 0047 (status FINAL / accepted). The user merges the PR. Then M36.1 world and records (Sonnet · high).
+- User answers (in the plan "Answers" and ADR 0047): stages = east gate battle (5.62) + door thieves (5.54); hooks = jail
+  visit, Gnoll gathering, cooking contest; day rule = march Day + 163; Erin and the Hobs in the Watch cells on the map.
+- PR: https://github.com/Daddy-Ousen/innworld-rpg/pull/260 (draft). Next: the user merges it. Then M36.1 world and
+  records (Sonnet · high).
 - Gotchas:
   - Book 9's "Day N" is Tyrion's march count, NOT Laken's (+45 rule of ADR 0028 does not apply). Proposed: game day = Day + 163.
   - Numbtongue looks dead in 5.62 but lives in Book 10 (6.02 on): no kill. Purple Smile: never confirmed dead: no kill.
