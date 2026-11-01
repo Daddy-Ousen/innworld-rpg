@@ -181,7 +181,7 @@ func test_every_fight_stage_and_key_scene_has_a_signpost() -> void:
 		if not st.is_empty() and st.get("kind", "fight") == "fight":
 			fights += 1
 			assert_true(db.canon.foreshadows.has(id), "fight stage %s has a foreshadow" % id)
-	assert_eq(fights, 25, "the 25 fight stages of Books 1 – 8")
+	assert_eq(fights, 26, "the 26 fight stages of Books 1 – 8 (M32.2 added Zel's last stand)")
 	for id: String in KEY_SCENES:
 		assert_true(db.canon.foreshadows.has(id), "key scene %s has a foreshadow" % id)
 
