@@ -3,11 +3,11 @@ extends GutTest
 ## reached from the east gate, exits go both ways, every enterable-looking door says what it
 ## is, and each map has a mood and an ambience bed.
 
-## The city maps (M16.4.1 streets; M16.4.2-4 rooms are added to ROOMS as they land).
+## The city maps (M16.4.1 streets; M16.4.2-4 rooms are added to ROOMS as they land; M36.4 the Watch cells).
 const STREETS := ["liscor_gate", "liscor_market", "liscor_plaza", "liscor_guild_street", "liscor_watch",
 		"liscor_homes"]
 const ROOMS: Array[String] = ["liscor_adventurers_guild", "liscor_mages_guild", "liscor_watch_barracks",
-		"liscor_watch_office", "liscor_tailless_thief", "liscor_gnoll_tavern"]
+		"liscor_watch_office", "liscor_tailless_thief", "liscor_gnoll_tavern", "liscor_watch_cells"]
 
 var _db: DataDb
 var _audio: AudioDb
