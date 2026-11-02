@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-11-02, cloud): M36.6 Book 9 canon 5.55 G, 5.56 G, 5.57 (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #265)
+- Two Sonnet reading agents (summaries only). User picks: no stage, no hook.
+- Data: `game/data/canon/book9/chapters/5.55G.json` (5), `5.56G.json` (6), `5.57.json` (8). All day 173. No kill.
+  Flags now set: `erin.freed_from_the_cells`, `redfang_hobs.freed_from_the_cells`, `numbtongue.stood_down_for_erin`.
+  The generator script was in the session scratchpad (gone): edit JSON by hand.
+- Tests: `game/tests/sim_book9_reisss_betrayal.gd` (new, 5). List in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.7 canon 5.58, 5.59, Interlude – Pebblesnatch and Garry (Opus · medium).
+  Ask the stage and hook choices first (plan: hook = judge the cooking contest, day 174; no stage).
+- Gotchas:
+  - 5.57 ends mid-fight: the Halfseekers attack Garen on the road (`halfseekers.attacked_garen_on_the_road`). 5.58
+    must settle it (Garen overthrown at dusk). Garen's "three commanders" are only a flag (no records).
+  - Rags is alive and hidden at the High Passes with Pyrite and Ulvama (`rags.alive_in_the_high_passes`); Tyrion
+    and Reiss think she is dead. Osthia is alive in chains in Reiss's army. Pyrite dies in 5.62 (M36.9).
+  - Numbtongue is back on his basement routine from day 174 (the stand-down flag). The Cave Goblins go south (flag only).
+  - The door: the inn link to Liscor stays unconnected until 5.60 (M36.8). The adventurers plan to carry a door to Esthelm.
+  - `unit_scene_beats` still fails on the ally-shout rule (old).
+
 ## Just done (2026-11-02, cloud): M36.5 Book 9 canon 5.54, Interlude – Krshia (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #264)
 - Two Sonnet reading agents (summaries only, not in git). User picks: fight stage on `road_camp` (22 – 24, day 172,
   XP tier 1); scene hooks in `liscor_watch_cells` (8 – 13, day 173) and `liscor_market` (17 – 20, day 173).
