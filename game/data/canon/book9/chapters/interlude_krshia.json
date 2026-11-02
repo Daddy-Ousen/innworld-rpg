@@ -1,0 +1,686 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "interlude_krshia",
+	"order": 89,
+	"system": [
+		{
+			"who": "krshia",
+			"kind": "class",
+			"name": "[Royal Shopkeeper]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "The first Gnoll with this class; it came through Lyonette."
+		},
+		{
+			"who": "krshia",
+			"kind": "skill",
+			"name": "[Imperial Appraiser]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Replaced [Quality Scent]."
+		},
+		{
+			"who": "krshia",
+			"kind": "skill",
+			"name": "[Silvertouched Wares]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Gained a few days before; her goods are worth a little more."
+		}
+	],
+	"events": {
+		"b9.erin_is_still_in_her_cell": {
+			"tier": 2,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_cells",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prisoner": {
+					"prefer": [
+						"calruz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_fights_the_watch_and_is_jailed"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.second_day_in_the_cells"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The next day Erin and the four Hobs are still in the Watch cells. At the inn Lyonette tells the visitors that the Watch has not let her out.",
+			"foreshadow": {
+				"days_before": 1,
+				"text": "Erin Solstice has been locked in the Watch cells with the Goblins. The Watch says visitors may go down."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "liscor_watch_cells",
+				"hours": [
+					8,
+					13
+				],
+				"npcs": [
+					{
+						"npc": "erin_solstice",
+						"pos": [
+							18,
+							3
+						]
+					},
+					{
+						"npc": "headscratcher",
+						"pos": [
+							18,
+							7
+						]
+					},
+					{
+						"npc": "badarrow",
+						"pos": [
+							14,
+							7
+						]
+					},
+					{
+						"npc": "rabbiteater",
+						"pos": [
+							10,
+							3
+						]
+					},
+					{
+						"npc": "shorthilt",
+						"pos": [
+							14,
+							3
+						]
+					},
+					{
+						"npc": "calruz",
+						"pos": [
+							20,
+							5
+						]
+					}
+				],
+				"line": "Morning comes to the cells below the Watch House only as a change of guard. Erin is still in hers, and the four Hobs in theirs.",
+				"when_flags": [
+					"erin.in_watch_cells"
+				],
+				"beats": [
+					{
+						"after_seconds": 0,
+						"npc": "erin_solstice",
+						"line": "Another day in here. Is there any news? Is Bird alive?"
+					},
+					{
+						"after_seconds": 90,
+						"npc": "headscratcher",
+						"line": "Numbtongue is free. He is clever. He comes back."
+					},
+					{
+						"after_seconds": 170,
+						"line": "Behind his ring of runes, Calruz watches Erin and says nothing."
+					},
+					{
+						"after_seconds": 250,
+						"npc": "rabbiteater",
+						"line": "Food is bad here. Erin's food is better."
+					},
+					{
+						"after_seconds": 330,
+						"npc": "erin_solstice",
+						"line": "When they let us out, I'm cooking for all of you."
+					}
+				],
+				"note": "M36.5: a scene (user pick). Day 173: Erin is still jailed (Krshia interlude); events resolve at day end, so the cells fill only after day 172. Prisoners stand at their bars by flag goals (M36.4). Beats and hours are guesses."
+			},
+			"hooks": [
+				{
+					"id": "player_visited_erin_in_the_cells",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"liscor_watch_cells"
+								],
+								"npc": [
+									"erin_solstice",
+									"headscratcher",
+									"badarrow",
+									"rabbiteater",
+									"shorthilt"
+								]
+							}
+						}
+					],
+					"days": [
+						173,
+						173
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"wandering_inn.earther_visited_the_cells"
+						],
+						"relationship": [
+							{
+								"from": "erin_solstice",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "headscratcher",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "A Human guest went down to the Watch cells and talked with Erin and the Goblins through the bars."
+				}
+			]
+		},
+		"b9.tkrn_tells_krshia_of_the_theft": {
+			"tier": 2,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"guardsman": {
+					"prefer": [
+						"tkrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.typhenous_steals_the_door"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"krshia.knows_the_door_was_stolen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Early in the morning Tkrn tells Krshia the door was stolen and found again, with dead Human thieves on the north road. The Pallass link is broken, and Pallass cannot send soldiers through."
+		},
+		"b9.zevara_takes_the_celum_stone": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.typhenous_steals_the_door"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"albez_door.at_wandering_inn",
+					"albez_door.celum_stone_taken",
+					"gold_teams.mean_to_leave_liscor",
+					"olesm.vouched_for_the_hobs"
+				],
+				"clear_flags": [
+					"albez_door.stolen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess. The water has dropped about six feet."
+			},
+			"summary": "The door is back in the half-empty inn. The mages say the Pallass link cannot be mended, and Zevara has the Celum stone locked in the armory. Olesm speaks up for the Hobs. Griffon Hunt, the Halfseekers and the Silver Swords say they will leave. Erin is still in her cell."
+		},
+		"b9.mrsha_shows_krshia_her_spells": {
+			"tier": 2,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"trainer": {
+					"prefer": [
+						"elirr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia",
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"krshia.knows_mrsha_can_cast",
+					"mrsha.reads_ryokas_spellbook"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At Krshia's home Mrsha grows grass through the floor with a wand. She has learned from Ryoka's spellbook, which Krshia keeps locked away. The Gnolls agree to keep the book hidden from the inn's mages."
+		},
+		"b9.the_gnoll_council_votes_to_stay": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"elder": {
+					"prefer": [
+						"elirr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guardswoman": {
+					"prefer": [
+						"beilmark"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"armorer": {
+					"prefer": [
+						"raekea_silversmith"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sceptic": {
+					"prefer": [
+						"fashia_splitfur"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor_gnolls.stay_to_defend_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At noon eleven Gnoll speakers meet in Elirr's pet shop. Five would leave, six would stay, until Krshia warns that a fallen Liscor opens the whole south to the Humans. All eleven stand. The Gnolls will stay and defend the city."
+		},
+		"b9.mrsha_throws_everdawns_radiance": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_market",
+			"roles": {
+				"shopkeeper": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": []
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guardswoman": {
+					"prefer": [
+						"beilmark"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"krshia",
+					"mrsha"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_gnoll_council_votes_to_stay"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.lit_by_everdawns_radiance",
+					"zevara.called_off_the_exodus",
+					"gold_teams.stay_a_few_more_days"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_krshia",
+				"confidence": "confirmed",
+				"note": "Day 10 = 173, the day after the theft. day rule march Day + 163 (ADR 0047), guess. [Everdawn's Radiance] is a Tier 1 spell."
+			},
+			"summary": "All afternoon Gnolls pass a spark of light by touch. At sunset it is too heavy for Krshia, but Mrsha lifts it and throws it into the sky. A star shines over Liscor for eight minutes and gives the city courage. Zevara calls off any flight that day.",
+			"news": "A star of Gnoll magic shone over Liscor at sunset. The city will not flee.",
+			"foreshadow": {
+				"days_before": 0,
+				"text": "The Gnolls of Liscor are passing something from paw to paw in the market. They say it will be done by sunset."
+			},
+			"stage": {
+				"kind": "scene",
+				"area": "liscor_market",
+				"hours": [
+					17,
+					20
+				],
+				"npcs": [
+					{
+						"npc": "krshia",
+						"pos": [
+							10,
+							5
+						]
+					},
+					{
+						"npc": "mrsha",
+						"pos": [
+							11,
+							5
+						]
+					},
+					{
+						"npc": "beilmark",
+						"pos": [
+							9,
+							7
+						]
+					},
+					{
+						"npc": "tkrn",
+						"pos": [
+							12,
+							7
+						]
+					},
+					{
+						"npc": "zevara",
+						"pos": [
+							14,
+							5
+						]
+					}
+				],
+				"line": "All afternoon Gnolls touch hands in the market, passing a warm spark from paw to paw. At sunset it is heavy as a stone.",
+				"beats": [
+					{
+						"after_seconds": 0,
+						"npc": "krshia",
+						"line": "Take it, and pass it on. Every one of us adds a little."
+					},
+					{
+						"after_seconds": 80,
+						"npc": "beilmark",
+						"line": "Eleven of us said stay. Now the whole street is saying it."
+					},
+					{
+						"after_seconds": 160,
+						"line": "Krshia cannot lift the spark. Mrsha picks it up as if it weighs nothing."
+					},
+					{
+						"after_seconds": 230,
+						"line": "Mrsha throws it into the sky, and a new star shines over Liscor."
+					},
+					{
+						"after_seconds": 300,
+						"npc": "zevara",
+						"line": "No one leaves the city tonight. Not after that."
+					}
+				],
+				"note": "M36.5: a scene (user pick, 2026-11-02). The council meets at noon in Elirr's pet shop (no map); the spark is passed through the market in the afternoon and thrown at sunset, so the scene is in liscor_market. Elirr, Raekea and Fashia have no look: line and beats only. Hours are a guess."
+			},
+			"hooks": [
+				{
+					"id": "player_carried_the_gnolls_spark",
+					"did": [
+						{
+							"action": [
+								"talk_with_guest",
+								"comfort_someone",
+								"persuade"
+							],
+							"context": {
+								"location": [
+									"liscor_market"
+								],
+								"npc": [
+									"krshia",
+									"mrsha",
+									"beilmark",
+									"tkrn"
+								]
+							}
+						}
+					],
+					"days": [
+						173,
+						173
+					],
+					"then": "change",
+					"effects": {
+						"set_flags": [
+							"liscor.earther_carried_the_gnolls_spark"
+						],
+						"relationship": [
+							{
+								"from": "krshia",
+								"to": "player",
+								"delta": 2
+							},
+							{
+								"from": "mrsha",
+								"to": "player",
+								"delta": 1
+							}
+						]
+					},
+					"news": "The Gnolls of Liscor passed a spark of light through the market. A Human took it in turn, and Krshia did not stop him."
+				}
+			]
+		}
+	}
+}
