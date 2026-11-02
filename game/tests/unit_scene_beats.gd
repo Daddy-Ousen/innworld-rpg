@@ -46,7 +46,7 @@ func test_the_canon_loads_clean() -> void:
 
 func test_every_scene_has_three_to_six_beats() -> void:
 	var scenes := _stages("scene")
-	assert_eq(scenes.size(), 49, "the 47 scenes of Books 1 – 8 and 2 of Book 9 (M36.2)")
+	assert_eq(scenes.size(), 51, "the 47 scenes of Books 1 – 8 and 4 of Book 9 (M36.2: 2, M36.3: 2)")
 	for id: String in scenes:
 		var n := (scenes[id].get("beats", []) as Array).size()
 		assert_between(n, SCENE_BEATS[0], SCENE_BEATS[1], "%s has %d beats" % [id, n])

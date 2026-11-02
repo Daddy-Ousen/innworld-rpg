@@ -239,9 +239,21 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   - [x] The user decided the ally-shout rule (2026-11-01): a fight stage with waves may have up to 5 shouts (other
     fights stay 1 – 3). Do it in its own PR after #262 is merged: change `unit_scene_beats` and add an ADR 0044 note.
   - [ ] Build the ally-shout change (test + ADR note, own PR).
-  - [ ] The user merges PR #262. Next: M36.3 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (Sonnet · high).
+  - [x] The user merged PR #262.
   - [ ] The user plays day 164 (the parade in the plaza at 10 – 13, the baseball game north of Celum at 14 – 19).
-- [ ] M36.3 – M36.9 canon batches.
+- [x] M36.3 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (2026-11-01, cloud, branch `claude/m35-1-stat-sheets-pt83je`,
+  restarted from main after PR #262). Two Sonnet reading agents (summaries only). User picks: no fight stage; 5.49 =
+  day 169, Bird = day 170; two talk hooks on scene stages: the hoard (`inn_upper_floor`, 16 – 21) and Bird's stories
+  (`inn_interior`, 11 – 15). Data: 31 events in `book9/chapters/5.48G.json`, `5.49.json`, `5.50G.json`,
+  `interlude_bird.json`; kill Quietstab (day 171); boycott flag cleared (guess); system Olesm [Strategist],
+  Rabbiteater [Champion] + 3 Skills, Rags [Fleet Foot], Pellmia 2 Skills. Tests: `sim_book9_horde_and_hoard` 7 (new),
+  `sim_book9_morning_after` 8, `sim_canon_book8` 6, `unit_canon_db` 7, `unit_data_db` 15, `unit_xp_window` 12,
+  `unit_foreshadow` 15, `sim_player_hooks` 6, `sim_kill_book8` 6: all pass. `unit_scene_beats` 5/6: the same old
+  ally-shout failure as on main (the scene count test passes). Counts: scenes 51, hooks 139, fights 26. Validator
+  book 9: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.3 PR. Next: M36.4 canon 5.51 G, 5.52, 5.53 (Opus · medium).
+  - [ ] The user plays days 169 – 170 (the hoard upstairs at 16 – 21 on day 169, Bird's stories at 11 – 15 on day 170).
+- [ ] M36.4 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

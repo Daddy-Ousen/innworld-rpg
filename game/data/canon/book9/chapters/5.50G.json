@@ -1,0 +1,561 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.50G",
+	"order": 83,
+	"events": {
+		"b9.the_four_chieftains_hold_a_sit_about": {
+			"tier": 1,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"garen",
+					"tremborag",
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblin_chieftains.held_a_sit_about"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "The chapter opens with no heading on the night of March Day 7 = day 170, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At night Rags, Garen, Tremborag and Reiss sit around one fire under a Goblin truce and trade insults. Reiss will not back down, and Pyrite breaks the tension."
+		},
+		"b9.reiss_shows_his_past_with_garen_in_smoke": {
+			"tier": 2,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_four_chieftains_hold_a_sit_about"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.knows_reiss_and_garen_were_sworn_brothers",
+					"rags.knows_garen_betrayed_the_halfseekers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Night of day 170, day rule march Day + 163 (ADR 0047), guess. Garen's past is in his record note (plan conflict 13); no kill effects."
+			},
+			"summary": "Reiss tells his story in pictures of smoke. He and Garen were sworn brothers, until they split over the Necromancer. Garen then betrayed his Halfseeker team to get the key."
+		},
+		"b9.pyrite_says_he_walked_with_greydath": {
+			"tier": 2,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_four_chieftains_hold_a_sit_about"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.known_as_greydaths_companion"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Night of day 170, day rule march Day + 163 (ADR 0047), guess. Greydath is the record greybeard (M36.1)."
+			},
+			"summary": "Pyrite lets slip that he once travelled with Greydath of Blades. Tremborag is shaken: he thought Greydath was long dead."
+		},
+		"b9.reiss_dreams_aloud_and_tremborag_walks_out": {
+			"tier": 1,
+			"window": {
+				"earliest": 170,
+				"latest": 170,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_four_chieftains_hold_a_sit_about"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.dreams_of_a_goblin_nation",
+					"tremborag.swore_to_kill_reiss_and_rags",
+					"garen.declared_against_reiss",
+					"velan_keys.treasure_in_the_high_passes"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Night of day 170, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Reiss says Velan's two keys open a treasure in the High Passes, and Garen's ears show he has one. Then Reiss shows his dream of a Goblin nation. Tremborag mocks it and leaves, swearing to kill Reiss and Rags. Garen declares himself Reiss's enemy, and Rags agrees to talk with Reiss."
+		},
+		"b9.the_tribes_march_side_by_side": {
+			"tier": 2,
+			"window": {
+				"earliest": 171,
+				"latest": 171,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"rider": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lieutenant": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.camps_beside_reiss"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "March Day 8 = day 171, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Rags's tribe moves in beside Reiss's army. Pyrite gets on well with Eater of Spears, and Poisonbite rides with Snapjaw."
+		},
+		"b9.rags_meets_osthia_in_chains": {
+			"tier": 2,
+			"window": {
+				"earliest": 171,
+				"latest": 171,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.captive_of_reiss",
+					"reiss.no_word_from_azkerash",
+					"rags.keeps_the_key_secret_from_azkerash"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "March Day 8 = day 171, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Marching with Reiss, Rags meets his prisoner, the Drake officer Osthia Blackwing, with her wings bound. Reiss says his master has been silent since Zel Shivertail died, and asks Rags to keep the key from him."
+		},
+		"b9.the_redfangs_shout_for_rags": {
+			"tier": 1,
+			"window": {
+				"earliest": 171,
+				"latest": 171,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"old_chieftain": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.redscar_chooses_rags_over_garen"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfangs.chose_rags_over_garen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Evening of March Day 8 = day 171, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the evening the Redfang chant goes up, and the whole tribe answers with Rags's name, Redscar and the Redfangs too. Garen hears it."
+		},
+		"b9.tremborag_kills_quietstab_at_the_latrines": {
+			"tier": 1,
+			"window": {
+				"earliest": 171,
+				"latest": 171,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"quietstab"
+					],
+					"fallback_tags": []
+				},
+				"killer": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"quietstab",
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.lost_quietstab",
+					"rags.felt_quietstab_die"
+				],
+				"kill": [
+					"quietstab"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Night of March Day 8 = day 171, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At night Tremborag catches Quietstab alone at the latrines and breaks his neck. Rags feels the death through her tribe and wakes in pain.",
+			"news": "A Hob of Rags's tribe was murdered in the night by Tremborag, the Great Chieftain of the Mountain."
+		},
+		"b9.reiss_takes_rags_as_his_ally": {
+			"tier": 2,
+			"window": {
+				"earliest": 171,
+				"latest": 171,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tremborag_kills_quietstab_at_the_latrines"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.allied_with_rags"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.50G",
+				"confidence": "confirmed",
+				"note": "Night of day 171, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Reiss sees the body, says nothing and walks away. He means to take Rags as his ally."
+		}
+	},
+	"system": []
+}

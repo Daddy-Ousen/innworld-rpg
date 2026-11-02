@@ -1,5 +1,27 @@
 # Handoff
 
+## Just done (2026-11-01, cloud): M36.3 Book 9 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #262)
+- Two Sonnet reading agents (summaries only, not in git). User picks: no fight stage; 5.49 = day 169, Bird = day 170;
+  two talk hooks on scene stages: the hoard (`inn_upper_floor`, 16 – 21) and Bird's stories (`inn_interior`, 11 – 15).
+- Data: `game/data/canon/book9/chapters/5.48G.json` (8), `5.49.json` (11), `5.50G.json` (9), `interlude_bird.json` (3).
+  Kill: Quietstab (day 171). `wandering_inn.drake_boycott` clears in 5.49 (guess). The generator script was in the
+  session scratchpad (gone); edit the JSON by hand from now on.
+- Tests: `game/tests/sim_book9_horde_and_hoard.gd` (new, 7). Counts: `unit_scene_beats` scenes 51,
+  `sim_player_hooks` 139 (fights stay 26). List and results in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.4 canon 5.51 G, 5.52, 5.53 (Opus · medium): Tremborag dies (day 172),
+  the rains end (`izril.rains` clears, day 171), Greydath's raid, Bird maimed, Erin and four Hobs jailed. M36.4 must
+  pick a spot for the Watch cells on the map (`liscor_watch_barracks` has no cells): ask the user. Ask the stage
+  and hook choices first. The ally-shout PR (see M36.2 below) is still open work.
+- Gotchas:
+  - Bevussa (`bevussa_slenderscale`) has no look and no entry in `npc_behaviour.json`, so a stage cannot place her.
+    She is in the Bird scene's line and beats only. A later batch that needs her on the map must add a look first.
+  - The validator's copy check caught a 7-word run that was only a list of three team names. A plain list of names
+    can match the book: reword lists.
+  - `inn_upper_floor` is small: the hallway is rows 5 – 6. Keep [1, 5] (ladder) and [17 – 18, 6] (stairs) free.
+  - `sim_book9_morning_after.gd.uid` and `sim_book9_horde_and_hoard.gd.uid` are now committed. The 17 old `.uid` files
+    in `game/tests/` stay untracked on purpose.
+- Active files: `game/data/canon/book9/chapters/`, `game/tests/sim_book9_horde_and_hoard.gd`, `docs/plans/m36.md`.
+
 ## Just done (2026-11-01, cloud): M36.2 Book 9 canon 5.45, 5.46, 5.47 G (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #261)
 - Two Sonnet reading agents (summaries only, not in git). User picks: no fight stage; two talk hooks (the parade and
   the baseball game), each on a scene stage with beats and a signpost.
