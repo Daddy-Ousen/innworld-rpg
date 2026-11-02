@@ -251,9 +251,24 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_foreshadow` 15, `sim_player_hooks` 6, `sim_kill_book8` 6: all pass. `unit_scene_beats` 5/6: the same old
   ally-shout failure as on main (the scene count test passes). Counts: scenes 51, hooks 139, fights 26. Validator
   book 9: 0 errors, 0 warnings. Full suite not run.
-  - [ ] The user merges the M36.3 PR. Next: M36.4 canon 5.51 G, 5.52, 5.53 (Opus · medium).
+  - [x] The user merged the M36.3 PR (#263).
   - [ ] The user plays days 169 – 170 (the hoard upstairs at 16 – 21 on day 169, Bird's stories at 11 – 15 on day 170).
-- [ ] M36.4 – M36.9 canon batches.
+- [x] M36.4 canon 5.51 G, 5.52, 5.53 and the Watch cells (2026-11-02, cloud, branch `claude/m35-1-stat-sheets-pt83je`,
+  restarted from main after PR #263). Three Sonnet reading agents (summaries only). User picks: no fight stage, no
+  hook; the cells are a new map `liscor_watch_cells`. Text fixes: 5.53 = day 172 (not 171); only the five Hobs are
+  arrested in 5.53 (Erin in 5.54, Numbtongue gets away). Data: 28 events in `book9/chapters/5.51G.json`, `5.52.json`,
+  `5.53.json`; kill Tremborag (day 172); `izril.rains` clears (day 172); system Numbtongue [Bard] 25 +
+  [Lightning Melody]; the cells map, a stair in the barracks, audio; flag goals for the four Hobs, Erin and Calruz;
+  Bird's tower post ends while the tower is smashed. Tests: `sim_book9_greydaths_raid` 6 (new),
+  `sim_book9_horde_and_hoard` 7, `sim_book9_morning_after` 8, `sim_book9_world` 8, `sim_canon_book8` 6,
+  `sim_kill_book8` 6, `unit_canon_db` 7, `unit_data_db` 15, `unit_map_db` 13, `unit_liscor_map` 8,
+  `unit_other_maps` 8, `unit_ambience` 13, `unit_audio_data` 7, `sim_liscor_rooms` 6, `unit_behaviour_db` 6,
+  `sim_npc_day` 3, `sim_book7_moths` 6, `sim_book8_raid_one` 8, `sim_book8_raid_two` 8, `sim_book8_battle_one` 11:
+  all pass. Validator `--all`: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.4 PR. Next: M36.5 canon 5.54, Interlude – Krshia (Opus · medium): the door thieves
+    stage (day 172 night), the jail-visit and Gnoll-gathering hooks, and `erin.in_watch_cells` on her arrest.
+  - [ ] The user looks at the Watch cells (Liscor Watch House, stair in the south-west corner) on day 173.
+- [ ] M36.5 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

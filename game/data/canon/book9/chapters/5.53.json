@@ -1,0 +1,568 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.53",
+	"order": 87,
+	"system": [
+		{
+			"who": "numbtongue",
+			"kind": "level",
+			"name": "[Bard]",
+			"level": 25,
+			"confidence": "confirmed",
+			"note": "He and Rabbiteater gained two levels each that week."
+		},
+		{
+			"who": "numbtongue",
+			"kind": "skill",
+			"name": "[Lightning Melody]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Gained that morning: a short riff calls a delayed bolt from the sky."
+		}
+	],
+	"events": {
+		"b9.numbtongue_calls_down_lightning": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "cave_goblin_refuge",
+			"roles": {
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"cave_goblins.split_among_the_five_hobs",
+					"numbtongue.called_down_lightning"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess. Place: the Book 8 refuge (guess)."
+			},
+			"summary": "In the caves the Cave Goblins have split into five small tribes under the five Hobs. Numbtongue tries his new song Skill, and a bolt of lightning from the sky throws Badarrow off the cave roof unhurt."
+		},
+		"b9.numbtongue_eats_with_the_antinium": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"acolyte": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cook": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue",
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.numbtongue_calls_down_lightning"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"numbtongue.ate_with_the_painted_soldiers",
+					"pawn.jealous_of_the_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Hobs, worried about what comes when the rains stop, send Numbtongue through the door to the inn. At lunch he shares soup with Pawn and the Painted Soldiers, and Pawn is jealous of the Goblins. Erin sends him back with food."
+		},
+		"b9.greybeard_shows_he_is_greydath": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "cave_goblin_refuge",
+			"roles": {
+				"old_goblin": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"greybeard"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.numbtongue_eats_with_the_antinium"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang_hobs.know_greybeard_is_greydath",
+					"headscratcher.nearly_killed_shorthilt"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "An old bearded Goblin brings cheese and is welcomed. When the Hobs spar, Headscratcher loses himself and nearly kills Shorthilt until Numbtongue clubs him with his guitar. Then the old Goblin shows who he is: Greydath of Blades."
+		},
+		"b9.greydath_hunts_the_hobs_across_the_flood": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"old_goblin": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_three": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_four": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"greybeard"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.greybeard_shows_he_is_greydath"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"greydath.tested_the_redfang_hobs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Greydath chases the five Hobs over the flooded valleys from hilltop to hilltop. He wants them to grow into Chieftains and says he will hurt Erin if none of them can even scratch him. He boasts that he once beat Garen."
+		},
+		"b9.the_rains_end": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"izril.rains_ended"
+				],
+				"clear_flags": [
+					"izril.rains"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess. The rain stops in the chase; the flood stays to 5.59."
+			},
+			"summary": "In the afternoon the rain stops at last. The sun comes out over the drowned valleys around Liscor.",
+			"news": "The spring rains have stopped over the Floodplains of Liscor."
+		},
+		"b9.greydath_throws_his_sword_at_the_tower": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"old_goblin": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"greybeard"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.greydath_hunts_the_hobs_across_the_flood"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.watchtower_smashed",
+					"bird.lost_his_left_arms",
+					"numbtongue.remembers_the_goblin_kings_death"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Bird shoots at Greydath's eye from the inn's tower, and the shot wakes in Numbtongue a memory of the Goblin King's death. Greydath dodges, flies into a rage and hurls his greatsword at the tower. Half of it is torn away and the rest falls. Badarrow's arrow finds his shoulder, and Greydath swims off.",
+			"news": "An old Goblin destroyed the watchtower of the Wandering Inn. The Antinium Bird was gravely hurt."
+		},
+		"b9.bird_is_carried_to_the_hive": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.greydath_throws_his_sword_at_the_tower"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.in_the_queens_care"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess. Bird lives (Book 9 Thereafter)."
+			},
+			"summary": "Erin finds Bird on the wet grass with both left arms and his shoulder gone. Potions and Lyonette's shirt slow the bleeding. The Hobs carry him through the door to Liscor and on to the Hive, where Klbkch has him taken to the Queen. He may live or not."
+		},
+		"b9.olesm_arrests_the_hobs_at_the_hive": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_three": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_four": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.greydath_throws_his_sword_at_the_tower"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang_hobs.in_watch_cells",
+					"numbtongue.arrested_at_the_hive",
+					"liscor.under_military_law",
+					"olesm.means_to_seize_the_magic_door"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.53",
+				"confidence": "confirmed",
+				"note": "No heading; day 172 (guess; the plan said 171): 5.52 (Day 9) ends as the rain stops, and Olesm already knows of the trebuchets. day rule march Day + 163 (ADR 0047), guess. Numbtongue gets away (5.54, M36.5); four go to liscor_watch_cells."
+			},
+			"summary": "Outside the Hive Olesm comes with thirty of the Watch and puts the five Hobs under arrest under military law: a Goblin has hurt Bird, and the Goblin Lord is coming. He says the magic door will be taken too. Erin is not arrested here.",
+			"news": "The Watch has arrested the Goblins of the Wandering Inn after the Antinium Bird was hurt."
+		}
+	}
+}

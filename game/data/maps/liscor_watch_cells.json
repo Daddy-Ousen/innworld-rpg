@@ -1,0 +1,436 @@
+{
+	"schema_version": 1,
+	"id": "liscor_watch_cells",
+	"name": "The Watch cells",
+	"location": "liscor_watch_cells",
+	"indoor": true,
+	"confidence": "guess",
+	"note": "M36.4 (ADR 0047, user pick: a new map). Canon (5.53, 5.54, 5.57): Liscor's prison is down a flight of stairs; a short row of big stone cells with cots (some for groups), the far ones with glowing magic bars; the last cell has no bars, only a ring of runes and a barrier, and holds Calruz; Erin's cell is just before his, Headscratcher's is across from hers, Rabbiteater and Shorthilt are on her side. Guesses: the size, the two rows of four cells, the jailer's table and brazier, and that the stair leads from the Watch House barracks (the text does not say whose stair it is). Only the cells in use have a cot drawn (every object must be reachable). Bars and the rune door are drawn with the cage art; the gap where a prisoner stands is not solid, so the player can talk through the bars (talk reach is one tile).",
+	"zones": {},
+	"exits": [
+		{
+			"at": [
+				2,
+				5
+			],
+			"to": "liscor_watch_barracks",
+			"arrive": [
+				3,
+				12
+			],
+			"minutes": 0
+		}
+	],
+	"objects": [
+		{
+			"id": "cells_stairs_up",
+			"kind": "stairs",
+			"at": [
+				2,
+				5
+			],
+			"name": "Stairs up to the Watch House",
+			"actions": []
+		},
+		{
+			"id": "cells_guard_table",
+			"kind": "table",
+			"at": [
+				2,
+				8
+			],
+			"name": "Jailer's table",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cells_guard_bench",
+			"kind": "bench",
+			"at": [
+				2,
+				9
+			],
+			"name": "Bench",
+			"actions": []
+		},
+		{
+			"id": "cells_brazier",
+			"kind": "brazier",
+			"at": [
+				1,
+				2
+			],
+			"name": "Brazier",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_one_bars_1",
+			"kind": "cage",
+			"at": [
+				5,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_one_bars_2",
+			"kind": "cage",
+			"at": [
+				6,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_one_bars_3",
+			"kind": "cage",
+			"at": [
+				7,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_one_bars_1",
+			"kind": "cage",
+			"at": [
+				5,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_one_bars_2",
+			"kind": "cage",
+			"at": [
+				6,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_one_bars_3",
+			"kind": "cage",
+			"at": [
+				7,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_two_bars_1",
+			"kind": "cage",
+			"at": [
+				9,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_two_bars_2",
+			"kind": "cage",
+			"at": [
+				10,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": []
+		},
+		{
+			"id": "cell_north_two_bars_3",
+			"kind": "cage",
+			"at": [
+				11,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_two_cot",
+			"kind": "bedroll",
+			"at": [
+				11,
+				1
+			],
+			"name": "Cot",
+			"actions": []
+		},
+		{
+			"id": "cell_south_two_bars_1",
+			"kind": "cage",
+			"at": [
+				9,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_two_bars_2",
+			"kind": "cage",
+			"at": [
+				10,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_two_bars_3",
+			"kind": "cage",
+			"at": [
+				11,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_three_bars_1",
+			"kind": "cage",
+			"at": [
+				13,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_three_bars_2",
+			"kind": "cage",
+			"at": [
+				14,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": []
+		},
+		{
+			"id": "cell_north_three_bars_3",
+			"kind": "cage",
+			"at": [
+				15,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_three_cot",
+			"kind": "bedroll",
+			"at": [
+				15,
+				1
+			],
+			"name": "Cot",
+			"actions": []
+		},
+		{
+			"id": "cell_south_three_bars_1",
+			"kind": "cage",
+			"at": [
+				13,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_three_bars_2",
+			"kind": "cage",
+			"at": [
+				14,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": []
+		},
+		{
+			"id": "cell_south_three_bars_3",
+			"kind": "cage",
+			"at": [
+				15,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_three_cot",
+			"kind": "bedroll",
+			"at": [
+				13,
+				9
+			],
+			"name": "Cot",
+			"actions": []
+		},
+		{
+			"id": "cell_north_four_bars_1",
+			"kind": "cage",
+			"at": [
+				17,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_four_bars_2",
+			"kind": "cage",
+			"at": [
+				18,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": []
+		},
+		{
+			"id": "cell_north_four_bars_3",
+			"kind": "cage",
+			"at": [
+				19,
+				3
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_north_four_cot",
+			"kind": "bedroll",
+			"at": [
+				19,
+				1
+			],
+			"name": "Cot",
+			"actions": []
+		},
+		{
+			"id": "cell_south_four_bars_1",
+			"kind": "cage",
+			"at": [
+				17,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_four_bars_2",
+			"kind": "cage",
+			"at": [
+				18,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": []
+		},
+		{
+			"id": "cell_south_four_bars_3",
+			"kind": "cage",
+			"at": [
+				19,
+				7
+			],
+			"name": "Glowing cell bars",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "cell_south_four_cot",
+			"kind": "bedroll",
+			"at": [
+				17,
+				9
+			],
+			"name": "Cot",
+			"actions": []
+		},
+		{
+			"id": "calruz_cell_runes_1",
+			"kind": "cage",
+			"at": [
+				20,
+				4
+			],
+			"name": "Rune-ringed cell door",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "calruz_cell_runes_2",
+			"kind": "cage",
+			"at": [
+				20,
+				5
+			],
+			"name": "Rune-ringed cell door",
+			"actions": []
+		},
+		{
+			"id": "calruz_cell_runes_3",
+			"kind": "cage",
+			"at": [
+				20,
+				6
+			],
+			"name": "Rune-ringed cell door",
+			"actions": [],
+			"solid": true
+		},
+		{
+			"id": "calruz_cell_cot",
+			"kind": "bedroll",
+			"at": [
+				22,
+				7
+			],
+			"name": "Cot",
+			"actions": []
+		}
+	],
+	"legend": {
+		".": "cave_floor",
+		"^": "stone_cliff"
+	},
+	"rows": [
+		"^^^^^^^^^^^^^^^^^^^^^^^^",
+		"^...^...^...^...^...^^^^",
+		"^...^...^...^...^...^^^^",
+		"^...^...^...^...^...^..^",
+		"^......................^",
+		"^......................^",
+		"^......................^",
+		"^...^...^...^...^...^..^",
+		"^...^...^...^...^...^^^^",
+		"^...^...^...^...^...^^^^",
+		"^^^^^^^^^^^^^^^^^^^^^^^^"
+	]
+}

@@ -1,0 +1,571 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.51G",
+	"order": 85,
+	"system": [],
+	"events": {
+		"b9.rags_finds_quietstab_in_the_ditch": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tremborag_kills_quietstab_at_the_latrines"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.swore_to_kill_tremborag"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "Dawn of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At dawn Rags's warriors find Quietstab's body in the latrine ditch. Tremborag grins at her across the camp. She goes for him, and Redscar and Pyrite hold her back."
+		},
+		"b9.reiss_tells_osthia_he_let_it_happen": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord",
+					"osthia_blackwing"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tremborag_kills_quietstab_at_the_latrines"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.given_a_carved_ring_by_reiss",
+					"reiss.let_quietstab_die_to_win_rags"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "Morning of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. Her ring is white in one place and black in another (plan conflict 14)."
+			},
+			"summary": "Inside a spell that hides their words, Reiss tells his prisoner Osthia that he watched the murder unseen and let it happen, to win Rags. Osthia hits him. He gives her a ring of white wood he carved for her."
+		},
+		"b9.rags_springs_her_pikes_on_tremborag": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shaman": {
+					"prefer": [
+						"ulvama"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.rags_finds_quietstab_in_the_ditch"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"mountain_city.ambushed_by_rags",
+					"reiss.offered_rags_his_draug"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "Morning of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "On the march Rags's pike wall and crossbows ambush the Mountain City tribe, while Human mages pound its rear. Rags pulls back, fighting as she goes, and tells Reiss that Tremborag dies tonight."
+		},
+		"b9.tyrion_burns_magnolias_letter": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble_two": {
+					"prefer": [
+						"jericha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.burned_magnolias_message",
+					"tyrion.called_the_gold_rank_captains"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Tyrion counts some eight thousand Goblin dead, most of them from the mountain. He burns a message from Magnolia Reinhart unmoved, and calls the Gold-rank captains to him, but not Elia Arcsinger."
+		},
+		"b9.elia_shoots_tremborag_and_his_tribe_leaves_him": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"elia_arcsinger"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_burns_magnolias_letter"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tremborag.abandoned_by_his_tribe",
+					"mountain_city.scattered_by_tyrion"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "Late morning of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Elia Arcsinger puts one arrow in Tremborag's back and a great fireball falls on his tribe. The Human riders scatter it and drive him south. His Hobs and Ulvama leave him, and he runs for miles alone."
+		},
+		"b9.tremborag_tells_rags_of_the_circle": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"great_chieftain": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags",
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.elia_shoots_tremborag_and_his_tribe_leaves_him"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.knows_greydath_hid_in_the_mountain",
+					"rags.sees_the_circle_of_goblin_killing"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; about eight miles south of the mountain. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Rags finds Tremborag spent on the plain. He tells her that Greydath once hid in his mountain as Greybeard, and how the old Goblin Lords served the Kings. Rags sees that the killing goes round and round, and rides away without striking."
+		},
+		"b9.tyrion_lances_tremborag": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"tremborag"
+					],
+					"fallback_tags": []
+				},
+				"killer": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"elia_arcsinger"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tremborag"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.elia_shoots_tremborag_and_his_tribe_leaves_him"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tremborag.slain_by_tyrion"
+				],
+				"kill": [
+					"tremborag"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. Yitton confirms the death in 5.52."
+			},
+			"summary": "Tremborag kills Gold-rank adventurers and mages who close on him. Tyrion rides him down and drives his lance through his chest. The Great Chieftain gets up, walks north toward his mountain, sits down and dies.",
+			"news": "Tremborag, Great Chieftain of the Goblin mountain, has been slain by Lord Tyrion Veltras on the plains of the north."
+		},
+		"b9.half_the_mountain_tribe_joins_rags": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"redfang": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_tremborag"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.took_in_half_the_mountain_city",
+					"mountain_city.tribe_broken_up"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Rags weeps over Tremborag and speaks of the circle. A little over half of the Mountain City tribe comes to her; the rest go to Garen or to Reiss."
+		},
+		"b9.azkerash_strikes_osthia_with_a_deathbolt": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"captive": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.half_the_mountain_tribe_joins_rags"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.struck_by_a_deathbolt",
+					"azkerash.spoke_through_reiss"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. Not a kill: she lives ([False Death]) and is a Pallass [Captain] in Thereafter (plan conflict 5)."
+			},
+			"summary": "Osthia calls it a cycle, and Reiss says Velan used that word. Then the Necromancer looks out through Reiss's eyes, names Osthia an old failure of his apprentice and strikes her down with a death spell. Garen reaches for his sword."
+		},
+		"b9.tyrion_sends_word_the_goblin_lord_is_next": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_tremborag"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.paraded_tremborags_head",
+					"north.told_the_goblin_lord_is_next"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.51G",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Tyrion has Tremborag's head carried through his army and sends word to the northern cities that the Goblin Lord comes next."
+		}
+	}
+}
