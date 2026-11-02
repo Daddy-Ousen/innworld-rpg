@@ -1,5 +1,32 @@
 # Handoff
 
+## Just done (2026-11-02, cloud): M36.4 Book 9 canon 5.51 G, 5.52, 5.53 + the Watch cells (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #263)
+- Three Sonnet reading agents (summaries only, not in git). User picks: no fight stage, no hook, the cells are a new
+  map. The generator script was in the session scratchpad (gone); edit the JSON by hand from now on.
+- Data: `game/data/canon/book9/chapters/5.51G.json` (10), `5.52.json` (10), `5.53.json` (8). Kill: Tremborag
+  (day 172). `izril.rains` clears on day 172 (`b9.the_rains_end`); `izril.flood` stays until 5.59 (M36.7).
+  Map `game/data/maps/liscor_watch_cells.json`; stair at [2, 12] in `liscor_watch_barracks`; audio mood and bed.
+  Goals in `game/data/npc_behaviour.json`: Headscratcher [18, 7], Badarrow [14, 7], Rabbiteater [10, 3],
+  Shorthilt [14, 3], Erin [18, 3], Calruz [20, 5].
+- Tests: `game/tests/sim_book9_greydaths_raid.gd` (new, 6). List and results in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.5 canon 5.54, Interlude – Krshia (Opus · medium). Ask the stage and hook
+  choices first (plan: the door thieves stage at night, day 172; hooks: the jail visit, days 172 – 173, and
+  Krshia's Gnoll gathering, day 173).
+- Gotchas for M36.5 and M36.6:
+  - Erin's 5.54 arrest event must set `erin.in_watch_cells`; her goal is already there. 5.57 must set
+    `erin.freed_from_the_cells` and `redfang_hobs.freed_from_the_cells` (M36.6). Calruz stays (`calruz.in_watch_prison`).
+  - Numbtongue is not in the cells: he gets away during the arrest (5.54) and fights the door thieves on the lake
+    shore that night. He has no Book 9 goal yet; his basement goals still hold. M36.5 may give him one (shore/off map).
+  - The 5.54 arrest may be the evening of day 172, not a morning (one agent read "morning"; 5.53 ends in the
+    afternoon). Check before setting Erin's day.
+  - Jail-visit hook: the prisoners stand at a gap in their bars; talk from the corridor row (y 4 - 6) below or above
+    them. A scene stage for the hook can place NPCs only on free floor: the gaps are the only cell tiles you can reach.
+  - `unit_map_db` wants every map object reachable: do not put objects in the closed cells.
+  - Bird: no tower post while `wandering_inn.watchtower_smashed` is set (also fixes Book 7). He is in the Hive.
+  - Osthia: struck by a death spell in 5.51 G, not killed (no [False Death] named in these chapters).
+- Active files: `game/data/canon/book9/chapters/`, `game/data/maps/liscor_watch_cells.json`,
+  `game/data/npc_behaviour.json`, `game/tests/sim_book9_greydaths_raid.gd`, `docs/plans/m36.md`.
+
 ## Just done (2026-11-01, cloud): M36.3 Book 9 canon 5.48 G, 5.49, 5.50 G, Interlude – Bird (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #262)
 - Two Sonnet reading agents (summaries only, not in git). User picks: no fight stage; 5.49 = day 169, Bird = day 170;
   two talk hooks on scene stages: the hoard (`inn_upper_floor`, 16 – 21) and Bird's stories (`inn_interior`, 11 – 15).
