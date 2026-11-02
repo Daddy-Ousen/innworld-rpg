@@ -1,0 +1,657 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.52",
+	"order": 86,
+	"system": [],
+	"events": {
+		"b9.erin_punches_the_fake_dragon": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"magician": {
+					"prefer": [
+						"eltistiman_verdue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"octavia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"eltistiman_verdue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"eltistiman.nose_broken_by_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Before dawn; 5.52 opens on March Day 9 = day 172 (guess). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Before dawn Erin opens the Celum door and a [Magician] in Dragon guise tries to scare her. She punches him and breaks his nose."
+		},
+		"b9.liscor_reads_tyrions_march": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.knows_tyrion_drives_the_goblins_south"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Liscor's strategists see that Tyrion is herding the Goblin tribes into Drake lands. At his pace he is four days away."
+		},
+		"b9.durene_wakes_at_riverfarm": {
+			"tier": 2,
+			"window": {
+				"earliest": 171,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "riverfarm",
+			"roles": {
+				"paladin": {
+					"prefer": [
+						"durene"
+					],
+					"fallback_tags": []
+				},
+				"witch": {
+					"prefer": [
+						"wiskeria"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"durene"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"durene.woke_after_the_goblin_battle",
+					"laken.rode_south_to_tyrion"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "The scene is headed 'Day ???'. Laken reaches Tyrion on the night of Day 9, so Durene wakes on about Day 8 - 9 (days 171 - 172). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Durene wakes in Riverfarm after almost a week. Wiskeria tells her the army lost, and that Laken rode south to Tyrion two days ago with Gamel, Tessia and some thirty villagers."
+		},
+		"b9.the_teams_split_loot_through_the_goblin_team": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_adventurers_guild",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"receptionist": {
+					"prefer": [
+						"selys"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"adventurer": {
+					"prefer": [
+						"revi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"adventurer_two": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guildmistress": {
+					"prefer": [
+						"tekshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"selys"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"adventurers.use_the_goblin_team_tax_gap"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. Order inside the day is a guess."
+			},
+			"summary": "The Guild hands out the lottery results for the Raskghar loot. Revi and Yvlon find a tax gap: loot shared with the Redfangs' registered team is taxed less."
+		},
+		"b9.olesm_warns_the_inn_the_goblins_are_coming": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm",
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.warned_the_goblins_are_coming"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At the inn Olesm says the rains will end soon and the Goblin armies will reach Liscor in about four days. Zevara says the walls will hold."
+		},
+		"b9.laken_meets_tyrions_nobles": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "tyrion_war_camp",
+			"roles": {
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble_two": {
+					"prefer": [
+						"erill_fienst"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble_three": {
+					"prefer": [
+						"ieka_imarris"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble_four": {
+					"prefer": [
+						"gralton_radivaek"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble_five": {
+					"prefer": [
+						"jericha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"laken_godart",
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.durene_wakes_at_riverfarm"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.at_tyrions_camp"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Night of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "On the night after Tremborag falls, Laken reaches Tyrion's camp and meets his nobles."
+		},
+		"b9.tyrion_reveals_the_trebuchet_plan": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "tyrion_war_camp",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				},
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.laken_meets_tyrions_nobles"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.plans_to_breach_liscor_with_trebuchets",
+					"laken.built_trebuchets_for_tyrion"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Night of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Over dinner Tyrion tells his nobles the true aim. The trebuchets will 'misfire' and breach Liscor's walls, the Goblins will storm in, and the Humans will take the city back. Laken has built thirteen; Tyrion wants many more."
+		},
+		"b9.a_letter_warns_olesm_of_trebuchets": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"courier": {
+					"prefer": [
+						"fals"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"adventurer": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"adventurer_two": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.knows_of_the_trebuchets"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. The sender is not named; Tyrion blames Magnolia. The book order of the dinner and the letter is odd (plan conflict 14)."
+			},
+			"summary": "Jelaqua and Seborn bring in Raskghar bodies, and Fals delivers a letter. Inside, three underlined words say the Human lord has trebuchets. Olesm runs for the city."
+		},
+		"b9.liscor_warns_the_walled_cities": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_city_hall",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.a_letter_warns_olesm_of_trebuchets"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"drakes.warned_of_the_trebuchets",
+					"liscor.called_on_the_antinium"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Olesm brings the warning to city hall. Embria goes to tell High Command, Ilvriss sends word to the Walled Cities, and Zevara calls for the Antinium."
+		},
+		"b9.tyrion_toasts_the_fall_of_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "tyrion_war_camp",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				},
+				"noble": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"emperor": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_reveals_the_trebuchet_plan"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.siege_in_four_days"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.52",
+				"confidence": "confirmed",
+				"note": "Night of March Day 9 = day 172, day rule march Day + 163 (ADR 0047), guess. Four days from Day 9 is Day 13 = day 176, the battle."
+			},
+			"summary": "Tyrion raises a toast: in two days he will announce the war, and in four the Goblin Lord's siege begins and Liscor falls. Yitton and Laken both feel caught."
+		}
+	}
+}
