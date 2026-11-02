@@ -118,7 +118,9 @@ func test_staying_away_still_sets_the_canon_to_day_172() -> void:
 	for id: String in ["osthia_blackwing", "bird", "numbtongue", "greybeard", "calruz"]:
 		assert_true(gs.world.is_alive(_db.canon, id), id + " lives")
 	assert_true(gs.flags.has("calruz.awaits_trial"), "no verdict for Calruz")
-	assert_false(gs.flags.has("erin.in_watch_cells"), "Erin is not arrested in 5.53")
+	assert_false((_db.canon.events[ARREST]["effects"]["set_flags"] as Array).has("erin.in_watch_cells"),
+			"5.53 does not jail Erin")
+	assert_true(gs.flags.has("erin.in_watch_cells"), "she is jailed the same day in 5.54 (M36.5)")
 
 
 func test_numbtongue_reaches_bard_25() -> void:
@@ -166,7 +168,8 @@ func test_the_hobs_stand_in_the_cells_after_the_arrest() -> void:
 	assert_eq(_area_of(gs, "calruz"), CELLS, "Calruz waits in the rune cell")
 	assert_eq(_pos_of(gs, "calruz"), SPOTS["calruz"])
 	assert_ne(_area_of(gs, "numbtongue"), CELLS, "Numbtongue gets away (5.54)")
-	assert_ne(_area_of(gs, "erin_solstice"), CELLS, "Erin is not jailed yet")
+	assert_eq(_area_of(gs, "erin_solstice"), CELLS, "Erin is jailed too (5.54, M36.5)")
+	assert_eq(_pos_of(gs, "erin_solstice"), SPOTS["erin_solstice"])
 	assert_ne(_area_of(gs, "bird"), "inn_watchtower", "no tower post once the tower is smashed")
 
 

@@ -28,7 +28,7 @@
 		{"id": "albez_door", "kind": "door", "at": [2, 12], "name": "Magic door", "actions": [],
 			"when_flags": ["albez_door.at_wandering_inn"],
 			"portal": {"links": [
-				{"id": "celum", "to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"]},
+				{"id": "celum", "to": "celum_stitchworks", "pos": [9, 3], "power_flags": ["erin.magical_grounds"], "unless_flags": ["albez_door.celum_stone_taken"]},
 				{"id": "pallass", "to": "pallass_door_street", "pos": [5, 2], "power_flags": ["erin.magical_grounds"], "when_flags": ["albez_door.anchor_at_pallass"]},
 				{"id": "liscor", "to": "liscor_watch", "pos": [5, 12], "power_flags": ["erin.magical_grounds"], "when_flags": ["albez_door.anchor_at_liscor_wall"]},
 				{"id": "raskghar_camp", "to": "raskghar_camp", "pos": [15, 2], "name": "The Raskghar camp", "power_flags": ["erin.magical_grounds"], "when_flags": ["raskghar.camp_raid_failed"], "unless_flags": ["raskghar.broken"]}]}},

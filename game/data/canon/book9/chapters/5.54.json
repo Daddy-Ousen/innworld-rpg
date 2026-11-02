@@ -1,0 +1,696 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.54",
+	"order": 88,
+	"system": [],
+	"events": {
+		"b9.erin_fights_the_watch_and_is_jailed": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guardsman": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"guardswoman": {
+					"prefer": [
+						"beilmark"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_three": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_four": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.olesm_arrests_the_hobs_at_the_hive"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.in_watch_cells",
+					"erin.punched_olesm",
+					"numbtongue.escaped_the_watch"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess. She has her own cell, near the Hobs (5.54)."
+			},
+			"summary": "Erin punches Olesm and a Guard and shouts at the Hobs to run. The Watch catches four of them. Numbtongue yells that Raskghar are attacking, runs up the wall and jumps off. Relc drops Erin with one tap, and Olesm sends her to the cells too.",
+			"news": "The innkeeper of the Wandering Inn struck a Watch officer and was jailed. One Goblin escaped over the walls."
+		},
+		"b9.the_five_queens_save_bird": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"archer": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"centenium": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"bird"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.bird_is_carried_to_the_hive"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"bird.saved_by_the_five_queens",
+					"bird.learned_to_cry"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the Free Queen's chamber Bird is dying. The Grand Queen comes by a living vessel, and all five Queens agree to save the Worker. The Silent Queen guides the surgery with new organs and chitin. Bird lives, and learns to cry."
+		},
+		"b9.the_hives_plan_to_retake_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"commander": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": []
+				},
+				"centenium": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"klbkch"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_five_queens_save_bird"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"antinium.plan_to_retake_liscor_after_the_breach",
+					"klbkch.would_obey_against_his_friends"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Hives make a plan: Liscor's Antinium fight on the walls and fall back once they are breached, then the other Hives tunnel in and take the city back as heroes. Klbkch says he would turn on his friends if ordered."
+		},
+		"b9.azkerash_orders_reiss_to_take_liscor": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"goblin_lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chosen": {
+					"prefer": [
+						"bea"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chosen_two": {
+					"prefer": [
+						"venitra"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.ordered_to_take_liscor",
+					"azkerash.lent_bea_and_venitra"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess. Osthia's body is carried off here, but she lives ([False Death], plan conflict 5): no kill."
+			},
+			"summary": "Sharing Reiss's body, the Necromancer orders him to take Liscor and promises to raise every dead thing on the field. He lends Bea and Venitra. Reiss agrees, but keeps his own name in secret."
+		},
+		"b9.erin_and_the_hobs_wait_in_the_cells": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_cells",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"prisoner": {
+					"prefer": [
+						"calruz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain_two": {
+					"prefer": [
+						"keldrass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_fights_the_watch_and_is_jailed"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"calruz.spoke_to_erin_in_the_cells",
+					"gold_ranks.jailed_after_the_lottery_brawl"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the cells below the Watch House Erin is told she may be out in hours, or tomorrow, with a fine. Bevussa, Keldrass and other Gold-ranks sit nearby after a brawl over the lottery. Behind his runes Calruz says he knows her, and she turns away. Late at night she talks with Headscratcher."
+		},
+		"b9.niers_marks_the_inn_on_his_map": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": []
+				},
+				"student": {
+					"prefer": [
+						"marian"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"student_two": {
+					"prefer": [
+						"venaz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"student_three": {
+					"prefer": [
+						"wil"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"niers_astoragon"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"niers.marked_the_inn_on_his_map"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In his war room in Baleros, Niers Astoragon talks his students through the coming siege. He marks a dot just east of Liscor, where his unknown chess partner must be."
+		},
+		"b9.olesm_shames_the_assembly_on_the_scrying": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "pallass",
+			"roles": {
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": []
+				},
+				"senator": {
+					"prefer": [
+						"errif_jealwind"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commentator": {
+					"prefer": [
+						"sir_relz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commentator_two": {
+					"prefer": [
+						"noass"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"magician": {
+					"prefer": [
+						"eltistiman_verdue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"olesm"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"olesm.broadcast_to_the_world",
+					"walled_cities.pledged_armies_to_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Olesm goes through the door to Pallass. Seen by the whole world on Wistram's scrying, he shouts down the stalling Senator Errif and says true Drakes do not run. Oteslia, Zeres and Manus promise armies, and Pallass soldiers start to come through the door.",
+			"news": "On a scrying seen across the world, Liscor's [Strategist] Olesm shamed Pallass's Assembly. Zeres, Oteslia and Manus pledged armies to Liscor."
+		},
+		"b9.typhenous_steals_the_door": {
+			"tier": 1,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": []
+				},
+				"magician": {
+					"prefer": [
+						"eltistiman_verdue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"typhenous"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.olesm_shames_the_assembly_on_the_scrying"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"albez_door.stolen",
+					"typhenous.betrayed_the_inn",
+					"albez_door.pallass_stone_shattered"
+				],
+				"clear_flags": [
+					"albez_door.at_wandering_inn",
+					"albez_door.anchor_at_pallass"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Night of Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess. Hired through 'Big E' (Erill) and a Lady; the Pallass link is lost."
+			},
+			"summary": "At night Typhenous puts the inn's guards to sleep with a spell in their food. He lets in hired thieves, four polite Brothers and five masked Sisters, who knock out the [Magician] and carry the door to boats. Typhenous palms the Pallass stone and leaves broken shards behind.",
+			"news": "The magic door of the Wandering Inn was stolen in the night. A horn sounded on Liscor's walls."
+		},
+		"b9.numbtongue_ambushes_the_door_thieves": {
+			"tier": 2,
+			"window": {
+				"earliest": 172,
+				"latest": 172,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.typhenous_steals_the_door"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"numbtongue.won_back_the_door",
+					"door_thieves.all_dead",
+					"cave_goblins.number_in_the_thousands"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.54",
+				"confidence": "confirmed",
+				"note": "Night of Day 9 = 172; 5.54 runs on from 5.53 to that night. day rule march Day + 163 (ADR 0047), guess. No thief has a record: no kill effects."
+			},
+			"summary": "On the north shore Numbtongue plays, and lightning blows up the Sisters' boat. Cave Goblin arrows kill the Brothers but one, who fights Numbtongue alone and loses. Numbtongue sits by Erin's door among thousands of Cave Goblins.",
+			"xp_window": {
+				"boost": 1,
+				"hours": [
+					22,
+					24
+				]
+			},
+			"foreshadow": {
+				"days_before": 0,
+				"text": "Boats were seen on the lake after dark, rowing north toward the road and the Goblin caves."
+			},
+			"stage": {
+				"kind": "fight",
+				"area": "road_camp",
+				"hours": [
+					22,
+					24
+				],
+				"foes": [
+					{
+						"enemy": "brothers_thug",
+						"pos": [
+							21,
+							6
+						]
+					},
+					{
+						"enemy": "brothers_thug",
+						"pos": [
+							21,
+							8
+						]
+					},
+					{
+						"enemy": "chell_sister",
+						"pos": [
+							27,
+							6
+						]
+					},
+					{
+						"enemy": "chell_sister",
+						"pos": [
+							27,
+							8
+						]
+					}
+				],
+				"line": "Two boats run aground below the north road. Masked women with bows and polite men with clubs haul a door out of the dark.",
+				"waves": [
+					{
+						"after_seconds": 20,
+						"from": [
+							16,
+							2
+						],
+						"allies": [
+							"numbtongue"
+						],
+						"helpers": [
+							"cave_goblin",
+							"cave_goblin"
+						],
+						"line": "A guitar plays in the dark of the pass. Lightning answers from the sky, and Cave Goblins pour down to the shore."
+					},
+					{
+						"after_seconds": 50,
+						"left_at_most": 3,
+						"from": [
+							24,
+							7
+						],
+						"foes": [
+							"brothers_thug",
+							"chell_sister"
+						],
+						"line": "The last Brother closes his friends' eyes, hums a thieves' rhyme and walks up to meet the Goblin."
+					}
+				],
+				"beats": [
+					{
+						"after_seconds": 25,
+						"npc": "numbtongue",
+						"line": "That is Erin's door. Put it down."
+					},
+					{
+						"after_seconds": 70,
+						"line": "The Cave Goblins watch in silence while Numbtongue and the last Brother fight alone."
+					}
+				],
+				"note": "M36.5 (user pick, 2026-11-02): the canon shore is on the lake north of Liscor by the Cave Goblins' pass; the Floodplains map is under water on day 172, so road_camp (the north road in the foothills) stands in. Six foes stand in for the nine thieves (no records). Hours: a guess."
+			}
+		}
+	}
+}

@@ -862,9 +862,11 @@
 		},
 		"numbtongue": {
 			"confidence": "guess",
-			"notes": "M18.3. A Redfang Hobgoblin who reads (4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses.",
+			"notes": "M18.3. A Redfang Hobgoblin who reads (4.34). Off the map in the wilds until they come to the inn (redfang.lodge_in_the_inn_basement, day 115); then they sleep in the inn basement and keep to it by day. Seats and hours are guesses. M36.5: after he gets away from the Watch (5.54, numbtongue.escaped_the_watch) he is with the Cave Goblins in the hills north of Liscor (off the map) until Erin talks him down outside the walls (5.57, numbtongue.stood_down_for_erin, set in M36.6).",
 			"combat": {"agility": 4, "hp": 40, "accuracy": 8, "evasion": 4, "armor": 3, "damage": [4, 8]},
 			"goals": [
+				{"goal": "off_map", "base": 6, "when_flags": ["numbtongue.escaped_the_watch"], "unless_flags": ["numbtongue.stood_down_for_erin"],
+					"target": {"off_map": "wilds"}},
 				{"goal": "sleep", "base": 3, "hours": [[21, 8, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],
 					"target": {"area": "inn_basement", "pos": [10, 2]}},
 				{"goal": "guard_post", "base": 2, "hours": [[8, 21, 1]], "when_flags": ["redfang.lodge_in_the_inn_basement"],

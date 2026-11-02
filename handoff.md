@@ -1,5 +1,27 @@
 # Handoff
 
+## Just done (2026-11-02, cloud): M36.5 Book 9 canon 5.54, Interlude – Krshia (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #264)
+- Two Sonnet reading agents (summaries only, not in git). User picks: fight stage on `road_camp` (22 – 24, day 172,
+  XP tier 1); scene hooks in `liscor_watch_cells` (8 – 13, day 173) and `liscor_market` (17 – 20, day 173).
+- Data: `game/data/canon/book9/chapters/5.54.json` (9), `interlude_krshia.json` (6); the Celum link in
+  `game/data/maps/inn_interior.json` has `unless_flags: albez_door.celum_stone_taken`; Numbtongue's off-map goal in
+  `game/data/npc_behaviour.json`. The generator script was in the session scratchpad (gone): edit JSON by hand.
+- Tests: `game/tests/sim_book9_door_thieves.gd` (new, 8); counts in `unit_scene_beats`, `unit_foreshadow`,
+  `sim_player_hooks`. List and results in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.6 canon 5.55 G, 5.56 G, 5.57 (Sonnet · high). Ask the stage and hook
+  choices first (the plan has none for M36.6).
+- Gotchas:
+  - Canon events resolve at the END of their day. A stage cannot wait (`when_flags`) on a flag that a same-day event
+    sets, and NPC flag goals only move the next day. Put such a scene on the next day, or drop the gate.
+  - M36.6 (5.57) must set `erin.freed_from_the_cells` and `redfang_hobs.freed_from_the_cells` (the Watch frees Erin,
+    then the four Hobs; Calruz stays), and `numbtongue.stood_down_for_erin` (Erin talks Numbtongue down outside the
+    walls; he leads about 24,000 Cave Goblins). Until then Numbtongue is off the map.
+  - The door: `albez_door.at_wandering_inn` is set again on day 173 but no link works (Pallass lost, Celum stone
+    taken; the Liscor link waits for `albez_door.anchor_at_liscor_wall`, 5.60, M36.8).
+  - `floodplains_south` and `liscor_gate` are about 90 % water while `izril.flood` is set (until 5.59).
+  - `unit_scene_beats` still fails on the ally-shout rule (old; the user's fix waits for its own PR).
+- Active files: `game/data/canon/book9/chapters/`, `game/tests/sim_book9_door_thieves.gd`, `docs/plans/m36.md`.
+
 ## Just done (2026-11-02, cloud): M36.4 Book 9 canon 5.51 G, 5.52, 5.53 + the Watch cells (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #263)
 - Three Sonnet reading agents (summaries only, not in git). User picks: no fight stage, no hook, the cells are a new
   map. The generator script was in the session scratchpad (gone); edit the JSON by hand from now on.

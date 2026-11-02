@@ -265,10 +265,24 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `unit_other_maps` 8, `unit_ambience` 13, `unit_audio_data` 7, `sim_liscor_rooms` 6, `unit_behaviour_db` 6,
   `sim_npc_day` 3, `sim_book7_moths` 6, `sim_book8_raid_one` 8, `sim_book8_raid_two` 8, `sim_book8_battle_one` 11:
   all pass. Validator `--all`: 0 errors, 0 warnings. Full suite not run.
-  - [ ] The user merges the M36.4 PR. Next: M36.5 canon 5.54, Interlude – Krshia (Opus · medium): the door thieves
-    stage (day 172 night), the jail-visit and Gnoll-gathering hooks, and `erin.in_watch_cells` on her arrest.
+  - [x] The user merged the M36.4 PR (#264).
   - [ ] The user looks at the Watch cells (Liscor Watch House, stair in the south-west corner) on day 173.
-- [ ] M36.5 – M36.9 canon batches.
+- [x] M36.5 canon 5.54, Interlude – Krshia (2026-11-02, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted
+  from main after PR #264). Two Sonnet reading agents (summaries only). User picks: the door-thieves fight stage on
+  `road_camp` (the Floodplains map is flooded), XP tier 1; two scene hooks: the jail visit (`liscor_watch_cells`,
+  day 173) and the Gnolls' spark (`liscor_market`, day 173). Data: 15 events in `book9/chapters/5.54.json` and
+  `interlude_krshia.json`; no named kill; Erin jailed (day 172), Numbtongue off map with the Cave Goblins; the door
+  stolen and back; the Pallass link lost; the Celum link closes; system Krshia [Royal Shopkeeper] + 2 Skills.
+  Tests: `sim_book9_door_thieves` 8 (new), `sim_book9_greydaths_raid` 6 (2 checks updated: Erin is now jailed on
+  day 172), `sim_book9_morning_after` 8, `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7,
+  `unit_data_db` 15, `unit_xp_window` 12, `unit_foreshadow` 15, `sim_player_hooks` 6, `unit_combat_db` 14,
+  `unit_map_db` 13, `unit_portal` 11, `unit_portal_links` 10, `unit_behaviour_db` 6, `sim_npc_day` 3: all pass.
+  `unit_scene_beats` 5/6: the old ally-shout failure (also on main; scene and fight counts pass). Counts: scenes 53,
+  fights 27, hooks 141. Validator `--all`: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.5 PR. Next: M36.6 canon 5.55 G, 5.56 G, 5.57 (Sonnet · high): set
+    `erin.freed_from_the_cells`, `redfang_hobs.freed_from_the_cells`, `numbtongue.stood_down_for_erin`.
+  - [ ] The user plays day 172 night (thieves at `road_camp`, 22 – 24) and day 173 (the cells 8 – 13, the market 17 – 20).
+- [ ] M36.6 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
