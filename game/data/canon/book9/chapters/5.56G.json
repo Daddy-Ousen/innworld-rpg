@@ -1,0 +1,375 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.56G",
+	"order": 91,
+	"system": [
+		{
+			"who": "pyrite",
+			"kind": "class",
+			"name": "[Magestone Chieftain]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "He names it at the end of the chapter. Unclear if it is new in this chapter."
+		}
+	],
+	"events": {
+		"b9.pyrite_falls_to_seven_deathbolts": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.reiss_deathbolts_rags"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.struck_by_seven_deathbolts",
+					"pyrite.fed_on_magestones_to_survive",
+					"reiss.reattached_his_hand"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Pyrite is not killed (his death is 5.62)."
+			},
+			"summary": "Pyrite kills many of Reiss's Hobs and holds off the [Deathbolt]s. Reiss fights in the style of Zel Shivertail with [Bone Claws] and [Draug Strength], breaks Pyrite's ribs and drops him with seven bolts. Pyrite lives, because he ate the magic in his gems."
+		},
+		"b9.garen_cuts_through_tyrions_vanguard": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.broke_through_the_human_vanguard",
+					"garen.killed_three_human_commanders",
+					"garen.heads_south_past_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. No kill effect: Geim, Helica and Sir Meilmen have no records (M36.1 pick)."
+			},
+			"summary": "Garen does not help Rags. He rides his Redfangs through three Human forward groups, cutting down their commanders, and heads south toward Liscor to loop home to the High Passes. Yitton later names the dead commanders as Geim, Helica and Sir Meilmen."
+		},
+		"b9.the_flooded_waters_break_and_flee": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"scout": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.reiss_deathbolts_rags"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters.broken_by_reiss",
+					"redscar.leads_the_survivors_south",
+					"reiss.holds_the_mountain_horde",
+					"snapjaw.sent_to_kill_rags"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The Goblins shout that the Chieftain is dead and break. Many of Tremborag's Goblins give in to Reiss, and the Flooded Waters core flees south under Redscar. Reiss sends Snapjaw to find and kill Rags."
+		},
+		"b9.eater_goats_halt_tyrion": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"tyrion_veltras"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"tyrion.halted_by_the_eater_goats",
+					"tyrion.believes_rags_dead"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "A far bigger wave of Eater Goats comes from the High Passes. Tyrion stops his pursuit to fight it and judges that Rags is probably dead."
+		},
+		"b9.rags_wakes_under_her_wolf": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"ulvama"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.pyrite_falls_to_seven_deathbolts"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.alive_in_the_high_passes",
+					"pyrite.alive_with_rags",
+					"ulvama.found_rags",
+					"rags.lost_her_crossbow_and_shield"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Pyrite names himself [Magestone Chieftain] (system entry)."
+			},
+			"summary": "At sunset Rags wakes under her dead Carn Wolf and finds Pyrite alive but unable to walk, his gem sack empty. Ulvama and about two dozen Goblins find them and bow. Both armies think she is dead."
+		},
+		"b9.cave_goblins_reach_the_floodplains": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"goblin": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": []
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.numbtongue_ambushes_the_door_thieves"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"cave_goblins.camp_at_liscor",
+					"numbtongue.leads_the_cave_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.56G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Both the 5.56 G and 5.57 agents place this on the same afternoon."
+			},
+			"summary": "More than 24,000 Cave Goblins swim up from the flooded dungeon and gather on the Floodplains hills out of bow range, shouting \"Redfang!\" Olesm counts them from the wall, and Zevara and Ilvriss come to look."
+		}
+	}
+}

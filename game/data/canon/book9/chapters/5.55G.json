@@ -1,0 +1,317 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.55G",
+	"order": 90,
+	"system": [],
+	"events": {
+		"b9.rags_drills_the_combined_horde": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.drilled_the_combined_horde",
+					"redscar.runs_the_mountain_goblins"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.55G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Chapter opens at sunrise of Day 10."
+			},
+			"summary": "At sunrise Rags gives orders to the tribe, now far bigger after Tremborag's fall: drills, no snacking, Redscar and the Redfangs to lead the Mountain City Goblins, new lieutenants by contest."
+		},
+		"b9.pyrite_breaks_the_eater_goat_charge": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"ulvama"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"eater_goats.broken_by_pyrite",
+					"mountain_city.sees_the_flooded_waters_fight"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.55G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Thousands of Eater Goats hit the march and the Humans run. Rags forms a shield and bow line, and Pyrite leads the Hobs through the herd with a fire axe. Few Goblins fall, and Tremborag's Goblins watch and approve."
+		},
+		"b9.snapjaw_wakes_osthia_from_false_death": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": []
+				},
+				"mage": {
+					"prefer": [
+						"osthia_blackwing"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"snapjaw"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.azkerash_strikes_osthia_with_a_deathbolt"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.false_death_revealed",
+					"osthia.chained_in_reisss_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.55G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Osthia is alive; no kill (plan conflict 5)."
+			},
+			"summary": "Osthia's death was staged: Snapjaw takes off her ring after half a day, and the spell [False Death] ends. She wakes angry, Snapjaw knocks her out and has her chained under Hob guard."
+		},
+		"b9.rags_refuses_to_sack_liscor": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"rags"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.reiss_takes_rags_as_his_ally"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.proposed_taking_liscor_with_the_undead",
+					"rags.refused_to_sack_liscor"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.55G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Reiss tells the lieutenants the Humans mean to use the Goblins to breach Liscor and then slaughter them, and says to take the city first. Rags refuses, because Erin Solstice lives there. Her tribe cheers her and Garen glares."
+		},
+		"b9.reiss_deathbolts_rags": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.rags_refuses_to_sack_liscor"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.betrayed_rags",
+					"rags.struck_by_a_deathbolt",
+					"reiss.lost_his_right_hand_to_pyrite"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.55G",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Rags is hurt, not killed."
+			},
+			"summary": "A few hours past midday Reiss tells Rags of his dream and casts [Deathbolt] on her at point-blank range. She lives. Pyrite's thrown axes sever Reiss's right hand, and the two tribes begin to fight."
+		}
+	}
+}

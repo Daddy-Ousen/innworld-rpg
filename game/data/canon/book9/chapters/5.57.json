@@ -1,0 +1,517 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.57",
+	"order": 92,
+	"system": [],
+	"events": {
+		"b9.garen_beats_the_clairei_knights": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_through_tyrions_vanguard"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfangs.crossed_the_pass",
+					"clairei_knights.beaten_by_the_redfangs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "About 4,000 mounted Redfangs beat a dozen Clairei Field Knights in the pass. About two dozen Redfangs die. Garen spares the last Knight and chooses to loop past Liscor, not fight Reiss."
+		},
+		"b9.liscor_debates_the_cave_goblins": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"commander": {
+					"prefer": [
+						"embria_grasstongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.cave_goblins_reach_the_floodplains"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.offered_a_parley_for_the_hobs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Embria wants to attack and Olesm warns of heavy losses. Zevara proposes freeing the four Hobs if the Cave Goblins march south, and Ilvriss agrees."
+		},
+		"b9.zevara_lets_erin_out": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_cells",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prisoner": {
+					"prefer": [
+						"calruz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_is_still_in_her_cell",
+				"b9.liscor_debates_the_cave_goblins"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.freed_from_the_cells",
+					"ilvriss.returned_the_cloak_of_plenty"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Erin is freed first and alone."
+			},
+			"summary": "Zevara opens Erin's cell and tells her to get out. The four Hobs stay locked up for now, and Calruz stays in his cell."
+		},
+		"b9.erin_sets_her_terms_on_the_wall": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.zevara_lets_erin_out"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.refused_to_take_the_ultimatum",
+					"erin.negotiates_for_the_hobs"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "On the wall Erin sees the Goblin army and refuses to just carry the ultimatum. Her terms: free the Redfangs, return their gear, and let her talk to Numbtongue alone. Zevara agrees but refuses the guitar."
+		},
+		"b9.the_dead_doors_are_counted": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cub": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"lyonette"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.zevara_lets_erin_out"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"albez_door.liscor_link_unconnected",
+					"adventurers.plan_to_carry_a_door_to_esthelm",
+					"eltistiman.has_vanished"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Doors: the Pallass link was lost in 5.54, the Celum stone was taken in the Krshia interlude."
+			},
+			"summary": "Lyonette tells Erin the Pallass stone is gone, Olesm holds the Celum stone and the inn door will not open onto Liscor. The adventurers plan to carry a door with a new mana stone north to Esthelm."
+		},
+		"b9.erin_talks_numbtongue_down": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"princess": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"goblin": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice",
+					"numbtongue"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_sets_her_terms_on_the_wall"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"numbtongue.stood_down_for_erin",
+					"cave_goblins.agreed_to_go_south",
+					"erin.promised_the_goblins_a_door_and_stone"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Place: the muddy hills outside the walls."
+			},
+			"summary": "Erin crosses the mud and hugs Numbtongue, with about 24,000 Cave Goblins around. She tells him Bird lives and the Redfangs are safe. He will lead the Cave Goblins south, then west, and will not join the Goblin Lord. She warns that Zevara will fire on them after night."
+		},
+		"b9.the_watch_frees_the_four_hobs": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_two": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_three": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob_four": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_talks_numbtongue_down"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redfang_hobs.freed_from_the_cells"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Calruz stays jailed (calruz.in_watch_prison)."
+			},
+			"summary": "Erin waves from the hill. A rope ladder goes down the wall and Headscratcher, Shorthilt, Badarrow and Rabbiteater climb down to the Cave Goblins."
+		},
+		"b9.the_halfseekers_meet_garen_on_the_road": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_beats_the_clairei_knights"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.attacked_garen_on_the_road"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.57",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Place is a guess."
+			},
+			"summary": "Near evening Garen meets Jelaqua, Moore and Seborn on the road. They attack him, and the chapter ends mid-fight. The outcome is in 5.58."
+		}
+	}
+}
