@@ -223,9 +223,9 @@ func test_staying_away_still_sets_the_canon_to_day_173() -> void:
 	assert_eq(gs.world.status(GNOLLS), Director.DONE)
 	for id: String in ["bird", "numbtongue", "osthia_blackwing", "calruz", "erin_solstice"]:
 		assert_true(gs.world.is_alive(_db.canon, id), id + " lives")
-	assert_true(gs.flags.has("erin.in_watch_cells"), "Erin is still in her cell (freed in 5.57)")
+	assert_true(gs.flags.has("erin.in_watch_cells"), "Erin was jailed (freed on day 173, 5.57, M36.6)")
 	assert_ne(_area_of(gs, "numbtongue"), "liscor_watch_cells")
-	assert_ne(_area_of(gs, "numbtongue"), "inn_basement", "Numbtongue is with the Cave Goblins")
+	assert_true(gs.flags.has("numbtongue.stood_down_for_erin"), "Erin talks him down on day 173 (5.57, M36.6)")
 
 
 func test_krshia_becomes_a_royal_shopkeeper() -> void:
