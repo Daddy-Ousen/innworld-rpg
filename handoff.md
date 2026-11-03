@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-11-03, cloud): M36.9 Book 9 canon 5.62, Interlude – Thereafter (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #268)
+- Two Sonnet reading agents (summaries only). User picks: fight stage for the gate battle (`liscor_gate`, 17 - 21, day 176,
+  XP tier 2); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.
+- Data: `game/data/canon/book9/chapters/5.62.json` (24 events, order 98, day 176), `interlude_thereafter.json` (17, order 99,
+  days 177 - 180). Ten kills (see `progress.md`). Stage `b9.the_east_gate_breaks_and_the_drakes_sortie`.
+- Tests (all pass): `sim_book9_battle_of_liscor` 7 (new), plus the list in `progress.md` "M36". `unit_scene_beats` 5/6: old beat-count
+  failure (b6, b8 events; also on main). Full suite not run.
+- Next: the user merges the PR. Then M36.10 `sim_canon_book9` and `sim_kill_book9` (Sonnet - medium); validator `--all`.
+  M36.10 has to check the Book 9 dead stay dead and the survivors live; also close M36 in ROADMAP and tag `m36-done` (tags may not push from the cloud).
+- Gotchas:
+  - Reiss is the `goblin_lord` record. He is killed by Tyrion's lance, then dies at Erin's table (flags only, no second kill).
+  - The sim for 5.60/5.61 (`sim_book9_siege_begins`) now lists only 4 survivors: the others die in 5.62 on day 176.
+  - Numbtongue: Thereafter says Badarrow reports him dead; flag `numbtongue.reported_dead_by_badarrow`, no kill (plan conflict 3).
+  - Thereafter shows no Goblin camp at the inn and no word on the magic door. The inn is closed and barred.
+  - Embria has no combat record, so she is not a stage ally. Reizmelt and Lyonette's kingdom have no place record: guess places.
+  - `unit_scene_beats` still fails on the ally-shout rule (old).
+
 ## Just done (2026-11-03, cloud): M36.8 Book 9 canon 5.60, 5.61 (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #267)
 - Two Sonnet reading agents (summaries only). User picks: fight stage for the trebuchet barrage (`liscor_gate`, 13 - 16,
   day 176, XP tier 1); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.

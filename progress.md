@@ -310,9 +310,22 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   seventh of them; the Solstice Goblins charge Reiss's lines (the chapter ends at first contact; 5.62 is M36.9).
   Tests: `sim_book9_siege_begins` 7 (new), plus the targeted list in `handoff.md`. Counts: scenes 53, fights 29, hooks 141.
   Validator book9: 0 errors, 0 warnings. Full suite not run.
-  - [ ] The user merges the M36.8 PR. Next: M36.9 canon 5.62, Interlude – Thereafter (Opus · medium).
+  - [x] The user merged the M36.8 PR (#268).
   - [ ] The user plays day 176 afternoon (barrage at `liscor_gate`, 13 – 16).
-- [ ] M36.9 canon batch.
+- [x] M36.9 canon 5.62, Interlude – Thereafter (2026-11-03, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted
+  from main after PR #268). Two Sonnet reading agents (summaries only). User picks: a fight stage for the gate battle
+  (`liscor_gate`, 17 – 21, day 176, XP tier 2); no hook. Data: 41 events (24 + 17), days 176 – 180; ten named kills
+  (Headscratcher, Yellow Splatters, Spiderslicer, Shorthilt, Garen, Reiss = `goblin_lord`, Eater of Spears, Noears,
+  Pyrite, Sir Vumat); no kill for Numbtongue, Purple Smile, Osthia; Erin [General] 6 offered and cancelled (system
+  record); Rags Great Chieftain (title flag only); inn closed and barred; Ryoka at Reizmelt (flag event, no record).
+  Tests: `sim_book9_battle_of_liscor` 7 (new), `sim_book9_siege_begins` 7 (1 check updated), `unit_canon_db` 7,
+  `unit_data_db` 15, `unit_xp_window` 12, `unit_foreshadow` 15 (fight count 30), `sim_player_hooks` 6, `sim_canon_book8` 6,
+  `sim_kill_book8` 6, `unit_map_db` 13, `unit_behaviour_db` 6, `sim_book9_garens_fall`, `sim_book9_reisss_betrayal`,
+  `sim_book9_door_thieves`, `sim_book9_world`: all pass. `unit_scene_beats` 5/6: the old ally-shout failure (also on
+  main; the fight count 30 passes). Counts: scenes 53, fights 30, hooks 141. Validator books 1 – 9: 0 errors, 0 warnings.
+  Full suite not run.
+  - [ ] The user merges the M36.9 PR. Next: M36.10 `sim_canon_book9` and `sim_kill_book9` (Sonnet · medium).
+  - [ ] The user plays day 176 evening (gate battle at `liscor_gate`, 17 – 21).
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
