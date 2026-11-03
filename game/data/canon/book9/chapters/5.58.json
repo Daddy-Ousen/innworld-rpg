@@ -1,0 +1,612 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.58",
+	"order": 93,
+	"system": [
+		{
+			"who": "headscratcher",
+			"kind": "class",
+			"name": "[Berserker]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Stated in words while the Hobs face Garen; already recorded in Book 8."
+		},
+		{
+			"who": "garen",
+			"kind": "skill",
+			"name": "[Frenzy Cuts]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Garen's blade skill in the fight with the Halfseekers."
+		}
+	],
+	"events": {
+		"b9.the_halfseekers_charge_the_redfangs": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"jelaqua"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_halfseekers_meet_garen_on_the_road"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.charged_the_redfang_host",
+					"redfangs.lost_a_hundred_to_the_halfseekers"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Place is a guess (the book says a road bend beside a cave, grass, hills); road_camp stands in. No Redfang has a record: no kill."
+			},
+			"summary": "At dusk Jelaqua, Moore and Seborn cut into the Redfang host to reach Garen. Spears and arrows hit Jelaqua but she does not bleed. Over a hundred Redfangs die. The Gold-rank teams hold a magic door on the grass and send Wings of Pallass and Flamewardens through it.",
+			"xp_window": {
+				"boost": 1,
+				"hours": [
+					18,
+					21
+				]
+			},
+			"foreshadow": {
+				"days_before": 0,
+				"text": "Riders went north at noon: the Halfseekers mean to stop Garen on the road before dark."
+			},
+			"stage": {
+				"kind": "fight",
+				"area": "road_camp",
+				"hours": [
+					18,
+					21
+				],
+				"foes": [
+					{
+						"enemy": "redfang_warrior",
+						"pos": [
+							21,
+							8
+						]
+					},
+					{
+						"enemy": "redfang_warrior",
+						"pos": [
+							20,
+							6
+						]
+					},
+					{
+						"enemy": "redfang_warrior",
+						"pos": [
+							21,
+							10
+						]
+					},
+					{
+						"enemy": "redfang_hob",
+						"pos": [
+							20,
+							10
+						]
+					},
+					{
+						"enemy": "redfang_hob",
+						"pos": [
+							22,
+							12
+						]
+					}
+				],
+				"line": "At dusk the Redfang host stands thick on the north road. Three Gold-rank Halfseekers are riding straight at it.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							16,
+							22
+						],
+						"allies": [
+							"jelaqua",
+							"moore",
+							"seborn"
+						],
+						"line": "A Selphid with a spear in her chest shouts a war cry and does not slow down."
+					},
+					{
+						"after_seconds": 40,
+						"from": [
+							16,
+							1
+						],
+						"allies": [
+							"ylawes_byres",
+							"dawil",
+							"halrac"
+						],
+						"line": "A door opens in the grass. Adventurers pour out of it with swords drawn."
+					},
+					{
+						"after_seconds": 70,
+						"left_at_most": 3,
+						"from": [
+							26,
+							14
+						],
+						"foes": [
+							"redfang_warrior",
+							"redfang_hob"
+						],
+						"line": "Redfang riders with ropes and bottles of acid swing round the flank."
+					}
+				],
+				"beats": [
+					{
+						"after_seconds": 15,
+						"npc": "jelaqua",
+						"line": "Garen! Come and answer for Halassia!"
+					},
+					{
+						"after_seconds": 55,
+						"npc": "ylawes_byres",
+						"line": "Hold the door! Nobody goes past it!"
+					}
+				],
+				"note": "M36.7 (user pick, 2026-11-03): the Halfseekers against Garen's host, XP tier 1. Book scene: a road bend by a cave. road_camp stands in, as for the door thieves. Garen is not a foe (no combat record); the next event overthrows him. Hours: a guess."
+			}
+		},
+		"b9.wings_of_pallass_hit_the_redfangs": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"flyer": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"adventurer": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"falene_skystrall"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_halfseekers_charge_the_redfangs"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wings_of_pallass.fought_the_redfangs",
+					"gold_teams.held_the_door_at_the_road_cave"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Bevussa and the Wings of Pallass fly out of a magic door, then Keldrass and his Flamewardens. Silver Swords and Griffon Hunt guard the door from the inn side. Bevussa, Ylawes and Dawil are hurt."
+		},
+		"b9.the_five_hobs_run_out_of_the_door": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"warrior": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"champion": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"weapon": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tribe_hob": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.wings_of_pallass_hit_the_redfangs"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.struck_erin_on_the_road",
+					"redfangs.know_the_five_hobs_by_their_paint"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "A Bone Horror comes through the door and the Hobs smash it. Erin and the five Hobs run out. Garen strikes Erin down. Headscratcher stops him. The Redfangs see the war paint and know the five."
+		},
+		"b9.the_five_hobs_challenge_garen": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"champion": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": []
+				},
+				"berserker": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"weapon": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"block": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_five_hobs_run_out_of_the_door"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.overthrown_by_the_five_hobs",
+					"redfangs.follow_the_five_hobs",
+					"garen.holds_a_hundred_riders"
+				],
+				"clear_flags": [
+					"garen.hit_squad_hunts_erin",
+					"garen.leads_the_redfang_again"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Garen is not killed. The Redfangs name no single chief: the five lead together, Headscratcher speaks for them."
+			},
+			"summary": "The five Hobs challenge Garen for the chiefship. He beats them bare-handed, but Spiderslicer blocks his killing blow. The tribe walks over to the Hobs. Fewer than a hundred stay with Garen."
+		},
+		"b9.garen_beats_the_halfseekers_and_rides_north": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "redfang_road_cave",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"captain": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_five_hobs_challenge_garen"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.rode_north_alone",
+					"moore.badly_hurt_by_garen",
+					"seborn.badly_hurt_by_garen",
+					"garen.carries_a_key_to_velans_secret"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. Place and exact order are a guess; the key flag repeats an old one."
+			},
+			"summary": "After dark the Redfangs free their bound captives. Garen fights the three Halfseekers on the road and beats them, then beheads Jelaqua's body. The Selphid lives. Garen rides north, alive, looking back."
+		},
+		"b9.jelaqua_takes_a_raskghar_body": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": []
+				},
+				"giant": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"jelaqua"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_beats_the_halfseekers_and_rides_north"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"jelaqua.wears_a_raskghar_body",
+					"erin.teeth_mended_by_pisces",
+					"moore.bedridden_at_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Moore carries a dying Seborn through the door to the inn. Jelaqua moves into a Raskghar corpse from the basement. Pisces mends Erin's broken teeth."
+		},
+		"b9.redscars_tribe_flees_south": {
+			"tier": 1,
+			"window": {
+				"earliest": 173,
+				"latest": 173,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"redscar"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_five_hobs_challenge_garen"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters_tribe.flees_south",
+					"flooded_waters_tribe.heads_for_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.58",
+				"confidence": "confirmed",
+				"note": "March Day 10 = day 173, day rule march Day + 163 (ADR 0047), guess. The ending line gives the eleventh day for their arrival; this event is the road before it."
+			},
+			"summary": "On the roads north of Liscor Redscar's Flooded Waters tribe flees south from the Goblin Lord's army. On the eleventh day they reach the Floodplains."
+		}
+	}
+}

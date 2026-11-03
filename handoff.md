@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-11-03, cloud): M36.7 Book 9 canon 5.58, 5.59, Interlude – Pebblesnatch and Garry (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #266)
+- Two Sonnet reading agents (summaries only). User picks: fight stage for the Halfseekers against Garen's host
+  (`road_camp`, 18 - 21, day 173, XP tier 1); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.
+- Data: `game/data/canon/book9/chapters/5.58.json` (7), `5.59.json` (7), `interlude_pebblesnatch_and_garry.json` (3).
+  Days 173 - 174. No kill. `izril.flood` clears on day 174; `izril.floodplains_muddy` set.
+- Tests: `game/tests/sim_book9_garens_fall.gd` (new, 7); fight counts 28 in `unit_scene_beats` and `unit_foreshadow`.
+  List in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.8 canon 5.60, 5.61 (Sonnet - high), events only. Ask the stage and hook choices first.
+- Gotchas:
+  - Stage tiles must not hit water, objects or exits on `road_camp` (campfire at (20, 12), water x 23 - 25, y 4 - 10).
+  - Garen lives and rides north (`garen.rode_north_alone`); the Redfangs follow the five Hobs
+    (`redfangs.follow_the_five_hobs`). Garen has no combat record, so he cannot be a stage foe.
+  - Jelaqua wears a Raskghar body (`jelaqua.wears_a_raskghar_body`); Moore is bedridden; Seborn is hurt.
+  - The inn has a second door to Liscor (5.59, flag only); most Liscor folk cannot cross it
+    (`liscor.most_cannot_cross_the_door`). The orange anchor goes south (`albez_door.orange_anchor_carried_south`).
+    5.60 (M36.8) moves the door to city hall.
+  - `unit_scene_beats` still fails on the ally-shout rule (old).
+
 ## Just done (2026-11-02, cloud): M36.6 Book 9 canon 5.55 G, 5.56 G, 5.57 (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #265)
 - Two Sonnet reading agents (summaries only). User picks: no stage, no hook.
 - Data: `game/data/canon/book9/chapters/5.55G.json` (5), `5.56G.json` (6), `5.57.json` (8). All day 173. No kill.
