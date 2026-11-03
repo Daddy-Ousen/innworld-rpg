@@ -289,8 +289,20 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_data_db` 15, `unit_behaviour_db` 6,
   `sim_npc_day` 3, `sim_player_hooks` 6, `unit_foreshadow` 15, `unit_xp_window` 12: all 97 pass. Validator book9: 0 errors.
   Full suite not run.
-  - [ ] The user merges the M36.6 PR. Next: M36.7 canon 5.58, 5.59, Interlude – Pebblesnatch and Garry (Opus · medium).
-- [ ] M36.7 – M36.9 canon batches.
+  - [x] The user merged the M36.6 PR (#266).
+- [x] M36.7 canon 5.58, 5.59, Interlude – Pebblesnatch and Garry (2026-11-03, cloud, branch
+  `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #266). Two Sonnet reading agents (summaries only).
+  User picks: a fight stage for the Halfseekers against Garen's host (`road_camp`, 18 – 21, day 173, XP tier 1), no
+  hook. Data: 17 events (7 + 7 + 3), days 173 – 174, no named kill. Garen is overthrown by the five Hobs and rides
+  north (alive); Jelaqua takes a Raskghar body; the Flooded Waters reach the inn; `izril.flood` clears (day 174);
+  system Erin [Magical Innkeeper] 37, Drassi, Noears, Garry [Cook] 17. Tests: `sim_book9_garens_fall` 7 (new),
+  `unit_data_db` 15, `unit_xp_window` 12, `unit_foreshadow` 15, `sim_player_hooks` 6, `sim_book9_reisss_betrayal` 5,
+  `sim_book9_door_thieves` 8, `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_map_db` 13,
+  `unit_behaviour_db` 6, `sim_npc_day` 3: all pass. `unit_scene_beats` 5/6: the old ally-shout failure (also on main;
+  the scene and fight counts pass). Counts: scenes 53, fights 28, hooks 141. Validator book9: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.7 PR. Next: M36.8 canon 5.60, 5.61 (Sonnet · high).
+  - [ ] The user plays day 173 evening (Halfseekers fight at `road_camp`, 18 – 21).
+- [ ] M36.8 – M36.9 canon batches.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

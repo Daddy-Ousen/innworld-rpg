@@ -54,7 +54,7 @@ func test_every_scene_has_three_to_six_beats() -> void:
 
 func test_every_fight_has_one_to_three_shouts() -> void:
 	var fights := _stages("fight")
-	assert_eq(fights.size(), 27, "the 26 fight stages of Books 1 – 8 (M32.2 added Zel's last stand) and the Book 9 door thieves (M36.5)")
+	assert_eq(fights.size(), 28, "the 26 fight stages of Books 1 – 8 (M32.2 added Zel's last stand) and the Book 9 door thieves (M36.5) and Halfseekers fight (M36.7)")
 	for id: String in fights:
 		var n := (fights[id].get("beats", []) as Array).size()
 		assert_between(n, FIGHT_BEATS[0], FIGHT_BEATS[1], "%s has %d beats" % [id, n])

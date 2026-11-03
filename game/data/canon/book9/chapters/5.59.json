@@ -1,0 +1,477 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.59",
+	"order": 94,
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "level",
+			"name": "[Magical Innkeeper]",
+			"level": 37,
+			"confidence": "confirmed",
+			"note": "Stated at the end of the chapter (36 in Book 8)."
+		},
+		{
+			"who": "drassi",
+			"kind": "skill",
+			"name": "[Server's Prescience]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "A new Skill for the Gnoll server."
+		},
+		{
+			"who": "noears",
+			"kind": "class",
+			"name": "[Lightning Mage]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Named in the Goblins' talk."
+		}
+	],
+	"events": {
+		"b9.erin_wakes_sore_and_will_not_open_the_cave_door": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"server": {
+					"prefer": [
+						"drassi"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.jelaqua_takes_a_raskghar_body"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.refuses_the_goblin_cave_door"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin wakes tired and sore, her teeth capped by Pisces. She is sure 'they' are coming. She tells Zevara and Olesm that Garen ran off and the Hobs are kind, and that she will not open the Goblin-cave door until she knows more."
+		},
+		"b9.dawil_offers_to_take_erin_to_pallass": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"dwarf": {
+					"prefer": [
+						"dawil"
+					],
+					"fallback_tags": []
+				},
+				"fighter": {
+					"prefer": [
+						"ylawes_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"halfseeker": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"dawil"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_wakes_sore_and_will_not_open_the_cave_door"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"gold_teams.will_flee_when_the_army_comes",
+					"albez_door.orange_anchor_carried_south",
+					"dawil.offered_to_escort_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Dawil, his beard burnt off, says the Gold teams will leave when the army comes and offers to take Erin to Pallass. The adventurers carry a second door anchor south, an orange stone already in the bowl. Mrsha, Ceria, Pisces, Krshia and Selys visit."
+		},
+		"b9.erin_feels_the_goblins_coming": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.redscars_tribe_flees_south"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"flooded_waters_tribe.reach_the_plain",
+					"liscor.watches_the_goblins_go_to_the_inn"
+				],
+				"clear_flags": [
+					"izril.flood"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess. ADR 0047: izril.flood clears here. The book says the valleys keep standing lakes; izril.floodplains_muddy keeps that look in words only."
+			},
+			"summary": "At midday Erin feels the Goblins coming. She stands on the broken roof where Bird's tower stood and sees a green wave on the plain. From Liscor's walls Olesm, Zevara, Embria and Ilvriss see Cave Goblins and Redfangs, then a larger force of tens of thousands, heading for the inn."
+		},
+		"b9.the_flooded_waters_walk_into_the_inn": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": []
+				},
+				"hunter": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tribe_hob": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_feels_the_goblins_coming"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.no_killing_goblins_sign",
+					"goblins.camp_around_the_inn",
+					"izril.floodplains_muddy",
+					"erin.fed_the_goblins_free"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At dusk Redscar, Poisonbite and Noears lead the Flooded Waters Goblins up the hill. A sign on the door says 'No killing Goblins.' Redscar finds the five Hobs inside. Erin feeds the Goblins free and sets rules: no fighting. She opens a second door to Liscor."
+		},
+		"b9.liscor_cannot_cross_the_door": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "liscor",
+			"roles": {
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": []
+				},
+				"lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"half_giant": {
+					"prefer": [
+						"krshia"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"flyer": {
+					"prefer": [
+						"bevussa_slenderscale"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"zevara"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_flooded_waters_walk_into_the_inn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.most_cannot_cross_the_door",
+					"zevara.barricades_the_inn_door"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess. Erin's aura is read by Olesm as the cause (a Skill)."
+			},
+			"summary": "On the Liscor side soldiers, Guards and most adventurers cannot make themselves step through the door. Only Bevussa, Mrsha and Krshia open it. Ilvriss could enter but stays out. Zevara orders a [Fireball] scroll and a barricade at the door."
+		},
+		"b9.redscar_and_spiderslicer_duel_and_make_peace": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"chief": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": []
+				},
+				"tribe_hob": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"redscar"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_flooded_waters_walk_into_the_inn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"redscar.reconciled_with_spiderslicer",
+					"goblins.tell_erin_rags_is_alive"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At night the five Redfang Hobs are reunited with Redscar. Redscar and Spiderslicer fight a sword duel on the hill, then make peace. Poisonbite and the women tell Erin about Rags. Noears and the adventurers argue over ear bounties. The Halfseekers talk with Redscar about Garen."
+		},
+		"b9.the_goblins_dance_at_the_inn": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": []
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"erin_solstice"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.redscar_and_spiderslicer_duel_and_make_peace"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.goblin_party_on_day_174"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.59",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Pawn arrives with a glowing censer and Painted Soldiers. A Goblin band plays and everyone dances. Pisces recites a poem. Erin falls asleep in the kitchen about two hours before dawn."
+		}
+	}
+}

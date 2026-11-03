@@ -1,0 +1,191 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "interlude_pebblesnatch_and_garry",
+	"order": 95,
+	"system": [
+		{
+			"who": "garry",
+			"kind": "level",
+			"name": "[Cook]",
+			"level": 17,
+			"confidence": "confirmed",
+			"note": "Stated in the cooking contest."
+		},
+		{
+			"who": "pebblesnatch",
+			"kind": "skill",
+			"name": "[Quick Boiling]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Her cooking Skill; she wears a chef's hat."
+		}
+	],
+	"events": {
+		"b9.garry_gets_leave_to_go_to_the_inn": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"queen": {
+					"prefer": [
+						"free_queen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"cook": {
+					"prefer": [
+						"garry"
+					],
+					"fallback_tags": []
+				},
+				"bird": {
+					"prefer": [
+						"bird"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garry"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_flooded_waters_walk_into_the_inn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garry.sent_to_the_inn"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_pebblesnatch_and_garry",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the Hive Bird lies injured. The Free Queen lets Garry go to the inn. Klbkch says Pawn has already left."
+		},
+		"b9.garry_wins_the_goblin_cooking_contest": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"cook": {
+					"prefer": [
+						"garry"
+					],
+					"fallback_tags": []
+				},
+				"goblin_cook": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"garry"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garry_gets_leave_to_go_to_the_inn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garry.won_the_goblin_cooking_contest",
+					"pebblesnatch.gave_garry_the_hat"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_pebblesnatch_and_garry",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At the Floodplains camp Pebblesnatch has fallen out with the hungry Goblins. Garry arrives and the Goblins make them compete, with eighteen judges. Pebblesnatch cooks Rock Crab soup, a Hob cooks kebabs, and Garry wins with breaded caterpillar. Pebblesnatch gives him her chef's hat."
+		},
+		"b9.garry_trades_bread_with_erin_and_feeds_the_hive": {
+			"tier": 1,
+			"window": {
+				"earliest": 174,
+				"latest": 174,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"cook": {
+					"prefer": [
+						"garry"
+					],
+					"fallback_tags": []
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garry"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garry_wins_the_goblin_cooking_contest"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garry.cooks_for_the_hive",
+					"hive.queen_tasted_sugar"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_pebblesnatch_and_garry",
+				"confidence": "confirmed",
+				"note": "March Day 11 = day 174, day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At the inn Garry learns a hamburger bread trick and teaches Erin sweet-potato bread. Erin says he cooks better than she does. He carries pizza, hamburgers and cake back to the Hive, and the Queen tastes sugar."
+		}
+	}
+}
