@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-11-03, cloud): M36.8 Book 9 canon 5.60, 5.61 (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #267)
+- Two Sonnet reading agents (summaries only). User picks: fight stage for the trebuchet barrage (`liscor_gate`, 13 - 16,
+  day 176, XP tier 1); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.
+- Data: `game/data/canon/book9/chapters/5.60.json` (13 events, day 175), `5.61.json` (11, days 175 - 176). No kill.
+- Tests (all pass): `sim_book9_siege_begins` 7 (new), `unit_data_db` 15, `unit_xp_window` 12, `unit_foreshadow` 15, `sim_player_hooks` 6, `sim_book9_garens_fall` 7, `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_map_db` 13. `unit_scene_beats` 5/6: the old beat-count failure (b6, b8 events; also on main); the fight count 29 passes.
+  List in `progress.md` "M36". Full suite not run.
+- Next: the user merges the PR. Then M36.9 canon 5.62, Interlude - Thereafter (Opus - medium): the battle at the east
+  gate (stage on `liscor_gate`), ten named kills, Erin's refused [General], Rags Great Chieftain. Ask the choices first.
+- Gotchas:
+  - 5.61 ends at first contact: the Solstice Goblins charge Reiss's lines (`reiss_army.hesitates_at_the_charge`).
+    5.62 starts the battle. The walls are cracked but stand (`liscor.walls_cracked_but_standing`).
+  - The door is at city hall (`albez_door.at_liscor_city_hall`); the inn flag is cleared, so the inn's door links are
+    off. The text says it is gone after the battle (5.62); the Redfangs' "carry the door south" is a loose end.
+  - Text conflict: Ylawes, Falene, Dawil leave north in 5.60 but stand on the wall in 5.61; no flag marks them gone.
+  - Garen rejoins Rags with 8 Redfangs (day 175 night); Reiss is Garen's brother (flag only).
+  - The barrage stage uses zombie, skeleton, ghoul, goblin_lord_soldier; `draug` is kept for 5.62.
+  - `unit_scene_beats` still fails on the ally-shout rule (old).
+
 ## Just done (2026-11-03, cloud): M36.7 Book 9 canon 5.58, 5.59, Interlude – Pebblesnatch and Garry (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #266)
 - Two Sonnet reading agents (summaries only). User picks: fight stage for the Halfseekers against Garen's host
   (`road_camp`, 18 - 21, day 173, XP tier 1); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.

@@ -300,9 +300,19 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `sim_book9_door_thieves` 8, `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_map_db` 13,
   `unit_behaviour_db` 6, `sim_npc_day` 3: all pass. `unit_scene_beats` 5/6: the old ally-shout failure (also on main;
   the scene and fight counts pass). Counts: scenes 53, fights 28, hooks 141. Validator book9: 0 errors, 0 warnings. Full suite not run.
-  - [ ] The user merges the M36.7 PR. Next: M36.8 canon 5.60, 5.61 (Sonnet · high).
+  - [x] The user merged the M36.7 PR (#267).
   - [ ] The user plays day 173 evening (Halfseekers fight at `road_camp`, 18 – 21).
-- [ ] M36.8 – M36.9 canon batches.
+- [x] M36.8 canon 5.60, 5.61 (2026-11-03, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after
+  PR #267). Two Sonnet reading agents (summaries only). User picks: a fight stage for the trebuchet barrage
+  (`liscor_gate`, 13 – 16, day 176, XP tier 1); no hook. Data: 24 events (13 + 11), days 175 – 176, no named kill.
+  The door leaves the inn for city hall (`albez_door.at_liscor_city_hall`; `albez_door.at_wandering_inn` clears);
+  the tribes vote to go south; Erin sews a white flag; Tyrion's trebuchets crack the east gate; the Antinium wreck a
+  seventh of them; the Solstice Goblins charge Reiss's lines (the chapter ends at first contact; 5.62 is M36.9).
+  Tests: `sim_book9_siege_begins` 7 (new), plus the targeted list in `handoff.md`. Counts: scenes 53, fights 29, hooks 141.
+  Validator book9: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.8 PR. Next: M36.9 canon 5.62, Interlude – Thereafter (Opus · medium).
+  - [ ] The user plays day 176 afternoon (barrage at `liscor_gate`, 13 – 16).
+- [ ] M36.9 canon batch.
 - [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

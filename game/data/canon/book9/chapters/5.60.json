@@ -1,0 +1,786 @@
+{
+ "schema_version": 1,
+ "book": 9,
+ "chapter": "5.60",
+ "order": 96,
+ "system": [
+  {
+   "who": "falene_skystrall",
+   "kind": "skill",
+   "name": "[Binding Cords – Iron]",
+   "level": null,
+   "confidence": "confirmed",
+   "note": "Falene's spell in the fight between Ylawes and Yvlon."
+  },
+  {
+   "who": "ulvama",
+   "kind": "skill",
+   "name": "[Sky's Blessing]",
+   "level": null,
+   "confidence": "confirmed",
+   "note": "Ulvama's Skill; no level shown."
+  }
+ ],
+ "events": {
+  "b9.oteslia_riders_pass_the_pallass_column": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "northern_high_road",
+   "roles": {
+    "flyer": {
+     "prefer": [
+      "bevussa_slenderscale"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_goblins_dance_at_the_inn"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "oteslia.winged_riders_race_to_liscor",
+     "pallass.seventh_division_marching_late"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "About four hundred Oteslia Drake riders fly south day and night and leap over a marching Pallass column. They will still arrive after the Humans and Goblins. The Pallass infantry will be later still."
+  },
+  "b9.laken_gralton_and_yitton_plan_a_rescue": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "tyrion_war_camp",
+   "roles": {
+    "emperor": {
+     "prefer": [
+      "laken_godart"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "knight": {
+     "prefer": [
+      "gamel"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "lord": {
+     "prefer": [
+      "gralton_radivaek"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "father": {
+     "prefer": [
+      "yitton_byres"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "laken.alliance_with_gralton_and_yitton_for_the_byres_children",
+     "laken.uneasy_about_the_war"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. Laken's own day count (Day 12 since Riverfarm) matches march Day 12."
+   },
+   "summary": "In his tent near Esthelm, Laken hears that Yitton fears for Ylawes and Yvlon in Liscor. Laken, Gralton and Yitton agree to look for a way to save them. Laken says he distrusts Lady Ieka and Lord Erill."
+  },
+  "b9.ylawes_and_yvlon_fight_over_leaving": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "brother": {
+     "prefer": [
+      "ylawes_byres"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "sister": {
+     "prefer": [
+      "yvlon_byres"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "mage": {
+     "prefer": [
+      "falene_skystrall"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "scout": {
+     "prefer": [
+      "halrac"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "ylawes.demanded_yvlon_leave_liscor",
+     "yvlon.refused_to_leave_liscor"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. Text conflict flagged: Ylawes, Falene and Dawil leave to go north here, yet stand on the wall in 5.61. No flag marks them as gone."
+   },
+   "summary": "Ylawes demands that Yvlon leave north. She refuses and the argument turns to blows. Falene binds them with cords and Halrac and Erin end it. Ylawes storms out. 5.61 shows him back on the wall, so he only left the inn."
+  },
+  "b9.ilvriss_moves_the_door_to_city_hall": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "lord": {
+     "prefer": [
+      "ilvriss"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "captain": {
+     "prefer": [
+      "zevara"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "strategist": {
+     "prefer": [
+      "olesm"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "soldier": {
+     "prefer": [
+      "relc"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "antinium": {
+     "prefer": [
+      "klbkch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.ylawes_and_yvlon_fight_over_leaving"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "albez_door.at_liscor_city_hall",
+     "adventurers.conscripted_to_hold_the_walls",
+     "ilvriss.stopped_drinking"
+    ],
+    "clear_flags": [
+     "albez_door.at_wandering_inn"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. The inn's door leaves the inn here (data: its inn-side links stop). Book 10 (M37) may bring it back. Loose end: the Redfangs still talk of carrying the door south that night."
+   },
+   "summary": "Zevara, Olesm, Relc and Klbkch come to take the door. The adventurers resist until Ilvriss, in the Heartflame Breastplate, rules that the door goes to city hall as an escape route. The adventurers must fight until the walls fall. Early flight is treason."
+  },
+  "b9.xrn_digs_the_secret_tunnel_north": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "liscor_hive",
+   "roles": {
+    "queen": {
+     "prefer": [
+      "xrn"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "prognugator": {
+     "prefer": [
+      "tersk"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "digger": {
+     "prefer": [
+      "pivr"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.ilvriss_moves_the_door_to_city_hall"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "antinium.plan_to_retake_liscor_after_it_falls",
+     "antinium.twisted_held_back_for_the_drake_armies"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Xrn, Tersk, Pivr and the Prognugators of three Hives dig a secret tunnel north to Liscor. Their plan is to retake the city after it falls and the Drakes retreat into the Free Antinium hive. Twisted Antinium are held back to meet the Drake armies."
+  },
+  "b9.pawn_and_anand_fear_the_plan": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "liscor_hive",
+   "roles": {
+    "priest": {
+     "prefer": [
+      "pawn"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "tactician": {
+     "prefer": [
+      "anand"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.xrn_digs_the_secret_tunnel_north"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "painted_soldiers.will_not_hold_the_walls",
+     "pawn.fears_for_erin_and_selys"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Anand says the Painted Soldiers will not hold the walls. Klbkch has forbidden him to give the plan away. Pawn fears the Hive will betray Erin, Selys, Mrsha and Lyonette. Anand says Erin will most likely survive. Pawn prays."
+  },
+  "b9.tyrion_hears_the_door_is_held_by_liscor": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "tyrion_war_camp",
+   "roles": {
+    "lord": {
+     "prefer": [
+      "tyrion_veltras"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "aide": {
+     "prefer": [
+      "jericha"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "son": {
+     "prefer": [
+      "ullim"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "tyrion.told_liscor_holds_the_door",
+     "tyrion.threatened_by_magnolia"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "A spy tells Tyrion that Liscor holds the door and that it links to a passage south of the city. It can be used to flee or to reinforce. Magnolia sends him a threat. Ullim reports that Tyrion's sons Hethon and Sammial are lonely."
+  },
+  "b9.magnolia_puts_her_counter_plan_in_motion": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "magnolia_estate",
+   "roles": {
+    "lady": {
+     "prefer": [
+      "magnolia_reinhart"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "maid": {
+     "prefer": [
+      "ressa"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "ally": {
+     "prefer": [
+      "bethal"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.tyrion_hears_the_door_is_held_by_liscor"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "magnolia.counter_move_under_way",
+     "magnolia.accuses_the_walled_cities_of_killing_tyrions_wife"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. The wife's death by a Drake assassin is Magnolia's claim; we keep it as a flag."
+   },
+   "summary": "Magnolia tells Ressa and Ladies Bethal, Zanthia, Pryde and Wuvren to take their positions within a day. She says a Drake assassin from the Walled Cities killed Tyrion's wife."
+  },
+  "b9.rags_walks_south_behind_the_human_army": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "high_passes",
+   "roles": {
+    "chieftain": {
+     "prefer": [
+      "rags"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "magestone": {
+     "prefer": [
+      "pyrite"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "shaman": {
+     "prefer": [
+      "ulvama"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "hob": {
+     "prefer": [
+      "garen"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "rags.follows_the_human_army_south",
+     "pyrite.weak_after_a_deathbolt",
+     "garen.refused_to_stay_with_rags"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. Level and rank of Pyrite unknown (no level shown)."
+   },
+   "summary": "Rags, Pyrite, Ulvama and Tremborag's former Goblins walk south behind the Human army. Pyrite is weak after a Deathbolt. Garen arrives with about a dozen Redfangs. Rags tells him to stay and fix things. He refuses and rides off."
+  },
+  "b9.embria_gives_relc_her_will": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "liscor_walls",
+   "roles": {
+    "wing_commander": {
+     "prefer": [
+      "embria_grasstongue"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "soldier": {
+     "prefer": [
+      "relc"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "embria.high_command_will_not_send_help",
+     "relc.holds_embrias_will"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Embria has spoken to High Command and learned that no help will be sent. She gives Relc her will. Relc visits Erin and asks if she can do anything. She says no."
+  },
+  "b9.reiss_and_azkerash_plan_the_teleport": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "floodplains_of_liscor",
+   "roles": {
+    "lord": {
+     "prefer": [
+      "goblin_lord"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "necromancer": {
+     "prefer": [
+      "azkerash"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "goblin": {
+     "prefer": [
+      "snapjaw"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.oteslia_riders_pass_the_pallass_column"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "azkerash.will_teleport_in_his_chosen",
+     "reiss.told_to_keep_az_kerashs_student_alive"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. Reiss is our goblin_lord record (one entity, no merge). That the student is Pisces is the reader's guess, not stated."
+   },
+   "summary": "Az'kerash will teleport in his Chosen: Bea against the Antinium and Venitra against ambushes. Ijvani has not answered. Reiss must keep Az'kerash's student in Liscor alive, which probably means Pisces. Snapjaw asks Reiss if it is really him. Reiss remembers Osthia begging him."
+  },
+  "b9.the_goblin_tribes_vote_to_go_south": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "redfang": {
+     "prefer": [
+      "redscar"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "shaman": {
+     "prefer": [
+      "noears"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "poison": {
+     "prefer": [
+      "poisonbite"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "hob": {
+     "prefer": [
+      "spiderslicer"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.ilvriss_moves_the_door_to_city_hall"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "goblin_tribes.voted_to_go_south",
+     "redfangs.will_leave_tonight_for_the_south"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Redscar, Noears, Poisonbite and Spiderslicer put it to the vote. The tribes will go south that night. Erin hugs the Redfangs and says goodbye."
+  },
+  "b9.erin_sews_a_white_flag": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "innkeeper": {
+     "prefer": [
+      "erin_solstice"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "child": {
+     "prefer": [
+      "mrsha"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "goblin": {
+     "prefer": [
+      "pebblesnatch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_goblin_tribes_vote_to_go_south"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "erin.decided_to_stop_the_war",
+     "erin.made_a_white_flag"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.60",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Erin decides to stop the war herself. She cuts a bedsheet and ties it to a quarterstaff. Mrsha and Pebblesnatch watch her."
+  }
+ }
+}

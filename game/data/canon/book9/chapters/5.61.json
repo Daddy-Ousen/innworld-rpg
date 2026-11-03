@@ -1,0 +1,854 @@
+{
+ "schema_version": 1,
+ "book": 9,
+ "chapter": "5.61",
+ "order": 97,
+ "system": [
+  {
+   "who": "erin_solstice",
+   "kind": "skill",
+   "name": "[Dangersense]",
+   "level": null,
+   "confidence": "confirmed",
+   "note": "Erin's Skill screams at the Goblin host; no level shown."
+  },
+  {
+   "who": "erin_solstice",
+   "kind": "skill",
+   "name": "[Loud Voice]",
+   "level": null,
+   "confidence": "confirmed",
+   "note": "Erin shouts for a truce so the whole field hears; no level shown."
+  }
+ ],
+ "events": {
+  "b9.garen_rejoins_rags_with_eight_redfangs": {
+   "tier": 1,
+   "window": {
+    "earliest": 175,
+    "latest": 175,
+    "confidence": "guess"
+   },
+   "location": "high_passes",
+   "roles": {
+    "hob": {
+     "prefer": [
+      "garen"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "chieftain": {
+     "prefer": [
+      "rags"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "magestone": {
+     "prefer": [
+      "pyrite"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.rags_walks_south_behind_the_human_army"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "garen.apologised_to_his_men_and_to_rags",
+     "garen.rejoined_rags_with_eight_redfangs",
+     "reiss.is_garens_brother"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 12 = day 175, day rule march Day + 163 (ADR 0047), guess. Garen lives (Book 9 canon)."
+   },
+   "summary": "At night Garen has eight Redfangs left. A veteran, Starstarer, says they will go back to the war. Garen admits he was wrong and apologises, first to his men, then to Rags. Pyrite agrees to a ride. Garen runs south beside his wolf. We learn that Reiss is his brother."
+  },
+  "b9.the_goblin_host_marches_past_the_inn": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "innkeeper": {
+     "prefer": [
+      "erin_solstice"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "maid": {
+     "prefer": [
+      "lyonette"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "child": {
+     "prefer": [
+      "mrsha"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.erin_sews_a_white_flag"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "erin.dangersense_screaming",
+     "wandering_inn.abandoned_and_locked"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Erin wakes with [Dangersense] loud. The Flooded Waters tribe moves south past the inn. She makes waffles for her guests. War drums sound and Reiss's army pours into the valley. The inn is left locked."
+  },
+  "b9.pebblesnatch_hides_under_the_dungeon_door": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "wandering_inn",
+   "roles": {
+    "goblin": {
+     "prefer": [
+      "pebblesnatch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_goblin_host_marches_past_the_inn"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "pebblesnatch.cut_off_in_the_old_cave"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Pebblesnatch goes to the old cave under the dungeon door for the red mana stone and hides as the army passes. She sees Goblins in black resin armour, a column of undead Goblins and Eater Goats, and then Tyrion's army. She hears angry Shield Spiders."
+  },
+  "b9.liscor_war_room_counts_the_relief": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "liscor_city_hall",
+   "roles": {
+    "lord": {
+     "prefer": [
+      "ilvriss"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "captain": {
+     "prefer": [
+      "zevara"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "strategist": {
+     "prefer": [
+      "olesm"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "antinium": {
+     "prefer": [
+      "klbkch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "watcher": {
+     "prefer": [
+      "niers_astoragon"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.erin_sews_a_white_flag"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "ilvriss.refused_to_flee_by_the_door",
+     "liscor.relief_two_to_four_days_away",
+     "niers.counts_about_160000_goblins",
+     "falene.broadcasts_the_siege_to_the_world"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Ilvriss counts the relief: Oteslia riders by nightfall, Pallass in about two days, Manus in three, others later. Antinium hold the east wall and streets. He refuses to flee. Niers watches and counts about 160,000 Goblins. Falene broadcasts."
+  },
+  "b9.the_hive_plans_to_fail_against_the_trebuchets": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "liscor_hive",
+   "roles": {
+    "queen": {
+     "prefer": [
+      "free_queen"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "soldier": {
+     "prefer": [
+      "belgrade"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "priest": {
+     "prefer": [
+      "pawn"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "archer": {
+     "prefer": [
+      "bird"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "cook": {
+     "prefer": [
+      "garry"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.liscor_war_room_counts_the_relief"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "antinium.tunnels_slowed_by_mud",
+     "antinium.plans_to_destroy_only_a_few_trebuchets",
+     "bird.refused_to_sing",
+     "pawn.commands_the_painted_soldiers"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Klbkch tells the Drakes, truthfully, that mud slows the tunnelling and hundreds of Workers died. The Hive means to destroy only a few trebuchets. Bird will not sing. Pawn takes charge of the Painted Soldiers."
+  },
+  "b9.tyrion_orders_the_barrage": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "tyrion_war_camp",
+   "roles": {
+    "lord": {
+     "prefer": [
+      "tyrion_veltras"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "aide": {
+     "prefer": [
+      "jericha"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "emperor": {
+     "prefer": [
+      "laken_godart"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "engineer": {
+     "prefer": [
+      "tessia"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "enchanter": {
+     "prefer": [
+      "ieka_imarris"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "noble": {
+     "prefer": [
+      "lord_pellmia"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "rival": {
+     "prefer": [
+      "gralton_radivaek"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "father": {
+     "prefer": [
+      "yitton_byres"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.laken_gralton_and_yitton_plan_a_rescue"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "tyrion.ordered_the_first_volley",
+     "tyrion.admits_it_is_an_assault",
+     "yitton_byres.stunned_and_held_behind_the_lines"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Tyrion sends a false apology, then orders the first volley on the east gate. Laken commands the engineers, Ieka the enchantments. Yitton begs for his children; Jericha stuns him and he is held. Tyrion admits it is an assault and goes ahead."
+  },
+  "b9.azkerash_orders_the_walls_taken": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "floodplains_of_liscor",
+   "roles": {
+    "necromancer": {
+     "prefer": [
+      "azkerash"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "lord": {
+     "prefer": [
+      "goblin_lord"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.reiss_and_azkerash_plan_the_teleport"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "azkerash.sends_the_undead_to_blow_the_gaps",
+     "azkerash.holds_a_teleport_force_for_thirty_minutes",
+     "reiss.half_resists_azkerash"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Az'kerash orders the walls taken. The undead go first and explode in the gaps. A teleport force waits for thirty minutes. Reiss resists only in part, and he is drawn to Erin as a safe friend."
+  },
+  "b9.erin_walks_out_under_a_white_flag": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "floodplains_of_liscor",
+   "roles": {
+    "innkeeper": {
+     "prefer": [
+      "erin_solstice"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "antinium": {
+     "prefer": [
+      "klbkch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_goblin_host_marches_past_the_inn",
+    "b9.erin_sews_a_white_flag"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "erin.walked_out_under_a_white_flag",
+     "erin.called_for_a_truce_with_loud_voice",
+     "erin.truce_heard_by_the_whole_world"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Tyrion's side says no mistakes will happen. Erin walks out of the inn with a bedsheet on a quarterstaff and shouts for a truce with [Loud Voice]. Falene's feed carries it to the world. Klbkch orders her stopped. Tyrion says: fire."
+  },
+  "b9.the_trebuchets_fire_on_the_east_gate": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "liscor_east_gate",
+   "roles": {
+    "captain": {
+     "prefer": [
+      "zevara"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "soldier": {
+     "prefer": [
+      "relc"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "antinium": {
+     "prefer": [
+      "klbkch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "gnoll": {
+     "prefer": [
+      "tkrn"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.erin_walks_out_under_a_white_flag",
+    "b9.tyrion_orders_the_barrage"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "trebuchets.fired_three_volleys_on_liscor",
+     "liscor.east_gate_bowed_inward",
+     "liscor.walls_cracked_but_standing"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess. Fight stage added by the user's choice. The undead that squeeze through the gaps are Az'kerash's order (5.61); the stage foes are a guess."
+   },
+   "summary": "About two dozen trebuchets fire three volleys. The first two hit mud and wall base and hurt nobody. The enchanted third bows the east gate inward and cracks the wall. Some stones crush about twenty-four Goblins. Undead press at the gaps.",
+   "xp_window": {
+    "boost": 1,
+    "hours": [
+     13,
+     16
+    ]
+   },
+   "foreshadow": {
+    "days_before": 1,
+    "text": "Riverfarm engineers have set up trebuchets on the ridge. Liscor's gate guards say tomorrow the stones will fly."
+   },
+   "stage": {
+    "kind": "fight",
+    "area": "liscor_gate",
+    "hours": [
+     13,
+     16
+    ],
+    "foes": [
+     {
+      "enemy": "zombie",
+      "pos": [
+       27,
+       11
+      ]
+     },
+     {
+      "enemy": "zombie",
+      "pos": [
+       27,
+       12
+      ]
+     },
+     {
+      "enemy": "skeleton",
+      "pos": [
+       28,
+       13
+      ]
+     },
+     {
+      "enemy": "skeleton",
+      "pos": [
+       26,
+       13
+      ]
+     }
+    ],
+    "line": "The first stones have hit the mud and the wall. Az'kerash's undead are shambling up the road to the cracks.",
+    "waves": [
+     {
+      "after_seconds": 0,
+      "from": [
+       2,
+       11
+      ],
+      "allies": [
+       "relc",
+       "klbkch",
+       "tkrn"
+      ],
+      "line": "Relc, Klbkch and Tkrn stand at the cracked east gate, ready for whatever comes through."
+     },
+     {
+      "after_seconds": 30,
+      "from": [
+       2,
+       12
+      ],
+      "allies": [
+       "zevara",
+       "halrac",
+       "jelaqua"
+      ],
+      "line": "Zevara and the Gold-rank adventurers hurry down from the wall."
+     },
+     {
+      "after_seconds": 60,
+      "left_at_most": 3,
+      "from": [
+       30,
+       12
+      ],
+      "foes": [
+       "ghoul",
+       "goblin_lord_soldier",
+       "zombie"
+      ],
+      "line": "A third volley thumps on the wall. A ghoul and black-armoured soldiers charge the crack."
+     }
+    ],
+    "beats": [
+     {
+      "after_seconds": 10,
+      "npc": "zevara",
+      "line": "Hold the gaps! Nothing gets into the city!"
+     },
+     {
+      "after_seconds": 50,
+      "npc": "relc",
+      "line": "They are coming through the crack! Block it!"
+     }
+    ],
+    "note": "User pick (2026-11-03): a trebuchet barrage stage on liscor_gate, XP tier 1. The book has no scene at the gate yet; 5.62 holds the main battle (M36.9). Hours and foes are guesses."
+   }
+  },
+  "b9.the_antinium_ambush_the_trebuchets": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "liscor_east_gate",
+   "roles": {
+    "antinium": {
+     "prefer": [
+      "klbkch"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "archer": {
+     "prefer": [
+      "halrac"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_trebuchets_fire_on_the_east_gate"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "antinium.burned_a_seventh_of_the_trebuchets",
+     "liscor.tunnels_sealed",
+     "trebuchets.stopped_firing"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "Antinium come out of the tunnels and burn or wreck three or four trebuchets. Human archers, mages and adventurers kill the rest of the crews. Klbkch seals the tunnels and calls the retreat. No named person dies. Reiss's army begins to charge, chanting 'Goblin'."
+  },
+  "b9.the_solstice_goblins_charge_reisss_lines": {
+   "tier": 1,
+   "window": {
+    "earliest": 176,
+    "latest": 176,
+    "confidence": "guess"
+   },
+   "location": "floodplains_of_liscor",
+   "roles": {
+    "warrior": {
+     "prefer": [
+      "headscratcher"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "bard": {
+     "prefer": [
+      "numbtongue"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "archer": {
+     "prefer": [
+      "badarrow"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "weapon": {
+     "prefer": [
+      "shorthilt"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "champion": {
+     "prefer": [
+      "rabbiteater"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "chief": {
+     "prefer": [
+      "redscar"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "shaman": {
+     "prefer": [
+      "noears"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "poison": {
+     "prefer": [
+      "poisonbite"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "hob": {
+     "prefer": [
+      "spiderslicer"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    },
+    "innkeeper": {
+     "prefer": [
+      "erin_solstice"
+     ],
+     "fallback_tags": [],
+     "optional": true
+    }
+   },
+   "requires": {
+    "alive": [],
+    "flags": [],
+    "not_flags": []
+   },
+   "depends_on": [
+    "b9.the_antinium_ambush_the_trebuchets"
+   ],
+   "on_fail": [
+    "cancel"
+   ],
+   "effects": {
+    "set_flags": [
+     "goblins.solstice_goblins_answer_erin",
+     "erin.asked_the_goblins_for_help",
+     "reiss_army.hesitates_at_the_charge"
+    ]
+   },
+   "status": "candidate",
+   "canon_ref": {
+    "book": 9,
+    "chapter": "5.61",
+    "confidence": "confirmed",
+    "note": "March Day 13 = day 176, day rule march Day + 163 (ADR 0047), guess."
+   },
+   "summary": "The five Hobs take Erin's flag, first mistaking it for a war flag. The Flooded Waters, Redfangs and Cave Goblins, a third of Reiss's host, arrive. Erin asks for help and they roar yes. The Solstice Goblins charge Reiss's lines. His army hesitates; Az'kerash panics."
+  }
+ }
+}
