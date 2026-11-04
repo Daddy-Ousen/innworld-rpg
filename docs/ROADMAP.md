@@ -17,8 +17,9 @@ left, put them under "Waits on the user". Detail of finished work lives in the A
 | M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
 | Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
 | Google Play | closed test running | – (user) |
+| Microsoft Store | kit ready (`docs/WINDOWS_STORE.md`); needs Partner Center account, name and identity | – (user) |
 
-Last release: v0.2.0-alpha (2026-11-01, tag and GitHub pre-release published): v0.1.9 plus the bag screen in the card look (M31 – M33: signposts, scene beats, Book 6 – 8 climaxes, spells, dishes, quests, friend perks). v0.1.8 is on Google Play's closed test track, waiting for review.
+Last release: v0.2.1-alpha (2026-11-04, tag and GitHub pre-release published): v0.2.0 plus M35 (Ceria's fire lesson, stat sheets, Magnolia) and all of Book 9 (M36). v0.1.8 is on Google Play's closed test track, waiting for review.
 Next step: cloud sessions (prompts in `docs/CLOUD.md` "Task queue" items 1 – 4). Order: M36.P is merged, M36.1 is merged, M36.2 is merged, M36.3 is merged, M36.4 is merged, M36.5 is merged, M36.6 is merged, M36.7 is merged, M36.8 is merged, M36.9 is merged, M36.10 is merged, the `requires.alive` follow-up is built (merge its PR; M36.0 was skipped: no engine need), then M37. The user still plays M31 – M33 and the bag (apk on the release page, or `godot --path game`).
 Cloud text: Books 1 – 10 are in the private repo `Daddy-Ousen/innworld-canon-raw` (2026-11-01).
 
