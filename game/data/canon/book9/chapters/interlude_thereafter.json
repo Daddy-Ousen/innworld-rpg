@@ -1,0 +1,946 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "interlude_thereafter",
+	"order": 99,
+	"system": [],
+	"events": {
+		"b9.greydath_leaves_his_sword_and_a_riddle": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"greybeard"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_goblins_flee_up_the_mountain"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"greydath.left_his_greatsword_with_rags",
+					"goblin_king.treasure_needs_two_keys",
+					"greydath.says_the_truth_is_at_the_beginning",
+					"rags.holds_garens_key"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Night into Day 14 = day 177 (the day after the battle). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Before dawn Greydath of Blades jumps down to the survivors. He says he only watched and tested them, that a Goblin King must rise alone, and that Velan chose his death. He points to Velan's treasure, which needs two keys. He leaves his greatsword in the ground and goes."
+		},
+		"b9.rags_is_hailed_great_chieftain": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"poison": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"biter": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wolf_rider": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.greydath_leaves_his_sword_and_a_riddle"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.great_chieftain_title",
+					"goblins.survivors_follow_rags_up_the_mountain",
+					"redscar.carries_garens_sword",
+					"numbtongue.reported_dead_by_badarrow"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Sunrise, Day 14 = day 177 (the day after the battle). A spoken title, not a class: no level or Skill shown. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At sunrise the survivors hail Rags. She climbs a rock and the raised swords burst into flame. She names herself Chieftain of the Flooded Waters, the Redfangs, Reiss's Goblins and the Cave Goblins, and Great Chieftain of the Mountain. She leads them up the mountain."
+		},
+		"b9.pawn_refuses_to_revive_yellow_splatters": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.yellow_splatters_dies_shielding_pawn",
+				"b9.the_goblins_flee_up_the_mountain"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pawn.refused_the_rite_of_anastases",
+					"painted_soldiers.about_a_hundred_dead",
+					"pawn.broken_antennae"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Dawn, Day 14 = day 177 (the day after the battle). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "At dawn about a hundred Painted Soldiers lie dead. Klbkch offers to ask the Queen to revive Yellow Splatters by the Rite of Anastases. Pawn refuses, because Yellow Splatters is free now. Lyonette takes Pawn home to the inn. He vows never to forget them."
+		},
+		"b9.osthia_lives_and_ilvriss_keeps_the_secret": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"wall_lord": {
+					"prefer": [
+						"ilvriss"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"osthia.alive_after_the_battle",
+					"azkerash.survived_secret_kept_by_ilvriss"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Morning, Day 14 = day 177 (the day after the battle). No record for Osthia; she lives ([False Death], plan conflict 5). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Osthia Blackwing, the Pallass [Captain] held in Reiss's army, slips out alive and tries to warn that Az'kerash lives and used Reiss. Wall Lord Ilvriss already knows. He silences her, says the secret is their only edge and takes her away on his horse."
+		},
+		"b9.laken_walks_the_dead_and_takes_prisoners_north": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"page": {
+					"prefer": [
+						"gamel"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"noble": {
+					"prefer": [
+						"yitton_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chef": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shaman": {
+					"prefer": [
+						"ulvama"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.rags_breaks_the_dungeon_wall_on_the_human_rear",
+				"b9.magnolia_threatens_tyrion_and_he_turns_away"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"laken.took_goblin_prisoners_north",
+					"pebblesnatch.prisoner_of_laken",
+					"ulvama.prisoner_of_laken",
+					"yitton.daughter_refuses_to_see_him"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Day after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Laken walks the battlefield and tells a dying Goblin to live. He forbids anyone to harm his prisoners, a few hundred Goblins that include Pebblesnatch and a hostile, hurt Ulvama. He claims them and marches them north with Yitton and Gralton."
+		},
+		"b9.azkerash_writes_off_liscor": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "azkerash_castle",
+			"roles": {
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.wrote_off_reiss",
+					"azkerash.plans_the_next_generation"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "About a day after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Az'kerash, whole again, rages and then goes cold. He calls Liscor of no consequence and Reiss useless. Only Zel Shivertail's death was worth it. He has his Chosen prepare Drake scales, Antinium chitin and mana potions for the next generation of creations."
+		},
+		"b9.the_antinium_tunnel_is_kept": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "liscor_hive",
+			"roles": {
+				"antinium": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"prognugator": {
+					"prefer": [
+						"xrn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"armoured": {
+					"prefer": [
+						"tersk"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_painted_soldiers_charge_with_pawn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"antinium.attack_on_liscor_cancelled",
+					"antinium.tunnel_kept_and_extended_to_link_all_hives"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Same period as the day after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "In the tunnel under Liscor the three Hives wait and the attack plan is dead. Klbkch halts Xrn and, in the Free Queen's name, orders the tunnel kept, hidden and extended to link all six Hives. Xrn warns that the Grand Queen has not agreed."
+		},
+		"b9.liscor_is_quiet_and_the_inn_is_closed": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"child": {
+					"prefer": [
+						"mrsha"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_refuses_the_general_class"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"wandering_inn.closed_and_barred",
+					"wandering_inn.roof_shattered"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Day 14 = day 177 (the day after the battle). The door is not mentioned. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Liscor is hushed on the morning after the fighting. The Wandering Inn is closed, its shutters locked and barred, and the roof is shattered. Nobody is let in."
+		},
+		"b9.ceria_visits_calruz": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "liscor_watch_cells",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"ceria_springwalker"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"minotaur": {
+					"prefer": [
+						"calruz"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"alchemist": {
+					"prefer": [
+						"pisces"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"warrior": {
+					"prefer": [
+						"yvlon_byres"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"ksmvr"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_goblins_flee_up_the_mountain"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"calruz.accepts_any_punishment",
+					"horns.vow_to_grow_stronger"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Day 14 = day 177 (the day after the battle). Calruz stays alive; no verdict (plan conflict 2). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Ceria visits Calruz in his cell while the Horns wait outside. He is mostly vacant, then clear, and says he went mad and must die. He asks her to tell the Gnolls he will accept any punishment. There is no verdict yet. The Horns vow to grow stronger together."
+		},
+		"b9.halfseekers_burn_garens_body": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "high_passes",
+			"roles": {
+				"selphid": {
+					"prefer": [
+						"jelaqua"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"golem": {
+					"prefer": [
+						"moore"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"scout": {
+					"prefer": [
+						"seborn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.relc_kills_garen_at_the_east_gate"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"halfseekers.burned_garens_body",
+					"halfseekers.found_no_key_on_garen",
+					"halfseekers.go_on_as_three"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Soon after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Jelaqua, Moore and Seborn burn Garen's body so no Selphid can take it. His chest shows a clean wound above the heart and about two dozen spear stabs. They find no key on him and decide to go on, three of them, for one more adventure."
+		},
+		"b9.magnolia_takes_tea_after_the_battle": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "magnolia_estate",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"maid": {
+					"prefer": [
+						"ressa"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady2": {
+					"prefer": [
+						"bethal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.magnolia_threatens_tyrion_and_he_turns_away"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.said_nobody_won",
+					"magnolia.has_a_bounty_on_the_necromancer",
+					"magnolia.got_a_letter_from_a_walled_city_noble"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Shortly after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Magnolia says nobody won: Zel Shivertail is dead, the north wasted an army and she bought peace at a cost. A noble of a Walled City sends her a vague letter hinting at a future invitation. A bounty on the Necromancer has no result yet. She wants to strike him only when sure of winning."
+		},
+		"b9.lord_erill_pays_the_circle_of_thorns": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "tyrion_war_camp",
+			"roles": {
+				"noble": {
+					"prefer": [
+						"erill_fienst"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lady": {
+					"prefer": [
+						"ieka_imarris"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.magnolia_threatens_tyrion_and_he_turns_away"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erill.paid_the_circle_of_thorns",
+					"circle_of_thorns.remembers_magnolia"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Less than a day after Magnolia stopped Tyrion. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Lord Erill is frightened by Magnolia's personal threat. He gives Lady Ieka of the Circle of Thorns a bag of about two hundred thousand gold. Ieka says the Circle will remember."
+		},
+		"b9.the_king_sees_lyonette_on_the_wall": {
+			"tier": 1,
+			"window": {
+				"earliest": 177,
+				"latest": 177,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"maid": {
+					"prefer": [
+						"lyonette"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_east_gate_breaks_and_the_drakes_sortie"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"lyonette.recognised_in_a_scrying_pool",
+					"lyonette.king_orders_her_found"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "The kingdom and the place are not named in the text, so the map place is a guess. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Two monarchs watching the battle in a scrying pool recognise Lyonette du Marquin climbing the wall with a white Gnoll. The King orders a servant to confirm it and bring her back, as the kingdom needs her."
+		},
+		"b9.niers_plans_a_trip_to_liscor": {
+			"tier": 1,
+			"window": {
+				"earliest": 178,
+				"latest": 178,
+				"confidence": "guess"
+			},
+			"location": "baleros",
+			"roles": {
+				"general": {
+					"prefer": [
+						"niers_astoragon"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"tactician": {
+					"prefer": [
+						"foliana"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_leads_the_cave_goblins_into_reisss_host"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"niers.plans_to_leave_for_liscor",
+					"niers.keeps_a_scry_image_of_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Time not stated; a few days after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Niers Astoragon plans to leave the Forgotten Wing for a short trip, probably to Liscor. He keeps a blurry scry image of a young woman waving a white flag. He tells Foliana to keep quiet about it."
+		},
+		"b9.toren_stacks_the_dead_in_the_dungeon": {
+			"tier": 1,
+			"window": {
+				"earliest": 178,
+				"latest": 178,
+				"confidence": "guess"
+			},
+			"location": "liscor_dungeon",
+			"roles": {
+				"skeleton": {
+					"prefer": [
+						"toren"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_dead_of_both_sides_rise"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"toren.hoards_the_battles_dead",
+					"toren.dead_begin_to_rise"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Some time after the battle. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Toren drags more bodies to the room behind a plain door at the end of a hall. The amphitheatre now holds thousands of corpses and some begin to rise. A mask hangs at his side and calls to him."
+		},
+		"b9.the_blighted_king_orders_a_second_summoning": {
+			"tier": 1,
+			"window": {
+				"earliest": 178,
+				"latest": 178,
+				"confidence": "guess"
+			},
+			"location": "blighted_kingdom",
+			"roles": {
+				"king": {
+					"prefer": [
+						"blighted_king"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"nereshal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_east_gate_breaks_and_the_drakes_sortie"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"blighted_king.orders_a_second_summoning"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Time not stated. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "With his [Chronomancer] Nereshal, the Blighted King orders a second summoning ritual over his mages' protests. He says the first Earthers are weak and will be guided, and the new ones raised with care. He wants weapons from their world."
+		},
+		"b9.ryoka_runs_a_package_to_reizmelt": {
+			"tier": 1,
+			"window": {
+				"earliest": 180,
+				"latest": 180,
+				"confidence": "guess"
+			},
+			"location": "north_izril",
+			"roles": {
+				"runner": {
+					"prefer": [
+						"ryoka_griffin"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.magnolia_threatens_tyrion_and_he_turns_away"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"ryoka.heard_the_news_at_reizmelt",
+					"ryoka.is_a_city_runner"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "interlude_thereafter",
+				"confidence": "confirmed",
+				"note": "Four days after the battle (guess). Reizmelt has no place record, so the map place is north_izril. No class or level for Ryoka (CLAUDE.md). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Days after the battle a city crier gives Ryoka a flattering story of Tyrion's trebuchets. She runs a fragile package to Reizmelt as a small-time City Runner. There she hears the news, says it is good she was not there, and lets the wind swirl. She thinks it will be a beautiful spring."
+		}
+	}
+}

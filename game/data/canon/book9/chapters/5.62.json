@@ -1,0 +1,1598 @@
+{
+	"schema_version": 1,
+	"book": 9,
+	"chapter": "5.62",
+	"order": 98,
+	"system": [
+		{
+			"who": "erin_solstice",
+			"kind": "class",
+			"name": "[General] (offered, cancelled)",
+			"level": 6,
+			"confidence": "confirmed",
+			"note": "Offered in place of [Warrior] with [Inspiring Words] and [All-or-Nothing Charge]. Erin refuses and the level-ups are cancelled."
+		},
+		{
+			"who": "erin_solstice",
+			"kind": "skill",
+			"name": "[Minotaur Punch]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Used in the charge."
+		},
+		{
+			"who": "rabbiteater",
+			"kind": "skill",
+			"name": "[Grand Slash]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Seen in the battle (gained in 5.49)."
+		},
+		{
+			"who": "eater_of_spears",
+			"kind": "skill",
+			"name": "[Unerring Throw]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Seen in the battle."
+		},
+		{
+			"who": "azkerash",
+			"kind": "skill",
+			"name": "[Flash Step]",
+			"level": null,
+			"confidence": "confirmed",
+			"note": "Cast through Reiss's body."
+		}
+	],
+	"events": {
+		"b9.erin_leads_the_cave_goblins_into_reisss_host": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wolf_rider": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_solstice_goblins_charge_reisss_lines"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"battle_of_liscor.begun",
+					"erin.led_the_cave_goblins_into_the_charge"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Erin leads the Cave Goblins down into Reiss's black-armoured host. Headscratcher's axe grows, Badarrow's bell arrow stuns the front rank and Numbtongue's guitar throws sparks. Rags's pikes hit the flank. The Redfang riders break through, loop and charge again."
+		},
+		"b9.the_dead_of_both_sides_rise": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"poison": {
+					"prefer": [
+						"poisonbite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"killer": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"biter": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"giant": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.erin_leads_the_cave_goblins_into_reisss_host"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"battle_of_liscor.the_dead_rise",
+					"goblins.poison_useless_on_the_undead",
+					"reiss.necromancers_hold_the_far_hill"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Reiss's necromancers sit on a far hill behind shields. Every Goblin and Human who falls rises as a zombie, ghoul or draug. Poisonbite's poison is useless on the dead. Eater of Spears beats Headscratcher down until Erin and a pepper potion blind him. The Goblins start to lose."
+		},
+		"b9.noears_calls_the_inns_mana_for_lightning": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"mage": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_dead_of_both_sides_rise"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"noears.called_the_inns_free_mana",
+					"numbtongue.played_the_thunder_song"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. The door is not at the inn (5.60). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Noears climbs the inn's wrecked third floor and spends all the inn's free mana, which the missing door no longer drains, on lightning. Numbtongue and a Goblin band answer with a thunder song. The bolts wipe out the mages' hill and slow the dead, but it is not enough."
+		},
+		"b9.the_painted_soldiers_charge_with_pawn": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"sergeant": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_dead_of_both_sides_rise"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"painted_soldiers.disobeyed_the_queens",
+					"painted_soldiers.charged_with_pawn",
+					"antinium.free_queen_feigns_deafness"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Pawn begs the Free Queen, and a hundred of the oldest Painted Soldiers leave the Hive against orders, Purple Smile among them. Pawn leads a prayer with a censer. They cross heavy arrow fire almost untouched and break Reiss's formation. Redscar's and Numbtongue's Goblins follow."
+		},
+		"b9.walls_and_mages_hit_reisss_army": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "liscor_walls",
+			"roles": {
+				"archer": {
+					"prefer": [
+						"halrac"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"mage": {
+					"prefer": [
+						"typhenous"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"ranger": {
+					"prefer": [
+						"jackal"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_painted_soldiers_charge_with_pawn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"jackal.refused_to_shoot_the_goblin_leaders",
+					"laken.misfired_boulders_into_the_human_rear",
+					"liscor.walls_fire_on_reisss_army"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Halrac, Typhenous and Olesm fire on Reiss's army from the walls. Tyrion orders Gold-rank archers to shoot Goblin leaders, but Jackal's team stands down. Laken lets his boulders land in the Human rear. An opening forms in the Goblin Lord's lines."
+		},
+		"b9.azkerash_takes_reisss_body": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.walls_and_mages_hit_reisss_army",
+				"b9.noears_calls_the_inns_mana_for_lightning"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.possessed_reiss_in_the_battle",
+					"azkerash.cast_bone_rapier_and_stone_lances"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Five Redfangs reach Reiss and nearly beat him. Az'kerash takes over his body and casts Bone Rapier, Flash Step and Mass Stone Lances. The rapier's curse stops wounds from healing, even with potions. The lances shatter the Painted Soldiers."
+		},
+		"b9.azkerash_kills_headscratcher": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"headscratcher"
+					],
+					"fallback_tags": []
+				},
+				"killer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"headscratcher"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.azkerash_takes_reisss_body"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"headscratcher.died_in_erins_arms",
+					"headscratcher.killed_by_azkerash_in_reisss_body"
+				],
+				"kill": [
+					"headscratcher"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Headscratcher is stabbed below the heart by the Bone Rapier in Reiss's hand. He dies in Erin's arms, still holding the axe.",
+			"news": "Headscratcher, Hob of the Redfangs, was killed in the battle on the Floodplains of Liscor."
+		},
+		"b9.yellow_splatters_dies_shielding_pawn": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"yellow_splatters"
+					],
+					"fallback_tags": []
+				},
+				"priest": {
+					"prefer": [
+						"pawn"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"yellow_splatters"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.azkerash_takes_reisss_body"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"yellow_splatters.died_shielding_pawn"
+				],
+				"kill": [
+					"yellow_splatters"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "A Stone Lance is aimed at Pawn. Yellow Splatters, a Painted Soldier [Sergeant], steps in front of it and dies. Pawn finds the body among the dead later.",
+			"news": "Yellow Splatters, a Painted Antinium Sergeant, died shielding Pawn in the battle at Liscor."
+		},
+		"b9.rags_breaks_the_dungeon_wall_on_the_human_rear": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "shield_spider_nest",
+			"roles": {
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"magestone": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shaman": {
+					"prefer": [
+						"ulvama"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chef": {
+					"prefer": [
+						"pebblesnatch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"laken_godart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.walls_and_mages_hit_reisss_army"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"rags.released_the_shield_spiders_on_the_human_rear",
+					"pebblesnatch.found_alone_in_the_cave"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Rags breaks the wall of the Shield Spider nest from a cliff cave, and the spiders pour onto Tyrion's rear. Ulvama enlarges and enrages them. Laken and the lords fight the swarm. Tyrion kills many before the rest are destroyed or sealed in. Pebblesnatch is found alone in the cave."
+		},
+		"b9.garen_cuts_azkerash_and_reiss_wakes": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"hob": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"lord": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"shield": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.azkerash_takes_reisss_body",
+				"b9.rags_breaks_the_dungeon_wall_on_the_human_rear"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"azkerash.link_to_reiss_broken",
+					"reiss.himself_again",
+					"garen_and_reiss.made_peace",
+					"reiss.wound_will_not_close"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Rags rallies the tribe. Garen leads the Redfangs through the lines and cuts Az'kerash's arm off at the elbow in Reiss's body. The pain breaks the link and Reiss is himself again. The brothers make peace. Tyrion orders a full charge, and Reiss turns to hold the Humans."
+		},
+		"b9.spiderslicer_dies_shielding_garen": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"spiderslicer"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"spiderslicer"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"spiderslicer.died_shielding_garen"
+				],
+				"kill": [
+					"spiderslicer"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Az'kerash's last bone spray flies at Garen. Spiderslicer steps in front and takes it, and Redscar weeps over the body.",
+			"news": "Spiderslicer, a Redfang rider, was killed protecting Garen in the battle at Liscor."
+		},
+		"b9.shorthilt_dies_fighting_the_riders": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"shorthilt"
+					],
+					"fallback_tags": []
+				},
+				"wolf_rider": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"necromancer": {
+					"prefer": [
+						"azkerash"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"shorthilt"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"shorthilt.died_fighting_the_human_riders",
+					"rabbiteater.carries_calruzs_axe"
+				],
+				"kill": [
+					"shorthilt"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. The axe is Calruz's (Ilvriss gave it to Erin; Headscratcher carried it; flag only). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Shorthilt, already gutted by Az'kerash, hands his axe to Rabbiteater, walks back into the Human riders and falls fighting.",
+			"news": "Shorthilt, a Hob of the Redfangs, died fighting Human riders at the battle of Liscor."
+		},
+		"b9.the_east_gate_breaks_and_the_drakes_sortie": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"commander": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"antinium": {
+					"prefer": [
+						"klbkch"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"spear": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"strategist": {
+					"prefer": [
+						"olesm"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.azkerash_takes_reisss_body"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"liscor.east_gate_torn_open",
+					"liscor.walls_breached_twice_more_but_held",
+					"embria.led_the_sortie_with_pallass_troops"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "The trebuchet stones tear the east gate open and two more breaches follow. Zevara has the gates sealed and Workers haul rubble. Embria leads about a thousand Pallass troops and the 4th Company out to keep the Goblins from entering. The Humans strike the Goblins from behind.",
+			"stage": {
+				"kind": "fight",
+				"area": "liscor_gate",
+				"hours": [
+					17,
+					21
+				],
+				"foes": [
+					{
+						"enemy": "draug",
+						"pos": [
+							28,
+							11
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							29,
+							10
+						]
+					},
+					{
+						"enemy": "ghoul",
+						"pos": [
+							29,
+							13
+						]
+					},
+					{
+						"enemy": "goblin_lord_soldier",
+						"pos": [
+							27,
+							13
+						]
+					},
+					{
+						"enemy": "zombie",
+						"pos": [
+							28,
+							12
+						]
+					}
+				],
+				"line": "The east gate is torn open and two more cracks gape in the wall. The dead and the black-armoured Goblins pour up the road.",
+				"waves": [
+					{
+						"after_seconds": 0,
+						"from": [
+							2,
+							11
+						],
+						"allies": [
+							"relc",
+							"klbkch",
+							"zevara"
+						],
+						"line": "Zevara, Relc and Klbkch hold the breach while Workers drag stone to block it."
+					},
+					{
+						"after_seconds": 30,
+						"from": [
+							2,
+							12
+						],
+						"allies": [
+							"ylawes_byres",
+							"yvlon_byres",
+							"ceria_springwalker"
+						],
+						"line": "The Gold-rank adventurers run down from the wall to hold the gap."
+					},
+					{
+						"after_seconds": 55,
+						"left_at_most": 3,
+						"from": [
+							30,
+							12
+						],
+						"foes": [
+							"draug",
+							"ghoul",
+							"goblin_lord_soldier"
+						],
+						"line": "A draug and black-armoured soldiers charge the breach behind Garen's Redfangs."
+					},
+					{
+						"after_seconds": 90,
+						"left_at_most": 3,
+						"from": [
+							30,
+							11
+						],
+						"foes": [
+							"draug",
+							"zombie",
+							"ghoul"
+						],
+						"line": "The last of Reiss's dead shamble at the gate as the Humans hit the Goblins from behind."
+					}
+				],
+				"beats": [
+					{
+						"after_seconds": 10,
+						"npc": "zevara",
+						"line": "Block it with anything! Stone, wood, bodies, I do not care!"
+					},
+					{
+						"after_seconds": 45,
+						"npc": "relc",
+						"line": "Hold the line! They are coming through the gap!"
+					},
+					{
+						"after_seconds": 100,
+						"npc": "klbkch",
+						"line": "The Goblin Lord's army is breaking. Hold the gate."
+					}
+				],
+				"note": "User pick (2026-11-03): the main gate battle, XP tier 2. In the book most of 5.62 is fought on the Floodplains; the gate shows as the breach and Embria's sortie. Embria has no combat record, so she is not an ally. Hours, tiles and foes are guesses."
+			},
+			"xp_window": {
+				"boost": 2,
+				"hours": [
+					17,
+					21
+				]
+			},
+			"foreshadow": {
+				"days_before": 1,
+				"text": "Tyrion's stones are cracking the east gate. The Watch says the Goblin Lord's whole host will come at the breach tomorrow evening."
+			}
+		},
+		"b9.relc_kills_garen_at_the_east_gate": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "liscor_east_gate",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"garen"
+					],
+					"fallback_tags": []
+				},
+				"spear": {
+					"prefer": [
+						"relc"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"captain": {
+					"prefer": [
+						"zevara"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"garen"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.the_east_gate_breaks_and_the_drakes_sortie",
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"garen.killed_by_relc_at_the_gate",
+					"garen.killed_three_drake_captains",
+					"relc.ordered_the_gates_held"
+				],
+				"kill": [
+					"garen"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. The Halfseekers' count of stab wounds is in Thereafter. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Garen leads the Goblins to the city and kills three Drake [Captains] before Embria's line. He wounds Embria's stomach. Relc's spear ends him after about two dozen stabs. Relc orders the Drakes to fall back and hold the gates, and the Goblins flee south.",
+			"news": "Garen Redfang, the Goblin Lord's brother, was killed at Liscor's east gate by Relc of the Watch."
+		},
+		"b9.tyrion_lances_reiss": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"goblin_lord"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"goblin_lord"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.killed_by_tyrion",
+					"battle_of_liscor.goblin_lord_slain"
+				],
+				"kill": [
+					"goblin_lord"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. Reiss is our goblin_lord record (plan conflict 6). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Tyrion's lance goes through Reiss, the Goblin Lord. Half his body is gone and he walks on a little. Tyrion then declares that the Goblin Lord is dead.",
+			"news": "Tyrion Veltras has killed the Goblin Lord, Reiss, on the Floodplains outside Liscor."
+		},
+		"b9.eater_of_spears_falls_to_human_riders": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"eater_of_spears"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"eater_of_spears"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"eater_of_spears.killed_by_human_cavalry"
+				],
+				"kill": [
+					"eater_of_spears"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Human cavalry, mages and archers bring down the giant Hob Eater of Spears as the Goblin lines collapse.",
+			"news": "Eater of Spears, a giant Hob of the Goblin Lord's army, fell to Human riders at Liscor."
+		},
+		"b9.noears_destroys_the_inns_third_floor": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"noears"
+					],
+					"fallback_tags": []
+				}
+			},
+			"requires": {
+				"alive": [
+					"noears"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.noears_calls_the_inns_mana_for_lightning"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"noears.died_on_the_inn_roof",
+					"wandering_inn.third_floor_destroyed"
+				],
+				"kill": [
+					"noears"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. The third floor is destroyed, not burned (plan conflict 12). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Noears throws one last lightning bolt that destroys the wrecked third floor of the inn. A hundred spells hit the spot where he stands. Nothing is left of him.",
+			"news": "Noears, a Goblin [Lightning Mage], was killed by a volley of Human spells at the Wandering Inn."
+		},
+		"b9.numbtongue_is_speared_and_plays_a_last_chord": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"bard": {
+					"prefer": [
+						"numbtongue"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.garen_cuts_azkerash_and_reiss_wakes"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"numbtongue.speared_in_the_battle"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. No kill: he plays in Book 10 (plan conflict 3). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Numbtongue tricks Tyrion with a false warning, charges him with a sword and is speared by a Human rider. He plays one last chord and lightning falls. The text does not say he dies."
+		},
+		"b9.pyrite_holds_the_slope_against_tyrion": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"pyrite"
+					],
+					"fallback_tags": []
+				},
+				"knight": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"pyrite"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_reiss"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"pyrite.died_holding_the_slope",
+					"tyrion.wounded_by_pyrite"
+				],
+				"kill": [
+					"pyrite"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Pyrite holds the slope against Tyrion's knights, wounds Tyrion and kills his horse. Knights and mage lightning bring him down. He dies at sunset, smiling.",
+			"news": "Pyrite, a Goblin [Magestone Chieftain], died holding a hillside against Tyrion Veltras outside Liscor."
+		},
+		"b9.redscar_kills_sir_vumat": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"victim": {
+					"prefer": [
+						"sir_vumat"
+					],
+					"fallback_tags": []
+				},
+				"hob": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [
+					"sir_vumat"
+				],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_reiss"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"sir_vumat.killed_by_redscar",
+					"redscar.carries_two_blades"
+				],
+				"kill": [
+					"sir_vumat"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Redscar kills the Human [Knight] Sir Vumat and fights on to the end of the day. He carries two blades, one frost-enchanted.",
+			"news": "Sir Vumat, a Human [Knight], was killed by the Goblin Redscar outside Liscor."
+		},
+		"b9.the_goblins_flee_up_the_mountain": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"biter": {
+					"prefer": [
+						"snapjaw"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"chieftain": {
+					"prefer": [
+						"rags"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"hob": {
+					"prefer": [
+						"redscar"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"archer": {
+					"prefer": [
+						"badarrow"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"wolf_rider": {
+					"prefer": [
+						"rabbiteater"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"soldier": {
+					"prefer": [
+						"purple_smile"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.pyrite_holds_the_slope_against_tyrion",
+				"b9.redscar_kills_sir_vumat",
+				"b9.relc_kills_garen_at_the_east_gate"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"goblins.fled_up_the_mountain",
+					"purple_smile.missing_after_the_battle",
+					"badarrow.rescued_by_redscar"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. No kill for Purple Smile (plan conflict 4). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Snapjaw hauls Rags up the mountain. Redscar drags Badarrow away. Rabbiteater flees with the axe. The Goblins scatter south and up the slopes. Purple Smile is not seen again. Erin stays by Headscratcher."
+		},
+		"b9.magnolia_threatens_tyrion_and_he_turns_away": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "floodplains_of_liscor",
+			"roles": {
+				"lady": {
+					"prefer": [
+						"magnolia_reinhart"
+					],
+					"fallback_tags": [],
+					"optional": true
+				},
+				"knight": {
+					"prefer": [
+						"tyrion_veltras"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_reiss"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"magnolia.threatened_veltras_home",
+					"tyrion.marched_to_the_blood_fields",
+					"tyrion.challenged_the_drakes_to_meet_in_six_days",
+					"battle_of_liscor.over"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Magnolia's scried image stands before the Veltras keep. She threatens his family and shows him other nobles' homes. Tyrion cuts the link, says the Goblin Lord is dead and marches past Liscor to the Blood Fields. He challenges the Drakes to meet him there in six days. Liscor cheers."
+		},
+		"b9.reiss_dies_at_a_table_in_the_inn": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.tyrion_lances_reiss",
+				"b9.magnolia_threatens_tyrion_and_he_turns_away"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"reiss.died_at_erins_table",
+					"reiss.buried_by_erin",
+					"reiss.head_given_to_the_humans",
+					"headscratcher.buried_by_erin"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176, night. day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Reiss, half his body gone, walks to the inn and sits at a table with Erin. He dies there. Erin carries his body out, gives the Humans his head and buries the rest beside Headscratcher. She is the only one who mourns the Goblins."
+		},
+		"b9.erin_refuses_the_general_class": {
+			"tier": 1,
+			"window": {
+				"earliest": 176,
+				"latest": 176,
+				"confidence": "guess"
+			},
+			"location": "wandering_inn",
+			"roles": {
+				"innkeeper": {
+					"prefer": [
+						"erin_solstice"
+					],
+					"fallback_tags": [],
+					"optional": true
+				}
+			},
+			"requires": {
+				"alive": [],
+				"flags": [],
+				"not_flags": []
+			},
+			"depends_on": [
+				"b9.reiss_dies_at_a_table_in_the_inn"
+			],
+			"on_fail": [
+				"cancel"
+			],
+			"effects": {
+				"set_flags": [
+					"erin.refused_the_general_class"
+				]
+			},
+			"status": "candidate",
+			"canon_ref": {
+				"book": 9,
+				"chapter": "5.62",
+				"confidence": "confirmed",
+				"note": "March Day 13 = day 176, night. A system record keeps the offer; she keeps no [General] class (ADR 0047). day rule march Day + 163 (ADR 0047), guess."
+			},
+			"summary": "Alone in the kitchen, Erin is shown a change from [Warrior] to [General] at level 6, with [Inspiring Words] and [All-or-Nothing Charge]. She shouts at it to stop and the level-ups are cancelled."
+		}
+	}
+}

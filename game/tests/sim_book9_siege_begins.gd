@@ -192,13 +192,13 @@ func test_the_door_moves_to_city_hall_and_the_white_flag_is_made() -> void:
 	assert_false(gs.flags.has("albez_door.at_wandering_inn"), "the door leaves the inn")
 
 
-func test_staying_away_still_fires_the_trebuchets_and_nobody_named_dies() -> void:
+func test_staying_away_still_fires_the_trebuchets_and_nobody_named_dies_on_day_176() -> void:
 	var gs := _fresh()
 	ToyCanon.sleep_through(gs, _db, 176)
 	_has_all(gs, ["trebuchets.fired_three_volleys_on_liscor", "liscor.walls_cracked_but_standing",
 			"antinium.burned_a_seventh_of_the_trebuchets", "goblins.solstice_goblins_answer_erin",
 			"erin.called_for_a_truce_with_loud_voice", "garen.rejoined_rags_with_eight_redfangs"])
-	for who: String in ["erin_solstice", "numbtongue", "rags", "pyrite", "garen", "headscratcher", "shorthilt", "yitton_byres"]:
+	for who: String in ["erin_solstice", "numbtongue", "rags", "yitton_byres"]:
 		assert_true(gs.world.is_alive(_db.canon, who), who + " lives")
 
 
