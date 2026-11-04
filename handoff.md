@@ -1,5 +1,17 @@
 # Handoff
 
+## Just done (2026-11-04, cloud): M36.10 Book 9 sims (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #269)
+- No stage or hook (the user's "ask stage and hook" had nothing to choose: tests only). Tests and docs only; no data or code change.
+- New: `game/tests/sim_canon_book9.gd` (8 tests) and `game/tests/sim_kill_book9.gd` (6 tests). Pass with `sim_canon_book8`,
+  `sim_kill_book8`, `unit_canon_db`, `unit_data_db`, `sim_book9_battle_of_liscor`. Validator `python3 tools/validate_data.py game/data/canon --all`:
+  0 errors, 0 warnings (the arg is the canon parent folder, not `game/data/canon/book9`). Full suite not run.
+- Next: the user merges the PR, then tags `m36-done` on the merge commit (tags may not push from the cloud: tag pending). Then M37.P.
+- **Open follow-up (user decides):** ~14 events in 5.55 - Thereafter (Erin walks out under the white flag, Erin refuses [General],
+  Rags hailed, Garen cuts Azkerash, Numbtongue speared, Tyrion orders the barrage, Redscar kills Sir Vumat ...) have optional
+  roles and empty `requires.alive`. Killing that NPC on day 175 changes nothing. `sim_kill_book9` tests only what the data does.
+  Fix = add `alive` to those events; then extend the kill sim. Not done in this PR.
+- Gotchas: `unit_scene_beats` still has the old ally-shout failure (also on main). `.gd.uid` files are git-excluded locally.
+
 ## Just done (2026-11-03, cloud): M36.9 Book 9 canon 5.62, Interlude – Thereafter (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #268)
 - Two Sonnet reading agents (summaries only). User picks: fight stage for the gate battle (`liscor_gate`, 17 - 21, day 176,
   XP tier 2); no hook. The generator script was in the scratchpad (gone): edit JSON by hand.

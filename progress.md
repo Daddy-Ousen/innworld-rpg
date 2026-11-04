@@ -324,9 +324,22 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   `sim_book9_door_thieves`, `sim_book9_world`: all pass. `unit_scene_beats` 5/6: the old ally-shout failure (also on
   main; the fight count 30 passes). Counts: scenes 53, fights 30, hooks 141. Validator books 1 – 9: 0 errors, 0 warnings.
   Full suite not run.
-  - [ ] The user merges the M36.9 PR. Next: M36.10 `sim_canon_book9` and `sim_kill_book9` (Sonnet · medium).
+  - [x] The user merged the M36.9 PR (#269).
   - [ ] The user plays day 176 evening (gate battle at `liscor_gate`, 17 – 21).
-- [ ] M36.10 `sim_canon_book9` and `sim_kill_book9`.
+- [x] M36.10 `sim_canon_book9` and `sim_kill_book9` (2026-11-04, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted
+  from main after PR #269). No stage, no hook, no data change: tests and docs only. `sim_canon_book9` 8 (new): 206 events
+  (days 164 - 180) run as canon with drift 0; the 13 named dead die by one event each; 14 survivors live; the 4 Book 8 dead
+  stay dead; 4 fight stages with `xp_window` + 6 scene stages with hooks; rains, flood, boycott, door and ending flags; chapter
+  order. `sim_kill_book9` 6 (new): kill day 175, sleep to 177; no kill = canon; Garen, Reiss and Pyrite killed early cancel
+  their own canon events; Erin, Rags, Numbtongue, Tyrion, Redscar, Relc, Zevara and Ilvriss killed early: no crash, all
+  events resolve. Also pass: `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_data_db` 15,
+  `sim_book9_battle_of_liscor` 7. Validator `game/data/canon --all`: 0 errors, 0 warnings. Full suite not run.
+  - [ ] The user merges the M36.10 PR. Then the tag `m36-done` on the merge commit (tag pending: tags may not push from the cloud).
+  - [ ] **Open follow-up (data gap found by the kill sim):** about 14 events in 5.60 - Thereafter about Erin, Rags, Garen,
+    Numbtongue, Tyrion and Reiss have optional roles and an empty `requires.alive`. If that person is dead, the event still
+    happens (for example Erin walks out under the white flag after she is killed). Book 8 had `requires.alive` on these. The
+    fix is data only (add `alive` to those events); the user decides how far Book 9 alternate history goes. Not done here.
+  - [x] Next: M37 (Book 10): the M37.P plan (`docs/plans/m37.md`, ADR 0048).
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
