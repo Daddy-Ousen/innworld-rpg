@@ -346,7 +346,17 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
     `sim_book9_*`, `unit_canon_db`, `unit_data_db`, `sim_canon_book8`, `sim_kill_book8`, `sim_player_hooks` 6,
     `unit_foreshadow` 15, `unit_xp_window` 12. Validator `game/data/canon --all`: 0 errors, 0 warnings. Full suite not run.
     - [ ] The user merges the follow-up PR.
-  - [x] Next: M37 (Book 10): the M37.P plan (`docs/plans/m37.md`, ADR 0048).
+  - [x] The user merged the follow-up PR (#271). M36 is complete. Tag `m36-done`: pending (cloud may not push tags).
+
+## M37 Book 10 (The Wind Runner) (plan `docs/plans/m37.md`, ADR 0048)
+- [x] M37.P plan (2026-11-04, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #271). Nine Sonnet
+  reading agents read all 17 chapters (summaries only). User picks: Baleros (D) and Chandrar (K) in the short version, off
+  map; one fight stage (night undead at the inn, day 183); two hooks (walk with Numbtongue, day 184; Gold-rank farewell,
+  day 192); one new map (Tails and Scales, Pallass). Result: day anchor 176, 16 conflicts, no named kill, no Ryoka class, no
+  engine step (M37.0 skipped), `6.` ids need no fix, 9 steps after the plan. Docs only. No tests run (no code or data changed).
+  - [ ] The user merges the M37.P PR.
+- [ ] M37.1 world and records · [ ] M37.2 Tails and Scales map · [ ] M37.3 canon 6.00, 6.01 · [ ] M37.4 canon 6.02, 6.03
+  · [ ] M37.5 canon 6.08 – 6.10 · [ ] M37.6 canon 6.11, 6.16 · [ ] M37.7 Baleros · [ ] M37.8 Chandrar · [ ] M37.9 sims
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
