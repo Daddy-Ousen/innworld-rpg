@@ -91,6 +91,7 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 | Version | Date | What |
 |---|---|---|
 | v0.2.0-alpha | 2026-11-01 | bag screen in the card look on top of v0.1.9 (Android code 9); the aab stays local |
+| v0.2.1-alpha | 2026-11-04 | Book 9 (M36) + M35 (Ceria's fire lesson, stat sheets, Magnolia) (Android code 10); the aab stays local |
 | v0.1.9-alpha | 2026-10-31 | M31 – M33 (Android code 8); the aab stays local |
 | v0.1.8-alpha | 2026-10-24 | M34.5 phone fixes (Android code 7); sent to the Play closed test |
 | v0.1.7-alpha | 2026-10-22 | M34 phone controls (code 6) |
