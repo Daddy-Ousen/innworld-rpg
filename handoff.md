@@ -1,5 +1,20 @@
 # Handoff
 
+## Just done (2026-11-04, local): release build v0.2.1-alpha (branch `release/v0.2.1`)
+- Synced local `main` with GitHub (it was 62 commits behind: M35 and all of Book 9 / M36 came in through cloud PRs #256 – #271;
+  tag `m36-done` exists).
+- Bumped `game/project.godot` and both Android presets (`version/code=10`, name `0.2.1-alpha`). `--import` twice, then
+  `tools/release.ps1` (PowerShell tool, System32 first in PATH, `$env:GODOT` = console exe). Smoke tests pass for all three
+  (events=1614, maps=53, problems=0). Apk verifies (v2 + v3). Files in `export/`: 3 zips, apk, aab.
+- Changelog: `docs/changelog/v0.2.1-alpha.md` (Play text 469 chars). `progress.md` Releases and `docs/ROADMAP.md` updated.
+- Next: the user merges the release PR. Then tag `v0.2.1-alpha` on the merge commit and `gh release create --prerelease` with
+  the 3 zips + the apk + the GitHub notes from the changelog (Pages deploys from the release). Optional: the aab to Play.
+- Gotchas: the build leaves ~299 `.import` files changed (line ends only): do not commit them. `git checkout -- game/assets`
+  was blocked by the permission classifier, so they stay dirty. `.gitignore` change, `.uid` files and `web/` are not part of
+  the release. Old open PR #210 (head `main`) is unrelated. No GUT run for the release (version bump only); `unit_scene_beats`
+  has a known old failure (see below).
+- Open play checks: Book 9 fight stages (east gate day 176, door thieves day 172), Ceria's fire lesson (day 36).
+
 ## Just done (2026-11-04, cloud): M36 follow-up, `requires.alive` on Book 9 subject events (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #270)
 - User said yes to the data gap found by `sim_kill_book9`. Data only (no schema or code change): 42 events across 5.51G, 5.54, 5.60 - 5.62
   and three interludes now list their one subject in `requires.alive`. Text edit in place (5.60, 5.61 do not round-trip through a JSON dump).

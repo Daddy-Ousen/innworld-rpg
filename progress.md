@@ -503,6 +503,11 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] v0.2.1-alpha (2026-11-04, branch `release/v0.2.1`, local): v0.2.0 + M35 and Book 9 (M36, PRs #256 – #271). Data only,
+  save version 24. Android code 10. Smoke tests pass (events=1614, maps=53, problems=0). Apk verifies (v2 + v3). Three zips
+  + apk + aab built in `export/`. Changelog `docs/changelog/v0.2.1-alpha.md`. No GUT run (version bump only).
+  - [ ] Waits: user merges the release PR, then tag `v0.2.1-alpha` on the merge commit + `gh release create --prerelease`
+    with the 3 zips + apk. The aab stays local for Play.
 - [x] v0.2.0-alpha (2026-11-01, branch `release/v0.2.0`): v0.1.9 + the bag screen in the card look ([PR #251](https://github.com/Daddy-Ousen/innworld-rpg/pull/251)).
   Android code 9. Smoke tests pass (events=1408, maps=52, problems=0). Apk verifies (v2 + v3), versionCode 9. Three zips +
   apk + aab built in `export/`. No GUT run (version bump only). Waits: user merges the PR, then tag `v0.2.0-alpha` +
