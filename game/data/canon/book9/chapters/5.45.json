@@ -431,7 +431,8 @@
 			},
 			"requires": {
 				"alive": [
-					"erin_solstice"
+					"erin_solstice",
+					"yvlon_byres"
 				],
 				"flags": [],
 				"not_flags": []

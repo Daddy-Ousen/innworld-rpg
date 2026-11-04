@@ -334,11 +334,18 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
   their own canon events; Erin, Rags, Numbtongue, Tyrion, Redscar, Relc, Zevara and Ilvriss killed early: no crash, all
   events resolve. Also pass: `sim_canon_book8` 6, `sim_kill_book8` 6, `unit_canon_db` 7, `unit_data_db` 15,
   `sim_book9_battle_of_liscor` 7. Validator `game/data/canon --all`: 0 errors, 0 warnings. Full suite not run.
-  - [ ] The user merges the M36.10 PR. Then the tag `m36-done` on the merge commit (tag pending: tags may not push from the cloud).
-  - [ ] **Open follow-up (data gap found by the kill sim):** about 14 events in 5.60 - Thereafter about Erin, Rags, Garen,
-    Numbtongue, Tyrion and Reiss have optional roles and an empty `requires.alive`. If that person is dead, the event still
-    happens (for example Erin walks out under the white flag after she is killed). Book 8 had `requires.alive` on these. The
-    fix is data only (add `alive` to those events); the user decides how far Book 9 alternate history goes. Not done here.
+  - [x] The user merged the M36.10 PR (#270). Tag `m36-done` on its merge commit 0c09678: pending (tags may not push from the cloud).
+  - [x] **Follow-up: the `requires.alive` gap** (2026-11-04, cloud, branch `claude/m35-1-stat-sheets-pt83je`, restarted
+    from main after PR #270; user said "yes"). Data only: 42 Book 9 events whose subject is one person now list that person
+    in `requires.alive` (Erin, Rags, Garen, Numbtongue, Tyrion, Reiss, Relc, Redscar, Noears, Ilvriss, Azkerash, Magnolia,
+    Pawn, Laken, Ceria + Calruz, Niers, Toren, Ryoka, Xrn, Embria, Pebblesnatch, Yvlon, Bevussa, Tkrn). Not changed:
+    `reiss_dies_at_a_table` (Reiss is already dead by the lance), events with two equal subjects, and events with a
+    required role. Cascades (by `depends_on`): a dead Erin or Tyrion or Noears or Ilvriss cancels the whole gate battle;
+    a dead Rags, Garen or Reiss cancels their own events and the lance/Relc chain; a dead Redscar leaves Sir Vumat alive;
+    a dead Relc leaves Garen alive. `sim_kill_book9` now 12 tests (was 6). Also pass: `sim_canon_book9` 8, all nine
+    `sim_book9_*`, `unit_canon_db`, `unit_data_db`, `sim_canon_book8`, `sim_kill_book8`, `sim_player_hooks` 6,
+    `unit_foreshadow` 15, `unit_xp_window` 12. Validator `game/data/canon --all`: 0 errors, 0 warnings. Full suite not run.
+    - [ ] The user merges the follow-up PR.
   - [x] Next: M37 (Book 10): the M37.P plan (`docs/plans/m37.md`, ADR 0048).
 
 ## Player audit (2026-10-17, local, read-only; no code changed)

@@ -4,8 +4,8 @@ extends GutTest
 ## Book 9 event to day 176 resolves, and the dead stay dead. Garen, Reiss (the Goblin Lord) and Pyrite have events
 ## that need them alive: those events are cancelled and the rest of the battle goes on. The game is slept once
 ## (before_all); each test starts from a copy.
-## Known gap (not tested, see handoff.md): the 5.60 - 5.62 events about Erin, Rags, Numbtongue, Tyrion and Redscar
-## have optional roles and no requires.alive, so their deaths change nothing yet.
+## Events about one person list that person in requires.alive (follow-up to M36.10): a dead Erin does not walk out
+## under a white flag, and the events that depend on it are cancelled too.
 
 const KILL_DAY := 175
 const LAST_DAY := 177
@@ -102,7 +102,8 @@ func test_garen_dies_early_and_relc_has_no_one_to_kill() -> void:
 	assert_false(gs.flags.has("garen.killed_by_relc_at_the_gate"))
 	assert_false(gs.world.is_alive(_db.canon, "garen"), "he stays dead")
 	assert_true(_happened(gs, GATE), "the gate still breaks")
-	assert_true(_happened(gs, LANCE_REISS), "Tyrion still lances Reiss")
+	assert_false(_happened(gs, "b9.garen_cuts_azkerash_and_reiss_wakes"), "he cannot cut Azkerash")
+	assert_false(_happened(gs, LANCE_REISS), "the lance follows Garen's cut")
 	assert_false(_happened(gs, "b9.halfseekers_burn_garens_body"), "no body to burn")
 
 
@@ -130,12 +131,78 @@ func test_pyrite_dies_early_and_rags_is_not_hailed() -> void:
 	assert_true(_happened(gs, LANCE_REISS))
 
 
-func test_a_key_npc_dies_and_the_book_still_runs_to_the_end_of_the_battle() -> void:
-	# Erin, Rags, Numbtongue, Tyrion, Redscar and the Drakes at the gate: no crash, everything resolves, the dead stay dead.
-	for npc: String in ["erin_solstice", "rags", "numbtongue", "tyrion_veltras", "redscar", "relc", "zevara", "ilvriss"]:
-		var gs := _run([npc])
-		_all_resolved(gs)
-		assert_false(gs.world.is_alive(_db.canon, npc), npc + " stays dead")
-		assert_true(_happened(gs, GATE), npc + ": the gate event is resolved")
-		for n: String in ["twofeather", "quietstab", "tremborag"]:
-			assert_false(gs.world.is_alive(_db.canon, n), n + " (dead before day 175) stays dead")
+func test_erin_dies_and_there_is_no_white_flag_and_no_battle() -> void:
+	var gs := _run(["erin_solstice"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	for id: String in ["b9.erin_sews_a_white_flag", "b9.erin_walks_out_under_a_white_flag",
+			"b9.erin_leads_the_cave_goblins_into_reisss_host", GATE, RELC_KILLS_GAREN, LANCE_REISS]:
+		assert_false(_happened(gs, id), id)
+	assert_false(gs.flags.has("erin.walked_out_under_a_white_flag"))
+	assert_false(gs.flags.has("erin.refused_the_general_class"))
+	assert_false(gs.world.is_alive(_db.canon, "erin_solstice"), "she stays dead")
+	# Nobody else is killed by the cancelled battle.
+	for n: String in ["garen", "goblin_lord", "pyrite", "sir_vumat", "headscratcher", "noears"]:
+		assert_true(gs.world.is_alive(_db.canon, n), n + " is spared")
+
+
+func test_tyrion_dies_and_the_barrage_and_the_battle_do_not_happen() -> void:
+	var gs := _run(["tyrion_veltras"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	for id: String in ["b9.tyrion_orders_the_barrage", "b9.the_trebuchets_fire_on_the_east_gate", GATE, LANCE_REISS]:
+		assert_false(_happened(gs, id), id)
+	assert_true(gs.world.is_alive(_db.canon, "goblin_lord"), "no lance, no death in the battle")
+
+
+func test_rags_dies_and_the_flank_attack_is_gone_but_the_gate_still_breaks() -> void:
+	var gs := _run(["rags"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	for id: String in ["b9.rags_walks_south_behind_the_human_army", "b9.rags_breaks_the_dungeon_wall_on_the_human_rear"]:
+		assert_false(_happened(gs, id), id)
+	assert_true(_happened(gs, GATE))
+	assert_false(gs.world.is_alive(_db.canon, "rags"), "she stays dead")
+
+
+func test_numbtongue_dies_and_is_not_speared_twice() -> void:
+	var gs := _run(["numbtongue"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	assert_false(_happened(gs, "b9.numbtongue_is_speared_and_plays_a_last_chord"))
+	assert_false(gs.flags.has("numbtongue.speared_in_the_battle"))
+	assert_true(_happened(gs, GATE), "the battle goes on")
+	assert_false(gs.world.is_alive(_db.canon, "numbtongue"), "he stays dead")
+
+
+func test_redscar_dies_and_sir_vumat_lives() -> void:
+	var gs := _run(["redscar"])
+	_all_resolved(gs)
+	assert_false(_happened(gs, "b9.redscar_kills_sir_vumat"))
+	assert_true(gs.world.is_alive(_db.canon, "sir_vumat"), "no one is left to kill him")
+	assert_true(_happened(gs, GATE))
+
+
+func test_relc_dies_and_garen_is_not_killed_at_the_gate() -> void:
+	var gs := _run(["relc"])
+	_all_resolved(gs)
+	assert_false(_happened(gs, RELC_KILLS_GAREN))
+	assert_true(gs.world.is_alive(_db.canon, "garen"), "Relc cannot kill him")
+	assert_true(_happened(gs, GATE))
+	assert_true(_happened(gs, LANCE_REISS))
+
+
+func test_noears_and_ilvriss_die_and_the_book_still_resolves() -> void:
+	# Noears (the roof) and Ilvriss (the door, the war room): big chains are cancelled, nothing is left pending.
+	var gs := _run(["noears"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	assert_false(_happened(gs, "b9.noears_calls_the_inns_mana_for_lightning"))
+	assert_false(_happened(gs, "b9.noears_destroys_the_inns_third_floor"))
+	assert_false(gs.world.is_alive(_db.canon, "noears"), "he stays dead")
+	gs = _run(["ilvriss"])
+	_all_resolved(gs)
+	assert_gt(gs.world.drift, 0.0)
+	assert_false(_happened(gs, "b9.ilvriss_moves_the_door_to_city_hall"))
+	assert_false(gs.flags.has("albez_door.at_liscor_city_hall"))
+	assert_false(gs.world.is_alive(_db.canon, "ilvriss"), "he stays dead")

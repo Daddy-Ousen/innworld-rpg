@@ -92,7 +92,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"erin_solstice"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -207,7 +209,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"noears"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -394,7 +398,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"azkerash"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -452,7 +458,8 @@
 			},
 			"requires": {
 				"alive": [
-					"headscratcher"
+					"headscratcher",
+					"azkerash"
 				],
 				"flags": [],
 				"not_flags": []
@@ -582,7 +589,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"rags"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -646,7 +655,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"garen"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -1025,7 +1036,8 @@
 			},
 			"requires": {
 				"alive": [
-					"garen"
+					"garen",
+					"relc"
 				],
 				"flags": [],
 				"not_flags": []
@@ -1082,7 +1094,8 @@
 			},
 			"requires": {
 				"alive": [
-					"goblin_lord"
+					"goblin_lord",
+					"tyrion_veltras"
 				],
 				"flags": [],
 				"not_flags": []
@@ -1239,7 +1252,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"numbtongue"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -1343,7 +1358,8 @@
 			},
 			"requires": {
 				"alive": [
-					"sir_vumat"
+					"sir_vumat",
+					"redscar"
 				],
 				"flags": [],
 				"not_flags": []
@@ -1479,7 +1495,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"magnolia_reinhart"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -1570,7 +1588,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"erin_solstice"
+				],
 				"flags": [],
 				"not_flags": []
 			},

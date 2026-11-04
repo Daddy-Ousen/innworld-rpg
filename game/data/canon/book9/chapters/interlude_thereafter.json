@@ -117,7 +117,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"rags"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -176,7 +178,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"pawn"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -292,7 +296,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"laken_godart"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -338,7 +344,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"azkerash"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -523,7 +531,10 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"ceria_springwalker",
+					"calruz"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -638,7 +649,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"magnolia_reinhart"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -782,7 +795,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"niers_astoragon"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -825,7 +840,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"toren"
+				],
 				"flags": [],
 				"not_flags": []
 			},
@@ -917,7 +934,9 @@
 				}
 			},
 			"requires": {
-				"alive": [],
+				"alive": [
+					"ryoka_griffin"
+				],
 				"flags": [],
 				"not_flags": []
 			},

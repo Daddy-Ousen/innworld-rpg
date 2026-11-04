@@ -36,7 +36,8 @@
 			},
 			"requires": {
 				"alive": [
-					"bird"
+					"bird",
+					"bevussa_slenderscale"
 				],
 				"flags": [],
 				"not_flags": []

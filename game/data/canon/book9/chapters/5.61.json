@@ -54,7 +54,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "garen"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -155,7 +157,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "pebblesnatch"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -392,7 +396,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "tyrion_veltras"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -443,7 +449,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "azkerash"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -494,7 +502,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "erin_solstice"
+    ],
     "flags": [],
     "not_flags": []
    },
