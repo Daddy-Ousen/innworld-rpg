@@ -262,7 +262,8 @@
 			},
 			"requires": {
 				"alive": [
-					"goblin_lord"
+					"goblin_lord",
+					"azkerash"
 				],
 				"flags": [],
 				"not_flags": []

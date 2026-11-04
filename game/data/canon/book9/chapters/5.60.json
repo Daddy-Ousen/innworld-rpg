@@ -104,7 +104,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "laken_godart"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -239,7 +241,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "ilvriss"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -300,7 +304,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "xrn"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -350,7 +356,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "pawn"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -407,7 +415,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "tyrion_veltras"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -464,7 +474,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "magnolia_reinhart"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -528,7 +540,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "rags"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -579,7 +593,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "embria_grasstongue"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -636,7 +652,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "goblin_lord"
+    ],
     "flags": [],
     "not_flags": []
    },
@@ -757,7 +775,9 @@
     }
    },
    "requires": {
-    "alive": [],
+    "alive": [
+     "erin_solstice"
+    ],
     "flags": [],
     "not_flags": []
    },

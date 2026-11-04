@@ -378,7 +378,8 @@
 			},
 			"requires": {
 				"alive": [
-					"tremborag"
+					"tremborag",
+					"tyrion_veltras"
 				],
 				"flags": [],
 				"not_flags": []
@@ -497,7 +498,8 @@
 			},
 			"requires": {
 				"alive": [
-					"goblin_lord"
+					"goblin_lord",
+					"azkerash"
 				],
 				"flags": [],
 				"not_flags": []

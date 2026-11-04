@@ -255,7 +255,8 @@
 			},
 			"requires": {
 				"alive": [
-					"krshia"
+					"krshia",
+					"tkrn"
 				],
 				"flags": [],
 				"not_flags": []
