@@ -1,6 +1,6 @@
 # Privacy policy — Innworld RPG
 
-Last change: 2026-10-11
+Last change: 2026-11-04
 
 Innworld RPG is a free, non-commercial fan game. This policy covers every build: Android, Windows, Linux and the web build.
 
@@ -13,7 +13,7 @@ Nothing. The game does not collect, store on a server, send or share any persona
 - No in-app purchases.
 - The Android app asks for no permissions. It has no internet permission, so it can not send data.
 
-The sites that host the downloads and the web build (Google Play, GitHub, itch.io) have their own privacy
+The sites that host the downloads and the web build (Google Play, Microsoft Store, GitHub, itch.io) have their own privacy
 policies. The game itself adds nothing to what they log.
 
 ## What stays on your device

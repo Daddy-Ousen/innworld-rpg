@@ -1,5 +1,18 @@
 # Handoff
 
+## Just done (2026-11-04, local): Microsoft Store kit (branch `feat/windows-store`)
+- v0.2.1-alpha is released (tag + pre-release, PR #272). The user then asked for Windows Store files.
+- New: `docs/WINDOWS_STORE.md` (account, identity, pages, listing text, certification notes, age rating, requirements, images),
+  `docs/adr/0049-windows-store-msix.md`, `tools/windows_store.ps1`, `tools/release/AppxManifest.template.xml`,
+  `tools/build_windows_store_art.py` + test. `PRIVACY.md` names the Store. Art is in `export/store_windows/` (gitignored).
+- Checked: Python tests pass; `windows_store.ps1 -Test` packs and signs a 96 MB .msix (Store version 1.2.1.0).
+  NOT checked: installing or running it, the Windows App Certification Kit.
+- Next: user merges the PR, makes the Partner Center account, reserves the name, fills `%USERPROFILE%\.innworld-store.txt`
+  (identity, publisher, publisherdisplay), runs `windows_store.ps1`, uploads the .msix + images from `export/store_windows/listing/`.
+- Gotchas: Store version = game version with Major + 1 (0.2.1 → 1.2.1.0). Upload unsigned. `git checkout -- game/assets`
+  is blocked by the permission classifier: ~299 `.import` files stay dirty, do not commit them. `.gitignore`, `.uid` files, `web/`
+  are not part of the branch. Next ADR number: 0050 (0048 reserved for Book 10).
+
 ## Just done (2026-11-04, local): release build v0.2.1-alpha (branch `release/v0.2.1`)
 - Synced local `main` with GitHub (it was 62 commits behind: M35 and all of Book 9 / M36 came in through cloud PRs #256 – #271;
   tag `m36-done` exists).

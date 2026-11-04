@@ -503,11 +503,20 @@ M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
 - [ ] Tablet check (API 36 cannot lock landscape on large screens). Store tags (optional).
 
 ## Releases (ADR 0029)
+- [x] Microsoft Store kit (2026-11-04, branch `feat/windows-store`, ADR 0049, `docs/WINDOWS_STORE.md`): `tools/windows_store.ps1`
+  (MSIX from the Windows build, `-Test` for a self-signed local package), `tools/release/AppxManifest.template.xml`,
+  `tools/build_windows_store_art.py` (package logos, 300 icon, 1080 box art, 720 × 1080 poster, 6 screenshots in
+  `export/store_windows/`), listing text, certification notes, age-rating and requirements answers; `PRIVACY.md` names the Store.
+  Tests: `tools/tests/test_build_windows_store_art.py` (3) + `test_build_store_art.py` pass. A `-Test` package of v0.2.1-alpha
+  packs and signs (Store version 1.2.1.0, 96 MB). **Not installed or run.** No GUT run (no game change).
+  - [ ] The user makes the Partner Center account, reserves the name, puts the three identity values in
+    `%USERPROFILE%\.innworld-store.txt`, runs `windows_store.ps1`, tests the `-Test` package once, and submits.
+  - [ ] Open: exe icon in Explorer is the Godot default (needs `rcedit`: ask first). Min GPU claim is a guess.
 - [x] v0.2.1-alpha (2026-11-04, branch `release/v0.2.1`, local): v0.2.0 + M35 and Book 9 (M36, PRs #256 – #271). Data only,
   save version 24. Android code 10. Smoke tests pass (events=1614, maps=53, problems=0). Apk verifies (v2 + v3). Three zips
   + apk + aab built in `export/`. Changelog `docs/changelog/v0.2.1-alpha.md`. No GUT run (version bump only).
-  - [ ] Waits: user merges the release PR, then tag `v0.2.1-alpha` on the merge commit + `gh release create --prerelease`
-    with the 3 zips + apk. The aab stays local for Play.
+  - [x] Merged ([PR #272](https://github.com/Daddy-Ousen/innworld-rpg/pull/272), merge commit 675ef35). Tag `v0.2.1-alpha`
+    pushed. GitHub pre-release published with 3 zips + apk (sizes checked). The aab stays local for Play.
 - [x] v0.2.0-alpha (2026-11-01, branch `release/v0.2.0`): v0.1.9 + the bag screen in the card look ([PR #251](https://github.com/Daddy-Ousen/innworld-rpg/pull/251)).
   Android code 9. Smoke tests pass (events=1408, maps=52, problems=0). Apk verifies (v2 + v3), versionCode 9. Three zips +
   apk + aab built in `export/`. No GUT run (version bump only). Waits: user merges the PR, then tag `v0.2.0-alpha` +
