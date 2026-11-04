@@ -1,5 +1,16 @@
 # Handoff
 
+## Just done (2026-11-04, cloud): M36 follow-up, `requires.alive` on Book 9 subject events (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #270)
+- User said yes to the data gap found by `sim_kill_book9`. Data only (no schema or code change): 42 events across 5.51G, 5.54, 5.60 - 5.62
+  and three interludes now list their one subject in `requires.alive`. Text edit in place (5.60, 5.61 do not round-trip through a JSON dump).
+- Cascade rule: a cancelled event cancels its `depends_on` chain. A dead Erin, Tyrion, Noears or Ilvriss cancels the gate battle
+  (Ilvriss: the war room chain, may be more than the book would do; the user can ask for a lighter fix). Dead Redscar: Sir Vumat lives.
+  Dead Relc: Garen lives. Left alone: `reiss_dies_at_a_table`, events with a required role, two-subject events (Ylawes/Yvlon).
+- Tests: `sim_kill_book9` 12 (was 6), `sim_canon_book9` 8, all nine `sim_book9_*`, `unit_canon_db`, `unit_data_db`, `sim_canon_book8`,
+  `sim_kill_book8`, `sim_player_hooks`, `unit_foreshadow`, `unit_xp_window` pass. Validator `python3 tools/validate_data.py game/data/canon --all`: 0 errors. Full suite not run.
+- Next: the user merges the PR, then tags `m36-done` on a merge commit (tag pending: tags may not push from the cloud; PR #270 merge is 0c09678). Then M37.P.
+- Gotchas: `unit_scene_beats` still has the old ally-shout failure (also on main). `.gd.uid` files are git-excluded locally.
+
 ## Just done (2026-11-04, cloud): M36.10 Book 9 sims (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #269)
 - No stage or hook (the user's "ask stage and hook" had nothing to choose: tests only). Tests and docs only; no data or code change.
 - New: `game/tests/sim_canon_book9.gd` (8 tests) and `game/tests/sim_kill_book9.gd` (6 tests). Pass with `sim_canon_book8`,
