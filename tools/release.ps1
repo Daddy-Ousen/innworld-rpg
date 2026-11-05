@@ -1,5 +1,4 @@
-# Build the release files (Windows, Linux, Web zips + signed Android apk + Google Play aab) into export/. See docs/adr/0029-release-builds.md
-# and docs/adr/0031-web-build.md.
+# Build the release files (Windows, Linux, Web zips + signed Android apk + Google Play aab) into export/. See ADR 0029 and ADR 0031 in docs/DECISIONS.md.
 #
 #   $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
 #   powershell -ExecutionPolicy Bypass -File tools/release.ps1

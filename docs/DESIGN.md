@@ -108,7 +108,7 @@ An event may also have a `stage`: its fight appears on the map when the player i
 
 ### 4.5 NPCs
 - Canon NPCs have: goals, schedule, relationships, faction, knowledge flags, class/level.
-- Behaviour: **utility AI** (score a few goals, pick the best), not an LLM.
+- Behaviour: **utility AI** (score a few goals, pick the best). No language model.
 - **Simulation level of detail:** full sim near the player, coarse daily rolls off-screen, pure canon for T1.
 - NPCs can level and gain classes via the same system at low resolution.
 - A saved canon NPC who "should" be dead gets a generic goal set, plus hand-written goals for major characters when content exists.
@@ -118,21 +118,21 @@ An event may also have a `stage`: its fight appears on the map when the player i
 - On killing a major NPC: a one-time warning with a short delay ("the thread of fate…" style). Then the director patches the story.
 - The player can leave the start region, but content density is highest near Liscor in Book 1.
 
-## 5. AI inside the game
+## 5. Generated text
 - **v1: none.** All state changes are deterministic code + data.
-- Later (optional): LLM for rumors, flavour text, or free-text dialogue. Rule: LLM output never changes `GameState` directly; it can only pick from actions the engine offers.
+- Later (optional): generated rumors or flavour text. Rule: generated text never changes `GameState` directly; it can only pick from actions the engine offers.
 
 ## 6. Content pipeline (canon → data)
 1. `tools/extract_epub.py` splits the Book 1 ebook into chapter text in `canon/raw/book1/`.
-2. An agent reads one chapter at a time and proposes events, NPCs, locations and classes seen, as JSON with `canon_ref` and `confidence`.
+2. A reviewer reads one chapter at a time and proposes events, NPCs, locations and classes seen, as JSON with `canon_ref` and `confidence`.
 3. A human reviews and commits to `game/data/canon/book1/` (moved from `canon/events/` in M3, ADR 0005).
 4. Days: the book gives few exact dates. We set **windows**, not fixed days. Mark guesses.
 
 ## 7. Known risks
 - Scope creep ("do anything"). Mitigation: vertical slice first, T1/T2/T3 tiers, level-of-detail sim.
-- Lore drift from agents. Mitigation: `canon_ref` + `confidence` on every canon record; human review.
+- Lore drift while extracting. Mitigation: `canon_ref` + `confidence` on every canon record; human review.
 - Save breakage. Mitigation: versioned saves + migrations from day one.
-- Art. Mitigation: one paid/free tileset (e.g. Kenney, a 16×16 fantasy pack); no AI art mixing styles.
+- Art. Mitigation: one paid/free tileset (e.g. Kenney, a 16×16 fantasy pack); no mixing of art styles.
 - Legal. Free, non-commercial, no book text shipped. Checked 2026-10-09 against pirateaba's fanworks policy (https://wanderinginn.com/fanworks-permissions/):
   the policy does not name games and says to assume "not allowed" when in doubt. Rules that touch us: no book text or interior art (we ship none);
   credit the author (we do); no crowdfunding or sale (we have none); no trademark in marketing material, for example the book titles (done 2026-10-09: marketing text says "pirateaba's Innworld"; the title stays only in the credit lines). No written permission is on file. Safest step: ask pirateaba by email or on her Discord (the user does this).

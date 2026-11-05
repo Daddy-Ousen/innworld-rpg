@@ -7,7 +7,7 @@ Usage (PowerShell, from repo root):
     python tools/validate_data.py game/data/canon/book2        (book1 ids are known)
     python tools/validate_data.py --all game/data/canon        (every book<N> folder)
 
-Layout checked (schema in docs/adr/0004-m2-canon-schemas.md):
+Layout checked (schema in ADR 0004 in docs/DECISIONS.md):
     <dir>/npcs.json                {"schema_version": 1, "npcs": {id: npc}}
     <dir>/locations.json           {"schema_version": 1, "locations": {id: location}}
     <dir>/chapters/<chapter>.json  {"schema_version": 1, "book": N, "chapter": "1.00", "events": {id: event}, "system": [...]}

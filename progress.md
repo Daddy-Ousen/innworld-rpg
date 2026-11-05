@@ -1,7 +1,9 @@
 # Progress
 
-M0–M16 detail (roadmap bullets, decisions, ADR 0001–0026) lives in
-`docs/PROGRESS_ARCHIVE.md`. Read the archive only when you need that old detail.
+M0–M16 detail lives in `docs/ROADMAP.md` (Done), `docs/DECISIONS.md` (ADR 0001–0026) and git history.
+
+Docs cleanup (2026-11-05): ADR files, old plans, the archive and the audit were removed. ADR numbers live in `docs/DECISIONS.md`.
+Older plan and ADR file paths in this file and `handoff.md` are history: use `git log -- <path>` to read them. Only `docs/plans/m37.md` is kept.
 
 ## Context discipline (all sessions)
 - Redirect GUT / validator runs to a file (scratchpad). Read only the pass/fail summary line and any FAIL/Error/Parse Error lines — never the full run.
