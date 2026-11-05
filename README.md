@@ -7,9 +7,10 @@ The story of the books goes on around you, day by day. What you do with your day
 
 > The books define how the world begins. The player decides what happens next.
 
+[**Get it on the Microsoft Store**](https://apps.microsoft.com/detail/9NSJKRJRTP5J) ·
 [**Play on itch.io**](https://rhasasn229.itch.io/innworld-rpg) ·
 [**Play in your browser**](https://daddy-ousen.github.io/innworld-rpg/) ·
-[**Download v0.1.2-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.1.2-alpha) (Windows, Linux) · free
+[**Download v0.2.1-alpha**](https://github.com/Daddy-Ousen/innworld-rpg/releases/tag/v0.2.1-alpha) (Windows, Linux, Android) · free
 
 *Non-commercial fan work. The books and the world belong to pirateaba. This repo holds no book text.*
 
@@ -30,8 +31,8 @@ The story of the books goes on around you, day by day. What you do with your day
 
 | | |
 |---|---|
-| Story | Books 1–7 as canon data: 1,089 events, 296 characters, 122 places |
-| World | 50 maps, day and night, winter snow, NPC schedules |
+| Story | Books 1–9 as canon data: 1,614 events, 335 characters, 130 places |
+| World | 53 maps, day and night, winter snow, NPC schedules |
 | Systems | Classes, levels, Skills, spells, tactical combat, traps, cooking, money, hunger, travel |
 | Art and sound | Pixel art, character animation, music, sound effects, ambience |
 | Saves | 3 slots, plus an autosave each morning |
@@ -41,15 +42,23 @@ This is an **alpha**. Expect bugs and rough edges. Saves from this build may not
 | Book | Chapters | Events |
 |---|---|---|
 | 1 The Wandering Inn | 1.00 – 1.63 | 151 |
-| 2 Fae and Fare | Interlude – The Call to 2.48 | 207 |
-| 3 Flowers of Esthelm | 3.00 – 3.25 | 157 |
-| 4 Winter Solstice | 3.26 – 3.40 | 111 |
-| 5 The Last Light | 4.00 K – 4.31 | 140 |
-| 6 The General of Izril | 4.32 G – 4.49 | 132 |
+| 2 Fae and Fare | Interlude – The Call to 2.48 | 210 |
+| 3 Flowers of Esthelm | 3.00 – 3.25 | 166 |
+| 4 Winter Solstice | 3.26 – 3.40 | 116 |
+| 5 The Last Light | 4.00 K – 4.31 | 149 |
+| 6 The General of Izril | 4.32 G – 4.49 | 145 |
+| 7 The Rains of Liscor | 5.00 – 5.20 G | 202 |
+| 8 Blood of Liscor | 5.21 – 5.44 | 269 |
+| 9 Tears of Liscor | 5.45 – 5.62 | 206 |
 
-Next: Book 7 (The Rains of Liscor). See the [roadmap](docs/ROADMAP.md).
+Next: Book 10. See the [roadmap](docs/ROADMAP.md).
 
 ## Play it
+
+### Microsoft Store (Windows)
+
+Get **[Innworld RPG on the Microsoft Store](https://apps.microsoft.com/detail/9NSJKRJRTP5J)**. It is free.
+The Store installs it and keeps it up to date. It is the same alpha as the download below.
 
 ### In your browser
 
@@ -62,13 +71,14 @@ For the best play, use the download below.
 ### Download
 
 1. Go to the [Releases page](https://github.com/Daddy-Ousen/innworld-rpg/releases).
-2. Download the zip for your system.
+2. Download the zip for your system, or the `.apk` for Android.
 3. Unzip it and start the game:
    - **Windows:** double-click `InnworldRPG.exe`.
      Windows SmartScreen can warn you, because the file has no signature. Click **More info**, then **Run anyway**.
+   - **Android:** open the `.apk` on your phone and allow installs from this source.
    - **Linux:** run `chmod +x InnworldRPG.x86_64`, then `./InnworldRPG.x86_64`.
 
-v0.1.2 has touch controls (an on-screen pad and buttons); see "Touch" below. A keyboard works too.
+The game has touch controls (an on-screen pad and buttons); see "Touch" below. A keyboard works too.
 You can start outside the east gate of Liscor or in Celum.
 
 ### Keys
@@ -127,7 +137,7 @@ python -m unittest discover -s tools/tests        # Python tool tests
 python tools/validate_data.py game/data/canon --all
 ```
 
-GUT: 166 scripts. Python: 105 tests.
+GUT: 227 scripts. Python: 105 tests.
 
 ### Build the release zips
 
@@ -159,7 +169,7 @@ docs/          design, roadmap, decisions (ADRs in docs/adr/), cloud guide
 game/          Godot project
   core/        headless simulation (no nodes, no scenes)
   data/        classes, skills, spells, actions, enemies, maps (JSON)
-    canon/     Books 1–7: events, NPCs and locations (JSON)
+    canon/     Books 1–9: events, NPCs and locations (JSON)
   world/ ui/   scenes and presentation
   tests/       GUT tests
 tools/         Python: epub extraction, art and sound builders, data validator (not shipped)
