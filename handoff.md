@@ -1,5 +1,13 @@
 # Handoff
 
+## Just done (2026-11-05, local): README update (branch `docs/readme-store`, PR #275)
+- The game is on the Microsoft Store: https://apps.microsoft.com/detail/9NSJKRJRTP5J (free). README now links it.
+- README also: v0.2.1-alpha download (Windows, Linux, Android), Books 1-9 table (1,614 events, 335 characters, 130 places, 53 maps), GUT 227 scripts.
+- Local `main` synced with GitHub (b749fc8). Tag `m36-done` is on 2aaf7b3 and pushed. Stale 'tag pending' lines remain in older handoff/progress text.
+- Next: user merges PR #275. Then M37.1 (world and records, see `docs/plans/m37.md`). The Store listing text may need the same link in `docs/WINDOWS_STORE.md`.
+- Gotchas: ~299 `.import` files stay dirty, do not commit them. Python test count in README (105) was not re-checked.
+
+
 ## Just done (2026-11-04, cloud): M37.P Book 10 plan (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #271)
 - Docs only. New: `docs/plans/m37.md` (final plan, replaces the skeleton), `docs/adr/0048-m37-book10.md`. Updated: ROADMAP, CLOUD item 4, progress.
   No code or data changed; no tests run.
