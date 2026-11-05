@@ -91,7 +91,7 @@ schema or save question; Opus · medium for engine code and fight-stage logic.
    > Do the next open M36 step in docs/plans/m36.md. Read progress.md and handoff.md first. Follow CLAUDE.md
    > and ADR 0047. Ask me the stage and hook choices first. Then build, run only the tests the step lists,
    > update the docs, and open a PR.
-4. **M37.P Book 10 plan** (after M36 is merged; plan `docs/plans/m37.md`, text in `canon/raw/book10`), then
+4. **M37.P Book 10 plan** (written 2026-11-04, ADR 0048; skip it once its PR is merged. Next is M37.1: M37.0 is skipped), then
    **M37.0 … M37.n** (same prompts as items 2 and 3, with Book 10, ADR 0048 and docs/plans/m37.md).
    **Model · effort:** M37.P **Opus · high**; the steps follow the tags in item 3 (use the merged M37 plan's tags first).
    M37.P also checks the `6.` chapter ids in the validator and `core/canon_db.gd`; if one fails, that fix is an

@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-11-04, cloud): M37.P Book 10 plan (branch `claude/m35-1-stat-sheets-pt83je`, restarted from main after PR #271)
+- Docs only. New: `docs/plans/m37.md` (final plan, replaces the skeleton), `docs/adr/0048-m37-book10.md`. Updated: ROADMAP, CLOUD item 4, progress.
+  No code or data changed; no tests run.
+- Nine Sonnet agents read all 17 chapters (summaries only, not in git). User picks: Baleros (D) and Chandrar (K) as the short
+  version (5 - 6 events per chapter, one batch each, off map); one fight stage (night undead at the inn, `inn_hill`, day 183);
+  two hooks (walk with Numbtongue, `liscor_market`, day 184; Gold-rank farewell, `inn_interior`, day 192); one new map
+  (Tails and Scales, Pallass).
+- Facts to keep: D = Daly's Baleros thread (Book 5 has `1.00D` - `1.06D`); K = the King's Chandrar thread (Book 2 has `2.22K`).
+  Day anchor 176 (battle); 6.02 = days 182 - 184, 6.08 + 6.09 + 6.10 are ONE day (190), 6.11 = 191, 6.16 = 192, Ilvriss leaves 194.
+  `order` 100 - 116. No named kill. Ryoka: no class, level or Skill (her [Runner's Wind] is a lie). The magic door works again from
+  day 182 (Book 9 left it gone): flags only. One reading agent called 6.16 "early timeline": wrong, it follows Book 9.
+- Next: the user merges the PR. Then M37.1 world and records (Sonnet - high); it must also check: Shieldscale = Osthia,
+  Regrika Blackpaw = Venitra?, Teres vs `teresa`, Erin's [Warrior]. Ask the user for anything the plan marks "ask".
+- Gotchas: tag `m36-done` is still pending (cloud cannot push tags). `unit_scene_beats` still has the old ally-shout failure.
+  The Book 10 text has explicit parts in 6.04 D, 6.06 D, 6.07 D: keep them out of the data.
+
 ## Just done (2026-11-04, local): Microsoft Store kit (branch `feat/windows-store`)
 - v0.2.1-alpha is released (tag + pre-release, PR #272). The user then asked for Windows Store files.
 - New: `docs/WINDOWS_STORE.md` (account, identity, pages, listing text, certification notes, age rating, requirements, images),
