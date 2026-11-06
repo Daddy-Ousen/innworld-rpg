@@ -3,6 +3,7 @@
 M0–M16 detail lives in `docs/ROADMAP.md` (Done), `docs/DECISIONS.md` (ADR 0001–0026) and git history.
 
 Docs cleanup (2026-11-05): ADR files, old plans, the archive and the audit were removed. ADR numbers live in `docs/DECISIONS.md`.
+Terms of service (2026-11-06): `TERMS.md` added at the root, linked from the README. Not committed.
 Older plan and ADR file paths in this file and `handoff.md` are history: use `git log -- <path>` to read them. Only `docs/plans/m37.md` is kept.
 
 ## Context discipline (all sessions)

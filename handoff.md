@@ -1,5 +1,14 @@
 # Handoff
 
+## Just done (2026-11-06, local): terms of service (branch `docs/readme-store`, not committed)
+- New `TERMS.md` at the repo root (same style as `PRIVACY.md`). README "Canon and copyright" links it. Docs only, no tests run.
+- Next: user reads `TERMS.md`, commits. Store forms may want the URL `https://github.com/Daddy-Ousen/innworld-rpg/blob/main/TERMS.md` (not added to `docs/PLAY_STORE.md` or `docs/WINDOWS_STORE.md`).
+- Gotchas: the repo has no code license; `TERMS.md` does not invent one. It is not legal advice.
+
+## Just done (2026-11-05, local): itch.io devlog draft
+- New `docs/DEVLOG_v0.2.1.md` (covers v0.1.6 - v0.2.1). Docs only, not committed. User posts it on itch.io.
+- Check before posting: the draft says no browser build (v0.2.1 has none?) and lists Windows, Linux, Android. Fix if wrong.
+
 ## Just done (2026-11-05, local): docs cleanup (branch `docs/readme-store`, not committed)
 - Goal: less AI-looking repo, same workflow. Removed `docs/adr/` (49 files), `docs/PROGRESS_ARCHIVE.md`, `docs/AUDIT_PLAYER_2026-10-17.md`, `docs/KICKOFF.md`, and all plans except `docs/plans/m37.md`.
 - New `docs/DECISIONS.md`: all 49 ADRs condensed (same numbers, plain voice). New ADRs go at its end.
