@@ -14,7 +14,7 @@
   - Replaced finished M33 in "Next up" with M37 Book 10 submilestones (M37.1 – M37.9) with specific model & effort per step.
   - Added M33 play check to "Waits on the user".
   - Added M36, M35, and M33 to the "Done" table.
-- Updated `docs/plans/m37.md`: aligned model tags to Gemini 4 Argon (High) and Gemini 3.8 Pro (High), recorded new answers.
+- Updated `docs/plans/m37.md`: aligned model tags to Gemini 4 Argon (High) and Gemini 4 Argon (High), recorded new answers.
 - Updated `progress.md`: marked M37 plan merged and added Antigravity model guidance to M37 submilestones.
 - Active files: `docs/ROADMAP.md`, `docs/plans/m37.md`, `progress.md`, `handoff.md`.
 - Next steps: user merges PR #277 (https://github.com/Daddy-Ousen/innworld-rpg/pull/277). Then sync local `main` and branch `feat/m37.1-world-records` for M37.1.

@@ -357,10 +357,10 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
   map; one fight stage (night undead at the inn, day 183); two hooks (walk with Numbtongue, day 184; Gold-rank farewell,
   day 192); one new map (Tails and Scales, Pallass). Result: day anchor 176, 16 conflicts, no named kill, no Ryoka class, no
   engine step (M37.0 skipped), `6.` ids need no fix, 9 steps after the plan. Docs only. No tests run. PR merged.
-- [ ] M37.1 world and records [Gemini 3.8 Pro (High)] · [ ] M37.2 Tails and Scales map [Gemini 3.8 Pro (High)]
-  · [ ] M37.3 canon 6.00, 6.01 [Gemini 3.8 Pro (High)] · [ ] M37.4 canon 6.02, 6.03 [Gemini 4 Argon (High)]
-  · [ ] M37.5 canon 6.08 – 6.10 [Gemini 3.8 Pro (High)] · [ ] M37.6 canon 6.11, 6.16 [Gemini 4 Argon (High)]
-  · [ ] M37.7 Baleros [Gemini 3.8 Pro (High)] · [ ] M37.8 Chandrar [Gemini 3.8 Pro (High)] · [ ] M37.9 sims [Gemini 3.8 Pro (High)]
+- [ ] M37.1 world and records [Gemini 4 Argon (High)] · [ ] M37.2 Tails and Scales map [Gemini 4 Argon (High)]
+  · [ ] M37.3 canon 6.00, 6.01 [Gemini 4 Argon (High)] · [ ] M37.4 canon 6.02, 6.03 [Gemini 4 Argon (High)]
+  · [ ] M37.5 canon 6.08 – 6.10 [Gemini 4 Argon (High)] · [ ] M37.6 canon 6.11, 6.16 [Gemini 4 Argon (High)]
+  · [ ] M37.7 Baleros [Gemini 4 Argon (High)] · [ ] M37.8 Chandrar [Gemini 4 Argon (High)] · [ ] M37.9 sims [Gemini 4 Argon (High)]
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
