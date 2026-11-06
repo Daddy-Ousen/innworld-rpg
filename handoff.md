@@ -17,7 +17,7 @@
 - Updated `docs/plans/m37.md`: aligned model tags to Gemini 4 Argon (High) and Gemini 3.8 Pro (High), recorded new answers.
 - Updated `progress.md`: marked M37 plan merged and added Antigravity model guidance to M37 submilestones.
 - Active files: `docs/ROADMAP.md`, `docs/plans/m37.md`, `progress.md`, `handoff.md`.
-- Next steps: commit doc updates on `docs/readme-store`, merge to `main`, and create `feat/m37.1-world-records`.
+- Next steps: user merges PR #277 (https://github.com/Daddy-Ousen/innworld-rpg/pull/277). Then sync local `main` and branch `feat/m37.1-world-records` for M37.1.
 
 ## Earlier (2026-11-06, local): terms and privacy on the real website
 - The real site is `web/` in the clone `D:\ClaudeC\innworld-web` (branch `feat/website-update`), Vercel project `innworld-site`, https://innworld.rhasan.online.
