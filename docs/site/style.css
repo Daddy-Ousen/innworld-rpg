@@ -1,13 +1,27 @@
-:root{--bg:#fff;--fg:#1d1d1f;--muted:#5f6368;--link:#1a5fb4;--rule:#ddd}
-@media (prefers-color-scheme:dark){:root{--bg:#16161a;--fg:#e8e8ea;--muted:#a0a0a8;--link:#7ab3ff;--rule:#333}}
+/* Matches the game: night sky, brown wood panels, gold trim, Pixel Operator (CC0). */
+@font-face{font-family:"Pixel Operator";src:url(PixelOperator.ttf);font-weight:400}
+@font-face{font-family:"Pixel Operator";src:url(PixelOperator-Bold.ttf);font-weight:700}
+:root{--bg:#1a120c;--panel:#301f12;--panel2:#4d2e1c;--edge:#75512f;--gold:#d9a655;--gold-hi:#ffd166;--text:#f2e6c7;--muted:#c9b48f}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:42rem;margin:0 auto;padding:2rem 16px 4rem}
-h1{font-size:1.9rem;margin:0 0 .25rem}
-h2{font-size:1.2rem;margin:2rem 0 .5rem}
-.meta{color:var(--muted);margin:0 0 1.5rem}
-a{color:var(--link)}
-ul{padding-left:1.25rem}
-nav{border-bottom:1px solid var(--rule);padding:.75rem 16px}
-nav a{margin-right:1rem}
-footer{border-top:1px solid var(--rule);margin-top:3rem;padding-top:1rem;color:var(--muted);font-size:.9rem}
+html{image-rendering:pixelated}
+body{margin:0;color:var(--text);font:22px/1.45 "Pixel Operator",monospace;
+  background:
+    linear-gradient(#0e1026 0 60px,#171a3c 60px 120px,#272650 120px 180px,#3d3466 180px 240px,#5f4a7a 240px 280px,var(--bg) 280px) no-repeat,
+    var(--bg)}
+a{color:var(--gold-hi)}
+a:hover{color:#fff}
+.top{max-width:44rem;margin:0 auto;padding:20px 16px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top img{width:64px;height:64px;image-rendering:pixelated;border:4px solid var(--edge);background:#000}
+.top .name{font-weight:700;font-size:30px;color:var(--text);text-decoration:none;flex:1;min-width:10rem}
+.top nav a{display:inline-block;margin-left:8px;padding:2px 12px;background:var(--panel2);border:3px solid var(--gold);color:var(--text);text-decoration:none}
+.top nav a:hover,.top nav a[aria-current]{background:var(--gold);color:#1a120c}
+main{max-width:44rem;margin:32px auto 0;padding:24px 20px 28px;background:var(--panel);border:4px solid var(--edge);box-shadow:0 0 0 4px var(--bg),0 0 0 8px var(--panel2)}
+@media (max-width:46rem){main{margin:24px 12px 0}}
+h1{font-size:38px;line-height:1.1;margin:0 0 4px;color:var(--gold-hi)}
+h2{font-size:26px;margin:28px 0 6px;color:var(--gold);border-bottom:3px solid var(--edge);padding-bottom:2px}
+.meta{color:var(--muted);margin:0 0 16px}
+p{margin:8px 0}
+ul{padding-left:24px;margin:8px 0}
+li{margin:4px 0}
+li::marker{color:var(--gold)}
+footer{max-width:44rem;margin:20px auto 40px;padding:0 20px;color:var(--muted);font-size:18px;text-align:center}

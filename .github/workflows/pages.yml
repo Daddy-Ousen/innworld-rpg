@@ -45,9 +45,16 @@ jobs:
           unzip -q web.zip -d site
           test -f site/index.html
           # Static pages (terms, privacy) live in docs/site and ship next to the game.
-          cp docs/site/*.html docs/site/style.css site/
-          # Small link under the game canvas (fixed, bottom right, out of the way).
-          sed -i 's#</body>#<div style="position:fixed;right:8px;bottom:4px;font:12px sans-serif;opacity:.6;z-index:9"><a href="terms.html" style="color:\#999">Terms</a> \&middot; <a href="privacy.html" style="color:\#999">Privacy</a></div></body>#' site/index.html
+          cp docs/site/* site/
+          # Link box on the game page: themed like the game, bottom right, on top of the canvas.
+          cat > link.html <<'EOT'
+<style>@font-face{font-family:"Pixel Operator";src:url(PixelOperator.ttf)}
+#legal{position:fixed;right:10px;bottom:10px;z-index:9;font:18px "Pixel Operator",monospace;background:#301f12;border:3px solid #d9a655;padding:3px 10px}
+#legal a{color:#ffd166;text-decoration:none}#legal a:hover{color:#fff}</style>
+<div id="legal"><a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></div>
+EOT
+          sed -i '/<\/body>/e cat link.html' site/index.html
+          grep -q 'id="legal"' site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,5 +1,11 @@
 # Handoff
 
+## Just done (2026-11-06, local): terms and privacy on the real website
+- The real site is `web/` in the clone `D:\ClaudeC\innworld-web` (branch `feat/website-update`), Vercel project `innworld-site`, https://innworld.rhasan.online.
+- Commit 1611063 there: `web/terms.html`, `web/privacy.html` (site theme), links in nav and footer of index, changelog. Checked in a browser locally.
+- NOT deployed: the production deploy was blocked. Next: user runs `cd D:\ClaudeC\innworld-web\web; vercel deploy --prod` (or allows it). Then check `/terms` and `/privacy`. Branch not pushed.
+- The GitHub Pages copy (`docs/site/`, `pages.yml` link box, PR #276) is the game build only: it is not the main site. Decide whether to keep it.
+
 ## Just done (2026-11-06, local): terms of service (branch `docs/readme-store`, not committed)
 - New `TERMS.md` at the repo root (same style as `PRIVACY.md`). README "Canon and copyright" links it. Docs only, no tests run.
 - Next: user reads `TERMS.md`, commits. Store forms may want the URL `https://github.com/Daddy-Ousen/innworld-rpg/blob/main/TERMS.md` (not added to `docs/PLAY_STORE.md` or `docs/WINDOWS_STORE.md`).
