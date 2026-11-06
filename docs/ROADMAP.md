@@ -9,32 +9,40 @@ left, put them under "Waits on the user". Detail of finished work lives in `docs
 
 ## At a glance
 
-| Milestone | State |
-|---|---|
-| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | M35.0 – M35.3 built (M35.2: none found; ADR 0046, ) |
-| M36 Book 9 (Tears of Liscor) | Done and merged (M36.P – M36.10). Plan: ADR 0047. |
-| M37 Book 10 (The Wind Runner) | Plan written (`docs/plans/m37.md`, ADR 0048). Next: M37.1 world and records, M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped). |
-| M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open ) |
-| Play checks (M20, M27 – M32, M34) | waits on the user |
-| Google Play | closed test running |
-| Microsoft Store | kit ready (`docs/WINDOWS_STORE.md`); needs Partner Center account, name and identity |
+| Milestone | State | Model · effort (Antigravity) |
+|---|---|---|
+| M37 Book 10 (The Wind Runner) | Plan written (`docs/plans/m37.md`, ADR 0048). Next: M37.1 world and records, M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped). | M37.1, M37.2: Gemini 4 Argon (High) · M37.3, M37.5, M37.7, M37.8: Gemini 4 Argon (High) · M37.4, M37.6: Gemini 4 Argon (High) · M37.9: Gemini 4 Argon (High) |
+| M36 Book 9 (Tears of Liscor) | Done and merged (M36.P – M36.10, ADR 0047). | – (done) |
+| M35 New content (Ceria's fire lesson, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | Done and merged (M35.0 – M35.3, ADR 0046). | – (done) |
+| M33 Depth: spells, dishes, quests, friends | Done (M33.0 – M33.4, ADR 0044); only the play check is open. | – (done) |
+| Play checks (M20, M27 – M35) | waits on the user | – (user) |
+| Google Play | closed test running | – (user) |
+| Microsoft Store | kit ready (`docs/WINDOWS_STORE.md`); needs Partner Center account, name and identity | – (user) |
 
 Last release: v0.2.1-alpha (2026-11-04, tag and GitHub pre-release published): v0.2.0 plus M35 (Ceria's fire lesson, stat sheets, Magnolia) and all of Book 9 (M36). v0.1.8 is on Google Play's closed test track, waiting for review.
 Next step: M37.1 (world and records), see `docs/plans/m37.md`. Book 10 text is in the private repo `Daddy-Ousen/innworld-canon-raw`.
+
+How to read the model column: select that model and effort in Antigravity's model selector before you start the step. Use Gemini 4 Argon (High) (or Claude Sonnet/Opus 5.5) for canon batches, records, maps, fight stages, and book sims; use Gemini 3.8 Flash (High) for fast checks, targeted test runs, and doc updates. Reading agents (summaries only) run on Gemini 3.8 Flash or Argon.
 
 ---
 
 # Next up
 
-M33 comes from the player audit of 2026-10-17 (ADR 0044). One branch + PR per sub-step. Steps marked (user) need the owner to do or decide something.
+One branch + PR per sub-step. Steps marked (user) need the owner to do or decide something.
 
-## M33 — Depth: spells, dishes, quests, friends (ADR 0044)
-- [x] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees (2026-10-26: 12 new spells, kinds `hold`, `blink`, `hide`, `wall`, friend gate)
-- [x] M33.1 Erin's food and drink from the books (names from the text, numbers guessed) - [x] M33.2 Quest engine: `data/quests.json`, journal "Tasks", save version bump + migration (schema ask) (2026-10-26: auto "Ask about" row, `learn.flags` teacher unlock, save v24)
-- [x] M33.3 Three personal quest lines (Erin's inn, Pawn's Soldiers, Pisces's mana lesson) (2026-10-26: data only; Pisces's reward opens [Flash Step])
-- [x] M33.4 Friendship that does something: perks at friend and close-friend level (2026-10-26: passive perks, `rules.standing.perks`)
-- [ ] (user) Play a quest line and learn a spell from a friend
-**Done when:** the spells, dishes, quest lines and perks work; old saves load; the touched tests pass; the user has played it.
+## M37 — Book 10 (The Wind Runner) (plan `docs/plans/m37.md`, ADR 0048)
+- [x] M37.P Plan: 17 chapters read, day anchor 176, short version for Baleros & Chandrar, 1 fight stage, 2 hooks, 1 new map, 0 kills **[Gemini 4 Argon (High)]**
+- [-] M37.0 Engine: skipped (no new engine mechanics or schema changes needed)
+- [ ] M37.1 World and records: 45 NPCs, 4 verification checks, notes on existing records, load test **[Gemini 4 Argon (High)]**
+- [ ] M37.2 Tails and Scales map: Pallass floor 5 bar, link from `pallass_door_street`, goals for Rufelt and Lasica **[Gemini 4 Argon (High)]**
+- [ ] M37.3 Canon 6.00, 6.01: Ryoka at Reizmelt (days 181–183), off map, no stage, no hook, no Ryoka class **[Gemini 4 Argon (High)]**
+- [ ] M37.4 Canon 6.02, 6.03: door reopened, inn barred, night undead fight stage (`inn_hill`, day 183, `xp_window`), Numbtongue walk hook (`liscor_market`, day 184) **[Gemini 4 Argon (High)]**
+- [ ] M37.5 Canon 6.08 – 6.10: Apista, Erin in Pallass, mana cave, Tails and Scales (day 190) **[Gemini 4 Argon (High)]**
+- [ ] M37.6 Canon 6.11, 6.16: Calruz, Ilvriss leaves, Gold-rank farewell hook (`inn_interior`, day 192), Garia [Martial Artist] **[Gemini 4 Argon (High)]**
+- [ ] M37.7 Canon 6.04 D – 6.07 D: Baleros short version (days 183–187), off map, neutral summaries for explicit scenes **[Gemini 4 Argon (High)]**
+- [ ] M37.8 Canon 6.12 K – 6.15 K: Chandrar short version (days 189–194), off map, Reim, banquet, edict, Pomle **[Gemini 4 Argon (High)]**
+- [ ] M37.9 Book 10 full sims: `sim_canon_book10`, `sim_kill_book10`, validator `--all` **[Gemini 4 Argon (High)]**
+**Done when:** Book 10 canon events run with drift 0; Tails and Scales bar map works; fight stage and hooks work; sims and validator pass.
 
 ---
 
@@ -42,6 +50,7 @@ M33 comes from the player audit of 2026-10-17 (ADR 0044). One branch + PR per su
 
 ## Play checks
 All build steps are merged. Run the game with `godot --path game`, or install the apk from the latest release.
+- [ ] M33: play a quest line (Erin, Pawn, or Pisces) and learn [Flash Step] from Pisces after his lesson
 - [ ] M35.3: sleep to Book 6 day 129 – 134 and find Magnolia and Ressa: the battlefield on day 130, the Invrisil gate by day on days 131 – 133, the estate hall after
 - [ ] M35.0: take "Ceria and the spark" from Ceria on day 36 (she eats at the inn at 6 – 9 h and 18 – 23 h), finish it, then learn [Flashfire] from her
 - [ ] Bag screen (card look, 2026-10-31): open the bag on the phone, eat, hold a tool, "Leave 1", put the held item in the bag
@@ -102,7 +111,10 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 # Done (newest first)
 
 | Milestone | What it gave the game | ADR |
-|---|---|
+|---|---|---|
+| M36 Book 9 (Tears of Liscor) | canon 5.45 – 5.62 + Thereafter (days 164 – 180), 4 fight stages, 6 scene stages, 13 dead, `liscor_watch_cells` map | 0047 |
+| M35 New content | Ceria fire quest [Flashfire], NPC stat sheets, Magnolia whereabouts | 0046 |
+| M33 Depth: spells, dishes, quests, friends | 12 spells (hold/blink/hide/wall), 5 recipes/dishes, quest engine, 3 lines, 32 friend perks | 0044 |
 | M32 Climaxes of Books 6 – 8 | three-door battle, Zel's stand on `invrisil_battlefield`, boss abilities (fear, bile, command), Zel can live | 0044 |
 | M31 Signposts and scene beats | event signposts (talk, journal "Coming up"), timed scene beats, ally shouts | 0044 |
 | M34 Phone controls, second pass | action card per target, shop screen, context button, tap to walk, sizes by dpi, upright fixes | 0045 |

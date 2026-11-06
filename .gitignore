@@ -22,3 +22,6 @@ Thumbs.db
 
 # Godot Android Gradle build template (re-made by tools/release.ps1)
 game/android/
+
+# Release signing key and password (never commit)
+secrets/

@@ -1,13 +1,33 @@
 # Handoff
 
-## Just done (2026-11-06, local): terms of service (branch `docs/readme-store`, not committed)
-- New `TERMS.md` at the repo root (same style as `PRIVACY.md`). README "Canon and copyright" links it. Docs only, no tests run.
-- Next: user reads `TERMS.md`, commits. Store forms may want the URL `https://github.com/Daddy-Ousen/innworld-rpg/blob/main/TERMS.md` (not added to `docs/PLAY_STORE.md` or `docs/WINDOWS_STORE.md`).
-- Gotchas: the repo has no code license; `TERMS.md` does not invent one. It is not legal advice.
+## Just done (2026-11-06, local): Grill-me interview completed, design decisions settled for M37
+- User published the website update on Vercel (`terms.html`, `privacy.html`, navigation and changelog links).
+- User published the devlog on itch.io (`docs/DEVLOG_v0.2.1.md`).
+- Going forward, development uses Google Antigravity.
+- Grill-me design choices confirmed by user:
+  1. Branch workflow: commit doc updates on `docs/readme-store`, push and merge PR into `main`, then start M37.1 on a clean `feat/m37.1-world-records` branch.
+  2. Disguises (M37.1): single records `osthia_blackwing` and `venitra` with notes for Shieldscale and Regrika Blackpaw, using story flags for undercover status.
+  3. Tails and Scales bar map (M37.2): medium lively lounge (28x20 tiles) with entrance hall, central dance floor, bar counter, kitchen partition, and musician stage.
+  4. Night undead fight stage (M37.4): Tier 1 (x1.5 XP multiplier) for inn hill defense on day 183.
+- Updated `docs/ROADMAP.md`:
+  - Added "Model · effort (Antigravity)" column to "At a glance" with suggested Gemini models and effort levels.
+  - Replaced finished M33 in "Next up" with M37 Book 10 submilestones (M37.1 – M37.9) with specific model & effort per step.
+  - Added M33 play check to "Waits on the user".
+  - Added M36, M35, and M33 to the "Done" table.
+- Updated `docs/plans/m37.md`: aligned model tags to Gemini 4 Argon (High) and Gemini 4 Argon (High), recorded new answers.
+- Updated `progress.md`: marked M37 plan merged and added Antigravity model guidance to M37 submilestones.
+- Active files: `docs/ROADMAP.md`, `docs/plans/m37.md`, `progress.md`, `handoff.md`.
+- Next steps: user merges PR #277 (https://github.com/Daddy-Ousen/innworld-rpg/pull/277). Then sync local `main` and branch `feat/m37.1-world-records` for M37.1.
 
-## Just done (2026-11-05, local): itch.io devlog draft
-- New `docs/DEVLOG_v0.2.1.md` (covers v0.1.6 - v0.2.1). Docs only, not committed. User posts it on itch.io.
-- Check before posting: the draft says no browser build (v0.2.1 has none?) and lists Windows, Linux, Android. Fix if wrong.
+## Earlier (2026-11-06, local): terms and privacy on the real website
+- The real site is `web/` in the clone `D:\ClaudeC\innworld-web` (branch `feat/website-update`), Vercel project `innworld-site`, https://innworld.rhasan.online.
+- Deployed by user: `web/terms.html`, `web/privacy.html` (site theme), links in nav and footer of index, changelog.
+
+## Earlier (2026-11-06, local): terms of service (branch `docs/readme-store`)
+- New `TERMS.md` at the repo root (same style as `PRIVACY.md`). README "Canon and copyright" links it. PR #276 merged.
+
+## Earlier (2026-11-05, local): itch.io devlog
+- `docs/DEVLOG_v0.2.1.md` (covers v0.1.6 - v0.2.1). Published by user on itch.io.
 
 ## Just done (2026-11-05, local): docs cleanup (branch `docs/readme-store`, not committed)
 - Goal: less AI-looking repo, same workflow. Removed `docs/adr/` (49 files), `docs/PROGRESS_ARCHIVE.md`, `docs/AUDIT_PLAYER_2026-10-17.md`, `docs/KICKOFF.md`, and all plans except `docs/plans/m37.md`.
