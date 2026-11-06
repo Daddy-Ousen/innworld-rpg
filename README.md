@@ -188,7 +188,7 @@ A setup script for remote dev environments is in `tools/cloud/`.
 - Canon events are short summaries in our own words, with chapter references. No book text is in git.
 - Guesses are marked `"confidence": "guess"` in the data.
 - The game is free and non-commercial. *The Wandering Inn* and its world belong to pirateaba.
-- [Terms of service](TERMS.md) and [privacy policy](PRIVACY.md).
+- [Terms of service](https://daddy-ousen.github.io/innworld-rpg/terms.html) and [privacy policy](https://daddy-ousen.github.io/innworld-rpg/privacy.html) (also as [TERMS.md](TERMS.md) and [PRIVACY.md](PRIVACY.md)).
 
 ## Credits
 

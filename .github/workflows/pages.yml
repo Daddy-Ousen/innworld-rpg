@@ -28,6 +28,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: docs/site
       - name: Get the web zip from the release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -41,6 +44,10 @@ jobs:
           mkdir site
           unzip -q web.zip -d site
           test -f site/index.html
+          # Static pages (terms, privacy) live in docs/site and ship next to the game.
+          cp docs/site/*.html docs/site/style.css site/
+          # Small link under the game canvas (fixed, bottom right, out of the way).
+          sed -i 's#</body>#<div style="position:fixed;right:8px;bottom:4px;font:12px sans-serif;opacity:.6;z-index:9"><a href="terms.html" style="color:\#999">Terms</a> \&middot; <a href="privacy.html" style="color:\#999">Privacy</a></div></body>#' site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
