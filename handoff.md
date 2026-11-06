@@ -1,5 +1,23 @@
 # Handoff
 
+## Just done (2026-11-06, local): terms of service (branch `docs/readme-store`, not committed)
+- New `TERMS.md` at the repo root (same style as `PRIVACY.md`). README "Canon and copyright" links it. Docs only, no tests run.
+- Next: user reads `TERMS.md`, commits. Store forms may want the URL `https://github.com/Daddy-Ousen/innworld-rpg/blob/main/TERMS.md` (not added to `docs/PLAY_STORE.md` or `docs/WINDOWS_STORE.md`).
+- Gotchas: the repo has no code license; `TERMS.md` does not invent one. It is not legal advice.
+
+## Just done (2026-11-05, local): itch.io devlog draft
+- New `docs/DEVLOG_v0.2.1.md` (covers v0.1.6 - v0.2.1). Docs only, not committed. User posts it on itch.io.
+- Check before posting: the draft says no browser build (v0.2.1 has none?) and lists Windows, Linux, Android. Fix if wrong.
+
+## Just done (2026-11-05, local): docs cleanup (branch `docs/readme-store`, not committed)
+- Goal: less AI-looking repo, same workflow. Removed `docs/adr/` (49 files), `docs/PROGRESS_ARCHIVE.md`, `docs/AUDIT_PLAYER_2026-10-17.md`, `docs/KICKOFF.md`, and all plans except `docs/plans/m37.md`.
+- New `docs/DECISIONS.md`: all 49 ADRs condensed (same numbers, plain voice). New ADRs go at its end.
+- Edited: README (Contributing section, links), ROADMAP (no model column or tags), DESIGN (no LLM/agent wording), CLOUD (short task section for M37), CLAUDE.md (ADR step, archive pointer), progress.md note, comments in `tools/release.ps1`, `tools/validate_data.py`, `tools/cloud/setup.sh`, `game/tests/unit_foreshadow.gd`.
+- Kept on purpose: CLAUDE.md, progress.md, handoff.md, CLOUD.md (user chose to leave them). Git history untouched.
+- Not run: GUT (only comments changed). Validator on book1: 0 errors.
+- Next: user reviews `git diff`, commits, merges PR #275. Then M37.1.
+- Gotchas: old paths `docs/adr/...` and `docs/plans/m<N>.md` in older notes below are history (use `git log -- <path>`). ~299 `.import` files stay dirty, do not commit them.
+
 ## Just done (2026-11-05, local): README update (branch `docs/readme-store`, PR #275)
 - The game is on the Microsoft Store: https://apps.microsoft.com/detail/9NSJKRJRTP5J (free). README now links it.
 - README also: v0.2.1-alpha download (Windows, Linux, Android), Books 1-9 table (1,614 events, 335 characters, 130 places, 53 maps), GUT 227 scripts.

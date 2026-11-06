@@ -4,42 +4,35 @@ Rule: finish a milestone's acceptance tests before starting the next. Tick boxes
 Order: **At a glance** → **Next up** (open work, in order) → **Waits on the user** → **Later** → **Releases** →
 **Done** (newest first, one line each).
 When a milestone's build steps are all ticked, move it to the top of Done. If only "the user plays" checks are
-left, put them under "Waits on the user". Detail of finished work lives in the ADRs (`docs/adr/`), the plans
-(`docs/plans/`), `docs/PROGRESS_ARCHIVE.md` and git history.
+left, put them under "Waits on the user". Detail of finished work lives in `docs/DECISIONS.md`, the plans
+(`docs/plans/`) and git history.
 
 ## At a glance
 
-| Milestone | State | Model · effort per step |
-|---|---|---|
-| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | M35.0 – M35.3 built (M35.2: none found; ADR 0046, `docs/plans/m35.md`) | M35.0: Sonnet · high · M35.1: Sonnet · medium · M35.2: Sonnet · high · M35.3: Opus · high |
-| M36 Book 9 (Tears of Liscor) | M36.P merged (PR #260, `docs/plans/m36.md`, ADR 0047). M36.1 merged (PR #261). M36.2 merged (PR #262). M36.3 merged (PR #263). M36.4 merged (PR #264). M36.5 merged (PR #265). M36.6 merged (PR #266). M36.7 merged (PR #267). M36.8 merged (PR #268). M36.9 merged (PR #269). M36.10 merged (PR #270). `requires.alive` follow-up built (2026-11-04): waits for the merge; then the tag `m36-done` (tag pending: cloud may not push tags) and M37 | M36.P: Opus · high · data steps: Sonnet · high · engine and stages: Opus · medium |
-| M37 Book 10 (The Wind Runner) | M37.P plan written (2026-11-04, `docs/plans/m37.md`, ADR 0048): waits for the merge. Then M37.1 world and records, M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped) | M37.1, M37.2: Sonnet · high · M37.3, M37.5, M37.7, M37.8: Sonnet · high · M37.4, M37.6: Opus · medium · M37.9: Sonnet · medium |
-| M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open (`docs/plans/m33.md`) | M33.0: Opus · medium · M33.1: Sonnet · medium · M33.2: Opus · high · M33.3: Sonnet · high · M33.4: Sonnet · medium |
-| Play checks (M20, M27 – M32, M34) | waits on the user | – (user) |
-| Google Play | closed test running | – (user) |
-| Microsoft Store | kit ready (`docs/WINDOWS_STORE.md`); needs Partner Center account, name and identity | – (user) |
+| Milestone | State |
+|---|---|
+| M35 New content (Ceria's magic line, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | M35.0 – M35.3 built (M35.2: none found; ADR 0046, ) |
+| M36 Book 9 (Tears of Liscor) | Done and merged (M36.P – M36.10). Plan: ADR 0047. |
+| M37 Book 10 (The Wind Runner) | Plan written (`docs/plans/m37.md`, ADR 0048). Next: M37.1 world and records, M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped). |
+| M33 Depth: spells, dishes, quests, friends | M33.0 – M33.4 done; only the play check is open ) |
+| Play checks (M20, M27 – M32, M34) | waits on the user |
+| Google Play | closed test running |
+| Microsoft Store | kit ready (`docs/WINDOWS_STORE.md`); needs Partner Center account, name and identity |
 
 Last release: v0.2.1-alpha (2026-11-04, tag and GitHub pre-release published): v0.2.0 plus M35 (Ceria's fire lesson, stat sheets, Magnolia) and all of Book 9 (M36). v0.1.8 is on Google Play's closed test track, waiting for review.
-Next step: cloud sessions (prompts in `docs/CLOUD.md` "Task queue" items 1 – 4). Order: M36.P is merged, M36.1 is merged, M36.2 is merged, M36.3 is merged, M36.4 is merged, M36.5 is merged, M36.6 is merged, M36.7 is merged, M36.8 is merged, M36.9 is merged, M36.10 is merged, the `requires.alive` follow-up is merged (PR #271), M37.P is written (merge its PR; M37.0 is skipped), then M37.1. The user still plays M31 – M33 and the bag (apk on the release page, or `godot --path game`).
-Cloud text: Books 1 – 10 are in the private repo `Daddy-Ousen/innworld-canon-raw` (2026-11-01).
-
-How to read the last column: pick that model and effort in the app before you start the step's session. Reading
-agents that a step starts (book text, summaries only) run on Sonnet · medium. Default is Sonnet · medium. Opus for
-engine, save and design work and for canon logic; high effort where lore, balance or cascades are easy to get wrong.
+Next step: M37.1 (world and records), see `docs/plans/m37.md`. Book 10 text is in the private repo `Daddy-Ousen/innworld-canon-raw`.
 
 ---
 
 # Next up
 
-M33 comes from the player audit of 2026-10-17 (the last of M31 – M33; `docs/AUDIT_PLAYER_2026-10-17.md`, ADR 0044); the user said
-"we will do all". One branch + PR per sub-step. Steps marked (user) need the user to do or decide something.
+M33 comes from the player audit of 2026-10-17 (ADR 0044). One branch + PR per sub-step. Steps marked (user) need the owner to do or decide something.
 
-## M33 — Depth: spells, dishes, quests, friends (plan `docs/plans/m33.md`, ADR 0044)
-- [x] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees **[Opus · medium]** (2026-10-26: 12 new spells, kinds `hold`, `blink`, `hide`, `wall`, friend gate)
-- [x] M33.1 Erin's food and drink from the books (names from the text, numbers guessed) **[Sonnet · medium]**
-- [x] M33.2 Quest engine: `data/quests.json`, journal "Tasks", save version bump + migration (schema ask) **[Opus · high]** (2026-10-26: auto "Ask about" row, `learn.flags` teacher unlock, save v24)
-- [x] M33.3 Three personal quest lines (Erin's inn, Pawn's Soldiers, Pisces's mana lesson) **[Sonnet · high]** (2026-10-26: data only; Pisces's reward opens [Flash Step])
-- [x] M33.4 Friendship that does something: perks at friend and close-friend level **[Sonnet · medium]** (2026-10-26: passive perks, `rules.standing.perks`)
+## M33 — Depth: spells, dishes, quests, friends (ADR 0044)
+- [x] M33.0 Canon spells (10 – 15) with teachers and spellbooks; new effect kinds only where the user agrees (2026-10-26: 12 new spells, kinds `hold`, `blink`, `hide`, `wall`, friend gate)
+- [x] M33.1 Erin's food and drink from the books (names from the text, numbers guessed) - [x] M33.2 Quest engine: `data/quests.json`, journal "Tasks", save version bump + migration (schema ask) (2026-10-26: auto "Ask about" row, `learn.flags` teacher unlock, save v24)
+- [x] M33.3 Three personal quest lines (Erin's inn, Pawn's Soldiers, Pisces's mana lesson) (2026-10-26: data only; Pisces's reward opens [Flash Step])
+- [x] M33.4 Friendship that does something: perks at friend and close-friend level (2026-10-26: passive perks, `rules.standing.perks`)
 - [ ] (user) Play a quest line and learn a spell from a friend
 **Done when:** the spells, dishes, quest lines and perks work; old saves load; the touched tests pass; the user has played it.
 
@@ -76,7 +69,7 @@ v0.1.8 sent for review (2026-10-24).
 ---
 
 # Later
-- Optional LLM flavour layer
+- Optional generated flavour text
 - Console `skip <days>` command (offered 2026-10-11, no answer yet)
 - Outside PR #164 (DKemp98, more Skills and classes): changes asked 2026-10-12; wait for rebased, split PRs
 - Outside PR #210 (DKemp98, sort the tags, add `crafting.potions`): open since 2026-10-18, not reviewed yet
@@ -90,7 +83,7 @@ ADR 0029 (Windows, Linux), ADR 0031 (web), ADR 0034 (Android), ADR 0037 (Play aa
 Every release uploads the signed Android apk too. The aab goes to Play only.
 
 | Version | Date | What |
-|---|---|---|
+|---|---|
 | v0.2.0-alpha | 2026-11-01 | bag screen in the card look on top of v0.1.9 (Android code 9); the aab stays local |
 | v0.2.1-alpha | 2026-11-04 | Book 9 (M36) + M35 (Ceria's fire lesson, stat sheets, Magnolia) (Android code 10); the aab stays local |
 | v0.1.9-alpha | 2026-10-31 | M31 – M33 (Android code 8); the aab stays local |
@@ -109,7 +102,7 @@ Every release uploads the signed Android apk too. The aab goes to Play only.
 # Done (newest first)
 
 | Milestone | What it gave the game | ADR |
-|---|---|---|
+|---|---|
 | M32 Climaxes of Books 6 – 8 | three-door battle, Zel's stand on `invrisil_battlefield`, boss abilities (fear, bile, command), Zel can live | 0044 |
 | M31 Signposts and scene beats | event signposts (talk, journal "Coming up"), timed scene beats, ally shouts | 0044 |
 | M34 Phone controls, second pass | action card per target, shop screen, context button, tap to walk, sizes by dpi, upright fixes | 0045 |

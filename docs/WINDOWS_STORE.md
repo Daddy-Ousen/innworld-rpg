@@ -2,7 +2,7 @@
 
 What we need to put Innworld RPG in the Microsoft Store, and the text for each Partner Center page.
 Prepared 2026-11-04 (v0.2.1-alpha). Same author's rules as Google Play: see `docs/PLAY_STORE.md` section 0.
-Design note: `docs/adr/0049-windows-store-msix.md`.
+Design note: ADR 0049 in `docs/DECISIONS.md`.
 
 ## 0. The short version
 

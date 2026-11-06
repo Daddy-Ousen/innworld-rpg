@@ -142,14 +142,14 @@ GUT: 227 scripts. Python: 105 tests.
 ### Build the release zips
 
 Windows, with the Godot 4.7.2 export templates installed. This makes the Windows, Linux and Web zips.
-A published GitHub release with the Web zip also updates the browser version ([ADR 0031](docs/adr/0031-web-build.md)).
+A published GitHub release with the Web zip also updates the browser version ([ADR 0031](docs/DECISIONS.md)).
 
 ```powershell
 $env:GODOT = "<path to Godot_v4.7.2-stable_win64_console.exe>"
 powershell -ExecutionPolicy Bypass -File tools/release.ps1   # zips land in export/
 ```
 
-Details: [ADR 0029](docs/adr/0029-release-builds.md).
+Details: [ADR 0029](docs/DECISIONS.md).
 
 ### How it is built
 
@@ -160,12 +160,12 @@ Details: [ADR 0029](docs/adr/0029-release-builds.md).
   A new book adds data, not engine code.
 - **Canon events are nodes,** not scripts. Each has roles, preconditions, fallbacks and effects, so the player can change them.
 
-Read more: [design](docs/DESIGN.md) · [roadmap](docs/ROADMAP.md) · [decisions (ADRs)](docs/adr/) · [progress](progress.md)
+Read more: [design](docs/DESIGN.md) · [roadmap](docs/ROADMAP.md) · [decisions](docs/DECISIONS.md) · [progress](progress.md)
 
 ### Layout
 
 ```
-docs/          design, roadmap, decisions (ADRs in docs/adr/), cloud guide
+docs/          design, roadmap, decisions, store guides
 game/          Godot project
   core/        headless simulation (no nodes, no scenes)
   data/        classes, skills, spells, actions, enemies, maps (JSON)
@@ -177,11 +177,10 @@ tools/         Python: epub extraction, art and sound builders, data validator (
   cloud/       cloud session setup (Godot install, import)
 ```
 
-### Work on it with Claude Code
+### Contributing
 
-The repo is set up for Claude Code, local or in the cloud (claude.ai/code or the Claude app).
-A session start hook installs Godot and imports the project. Rules for AI agents are in [CLAUDE.md](CLAUDE.md).
-The cloud guide is [docs/CLOUD.md](docs/CLOUD.md).
+Project rules (architecture, data format, tests, commits) are in [CLAUDE.md](CLAUDE.md).
+A setup script for remote dev environments is in `tools/cloud/`.
 
 ## Canon and copyright
 
@@ -189,6 +188,7 @@ The cloud guide is [docs/CLOUD.md](docs/CLOUD.md).
 - Canon events are short summaries in our own words, with chapter references. No book text is in git.
 - Guesses are marked `"confidence": "guess"` in the data.
 - The game is free and non-commercial. *The Wandering Inn* and its world belong to pirateaba.
+- [Terms of service](https://daddy-ousen.github.io/innworld-rpg/terms.html) and [privacy policy](https://daddy-ousen.github.io/innworld-rpg/privacy.html) (also as [TERMS.md](TERMS.md) and [PRIVACY.md](PRIVACY.md)).
 
 ## Credits
 

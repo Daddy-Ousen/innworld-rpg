@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Cloud session setup (Claude Code on the web). Runs from the SessionStart hook in
+# Remote dev environment setup. Runs from the session-start hook in
 # .claude/settings.json. Does nothing on a local machine unless you pass --force.
 #   1. Godot 4.7.2 on PATH (tools/cloud/install_godot.sh)
 #   2. Python tool deps (tools/requirements.txt)
 #   3. Book text: links book<N>/ from the PRIVATE repo Daddy-Ousen/innworld-canon-raw into canon/raw/
-#   4. git identity for commits (Daddy-Ousen, no Claude trailer)
+#   4. git identity for commits (Daddy-Ousen)
 #   5. Godot import (makes game/.godot, the class_name cache; tests need it)
-# Output is short on purpose: it lands in the session context. Full log: /tmp/innworld-setup.log
+# Output is short on purpose. Full log: /tmp/innworld-setup.log
 set -u
 
 if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ] && [ "${1:-}" != "--force" ]; then

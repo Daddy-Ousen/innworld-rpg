@@ -14,7 +14,7 @@ Read `docs/DESIGN.md` before any system work. Read `docs/ROADMAP.md` to see the 
 ## Layout
 ```
 CLAUDE.md
-docs/                 design, roadmap, decisions (ADRs)
+docs/                 design, roadmap, decisions log
 game/                 Godot project root (project.godot lives here)
   core/               pure simulation logic — NO Node, NO scene, NO rendering
   data/               classes, skills, actions, rules (JSON)
@@ -63,7 +63,7 @@ If `godot` is not on PATH, use the full path to the Godot exe or set `$env:GODOT
 2. Plan first (plan mode). List files you will touch.
 3. Write tests, then code.
 4. Run the tests in "Test scope". Fix until green.
-5. Update `docs/ROADMAP.md` checkboxes and add an ADR in `docs/adr/` for any design decision.
+5. Update `docs/ROADMAP.md` checkboxes and add an entry (next ADR number) to `docs/DECISIONS.md` for any design decision.
 6. Commit.
 
 ## Context discipline (agreed 2026-09-25, see `progress.md`)
@@ -71,7 +71,7 @@ Canon batches and full test runs blow up context fast. To keep quality without t
 - Redirect GUT / validator runs to a scratchpad file. Read back only the summary line and any FAIL/Error/Parse Error lines, never the full run.
 - Delegate chapter-text reading (for canon extraction) and full test-suite runs to a subagent (Agent tool). Only its short summary should return to the main session — not raw book text or raw test logs.
 - Don't re-read a file right after Edit/Write.
-- Keep `progress.md` to current-milestone status only; finished milestones live in `docs/PROGRESS_ARCHIVE.md`.
+- Keep `progress.md` to current-milestone status only; finished milestones live in `docs/ROADMAP.md` (Done) and git history.
 
 ## User rules (all sessions; copied from the user's private settings so cloud sessions get them)
 - **State files.** Read `progress.md` and `handoff.md` before you act. Do not tick an item in `progress.md` until

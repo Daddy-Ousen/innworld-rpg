@@ -164,7 +164,7 @@ func test_combat_db_checks_the_foreshadow_map() -> void:
 
 # --- M31.1: the real canon data
 
-## The key scenes a reader will want to see (docs/plans/m31.md "M31.1").
+## The key scenes a reader will want to see (M31.1).
 const KEY_SCENES := ["b2.erin_iphone_concert_night", "b2.frost_faeries_accept_the_banquet",
 	"b3.erin_stages_romeo_and_juliet", "b3.erin_stages_frozen", "b5.zzzzf_brunkrs_feast_at_the_inn",
 	"b5.zzzzz_liscor_burns_brunkr_and_ulrien", "b6.the_goblin_party_at_the_inn",
