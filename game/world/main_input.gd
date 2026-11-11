@@ -72,6 +72,8 @@ func _key(event: InputEvent) -> bool:
 		_m.open_use_menu()
 	elif event.is_action_pressed(&"sleep"):
 		_m.sleep()
+	elif event.is_action_pressed(&"rest"):
+		_m.open_rest()
 	elif event.is_action_pressed(&"eat"):
 		_m.panels.open_bag()
 	elif event.is_action_pressed(&"sheet"):

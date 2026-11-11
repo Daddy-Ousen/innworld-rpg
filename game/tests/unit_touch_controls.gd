@@ -192,7 +192,7 @@ func test_a_panel_lets_go_of_a_held_pad_button() -> void:
 
 func test_buttons_send_their_actions() -> void:
 	var m := _main()
-	for action: StringName in [&"use", &"bag", &"back", &"eat", &"sleep", &"sheet", &"journal", &"log",
+	for action: StringName in [&"use", &"bag", &"back", &"eat", &"sleep", &"rest", &"sheet", &"journal", &"log",
 			&"help", &"block", &"throw", &"drop", &"wait"]:
 		assert_true(m.touch.buttons.has(action), "a button for %s" % action)
 		assert_eq(_button(m, action).focus_mode, Control.FOCUS_NONE, "%s takes no key focus" % action)
