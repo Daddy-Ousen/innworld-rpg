@@ -1,0 +1,1365 @@
+{
+	"schema_version": 1,
+	"npcs": {
+		"fierre": {
+			"name": "Serafierre val Lischelle-Drakle",
+			"race": "Vampire",
+			"tags": [
+				"vampire",
+				"reizmelt",
+				"drakle"
+			],
+			"faction": null,
+			"home": "drakle_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Called Fierre at the Huntress' Haven (6.00); full name Serafierre val Lischelle-Drakle at chapter end. Vampires cannot gain classes or levels (6.01)."
+			},
+			"summary": "A young Vampire in Reizmelt who works as an envelope opener and alchemist's helper. After taking Ryoka to her family's keep when Ryoka guesses her nature, she becomes Ryoka's close friend."
+		},
+		"colfa": {
+			"name": "Colfa val Lischelle-Drakle",
+			"race": "Vampire",
+			"tags": [
+				"vampire",
+				"drakle",
+				"noble"
+			],
+			"faction": null,
+			"home": "drakle_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Seen at the end of 6.00; named Lady Colfa in 6.01. Born Human of the Lischelle farming family, she lost her classes when Himilt turned her into a Vampire."
+			},
+			"summary": "Fierre's mother and mistress of House Lischelle-Drakle. Born Human, she puts on grand old vampire airs and has a strong dominating gaze, though an arm rash troubles her."
+		},
+		"himilt": {
+			"name": "Himilt val Lischelle-Drakle",
+			"race": "Vampire",
+			"tags": [
+				"vampire",
+				"drakle",
+				"noble",
+				"farmer"
+			],
+			"faction": null,
+			"home": "drakle_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Seen at the end of 6.00; named Himilt Drakle / Lord Himilt val Lischelle-Drakle in 6.01. Vampires hold no classes."
+			},
+			"summary": "Fierre's steady father and Colfa's husband. Dressed like a working farmer, he tends sheep and repairs the masonry of their ruined keep despite a chronic swelling under his jaw."
+		},
+		"rivel": {
+			"name": "Rivel",
+			"race": "Vampire",
+			"tags": [
+				"vampire",
+				"drakle"
+			],
+			"faction": null,
+			"home": "drakle_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Present in the rafters at the end of 6.00; named Rivel in 6.01 as Fierre's brother."
+			},
+			"summary": "Fierre's brother, the only one of her surviving brothers still living at the Drakle keep."
+		},
+		"bamer": {
+			"name": "Bamer",
+			"race": "Vampire",
+			"tags": [
+				"vampire",
+				"drakle",
+				"elder"
+			],
+			"faction": null,
+			"home": "drakle_estate",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Seen coughing in the rafters at the end of 6.00; named Bamer in 6.01 as the oldest Vampire Fierre knows."
+			},
+			"summary": "An elderly Vampire living with the Drakle family, weakened by age and a lifelong cough."
+		},
+		"madain": {
+			"name": "Madain",
+			"race": "Human",
+			"tags": [
+				"human",
+				"innkeeper",
+				"reizmelt",
+				"veteran"
+			],
+			"faction": null,
+			"home": "huntress_haven",
+			"classes": [
+				{
+					"name": "[Innkeeper]",
+					"level": null
+				},
+				{
+					"name": "[Javelineer]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "Nicknamed Mad Madain. An [Innkeeper] and retired [Javelineer] of a Gold-rank team (6.00). Race not stated (guess)."
+			},
+			"summary": "The gruff owner of the Huntress' Haven in Reizmelt, who wakes his boarders at dawn with a pan so he can spend the day hunting fresh game."
+		},
+		"alber": {
+			"name": "Alber",
+			"race": "Human",
+			"tags": [
+				"human",
+				"fighter",
+				"reizmelt"
+			],
+			"faction": null,
+			"home": "huntress_haven",
+			"classes": [
+				{
+					"name": "[Fist Fighter]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "Regular boarder at the Huntress' Haven (6.00); class [Fist Fighter] stated, level and race not stated (guess)."
+			},
+			"summary": "A stocky, self-taught [Fist Fighter] who boards at the Huntress' Haven and fights challengers in a Reizmelt street ring for coin."
+		},
+		"alime": {
+			"name": "Alime",
+			"race": "Human",
+			"tags": [
+				"human",
+				"runners_guild",
+				"receptionist",
+				"reizmelt"
+			],
+			"faction": "runners_guild",
+			"home": "reizmelt",
+			"classes": [
+				{
+					"name": "[Receptionist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "Receptionist at the Reizmelt Runner's Guild with a bad leg (6.00, 6.01). Race not stated (guess)."
+			},
+			"summary": "The polite [Receptionist] of Reizmelt's Runner's Guild, who walks with an injured leg and dispatches Ryoka on her northern runs."
+		},
+		"kelysta": {
+			"name": "Kelysta",
+			"race": "Human",
+			"tags": [
+				"human",
+				"alchemist",
+				"reizmelt"
+			],
+			"faction": null,
+			"home": "reizmelt",
+			"classes": [
+				{
+					"name": "[Alchemist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "An elderly [Alchemist] in Reizmelt who employs Fierre (6.00, 6.01). Race not stated (guess)."
+			},
+			"summary": "An old, stain-tattooed [Alchemist] in Reizmelt who employs Fierre at her shop and worries over the girl's cough."
+		},
+		"levil": {
+			"name": "Levil",
+			"race": "Human",
+			"tags": [
+				"human",
+				"adventurer",
+				"mage",
+				"captain",
+				"reizmelt"
+			],
+			"faction": "pithfire_hounds",
+			"home": "reizmelt",
+			"classes": [
+				{
+					"name": "[Pyromancer]",
+					"level": null
+				},
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "Captain of the Silver-rank Pithfire Hounds; called both a [Pyromancer] and a [Mage] (6.00, 6.01). Race not stated (guess)."
+			},
+			"summary": "The warm-handed [Pyromancer] captain of the Silver-rank Pithfire Hounds, whom Ryoka helps rescue from Wailer Frogs in the marsh."
+		},
+		"lord_beilkit": {
+			"name": "Lord Beilkit",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"lord",
+				"north_izril"
+			],
+			"faction": null,
+			"home": "blaisefords_lookout",
+			"classes": [
+				{
+					"name": "[Lord]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "likely",
+				"note": "A minor northern [Lord] of House Malt in Blaiseford's Lookout who receives a courting letter via Ryoka (6.00). Unseen in person; race is a guess."
+			},
+			"summary": "A minor northern [Lord] of House Malt at Blaiseford's Lookout whose family wealth comes from sheep estates."
+		},
+		"quelm": {
+			"name": "Quelm",
+			"race": "Human",
+			"tags": [
+				"human",
+				"alchemist",
+				"celum"
+			],
+			"faction": null,
+			"home": "celum",
+			"classes": [
+				{
+					"name": "[Alchemist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.02",
+				"confidence": "likely",
+				"note": "One of Octavia's rival [Alchemists] in Celum (6.02). Race and level not stated (guess)."
+			},
+			"summary": "A scrawny Celum [Alchemist] who copies and improves Octavia's match formula until she throws a burning bottle through his shop window."
+		},
+		"elissa_slipscal": {
+			"name": "Elissa Slipscal",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"townsfolk",
+				"liscor"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.08",
+				"confidence": "confirmed",
+				"note": "An older orange-scaled Drake in Liscor who corrects the Human spelling 'Slipscale' to 'Slipscal' (6.08). No class stated."
+			},
+			"summary": "A bossy older Drake of Liscor who blocks Lyonette in line at the Watch and demands action against rent-gouging landlords."
+		},
+		"kel": {
+			"name": "Kel",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"watch",
+				"guard",
+				"pallass"
+			],
+			"faction": "pallass_watch",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Guardsman]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A Drake [Guardsman] stationed with Nevvim at Pallass's seventh-floor door to Liscor (6.09)."
+			},
+			"summary": "An uptight Pallass [Guardsman] at the magic door who tries to charge Erin the five-gold entry tax before Captain Venim steps in."
+		},
+		"nevvim": {
+			"name": "Nevvim",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"watch",
+				"guard",
+				"pallass"
+			],
+			"faction": "pallass_watch",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Guardsman]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A Drake [Guardsman] guarding the Liscor door on Pallass's seventh floor beside Kel (6.09)."
+			},
+			"summary": "Kel's partner on door duty in Pallass, who asks Captain Venim if they should arrest Erin after she threatens Venim."
+		},
+		"lorent": {
+			"name": "Lorent",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"shopkeeper",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Sharpener]",
+					"level": null
+				},
+				{
+					"name": "[Shopkeeper]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A Pallass-born Dullahan [Sharpener] and [Shopkeeper] who sells Maughin's knives (6.09, 6.13K)."
+			},
+			"summary": "A dour Dullahan knife [Sharpener] in Pallass who startles Erin by setting his head in a counter basket while his body fetches stock."
+		},
+		"grimalkin": {
+			"name": "Grimalkin",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"mage",
+				"pallass",
+				"strong"
+			],
+			"faction": "pallass",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Mage]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A muscle-bound Pallass [Mage] of physical magic who drills apprentices on the stairs (6.09) and watches the smiths' contest (6.13K)."
+			},
+			"summary": "A hugely muscular Drake [Mage] of Pallass who teaches physical magic and salutes Erin's courage on the city stairs."
+		},
+		"maughin": {
+			"name": "Maughin",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"armorer",
+				"blacksmith",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Armorer]",
+					"level": 35
+				},
+				{
+					"name": "[Blacksmith]",
+					"level": null
+				},
+				{
+					"name": "[Smith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A giant Dullahan master smith on Pallass's ninth floor (6.09, 6.10); states he is a Level 35 [Armorer] in 6.13K."
+			},
+			"summary": "A giant Dullahan [Armorer] on Pallass's ninth floor who backs the door-tax protest and repairs Pelt's discarded masterwork knife for Erin."
+		},
+		"pelt": {
+			"name": "Pelt",
+			"race": "Dwarf",
+			"tags": [
+				"dwarf",
+				"blacksmith",
+				"pallass",
+				"master"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Smith]",
+					"level": null
+				},
+				{
+					"name": "[Blacksmith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "Mentioned in 6.05D; appears on Pallass's ninth floor in 6.09 and 6.13K. Higher level than Level 35 Maughin, exact level not stated."
+			},
+			"summary": "A gruff, hard-drinking Dwarf master [Smith] in Pallass who forges a miraculous knife for Erin in under an hour, then tosses it aside over a tiny flaw."
+		},
+		"xif": {
+			"name": "Xif",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"alchemist",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Alchemist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A nose-blind City Gnoll [Alchemist] who runs Cunning Crafts on Pallass's ninth floor (6.09, 6.10)."
+			},
+			"summary": "An eccentric, dye-stained City Gnoll [Alchemist] in Pallass who rallies his guild for door access after tasting Erin's Acid Flies."
+		},
+		"melinni": {
+			"name": "Melinni",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"butcher",
+				"merchant",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Butcher]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A white-scaled Drake [Butcher] who owns Melinni's Meats on Pallass's fourth floor (6.09, 6.10)."
+			},
+			"summary": "Pallass's wealthiest [Butcher], a friend of Rufelt and rival of Lasica who rallies the city's meat sellers against the door tariff."
+		},
+		"rufelt": {
+			"name": "Rufelt",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"bartender",
+				"pallass",
+				"tails_and_scales"
+			],
+			"faction": null,
+			"home": "tails_and_scales",
+			"classes": [
+				{
+					"name": "[Bartender]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "City Gnoll co-owner of Tails and Scales with his Drake wife Lasica (6.09, 6.10). Holds an unnamed advanced [Bartender] class past Level 30."
+			},
+			"summary": "A warm, perceptive City Gnoll [Bartender] who runs Tails and Scales in Pallass with his Drake wife Lasica and comforts a grieving Erin."
+		},
+		"lasica": {
+			"name": "Lasica Feltail",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"chef",
+				"cook",
+				"pallass",
+				"tails_and_scales"
+			],
+			"faction": null,
+			"home": "tails_and_scales",
+			"classes": [
+				{
+					"name": "[Chef]",
+					"level": null
+				},
+				{
+					"name": "[Cook]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "Purple-scaled Drake [Chef] and [Cook] who runs Tails and Scales with her Gnoll husband Rufelt (6.09, 6.10); past Level 30."
+			},
+			"summary": "A brisk, purple-scaled Drake [Chef] who runs the kitchen of Tails and Scales with her Gnoll husband Rufelt and helps Erin fight the Pallass door fee."
+		},
+		"saliss_of_lights": {
+			"name": "Saliss of Lights",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"adventurer",
+				"named_adventurer",
+				"pallass"
+			],
+			"faction": "pallass",
+			"home": "pallass",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.10",
+				"confidence": "confirmed",
+				"note": "Seen outside Tails and Scales being hauled off by the Watch for nudity; Lasica calls him Pallass's resident Named Adventurer (6.10). No class stated in Book 10."
+			},
+			"summary": "Pallass's eccentric resident Named Adventurer, a slim yellow-scaled Drake whom Erin first spots being arrested outside Tails and Scales without his clothes."
+		},
+		"rissa_inkscale": {
+			"name": "Rissa Inkscale",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"scribe",
+				"liscor"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [
+				{
+					"name": "[Scribe]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "Liscor's best [Scribe], with the Skill [Illustrator's Vision] (6.11). Level not stated."
+			},
+			"summary": "A temperamental yellow-and-blue-scaled Drake [Scribe] in Liscor whom Ilvriss hires to sketch Az'kerash's undead."
+		},
+		"jeckl": {
+			"name": "Jeckl",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"scribe",
+				"liscor"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [
+				{
+					"name": "[Scribe]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "A Gnoll [Scribe] in Liscor hired off-screen by Olesm and Welsca to copy Olesm's chess magazine (6.11)."
+			},
+			"summary": "A reasonably priced Gnoll [Scribe] in Liscor who copies Olesm's chess magazine under oath of secrecy."
+		},
+		"lawes": {
+			"name": "Lawes",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"spy",
+				"salazsar",
+				"pallass"
+			],
+			"faction": "salazsar",
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Spy]",
+					"level": null
+				},
+				{
+					"name": "[Infiltrator]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "Salazsar's Drake [Spy] (or [Infiltrator]) stationed near Pallass for seven years; keeps Ilvriss's black mana stone door in a village hut (6.11). Not ylawes_byres."
+			},
+			"summary": "An unassuming Drake [Spy] for Salazsar who rents a hut outside Pallass to anchor Ilvriss's secret black mana stone door."
+		},
+		"veel": {
+			"name": "Veel",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"warrior",
+				"captain",
+				"salazsar"
+			],
+			"faction": "salazsar",
+			"home": "salazsar",
+			"classes": [
+				{
+					"name": "[Sword Captain]",
+					"level": 26
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "A Level 26 [Sword Captain] in Ilvriss's retinue, brought into his secret cell against Az'kerash (6.11)."
+			},
+			"summary": "The strongest fighter in Wall Lord Ilvriss's Liscor retinue, a seasoned [Sword Captain] trusted with the secret war against Az'kerash."
+		},
+		"rudss": {
+			"name": "Rudss",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"veteran",
+				"townsfolk",
+				"liscor"
+			],
+			"faction": null,
+			"home": "liscor",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "A retired veteran of Liscor's army who chats with Ilvriss on the street beside Tekshia (6.11). No class stated."
+			},
+			"summary": "An opinionated retired Drake army veteran in Liscor who sits in the street with Tekshia and chats with Wall Lord Ilvriss."
+		},
+		"bealt": {
+			"name": "Bealt",
+			"race": "Gnoll",
+			"tags": [
+				"gnoll",
+				"smith",
+				"pallass"
+			],
+			"faction": null,
+			"home": "pallass",
+			"classes": [
+				{
+					"name": "[Farrier]",
+					"level": null
+				},
+				{
+					"name": "[Smith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.13K",
+				"confidence": "confirmed",
+				"note": "A City Gnoll [Farrier] and [Smith] on Pallass's ninth floor whose offer to make Erin a knife sparks the contest with Pelt and Maughin (6.13K)."
+			},
+			"summary": "A friendly City Gnoll [Farrier] on Pallass's ninth floor whose boast of fast work sets off a smithing contest between Pelt and Maughin."
+		},
+		"caroline": {
+			"name": "Caroline",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"baleros",
+				"distant"
+			],
+			"faction": "united_nations",
+			"home": "baleros",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.04D",
+				"confidence": "confirmed",
+				"note": "A 19-year-old Australian Earther who gives Kenjiro her romance manuscript to test-sell, then vanishes overnight from a roadside inn near Talenqual (6.04D)."
+			},
+			"summary": "An Australian Earther and aspiring writer whose sudden disappearance from a roadside inn drives Daly and Geneva's group to leave Gravetender's Fist."
+		},
+		"blake": {
+			"name": "Blake",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"baleros",
+				"distant"
+			],
+			"faction": "united_nations",
+			"home": "talenqual",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.05D",
+				"confidence": "confirmed",
+				"note": "A 19-year-old New Zealand Earther rescued from an abandoned hill village with Nicoletta, Lorenzo, and Diana (6.05D); suggests repeating crossbows to Paige (6.06D)."
+			},
+			"summary": "A young New Zealand Earther who survives for weeks in an abandoned Baleros hill village with three Italian companions until Daly's Bushrangers rescue them."
+		},
+		"eldima": {
+			"name": "Eldima",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"adventurer",
+				"captain",
+				"warrior",
+				"baleros",
+				"distant"
+			],
+			"faction": "rustless_guard",
+			"home": "talenqual",
+			"classes": [
+				{
+					"name": "[Warrior]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.04D",
+				"confidence": "confirmed",
+				"note": "Female Dullahan captain of the Silver-rank Rustless Guard in Talenqual; clashes with Daly in 6.04D, then is rescued by the Bushrangers at the serpent dungeon in 6.06D."
+			},
+			"summary": "The Dullahan captain of Talenqual's Silver-rank Rustless Guard, who goes from Daly's rival to a grateful ally after the Bushrangers save her team."
+		},
+		"kiltem": {
+			"name": "Kiltem",
+			"race": "Dullahan",
+			"tags": [
+				"dullahan",
+				"adventurer",
+				"warrior",
+				"baleros",
+				"distant"
+			],
+			"faction": "rustless_guard",
+			"home": "talenqual",
+			"classes": [
+				{
+					"name": "[Warrior]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.06D",
+				"confidence": "confirmed",
+				"note": "A Dullahan [Warrior] in Eldima's Rustless Guard whose crushed bones Geneva sets before giving him a healing potion outside the Talenqual dungeon (6.06D)."
+			},
+			"summary": "A Dullahan [Warrior] of the Rustless Guard whom Geneva treats after a giant serpent mauls him outside the Talenqual dungeon."
+		},
+		"hastel": {
+			"name": "Miss Hastel",
+			"race": "Centaur",
+			"tags": [
+				"centaur",
+				"landlady",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "talenqual",
+			"classes": [
+				{
+					"name": "[Landlady]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.05D",
+				"confidence": "confirmed",
+				"note": "A pregnant Centaur [Landlady] in Talenqual who rents apartments to the Earthers (6.05D) and is saved by Geneva's emergency Caesarean section (6.06D)."
+			},
+			"summary": "A Centaur [Landlady] in Talenqual who rents an apartment house to the United Nations company and survives a breech birth thanks to Geneva's surgery."
+		},
+		"rital": {
+			"name": "Rital",
+			"race": "Beastkin",
+			"tags": [
+				"beastkin",
+				"baleros",
+				"distant"
+			],
+			"faction": null,
+			"home": "talenqual",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.05D",
+				"confidence": "confirmed",
+				"note": "A Cat-tribe Beastkin and Miss Hastel's partner, who runs to fetch Geneva when Hastel's labor fails (6.05D, 6.06D)."
+			},
+			"summary": "A Cat-tribe Beastkin in Talenqual and the devoted partner of the Centaur [Landlady] Miss Hastel."
+		},
+		"kirana": {
+			"name": "Kirana",
+			"race": "Human",
+			"tags": [
+				"human",
+				"earther",
+				"cook",
+				"baleros",
+				"distant"
+			],
+			"faction": "united_nations",
+			"home": "talenqual",
+			"classes": [
+				{
+					"name": "[Cook]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.04D",
+				"confidence": "confirmed",
+				"note": "An Indian Earther and [Cook] for the United Nations company in Talenqual (6.04D - 6.06D); level under 15."
+			},
+			"summary": "An Indian Earther who runs the kitchen and household supplies for the United Nations company in Talenqual."
+		},
+		"ilhmet": {
+			"name": "Ilhmet",
+			"race": "Human",
+			"tags": [
+				"human",
+				"germina",
+				"chandrar",
+				"distant"
+			],
+			"faction": "germina",
+			"home": "ger",
+			"classes": [
+				{
+					"name": "[Councilor of State]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "A red-robed [Councilor of State] of Germina who leads the Quarass's rebirth ritual in Ger and picks the three blood-oath witnesses (6.12K)."
+			},
+			"summary": "Germina's [Councilor of State], who presides over the ancient blood ritual in Ger to awaken the reborn Quarass."
+		},
+		"the_quarass": {
+			"name": "The Quarass",
+			"race": "Human",
+			"tags": [
+				"human",
+				"ruler",
+				"germina",
+				"chandrar",
+				"distant"
+			],
+			"faction": "germina",
+			"home": "ger",
+			"classes": [
+				{
+					"name": "[Quarass]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "After Flos beheaded the old Quarass (4.06KM), she is reborn in a young Germinan girl in Ger with all past Quarasses' memories via the [Quarass] class (6.12K). One entity."
+			},
+			"summary": "The immortal ruler of Germina, reborn in a child through a blood oath in Ger with all her predecessors' memories intact."
+		},
+		"vaitsha": {
+			"name": "Vaitsha Zectiou",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"germina",
+				"chandrar",
+				"distant"
+			],
+			"faction": "germina",
+			"home": "ger",
+			"classes": [
+				{
+					"name": "[Highborn]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "A young Germinan [Highborn] who swears the first blood oath on the stones of Ger at the Quarass's rebirth (6.12K)."
+			},
+			"summary": "A young [Highborn] noblewoman of Ger chosen as one of the three blood-bound guardians in the Quarass's rebirth ritual."
+		},
+		"khalid": {
+			"name": "Khalid",
+			"race": "Human",
+			"tags": [
+				"human",
+				"germina",
+				"chandrar",
+				"distant"
+			],
+			"faction": "germina",
+			"home": "ger",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "A scarred street boy of Ger with no surname who swears the second blood oath at the Quarass's rebirth (6.12K)."
+			},
+			"summary": "A brave, scarred street boy of Ger who swears a blood oath at the Quarass's resurrection and becomes her bound companion."
+		},
+		"calliope": {
+			"name": "Queen Calliope",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"queen",
+				"hellios",
+				"chandrar",
+				"distant"
+			],
+			"faction": "hellios",
+			"home": "blalevault",
+			"classes": [
+				{
+					"name": "[Queen]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "Widow of King Treland and [Queen] of Hellios; refuses to bow to Flos in Blalevault and abdicates—losing her [Queen] class—to spare her son Siyal (6.12K)."
+			},
+			"summary": "The grieving [Queen] of Hellios who wages a war of vengeance against Flos Reimarch, then abdicates her throne to save her son and people."
+		},
+		"bezha": {
+			"name": "Bezha",
+			"race": "Human",
+			"tags": [
+				"human",
+				"smith_clan",
+				"chandrar",
+				"distant"
+			],
+			"faction": "tannousin_clan",
+			"home": "chandrar",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "Formally Bezhavil; elder clanswoman of Clan Tannousin and aunt to Nawalishifra, Silmak, and Hesseif in Reim (6.12K - 6.14K)."
+			},
+			"summary": "An elder clanswoman of Clan Tannousin who oversees the caravan's womenfolk on the journey to Reim and backs Nawalishifra at the forge."
+		},
+		"silmak": {
+			"name": "Silmak",
+			"race": "Human",
+			"tags": [
+				"human",
+				"shaman",
+				"smith_clan",
+				"chandrar",
+				"distant"
+			],
+			"faction": "tannousin_clan",
+			"home": "chandrar",
+			"classes": [
+				{
+					"name": "[Shaman]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.13K",
+				"confidence": "confirmed",
+				"note": "A young [Shaman] of Clan Tannousin who speaks for the caravan in Reim and casts the airless forging circle for Nawalishifra (6.13K, 6.14K)."
+			},
+			"summary": "A young [Shaman] of Clan Tannousin who serves as spokesman for Nawalishifra's caravan and powers the airless rune circle for her smithing."
+		},
+		"hesseif": {
+			"name": "Hesseif",
+			"race": "Human",
+			"tags": [
+				"human",
+				"warrior",
+				"smith_clan",
+				"chandrar",
+				"distant"
+			],
+			"faction": "tannousin_clan",
+			"home": "chandrar",
+			"classes": [
+				{
+					"name": "[Warrior]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.13K",
+				"confidence": "confirmed",
+				"note": "A big shaved-headed [Warrior] of Clan Tannousin who guards the Naq-Alrama steel wagon and assists Nawalishifra in Reim (6.13K, 6.14K)."
+			},
+			"summary": "A massive [Warrior] of Clan Tannousin who guards the clan's Naq-Alrama steel and helps set up Nawalishifra's furnace in Reim."
+		},
+		"daiton": {
+			"name": "Daiton",
+			"race": "Human",
+			"tags": [
+				"human",
+				"blacksmith",
+				"reim",
+				"chandrar",
+				"distant"
+			],
+			"faction": "kingdom_of_reim",
+			"home": "reim",
+			"classes": [
+				{
+					"name": "[Blacksmith]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.13K",
+				"confidence": "confirmed",
+				"note": "Master [Blacksmith] of Reim's royal forges who challenges Nawalishifra to a one-day sword-forging duel (6.13K) and sees her blade survive Flos's hammer test (6.14K)."
+			},
+			"summary": "The loyal master [Blacksmith] of Reim's royal forges, famed for mass-producing steel weapons for Flos's armies, who tests his craft against Nawalishifra."
+		},
+		"chaita": {
+			"name": "Chaita",
+			"race": "Garuda",
+			"tags": [
+				"garuda",
+				"runner",
+				"courier",
+				"chandrar",
+				"distant"
+			],
+			"faction": "runners_guild",
+			"home": "chandrar",
+			"classes": [],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "Chaita of Keymos, a Garuda Courier called the Sky's Mirage who once saved Drevish as a Street Runner and carries Flos's peace scrolls across Chandrar (6.14K)."
+			},
+			"summary": "An emerald-and-white-feathered Garuda Courier known as the Sky's Mirage, the only Courier who answers Flos's call to carry his peace edict."
+		},
+		"raelt": {
+			"name": "King Raelt",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"king",
+				"jecrass",
+				"chandrar",
+				"distant"
+			],
+			"faction": "jecrass",
+			"home": "jecrass",
+			"classes": [
+				{
+					"name": "[King]",
+					"level": null
+				},
+				{
+					"name": "[Prince]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "Mentioned in 6.14K; appears in 6.15K as [King] of Jecrass (born a [Prince]), clashing with his River Wardens and accepting Flos's peace."
+			},
+			"summary": "The sharp-tongued, pragmatic [King] of Jecrass who despises his greedy River Warden nobles and accepts Flos's peace terms to spare his realm."
+		},
+		"orjin": {
+			"name": "Orjin",
+			"race": "Human",
+			"tags": [
+				"human",
+				"martial_artist",
+				"pomle",
+				"chandrar",
+				"distant"
+			],
+			"faction": "pomle",
+			"home": "pomle",
+			"classes": [
+				{
+					"name": "[Martial Artist]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.15K",
+				"confidence": "confirmed",
+				"note": "The Strongest of Pomle, a [Martial Artist] who keeps the peace at the oasis summit and stops the rulers' battle by force (6.15K)."
+			},
+			"summary": "A formidable [Martial Artist] titled the Strongest of Pomle, who reluctantly enforces the oasis nation's neutrality at the southern rulers' summit."
+		},
+		"salii": {
+			"name": "Salii",
+			"race": "Drake",
+			"tags": [
+				"drake",
+				"secretary",
+				"pomle",
+				"chandrar",
+				"distant"
+			],
+			"faction": "pomle",
+			"home": "pomle",
+			"classes": [
+				{
+					"name": "[Secretary]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.15K",
+				"confidence": "confirmed",
+				"note": "A brown-scaled Drake [Secretary] who runs Pomle's affairs alongside Orjin and duplicates the Emperor of Sands' secret letter (6.15K)."
+			},
+			"summary": "A dusty-brown-scaled Drake [Secretary] who manages anarchic Pomle alongside Orjin and organizes the eight-nation summit."
+		},
+		"nsiia": {
+			"name": "Empress Nsiia",
+			"race": "Human",
+			"tags": [
+				"human",
+				"noble",
+				"ruler",
+				"tiqr",
+				"chandrar",
+				"distant"
+			],
+			"faction": "tiqr",
+			"home": "tiqr",
+			"classes": [
+				{
+					"name": "[Empress of Beasts]",
+					"level": null
+				},
+				{
+					"name": "[Empress]",
+					"level": null
+				},
+				{
+					"name": "[Beast Master]",
+					"level": null
+				}
+			],
+			"alive_at_start": true,
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.15K",
+				"confidence": "confirmed",
+				"note": "Empress of Tiqr, called the [Empress of Beasts]; speaks well of Flos at Pomle and faces a nine-nation declaration of war against Tiqr (6.15K)."
+			},
+			"summary": "The bold [Empress of Beasts] of Tiqr, who rides her Grand Elephant to the Pomle summit and refuses to join the coalition against her old ally Flos."
+		}
+	}
+}

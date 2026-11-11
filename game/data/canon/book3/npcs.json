@@ -310,7 +310,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "One of the thirteen Redfang warriors Garen sent after Erin. A band nickname; the Redfang have no Shaman to give names. Survives Esthelm (3.20T)."},
+			"canon_ref": {"book": 3, "chapter": "3.18T", "confidence": "confirmed", "note": "One of the thirteen Redfang warriors Garen sent after Erin. A band nickname; the Redfang have no Shaman to give names. Survives Esthelm (3.20T). Book 10: last of the five Redfangs at the inn; buries his brothers, reaches [Bard] 29 and [Miner] 6, and finds a mana stone cave (6.03, 6.07D)."},
 			"summary": "One of the Redfang band's quietest trackers, who scouts ahead with Badarrow through the ruins of Esthelm. He lives through the last battle."
 		},
 		"rabbiteater": {
