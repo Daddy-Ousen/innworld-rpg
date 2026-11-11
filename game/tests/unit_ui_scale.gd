@@ -165,3 +165,21 @@ func test_options_menu_sets_the_scale() -> void:
 	pick.item_selected.emit(2)
 	assert_eq(_session.ui_scale.mode, "1.5")
 	assert_eq(get_window().content_scale_factor, 1.5)
+
+
+## Audit B1 (2026-11-11): Session.ui_factor() passes the mobile flag, so a phone gets 250 %.
+func test_session_factor_uses_the_phone_size() -> void:
+	var old_path: String = _session.ui_scale_path
+	_session.ui_scale_path = TEST_FILE
+	UiScale.dpi_override = 405.0
+	UiScale.mobile_override = 1
+	_session.set_ui_scale_mode(UiScale.AUTO)
+	assert_eq(_session.ui_factor(), UiScale.MOBILE, "Auto on a phone OS: 2.5")
+	_session.set_ui_scale_mode("2")
+	assert_eq(_session.ui_factor(), 2.0, "a fixed mode wins over the phone size")
+	_session.set_ui_scale_mode(UiScale.AUTO)
+	UiScale.mobile_override = 0
+	assert_ne(_session.ui_factor(), UiScale.MOBILE, "not a phone OS: the old rule")
+	UiScale.mobile_override = -1
+	_session.ui_scale_path = old_path
+	_session.apply_ui_scale()
