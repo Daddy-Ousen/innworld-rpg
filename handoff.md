@@ -1,5 +1,19 @@
 # Handoff
 
+## Just done (2026-11-11, local): M37.1 world and records (branch `feat/m37.1-world-records`)
+- Committed the 2026-11-06 working-tree work after a review: `game/data/canon/book10/npcs.json` (51), `locations.json` (22),
+  `chapters/.gitkeep`, `game/tests/sim_book10_world.gd`, note edits in book1/2/3/4/5/7 `npcs.json`. ADR 0050 in
+  `docs/DECISIONS.md`; ROADMAP and progress ticked.
+- Review: no duplicate of an older record. Shieldscale and Regrika are notes on `osthia_blackwing` and `venitra`. Teresa keeps
+  her name (Book 2 uses both forms). Lawes ([Spy] / [Infiltrator]) checked in 6.11.
+- Tests: `sim_book10_world` 6/6, `unit_canon_db` 7/7, `unit_data_db` 15/15, validator books 1-5, 7, 10: 0 errors (book10 warns:
+  no chapters yet), Python tools 137 OK. Full suite not run.
+- Next: user merges the M37.1 PR. Then M37.2 Tails and Scales map (ask the layout first; user picked 28x20 lounge, see
+  `docs/plans/m37.md` "Answers"). Location `tails_and_scales` already exists in book10.
+- Open for later batches: Nawal, Okasha, Siyal have no records (add in M37.7 / M37.8 if an event needs them). Erin's [Warrior]
+  `system` line goes in M37.5 (6.09).
+- Gotchas: ~299 `.import` files, `.playwright-mcp/` and empty `web/` stay uncommitted.
+
 ## Just done (2026-11-06, local): Grill-me interview completed, design decisions settled for M37
 - User published the website update on Vercel (`terms.html`, `privacy.html`, navigation and changelog links).
 - User published the devlog on itch.io (`docs/DEVLOG_v0.2.1.md`).
