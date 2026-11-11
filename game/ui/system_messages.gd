@@ -166,7 +166,7 @@ static func offer_pages(gs: GameState, db: DataDb) -> Array[Dictionary]:
 		else:
 			lines.append(SystemVoice.class_offered(c["name"]))
 		lines.append("If you decline, it is never offered again.")
-		var p := page(OFFER, "[Class Offered]", lines, [ACCEPT, DECLINE])
+		var p := page(OFFER, "Class Offered", lines, [ACCEPT, DECLINE])
 		p["class"] = id
 		out.append(p)
 	return out
