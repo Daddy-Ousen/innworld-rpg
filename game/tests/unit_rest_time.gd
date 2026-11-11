@@ -5,40 +5,39 @@ extends GutTest
 
 const SEED := 20261111
 
+## The real data, from the Session autoload (loaded once at start; DataDb.load_dir takes 15 s).
 var _real: DataDb
-var _toy: DataDb
 
 
 func before_all() -> void:
-	_real = DataDb.load_dir()
+	var session := get_node_or_null("/root/Session")
+	_real = session.db if session != null else DataDb.load_dir()
 	assert_eq(_real.errors, [] as Array[String])
 
 
-func before_each() -> void:
-	_toy = ToyCombat.db()
-	_toy.combat.enemies["goblin"]["ranged"]["chance"] = 0.0
-
-
-func _arena(pos: Vector2i = Vector2i(1, 4)) -> GameState:
-	var gs := ToyCombat.new_game(_toy, SEED)
-	ToyCombat.to_arena(gs, _toy, pos)
-	return gs
-
-
-## A real-db game at `hour` of day 4, standing in `area`.
+## A game on the real data, standing in `area`, at `hour` of the day the game starts on or the
+## next one (the clock never goes back).
 func _real_game(area: String, pos: Vector2i, hour: float, start: String = "celum") -> GameState:
 	var gs := GameState.new_game(SEED, _real, start)
 	gs.player.place(area, pos)
-	Commands.settle(gs, _real)
-	gs.clock.total_minutes = int(hour * 60.0) + Clock.MINUTES_PER_DAY * 3
+	var to := gs.clock.total_minutes - gs.clock.minute() + int(hour * 60.0)
+	if to < gs.clock.total_minutes:
+		to += Clock.MINUTES_PER_DAY
+	gs.clock.advance(to - gs.clock.total_minutes)
 	gs.clock.awake_minutes = 0
+	Commands.settle(gs, _real)
 	return gs
 
 
+## Outdoors at Celum's gate, 15:00, nothing near.
+func _calm(hour: float = 12.0) -> GameState:
+	return _real_game("celum_gate", Vector2i(16, 8), hour)
+
+
 func test_it_rests_the_asked_time_when_nothing_happens() -> void:
-	var gs := _arena()
+	var gs := _calm()
 	var before := gs.clock.total_minutes
-	var r := Commands.rest(gs, _toy, 60)
+	var r := Commands.rest(gs, _real, 60)
 	assert_eq(r["error"], "")
 	assert_eq(r["stop"], "")
 	assert_eq(r["minutes"], 60)
@@ -47,30 +46,30 @@ func test_it_rests_the_asked_time_when_nothing_happens() -> void:
 
 
 func test_an_odd_time_ends_on_the_minute() -> void:
-	var gs := _arena()
+	var gs := _calm()
 	var before := gs.clock.total_minutes
-	var r := Commands.rest(gs, _toy, 25)
+	var r := Commands.rest(gs, _real, 25)
 	assert_eq(r["minutes"], 25, "two chunks of 10 and one of 5")
 	assert_eq(gs.clock.total_minutes, before + 25)
 	assert_eq(gs.combat.lines[0], "You rest for 25 min.")
 
 
 func test_it_is_pure_time_no_action_record_no_xp_no_heal() -> void:
-	var gs := _arena()
+	var gs := _calm()
 	gs.player.hp = 3
 	var records := gs.action_log.records.size()
 	var progress := gs.progression.to_dict().duplicate(true)
-	Commands.rest(gs, _toy, 120)
+	Commands.rest(gs, _real, 120)
 	assert_eq(gs.action_log.records.size(), records, "no action record")
 	assert_eq(gs.player.hp, 3, "no heal")
 	assert_eq(gs.progression.to_dict(), progress, "no XP")
 
 
 func test_a_hostile_near_refuses_the_rest() -> void:
-	var gs := _arena()
-	Combat.add_monster(gs, _toy, "goblin", Vector2i(6, 4), CombatState.HOSTILE)
+	var gs := _calm()
+	Combat.add_monster(gs, _real, "goblin_grunt", Vector2i(16, 4), CombatState.HOSTILE)
 	var before := gs.clock.total_minutes
-	var r := Commands.rest(gs, _toy, 60)
+	var r := Commands.rest(gs, _real, 60)
 	assert_eq(r["error"], Combat.REFUSED_DANGER)
 	assert_eq(r["minutes"], 0)
 	assert_eq(gs.clock.total_minutes, before)
@@ -99,16 +98,16 @@ func test_a_staged_fight_that_starts_stops_the_rest() -> void:
 
 
 func test_a_collapse_due_stops_the_rest() -> void:
-	var gs := _arena()
-	var rules: Dictionary = _toy.rules["clock"]
+	var gs := _calm()
+	var rules: Dictionary = _real.rules["clock"]
 	gs.clock.awake_minutes = int(rules["collapse_after_awake"]) - 25
-	var r := Commands.rest(gs, _toy, 120)
+	var r := Commands.rest(gs, _real, 120)
 	assert_eq(r["stop"], "tired")
 	assert_eq(r["minutes"], 25)
 	assert_true(gs.clock.is_collapse_due(rules))
 	assert_has(gs.combat.lines, "You are too tired to rest on.")
 	# Already due: nothing moves, the stop is still "tired".
-	var again := Commands.rest(gs, _toy, 60)
+	var again := Commands.rest(gs, _real, 60)
 	assert_eq(again["minutes"], 0)
 	assert_eq(again["stop"], "tired")
 
@@ -175,10 +174,12 @@ func test_the_hour_a_meal_starts_the_next_start_is_the_following_meal() -> void:
 
 
 func test_a_db_without_inn_rules_has_no_meal_option() -> void:
-	var gs := _arena()
-	_toy.rules.erase("inn")
-	assert_eq(Rest.next_meal(gs, _toy), {})
-	var rows := Rest.options(gs, _toy)
+	var gs := _calm()
+	var inn: Dictionary = _real.rules["inn"]
+	_real.rules.erase("inn")  # the Session's data is shared: put it back below
+	assert_eq(Rest.next_meal(gs, _real), {})
+	var rows := Rest.options(gs, _real)
+	_real.rules["inn"] = inn
 	assert_eq(rows.size(), 2, "1 hour and 3 hours only")
 	assert_eq(rows[0]["text"], "Rest 1 hour")
 	assert_eq(rows[1]["text"], "Rest 3 hours")
@@ -224,6 +225,6 @@ func test_sleep_plan_collapse_is_now() -> void:
 
 
 func test_sleep_plan_danger_is_refused() -> void:
-	var gs := _arena()
-	Combat.add_monster(gs, _toy, "goblin", Vector2i(6, 4), CombatState.HOSTILE)
-	assert_eq(Rest.sleep_plan(gs, _toy)["mode"], Rest.REFUSED)
+	var gs := _calm()
+	Combat.add_monster(gs, _real, "goblin_grunt", Vector2i(16, 4), CombatState.HOSTILE)
+	assert_eq(Rest.sleep_plan(gs, _real)["mode"], Rest.REFUSED)

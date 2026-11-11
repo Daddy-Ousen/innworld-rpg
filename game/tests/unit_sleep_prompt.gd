@@ -10,14 +10,18 @@ func before_each() -> void:
 	_session = get_node_or_null("/root/Session")
 
 
-## A main scene in the inn at the bed, `hour` of day 4.
+## A main scene in the inn at the bed, at `hour` (the day the game starts on, or the next:
+## the clock never goes back).
 func _main(hour: float = 8.0, area: String = "inn_interior", at: Vector2i = Vector2i(20, 13)) -> Node:
 	var gs := GameState.new_game(4, _session.db)
 	gs.player.place(area, at)
 	gs.npcs.npcs.clear()
-	Commands.settle(gs, _session.db)
-	gs.clock.total_minutes = int(hour * 60.0) + Clock.MINUTES_PER_DAY * 3
+	var to := gs.clock.total_minutes - gs.clock.minute() + int(hour * 60.0)
+	if to < gs.clock.total_minutes:
+		to += Clock.MINUTES_PER_DAY
+	gs.clock.advance(to - gs.clock.total_minutes)
 	gs.clock.awake_minutes = 0
+	Commands.settle(gs, _session.db)
 	_session.set_state(gs)
 	var m: Node = load("res://world/main.tscn").instantiate()
 	m.switch_scene = false

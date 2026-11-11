@@ -14,8 +14,9 @@
   (`docs/AUDIT_2026-11-11.md`, not committed): Android Back and save-on-pause, mouse on Windows, Skill texts, first task.
 - Gotchas: code that sleeps at once (collapse flows) must call `sleep_now()`, not `sleep()`. `sleep()` asks unless
   `confirm_sleep` is false (headless default). Monsters get no turns in a long gap, so a rest does not wake idle monsters;
-  danger stops come from stages, brawls and the like. A core test run loads the data in about 30 s; the whole
-  `unit_rest_time` takes several minutes. The `.import` files, `.playwright-mcp/`, `web/` and the audit report stay uncommitted.
+  danger stops come from stages, brawls and the like. `ToyData.db()` loads the real data twice (about 30 s), so a toy db in `before_each` costs that
+  per test: use the Session's db (`get_node_or_null("/root/Session").db`) and build a toy db once only where needed.
+  `unit_rest_time` runs in about 50 s (24 s for `unit_sleep_prompt`); tests must never set the clock before the game start. The `.import` files, `.playwright-mcp/`, `web/` and the audit report stay uncommitted.
 
 ## Just done (2026-11-11, local): audit quick bugs B1 - B3 (branch `fix/audit-quick-bugs`, PR open, not merged)
 - B1 `game/ui/session.gd`: `ui_factor()` passes `UiScale.is_mobile_os()`. B2 `game/ui/system_messages.gd`: title `Class Offered`.
