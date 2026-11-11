@@ -30,6 +30,10 @@ How to read the model column: select that model and effort in Antigravity's mode
 
 One branch + PR per sub-step. Steps marked (user) need the owner to do or decide something.
 
+## Audit follow-ups (2026-11-11)
+- [x] Quick bugs B1 - B3 ([PR #279](https://github.com/Daddy-Ousen/innworld-rpg/pull/279)): phone menu size, class offer title, first day line once
+- [x] Sleep asks first, and Rest passes time (audit D1, D2; ADR 0051)
+
 ## M37 — Book 10 (The Wind Runner) (plan `docs/plans/m37.md`, ADR 0048)
 - [x] M37.P Plan: 17 chapters read, day anchor 176, short version for Baleros & Chandrar, 1 fight stage, 2 hooks, 1 new map, 0 kills **[Gemini 4 Argon (High)]**
 - [-] M37.0 Engine: skipped (no new engine mechanics or schema changes needed)
@@ -50,6 +54,7 @@ One branch + PR per sub-step. Steps marked (user) need the owner to do or decide
 
 ## Play checks
 All build steps are merged. Run the game with `godot --path game`, or install the apk from the latest release.
+- [ ] Sleep and Rest (ADR 0051): press Z in the inn at midday (the question shows the wake time), say "Stay awake", then press R and rest until dinner; the same on the phone (Sleep and Rest in the More grid)
 - [ ] M33: play a quest line (Erin, Pawn, or Pisces) and learn [Flash Step] from Pisces after his lesson
 - [ ] M35.3: sleep to Book 6 day 129 – 134 and find Magnolia and Ressa: the battlefield on day 130, the Invrisil gate by day on days 131 – 133, the estate hall after
 - [ ] M35.0: take "Ceria and the spark" from Ceria on day 36 (she eats at the inn at 6 – 9 h and 18 – 23 h), finish it, then learn [Flashfire] from her

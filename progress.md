@@ -753,3 +753,16 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
 - [ ] The user picks what to fix first (the "ten things" table in the report).
 - [x] Quick bugs B1 – B3 (2026-11-11, branch `fix/audit-quick-bugs`): `Session.ui_factor()` now passes `UiScale.is_mobile_os()` (a phone gets 250 %); the class offer title is `Class Offered` (the dialog adds the brackets); a new game shows its day line once (`main.gd` adds it only when `Session.fresh` is false). Tests: `unit_ui_scale` 12/12 (+1), `unit_hud_log` 11/11 (+2), `unit_system_voice` 5/5, `unit_play_loop` 18, `unit_touch_controls` 18, `unit_action_card` 11, `unit_shop_panel` 14, `unit_context_button` 10, `unit_combat_screen` 12, `unit_bag` 17 pass. `unit_system_messages` 17/18: `test_main_scene_sleep_opens_the_dialog` also fails on `origin/main` (not this change). Full suite not run.
   - Render check at 250 % (2400 × 1080, 405 dpi, factor 2.5): map with pad, action card, shop, bag and fight fit the screen, nothing overlaps. Small flaw: on map screens the "H: help" label is clipped by the top-right corner icon. No layout rework done.
+- [x] Sleep asks first, Rest passes time (2026-11-11, branch `feat/sleep-ask-rest`, ADR 0051, audit D1 + D2):
+  `Rest.sleep_plan` / `Rest.options` / `Rest.next_meal` and `Commands.rest` in core (10-minute chunks; stops on danger,
+  HP loss, a due collapse, a map change or new lines; no XP, no record, no heal). UI: `InteractMenu.open_ask` (the question
+  and the Rest panel), `MainScreen.sleep` asks (`confirm_sleep`, off headless), `sleep_now`, `open_rest`, `rest`; input
+  action `rest` (R); "Rest" in the More grid; help text. No save, schema or rules change.
+  - Tests (all pass): `unit_rest_time` (new, 20), `unit_sleep_prompt` (new, 15), `unit_input_actions` 6, `unit_touch_controls`
+    18, `unit_travel_prompt` 6, `unit_context_button` 10, `unit_play_loop` 18, `unit_hud_log` 11, `unit_night` 9,
+    `unit_guests` 27, `unit_action_card` 11, `unit_ui_scale` 12, `unit_console` 15, `unit_world_view` 20, `unit_interact` 11,
+    `unit_journal` 7, `unit_no_xp_shown` 4, `sim_inn_service` 1; `unit_system_messages` 17 of 18 (the old
+    `test_main_scene_sleep_opens_the_dialog` failure, same as `origin/main`, not fixed). Full suite not run.
+  - Picture check (windowed, `--audio-driver Dummy`): sleep question and Rest panel at 1280 x 720 and on a phone (2400 x 1080,
+    405 dpi, touch on, 250 %), and the 4-row More grid. Nothing runs off the screen or overlaps.
+  - [ ] The user plays: Z in the inn at midday (question), "Stay awake", R and rest until dinner; the same on the phone.
