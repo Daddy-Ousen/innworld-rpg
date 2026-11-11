@@ -741,3 +741,15 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
 
 ## Repo
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
+
+## Full audit (2026-11-11, local, read-only; no code or data changed)
+- [x] Audit of logic, design, controls (Windows, Android touch), visuals and art: `docs/AUDIT_2026-11-11.md` (not committed).
+  Pictures in `export/audit_2026-11-11/` (gitignored). Checked on the web build, 24 renders and the code. Tests run:
+  `unit_scene_beats` 5/6 (old failure), `unit_npc_sim` 13/14 (old failure), `unit_ui_scale` 11/11. Full suite not run.
+- Top findings: the 250 % phone menu size is never used (`Session.ui_factor()` does not pass `mobile`); sleep has no
+  question and there is no "rest 1 hour"; Android Back quits with no save (code only); on Windows the mouse works only
+  in fights and the menu size does not follow the window; Skills and classes have no text; fights pay nothing; small
+  touch buttons in the fight bar and the System dialog; bare inn art and a title screen with no art.
+- [ ] The user picks what to fix first (the "ten things" table in the report).
+- [x] Quick bugs B1 – B3 (2026-11-11, branch `fix/audit-quick-bugs`): `Session.ui_factor()` now passes `UiScale.is_mobile_os()` (a phone gets 250 %); the class offer title is `Class Offered` (the dialog adds the brackets); a new game shows its day line once (`main.gd` adds it only when `Session.fresh` is false). Tests: `unit_ui_scale` 12/12 (+1), `unit_hud_log` 11/11 (+2), `unit_system_voice` 5/5, `unit_play_loop` 18, `unit_touch_controls` 18, `unit_action_card` 11, `unit_shop_panel` 14, `unit_context_button` 10, `unit_combat_screen` 12, `unit_bag` 17 pass. `unit_system_messages` 17/18: `test_main_scene_sleep_opens_the_dialog` also fails on `origin/main` (not this change). Full suite not run.
+  - Render check at 250 % (2400 × 1080, 405 dpi, factor 2.5): map with pad, action card, shop, bag and fight fit the screen, nothing overlaps. Small flaw: on map screens the "H: help" label is clipped by the top-right corner icon. No layout rework done.

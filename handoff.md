@@ -1,5 +1,38 @@
 # Handoff
 
+## Just done (2026-11-11, local): audit quick bugs B1 - B3 (branch `fix/audit-quick-bugs`, PR open, not merged)
+- B1 `game/ui/session.gd`: `ui_factor()` passes `UiScale.is_mobile_os()`. B2 `game/ui/system_messages.gd`: title `Class Offered`.
+  B3 `game/world/main.gd`: day line in `_ready()` only when `Session.fresh` is false.
+- Tests added: `unit_ui_scale` (+1), `unit_hud_log` (+2); `unit_system_voice` updated. Targeted scripts pass (see `progress.md`).
+  `unit_system_messages` `test_main_scene_sleep_opens_the_dialog` fails on `origin/main` too: not fixed (out of scope).
+- Render check at 250 % looked fine; only "H: help" is clipped at the top-right on map screens.
+- Next: the user merges the PR. Then the user picks the next audit fix (`docs/AUDIT_2026-11-11.md`, not committed).
+- Gotchas: `Session.set_state()` clears `Session.fresh`; a test for a fresh game must set `fresh = true` after it.
+  The `.import` files, `.playwright-mcp/`, `web/` and the audit report stay uncommitted.
+
+## Just done (2026-11-11, local): full game audit (read-only; branch `feat/m37.1-world-records`, nothing committed)
+- Report: `docs/AUDIT_2026-11-11.md` (new, not committed). Pictures: `export/audit_2026-11-11/` (gitignored).
+- No code or data changed. A throwaway render script (`game/_shot.gd`) was made and deleted.
+- Checked by: the web build in a browser, 24 renders (desktop 1280 × 720 and 1920 × 1080, phone 2400 × 1080 at 405 dpi,
+  upright), reading core / ui / world code. Tests run: `unit_scene_beats` 5/6 (old), `unit_npc_sim` 13/14 (old),
+  `unit_ui_scale` 11/11. Full suite not run.
+- Main findings:
+  - Bug: `Session.ui_factor()` (`game/ui/session.gd:79`) never passes `mobile`, so the 250 % phone menu size is dead code
+    (phones get 200 %, tablets 100 %).
+  - Bug: `[[Class Offered]]` title; the first log line shows twice at a new game.
+  - Android (code only): the Back button quits with no save; no save when the app goes to the background; no safe area.
+  - Sleep (Z, or "Sleep" in the More grid) has no question and always goes to 06:00. No "rest 1 hour".
+  - Windows: mouse works only in fights; no gamepad; no full screen; menu size does not follow the window.
+  - Skills and classes have no description text. Fights pay no coins or loot. No first task, no map, exits have no names.
+  - Touch: the fight bar and System dialog buttons are about 17 dp high (card and shop are 48 dp).
+  - Art: title screen has no art; the inn inside and outside are bare; crowd sprites are copies.
+- Next: the user picks what to fix first (the report's "ten things" table). M37.2 is still the next roadmap step.
+- Gotchas: to render locally, write an `extends SceneTree` script, set `Session.ui_scale_path`, `touch_settings_path`,
+  `text_settings_path` and `save_dir` to a scratch folder first (or the user's own settings and saves are overwritten),
+  `UiScale.mobile_override = 1`, `UiScale.dpi_override = 405`, a borderless 2400 × 1080 window works on a 1920 × 1080
+  screen. `Session.ui_factor()` reads the real screen dpi, so set the menu size mode by hand ("2") for a phone render.
+  The built-in browser cannot type in the web build's debug console; a key press shorter than one frame does not walk.
+
 ## Just done (2026-11-11, local): M37.1 world and records (branch `feat/m37.1-world-records`)
 - Committed the 2026-11-06 working-tree work after a review: `game/data/canon/book10/npcs.json` (51), `locations.json` (22),
   `chapters/.gitkeep`, `game/tests/sim_book10_world.gd`, note edits in book1/2/3/4/5/7 `npcs.json`. ADR 0050 in

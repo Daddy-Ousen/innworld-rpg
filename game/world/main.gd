@@ -116,7 +116,8 @@ func _ready() -> void:
 	Session.ui_scale_changed.connect(panels.apply_ui_scale)
 	panels.apply_ui_scale()
 	console_layer.visible = false
-	hud.add_lines([panels.day_line()])
+	if not Session.fresh:  # a new game gets its day line when the welcome page closes
+		hud.add_lines([panels.day_line()])
 	if not Session.db.is_valid():
 		hud.add_lines(["Data errors: see the debug console (`)."])
 	_redraw()

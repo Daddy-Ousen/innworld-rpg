@@ -34,7 +34,7 @@ func test_offer_page_title_and_first_line() -> void:
 	var gs := ToyMaps.new_game(db)
 	gs.progression.offers.append({"class": "cook", "kind": ClassSystem.KIND_NEW, "day": 1})
 	var p: Dictionary = SystemMessages.offer_pages(gs, db)[0]
-	assert_eq(p["title"], "[Class Offered]")
+	assert_eq(p["title"], "Class Offered")
 	assert_eq(p["lines"][0], SystemVoice.class_offered(db.classes["cook"]["name"]))
 	assert_eq(p["choices"], [SystemMessages.ACCEPT, SystemMessages.DECLINE] as Array[String])
 

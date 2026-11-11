@@ -79,7 +79,7 @@ func set_ui_scale_mode(mode: String) -> void:
 func ui_factor() -> float:
 	var size := DisplayServer.window_get_size()
 	return ui_scale.factor(float(mini(size.x, size.y)), float(DisplayServer.screen_get_dpi()),
-			touch_seen or DisplayServer.is_touchscreen_available())
+			touch_seen or DisplayServer.is_touchscreen_available(), UiScale.is_mobile_os())
 
 
 ## Sets the root window's content scale; tells the game screen when it changed.

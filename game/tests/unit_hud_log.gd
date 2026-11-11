@@ -116,3 +116,29 @@ func test_every_key_the_game_uses_is_on_the_help_page() -> void:
 	var keys := "\n".join(SystemMessages.KEYS)
 	for k: String in ["WASD", "Space", "B:", "T:", "X:", "E:", "F:", "I:", "Z:", "C:", "J:", "L:", "H:", "Esc"]:
 		assert_string_contains(keys, k)
+
+
+## Audit B3 (2026-11-11): one day line after a new game, one after a load.
+func _day_lines(m: Node) -> int:
+	var n := 0
+	for l in m.hud.history():
+		if (l as String).begins_with("Day "):
+			n += 1
+	return n
+
+
+func test_a_new_game_shows_the_day_line_once() -> void:
+	_session.set_state(GameState.new_game(4, _session.db))
+	_session.fresh = true  # set_state clears it: a new game sets it after
+	var m: Node = load("res://world/main.tscn").instantiate()
+	m.switch_scene = false
+	add_child_autofree(m)
+	assert_eq(_day_lines(m), 0, "the welcome page is open: no day line yet")
+	m.dialog.closed.emit()
+	assert_eq(_day_lines(m), 1, "the welcome page closed: one day line")
+
+
+func test_a_loaded_game_shows_the_day_line_once() -> void:
+	_session.fresh = false
+	var m := _main()
+	assert_eq(_day_lines(m), 1)
