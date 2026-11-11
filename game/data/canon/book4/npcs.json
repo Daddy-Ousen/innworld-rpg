@@ -46,7 +46,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "The Gold Stone Chieftain whose tribe Rags absorbed (b2.rags_absorbs_gold_stone_tribe). Stands with Rags in 3.26G; named by her in 3.28G. Once lived in the mountain."},
+			"canon_ref": {"book": 4, "chapter": "3.28G", "confidence": "confirmed", "note": "The Gold Stone Chieftain whose tribe Rags absorbed (b2.rags_absorbs_gold_stone_tribe). Stands with Rags in 3.26G; named by her in 3.28G. Killed at Liscor (Book 9). Book 10: buried by Numbtongue on the hill (6.03); had [Warrior] and [Scavenger] and left his mining memory to Numbtongue (6.07D)."},
 			"summary": "The slow-spoken Hob Chieftain of the Gold Stone tribe, one of the few who stand by Rags at Tremborag's feast. He once lived in the mountain and guards a captive there. Rags names him Pyrite, and he frees the captives in her breakout."
 		},
 		"redscar": {

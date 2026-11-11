@@ -693,3 +693,15 @@ Book 10 covers the spring weeks after the battle of Liscor. Five threads: Ryoka 
 - Same author rules as Play (no book or series name, no book art, free, no ads). Text and answers in `docs/WINDOWS_STORE.md`.
 - Consequences: the Store version has its own save folder (MSIX storage). The exe icon is still the Godot default (`application/modify_resources=false`); fixing it needs `rcedit` (ask first, rule 11). Installing and running the signed test package is not yet checked. Each release needs one more manual step: upload the new .msix in Partner Center.
 
+## ADR 0050 — M37.1 Book 10 world and records
+- 51 new people and 22 new places in `game/data/canon/book10/`. The plan guessed about 45; the extra ones are Reizmelt and
+  Pallass people that the 6.00 – 6.11 events name. Nawal, Okasha and Siyal are not added yet; M37.7 / M37.8 add them only if
+  an event needs them.
+- Osthia = "Shieldscale" (6.11) and Venitra = "Regrika Blackpaw" (6.11): the text says so, so no new records. Each cover name is
+  a note on the old record (`osthia_blackwing`, `venitra`). Disguise state is a story flag, set by the Book 10 events.
+- Teres: Book 2 (2.22K) uses both "Teres" and "Teresa". Book 10 uses "Teres". The record keeps id `teresa` and name "Teresa"
+  (her full name); the note says she goes by Teres. No rename, so no save or UI change.
+- The new Quarass is the old one reborn (6.12K): one record `the_quarass`. Lawes of Pallass (6.11) is a new record, not
+  `ylawes_byres`.
+- Erin's [Warrior] (6.09): her record has no [Warrior]. M37.5 adds a `system` line in the 6.09 batch; no class change now.
+- No schema change, no save change, no engine change.

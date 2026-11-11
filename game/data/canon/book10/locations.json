@@ -1,0 +1,415 @@
+{
+	"schema_version": 1,
+	"locations": {
+		"reizmelt": {
+			"name": "Reizmelt",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"town",
+				"human",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "A small northern Izril town (~5,000 people) where Ryoka works as a Street Runner under the name Ryoka (6.00, 6.01)."
+			},
+			"summary": "A modest northern Human town of stone and timber where Ryoka settles after leaving Liscor, taking small delivery runs for the local Runner's Guild."
+		},
+		"huntress_haven": {
+			"name": "The Huntress' Haven",
+			"kind": "building",
+			"parent": "reizmelt",
+			"tags": [
+				"inn",
+				"reizmelt",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Madain's inn in Reizmelt where Ryoka and Alber rent rooms and Fierre eats breakfast (6.00, 6.01)."
+			},
+			"summary": "A lively Reizmelt inn owned by Mad Madain, who wakes his guests at dawn with a banging pan and serves fresh game he hunts himself."
+		},
+		"blaisefords_lookout": {
+			"name": "Blaiseford's Lookout",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"town",
+				"human",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "A small hill town twelve miles from Reizmelt where Ryoka delivers a letter to Lord Beilkit of House Malt (6.00)."
+			},
+			"summary": "A small hill town twelve miles from Reizmelt where minor nobles like Lord Beilkit of House Malt keep their sheep-country estates."
+		},
+		"gilliel_swamplands": {
+			"name": "Gilliel Swamplands",
+			"kind": "wild",
+			"parent": "north_izril",
+			"tags": [
+				"swamp",
+				"monsters",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "Marshlands near Reizmelt infested with Wailer Frogs where Ryoka helps rescue the Pithfire Hounds (6.00)."
+			},
+			"summary": "A treacherous stretch of marshland near Reizmelt, loud with Wailer Frogs and dangerous enough to trap Silver-rank adventurers."
+		},
+		"drakle_estate": {
+			"name": "Drakle Keep",
+			"kind": "building",
+			"parent": "north_izril",
+			"tags": [
+				"keep",
+				"farm",
+				"vampire",
+				"north_izril"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.00",
+				"confidence": "confirmed",
+				"note": "The ruined keep and sheep farm of House Lischelle-Drakle in the northern hills where Fierre's Vampire family lives (6.00, 6.01)."
+			},
+			"summary": "A half-ruined stone keep and sheep farm in the hills outside Reizmelt, home to Fierre and the surviving Vampires of House Lischelle-Drakle."
+		},
+		"baepr": {
+			"name": "Baepr",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"village",
+				"human",
+				"north_izril",
+				"mentioned"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.01",
+				"confidence": "confirmed",
+				"note": "A village roughly sixteen miles from Reizmelt mentioned as one of Ryoka's delivery stops (6.01)."
+			},
+			"summary": "A small northern village sixteen miles from Reizmelt on Ryoka's delivery circuit."
+		},
+		"lellisdam": {
+			"name": "Lellisdam",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"town",
+				"human",
+				"north_izril",
+				"mentioned"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.01",
+				"confidence": "confirmed",
+				"note": "A northern settlement with an alchemist's guild that corresponds with Kelysta in Reizmelt (6.01)."
+			},
+			"summary": "A northern Izril town whose alchemists trade letters and orders with Kelysta's shop in Reizmelt."
+		},
+		"ambault": {
+			"name": "Ambault",
+			"kind": "settlement",
+			"parent": "north_izril",
+			"tags": [
+				"town",
+				"human",
+				"north_izril",
+				"mentioned"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.01",
+				"confidence": "confirmed",
+				"note": "A nearby northern city or town mentioned by Fierre (6.01) and by Celum's alchemists as a match supplier (6.02)."
+			},
+			"summary": "A northern Izril town within trading reach of Reizmelt and Celum, known for its alchemists and match makers."
+		},
+		"orefell": {
+			"name": "Orefell",
+			"kind": "settlement",
+			"parent": null,
+			"tags": [
+				"town",
+				"mining",
+				"mentioned"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.03",
+				"confidence": "confirmed",
+				"note": "A mining town mentioned by Zevara when inspecting Numbtongue's gold-bearing ore (6.03)."
+			},
+			"summary": "An Izril mining town whose rich gold veins Zevara compares to the ore Numbtongue brings back from the Floodplains hills."
+		},
+		"goblin_graves_hill": {
+			"name": "Hill of the Redfang Graves",
+			"kind": "landmark",
+			"parent": "floodplains_of_liscor",
+			"tags": [
+				"grave",
+				"goblin",
+				"hill"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.03",
+				"confidence": "confirmed",
+				"note": "The hill near the Wandering Inn where Numbtongue buries Headscratcher, Shorthilt, Bristler, Badarrow, and Pyrite under five stone cairns (6.03, 6.08)."
+			},
+			"summary": "A quiet hill overlooking the Floodplains where Numbtongue builds five stone cairns for Pyrite and his fallen Redfang brothers."
+		},
+		"numbtongue_mana_cave": {
+			"name": "Numbtongue's Mana Stone Cave",
+			"kind": "wild",
+			"parent": "high_passes",
+			"tags": [
+				"cave",
+				"mining",
+				"mana_stones"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.07D",
+				"confidence": "confirmed",
+				"note": "A hidden cave in the foothills of the High Passes where Numbtongue mines red, blue, green, white, and black mana stones with Pyrite's memory (6.07D)."
+			},
+			"summary": "A secret cavern in the High Passes foothills lined with multi-colored mana stones, discovered by Numbtongue with Pyrite's mining instincts."
+		},
+		"drake_village_hut": {
+			"name": "Lawes's Village Hut",
+			"kind": "building",
+			"parent": "pallass",
+			"tags": [
+				"hut",
+				"door_link",
+				"salazsar",
+				"pallass"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "A rented hut in a small farming village three miles from Pallass where Salazsar's spy Lawes hides Ilvriss's black mana stone door (6.11)."
+			},
+			"summary": "An ordinary hut in a farming village three miles outside Pallass, used by the Salazsar spy Lawes to house Ilvriss's secret teleportation door."
+		},
+		"rissa_scribe_shop": {
+			"name": "Rissa Inkscale's Scribe Shop",
+			"kind": "building",
+			"parent": "liscor",
+			"tags": [
+				"shop",
+				"scribe",
+				"liscor"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.11",
+				"confidence": "confirmed",
+				"note": "Rissa Inkscale's cramped, ink-stained shop in Liscor where Ilvriss and Osthia commission portraits of Az'kerash's Chosen (6.11)."
+			},
+			"summary": "A cluttered Liscor workshop smelling of ink and parchment, where Rissa Inkscale draws lifelike portraits for paying clients."
+		},
+		"tails_and_scales": {
+			"name": "Tails and Scales",
+			"kind": "building",
+			"parent": "pallass",
+			"tags": [
+				"tavern",
+				"bar",
+				"pallass",
+				"walled_city"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.09",
+				"confidence": "confirmed",
+				"note": "A popular tavern on Pallass's second floor run by the Gnoll [Bartender] Rufelt and his Drake [Chef] wife Lasica (6.09, 6.10)."
+			},
+			"summary": "A warm, bustling second-floor tavern in Pallass run by the married Gnoll-and-Drake pair Rufelt and Lasica, welcoming Drakes and Gnolls alike."
+		},
+		"talenqual": {
+			"name": "Talenqual",
+			"kind": "settlement",
+			"parent": "baleros",
+			"tags": [
+				"city",
+				"baleros",
+				"united_nations",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.04D",
+				"confidence": "confirmed",
+				"note": "A major featherfolk-ruled city on Baleros with a Dullahan quarter, where Geneva, Daly, Luan, and Kenjiro establish the United Nations company (6.04D - 6.06D)."
+			},
+			"summary": "A major Balerosian city with a busy Dullahan district, where Daly's Bushrangers and Geneva's clinic join forces to found the United Nations company."
+		},
+		"cinfal": {
+			"name": "Cinfal",
+			"kind": "settlement",
+			"parent": "baleros",
+			"tags": [
+				"city",
+				"baleros",
+				"mentioned",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.05D",
+				"confidence": "confirmed",
+				"note": "A distant Balerosian port or town where three French Earthers live under the Iron Vanguard's protection (6.05D)."
+			},
+			"summary": "A Balerosian city in Iron Vanguard territory where several Earthers live under the great company's protection."
+		},
+		"ger": {
+			"name": "Ger",
+			"kind": "settlement",
+			"parent": "germina",
+			"tags": [
+				"city",
+				"capital",
+				"germina",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "Capital city of Germina and site of the ancient stone circle where the Quarass is reborn in a child (6.12K)."
+			},
+			"summary": "The ancient capital of Germina, built around the sacred stone circle where the nation's rulers gather to witness the Quarass's rebirth."
+		},
+		"blalevault": {
+			"name": "Blalevault",
+			"kind": "settlement",
+			"parent": "hellios",
+			"tags": [
+				"city",
+				"capital",
+				"hellios",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.12K",
+				"confidence": "confirmed",
+				"note": "Capital of Hellios, taken by Flos Reimarch when Queen Calliope abdicates to spare her son Siyal (6.12K)."
+			},
+			"summary": "The royal capital of Hellios, where Flos Reimarch breaks the kingdom's last defense and receives Queen Calliope's abdication."
+		},
+		"jecrass": {
+			"name": "Jecrass",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": [
+				"nation",
+				"kingdom",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "Mentioned in 6.14K; seen in 6.15K as King Raelt's kingdom bordering Reim and Belchan, divided between crown and River Wardens."
+			},
+			"summary": "A Chandrarian kingdom south of Reim ruled by King Raelt, whose fertile riverlands are contested by greedy River Warden nobles."
+		},
+		"belchan": {
+			"name": "Belchan",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": [
+				"nation",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "A southern Chandrarian nation bordering Jecrass that raids Jecrass's villages while Reim marches north (6.14K, 6.15K)."
+			},
+			"summary": "A Chandrarian nation neighboring Jecrass whose border forces opportunistically raid Jecrass's riverlands during Flos's wars."
+		},
+		"pomle": {
+			"name": "Pomle",
+			"kind": "settlement",
+			"parent": "chandrar",
+			"tags": [
+				"oasis",
+				"nation",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "Mentioned in 6.14K; seen in 6.15K as a neutral oasis sanctuary of martial artists in the Zeikhal Desert led by Orjin the Strongest."
+			},
+			"summary": "A neutral oasis nation in the Zeikhal Desert home to thousands of martial artists under Orjin the Strongest, where nine rulers meet in summit."
+		},
+		"tiqr": {
+			"name": "Tiqr",
+			"kind": "region",
+			"parent": "chandrar",
+			"tags": [
+				"nation",
+				"chandrar",
+				"off_map"
+			],
+			"status": "candidate",
+			"canon_ref": {
+				"book": 10,
+				"chapter": "6.14K",
+				"confidence": "confirmed",
+				"note": "Mentioned in 6.14K; represented at Pomle in 6.15K by its ruler Empress Nsiia, the [Empress of Beasts], before nine nations declare war on it."
+			},
+			"summary": "A lush Chandrarian realm ruled by Empress Nsiia, the [Empress of Beasts], famed for its tamed wildlife and targeted by a nine-nation coalition at Pomle."
+		}
+	}
+}

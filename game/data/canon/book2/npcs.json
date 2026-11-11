@@ -92,7 +92,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "likely", "note": "First seen unnamed, caught stealing (2.20), exiled into the snow (2.23), named once Erin takes her in (2.25). Her own narration hints she is a Calanfer princess travelling under a false House name; treat that as a guess."},
+			"canon_ref": {"book": 2, "chapter": "2.20", "confidence": "likely", "note": "First seen unnamed, caught stealing (2.20), exiled into the snow (2.23), named once Erin takes her in (2.25). Her narration hints she is a Calanfer princess under a false House name. Book 10: runs the inn and rebuilds it after the siege; reaches [Worldly Princess] Level 17 (6.08)."},
 			"summary": "A young noblewoman posing as a minor House's daughter, caught stealing food and gear in Liscor with a desperate fireball. Exiled into the winter without gear, she is found freezing by Erin, who takes her in as inn help over her protests."
 		},
 		"brunkr": {
@@ -248,7 +248,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "likely", "note": "Goes by 'Teres'. Twin sister of Trey; same note on Earther origin."},
+			"canon_ref": {"book": 2, "chapter": "2.22K", "confidence": "likely", "note": "Goes by 'Teres'. Twin sister of Trey; same note on Earther origin. Book 10: full name Teresa Atwood (6.12K), called Teres throughout 6.12K-6.14K as she trains with Orthenon and learns of the Quarass's rebirth."},
 			"summary": "An Earth-born English teenager, called Teres, twin sister of Trey and fellow attendant to Flos Reimarch. Another Earther in this world besides Ryoka and Erin."
 		},
 		"drevish": {
@@ -387,7 +387,7 @@
 				"book": 2,
 				"chapter": "2.29",
 				"confidence": "confirmed",
-				"note": "'Wall Lord' is his title; no bracketed class is confirmed on the page for him, so none is recorded. Captures and interrogates Ryoka, then loses a duel to Zel and is kept as his honor-bound prisoner."
+				"note": "'Wall Lord' is his title; no bracketed class is confirmed on the page for him. Captures and interrogates Ryoka, then loses a duel to Zel and is kept as his honor-bound prisoner. Book 10: forms a secret anti-Az'kerash task force in Liscor with Osthia and exposes Regrika Blackpaw (6.11)."
 			},
 			"summary": "Arrogant, paranoid Drake Wall Lord at war with Zel Shivertail. Captures and interrogates Ryoka, is incapacitated by her stink-potion escape, then loses a formal duel to Zel and becomes his prisoner - fighting alongside him anyway when the Goblin Lord's army attacks."
 		},
@@ -607,7 +607,7 @@
 			"classes": [],
 			"alive_at_start": true,
 			"status": "candidate",
-			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "confirmed", "note": "Made from nothing by his own design, unlike Kerash or Bea. Too heavy to swim without enchantments."},
+			"canon_ref": {"book": 2, "chapter": "2.48", "confidence": "confirmed", "note": "Made from nothing by Az'kerash's design, unlike Kerash or Bea. Too heavy to swim without enchantments. Book 10: exposed by Osthia and Ilvriss as the fake Gnoll Named Adventurer Regrika Blackpaw (6.11), who murdered Brunkr and Ulrien and carried out hits across the Walled Cities."},
 			"summary": "Proud undead servant of Az'kerash, one of his elite Chosen, who failed to stop the Runner Ryoka in his castle. He sends her to track Ryoka down and decide whether to kill her."
 		},
 		"serpentine_matriarch_of_zeres": {
