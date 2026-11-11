@@ -310,6 +310,60 @@ static func wait(gs: GameState, db: DataDb, seconds: int) -> int:
 	return minutes
 
 
+## Audit D2 (ADR 0051): passes `minutes` of game time standing still, in chunks of Rest.CHUNK, through
+## the same path as wait. No XP, no action record, no heal. Stops early when the player is needed:
+## a fight or a hostile near ("danger"), HP lost ("hurt"), a collapse due ("tired"), a new map
+## ("moved"), or new lines (a meal, a trap, a quest: "event"). Refused in a fight, in danger or
+## when knocked out: {"error"} and the line in gs.combat.lines.
+## Returns {"minutes": rested, "stop": "" | the reason, "error": ""}; gs.combat.lines holds
+## "You rest for 40 min." and then the reason (or the world's lines).
+static func rest(gs: GameState, db: DataDb, minutes: int) -> Dictionary:
+	Combat.begin_command(gs)
+	var out := {"minutes": 0, "stop": "", "error": ""}
+	var why := Combat.refusal(gs)
+	if why == "" and Encounter.active(gs):
+		why = Combat.REFUSED_DANGER
+	if why != "" or minutes < 1:
+		out["error"] = why if why != "" else "Rest for at least a minute."
+		gs.combat.lines.append(String(out["error"]))
+		return out
+	var rules: Dictionary = db.rules["clock"]
+	var start := gs.clock.total_minutes
+	var area := gs.player.area
+	var hp := gs.player.hp
+	var world: Array[String] = []
+	while gs.clock.total_minutes - start < minutes:
+		var chunk := mini(Rest.CHUNK, minutes - (gs.clock.total_minutes - start))
+		chunk = clampi(int(rules["collapse_after_awake"]) - gs.clock.awake_minutes, 1, chunk)  # end at the collapse
+		if wait(gs, db, chunk * 60) < 0:
+			out["stop"] = "down" if Combat.is_down(gs) else "tired"
+			break
+		world.append_array(gs.combat.lines)
+		if gs.player.hp < hp:
+			out["stop"] = "hurt"
+		elif Combat.in_danger(gs) or Encounter.active(gs):
+			out["stop"] = "danger"
+		elif gs.clock.is_collapse_due(rules):
+			out["stop"] = "tired"
+		elif gs.player.area != area:
+			out["stop"] = "moved"
+		elif not gs.combat.lines.is_empty():
+			out["stop"] = "event"
+		if out["stop"] != "":
+			break
+	out["minutes"] = gs.clock.total_minutes - start
+	var lines: Array[String] = []
+	if int(out["minutes"]) > 0:
+		lines.append("You rest for %s." % Rest.duration_text(int(out["minutes"])))
+	match String(out["stop"]):
+		"hurt": lines.append("You are hurt.")
+		"danger": lines.append("Something comes near.")
+		"tired": lines.append("You are too tired to rest on.")
+	lines.append_array(world)
+	gs.combat.lines = lines
+	return out
+
+
 ## Combat mode (M17.1): ends the player's turn; the others act and the next
 ## round starts. Returns "" or why not.
 static func end_turn(gs: GameState, db: DataDb) -> String:

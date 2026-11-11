@@ -50,7 +50,7 @@ const STICK_ACTIONS := {
 ## context button comes last (M34.2).
 const COLUMN := [["More", &""], ["Bag", &"bag"]]
 const MORE := [
-	["Eat", &"eat"], ["Sleep", &"sleep"], ["Character", &"sheet"],
+	["Eat", &"eat"], ["Sleep", &"sleep"], ["Rest", &"rest"], ["Character", &"sheet"],
 	["Journal", &"journal"], ["Log", &"log"], ["Help", &"help"],
 	["Block", &"block"], ["Throw", &"throw"], ["Drop", &"drop"],
 ]

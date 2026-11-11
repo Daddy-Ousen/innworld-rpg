@@ -41,6 +41,9 @@ var switch_scene := true
 ## A long road (TravelPrompt.LONG_MINUTES) asks first and plays a short walk
 ## (user, 2026-10-08). Off headless-only: sims that drive this scene step at once.
 var confirm_travel := DisplayServer.get_name() != "headless"
+## A sleep the player starts asks first (audit D1, ADR 0051). Off headless-only: sims and old
+## tests call `sleep()` and sleep at once.
+var confirm_sleep := DisplayServer.get_name() != "headless"
 ## M17.3: replay the others' turns after a command (off headless; tests may
 ## turn it on).
 var replay_turns := DisplayServer.get_name() != "headless"
@@ -250,7 +253,7 @@ func step(dir: String) -> void:
 			"exit_to": "", "npc": ""} if dir == WAIT else Commands.move(gs, db, dir)
 	if r["refused"] and gs.clock.is_collapse_due(db.rules["clock"]):
 		hud.add_lines(["You are too tired to take another step."])
-		sleep()
+		sleep_now()
 		return
 	if r["npc"] != "" and r["npc"] != _bumped:
 		hud.add_lines(["%s is in the way." % db.canon.npcs[r["npc"]]["name"]])
@@ -333,7 +336,7 @@ func _command_error(err: String) -> void:
 	if err != "":
 		hud.add_lines([err])
 		if Session.gs.clock.is_collapse_due(Session.db.rules["clock"]):
-			sleep()
+			sleep_now()
 			return
 	_finish()
 
@@ -415,7 +418,7 @@ func use(object_id: String, action_id: String) -> void:
 	if r["error"] != "":
 		hud.add_lines([r["error"]])
 		if Session.gs.clock.is_collapse_due(Session.db.rules["clock"]):
-			sleep()
+			sleep_now()
 			return
 	else:
 		hud.add_lines(["%s." % Session.db.actions[action_id]["name"]])
@@ -440,10 +443,25 @@ func attack_npc(npc: String, confirmed: bool = false) -> void:
 	_finish()
 
 
-## Ends the day (a collapse if the player is past the awake limit, a
-## knock-out if they are down) and shows the night in the System dialog.
+## A sleep the player starts (Z, the touch Sleep button, a bed's card): asks first with the wake
+## time and the hours (Rest.sleep_plan). A collapse, a knock-out and a refused sleep do not ask.
 ## `bed`: the bed picked in the use menu ("" = where you stand, Z).
 func sleep(bed: String = "") -> void:
+	skip_replay()
+	if confirm_sleep:
+		var plan := Rest.sleep_plan(Session.gs, Session.db, bed)
+		if plan["mode"] == Rest.ASK:
+			aim.cancel_walk()
+			menu.open_ask(String(plan["title"]), String(plan["sub"]),
+					[{"text": "Sleep", "action": "sleep"}] as Array[Dictionary], "Stay awake",
+					func(_answer: String) -> void: sleep_now(bed))
+			return
+	sleep_now(bed)
+
+
+## Ends the day at once (a collapse if the player is past the awake limit, a knock-out if they
+## are down) and shows the night in the System dialog.
+func sleep_now(bed: String = "") -> void:
 	skip_replay()
 	aim.cancel_walk()
 	var night := Commands.sleep(Session.gs, Session.db, bed)
@@ -453,6 +471,36 @@ func sleep(bed: String = "") -> void:
 		return
 	Audio.play_cues([SoundCues.action_cue(Audio.db, Interact.SLEEP)])
 	panels.show_night(night)
+
+
+## R: the Rest panel (audit D2, ADR 0051): Rest 1 hour, 3 hours, until the next meal, Cancel.
+## Refused in a fight or with enemies near (the same line as other refused commands).
+func open_rest() -> void:
+	skip_replay()
+	var gs := Session.gs
+	var why := Combat.refusal(gs)
+	if why == "" and Encounter.active(gs):
+		why = Combat.REFUSED_DANGER
+	if why != "":
+		hud.add_lines([why])
+		return
+	aim.cancel_walk()
+	var rows: Array[Dictionary] = []
+	for o: Dictionary in Rest.options(gs, Session.db):
+		rows.append({"text": o["text"], "action": str(o["minutes"])})
+	menu.open_ask("Rest", "Now %s. Pass time." % gs.clock.time_string(), rows, "Cancel",
+			func(answer: String) -> void: rest(int(answer)))
+
+
+## Passes `minutes` of game time (Commands.rest). The log gets the time rested and why it stopped.
+## A collapse that is due runs the "too tired" night.
+func rest(minutes: int) -> void:
+	skip_replay()
+	aim.cancel_walk()
+	var r := Commands.rest(Session.gs, Session.db, minutes)
+	_finish()
+	if r["stop"] == "tired" and not Combat.is_down(Session.gs) and not dialog.visible:
+		sleep_now()
 
 
 ## Ends the player's turn (the End turn button; Space does it through step).

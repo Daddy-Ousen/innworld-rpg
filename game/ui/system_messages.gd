@@ -62,14 +62,15 @@ const KEYS: Array[String] = [
 	"E: use or take what is next to you",
 	"F: eat",
 	"I: bag",
-	"Z: sleep",
+	"Z: sleep (it asks first: you wake at 06:00)",
+	"R: rest (pass an hour or wait for a meal)",
 	"C: character",
 	"J: journal",
 	"L: message history",
 	"H: this help",
 	"Esc: menu (save, load, quit)",
 	"`: debug console",
-	"Touch screen: hold a finger anywhere on the left half and drag to walk (Wait is bottom left); Use, Bag, More and Menu are on the right; Back closes a panel",
+	"Touch screen: hold a finger anywhere on the left half and drag to walk (Wait is bottom left); Use, Bag, More (Sleep, Rest, Eat ...) and Menu are on the right; Back closes a panel",
 	"Touch, in a fight: tap a tile to see the plan, tap it again to act; Cancel stops a walk or a Skill",
 	"Options: Touch controls Auto (on a touch screen), On or Off",
 ]
@@ -79,7 +80,7 @@ const HINTS: Array[String] = [
 	"Walk with WASD or the arrow keys. E uses what is next to you.",
 	"What you do all day shapes you. At night the System can offer you a class.",
 	"J opens the journal. Choose a focus there: work that matches it brings that class closer.",
-	"Sleep in a bed (Z). C shows your character. Esc opens the menu (save, load).",
+	"Sleep in a bed (Z). R rests to pass time. C shows your character. Esc opens the menu (save, load).",
 	"The game saves itself each morning.",
 ]
 

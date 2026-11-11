@@ -705,3 +705,26 @@ Book 10 covers the spring weeks after the battle of Liscor. Five threads: Ryoka 
   `ylawes_byres`.
 - Erin's [Warrior] (6.09): her record has no [Warrior]. M37.5 adds a `system` line in the 6.09 batch; no class change now.
 - No schema change, no save change, no engine change.
+
+## ADR 0051 — Sleep asks first; Rest passes time
+2026-11-11 · Accepted (audit D1, D2)
+
+- Every sleep the player starts asks first: Z, the touch "Sleep" button and the "sleep" action on a bed's card. The card says
+  "Sleep until 06:00?" and the hours ("22 h", and "Room: <price>" for a paid room). Buttons: "Sleep" (has the focus) and
+  "Stay awake". Esc, Back and the `back` action mean "Stay awake" and change nothing.
+- No question for a forced collapse or a knock-out. A refused sleep (enemies near, outdoors, cannot pay) shows its line and asks
+  nothing. `Rest.sleep_plan` reads the place and the danger without changing state; it returns ask, now or refused.
+- New input action `rest` (R) and "Rest" in the touch More grid open a small panel in the card look: "Rest 1 hour",
+  "Rest 3 hours", "Rest until HH:MM (<meal>)" (the next `rules.inn.meals` start, today or tomorrow), "Cancel". A db with no
+  `rules.inn` has no meal row. Both the sleep question and the panel are `InteractMenu.open_ask`, so the finger sizes (48 dp)
+  and the Back rules are the card's.
+- `Commands.rest(gs, db, minutes)` is a core command (headless, deterministic). It waits in chunks of 10 minutes through
+  `Commands.wait`, so the world runs as before. It stops early on: danger (a fight or a hostile near), HP lost, a collapse due
+  (the chunk ends on the collapse minute), a map change, or new world lines (a meal, a trap, a quest). The log says how long
+  the player rested and why it stopped. Refused in a fight, in danger or when knocked out. A collapse that is due runs the
+  existing "too tired" night.
+- Rest is pure time: no XP, no action record, no heal, no hunger change beyond what time does. Monsters get no turns during
+  a long gap (the existing `jump_seconds` rule), so an idle monster near the player does not wake while they rest.
+- Left out on purpose: healing while resting, XP, a rules key (the chunk size, the hour options and the panel rows are
+  constants in `core/rest.gd`), a `rest` debug command (`wait <minutes>` stays), a Rest option "until evening".
+- Headless: `MainScreen.confirm_sleep` is false (like `confirm_travel`), so sims and old tests that call `sleep()` sleep at once.

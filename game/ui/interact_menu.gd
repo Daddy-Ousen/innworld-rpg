@@ -28,6 +28,8 @@ const SHOP := "menu:shop"
 const TARGETS := "targets"
 const ACTIONS := "actions"
 const CONFIRM := "confirm"
+## A small question page (open_ask): the sleep question and the Rest panel (ADR 0051).
+const ASK := "ask"
 ## Button height (UI pixels). M34.4: on a phone row_h() makes it at least 48 dp.
 const ROW_H := 32.0
 const GAP := 8
@@ -58,6 +60,8 @@ var _db: DataDb
 ## The option on the card ({} on the target page).
 var _target := {}
 var _bag := false
+## open_ask: what to call with the picked row's "action" (the card is closed first).
+var _on_ask: Callable
 var _rows: Array[Dictionary] = []
 var _buttons: Array[CardButton] = []
 
@@ -233,6 +237,26 @@ func open_bag(gs: GameState, db: DataDb) -> bool:
 	_close.text = "Close"
 	_open()
 	return true
+
+
+## A small question on the card (ADR 0051): `title`, `sub`, one big button per row ({"text",
+## "action"}), and a last Close button called `close_text` that answers "no" (Esc and Back too).
+## A pick closes the card, then calls `done` with the row's "action".
+func open_ask(title: String, sub: String, rows: Array[Dictionary], close_text: String, done: Callable) -> void:
+	_bag = false
+	_options.clear()
+	_on_ask = done
+	page = ASK
+	_target = {"id": "ask", "name": title}
+	_head(title, sub, "")
+	var list: Array[Dictionary] = []
+	for r: Dictionary in rows:
+		list.append({"text": String(r["text"]), "object": "ask", "action": String(r["action"]), "group": "ask"})
+	_fill(list, func(i: int) -> void:
+		close()
+		_on_ask.call(String(list[i]["action"])))
+	_close.text = close_text
+	_open()
 
 
 ## The buttons of the page now, in order: {"text", "object", "action", "group"}.
@@ -492,7 +516,7 @@ func _fill(rows: Array[Dictionary], on_pick: Callable) -> void:
 	_rows = rows
 	_buttons.clear()
 	var grid := GridContainer.new()
-	grid.columns = 1 if rows.any(func(r: Dictionary) -> bool: return String(r["text"]).length() > LONG) else 2
+	grid.columns = 1 if page == ASK or rows.any(func(r: Dictionary) -> bool: return String(r["text"]).length() > LONG) else 2
 	grid.add_theme_constant_override("h_separation", GAP)
 	grid.add_theme_constant_override("v_separation", GAP)
 	_list.add_child(grid)

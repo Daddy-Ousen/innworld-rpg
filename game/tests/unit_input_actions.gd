@@ -6,7 +6,7 @@ extends GutTest
 const KEYS := {
 	&"move_n": [KEY_W, KEY_UP], &"move_s": [KEY_S, KEY_DOWN], &"move_e": [KEY_D, KEY_RIGHT],
 	&"move_w": [KEY_A, KEY_LEFT], &"wait": [KEY_SPACE], &"use": [KEY_E], &"eat": [KEY_F],
-	&"bag": [KEY_I], &"sleep": [KEY_Z], &"sheet": [KEY_C], &"journal": [KEY_J], &"log": [KEY_L],
+	&"bag": [KEY_I], &"sleep": [KEY_Z], &"rest": [KEY_R], &"sheet": [KEY_C], &"journal": [KEY_J], &"log": [KEY_L],
 	&"help": [KEY_H], &"back": [KEY_ESCAPE], &"block": [KEY_B], &"throw": [KEY_T],
 	&"drop": [KEY_X, KEY_DELETE], &"stow": [KEY_P], &"page_up": [KEY_PAGEUP],
 	&"page_down": [KEY_PAGEDOWN], &"console": [KEY_QUOTELEFT], &"skill_1": [KEY_1],

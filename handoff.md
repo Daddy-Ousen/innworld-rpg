@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-11-11, local): sleep asks first, Rest passes time (branch `feat/sleep-ask-rest`, PR open, not merged)
+- Audit D1: Z, the touch "Sleep" button and a bed's "sleep" action ask first ("Sleep until 06:00?", hours, room price;
+  "Sleep" / "Stay awake"). A collapse, a knock-out and a refused sleep do not ask.
+- Audit D2: key R and "Rest" in the More grid open a panel: Rest 1 hour, 3 hours, until the next meal, Cancel.
+  `Commands.rest` (core) waits in 10-minute chunks and stops on danger, HP loss, a due collapse, a map change or new lines.
+- Files: `game/core/rest.gd` (`sleep_plan`, `options`, `next_meal`, `duration_text`), `game/core/commands.gd` (`rest`),
+  `game/ui/interact_menu.gd` (`open_ask`), `game/world/main.gd` (`sleep`, `sleep_now`, `open_rest`, `rest`, `confirm_sleep`),
+  `game/world/main_input.gd`, `game/project.godot` (`rest` = R), `game/ui/touch_controls.gd` (`MORE`), `game/ui/system_messages.gd`.
+  Tests: `game/tests/unit_rest_time.gd`, `game/tests/unit_sleep_prompt.gd` (the old `unit_rest.gd` tests `Rest.place`).
+  ADR 0051 in `docs/DECISIONS.md`.
+- Next: the user merges the PR and plays Z / R (open check in `docs/ROADMAP.md`). Then the next audit item
+  (`docs/AUDIT_2026-11-11.md`, not committed): Android Back and save-on-pause, mouse on Windows, Skill texts, first task.
+- Gotchas: code that sleeps at once (collapse flows) must call `sleep_now()`, not `sleep()`. `sleep()` asks unless
+  `confirm_sleep` is false (headless default). Monsters get no turns in a long gap, so a rest does not wake idle monsters;
+  danger stops come from stages, brawls and the like. A core test run loads the data in about 30 s; the whole
+  `unit_rest_time` takes several minutes. The `.import` files, `.playwright-mcp/`, `web/` and the audit report stay uncommitted.
+
 ## Just done (2026-11-11, local): audit quick bugs B1 - B3 (branch `fix/audit-quick-bugs`, PR open, not merged)
 - B1 `game/ui/session.gd`: `ui_factor()` passes `UiScale.is_mobile_os()`. B2 `game/ui/system_messages.gd`: title `Class Offered`.
   B3 `game/world/main.gd`: day line in `_ready()` only when `Session.fresh` is false.
