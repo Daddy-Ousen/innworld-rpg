@@ -766,3 +766,18 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
   - Picture check (windowed, `--audio-driver Dummy`): sleep question and Rest panel at 1280 x 720 and on a phone (2400 x 1080,
     405 dpi, touch on, 250 %), and the 4-row More grid. Nothing runs off the screen or overlaps.
   - [ ] The user plays: Z in the inn at midday (question), "Stay awake", R and rest until dinner; the same on the phone.
+- [x] Android Back is Esc, and save when the app is paused (2026-11-12, branch `feat/android-back-save`, ADR 0052, audit B5):
+  `application/config/quit_on_go_back=false` (`game/project.godot`). `Session` (autoload) handles
+  `NOTIFICATION_WM_GO_BACK_REQUEST` (`go_back()`: sends the `back` action, press and release) and
+  `NOTIFICATION_APPLICATION_PAUSED` (`save_on_pause()`: autosave, only while the game screen is up; a failed save logs a warning).
+  `Session.game_screen` / `title_screen` are set by `MainScreen` / `TitleMenu` (`screen_up`). `TitleMenu.at_root()` and Back
+  on "Who are you?" and the start list; on the root title menu Back calls `Session.quit_app()` (`quit_handler` is the test hook).
+  Fix: `TravelPrompt` now answers the `back` action too (it listened to `ui_cancel` only). No core, save or schema change.
+  Web build: no background save (focus-out is not clean; see ADR 0052).
+  - Tests: `unit_android_back` (new, 23, all pass); `unit_input_actions` 6, `unit_touch_controls` 18, `unit_play_loop` 18,
+    `unit_action_card` 11, `unit_shop_panel` 14, `unit_bag` 17, `unit_journal` 7, `unit_travel_prompt` 6,
+    `unit_sleep_prompt` 15, `unit_audio_settings` 8, `unit_save_slots` 6, `unit_ui_theme` 11 pass. `unit_north_road` 9 of 10
+    (NPC post check for `magnolia_reinhart` / `ressa`; same failure on a clean `origin/main`, not fixed). Full suite not run.
+    Not tested on a phone.
+  - [ ] The user plays on the phone (needs a new release build): Back closes a card and opens the menu, Back on the title closes
+    the app; play to midday, switch to another app, close the game from the app list, open it again: Continue is at midday.

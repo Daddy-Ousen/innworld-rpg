@@ -33,6 +33,7 @@ One branch + PR per sub-step. Steps marked (user) need the owner to do or decide
 ## Audit follow-ups (2026-11-11)
 - [x] Quick bugs B1 - B3 ([PR #279](https://github.com/Daddy-Ousen/innworld-rpg/pull/279)): phone menu size, class offer title, first day line once
 - [x] Sleep asks first, and Rest passes time (audit D1, D2; ADR 0051)
+- [x] Android Back is Esc, and the game saves when the app is paused (audit B5; ADR 0052)
 
 ## M37 — Book 10 (The Wind Runner) (plan `docs/plans/m37.md`, ADR 0048)
 - [x] M37.P Plan: 17 chapters read, day anchor 176, short version for Baleros & Chandrar, 1 fight stage, 2 hooks, 1 new map, 0 kills **[Gemini 4 Argon (High)]**
@@ -54,6 +55,7 @@ One branch + PR per sub-step. Steps marked (user) need the owner to do or decide
 
 ## Play checks
 All build steps are merged. Run the game with `godot --path game`, or install the apk from the latest release.
+- [ ] Android Back and save on pause (ADR 0052; needs a new release build): on the phone, Back closes a card and opens the menu, Back on the title closes the app; play to midday, switch to another app, close the game from the app list, open it again: Continue is at midday
 - [ ] Sleep and Rest (ADR 0051): press Z in the inn at midday (the question shows the wake time), say "Stay awake", then press R and rest until dinner; the same on the phone (Sleep and Rest in the More grid)
 - [ ] M33: play a quest line (Erin, Pawn, or Pisces) and learn [Flash Step] from Pisces after his lesson
 - [ ] M35.3: sleep to Book 6 day 129 – 134 and find Magnolia and Ressa: the battlefield on day 130, the Invrisil gate by day on days 131 – 133, the estate hall after
