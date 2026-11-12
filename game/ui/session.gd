@@ -32,6 +32,12 @@ var touch_seen := false
 ## The size of menus, text and the HUD (M20.3); tests point the path at a test file.
 var ui_scale: UiScale
 var ui_scale_path := UiScale.PATH
+## The game screen and the title screen, set by each while it is in the tree (audit B5, ADR 0052).
+## The Android Back button and the app-paused save read them. Untyped: a typed link is a script cycle.
+var game_screen: Node
+var title_screen: Node
+## What "quit the app" does. Empty = `get_tree().quit()`; tests set a Callable instead.
+var quit_handler := Callable()
 
 
 func _ready() -> void:
@@ -120,6 +126,57 @@ func _input(event: InputEvent) -> void:
 		touch_seen = true
 		touch_changed.emit()
 		apply_ui_scale()  # Auto may now see a phone
+
+
+## Remembers the screen that is up (`game` or `title`) and forgets it when it leaves the tree.
+func screen_up(kind: String, node: Node) -> void:
+	if kind == "game":
+		game_screen = node
+	else:
+		title_screen = node
+	node.tree_exiting.connect(func() -> void:
+		if game_screen == node:
+			game_screen = null
+		if title_screen == node:
+			title_screen = null)
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:  # Android Back (quit_on_go_back is off)
+		go_back()
+	elif what == NOTIFICATION_APPLICATION_PAUSED:  # Android / iOS: the app goes to the background
+		save_on_pause()
+
+
+## The Android Back button (audit B5, ADR 0052): the same as Esc. The root title menu is the one
+## place it quits the app; every other screen gets the `back` action.
+func go_back() -> void:
+	if is_instance_valid(title_screen) and title_screen.at_root():
+		quit_app()
+		return
+	for pressed in [true, false]:  # parse_input_event for both sides (never action_release alone)
+		var ev := InputEventAction.new()
+		ev.action = &"back"
+		ev.pressed = pressed
+		Input.parse_input_event(ev)
+
+
+func quit_app() -> void:
+	if quit_handler.is_valid():
+		quit_handler.call()
+	else:
+		get_tree().quit()
+
+
+## The app went to the background: autosave, only while the game screen is up. A failed save is
+## logged and never stops the app. All state is in GameState; a walk's move is made only when it ends.
+func save_on_pause() -> Error:
+	if not is_instance_valid(game_screen) or gs == null:
+		return ERR_UNAVAILABLE
+	var err := autosave()
+	if err != OK:
+		push_warning("Save on pause failed: %s" % error_string(err))
+	return err
 
 
 func set_state(new_gs: GameState) -> void:

@@ -78,6 +78,7 @@ var tapper: MainTap
 
 
 func _ready() -> void:
+	Session.screen_up("game", self)
 	controls = MainInput.new(self)
 	aim = MainAim.new(self)
 	tapper = MainTap.new(self)

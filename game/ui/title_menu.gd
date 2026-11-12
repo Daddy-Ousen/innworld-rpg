@@ -33,6 +33,7 @@ var _start_id := ""
 
 
 func _ready() -> void:
+	Session.screen_up("title", self)
 	_new_game.pressed.connect(open_starts)
 	_continue.pressed.connect(continue_game)
 	_load.pressed.connect(open_load)
@@ -190,6 +191,24 @@ func _enter() -> void:
 	entered_game.emit()
 	if switch_scene:
 		get_tree().change_scene_to_file.call_deferred(GAME_SCENE)
+
+
+## True when the root menu shows and no sub-page is open. The Android Back button quits only here.
+func at_root() -> bool:
+	return not create_box.visible and not _starts.visible and not options.visible and not slots.visible
+
+
+## Esc and the Android Back button close a sub-page (Options and the load list close themselves).
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed(&"back") or options.visible or slots.visible:
+		return
+	if create_box.visible:
+		close_create()
+	elif _starts.visible:
+		close_starts()
+	else:
+		return
+	get_viewport().set_input_as_handled()
 
 
 func _focus_first() -> void:
