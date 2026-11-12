@@ -255,7 +255,7 @@ func _input(event: InputEvent) -> void:
 			skip()
 		get_viewport().set_input_as_handled()
 		return
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed(&"back"):  # Esc, or the Back button
 		_on_stay()
 		get_viewport().set_input_as_handled()
 

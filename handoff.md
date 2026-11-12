@@ -1,5 +1,21 @@
 # Handoff
 
+## Just done (2026-11-12, local): Android Back is Esc, save when paused (branch `feat/android-back-save`, PR open, not merged)
+- Audit B5. `game/project.godot` has `config/quit_on_go_back=false`. `Session` (autoload, `game/ui/session.gd`) handles
+  `NOTIFICATION_WM_GO_BACK_REQUEST` (`go_back()`: `back` action press + release via `Input.parse_input_event`) and
+  `NOTIFICATION_APPLICATION_PAUSED` (`save_on_pause()`: autosave while `Session.game_screen` is set; failure = warning only).
+  Root title menu + Back = `Session.quit_app()` (tests set `Session.quit_handler`). `TitleMenu.at_root()` and Back on
+  "Who are you?" / the start list (`game/ui/title_menu.gd`). `TravelPrompt` answers `back` now (`game/ui/travel_prompt.gd`).
+  `MainScreen._ready` and `TitleMenu._ready` call `Session.screen_up(...)`.
+- Tests: `game/tests/unit_android_back.gd` (23). ADR 0052 in `docs/DECISIONS.md`. Not tested on a phone.
+- Next: the user merges the PR, builds a release, and does the phone check (`docs/ROADMAP.md`, "Waits on the user"). Then the next audit
+  item (`docs/AUDIT_2026-11-11.md`, not committed): mouse on Windows, Skill texts, first task, safe area, touch button sizes.
+- Gotchas: the OS sends the go-back and paused notifications to nodes under the root window, so test with
+  `get_tree().root.propagate_notification(...)` then `Input.flush_buffered_events()`. Back is not a key event on Android.
+  A GUT test counts an engine error log (for example a failed `make_dir_recursive`) as a failure: use `assert_engine_error`.
+  `unit_north_road` fails 1 of 10 on `origin/main` too (not mine). The `.import` files, `.playwright-mcp/`, `web/` and the audit
+  report stay uncommitted. A copy of `game/.godot` into a git worktree gives paths too long to delete with git: use `rmdir /s /q "\?\..."`.
+
 ## Just done (2026-11-11, local): sleep asks first, Rest passes time (branch `feat/sleep-ask-rest`, PR open, not merged)
 - Audit D1: Z, the touch "Sleep" button and a bed's "sleep" action ask first ("Sleep until 06:00?", hours, room price;
   "Sleep" / "Stay awake"). A collapse, a knock-out and a refused sleep do not ask.

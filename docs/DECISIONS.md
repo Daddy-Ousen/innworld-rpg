@@ -728,3 +728,38 @@ Book 10 covers the spring weeks after the battle of Liscor. Five threads: Ryoka 
 - Left out on purpose: healing while resting, XP, a rules key (the chunk size, the hour options and the panel rows are
   constants in `core/rest.gd`), a `rest` debug command (`wait <minutes>` stays), a Rest option "until evening".
 - Headless: `MainScreen.confirm_sleep` is false (like `confirm_travel`), so sims and old tests that call `sleep()` sleep at once.
+
+## ADR 0052 — Android Back is Esc; save when the app is paused
+2026-11-12 · Accepted (audit B5)
+
+- What Godot 4.7 does (docs: classes `Node`, `SceneTree`, `ProjectSettings`; engine source `scene/main/window.cpp`,
+  `scene/main/scene_tree.cpp`, `platform/android/java_godot_lib_jni.cpp`): the Android Back button reaches the engine as a
+  window event, `DisplayServer.WINDOW_EVENT_GO_BACK_REQUEST`. The root `Window` sends `NOTIFICATION_WM_GO_BACK_REQUEST`
+  (Android only) to its child nodes and emits `go_back_requested`. It is not a key event: nothing in the Android input handler
+  turns Back into a key press. `SceneTree` quits on it only while `application/config/quit_on_go_back` is true (the default).
+  `NOTIFICATION_APPLICATION_PAUSED` (Android and iOS only) goes through `SceneTree` to every node under the root. The docs name
+  no go-back or pause notification for the `SceneTree` / `MainLoop` class itself; the autoload `Session` is a child of the root,
+  so it gets both.
+- `application/config/quit_on_go_back=false` in `game/project.godot`. One handler, `Session._notification` (autoload):
+  Back calls `Session.go_back()`, which sends the `back` input action (press and release, `Input.parse_input_event`). Every panel
+  already closes on `back`, so there is no second code path.
+- Game screen: Back does what Esc does. It closes the open panel, card, shop, question, Rest panel, Options or save list, one at a
+  time; lets an armed Skill go; with nothing open it opens the pause menu; on the pause menu it closes it. It never quits the
+  app from the game screen. The System dialog has no Esc handling, so Back does not throw away a class offer.
+- Title screen: Back closes a sub-page. `TitleMenu` now also closes "Who are you?" and the start list on `back` (before, only
+  Options and the load list did). On the root menu with nothing open, Back quits the app: `Session.quit_app()`. Tests replace
+  `Session.quit_handler` (a `Callable`) so they never quit.
+- Fixed on the way: the long-road question (`TravelPrompt`) listened to `ui_cancel` only, so the `back` action (the touch Back
+  button, the Android Back button) did not say "Stay". It now answers `back` too.
+- Save in the background: `NOTIFICATION_APPLICATION_PAUSED` runs `Session.save_on_pause()`: `autosave()`, only while the game screen
+  is in the tree (`Session.game_screen`, set by `MainScreen`, cleared when it leaves). The title screen, a missing game and a
+  game screen that is leaving save nothing. A failed save logs a warning and returns; nothing crashes. Safe moments, checked by
+  reading the code: all state is in `GameState`. A tap-walk and a fight replay run commands step by step, so each step is whole.
+  The long-road walk makes its move only when the walk ends, so a save during it holds the start of the road. The night's System
+  dialog opens after the night ran, so a save during it holds the morning; open class offers are in `progression.offers` and
+  stay saved.
+- Left out on purpose: no save on every desktop focus loss. No web save: the browser's focus-out also fires on a click outside the
+  canvas and in embeds, and Godot's docs name no hidden-tab notification for the web, so it is not clean. The morning
+  autosave, quit to title and the desktop window-close save stay as they were. No core, save-format or JSON-schema change.
+- Not tested on a phone (nobody had one in this step). Android 13+ "predictive back" may change how the OS calls the app; the
+  play check on a release build covers it.
