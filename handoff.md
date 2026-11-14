@@ -1,5 +1,22 @@
 # Handoff
 
+## Just done (2026-11-14, local): desktop menu size and map follow the window; full screen (branch `feat/desktop-scale-fullscreen`, PR open, not merged)
+- Audit W4, W3, T1; ADR 0053. `game/ui/ui_scale.gd`: `desktop_factor(h)`, `desktop_map_zoom(h)`, `is_desktop()`, `is_web()`,
+  `window_height()`, test overrides `web_override` and `height_override`; `map_grow()` now returns the desktop zoom / 2; `MODES` has
+  "2.5" and "3". `game/ui/session.gd`: `ui_factor()` passes the window height, `apply_ui_scale()` also emits on a zoom step,
+  `display` (`DisplaySettings`, `game/ui/display_settings.gd`), `set_fullscreen`, `toggle_fullscreen`, `display_changed`,
+  `window_handler`, F11 / Alt+Enter in `_input`. `game/ui/options_menu.*`: "Full screen (F11)" box (desktop only), 250 % / 300 %.
+  `game/project.godot`: action `fullscreen`. Help line in `game/ui/system_messages.gd`.
+- Tests: `unit_ui_scale` (16), `unit_display_settings` (new, 10) and the list in `progress.md`. Full suite not run.
+- Next: the user merges the PR and does the PC play check (`docs/ROADMAP.md`, "Waits on the user"). Then the next audit item
+  (`docs/AUDIT_2026-11-11.md`, not committed): mouse on the map (W1), Skill texts, first task, safe area, touch button sizes.
+- Gotchas: a NEW `class_name` file needs `godot --headless --path game --import` once, or other scripts fail to parse. For
+  renders: a borderless window exactly the screen size (1920 x 1080) makes Windows clamp later bigger sizes, so render the big
+  sizes first and 1920 x 1080 last; the render script must be split in a starter (`extends SceneTree`, waits two frames) and a
+  runner node, or it fails to compile because the autoloads are not up yet. In tests set `UiScale.web_override` and
+  `UiScale.height_override` and put them back. `Session.window_handler` stands in for the real window.
+  The `.import` files, `.playwright-mcp/`, `web/`, the audit report and four old `.gd.uid` files stay uncommitted.
+
 ## Just done (2026-11-12, local): Android Back is Esc, save when paused (branch `feat/android-back-save`, PR open, not merged)
 - Audit B5. `game/project.godot` has `config/quit_on_go_back=false`. `Session` (autoload, `game/ui/session.gd`) handles
   `NOTIFICATION_WM_GO_BACK_REQUEST` (`go_back()`: `back` action press + release via `Input.parse_input_event`) and
