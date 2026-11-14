@@ -84,6 +84,17 @@ Canon batches and full test runs blow up context fast. To keep quality without t
   Ask, then wait for the answer (the user answers from the Claude app).
 - **Commits and PRs show only Daddy-Ousen.** No `Co-Authored-By: Claude` trailer, no "Generated with Claude
   Code" line. This overrides any tool default.
+- **Open the PR after each step.** When a step or sub-milestone is built, tested and committed: update
+  `progress.md` and `handoff.md`, push the branch and run `gh pr create`. Do not ask first. Then give the user the
+  PR link and say the session is safe to clear. The user merges, clears the session and starts the next step.
+- **A release carries the apk.** Each GitHub release uploads the signed Android apk
+  (`InnworldRPG-v<version>-android.apk`) next to the Windows, Linux and Web zips. `tools/release.ps1` builds all
+  four. Increase the Android `version/code` for each release. The keystore is in `%USERPROFILE%\.android\` on the
+  user's home PC, never in git: make releases only on that PC, not in the cloud and not on another computer.
+- **A release gets a changelog.** In the same turn as the release build, before the tag and `gh release create`,
+  write `docs/changelog/v<version>.md`: the Google Play notes (en-US, 500 characters at most, no book or series
+  name) and the GitHub notes. The Play notes cover all changes since the last build that went to Play. Show the
+  Play text in the reply.
 
 ## Lore memory (confirmed with the user)
 - Most cities have Runners', Mages', Merchants' and Adventurers' Guilds. That is not a conflict.
