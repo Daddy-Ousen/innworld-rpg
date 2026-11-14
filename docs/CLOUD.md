@@ -31,6 +31,15 @@ You see `[setup] ...` lines at the start of the session. All lines must say ok, 
    ```
 4. Keep the network access at **Trusted** (the default).
 
+## New Claude account or new computer
+A cloud environment and its GitHub link belong to one Claude account. On a new account, do the one-time setup above
+again: connect GitHub as Daddy-Ousen with access to both repos, then put the setup script and the two variables in the
+new environment. The computer needs only a browser or the Claude app: no Godot, no Python, no clone.
+- The rules for a session are in `CLAUDE.md` in this repo. Memory files and private settings on the home PC do not
+  come along.
+- Releases (apk, Store package, tags) need the keystore on the home PC. Do them there.
+- Play checks: use the browser build on itch.io, the apk on a phone, or the home PC.
+
 ## How to start a session
 1. Open claude.ai/code (or the Code tab in the Claude app). Select **New session**.
 2. Select the repo `Daddy-Ousen/innworld-rpg` only, branch `main`. (Only one repo: with two repos the start
@@ -59,7 +68,8 @@ With two repos the hook does not run, so begin your prompt with:
 
 ## Next task
 **M37 Book 10** (plan `docs/plans/m37.md`, ADR 0048; text in `canon/raw/book10`). M37.P is merged, M37.0 is skipped.
-Next is M37.1 (world and records), then M37.2 – M37.9, one session per step, in order.
+M37.1 is done. Next is M37.2 (Tails and Scales map), then M37.3 – M37.9, one session per step, in order.
+The open items of the game audit (`docs/AUDIT_2026-11-11.md`) are the other queue: see `handoff.md` for the next one.
 Prompt to paste:
 > Do the next open M37 step in docs/plans/m37.md. Read progress.md and handoff.md first. Follow CLAUDE.md
 > and ADR 0048. Ask me the stage and hook choices first. Then build, run only the tests the step lists,

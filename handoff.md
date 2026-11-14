@@ -1,6 +1,24 @@
 # Handoff
 
-## Just done (2026-11-14, local): desktop menu size and map follow the window; full screen (branch `feat/desktop-scale-fullscreen`, PR open, not merged)
+## Just done (2026-11-14, local): ready for a new Claude account and a company laptop (branch `docs/laptop-prep`, PR open)
+- Why: the user moves to a new Claude account, mostly on a company laptop that may block Godot. That work runs in cloud
+  sessions (`docs/CLOUD.md`). Releases and play checks stay on the home PC.
+- Docs only: `CLAUDE.md` "User rules" got three rules from the home PC's memory files (open the PR after each step, a
+  release carries the apk, a release gets a changelog). The model guide names Claude models again (`docs/ROADMAP.md`,
+  `docs/plans/m37.md`, `progress.md` M37 lines). `docs/AUDIT_2026-11-11.md` is committed. `docs/CLOUD.md` has
+  "New Claude account or new computer" and a current "Next task". No tests run (no code or data changed).
+- Next: the user merges the PR, then sets up the new account (`docs/CLOUD.md`). Then the next audit item
+  (`docs/AUDIT_2026-11-11.md`): mouse on the map (W1), Skill texts, first task, safe area, touch button sizes. Or M37.2
+  (Tails and Scales map, Sonnet · high; ask the layout first, see `docs/plans/m37.md` "Answers").
+- Gotchas: a cloud session cannot make a release (no keystore) and cannot play the game. The memory files and the user's
+  global `CLAUDE.md` exist only on the home PC: a rule that must hold in the cloud has to be in this repo's `CLAUDE.md`.
+  A cloud environment belongs to one Claude account: the new account needs its own (setup script, timeout variables,
+  GitHub access to both repos). Not pushed, on purpose: local branches `feat/website`, `claude/distracted-bhabha-16791a`,
+  `claude/magical-keller-a77871`, 2 commits on `feat/website-update`, one stash. The `.import` files,
+  `.playwright-mcp/`, `web/` and four old `.gd.uid` files stay uncommitted.
+- Active files: `CLAUDE.md`, `docs/CLOUD.md`, `docs/ROADMAP.md`, `docs/plans/m37.md`, `docs/AUDIT_2026-11-11.md`.
+
+## Earlier (2026-11-14, local): desktop menu size and map follow the window; full screen (branch `feat/desktop-scale-fullscreen`, PR #282 merged)
 - Audit W4, W3, T1; ADR 0053. `game/ui/ui_scale.gd`: `desktop_factor(h)`, `desktop_map_zoom(h)`, `is_desktop()`, `is_web()`,
   `window_height()`, test overrides `web_override` and `height_override`; `map_grow()` now returns the desktop zoom / 2; `MODES` has
   "2.5" and "3". `game/ui/session.gd`: `ui_factor()` passes the window height, `apply_ui_scale()` also emits on a zoom step,
