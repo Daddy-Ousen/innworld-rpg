@@ -763,3 +763,47 @@ Book 10 covers the spring weeks after the battle of Liscor. Five threads: Ryoka 
   autosave, quit to title and the desktop window-close save stay as they were. No core, save-format or JSON-schema change.
 - Not tested on a phone (nobody had one in this step). Android 13+ "predictive back" may change how the OS calls the app; the
   play check on a release build covers it.
+
+## ADR 0053 — Desktop: the menu size and the map follow the window; full screen
+
+Date 2026-11-14. Audit W4, W3 and T1 (`docs/AUDIT_2026-11-11.md`). Presentation and `Session` only: no core, save-format or
+JSON-schema change.
+
+- **Problem.** The stretch mode is set for the web only. On a desktop the UI is laid out in real pixels and scaled by the
+  root window's `content_scale_factor`, which "Auto" kept at 1.0 without a touch screen. At 1920 x 1080 the HUD, log and
+  fight bar were small; at 2560 x 1440 and 3840 x 2160 they were very small, and the map showed about 60 x 34 tiles.
+- **Rule 1, the menu size (Auto, desktop).** `factor = clamp(floor(height / 648 * 2) / 2, 1, 3)`, height = the window height
+  (`UiScale.desktop_factor`). The UI view is then always about 1152 x 648 or more at 16:9 (720p and up), so the panels,
+  designed for 1152 x 648, are never cut.
+- **Rule 2, the map zoom (desktop).** `zoom = max(2, round(height / 540))`, whole steps so the 32 px art stays sharp
+  (`UiScale.desktop_map_zoom`, returned through `UiScale.map_grow()`; `camera_zoom(f)` and its callers did not change).
+
+| Window height | Menu size (Auto) | Map zoom | Tiles in view (rows) |
+|---|---|---|---|
+| 600 - 647 | 100 % | 2 | 9 - 10 |
+| 720 | 100 % | 2 | 11 |
+| 1080 | 150 % | 2 | 17 |
+| 1440 | 200 % | 3 | 15 |
+| 2160 | 300 % | 4 | 17 |
+
+- **Where it runs.** "Desktop" = not a phone OS (`UiScale.is_mobile_os()`) and not the web build (`UiScale.is_web()`).
+  The web already stretches (`canvas_items`), so the rule must not run there: it would scale twice. A phone keeps 250 % and the
+  dp map size (ADR 0045, PR #279). A desktop with a touch screen takes the larger of the touch rule and the window rule.
+  The window height is read in `Session.ui_factor()`; `Session` already re-applies on `size_changed`, so a resize and a full
+  screen switch update the menu size. It now emits `ui_scale_changed` when the map zoom changes too (the factor can stay
+  the same while the zoom steps, for example 1300 -> 1350 at 200 %).
+- **Extends the 2026-10-05 rule** ("the map keeps its size under a bigger UI", ADR 0033). A FIXED menu size (100 % ... 300 %)
+  still does not change the map: the zoom follows the window height only. But a desktop Auto now grows the map in whole steps on
+  big screens, because a map at a fixed 64 px per tile is tiny on a 4K screen.
+- **T1.** The menu size list now has 250 % and 300 % (`UiScale.MODES`, `OptionsMenu.SCALE_LABELS`). A fixed size works on
+  every platform. A bad value in `settings.cfg` still reads as Auto.
+- **Full screen (W3).** A "Full screen (F11)" check box in Options, the input action `fullscreen` on F11 and Alt+Enter, handled
+  in `Session._input` so it works on the title screen, in the game and with a panel open. Borderless full screen
+  (`WINDOW_MODE_FULLSCREEN`), not exclusive. Saved in `user://settings.cfg`, section `display`, key `fullscreen`
+  (`DisplaySettings`), applied at start; the default is a window. Desktop only: hidden and off on a phone OS and in the web
+  build. A headless run never changes the window mode (`DisplaySettings.apply_window` skips it; tests set
+  `Session.window_handler`). Help page: "F11 or Alt+Enter: full screen (PC)".
+- **Checked.** Renders at 1280 x 720, 1920 x 1080, 2560 x 1440 and 3840 x 2160 (title, map with HUD and log, card, shop,
+  character page, journal, Options, fight): at each size the UI view is 1280 x 720, so every size looks the same except for
+  sharpness; nothing is cut. A phone render (2400 x 1080, 405 dpi, touch on) is unchanged: 250 %, dp map, no full screen box.
+- **Left out.** Exclusive full screen, a display (monitor) choice, a render scale, a free map zoom option, mouse on the map.

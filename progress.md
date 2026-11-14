@@ -781,3 +781,20 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
     Not tested on a phone.
   - [ ] The user plays on the phone (needs a new release build): Back closes a card and opens the menu, Back on the title closes
     the app; play to midday, switch to another app, close the game from the app list, open it again: Continue is at midday.
+- [x] Desktop menu size and map follow the window; full screen (2026-11-14, branch `feat/desktop-scale-fullscreen`, ADR 0053, audit W4 + W3 + T1):
+  `UiScale.desktop_factor` (Auto = height / 648 in steps of 0.5, 1 to 3) and `desktop_map_zoom` (`max(2, round(height / 540))`, whole
+  steps) through `map_grow()`; desktop = not a phone OS and not the web build (`UiScale.is_desktop`; the web already stretches).
+  `Session.ui_factor()` passes the window height; `apply_ui_scale` also emits when the map zoom steps. Menu size list adds 250 % and 300 %.
+  Full screen: `DisplaySettings` (`user://settings.cfg` `display/fullscreen`), `Session.set_fullscreen` / `toggle_fullscreen` /
+  `display_changed` / `window_handler`, input action `fullscreen` (F11, Alt+Enter) handled in `Session._input`, "Full screen (F11)" box
+  in Options (desktop only), help line. Headless never changes the window mode. No core, save or schema change.
+  - Tests (all pass): `unit_ui_scale` (16), `unit_display_settings` (new, 10), `unit_audio_settings` 8, `unit_ui_theme` 11,
+    `unit_input_actions` 6, `unit_touch_controls` 18, `unit_context_button` 10, `unit_action_card` 11, `unit_shop_panel` 14,
+    `unit_bag` 17, `unit_tap_walk` 10, `unit_world_view` 20, `unit_combat_screen` 12, `unit_play_loop` 18, `unit_hud_log` 11,
+    `unit_travel_prompt` 6, `unit_sleep_prompt` 15, `unit_android_back` 23; `unit_system_messages` 17 of 18 (the old
+    sleep-dialog failure, same on `origin/main`). Full suite not run.
+  - Picture check (windowed, `--audio-driver Dummy`, borderless): 1280 x 720 (factor 1, zoom 2), 1920 x 1080 (1.5, 2), 2560 x 1440
+    (2, 3), 3840 x 2160 (3, 4): title, map + HUD + log, card, shop, character page, journal, Options, fight. The UI view is 1280 x 720
+    at every size; nothing is cut; 11 to 17 map rows; the HUD has the same share of the screen. Phone (2400 x 1080, 405 dpi, touch on)
+    unchanged: 250 %, dp map, no full screen box. Pictures: `export/audit_2026-11-11/desktop_scale/` (gitignored).
+  - [ ] The user plays on the PC: press F11, look at the text and map size; drag the window small and large; Options > Menu size 300 %.

@@ -2,7 +2,7 @@
 ## a mute box; a large text box (M15.0, Session.set_large_text); the touch
 ## controls Auto / On / Off (M20.1, Session.set_touch_mode); Controls Tap + stick /
 ## Stick only (M34.3, Session.set_touch_controls); the menu size
-## Auto / 100% / 150% / 200% (M20.3, Session.set_ui_scale_mode). Opened from the title menu and the pause menu. Each change
+## Auto / 100% / 150% / 200% / 250% / 300% (M20.3, T1, Session.set_ui_scale_mode). Opened from the title menu and the pause menu. Each change
 ## goes to Audio at once (it applies and saves user://settings.cfg).
 ## Esc or Back closes it. Presentation only.
 class_name OptionsMenu
@@ -20,7 +20,7 @@ const TOUCH_LABELS := {TouchSettings.AUTO: "Auto", TouchSettings.ON: "On", Touch
 ## Touch controls scheme -> its label, in list order (M34.3).
 const CONTROLS_LABELS := {TouchSettings.TAP: "Tap + stick", TouchSettings.STICK: "Stick only"}
 ## UI scale mode -> its label, in list order (UiScale.MODES).
-const SCALE_LABELS := {UiScale.AUTO: "Auto", "1": "100%", "1.5": "150%", "2": "200%"}
+const SCALE_LABELS := {UiScale.AUTO: "Auto", "1": "100%", "1.5": "150%", "2": "200%", "2.5": "250%", "3": "300%"}
 
 ## Bus -> HSlider.
 var sliders := {}
@@ -28,6 +28,7 @@ var sliders := {}
 @onready var _rows: GridContainer = %Rows
 @onready var _mute: CheckBox = %Mute
 @onready var _large_text: CheckBox = %LargeText
+@onready var _fullscreen: CheckBox = %Fullscreen
 @onready var _touch: OptionButton = %Touch
 @onready var _controls: OptionButton = %Controls
 @onready var _ui_scale: OptionButton = %UiScale
@@ -52,6 +53,12 @@ func _ready() -> void:
 		sliders[bus] = s
 	_mute.toggled.connect(Audio.set_muted)
 	_large_text.toggled.connect(Session.set_large_text)
+	_fullscreen.visible = DisplaySettings.available()  # audit W3: desktop only
+	_fullscreen.toggled.connect(Session.set_fullscreen)
+	Session.display_changed.connect(_sync_fullscreen)
+	tree_exiting.connect(func() -> void:
+		if Session.display_changed.is_connected(_sync_fullscreen):
+			Session.display_changed.disconnect(_sync_fullscreen))
 	for mode: String in TOUCH_LABELS:
 		_touch.add_item(TOUCH_LABELS[mode])
 	_touch.item_selected.connect(func(i: int) -> void:
@@ -73,11 +80,18 @@ func open() -> void:
 		(sliders[bus] as HSlider).set_value_no_signal(Audio.settings.volume(bus))
 	_mute.set_pressed_no_signal(Audio.settings.muted)
 	_large_text.set_pressed_no_signal(Session.text.large)
+	_fullscreen.visible = DisplaySettings.available()
+	_sync_fullscreen()
 	_touch.select(TOUCH_LABELS.keys().find(Session.touch.mode))
 	_controls.select(CONTROLS_LABELS.keys().find(Session.touch.controls))
 	_ui_scale.select(SCALE_LABELS.keys().find(Session.ui_scale.mode))
 	show()
 	(sliders["Master"] as HSlider).grab_focus()
+
+
+## F11 or Alt+Enter changed the setting while the panel is up.
+func _sync_fullscreen() -> void:
+	_fullscreen.set_pressed_no_signal(Session.display.fullscreen)
 
 
 func close() -> void:

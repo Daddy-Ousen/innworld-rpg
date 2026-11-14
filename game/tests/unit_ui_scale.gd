@@ -15,6 +15,8 @@ func before_each() -> void:
 func after_each() -> void:
 	UiScale.dpi_override = 0.0
 	UiScale.mobile_override = -1
+	UiScale.web_override = -1
+	UiScale.height_override = 0.0
 	_session.set_ui_scale_mode(UiScale.AUTO)
 	_session.set_touch_mode(TouchSettings.AUTO)
 
@@ -60,8 +62,11 @@ func test_modes_and_bad_values() -> void:
 	assert_eq(s.factor(1080, 400, true), 1.5)
 	s.set_mode("1")
 	assert_eq(s.factor(1080, 400, true), 1.0, "a fixed mode wins over Auto's rule")
-	s.set_mode("3")
+	s.set_mode("4")
 	assert_eq(s.mode, UiScale.AUTO, "an unknown mode reads as Auto")
+	for m: String in ["2.5", "3"]:
+		s.set_mode(m)
+		assert_eq(s.factor(1080, 400, true, false, 1080.0), float(m), "T1: a fixed %s wins everywhere" % m)
 
 
 func test_save_and_load_keep_other_settings() -> void:
@@ -183,3 +188,80 @@ func test_session_factor_uses_the_phone_size() -> void:
 	UiScale.mobile_override = -1
 	_session.ui_scale_path = old_path
 	_session.apply_ui_scale()
+
+
+## Audit W4 (ADR 0053): desktop Auto follows the window height in steps of 0.5.
+func test_desktop_auto_follows_the_window_height() -> void:
+	var want := {600: 1.0, 648: 1.0, 720: 1.0, 900: 1.0, 1080: 1.5, 1295: 1.5, 1296: 2.0, 1440: 2.0,
+			2160: 3.0, 4000: 3.0}
+	for h: int in want:
+		assert_eq(UiScale.desktop_factor(float(h)), want[h], "factor at %d" % h)
+	var s := UiScale.new()
+	UiScale.mobile_override = 0
+	UiScale.web_override = 0
+	assert_eq(s.factor(1080, 96, false, false, 1080.0), 1.5, "a desktop: 1080 -> 150 %")
+	assert_eq(s.factor(720, 96, false, false, 720.0), 1.0)
+	assert_eq(s.factor(1080, 96, false, false), 1.0, "no height: the old rule")
+	assert_eq(s.factor(1080, 400, true, false, 600.0), UiScale.BIG, "a small touch desktop keeps the touch rule")
+	assert_eq(s.factor(1440, 400, true, false, 1440.0), 2.0, "the larger of the two")
+	s.set_mode("1")
+	assert_eq(s.factor(2160, 96, false, false, 2160.0), 1.0, "a fixed size ignores the window")
+
+
+func test_desktop_map_zoom_is_whole() -> void:
+	var want := {600: 2.0, 720: 2.0, 1080: 2.0, 1350: 3.0, 1440: 3.0, 1890: 4.0, 2160: 4.0}
+	for h: int in want:
+		assert_eq(UiScale.desktop_map_zoom(float(h)), want[h], "zoom at %d" % h)
+	UiScale.mobile_override = 0
+	UiScale.web_override = 0
+	for h: int in [1080, 1440, 2160]:
+		UiScale.height_override = float(h)
+		assert_eq(UiScale.map_grow(), UiScale.desktop_map_zoom(float(h)) / UiScale.CAMERA_ZOOM)
+		assert_eq(UiScale.camera_zoom(2.0), UiScale.desktop_map_zoom(float(h)) / 2.0, "a fixed size: same map")
+	UiScale.height_override = 1440.0
+	assert_eq(UiScale.camera_zoom(2.0), 1.5, "1440 at 200 %: zoom 3 over factor 2")
+
+
+## The web build already stretches, so no desktop rule there (it would scale twice); a phone is unchanged.
+func test_web_and_phone_are_unchanged() -> void:
+	UiScale.web_override = 1
+	UiScale.mobile_override = 0
+	UiScale.height_override = 2160.0
+	assert_false(UiScale.is_desktop())
+	assert_eq(UiScale.map_grow(), 1.0, "web: no map growth")
+	assert_eq(UiScale.new().factor(1080, 96, false, false, 2160.0), 1.0, "web: Auto as before")
+	assert_eq(UiScale.camera_zoom(1.0), 2.0)
+	UiScale.web_override = 0
+	UiScale.mobile_override = 1
+	UiScale.dpi_override = 405.0
+	assert_false(UiScale.is_desktop())
+	assert_eq(UiScale.new().factor(1080, 405, true, true, 1080.0), UiScale.MOBILE, "a phone: 250 %")
+	assert_almost_eq(UiScale.map_grow(), 405.0 / 160.0 * UiScale.TILE_DP / (UiScale.TILE_PX * UiScale.CAMERA_ZOOM), 0.001,
+			"a phone: the dp map size, not the window rule")
+
+
+func test_session_follows_the_window_and_the_map() -> void:
+	var old_path: String = _session.ui_scale_path
+	_session.ui_scale_path = TEST_FILE
+	UiScale.mobile_override = 0
+	UiScale.web_override = 0
+	UiScale.height_override = 1080.0
+	_session.set_ui_scale_mode(UiScale.AUTO)
+	assert_eq(_session.ui_factor(), 1.5)
+	var m := _main()
+	assert_almost_eq(m.view.camera.zoom.x, 2.0 / 1.5, 0.0001, "1080: zoom 2 at 150 %")
+	watch_signals(_session)
+	UiScale.height_override = 1440.0
+	_session.apply_ui_scale()
+	assert_signal_emitted(_session, "ui_scale_changed")
+	assert_eq(get_window().content_scale_factor, 2.0)
+	assert_eq(m.view.camera.zoom, Vector2.ONE * 1.5, "1440: zoom 3 at 200 %")
+	UiScale.height_override = 1300.0  # the factor stays 2, the zoom steps 3 -> 2
+	watch_signals(_session)
+	_session.apply_ui_scale()
+	assert_signal_emitted(_session, "ui_scale_changed", "the zoom alone changed")
+	assert_eq(m.view.camera.zoom, Vector2.ONE, "1300: factor 2, zoom 2")
+	_session.ui_scale_path = old_path
+	DirAccess.remove_absolute(TEST_FILE)
+	UiScale.height_override = 0.0
+	_session.set_ui_scale_mode(UiScale.AUTO)

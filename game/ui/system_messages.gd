@@ -69,6 +69,7 @@ const KEYS: Array[String] = [
 	"L: message history",
 	"H: this help",
 	"Esc: menu (save, load, quit)",
+	"F11 or Alt+Enter: full screen (PC)",
 	"`: debug console",
 	"Touch screen: hold a finger anywhere on the left half and drag to walk (Wait is bottom left); Use, Bag, More (Sleep, Rest, Eat ...) and Menu are on the right; Back closes a panel",
 	"Touch, in a fight: tap a tile to see the plan, tap it again to act; Cancel stops a walk or a Skill",
