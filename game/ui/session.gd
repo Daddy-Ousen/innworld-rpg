@@ -10,6 +10,8 @@ signal state_changed
 signal touch_changed
 ## The UI scale factor changed (M20.3): the option, a resize or the first touch.
 signal ui_scale_changed
+## The full screen setting changed (audit W3): F11, Alt+Enter or the Options box.
+signal display_changed
 
 const NEW_GAME_SEED := 1
 
@@ -32,6 +34,13 @@ var touch_seen := false
 ## The size of menus, text and the HUD (M20.3); tests point the path at a test file.
 var ui_scale: UiScale
 var ui_scale_path := UiScale.PATH
+## Full screen or a window (audit W3, desktop only); tests point the path at a test file.
+var display: DisplaySettings
+var display_settings_path := DisplaySettings.PATH
+## What a window switch does. Empty = `DisplaySettings.apply_window` (a no-op in a headless run);
+## tests set a Callable taking the new full screen state.
+var window_handler := Callable()
+var _map_grow_seen := 1.0
 ## The game screen and the title screen, set by each while it is in the tree (audit B5, ADR 0052).
 ## The Android Back button and the app-paused save read them. Untyped: a typed link is a script cycle.
 var game_screen: Node
@@ -45,6 +54,7 @@ func _ready() -> void:
 	gs = GameState.new_game(NEW_GAME_SEED, db)
 	load_text_settings()
 	load_touch_settings()
+	load_display_settings()
 	load_ui_scale()
 	get_window().size_changed.connect(apply_ui_scale)  # a phone turns, a browser resizes
 
@@ -74,7 +84,37 @@ func load_ui_scale() -> void:
 	apply_ui_scale()
 
 
-## Auto, 1, 1.5 or 2 (UiScale.MODES); applied and saved at once.
+## Reads the full screen setting from `display_settings_path` and applies it (desktop only).
+func load_display_settings() -> void:
+	display = DisplaySettings.load_file(display_settings_path)
+	if not DisplaySettings.available():
+		display.fullscreen = false  # a phone OS and the web have no window mode
+	elif display.fullscreen:
+		_apply_window()
+
+
+## Full screen on or off; applied and saved at once. Ignored on a phone OS and in the web build.
+func set_fullscreen(on: bool) -> void:
+	if not DisplaySettings.available() or display.fullscreen == on:
+		return
+	display.fullscreen = on
+	display.save(display_settings_path)
+	_apply_window()
+	display_changed.emit()
+
+
+func toggle_fullscreen() -> void:
+	set_fullscreen(not display.fullscreen)
+
+
+func _apply_window() -> void:
+	if window_handler.is_valid():
+		window_handler.call(display.fullscreen)
+	else:
+		DisplaySettings.apply_window(display.fullscreen)
+
+
+## Auto, 1, 1.5, 2, 2.5 or 3 (UiScale.MODES); applied and saved at once.
 func set_ui_scale_mode(mode: String) -> void:
 	ui_scale.set_mode(mode)
 	ui_scale.save(ui_scale_path)
@@ -85,7 +125,8 @@ func set_ui_scale_mode(mode: String) -> void:
 func ui_factor() -> float:
 	var size := DisplayServer.window_get_size()
 	return ui_scale.factor(float(mini(size.x, size.y)), float(DisplayServer.screen_get_dpi()),
-			touch_seen or DisplayServer.is_touchscreen_available(), UiScale.is_mobile_os())
+			touch_seen or DisplayServer.is_touchscreen_available(), UiScale.is_mobile_os(),
+			UiScale.window_height())
 
 
 ## Sets the root window's content scale; tells the game screen when it changed.
@@ -93,8 +134,12 @@ func apply_ui_scale() -> void:
 	UiScale.set_box_alpha(ThemeDB.get_project_theme(),
 			UiScale.MOBILE_ALPHA if UiScale.is_mobile_os() else 1.0)
 	var f := ui_factor()
-	if not is_equal_approx(get_window().content_scale_factor, f):
+	var zoom := UiScale.map_grow()  # a desktop map zoom steps with the window height (ADR 0053)
+	var changed := not is_equal_approx(get_window().content_scale_factor, f)
+	if changed:
 		get_window().content_scale_factor = f
+	if changed or not is_equal_approx(_map_grow_seen, zoom):
+		_map_grow_seen = zoom
 		ui_scale_changed.emit()
 
 
@@ -122,6 +167,10 @@ func touch_shown() -> bool:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"fullscreen") and not event.is_echo():  # F11 or Alt+Enter, on every screen
+		toggle_fullscreen()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventScreenTouch and not touch_seen:
 		touch_seen = true
 		touch_changed.emit()

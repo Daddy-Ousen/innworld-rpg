@@ -7,6 +7,9 @@
 ## and the pad's sizes are divided by the factor. M34.4: on a phone they grow
 ## to a size in dp instead (map_grow, touch_grow). Pure except for `fit`,
 ## `keep_fit`, the screen dpi and the window read in `Session`.
+## Audit W4 (ADR 0053): on a desktop (not a phone OS, not the web build) Auto
+## follows the window height in steps of 0.5, and the map zoom follows it in
+## whole steps (map_grow). The web build already stretches the window.
 class_name UiScale
 extends RefCounted
 
@@ -14,7 +17,7 @@ const PATH := "user://settings.cfg"
 const SECTION := "display"
 const AUTO := "auto"
 ## Modes in Options order: Auto, then fixed factors.
-const MODES: Array[String] = [AUTO, "1", "1.5", "2"]
+const MODES: Array[String] = [AUTO, "1", "1.5", "2", "2.5", "3"]
 const BIG := 2.0
 ## Auto on a phone or tablet OS (Android, iOS, or a browser on them): a bit
 ## bigger than BIG, whatever the reported dpi says (user, 2026-10-08).
@@ -22,6 +25,12 @@ const MOBILE := 2.5
 ## Alpha of panel, button and list boxes on mobile: the map shows through.
 const MOBILE_ALPHA := 0.78
 const PHONE_INCHES := 5.0
+## Desktop Auto (ADR 0053): the factor is the window height / DESKTOP_BASE_PX in steps of
+## DESKTOP_STEP, from 1 to DESKTOP_MAX. The map zoom is the height / DESKTOP_MAP_PX, whole, at least CAMERA_ZOOM.
+const DESKTOP_BASE_PX := 648.0
+const DESKTOP_STEP := 0.5
+const DESKTOP_MAX := 3.0
+const DESKTOP_MAP_PX := 540.0
 ## The world camera's zoom at factor 1 (world_view.tscn).
 const CAMERA_ZOOM := 2.0
 ## Space kept around a panel that is cut to fit a small view.
@@ -41,6 +50,9 @@ const TILE_PX := 32.0
 ## Renders and tests set these: dpi (0 = the screen's), mobile (-1 = the OS, 0 = no, 1 = yes).
 static var dpi_override := 0.0
 static var mobile_override := -1
+## Renders and tests: web (-1 = the OS, 0 = no, 1 = yes) and the window height (0 = the window's).
+static var web_override := -1
+static var height_override := 0.0
 
 var mode := AUTO
 
@@ -67,10 +79,45 @@ func set_mode(m: String) -> void:
 
 ## The factor for this mode. `short_px`: the short side of the window in
 ## pixels; `dpi`: the screen's dots per inch; `touch`: a touch screen.
-func factor(short_px: float, dpi: float, touch: bool, mobile := false) -> float:
+## `height_px`: the window height; with it Auto on a desktop follows the window (ADR 0053).
+func factor(short_px: float, dpi: float, touch: bool, mobile := false, height_px := 0.0) -> float:
 	if mode != AUTO:
 		return float(mode)
-	return MOBILE if mobile else auto_factor(short_px, dpi, touch)
+	if mobile:
+		return MOBILE
+	var f := auto_factor(short_px, dpi, touch)
+	if height_px > 0.0 and is_desktop():
+		f = maxf(f, desktop_factor(height_px))
+	return f
+
+
+## Desktop Auto: height / 648 in steps of 0.5, from 1 to 3 (720 -> 1, 1080 -> 1.5, 1440 -> 2, 2160 -> 3).
+static func desktop_factor(height_px: float) -> float:
+	var steps := floorf(height_px * (1.0 / DESKTOP_STEP) / DESKTOP_BASE_PX) * DESKTOP_STEP
+	return clampf(steps, 1.0, DESKTOP_MAX)
+
+
+## The desktop map zoom in whole steps, so the pixel art stays sharp
+## (720 -> 2, 1080 -> 2, 1440 -> 3, 2160 -> 4).
+static func desktop_map_zoom(height_px: float) -> float:
+	return maxf(CAMERA_ZOOM, roundf(height_px / DESKTOP_MAP_PX))
+
+
+## True in the web build, or when a test says so.
+static func is_web() -> bool:
+	if web_override >= 0:
+		return web_override == 1
+	return OS.has_feature("web")
+
+
+## True on a desktop: not a phone OS and not the web build (the web stretches by itself).
+static func is_desktop() -> bool:
+	return not is_mobile_os() and not is_web()
+
+
+## The window height in pixels.
+static func window_height() -> float:
+	return height_override if height_override > 0.0 else float(DisplayServer.window_get_size().y)
 
 
 ## BIG on a touch screen whose short side is under PHONE_INCHES, else 1.
@@ -100,9 +147,14 @@ static func touch_grow() -> float:
 	return maxf(px_per_dp() * TOUCH_DP / PAD_PX, 1.0) if is_mobile_os() else 1.0
 
 
-## How much the map grows on a phone so a tile is about TILE_DP (1 on a desktop).
+## How much the map grows: on a phone so a tile is about TILE_DP; on a desktop with the
+## window height, in whole zoom steps (ADR 0053); 1 in the web build.
 static func map_grow() -> float:
-	return maxf(px_per_dp() * TILE_DP / (TILE_PX * CAMERA_ZOOM), 1.0) if is_mobile_os() else 1.0
+	if is_mobile_os():
+		return maxf(px_per_dp() * TILE_DP / (TILE_PX * CAMERA_ZOOM), 1.0)
+	if is_web():
+		return 1.0
+	return desktop_map_zoom(window_height()) / CAMERA_ZOOM
 
 
 ## The smallest height of a menu button in UI pixels at factor `f`: TOUCH_DP on a
