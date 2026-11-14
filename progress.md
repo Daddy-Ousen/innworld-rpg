@@ -360,10 +360,10 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
 - [x] M37.1 world and records (2026-11-11, local, branch `feat/m37.1-world-records`, ADR 0050). 51 records, 22 places
   in `book10`, notes on 9 older records, `sim_book10_world`. Tests: `sim_book10_world` 6/6, `unit_canon_db` 7/7,
   `unit_data_db` 15/15, validator books 1-5, 7, 10: 0 errors, Python tools 137 OK. Full suite not run.
-- [ ] M37.2 Tails and Scales map [Gemini 4 Argon (High)]
-  · [ ] M37.3 canon 6.00, 6.01 [Gemini 4 Argon (High)] · [ ] M37.4 canon 6.02, 6.03 [Gemini 4 Argon (High)]
-  · [ ] M37.5 canon 6.08 – 6.10 [Gemini 4 Argon (High)] · [ ] M37.6 canon 6.11, 6.16 [Gemini 4 Argon (High)]
-  · [ ] M37.7 Baleros [Gemini 4 Argon (High)] · [ ] M37.8 Chandrar [Gemini 4 Argon (High)] · [ ] M37.9 sims [Gemini 4 Argon (High)]
+- [ ] M37.2 Tails and Scales map [Sonnet · high]
+  · [ ] M37.3 canon 6.00, 6.01 [Sonnet · high] · [ ] M37.4 canon 6.02, 6.03 [Opus · medium]
+  · [ ] M37.5 canon 6.08 – 6.10 [Sonnet · high] · [ ] M37.6 canon 6.11, 6.16 [Opus · medium]
+  · [ ] M37.7 Baleros [Sonnet · high] · [ ] M37.8 Chandrar [Sonnet · high] · [ ] M37.9 sims [Sonnet · medium]
 
 ## Player audit (2026-10-17, local, read-only; no code changed)
 - [x] Audit from a player's and a book reader's view: `docs/AUDIT_PLAYER_2026-10-17.md` (not committed). Played the
@@ -743,7 +743,7 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
 - Public: https://github.com/Daddy-Ousen/innworld-rpg, branch `main`.
 
 ## Full audit (2026-11-11, local, read-only; no code or data changed)
-- [x] Audit of logic, design, controls (Windows, Android touch), visuals and art: `docs/AUDIT_2026-11-11.md` (not committed).
+- [x] Audit of logic, design, controls (Windows, Android touch), visuals and art: `docs/AUDIT_2026-11-11.md` (committed 2026-11-14).
   Pictures in `export/audit_2026-11-11/` (gitignored). Checked on the web build, 24 renders and the code. Tests run:
   `unit_scene_beats` 5/6 (old failure), `unit_npc_sim` 13/14 (old failure), `unit_ui_scale` 11/11. Full suite not run.
 - Top findings: the 250 % phone menu size is never used (`Session.ui_factor()` does not pass `mobile`); sleep has no
@@ -798,3 +798,20 @@ Older plan and ADR file paths in this file and `handoff.md` are history: use `gi
     at every size; nothing is cut; 11 to 17 map rows; the HUD has the same share of the screen. Phone (2400 x 1080, 405 dpi, touch on)
     unchanged: 250 %, dp map, no full screen box. Pictures: `export/audit_2026-11-11/desktop_scale/` (gitignored).
   - [ ] The user plays on the PC: press F11, look at the text and map size; drag the window small and large; Options > Menu size 300 %.
+  - [x] Merged ([PR #282](https://github.com/Daddy-Ousen/innworld-rpg/pull/282)).
+
+## Move to a new Claude account and a company laptop (2026-11-14, local, branch `docs/laptop-prep`)
+The user will work from a new Claude account, mostly on a company laptop that may block Godot. Work there goes through cloud
+sessions (`docs/CLOUD.md`); releases and play checks stay on the home PC.
+- [x] Three rules that were only in the home PC's memory files are now in `CLAUDE.md` "User rules": open the PR after each
+  step, a release carries the apk, a release gets a changelog.
+- [x] Model guide back to Claude models (was Gemini / Antigravity): `docs/ROADMAP.md` (column, note, M37 list),
+  `docs/plans/m37.md` (step tags), the M37 lines above. Tags are the ones of the first M37 plan (commit 712ebaa).
+- [x] `docs/AUDIT_2026-11-11.md` committed (the next audit items need it in the cloud).
+- [x] `docs/CLOUD.md`: new section "New Claude account or new computer"; "Next task" brought up to date.
+- Docs only. No code or data changed. No tests run.
+- [ ] The user merges the PR.
+- [ ] The user sets up the new account (`docs/CLOUD.md`, "New Claude account or new computer").
+- Still only on the home PC (on purpose): the keystore, `secrets/`, `%USERPROFILE%\.innworld-store.txt`, the epubs, `export/`;
+  the local branches `feat/website`, `claude/distracted-bhabha-16791a`, `claude/magical-keller-a77871`, 2 commits on
+  `feat/website-update` and one stash (`m28-plan-wip`). The user did not ask to push them.

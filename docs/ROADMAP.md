@@ -9,9 +9,9 @@ left, put them under "Waits on the user". Detail of finished work lives in `docs
 
 ## At a glance
 
-| Milestone | State | Model · effort (Antigravity) |
+| Milestone | State | Model · effort |
 |---|---|---|
-| M37 Book 10 (The Wind Runner) | Plan written (`docs/plans/m37.md`, ADR 0048). M37.1 done. Next: M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped). | M37.1, M37.2: Gemini 4 Argon (High) · M37.3, M37.5, M37.7, M37.8: Gemini 4 Argon (High) · M37.4, M37.6: Gemini 4 Argon (High) · M37.9: Gemini 4 Argon (High) |
+| M37 Book 10 (The Wind Runner) | Plan written (`docs/plans/m37.md`, ADR 0048). M37.1 done. Next: M37.2 Tails and Scales map, M37.3 – M37.8 canon, M37.9 sims (M37.0 skipped). | M37.2, M37.3, M37.5, M37.7, M37.8: Sonnet · high · M37.4, M37.6: Opus · medium · M37.9: Sonnet · medium |
 | M36 Book 9 (Tears of Liscor) | Done and merged (M36.P – M36.10, ADR 0047). | – (done) |
 | M35 New content (Ceria's fire lesson, stat sheets, Invrisil Runners' Guild staff, Magnolia's whereabouts) | Done and merged (M35.0 – M35.3, ADR 0046). | – (done) |
 | M33 Depth: spells, dishes, quests, friends | Done (M33.0 – M33.4, ADR 0044); only the play check is open. | – (done) |
@@ -22,7 +22,7 @@ left, put them under "Waits on the user". Detail of finished work lives in `docs
 Last release: v0.2.1-alpha (2026-11-04, tag and GitHub pre-release published): v0.2.0 plus M35 (Ceria's fire lesson, stat sheets, Magnolia) and all of Book 9 (M36). v0.1.8 is on Google Play's closed test track, waiting for review.
 Next step: M37.2 (Tails and Scales map), see `docs/plans/m37.md`. Book 10 text is in the private repo `Daddy-Ousen/innworld-canon-raw`.
 
-How to read the model column: select that model and effort in Antigravity's model selector before you start the step. Use Gemini 4 Argon (High) (or Claude Sonnet/Opus 5.5) for canon batches, records, maps, fight stages, and book sims; use Gemini 3.8 Flash (High) for fast checks, targeted test runs, and doc updates. Reading agents (summaries only) run on Gemini 3.8 Flash or Argon.
+How to read the model column: select that Claude model and effort in the model selector before you start the step. Use Sonnet 5.5 (high) for canon batches, records, maps and book sims; use Opus 5.5 (medium) for batches with a fight stage or a hook, and Opus 5.5 (high) for plans and new systems; use Haiku 5.5 (low) for small chores and doc updates. Reading agents (summaries only) run on Sonnet.
 
 ---
 
@@ -37,17 +37,17 @@ One branch + PR per sub-step. Steps marked (user) need the owner to do or decide
 - [x] Desktop: the menu size and the map follow the window; full screen (F11, Options) (audit W3, W4, T1; ADR 0053)
 
 ## M37 — Book 10 (The Wind Runner) (plan `docs/plans/m37.md`, ADR 0048)
-- [x] M37.P Plan: 17 chapters read, day anchor 176, short version for Baleros & Chandrar, 1 fight stage, 2 hooks, 1 new map, 0 kills **[Gemini 4 Argon (High)]**
+- [x] M37.P Plan: 17 chapters read, day anchor 176, short version for Baleros & Chandrar, 1 fight stage, 2 hooks, 1 new map, 0 kills **[Opus · high]**
 - [-] M37.0 Engine: skipped (no new engine mechanics or schema changes needed)
-- [x] M37.1 World and records: 51 NPCs, 22 places, 4 checks, notes on existing records, `sim_book10_world` (ADR 0050) **[Gemini 4 Argon (High)]**
-- [ ] M37.2 Tails and Scales map: Pallass floor 5 bar, link from `pallass_door_street`, goals for Rufelt and Lasica **[Gemini 4 Argon (High)]**
-- [ ] M37.3 Canon 6.00, 6.01: Ryoka at Reizmelt (days 181–183), off map, no stage, no hook, no Ryoka class **[Gemini 4 Argon (High)]**
-- [ ] M37.4 Canon 6.02, 6.03: door reopened, inn barred, night undead fight stage (`inn_hill`, day 183, `xp_window`), Numbtongue walk hook (`liscor_market`, day 184) **[Gemini 4 Argon (High)]**
-- [ ] M37.5 Canon 6.08 – 6.10: Apista, Erin in Pallass, mana cave, Tails and Scales (day 190) **[Gemini 4 Argon (High)]**
-- [ ] M37.6 Canon 6.11, 6.16: Calruz, Ilvriss leaves, Gold-rank farewell hook (`inn_interior`, day 192), Garia [Martial Artist] **[Gemini 4 Argon (High)]**
-- [ ] M37.7 Canon 6.04 D – 6.07 D: Baleros short version (days 183–187), off map, neutral summaries for explicit scenes **[Gemini 4 Argon (High)]**
-- [ ] M37.8 Canon 6.12 K – 6.15 K: Chandrar short version (days 189–194), off map, Reim, banquet, edict, Pomle **[Gemini 4 Argon (High)]**
-- [ ] M37.9 Book 10 full sims: `sim_canon_book10`, `sim_kill_book10`, validator `--all` **[Gemini 4 Argon (High)]**
+- [x] M37.1 World and records: 51 NPCs, 22 places, 4 checks, notes on existing records, `sim_book10_world` (ADR 0050) **[Sonnet · high]**
+- [ ] M37.2 Tails and Scales map: Pallass floor 5 bar, link from `pallass_door_street`, goals for Rufelt and Lasica **[Sonnet · high]**
+- [ ] M37.3 Canon 6.00, 6.01: Ryoka at Reizmelt (days 181–183), off map, no stage, no hook, no Ryoka class **[Sonnet · high]**
+- [ ] M37.4 Canon 6.02, 6.03: door reopened, inn barred, night undead fight stage (`inn_hill`, day 183, `xp_window`), Numbtongue walk hook (`liscor_market`, day 184) **[Opus · medium]**
+- [ ] M37.5 Canon 6.08 – 6.10: Apista, Erin in Pallass, mana cave, Tails and Scales (day 190) **[Sonnet · high]**
+- [ ] M37.6 Canon 6.11, 6.16: Calruz, Ilvriss leaves, Gold-rank farewell hook (`inn_interior`, day 192), Garia [Martial Artist] **[Opus · medium]**
+- [ ] M37.7 Canon 6.04 D – 6.07 D: Baleros short version (days 183–187), off map, neutral summaries for explicit scenes **[Sonnet · high]**
+- [ ] M37.8 Canon 6.12 K – 6.15 K: Chandrar short version (days 189–194), off map, Reim, banquet, edict, Pomle **[Sonnet · high]**
+- [ ] M37.9 Book 10 full sims: `sim_canon_book10`, `sim_kill_book10`, validator `--all` **[Sonnet · medium]**
 **Done when:** Book 10 canon events run with drift 0; Tails and Scales bar map works; fight stage and hooks work; sims and validator pass.
 
 ---
